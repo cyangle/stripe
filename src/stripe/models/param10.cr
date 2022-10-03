@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_number : String? = nil
@@ -28,6 +28,8 @@ module Stripe
     @[JSON::Field(key: "bsb_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bsb_number : String? = nil
     MAX_LENGTH_FOR_BSB_NUMBER = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,14 +48,14 @@ module Stripe
 
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bsb_number\" is required and cannot be null") if @bsb_number.nil?
 
-      if _bsb_number = @bsb_number
+      unless (_bsb_number = @bsb_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bsb_number", _bsb_number.to_s.size, MAX_LENGTH_FOR_BSB_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -65,12 +67,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account_number.nil?
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       return false if @bsb_number.nil?
-      if _bsb_number = @bsb_number
+      unless (_bsb_number = @bsb_number).nil?
         return false if _bsb_number.to_s.size > MAX_LENGTH_FOR_BSB_NUMBER
       end
 

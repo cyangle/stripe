@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "upfront", type: Stripe::QuotesResourceUpfront?, default: nil, required: true, nullable: false, emit_null: false)]
     getter upfront : Stripe::QuotesResourceUpfront? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "recurring", type: Stripe::QuotesResourceComputedRecurring?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: recurring.nil? && !recurring_present?)]
     getter recurring : Stripe::QuotesResourceComputedRecurring? = nil
@@ -50,10 +52,10 @@ module Stripe
 
       invalid_properties.push("\"upfront\" is required and cannot be null") if @upfront.nil?
 
-      if _upfront = @upfront
+      unless (_upfront = @upfront).nil?
         invalid_properties.concat(_upfront.list_invalid_properties_for("upfront")) if _upfront.is_a?(OpenApi::Validatable)
       end
-      if _recurring = @recurring
+      unless (_recurring = @recurring).nil?
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -63,11 +65,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @upfront.nil?
-      if _upfront = @upfront
+      unless (_upfront = @upfront).nil?
         return false if _upfront.is_a?(OpenApi::Validatable) && !_upfront.valid?
       end
 
-      if _recurring = @recurring
+      unless (_recurring = @recurring).nil?
         return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
 

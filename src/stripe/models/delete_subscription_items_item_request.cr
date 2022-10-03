@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
     @[JSON::Field(key: "clear_usage", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -50,7 +50,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 
@@ -60,7 +60,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 

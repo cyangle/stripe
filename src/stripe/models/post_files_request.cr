@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the `multipart/form-data` protocol).
     @[JSON::Field(key: "file", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     ERROR_MESSAGE_FOR_PURPOSE = "invalid value for \"purpose\", must be one of [account_requirement, additional_verification, business_icon, business_logo, customer_signature, dispute_evidence, identity_document, pci_document, tax_document_user_upload, terminal_reader_splashscreen]."
     VALID_VALUES_FOR_PURPOSE  = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -61,11 +63,11 @@ module Stripe
 
       invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
 
-      if _purpose = @purpose
+      unless (_purpose = @purpose).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PURPOSE) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
 
-      if _file_link_data = @file_link_data
+      unless (_file_link_data = @file_link_data).nil?
         invalid_properties.concat(_file_link_data.list_invalid_properties_for("file_link_data")) if _file_link_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -77,11 +79,11 @@ module Stripe
       return false if @file.nil?
 
       return false if @purpose.nil?
-      if _purpose = @purpose
+      unless (_purpose = @purpose).nil?
         return false unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
 
-      if _file_link_data = @file_link_data
+      unless (_file_link_data = @file_link_data).nil?
         return false if _file_link_data.is_a?(OpenApi::Validatable) && !_file_link_data.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "application_fee_percent", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter application_fee_percent : Float64? = nil
@@ -76,32 +76,32 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _billing_cycle_anchor = @billing_cycle_anchor
+      unless (_billing_cycle_anchor = @billing_cycle_anchor).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
-      if _collection_method = @collection_method
+      unless (_collection_method = @collection_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
-      if _default_payment_method = @default_payment_method
+      unless (_default_payment_method = @default_payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -110,35 +110,35 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _billing_cycle_anchor = @billing_cycle_anchor
+      unless (_billing_cycle_anchor = @billing_cycle_anchor).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
 
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
 
-      if _collection_method = @collection_method
+      unless (_collection_method = @collection_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
 
-      if _default_payment_method = @default_payment_method
+      unless (_default_payment_method = @default_payment_method).nil?
         return false if _default_payment_method.to_s.size > MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

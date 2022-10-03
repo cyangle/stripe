@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Surfaces if automatic tax computation is possible given the current customer location information.
     @[JSON::Field(key: "automatic_tax", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_AUTOMATIC_TAX = "invalid value for \"automatic_tax\", must be one of [failed, not_collecting, supported, unrecognized_location]."
     VALID_VALUES_FOR_AUTOMATIC_TAX  = StaticArray["failed", "not_collecting", "supported", "unrecognized_location"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # A recent IP address of the customer used for tax reporting and tax location inference.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
@@ -62,15 +64,15 @@ module Stripe
 
       invalid_properties.push("\"automatic_tax\" is required and cannot be null") if @automatic_tax.nil?
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AUTOMATIC_TAX) unless OpenApi::EnumValidator.valid?(_automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
       end
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _location = @location
+      unless (_location = @location).nil?
         invalid_properties.concat(_location.list_invalid_properties_for("location")) if _location.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -80,15 +82,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @automatic_tax.nil?
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false unless OpenApi::EnumValidator.valid?(_automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
       end
 
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
-      if _location = @location
+      unless (_location = @location).nil?
         return false if _location.is_a?(OpenApi::Validatable) && !_location.valid?
       end
 

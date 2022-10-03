@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "data_string", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: data_string.nil? && !data_string_present?)]
     getter data_string : String? = nil

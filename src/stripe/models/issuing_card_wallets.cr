@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "apple_pay", type: Stripe::IssuingCardApplePay?, default: nil, required: true, nullable: false, emit_null: false)]
     getter apple_pay : Stripe::IssuingCardApplePay? = nil
@@ -27,7 +27,9 @@ module Stripe
     @[JSON::Field(key: "google_pay", type: Stripe::IssuingCardGooglePay?, default: nil, required: true, nullable: false, emit_null: false)]
     getter google_pay : Stripe::IssuingCardGooglePay? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Unique identifier for a card used with digital wallets
     @[JSON::Field(key: "primary_account_identifier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: primary_account_identifier.nil? && !primary_account_identifier_present?)]
@@ -56,15 +58,15 @@ module Stripe
 
       invalid_properties.push("\"apple_pay\" is required and cannot be null") if @apple_pay.nil?
 
-      if _apple_pay = @apple_pay
+      unless (_apple_pay = @apple_pay).nil?
         invalid_properties.concat(_apple_pay.list_invalid_properties_for("apple_pay")) if _apple_pay.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"google_pay\" is required and cannot be null") if @google_pay.nil?
 
-      if _google_pay = @google_pay
+      unless (_google_pay = @google_pay).nil?
         invalid_properties.concat(_google_pay.list_invalid_properties_for("google_pay")) if _google_pay.is_a?(OpenApi::Validatable)
       end
-      if _primary_account_identifier = @primary_account_identifier
+      unless (_primary_account_identifier = @primary_account_identifier).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_account_identifier", _primary_account_identifier.to_s.size, MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER)
           invalid_properties.push(max_length_error)
         end
@@ -76,16 +78,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @apple_pay.nil?
-      if _apple_pay = @apple_pay
+      unless (_apple_pay = @apple_pay).nil?
         return false if _apple_pay.is_a?(OpenApi::Validatable) && !_apple_pay.valid?
       end
 
       return false if @google_pay.nil?
-      if _google_pay = @google_pay
+      unless (_google_pay = @google_pay).nil?
         return false if _google_pay.is_a?(OpenApi::Validatable) && !_google_pay.valid?
       end
 
-      if _primary_account_identifier = @primary_account_identifier
+      unless (_primary_account_identifier = @primary_account_identifier).nil?
         return false if _primary_account_identifier.to_s.size > MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER
       end
 

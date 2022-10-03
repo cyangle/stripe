@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -53,7 +53,9 @@ module Stripe
     getter status : String? = nil
     MAX_LENGTH_FOR_STATUS = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # If something should go wrong during the run, a message about the failure (populated when  `status=failed`).
     @[JSON::Field(key: "error", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: error.nil? && !error_present?)]
@@ -104,7 +106,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -113,34 +115,34 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"parameters\" is required and cannot be null") if @parameters.nil?
 
-      if _parameters = @parameters
+      unless (_parameters = @parameters).nil?
         invalid_properties.concat(_parameters.list_invalid_properties_for("parameters")) if _parameters.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
 
-      if _report_type = @report_type
+      unless (_report_type = @report_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("report_type", _report_type.to_s.size, MAX_LENGTH_FOR_REPORT_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _error = @error
+      unless (_error = @error).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("error", _error.to_s.size, MAX_LENGTH_FOR_ERROR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _result = @result
+      unless (_result = @result).nil?
         invalid_properties.concat(_result.list_invalid_properties_for("result")) if _result.is_a?(OpenApi::Validatable)
       end
 
@@ -153,37 +155,37 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @parameters.nil?
-      if _parameters = @parameters
+      unless (_parameters = @parameters).nil?
         return false if _parameters.is_a?(OpenApi::Validatable) && !_parameters.valid?
       end
 
       return false if @report_type.nil?
-      if _report_type = @report_type
+      unless (_report_type = @report_type).nil?
         return false if _report_type.to_s.size > MAX_LENGTH_FOR_REPORT_TYPE
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
-      if _error = @error
+      unless (_error = @error).nil?
         return false if _error.to_s.size > MAX_LENGTH_FOR_ERROR
       end
 
-      if _result = @result
+      unless (_result = @result).nil?
         return false if _result.is_a?(OpenApi::Validatable) && !_result.valid?
       end
 

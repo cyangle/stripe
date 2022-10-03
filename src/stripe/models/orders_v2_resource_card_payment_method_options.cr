@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
     VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Indicates that you intend to make future payments with the payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the order's Customer, if present, after the order's PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -53,10 +55,10 @@ module Stripe
 
       invalid_properties.push("\"capture_method\" is required and cannot be null") if @capture_method.nil?
 
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -66,11 +68,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @capture_method.nil?
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "line_items", type: Array(Stripe::CreateParams)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter line_items : Array(Stripe::CreateParams)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTax1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter automatic_tax : Stripe::AutomaticTax1? = nil
@@ -109,42 +111,42 @@ module Stripe
 
       invalid_properties.push("\"line_items\" is required and cannot be null") if @line_items.nil?
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
-      if _client_permissions = @client_permissions
+      unless (_client_permissions = @client_permissions).nil?
         invalid_properties.concat(_client_permissions.list_invalid_properties_for("client_permissions")) if _client_permissions.is_a?(OpenApi::Validatable)
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
       end
 
-      if _payment = @payment
+      unless (_payment = @payment).nil?
         invalid_properties.concat(_payment.list_invalid_properties_for("payment")) if _payment.is_a?(OpenApi::Validatable)
       end
-      if _shipping_cost = @shipping_cost
+      unless (_shipping_cost = @shipping_cost).nil?
         invalid_properties.concat(_shipping_cost.list_invalid_properties_for("shipping_cost")) if _shipping_cost.is_a?(OpenApi::Validatable)
       end
-      if _shipping_details = @shipping_details
+      unless (_shipping_details = @shipping_details).nil?
         invalid_properties.concat(_shipping_details.list_invalid_properties_for("shipping_details")) if _shipping_details.is_a?(OpenApi::Validatable)
       end
-      if _tax_details = @tax_details
+      unless (_tax_details = @tax_details).nil?
         invalid_properties.concat(_tax_details.list_invalid_properties_for("tax_details")) if _tax_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -156,47 +158,47 @@ module Stripe
       return false if @currency.nil?
 
       return false if @line_items.nil?
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
 
-      if _client_permissions = @client_permissions
+      unless (_client_permissions = @client_permissions).nil?
         return false if _client_permissions.is_a?(OpenApi::Validatable) && !_client_permissions.valid?
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
 
-      if _payment = @payment
+      unless (_payment = @payment).nil?
         return false if _payment.is_a?(OpenApi::Validatable) && !_payment.valid?
       end
 
-      if _shipping_cost = @shipping_cost
+      unless (_shipping_cost = @shipping_cost).nil?
         return false if _shipping_cost.is_a?(OpenApi::Validatable) && !_shipping_cost.valid?
       end
 
-      if _shipping_details = @shipping_details
+      unless (_shipping_details = @shipping_details).nil?
         return false if _shipping_details.is_a?(OpenApi::Validatable) && !_shipping_details.valid?
       end
 
-      if _tax_details = @tax_details
+      unless (_tax_details = @tax_details).nil?
         return false if _tax_details.is_a?(OpenApi::Validatable) && !_tax_details.valid?
       end
 

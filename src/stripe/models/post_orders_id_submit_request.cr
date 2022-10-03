@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # `expected_total` should always be set to the order's `amount_total` field. If they don't match, submitting the order will fail. This helps detect race conditions where something else concurrently modifies the order.
     @[JSON::Field(key: "expected_total", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expected_total : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]

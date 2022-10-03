@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # ID of the invoice.
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : String? = nil
     MAX_LENGTH_FOR_INVOICE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -97,22 +99,22 @@ module Stripe
 
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _lines = @lines
+      unless (_lines = @lines).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "lines", container: _lines)) if _lines.is_a?(Array)
       end
-      if _memo = @memo
+      unless (_memo = @memo).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, MAX_LENGTH_FOR_MEMO)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
@@ -123,19 +125,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @invoice.nil?
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 
-      if _lines = @lines
+      unless (_lines = @lines).nil?
         return false if _lines.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _lines)
       end
 
-      if _memo = @memo
+      unless (_memo = @memo).nil?
         return false if _memo.to_s.size > MAX_LENGTH_FOR_MEMO
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 

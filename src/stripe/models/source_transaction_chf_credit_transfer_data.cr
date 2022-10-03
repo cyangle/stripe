@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Reference associated with the transfer.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -64,27 +64,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_address_country = @sender_address_country
+      unless (_sender_address_country = @sender_address_country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_address_country", _sender_address_country.to_s.size, MAX_LENGTH_FOR_SENDER_ADDRESS_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_address_line1 = @sender_address_line1
+      unless (_sender_address_line1 = @sender_address_line1).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_address_line1", _sender_address_line1.to_s.size, MAX_LENGTH_FOR_SENDER_ADDRESS_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_iban = @sender_iban
+      unless (_sender_iban = @sender_iban).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_iban", _sender_iban.to_s.size, MAX_LENGTH_FOR_SENDER_IBAN)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_name = @sender_name
+      unless (_sender_name = @sender_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -95,23 +95,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
-      if _sender_address_country = @sender_address_country
+      unless (_sender_address_country = @sender_address_country).nil?
         return false if _sender_address_country.to_s.size > MAX_LENGTH_FOR_SENDER_ADDRESS_COUNTRY
       end
 
-      if _sender_address_line1 = @sender_address_line1
+      unless (_sender_address_line1 = @sender_address_line1).nil?
         return false if _sender_address_line1.to_s.size > MAX_LENGTH_FOR_SENDER_ADDRESS_LINE1
       end
 
-      if _sender_iban = @sender_iban
+      unless (_sender_iban = @sender_iban).nil?
         return false if _sender_iban.to_s.size > MAX_LENGTH_FOR_SENDER_IBAN
       end
 
-      if _sender_name = @sender_name
+      unless (_sender_name = @sender_name).nil?
         return false if _sender_name.to_s.size > MAX_LENGTH_FOR_SENDER_NAME
       end
 

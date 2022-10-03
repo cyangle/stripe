@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The integer amount in **cents (or local equivalent)** to apply to the customer's credit balance.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -65,13 +67,13 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -84,11 +86,11 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 

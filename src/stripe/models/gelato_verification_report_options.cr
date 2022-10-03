@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "document", type: Stripe::GelatoReportDocumentOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter document : Stripe::GelatoReportDocumentOptions? = nil
@@ -43,7 +43,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _document = @document
+      unless (_document = @document).nil?
         invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
 
@@ -53,7 +53,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _document = @document
+      unless (_document = @document).nil?
         return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 

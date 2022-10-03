@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter = GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameterOneOf | Int64
+  alias GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter = GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameterOneOf | Int32
 end

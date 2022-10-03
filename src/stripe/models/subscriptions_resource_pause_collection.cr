@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
     @[JSON::Field(key: "behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_BEHAVIOR = "invalid value for \"behavior\", must be one of [keep_as_draft, mark_uncollectible, void]."
     VALID_VALUES_FOR_BEHAVIOR  = StaticArray["keep_as_draft", "mark_uncollectible", "void"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The time after which the subscription will resume collecting payments.
     @[JSON::Field(key: "resumes_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: resumes_at.nil? && !resumes_at_present?)]
@@ -54,7 +56,7 @@ module Stripe
 
       invalid_properties.push("\"behavior\" is required and cannot be null") if @behavior.nil?
 
-      if _behavior = @behavior
+      unless (_behavior = @behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
       end
 
@@ -65,7 +67,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @behavior.nil?
-      if _behavior = @behavior
+      unless (_behavior = @behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
       end
 

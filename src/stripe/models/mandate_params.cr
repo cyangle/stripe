@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "acceptance", type: Stripe::MandateAcceptanceParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acceptance : Stripe::MandateAcceptanceParams? = nil
@@ -60,17 +60,17 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _acceptance = @acceptance
+      unless (_acceptance = @acceptance).nil?
         invalid_properties.concat(_acceptance.list_invalid_properties_for("acceptance")) if _acceptance.is_a?(OpenApi::Validatable)
       end
-      if _amount = @amount
+      unless (_amount = @amount).nil?
         invalid_properties.concat(_amount.list_invalid_properties_for("amount")) if _amount.is_a?(OpenApi::Validatable)
       end
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
-      if _notification_method = @notification_method
+      unless (_notification_method = @notification_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_NOTIFICATION_METHOD) unless OpenApi::EnumValidator.valid?(_notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
       end
       invalid_properties
@@ -79,19 +79,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _acceptance = @acceptance
+      unless (_acceptance = @acceptance).nil?
         return false if _acceptance.is_a?(OpenApi::Validatable) && !_acceptance.valid?
       end
 
-      if _amount = @amount
+      unless (_amount = @amount).nil?
         return false if _amount.is_a?(OpenApi::Validatable) && !_amount.valid?
       end
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      if _notification_method = @notification_method
+      unless (_notification_method = @notification_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
       end
 

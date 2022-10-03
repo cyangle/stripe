@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "application_fee_amount", type: Stripe::PostQuotesRequestApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil
@@ -120,59 +120,59 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _application_fee_amount = @application_fee_amount
+      unless (_application_fee_amount = @application_fee_amount).nil?
         invalid_properties.concat(_application_fee_amount.list_invalid_properties_for("application_fee_amount")) if _application_fee_amount.is_a?(OpenApi::Validatable)
       end
-      if _application_fee_percent = @application_fee_percent
+      unless (_application_fee_percent = @application_fee_percent).nil?
         invalid_properties.concat(_application_fee_percent.list_invalid_properties_for("application_fee_percent")) if _application_fee_percent.is_a?(OpenApi::Validatable)
       end
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _collection_method = @collection_method
+      unless (_collection_method = @collection_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _default_tax_rates = @default_tax_rates
+      unless (_default_tax_rates = @default_tax_rates).nil?
         invalid_properties.concat(_default_tax_rates.list_invalid_properties_for("default_tax_rates")) if _default_tax_rates.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
       end
 
-      if _footer = @footer
+      unless (_footer = @footer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _header = @header
+      unless (_header = @header).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("header", _header.to_s.size, MAX_LENGTH_FOR_HEADER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
 
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of")) if _on_behalf_of.is_a?(OpenApi::Validatable)
       end
-      if _subscription_data = @subscription_data
+      unless (_subscription_data = @subscription_data).nil?
         invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -181,63 +181,63 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _application_fee_amount = @application_fee_amount
+      unless (_application_fee_amount = @application_fee_amount).nil?
         return false if _application_fee_amount.is_a?(OpenApi::Validatable) && !_application_fee_amount.valid?
       end
 
-      if _application_fee_percent = @application_fee_percent
+      unless (_application_fee_percent = @application_fee_percent).nil?
         return false if _application_fee_percent.is_a?(OpenApi::Validatable) && !_application_fee_percent.valid?
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _collection_method = @collection_method
+      unless (_collection_method = @collection_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _default_tax_rates = @default_tax_rates
+      unless (_default_tax_rates = @default_tax_rates).nil?
         return false if _default_tax_rates.is_a?(OpenApi::Validatable) && !_default_tax_rates.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
 
-      if _footer = @footer
+      unless (_footer = @footer).nil?
         return false if _footer.to_s.size > MAX_LENGTH_FOR_FOOTER
       end
 
-      if _header = @header
+      unless (_header = @header).nil?
         return false if _header.to_s.size > MAX_LENGTH_FOR_HEADER
       end
 
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
 
-      if _subscription_data = @subscription_data
+      unless (_subscription_data = @subscription_data).nil?
         return false if _subscription_data.is_a?(OpenApi::Validatable) && !_subscription_data.valid?
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

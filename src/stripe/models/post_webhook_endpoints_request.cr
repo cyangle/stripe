@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
     @[JSON::Field(key: "enabled_events", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
     @[JSON::Field(key: "api_version", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -78,22 +80,22 @@ module Stripe
 
       invalid_properties.push("\"enabled_events\" is required and cannot be null") if @enabled_events.nil?
 
-      if _enabled_events = @enabled_events
+      unless (_enabled_events = @enabled_events).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ENABLED_EVENTS) unless OpenApi::EnumValidator.valid?(_enabled_events, VALID_VALUES_FOR_ENABLED_EVENTS)
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
-      if _api_version = @api_version
+      unless (_api_version = @api_version).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_API_VERSION) unless OpenApi::EnumValidator.valid?(_api_version, VALID_VALUES_FOR_API_VERSION)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -103,21 +105,21 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @enabled_events.nil?
-      if _enabled_events = @enabled_events
+      unless (_enabled_events = @enabled_events).nil?
         return false unless OpenApi::EnumValidator.valid?(_enabled_events, VALID_VALUES_FOR_ENABLED_EVENTS)
       end
 
       return false if @url.nil?
 
-      if _api_version = @api_version
+      unless (_api_version = @api_version).nil?
         return false unless OpenApi::EnumValidator.valid?(_api_version, VALID_VALUES_FOR_API_VERSION)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 

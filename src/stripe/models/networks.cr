@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # All available networks for the card.
     @[JSON::Field(key: "available", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter available : Array(String)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The preferred network for the card.
     @[JSON::Field(key: "preferred", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred.nil? && !preferred_present?)]
@@ -53,7 +55,7 @@ module Stripe
 
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
 
-      if _preferred = @preferred
+      unless (_preferred = @preferred).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
           invalid_properties.push(max_length_error)
         end
@@ -66,7 +68,7 @@ module Stripe
     def valid? : Bool
       return false if @available.nil?
 
-      if _preferred = @preferred
+      unless (_preferred = @preferred).nil?
         return false if _preferred.to_s.size > MAX_LENGTH_FOR_PREFERRED
       end
 

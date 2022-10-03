@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.configuration]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.configuration"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "bbpos_wisepos_e", type: Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bbpos_wisepos_e : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil
@@ -77,7 +79,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -86,17 +88,17 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _bbpos_wisepos_e = @bbpos_wisepos_e
+      unless (_bbpos_wisepos_e = @bbpos_wisepos_e).nil?
         invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e")) if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
       end
 
-      if _tipping = @tipping
+      unless (_tipping = @tipping).nil?
         invalid_properties.concat(_tipping.list_invalid_properties_for("tipping")) if _tipping.is_a?(OpenApi::Validatable)
       end
-      if _verifone_p400 = @verifone_p400
+      unless (_verifone_p400 = @verifone_p400).nil?
         invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400")) if _verifone_p400.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -106,26 +108,26 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _bbpos_wisepos_e = @bbpos_wisepos_e
+      unless (_bbpos_wisepos_e = @bbpos_wisepos_e).nil?
         return false if _bbpos_wisepos_e.is_a?(OpenApi::Validatable) && !_bbpos_wisepos_e.valid?
       end
 
-      if _tipping = @tipping
+      unless (_tipping = @tipping).nil?
         return false if _tipping.is_a?(OpenApi::Validatable) && !_tipping.valid?
       end
 
-      if _verifone_p400 = @verifone_p400
+      unless (_verifone_p400 = @verifone_p400).nil?
         return false if _verifone_p400.is_a?(OpenApi::Validatable) && !_verifone_p400.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the FinancialAccount should have the Feature.
     @[JSON::Field(key: "requested", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -34,6 +34,8 @@ module Stripe
     # Additional details; includes at least one entry when the status is not `active`.
     @[JSON::Field(key: "status_details", type: Array(Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_details : Array(Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,12 +57,12 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"status_details\" is required and cannot be null") if @status_details.nil?
 
-      if _status_details = @status_details
+      unless (_status_details = @status_details).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "status_details", container: _status_details)) if _status_details.is_a?(Array)
       end
       invalid_properties
@@ -72,12 +74,12 @@ module Stripe
       return false if @requested.nil?
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @status_details.nil?
-      if _status_details = @status_details
+      unless (_status_details = @status_details).nil?
         return false if _status_details.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _status_details)
       end
 

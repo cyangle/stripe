@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ID of the file. The file's `purpose` must be one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`, `identity_document_downloadable`, `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
     @[JSON::Field(key: "file", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter file : String? = nil
     MAX_LENGTH_FOR_FILE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -58,13 +60,13 @@ module Stripe
 
       invalid_properties.push("\"file\" is required and cannot be null") if @file.nil?
 
-      if _file = @file
+      unless (_file = @file).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("file", _file.to_s.size, MAX_LENGTH_FOR_FILE)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -74,11 +76,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @file.nil?
-      if _file = @file
+      unless (_file = @file).nil?
         return false if _file.to_s.size > MAX_LENGTH_FOR_FILE
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 

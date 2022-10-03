@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Monetary threshold that triggers the subscription to create an invoice
     @[JSON::Field(key: "amount_gte", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_gte.nil? && !amount_gte_present?)]

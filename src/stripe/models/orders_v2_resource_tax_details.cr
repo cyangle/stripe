@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Describes the purchaser's tax exemption status. One of `none`, `exempt`, or `reverse`.
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,6 +30,8 @@ module Stripe
     # The purchaser's tax IDs to be used in calculation of tax for this Order.
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::OrdersV2ResourceTaxDetailsResourceTaxId)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_ids : Array(Stripe::OrdersV2ResourceTaxDetailsResourceTaxId)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,12 +50,12 @@ module Stripe
 
       invalid_properties.push("\"tax_exempt\" is required and cannot be null") if @tax_exempt.nil?
 
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
       invalid_properties.push("\"tax_ids\" is required and cannot be null") if @tax_ids.nil?
 
-      if _tax_ids = @tax_ids
+      unless (_tax_ids = @tax_ids).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_ids", container: _tax_ids)) if _tax_ids.is_a?(Array)
       end
       invalid_properties
@@ -63,12 +65,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @tax_exempt.nil?
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
 
       return false if @tax_ids.nil?
-      if _tax_ids = @tax_ids
+      unless (_tax_ids = @tax_ids).nil?
         return false if _tax_ids.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_ids)
       end
 

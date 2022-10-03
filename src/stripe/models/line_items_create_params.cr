@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter price : String? = nil
@@ -27,7 +27,9 @@ module Stripe
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "adjustable_quantity", type: Stripe::AdjustableQuantityParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter adjustable_quantity : Stripe::AdjustableQuantityParams? = nil
@@ -51,14 +53,14 @@ module Stripe
 
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
-      if _price = @price
+      unless (_price = @price).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"quantity\" is required and cannot be null") if @quantity.nil?
 
-      if _adjustable_quantity = @adjustable_quantity
+      unless (_adjustable_quantity = @adjustable_quantity).nil?
         invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity")) if _adjustable_quantity.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -68,13 +70,13 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @price.nil?
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
       return false if @quantity.nil?
 
-      if _adjustable_quantity = @adjustable_quantity
+      unless (_adjustable_quantity = @adjustable_quantity).nil?
         return false if _adjustable_quantity.is_a?(OpenApi::Validatable) && !_adjustable_quantity.valid?
       end
 

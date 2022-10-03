@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs), but currently not in the API.
     @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: id.nil? && !id_present?)]
@@ -52,12 +52,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _idempotency_key = @idempotency_key
+      unless (_idempotency_key = @idempotency_key).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("idempotency_key", _idempotency_key.to_s.size, MAX_LENGTH_FOR_IDEMPOTENCY_KEY)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
-      if _idempotency_key = @idempotency_key
+      unless (_idempotency_key = @idempotency_key).nil?
         return false if _idempotency_key.to_s.size > MAX_LENGTH_FOR_IDEMPOTENCY_KEY
       end
 

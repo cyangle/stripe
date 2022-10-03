@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Allows or disallows billing details to be set on an Order with a publishable key and Order client_secret
     @[JSON::Field(key: "billing_details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
@@ -64,13 +64,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_DETAILS) unless OpenApi::EnumValidator.valid?(_billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
       end
-      if _promotion_codes = @promotion_codes
+      unless (_promotion_codes = @promotion_codes).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PROMOTION_CODES) unless OpenApi::EnumValidator.valid?(_promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
       end
-      if _shipping_details = @shipping_details
+      unless (_shipping_details = @shipping_details).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SHIPPING_DETAILS) unless OpenApi::EnumValidator.valid?(_shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
       end
       invalid_properties
@@ -79,15 +79,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
       end
 
-      if _promotion_codes = @promotion_codes
+      unless (_promotion_codes = @promotion_codes).nil?
         return false unless OpenApi::EnumValidator.valid?(_promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
       end
 
-      if _shipping_details = @shipping_details
+      unless (_shipping_details = @shipping_details).nil?
         return false unless OpenApi::EnumValidator.valid?(_shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
       end
 

@@ -18,12 +18,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
       invalid_properties
@@ -59,7 +61,7 @@ module Stripe
     def valid? : Bool
       return false if @amount.nil?
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 

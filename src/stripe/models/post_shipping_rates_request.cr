@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter display_name : String? = nil
     MAX_LENGTH_FOR_DISPLAY_NAME = 100
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "delivery_estimate", type: Stripe::DeliveryEstimate1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter delivery_estimate : Stripe::DeliveryEstimate1? = nil
@@ -81,24 +83,24 @@ module Stripe
 
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _delivery_estimate = @delivery_estimate
+      unless (_delivery_estimate = @delivery_estimate).nil?
         invalid_properties.concat(_delivery_estimate.list_invalid_properties_for("delivery_estimate")) if _delivery_estimate.is_a?(OpenApi::Validatable)
       end
 
-      if _fixed_amount = @fixed_amount
+      unless (_fixed_amount = @fixed_amount).nil?
         invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount")) if _fixed_amount.is_a?(OpenApi::Validatable)
       end
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
@@ -108,23 +110,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @display_name.nil?
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
-      if _delivery_estimate = @delivery_estimate
+      unless (_delivery_estimate = @delivery_estimate).nil?
         return false if _delivery_estimate.is_a?(OpenApi::Validatable) && !_delivery_estimate.valid?
       end
 
-      if _fixed_amount = @fixed_amount
+      unless (_fixed_amount = @fixed_amount).nil?
         return false if _fixed_amount.is_a?(OpenApi::Validatable) && !_fixed_amount.valid?
       end
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

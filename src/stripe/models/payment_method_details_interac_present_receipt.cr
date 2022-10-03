@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The type of account being debited or credited
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -113,45 +113,45 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_type = @account_type
+      unless (_account_type = @account_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
       end
-      if _application_cryptogram = @application_cryptogram
+      unless (_application_cryptogram = @application_cryptogram).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("application_cryptogram", _application_cryptogram.to_s.size, MAX_LENGTH_FOR_APPLICATION_CRYPTOGRAM)
           invalid_properties.push(max_length_error)
         end
       end
-      if _application_preferred_name = @application_preferred_name
+      unless (_application_preferred_name = @application_preferred_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("application_preferred_name", _application_preferred_name.to_s.size, MAX_LENGTH_FOR_APPLICATION_PREFERRED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _authorization_code = @authorization_code
+      unless (_authorization_code = @authorization_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("authorization_code", _authorization_code.to_s.size, MAX_LENGTH_FOR_AUTHORIZATION_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _authorization_response_code = @authorization_response_code
+      unless (_authorization_response_code = @authorization_response_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("authorization_response_code", _authorization_response_code.to_s.size, MAX_LENGTH_FOR_AUTHORIZATION_RESPONSE_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _cardholder_verification_method = @cardholder_verification_method
+      unless (_cardholder_verification_method = @cardholder_verification_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_verification_method", _cardholder_verification_method.to_s.size, MAX_LENGTH_FOR_CARDHOLDER_VERIFICATION_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _dedicated_file_name = @dedicated_file_name
+      unless (_dedicated_file_name = @dedicated_file_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dedicated_file_name", _dedicated_file_name.to_s.size, MAX_LENGTH_FOR_DEDICATED_FILE_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _terminal_verification_results = @terminal_verification_results
+      unless (_terminal_verification_results = @terminal_verification_results).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terminal_verification_results", _terminal_verification_results.to_s.size, MAX_LENGTH_FOR_TERMINAL_VERIFICATION_RESULTS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transaction_status_information = @transaction_status_information
+      unless (_transaction_status_information = @transaction_status_information).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_status_information", _transaction_status_information.to_s.size, MAX_LENGTH_FOR_TRANSACTION_STATUS_INFORMATION)
           invalid_properties.push(max_length_error)
         end
@@ -162,39 +162,39 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_type = @account_type
+      unless (_account_type = @account_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
       end
 
-      if _application_cryptogram = @application_cryptogram
+      unless (_application_cryptogram = @application_cryptogram).nil?
         return false if _application_cryptogram.to_s.size > MAX_LENGTH_FOR_APPLICATION_CRYPTOGRAM
       end
 
-      if _application_preferred_name = @application_preferred_name
+      unless (_application_preferred_name = @application_preferred_name).nil?
         return false if _application_preferred_name.to_s.size > MAX_LENGTH_FOR_APPLICATION_PREFERRED_NAME
       end
 
-      if _authorization_code = @authorization_code
+      unless (_authorization_code = @authorization_code).nil?
         return false if _authorization_code.to_s.size > MAX_LENGTH_FOR_AUTHORIZATION_CODE
       end
 
-      if _authorization_response_code = @authorization_response_code
+      unless (_authorization_response_code = @authorization_response_code).nil?
         return false if _authorization_response_code.to_s.size > MAX_LENGTH_FOR_AUTHORIZATION_RESPONSE_CODE
       end
 
-      if _cardholder_verification_method = @cardholder_verification_method
+      unless (_cardholder_verification_method = @cardholder_verification_method).nil?
         return false if _cardholder_verification_method.to_s.size > MAX_LENGTH_FOR_CARDHOLDER_VERIFICATION_METHOD
       end
 
-      if _dedicated_file_name = @dedicated_file_name
+      unless (_dedicated_file_name = @dedicated_file_name).nil?
         return false if _dedicated_file_name.to_s.size > MAX_LENGTH_FOR_DEDICATED_FILE_NAME
       end
 
-      if _terminal_verification_results = @terminal_verification_results
+      unless (_terminal_verification_results = @terminal_verification_results).nil?
         return false if _terminal_verification_results.to_s.size > MAX_LENGTH_FOR_TERMINAL_VERIFICATION_RESULTS
       end
 
-      if _transaction_status_information = @transaction_status_information
+      unless (_transaction_status_information = @transaction_status_information).nil?
         return false if _transaction_status_information.to_s.size > MAX_LENGTH_FOR_TRANSACTION_STATUS_INFORMATION
       end
 

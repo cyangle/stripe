@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the payment link's `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -95,31 +95,31 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _after_completion = @after_completion
+      unless (_after_completion = @after_completion).nil?
         invalid_properties.concat(_after_completion.list_invalid_properties_for("after_completion")) if _after_completion.is_a?(OpenApi::Validatable)
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _billing_address_collection = @billing_address_collection
+      unless (_billing_address_collection = @billing_address_collection).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
-      if _customer_creation = @customer_creation
+      unless (_customer_creation = @customer_creation).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOMER_CREATION) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
 
-      if _payment_method_collection = @payment_method_collection
+      unless (_payment_method_collection = @payment_method_collection).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types")) if _payment_method_types.is_a?(OpenApi::Validatable)
       end
-      if _shipping_address_collection = @shipping_address_collection
+      unless (_shipping_address_collection = @shipping_address_collection).nil?
         invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -128,35 +128,35 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _after_completion = @after_completion
+      unless (_after_completion = @after_completion).nil?
         return false if _after_completion.is_a?(OpenApi::Validatable) && !_after_completion.valid?
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _billing_address_collection = @billing_address_collection
+      unless (_billing_address_collection = @billing_address_collection).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
 
-      if _customer_creation = @customer_creation
+      unless (_customer_creation = @customer_creation).nil?
         return false unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
-      if _payment_method_collection = @payment_method_collection
+      unless (_payment_method_collection = @payment_method_collection).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
 
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         return false if _payment_method_types.is_a?(OpenApi::Validatable) && !_payment_method_types.valid?
       end
 
-      if _shipping_address_collection = @shipping_address_collection
+      unless (_shipping_address_collection = @shipping_address_collection).nil?
         return false if _shipping_address_collection.is_a?(OpenApi::Validatable) && !_shipping_address_collection.valid?
       end
 

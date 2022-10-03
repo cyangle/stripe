@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Status of this `selfie` check.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [unverified, verified]."
     VALID_VALUES_FOR_STATUS  = StaticArray["unverified", "verified"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # ID of the [File](https://stripe.com/docs/api/files) holding the image of the identity document used in this check.
     @[JSON::Field(key: "document", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: document.nil? && !document_present?)]
@@ -71,18 +73,18 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _document = @document
+      unless (_document = @document).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("document", _document.to_s.size, MAX_LENGTH_FOR_DOCUMENT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _error = @error
+      unless (_error = @error).nil?
         invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
-      if _selfie = @selfie
+      unless (_selfie = @selfie).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("selfie", _selfie.to_s.size, MAX_LENGTH_FOR_SELFIE)
           invalid_properties.push(max_length_error)
         end
@@ -94,19 +96,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _document = @document
+      unless (_document = @document).nil?
         return false if _document.to_s.size > MAX_LENGTH_FOR_DOCUMENT
       end
 
-      if _error = @error
+      unless (_error = @error).nil?
         return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
 
-      if _selfie = @selfie
+      unless (_selfie = @selfie).nil?
         return false if _selfie.to_s.size > MAX_LENGTH_FOR_SELFIE
       end
 

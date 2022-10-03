@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "columns", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter columns : Array(String)? = nil
@@ -72,10 +72,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _reporting_category = @reporting_category
+      unless (_reporting_category = @reporting_category).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REPORTING_CATEGORY) unless OpenApi::EnumValidator.valid?(_reporting_category, VALID_VALUES_FOR_REPORTING_CATEGORY)
       end
-      if _timezone = @timezone
+      unless (_timezone = @timezone).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TIMEZONE) unless OpenApi::EnumValidator.valid?(_timezone, VALID_VALUES_FOR_TIMEZONE)
       end
       invalid_properties
@@ -84,11 +84,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _reporting_category = @reporting_category
+      unless (_reporting_category = @reporting_category).nil?
         return false unless OpenApi::EnumValidator.valid?(_reporting_category, VALID_VALUES_FOR_REPORTING_CATEGORY)
       end
 
-      if _timezone = @timezone
+      unless (_timezone = @timezone).nil?
         return false unless OpenApi::EnumValidator.valid?(_timezone, VALID_VALUES_FOR_TIMEZONE)
       end
 

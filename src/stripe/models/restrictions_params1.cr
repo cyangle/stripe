@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::RestrictionsParamsCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency_options : Hash(String, Stripe::RestrictionsParamsCurrencyOptionsValue)? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
       invalid_properties
@@ -47,7 +47,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 

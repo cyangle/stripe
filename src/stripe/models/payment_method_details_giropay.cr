@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Bank code of bank associated with the bank account.
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
@@ -70,22 +70,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bic = @bic
+      unless (_bic = @bic).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -96,19 +96,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
-      if _bic = @bic
+      unless (_bic = @bic).nil?
         return false if _bic.to_s.size > MAX_LENGTH_FOR_BIC
       end
 
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 

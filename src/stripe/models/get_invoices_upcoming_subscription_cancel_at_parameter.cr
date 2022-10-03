@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias GetInvoicesUpcomingSubscriptionCancelAtParameter = BusinessProfileSpecsSupportUrlOneOf | Int64
+  alias GetInvoicesUpcomingSubscriptionCancelAtParameter = BusinessProfileSpecsSupportUrlOneOf | Int32
 end

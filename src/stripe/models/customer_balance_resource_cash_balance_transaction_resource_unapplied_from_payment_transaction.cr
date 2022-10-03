@@ -19,10 +19,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "payment_intent", type: Stripe::CustomerBalanceResourceCashBalanceTransactionResourceUnappliedFromPaymentTransactionPaymentIntent?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_intent : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceUnappliedFromPaymentTransactionPaymentIntent? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @payment_intent.nil?
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 

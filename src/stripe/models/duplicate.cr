@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "additional_documentation", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter additional_documentation : Stripe::BusinessProfileSpecsSupportUrl? = nil
@@ -59,24 +59,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _additional_documentation = @additional_documentation
+      unless (_additional_documentation = @additional_documentation).nil?
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
-      if _card_statement = @card_statement
+      unless (_card_statement = @card_statement).nil?
         invalid_properties.concat(_card_statement.list_invalid_properties_for("card_statement")) if _card_statement.is_a?(OpenApi::Validatable)
       end
-      if _cash_receipt = @cash_receipt
+      unless (_cash_receipt = @cash_receipt).nil?
         invalid_properties.concat(_cash_receipt.list_invalid_properties_for("cash_receipt")) if _cash_receipt.is_a?(OpenApi::Validatable)
       end
-      if _check_image = @check_image
+      unless (_check_image = @check_image).nil?
         invalid_properties.concat(_check_image.list_invalid_properties_for("check_image")) if _check_image.is_a?(OpenApi::Validatable)
       end
-      if _explanation = @explanation
+      unless (_explanation = @explanation).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _original_transaction = @original_transaction
+      unless (_original_transaction = @original_transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, MAX_LENGTH_FOR_ORIGINAL_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
@@ -87,27 +87,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _additional_documentation = @additional_documentation
+      unless (_additional_documentation = @additional_documentation).nil?
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
-      if _card_statement = @card_statement
+      unless (_card_statement = @card_statement).nil?
         return false if _card_statement.is_a?(OpenApi::Validatable) && !_card_statement.valid?
       end
 
-      if _cash_receipt = @cash_receipt
+      unless (_cash_receipt = @cash_receipt).nil?
         return false if _cash_receipt.is_a?(OpenApi::Validatable) && !_cash_receipt.valid?
       end
 
-      if _check_image = @check_image
+      unless (_check_image = @check_image).nil?
         return false if _check_image.is_a?(OpenApi::Validatable) && !_check_image.valid?
       end
 
-      if _explanation = @explanation
+      unless (_explanation = @explanation).nil?
         return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 
-      if _original_transaction = @original_transaction
+      unless (_original_transaction = @original_transaction).nil?
         return false if _original_transaction.to_s.size > MAX_LENGTH_FOR_ORIGINAL_TRANSACTION
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -49,7 +49,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _memo = @memo
+      unless (_memo = @memo).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, MAX_LENGTH_FOR_MEMO)
           invalid_properties.push(max_length_error)
         end
@@ -61,7 +61,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _memo = @memo
+      unless (_memo = @memo).nil?
         return false if _memo.to_s.size > MAX_LENGTH_FOR_MEMO
       end
 

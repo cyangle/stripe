@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Indicates which line items triggered a threshold invoice.
     @[JSON::Field(key: "item_reasons", type: Array(Stripe::InvoiceItemThresholdReason)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter item_reasons : Array(Stripe::InvoiceItemThresholdReason)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The total invoice amount threshold boundary if it triggered the threshold invoice.
     @[JSON::Field(key: "amount_gte", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_gte.nil? && !amount_gte_present?)]
@@ -52,7 +54,7 @@ module Stripe
 
       invalid_properties.push("\"item_reasons\" is required and cannot be null") if @item_reasons.nil?
 
-      if _item_reasons = @item_reasons
+      unless (_item_reasons = @item_reasons).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "item_reasons", container: _item_reasons)) if _item_reasons.is_a?(Array)
       end
 
@@ -63,7 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @item_reasons.nil?
-      if _item_reasons = @item_reasons
+      unless (_item_reasons = @item_reasons).nil?
         return false if _item_reasons.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _item_reasons)
       end
 

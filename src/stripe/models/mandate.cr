@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "customer_acceptance", type: Stripe::CustomerAcceptance?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer_acceptance : Stripe::CustomerAcceptance? = nil
@@ -57,7 +57,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [multi_use, single_use]."
     VALID_VALUES_FOR__TYPE  = StaticArray["multi_use", "single_use"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     #
     @[JSON::Field(key: "multi_use", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -92,12 +94,12 @@ module Stripe
 
       invalid_properties.push("\"customer_acceptance\" is required and cannot be null") if @customer_acceptance.nil?
 
-      if _customer_acceptance = @customer_acceptance
+      unless (_customer_acceptance = @customer_acceptance).nil?
         invalid_properties.concat(_customer_acceptance.list_invalid_properties_for("customer_acceptance")) if _customer_acceptance.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -106,31 +108,31 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"payment_method\" is required and cannot be null") if @payment_method.nil?
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method")) if _payment_method.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"payment_method_details\" is required and cannot be null") if @payment_method_details.nil?
 
-      if _payment_method_details = @payment_method_details
+      unless (_payment_method_details = @payment_method_details).nil?
         invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details")) if _payment_method_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _single_use = @single_use
+      unless (_single_use = @single_use).nil?
         invalid_properties.concat(_single_use.list_invalid_properties_for("single_use")) if _single_use.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -140,43 +142,43 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @customer_acceptance.nil?
-      if _customer_acceptance = @customer_acceptance
+      unless (_customer_acceptance = @customer_acceptance).nil?
         return false if _customer_acceptance.is_a?(OpenApi::Validatable) && !_customer_acceptance.valid?
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @payment_method.nil?
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.is_a?(OpenApi::Validatable) && !_payment_method.valid?
       end
 
       return false if @payment_method_details.nil?
-      if _payment_method_details = @payment_method_details
+      unless (_payment_method_details = @payment_method_details).nil?
         return false if _payment_method_details.is_a?(OpenApi::Validatable) && !_payment_method_details.valid?
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _single_use = @single_use
+      unless (_single_use = @single_use).nil?
         return false if _single_use.is_a?(OpenApi::Validatable) && !_single_use.valid?
       end
 

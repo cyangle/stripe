@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The Klarna payment method used for this transaction. Can be one of `pay_later`, `pay_now`, `pay_with_financing`, or `pay_in_installments`
     @[JSON::Field(key: "payment_method_category", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_category.nil? && !payment_method_category_present?)]
@@ -52,12 +52,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _payment_method_category = @payment_method_category
+      unless (_payment_method_category = @payment_method_category).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _preferred_locale = @preferred_locale
+      unless (_preferred_locale = @preferred_locale).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _payment_method_category = @payment_method_category
+      unless (_payment_method_category = @payment_method_category).nil?
         return false if _payment_method_category.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY
       end
 
-      if _preferred_locale = @preferred_locale
+      unless (_preferred_locale = @preferred_locale).nil?
         return false if _preferred_locale.to_s.size > MAX_LENGTH_FOR_PREFERRED_LOCALE
       end
 

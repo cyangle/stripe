@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar reviews](https://stripe.com/docs/radar/reviews) for details.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was [blocked by Stripe](https://stripe.com/docs/declines#blocked-payments) after bank authorization, and may temporarily appear as \"pending\" on a cardholder's statement.
     @[JSON::Field(key: "network_status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network_status.nil? && !network_status_present?)]
@@ -87,31 +89,31 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _network_status = @network_status
+      unless (_network_status = @network_status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_status", _network_status.to_s.size, MAX_LENGTH_FOR_NETWORK_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _risk_level = @risk_level
+      unless (_risk_level = @risk_level).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("risk_level", _risk_level.to_s.size, MAX_LENGTH_FOR_RISK_LEVEL)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _rule = @rule
+      unless (_rule = @rule).nil?
         invalid_properties.concat(_rule.list_invalid_properties_for("rule")) if _rule.is_a?(OpenApi::Validatable)
       end
-      if _seller_message = @seller_message
+      unless (_seller_message = @seller_message).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("seller_message", _seller_message.to_s.size, MAX_LENGTH_FOR_SELLER_MESSAGE)
           invalid_properties.push(max_length_error)
         end
@@ -123,27 +125,27 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
-      if _network_status = @network_status
+      unless (_network_status = @network_status).nil?
         return false if _network_status.to_s.size > MAX_LENGTH_FOR_NETWORK_STATUS
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
-      if _risk_level = @risk_level
+      unless (_risk_level = @risk_level).nil?
         return false if _risk_level.to_s.size > MAX_LENGTH_FOR_RISK_LEVEL
       end
 
-      if _rule = @rule
+      unless (_rule = @rule).nil?
         return false if _rule.is_a?(OpenApi::Validatable) && !_rule.valid?
       end
 
-      if _seller_message = @seller_message
+      unless (_seller_message = @seller_message).nil?
         return false if _seller_message.to_s.size > MAX_LENGTH_FOR_SELLER_MESSAGE
       end
 

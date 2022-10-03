@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). If not set, defaults to the full transaction amount.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -62,16 +62,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _evidence = @evidence
+      unless (_evidence = @evidence).nil?
         invalid_properties.concat(_evidence.list_invalid_properties_for("evidence")) if _evidence.is_a?(OpenApi::Validatable)
       end
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -80,15 +80,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _evidence = @evidence
+      unless (_evidence = @evidence).nil?
         return false if _evidence.is_a?(OpenApi::Validatable) && !_evidence.valid?
       end
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         return false if _transaction.to_s.size > MAX_LENGTH_FOR_TRANSACTION
       end
 
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 

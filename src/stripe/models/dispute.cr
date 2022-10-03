@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -80,7 +80,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [charge_refunded, lost, needs_response, under_review, warning_closed, warning_needs_response, warning_under_review, won]."
     VALID_VALUES_FOR_STATUS  = StaticArray["charge_refunded", "lost", "needs_response", "under_review", "warning_closed", "warning_needs_response", "warning_under_review", "won"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "payment_intent", type: Stripe::DisputePaymentIntent?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
     getter payment_intent : Stripe::DisputePaymentIntent? = nil
@@ -121,12 +123,12 @@ module Stripe
 
       invalid_properties.push("\"balance_transactions\" is required and cannot be null") if @balance_transactions.nil?
 
-      if _balance_transactions = @balance_transactions
+      unless (_balance_transactions = @balance_transactions).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "balance_transactions", container: _balance_transactions)) if _balance_transactions.is_a?(Array)
       end
       invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
@@ -135,17 +137,17 @@ module Stripe
 
       invalid_properties.push("\"evidence\" is required and cannot be null") if @evidence.nil?
 
-      if _evidence = @evidence
+      unless (_evidence = @evidence).nil?
         invalid_properties.concat(_evidence.list_invalid_properties_for("evidence")) if _evidence.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"evidence_details\" is required and cannot be null") if @evidence_details.nil?
 
-      if _evidence_details = @evidence_details
+      unless (_evidence_details = @evidence_details).nil?
         invalid_properties.concat(_evidence_details.list_invalid_properties_for("evidence_details")) if _evidence_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -158,22 +160,22 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -185,12 +187,12 @@ module Stripe
       return false if @amount.nil?
 
       return false if @balance_transactions.nil?
-      if _balance_transactions = @balance_transactions
+      unless (_balance_transactions = @balance_transactions).nil?
         return false if _balance_transactions.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _balance_transactions)
       end
 
       return false if @charge.nil?
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
 
@@ -199,17 +201,17 @@ module Stripe
       return false if @currency.nil?
 
       return false if @evidence.nil?
-      if _evidence = @evidence
+      unless (_evidence = @evidence).nil?
         return false if _evidence.is_a?(OpenApi::Validatable) && !_evidence.valid?
       end
 
       return false if @evidence_details.nil?
-      if _evidence_details = @evidence_details
+      unless (_evidence_details = @evidence_details).nil?
         return false if _evidence_details.is_a?(OpenApi::Validatable) && !_evidence_details.valid?
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -220,21 +222,21 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @reason.nil?
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 

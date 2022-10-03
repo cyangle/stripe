@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The messaging shown to customers in the portal.
     @[JSON::Field(key: "headline", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: headline.nil? && !headline_present?)]
@@ -61,17 +61,17 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _headline = @headline
+      unless (_headline = @headline).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, MAX_LENGTH_FOR_HEADLINE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _privacy_policy_url = @privacy_policy_url
+      unless (_privacy_policy_url = @privacy_policy_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("privacy_policy_url", _privacy_policy_url.to_s.size, MAX_LENGTH_FOR_PRIVACY_POLICY_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _terms_of_service_url = @terms_of_service_url
+      unless (_terms_of_service_url = @terms_of_service_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terms_of_service_url", _terms_of_service_url.to_s.size, MAX_LENGTH_FOR_TERMS_OF_SERVICE_URL)
           invalid_properties.push(max_length_error)
         end
@@ -82,15 +82,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _headline = @headline
+      unless (_headline = @headline).nil?
         return false if _headline.to_s.size > MAX_LENGTH_FOR_HEADLINE
       end
 
-      if _privacy_policy_url = @privacy_policy_url
+      unless (_privacy_policy_url = @privacy_policy_url).nil?
         return false if _privacy_policy_url.to_s.size > MAX_LENGTH_FOR_PRIVACY_POLICY_URL
       end
 
-      if _terms_of_service_url = @terms_of_service_url
+      unless (_terms_of_service_url = @terms_of_service_url).nil?
         return false if _terms_of_service_url.to_s.size > MAX_LENGTH_FOR_TERMS_OF_SERVICE_URL
       end
 

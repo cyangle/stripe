@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The additional amount Stripe will hold if the authorization is approved, in the card's [currency](https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency) and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,7 +41,9 @@ module Stripe
     @[JSON::Field(key: "merchant_currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter merchant_currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "amount_details", type: Stripe::IssuingAuthorizationAmountDetails1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
     getter amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil
@@ -79,7 +81,7 @@ module Stripe
 
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
 
-      if _amount_details = @amount_details
+      unless (_amount_details = @amount_details).nil?
         invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -98,7 +100,7 @@ module Stripe
 
       return false if @merchant_currency.nil?
 
-      if _amount_details = @amount_details
+      unless (_amount_details = @amount_details).nil?
         return false if _amount_details.is_a?(OpenApi::Validatable) && !_amount_details.valid?
       end
 

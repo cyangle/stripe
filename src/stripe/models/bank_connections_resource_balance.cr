@@ -19,15 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The time that the external institution calculated this balance. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "as_of", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter as_of : Int64? = nil
 
     # The balances owed to (or by) the account holder.  Each key is a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.  Each value is a integer amount. A positive amount indicates money owed to the account holder. A negative amount indicates money owed by the account holder.
-    @[JSON::Field(key: "current", type: Hash(String, Int64)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter current : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "current", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter current : Hash(String, Int32)? = nil
 
     # The `type` of the balance. An additional hash is included on the balance with a name matching this value.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,7 +35,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [cash, credit]."
     VALID_VALUES_FOR__TYPE  = StaticArray["cash", "credit"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "cash", type: Stripe::BankConnectionsResourceBalanceApiResourceCashBalance?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cash : Stripe::BankConnectionsResourceBalanceApiResourceCashBalance? = nil
@@ -49,7 +51,7 @@ module Stripe
       *,
       # Required properties
       @as_of : Int64? = nil,
-      @current : Hash(String, Int64)? = nil,
+      @current : Hash(String, Int32)? = nil,
       @_type : String? = nil,
       # Optional properties
       @cash : Stripe::BankConnectionsResourceBalanceApiResourceCashBalance? = nil,
@@ -68,13 +70,13 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _cash = @cash
+      unless (_cash = @cash).nil?
         invalid_properties.concat(_cash.list_invalid_properties_for("cash")) if _cash.is_a?(OpenApi::Validatable)
       end
-      if _credit = @credit
+      unless (_credit = @credit).nil?
         invalid_properties.concat(_credit.list_invalid_properties_for("credit")) if _credit.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -88,15 +90,15 @@ module Stripe
       return false if @current.nil?
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _cash = @cash
+      unless (_cash = @cash).nil?
         return false if _cash.is_a?(OpenApi::Validatable) && !_cash.valid?
       end
 
-      if _credit = @credit
+      unless (_credit = @credit).nil?
         return false if _credit.is_a?(OpenApi::Validatable) && !_credit.valid?
       end
 
@@ -115,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] current Object to be assigned
-    def current=(current : Hash(String, Int64)?)
+    def current=(current : Hash(String, Int32)?)
       if current.nil?
         raise ArgumentError.new("\"current\" is required and cannot be null")
       end

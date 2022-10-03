@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The time that the invoice draft was finalized.
     @[JSON::Field(key: "finalized_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: finalized_at.nil? && !finalized_at_present?)]

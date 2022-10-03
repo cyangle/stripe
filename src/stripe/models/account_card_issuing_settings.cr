@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "tos_acceptance", type: Stripe::CardIssuingAccountTermsOfService?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tos_acceptance : Stripe::CardIssuingAccountTermsOfService? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _tos_acceptance = @tos_acceptance
+      unless (_tos_acceptance = @tos_acceptance).nil?
         invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance")) if _tos_acceptance.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -47,7 +47,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _tos_acceptance = @tos_acceptance
+      unless (_tos_acceptance = @tos_acceptance).nil?
         return false if _tos_acceptance.is_a?(OpenApi::Validatable) && !_tos_acceptance.valid?
       end
 

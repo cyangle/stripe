@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Two-digit number representing the card's expiration month.
     @[JSON::Field(key: "exp_month", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "exp_year", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter exp_year : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: brand.nil? && !brand_present?)]
@@ -142,51 +144,51 @@ module Stripe
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
-      if _checks = @checks
+      unless (_checks = @checks).nil?
         invalid_properties.concat(_checks.list_invalid_properties_for("checks")) if _checks.is_a?(OpenApi::Validatable)
       end
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _funding = @funding
+      unless (_funding = @funding).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
           invalid_properties.push(max_length_error)
         end
       end
-      if _installments = @installments
+      unless (_installments = @installments).nil?
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _network = @network
+      unless (_network = @network).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, MAX_LENGTH_FOR_NETWORK)
           invalid_properties.push(max_length_error)
         end
       end
-      if _three_d_secure = @three_d_secure
+      unless (_three_d_secure = @three_d_secure).nil?
         invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure")) if _three_d_secure.is_a?(OpenApi::Validatable)
       end
-      if _wallet = @wallet
+      unless (_wallet = @wallet).nil?
         invalid_properties.concat(_wallet.list_invalid_properties_for("wallet")) if _wallet.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -199,47 +201,47 @@ module Stripe
 
       return false if @exp_year.nil?
 
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
-      if _checks = @checks
+      unless (_checks = @checks).nil?
         return false if _checks.is_a?(OpenApi::Validatable) && !_checks.valid?
       end
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _funding = @funding
+      unless (_funding = @funding).nil?
         return false if _funding.to_s.size > MAX_LENGTH_FOR_FUNDING
       end
 
-      if _installments = @installments
+      unless (_installments = @installments).nil?
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 
-      if _network = @network
+      unless (_network = @network).nil?
         return false if _network.to_s.size > MAX_LENGTH_FOR_NETWORK
       end
 
-      if _three_d_secure = @three_d_secure
+      unless (_three_d_secure = @three_d_secure).nil?
         return false if _three_d_secure.is_a?(OpenApi::Validatable) && !_three_d_secure.valid?
       end
 
-      if _wallet = @wallet
+      unless (_wallet = @wallet).nil?
         return false if _wallet.is_a?(OpenApi::Validatable) && !_wallet.valid?
       end
 

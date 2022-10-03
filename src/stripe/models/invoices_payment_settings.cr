@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the invoice's default_payment_method or default_source, if set.
     @[JSON::Field(key: "default_mandate", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: default_mandate.nil? && !default_mandate_present?)]
@@ -60,15 +60,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _default_mandate = @default_mandate
+      unless (_default_mandate = @default_mandate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
       invalid_properties
@@ -77,15 +77,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _default_mandate = @default_mandate
+      unless (_default_mandate = @default_mandate).nil?
         return false if _default_mandate.to_s.size > MAX_LENGTH_FOR_DEFAULT_MANDATE
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
 

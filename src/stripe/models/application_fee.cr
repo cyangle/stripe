@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account", type: Stripe::ApplicationFeeAccount?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account : Stripe::ApplicationFeeAccount? = nil
@@ -68,7 +68,9 @@ module Stripe
     @[JSON::Field(key: "refunds", type: Stripe::FeeRefundList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter refunds : Stripe::FeeRefundList1? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "balance_transaction", type: Stripe::ApplicationFeeBalanceTransaction?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
     getter balance_transaction : Stripe::ApplicationFeeBalanceTransaction? = nil
@@ -112,7 +114,7 @@ module Stripe
 
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
 
-      if _account = @account
+      unless (_account = @account).nil?
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
@@ -121,12 +123,12 @@ module Stripe
 
       invalid_properties.push("\"application\" is required and cannot be null") if @application.nil?
 
-      if _application = @application
+      unless (_application = @application).nil?
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
@@ -135,7 +137,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -144,20 +146,20 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"refunded\" is required and cannot be null") if @refunded.nil?
 
       invalid_properties.push("\"refunds\" is required and cannot be null") if @refunds.nil?
 
-      if _refunds = @refunds
+      unless (_refunds = @refunds).nil?
         invalid_properties.concat(_refunds.list_invalid_properties_for("refunds")) if _refunds.is_a?(OpenApi::Validatable)
       end
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _originating_transaction = @originating_transaction
+      unless (_originating_transaction = @originating_transaction).nil?
         invalid_properties.concat(_originating_transaction.list_invalid_properties_for("originating_transaction")) if _originating_transaction.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -167,7 +169,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account.nil?
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
 
@@ -176,12 +178,12 @@ module Stripe
       return false if @amount_refunded.nil?
 
       return false if @application.nil?
-      if _application = @application
+      unless (_application = @application).nil?
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
       return false if @charge.nil?
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
 
@@ -190,29 +192,29 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @refunded.nil?
 
       return false if @refunds.nil?
-      if _refunds = @refunds
+      unless (_refunds = @refunds).nil?
         return false if _refunds.is_a?(OpenApi::Validatable) && !_refunds.valid?
       end
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
-      if _originating_transaction = @originating_transaction
+      unless (_originating_transaction = @originating_transaction).nil?
         return false if _originating_transaction.is_a?(OpenApi::Validatable) && !_originating_transaction.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The account the person is associated with.
     @[JSON::Field(key: "account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,7 +41,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [person]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["person"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
@@ -241,7 +243,7 @@ module Stripe
 
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
 
-      if _account = @account
+      unless (_account = @account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
@@ -250,98 +252,98 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      if _address_kana = @address_kana
+      unless (_address_kana = @address_kana).nil?
         invalid_properties.concat(_address_kana.list_invalid_properties_for("address_kana")) if _address_kana.is_a?(OpenApi::Validatable)
       end
-      if _address_kanji = @address_kanji
+      unless (_address_kanji = @address_kanji).nil?
         invalid_properties.concat(_address_kanji.list_invalid_properties_for("address_kanji")) if _address_kanji.is_a?(OpenApi::Validatable)
       end
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _first_name_kana = @first_name_kana
+      unless (_first_name_kana = @first_name_kana).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kana", _first_name_kana.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _first_name_kanji = @first_name_kanji
+      unless (_first_name_kanji = @first_name_kanji).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kanji", _first_name_kanji.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _future_requirements = @future_requirements
+      unless (_future_requirements = @future_requirements).nil?
         invalid_properties.concat(_future_requirements.list_invalid_properties_for("future_requirements")) if _future_requirements.is_a?(OpenApi::Validatable)
       end
 
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last_name_kana = @last_name_kana
+      unless (_last_name_kana = @last_name_kana).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kana", _last_name_kana.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last_name_kanji = @last_name_kanji
+      unless (_last_name_kanji = @last_name_kanji).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kanji", _last_name_kanji.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
-      if _maiden_name = @maiden_name
+      unless (_maiden_name = @maiden_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("maiden_name", _maiden_name.to_s.size, MAX_LENGTH_FOR_MAIDEN_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _nationality = @nationality
+      unless (_nationality = @nationality).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nationality", _nationality.to_s.size, MAX_LENGTH_FOR_NATIONALITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _political_exposure = @political_exposure
+      unless (_political_exposure = @political_exposure).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_POLITICAL_EXPOSURE) unless OpenApi::EnumValidator.valid?(_political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
       end
-      if _registered_address = @registered_address
+      unless (_registered_address = @registered_address).nil?
         invalid_properties.concat(_registered_address.list_invalid_properties_for("registered_address")) if _registered_address.is_a?(OpenApi::Validatable)
       end
-      if _relationship = @relationship
+      unless (_relationship = @relationship).nil?
         invalid_properties.concat(_relationship.list_invalid_properties_for("relationship")) if _relationship.is_a?(OpenApi::Validatable)
       end
-      if _requirements = @requirements
+      unless (_requirements = @requirements).nil?
         invalid_properties.concat(_requirements.list_invalid_properties_for("requirements")) if _requirements.is_a?(OpenApi::Validatable)
       end
 
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -351,99 +353,99 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account.nil?
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
 
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _address_kana = @address_kana
+      unless (_address_kana = @address_kana).nil?
         return false if _address_kana.is_a?(OpenApi::Validatable) && !_address_kana.valid?
       end
 
-      if _address_kanji = @address_kanji
+      unless (_address_kanji = @address_kanji).nil?
         return false if _address_kanji.is_a?(OpenApi::Validatable) && !_address_kanji.valid?
       end
 
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
 
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
-      if _first_name_kana = @first_name_kana
+      unless (_first_name_kana = @first_name_kana).nil?
         return false if _first_name_kana.to_s.size > MAX_LENGTH_FOR_FIRST_NAME_KANA
       end
 
-      if _first_name_kanji = @first_name_kanji
+      unless (_first_name_kanji = @first_name_kanji).nil?
         return false if _first_name_kanji.to_s.size > MAX_LENGTH_FOR_FIRST_NAME_KANJI
       end
 
-      if _future_requirements = @future_requirements
+      unless (_future_requirements = @future_requirements).nil?
         return false if _future_requirements.is_a?(OpenApi::Validatable) && !_future_requirements.valid?
       end
 
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 
-      if _last_name_kana = @last_name_kana
+      unless (_last_name_kana = @last_name_kana).nil?
         return false if _last_name_kana.to_s.size > MAX_LENGTH_FOR_LAST_NAME_KANA
       end
 
-      if _last_name_kanji = @last_name_kanji
+      unless (_last_name_kanji = @last_name_kanji).nil?
         return false if _last_name_kanji.to_s.size > MAX_LENGTH_FOR_LAST_NAME_KANJI
       end
 
-      if _maiden_name = @maiden_name
+      unless (_maiden_name = @maiden_name).nil?
         return false if _maiden_name.to_s.size > MAX_LENGTH_FOR_MAIDEN_NAME
       end
 
-      if _nationality = @nationality
+      unless (_nationality = @nationality).nil?
         return false if _nationality.to_s.size > MAX_LENGTH_FOR_NATIONALITY
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
-      if _political_exposure = @political_exposure
+      unless (_political_exposure = @political_exposure).nil?
         return false unless OpenApi::EnumValidator.valid?(_political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
       end
 
-      if _registered_address = @registered_address
+      unless (_registered_address = @registered_address).nil?
         return false if _registered_address.is_a?(OpenApi::Validatable) && !_registered_address.valid?
       end
 
-      if _relationship = @relationship
+      unless (_relationship = @relationship).nil?
         return false if _relationship.is_a?(OpenApi::Validatable) && !_relationship.valid?
       end
 
-      if _requirements = @requirements
+      unless (_requirements = @requirements).nil?
         return false if _requirements.is_a?(OpenApi::Validatable) && !_requirements.valid?
       end
 
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 

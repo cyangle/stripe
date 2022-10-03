@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The custom message that is displayed to the customer after the purchase is complete.
     @[JSON::Field(key: "custom_message", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: custom_message.nil? && !custom_message_present?)]
@@ -43,7 +43,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _custom_message = @custom_message
+      unless (_custom_message = @custom_message).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, MAX_LENGTH_FOR_CUSTOM_MESSAGE)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +54,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _custom_message = @custom_message
+      unless (_custom_message = @custom_message).nil?
         return false if _custom_message.to_s.size > MAX_LENGTH_FOR_CUSTOM_MESSAGE
       end
 

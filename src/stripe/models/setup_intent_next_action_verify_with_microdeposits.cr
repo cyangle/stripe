@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The timestamp when the microdeposits are expected to land.
     @[JSON::Field(key: "arrival_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     getter hosted_verification_url : String? = nil
     MAX_LENGTH_FOR_HOSTED_VERIFICATION_URL = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
     @[JSON::Field(key: "microdeposit_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: microdeposit_type.nil? && !microdeposit_type_present?)]
@@ -62,12 +64,12 @@ module Stripe
 
       invalid_properties.push("\"hosted_verification_url\" is required and cannot be null") if @hosted_verification_url.nil?
 
-      if _hosted_verification_url = @hosted_verification_url
+      unless (_hosted_verification_url = @hosted_verification_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_verification_url", _hosted_verification_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VERIFICATION_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _microdeposit_type = @microdeposit_type
+      unless (_microdeposit_type = @microdeposit_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_MICRODEPOSIT_TYPE) unless OpenApi::EnumValidator.valid?(_microdeposit_type, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
       end
       invalid_properties
@@ -79,11 +81,11 @@ module Stripe
       return false if @arrival_date.nil?
 
       return false if @hosted_verification_url.nil?
-      if _hosted_verification_url = @hosted_verification_url
+      unless (_hosted_verification_url = @hosted_verification_url).nil?
         return false if _hosted_verification_url.to_s.size > MAX_LENGTH_FOR_HOSTED_VERIFICATION_URL
       end
 
-      if _microdeposit_type = @microdeposit_type
+      unless (_microdeposit_type = @microdeposit_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_microdeposit_type, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
       end
 

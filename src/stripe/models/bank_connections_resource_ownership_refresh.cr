@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The time at which the last refresh attempt was initiated. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "last_attempted_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,6 +30,8 @@ module Stripe
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, pending, succeeded]."
     VALID_VALUES_FOR_STATUS  = StaticArray["failed", "pending", "succeeded"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,7 +52,7 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
@@ -62,7 +64,7 @@ module Stripe
       return false if @last_attempted_at.nil?
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 

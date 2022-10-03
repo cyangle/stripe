@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Reason for the failure.
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
     ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [account_closed, account_frozen, bank_account_restricted, bank_ownership_changed, debit_not_authorized, incorrect_account_holder_address, incorrect_account_holder_name, incorrect_account_holder_tax_id, insufficient_funds, invalid_account_number, invalid_currency, no_account, other]."
     VALID_VALUES_FOR_CODE  = StaticArray["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "debit_not_authorized", "incorrect_account_holder_address", "incorrect_account_holder_name", "incorrect_account_holder_tax_id", "insufficient_funds", "invalid_account_number", "invalid_currency", "no_account", "other"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +45,7 @@ module Stripe
 
       invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
-      if _code = @code
+      unless (_code = @code).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
       invalid_properties
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @code.nil?
-      if _code = @code
+      unless (_code = @code).nil?
         return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
 

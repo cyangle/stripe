@@ -19,11 +19,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "cvc", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cvc : String? = nil
     MAX_LENGTH_FOR_CVC = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +43,7 @@ module Stripe
 
       invalid_properties.push("\"cvc\" is required and cannot be null") if @cvc.nil?
 
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
           invalid_properties.push(max_length_error)
         end
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @cvc.nil?
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         return false if _cvc.to_s.size > MAX_LENGTH_FOR_CVC
       end
 

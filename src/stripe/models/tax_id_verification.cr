@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [pending, unavailable, unverified, verified]."
     VALID_VALUES_FOR_STATUS  = StaticArray["pending", "unavailable", "unverified", "verified"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Verified address.
     @[JSON::Field(key: "verified_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_address.nil? && !verified_address_present?)]
@@ -64,15 +66,15 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _verified_address = @verified_address
+      unless (_verified_address = @verified_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_address", _verified_address.to_s.size, MAX_LENGTH_FOR_VERIFIED_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -84,15 +86,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _verified_address = @verified_address
+      unless (_verified_address = @verified_address).nil?
         return false if _verified_address.to_s.size > MAX_LENGTH_FOR_VERIFIED_ADDRESS
       end
 
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 

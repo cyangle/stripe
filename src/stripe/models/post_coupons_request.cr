@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # A positive integer representing the amount to subtract from an invoice total (required if `percent_off` is not passed).
     @[JSON::Field(key: "amount_off", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -100,27 +100,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _applies_to = @applies_to
+      unless (_applies_to = @applies_to).nil?
         invalid_properties.concat(_applies_to.list_invalid_properties_for("applies_to")) if _applies_to.is_a?(OpenApi::Validatable)
       end
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
-      if _duration = @duration
+      unless (_duration = @duration).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DURATION) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -132,27 +132,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _applies_to = @applies_to
+      unless (_applies_to = @applies_to).nil?
         return false if _applies_to.is_a?(OpenApi::Validatable) && !_applies_to.valid?
       end
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
-      if _duration = @duration
+      unless (_duration = @duration).nil?
         return false unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
 
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 

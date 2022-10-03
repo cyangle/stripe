@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [api_error, card_error, idempotency_error, invalid_request_error]."
     VALID_VALUES_FOR__TYPE  = StaticArray["api_error", "card_error", "idempotency_error", "invalid_request_error"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # For card errors, the ID of the failed charge.
     @[JSON::Field(key: "charge", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -104,54 +106,54 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _code = @code
+      unless (_code = @code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _decline_code = @decline_code
+      unless (_decline_code = @decline_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("decline_code", _decline_code.to_s.size, MAX_LENGTH_FOR_DECLINE_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _doc_url = @doc_url
+      unless (_doc_url = @doc_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("doc_url", _doc_url.to_s.size, MAX_LENGTH_FOR_DOC_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _message = @message
+      unless (_message = @message).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _param = @param
+      unless (_param = @param).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("param", _param.to_s.size, MAX_LENGTH_FOR_PARAM)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method")) if _payment_method.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_type = @payment_method_type
+      unless (_payment_method_type = @payment_method_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_type", _payment_method_type.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _setup_intent = @setup_intent
+      unless (_setup_intent = @setup_intent).nil?
         invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent")) if _setup_intent.is_a?(OpenApi::Validatable)
       end
-      if _source = @source
+      unless (_source = @source).nil?
         invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -161,51 +163,51 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.to_s.size > MAX_LENGTH_FOR_CHARGE
       end
 
-      if _code = @code
+      unless (_code = @code).nil?
         return false if _code.to_s.size > MAX_LENGTH_FOR_CODE
       end
 
-      if _decline_code = @decline_code
+      unless (_decline_code = @decline_code).nil?
         return false if _decline_code.to_s.size > MAX_LENGTH_FOR_DECLINE_CODE
       end
 
-      if _doc_url = @doc_url
+      unless (_doc_url = @doc_url).nil?
         return false if _doc_url.to_s.size > MAX_LENGTH_FOR_DOC_URL
       end
 
-      if _message = @message
+      unless (_message = @message).nil?
         return false if _message.to_s.size > MAX_LENGTH_FOR_MESSAGE
       end
 
-      if _param = @param
+      unless (_param = @param).nil?
         return false if _param.to_s.size > MAX_LENGTH_FOR_PARAM
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.is_a?(OpenApi::Validatable) && !_payment_method.valid?
       end
 
-      if _payment_method_type = @payment_method_type
+      unless (_payment_method_type = @payment_method_type).nil?
         return false if _payment_method_type.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE
       end
 
-      if _setup_intent = @setup_intent
+      unless (_setup_intent = @setup_intent).nil?
         return false if _setup_intent.is_a?(OpenApi::Validatable) && !_setup_intent.valid?
       end
 
-      if _source = @source
+      unless (_source = @source).nil?
         return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
 

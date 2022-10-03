@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Gross amount of the transaction, in %s.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -76,7 +76,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [adjustment, advance, advance_funding, anticipation_repayment, application_fee, application_fee_refund, charge, connect_collection_transfer, contribution, issuing_authorization_hold, issuing_authorization_release, issuing_dispute, issuing_transaction, payment, payment_failure_refund, payment_refund, payout, payout_cancel, payout_failure, refund, refund_failure, reserve_transaction, reserved_funds, stripe_fee, stripe_fx_fee, tax_fee, topup, topup_reversal, transfer, transfer_cancel, transfer_failure, transfer_refund]."
     VALID_VALUES_FOR__TYPE  = StaticArray["adjustment", "advance", "advance_funding", "anticipation_repayment", "application_fee", "application_fee_refund", "charge", "connect_collection_transfer", "contribution", "issuing_authorization_hold", "issuing_authorization_release", "issuing_dispute", "issuing_transaction", "payment", "payment_failure_refund", "payment_refund", "payout", "payout_cancel", "payout_failure", "refund", "refund_failure", "reserve_transaction", "reserved_funds", "stripe_fee", "stripe_fx_fee", "tax_fee", "topup", "topup_reversal", "transfer", "transfer_cancel", "transfer_failure", "transfer_refund"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -140,12 +142,12 @@ module Stripe
 
       invalid_properties.push("\"fee_details\" is required and cannot be null") if @fee_details.nil?
 
-      if _fee_details = @fee_details
+      unless (_fee_details = @fee_details).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "fee_details", container: _fee_details)) if _fee_details.is_a?(Array)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -154,35 +156,35 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"reporting_category\" is required and cannot be null") if @reporting_category.nil?
 
-      if _reporting_category = @reporting_category
+      unless (_reporting_category = @reporting_category).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, MAX_LENGTH_FOR_REPORTING_CATEGORY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _source = @source
+      unless (_source = @source).nil?
         invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -202,42 +204,42 @@ module Stripe
       return false if @fee.nil?
 
       return false if @fee_details.nil?
-      if _fee_details = @fee_details
+      unless (_fee_details = @fee_details).nil?
         return false if _fee_details.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _fee_details)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @net.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @reporting_category.nil?
-      if _reporting_category = @reporting_category
+      unless (_reporting_category = @reporting_category).nil?
         return false if _reporting_category.to_s.size > MAX_LENGTH_FOR_REPORTING_CATEGORY
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _source = @source
+      unless (_source = @source).nil?
         return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
 

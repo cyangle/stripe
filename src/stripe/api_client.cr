@@ -9,6 +9,7 @@
 
 require "log"
 require "./configuration"
+require "./api_error"
 
 module Stripe
   class ApiClient
@@ -21,6 +22,7 @@ module Stripe
       COLLECTION_FORMAT_MULTI => COLLECTION_FORMAT_MULTI,
     }
     UNKNOWN_COLLECTION_FORMAT_SEPARATOR = "unknown"
+    JSON_MIME_REGEX                     = /Application\/.*json(?!p)(;.*)?/i
 
     # The Configuration object holding settings to be used in the API client.
     property config : Configuration
@@ -39,7 +41,7 @@ module Stripe
       }
     end
 
-    def self.default
+    def self.default : ApiClient
       @@default ||= ApiClient.new
     end
 
@@ -51,11 +53,11 @@ module Stripe
     #   */*
     # @param [String] mime MIME
     # @return [Boolean] True if the MIME is application/json
-    def json_mime?(mime)
-      (mime == "*/*") || !(mime =~ /Application\/.*json(?!p)(;.*)?/i).nil?
+    def json_mime?(mime : String) : Bool
+      (mime == "*/*") || JSON_MIME_REGEX.matches?(mime)
     end
 
-    def build_request_url(path : String, operation : String)
+    def build_request_url(path : String, operation : String) : String
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, "/")
       @config.base_url(operation) + path
@@ -66,7 +68,11 @@ module Stripe
     # @param [Hash] header_params Header parameters
     # @param [Hash] query_params Query parameters
     # @param [String] auth_names Authentication scheme name
-    def update_params_for_auth!(header_params, query_params, auth_names)
+    def update_params_for_auth!(
+      header_params : Hash(String, String),
+      query_params : Hash(String, (String | Array(String))),
+      auth_names : Array(String)
+    ) : Nil
       auth_names.each do |auth_name|
         auth_setting = @config.auth_settings[auth_name]
         next unless auth_setting
@@ -76,7 +82,7 @@ module Stripe
         when "query"
           query_params[auth_setting["key"]] = auth_setting["value"]
         else
-          raise ArgumentError.new("Authentication token must be in `query` of `header`")
+          raise ArgumentError.new("Authentication token must be in `query` or `header`")
         end
       end
     end
@@ -84,7 +90,7 @@ module Stripe
     # Sets user agent in HTTP header
     #
     # @param [String] user_agent User agent (e.g. openapi-generator/ruby/1.0.0)
-    def user_agent=(user_agent)
+    def user_agent=(user_agent : String) : Nil
       @user_agent = user_agent
       @default_headers["User-Agent"] = @user_agent
     end
@@ -92,10 +98,10 @@ module Stripe
     # Return Accept header based on an array of accepts provided.
     # @param [Array] accepts array for Accept
     # @return [String] the Accept header (e.g. application/json)
-    def select_header_accept(accepts) : String
+    def select_header_accept(accepts : Array(String)) : String
       # return nil if accepts.nil? || accepts.empty?
       # use JSON when present, otherwise use all of the provided
-      json_accept = accepts.find { |s| json_mime?(s) }
+      json_accept : String? = accepts.find { |s| json_mime?(s) }
       if json_accept.nil?
         accepts.join(",")
       else
@@ -106,12 +112,12 @@ module Stripe
     # Return Content-Type header based on an array of content types provided.
     # @param [Array] content_types array for Content-Type
     # @return [String] the Content-Type header  (e.g. application/json)
-    def select_header_content_type(content_types)
+    def select_header_content_type(content_types : Array(String)) : String
       # use application/json by default
-      return "application/json" if content_types.nil? || content_types.empty?
+      return "application/json" if content_types.empty?
       # use JSON when present, otherwise use the first one
       json_content_type = content_types.find { |s| json_mime?(s) }
-      json_content_type || content_types.first
+      (json_content_type || content_types.first).not_nil!
     end
 
     # Build parameter value according to the given collection format.
@@ -130,7 +136,16 @@ module Stripe
     #
     # @return Crest::Request
     #   the data deserialized from response body (could be nil), response status code and response headers.
-    def build_api_request(http_method : Symbol, path : String, operation : String, post_body : IO | String?, auth_names = [] of String, header_params = {} of String => String, query_params = {} of String => (String | Array(String)), form_params : Hash(String, (String | Array(String) | IO)) | Nil = {} of String => (String | Array(String) | IO)) : Crest::Request
+    def build_api_request(
+      http_method : Symbol,
+      path : String,
+      operation : String,
+      post_body : IO | String | Nil = nil,
+      auth_names : Array(String) = Array(String).new,
+      header_params : Hash(String, String) = Hash(String, String).new,
+      query_params : Hash(String, (String | Array(String))) = Hash(String, (String | Array(String))).new,
+      form_params : Hash(String, (String | Array(String) | IO)) | Nil = nil
+    ) : Crest::Request
       # ssl_options = {
       #   "ca_file" => @config.ssl_ca_file,
       #   "verify" => @config.ssl_verify,
@@ -163,7 +178,7 @@ module Stripe
       )
     end
 
-    def execute_api_request(request : Crest::Request)
+    def execute_api_request(request : Crest::Request) : Tuple(String, Int32, Hash(String, Array(String) | String))
       response = request.execute
 
       if @config.debugging
@@ -183,7 +198,7 @@ module Stripe
         end
       end
 
-      return response.body, response.status_code, response.headers
+      return {response.body, response.status_code, response.headers}
     end
   end
 end

@@ -19,10 +19,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "bank_transfer", type: Stripe::CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank_transfer : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"bank_transfer\" is required and cannot be null") if @bank_transfer.nil?
 
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @bank_transfer.nil?
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         return false if _bank_transfer.is_a?(OpenApi::Validatable) && !_bank_transfer.valid?
       end
 

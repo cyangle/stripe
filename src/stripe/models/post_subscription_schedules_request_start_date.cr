@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # When the subscription schedule starts. We recommend using `now` so that it starts the subscription immediately. You can also use a Unix timestamp to backdate the subscription so that it starts on a past date, or set a future date for the subscription to start on.
-  alias PostSubscriptionSchedulesRequestStartDate = Int64 | PostCustomersCustomerSubscriptionsRequestTrialEndOneOf
+  alias PostSubscriptionSchedulesRequestStartDate = Int32 | PostCustomersCustomerSubscriptionsRequestTrialEndOneOf
 end

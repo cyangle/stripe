@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -40,7 +40,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [customer]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["customer"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::CustomerAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
     getter address : Stripe::CustomerAddress? = nil
@@ -102,8 +104,8 @@ module Stripe
     property? email_present : Bool = false
 
     # The current multi-currency balances, if any, being stored on the customer.If positive in a currency, the customer has a credit to apply to their next invoice denominated in that currency.If negative, the customer has an amount owed that will be added to their next invoice denominated in that currency. These balances do not refer to any unpaid invoices.They solely track amounts that have yet to be successfully applied to any invoice. A balance in a particular currency is only applied to any invoice as an invoice in that currency is finalized.
-    @[JSON::Field(key: "invoice_credit_balance", type: Hash(String, Int64)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter invoice_credit_balance : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "invoice_credit_balance", type: Hash(String, Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter invoice_credit_balance : Hash(String, Int32)? = nil
 
     # The prefix for the customer used to generate unique invoice numbers.
     @[JSON::Field(key: "invoice_prefix", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: invoice_prefix.nil? && !invoice_prefix_present?)]
@@ -199,7 +201,7 @@ module Stripe
       @description : String? = nil,
       @discount : Stripe::CustomerDiscount? = nil,
       @email : String? = nil,
-      @invoice_credit_balance : Hash(String, Int64)? = nil,
+      @invoice_credit_balance : Hash(String, Int32)? = nil,
       @invoice_prefix : String? = nil,
       @invoice_settings : Stripe::InvoiceSettingCustomerSetting? = nil,
       @metadata : Hash(String, String)? = nil,
@@ -226,7 +228,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -235,79 +237,79 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
 
-      if _cash_balance = @cash_balance
+      unless (_cash_balance = @cash_balance).nil?
         invalid_properties.concat(_cash_balance.list_invalid_properties_for("cash_balance")) if _cash_balance.is_a?(OpenApi::Validatable)
       end
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _default_source = @default_source
+      unless (_default_source = @default_source).nil?
         invalid_properties.concat(_default_source.list_invalid_properties_for("default_source")) if _default_source.is_a?(OpenApi::Validatable)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _discount = @discount
+      unless (_discount = @discount).nil?
         invalid_properties.concat(_discount.list_invalid_properties_for("discount")) if _discount.is_a?(OpenApi::Validatable)
       end
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _invoice_prefix = @invoice_prefix
+      unless (_invoice_prefix = @invoice_prefix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_prefix", _invoice_prefix.to_s.size, MAX_LENGTH_FOR_INVOICE_PREFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _sources = @sources
+      unless (_sources = @sources).nil?
         invalid_properties.concat(_sources.list_invalid_properties_for("sources")) if _sources.is_a?(OpenApi::Validatable)
       end
-      if _subscriptions = @subscriptions
+      unless (_subscriptions = @subscriptions).nil?
         invalid_properties.concat(_subscriptions.list_invalid_properties_for("subscriptions")) if _subscriptions.is_a?(OpenApi::Validatable)
       end
-      if _tax = @tax
+      unless (_tax = @tax).nil?
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
-      if _tax_ids = @tax_ids
+      unless (_tax_ids = @tax_ids).nil?
         invalid_properties.concat(_tax_ids.list_invalid_properties_for("tax_ids")) if _tax_ids.is_a?(OpenApi::Validatable)
       end
-      if _test_clock = @test_clock
+      unless (_test_clock = @test_clock).nil?
         invalid_properties.concat(_test_clock.list_invalid_properties_for("test_clock")) if _test_clock.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -319,86 +321,86 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _cash_balance = @cash_balance
+      unless (_cash_balance = @cash_balance).nil?
         return false if _cash_balance.is_a?(OpenApi::Validatable) && !_cash_balance.valid?
       end
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
-      if _default_source = @default_source
+      unless (_default_source = @default_source).nil?
         return false if _default_source.is_a?(OpenApi::Validatable) && !_default_source.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _discount = @discount
+      unless (_discount = @discount).nil?
         return false if _discount.is_a?(OpenApi::Validatable) && !_discount.valid?
       end
 
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _invoice_prefix = @invoice_prefix
+      unless (_invoice_prefix = @invoice_prefix).nil?
         return false if _invoice_prefix.to_s.size > MAX_LENGTH_FOR_INVOICE_PREFIX
       end
 
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _sources = @sources
+      unless (_sources = @sources).nil?
         return false if _sources.is_a?(OpenApi::Validatable) && !_sources.valid?
       end
 
-      if _subscriptions = @subscriptions
+      unless (_subscriptions = @subscriptions).nil?
         return false if _subscriptions.is_a?(OpenApi::Validatable) && !_subscriptions.valid?
       end
 
-      if _tax = @tax
+      unless (_tax = @tax).nil?
         return false if _tax.is_a?(OpenApi::Validatable) && !_tax.valid?
       end
 
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
 
-      if _tax_ids = @tax_ids
+      unless (_tax_ids = @tax_ids).nil?
         return false if _tax_ids.is_a?(OpenApi::Validatable) && !_tax_ids.valid?
       end
 
-      if _test_clock = @test_clock
+      unless (_test_clock = @test_clock).nil?
         return false if _test_clock.is_a?(OpenApi::Validatable) && !_test_clock.valid?
       end
 
@@ -546,7 +548,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_credit_balance Object to be assigned
-    def invoice_credit_balance=(invoice_credit_balance : Hash(String, Int64)?)
+    def invoice_credit_balance=(invoice_credit_balance : Hash(String, Int32)?)
       if invoice_credit_balance.nil?
         return @invoice_credit_balance = nil
       end

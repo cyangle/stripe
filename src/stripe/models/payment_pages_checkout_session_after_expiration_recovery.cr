@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`
     @[JSON::Field(key: "allow_promotion_codes", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The timestamp at which the recovery URL will expire.
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
@@ -68,7 +70,7 @@ module Stripe
 
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -83,7 +85,7 @@ module Stripe
 
       return false if @enabled.nil?
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

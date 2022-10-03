@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account, application]."
     VALID_VALUES_FOR__TYPE  = StaticArray["account", "application"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # `true` if the Connect application retrieving the resource controls the account and can therefore exercise [platform controls](https://stripe.com/docs/connect/platform-controls-for-standard-accounts). Otherwise, this field is null.
     @[JSON::Field(key: "is_controller", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -51,7 +53,7 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
@@ -62,7 +64,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

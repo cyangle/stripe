@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "price", type: Stripe::SubscriptionScheduleConfigurationItemPrice?, default: nil, required: true, nullable: false, emit_null: false)]
     getter price : Stripe::SubscriptionScheduleConfigurationItemPrice? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemBillingThresholds1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
     getter billing_thresholds : Stripe::SubscriptionItemBillingThresholds1? = nil
@@ -63,14 +65,14 @@ module Stripe
 
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
-      if _price = @price
+      unless (_price = @price).nil?
         invalid_properties.concat(_price.list_invalid_properties_for("price")) if _price.is_a?(OpenApi::Validatable)
       end
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_rates", container: _tax_rates)) if _tax_rates.is_a?(Array)
       end
       invalid_properties
@@ -80,15 +82,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @price.nil?
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
       end
 
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         return false if _tax_rates.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_rates)
       end
 

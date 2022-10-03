@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Information about the run failure.
     @[JSON::Field(key: "message", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter message : String? = nil
     MAX_LENGTH_FOR_MESSAGE = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +44,7 @@ module Stripe
 
       invalid_properties.push("\"message\" is required and cannot be null") if @message.nil?
 
-      if _message = @message
+      unless (_message = @message).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +56,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @message.nil?
-      if _message = @message
+      unless (_message = @message).nil?
         return false if _message.to_s.size > MAX_LENGTH_FOR_MESSAGE
       end
 

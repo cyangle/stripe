@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "skip_tipping", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter skip_tipping : Bool? = nil

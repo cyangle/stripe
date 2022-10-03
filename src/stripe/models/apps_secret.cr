@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,7 +48,9 @@ module Stripe
     @[JSON::Field(key: "scope", type: Stripe::SecretServiceResourceScope?, default: nil, required: true, nullable: false, emit_null: false)]
     getter scope : Stripe::SecretServiceResourceScope? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # If true, indicates that this secret has been deleted
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -96,7 +98,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -105,23 +107,23 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"scope\" is required and cannot be null") if @scope.nil?
 
-      if _scope = @scope
+      unless (_scope = @scope).nil?
         invalid_properties.concat(_scope.list_invalid_properties_for("scope")) if _scope.is_a?(OpenApi::Validatable)
       end
 
-      if _payload = @payload
+      unless (_payload = @payload).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payload", _payload.to_s.size, MAX_LENGTH_FOR_PAYLOAD)
           invalid_properties.push(max_length_error)
         end
@@ -135,28 +137,28 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @scope.nil?
-      if _scope = @scope
+      unless (_scope = @scope).nil?
         return false if _scope.is_a?(OpenApi::Validatable) && !_scope.valid?
       end
 
-      if _payload = @payload
+      unless (_payload = @payload).nil?
         return false if _payload.to_s.size > MAX_LENGTH_FOR_PAYLOAD
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount of tax applied for this rate.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,6 +27,8 @@ module Stripe
 
     @[JSON::Field(key: "rate", type: Stripe::TaxRate?, default: nil, required: true, nullable: false, emit_null: false)]
     getter rate : Stripe::TaxRate? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,7 +49,7 @@ module Stripe
 
       invalid_properties.push("\"rate\" is required and cannot be null") if @rate.nil?
 
-      if _rate = @rate
+      unless (_rate = @rate).nil?
         invalid_properties.concat(_rate.list_invalid_properties_for("rate")) if _rate.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -59,7 +61,7 @@ module Stripe
       return false if @amount.nil?
 
       return false if @rate.nil?
-      if _rate = @rate
+      unless (_rate = @rate).nil?
         return false if _rate.is_a?(OpenApi::Validatable) && !_rate.valid?
       end
 

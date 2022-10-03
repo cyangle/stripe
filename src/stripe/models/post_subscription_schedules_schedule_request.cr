@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "default_settings", type: Stripe::DefaultSettingsParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_settings : Stripe::DefaultSettingsParams? = nil
@@ -65,20 +65,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _default_settings = @default_settings
+      unless (_default_settings = @default_settings).nil?
         invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings")) if _default_settings.is_a?(OpenApi::Validatable)
       end
-      if _end_behavior = @end_behavior
+      unless (_end_behavior = @end_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_END_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _phases = @phases
+      unless (_phases = @phases).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "phases", container: _phases)) if _phases.is_a?(Array)
       end
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties
@@ -87,23 +87,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _default_settings = @default_settings
+      unless (_default_settings = @default_settings).nil?
         return false if _default_settings.is_a?(OpenApi::Validatable) && !_default_settings.valid?
       end
 
-      if _end_behavior = @end_behavior
+      unless (_end_behavior = @end_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _phases = @phases
+      unless (_phases = @phases).nil?
         return false if _phases.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _phases)
       end
 
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 

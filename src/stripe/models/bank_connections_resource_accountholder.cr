@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of account holder that this account belongs to.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account, customer]."
     VALID_VALUES_FOR__TYPE  = StaticArray["account", "customer"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "account", type: Stripe::BankConnectionsResourceAccountholderAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account : Stripe::BankConnectionsResourceAccountholderAccount? = nil
@@ -54,13 +56,13 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _account = @account
+      unless (_account = @account).nil?
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -70,15 +72,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 

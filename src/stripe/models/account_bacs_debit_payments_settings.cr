@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct Debit, this will appear on the mandate, and as the statement descriptor.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -40,7 +40,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -51,7 +51,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 

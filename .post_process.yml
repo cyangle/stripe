@@ -39,8 +39,8 @@ tasks:
         new_value: 'String'
       -
         name: 'Correct Int32'
-        pattern: 'Int32'
-        new_value: 'Int64'
+        pattern: ': Int32'
+        new_value: ': Int64'
       -
         name: 'Correct ::::'
         pattern: '::::'
@@ -50,8 +50,20 @@ tasks:
         pattern: '^\s+if _[^\s]+ = [^\s]+$\n^\s+end$'
         new_value: ''
         multi_line: true
+      -
+        name: "Remove empty unless blocks"
+        pattern: '(^\s+unless [^\s]+ = [^\s]+$\n^\s+end$|^\s+unless [^\s]+$\n^\s+end$)'
+        new_value: ''
+        multi_line: true
   - name: 'Update api error'
     file_glob: './src/stripe/api_error.cr'
+    changes:
+      -
+        name: 'Correct Int64'
+        pattern: 'Int64'
+        new_value: 'Int32'
+  - name: 'Update api error'
+    file_glob: './src/stripe/api_client.cr'
     changes:
       -
         name: 'Correct Int64'

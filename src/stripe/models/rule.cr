@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The action taken on the payment.
     @[JSON::Field(key: "action", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,6 +35,8 @@ module Stripe
     @[JSON::Field(key: "predicate", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter predicate : String? = nil
     MAX_LENGTH_FOR_PREDICATE = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,21 +56,21 @@ module Stripe
 
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
 
-      if _action = @action
+      unless (_action = @action).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, MAX_LENGTH_FOR_ACTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"predicate\" is required and cannot be null") if @predicate.nil?
 
-      if _predicate = @predicate
+      unless (_predicate = @predicate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("predicate", _predicate.to_s.size, MAX_LENGTH_FOR_PREDICATE)
           invalid_properties.push(max_length_error)
         end
@@ -80,17 +82,17 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @action.nil?
-      if _action = @action
+      unless (_action = @action).nil?
         return false if _action.to_s.size > MAX_LENGTH_FOR_ACTION
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @predicate.nil?
-      if _predicate = @predicate
+      unless (_predicate = @predicate).nil?
         return false if _predicate.to_s.size > MAX_LENGTH_FOR_PREDICATE
       end
 

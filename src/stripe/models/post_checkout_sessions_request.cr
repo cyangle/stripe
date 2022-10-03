@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The URL the customer will be directed to if they decide to cancel payment and return to your website.
     @[JSON::Field(key: "cancel_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     getter success_url : String? = nil
     MAX_LENGTH_FOR_SUCCESS_URL = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "after_expiration", type: Stripe::AfterExpirationParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter after_expiration : Stripe::AfterExpirationParams? = nil
@@ -200,94 +202,94 @@ module Stripe
 
       invalid_properties.push("\"cancel_url\" is required and cannot be null") if @cancel_url.nil?
 
-      if _cancel_url = @cancel_url
+      unless (_cancel_url = @cancel_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancel_url", _cancel_url.to_s.size, MAX_LENGTH_FOR_CANCEL_URL)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"success_url\" is required and cannot be null") if @success_url.nil?
 
-      if _success_url = @success_url
+      unless (_success_url = @success_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("success_url", _success_url.to_s.size, MAX_LENGTH_FOR_SUCCESS_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _after_expiration = @after_expiration
+      unless (_after_expiration = @after_expiration).nil?
         invalid_properties.concat(_after_expiration.list_invalid_properties_for("after_expiration")) if _after_expiration.is_a?(OpenApi::Validatable)
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _billing_address_collection = @billing_address_collection
+      unless (_billing_address_collection = @billing_address_collection).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
-      if _client_reference_id = @client_reference_id
+      unless (_client_reference_id = @client_reference_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_reference_id", _client_reference_id.to_s.size, MAX_LENGTH_FOR_CLIENT_REFERENCE_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _consent_collection = @consent_collection
+      unless (_consent_collection = @consent_collection).nil?
         invalid_properties.concat(_consent_collection.list_invalid_properties_for("consent_collection")) if _consent_collection.is_a?(OpenApi::Validatable)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer_creation = @customer_creation
+      unless (_customer_creation = @customer_creation).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOMER_CREATION) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
-      if _customer_update = @customer_update
+      unless (_customer_update = @customer_update).nil?
         invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update")) if _customer_update.is_a?(OpenApi::Validatable)
       end
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discounts", container: _discounts)) if _discounts.is_a?(Array)
       end
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
-      if _locale = @locale
+      unless (_locale = @locale).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_LOCALE) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
-      if _mode = @mode
+      unless (_mode = @mode).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_MODE) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
       end
-      if _payment_intent_data = @payment_intent_data
+      unless (_payment_intent_data = @payment_intent_data).nil?
         invalid_properties.concat(_payment_intent_data.list_invalid_properties_for("payment_intent_data")) if _payment_intent_data.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_collection = @payment_method_collection
+      unless (_payment_method_collection = @payment_method_collection).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
-      if _phone_number_collection = @phone_number_collection
+      unless (_phone_number_collection = @phone_number_collection).nil?
         invalid_properties.concat(_phone_number_collection.list_invalid_properties_for("phone_number_collection")) if _phone_number_collection.is_a?(OpenApi::Validatable)
       end
-      if _setup_intent_data = @setup_intent_data
+      unless (_setup_intent_data = @setup_intent_data).nil?
         invalid_properties.concat(_setup_intent_data.list_invalid_properties_for("setup_intent_data")) if _setup_intent_data.is_a?(OpenApi::Validatable)
       end
-      if _shipping_address_collection = @shipping_address_collection
+      unless (_shipping_address_collection = @shipping_address_collection).nil?
         invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
       end
-      if _shipping_options = @shipping_options
+      unless (_shipping_options = @shipping_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "shipping_options", container: _shipping_options)) if _shipping_options.is_a?(Array)
       end
-      if _submit_type = @submit_type
+      unless (_submit_type = @submit_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUBMIT_TYPE) unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
       end
-      if _subscription_data = @subscription_data
+      unless (_subscription_data = @subscription_data).nil?
         invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
       end
-      if _tax_id_collection = @tax_id_collection
+      unless (_tax_id_collection = @tax_id_collection).nil?
         invalid_properties.concat(_tax_id_collection.list_invalid_properties_for("tax_id_collection")) if _tax_id_collection.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -297,104 +299,104 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @cancel_url.nil?
-      if _cancel_url = @cancel_url
+      unless (_cancel_url = @cancel_url).nil?
         return false if _cancel_url.to_s.size > MAX_LENGTH_FOR_CANCEL_URL
       end
 
       return false if @success_url.nil?
-      if _success_url = @success_url
+      unless (_success_url = @success_url).nil?
         return false if _success_url.to_s.size > MAX_LENGTH_FOR_SUCCESS_URL
       end
 
-      if _after_expiration = @after_expiration
+      unless (_after_expiration = @after_expiration).nil?
         return false if _after_expiration.is_a?(OpenApi::Validatable) && !_after_expiration.valid?
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _billing_address_collection = @billing_address_collection
+      unless (_billing_address_collection = @billing_address_collection).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
 
-      if _client_reference_id = @client_reference_id
+      unless (_client_reference_id = @client_reference_id).nil?
         return false if _client_reference_id.to_s.size > MAX_LENGTH_FOR_CLIENT_REFERENCE_ID
       end
 
-      if _consent_collection = @consent_collection
+      unless (_consent_collection = @consent_collection).nil?
         return false if _consent_collection.is_a?(OpenApi::Validatable) && !_consent_collection.valid?
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _customer_creation = @customer_creation
+      unless (_customer_creation = @customer_creation).nil?
         return false unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
-      if _customer_update = @customer_update
+      unless (_customer_update = @customer_update).nil?
         return false if _customer_update.is_a?(OpenApi::Validatable) && !_customer_update.valid?
       end
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         return false if _discounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discounts)
       end
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
-      if _locale = @locale
+      unless (_locale = @locale).nil?
         return false unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
-      if _mode = @mode
+      unless (_mode = @mode).nil?
         return false unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
       end
 
-      if _payment_intent_data = @payment_intent_data
+      unless (_payment_intent_data = @payment_intent_data).nil?
         return false if _payment_intent_data.is_a?(OpenApi::Validatable) && !_payment_intent_data.valid?
       end
 
-      if _payment_method_collection = @payment_method_collection
+      unless (_payment_method_collection = @payment_method_collection).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
 
-      if _phone_number_collection = @phone_number_collection
+      unless (_phone_number_collection = @phone_number_collection).nil?
         return false if _phone_number_collection.is_a?(OpenApi::Validatable) && !_phone_number_collection.valid?
       end
 
-      if _setup_intent_data = @setup_intent_data
+      unless (_setup_intent_data = @setup_intent_data).nil?
         return false if _setup_intent_data.is_a?(OpenApi::Validatable) && !_setup_intent_data.valid?
       end
 
-      if _shipping_address_collection = @shipping_address_collection
+      unless (_shipping_address_collection = @shipping_address_collection).nil?
         return false if _shipping_address_collection.is_a?(OpenApi::Validatable) && !_shipping_address_collection.valid?
       end
 
-      if _shipping_options = @shipping_options
+      unless (_shipping_options = @shipping_options).nil?
         return false if _shipping_options.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _shipping_options)
       end
 
-      if _submit_type = @submit_type
+      unless (_submit_type = @submit_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
       end
 
-      if _subscription_data = @subscription_data
+      unless (_subscription_data = @subscription_data).nil?
         return false if _subscription_data.is_a?(OpenApi::Validatable) && !_subscription_data.valid?
       end
 
-      if _tax_id_collection = @tax_id_collection
+      unless (_tax_id_collection = @tax_id_collection).nil?
         return false if _tax_id_collection.is_a?(OpenApi::Validatable) && !_tax_id_collection.valid?
       end
 

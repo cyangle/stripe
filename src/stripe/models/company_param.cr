@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "tax_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_id : String? = nil
@@ -39,7 +39,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _tax_id = @tax_id
+      unless (_tax_id = @tax_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id", _tax_id.to_s.size, MAX_LENGTH_FOR_TAX_ID)
           invalid_properties.push(max_length_error)
         end
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _tax_id = @tax_id
+      unless (_tax_id = @tax_id).nil?
         return false if _tax_id.to_s.size > MAX_LENGTH_FOR_TAX_ID
       end
 

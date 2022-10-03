@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `\"balance.summary.1\"`.
     @[JSON::Field(key: "report_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter report_type : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -52,7 +54,7 @@ module Stripe
 
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
 
-      if _parameters = @parameters
+      unless (_parameters = @parameters).nil?
         invalid_properties.concat(_parameters.list_invalid_properties_for("parameters")) if _parameters.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -63,7 +65,7 @@ module Stripe
     def valid? : Bool
       return false if @report_type.nil?
 
-      if _parameters = @parameters
+      unless (_parameters = @parameters).nil?
         return false if _parameters.is_a?(OpenApi::Validatable) && !_parameters.valid?
       end
 

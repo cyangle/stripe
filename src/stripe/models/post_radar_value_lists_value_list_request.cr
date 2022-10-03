@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The name of the value list for use in rules.
     @[JSON::Field(key: "alias", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -55,13 +55,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if __alias = @_alias
+      unless (__alias = @_alias).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, MAX_LENGTH_FOR__ALIAS)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -72,11 +72,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if __alias = @_alias
+      unless (__alias = @_alias).nil?
         return false if __alias.to_s.size > MAX_LENGTH_FOR__ALIAS
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # SEPA creditor ID.
     @[JSON::Field(key: "creditor_identifier", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -52,17 +52,17 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _creditor_identifier = @creditor_identifier
+      unless (_creditor_identifier = @creditor_identifier).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_identifier", _creditor_identifier.to_s.size, MAX_LENGTH_FOR_CREDITOR_IDENTIFIER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _mandate_reference = @mandate_reference
+      unless (_mandate_reference = @mandate_reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate_reference", _mandate_reference.to_s.size, MAX_LENGTH_FOR_MANDATE_REFERENCE)
           invalid_properties.push(max_length_error)
         end
@@ -73,15 +73,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _creditor_identifier = @creditor_identifier
+      unless (_creditor_identifier = @creditor_identifier).nil?
         return false if _creditor_identifier.to_s.size > MAX_LENGTH_FOR_CREDITOR_IDENTIFIER
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _mandate_reference = @mandate_reference
+      unless (_mandate_reference = @mandate_reference).nil?
         return false if _mandate_reference.to_s.size > MAX_LENGTH_FOR_MANDATE_REFERENCE
       end
 

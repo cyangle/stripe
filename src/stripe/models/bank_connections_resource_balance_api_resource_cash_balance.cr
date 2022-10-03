@@ -19,11 +19,11 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The funds available to the account holder. Typically this is the current balance less any holds.  Each key is a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.  Each value is a integer amount. A positive amount indicates money owed to the account holder. A negative amount indicates money owed by the account holder.
-    @[JSON::Field(key: "available", type: Hash(String, Int64)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available.nil? && !available_present?)]
-    getter available : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "available", type: Hash(String, Int32)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available.nil? && !available_present?)]
+    getter available : Hash(String, Int32)? = nil
 
     @[JSON::Field(ignore: true)]
     property? available_present : Bool = false
@@ -33,7 +33,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @available : Hash(String, Int64)? = nil
+      @available : Hash(String, Int32)? = nil
     )
     end
 
@@ -53,7 +53,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available Object to be assigned
-    def available=(available : Hash(String, Int64)?)
+    def available=(available : Hash(String, Int32)?)
       if available.nil?
         return @available = nil
       end

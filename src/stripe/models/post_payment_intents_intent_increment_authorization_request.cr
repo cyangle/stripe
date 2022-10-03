@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
     @[JSON::Field(key: "application_fee_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -74,18 +76,18 @@ module Stripe
 
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -96,15 +98,15 @@ module Stripe
     def valid? : Bool
       return false if @amount.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

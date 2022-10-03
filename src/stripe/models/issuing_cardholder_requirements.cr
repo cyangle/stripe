@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
     @[JSON::Field(key: "disabled_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: disabled_reason.nil? && !disabled_reason_present?)]
@@ -54,10 +54,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _disabled_reason = @disabled_reason
+      unless (_disabled_reason = @disabled_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DISABLED_REASON) unless OpenApi::EnumValidator.valid?(_disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
       end
-      if _past_due = @past_due
+      unless (_past_due = @past_due).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAST_DUE) unless OpenApi::EnumValidator.valid?(_past_due, VALID_VALUES_FOR_PAST_DUE)
       end
       invalid_properties
@@ -66,11 +66,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _disabled_reason = @disabled_reason
+      unless (_disabled_reason = @disabled_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
       end
 
-      if _past_due = @past_due
+      unless (_past_due = @past_due).nil?
         return false unless OpenApi::EnumValidator.valid?(_past_due, VALID_VALUES_FOR_PAST_DUE)
       end
 

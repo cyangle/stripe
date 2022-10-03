@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Assessments from Stripe. If set, the value is `fraudulent`.
     @[JSON::Field(key: "stripe_report", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -46,12 +46,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _stripe_report = @stripe_report
+      unless (_stripe_report = @stripe_report).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("stripe_report", _stripe_report.to_s.size, MAX_LENGTH_FOR_STRIPE_REPORT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _user_report = @user_report
+      unless (_user_report = @user_report).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_report", _user_report.to_s.size, MAX_LENGTH_FOR_USER_REPORT)
           invalid_properties.push(max_length_error)
         end
@@ -62,11 +62,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _stripe_report = @stripe_report
+      unless (_stripe_report = @stripe_report).nil?
         return false if _stripe_report.to_s.size > MAX_LENGTH_FOR_STRIPE_REPORT
       end
 
-      if _user_report = @user_report
+      unless (_user_report = @user_report).nil?
         return false if _user_report.to_s.size > MAX_LENGTH_FOR_USER_REPORT
       end
 

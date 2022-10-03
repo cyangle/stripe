@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Status of this `document` check.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [unverified, verified]."
     VALID_VALUES_FOR_STATUS  = StaticArray["unverified", "verified"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::GelatoDocumentReportAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
     getter address : Stripe::GelatoDocumentReportAddress? = nil
@@ -135,46 +137,46 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
-      if _error = @error
+      unless (_error = @error).nil?
         invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
-      if _expiration_date = @expiration_date
+      unless (_expiration_date = @expiration_date).nil?
         invalid_properties.concat(_expiration_date.list_invalid_properties_for("expiration_date")) if _expiration_date.is_a?(OpenApi::Validatable)
       end
 
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _issued_date = @issued_date
+      unless (_issued_date = @issued_date).nil?
         invalid_properties.concat(_issued_date.list_invalid_properties_for("issued_date")) if _issued_date.is_a?(OpenApi::Validatable)
       end
-      if _issuing_country = @issuing_country
+      unless (_issuing_country = @issuing_country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_country", _issuing_country.to_s.size, MAX_LENGTH_FOR_ISSUING_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _number = @number
+      unless (_number = @number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
@@ -184,47 +186,47 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
 
-      if _error = @error
+      unless (_error = @error).nil?
         return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
 
-      if _expiration_date = @expiration_date
+      unless (_expiration_date = @expiration_date).nil?
         return false if _expiration_date.is_a?(OpenApi::Validatable) && !_expiration_date.valid?
       end
 
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
-      if _issued_date = @issued_date
+      unless (_issued_date = @issued_date).nil?
         return false if _issued_date.is_a?(OpenApi::Validatable) && !_issued_date.valid?
       end
 
-      if _issuing_country = @issuing_country
+      unless (_issuing_country = @issuing_country).nil?
         return false if _issuing_country.to_s.size > MAX_LENGTH_FOR_ISSUING_COUNTRY
       end
 
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 
-      if _number = @number
+      unless (_number = @number).nil?
         return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

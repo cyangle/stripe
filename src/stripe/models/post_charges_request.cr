@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -132,55 +132,55 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _destination = @destination
+      unless (_destination = @destination).nil?
         invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("on_behalf_of", _on_behalf_of.to_s.size, MAX_LENGTH_FOR_ON_BEHALF_OF)
           invalid_properties.push(max_length_error)
         end
       end
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options")) if _radar_options.is_a?(OpenApi::Validatable)
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _source = @source
+      unless (_source = @source).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
@@ -190,51 +190,51 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _destination = @destination
+      unless (_destination = @destination).nil?
         return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         return false if _on_behalf_of.to_s.size > MAX_LENGTH_FOR_ON_BEHALF_OF
       end
 
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _source = @source
+      unless (_source = @source).nil?
         return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         return false if _statement_descriptor_suffix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

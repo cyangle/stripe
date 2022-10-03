@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of information to be displayed by the reader.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [cart]."
     VALID_VALUES_FOR__TYPE  = StaticArray["cart"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "cart", type: Stripe::TerminalReaderReaderResourceSetReaderDisplayActionCart?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cart.nil? && !cart_present?)]
     getter cart : Stripe::TerminalReaderReaderResourceSetReaderDisplayActionCart? = nil
@@ -53,10 +55,10 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _cart = @cart
+      unless (_cart = @cart).nil?
         invalid_properties.concat(_cart.list_invalid_properties_for("cart")) if _cart.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -66,11 +68,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _cart = @cart
+      unless (_cart = @cart).nil?
         return false if _cart.is_a?(OpenApi::Validatable) && !_cart.valid?
       end
 

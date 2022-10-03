@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "configuration", type: Stripe::BillingPortalSessionConfiguration?, default: nil, required: true, nullable: false, emit_null: false)]
     getter configuration : Stripe::BillingPortalSessionConfiguration? = nil
@@ -53,7 +53,9 @@ module Stripe
     getter url : String? = nil
     MAX_LENGTH_FOR_URL = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: locale.nil? && !locale_present?)]
@@ -106,21 +108,21 @@ module Stripe
 
       invalid_properties.push("\"configuration\" is required and cannot be null") if @configuration.nil?
 
-      if _configuration = @configuration
+      unless (_configuration = @configuration).nil?
         invalid_properties.concat(_configuration.list_invalid_properties_for("configuration")) if _configuration.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -129,25 +131,25 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _locale = @locale
+      unless (_locale = @locale).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_LOCALE) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("on_behalf_of", _on_behalf_of.to_s.size, MAX_LENGTH_FOR_ON_BEHALF_OF)
           invalid_properties.push(max_length_error)
         end
       end
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
@@ -159,43 +161,43 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @configuration.nil?
-      if _configuration = @configuration
+      unless (_configuration = @configuration).nil?
         return false if _configuration.is_a?(OpenApi::Validatable) && !_configuration.valid?
       end
 
       return false if @created.nil?
 
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @url.nil?
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
-      if _locale = @locale
+      unless (_locale = @locale).nil?
         return false unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         return false if _on_behalf_of.to_s.size > MAX_LENGTH_FOR_ON_BEHALF_OF
       end
 
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 

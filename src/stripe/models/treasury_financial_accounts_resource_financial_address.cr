@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The type of financial address
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [aba]."
     VALID_VALUES_FOR__TYPE  = StaticArray["aba"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "aba", type: Stripe::TreasuryFinancialAccountsResourceAbaRecord?, default: nil, required: false, nullable: false, emit_null: false)]
     getter aba : Stripe::TreasuryFinancialAccountsResourceAbaRecord? = nil
@@ -57,13 +59,13 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _aba = @aba
+      unless (_aba = @aba).nil?
         invalid_properties.concat(_aba.list_invalid_properties_for("aba")) if _aba.is_a?(OpenApi::Validatable)
       end
-      if _supported_networks = @supported_networks
+      unless (_supported_networks = @supported_networks).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED_NETWORKS) unless OpenApi::EnumValidator.valid?(_supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
       end
       invalid_properties
@@ -73,15 +75,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _aba = @aba
+      unless (_aba = @aba).nil?
         return false if _aba.is_a?(OpenApi::Validatable) && !_aba.valid?
       end
 
-      if _supported_networks = @supported_networks
+      unless (_supported_networks = @supported_networks).nil?
         return false unless OpenApi::EnumValidator.valid?(_supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -55,7 +55,9 @@ module Stripe
     getter usage : String? = nil
     MAX_LENGTH_FOR_USAGE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "application", type: Stripe::SetupIntentApplication?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: application.nil? && !application_present?)]
     getter application : Stripe::SetupIntentApplication? = nil
@@ -203,7 +205,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -212,69 +214,69 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"payment_method_types\" is required and cannot be null") if @payment_method_types.nil?
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"usage\" is required and cannot be null") if @usage.nil?
 
-      if _usage = @usage
+      unless (_usage = @usage).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, MAX_LENGTH_FOR_USAGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _application = @application
+      unless (_application = @application).nil?
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _flow_directions = @flow_directions
+      unless (_flow_directions = @flow_directions).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FLOW_DIRECTIONS) unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
       end
-      if _last_setup_error = @last_setup_error
+      unless (_last_setup_error = @last_setup_error).nil?
         invalid_properties.concat(_last_setup_error.list_invalid_properties_for("last_setup_error")) if _last_setup_error.is_a?(OpenApi::Validatable)
       end
-      if _latest_attempt = @latest_attempt
+      unless (_latest_attempt = @latest_attempt).nil?
         invalid_properties.concat(_latest_attempt.list_invalid_properties_for("latest_attempt")) if _latest_attempt.is_a?(OpenApi::Validatable)
       end
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         invalid_properties.concat(_mandate.list_invalid_properties_for("mandate")) if _mandate.is_a?(OpenApi::Validatable)
       end
 
-      if _next_action = @next_action
+      unless (_next_action = @next_action).nil?
         invalid_properties.concat(_next_action.list_invalid_properties_for("next_action")) if _next_action.is_a?(OpenApi::Validatable)
       end
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of")) if _on_behalf_of.is_a?(OpenApi::Validatable)
       end
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method")) if _payment_method.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
-      if _single_use_mandate = @single_use_mandate
+      unless (_single_use_mandate = @single_use_mandate).nil?
         invalid_properties.concat(_single_use_mandate.list_invalid_properties_for("single_use_mandate")) if _single_use_mandate.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -286,82 +288,82 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @payment_method_types.nil?
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @usage.nil?
-      if _usage = @usage
+      unless (_usage = @usage).nil?
         return false if _usage.to_s.size > MAX_LENGTH_FOR_USAGE
       end
 
-      if _application = @application
+      unless (_application = @application).nil?
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _flow_directions = @flow_directions
+      unless (_flow_directions = @flow_directions).nil?
         return false unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
       end
 
-      if _last_setup_error = @last_setup_error
+      unless (_last_setup_error = @last_setup_error).nil?
         return false if _last_setup_error.is_a?(OpenApi::Validatable) && !_last_setup_error.valid?
       end
 
-      if _latest_attempt = @latest_attempt
+      unless (_latest_attempt = @latest_attempt).nil?
         return false if _latest_attempt.is_a?(OpenApi::Validatable) && !_latest_attempt.valid?
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.is_a?(OpenApi::Validatable) && !_mandate.valid?
       end
 
-      if _next_action = @next_action
+      unless (_next_action = @next_action).nil?
         return false if _next_action.is_a?(OpenApi::Validatable) && !_next_action.valid?
       end
 
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.is_a?(OpenApi::Validatable) && !_payment_method.valid?
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 
-      if _single_use_mandate = @single_use_mandate
+      unless (_single_use_mandate = @single_use_mandate).nil?
         return false if _single_use_mandate.is_a?(OpenApi::Validatable) && !_single_use_mandate.valid?
       end
 

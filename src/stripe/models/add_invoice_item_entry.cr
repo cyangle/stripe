@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price : String? = nil
@@ -50,16 +50,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _price = @price
+      unless (_price = @price).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -68,15 +68,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A positive integer representing how much to transfer.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -82,21 +84,21 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _source = @source
+      unless (_source = @source).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
@@ -112,19 +114,19 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _source = @source
+      unless (_source = @source).nil?
         return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 

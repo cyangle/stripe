@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.
     @[JSON::Field(key: "mcc", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: mcc.nil? && !mcc_present?)]
@@ -104,40 +104,40 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _mcc = @mcc
+      unless (_mcc = @mcc).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mcc", _mcc.to_s.size, MAX_LENGTH_FOR_MCC)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _support_address = @support_address
+      unless (_support_address = @support_address).nil?
         invalid_properties.concat(_support_address.list_invalid_properties_for("support_address")) if _support_address.is_a?(OpenApi::Validatable)
       end
-      if _support_email = @support_email
+      unless (_support_email = @support_email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_email", _support_email.to_s.size, MAX_LENGTH_FOR_SUPPORT_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _support_phone = @support_phone
+      unless (_support_phone = @support_phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_phone", _support_phone.to_s.size, MAX_LENGTH_FOR_SUPPORT_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _support_url = @support_url
+      unless (_support_url = @support_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_url", _support_url.to_s.size, MAX_LENGTH_FOR_SUPPORT_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -148,35 +148,35 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _mcc = @mcc
+      unless (_mcc = @mcc).nil?
         return false if _mcc.to_s.size > MAX_LENGTH_FOR_MCC
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
-      if _support_address = @support_address
+      unless (_support_address = @support_address).nil?
         return false if _support_address.is_a?(OpenApi::Validatable) && !_support_address.valid?
       end
 
-      if _support_email = @support_email
+      unless (_support_email = @support_email).nil?
         return false if _support_email.to_s.size > MAX_LENGTH_FOR_SUPPORT_EMAIL
       end
 
-      if _support_phone = @support_phone
+      unless (_support_phone = @support_phone).nil?
         return false if _support_phone.to_s.size > MAX_LENGTH_FOR_SUPPORT_PHONE
       end
 
-      if _support_url = @support_url
+      unless (_support_url = @support_url).nil?
         return false if _support_url.to_s.size > MAX_LENGTH_FOR_SUPPORT_URL
       end
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

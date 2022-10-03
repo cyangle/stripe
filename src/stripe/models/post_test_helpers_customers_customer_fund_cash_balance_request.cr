@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount to be used for this test cash balance transaction. A positive integer representing how much to fund in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to fund $1.00 or 100 to fund ¥100, a zero-decimal currency).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -61,7 +63,7 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
@@ -76,7 +78,7 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 

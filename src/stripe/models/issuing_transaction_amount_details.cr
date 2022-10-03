@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The fee charged by the ATM for the cash withdrawal.
     @[JSON::Field(key: "atm_fee", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: atm_fee.nil? && !atm_fee_present?)]

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The total amount that was moved to your balance. This is almost always equal to the amount charged. In rare cases when customers deposit excess funds and we are unable to refund those, those funds get moved to your balance and show up in amount_charged as well. The amount charged is expressed in the source's currency.
     @[JSON::Field(key: "amount_charged", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -43,7 +43,9 @@ module Stripe
     getter refund_attributes_status : String? = nil
     MAX_LENGTH_FOR_REFUND_ATTRIBUTES_STATUS = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
     @[JSON::Field(key: "address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
@@ -81,19 +83,19 @@ module Stripe
 
       invalid_properties.push("\"refund_attributes_method\" is required and cannot be null") if @refund_attributes_method.nil?
 
-      if _refund_attributes_method = @refund_attributes_method
+      unless (_refund_attributes_method = @refund_attributes_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_method", _refund_attributes_method.to_s.size, MAX_LENGTH_FOR_REFUND_ATTRIBUTES_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"refund_attributes_status\" is required and cannot be null") if @refund_attributes_status.nil?
 
-      if _refund_attributes_status = @refund_attributes_status
+      unless (_refund_attributes_status = @refund_attributes_status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_status", _refund_attributes_status.to_s.size, MAX_LENGTH_FOR_REFUND_ATTRIBUTES_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address = @address
+      unless (_address = @address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address", _address.to_s.size, MAX_LENGTH_FOR_ADDRESS)
           invalid_properties.push(max_length_error)
         end
@@ -111,16 +113,16 @@ module Stripe
       return false if @amount_returned.nil?
 
       return false if @refund_attributes_method.nil?
-      if _refund_attributes_method = @refund_attributes_method
+      unless (_refund_attributes_method = @refund_attributes_method).nil?
         return false if _refund_attributes_method.to_s.size > MAX_LENGTH_FOR_REFUND_ATTRIBUTES_METHOD
       end
 
       return false if @refund_attributes_status.nil?
-      if _refund_attributes_status = @refund_attributes_status
+      unless (_refund_attributes_status = @refund_attributes_status).nil?
         return false if _refund_attributes_status.to_s.size > MAX_LENGTH_FOR_REFUND_ATTRIBUTES_STATUS
       end
 
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.to_s.size > MAX_LENGTH_FOR_ADDRESS
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "three_d_secure", type: Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: three_d_secure.nil? && !three_d_secure_present?)]
     getter three_d_secure : Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _three_d_secure = @three_d_secure
+      unless (_three_d_secure = @three_d_secure).nil?
         invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure")) if _three_d_secure.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _three_d_secure = @three_d_secure
+      unless (_three_d_secure = @three_d_secure).nil?
         return false if _three_d_secure.is_a?(OpenApi::Validatable) && !_three_d_secure.valid?
       end
 

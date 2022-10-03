@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Entity number associated with this Multibanco payment.
     @[JSON::Field(key: "entity", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: entity.nil? && !entity_present?)]
@@ -52,12 +52,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _entity = @entity
+      unless (_entity = @entity).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("entity", _entity.to_s.size, MAX_LENGTH_FOR_ENTITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _entity = @entity
+      unless (_entity = @entity).nil?
         return false if _entity.to_s.size > MAX_LENGTH_FOR_ENTITY
       end
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 

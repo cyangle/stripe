@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A name for the secret that's unique within the scope.
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "scope", type: Stripe::ScopeParam1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter scope : Stripe::ScopeParam1? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -53,14 +55,14 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"scope\" is required and cannot be null") if @scope.nil?
 
-      if _scope = @scope
+      unless (_scope = @scope).nil?
         invalid_properties.concat(_scope.list_invalid_properties_for("scope")) if _scope.is_a?(OpenApi::Validatable)
       end
 
@@ -71,12 +73,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @scope.nil?
-      if _scope = @scope
+      unless (_scope = @scope).nil?
         return false if _scope.is_a?(OpenApi::Validatable) && !_scope.valid?
       end
 

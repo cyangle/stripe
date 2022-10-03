@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "quote", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quote : String? = nil
     MAX_LENGTH_FOR_QUOTE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "is_revision", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter is_revision : Bool? = nil
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
 
-      if _quote = @quote
+      unless (_quote = @quote).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("quote", _quote.to_s.size, MAX_LENGTH_FOR_QUOTE)
           invalid_properties.push(max_length_error)
         end
@@ -61,7 +63,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @quote.nil?
-      if _quote = @quote
+      unless (_quote = @quote).nil?
         return false if _quote.to_s.size > MAX_LENGTH_FOR_QUOTE
       end
 

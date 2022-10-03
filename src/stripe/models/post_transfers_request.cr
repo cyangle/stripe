@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "destination", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter destination : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # A positive integer in cents (or local equivalent) representing how much to transfer.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -89,13 +91,13 @@ module Stripe
 
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _source_type = @source_type
+      unless (_source_type = @source_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_TYPE) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
 
@@ -109,11 +111,11 @@ module Stripe
 
       return false if @destination.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _source_type = @source_type
+      unless (_source_type = @source_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
 

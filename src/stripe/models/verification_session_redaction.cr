@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Indicates whether this object and its related objects have been redacted or not.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [processing, redacted]."
     VALID_VALUES_FOR_STATUS  = StaticArray["processing", "redacted"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +45,7 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 

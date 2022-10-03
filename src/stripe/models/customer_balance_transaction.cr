@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The amount of the transaction. A negative value is a credit for the customer's balance, and a positive value is a debit to the customer's `balance`.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,7 +61,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [adjustment, applied_to_invoice, credit_note, initial, invoice_too_large, invoice_too_small, migration, unapplied_from_invoice, unspent_receiver_credit]."
     VALID_VALUES_FOR__TYPE  = StaticArray["adjustment", "applied_to_invoice", "credit_note", "initial", "invoice_too_large", "invoice_too_small", "migration", "unapplied_from_invoice", "unspent_receiver_credit"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "credit_note", type: Stripe::CustomerBalanceTransactionCreditNote?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: credit_note.nil? && !credit_note_present?)]
     getter credit_note : Stripe::CustomerBalanceTransactionCreditNote? = nil
@@ -125,14 +127,14 @@ module Stripe
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"ending_balance\" is required and cannot be null") if @ending_balance.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -141,23 +143,23 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _credit_note = @credit_note
+      unless (_credit_note = @credit_note).nil?
         invalid_properties.concat(_credit_note.list_invalid_properties_for("credit_note")) if _credit_note.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         invalid_properties.concat(_invoice.list_invalid_properties_for("invoice")) if _invoice.is_a?(OpenApi::Validatable)
       end
 
@@ -174,38 +176,38 @@ module Stripe
       return false if @currency.nil?
 
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
       return false if @ending_balance.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _credit_note = @credit_note
+      unless (_credit_note = @credit_note).nil?
         return false if _credit_note.is_a?(OpenApi::Validatable) && !_credit_note.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.is_a?(OpenApi::Validatable) && !_invoice.valid?
       end
 

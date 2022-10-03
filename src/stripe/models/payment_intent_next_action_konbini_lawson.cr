@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The payment code.
     @[JSON::Field(key: "payment_code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_code : String? = nil
     MAX_LENGTH_FOR_PAYMENT_CODE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The confirmation number.
     @[JSON::Field(key: "confirmation_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -51,12 +53,12 @@ module Stripe
 
       invalid_properties.push("\"payment_code\" is required and cannot be null") if @payment_code.nil?
 
-      if _payment_code = @payment_code
+      unless (_payment_code = @payment_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_code", _payment_code.to_s.size, MAX_LENGTH_FOR_PAYMENT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _confirmation_number = @confirmation_number
+      unless (_confirmation_number = @confirmation_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +70,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @payment_code.nil?
-      if _payment_code = @payment_code
+      unless (_payment_code = @payment_code).nil?
         return false if _payment_code.to_s.size > MAX_LENGTH_FOR_PAYMENT_CODE
       end
 
-      if _confirmation_number = @confirmation_number
+      unless (_confirmation_number = @confirmation_number).nil?
         return false if _confirmation_number.to_s.size > MAX_LENGTH_FOR_CONFIRMATION_NUMBER
       end
 

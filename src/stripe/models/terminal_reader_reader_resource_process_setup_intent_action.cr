@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "setup_intent", type: Stripe::TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent?, default: nil, required: true, nullable: false, emit_null: false)]
     getter setup_intent : Stripe::TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
     @[JSON::Field(key: "generated_card", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -49,10 +51,10 @@ module Stripe
 
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
 
-      if _setup_intent = @setup_intent
+      unless (_setup_intent = @setup_intent).nil?
         invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent")) if _setup_intent.is_a?(OpenApi::Validatable)
       end
-      if _generated_card = @generated_card
+      unless (_generated_card = @generated_card).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, MAX_LENGTH_FOR_GENERATED_CARD)
           invalid_properties.push(max_length_error)
         end
@@ -64,11 +66,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @setup_intent.nil?
-      if _setup_intent = @setup_intent
+      unless (_setup_intent = @setup_intent).nil?
         return false if _setup_intent.is_a?(OpenApi::Validatable) && !_setup_intent.valid?
       end
 
-      if _generated_card = @generated_card
+      unless (_generated_card = @generated_card).nil?
         return false if _generated_card.to_s.size > MAX_LENGTH_FOR_GENERATED_CARD
       end
 

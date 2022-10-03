@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The email address of the customer placing the order.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -69,15 +71,15 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _items = @items
+      unless (_items = @items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -90,15 +92,15 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _items = @items
+      unless (_items = @items).nil?
         return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 

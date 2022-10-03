@@ -19,11 +19,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether 3D Secure is supported on this card.
     @[JSON::Field(key: "supported", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported : Bool? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

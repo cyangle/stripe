@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The end date of this usage period. All usage up to and including this point in time is included.
     @[JSON::Field(key: "end", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _end.nil? && !_end_present?)]

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Amount of each recurring payment.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
@@ -69,12 +69,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
@@ -84,11 +84,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 

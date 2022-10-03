@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -55,7 +55,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [card]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["card"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "account", type: Stripe::CardAccount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account.nil? && !account_present?)]
     getter account : Stripe::CardAccount? = nil
@@ -263,7 +265,7 @@ module Stripe
 
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
 
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
@@ -274,113 +276,113 @@ module Stripe
 
       invalid_properties.push("\"funding\" is required and cannot be null") if @funding.nil?
 
-      if _funding = @funding
+      unless (_funding = @funding).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _account = @account
+      unless (_account = @account).nil?
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
-      if _address_city = @address_city
+      unless (_address_city = @address_city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_country = @address_country
+      unless (_address_country = @address_country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line1 = @address_line1
+      unless (_address_line1 = @address_line1).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line1_check = @address_line1_check
+      unless (_address_line1_check = @address_line1_check).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line2 = @address_line2
+      unless (_address_line2 = @address_line2).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_state = @address_state
+      unless (_address_state = @address_state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_zip = @address_zip
+      unless (_address_zip = @address_zip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_zip_check = @address_zip_check
+      unless (_address_zip_check = @address_zip_check).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip_check", _address_zip_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
-      if _available_payout_methods = @available_payout_methods
+      unless (_available_payout_methods = @available_payout_methods).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AVAILABLE_PAYOUT_METHODS) unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
       end
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
-      if _cvc_check = @cvc_check
+      unless (_cvc_check = @cvc_check).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _dynamic_last4 = @dynamic_last4
+      unless (_dynamic_last4 = @dynamic_last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tokenization_method = @tokenization_method
+      unless (_tokenization_method = @tokenization_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tokenization_method", _tokenization_method.to_s.size, MAX_LENGTH_FOR_TOKENIZATION_METHOD)
           invalid_properties.push(max_length_error)
         end
@@ -392,7 +394,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @brand.nil?
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
@@ -401,94 +403,94 @@ module Stripe
       return false if @exp_year.nil?
 
       return false if @funding.nil?
-      if _funding = @funding
+      unless (_funding = @funding).nil?
         return false if _funding.to_s.size > MAX_LENGTH_FOR_FUNDING
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @last4.nil?
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
 
-      if _address_city = @address_city
+      unless (_address_city = @address_city).nil?
         return false if _address_city.to_s.size > MAX_LENGTH_FOR_ADDRESS_CITY
       end
 
-      if _address_country = @address_country
+      unless (_address_country = @address_country).nil?
         return false if _address_country.to_s.size > MAX_LENGTH_FOR_ADDRESS_COUNTRY
       end
 
-      if _address_line1 = @address_line1
+      unless (_address_line1 = @address_line1).nil?
         return false if _address_line1.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1
       end
 
-      if _address_line1_check = @address_line1_check
+      unless (_address_line1_check = @address_line1_check).nil?
         return false if _address_line1_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK
       end
 
-      if _address_line2 = @address_line2
+      unless (_address_line2 = @address_line2).nil?
         return false if _address_line2.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE2
       end
 
-      if _address_state = @address_state
+      unless (_address_state = @address_state).nil?
         return false if _address_state.to_s.size > MAX_LENGTH_FOR_ADDRESS_STATE
       end
 
-      if _address_zip = @address_zip
+      unless (_address_zip = @address_zip).nil?
         return false if _address_zip.to_s.size > MAX_LENGTH_FOR_ADDRESS_ZIP
       end
 
-      if _address_zip_check = @address_zip_check
+      unless (_address_zip_check = @address_zip_check).nil?
         return false if _address_zip_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_ZIP_CHECK
       end
 
-      if _available_payout_methods = @available_payout_methods
+      unless (_available_payout_methods = @available_payout_methods).nil?
         return false unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
       end
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
-      if _cvc_check = @cvc_check
+      unless (_cvc_check = @cvc_check).nil?
         return false if _cvc_check.to_s.size > MAX_LENGTH_FOR_CVC_CHECK
       end
 
-      if _dynamic_last4 = @dynamic_last4
+      unless (_dynamic_last4 = @dynamic_last4).nil?
         return false if _dynamic_last4.to_s.size > MAX_LENGTH_FOR_DYNAMIC_LAST4
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
-      if _tokenization_method = @tokenization_method
+      unless (_tokenization_method = @tokenization_method).nil?
         return false if _tokenization_method.to_s.size > MAX_LENGTH_FOR_TOKENIZATION_METHOD
       end
 

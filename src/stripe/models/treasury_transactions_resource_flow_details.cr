@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of the flow that created the Transaction. Set to the same value as `flow_type`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [credit_reversal, debit_reversal, inbound_transfer, issuing_authorization, other, outbound_payment, outbound_transfer, received_credit, received_debit]."
     VALID_VALUES_FOR__TYPE  = StaticArray["credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "credit_reversal", type: Stripe::TreasuryCreditReversal?, default: nil, required: false, nullable: false, emit_null: false)]
     getter credit_reversal : Stripe::TreasuryCreditReversal? = nil
@@ -78,31 +80,31 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _credit_reversal = @credit_reversal
+      unless (_credit_reversal = @credit_reversal).nil?
         invalid_properties.concat(_credit_reversal.list_invalid_properties_for("credit_reversal")) if _credit_reversal.is_a?(OpenApi::Validatable)
       end
-      if _debit_reversal = @debit_reversal
+      unless (_debit_reversal = @debit_reversal).nil?
         invalid_properties.concat(_debit_reversal.list_invalid_properties_for("debit_reversal")) if _debit_reversal.is_a?(OpenApi::Validatable)
       end
-      if _inbound_transfer = @inbound_transfer
+      unless (_inbound_transfer = @inbound_transfer).nil?
         invalid_properties.concat(_inbound_transfer.list_invalid_properties_for("inbound_transfer")) if _inbound_transfer.is_a?(OpenApi::Validatable)
       end
-      if _issuing_authorization = @issuing_authorization
+      unless (_issuing_authorization = @issuing_authorization).nil?
         invalid_properties.concat(_issuing_authorization.list_invalid_properties_for("issuing_authorization")) if _issuing_authorization.is_a?(OpenApi::Validatable)
       end
-      if _outbound_payment = @outbound_payment
+      unless (_outbound_payment = @outbound_payment).nil?
         invalid_properties.concat(_outbound_payment.list_invalid_properties_for("outbound_payment")) if _outbound_payment.is_a?(OpenApi::Validatable)
       end
-      if _outbound_transfer = @outbound_transfer
+      unless (_outbound_transfer = @outbound_transfer).nil?
         invalid_properties.concat(_outbound_transfer.list_invalid_properties_for("outbound_transfer")) if _outbound_transfer.is_a?(OpenApi::Validatable)
       end
-      if _received_credit = @received_credit
+      unless (_received_credit = @received_credit).nil?
         invalid_properties.concat(_received_credit.list_invalid_properties_for("received_credit")) if _received_credit.is_a?(OpenApi::Validatable)
       end
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         invalid_properties.concat(_received_debit.list_invalid_properties_for("received_debit")) if _received_debit.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -112,39 +114,39 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _credit_reversal = @credit_reversal
+      unless (_credit_reversal = @credit_reversal).nil?
         return false if _credit_reversal.is_a?(OpenApi::Validatable) && !_credit_reversal.valid?
       end
 
-      if _debit_reversal = @debit_reversal
+      unless (_debit_reversal = @debit_reversal).nil?
         return false if _debit_reversal.is_a?(OpenApi::Validatable) && !_debit_reversal.valid?
       end
 
-      if _inbound_transfer = @inbound_transfer
+      unless (_inbound_transfer = @inbound_transfer).nil?
         return false if _inbound_transfer.is_a?(OpenApi::Validatable) && !_inbound_transfer.valid?
       end
 
-      if _issuing_authorization = @issuing_authorization
+      unless (_issuing_authorization = @issuing_authorization).nil?
         return false if _issuing_authorization.is_a?(OpenApi::Validatable) && !_issuing_authorization.valid?
       end
 
-      if _outbound_payment = @outbound_payment
+      unless (_outbound_payment = @outbound_payment).nil?
         return false if _outbound_payment.is_a?(OpenApi::Validatable) && !_outbound_payment.valid?
       end
 
-      if _outbound_transfer = @outbound_transfer
+      unless (_outbound_transfer = @outbound_transfer).nil?
         return false if _outbound_transfer.is_a?(OpenApi::Validatable) && !_outbound_transfer.valid?
       end
 
-      if _received_credit = @received_credit
+      unless (_received_credit = @received_credit).nil?
         return false if _received_credit.is_a?(OpenApi::Validatable) && !_received_credit.valid?
       end
 
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         return false if _received_debit.is_a?(OpenApi::Validatable) && !_received_debit.valid?
       end
 

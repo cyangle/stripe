@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The time that payment will be attempted. If customer approval is required, they need to provide approval before this time.
     @[JSON::Field(key: "charge_attempt_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: charge_attempt_at.nil? && !charge_attempt_at_present?)]

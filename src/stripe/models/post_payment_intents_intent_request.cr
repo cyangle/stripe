@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -130,59 +130,59 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _application_fee_amount = @application_fee_amount
+      unless (_application_fee_amount = @application_fee_amount).nil?
         invalid_properties.concat(_application_fee_amount.list_invalid_properties_for("application_fee_amount")) if _application_fee_amount.is_a?(OpenApi::Validatable)
       end
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_method_data = @payment_method_data
+      unless (_payment_method_data = @payment_method_data).nil?
         invalid_properties.concat(_payment_method_data.list_invalid_properties_for("payment_method_data")) if _payment_method_data.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
 
-      if _receipt_email = @receipt_email
+      unless (_receipt_email = @receipt_email).nil?
         invalid_properties.concat(_receipt_email.list_invalid_properties_for("receipt_email")) if _receipt_email.is_a?(OpenApi::Validatable)
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
@@ -192,59 +192,59 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _application_fee_amount = @application_fee_amount
+      unless (_application_fee_amount = @application_fee_amount).nil?
         return false if _application_fee_amount.is_a?(OpenApi::Validatable) && !_application_fee_amount.valid?
       end
 
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
-      if _payment_method_data = @payment_method_data
+      unless (_payment_method_data = @payment_method_data).nil?
         return false if _payment_method_data.is_a?(OpenApi::Validatable) && !_payment_method_data.valid?
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 
-      if _receipt_email = @receipt_email
+      unless (_receipt_email = @receipt_email).nil?
         return false if _receipt_email.is_a?(OpenApi::Validatable) && !_receipt_email.valid?
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         return false if _statement_descriptor_suffix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

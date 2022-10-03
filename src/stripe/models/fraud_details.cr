@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "user_report", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter user_report : String? = nil
     MAX_LENGTH_FOR_USER_REPORT    = 5000
     ERROR_MESSAGE_FOR_USER_REPORT = "invalid value for \"user_report\", must be one of [, fraudulent, safe]."
     VALID_VALUES_FOR_USER_REPORT  = StaticArray["", "fraudulent", "safe"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +45,7 @@ module Stripe
 
       invalid_properties.push("\"user_report\" is required and cannot be null") if @user_report.nil?
 
-      if _user_report = @user_report
+      unless (_user_report = @user_report).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_USER_REPORT) unless OpenApi::EnumValidator.valid?(_user_report, VALID_VALUES_FOR_USER_REPORT)
       end
       invalid_properties
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @user_report.nil?
-      if _user_report = @user_report
+      unless (_user_report = @user_report).nil?
         return false unless OpenApi::EnumValidator.valid?(_user_report, VALID_VALUES_FOR_USER_REPORT)
       end
 

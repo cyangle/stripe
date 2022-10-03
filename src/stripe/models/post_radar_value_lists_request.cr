@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The name of the value list for use in rules.
     @[JSON::Field(key: "alias", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 100
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -68,20 +70,20 @@ module Stripe
 
       invalid_properties.push("\"_alias\" is required and cannot be null") if @_alias.nil?
 
-      if __alias = @_alias
+      unless (__alias = @_alias).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, MAX_LENGTH_FOR__ALIAS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _item_type = @item_type
+      unless (_item_type = @item_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ITEM_TYPE) unless OpenApi::EnumValidator.valid?(_item_type, VALID_VALUES_FOR_ITEM_TYPE)
       end
 
@@ -92,16 +94,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_alias.nil?
-      if __alias = @_alias
+      unless (__alias = @_alias).nil?
         return false if __alias.to_s.size > MAX_LENGTH_FOR__ALIAS
       end
 
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _item_type = @item_type
+      unless (_item_type = @item_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_item_type, VALID_VALUES_FOR_ITEM_TYPE)
       end
 

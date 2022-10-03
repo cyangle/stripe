@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ip_address : String? = nil
@@ -42,7 +42,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
           invalid_properties.push(max_length_error)
         end
@@ -53,7 +53,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         return false if _user_agent.to_s.size > MAX_LENGTH_FOR_USER_AGENT
       end
 

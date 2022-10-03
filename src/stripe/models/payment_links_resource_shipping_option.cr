@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A non-negative integer in cents representing how much to charge.
     @[JSON::Field(key: "shipping_amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,6 +27,8 @@ module Stripe
 
     @[JSON::Field(key: "shipping_rate", type: Stripe::PaymentLinksResourceShippingOptionShippingRate?, default: nil, required: true, nullable: false, emit_null: false)]
     getter shipping_rate : Stripe::PaymentLinksResourceShippingOptionShippingRate? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,7 +49,7 @@ module Stripe
 
       invalid_properties.push("\"shipping_rate\" is required and cannot be null") if @shipping_rate.nil?
 
-      if _shipping_rate = @shipping_rate
+      unless (_shipping_rate = @shipping_rate).nil?
         invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate")) if _shipping_rate.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -59,7 +61,7 @@ module Stripe
       return false if @shipping_amount.nil?
 
       return false if @shipping_rate.nil?
-      if _shipping_rate = @shipping_rate
+      unless (_shipping_rate = @shipping_rate).nil?
         return false if _shipping_rate.is_a?(OpenApi::Validatable) && !_shipping_rate.valid?
       end
 

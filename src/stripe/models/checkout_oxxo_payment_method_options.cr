@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.
     @[JSON::Field(key: "expires_after_days", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expires_after_days : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -51,7 +53,7 @@ module Stripe
 
       invalid_properties.push("\"expires_after_days\" is required and cannot be null") if @expires_after_days.nil?
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -62,7 +64,7 @@ module Stripe
     def valid? : Bool
       return false if @expires_after_days.nil?
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

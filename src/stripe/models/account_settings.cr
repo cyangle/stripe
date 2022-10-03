@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "branding", type: Stripe::AccountBrandingSettings?, default: nil, required: true, nullable: false, emit_null: false)]
     getter branding : Stripe::AccountBrandingSettings? = nil
@@ -33,7 +33,9 @@ module Stripe
     @[JSON::Field(key: "payments", type: Stripe::AccountPaymentsSettings?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payments : Stripe::AccountPaymentsSettings? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "bacs_debit_payments", type: Stripe::AccountBacsDebitPaymentsSettings?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bacs_debit_payments : Stripe::AccountBacsDebitPaymentsSettings? = nil
@@ -75,37 +77,37 @@ module Stripe
 
       invalid_properties.push("\"branding\" is required and cannot be null") if @branding.nil?
 
-      if _branding = @branding
+      unless (_branding = @branding).nil?
         invalid_properties.concat(_branding.list_invalid_properties_for("branding")) if _branding.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"card_payments\" is required and cannot be null") if @card_payments.nil?
 
-      if _card_payments = @card_payments
+      unless (_card_payments = @card_payments).nil?
         invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments")) if _card_payments.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"dashboard\" is required and cannot be null") if @dashboard.nil?
 
-      if _dashboard = @dashboard
+      unless (_dashboard = @dashboard).nil?
         invalid_properties.concat(_dashboard.list_invalid_properties_for("dashboard")) if _dashboard.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"payments\" is required and cannot be null") if @payments.nil?
 
-      if _payments = @payments
+      unless (_payments = @payments).nil?
         invalid_properties.concat(_payments.list_invalid_properties_for("payments")) if _payments.is_a?(OpenApi::Validatable)
       end
-      if _bacs_debit_payments = @bacs_debit_payments
+      unless (_bacs_debit_payments = @bacs_debit_payments).nil?
         invalid_properties.concat(_bacs_debit_payments.list_invalid_properties_for("bacs_debit_payments")) if _bacs_debit_payments.is_a?(OpenApi::Validatable)
       end
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
-      if _payouts = @payouts
+      unless (_payouts = @payouts).nil?
         invalid_properties.concat(_payouts.list_invalid_properties_for("payouts")) if _payouts.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit_payments = @sepa_debit_payments
+      unless (_sepa_debit_payments = @sepa_debit_payments).nil?
         invalid_properties.concat(_sepa_debit_payments.list_invalid_properties_for("sepa_debit_payments")) if _sepa_debit_payments.is_a?(OpenApi::Validatable)
       end
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -115,42 +117,42 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @branding.nil?
-      if _branding = @branding
+      unless (_branding = @branding).nil?
         return false if _branding.is_a?(OpenApi::Validatable) && !_branding.valid?
       end
 
       return false if @card_payments.nil?
-      if _card_payments = @card_payments
+      unless (_card_payments = @card_payments).nil?
         return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
 
       return false if @dashboard.nil?
-      if _dashboard = @dashboard
+      unless (_dashboard = @dashboard).nil?
         return false if _dashboard.is_a?(OpenApi::Validatable) && !_dashboard.valid?
       end
 
       return false if @payments.nil?
-      if _payments = @payments
+      unless (_payments = @payments).nil?
         return false if _payments.is_a?(OpenApi::Validatable) && !_payments.valid?
       end
 
-      if _bacs_debit_payments = @bacs_debit_payments
+      unless (_bacs_debit_payments = @bacs_debit_payments).nil?
         return false if _bacs_debit_payments.is_a?(OpenApi::Validatable) && !_bacs_debit_payments.valid?
       end
 
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
 
-      if _payouts = @payouts
+      unless (_payouts = @payouts).nil?
         return false if _payouts.is_a?(OpenApi::Validatable) && !_payouts.valid?
       end
 
-      if _sepa_debit_payments = @sepa_debit_payments
+      unless (_sepa_debit_payments = @sepa_debit_payments).nil?
         return false if _sepa_debit_payments.is_a?(OpenApi::Validatable) && !_sepa_debit_payments.valid?
       end
 
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 

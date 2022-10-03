@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ID of the customer who will be billed when this invoice item is billed.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : String? = nil
     MAX_LENGTH_FOR_CUSTOMER = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative `amount` will reduce the `amount_due` on the invoice.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -124,43 +126,43 @@ module Stripe
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
       end
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _period = @period
+      unless (_period = @period).nil?
         invalid_properties.concat(_period.list_invalid_properties_for("period")) if _period.is_a?(OpenApi::Validatable)
       end
-      if _price = @price
+      unless (_price = @price).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
 
-      if _subscription = @subscription
+      unless (_subscription = @subscription).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
           invalid_properties.push(max_length_error)
         end
@@ -173,39 +175,39 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _period = @period
+      unless (_period = @period).nil?
         return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
 
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
 
-      if _subscription = @subscription
+      unless (_subscription = @subscription).nil?
         return false if _subscription.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION
       end
 

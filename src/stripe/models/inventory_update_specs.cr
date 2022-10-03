@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
@@ -50,10 +50,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _value = @value
+      unless (_value = @value).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_VALUE) unless OpenApi::EnumValidator.valid?(_value, VALID_VALUES_FOR_VALUE)
       end
       invalid_properties
@@ -62,11 +62,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _value = @value
+      unless (_value = @value).nil?
         return false unless OpenApi::EnumValidator.valid?(_value, VALID_VALUES_FOR_VALUE)
       end
 

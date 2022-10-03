@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices
     @[JSON::Field(key: "first_time_transaction", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter first_time_transaction : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Promotion code restrictions defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PromotionCodeCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -66,11 +68,11 @@ module Stripe
 
       invalid_properties.push("\"first_time_transaction\" is required and cannot be null") if @first_time_transaction.nil?
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
 
-      if _minimum_amount_currency = @minimum_amount_currency
+      unless (_minimum_amount_currency = @minimum_amount_currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("minimum_amount_currency", _minimum_amount_currency.to_s.size, MAX_LENGTH_FOR_MINIMUM_AMOUNT_CURRENCY)
           invalid_properties.push(max_length_error)
         end
@@ -83,11 +85,11 @@ module Stripe
     def valid? : Bool
       return false if @first_time_transaction.nil?
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
-      if _minimum_amount_currency = @minimum_amount_currency
+      unless (_minimum_amount_currency = @minimum_amount_currency).nil?
         return false if _minimum_amount_currency.to_s.size > MAX_LENGTH_FOR_MINIMUM_AMOUNT_CURRENCY
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,7 +46,9 @@ module Stripe
     @[JSON::Field(key: "size", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter size : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The time at which the file expires and is no longer available in epoch seconds.
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
@@ -122,42 +124,42 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
 
-      if _purpose = @purpose
+      unless (_purpose = @purpose).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PURPOSE) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
       invalid_properties.push("\"size\" is required and cannot be null") if @size.nil?
 
-      if _filename = @filename
+      unless (_filename = @filename).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("filename", _filename.to_s.size, MAX_LENGTH_FOR_FILENAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _links = @links
+      unless (_links = @links).nil?
         invalid_properties.concat(_links.list_invalid_properties_for("links")) if _links.is_a?(OpenApi::Validatable)
       end
-      if _title = @title
+      unless (_title = @title).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
           invalid_properties.push(max_length_error)
         end
       end
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -171,39 +173,39 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @purpose.nil?
-      if _purpose = @purpose
+      unless (_purpose = @purpose).nil?
         return false unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
 
       return false if @size.nil?
 
-      if _filename = @filename
+      unless (_filename = @filename).nil?
         return false if _filename.to_s.size > MAX_LENGTH_FOR_FILENAME
       end
 
-      if _links = @links
+      unless (_links = @links).nil?
         return false if _links.is_a?(OpenApi::Validatable) && !_links.valid?
       end
 
-      if _title = @title
+      unless (_title = @title).nil?
         return false if _title.to_s.size > MAX_LENGTH_FOR_TITLE
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

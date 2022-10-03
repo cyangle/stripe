@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "branding", type: Stripe::BrandingSettingsSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter branding : Stripe::BrandingSettingsSpecs? = nil
@@ -58,22 +58,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _branding = @branding
+      unless (_branding = @branding).nil?
         invalid_properties.concat(_branding.list_invalid_properties_for("branding")) if _branding.is_a?(OpenApi::Validatable)
       end
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
-      if _card_payments = @card_payments
+      unless (_card_payments = @card_payments).nil?
         invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments")) if _card_payments.is_a?(OpenApi::Validatable)
       end
-      if _payments = @payments
+      unless (_payments = @payments).nil?
         invalid_properties.concat(_payments.list_invalid_properties_for("payments")) if _payments.is_a?(OpenApi::Validatable)
       end
-      if _payouts = @payouts
+      unless (_payouts = @payouts).nil?
         invalid_properties.concat(_payouts.list_invalid_properties_for("payouts")) if _payouts.is_a?(OpenApi::Validatable)
       end
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -82,27 +82,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _branding = @branding
+      unless (_branding = @branding).nil?
         return false if _branding.is_a?(OpenApi::Validatable) && !_branding.valid?
       end
 
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
 
-      if _card_payments = @card_payments
+      unless (_card_payments = @card_payments).nil?
         return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
 
-      if _payments = @payments
+      unless (_payments = @payments).nil?
         return false if _payments.is_a?(OpenApi::Validatable) && !_payments.valid?
       end
 
-      if _payouts = @payouts
+      unless (_payouts = @payouts).nil?
         return false if _payouts.is_a?(OpenApi::Validatable) && !_payouts.valid?
       end
 
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 

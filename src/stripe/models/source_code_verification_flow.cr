@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The number of attempts remaining to authenticate the source object with a verification code.
     @[JSON::Field(key: "attempts_remaining", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,6 +29,8 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     MAX_LENGTH_FOR_STATUS = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,7 +51,7 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
@@ -63,7 +65,7 @@ module Stripe
       return false if @attempts_remaining.nil?
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 

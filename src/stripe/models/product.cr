@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the product is currently available for purchase.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,7 +61,9 @@ module Stripe
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter updated : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "default_price", type: Stripe::ProductDefaultPrice?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: default_price.nil? && !default_price_present?)]
     getter default_price : Stripe::ProductDefaultPrice? = nil
@@ -157,7 +159,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -170,44 +172,44 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
-      if _default_price = @default_price
+      unless (_default_price = @default_price).nil?
         invalid_properties.concat(_default_price.list_invalid_properties_for("default_price")) if _default_price.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         invalid_properties.concat(_tax_code.list_invalid_properties_for("tax_code")) if _tax_code.is_a?(OpenApi::Validatable)
       end
-      if _unit_label = @unit_label
+      unless (_unit_label = @unit_label).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -223,7 +225,7 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -234,42 +236,42 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @updated.nil?
 
-      if _default_price = @default_price
+      unless (_default_price = @default_price).nil?
         return false if _default_price.is_a?(OpenApi::Validatable) && !_default_price.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         return false if _tax_code.is_a?(OpenApi::Validatable) && !_tax_code.valid?
       end
 
-      if _unit_label = @unit_label
+      unless (_unit_label = @unit_label).nil?
         return false if _unit_label.to_s.size > MAX_LENGTH_FOR_UNIT_LABEL
       end
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Amount for bank account.
     @[JSON::Field(key: "bank_account", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]

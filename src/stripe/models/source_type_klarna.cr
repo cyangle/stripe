@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "background_image_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter background_image_url : String? = nil

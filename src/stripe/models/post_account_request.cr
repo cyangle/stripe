@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
     @[JSON::Field(key: "account_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -103,46 +103,46 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_token = @account_token
+      unless (_account_token = @account_token).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_token", _account_token.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
-      if _business_type = @business_type
+      unless (_business_type = @business_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
-      if _capabilities = @capabilities
+      unless (_capabilities = @capabilities).nil?
         invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
       end
-      if _company = @company
+      unless (_company = @company).nil?
         invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)
       end
 
-      if _documents = @documents
+      unless (_documents = @documents).nil?
         invalid_properties.concat(_documents.list_invalid_properties_for("documents")) if _documents.is_a?(OpenApi::Validatable)
       end
 
-      if _external_account = @external_account
+      unless (_external_account = @external_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _individual = @individual
+      unless (_individual = @individual).nil?
         invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
-      if _tos_acceptance = @tos_acceptance
+      unless (_tos_acceptance = @tos_acceptance).nil?
         invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance")) if _tos_acceptance.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -151,51 +151,51 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_token = @account_token
+      unless (_account_token = @account_token).nil?
         return false if _account_token.to_s.size > MAX_LENGTH_FOR_ACCOUNT_TOKEN
       end
 
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
 
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
 
-      if _business_type = @business_type
+      unless (_business_type = @business_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
 
-      if _capabilities = @capabilities
+      unless (_capabilities = @capabilities).nil?
         return false if _capabilities.is_a?(OpenApi::Validatable) && !_capabilities.valid?
       end
 
-      if _company = @company
+      unless (_company = @company).nil?
         return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
 
-      if _documents = @documents
+      unless (_documents = @documents).nil?
         return false if _documents.is_a?(OpenApi::Validatable) && !_documents.valid?
       end
 
-      if _external_account = @external_account
+      unless (_external_account = @external_account).nil?
         return false if _external_account.to_s.size > MAX_LENGTH_FOR_EXTERNAL_ACCOUNT
       end
 
-      if _individual = @individual
+      unless (_individual = @individual).nil?
         return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
 
-      if _tos_acceptance = @tos_acceptance
+      unless (_tos_acceptance = @tos_acceptance).nil?
         return false if _tos_acceptance.is_a?(OpenApi::Validatable) && !_tos_acceptance.valid?
       end
 

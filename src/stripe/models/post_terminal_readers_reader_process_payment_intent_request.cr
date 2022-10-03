@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # PaymentIntent ID
     @[JSON::Field(key: "payment_intent", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_intent : String? = nil
     MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -53,13 +55,13 @@ module Stripe
 
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _process_config = @process_config
+      unless (_process_config = @process_config).nil?
         invalid_properties.concat(_process_config.list_invalid_properties_for("process_config")) if _process_config.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -69,11 +71,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @payment_intent.nil?
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.to_s.size > MAX_LENGTH_FOR_PAYMENT_INTENT
       end
 
-      if _process_config = @process_config
+      unless (_process_config = @process_config).nil?
         return false if _process_config.is_a?(OpenApi::Validatable) && !_process_config.valid?
       end
 

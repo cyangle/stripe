@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The point after which the changes reflected by this update will be discarded and no longer applied.
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expires_at : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
     @[JSON::Field(key: "billing_cycle_anchor", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_cycle_anchor.nil? && !billing_cycle_anchor_present?)]
@@ -76,7 +78,7 @@ module Stripe
 
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
-      if _subscription_items = @subscription_items
+      unless (_subscription_items = @subscription_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "subscription_items", container: _subscription_items)) if _subscription_items.is_a?(Array)
       end
 
@@ -88,7 +90,7 @@ module Stripe
     def valid? : Bool
       return false if @expires_at.nil?
 
-      if _subscription_items = @subscription_items
+      unless (_subscription_items = @subscription_items).nil?
         return false if _subscription_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _subscription_items)
       end
 

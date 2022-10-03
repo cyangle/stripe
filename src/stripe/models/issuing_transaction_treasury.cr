@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The Treasury [ReceivedCredit](https://stripe.com/docs/api/treasury/received_debits) representing this Issuing transaction if it is a refund
     @[JSON::Field(key: "received_credit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_credit.nil? && !received_credit_present?)]
@@ -52,12 +52,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _received_credit = @received_credit
+      unless (_received_credit = @received_credit).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, MAX_LENGTH_FOR_RECEIVED_CREDIT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _received_credit = @received_credit
+      unless (_received_credit = @received_credit).nil?
         return false if _received_credit.to_s.size > MAX_LENGTH_FOR_RECEIVED_CREDIT
       end
 
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         return false if _received_debit.to_s.size > MAX_LENGTH_FOR_RECEIVED_DEBIT
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This setting only applies when a ZIP or postal code is provided and they fail bank verification.
     @[JSON::Field(key: "avs_failure", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,6 +28,8 @@ module Stripe
     # Whether Stripe automatically declines charges with an incorrect CVC. This setting only applies when a CVC is provided and it fails bank verification.
     @[JSON::Field(key: "cvc_failure", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cvc_failure : Bool? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

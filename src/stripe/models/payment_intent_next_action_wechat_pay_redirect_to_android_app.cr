@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # app_id is the APP ID registered on WeChat open platform
     @[JSON::Field(key: "app_id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -56,6 +56,8 @@ module Stripe
     getter timestamp : String? = nil
     MAX_LENGTH_FOR_TIMESTAMP = 5000
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -78,49 +80,49 @@ module Stripe
 
       invalid_properties.push("\"app_id\" is required and cannot be null") if @app_id.nil?
 
-      if _app_id = @app_id
+      unless (_app_id = @app_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"nonce_str\" is required and cannot be null") if @nonce_str.nil?
 
-      if _nonce_str = @nonce_str
+      unless (_nonce_str = @nonce_str).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, MAX_LENGTH_FOR_NONCE_STR)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"package\" is required and cannot be null") if @package.nil?
 
-      if _package = @package
+      unless (_package = @package).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, MAX_LENGTH_FOR_PACKAGE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"partner_id\" is required and cannot be null") if @partner_id.nil?
 
-      if _partner_id = @partner_id
+      unless (_partner_id = @partner_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, MAX_LENGTH_FOR_PARTNER_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"prepay_id\" is required and cannot be null") if @prepay_id.nil?
 
-      if _prepay_id = @prepay_id
+      unless (_prepay_id = @prepay_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, MAX_LENGTH_FOR_PREPAY_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sign\" is required and cannot be null") if @sign.nil?
 
-      if _sign = @sign
+      unless (_sign = @sign).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, MAX_LENGTH_FOR_SIGN)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"timestamp\" is required and cannot be null") if @timestamp.nil?
 
-      if _timestamp = @timestamp
+      unless (_timestamp = @timestamp).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, MAX_LENGTH_FOR_TIMESTAMP)
           invalid_properties.push(max_length_error)
         end
@@ -132,37 +134,37 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @app_id.nil?
-      if _app_id = @app_id
+      unless (_app_id = @app_id).nil?
         return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
       end
 
       return false if @nonce_str.nil?
-      if _nonce_str = @nonce_str
+      unless (_nonce_str = @nonce_str).nil?
         return false if _nonce_str.to_s.size > MAX_LENGTH_FOR_NONCE_STR
       end
 
       return false if @package.nil?
-      if _package = @package
+      unless (_package = @package).nil?
         return false if _package.to_s.size > MAX_LENGTH_FOR_PACKAGE
       end
 
       return false if @partner_id.nil?
-      if _partner_id = @partner_id
+      unless (_partner_id = @partner_id).nil?
         return false if _partner_id.to_s.size > MAX_LENGTH_FOR_PARTNER_ID
       end
 
       return false if @prepay_id.nil?
-      if _prepay_id = @prepay_id
+      unless (_prepay_id = @prepay_id).nil?
         return false if _prepay_id.to_s.size > MAX_LENGTH_FOR_PREPAY_ID
       end
 
       return false if @sign.nil?
-      if _sign = @sign
+      unless (_sign = @sign).nil?
         return false if _sign.to_s.size > MAX_LENGTH_FOR_SIGN
       end
 
       return false if @timestamp.nil?
-      if _timestamp = @timestamp
+      unless (_timestamp = @timestamp).nil?
         return false if _timestamp.to_s.size > MAX_LENGTH_FOR_TIMESTAMP
       end
 

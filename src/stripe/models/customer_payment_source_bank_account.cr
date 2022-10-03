@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_number : String? = nil
@@ -28,7 +28,9 @@ module Stripe
     getter country : String? = nil
     MAX_LENGTH_FOR_COUNTRY = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_name : String? = nil
@@ -76,31 +78,31 @@ module Stripe
 
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_holder_type = @account_holder_type
+      unless (_account_holder_type = @account_holder_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -112,28 +114,28 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account_number.nil?
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
-      if _account_holder_type = @account_holder_type
+      unless (_account_holder_type = @account_holder_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
 
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 

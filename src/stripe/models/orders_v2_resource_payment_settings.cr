@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account.
     @[JSON::Field(key: "application_fee_amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
@@ -100,31 +100,31 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _automatic_payment_methods = @automatic_payment_methods
+      unless (_automatic_payment_methods = @automatic_payment_methods).nil?
         invalid_properties.concat(_automatic_payment_methods.list_invalid_properties_for("automatic_payment_methods")) if _automatic_payment_methods.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -133,31 +133,31 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _automatic_payment_methods = @automatic_payment_methods
+      unless (_automatic_payment_methods = @automatic_payment_methods).nil?
         return false if _automatic_payment_methods.is_a?(OpenApi::Validatable) && !_automatic_payment_methods.valid?
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
 
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         return false if _statement_descriptor_suffix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

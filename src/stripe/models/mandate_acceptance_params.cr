@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
@@ -26,7 +26,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [accepted, pending, refused, revoked]."
     VALID_VALUES_FOR_STATUS  = StaticArray["accepted", "pending", "refused", "revoked"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "date", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter date : Int64? = nil
@@ -73,20 +75,20 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _offline = @offline
+      unless (_offline = @offline).nil?
         invalid_properties.concat(_offline.list_invalid_properties_for("offline")) if _offline.is_a?(OpenApi::Validatable)
       end
-      if _online = @online
+      unless (_online = @online).nil?
         invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
       end
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
           invalid_properties.push(max_length_error)
         end
@@ -98,23 +100,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _offline = @offline
+      unless (_offline = @offline).nil?
         return false if _offline.is_a?(OpenApi::Validatable) && !_offline.valid?
       end
 
-      if _online = @online
+      unless (_online = @online).nil?
         return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         return false if _user_agent.to_s.size > MAX_LENGTH_FOR_USER_AGENT
       end
 

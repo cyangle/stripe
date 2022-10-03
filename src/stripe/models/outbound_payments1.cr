@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "ach", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ach : Stripe::Access? = nil
@@ -42,10 +42,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _ach = @ach
+      unless (_ach = @ach).nil?
         invalid_properties.concat(_ach.list_invalid_properties_for("ach")) if _ach.is_a?(OpenApi::Validatable)
       end
-      if _us_domestic_wire = @us_domestic_wire
+      unless (_us_domestic_wire = @us_domestic_wire).nil?
         invalid_properties.concat(_us_domestic_wire.list_invalid_properties_for("us_domestic_wire")) if _us_domestic_wire.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -54,11 +54,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _ach = @ach
+      unless (_ach = @ach).nil?
         return false if _ach.is_a?(OpenApi::Validatable) && !_ach.valid?
       end
 
-      if _us_domestic_wire = @us_domestic_wire
+      unless (_us_domestic_wire = @us_domestic_wire).nil?
         return false if _us_domestic_wire.is_a?(OpenApi::Validatable) && !_us_domestic_wire.valid?
       end
 

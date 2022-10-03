@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether evidence has been staged for this dispute.
     @[JSON::Field(key: "has_evidence", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -33,7 +33,9 @@ module Stripe
     @[JSON::Field(key: "submission_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter submission_count : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.
     @[JSON::Field(key: "due_by", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: due_by.nil? && !due_by_present?)]

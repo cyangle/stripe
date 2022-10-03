@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The client secret of the SetupIntent.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -67,24 +67,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _mandate_data = @mandate_data
+      unless (_mandate_data = @mandate_data).nil?
         invalid_properties.concat(_mandate_data.list_invalid_properties_for("mandate_data")) if _mandate_data.is_a?(OpenApi::Validatable)
       end
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_method_data = @payment_method_data
+      unless (_payment_method_data = @payment_method_data).nil?
         invalid_properties.concat(_payment_method_data.list_invalid_properties_for("payment_method_data")) if _payment_method_data.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
 
@@ -94,23 +94,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
-      if _mandate_data = @mandate_data
+      unless (_mandate_data = @mandate_data).nil?
         return false if _mandate_data.is_a?(OpenApi::Validatable) && !_mandate_data.valid?
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
-      if _payment_method_data = @payment_method_data
+      unless (_payment_method_data = @payment_method_data).nil?
         return false if _payment_method_data.is_a?(OpenApi::Validatable) && !_payment_method_data.valid?
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 

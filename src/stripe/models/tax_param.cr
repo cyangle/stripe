@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "ip_address", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ip_address : Stripe::BusinessProfileSpecsSupportUrl? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         invalid_properties.concat(_ip_address.list_invalid_properties_for("ip_address")) if _ip_address.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -47,7 +47,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         return false if _ip_address.is_a?(OpenApi::Validatable) && !_ip_address.valid?
       end
 

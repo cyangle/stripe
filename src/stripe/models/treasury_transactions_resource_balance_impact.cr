@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The change made to funds the user can spend right now.
     @[JSON::Field(key: "cash", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,6 +32,8 @@ module Stripe
     # The change made to funds in the account, but not spendable because they are being held for pending outbound flows.
     @[JSON::Field(key: "outbound_pending", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter outbound_pending : Int64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

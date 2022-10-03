@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The list of account features that you would like to refresh.
     @[JSON::Field(key: "features", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -26,7 +26,9 @@ module Stripe
     ERROR_MESSAGE_FOR_FEATURES = "invalid value for \"features\", must be one of [balance, ownership]."
     VALID_VALUES_FOR_FEATURES  = StaticArray["balance", "ownership"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -50,7 +52,7 @@ module Stripe
 
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
 
-      if _features = @features
+      unless (_features = @features).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FEATURES) unless OpenApi::EnumValidator.valid?(_features, VALID_VALUES_FOR_FEATURES)
       end
 
@@ -61,7 +63,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @features.nil?
-      if _features = @features
+      unless (_features = @features).nil?
         return false unless OpenApi::EnumValidator.valid?(_features, VALID_VALUES_FOR_FEATURES)
       end
 

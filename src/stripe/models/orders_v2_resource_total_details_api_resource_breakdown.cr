@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The aggregated discounts.
     @[JSON::Field(key: "discounts", type: Array(Stripe::LineItemsDiscountAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,6 +28,8 @@ module Stripe
     # The aggregated tax amounts by rate.
     @[JSON::Field(key: "taxes", type: Array(Stripe::LineItemsTaxAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter taxes : Array(Stripe::LineItemsTaxAmount)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,12 +48,12 @@ module Stripe
 
       invalid_properties.push("\"discounts\" is required and cannot be null") if @discounts.nil?
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discounts", container: _discounts)) if _discounts.is_a?(Array)
       end
       invalid_properties.push("\"taxes\" is required and cannot be null") if @taxes.nil?
 
-      if _taxes = @taxes
+      unless (_taxes = @taxes).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "taxes", container: _taxes)) if _taxes.is_a?(Array)
       end
       invalid_properties
@@ -61,12 +63,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @discounts.nil?
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         return false if _discounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discounts)
       end
 
       return false if @taxes.nil?
-      if _taxes = @taxes
+      unless (_taxes = @taxes).nil?
         return false if _taxes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _taxes)
       end
 

@@ -18,10 +18,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "customer_acceptance", type: Stripe::CustomerAcceptanceParam?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer_acceptance : Stripe::CustomerAcceptanceParam? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,7 +41,7 @@ module Stripe
 
       invalid_properties.push("\"customer_acceptance\" is required and cannot be null") if @customer_acceptance.nil?
 
-      if _customer_acceptance = @customer_acceptance
+      unless (_customer_acceptance = @customer_acceptance).nil?
         invalid_properties.concat(_customer_acceptance.list_invalid_properties_for("customer_acceptance")) if _customer_acceptance.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -49,7 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @customer_acceptance.nil?
-      if _customer_acceptance = @customer_acceptance
+      unless (_customer_acceptance = @customer_acceptance).nil?
         return false if _customer_acceptance.is_a?(OpenApi::Validatable) && !_customer_acceptance.valid?
       end
 

@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether Installments are enabled for this PaymentIntent.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Installment plans that may be selected for this PaymentIntent.
     @[JSON::Field(key: "available_plans", type: Array(Stripe::PaymentMethodDetailsCardInstallmentsPlan)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available_plans.nil? && !available_plans_present?)]
@@ -59,10 +61,10 @@ module Stripe
 
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
-      if _available_plans = @available_plans
+      unless (_available_plans = @available_plans).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "available_plans", container: _available_plans)) if _available_plans.is_a?(Array)
       end
-      if _plan = @plan
+      unless (_plan = @plan).nil?
         invalid_properties.concat(_plan.list_invalid_properties_for("plan")) if _plan.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -73,11 +75,11 @@ module Stripe
     def valid? : Bool
       return false if @enabled.nil?
 
-      if _available_plans = @available_plans
+      unless (_available_plans = @available_plans).nil?
         return false if _available_plans.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _available_plans)
       end
 
-      if _plan = @plan
+      unless (_plan = @plan).nil?
         return false if _plan.is_a?(OpenApi::Validatable) && !_plan.valid?
       end
 

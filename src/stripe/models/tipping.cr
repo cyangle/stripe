@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "aud", type: Stripe::CurrencySpecificConfig?, default: nil, required: false, nullable: false, emit_null: false)]
     getter aud : Stripe::CurrencySpecificConfig? = nil
@@ -89,46 +89,46 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _aud = @aud
+      unless (_aud = @aud).nil?
         invalid_properties.concat(_aud.list_invalid_properties_for("aud")) if _aud.is_a?(OpenApi::Validatable)
       end
-      if _cad = @cad
+      unless (_cad = @cad).nil?
         invalid_properties.concat(_cad.list_invalid_properties_for("cad")) if _cad.is_a?(OpenApi::Validatable)
       end
-      if _chf = @chf
+      unless (_chf = @chf).nil?
         invalid_properties.concat(_chf.list_invalid_properties_for("chf")) if _chf.is_a?(OpenApi::Validatable)
       end
-      if _czk = @czk
+      unless (_czk = @czk).nil?
         invalid_properties.concat(_czk.list_invalid_properties_for("czk")) if _czk.is_a?(OpenApi::Validatable)
       end
-      if _dkk = @dkk
+      unless (_dkk = @dkk).nil?
         invalid_properties.concat(_dkk.list_invalid_properties_for("dkk")) if _dkk.is_a?(OpenApi::Validatable)
       end
-      if _eur = @eur
+      unless (_eur = @eur).nil?
         invalid_properties.concat(_eur.list_invalid_properties_for("eur")) if _eur.is_a?(OpenApi::Validatable)
       end
-      if _gbp = @gbp
+      unless (_gbp = @gbp).nil?
         invalid_properties.concat(_gbp.list_invalid_properties_for("gbp")) if _gbp.is_a?(OpenApi::Validatable)
       end
-      if _hkd = @hkd
+      unless (_hkd = @hkd).nil?
         invalid_properties.concat(_hkd.list_invalid_properties_for("hkd")) if _hkd.is_a?(OpenApi::Validatable)
       end
-      if _myr = @myr
+      unless (_myr = @myr).nil?
         invalid_properties.concat(_myr.list_invalid_properties_for("myr")) if _myr.is_a?(OpenApi::Validatable)
       end
-      if _nok = @nok
+      unless (_nok = @nok).nil?
         invalid_properties.concat(_nok.list_invalid_properties_for("nok")) if _nok.is_a?(OpenApi::Validatable)
       end
-      if _nzd = @nzd
+      unless (_nzd = @nzd).nil?
         invalid_properties.concat(_nzd.list_invalid_properties_for("nzd")) if _nzd.is_a?(OpenApi::Validatable)
       end
-      if _sek = @sek
+      unless (_sek = @sek).nil?
         invalid_properties.concat(_sek.list_invalid_properties_for("sek")) if _sek.is_a?(OpenApi::Validatable)
       end
-      if _sgd = @sgd
+      unless (_sgd = @sgd).nil?
         invalid_properties.concat(_sgd.list_invalid_properties_for("sgd")) if _sgd.is_a?(OpenApi::Validatable)
       end
-      if _usd = @usd
+      unless (_usd = @usd).nil?
         invalid_properties.concat(_usd.list_invalid_properties_for("usd")) if _usd.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -137,59 +137,59 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _aud = @aud
+      unless (_aud = @aud).nil?
         return false if _aud.is_a?(OpenApi::Validatable) && !_aud.valid?
       end
 
-      if _cad = @cad
+      unless (_cad = @cad).nil?
         return false if _cad.is_a?(OpenApi::Validatable) && !_cad.valid?
       end
 
-      if _chf = @chf
+      unless (_chf = @chf).nil?
         return false if _chf.is_a?(OpenApi::Validatable) && !_chf.valid?
       end
 
-      if _czk = @czk
+      unless (_czk = @czk).nil?
         return false if _czk.is_a?(OpenApi::Validatable) && !_czk.valid?
       end
 
-      if _dkk = @dkk
+      unless (_dkk = @dkk).nil?
         return false if _dkk.is_a?(OpenApi::Validatable) && !_dkk.valid?
       end
 
-      if _eur = @eur
+      unless (_eur = @eur).nil?
         return false if _eur.is_a?(OpenApi::Validatable) && !_eur.valid?
       end
 
-      if _gbp = @gbp
+      unless (_gbp = @gbp).nil?
         return false if _gbp.is_a?(OpenApi::Validatable) && !_gbp.valid?
       end
 
-      if _hkd = @hkd
+      unless (_hkd = @hkd).nil?
         return false if _hkd.is_a?(OpenApi::Validatable) && !_hkd.valid?
       end
 
-      if _myr = @myr
+      unless (_myr = @myr).nil?
         return false if _myr.is_a?(OpenApi::Validatable) && !_myr.valid?
       end
 
-      if _nok = @nok
+      unless (_nok = @nok).nil?
         return false if _nok.is_a?(OpenApi::Validatable) && !_nok.valid?
       end
 
-      if _nzd = @nzd
+      unless (_nzd = @nzd).nil?
         return false if _nzd.is_a?(OpenApi::Validatable) && !_nzd.valid?
       end
 
-      if _sek = @sek
+      unless (_sek = @sek).nil?
         return false if _sek.is_a?(OpenApi::Validatable) && !_sek.valid?
       end
 
-      if _sgd = @sgd
+      unless (_sgd = @sgd).nil?
         return false if _sgd.is_a?(OpenApi::Validatable) && !_sgd.valid?
       end
 
-      if _usd = @usd
+      unless (_usd = @usd).nil?
         return false if _usd.is_a?(OpenApi::Validatable) && !_usd.valid?
       end
 

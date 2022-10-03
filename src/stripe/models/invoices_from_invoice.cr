@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The relation between this invoice and the cloned invoice
     @[JSON::Field(key: "action", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,6 +28,8 @@ module Stripe
 
     @[JSON::Field(key: "invoice", type: Stripe::InvoicesFromInvoiceInvoice?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : Stripe::InvoicesFromInvoiceInvoice? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,14 +48,14 @@ module Stripe
 
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
 
-      if _action = @action
+      unless (_action = @action).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, MAX_LENGTH_FOR_ACTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         invalid_properties.concat(_invoice.list_invalid_properties_for("invoice")) if _invoice.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -63,12 +65,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @action.nil?
-      if _action = @action
+      unless (_action = @action).nil?
         return false if _action.to_s.size > MAX_LENGTH_FOR_ACTION
       end
 
       return false if @invoice.nil?
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.is_a?(OpenApi::Validatable) && !_invoice.valid?
       end
 

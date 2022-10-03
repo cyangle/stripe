@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "posted_at", type: Stripe::GetAccountsCreatedParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter posted_at : Stripe::GetAccountsCreatedParameter? = nil
@@ -37,7 +37,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _posted_at = @posted_at
+      unless (_posted_at = @posted_at).nil?
         invalid_properties.concat(_posted_at.list_invalid_properties_for("posted_at")) if _posted_at.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -46,7 +46,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _posted_at = @posted_at
+      unless (_posted_at = @posted_at).nil?
         return false if _posted_at.is_a?(OpenApi::Validatable) && !_posted_at.valid?
       end
 

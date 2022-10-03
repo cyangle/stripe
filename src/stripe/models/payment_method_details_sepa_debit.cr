@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Bank code of bank associated with the bank account.
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
@@ -88,32 +88,32 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _branch_code = @branch_code
+      unless (_branch_code = @branch_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_code", _branch_code.to_s.size, MAX_LENGTH_FOR_BRANCH_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
@@ -124,27 +124,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
-      if _branch_code = @branch_code
+      unless (_branch_code = @branch_code).nil?
         return false if _branch_code.to_s.size > MAX_LENGTH_FOR_BRANCH_CODE
       end
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 

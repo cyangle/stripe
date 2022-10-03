@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "default_allowed_updates", type: Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates?, default: nil, required: true, nullable: false, emit_null: false)]
     getter default_allowed_updates : Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates? = nil
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "products", type: Stripe::SubscriptionUpdateCreationParamProducts?, default: nil, required: true, nullable: false, emit_null: false)]
     getter products : Stripe::SubscriptionUpdateCreationParamProducts? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
@@ -56,17 +58,17 @@ module Stripe
 
       invalid_properties.push("\"default_allowed_updates\" is required and cannot be null") if @default_allowed_updates.nil?
 
-      if _default_allowed_updates = @default_allowed_updates
+      unless (_default_allowed_updates = @default_allowed_updates).nil?
         invalid_properties.concat(_default_allowed_updates.list_invalid_properties_for("default_allowed_updates")) if _default_allowed_updates.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       invalid_properties.push("\"products\" is required and cannot be null") if @products.nil?
 
-      if _products = @products
+      unless (_products = @products).nil?
         invalid_properties.concat(_products.list_invalid_properties_for("products")) if _products.is_a?(OpenApi::Validatable)
       end
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties
@@ -76,18 +78,18 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @default_allowed_updates.nil?
-      if _default_allowed_updates = @default_allowed_updates
+      unless (_default_allowed_updates = @default_allowed_updates).nil?
         return false if _default_allowed_updates.is_a?(OpenApi::Validatable) && !_default_allowed_updates.valid?
       end
 
       return false if @enabled.nil?
 
       return false if @products.nil?
-      if _products = @products
+      unless (_products = @products).nil?
         return false if _products.is_a?(OpenApi::Validatable) && !_products.valid?
       end
 
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 

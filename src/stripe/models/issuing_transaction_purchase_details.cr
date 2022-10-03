@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "flight", type: Stripe::IssuingTransactionPurchaseDetailsFlight?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flight.nil? && !flight_present?)]
     getter flight : Stripe::IssuingTransactionPurchaseDetailsFlight? = nil
@@ -72,19 +72,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _flight = @flight
+      unless (_flight = @flight).nil?
         invalid_properties.concat(_flight.list_invalid_properties_for("flight")) if _flight.is_a?(OpenApi::Validatable)
       end
-      if _fuel = @fuel
+      unless (_fuel = @fuel).nil?
         invalid_properties.concat(_fuel.list_invalid_properties_for("fuel")) if _fuel.is_a?(OpenApi::Validatable)
       end
-      if _lodging = @lodging
+      unless (_lodging = @lodging).nil?
         invalid_properties.concat(_lodging.list_invalid_properties_for("lodging")) if _lodging.is_a?(OpenApi::Validatable)
       end
-      if _receipt = @receipt
+      unless (_receipt = @receipt).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "receipt", container: _receipt)) if _receipt.is_a?(Array)
       end
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
@@ -95,23 +95,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _flight = @flight
+      unless (_flight = @flight).nil?
         return false if _flight.is_a?(OpenApi::Validatable) && !_flight.valid?
       end
 
-      if _fuel = @fuel
+      unless (_fuel = @fuel).nil?
         return false if _fuel.is_a?(OpenApi::Validatable) && !_fuel.valid?
       end
 
-      if _lodging = @lodging
+      unless (_lodging = @lodging).nil?
         return false if _lodging.is_a?(OpenApi::Validatable) && !_lodging.valid?
       end
 
-      if _receipt = @receipt
+      unless (_receipt = @receipt).nil?
         return false if _receipt.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _receipt)
       end
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 

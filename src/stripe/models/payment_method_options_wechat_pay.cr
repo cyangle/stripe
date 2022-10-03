@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The app ID registered with WeChat Pay. Only required when client is ios or android.
     @[JSON::Field(key: "app_id", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: app_id.nil? && !app_id_present?)]
@@ -60,15 +60,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _app_id = @app_id
+      unless (_app_id = @app_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _client = @client
+      unless (_client = @client).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CLIENT) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -77,15 +77,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _app_id = @app_id
+      unless (_app_id = @app_id).nil?
         return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
       end
 
-      if _client = @client
+      unless (_client = @client).nil?
         return false unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

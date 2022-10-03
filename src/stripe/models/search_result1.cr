@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "data", type: Array(Stripe::Customer)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter data : Array(Stripe::Customer)? = nil
@@ -37,7 +37,9 @@ module Stripe
     getter url : String? = nil
     MAX_LENGTH_FOR_URL = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "next_page", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: next_page.nil? && !next_page_present?)]
     getter next_page : String? = nil
@@ -72,24 +74,24 @@ module Stripe
 
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
 
-      if _data = @data
+      unless (_data = @data).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "data", container: _data)) if _data.is_a?(Array)
       end
       invalid_properties.push("\"has_more\" is required and cannot be null") if @has_more.nil?
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _next_page = @next_page
+      unless (_next_page = @next_page).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("next_page", _next_page.to_s.size, MAX_LENGTH_FOR_NEXT_PAGE)
           invalid_properties.push(max_length_error)
         end
@@ -102,23 +104,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @data.nil?
-      if _data = @data
+      unless (_data = @data).nil?
         return false if _data.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _data)
       end
 
       return false if @has_more.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @url.nil?
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
-      if _next_page = @next_page
+      unless (_next_page = @next_page).nil?
         return false if _next_page.to_s.size > MAX_LENGTH_FOR_NEXT_PAGE
       end
 

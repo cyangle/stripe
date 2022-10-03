@@ -18,11 +18,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
     MAX_LENGTH_FOR_COUNTRY = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
@@ -52,7 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 

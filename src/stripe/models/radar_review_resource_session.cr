@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The browser used in this browser session (e.g., `Chrome`).
     @[JSON::Field(key: "browser", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: browser.nil? && !browser_present?)]
@@ -70,22 +70,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _browser = @browser
+      unless (_browser = @browser).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, MAX_LENGTH_FOR_BROWSER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _device = @device
+      unless (_device = @device).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device", _device.to_s.size, MAX_LENGTH_FOR_DEVICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _platform = @platform
+      unless (_platform = @platform).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("platform", _platform.to_s.size, MAX_LENGTH_FOR_PLATFORM)
           invalid_properties.push(max_length_error)
         end
       end
-      if _version = @version
+      unless (_version = @version).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("version", _version.to_s.size, MAX_LENGTH_FOR_VERSION)
           invalid_properties.push(max_length_error)
         end
@@ -96,19 +96,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _browser = @browser
+      unless (_browser = @browser).nil?
         return false if _browser.to_s.size > MAX_LENGTH_FOR_BROWSER
       end
 
-      if _device = @device
+      unless (_device = @device).nil?
         return false if _device.to_s.size > MAX_LENGTH_FOR_DEVICE
       end
 
-      if _platform = @platform
+      unless (_platform = @platform).nil?
         return false if _platform.to_s.size > MAX_LENGTH_FOR_PLATFORM
       end
 
-      if _version = @version
+      unless (_version = @version).nil?
         return false if _version.to_s.size > MAX_LENGTH_FOR_VERSION
       end
 

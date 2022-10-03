@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The currency for the card.
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [physical, virtual]."
     VALID_VALUES_FOR__TYPE  = StaticArray["physical", "virtual"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
     @[JSON::Field(key: "cardholder", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -100,30 +102,30 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _cardholder = @cardholder
+      unless (_cardholder = @cardholder).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder", _cardholder.to_s.size, MAX_LENGTH_FOR_CARDHOLDER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _replacement_for = @replacement_for
+      unless (_replacement_for = @replacement_for).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("replacement_for", _replacement_for.to_s.size, MAX_LENGTH_FOR_REPLACEMENT_FOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _replacement_reason = @replacement_reason
+      unless (_replacement_reason = @replacement_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REPLACEMENT_REASON) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _spending_controls = @spending_controls
+      unless (_spending_controls = @spending_controls).nil?
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
@@ -135,31 +137,31 @@ module Stripe
       return false if @currency.nil?
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _cardholder = @cardholder
+      unless (_cardholder = @cardholder).nil?
         return false if _cardholder.to_s.size > MAX_LENGTH_FOR_CARDHOLDER
       end
 
-      if _replacement_for = @replacement_for
+      unless (_replacement_for = @replacement_for).nil?
         return false if _replacement_for.to_s.size > MAX_LENGTH_FOR_REPLACEMENT_FOR
       end
 
-      if _replacement_reason = @replacement_reason
+      unless (_replacement_reason = @replacement_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _spending_controls = @spending_controls
+      unless (_spending_controls = @spending_controls).nil?
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The end of this phase of the subscription schedule.
     @[JSON::Field(key: "end_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,6 +28,8 @@ module Stripe
     # The start of this phase of the subscription schedule.
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter start_date : Int64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

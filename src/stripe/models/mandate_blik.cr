@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Date at which the mandate expires.
     @[JSON::Field(key: "expires_after", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expires_after.nil? && !expires_after_present?)]
@@ -56,10 +56,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _off_session = @off_session
+      unless (_off_session = @off_session).nil?
         invalid_properties.concat(_off_session.list_invalid_properties_for("off_session")) if _off_session.is_a?(OpenApi::Validatable)
       end
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _off_session = @off_session
+      unless (_off_session = @off_session).nil?
         return false if _off_session.is_a?(OpenApi::Validatable) && !_off_session.valid?
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

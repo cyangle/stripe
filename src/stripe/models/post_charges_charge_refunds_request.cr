@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # A positive integer representing how much to refund.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -90,24 +90,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _origin = @origin
+      unless (_origin = @origin).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ORIGIN) unless OpenApi::EnumValidator.valid?(_origin, VALID_VALUES_FOR_ORIGIN)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
@@ -117,23 +117,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _origin = @origin
+      unless (_origin = @origin).nil?
         return false unless OpenApi::EnumValidator.valid?(_origin, VALID_VALUES_FOR_ORIGIN)
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.to_s.size > MAX_LENGTH_FOR_PAYMENT_INTENT
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 

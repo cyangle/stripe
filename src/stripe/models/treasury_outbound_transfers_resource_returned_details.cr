@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Reason for the return.
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,6 +29,8 @@ module Stripe
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,12 +49,12 @@ module Stripe
 
       invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
-      if _code = @code
+      unless (_code = @code).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
       invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -62,12 +64,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @code.nil?
-      if _code = @code
+      unless (_code = @code).nil?
         return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
 
       return false if @transaction.nil?
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
@@ -47,15 +47,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _effective_date = @effective_date
+      unless (_effective_date = @effective_date).nil?
         invalid_properties.concat(_effective_date.list_invalid_properties_for("effective_date")) if _effective_date.is_a?(OpenApi::Validatable)
       end
-      if _trial_period_days = @trial_period_days
+      unless (_trial_period_days = @trial_period_days).nil?
         invalid_properties.concat(_trial_period_days.list_invalid_properties_for("trial_period_days")) if _trial_period_days.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -64,15 +64,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _effective_date = @effective_date
+      unless (_effective_date = @effective_date).nil?
         return false if _effective_date.is_a?(OpenApi::Validatable) && !_effective_date.valid?
       end
 
-      if _trial_period_days = @trial_period_days
+      unless (_trial_period_days = @trial_period_days).nil?
         return false if _trial_period_days.is_a?(OpenApi::Validatable) && !_trial_period_days.valid?
       end
 

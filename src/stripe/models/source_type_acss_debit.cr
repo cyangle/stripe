@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "bank_address_city", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_address_city.nil? && !bank_address_city_present?)]
     getter bank_address_city : String? = nil

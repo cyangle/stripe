@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, gb_bank_transfer, jp_bank_transfer, mx_bank_transfer]."
     VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "eu_bank_transfer", type: Stripe::EuBankTransferParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter eu_bank_transfer : Stripe::EuBankTransferParams? = nil
@@ -54,13 +56,13 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _eu_bank_transfer = @eu_bank_transfer
+      unless (_eu_bank_transfer = @eu_bank_transfer).nil?
         invalid_properties.concat(_eu_bank_transfer.list_invalid_properties_for("eu_bank_transfer")) if _eu_bank_transfer.is_a?(OpenApi::Validatable)
       end
-      if _requested_address_types = @requested_address_types
+      unless (_requested_address_types = @requested_address_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REQUESTED_ADDRESS_TYPES) unless OpenApi::EnumValidator.valid?(_requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
       end
       invalid_properties
@@ -70,15 +72,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _eu_bank_transfer = @eu_bank_transfer
+      unless (_eu_bank_transfer = @eu_bank_transfer).nil?
         return false if _eu_bank_transfer.is_a?(OpenApi::Validatable) && !_eu_bank_transfer.valid?
       end
 
-      if _requested_address_types = @requested_address_types
+      unless (_requested_address_types = @requested_address_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
       end
 

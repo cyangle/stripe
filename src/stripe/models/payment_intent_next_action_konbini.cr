@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The timestamp at which the pending Konbini payment expires.
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "stores", type: Stripe::PaymentIntentNextActionKonbiniStores?, default: nil, required: true, nullable: false, emit_null: false)]
     getter stores : Stripe::PaymentIntentNextActionKonbiniStores? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The URL for the Konbini payment instructions page, which allows customers to view and print a Konbini voucher.
     @[JSON::Field(key: "hosted_voucher_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: hosted_voucher_url.nil? && !hosted_voucher_url_present?)]
@@ -59,10 +61,10 @@ module Stripe
 
       invalid_properties.push("\"stores\" is required and cannot be null") if @stores.nil?
 
-      if _stores = @stores
+      unless (_stores = @stores).nil?
         invalid_properties.concat(_stores.list_invalid_properties_for("stores")) if _stores.is_a?(OpenApi::Validatable)
       end
-      if _hosted_voucher_url = @hosted_voucher_url
+      unless (_hosted_voucher_url = @hosted_voucher_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_voucher_url", _hosted_voucher_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
           invalid_properties.push(max_length_error)
         end
@@ -76,11 +78,11 @@ module Stripe
       return false if @expires_at.nil?
 
       return false if @stores.nil?
-      if _stores = @stores
+      unless (_stores = @stores).nil?
         return false if _stores.is_a?(OpenApi::Validatable) && !_stores.valid?
       end
 
-      if _hosted_voucher_url = @hosted_voucher_url
+      unless (_hosted_voucher_url = @hosted_voucher_url).nil?
         return false if _hosted_voucher_url.to_s.size > MAX_LENGTH_FOR_HOSTED_VOUCHER_URL
       end
 

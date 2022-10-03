@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "allowed_categories", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_categories : Array(String)? = nil
@@ -50,13 +50,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _allowed_categories = @allowed_categories
+      unless (_allowed_categories = @allowed_categories).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ALLOWED_CATEGORIES) unless OpenApi::EnumValidator.valid?(_allowed_categories, VALID_VALUES_FOR_ALLOWED_CATEGORIES)
       end
-      if _blocked_categories = @blocked_categories
+      unless (_blocked_categories = @blocked_categories).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BLOCKED_CATEGORIES) unless OpenApi::EnumValidator.valid?(_blocked_categories, VALID_VALUES_FOR_BLOCKED_CATEGORIES)
       end
-      if _spending_limits = @spending_limits
+      unless (_spending_limits = @spending_limits).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "spending_limits", container: _spending_limits)) if _spending_limits.is_a?(Array)
       end
       invalid_properties
@@ -65,15 +65,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _allowed_categories = @allowed_categories
+      unless (_allowed_categories = @allowed_categories).nil?
         return false unless OpenApi::EnumValidator.valid?(_allowed_categories, VALID_VALUES_FOR_ALLOWED_CATEGORIES)
       end
 
-      if _blocked_categories = @blocked_categories
+      unless (_blocked_categories = @blocked_categories).nil?
         return false unless OpenApi::EnumValidator.valid?(_blocked_categories, VALID_VALUES_FOR_BLOCKED_CATEGORIES)
       end
 
-      if _spending_limits = @spending_limits
+      unless (_spending_limits = @spending_limits).nil?
         return false if _spending_limits.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _spending_limits)
       end
 

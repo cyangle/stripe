@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "destination", type: Stripe::PaymentLinksResourceTransferDataDestination?, default: nil, required: true, nullable: false, emit_null: false)]
     getter destination : Stripe::PaymentLinksResourceTransferDataDestination? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The amount in %s that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
@@ -51,7 +53,7 @@ module Stripe
 
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
 
-      if _destination = @destination
+      unless (_destination = @destination).nil?
         invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
       end
 
@@ -62,7 +64,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @destination.nil?
-      if _destination = @destination
+      unless (_destination = @destination).nil?
         return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
 

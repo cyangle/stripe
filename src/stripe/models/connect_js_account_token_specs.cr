@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_type : String? = nil
@@ -52,13 +52,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _business_type = @business_type
+      unless (_business_type = @business_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
-      if _company = @company
+      unless (_company = @company).nil?
         invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)
       end
-      if _individual = @individual
+      unless (_individual = @individual).nil?
         invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
 
@@ -68,15 +68,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _business_type = @business_type
+      unless (_business_type = @business_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
 
-      if _company = @company
+      unless (_company = @company).nil?
         return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
 
-      if _individual = @individual
+      unless (_individual = @individual).nil?
         return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
 

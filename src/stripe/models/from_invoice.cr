@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "action", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter action : String? = nil
@@ -30,6 +30,8 @@ module Stripe
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : String? = nil
     MAX_LENGTH_FOR_INVOICE = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,12 +50,12 @@ module Stripe
 
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
 
-      if _action = @action
+      unless (_action = @action).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACTION) unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
       end
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
@@ -65,12 +67,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @action.nil?
-      if _action = @action
+      unless (_action = @action).nil?
         return false unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
       end
 
       return false if @invoice.nil?
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 

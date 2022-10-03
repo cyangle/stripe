@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Reason why the `status` of this card is `canceled`.
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -64,20 +64,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _pin = @pin
+      unless (_pin = @pin).nil?
         invalid_properties.concat(_pin.list_invalid_properties_for("pin")) if _pin.is_a?(OpenApi::Validatable)
       end
-      if _spending_controls = @spending_controls
+      unless (_spending_controls = @spending_controls).nil?
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
@@ -86,23 +86,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _pin = @pin
+      unless (_pin = @pin).nil?
         return false if _pin.is_a?(OpenApi::Validatable) && !_pin.valid?
       end
 
-      if _spending_controls = @spending_controls
+      unless (_spending_controls = @spending_controls).nil?
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 

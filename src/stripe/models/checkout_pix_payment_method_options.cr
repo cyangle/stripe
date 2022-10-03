@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The number of seconds after which Pix payment will expire.
     @[JSON::Field(key: "expires_after_seconds", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expires_after_seconds.nil? && !expires_after_seconds_present?)]

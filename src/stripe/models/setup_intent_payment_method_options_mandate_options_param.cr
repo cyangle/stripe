@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "custom_mandate_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter custom_mandate_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
@@ -60,21 +60,21 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _custom_mandate_url = @custom_mandate_url
+      unless (_custom_mandate_url = @custom_mandate_url).nil?
         invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url")) if _custom_mandate_url.is_a?(OpenApi::Validatable)
       end
-      if _default_for = @default_for
+      unless (_default_for = @default_for).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_FOR) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
       end
-      if _interval_description = @interval_description
+      unless (_interval_description = @interval_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_schedule = @payment_schedule
+      unless (_payment_schedule = @payment_schedule).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
-      if _transaction_type = @transaction_type
+      unless (_transaction_type = @transaction_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TRANSACTION_TYPE) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
       invalid_properties
@@ -83,23 +83,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _custom_mandate_url = @custom_mandate_url
+      unless (_custom_mandate_url = @custom_mandate_url).nil?
         return false if _custom_mandate_url.is_a?(OpenApi::Validatable) && !_custom_mandate_url.valid?
       end
 
-      if _default_for = @default_for
+      unless (_default_for = @default_for).nil?
         return false unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
       end
 
-      if _interval_description = @interval_description
+      unless (_interval_description = @interval_description).nil?
         return false if _interval_description.to_s.size > MAX_LENGTH_FOR_INTERVAL_DESCRIPTION
       end
 
-      if _payment_schedule = @payment_schedule
+      unless (_payment_schedule = @payment_schedule).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
 
-      if _transaction_type = @transaction_type
+      unless (_transaction_type = @transaction_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
 

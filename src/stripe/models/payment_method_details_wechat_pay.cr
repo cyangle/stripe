@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Uniquely identifies this particular WeChat Pay account. You can use this attribute to check whether two WeChat accounts are the same.
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
@@ -52,12 +52,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transaction_id = @transaction_id
+      unless (_transaction_id = @transaction_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, MAX_LENGTH_FOR_TRANSACTION_ID)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _transaction_id = @transaction_id
+      unless (_transaction_id = @transaction_id).nil?
         return false if _transaction_id.to_s.size > MAX_LENGTH_FOR_TRANSACTION_ID
       end
 

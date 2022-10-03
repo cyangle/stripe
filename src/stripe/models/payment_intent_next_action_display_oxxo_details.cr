@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The timestamp after which the OXXO voucher expires.
     @[JSON::Field(key: "expires_after", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expires_after.nil? && !expires_after_present?)]
@@ -60,12 +60,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _hosted_voucher_url = @hosted_voucher_url
+      unless (_hosted_voucher_url = @hosted_voucher_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_voucher_url", _hosted_voucher_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _number = @number
+      unless (_number = @number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -76,11 +76,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _hosted_voucher_url = @hosted_voucher_url
+      unless (_hosted_voucher_url = @hosted_voucher_url).nil?
         return false if _hosted_voucher_url.to_s.size > MAX_LENGTH_FOR_HOSTED_VOUCHER_URL
       end
 
-      if _number = @number
+      unless (_number = @number).nil?
         return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 

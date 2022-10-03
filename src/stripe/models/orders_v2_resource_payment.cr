@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "payment_intent", type: Stripe::OrdersV2ResourcePaymentPaymentIntent?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
     getter payment_intent : Stripe::OrdersV2ResourcePaymentPaymentIntent? = nil
@@ -58,13 +58,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
@@ -73,15 +73,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "decline_on", type: Stripe::DeclineChargeOnSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter decline_on : Stripe::DeclineChargeOnSpecs? = nil
@@ -50,18 +50,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _decline_on = @decline_on
+      unless (_decline_on = @decline_on).nil?
         invalid_properties.concat(_decline_on.list_invalid_properties_for("decline_on")) if _decline_on.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor_prefix = @statement_descriptor_prefix
+      unless (_statement_descriptor_prefix = @statement_descriptor_prefix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix", _statement_descriptor_prefix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
+      unless (_statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana).nil?
         invalid_properties.concat(_statement_descriptor_prefix_kana.list_invalid_properties_for("statement_descriptor_prefix_kana")) if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
+      unless (_statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji).nil?
         invalid_properties.concat(_statement_descriptor_prefix_kanji.list_invalid_properties_for("statement_descriptor_prefix_kanji")) if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -70,19 +70,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _decline_on = @decline_on
+      unless (_decline_on = @decline_on).nil?
         return false if _decline_on.is_a?(OpenApi::Validatable) && !_decline_on.valid?
       end
 
-      if _statement_descriptor_prefix = @statement_descriptor_prefix
+      unless (_statement_descriptor_prefix = @statement_descriptor_prefix).nil?
         return false if _statement_descriptor_prefix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX
       end
 
-      if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
+      unless (_statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana).nil?
         return false if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable) && !_statement_descriptor_prefix_kana.valid?
       end
 
-      if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
+      unless (_statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji).nil?
         return false if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable) && !_statement_descriptor_prefix_kanji.valid?
       end
 

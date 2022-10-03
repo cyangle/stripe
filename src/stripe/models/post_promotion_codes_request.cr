@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The coupon for this promotion code.
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter coupon : String? = nil
     MAX_LENGTH_FOR_COUPON = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Whether the promotion code is currently active.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -85,24 +87,24 @@ module Stripe
 
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
 
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _code = @code
+      unless (_code = @code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _restrictions = @restrictions
+      unless (_restrictions = @restrictions).nil?
         invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions")) if _restrictions.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -112,19 +114,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @coupon.nil?
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
-      if _code = @code
+      unless (_code = @code).nil?
         return false if _code.to_s.size > MAX_LENGTH_FOR_CODE
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _restrictions = @restrictions
+      unless (_restrictions = @restrictions).nil?
         return false if _restrictions.is_a?(OpenApi::Validatable) && !_restrictions.valid?
       end
 

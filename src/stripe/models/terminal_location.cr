@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
@@ -48,7 +48,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.location]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.location"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The ID of a configuration that will be used to customize all readers in this location.
     @[JSON::Field(key: "configuration_overrides", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -78,19 +80,19 @@ module Stripe
 
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -101,10 +103,10 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _configuration_overrides = @configuration_overrides
+      unless (_configuration_overrides = @configuration_overrides).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES)
           invalid_properties.push(max_length_error)
         end
@@ -116,17 +118,17 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @address.nil?
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
       return false if @display_name.nil?
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -135,11 +137,11 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _configuration_overrides = @configuration_overrides
+      unless (_configuration_overrides = @configuration_overrides).nil?
         return false if _configuration_overrides.to_s.size > MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES
       end
 

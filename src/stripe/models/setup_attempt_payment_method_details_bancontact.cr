@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Bank code of bank associated with the bank account.
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
@@ -103,36 +103,36 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bic = @bic
+      unless (_bic = @bic).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
           invalid_properties.push(max_length_error)
         end
       end
-      if _generated_sepa_debit = @generated_sepa_debit
+      unless (_generated_sepa_debit = @generated_sepa_debit).nil?
         invalid_properties.concat(_generated_sepa_debit.list_invalid_properties_for("generated_sepa_debit")) if _generated_sepa_debit.is_a?(OpenApi::Validatable)
       end
-      if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
+      unless (_generated_sepa_debit_mandate = @generated_sepa_debit_mandate).nil?
         invalid_properties.concat(_generated_sepa_debit_mandate.list_invalid_properties_for("generated_sepa_debit_mandate")) if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
       end
-      if _iban_last4 = @iban_last4
+      unless (_iban_last4 = @iban_last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _preferred_language = @preferred_language
+      unless (_preferred_language = @preferred_language).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -143,35 +143,35 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
-      if _bic = @bic
+      unless (_bic = @bic).nil?
         return false if _bic.to_s.size > MAX_LENGTH_FOR_BIC
       end
 
-      if _generated_sepa_debit = @generated_sepa_debit
+      unless (_generated_sepa_debit = @generated_sepa_debit).nil?
         return false if _generated_sepa_debit.is_a?(OpenApi::Validatable) && !_generated_sepa_debit.valid?
       end
 
-      if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
+      unless (_generated_sepa_debit_mandate = @generated_sepa_debit_mandate).nil?
         return false if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable) && !_generated_sepa_debit_mandate.valid?
       end
 
-      if _iban_last4 = @iban_last4
+      unless (_iban_last4 = @iban_last4).nil?
         return false if _iban_last4.to_s.size > MAX_LENGTH_FOR_IBAN_LAST4
       end
 
-      if _preferred_language = @preferred_language
+      unless (_preferred_language = @preferred_language).nil?
         return false unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
 
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 

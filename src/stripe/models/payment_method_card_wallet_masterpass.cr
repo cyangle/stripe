@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "billing_address", type: Stripe::PaymentMethodCardWalletMasterpassBillingAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_address.nil? && !billing_address_present?)]
     getter billing_address : Stripe::PaymentMethodCardWalletMasterpassBillingAddress? = nil
@@ -66,20 +66,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _billing_address = @billing_address
+      unless (_billing_address = @billing_address).nil?
         invalid_properties.concat(_billing_address.list_invalid_properties_for("billing_address")) if _billing_address.is_a?(OpenApi::Validatable)
       end
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping_address = @shipping_address
+      unless (_shipping_address = @shipping_address).nil?
         invalid_properties.concat(_shipping_address.list_invalid_properties_for("shipping_address")) if _shipping_address.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -88,19 +88,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _billing_address = @billing_address
+      unless (_billing_address = @billing_address).nil?
         return false if _billing_address.is_a?(OpenApi::Validatable) && !_billing_address.valid?
       end
 
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _shipping_address = @shipping_address
+      unless (_shipping_address = @shipping_address).nil?
         return false if _shipping_address.is_a?(OpenApi::Validatable) && !_shipping_address.valid?
       end
 

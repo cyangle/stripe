@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The name of the person or business that owns the bank account
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,6 +41,8 @@ module Stripe
     getter iban : String? = nil
     MAX_LENGTH_FOR_IBAN = 5000
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -60,28 +62,28 @@ module Stripe
 
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
 
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bic\" is required and cannot be null") if @bic.nil?
 
-      if _bic = @bic
+      unless (_bic = @bic).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"iban\" is required and cannot be null") if @iban.nil?
 
-      if _iban = @iban
+      unless (_iban = @iban).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban", _iban.to_s.size, MAX_LENGTH_FOR_IBAN)
           invalid_properties.push(max_length_error)
         end
@@ -93,22 +95,22 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account_holder_name.nil?
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
       return false if @bic.nil?
-      if _bic = @bic
+      unless (_bic = @bic).nil?
         return false if _bic.to_s.size > MAX_LENGTH_FOR_BIC
       end
 
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @iban.nil?
-      if _iban = @iban
+      unless (_iban = @iban).nil?
         return false if _iban.to_s.size > MAX_LENGTH_FOR_IBAN
       end
 

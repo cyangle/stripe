@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether Installments are enabled for this Invoice.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: enabled.nil? && !enabled_present?)]

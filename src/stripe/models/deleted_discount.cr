@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "coupon", type: Stripe::Coupon?, default: nil, required: true, nullable: false, emit_null: false)]
     getter coupon : Stripe::Coupon? = nil
@@ -45,7 +45,9 @@ module Stripe
     @[JSON::Field(key: "start", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter start : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.
     @[JSON::Field(key: "checkout_session", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: checkout_session.nil? && !checkout_session_present?)]
@@ -118,50 +120,50 @@ module Stripe
 
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
 
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         invalid_properties.concat(_coupon.list_invalid_properties_for("coupon")) if _coupon.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"deleted\" is required and cannot be null") if @deleted.nil?
 
-      if _deleted = @deleted
+      unless (_deleted = @deleted).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DELETED) unless OpenApi::EnumValidator.valid?(_deleted, VALID_VALUES_FOR_DELETED)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"start\" is required and cannot be null") if @start.nil?
 
-      if _checkout_session = @checkout_session
+      unless (_checkout_session = @checkout_session).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("checkout_session", _checkout_session.to_s.size, MAX_LENGTH_FOR_CHECKOUT_SESSION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_item = @invoice_item
+      unless (_invoice_item = @invoice_item).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_item", _invoice_item.to_s.size, MAX_LENGTH_FOR_INVOICE_ITEM)
           invalid_properties.push(max_length_error)
         end
       end
-      if _promotion_code = @promotion_code
+      unless (_promotion_code = @promotion_code).nil?
         invalid_properties.concat(_promotion_code.list_invalid_properties_for("promotion_code")) if _promotion_code.is_a?(OpenApi::Validatable)
       end
-      if _subscription = @subscription
+      unless (_subscription = @subscription).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
           invalid_properties.push(max_length_error)
         end
@@ -173,48 +175,48 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @coupon.nil?
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         return false if _coupon.is_a?(OpenApi::Validatable) && !_coupon.valid?
       end
 
       return false if @deleted.nil?
-      if _deleted = @deleted
+      unless (_deleted = @deleted).nil?
         return false unless OpenApi::EnumValidator.valid?(_deleted, VALID_VALUES_FOR_DELETED)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @start.nil?
 
-      if _checkout_session = @checkout_session
+      unless (_checkout_session = @checkout_session).nil?
         return false if _checkout_session.to_s.size > MAX_LENGTH_FOR_CHECKOUT_SESSION
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 
-      if _invoice_item = @invoice_item
+      unless (_invoice_item = @invoice_item).nil?
         return false if _invoice_item.to_s.size > MAX_LENGTH_FOR_INVOICE_ITEM
       end
 
-      if _promotion_code = @promotion_code
+      unless (_promotion_code = @promotion_code).nil?
         return false if _promotion_code.is_a?(OpenApi::Validatable) && !_promotion_code.valid?
       end
 
-      if _subscription = @subscription
+      unless (_subscription = @subscription).nil?
         return false if _subscription.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION
       end
 

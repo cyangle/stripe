@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "acss_debit", type: Stripe::PaymentIntentPaymentMethodOptionsAcssDebit1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit : Stripe::PaymentIntentPaymentMethodOptionsAcssDebit1? = nil
@@ -154,94 +154,94 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
-      if _affirm = @affirm
+      unless (_affirm = @affirm).nil?
         invalid_properties.concat(_affirm.list_invalid_properties_for("affirm")) if _affirm.is_a?(OpenApi::Validatable)
       end
-      if _afterpay_clearpay = @afterpay_clearpay
+      unless (_afterpay_clearpay = @afterpay_clearpay).nil?
         invalid_properties.concat(_afterpay_clearpay.list_invalid_properties_for("afterpay_clearpay")) if _afterpay_clearpay.is_a?(OpenApi::Validatable)
       end
-      if _alipay = @alipay
+      unless (_alipay = @alipay).nil?
         invalid_properties.concat(_alipay.list_invalid_properties_for("alipay")) if _alipay.is_a?(OpenApi::Validatable)
       end
-      if _au_becs_debit = @au_becs_debit
+      unless (_au_becs_debit = @au_becs_debit).nil?
         invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit")) if _au_becs_debit.is_a?(OpenApi::Validatable)
       end
-      if _bacs_debit = @bacs_debit
+      unless (_bacs_debit = @bacs_debit).nil?
         invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit")) if _bacs_debit.is_a?(OpenApi::Validatable)
       end
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
       end
-      if _blik = @blik
+      unless (_blik = @blik).nil?
         invalid_properties.concat(_blik.list_invalid_properties_for("blik")) if _blik.is_a?(OpenApi::Validatable)
       end
-      if _boleto = @boleto
+      unless (_boleto = @boleto).nil?
         invalid_properties.concat(_boleto.list_invalid_properties_for("boleto")) if _boleto.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _card_present = @card_present
+      unless (_card_present = @card_present).nil?
         invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
       end
-      if _customer_balance = @customer_balance
+      unless (_customer_balance = @customer_balance).nil?
         invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance")) if _customer_balance.is_a?(OpenApi::Validatable)
       end
-      if _eps = @eps
+      unless (_eps = @eps).nil?
         invalid_properties.concat(_eps.list_invalid_properties_for("eps")) if _eps.is_a?(OpenApi::Validatable)
       end
-      if _fpx = @fpx
+      unless (_fpx = @fpx).nil?
         invalid_properties.concat(_fpx.list_invalid_properties_for("fpx")) if _fpx.is_a?(OpenApi::Validatable)
       end
-      if _giropay = @giropay
+      unless (_giropay = @giropay).nil?
         invalid_properties.concat(_giropay.list_invalid_properties_for("giropay")) if _giropay.is_a?(OpenApi::Validatable)
       end
-      if _grabpay = @grabpay
+      unless (_grabpay = @grabpay).nil?
         invalid_properties.concat(_grabpay.list_invalid_properties_for("grabpay")) if _grabpay.is_a?(OpenApi::Validatable)
       end
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         invalid_properties.concat(_ideal.list_invalid_properties_for("ideal")) if _ideal.is_a?(OpenApi::Validatable)
       end
-      if _interac_present = @interac_present
+      unless (_interac_present = @interac_present).nil?
         invalid_properties.concat(_interac_present.list_invalid_properties_for("interac_present")) if _interac_present.is_a?(OpenApi::Validatable)
       end
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         invalid_properties.concat(_klarna.list_invalid_properties_for("klarna")) if _klarna.is_a?(OpenApi::Validatable)
       end
-      if _konbini = @konbini
+      unless (_konbini = @konbini).nil?
         invalid_properties.concat(_konbini.list_invalid_properties_for("konbini")) if _konbini.is_a?(OpenApi::Validatable)
       end
-      if _link = @link
+      unless (_link = @link).nil?
         invalid_properties.concat(_link.list_invalid_properties_for("link")) if _link.is_a?(OpenApi::Validatable)
       end
-      if _oxxo = @oxxo
+      unless (_oxxo = @oxxo).nil?
         invalid_properties.concat(_oxxo.list_invalid_properties_for("oxxo")) if _oxxo.is_a?(OpenApi::Validatable)
       end
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         invalid_properties.concat(_p24.list_invalid_properties_for("p24")) if _p24.is_a?(OpenApi::Validatable)
       end
-      if _paynow = @paynow
+      unless (_paynow = @paynow).nil?
         invalid_properties.concat(_paynow.list_invalid_properties_for("paynow")) if _paynow.is_a?(OpenApi::Validatable)
       end
-      if _pix = @pix
+      unless (_pix = @pix).nil?
         invalid_properties.concat(_pix.list_invalid_properties_for("pix")) if _pix.is_a?(OpenApi::Validatable)
       end
-      if _promptpay = @promptpay
+      unless (_promptpay = @promptpay).nil?
         invalid_properties.concat(_promptpay.list_invalid_properties_for("promptpay")) if _promptpay.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
-      if _wechat_pay = @wechat_pay
+      unless (_wechat_pay = @wechat_pay).nil?
         invalid_properties.concat(_wechat_pay.list_invalid_properties_for("wechat_pay")) if _wechat_pay.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -250,123 +250,123 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
-      if _affirm = @affirm
+      unless (_affirm = @affirm).nil?
         return false if _affirm.is_a?(OpenApi::Validatable) && !_affirm.valid?
       end
 
-      if _afterpay_clearpay = @afterpay_clearpay
+      unless (_afterpay_clearpay = @afterpay_clearpay).nil?
         return false if _afterpay_clearpay.is_a?(OpenApi::Validatable) && !_afterpay_clearpay.valid?
       end
 
-      if _alipay = @alipay
+      unless (_alipay = @alipay).nil?
         return false if _alipay.is_a?(OpenApi::Validatable) && !_alipay.valid?
       end
 
-      if _au_becs_debit = @au_becs_debit
+      unless (_au_becs_debit = @au_becs_debit).nil?
         return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
 
-      if _bacs_debit = @bacs_debit
+      unless (_bacs_debit = @bacs_debit).nil?
         return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
 
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
 
-      if _blik = @blik
+      unless (_blik = @blik).nil?
         return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
       end
 
-      if _boleto = @boleto
+      unless (_boleto = @boleto).nil?
         return false if _boleto.is_a?(OpenApi::Validatable) && !_boleto.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _card_present = @card_present
+      unless (_card_present = @card_present).nil?
         return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end
 
-      if _customer_balance = @customer_balance
+      unless (_customer_balance = @customer_balance).nil?
         return false if _customer_balance.is_a?(OpenApi::Validatable) && !_customer_balance.valid?
       end
 
-      if _eps = @eps
+      unless (_eps = @eps).nil?
         return false if _eps.is_a?(OpenApi::Validatable) && !_eps.valid?
       end
 
-      if _fpx = @fpx
+      unless (_fpx = @fpx).nil?
         return false if _fpx.is_a?(OpenApi::Validatable) && !_fpx.valid?
       end
 
-      if _giropay = @giropay
+      unless (_giropay = @giropay).nil?
         return false if _giropay.is_a?(OpenApi::Validatable) && !_giropay.valid?
       end
 
-      if _grabpay = @grabpay
+      unless (_grabpay = @grabpay).nil?
         return false if _grabpay.is_a?(OpenApi::Validatable) && !_grabpay.valid?
       end
 
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
 
-      if _interac_present = @interac_present
+      unless (_interac_present = @interac_present).nil?
         return false if _interac_present.is_a?(OpenApi::Validatable) && !_interac_present.valid?
       end
 
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
 
-      if _konbini = @konbini
+      unless (_konbini = @konbini).nil?
         return false if _konbini.is_a?(OpenApi::Validatable) && !_konbini.valid?
       end
 
-      if _link = @link
+      unless (_link = @link).nil?
         return false if _link.is_a?(OpenApi::Validatable) && !_link.valid?
       end
 
-      if _oxxo = @oxxo
+      unless (_oxxo = @oxxo).nil?
         return false if _oxxo.is_a?(OpenApi::Validatable) && !_oxxo.valid?
       end
 
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
 
-      if _paynow = @paynow
+      unless (_paynow = @paynow).nil?
         return false if _paynow.is_a?(OpenApi::Validatable) && !_paynow.valid?
       end
 
-      if _pix = @pix
+      unless (_pix = @pix).nil?
         return false if _pix.is_a?(OpenApi::Validatable) && !_pix.valid?
       end
 
-      if _promptpay = @promptpay
+      unless (_promptpay = @promptpay).nil?
         return false if _promptpay.is_a?(OpenApi::Validatable) && !_promptpay.valid?
       end
 
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
 
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 
-      if _wechat_pay = @wechat_pay
+      unless (_wechat_pay = @wechat_pay).nil?
         return false if _wechat_pay.is_a?(OpenApi::Validatable) && !_wechat_pay.valid?
       end
 

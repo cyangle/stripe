@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The Unix timestamp marking when the beneficial owner attestation was made.
     @[JSON::Field(key: "date", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: date.nil? && !date_present?)]
@@ -60,12 +60,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _ip = @ip
+      unless (_ip = @ip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip", _ip.to_s.size, MAX_LENGTH_FOR_IP)
           invalid_properties.push(max_length_error)
         end
       end
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
           invalid_properties.push(max_length_error)
         end
@@ -76,11 +76,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _ip = @ip
+      unless (_ip = @ip).nil?
         return false if _ip.to_s.size > MAX_LENGTH_FOR_IP
       end
 
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         return false if _user_agent.to_s.size > MAX_LENGTH_FOR_USER_AGENT
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -38,6 +38,8 @@ module Stripe
 
     @[JSON::Field(key: "owners", type: Stripe::BankConnectionsResourceOwnerList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter owners : Stripe::BankConnectionsResourceOwnerList1? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -60,19 +62,19 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"owners\" is required and cannot be null") if @owners.nil?
 
-      if _owners = @owners
+      unless (_owners = @owners).nil?
         invalid_properties.concat(_owners.list_invalid_properties_for("owners")) if _owners.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -84,17 +86,17 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @owners.nil?
-      if _owners = @owners
+      unless (_owners = @owners).nil?
         return false if _owners.is_a?(OpenApi::Validatable) && !_owners.valid?
       end
 

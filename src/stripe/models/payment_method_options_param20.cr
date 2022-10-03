@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "confirmation_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter confirmation_number : String? = nil
@@ -57,23 +57,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _confirmation_number = @confirmation_number
+      unless (_confirmation_number = @confirmation_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _expires_after_days = @expires_after_days
+      unless (_expires_after_days = @expires_after_days).nil?
         invalid_properties.concat(_expires_after_days.list_invalid_properties_for("expires_after_days")) if _expires_after_days.is_a?(OpenApi::Validatable)
       end
-      if _expires_at = @expires_at
+      unless (_expires_at = @expires_at).nil?
         invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at")) if _expires_at.is_a?(OpenApi::Validatable)
       end
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -82,23 +82,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _confirmation_number = @confirmation_number
+      unless (_confirmation_number = @confirmation_number).nil?
         return false if _confirmation_number.to_s.size > MAX_LENGTH_FOR_CONFIRMATION_NUMBER
       end
 
-      if _expires_after_days = @expires_after_days
+      unless (_expires_after_days = @expires_after_days).nil?
         return false if _expires_after_days.is_a?(OpenApi::Validatable) && !_expires_after_days.valid?
       end
 
-      if _expires_at = @expires_at
+      unless (_expires_at = @expires_at).nil?
         return false if _expires_at.is_a?(OpenApi::Validatable) && !_expires_at.valid?
       end
 
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

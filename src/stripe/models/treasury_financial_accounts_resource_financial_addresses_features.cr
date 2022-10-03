@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "aba", type: Stripe::TreasuryFinancialAccountsResourceToggleSettings?, default: nil, required: false, nullable: false, emit_null: false)]
     getter aba : Stripe::TreasuryFinancialAccountsResourceToggleSettings? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _aba = @aba
+      unless (_aba = @aba).nil?
         invalid_properties.concat(_aba.list_invalid_properties_for("aba")) if _aba.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -47,7 +47,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _aba = @aba
+      unless (_aba = @aba).nil?
         return false if _aba.is_a?(OpenApi::Validatable) && !_aba.valid?
       end
 

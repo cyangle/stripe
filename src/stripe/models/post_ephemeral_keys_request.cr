@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The ID of the Customer you'd like to modify using the resulting ephemeral key.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -50,13 +50,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _issuing_card = @issuing_card
+      unless (_issuing_card = @issuing_card).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, MAX_LENGTH_FOR_ISSUING_CARD)
           invalid_properties.push(max_length_error)
         end
@@ -67,11 +67,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _issuing_card = @issuing_card
+      unless (_issuing_card = @issuing_card).nil?
         return false if _issuing_card.to_s.size > MAX_LENGTH_FOR_ISSUING_CARD
       end
 

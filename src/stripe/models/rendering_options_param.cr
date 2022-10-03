@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount_tax_display : String? = nil
@@ -39,7 +39,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _amount_tax_display = @amount_tax_display
+      unless (_amount_tax_display = @amount_tax_display).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AMOUNT_TAX_DISPLAY) unless OpenApi::EnumValidator.valid?(_amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
       end
       invalid_properties
@@ -48,7 +48,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _amount_tax_display = @amount_tax_display
+      unless (_amount_tax_display = @amount_tax_display).nil?
         return false unless OpenApi::EnumValidator.valid?(_amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
       end
 

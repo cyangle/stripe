@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::SourceOwnerAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
     getter address : Stripe::SourceOwnerAddress? = nil
@@ -102,38 +102,38 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verified_address = @verified_address
+      unless (_verified_address = @verified_address).nil?
         invalid_properties.concat(_verified_address.list_invalid_properties_for("verified_address")) if _verified_address.is_a?(OpenApi::Validatable)
       end
-      if _verified_email = @verified_email
+      unless (_verified_email = @verified_email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_email", _verified_email.to_s.size, MAX_LENGTH_FOR_VERIFIED_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verified_phone = @verified_phone
+      unless (_verified_phone = @verified_phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_phone", _verified_phone.to_s.size, MAX_LENGTH_FOR_VERIFIED_PHONE)
           invalid_properties.push(max_length_error)
         end
@@ -144,35 +144,35 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
-      if _verified_address = @verified_address
+      unless (_verified_address = @verified_address).nil?
         return false if _verified_address.is_a?(OpenApi::Validatable) && !_verified_address.valid?
       end
 
-      if _verified_email = @verified_email
+      unless (_verified_email = @verified_email).nil?
         return false if _verified_email.to_s.size > MAX_LENGTH_FOR_VERIFIED_EMAIL
       end
 
-      if _verified_name = @verified_name
+      unless (_verified_name = @verified_name).nil?
         return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 
-      if _verified_phone = @verified_phone
+      unless (_verified_phone = @verified_phone).nil?
         return false if _verified_phone.to_s.size > MAX_LENGTH_FOR_VERIFIED_PHONE
       end
 

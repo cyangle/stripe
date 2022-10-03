@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
     MAX_LENGTH_FOR_ID = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "adjustable_quantity", type: Stripe::AdjustableQuantityParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter adjustable_quantity : Stripe::AdjustableQuantityParams? = nil
@@ -51,12 +53,12 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _adjustable_quantity = @adjustable_quantity
+      unless (_adjustable_quantity = @adjustable_quantity).nil?
         invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity")) if _adjustable_quantity.is_a?(OpenApi::Validatable)
       end
 
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
-      if _adjustable_quantity = @adjustable_quantity
+      unless (_adjustable_quantity = @adjustable_quantity).nil?
         return false if _adjustable_quantity.is_a?(OpenApi::Validatable) && !_adjustable_quantity.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Fields that can be provided to satisfy all fields in `original_fields_due`.
     @[JSON::Field(key: "alternative_fields_due", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,6 +28,8 @@ module Stripe
     # Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.
     @[JSON::Field(key: "original_fields_due", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter original_fields_due : Array(String)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

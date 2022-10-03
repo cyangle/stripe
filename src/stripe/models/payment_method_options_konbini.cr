@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
     @[JSON::Field(key: "confirmation_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: confirmation_number.nil? && !confirmation_number_present?)]
@@ -75,18 +75,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _confirmation_number = @confirmation_number
+      unless (_confirmation_number = @confirmation_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -95,15 +95,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _confirmation_number = @confirmation_number
+      unless (_confirmation_number = @confirmation_number).nil?
         return false if _confirmation_number.to_s.size > MAX_LENGTH_FOR_CONFIRMATION_NUMBER
       end
 
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

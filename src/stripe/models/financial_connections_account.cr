@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The type of the account. Account category is further divided in `subcategory`.
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -69,7 +69,9 @@ module Stripe
     ERROR_MESSAGE_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = "invalid value for \"supported_payment_method_types\", must be one of [link, us_bank_account]."
     VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES  = StaticArray["link", "us_bank_account"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "account_holder", type: Stripe::FinancialConnectionsAccountAccountHolder?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_holder.nil? && !account_holder_present?)]
     getter account_holder : Stripe::FinancialConnectionsAccountAccountHolder? = nil
@@ -159,21 +161,21 @@ module Stripe
 
       invalid_properties.push("\"category\" is required and cannot be null") if @category.nil?
 
-      if _category = @category
+      unless (_category = @category).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CATEGORY) unless OpenApi::EnumValidator.valid?(_category, VALID_VALUES_FOR_CATEGORY)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_name\" is required and cannot be null") if @institution_name.nil?
 
-      if _institution_name = @institution_name
+      unless (_institution_name = @institution_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -182,50 +184,50 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"subcategory\" is required and cannot be null") if @subcategory.nil?
 
-      if _subcategory = @subcategory
+      unless (_subcategory = @subcategory).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUBCATEGORY) unless OpenApi::EnumValidator.valid?(_subcategory, VALID_VALUES_FOR_SUBCATEGORY)
       end
       invalid_properties.push("\"supported_payment_method_types\" is required and cannot be null") if @supported_payment_method_types.nil?
 
-      if _supported_payment_method_types = @supported_payment_method_types
+      unless (_supported_payment_method_types = @supported_payment_method_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
       end
-      if _account_holder = @account_holder
+      unless (_account_holder = @account_holder).nil?
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
-      if _balance = @balance
+      unless (_balance = @balance).nil?
         invalid_properties.concat(_balance.list_invalid_properties_for("balance")) if _balance.is_a?(OpenApi::Validatable)
       end
-      if _balance_refresh = @balance_refresh
+      unless (_balance_refresh = @balance_refresh).nil?
         invalid_properties.concat(_balance_refresh.list_invalid_properties_for("balance_refresh")) if _balance_refresh.is_a?(OpenApi::Validatable)
       end
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _ownership = @ownership
+      unless (_ownership = @ownership).nil?
         invalid_properties.concat(_ownership.list_invalid_properties_for("ownership")) if _ownership.is_a?(OpenApi::Validatable)
       end
-      if _ownership_refresh = @ownership_refresh
+      unless (_ownership_refresh = @ownership_refresh).nil?
         invalid_properties.concat(_ownership_refresh.list_invalid_properties_for("ownership_refresh")) if _ownership_refresh.is_a?(OpenApi::Validatable)
       end
-      if _permissions = @permissions
+      unless (_permissions = @permissions).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PERMISSIONS) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
       invalid_properties
@@ -235,73 +237,73 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @category.nil?
-      if _category = @category
+      unless (_category = @category).nil?
         return false unless OpenApi::EnumValidator.valid?(_category, VALID_VALUES_FOR_CATEGORY)
       end
 
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @institution_name.nil?
-      if _institution_name = @institution_name
+      unless (_institution_name = @institution_name).nil?
         return false if _institution_name.to_s.size > MAX_LENGTH_FOR_INSTITUTION_NAME
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @subcategory.nil?
-      if _subcategory = @subcategory
+      unless (_subcategory = @subcategory).nil?
         return false unless OpenApi::EnumValidator.valid?(_subcategory, VALID_VALUES_FOR_SUBCATEGORY)
       end
 
       return false if @supported_payment_method_types.nil?
-      if _supported_payment_method_types = @supported_payment_method_types
+      unless (_supported_payment_method_types = @supported_payment_method_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
       end
 
-      if _account_holder = @account_holder
+      unless (_account_holder = @account_holder).nil?
         return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
 
-      if _balance = @balance
+      unless (_balance = @balance).nil?
         return false if _balance.is_a?(OpenApi::Validatable) && !_balance.valid?
       end
 
-      if _balance_refresh = @balance_refresh
+      unless (_balance_refresh = @balance_refresh).nil?
         return false if _balance_refresh.is_a?(OpenApi::Validatable) && !_balance_refresh.valid?
       end
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _ownership = @ownership
+      unless (_ownership = @ownership).nil?
         return false if _ownership.is_a?(OpenApi::Validatable) && !_ownership.valid?
       end
 
-      if _ownership_refresh = @ownership_refresh
+      unless (_ownership_refresh = @ownership_refresh).nil?
         return false if _ownership_refresh.is_a?(OpenApi::Validatable) && !_ownership_refresh.valid?
       end
 
-      if _permissions = @permissions
+      unless (_permissions = @permissions).nil?
         return false unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
 

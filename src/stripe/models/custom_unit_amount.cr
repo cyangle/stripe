@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The maximum unit amount the customer can specify for this item.
     @[JSON::Field(key: "maximum", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: maximum.nil? && !maximum_present?)]

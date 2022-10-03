@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -45,6 +45,8 @@ module Stripe
     getter tax_deduction_account_number : String? = nil
     MAX_LENGTH_FOR_TAX_DEDUCTION_ACCOUNT_NUMBER = 5000
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -65,14 +67,14 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"period_end\" is required and cannot be null") if @period_end.nil?
@@ -81,7 +83,7 @@ module Stripe
 
       invalid_properties.push("\"tax_deduction_account_number\" is required and cannot be null") if @tax_deduction_account_number.nil?
 
-      if _tax_deduction_account_number = @tax_deduction_account_number
+      unless (_tax_deduction_account_number = @tax_deduction_account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_deduction_account_number", _tax_deduction_account_number.to_s.size, MAX_LENGTH_FOR_TAX_DEDUCTION_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -93,12 +95,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
@@ -107,7 +109,7 @@ module Stripe
       return false if @period_start.nil?
 
       return false if @tax_deduction_account_number.nil?
-      if _tax_deduction_account_number = @tax_deduction_account_number
+      unless (_tax_deduction_account_number = @tax_deduction_account_number).nil?
         return false if _tax_deduction_account_number.to_s.size > MAX_LENGTH_FOR_TAX_DEDUCTION_ACCOUNT_NUMBER
       end
 

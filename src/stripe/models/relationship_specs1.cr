@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "director", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter director : Bool? = nil
@@ -58,11 +58,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _percent_ownership = @percent_ownership
+      unless (_percent_ownership = @percent_ownership).nil?
         invalid_properties.concat(_percent_ownership.list_invalid_properties_for("percent_ownership")) if _percent_ownership.is_a?(OpenApi::Validatable)
       end
 
-      if _title = @title
+      unless (_title = @title).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
           invalid_properties.push(max_length_error)
         end
@@ -73,11 +73,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _percent_ownership = @percent_ownership
+      unless (_percent_ownership = @percent_ownership).nil?
         return false if _percent_ownership.is_a?(OpenApi::Validatable) && !_percent_ownership.valid?
       end
 
-      if _title = @title
+      unless (_title = @title).nil?
         return false if _title.to_s.size > MAX_LENGTH_FOR_TITLE
       end
 

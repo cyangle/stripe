@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::PostCustomersRequestAddress?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::PostCustomersRequestAddress? = nil
@@ -162,95 +162,95 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
 
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _cash_balance = @cash_balance
+      unless (_cash_balance = @cash_balance).nil?
         invalid_properties.concat(_cash_balance.list_invalid_properties_for("cash_balance")) if _cash_balance.is_a?(OpenApi::Validatable)
       end
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _default_alipay_account = @default_alipay_account
+      unless (_default_alipay_account = @default_alipay_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_alipay_account", _default_alipay_account.to_s.size, MAX_LENGTH_FOR_DEFAULT_ALIPAY_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _default_bank_account = @default_bank_account
+      unless (_default_bank_account = @default_bank_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_bank_account", _default_bank_account.to_s.size, MAX_LENGTH_FOR_DEFAULT_BANK_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _default_card = @default_card
+      unless (_default_card = @default_card).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_card", _default_card.to_s.size, MAX_LENGTH_FOR_DEFAULT_CARD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _default_source = @default_source
+      unless (_default_source = @default_source).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, MAX_LENGTH_FOR_DEFAULT_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _invoice_prefix = @invoice_prefix
+      unless (_invoice_prefix = @invoice_prefix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_prefix", _invoice_prefix.to_s.size, MAX_LENGTH_FOR_INVOICE_PREFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _promotion_code = @promotion_code
+      unless (_promotion_code = @promotion_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _source = @source
+      unless (_source = @source).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tax = @tax
+      unless (_tax = @tax).nil?
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
       invalid_properties
@@ -259,87 +259,87 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _cash_balance = @cash_balance
+      unless (_cash_balance = @cash_balance).nil?
         return false if _cash_balance.is_a?(OpenApi::Validatable) && !_cash_balance.valid?
       end
 
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
-      if _default_alipay_account = @default_alipay_account
+      unless (_default_alipay_account = @default_alipay_account).nil?
         return false if _default_alipay_account.to_s.size > MAX_LENGTH_FOR_DEFAULT_ALIPAY_ACCOUNT
       end
 
-      if _default_bank_account = @default_bank_account
+      unless (_default_bank_account = @default_bank_account).nil?
         return false if _default_bank_account.to_s.size > MAX_LENGTH_FOR_DEFAULT_BANK_ACCOUNT
       end
 
-      if _default_card = @default_card
+      unless (_default_card = @default_card).nil?
         return false if _default_card.to_s.size > MAX_LENGTH_FOR_DEFAULT_CARD
       end
 
-      if _default_source = @default_source
+      unless (_default_source = @default_source).nil?
         return false if _default_source.to_s.size > MAX_LENGTH_FOR_DEFAULT_SOURCE
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _invoice_prefix = @invoice_prefix
+      unless (_invoice_prefix = @invoice_prefix).nil?
         return false if _invoice_prefix.to_s.size > MAX_LENGTH_FOR_INVOICE_PREFIX
       end
 
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
-      if _promotion_code = @promotion_code
+      unless (_promotion_code = @promotion_code).nil?
         return false if _promotion_code.to_s.size > MAX_LENGTH_FOR_PROMOTION_CODE
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _source = @source
+      unless (_source = @source).nil?
         return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
-      if _tax = @tax
+      unless (_tax = @tax).nil?
         return false if _tax.is_a?(OpenApi::Validatable) && !_tax.valid?
       end
 
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
 

@@ -18,11 +18,11 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    @[JSON::Field(key: "amounts", type: Array(Int64)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter amounts : Array(Int64)? = nil
+    @[JSON::Field(key: "amounts", type: Array(Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter amounts : Array(Int32)? = nil
 
     # The client secret of the SetupIntent.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @amounts : Array(Int64)? = nil,
+      @amounts : Array(Int32)? = nil,
       @client_secret : String? = nil,
       @descriptor_code : String? = nil,
       @expand : Array(String)? = nil
@@ -55,12 +55,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
-      if _descriptor_code = @descriptor_code
+      unless (_descriptor_code = @descriptor_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("descriptor_code", _descriptor_code.to_s.size, MAX_LENGTH_FOR_DESCRIPTOR_CODE)
           invalid_properties.push(max_length_error)
         end
@@ -72,11 +72,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
-      if _descriptor_code = @descriptor_code
+      unless (_descriptor_code = @descriptor_code).nil?
         return false if _descriptor_code.to_s.size > MAX_LENGTH_FOR_DESCRIPTOR_CODE
       end
 
@@ -85,7 +85,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amounts Object to be assigned
-    def amounts=(amounts : Array(Int64)?)
+    def amounts=(amounts : Array(Int32)?)
       if amounts.nil?
         return @amounts = nil
       end

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "business_profile", type: Stripe::BusinessProfileCreateParam?, default: nil, required: true, nullable: false, emit_null: false)]
     getter business_profile : Stripe::BusinessProfileCreateParam? = nil
@@ -26,7 +26,9 @@ module Stripe
     @[JSON::Field(key: "features", type: Stripe::FeaturesCreationParam?, default: nil, required: true, nullable: false, emit_null: false)]
     getter features : Stripe::FeaturesCreationParam? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "default_return_url", type: Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil
@@ -64,19 +66,19 @@ module Stripe
 
       invalid_properties.push("\"business_profile\" is required and cannot be null") if @business_profile.nil?
 
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
 
-      if _features = @features
+      unless (_features = @features).nil?
         invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
-      if _default_return_url = @default_return_url
+      unless (_default_return_url = @default_return_url).nil?
         invalid_properties.concat(_default_return_url.list_invalid_properties_for("default_return_url")) if _default_return_url.is_a?(OpenApi::Validatable)
       end
 
-      if _login_page = @login_page
+      unless (_login_page = @login_page).nil?
         invalid_properties.concat(_login_page.list_invalid_properties_for("login_page")) if _login_page.is_a?(OpenApi::Validatable)
       end
 
@@ -87,20 +89,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @business_profile.nil?
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
 
       return false if @features.nil?
-      if _features = @features
+      unless (_features = @features).nil?
         return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
 
-      if _default_return_url = @default_return_url
+      unless (_default_return_url = @default_return_url).nil?
         return false if _default_return_url.is_a?(OpenApi::Validatable) && !_default_return_url.valid?
       end
 
-      if _login_page = @login_page
+      unless (_login_page = @login_page).nil?
         return false if _login_page.is_a?(OpenApi::Validatable) && !_login_page.valid?
       end
 

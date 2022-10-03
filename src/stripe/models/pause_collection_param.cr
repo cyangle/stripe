@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter behavior : String? = nil
     ERROR_MESSAGE_FOR_BEHAVIOR = "invalid value for \"behavior\", must be one of [keep_as_draft, mark_uncollectible, void]."
     VALID_VALUES_FOR_BEHAVIOR  = StaticArray["keep_as_draft", "mark_uncollectible", "void"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "resumes_at", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter resumes_at : Int64? = nil
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"behavior\" is required and cannot be null") if @behavior.nil?
 
-      if _behavior = @behavior
+      unless (_behavior = @behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
       end
 
@@ -59,7 +61,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @behavior.nil?
-      if _behavior = @behavior
+      unless (_behavior = @behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
       end
 

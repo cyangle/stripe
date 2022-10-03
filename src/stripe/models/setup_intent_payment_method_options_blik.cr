@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "mandate_options", type: Stripe::SetupIntentPaymentMethodOptionsMandateOptionsBlik?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_options : Stripe::SetupIntentPaymentMethodOptionsMandateOptionsBlik? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _mandate_options = @mandate_options
+      unless (_mandate_options = @mandate_options).nil?
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -47,7 +47,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _mandate_options = @mandate_options
+      unless (_mandate_options = @mandate_options).nil?
         return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
 

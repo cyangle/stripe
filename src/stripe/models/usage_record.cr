@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,6 +49,8 @@ module Stripe
     @[JSON::Field(key: "timestamp", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter timestamp : Int64? = nil
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -70,7 +72,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -79,14 +81,14 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"quantity\" is required and cannot be null") if @quantity.nil?
 
       invalid_properties.push("\"subscription_item\" is required and cannot be null") if @subscription_item.nil?
 
-      if _subscription_item = @subscription_item
+      unless (_subscription_item = @subscription_item).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION_ITEM)
           invalid_properties.push(max_length_error)
         end
@@ -100,21 +102,21 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @quantity.nil?
 
       return false if @subscription_item.nil?
-      if _subscription_item = @subscription_item
+      unless (_subscription_item = @subscription_item).nil?
         return false if _subscription_item.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION_ITEM
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -37,7 +37,9 @@ module Stripe
     ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
     VALID_VALUES_FOR_USAGE_TYPE  = StaticArray["licensed", "metered"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
     @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
@@ -68,17 +70,17 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
 
       invalid_properties.push("\"usage_type\" is required and cannot be null") if @usage_type.nil?
 
-      if _usage_type = @usage_type
+      unless (_usage_type = @usage_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_USAGE_TYPE) unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
       end
-      if _aggregate_usage = @aggregate_usage
+      unless (_aggregate_usage = @aggregate_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AGGREGATE_USAGE) unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
       invalid_properties
@@ -88,18 +90,18 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       return false if @interval_count.nil?
 
       return false if @usage_type.nil?
-      if _usage_type = @usage_type
+      unless (_usage_type = @usage_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
       end
 
-      if _aggregate_usage = @aggregate_usage
+      unless (_aggregate_usage = @aggregate_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
 

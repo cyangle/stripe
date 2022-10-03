@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The time that the quote was accepted. Measured in seconds since Unix epoch.
     @[JSON::Field(key: "accepted_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: accepted_at.nil? && !accepted_at_present?)]

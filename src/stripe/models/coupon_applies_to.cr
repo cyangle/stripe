@@ -19,11 +19,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A list of product IDs this coupon applies to
     @[JSON::Field(key: "products", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter products : Array(String)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

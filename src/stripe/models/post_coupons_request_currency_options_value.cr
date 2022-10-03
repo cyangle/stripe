@@ -18,10 +18,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "amount_off", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_off : Int64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

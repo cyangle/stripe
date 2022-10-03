@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Account number to transfer funds to.
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
@@ -70,22 +70,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _swift_code = @swift_code
+      unless (_swift_code = @swift_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("swift_code", _swift_code.to_s.size, MAX_LENGTH_FOR_SWIFT_CODE)
           invalid_properties.push(max_length_error)
         end
@@ -96,19 +96,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 
-      if _swift_code = @swift_code
+      unless (_swift_code = @swift_code).nil?
         return false if _swift_code.to_s.size > MAX_LENGTH_FOR_SWIFT_CODE
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "address", type: Stripe::RequiredAddress?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::RequiredAddress? = nil
@@ -28,7 +28,9 @@ module Stripe
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "customs", type: Stripe::CustomsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customs : Stripe::CustomsParam? = nil
@@ -72,24 +74,24 @@ module Stripe
 
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customs = @customs
+      unless (_customs = @customs).nil?
         invalid_properties.concat(_customs.list_invalid_properties_for("customs")) if _customs.is_a?(OpenApi::Validatable)
       end
 
-      if _service = @service
+      unless (_service = @service).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SERVICE) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
@@ -99,24 +101,24 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @address.nil?
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _customs = @customs
+      unless (_customs = @customs).nil?
         return false if _customs.is_a?(OpenApi::Validatable) && !_customs.valid?
       end
 
-      if _service = @service
+      unless (_service = @service).nil?
         return false unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

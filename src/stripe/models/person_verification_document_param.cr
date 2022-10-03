@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "back", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter back : String? = nil
@@ -43,12 +43,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _back = @back
+      unless (_back = @back).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("back", _back.to_s.size, MAX_LENGTH_FOR_BACK)
           invalid_properties.push(max_length_error)
         end
       end
-      if _front = @front
+      unless (_front = @front).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("front", _front.to_s.size, MAX_LENGTH_FOR_FRONT)
           invalid_properties.push(max_length_error)
         end
@@ -59,11 +59,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _back = @back
+      unless (_back = @back).nil?
         return false if _back.to_s.size > MAX_LENGTH_FOR_BACK
       end
 
-      if _front = @front
+      unless (_front = @front).nil?
         return false if _front.to_s.size > MAX_LENGTH_FOR_FRONT
       end
 

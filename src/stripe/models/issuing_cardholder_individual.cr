@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The first name of this cardholder.
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -31,7 +31,9 @@ module Stripe
     getter last_name : String? = nil
     MAX_LENGTH_FOR_LAST_NAME = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "dob", type: Stripe::IssuingCardholderIndividualDob1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
     getter dob : Stripe::IssuingCardholderIndividualDob1? = nil
@@ -65,22 +67,22 @@ module Stripe
 
       invalid_properties.push("\"first_name\" is required and cannot be null") if @first_name.nil?
 
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
 
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -90,20 +92,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @first_name.nil?
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
       return false if @last_name.nil?
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
 
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 

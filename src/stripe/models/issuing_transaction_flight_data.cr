@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The time that the flight departed.
     @[JSON::Field(key: "departure_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: departure_at.nil? && !departure_at_present?)]
@@ -76,16 +76,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _passenger_name = @passenger_name
+      unless (_passenger_name = @passenger_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("passenger_name", _passenger_name.to_s.size, MAX_LENGTH_FOR_PASSENGER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _segments = @segments
+      unless (_segments = @segments).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "segments", container: _segments)) if _segments.is_a?(Array)
       end
-      if _travel_agency = @travel_agency
+      unless (_travel_agency = @travel_agency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("travel_agency", _travel_agency.to_s.size, MAX_LENGTH_FOR_TRAVEL_AGENCY)
           invalid_properties.push(max_length_error)
         end
@@ -96,15 +96,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _passenger_name = @passenger_name
+      unless (_passenger_name = @passenger_name).nil?
         return false if _passenger_name.to_s.size > MAX_LENGTH_FOR_PASSENGER_NAME
       end
 
-      if _segments = @segments
+      unless (_segments = @segments).nil?
         return false if _segments.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _segments)
       end
 
-      if _travel_agency = @travel_agency
+      unless (_travel_agency = @travel_agency).nil?
         return false if _travel_agency.to_s.size > MAX_LENGTH_FOR_TRAVEL_AGENCY
       end
 

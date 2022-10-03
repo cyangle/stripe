@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the product is available for purchase.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -98,46 +98,46 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _default_price = @default_price
+      unless (_default_price = @default_price).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_price", _default_price.to_s.size, MAX_LENGTH_FOR_DEFAULT_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _images = @images
+      unless (_images = @images).nil?
         invalid_properties.concat(_images.list_invalid_properties_for("images")) if _images.is_a?(OpenApi::Validatable)
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         invalid_properties.concat(_tax_code.list_invalid_properties_for("tax_code")) if _tax_code.is_a?(OpenApi::Validatable)
       end
-      if _unit_label = @unit_label
+      unless (_unit_label = @unit_label).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _url = @url
+      unless (_url = @url).nil?
         invalid_properties.concat(_url.list_invalid_properties_for("url")) if _url.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -146,43 +146,43 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _default_price = @default_price
+      unless (_default_price = @default_price).nil?
         return false if _default_price.to_s.size > MAX_LENGTH_FOR_DEFAULT_PRICE
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _images = @images
+      unless (_images = @images).nil?
         return false if _images.is_a?(OpenApi::Validatable) && !_images.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         return false if _tax_code.is_a?(OpenApi::Validatable) && !_tax_code.valid?
       end
 
-      if _unit_label = @unit_label
+      unless (_unit_label = @unit_label).nil?
         return false if _unit_label.to_s.size > MAX_LENGTH_FOR_UNIT_LABEL
       end
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.is_a?(OpenApi::Validatable) && !_url.valid?
       end
 

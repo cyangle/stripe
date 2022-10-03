@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount (in cents) to be transferred.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -37,7 +37,9 @@ module Stripe
     getter origin_payment_method : String? = nil
     MAX_LENGTH_FOR_ORIGIN_PAYMENT_METHOD = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -87,18 +89,18 @@ module Stripe
 
       invalid_properties.push("\"origin_payment_method\" is required and cannot be null") if @origin_payment_method.nil?
 
-      if _origin_payment_method = @origin_payment_method
+      unless (_origin_payment_method = @origin_payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("origin_payment_method", _origin_payment_method.to_s.size, MAX_LENGTH_FOR_ORIGIN_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
@@ -116,15 +118,15 @@ module Stripe
       return false if @financial_account.nil?
 
       return false if @origin_payment_method.nil?
-      if _origin_payment_method = @origin_payment_method
+      unless (_origin_payment_method = @origin_payment_method).nil?
         return false if _origin_payment_method.to_s.size > MAX_LENGTH_FOR_ORIGIN_PAYMENT_METHOD
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 

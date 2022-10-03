@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # A registration number used for customs in Europe. See https://www.gov.uk/eori and https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en.
     @[JSON::Field(key: "eori_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: eori_number.nil? && !eori_number_present?)]
@@ -43,7 +43,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _eori_number = @eori_number
+      unless (_eori_number = @eori_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("eori_number", _eori_number.to_s.size, MAX_LENGTH_FOR_EORI_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +54,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _eori_number = @eori_number
+      unless (_eori_number = @eori_number).nil?
         return false if _eori_number.to_s.size > MAX_LENGTH_FOR_EORI_NUMBER
       end
 

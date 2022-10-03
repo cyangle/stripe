@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bucket, finite, infinite]."
     VALID_VALUES_FOR__TYPE  = StaticArray["bucket", "finite", "infinite"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
@@ -55,11 +57,11 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _value = @value
+      unless (_value = @value).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_VALUE) unless OpenApi::EnumValidator.valid?(_value, VALID_VALUES_FOR_VALUE)
       end
       invalid_properties
@@ -69,11 +71,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _value = @value
+      unless (_value = @value).nil?
         return false unless OpenApi::EnumValidator.valid?(_value, VALID_VALUES_FOR_VALUE)
       end
 

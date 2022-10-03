@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The transaction amount, which will be reflected in your balance. This amount is in your currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -72,7 +72,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [capture, refund]."
     VALID_VALUES_FOR__TYPE  = StaticArray["capture", "refund"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "amount_details", type: Stripe::IssuingTransactionAmountDetails1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
     getter amount_details : Stripe::IssuingTransactionAmountDetails1? = nil
@@ -163,7 +165,7 @@ module Stripe
 
       invalid_properties.push("\"card\" is required and cannot be null") if @card.nil?
 
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
@@ -172,7 +174,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -185,43 +187,43 @@ module Stripe
 
       invalid_properties.push("\"merchant_data\" is required and cannot be null") if @merchant_data.nil?
 
-      if _merchant_data = @merchant_data
+      unless (_merchant_data = @merchant_data).nil?
         invalid_properties.concat(_merchant_data.list_invalid_properties_for("merchant_data")) if _merchant_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _amount_details = @amount_details
+      unless (_amount_details = @amount_details).nil?
         invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
-      if _authorization = @authorization
+      unless (_authorization = @authorization).nil?
         invalid_properties.concat(_authorization.list_invalid_properties_for("authorization")) if _authorization.is_a?(OpenApi::Validatable)
       end
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _cardholder = @cardholder
+      unless (_cardholder = @cardholder).nil?
         invalid_properties.concat(_cardholder.list_invalid_properties_for("cardholder")) if _cardholder.is_a?(OpenApi::Validatable)
       end
-      if _dispute = @dispute
+      unless (_dispute = @dispute).nil?
         invalid_properties.concat(_dispute.list_invalid_properties_for("dispute")) if _dispute.is_a?(OpenApi::Validatable)
       end
-      if _purchase_details = @purchase_details
+      unless (_purchase_details = @purchase_details).nil?
         invalid_properties.concat(_purchase_details.list_invalid_properties_for("purchase_details")) if _purchase_details.is_a?(OpenApi::Validatable)
       end
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
-      if _wallet = @wallet
+      unless (_wallet = @wallet).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_WALLET) unless OpenApi::EnumValidator.valid?(_wallet, VALID_VALUES_FOR_WALLET)
       end
       invalid_properties
@@ -233,7 +235,7 @@ module Stripe
       return false if @amount.nil?
 
       return false if @card.nil?
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
@@ -242,7 +244,7 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -253,51 +255,51 @@ module Stripe
       return false if @merchant_currency.nil?
 
       return false if @merchant_data.nil?
-      if _merchant_data = @merchant_data
+      unless (_merchant_data = @merchant_data).nil?
         return false if _merchant_data.is_a?(OpenApi::Validatable) && !_merchant_data.valid?
       end
 
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _amount_details = @amount_details
+      unless (_amount_details = @amount_details).nil?
         return false if _amount_details.is_a?(OpenApi::Validatable) && !_amount_details.valid?
       end
 
-      if _authorization = @authorization
+      unless (_authorization = @authorization).nil?
         return false if _authorization.is_a?(OpenApi::Validatable) && !_authorization.valid?
       end
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
-      if _cardholder = @cardholder
+      unless (_cardholder = @cardholder).nil?
         return false if _cardholder.is_a?(OpenApi::Validatable) && !_cardholder.valid?
       end
 
-      if _dispute = @dispute
+      unless (_dispute = @dispute).nil?
         return false if _dispute.is_a?(OpenApi::Validatable) && !_dispute.valid?
       end
 
-      if _purchase_details = @purchase_details
+      unless (_purchase_details = @purchase_details).nil?
         return false if _purchase_details.is_a?(OpenApi::Validatable) && !_purchase_details.valid?
       end
 
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 
-      if _wallet = @wallet
+      unless (_wallet = @wallet).nil?
         return false unless OpenApi::EnumValidator.valid?(_wallet, VALID_VALUES_FOR_WALLET)
       end
 

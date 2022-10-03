@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A positive integer in cents representing how much to payout.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -93,19 +95,19 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _method = @method
+      unless (_method = @method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_METHOD) unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
       end
-      if _source_type = @source_type
+      unless (_source_type = @source_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_TYPE) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
@@ -120,19 +122,19 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _method = @method
+      unless (_method = @method).nil?
         return false unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
       end
 
-      if _source_type = @source_type
+      unless (_source_type = @source_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 

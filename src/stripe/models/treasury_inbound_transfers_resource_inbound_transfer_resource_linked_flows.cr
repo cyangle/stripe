@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # If funds for this flow were returned after the flow went to the `succeeded` state, this field contains a reference to the ReceivedDebit return.
     @[JSON::Field(key: "received_debit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_debit.nil? && !received_debit_present?)]
@@ -43,7 +43,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +54,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         return false if _received_debit.to_s.size > MAX_LENGTH_FOR_RECEIVED_DEBIT
       end
 

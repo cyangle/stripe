@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "closed", type: Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: closed.nil? && !closed_present?)]
     getter closed : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _closed = @closed
+      unless (_closed = @closed).nil?
         invalid_properties.concat(_closed.list_invalid_properties_for("closed")) if _closed.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _closed = @closed
+      unless (_closed = @closed).nil?
         return false if _closed.is_a?(OpenApi::Validatable) && !_closed.valid?
       end
 

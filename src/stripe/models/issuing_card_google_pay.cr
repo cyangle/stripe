@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Google Pay Eligibility
     @[JSON::Field(key: "eligible", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter eligible : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Reason the card is ineligible for Google Pay
     @[JSON::Field(key: "ineligible_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ineligible_reason.nil? && !ineligible_reason_present?)]
@@ -54,7 +56,7 @@ module Stripe
 
       invalid_properties.push("\"eligible\" is required and cannot be null") if @eligible.nil?
 
-      if _ineligible_reason = @ineligible_reason
+      unless (_ineligible_reason = @ineligible_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INELIGIBLE_REASON) unless OpenApi::EnumValidator.valid?(_ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
       end
       invalid_properties
@@ -65,7 +67,7 @@ module Stripe
     def valid? : Bool
       return false if @eligible.nil?
 
-      if _ineligible_reason = @ineligible_reason
+      unless (_ineligible_reason = @ineligible_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
       end
 

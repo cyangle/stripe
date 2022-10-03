@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.financial_account_features]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.financial_account_features"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "card_issuing", type: Stripe::TreasuryFinancialAccountsResourceToggleSettings?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_issuing : Stripe::TreasuryFinancialAccountsResourceToggleSettings? = nil
@@ -74,28 +76,28 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
-      if _deposit_insurance = @deposit_insurance
+      unless (_deposit_insurance = @deposit_insurance).nil?
         invalid_properties.concat(_deposit_insurance.list_invalid_properties_for("deposit_insurance")) if _deposit_insurance.is_a?(OpenApi::Validatable)
       end
-      if _financial_addresses = @financial_addresses
+      unless (_financial_addresses = @financial_addresses).nil?
         invalid_properties.concat(_financial_addresses.list_invalid_properties_for("financial_addresses")) if _financial_addresses.is_a?(OpenApi::Validatable)
       end
-      if _inbound_transfers = @inbound_transfers
+      unless (_inbound_transfers = @inbound_transfers).nil?
         invalid_properties.concat(_inbound_transfers.list_invalid_properties_for("inbound_transfers")) if _inbound_transfers.is_a?(OpenApi::Validatable)
       end
-      if _intra_stripe_flows = @intra_stripe_flows
+      unless (_intra_stripe_flows = @intra_stripe_flows).nil?
         invalid_properties.concat(_intra_stripe_flows.list_invalid_properties_for("intra_stripe_flows")) if _intra_stripe_flows.is_a?(OpenApi::Validatable)
       end
-      if _outbound_payments = @outbound_payments
+      unless (_outbound_payments = @outbound_payments).nil?
         invalid_properties.concat(_outbound_payments.list_invalid_properties_for("outbound_payments")) if _outbound_payments.is_a?(OpenApi::Validatable)
       end
-      if _outbound_transfers = @outbound_transfers
+      unless (_outbound_transfers = @outbound_transfers).nil?
         invalid_properties.concat(_outbound_transfers.list_invalid_properties_for("outbound_transfers")) if _outbound_transfers.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -105,35 +107,35 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
 
-      if _deposit_insurance = @deposit_insurance
+      unless (_deposit_insurance = @deposit_insurance).nil?
         return false if _deposit_insurance.is_a?(OpenApi::Validatable) && !_deposit_insurance.valid?
       end
 
-      if _financial_addresses = @financial_addresses
+      unless (_financial_addresses = @financial_addresses).nil?
         return false if _financial_addresses.is_a?(OpenApi::Validatable) && !_financial_addresses.valid?
       end
 
-      if _inbound_transfers = @inbound_transfers
+      unless (_inbound_transfers = @inbound_transfers).nil?
         return false if _inbound_transfers.is_a?(OpenApi::Validatable) && !_inbound_transfers.valid?
       end
 
-      if _intra_stripe_flows = @intra_stripe_flows
+      unless (_intra_stripe_flows = @intra_stripe_flows).nil?
         return false if _intra_stripe_flows.is_a?(OpenApi::Validatable) && !_intra_stripe_flows.valid?
       end
 
-      if _outbound_payments = @outbound_payments
+      unless (_outbound_payments = @outbound_payments).nil?
         return false if _outbound_payments.is_a?(OpenApi::Validatable) && !_outbound_payments.valid?
       end
 
-      if _outbound_transfers = @outbound_transfers
+      unless (_outbound_transfers = @outbound_transfers).nil?
         return false if _outbound_transfers.is_a?(OpenApi::Validatable) && !_outbound_transfers.valid?
       end
 

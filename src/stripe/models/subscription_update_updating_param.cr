@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "default_allowed_updates", type: Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_allowed_updates : Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates? = nil
@@ -51,14 +51,14 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _default_allowed_updates = @default_allowed_updates
+      unless (_default_allowed_updates = @default_allowed_updates).nil?
         invalid_properties.concat(_default_allowed_updates.list_invalid_properties_for("default_allowed_updates")) if _default_allowed_updates.is_a?(OpenApi::Validatable)
       end
 
-      if _products = @products
+      unless (_products = @products).nil?
         invalid_properties.concat(_products.list_invalid_properties_for("products")) if _products.is_a?(OpenApi::Validatable)
       end
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties
@@ -67,15 +67,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _default_allowed_updates = @default_allowed_updates
+      unless (_default_allowed_updates = @default_allowed_updates).nil?
         return false if _default_allowed_updates.is_a?(OpenApi::Validatable) && !_default_allowed_updates.valid?
       end
 
-      if _products = @products
+      unless (_products = @products).nil?
         return false if _products.is_a?(OpenApi::Validatable) && !_products.valid?
       end
 
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 

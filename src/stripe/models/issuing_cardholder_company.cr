@@ -19,11 +19,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the company's business ID number was provided.
     @[JSON::Field(key: "tax_id_provided", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_id_provided : Bool? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

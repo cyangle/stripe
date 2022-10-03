@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
     MAX_LENGTH_FOR_URL = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +44,7 @@ module Stripe
 
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +56,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @url.nil?
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

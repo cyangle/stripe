@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount, in %s.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +47,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [fee_refund]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["fee_refund"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "balance_transaction", type: Stripe::FeeRefundBalanceTransaction?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
     getter balance_transaction : Stripe::FeeRefundBalanceTransaction? = nil
@@ -92,22 +94,22 @@ module Stripe
 
       invalid_properties.push("\"fee\" is required and cannot be null") if @fee.nil?
 
-      if _fee = @fee
+      unless (_fee = @fee).nil?
         invalid_properties.concat(_fee.list_invalid_properties_for("fee")) if _fee.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
 
@@ -124,21 +126,21 @@ module Stripe
       return false if @currency.nil?
 
       return false if @fee.nil?
-      if _fee = @fee
+      unless (_fee = @fee).nil?
         return false if _fee.is_a?(OpenApi::Validatable) && !_fee.valid?
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter coupon : String? = nil
@@ -43,12 +43,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _promotion_code = @promotion_code
+      unless (_promotion_code = @promotion_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
           invalid_properties.push(max_length_error)
         end
@@ -59,11 +59,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
-      if _promotion_code = @promotion_code
+      unless (_promotion_code = @promotion_code).nil?
         return false if _promotion_code.to_s.size > MAX_LENGTH_FOR_PROMOTION_CODE
       end
 

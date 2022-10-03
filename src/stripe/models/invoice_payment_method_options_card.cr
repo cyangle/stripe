@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "installments", type: Stripe::InvoiceInstallmentsCard?, default: nil, required: false, nullable: false, emit_null: false)]
     getter installments : Stripe::InvoiceInstallmentsCard? = nil
@@ -48,10 +48,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _installments = @installments
+      unless (_installments = @installments).nil?
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
-      if _request_three_d_secure = @request_three_d_secure
+      unless (_request_three_d_secure = @request_three_d_secure).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
       invalid_properties
@@ -60,11 +60,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _installments = @installments
+      unless (_installments = @installments).nil?
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
 
-      if _request_three_d_secure = @request_three_d_secure
+      unless (_request_three_d_secure = @request_three_d_secure).nil?
         return false unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
 

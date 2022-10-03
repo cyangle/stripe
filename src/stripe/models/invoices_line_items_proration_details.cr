@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "credited_items", type: Stripe::InvoicesLineItemsProrationDetailsCreditedItems?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: credited_items.nil? && !credited_items_present?)]
     getter credited_items : Stripe::InvoicesLineItemsProrationDetailsCreditedItems? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _credited_items = @credited_items
+      unless (_credited_items = @credited_items).nil?
         invalid_properties.concat(_credited_items.list_invalid_properties_for("credited_items")) if _credited_items.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _credited_items = @credited_items
+      unless (_credited_items = @credited_items).nil?
         return false if _credited_items.is_a?(OpenApi::Validatable) && !_credited_items.valid?
       end
 

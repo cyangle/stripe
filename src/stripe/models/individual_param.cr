@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter first_name : String? = nil
@@ -27,7 +27,9 @@ module Stripe
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter last_name : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "dob", type: Stripe::DateOfBirthSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter dob : Stripe::DateOfBirthSpecs? = nil
@@ -57,10 +59,10 @@ module Stripe
 
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
 
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -73,11 +75,11 @@ module Stripe
 
       return false if @last_name.nil?
 
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
 
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 

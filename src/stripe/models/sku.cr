@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the SKU is available for purchase.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -70,7 +70,9 @@ module Stripe
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter updated : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The URL of an image for this SKU, meant to be displayable to the customer.
     @[JSON::Field(key: "image", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: image.nil? && !image_present?)]
@@ -124,14 +126,14 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"inventory\" is required and cannot be null") if @inventory.nil?
 
-      if _inventory = @inventory
+      unless (_inventory = @inventory).nil?
         invalid_properties.concat(_inventory.list_invalid_properties_for("inventory")) if _inventory.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -140,24 +142,24 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
-      if _product = @product
+      unless (_product = @product).nil?
         invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
-      if _image = @image
+      unless (_image = @image).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, MAX_LENGTH_FOR_IMAGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -175,12 +177,12 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @inventory.nil?
-      if _inventory = @inventory
+      unless (_inventory = @inventory).nil?
         return false if _inventory.is_a?(OpenApi::Validatable) && !_inventory.valid?
       end
 
@@ -189,24 +191,24 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @price.nil?
 
       return false if @product.nil?
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
 
       return false if @updated.nil?
 
-      if _image = @image
+      unless (_image = @image).nil?
         return false if _image.to_s.size > MAX_LENGTH_FOR_IMAGE
       end
 
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 

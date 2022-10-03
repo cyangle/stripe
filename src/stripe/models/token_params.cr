@@ -18,11 +18,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "token", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter token : String? = nil
     MAX_LENGTH_FOR_TOKEN = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"token\" is required and cannot be null") if @token.nil?
 
-      if _token = @token
+      unless (_token = @token).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("token", _token.to_s.size, MAX_LENGTH_FOR_TOKEN)
           invalid_properties.push(max_length_error)
         end
@@ -52,7 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @token.nil?
-      if _token = @token
+      unless (_token = @token).nil?
         return false if _token.to_s.size > MAX_LENGTH_FOR_TOKEN
       end
 

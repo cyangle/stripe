@@ -18,12 +18,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "up_to", type: Stripe::TierUpTo?, default: nil, required: true, nullable: false, emit_null: false)]
     getter up_to : Stripe::TierUpTo? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "flat_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter flat_amount : Int64? = nil
@@ -58,7 +60,7 @@ module Stripe
 
       invalid_properties.push("\"up_to\" is required and cannot be null") if @up_to.nil?
 
-      if _up_to = @up_to
+      unless (_up_to = @up_to).nil?
         invalid_properties.concat(_up_to.list_invalid_properties_for("up_to")) if _up_to.is_a?(OpenApi::Validatable)
       end
 
@@ -69,7 +71,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @up_to.nil?
-      if _up_to = @up_to
+      unless (_up_to = @up_to).nil?
         return false if _up_to.is_a?(OpenApi::Validatable) && !_up_to.valid?
       end
 

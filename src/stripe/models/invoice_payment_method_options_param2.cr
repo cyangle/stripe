@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "bank_transfer", type: Stripe::BankTransferParam1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_transfer : Stripe::BankTransferParam1? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
 
@@ -51,7 +51,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         return false if _bank_transfer.is_a?(OpenApi::Validatable) && !_bank_transfer.valid?
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "adjustable_quantity", type: Stripe::AdjustableQuantityParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter adjustable_quantity : Stripe::AdjustableQuantityParams? = nil
@@ -58,16 +58,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _adjustable_quantity = @adjustable_quantity
+      unless (_adjustable_quantity = @adjustable_quantity).nil?
         invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity")) if _adjustable_quantity.is_a?(OpenApi::Validatable)
       end
 
-      if _price = @price
+      unless (_price = @price).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
 
@@ -77,15 +77,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _adjustable_quantity = @adjustable_quantity
+      unless (_adjustable_quantity = @adjustable_quantity).nil?
         return false if _adjustable_quantity.is_a?(OpenApi::Validatable) && !_adjustable_quantity.valid?
       end
 
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
 

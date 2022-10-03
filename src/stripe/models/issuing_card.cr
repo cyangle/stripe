@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The brand of the card.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -84,7 +84,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [physical, virtual]."
     VALID_VALUES_FOR__TYPE  = StaticArray["physical", "virtual"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The reason why the card was canceled.
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
@@ -185,14 +187,14 @@ module Stripe
 
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
 
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"cardholder\" is required and cannot be null") if @cardholder.nil?
 
-      if _cardholder = @cardholder
+      unless (_cardholder = @cardholder).nil?
         invalid_properties.concat(_cardholder.list_invalid_properties_for("cardholder")) if _cardholder.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
@@ -205,14 +207,14 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
@@ -223,55 +225,55 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"spending_controls\" is required and cannot be null") if @spending_controls.nil?
 
-      if _spending_controls = @spending_controls
+      unless (_spending_controls = @spending_controls).nil?
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
           invalid_properties.push(max_length_error)
         end
       end
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _number = @number
+      unless (_number = @number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _replaced_by = @replaced_by
+      unless (_replaced_by = @replaced_by).nil?
         invalid_properties.concat(_replaced_by.list_invalid_properties_for("replaced_by")) if _replaced_by.is_a?(OpenApi::Validatable)
       end
-      if _replacement_for = @replacement_for
+      unless (_replacement_for = @replacement_for).nil?
         invalid_properties.concat(_replacement_for.list_invalid_properties_for("replacement_for")) if _replacement_for.is_a?(OpenApi::Validatable)
       end
-      if _replacement_reason = @replacement_reason
+      unless (_replacement_reason = @replacement_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REPLACEMENT_REASON) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _wallets = @wallets
+      unless (_wallets = @wallets).nil?
         invalid_properties.concat(_wallets.list_invalid_properties_for("wallets")) if _wallets.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -281,12 +283,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @brand.nil?
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
       return false if @cardholder.nil?
-      if _cardholder = @cardholder
+      unless (_cardholder = @cardholder).nil?
         return false if _cardholder.is_a?(OpenApi::Validatable) && !_cardholder.valid?
       end
 
@@ -299,12 +301,12 @@ module Stripe
       return false if @exp_year.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @last4.nil?
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
@@ -313,58 +315,58 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @spending_controls.nil?
-      if _spending_controls = @spending_controls
+      unless (_spending_controls = @spending_controls).nil?
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         return false if _cvc.to_s.size > MAX_LENGTH_FOR_CVC
       end
 
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         return false if _financial_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_ACCOUNT
       end
 
-      if _number = @number
+      unless (_number = @number).nil?
         return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
-      if _replaced_by = @replaced_by
+      unless (_replaced_by = @replaced_by).nil?
         return false if _replaced_by.is_a?(OpenApi::Validatable) && !_replaced_by.valid?
       end
 
-      if _replacement_for = @replacement_for
+      unless (_replacement_for = @replacement_for).nil?
         return false if _replacement_for.is_a?(OpenApi::Validatable) && !_replacement_for.valid?
       end
 
-      if _replacement_reason = @replacement_reason
+      unless (_replacement_reason = @replacement_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _wallets = @wallets
+      unless (_wallets = @wallets).nil?
         return false if _wallets.is_a?(OpenApi::Validatable) && !_wallets.valid?
       end
 

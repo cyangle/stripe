@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `false` for Custom accounts, otherwise `true`.
     @[JSON::Field(key: "debit_negative_balances", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "schedule", type: Stripe::TransferSchedule?, default: nil, required: true, nullable: false, emit_null: false)]
     getter schedule : Stripe::TransferSchedule? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
@@ -59,10 +61,10 @@ module Stripe
 
       invalid_properties.push("\"schedule\" is required and cannot be null") if @schedule.nil?
 
-      if _schedule = @schedule
+      unless (_schedule = @schedule).nil?
         invalid_properties.concat(_schedule.list_invalid_properties_for("schedule")) if _schedule.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
@@ -76,11 +78,11 @@ module Stripe
       return false if @debit_negative_balances.nil?
 
       return false if @schedule.nil?
-      if _schedule = @schedule
+      unless (_schedule = @schedule).nil?
         return false if _schedule.is_a?(OpenApi::Validatable) && !_schedule.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 

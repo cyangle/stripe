@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [acss_debit, affirm, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, blik, boleto, customer_balance, eps, fpx, giropay, grabpay, ideal, klarna, konbini, link, oxxo, p24, paynow, pix, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
     VALID_VALUES_FOR__TYPE  = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "acss_debit", type: Stripe::PaymentMethodParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit : Stripe::PaymentMethodParam? = nil
@@ -169,57 +171,57 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
 
-      if _au_becs_debit = @au_becs_debit
+      unless (_au_becs_debit = @au_becs_debit).nil?
         invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit")) if _au_becs_debit.is_a?(OpenApi::Validatable)
       end
-      if _bacs_debit = @bacs_debit
+      unless (_bacs_debit = @bacs_debit).nil?
         invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit")) if _bacs_debit.is_a?(OpenApi::Validatable)
       end
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
 
-      if _boleto = @boleto
+      unless (_boleto = @boleto).nil?
         invalid_properties.concat(_boleto.list_invalid_properties_for("boleto")) if _boleto.is_a?(OpenApi::Validatable)
       end
 
-      if _eps = @eps
+      unless (_eps = @eps).nil?
         invalid_properties.concat(_eps.list_invalid_properties_for("eps")) if _eps.is_a?(OpenApi::Validatable)
       end
-      if _fpx = @fpx
+      unless (_fpx = @fpx).nil?
         invalid_properties.concat(_fpx.list_invalid_properties_for("fpx")) if _fpx.is_a?(OpenApi::Validatable)
       end
 
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         invalid_properties.concat(_ideal.list_invalid_properties_for("ideal")) if _ideal.is_a?(OpenApi::Validatable)
       end
 
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         invalid_properties.concat(_klarna.list_invalid_properties_for("klarna")) if _klarna.is_a?(OpenApi::Validatable)
       end
 
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         invalid_properties.concat(_p24.list_invalid_properties_for("p24")) if _p24.is_a?(OpenApi::Validatable)
       end
 
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options")) if _radar_options.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
 
@@ -230,63 +232,63 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
-      if _au_becs_debit = @au_becs_debit
+      unless (_au_becs_debit = @au_becs_debit).nil?
         return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
 
-      if _bacs_debit = @bacs_debit
+      unless (_bacs_debit = @bacs_debit).nil?
         return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
 
-      if _boleto = @boleto
+      unless (_boleto = @boleto).nil?
         return false if _boleto.is_a?(OpenApi::Validatable) && !_boleto.valid?
       end
 
-      if _eps = @eps
+      unless (_eps = @eps).nil?
         return false if _eps.is_a?(OpenApi::Validatable) && !_eps.valid?
       end
 
-      if _fpx = @fpx
+      unless (_fpx = @fpx).nil?
         return false if _fpx.is_a?(OpenApi::Validatable) && !_fpx.valid?
       end
 
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
 
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
 
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
 
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
 
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
 
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 

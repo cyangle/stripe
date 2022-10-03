@@ -19,28 +19,30 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Funds the user can spend right now.
-    @[JSON::Field(key: "cash", type: Hash(String, Int64)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter cash : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "cash", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter cash : Hash(String, Int32)? = nil
 
     # Funds not spendable yet, but will become available at a later time.
-    @[JSON::Field(key: "inbound_pending", type: Hash(String, Int64)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter inbound_pending : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "inbound_pending", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter inbound_pending : Hash(String, Int32)? = nil
 
     # Funds in the account, but not spendable because they are being held for pending outbound flows.
-    @[JSON::Field(key: "outbound_pending", type: Hash(String, Int64)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter outbound_pending : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "outbound_pending", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter outbound_pending : Hash(String, Int32)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @cash : Hash(String, Int64)? = nil,
-      @inbound_pending : Hash(String, Int64)? = nil,
-      @outbound_pending : Hash(String, Int64)? = nil
+      @cash : Hash(String, Int32)? = nil,
+      @inbound_pending : Hash(String, Int32)? = nil,
+      @outbound_pending : Hash(String, Int32)? = nil
     )
     end
 
@@ -72,7 +74,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash Object to be assigned
-    def cash=(cash : Hash(String, Int64)?)
+    def cash=(cash : Hash(String, Int32)?)
       if cash.nil?
         raise ArgumentError.new("\"cash\" is required and cannot be null")
       end
@@ -82,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_pending Object to be assigned
-    def inbound_pending=(inbound_pending : Hash(String, Int64)?)
+    def inbound_pending=(inbound_pending : Hash(String, Int32)?)
       if inbound_pending.nil?
         raise ArgumentError.new("\"inbound_pending\" is required and cannot be null")
       end
@@ -92,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_pending Object to be assigned
-    def outbound_pending=(outbound_pending : Hash(String, Int64)?)
+    def outbound_pending=(outbound_pending : Hash(String, Int32)?)
       if outbound_pending.nil?
         raise ArgumentError.new("\"outbound_pending\" is required and cannot be null")
       end

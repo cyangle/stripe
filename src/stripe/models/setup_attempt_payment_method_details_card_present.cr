@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "generated_card", type: Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: generated_card.nil? && !generated_card_present?)]
     getter generated_card : Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _generated_card = @generated_card
+      unless (_generated_card = @generated_card).nil?
         invalid_properties.concat(_generated_card.list_invalid_properties_for("generated_card")) if _generated_card.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _generated_card = @generated_card
+      unless (_generated_card = @generated_card).nil?
         return false if _generated_card.is_a?(OpenApi::Validatable) && !_generated_card.valid?
       end
 

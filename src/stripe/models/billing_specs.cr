@@ -19,10 +19,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "address", type: Stripe::RequiredAddress?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::RequiredAddress? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @address.nil?
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 

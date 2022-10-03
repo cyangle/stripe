@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether customer approval has been requested for this payment. For payments greater than INR 15000 or mandate amount, the customer must provide explicit approval of the payment with their bank.
     @[JSON::Field(key: "approval_requested", type: Bool?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: approval_requested.nil? && !approval_requested_present?)]

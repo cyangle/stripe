@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # An universal link that redirect to WeChat Pay app
     @[JSON::Field(key: "native_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter native_url : String? = nil
     MAX_LENGTH_FOR_NATIVE_URL = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +44,7 @@ module Stripe
 
       invalid_properties.push("\"native_url\" is required and cannot be null") if @native_url.nil?
 
-      if _native_url = @native_url
+      unless (_native_url = @native_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +56,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @native_url.nil?
-      if _native_url = @native_url
+      unless (_native_url = @native_url).nil?
         return false if _native_url.to_s.size > MAX_LENGTH_FOR_NATIVE_URL
       end
 

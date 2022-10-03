@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount (in cents) transferred.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -68,7 +68,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, succeeded]."
     VALID_VALUES_FOR_STATUS  = StaticArray["failed", "succeeded"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Reason for the failure. A ReceivedDebit might fail because the FinancialAccount doesn't have sufficient funds, is closed, or is frozen.
     @[JSON::Field(key: "failure_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
@@ -148,60 +150,60 @@ module Stripe
 
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"linked_flows\" is required and cannot be null") if @linked_flows.nil?
 
-      if _linked_flows = @linked_flows
+      unless (_linked_flows = @linked_flows).nil?
         invalid_properties.concat(_linked_flows.list_invalid_properties_for("linked_flows")) if _linked_flows.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
-      if _network = @network
+      unless (_network = @network).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _failure_code = @failure_code
+      unless (_failure_code = @failure_code).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FAILURE_CODE) unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
       end
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
+      unless (_hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _initiating_payment_method_details = @initiating_payment_method_details
+      unless (_initiating_payment_method_details = @initiating_payment_method_details).nil?
         invalid_properties.concat(_initiating_payment_method_details.list_invalid_properties_for("initiating_payment_method_details")) if _initiating_payment_method_details.is_a?(OpenApi::Validatable)
       end
-      if _reversal_details = @reversal_details
+      unless (_reversal_details = @reversal_details).nil?
         invalid_properties.concat(_reversal_details.list_invalid_properties_for("reversal_details")) if _reversal_details.is_a?(OpenApi::Validatable)
       end
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -217,58 +219,58 @@ module Stripe
       return false if @currency.nil?
 
       return false if @description.nil?
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @linked_flows.nil?
-      if _linked_flows = @linked_flows
+      unless (_linked_flows = @linked_flows).nil?
         return false if _linked_flows.is_a?(OpenApi::Validatable) && !_linked_flows.valid?
       end
 
       return false if @livemode.nil?
 
       return false if @network.nil?
-      if _network = @network
+      unless (_network = @network).nil?
         return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _failure_code = @failure_code
+      unless (_failure_code = @failure_code).nil?
         return false unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
       end
 
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         return false if _financial_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_ACCOUNT
       end
 
-      if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
+      unless (_hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url).nil?
         return false if _hosted_regulatory_receipt_url.to_s.size > MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL
       end
 
-      if _initiating_payment_method_details = @initiating_payment_method_details
+      unless (_initiating_payment_method_details = @initiating_payment_method_details).nil?
         return false if _initiating_payment_method_details.is_a?(OpenApi::Validatable) && !_initiating_payment_method_details.valid?
       end
 
-      if _reversal_details = @reversal_details
+      unless (_reversal_details = @reversal_details).nil?
         return false if _reversal_details.is_a?(OpenApi::Validatable) && !_reversal_details.valid?
       end
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The three-letter IATA airport code of the flight's destination.
     @[JSON::Field(key: "arrival_airport_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: arrival_airport_code.nil? && !arrival_airport_code_present?)]
@@ -87,27 +87,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _arrival_airport_code = @arrival_airport_code
+      unless (_arrival_airport_code = @arrival_airport_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _carrier = @carrier
+      unless (_carrier = @carrier).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _departure_airport_code = @departure_airport_code
+      unless (_departure_airport_code = @departure_airport_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("departure_airport_code", _departure_airport_code.to_s.size, MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _flight_number = @flight_number
+      unless (_flight_number = @flight_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flight_number", _flight_number.to_s.size, MAX_LENGTH_FOR_FLIGHT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _service_class = @service_class
+      unless (_service_class = @service_class).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_class", _service_class.to_s.size, MAX_LENGTH_FOR_SERVICE_CLASS)
           invalid_properties.push(max_length_error)
         end
@@ -119,23 +119,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _arrival_airport_code = @arrival_airport_code
+      unless (_arrival_airport_code = @arrival_airport_code).nil?
         return false if _arrival_airport_code.to_s.size > MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE
       end
 
-      if _carrier = @carrier
+      unless (_carrier = @carrier).nil?
         return false if _carrier.to_s.size > MAX_LENGTH_FOR_CARRIER
       end
 
-      if _departure_airport_code = @departure_airport_code
+      unless (_departure_airport_code = @departure_airport_code).nil?
         return false if _departure_airport_code.to_s.size > MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE
       end
 
-      if _flight_number = @flight_number
+      unless (_flight_number = @flight_number).nil?
         return false if _flight_number.to_s.size > MAX_LENGTH_FOR_FLIGHT_NUMBER
       end
 
-      if _service_class = @service_class
+      unless (_service_class = @service_class).nil?
         return false if _service_class.to_s.size > MAX_LENGTH_FOR_SERVICE_CLASS
       end
 

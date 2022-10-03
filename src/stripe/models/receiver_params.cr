@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "refund_attributes_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_attributes_method : String? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _refund_attributes_method = @refund_attributes_method
+      unless (_refund_attributes_method = @refund_attributes_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REFUND_ATTRIBUTES_METHOD) unless OpenApi::EnumValidator.valid?(_refund_attributes_method, VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)
       end
       invalid_properties
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _refund_attributes_method = @refund_attributes_method
+      unless (_refund_attributes_method = @refund_attributes_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_refund_attributes_method, VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)
       end
 

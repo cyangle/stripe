@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A list of prices and quantities that will generate invoice items appended to the next invoice for this phase.
     @[JSON::Field(key: "add_invoice_items", type: Array(Stripe::SubscriptionScheduleAddInvoiceItem)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +47,9 @@ module Stripe
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter start_date : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account during this phase of the schedule.
     @[JSON::Field(key: "application_fee_percent", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
@@ -171,7 +173,7 @@ module Stripe
 
       invalid_properties.push("\"add_invoice_items\" is required and cannot be null") if @add_invoice_items.nil?
 
-      if _add_invoice_items = @add_invoice_items
+      unless (_add_invoice_items = @add_invoice_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "add_invoice_items", container: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
@@ -180,47 +182,47 @@ module Stripe
 
       invalid_properties.push("\"items\" is required and cannot be null") if @items.nil?
 
-      if _items = @items
+      unless (_items = @items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
       invalid_properties.push("\"proration_behavior\" is required and cannot be null") if @proration_behavior.nil?
 
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _billing_cycle_anchor = @billing_cycle_anchor
+      unless (_billing_cycle_anchor = @billing_cycle_anchor).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
-      if _collection_method = @collection_method
+      unless (_collection_method = @collection_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         invalid_properties.concat(_coupon.list_invalid_properties_for("coupon")) if _coupon.is_a?(OpenApi::Validatable)
       end
-      if _default_payment_method = @default_payment_method
+      unless (_default_payment_method = @default_payment_method).nil?
         invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method")) if _default_payment_method.is_a?(OpenApi::Validatable)
       end
-      if _default_tax_rates = @default_tax_rates
+      unless (_default_tax_rates = @default_tax_rates).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "default_tax_rates", container: _default_tax_rates)) if _default_tax_rates.is_a?(Array)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
@@ -231,7 +233,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @add_invoice_items.nil?
-      if _add_invoice_items = @add_invoice_items
+      unless (_add_invoice_items = @add_invoice_items).nil?
         return false if _add_invoice_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _add_invoice_items)
       end
 
@@ -240,54 +242,54 @@ module Stripe
       return false if @end_date.nil?
 
       return false if @items.nil?
-      if _items = @items
+      unless (_items = @items).nil?
         return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       return false if @proration_behavior.nil?
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 
       return false if @start_date.nil?
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _billing_cycle_anchor = @billing_cycle_anchor
+      unless (_billing_cycle_anchor = @billing_cycle_anchor).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
 
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
 
-      if _collection_method = @collection_method
+      unless (_collection_method = @collection_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
 
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         return false if _coupon.is_a?(OpenApi::Validatable) && !_coupon.valid?
       end
 
-      if _default_payment_method = @default_payment_method
+      unless (_default_payment_method = @default_payment_method).nil?
         return false if _default_payment_method.is_a?(OpenApi::Validatable) && !_default_payment_method.valid?
       end
 
-      if _default_tax_rates = @default_tax_rates
+      unless (_default_tax_rates = @default_tax_rates).nil?
         return false if _default_tax_rates.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _default_tax_rates)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _invoice_settings = @invoice_settings
+      unless (_invoice_settings = @invoice_settings).nil?
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

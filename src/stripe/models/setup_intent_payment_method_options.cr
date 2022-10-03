@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "acss_debit", type: Stripe::SetupIntentPaymentMethodOptionsAcssDebit1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit : Stripe::SetupIntentPaymentMethodOptionsAcssDebit1? = nil
@@ -58,22 +58,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
-      if _blik = @blik
+      unless (_blik = @blik).nil?
         invalid_properties.concat(_blik.list_invalid_properties_for("blik")) if _blik.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _link = @link
+      unless (_link = @link).nil?
         invalid_properties.concat(_link.list_invalid_properties_for("link")) if _link.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -82,27 +82,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
-      if _blik = @blik
+      unless (_blik = @blik).nil?
         return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _link = @link
+      unless (_link = @link).nil?
         return false if _link.is_a?(OpenApi::Validatable) && !_link.valid?
       end
 
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 

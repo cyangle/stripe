@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount (in cents) transferred.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -77,7 +77,9 @@ module Stripe
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryReceivedCreditsResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryReceivedCreditsResourceStatusTransitions? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # A [hosted transaction receipt](https://stripe.com/docs/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     @[JSON::Field(key: "hosted_regulatory_receipt_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: hosted_regulatory_receipt_url.nil? && !hosted_regulatory_receipt_url_present?)]
@@ -129,14 +131,14 @@ module Stripe
 
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -147,37 +149,37 @@ module Stripe
 
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
-      if _network = @network
+      unless (_network = @network).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"received_credit\" is required and cannot be null") if @received_credit.nil?
 
-      if _received_credit = @received_credit
+      unless (_received_credit = @received_credit).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, MAX_LENGTH_FOR_RECEIVED_CREDIT)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"status_transitions\" is required and cannot be null") if @status_transitions.nil?
 
-      if _status_transitions = @status_transitions
+      unless (_status_transitions = @status_transitions).nil?
         invalid_properties.concat(_status_transitions.list_invalid_properties_for("status_transitions")) if _status_transitions.is_a?(OpenApi::Validatable)
       end
-      if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
+      unless (_hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -193,12 +195,12 @@ module Stripe
       return false if @currency.nil?
 
       return false if @financial_account.nil?
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         return false if _financial_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_ACCOUNT
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -207,35 +209,35 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @network.nil?
-      if _network = @network
+      unless (_network = @network).nil?
         return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @received_credit.nil?
-      if _received_credit = @received_credit
+      unless (_received_credit = @received_credit).nil?
         return false if _received_credit.to_s.size > MAX_LENGTH_FOR_RECEIVED_CREDIT
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @status_transitions.nil?
-      if _status_transitions = @status_transitions
+      unless (_status_transitions = @status_transitions).nil?
         return false if _status_transitions.is_a?(OpenApi::Validatable) && !_status_transitions.valid?
       end
 
-      if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
+      unless (_hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url).nil?
         return false if _hosted_regulatory_receipt_url.to_s.size > MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL
       end
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
       end
 

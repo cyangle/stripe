@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "canceled", type: Stripe::EvidenceParamCanceled?, default: nil, required: false, nullable: false, emit_null: false)]
     getter canceled : Stripe::EvidenceParamCanceled? = nil
@@ -68,28 +68,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _canceled = @canceled
+      unless (_canceled = @canceled).nil?
         invalid_properties.concat(_canceled.list_invalid_properties_for("canceled")) if _canceled.is_a?(OpenApi::Validatable)
       end
-      if _duplicate = @duplicate
+      unless (_duplicate = @duplicate).nil?
         invalid_properties.concat(_duplicate.list_invalid_properties_for("duplicate")) if _duplicate.is_a?(OpenApi::Validatable)
       end
-      if _fraudulent = @fraudulent
+      unless (_fraudulent = @fraudulent).nil?
         invalid_properties.concat(_fraudulent.list_invalid_properties_for("fraudulent")) if _fraudulent.is_a?(OpenApi::Validatable)
       end
-      if _merchandise_not_as_described = @merchandise_not_as_described
+      unless (_merchandise_not_as_described = @merchandise_not_as_described).nil?
         invalid_properties.concat(_merchandise_not_as_described.list_invalid_properties_for("merchandise_not_as_described")) if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
       end
-      if _not_received = @not_received
+      unless (_not_received = @not_received).nil?
         invalid_properties.concat(_not_received.list_invalid_properties_for("not_received")) if _not_received.is_a?(OpenApi::Validatable)
       end
-      if _other = @other
+      unless (_other = @other).nil?
         invalid_properties.concat(_other.list_invalid_properties_for("other")) if _other.is_a?(OpenApi::Validatable)
       end
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
-      if _service_not_as_described = @service_not_as_described
+      unless (_service_not_as_described = @service_not_as_described).nil?
         invalid_properties.concat(_service_not_as_described.list_invalid_properties_for("service_not_as_described")) if _service_not_as_described.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -98,35 +98,35 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _canceled = @canceled
+      unless (_canceled = @canceled).nil?
         return false if _canceled.is_a?(OpenApi::Validatable) && !_canceled.valid?
       end
 
-      if _duplicate = @duplicate
+      unless (_duplicate = @duplicate).nil?
         return false if _duplicate.is_a?(OpenApi::Validatable) && !_duplicate.valid?
       end
 
-      if _fraudulent = @fraudulent
+      unless (_fraudulent = @fraudulent).nil?
         return false if _fraudulent.is_a?(OpenApi::Validatable) && !_fraudulent.valid?
       end
 
-      if _merchandise_not_as_described = @merchandise_not_as_described
+      unless (_merchandise_not_as_described = @merchandise_not_as_described).nil?
         return false if _merchandise_not_as_described.is_a?(OpenApi::Validatable) && !_merchandise_not_as_described.valid?
       end
 
-      if _not_received = @not_received
+      unless (_not_received = @not_received).nil?
         return false if _not_received.is_a?(OpenApi::Validatable) && !_not_received.valid?
       end
 
-      if _other = @other
+      unless (_other = @other).nil?
         return false if _other.is_a?(OpenApi::Validatable) && !_other.valid?
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
-      if _service_not_as_described = @service_not_as_described
+      unless (_service_not_as_described = @service_not_as_described).nil?
         return false if _service_not_as_described.is_a?(OpenApi::Validatable) && !_service_not_as_described.valid?
       end
 

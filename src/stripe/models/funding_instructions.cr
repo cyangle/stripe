@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "bank_transfer", type: Stripe::FundingInstructionsBankTransfer?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank_transfer : Stripe::FundingInstructionsBankTransfer? = nil
@@ -45,6 +45,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [funding_instructions]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["funding_instructions"]
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -65,26 +67,26 @@ module Stripe
 
       invalid_properties.push("\"bank_transfer\" is required and cannot be null") if @bank_transfer.nil?
 
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"funding_type\" is required and cannot be null") if @funding_type.nil?
 
-      if _funding_type = @funding_type
+      unless (_funding_type = @funding_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FUNDING_TYPE) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties
@@ -94,24 +96,24 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @bank_transfer.nil?
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         return false if _bank_transfer.is_a?(OpenApi::Validatable) && !_bank_transfer.valid?
       end
 
       return false if @currency.nil?
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
       return false if @funding_type.nil?
-      if _funding_type = @funding_type
+      unless (_funding_type = @funding_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 

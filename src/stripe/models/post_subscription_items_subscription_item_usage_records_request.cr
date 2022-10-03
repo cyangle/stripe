@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The usage quantity for the specified timestamp.
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.
     @[JSON::Field(key: "action", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -59,11 +61,11 @@ module Stripe
 
       invalid_properties.push("\"quantity\" is required and cannot be null") if @quantity.nil?
 
-      if _action = @action
+      unless (_action = @action).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACTION) unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
       end
 
-      if _timestamp = @timestamp
+      unless (_timestamp = @timestamp).nil?
         invalid_properties.concat(_timestamp.list_invalid_properties_for("timestamp")) if _timestamp.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -74,11 +76,11 @@ module Stripe
     def valid? : Bool
       return false if @quantity.nil?
 
-      if _action = @action
+      unless (_action = @action).nil?
         return false unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
       end
 
-      if _timestamp = @timestamp
+      unless (_timestamp = @timestamp).nil?
         return false if _timestamp.is_a?(OpenApi::Validatable) && !_timestamp.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The amount (price) for this order item.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
@@ -83,23 +83,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _parent = @parent
+      unless (_parent = @parent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("parent", _parent.to_s.size, MAX_LENGTH_FOR_PARENT)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
@@ -110,19 +110,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _parent = @parent
+      unless (_parent = @parent).nil?
         return false if _parent.to_s.size > MAX_LENGTH_FOR_PARENT
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 

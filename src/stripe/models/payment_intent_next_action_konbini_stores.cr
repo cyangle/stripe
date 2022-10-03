@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "familymart", type: Stripe::PaymentIntentNextActionKonbiniStoresFamilymart?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: familymart.nil? && !familymart_present?)]
     getter familymart : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart? = nil
@@ -62,16 +62,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _familymart = @familymart
+      unless (_familymart = @familymart).nil?
         invalid_properties.concat(_familymart.list_invalid_properties_for("familymart")) if _familymart.is_a?(OpenApi::Validatable)
       end
-      if _lawson = @lawson
+      unless (_lawson = @lawson).nil?
         invalid_properties.concat(_lawson.list_invalid_properties_for("lawson")) if _lawson.is_a?(OpenApi::Validatable)
       end
-      if _ministop = @ministop
+      unless (_ministop = @ministop).nil?
         invalid_properties.concat(_ministop.list_invalid_properties_for("ministop")) if _ministop.is_a?(OpenApi::Validatable)
       end
-      if _seicomart = @seicomart
+      unless (_seicomart = @seicomart).nil?
         invalid_properties.concat(_seicomart.list_invalid_properties_for("seicomart")) if _seicomart.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -80,19 +80,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _familymart = @familymart
+      unless (_familymart = @familymart).nil?
         return false if _familymart.is_a?(OpenApi::Validatable) && !_familymart.valid?
       end
 
-      if _lawson = @lawson
+      unless (_lawson = @lawson).nil?
         return false if _lawson.is_a?(OpenApi::Validatable) && !_lawson.valid?
       end
 
-      if _ministop = @ministop
+      unless (_ministop = @ministop).nil?
         return false if _ministop.is_a?(OpenApi::Validatable) && !_ministop.valid?
       end
 
-      if _seicomart = @seicomart
+      unless (_seicomart = @seicomart).nil?
         return false if _seicomart.is_a?(OpenApi::Validatable) && !_seicomart.valid?
       end
 

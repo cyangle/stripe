@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The count of inventory available. Will be present if and only if `type` is `finite`.
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
@@ -62,13 +64,13 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _value = @value
+      unless (_value = @value).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
           invalid_properties.push(max_length_error)
         end
@@ -80,11 +82,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
-      if _value = @value
+      unless (_value = @value).nil?
         return false if _value.to_s.size > MAX_LENGTH_FOR_VALUE
       end
 

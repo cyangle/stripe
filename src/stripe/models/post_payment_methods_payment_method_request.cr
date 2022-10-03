@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "billing_details", type: Stripe::BillingDetailsInnerParams1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_details : Stripe::BillingDetailsInnerParams1? = nil
@@ -59,17 +59,17 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -78,19 +78,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 

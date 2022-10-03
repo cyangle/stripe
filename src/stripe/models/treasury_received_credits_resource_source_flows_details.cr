@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The type of the source flow that originated the ReceivedCredit.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [credit_reversal, other, outbound_payment, payout]."
     VALID_VALUES_FOR__TYPE  = StaticArray["credit_reversal", "other", "outbound_payment", "payout"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "credit_reversal", type: Stripe::TreasuryCreditReversal?, default: nil, required: false, nullable: false, emit_null: false)]
     getter credit_reversal : Stripe::TreasuryCreditReversal? = nil
@@ -58,16 +60,16 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _credit_reversal = @credit_reversal
+      unless (_credit_reversal = @credit_reversal).nil?
         invalid_properties.concat(_credit_reversal.list_invalid_properties_for("credit_reversal")) if _credit_reversal.is_a?(OpenApi::Validatable)
       end
-      if _outbound_payment = @outbound_payment
+      unless (_outbound_payment = @outbound_payment).nil?
         invalid_properties.concat(_outbound_payment.list_invalid_properties_for("outbound_payment")) if _outbound_payment.is_a?(OpenApi::Validatable)
       end
-      if _payout = @payout
+      unless (_payout = @payout).nil?
         invalid_properties.concat(_payout.list_invalid_properties_for("payout")) if _payout.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -77,19 +79,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _credit_reversal = @credit_reversal
+      unless (_credit_reversal = @credit_reversal).nil?
         return false if _credit_reversal.is_a?(OpenApi::Validatable) && !_credit_reversal.valid?
       end
 
-      if _outbound_payment = @outbound_payment
+      unless (_outbound_payment = @outbound_payment).nil?
         return false if _outbound_payment.is_a?(OpenApi::Validatable) && !_outbound_payment.valid?
       end
 
-      if _payout = @payout
+      unless (_payout = @payout).nil?
         return false if _payout.is_a?(OpenApi::Validatable) && !_payout.valid?
       end
 

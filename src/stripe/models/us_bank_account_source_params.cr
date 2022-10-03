@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_name : String? = nil
@@ -48,17 +48,17 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -69,15 +69,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 

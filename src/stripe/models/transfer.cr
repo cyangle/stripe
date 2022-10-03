@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount in %s to be transferred.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -63,7 +63,9 @@ module Stripe
     @[JSON::Field(key: "reversed", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reversed : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "balance_transaction", type: Stripe::TransferBalanceTransaction?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
     getter balance_transaction : Stripe::TransferBalanceTransaction? = nil
@@ -148,7 +150,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -159,39 +161,39 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"reversals\" is required and cannot be null") if @reversals.nil?
 
-      if _reversals = @reversals
+      unless (_reversals = @reversals).nil?
         invalid_properties.concat(_reversals.list_invalid_properties_for("reversals")) if _reversals.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"reversed\" is required and cannot be null") if @reversed.nil?
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _destination = @destination
+      unless (_destination = @destination).nil?
         invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
       end
-      if _destination_payment = @destination_payment
+      unless (_destination_payment = @destination_payment).nil?
         invalid_properties.concat(_destination_payment.list_invalid_properties_for("destination_payment")) if _destination_payment.is_a?(OpenApi::Validatable)
       end
-      if _source_transaction = @source_transaction
+      unless (_source_transaction = @source_transaction).nil?
         invalid_properties.concat(_source_transaction.list_invalid_properties_for("source_transaction")) if _source_transaction.is_a?(OpenApi::Validatable)
       end
-      if _source_type = @source_type
+      unless (_source_type = @source_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, MAX_LENGTH_FOR_SOURCE_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_group = @transfer_group
+      unless (_transfer_group = @transfer_group).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, MAX_LENGTH_FOR_TRANSFER_GROUP)
           invalid_properties.push(max_length_error)
         end
@@ -211,7 +213,7 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -220,42 +222,42 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @reversals.nil?
-      if _reversals = @reversals
+      unless (_reversals = @reversals).nil?
         return false if _reversals.is_a?(OpenApi::Validatable) && !_reversals.valid?
       end
 
       return false if @reversed.nil?
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _destination = @destination
+      unless (_destination = @destination).nil?
         return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
 
-      if _destination_payment = @destination_payment
+      unless (_destination_payment = @destination_payment).nil?
         return false if _destination_payment.is_a?(OpenApi::Validatable) && !_destination_payment.valid?
       end
 
-      if _source_transaction = @source_transaction
+      unless (_source_transaction = @source_transaction).nil?
         return false if _source_transaction.is_a?(OpenApi::Validatable) && !_source_transaction.valid?
       end
 
-      if _source_type = @source_type
+      unless (_source_type = @source_type).nil?
         return false if _source_type.to_s.size > MAX_LENGTH_FOR_SOURCE_TYPE
       end
 
-      if _transfer_group = @transfer_group
+      unless (_transfer_group = @transfer_group).nil?
         return false if _transfer_group.to_s.size > MAX_LENGTH_FOR_TRANSFER_GROUP
       end
 

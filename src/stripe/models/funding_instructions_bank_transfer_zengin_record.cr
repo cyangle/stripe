@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The account holder name
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_holder_name.nil? && !account_holder_name_present?)]
@@ -97,37 +97,37 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_type = @account_type
+      unless (_account_type = @account_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _branch_code = @branch_code
+      unless (_branch_code = @branch_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_code", _branch_code.to_s.size, MAX_LENGTH_FOR_BRANCH_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _branch_name = @branch_name
+      unless (_branch_name = @branch_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_name", _branch_name.to_s.size, MAX_LENGTH_FOR_BRANCH_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -138,31 +138,31 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
-      if _account_type = @account_type
+      unless (_account_type = @account_type).nil?
         return false if _account_type.to_s.size > MAX_LENGTH_FOR_ACCOUNT_TYPE
       end
 
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
-      if _branch_code = @branch_code
+      unless (_branch_code = @branch_code).nil?
         return false if _branch_code.to_s.size > MAX_LENGTH_FOR_BRANCH_CODE
       end
 
-      if _branch_name = @branch_name
+      unless (_branch_name = @branch_name).nil?
         return false if _branch_name.to_s.size > MAX_LENGTH_FOR_BRANCH_NAME
       end
 

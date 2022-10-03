@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "charge", type: Stripe::SepaDebitGeneratedFromCharge?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
     getter charge : Stripe::SepaDebitGeneratedFromCharge? = nil
@@ -48,10 +48,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
-      if _setup_attempt = @setup_attempt
+      unless (_setup_attempt = @setup_attempt).nil?
         invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt")) if _setup_attempt.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -60,11 +60,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
 
-      if _setup_attempt = @setup_attempt
+      unless (_setup_attempt = @setup_attempt).nil?
         return false if _setup_attempt.is_a?(OpenApi::Validatable) && !_setup_attempt.valid?
       end
 

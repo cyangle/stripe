@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount, in %s.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -44,7 +44,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [refund]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["refund"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "balance_transaction", type: Stripe::FeeRefundBalanceTransaction?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
     getter balance_transaction : Stripe::FeeRefundBalanceTransaction? = nil
@@ -170,64 +172,64 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _failure_balance_transaction = @failure_balance_transaction
+      unless (_failure_balance_transaction = @failure_balance_transaction).nil?
         invalid_properties.concat(_failure_balance_transaction.list_invalid_properties_for("failure_balance_transaction")) if _failure_balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _failure_reason = @failure_reason
+      unless (_failure_reason = @failure_reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_reason", _failure_reason.to_s.size, MAX_LENGTH_FOR_FAILURE_REASON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _instructions_email = @instructions_email
+      unless (_instructions_email = @instructions_email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("instructions_email", _instructions_email.to_s.size, MAX_LENGTH_FOR_INSTRUCTIONS_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _next_action = @next_action
+      unless (_next_action = @next_action).nil?
         invalid_properties.concat(_next_action.list_invalid_properties_for("next_action")) if _next_action.is_a?(OpenApi::Validatable)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
-      if _receipt_number = @receipt_number
+      unless (_receipt_number = @receipt_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_number", _receipt_number.to_s.size, MAX_LENGTH_FOR_RECEIPT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _source_transfer_reversal = @source_transfer_reversal
+      unless (_source_transfer_reversal = @source_transfer_reversal).nil?
         invalid_properties.concat(_source_transfer_reversal.list_invalid_properties_for("source_transfer_reversal")) if _source_transfer_reversal.is_a?(OpenApi::Validatable)
       end
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_reversal = @transfer_reversal
+      unless (_transfer_reversal = @transfer_reversal).nil?
         invalid_properties.concat(_transfer_reversal.list_invalid_properties_for("transfer_reversal")) if _transfer_reversal.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -243,64 +245,64 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _failure_balance_transaction = @failure_balance_transaction
+      unless (_failure_balance_transaction = @failure_balance_transaction).nil?
         return false if _failure_balance_transaction.is_a?(OpenApi::Validatable) && !_failure_balance_transaction.valid?
       end
 
-      if _failure_reason = @failure_reason
+      unless (_failure_reason = @failure_reason).nil?
         return false if _failure_reason.to_s.size > MAX_LENGTH_FOR_FAILURE_REASON
       end
 
-      if _instructions_email = @instructions_email
+      unless (_instructions_email = @instructions_email).nil?
         return false if _instructions_email.to_s.size > MAX_LENGTH_FOR_INSTRUCTIONS_EMAIL
       end
 
-      if _next_action = @next_action
+      unless (_next_action = @next_action).nil?
         return false if _next_action.is_a?(OpenApi::Validatable) && !_next_action.valid?
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
-      if _receipt_number = @receipt_number
+      unless (_receipt_number = @receipt_number).nil?
         return false if _receipt_number.to_s.size > MAX_LENGTH_FOR_RECEIPT_NUMBER
       end
 
-      if _source_transfer_reversal = @source_transfer_reversal
+      unless (_source_transfer_reversal = @source_transfer_reversal).nil?
         return false if _source_transfer_reversal.is_a?(OpenApi::Validatable) && !_source_transfer_reversal.valid?
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
-      if _transfer_reversal = @transfer_reversal
+      unless (_transfer_reversal = @transfer_reversal).nil?
         return false if _transfer_reversal.is_a?(OpenApi::Validatable) && !_transfer_reversal.valid?
       end
 

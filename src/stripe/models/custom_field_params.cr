@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
@@ -27,6 +27,8 @@ module Stripe
     @[JSON::Field(key: "value", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter value : String? = nil
     MAX_LENGTH_FOR_VALUE = 30
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,14 +47,14 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"value\" is required and cannot be null") if @value.nil?
 
-      if _value = @value
+      unless (_value = @value).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
           invalid_properties.push(max_length_error)
         end
@@ -64,12 +66,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @value.nil?
-      if _value = @value
+      unless (_value = @value).nil?
         return false if _value.to_s.size > MAX_LENGTH_FOR_VALUE
       end
 

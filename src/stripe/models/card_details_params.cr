@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "exp_month", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter exp_month : Int64? = nil
@@ -30,7 +30,9 @@ module Stripe
     getter number : String? = nil
     MAX_LENGTH_FOR_NUMBER = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "cvc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cvc : String? = nil
@@ -60,12 +62,12 @@ module Stripe
 
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
 
-      if _number = @number
+      unless (_number = @number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
           invalid_properties.push(max_length_error)
         end
@@ -81,11 +83,11 @@ module Stripe
       return false if @exp_year.nil?
 
       return false if @number.nil?
-      if _number = @number
+      unless (_number = @number).nil?
         return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         return false if _cvc.to_s.size > MAX_LENGTH_FOR_CVC
       end
 

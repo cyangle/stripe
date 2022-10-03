@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,7 +48,9 @@ module Stripe
     @[JSON::Field(key: "total_usage", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total_usage : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The invoice in which this usage period has been billed for.
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
@@ -81,7 +83,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -90,24 +92,24 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"period\" is required and cannot be null") if @period.nil?
 
-      if _period = @period
+      unless (_period = @period).nil?
         invalid_properties.concat(_period.list_invalid_properties_for("period")) if _period.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_item\" is required and cannot be null") if @subscription_item.nil?
 
-      if _subscription_item = @subscription_item
+      unless (_subscription_item = @subscription_item).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION_ITEM)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"total_usage\" is required and cannot be null") if @total_usage.nil?
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
@@ -119,30 +121,30 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @period.nil?
-      if _period = @period
+      unless (_period = @period).nil?
         return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
 
       return false if @subscription_item.nil?
-      if _subscription_item = @subscription_item
+      unless (_subscription_item = @subscription_item).nil?
         return false if _subscription_item.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION_ITEM
       end
 
       return false if @total_usage.nil?
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 

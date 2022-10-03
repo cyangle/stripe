@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The client secret of the source. Used for client-side retrieval using a publishable key.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,7 +61,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [ach_credit_transfer, ach_debit, acss_debit, alipay, au_becs_debit, bancontact, card, card_present, eps, giropay, ideal, klarna, multibanco, p24, sepa_debit, sofort, three_d_secure, wechat]."
     VALID_VALUES_FOR__TYPE  = StaticArray["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "ach_credit_transfer", type: Stripe::SourceTypeAchCreditTransfer?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ach_credit_transfer : Stripe::SourceTypeAchCreditTransfer? = nil
@@ -230,7 +232,7 @@ module Stripe
 
       invalid_properties.push("\"client_secret\" is required and cannot be null") if @client_secret.nil?
 
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
@@ -239,14 +241,14 @@ module Stripe
 
       invalid_properties.push("\"flow\" is required and cannot be null") if @flow.nil?
 
-      if _flow = @flow
+      unless (_flow = @flow).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, MAX_LENGTH_FOR_FLOW)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -255,106 +257,106 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _ach_credit_transfer = @ach_credit_transfer
+      unless (_ach_credit_transfer = @ach_credit_transfer).nil?
         invalid_properties.concat(_ach_credit_transfer.list_invalid_properties_for("ach_credit_transfer")) if _ach_credit_transfer.is_a?(OpenApi::Validatable)
       end
-      if _ach_debit = @ach_debit
+      unless (_ach_debit = @ach_debit).nil?
         invalid_properties.concat(_ach_debit.list_invalid_properties_for("ach_debit")) if _ach_debit.is_a?(OpenApi::Validatable)
       end
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
-      if _alipay = @alipay
+      unless (_alipay = @alipay).nil?
         invalid_properties.concat(_alipay.list_invalid_properties_for("alipay")) if _alipay.is_a?(OpenApi::Validatable)
       end
 
-      if _au_becs_debit = @au_becs_debit
+      unless (_au_becs_debit = @au_becs_debit).nil?
         invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit")) if _au_becs_debit.is_a?(OpenApi::Validatable)
       end
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _card_present = @card_present
+      unless (_card_present = @card_present).nil?
         invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
       end
-      if _code_verification = @code_verification
+      unless (_code_verification = @code_verification).nil?
         invalid_properties.concat(_code_verification.list_invalid_properties_for("code_verification")) if _code_verification.is_a?(OpenApi::Validatable)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _eps = @eps
+      unless (_eps = @eps).nil?
         invalid_properties.concat(_eps.list_invalid_properties_for("eps")) if _eps.is_a?(OpenApi::Validatable)
       end
-      if _giropay = @giropay
+      unless (_giropay = @giropay).nil?
         invalid_properties.concat(_giropay.list_invalid_properties_for("giropay")) if _giropay.is_a?(OpenApi::Validatable)
       end
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         invalid_properties.concat(_ideal.list_invalid_properties_for("ideal")) if _ideal.is_a?(OpenApi::Validatable)
       end
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         invalid_properties.concat(_klarna.list_invalid_properties_for("klarna")) if _klarna.is_a?(OpenApi::Validatable)
       end
 
-      if _multibanco = @multibanco
+      unless (_multibanco = @multibanco).nil?
         invalid_properties.concat(_multibanco.list_invalid_properties_for("multibanco")) if _multibanco.is_a?(OpenApi::Validatable)
       end
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         invalid_properties.concat(_owner.list_invalid_properties_for("owner")) if _owner.is_a?(OpenApi::Validatable)
       end
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         invalid_properties.concat(_p24.list_invalid_properties_for("p24")) if _p24.is_a?(OpenApi::Validatable)
       end
-      if _receiver = @receiver
+      unless (_receiver = @receiver).nil?
         invalid_properties.concat(_receiver.list_invalid_properties_for("receiver")) if _receiver.is_a?(OpenApi::Validatable)
       end
-      if _redirect = @redirect
+      unless (_redirect = @redirect).nil?
         invalid_properties.concat(_redirect.list_invalid_properties_for("redirect")) if _redirect.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
-      if _source_order = @source_order
+      unless (_source_order = @source_order).nil?
         invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _three_d_secure = @three_d_secure
+      unless (_three_d_secure = @three_d_secure).nil?
         invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure")) if _three_d_secure.is_a?(OpenApi::Validatable)
       end
-      if _usage = @usage
+      unless (_usage = @usage).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, MAX_LENGTH_FOR_USAGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _wechat = @wechat
+      unless (_wechat = @wechat).nil?
         invalid_properties.concat(_wechat.list_invalid_properties_for("wechat")) if _wechat.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -364,140 +366,140 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @client_secret.nil?
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       return false if @created.nil?
 
       return false if @flow.nil?
-      if _flow = @flow
+      unless (_flow = @flow).nil?
         return false if _flow.to_s.size > MAX_LENGTH_FOR_FLOW
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _ach_credit_transfer = @ach_credit_transfer
+      unless (_ach_credit_transfer = @ach_credit_transfer).nil?
         return false if _ach_credit_transfer.is_a?(OpenApi::Validatable) && !_ach_credit_transfer.valid?
       end
 
-      if _ach_debit = @ach_debit
+      unless (_ach_debit = @ach_debit).nil?
         return false if _ach_debit.is_a?(OpenApi::Validatable) && !_ach_debit.valid?
       end
 
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
-      if _alipay = @alipay
+      unless (_alipay = @alipay).nil?
         return false if _alipay.is_a?(OpenApi::Validatable) && !_alipay.valid?
       end
 
-      if _au_becs_debit = @au_becs_debit
+      unless (_au_becs_debit = @au_becs_debit).nil?
         return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
 
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _card_present = @card_present
+      unless (_card_present = @card_present).nil?
         return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end
 
-      if _code_verification = @code_verification
+      unless (_code_verification = @code_verification).nil?
         return false if _code_verification.is_a?(OpenApi::Validatable) && !_code_verification.valid?
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _eps = @eps
+      unless (_eps = @eps).nil?
         return false if _eps.is_a?(OpenApi::Validatable) && !_eps.valid?
       end
 
-      if _giropay = @giropay
+      unless (_giropay = @giropay).nil?
         return false if _giropay.is_a?(OpenApi::Validatable) && !_giropay.valid?
       end
 
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
 
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
 
-      if _multibanco = @multibanco
+      unless (_multibanco = @multibanco).nil?
         return false if _multibanco.is_a?(OpenApi::Validatable) && !_multibanco.valid?
       end
 
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
 
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
 
-      if _receiver = @receiver
+      unless (_receiver = @receiver).nil?
         return false if _receiver.is_a?(OpenApi::Validatable) && !_receiver.valid?
       end
 
-      if _redirect = @redirect
+      unless (_redirect = @redirect).nil?
         return false if _redirect.is_a?(OpenApi::Validatable) && !_redirect.valid?
       end
 
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
 
-      if _source_order = @source_order
+      unless (_source_order = @source_order).nil?
         return false if _source_order.is_a?(OpenApi::Validatable) && !_source_order.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _three_d_secure = @three_d_secure
+      unless (_three_d_secure = @three_d_secure).nil?
         return false if _three_d_secure.is_a?(OpenApi::Validatable) && !_three_d_secure.valid?
       end
 
-      if _usage = @usage
+      unless (_usage = @usage).nil?
         return false if _usage.to_s.size > MAX_LENGTH_FOR_USAGE
       end
 
-      if _wechat = @wechat
+      unless (_wechat = @wechat).nil?
         return false if _wechat.is_a?(OpenApi::Validatable) && !_wechat.valid?
       end
 

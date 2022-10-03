@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A unit of time.
     @[JSON::Field(key: "unit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,6 +30,8 @@ module Stripe
     # Must be greater than 0.
     @[JSON::Field(key: "value", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter value : Int64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
 
-      if _unit = @unit
+      unless (_unit = @unit).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_UNIT) unless OpenApi::EnumValidator.valid?(_unit, VALID_VALUES_FOR_UNIT)
       end
       invalid_properties.push("\"value\" is required and cannot be null") if @value.nil?
@@ -60,7 +62,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @unit.nil?
-      if _unit = @unit
+      unless (_unit = @unit).nil?
         return false unless OpenApi::EnumValidator.valid?(_unit, VALID_VALUES_FOR_UNIT)
       end
 

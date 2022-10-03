@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "shipping_rate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_rate : String? = nil
@@ -42,12 +42,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _shipping_rate = @shipping_rate
+      unless (_shipping_rate = @shipping_rate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_rate", _shipping_rate.to_s.size, MAX_LENGTH_FOR_SHIPPING_RATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping_rate_data = @shipping_rate_data
+      unless (_shipping_rate_data = @shipping_rate_data).nil?
         invalid_properties.concat(_shipping_rate_data.list_invalid_properties_for("shipping_rate_data")) if _shipping_rate_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -56,11 +56,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _shipping_rate = @shipping_rate
+      unless (_shipping_rate = @shipping_rate).nil?
         return false if _shipping_rate.to_s.size > MAX_LENGTH_FOR_SHIPPING_RATE
       end
 
-      if _shipping_rate_data = @shipping_rate_data
+      unless (_shipping_rate_data = @shipping_rate_data).nil?
         return false if _shipping_rate_data.is_a?(OpenApi::Validatable) && !_shipping_rate_data.valid?
       end
 

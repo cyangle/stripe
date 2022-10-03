@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "balance", type: Stripe::TreasuryFinancialAccountsResourceBalance?, default: nil, required: true, nullable: false, emit_null: false)]
     getter balance : Stripe::TreasuryFinancialAccountsResourceBalance? = nil
@@ -65,7 +65,9 @@ module Stripe
     @[JSON::Field(key: "supported_currencies", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported_currencies : Array(String)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The array of paths to active Features in the Features hash.
     @[JSON::Field(key: "active_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -133,12 +135,12 @@ module Stripe
 
       invalid_properties.push("\"balance\" is required and cannot be null") if @balance.nil?
 
-      if _balance = @balance
+      unless (_balance = @balance).nil?
         invalid_properties.concat(_balance.list_invalid_properties_for("balance")) if _balance.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
@@ -147,12 +149,12 @@ module Stripe
 
       invalid_properties.push("\"financial_addresses\" is required and cannot be null") if @financial_addresses.nil?
 
-      if _financial_addresses = @financial_addresses
+      unless (_financial_addresses = @financial_addresses).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "financial_addresses", container: _financial_addresses)) if _financial_addresses.is_a?(Array)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -161,35 +163,35 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"status_details\" is required and cannot be null") if @status_details.nil?
 
-      if _status_details = @status_details
+      unless (_status_details = @status_details).nil?
         invalid_properties.concat(_status_details.list_invalid_properties_for("status_details")) if _status_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"supported_currencies\" is required and cannot be null") if @supported_currencies.nil?
 
-      if _active_features = @active_features
+      unless (_active_features = @active_features).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACTIVE_FEATURES) unless OpenApi::EnumValidator.valid?(_active_features, VALID_VALUES_FOR_ACTIVE_FEATURES)
       end
-      if _features = @features
+      unless (_features = @features).nil?
         invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
 
-      if _pending_features = @pending_features
+      unless (_pending_features = @pending_features).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PENDING_FEATURES) unless OpenApi::EnumValidator.valid?(_pending_features, VALID_VALUES_FOR_PENDING_FEATURES)
       end
-      if _platform_restrictions = @platform_restrictions
+      unless (_platform_restrictions = @platform_restrictions).nil?
         invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions")) if _platform_restrictions.is_a?(OpenApi::Validatable)
       end
-      if _restricted_features = @restricted_features
+      unless (_restricted_features = @restricted_features).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RESTRICTED_FEATURES) unless OpenApi::EnumValidator.valid?(_restricted_features, VALID_VALUES_FOR_RESTRICTED_FEATURES)
       end
       invalid_properties
@@ -199,63 +201,63 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @balance.nil?
-      if _balance = @balance
+      unless (_balance = @balance).nil?
         return false if _balance.is_a?(OpenApi::Validatable) && !_balance.valid?
       end
 
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @created.nil?
 
       return false if @financial_addresses.nil?
-      if _financial_addresses = @financial_addresses
+      unless (_financial_addresses = @financial_addresses).nil?
         return false if _financial_addresses.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _financial_addresses)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @status_details.nil?
-      if _status_details = @status_details
+      unless (_status_details = @status_details).nil?
         return false if _status_details.is_a?(OpenApi::Validatable) && !_status_details.valid?
       end
 
       return false if @supported_currencies.nil?
 
-      if _active_features = @active_features
+      unless (_active_features = @active_features).nil?
         return false unless OpenApi::EnumValidator.valid?(_active_features, VALID_VALUES_FOR_ACTIVE_FEATURES)
       end
 
-      if _features = @features
+      unless (_features = @features).nil?
         return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
 
-      if _pending_features = @pending_features
+      unless (_pending_features = @pending_features).nil?
         return false unless OpenApi::EnumValidator.valid?(_pending_features, VALID_VALUES_FOR_PENDING_FEATURES)
       end
 
-      if _platform_restrictions = @platform_restrictions
+      unless (_platform_restrictions = @platform_restrictions).nil?
         return false if _platform_restrictions.is_a?(OpenApi::Validatable) && !_platform_restrictions.valid?
       end
 
-      if _restricted_features = @restricted_features
+      unless (_restricted_features = @restricted_features).nil?
         return false unless OpenApi::EnumValidator.valid?(_restricted_features, VALID_VALUES_FOR_RESTRICTED_FEATURES)
       end
 

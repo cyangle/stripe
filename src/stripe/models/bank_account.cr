@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Two-letter ISO code representing the country the bank account is located in.
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -51,7 +51,9 @@ module Stripe
     getter status : String? = nil
     MAX_LENGTH_FOR_STATUS = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "account", type: Stripe::BankAccountAccount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account.nil? && !account_present?)]
     getter account : Stripe::BankAccountAccount? = nil
@@ -169,7 +171,7 @@ module Stripe
 
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
@@ -178,67 +180,67 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account = @account
+      unless (_account = @account).nil?
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_holder_type = @account_holder_type
+      unless (_account_holder_type = @account_holder_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_type", _account_holder_type.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_type = @account_type
+      unless (_account_type = @account_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _available_payout_methods = @available_payout_methods
+      unless (_available_payout_methods = @available_payout_methods).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AVAILABLE_PAYOUT_METHODS) unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
       end
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -250,65 +252,65 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @last4.nil?
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
 
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
-      if _account_holder_type = @account_holder_type
+      unless (_account_holder_type = @account_holder_type).nil?
         return false if _account_holder_type.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE
       end
 
-      if _account_type = @account_type
+      unless (_account_type = @account_type).nil?
         return false if _account_type.to_s.size > MAX_LENGTH_FOR_ACCOUNT_TYPE
       end
 
-      if _available_payout_methods = @available_payout_methods
+      unless (_available_payout_methods = @available_payout_methods).nil?
         return false unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
       end
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _routing_number = @routing_number
+      unless (_routing_number = @routing_number).nil?
         return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 

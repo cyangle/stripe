@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ID of the customer to which to attach the PaymentMethod.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : String? = nil
     MAX_LENGTH_FOR_CUSTOMER = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -49,7 +51,7 @@ module Stripe
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
@@ -62,7 +64,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 

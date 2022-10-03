@@ -18,13 +18,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
-    @[JSON::Field(key: "fixed_amounts", type: Array(Int64)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter fixed_amounts : Array(Int64)? = nil
+    @[JSON::Field(key: "fixed_amounts", type: Array(Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter fixed_amounts : Array(Int32)? = nil
 
-    @[JSON::Field(key: "percentages", type: Array(Int64)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter percentages : Array(Int64)? = nil
+    @[JSON::Field(key: "percentages", type: Array(Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter percentages : Array(Int32)? = nil
 
     @[JSON::Field(key: "smart_tip_threshold", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter smart_tip_threshold : Int64? = nil
@@ -34,8 +34,8 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @fixed_amounts : Array(Int64)? = nil,
-      @percentages : Array(Int64)? = nil,
+      @fixed_amounts : Array(Int32)? = nil,
+      @percentages : Array(Int32)? = nil,
       @smart_tip_threshold : Int64? = nil
     )
     end
@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fixed_amounts Object to be assigned
-    def fixed_amounts=(fixed_amounts : Array(Int64)?)
+    def fixed_amounts=(fixed_amounts : Array(Int32)?)
       if fixed_amounts.nil?
         return @fixed_amounts = nil
       end
@@ -66,7 +66,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] percentages Object to be assigned
-    def percentages=(percentages : Array(Int64)?)
+    def percentages=(percentages : Array(Int32)?)
       if percentages.nil?
         return @percentages = nil
       end

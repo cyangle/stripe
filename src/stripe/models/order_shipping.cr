@@ -18,12 +18,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "address", type: Stripe::Address1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::Address1? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "carrier", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter carrier : String? = nil
@@ -62,25 +64,25 @@ module Stripe
 
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      if _carrier = @carrier
+      unless (_carrier = @carrier).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tracking_number = @tracking_number
+      unless (_tracking_number = @tracking_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_number", _tracking_number.to_s.size, MAX_LENGTH_FOR_TRACKING_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -92,23 +94,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @address.nil?
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _carrier = @carrier
+      unless (_carrier = @carrier).nil?
         return false if _carrier.to_s.size > MAX_LENGTH_FOR_CARRIER
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
-      if _tracking_number = @tracking_number
+      unless (_tracking_number = @tracking_number).nil?
         return false if _tracking_number.to_s.size > MAX_LENGTH_FOR_TRACKING_NUMBER
       end
 

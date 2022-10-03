@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # All supported networks.
     @[JSON::Field(key: "supported", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_SUPPORTED = "invalid value for \"supported\", must be one of [ach, us_domestic_wire]."
     VALID_VALUES_FOR_SUPPORTED  = StaticArray["ach", "us_domestic_wire"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The preferred network.
     @[JSON::Field(key: "preferred", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred.nil? && !preferred_present?)]
@@ -55,10 +57,10 @@ module Stripe
 
       invalid_properties.push("\"supported\" is required and cannot be null") if @supported.nil?
 
-      if _supported = @supported
+      unless (_supported = @supported).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED) unless OpenApi::EnumValidator.valid?(_supported, VALID_VALUES_FOR_SUPPORTED)
       end
-      if _preferred = @preferred
+      unless (_preferred = @preferred).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
           invalid_properties.push(max_length_error)
         end
@@ -70,11 +72,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @supported.nil?
-      if _supported = @supported
+      unless (_supported = @supported).nil?
         return false unless OpenApi::EnumValidator.valid?(_supported, VALID_VALUES_FOR_SUPPORTED)
       end
 
-      if _preferred = @preferred
+      unless (_preferred = @preferred).nil?
         return false if _preferred.to_s.size > MAX_LENGTH_FOR_PREFERRED
       end
 

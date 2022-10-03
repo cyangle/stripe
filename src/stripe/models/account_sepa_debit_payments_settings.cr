@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # SEPA creditor identifier that identifies the company making the payment.
     @[JSON::Field(key: "creditor_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -40,7 +40,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _creditor_id = @creditor_id
+      unless (_creditor_id = @creditor_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_id", _creditor_id.to_s.size, MAX_LENGTH_FOR_CREDITOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -51,7 +51,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _creditor_id = @creditor_id
+      unless (_creditor_id = @creditor_id).nil?
         return false if _creditor_id.to_s.size > MAX_LENGTH_FOR_CREDITOR_ID
       end
 

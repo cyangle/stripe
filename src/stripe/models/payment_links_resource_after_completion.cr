@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The specified behavior after the purchase is complete.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [hosted_confirmation, redirect]."
     VALID_VALUES_FOR__TYPE  = StaticArray["hosted_confirmation", "redirect"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "hosted_confirmation", type: Stripe::PaymentLinksResourceCompletionBehaviorConfirmationPage?, default: nil, required: false, nullable: false, emit_null: false)]
     getter hosted_confirmation : Stripe::PaymentLinksResourceCompletionBehaviorConfirmationPage? = nil
@@ -54,13 +56,13 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _hosted_confirmation = @hosted_confirmation
+      unless (_hosted_confirmation = @hosted_confirmation).nil?
         invalid_properties.concat(_hosted_confirmation.list_invalid_properties_for("hosted_confirmation")) if _hosted_confirmation.is_a?(OpenApi::Validatable)
       end
-      if _redirect = @redirect
+      unless (_redirect = @redirect).nil?
         invalid_properties.concat(_redirect.list_invalid_properties_for("redirect")) if _redirect.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -70,15 +72,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _hosted_confirmation = @hosted_confirmation
+      unless (_hosted_confirmation = @hosted_confirmation).nil?
         return false if _hosted_confirmation.is_a?(OpenApi::Validatable) && !_hosted_confirmation.valid?
       end
 
-      if _redirect = @redirect
+      unless (_redirect = @redirect).nil?
         return false if _redirect.is_a?(OpenApi::Validatable) && !_redirect.valid?
       end
 

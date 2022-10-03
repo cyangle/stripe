@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -38,7 +38,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [bank_account]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["bank_account"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
@@ -68,22 +70,22 @@ module Stripe
 
       invalid_properties.push("\"deleted\" is required and cannot be null") if @deleted.nil?
 
-      if _deleted = @deleted
+      unless (_deleted = @deleted).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DELETED) unless OpenApi::EnumValidator.valid?(_deleted, VALID_VALUES_FOR_DELETED)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
@@ -95,21 +97,21 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @deleted.nil?
-      if _deleted = @deleted
+      unless (_deleted = @deleted).nil?
         return false unless OpenApi::EnumValidator.valid?(_deleted, VALID_VALUES_FOR_DELETED)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 

@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "redirect_to_url", type: Stripe::SetupIntentNextActionRedirectToUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter redirect_to_url : Stripe::SetupIntentNextActionRedirectToUrl? = nil
@@ -58,16 +60,16 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _redirect_to_url = @redirect_to_url
+      unless (_redirect_to_url = @redirect_to_url).nil?
         invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url")) if _redirect_to_url.is_a?(OpenApi::Validatable)
       end
 
-      if _verify_with_microdeposits = @verify_with_microdeposits
+      unless (_verify_with_microdeposits = @verify_with_microdeposits).nil?
         invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits")) if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -77,15 +79,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
-      if _redirect_to_url = @redirect_to_url
+      unless (_redirect_to_url = @redirect_to_url).nil?
         return false if _redirect_to_url.is_a?(OpenApi::Validatable) && !_redirect_to_url.valid?
       end
 
-      if _verify_with_microdeposits = @verify_with_microdeposits
+      unless (_verify_with_microdeposits = @verify_with_microdeposits).nil?
         return false if _verify_with_microdeposits.is_a?(OpenApi::Validatable) && !_verify_with_microdeposits.valid?
       end
 

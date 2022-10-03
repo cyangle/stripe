@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "back", type: Stripe::LegalEntityCompanyVerificationDocumentBack?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: back.nil? && !back_present?)]
     getter back : Stripe::LegalEntityCompanyVerificationDocumentBack? = nil
@@ -66,20 +66,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _back = @back
+      unless (_back = @back).nil?
         invalid_properties.concat(_back.list_invalid_properties_for("back")) if _back.is_a?(OpenApi::Validatable)
       end
-      if _details = @details
+      unless (_details = @details).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, MAX_LENGTH_FOR_DETAILS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _details_code = @details_code
+      unless (_details_code = @details_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _front = @front
+      unless (_front = @front).nil?
         invalid_properties.concat(_front.list_invalid_properties_for("front")) if _front.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -88,19 +88,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _back = @back
+      unless (_back = @back).nil?
         return false if _back.is_a?(OpenApi::Validatable) && !_back.valid?
       end
 
-      if _details = @details
+      unless (_details = @details).nil?
         return false if _details.to_s.size > MAX_LENGTH_FOR_DETAILS
       end
 
-      if _details_code = @details_code
+      unless (_details_code = @details_code).nil?
         return false if _details_code.to_s.size > MAX_LENGTH_FOR_DETAILS_CODE
       end
 
-      if _front = @front
+      unless (_front = @front).nil?
         return false if _front.is_a?(OpenApi::Validatable) && !_front.valid?
       end
 

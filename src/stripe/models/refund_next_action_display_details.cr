@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "email_sent", type: Stripe::EmailSent?, default: nil, required: true, nullable: false, emit_null: false)]
     getter email_sent : Stripe::EmailSent? = nil
@@ -27,6 +27,8 @@ module Stripe
     # The expiry timestamp.
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expires_at : Int64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,7 +47,7 @@ module Stripe
 
       invalid_properties.push("\"email_sent\" is required and cannot be null") if @email_sent.nil?
 
-      if _email_sent = @email_sent
+      unless (_email_sent = @email_sent).nil?
         invalid_properties.concat(_email_sent.list_invalid_properties_for("email_sent")) if _email_sent.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
@@ -57,7 +59,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @email_sent.nil?
-      if _email_sent = @email_sent
+      unless (_email_sent = @email_sent).nil?
         return false if _email_sent.is_a?(OpenApi::Validatable) && !_email_sent.valid?
       end
 

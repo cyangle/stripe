@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "expires_after_seconds", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expires_after_seconds : Int64? = nil

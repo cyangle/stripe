@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -73,29 +73,29 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _fraud_details = @fraud_details
+      unless (_fraud_details = @fraud_details).nil?
         invalid_properties.concat(_fraud_details.list_invalid_properties_for("fraud_details")) if _fraud_details.is_a?(OpenApi::Validatable)
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _receipt_email = @receipt_email
+      unless (_receipt_email = @receipt_email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, MAX_LENGTH_FOR_RECEIPT_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
 
@@ -105,27 +105,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _fraud_details = @fraud_details
+      unless (_fraud_details = @fraud_details).nil?
         return false if _fraud_details.is_a?(OpenApi::Validatable) && !_fraud_details.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _receipt_email = @receipt_email
+      unless (_receipt_email = @receipt_email).nil?
         return false if _receipt_email.to_s.size > MAX_LENGTH_FOR_RECEIPT_EMAIL
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 

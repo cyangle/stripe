@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -57,15 +57,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
-      if _preferred_locale = @preferred_locale
+      unless (_preferred_locale = @preferred_locale).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -74,15 +74,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
 
-      if _preferred_locale = @preferred_locale
+      unless (_preferred_locale = @preferred_locale).nil?
         return false if _preferred_locale.to_s.size > MAX_LENGTH_FOR_PREFERRED_LOCALE
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

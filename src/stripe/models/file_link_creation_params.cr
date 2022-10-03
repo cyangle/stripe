@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "create", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter create : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expires_at : Int64? = nil
@@ -51,7 +53,7 @@ module Stripe
 
       invalid_properties.push("\"create\" is required and cannot be null") if @create.nil?
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -62,7 +64,7 @@ module Stripe
     def valid? : Bool
       return false if @create.nil?
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 

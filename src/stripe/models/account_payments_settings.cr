@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
@@ -79,27 +79,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_kana = @statement_descriptor_kana
+      unless (_statement_descriptor_kana = @statement_descriptor_kana).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_kanji = @statement_descriptor_kanji
+      unless (_statement_descriptor_kanji = @statement_descriptor_kanji).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
+      unless (_statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
+      unless (_statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
           invalid_properties.push(max_length_error)
         end
@@ -110,23 +110,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _statement_descriptor_kana = @statement_descriptor_kana
+      unless (_statement_descriptor_kana = @statement_descriptor_kana).nil?
         return false if _statement_descriptor_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA
       end
 
-      if _statement_descriptor_kanji = @statement_descriptor_kanji
+      unless (_statement_descriptor_kanji = @statement_descriptor_kanji).nil?
         return false if _statement_descriptor_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI
       end
 
-      if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
+      unless (_statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana).nil?
         return false if _statement_descriptor_prefix_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA
       end
 
-      if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
+      unless (_statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji).nil?
         return false if _statement_descriptor_prefix_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI
       end
 

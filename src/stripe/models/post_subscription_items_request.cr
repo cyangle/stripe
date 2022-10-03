@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The identifier of the subscription to modify.
     @[JSON::Field(key: "subscription", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subscription : String? = nil
     MAX_LENGTH_FOR_SUBSCRIPTION = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "billing_thresholds", type: Stripe::PostSubscriptionItemsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil
@@ -96,31 +98,31 @@ module Stripe
 
       invalid_properties.push("\"subscription\" is required and cannot be null") if @subscription.nil?
 
-      if _subscription = @subscription
+      unless (_subscription = @subscription).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
 
-      if _payment_behavior = @payment_behavior
+      unless (_payment_behavior = @payment_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
       end
-      if _price = @price
+      unless (_price = @price).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -130,31 +132,31 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @subscription.nil?
-      if _subscription = @subscription
+      unless (_subscription = @subscription).nil?
         return false if _subscription.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION
       end
 
-      if _billing_thresholds = @billing_thresholds
+      unless (_billing_thresholds = @billing_thresholds).nil?
         return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
 
-      if _payment_behavior = @payment_behavior
+      unless (_payment_behavior = @payment_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
       end
 
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
-      if _price_data = @price_data
+      unless (_price_data = @price_data).nil?
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
 
-      if _proration_behavior = @proration_behavior
+      unless (_proration_behavior = @proration_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
       end
 

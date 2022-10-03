@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The code for the type of error.
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,6 +36,8 @@ module Stripe
     @[JSON::Field(key: "requirement", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter requirement : String? = nil
     MAX_LENGTH_FOR_REQUIREMENT = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,19 +57,19 @@ module Stripe
 
       invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
-      if _code = @code
+      unless (_code = @code).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"requirement\" is required and cannot be null") if @requirement.nil?
 
-      if _requirement = @requirement
+      unless (_requirement = @requirement).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("requirement", _requirement.to_s.size, MAX_LENGTH_FOR_REQUIREMENT)
           invalid_properties.push(max_length_error)
         end
@@ -79,17 +81,17 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @code.nil?
-      if _code = @code
+      unless (_code = @code).nil?
         return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
 
       return false if @reason.nil?
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
       return false if @requirement.nil?
-      if _requirement = @requirement
+      unless (_requirement = @requirement).nil?
         return false if _requirement.to_s.size > MAX_LENGTH_FOR_REQUIREMENT
       end
 

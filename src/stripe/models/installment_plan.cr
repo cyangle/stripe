@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter count : Int64? = nil
@@ -32,6 +32,8 @@ module Stripe
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [fixed_count]."
     VALID_VALUES_FOR__TYPE  = StaticArray["fixed_count"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,12 +55,12 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
@@ -70,12 +72,12 @@ module Stripe
       return false if @count.nil?
 
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

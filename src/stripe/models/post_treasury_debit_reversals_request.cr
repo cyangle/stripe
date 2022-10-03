@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ReceivedDebit to reverse.
     @[JSON::Field(key: "received_debit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter received_debit : String? = nil
     MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -54,7 +56,7 @@ module Stripe
 
       invalid_properties.push("\"received_debit\" is required and cannot be null") if @received_debit.nil?
 
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
           invalid_properties.push(max_length_error)
         end
@@ -67,7 +69,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @received_debit.nil?
-      if _received_debit = @received_debit
+      unless (_received_debit = @received_debit).nil?
         return false if _received_debit.to_s.size > MAX_LENGTH_FOR_RECEIVED_DEBIT
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Token of the FinancialAccount.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -31,6 +31,8 @@ module Stripe
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [stripe]."
     VALID_VALUES_FOR_NETWORK  = StaticArray["stripe"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,14 +51,14 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
-      if _network = @network
+      unless (_network = @network).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       invalid_properties
@@ -66,12 +68,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @network.nil?
-      if _network = @network
+      unless (_network = @network).nil?
         return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
 

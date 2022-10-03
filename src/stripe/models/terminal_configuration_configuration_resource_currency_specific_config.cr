@@ -19,18 +19,18 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Fixed amounts displayed when collecting a tip
-    @[JSON::Field(key: "fixed_amounts", type: Array(Int64)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fixed_amounts.nil? && !fixed_amounts_present?)]
-    getter fixed_amounts : Array(Int64)? = nil
+    @[JSON::Field(key: "fixed_amounts", type: Array(Int32)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fixed_amounts.nil? && !fixed_amounts_present?)]
+    getter fixed_amounts : Array(Int32)? = nil
 
     @[JSON::Field(ignore: true)]
     property? fixed_amounts_present : Bool = false
 
     # Percentages displayed when collecting a tip
-    @[JSON::Field(key: "percentages", type: Array(Int64)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: percentages.nil? && !percentages_present?)]
-    getter percentages : Array(Int64)? = nil
+    @[JSON::Field(key: "percentages", type: Array(Int32)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: percentages.nil? && !percentages_present?)]
+    getter percentages : Array(Int32)? = nil
 
     @[JSON::Field(ignore: true)]
     property? percentages_present : Bool = false
@@ -44,8 +44,8 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @fixed_amounts : Array(Int64)? = nil,
-      @percentages : Array(Int64)? = nil,
+      @fixed_amounts : Array(Int32)? = nil,
+      @percentages : Array(Int32)? = nil,
       @smart_tip_threshold : Int64? = nil
     )
     end
@@ -66,7 +66,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fixed_amounts Object to be assigned
-    def fixed_amounts=(fixed_amounts : Array(Int64)?)
+    def fixed_amounts=(fixed_amounts : Array(Int32)?)
       if fixed_amounts.nil?
         return @fixed_amounts = nil
       end
@@ -76,7 +76,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] percentages Object to be assigned
-    def percentages=(percentages : Array(Int64)?)
+    def percentages=(percentages : Array(Int32)?)
       if percentages.nil?
         return @percentages = nil
       end

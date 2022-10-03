@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount (in cents) to be transferred.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -38,7 +38,9 @@ module Stripe
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach, us_domestic_wire]."
     VALID_VALUES_FOR_NETWORK  = StaticArray["ach", "us_domestic_wire"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -81,16 +83,16 @@ module Stripe
 
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
-      if _network = @network
+      unless (_network = @network).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _initiating_payment_method_details = @initiating_payment_method_details
+      unless (_initiating_payment_method_details = @initiating_payment_method_details).nil?
         invalid_properties.concat(_initiating_payment_method_details.list_invalid_properties_for("initiating_payment_method_details")) if _initiating_payment_method_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -106,15 +108,15 @@ module Stripe
       return false if @financial_account.nil?
 
       return false if @network.nil?
-      if _network = @network
+      unless (_network = @network).nil?
         return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _initiating_payment_method_details = @initiating_payment_method_details
+      unless (_initiating_payment_method_details = @initiating_payment_method_details).nil?
         return false if _initiating_payment_method_details.is_a?(OpenApi::Validatable) && !_initiating_payment_method_details.valid?
       end
 

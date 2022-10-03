@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,9 @@ module Stripe
     getter product : String? = nil
     MAX_LENGTH_FOR_PRODUCT = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Whether the SKU is available for purchase. Default to `true`.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -95,26 +97,26 @@ module Stripe
 
       invalid_properties.push("\"inventory\" is required and cannot be null") if @inventory.nil?
 
-      if _inventory = @inventory
+      unless (_inventory = @inventory).nil?
         invalid_properties.concat(_inventory.list_invalid_properties_for("inventory")) if _inventory.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
-      if _product = @product
+      unless (_product = @product).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _image = @image
+      unless (_image = @image).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, MAX_LENGTH_FOR_IMAGE)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -126,22 +128,22 @@ module Stripe
       return false if @currency.nil?
 
       return false if @inventory.nil?
-      if _inventory = @inventory
+      unless (_inventory = @inventory).nil?
         return false if _inventory.is_a?(OpenApi::Validatable) && !_inventory.valid?
       end
 
       return false if @price.nil?
 
       return false if @product.nil?
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 
-      if _image = @image
+      unless (_image = @image).nil?
         return false if _image.to_s.size > MAX_LENGTH_FOR_IMAGE
       end
 
-      if _package_dimensions = @package_dimensions
+      unless (_package_dimensions = @package_dimensions).nil?
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 

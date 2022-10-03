@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # This is the sum of all the discounts.
     @[JSON::Field(key: "amount_discount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "amount_tax", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_tax : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # This is the sum of all the shipping amounts.
     @[JSON::Field(key: "amount_shipping", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_shipping.nil? && !amount_shipping_present?)]
@@ -63,7 +65,7 @@ module Stripe
 
       invalid_properties.push("\"amount_tax\" is required and cannot be null") if @amount_tax.nil?
 
-      if _breakdown = @breakdown
+      unless (_breakdown = @breakdown).nil?
         invalid_properties.concat(_breakdown.list_invalid_properties_for("breakdown")) if _breakdown.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -76,7 +78,7 @@ module Stripe
 
       return false if @amount_tax.nil?
 
-      if _breakdown = @breakdown
+      unless (_breakdown = @breakdown).nil?
         return false if _breakdown.is_a?(OpenApi::Validatable) && !_breakdown.valid?
       end
 

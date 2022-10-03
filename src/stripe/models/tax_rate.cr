@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -57,7 +57,9 @@ module Stripe
     @[JSON::Field(key: "percentage", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter percentage : Float64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: country.nil? && !country_present?)]
@@ -141,14 +143,14 @@ module Stripe
 
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -159,33 +161,33 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"percentage\" is required and cannot be null") if @percentage.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _jurisdiction = @jurisdiction
+      unless (_jurisdiction = @jurisdiction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("jurisdiction", _jurisdiction.to_s.size, MAX_LENGTH_FOR_JURISDICTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _state = @state
+      unless (_state = @state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tax_type = @tax_type
+      unless (_tax_type = @tax_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_TYPE) unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
       end
       invalid_properties
@@ -199,12 +201,12 @@ module Stripe
       return false if @created.nil?
 
       return false if @display_name.nil?
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -213,29 +215,29 @@ module Stripe
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @percentage.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _jurisdiction = @jurisdiction
+      unless (_jurisdiction = @jurisdiction).nil?
         return false if _jurisdiction.to_s.size > MAX_LENGTH_FOR_JURISDICTION
       end
 
-      if _state = @state
+      unless (_state = @state).nil?
         return false if _state.to_s.size > MAX_LENGTH_FOR_STATE
       end
 
-      if _tax_type = @tax_type
+      unless (_tax_type = @tax_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
       end
 

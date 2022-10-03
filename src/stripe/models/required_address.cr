@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "city", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter city : String? = nil
@@ -36,7 +36,9 @@ module Stripe
     getter postal_code : String? = nil
     MAX_LENGTH_FOR_POSTAL_CODE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "line2", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter line2 : String? = nil
@@ -68,38 +70,38 @@ module Stripe
 
       invalid_properties.push("\"city\" is required and cannot be null") if @city.nil?
 
-      if _city = @city
+      unless (_city = @city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"line1\" is required and cannot be null") if @line1.nil?
 
-      if _line1 = @line1
+      unless (_line1 = @line1).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("line1", _line1.to_s.size, MAX_LENGTH_FOR_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"postal_code\" is required and cannot be null") if @postal_code.nil?
 
-      if _postal_code = @postal_code
+      unless (_postal_code = @postal_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("postal_code", _postal_code.to_s.size, MAX_LENGTH_FOR_POSTAL_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _line2 = @line2
+      unless (_line2 = @line2).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("line2", _line2.to_s.size, MAX_LENGTH_FOR_LINE2)
           invalid_properties.push(max_length_error)
         end
       end
-      if _state = @state
+      unless (_state = @state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
           invalid_properties.push(max_length_error)
         end
@@ -111,30 +113,30 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @city.nil?
-      if _city = @city
+      unless (_city = @city).nil?
         return false if _city.to_s.size > MAX_LENGTH_FOR_CITY
       end
 
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @line1.nil?
-      if _line1 = @line1
+      unless (_line1 = @line1).nil?
         return false if _line1.to_s.size > MAX_LENGTH_FOR_LINE1
       end
 
       return false if @postal_code.nil?
-      if _postal_code = @postal_code
+      unless (_postal_code = @postal_code).nil?
         return false if _postal_code.to_s.size > MAX_LENGTH_FOR_POSTAL_CODE
       end
 
-      if _line2 = @line2
+      unless (_line2 = @line2).nil?
         return false if _line2.to_s.size > MAX_LENGTH_FOR_LINE2
       end
 
-      if _state = @state
+      unless (_state = @state).nil?
         return false if _state.to_s.size > MAX_LENGTH_FOR_STATE
       end
 

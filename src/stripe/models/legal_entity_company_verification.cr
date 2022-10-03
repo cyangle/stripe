@@ -19,10 +19,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "document", type: Stripe::LegalEntityCompanyVerificationDocument?, default: nil, required: true, nullable: false, emit_null: false)]
     getter document : Stripe::LegalEntityCompanyVerificationDocument? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"document\" is required and cannot be null") if @document.nil?
 
-      if _document = @document
+      unless (_document = @document).nil?
         invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @document.nil?
-      if _document = @document
+      unless (_document = @document).nil?
         return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 

@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [custom_line_item, invoice_line_item]."
     VALID_VALUES_FOR__TYPE  = StaticArray["custom_line_item", "invoice_line_item"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
@@ -74,22 +76,22 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_line_item = @invoice_line_item
+      unless (_invoice_line_item = @invoice_line_item).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, MAX_LENGTH_FOR_INVOICE_LINE_ITEM)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
 
@@ -100,19 +102,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _invoice_line_item = @invoice_line_item
+      unless (_invoice_line_item = @invoice_line_item).nil?
         return false if _invoice_line_item.to_s.size > MAX_LENGTH_FOR_INVOICE_LINE_ITEM
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Request ability to capture this payment beyond the standard [authorization validity window](https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity)
     @[JSON::Field(key: "request_extended_authorization", type: Bool?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_extended_authorization.nil? && !request_extended_authorization_present?)]

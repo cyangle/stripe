@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "inbound_flows", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter inbound_flows : String? = nil
@@ -46,10 +46,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _inbound_flows = @inbound_flows
+      unless (_inbound_flows = @inbound_flows).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INBOUND_FLOWS) unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
       end
-      if _outbound_flows = @outbound_flows
+      unless (_outbound_flows = @outbound_flows).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OUTBOUND_FLOWS) unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
       end
       invalid_properties
@@ -58,11 +58,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _inbound_flows = @inbound_flows
+      unless (_inbound_flows = @inbound_flows).nil?
         return false unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
       end
 
-      if _outbound_flows = @outbound_flows
+      unless (_outbound_flows = @outbound_flows).nil?
         return false unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of bank transfer
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, gb_bank_transfer, jp_bank_transfer, mx_bank_transfer]."
     VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The remaining amount that needs to be transferred to complete the payment.
     @[JSON::Field(key: "amount_remaining", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_remaining.nil? && !amount_remaining_present?)]
@@ -85,19 +87,19 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _financial_addresses = @financial_addresses
+      unless (_financial_addresses = @financial_addresses).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "financial_addresses", container: _financial_addresses)) if _financial_addresses.is_a?(Array)
       end
-      if _hosted_instructions_url = @hosted_instructions_url
+      unless (_hosted_instructions_url = @hosted_instructions_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
@@ -109,19 +111,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _financial_addresses = @financial_addresses
+      unless (_financial_addresses = @financial_addresses).nil?
         return false if _financial_addresses.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _financial_addresses)
       end
 
-      if _hosted_instructions_url = @hosted_instructions_url
+      unless (_hosted_instructions_url = @hosted_instructions_url).nil?
         return false if _hosted_instructions_url.to_s.size > MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL
       end
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 

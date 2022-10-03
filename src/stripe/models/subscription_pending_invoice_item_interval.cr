@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,6 +30,8 @@ module Stripe
     # The number of intervals between invoices. For example, `interval=month` and `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval_count : Int64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
@@ -60,7 +62,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Fields that need to be collected to keep the capability enabled. If not collected by `current_deadline`, these fields appear in `past_due` as well, and the capability is disabled.
     @[JSON::Field(key: "currently_due", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,7 +41,9 @@ module Stripe
     @[JSON::Field(key: "pending_verification", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter pending_verification : Array(String)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Fields that are due and can be satisfied by providing the corresponding alternative fields instead.
     @[JSON::Field(key: "alternatives", type: Array(Stripe::AccountRequirementsAlternative)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: alternatives.nil? && !alternatives_present?)]
@@ -91,7 +93,7 @@ module Stripe
 
       invalid_properties.push("\"errors\" is required and cannot be null") if @errors.nil?
 
-      if _errors = @errors
+      unless (_errors = @errors).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "errors", container: _errors)) if _errors.is_a?(Array)
       end
       invalid_properties.push("\"eventually_due\" is required and cannot be null") if @eventually_due.nil?
@@ -100,11 +102,11 @@ module Stripe
 
       invalid_properties.push("\"pending_verification\" is required and cannot be null") if @pending_verification.nil?
 
-      if _alternatives = @alternatives
+      unless (_alternatives = @alternatives).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "alternatives", container: _alternatives)) if _alternatives.is_a?(Array)
       end
 
-      if _disabled_reason = @disabled_reason
+      unless (_disabled_reason = @disabled_reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("disabled_reason", _disabled_reason.to_s.size, MAX_LENGTH_FOR_DISABLED_REASON)
           invalid_properties.push(max_length_error)
         end
@@ -118,7 +120,7 @@ module Stripe
       return false if @currently_due.nil?
 
       return false if @errors.nil?
-      if _errors = @errors
+      unless (_errors = @errors).nil?
         return false if _errors.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _errors)
       end
 
@@ -128,11 +130,11 @@ module Stripe
 
       return false if @pending_verification.nil?
 
-      if _alternatives = @alternatives
+      unless (_alternatives = @alternatives).nil?
         return false if _alternatives.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _alternatives)
       end
 
-      if _disabled_reason = @disabled_reason
+      unless (_disabled_reason = @disabled_reason).nil?
         return false if _disabled_reason.to_s.size > MAX_LENGTH_FOR_DISABLED_REASON
       end
 

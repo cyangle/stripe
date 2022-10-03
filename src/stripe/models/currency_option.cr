@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "custom_unit_amount", type: Stripe::CurrencyOptionCustomUnitAmount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: custom_unit_amount.nil? && !custom_unit_amount_present?)]
     getter custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil
@@ -72,13 +72,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _custom_unit_amount = @custom_unit_amount
+      unless (_custom_unit_amount = @custom_unit_amount).nil?
         invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount")) if _custom_unit_amount.is_a?(OpenApi::Validatable)
       end
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      if _tiers = @tiers
+      unless (_tiers = @tiers).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tiers", container: _tiers)) if _tiers.is_a?(Array)
       end
 
@@ -88,15 +88,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _custom_unit_amount = @custom_unit_amount
+      unless (_custom_unit_amount = @custom_unit_amount).nil?
         return false if _custom_unit_amount.is_a?(OpenApi::Validatable) && !_custom_unit_amount.valid?
       end
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
-      if _tiers = @tiers
+      unless (_tiers = @tiers).nil?
         return false if _tiers.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tiers)
       end
 

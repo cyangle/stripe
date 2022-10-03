@@ -19,10 +19,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "settings", type: Stripe::CreateParams1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter settings : Stripe::CreateParams1? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"settings\" is required and cannot be null") if @settings.nil?
 
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @settings.nil?
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
 

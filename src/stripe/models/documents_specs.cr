@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "bank_account_ownership_verification", type: Stripe::DocumentsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_account_ownership_verification : Stripe::DocumentsParam? = nil
@@ -62,25 +62,25 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_account_ownership_verification = @bank_account_ownership_verification
+      unless (_bank_account_ownership_verification = @bank_account_ownership_verification).nil?
         invalid_properties.concat(_bank_account_ownership_verification.list_invalid_properties_for("bank_account_ownership_verification")) if _bank_account_ownership_verification.is_a?(OpenApi::Validatable)
       end
-      if _company_license = @company_license
+      unless (_company_license = @company_license).nil?
         invalid_properties.concat(_company_license.list_invalid_properties_for("company_license")) if _company_license.is_a?(OpenApi::Validatable)
       end
-      if _company_memorandum_of_association = @company_memorandum_of_association
+      unless (_company_memorandum_of_association = @company_memorandum_of_association).nil?
         invalid_properties.concat(_company_memorandum_of_association.list_invalid_properties_for("company_memorandum_of_association")) if _company_memorandum_of_association.is_a?(OpenApi::Validatable)
       end
-      if _company_ministerial_decree = @company_ministerial_decree
+      unless (_company_ministerial_decree = @company_ministerial_decree).nil?
         invalid_properties.concat(_company_ministerial_decree.list_invalid_properties_for("company_ministerial_decree")) if _company_ministerial_decree.is_a?(OpenApi::Validatable)
       end
-      if _company_registration_verification = @company_registration_verification
+      unless (_company_registration_verification = @company_registration_verification).nil?
         invalid_properties.concat(_company_registration_verification.list_invalid_properties_for("company_registration_verification")) if _company_registration_verification.is_a?(OpenApi::Validatable)
       end
-      if _company_tax_id_verification = @company_tax_id_verification
+      unless (_company_tax_id_verification = @company_tax_id_verification).nil?
         invalid_properties.concat(_company_tax_id_verification.list_invalid_properties_for("company_tax_id_verification")) if _company_tax_id_verification.is_a?(OpenApi::Validatable)
       end
-      if _proof_of_registration = @proof_of_registration
+      unless (_proof_of_registration = @proof_of_registration).nil?
         invalid_properties.concat(_proof_of_registration.list_invalid_properties_for("proof_of_registration")) if _proof_of_registration.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -89,31 +89,31 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_account_ownership_verification = @bank_account_ownership_verification
+      unless (_bank_account_ownership_verification = @bank_account_ownership_verification).nil?
         return false if _bank_account_ownership_verification.is_a?(OpenApi::Validatable) && !_bank_account_ownership_verification.valid?
       end
 
-      if _company_license = @company_license
+      unless (_company_license = @company_license).nil?
         return false if _company_license.is_a?(OpenApi::Validatable) && !_company_license.valid?
       end
 
-      if _company_memorandum_of_association = @company_memorandum_of_association
+      unless (_company_memorandum_of_association = @company_memorandum_of_association).nil?
         return false if _company_memorandum_of_association.is_a?(OpenApi::Validatable) && !_company_memorandum_of_association.valid?
       end
 
-      if _company_ministerial_decree = @company_ministerial_decree
+      unless (_company_ministerial_decree = @company_ministerial_decree).nil?
         return false if _company_ministerial_decree.is_a?(OpenApi::Validatable) && !_company_ministerial_decree.valid?
       end
 
-      if _company_registration_verification = @company_registration_verification
+      unless (_company_registration_verification = @company_registration_verification).nil?
         return false if _company_registration_verification.is_a?(OpenApi::Validatable) && !_company_registration_verification.valid?
       end
 
-      if _company_tax_id_verification = @company_tax_id_verification
+      unless (_company_tax_id_verification = @company_tax_id_verification).nil?
         return false if _company_tax_id_verification.is_a?(OpenApi::Validatable) && !_company_tax_id_verification.valid?
       end
 
-      if _proof_of_registration = @proof_of_registration
+      unless (_proof_of_registration = @proof_of_registration).nil?
         return false if _proof_of_registration.is_a?(OpenApi::Validatable) && !_proof_of_registration.valid?
       end
 

@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
     VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval_count : Int64? = nil
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
@@ -59,7 +61,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 

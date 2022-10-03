@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Balance amount.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "source_types", type: Stripe::BalanceAmountBySourceType?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_types : Stripe::BalanceAmountBySourceType? = nil
@@ -55,7 +57,7 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _source_types = @source_types
+      unless (_source_types = @source_types).nil?
         invalid_properties.concat(_source_types.list_invalid_properties_for("source_types")) if _source_types.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -68,7 +70,7 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _source_types = @source_types
+      unless (_source_types = @source_types).nil?
         return false if _source_types.is_a?(OpenApi::Validatable) && !_source_types.valid?
       end
 

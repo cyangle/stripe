@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "additional_documentation", type: Stripe::IssuingDisputeCanceledEvidenceAdditionalDocumentation?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
     getter additional_documentation : Stripe::IssuingDisputeCanceledEvidenceAdditionalDocumentation? = nil
@@ -75,16 +75,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _additional_documentation = @additional_documentation
+      unless (_additional_documentation = @additional_documentation).nil?
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _explanation = @explanation
+      unless (_explanation = @explanation).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
@@ -96,15 +96,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _additional_documentation = @additional_documentation
+      unless (_additional_documentation = @additional_documentation).nil?
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         return false if _cancellation_reason.to_s.size > MAX_LENGTH_FOR_CANCELLATION_REASON
       end
 
-      if _explanation = @explanation
+      unless (_explanation = @explanation).nil?
         return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 

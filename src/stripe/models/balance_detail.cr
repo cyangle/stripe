@@ -19,11 +19,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Funds that are available for use.
     @[JSON::Field(key: "available", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter available : Array(Stripe::BalanceAmount)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +43,7 @@ module Stripe
 
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
 
-      if _available = @available
+      unless (_available = @available).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "available", container: _available)) if _available.is_a?(Array)
       end
       invalid_properties
@@ -51,7 +53,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @available.nil?
-      if _available = @available
+      unless (_available = @available).nil?
         return false if _available.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _available)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.
     @[JSON::Field(key: "allowed_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -56,7 +56,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _allowed_types = @allowed_types
+      unless (_allowed_types = @allowed_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ALLOWED_TYPES) unless OpenApi::EnumValidator.valid?(_allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
       end
 
@@ -66,7 +66,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _allowed_types = @allowed_types
+      unless (_allowed_types = @allowed_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
       end
 

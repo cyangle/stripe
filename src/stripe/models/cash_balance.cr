@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ID of the customer whose cash balance this object represents.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -39,11 +39,13 @@ module Stripe
     @[JSON::Field(key: "settings", type: Stripe::CustomerBalanceCustomerBalanceSettings?, default: nil, required: true, nullable: false, emit_null: false)]
     getter settings : Stripe::CustomerBalanceCustomerBalanceSettings? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are represented in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
-    @[JSON::Field(key: "available", type: Hash(String, Int64)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available.nil? && !available_present?)]
-    getter available : Hash(String, Int64)? = nil
+    @[JSON::Field(key: "available", type: Hash(String, Int32)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available.nil? && !available_present?)]
+    getter available : Hash(String, Int32)? = nil
 
     @[JSON::Field(ignore: true)]
     property? available_present : Bool = false
@@ -58,7 +60,7 @@ module Stripe
       @object : String? = nil,
       @settings : Stripe::CustomerBalanceCustomerBalanceSettings? = nil,
       # Optional properties
-      @available : Hash(String, Int64)? = nil
+      @available : Hash(String, Int32)? = nil
     )
     end
 
@@ -69,7 +71,7 @@ module Stripe
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
@@ -78,12 +80,12 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"settings\" is required and cannot be null") if @settings.nil?
 
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
 
@@ -94,19 +96,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @settings.nil?
-      if _settings = @settings
+      unless (_settings = @settings).nil?
         return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
 
@@ -158,7 +160,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available Object to be assigned
-    def available=(available : Hash(String, Int64)?)
+    def available=(available : Hash(String, Int32)?)
       if available.nil?
         return @available = nil
       end

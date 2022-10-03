@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "minimum_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter minimum_amount : Int64? = nil

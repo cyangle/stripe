@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Funds that are available to be transferred or paid out, whether automatically by Stripe or explicitly via the [Transfers API](https://stripe.com/docs/api#transfers) or [Payouts API](https://stripe.com/docs/api#payouts). The available balance for each currency and payment type can be found in the `source_types` property.
     @[JSON::Field(key: "available", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -39,7 +39,9 @@ module Stripe
     @[JSON::Field(key: "pending", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter pending : Array(Stripe::BalanceAmount)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Funds held due to negative balances on connected Custom accounts. The connect reserve balance for each currency and payment type can be found in the `source_types` property.
     @[JSON::Field(key: "connect_reserved", type: Array(Stripe::BalanceAmount)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -75,28 +77,28 @@ module Stripe
 
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
 
-      if _available = @available
+      unless (_available = @available).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "available", container: _available)) if _available.is_a?(Array)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"pending\" is required and cannot be null") if @pending.nil?
 
-      if _pending = @pending
+      unless (_pending = @pending).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "pending", container: _pending)) if _pending.is_a?(Array)
       end
-      if _connect_reserved = @connect_reserved
+      unless (_connect_reserved = @connect_reserved).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "connect_reserved", container: _connect_reserved)) if _connect_reserved.is_a?(Array)
       end
-      if _instant_available = @instant_available
+      unless (_instant_available = @instant_available).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "instant_available", container: _instant_available)) if _instant_available.is_a?(Array)
       end
-      if _issuing = @issuing
+      unless (_issuing = @issuing).nil?
         invalid_properties.concat(_issuing.list_invalid_properties_for("issuing")) if _issuing.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -106,31 +108,31 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @available.nil?
-      if _available = @available
+      unless (_available = @available).nil?
         return false if _available.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _available)
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @pending.nil?
-      if _pending = @pending
+      unless (_pending = @pending).nil?
         return false if _pending.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _pending)
       end
 
-      if _connect_reserved = @connect_reserved
+      unless (_connect_reserved = @connect_reserved).nil?
         return false if _connect_reserved.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _connect_reserved)
       end
 
-      if _instant_available = @instant_available
+      unless (_instant_available = @instant_available).nil?
         return false if _instant_available.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _instant_available)
       end
 
-      if _issuing = @issuing
+      unless (_issuing = @issuing).nil?
         return false if _issuing.is_a?(OpenApi::Validatable) && !_issuing.valid?
       end
 

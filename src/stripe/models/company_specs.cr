@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::AddressSpecs? = nil
@@ -112,64 +112,64 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      if _address_kana = @address_kana
+      unless (_address_kana = @address_kana).nil?
         invalid_properties.concat(_address_kana.list_invalid_properties_for("address_kana")) if _address_kana.is_a?(OpenApi::Validatable)
       end
-      if _address_kanji = @address_kanji
+      unless (_address_kanji = @address_kanji).nil?
         invalid_properties.concat(_address_kanji.list_invalid_properties_for("address_kanji")) if _address_kanji.is_a?(OpenApi::Validatable)
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name_kana = @name_kana
+      unless (_name_kana = @name_kana).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kana", _name_kana.to_s.size, MAX_LENGTH_FOR_NAME_KANA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name_kanji = @name_kanji
+      unless (_name_kanji = @name_kanji).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kanji", _name_kanji.to_s.size, MAX_LENGTH_FOR_NAME_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _ownership_declaration = @ownership_declaration
+      unless (_ownership_declaration = @ownership_declaration).nil?
         invalid_properties.concat(_ownership_declaration.list_invalid_properties_for("ownership_declaration")) if _ownership_declaration.is_a?(OpenApi::Validatable)
       end
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _registration_number = @registration_number
+      unless (_registration_number = @registration_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("registration_number", _registration_number.to_s.size, MAX_LENGTH_FOR_REGISTRATION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _structure = @structure
+      unless (_structure = @structure).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STRUCTURE) unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
       end
-      if _tax_id = @tax_id
+      unless (_tax_id = @tax_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id", _tax_id.to_s.size, MAX_LENGTH_FOR_TAX_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tax_id_registrar = @tax_id_registrar
+      unless (_tax_id_registrar = @tax_id_registrar).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id_registrar", _tax_id_registrar.to_s.size, MAX_LENGTH_FOR_TAX_ID_REGISTRAR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _vat_id = @vat_id
+      unless (_vat_id = @vat_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("vat_id", _vat_id.to_s.size, MAX_LENGTH_FOR_VAT_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -178,59 +178,59 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _address_kana = @address_kana
+      unless (_address_kana = @address_kana).nil?
         return false if _address_kana.is_a?(OpenApi::Validatable) && !_address_kana.valid?
       end
 
-      if _address_kanji = @address_kanji
+      unless (_address_kanji = @address_kanji).nil?
         return false if _address_kanji.is_a?(OpenApi::Validatable) && !_address_kanji.valid?
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _name_kana = @name_kana
+      unless (_name_kana = @name_kana).nil?
         return false if _name_kana.to_s.size > MAX_LENGTH_FOR_NAME_KANA
       end
 
-      if _name_kanji = @name_kanji
+      unless (_name_kanji = @name_kanji).nil?
         return false if _name_kanji.to_s.size > MAX_LENGTH_FOR_NAME_KANJI
       end
 
-      if _ownership_declaration = @ownership_declaration
+      unless (_ownership_declaration = @ownership_declaration).nil?
         return false if _ownership_declaration.is_a?(OpenApi::Validatable) && !_ownership_declaration.valid?
       end
 
-      if _phone = @phone
+      unless (_phone = @phone).nil?
         return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
-      if _registration_number = @registration_number
+      unless (_registration_number = @registration_number).nil?
         return false if _registration_number.to_s.size > MAX_LENGTH_FOR_REGISTRATION_NUMBER
       end
 
-      if _structure = @structure
+      unless (_structure = @structure).nil?
         return false unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
       end
 
-      if _tax_id = @tax_id
+      unless (_tax_id = @tax_id).nil?
         return false if _tax_id.to_s.size > MAX_LENGTH_FOR_TAX_ID
       end
 
-      if _tax_id_registrar = @tax_id_registrar
+      unless (_tax_id_registrar = @tax_id_registrar).nil?
         return false if _tax_id_registrar.to_s.size > MAX_LENGTH_FOR_TAX_ID_REGISTRAR
       end
 
-      if _vat_id = @vat_id
+      unless (_vat_id = @vat_id).nil?
         return false if _vat_id.to_s.size > MAX_LENGTH_FOR_VAT_ID
       end
 
-      if _verification = @verification
+      unless (_verification = @verification).nil?
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 

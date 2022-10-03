@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_number : String? = nil
@@ -31,6 +31,8 @@ module Stripe
     @[JSON::Field(key: "transit_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transit_number : String? = nil
     MAX_LENGTH_FOR_TRANSIT_NUMBER = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,21 +52,21 @@ module Stripe
 
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_number\" is required and cannot be null") if @institution_number.nil?
 
-      if _institution_number = @institution_number
+      unless (_institution_number = @institution_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"transit_number\" is required and cannot be null") if @transit_number.nil?
 
-      if _transit_number = @transit_number
+      unless (_transit_number = @transit_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -76,17 +78,17 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account_number.nil?
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       return false if @institution_number.nil?
-      if _institution_number = @institution_number
+      unless (_institution_number = @institution_number).nil?
         return false if _institution_number.to_s.size > MAX_LENGTH_FOR_INSTITUTION_NUMBER
       end
 
       return false if @transit_number.nil?
-      if _transit_number = @transit_number
+      unless (_transit_number = @transit_number).nil?
         return false if _transit_number.to_s.size > MAX_LENGTH_FOR_TRANSIT_NUMBER
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The raw data string used to generate QR code, it should be used together with QR code library.
     @[JSON::Field(key: "data", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,23 +63,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _data = @data
+      unless (_data = @data).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, MAX_LENGTH_FOR_DATA)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _hosted_instructions_url = @hosted_instructions_url
+      unless (_hosted_instructions_url = @hosted_instructions_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _image_url_png = @image_url_png
+      unless (_image_url_png = @image_url_png).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_PNG)
           invalid_properties.push(max_length_error)
         end
       end
-      if _image_url_svg = @image_url_svg
+      unless (_image_url_svg = @image_url_svg).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_SVG)
           invalid_properties.push(max_length_error)
         end
@@ -90,19 +90,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _data = @data
+      unless (_data = @data).nil?
         return false if _data.to_s.size > MAX_LENGTH_FOR_DATA
       end
 
-      if _hosted_instructions_url = @hosted_instructions_url
+      unless (_hosted_instructions_url = @hosted_instructions_url).nil?
         return false if _hosted_instructions_url.to_s.size > MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL
       end
 
-      if _image_url_png = @image_url_png
+      unless (_image_url_png = @image_url_png).nil?
         return false if _image_url_png.to_s.size > MAX_LENGTH_FOR_IMAGE_URL_PNG
       end
 
-      if _image_url_svg = @image_url_svg
+      unless (_image_url_svg = @image_url_svg).nil?
         return false if _image_url_svg.to_s.size > MAX_LENGTH_FOR_IMAGE_URL_SVG
       end
 

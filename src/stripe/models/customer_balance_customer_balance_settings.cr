@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The configuration for how funds that land in the customer cash balance are reconciled.
     @[JSON::Field(key: "reconciliation_mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reconciliation_mode : String? = nil
     ERROR_MESSAGE_FOR_RECONCILIATION_MODE = "invalid value for \"reconciliation_mode\", must be one of [automatic, manual]."
     VALID_VALUES_FOR_RECONCILIATION_MODE  = StaticArray["automatic", "manual"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +45,7 @@ module Stripe
 
       invalid_properties.push("\"reconciliation_mode\" is required and cannot be null") if @reconciliation_mode.nil?
 
-      if _reconciliation_mode = @reconciliation_mode
+      unless (_reconciliation_mode = @reconciliation_mode).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RECONCILIATION_MODE) unless OpenApi::EnumValidator.valid?(_reconciliation_mode, VALID_VALUES_FOR_RECONCILIATION_MODE)
       end
       invalid_properties
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @reconciliation_mode.nil?
-      if _reconciliation_mode = @reconciliation_mode
+      unless (_reconciliation_mode = @reconciliation_mode).nil?
         return false unless OpenApi::EnumValidator.valid?(_reconciliation_mode, VALID_VALUES_FOR_RECONCILIATION_MODE)
       end
 

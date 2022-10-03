@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount (in cents) to be transferred.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,7 +32,9 @@ module Stripe
     @[JSON::Field(key: "financial_account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter financial_account : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # ID of the customer to whom the OutboundPayment is sent. Must match the Customer attached to the `destination_payment_method` passed in.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -103,32 +105,32 @@ module Stripe
 
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _destination_payment_method = @destination_payment_method
+      unless (_destination_payment_method = @destination_payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("destination_payment_method", _destination_payment_method.to_s.size, MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _destination_payment_method_data = @destination_payment_method_data
+      unless (_destination_payment_method_data = @destination_payment_method_data).nil?
         invalid_properties.concat(_destination_payment_method_data.list_invalid_properties_for("destination_payment_method_data")) if _destination_payment_method_data.is_a?(OpenApi::Validatable)
       end
-      if _destination_payment_method_options = @destination_payment_method_options
+      unless (_destination_payment_method_options = @destination_payment_method_options).nil?
         invalid_properties.concat(_destination_payment_method_options.list_invalid_properties_for("destination_payment_method_options")) if _destination_payment_method_options.is_a?(OpenApi::Validatable)
       end
-      if _end_user_details = @end_user_details
+      unless (_end_user_details = @end_user_details).nil?
         invalid_properties.concat(_end_user_details.list_invalid_properties_for("end_user_details")) if _end_user_details.is_a?(OpenApi::Validatable)
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
@@ -145,31 +147,31 @@ module Stripe
 
       return false if @financial_account.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _destination_payment_method = @destination_payment_method
+      unless (_destination_payment_method = @destination_payment_method).nil?
         return false if _destination_payment_method.to_s.size > MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD
       end
 
-      if _destination_payment_method_data = @destination_payment_method_data
+      unless (_destination_payment_method_data = @destination_payment_method_data).nil?
         return false if _destination_payment_method_data.is_a?(OpenApi::Validatable) && !_destination_payment_method_data.valid?
       end
 
-      if _destination_payment_method_options = @destination_payment_method_options
+      unless (_destination_payment_method_options = @destination_payment_method_options).nil?
         return false if _destination_payment_method_options.is_a?(OpenApi::Validatable) && !_destination_payment_method_options.valid?
       end
 
-      if _end_user_details = @end_user_details
+      unless (_end_user_details = @end_user_details).nil?
         return false if _end_user_details.is_a?(OpenApi::Validatable) && !_end_user_details.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
     @[JSON::Field(key: "native_data", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: native_data.nil? && !native_data_present?)]
@@ -70,22 +70,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _native_data = @native_data
+      unless (_native_data = @native_data).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_data", _native_data.to_s.size, MAX_LENGTH_FOR_NATIVE_DATA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _native_url = @native_url
+      unless (_native_url = @native_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -96,19 +96,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _native_data = @native_data
+      unless (_native_data = @native_data).nil?
         return false if _native_data.to_s.size > MAX_LENGTH_FOR_NATIVE_DATA
       end
 
-      if _native_url = @native_url
+      unless (_native_url = @native_url).nil?
         return false if _native_url.to_s.size > MAX_LENGTH_FOR_NATIVE_URL
       end
 
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The amount discounted.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,6 +27,8 @@ module Stripe
 
     @[JSON::Field(key: "discount", type: Stripe::Discount?, default: nil, required: true, nullable: false, emit_null: false)]
     getter discount : Stripe::Discount? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,7 +49,7 @@ module Stripe
 
       invalid_properties.push("\"discount\" is required and cannot be null") if @discount.nil?
 
-      if _discount = @discount
+      unless (_discount = @discount).nil?
         invalid_properties.concat(_discount.list_invalid_properties_for("discount")) if _discount.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -59,7 +61,7 @@ module Stripe
       return false if @amount.nil?
 
       return false if @discount.nil?
-      if _discount = @discount
+      unless (_discount = @discount).nil?
         return false if _discount.is_a?(OpenApi::Validatable) && !_discount.valid?
       end
 

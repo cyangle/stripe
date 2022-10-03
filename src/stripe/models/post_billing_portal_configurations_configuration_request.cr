@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the configuration is active and can be used to create portal sessions.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,20 +63,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
-      if _default_return_url = @default_return_url
+      unless (_default_return_url = @default_return_url).nil?
         invalid_properties.concat(_default_return_url.list_invalid_properties_for("default_return_url")) if _default_return_url.is_a?(OpenApi::Validatable)
       end
 
-      if _features = @features
+      unless (_features = @features).nil?
         invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
-      if _login_page = @login_page
+      unless (_login_page = @login_page).nil?
         invalid_properties.concat(_login_page.list_invalid_properties_for("login_page")) if _login_page.is_a?(OpenApi::Validatable)
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -85,23 +85,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
 
-      if _default_return_url = @default_return_url
+      unless (_default_return_url = @default_return_url).nil?
         return false if _default_return_url.is_a?(OpenApi::Validatable) && !_default_return_url.valid?
       end
 
-      if _features = @features
+      unless (_features = @features).nil?
         return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
 
-      if _login_page = @login_page
+      unless (_login_page = @login_page).nil?
         return false if _login_page.is_a?(OpenApi::Validatable) && !_login_page.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 

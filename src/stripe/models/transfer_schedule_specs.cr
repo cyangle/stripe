@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "delay_days", type: Stripe::TransferScheduleSpecsDelayDays?, default: nil, required: false, nullable: false, emit_null: false)]
     getter delay_days : Stripe::TransferScheduleSpecsDelayDays? = nil
@@ -55,14 +55,14 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _delay_days = @delay_days
+      unless (_delay_days = @delay_days).nil?
         invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days")) if _delay_days.is_a?(OpenApi::Validatable)
       end
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      if _weekly_anchor = @weekly_anchor
+      unless (_weekly_anchor = @weekly_anchor).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_WEEKLY_ANCHOR) unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
       end
       invalid_properties
@@ -71,15 +71,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _delay_days = @delay_days
+      unless (_delay_days = @delay_days).nil?
         return false if _delay_days.is_a?(OpenApi::Validatable) && !_delay_days.valid?
       end
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      if _weekly_anchor = @weekly_anchor
+      unless (_weekly_anchor = @weekly_anchor).nil?
         return false unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
       end
 

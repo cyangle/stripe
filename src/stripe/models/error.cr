@@ -19,10 +19,12 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "error", type: Stripe::ApiErrors?, default: nil, required: true, nullable: false, emit_null: false)]
     getter error : Stripe::ApiErrors? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +42,7 @@ module Stripe
 
       invalid_properties.push("\"error\" is required and cannot be null") if @error.nil?
 
-      if _error = @error
+      unless (_error = @error).nil?
         invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @error.nil?
-      if _error = @error
+      unless (_error = @error).nil?
         return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
 

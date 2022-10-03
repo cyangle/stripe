@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Preferred language of the Bancontact authorization page that the customer is redirected to.
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter preferred_language : String? = nil
     ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE = "invalid value for \"preferred_language\", must be one of [de, en, fr, nl]."
     VALID_VALUES_FOR_PREFERRED_LANGUAGE  = StaticArray["de", "en", "fr", "nl"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +45,7 @@ module Stripe
 
       invalid_properties.push("\"preferred_language\" is required and cannot be null") if @preferred_language.nil?
 
-      if _preferred_language = @preferred_language
+      unless (_preferred_language = @preferred_language).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
       invalid_properties
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @preferred_language.nil?
-      if _preferred_language = @preferred_language
+      unless (_preferred_language = @preferred_language).nil?
         return false unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
 

@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. There cannot be any line items with recurring prices when using this field.
-  alias PostQuotesRequestApplicationFeeAmount = BusinessProfileSpecsSupportUrlOneOf | Int64
+  alias PostQuotesRequestApplicationFeeAmount = BusinessProfileSpecsSupportUrlOneOf | Int32
 end

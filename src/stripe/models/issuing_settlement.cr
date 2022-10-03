@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The Bank Identification Number reflecting this settlement record.
     @[JSON::Field(key: "bin", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -93,6 +93,8 @@ module Stripe
     @[JSON::Field(key: "transaction_volume", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction_volume : Int64? = nil
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -124,7 +126,7 @@ module Stripe
 
       invalid_properties.push("\"bin\" is required and cannot be null") if @bin.nil?
 
-      if _bin = @bin
+      unless (_bin = @bin).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, MAX_LENGTH_FOR_BIN)
           invalid_properties.push(max_length_error)
         end
@@ -137,7 +139,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -152,26 +154,26 @@ module Stripe
 
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
-      if _network = @network
+      unless (_network = @network).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       invalid_properties.push("\"network_fees\" is required and cannot be null") if @network_fees.nil?
 
       invalid_properties.push("\"network_settlement_identifier\" is required and cannot be null") if @network_settlement_identifier.nil?
 
-      if _network_settlement_identifier = @network_settlement_identifier
+      unless (_network_settlement_identifier = @network_settlement_identifier).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"settlement_service\" is required and cannot be null") if @settlement_service.nil?
 
-      if _settlement_service = @settlement_service
+      unless (_settlement_service = @settlement_service).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, MAX_LENGTH_FOR_SETTLEMENT_SERVICE)
           invalid_properties.push(max_length_error)
         end
@@ -187,7 +189,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @bin.nil?
-      if _bin = @bin
+      unless (_bin = @bin).nil?
         return false if _bin.to_s.size > MAX_LENGTH_FOR_BIN
       end
 
@@ -198,7 +200,7 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -211,24 +213,24 @@ module Stripe
       return false if @net_total.nil?
 
       return false if @network.nil?
-      if _network = @network
+      unless (_network = @network).nil?
         return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
 
       return false if @network_fees.nil?
 
       return false if @network_settlement_identifier.nil?
-      if _network_settlement_identifier = @network_settlement_identifier
+      unless (_network_settlement_identifier = @network_settlement_identifier).nil?
         return false if _network_settlement_identifier.to_s.size > MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @settlement_service.nil?
-      if _settlement_service = @settlement_service
+      unless (_settlement_service = @settlement_service).nil?
         return false if _settlement_service.to_s.size > MAX_LENGTH_FOR_SETTLEMENT_SERVICE
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
@@ -70,15 +70,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
@@ -88,15 +88,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.to_s.size > MAX_LENGTH_FOR_PAYMENT_INTENT
       end
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 

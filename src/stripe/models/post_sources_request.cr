@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where charge amount may not be specified until funds land.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -117,52 +117,52 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _flow = @flow
+      unless (_flow = @flow).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FLOW) unless OpenApi::EnumValidator.valid?(_flow, VALID_VALUES_FOR_FLOW)
       end
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         invalid_properties.concat(_mandate.list_invalid_properties_for("mandate")) if _mandate.is_a?(OpenApi::Validatable)
       end
 
-      if _original_source = @original_source
+      unless (_original_source = @original_source).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_source", _original_source.to_s.size, MAX_LENGTH_FOR_ORIGINAL_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         invalid_properties.concat(_owner.list_invalid_properties_for("owner")) if _owner.is_a?(OpenApi::Validatable)
       end
-      if _receiver = @receiver
+      unless (_receiver = @receiver).nil?
         invalid_properties.concat(_receiver.list_invalid_properties_for("receiver")) if _receiver.is_a?(OpenApi::Validatable)
       end
-      if _redirect = @redirect
+      unless (_redirect = @redirect).nil?
         invalid_properties.concat(_redirect.list_invalid_properties_for("redirect")) if _redirect.is_a?(OpenApi::Validatable)
       end
-      if _source_order = @source_order
+      unless (_source_order = @source_order).nil?
         invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _token = @token
+      unless (_token = @token).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("token", _token.to_s.size, MAX_LENGTH_FOR_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _usage = @usage
+      unless (_usage = @usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_USAGE) unless OpenApi::EnumValidator.valid?(_usage, VALID_VALUES_FOR_USAGE)
       end
       invalid_properties
@@ -171,51 +171,51 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _flow = @flow
+      unless (_flow = @flow).nil?
         return false unless OpenApi::EnumValidator.valid?(_flow, VALID_VALUES_FOR_FLOW)
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.is_a?(OpenApi::Validatable) && !_mandate.valid?
       end
 
-      if _original_source = @original_source
+      unless (_original_source = @original_source).nil?
         return false if _original_source.to_s.size > MAX_LENGTH_FOR_ORIGINAL_SOURCE
       end
 
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
 
-      if _receiver = @receiver
+      unless (_receiver = @receiver).nil?
         return false if _receiver.is_a?(OpenApi::Validatable) && !_receiver.valid?
       end
 
-      if _redirect = @redirect
+      unless (_redirect = @redirect).nil?
         return false if _redirect.is_a?(OpenApi::Validatable) && !_redirect.valid?
       end
 
-      if _source_order = @source_order
+      unless (_source_order = @source_order).nil?
         return false if _source_order.is_a?(OpenApi::Validatable) && !_source_order.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _token = @token
+      unless (_token = @token).nil?
         return false if _token.to_s.size > MAX_LENGTH_FOR_TOKEN
       end
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
-      if _usage = @usage
+      unless (_usage = @usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_usage, VALID_VALUES_FOR_USAGE)
       end
 

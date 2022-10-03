@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "additional_documentation", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter additional_documentation : Stripe::BusinessProfileSpecsSupportUrl? = nil
@@ -80,40 +80,40 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _additional_documentation = @additional_documentation
+      unless (_additional_documentation = @additional_documentation).nil?
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
-      if _canceled_at = @canceled_at
+      unless (_canceled_at = @canceled_at).nil?
         invalid_properties.concat(_canceled_at.list_invalid_properties_for("canceled_at")) if _canceled_at.is_a?(OpenApi::Validatable)
       end
-      if _cancellation_policy_provided = @cancellation_policy_provided
+      unless (_cancellation_policy_provided = @cancellation_policy_provided).nil?
         invalid_properties.concat(_cancellation_policy_provided.list_invalid_properties_for("cancellation_policy_provided")) if _cancellation_policy_provided.is_a?(OpenApi::Validatable)
       end
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _expected_at = @expected_at
+      unless (_expected_at = @expected_at).nil?
         invalid_properties.concat(_expected_at.list_invalid_properties_for("expected_at")) if _expected_at.is_a?(OpenApi::Validatable)
       end
-      if _explanation = @explanation
+      unless (_explanation = @explanation).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _product_type = @product_type
+      unless (_product_type = @product_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRODUCT_TYPE) unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
       end
-      if _return_status = @return_status
+      unless (_return_status = @return_status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RETURN_STATUS) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
       end
-      if _returned_at = @returned_at
+      unless (_returned_at = @returned_at).nil?
         invalid_properties.concat(_returned_at.list_invalid_properties_for("returned_at")) if _returned_at.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -122,43 +122,43 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _additional_documentation = @additional_documentation
+      unless (_additional_documentation = @additional_documentation).nil?
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
-      if _canceled_at = @canceled_at
+      unless (_canceled_at = @canceled_at).nil?
         return false if _canceled_at.is_a?(OpenApi::Validatable) && !_canceled_at.valid?
       end
 
-      if _cancellation_policy_provided = @cancellation_policy_provided
+      unless (_cancellation_policy_provided = @cancellation_policy_provided).nil?
         return false if _cancellation_policy_provided.is_a?(OpenApi::Validatable) && !_cancellation_policy_provided.valid?
       end
 
-      if _cancellation_reason = @cancellation_reason
+      unless (_cancellation_reason = @cancellation_reason).nil?
         return false if _cancellation_reason.to_s.size > MAX_LENGTH_FOR_CANCELLATION_REASON
       end
 
-      if _expected_at = @expected_at
+      unless (_expected_at = @expected_at).nil?
         return false if _expected_at.is_a?(OpenApi::Validatable) && !_expected_at.valid?
       end
 
-      if _explanation = @explanation
+      unless (_explanation = @explanation).nil?
         return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
-      if _product_type = @product_type
+      unless (_product_type = @product_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
       end
 
-      if _return_status = @return_status
+      unless (_return_status = @return_status).nil?
         return false unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
       end
 
-      if _returned_at = @returned_at
+      unless (_returned_at = @returned_at).nil?
         return false if _returned_at.is_a?(OpenApi::Validatable) && !_returned_at.valid?
       end
 

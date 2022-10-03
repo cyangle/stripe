@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The array that contains reasons for a FinancialAccount closure.
     @[JSON::Field(key: "reasons", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reasons : Array(String)? = nil
     ERROR_MESSAGE_FOR_REASONS = "invalid value for \"reasons\", must be one of [account_rejected, closed_by_platform, other]."
     VALID_VALUES_FOR_REASONS  = StaticArray["account_rejected", "closed_by_platform", "other"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +45,7 @@ module Stripe
 
       invalid_properties.push("\"reasons\" is required and cannot be null") if @reasons.nil?
 
-      if _reasons = @reasons
+      unless (_reasons = @reasons).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASONS) unless OpenApi::EnumValidator.valid?(_reasons, VALID_VALUES_FOR_REASONS)
       end
       invalid_properties
@@ -53,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @reasons.nil?
-      if _reasons = @reasons
+      unless (_reasons = @reasons).nil?
         return false unless OpenApi::EnumValidator.valid?(_reasons, VALID_VALUES_FOR_REASONS)
       end
 

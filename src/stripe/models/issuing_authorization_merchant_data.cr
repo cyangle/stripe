@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,9 @@ module Stripe
     getter network_id : String? = nil
     MAX_LENGTH_FOR_NETWORK_ID = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # City where the seller is located
     @[JSON::Field(key: "city", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: city.nil? && !city_present?)]
@@ -102,46 +104,46 @@ module Stripe
 
       invalid_properties.push("\"category\" is required and cannot be null") if @category.nil?
 
-      if _category = @category
+      unless (_category = @category).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("category", _category.to_s.size, MAX_LENGTH_FOR_CATEGORY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"category_code\" is required and cannot be null") if @category_code.nil?
 
-      if _category_code = @category_code
+      unless (_category_code = @category_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("category_code", _category_code.to_s.size, MAX_LENGTH_FOR_CATEGORY_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"network_id\" is required and cannot be null") if @network_id.nil?
 
-      if _network_id = @network_id
+      unless (_network_id = @network_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_id", _network_id.to_s.size, MAX_LENGTH_FOR_NETWORK_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _city = @city
+      unless (_city = @city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _postal_code = @postal_code
+      unless (_postal_code = @postal_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("postal_code", _postal_code.to_s.size, MAX_LENGTH_FOR_POSTAL_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _state = @state
+      unless (_state = @state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
           invalid_properties.push(max_length_error)
         end
@@ -153,37 +155,37 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @category.nil?
-      if _category = @category
+      unless (_category = @category).nil?
         return false if _category.to_s.size > MAX_LENGTH_FOR_CATEGORY
       end
 
       return false if @category_code.nil?
-      if _category_code = @category_code
+      unless (_category_code = @category_code).nil?
         return false if _category_code.to_s.size > MAX_LENGTH_FOR_CATEGORY_CODE
       end
 
       return false if @network_id.nil?
-      if _network_id = @network_id
+      unless (_network_id = @network_id).nil?
         return false if _network_id.to_s.size > MAX_LENGTH_FOR_NETWORK_ID
       end
 
-      if _city = @city
+      unless (_city = @city).nil?
         return false if _city.to_s.size > MAX_LENGTH_FOR_CITY
       end
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _postal_code = @postal_code
+      unless (_postal_code = @postal_code).nil?
         return false if _postal_code.to_s.size > MAX_LENGTH_FOR_POSTAL_CODE
       end
 
-      if _state = @state
+      unless (_state = @state).nil?
         return false if _state.to_s.size > MAX_LENGTH_FOR_STATE
       end
 

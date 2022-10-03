@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter active : Bool? = nil
@@ -72,29 +74,29 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_code", _tax_code.to_s.size, MAX_LENGTH_FOR_TAX_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _unit_label = @unit_label
+      unless (_unit_label = @unit_label).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
           invalid_properties.push(max_length_error)
         end
@@ -106,23 +108,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         return false if _tax_code.to_s.size > MAX_LENGTH_FOR_TAX_CODE
       end
 
-      if _unit_label = @unit_label
+      unless (_unit_label = @unit_label).nil?
         return false if _unit_label.to_s.size > MAX_LENGTH_FOR_UNIT_LABEL
       end
 

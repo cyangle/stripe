@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Payment schedule for the mandate.
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -33,7 +33,9 @@ module Stripe
     ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
     VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # List of Stripe products where this mandate can be selected automatically.
     @[JSON::Field(key: "default_for", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -69,18 +71,18 @@ module Stripe
 
       invalid_properties.push("\"payment_schedule\" is required and cannot be null") if @payment_schedule.nil?
 
-      if _payment_schedule = @payment_schedule
+      unless (_payment_schedule = @payment_schedule).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
       invalid_properties.push("\"transaction_type\" is required and cannot be null") if @transaction_type.nil?
 
-      if _transaction_type = @transaction_type
+      unless (_transaction_type = @transaction_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TRANSACTION_TYPE) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
-      if _default_for = @default_for
+      unless (_default_for = @default_for).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_FOR) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
       end
-      if _interval_description = @interval_description
+      unless (_interval_description = @interval_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
@@ -92,20 +94,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @payment_schedule.nil?
-      if _payment_schedule = @payment_schedule
+      unless (_payment_schedule = @payment_schedule).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
 
       return false if @transaction_type.nil?
-      if _transaction_type = @transaction_type
+      unless (_transaction_type = @transaction_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
 
-      if _default_for = @default_for
+      unless (_default_for = @default_for).nil?
         return false unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
       end
 
-      if _interval_description = @interval_description
+      unless (_interval_description = @interval_description).nil?
         return false if _interval_description.to_s.size > MAX_LENGTH_FOR_INTERVAL_DESCRIPTION
       end
 

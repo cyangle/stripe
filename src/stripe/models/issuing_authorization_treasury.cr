@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The array of [ReceivedCredits](https://stripe.com/docs/api/treasury/received_credits) associated with this authorization
     @[JSON::Field(key: "received_credits", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "received_debits", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter received_debits : Array(String)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The Treasury [Transaction](https://stripe.com/docs/api/treasury/transactions) associated with this authorization
     @[JSON::Field(key: "transaction", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction.nil? && !transaction_present?)]
@@ -60,7 +62,7 @@ module Stripe
 
       invalid_properties.push("\"received_debits\" is required and cannot be null") if @received_debits.nil?
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
@@ -75,7 +77,7 @@ module Stripe
 
       return false if @received_debits.nil?
 
-      if _transaction = @transaction
+      unless (_transaction = @transaction).nil?
         return false if _transaction.to_s.size > MAX_LENGTH_FOR_TRANSACTION
       end
 

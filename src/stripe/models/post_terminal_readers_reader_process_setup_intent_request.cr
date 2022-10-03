@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Customer Consent Collected
     @[JSON::Field(key: "customer_consent_collected", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     getter setup_intent : String? = nil
     MAX_LENGTH_FOR_SETUP_INTENT = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -56,7 +58,7 @@ module Stripe
 
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
 
-      if _setup_intent = @setup_intent
+      unless (_setup_intent = @setup_intent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("setup_intent", _setup_intent.to_s.size, MAX_LENGTH_FOR_SETUP_INTENT)
           invalid_properties.push(max_length_error)
         end
@@ -71,7 +73,7 @@ module Stripe
       return false if @customer_consent_collected.nil?
 
       return false if @setup_intent.nil?
-      if _setup_intent = @setup_intent
+      unless (_setup_intent = @setup_intent).nil?
         return false if _setup_intent.to_s.size > MAX_LENGTH_FOR_SETUP_INTENT
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter preferred_language : String? = nil
@@ -39,7 +39,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _preferred_language = @preferred_language
+      unless (_preferred_language = @preferred_language).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
       invalid_properties
@@ -48,7 +48,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _preferred_language = @preferred_language
+      unless (_preferred_language = @preferred_language).nil?
         return false unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The unique reference of the mandate.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,6 +30,8 @@ module Stripe
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
     MAX_LENGTH_FOR_URL = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,14 +50,14 @@ module Stripe
 
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
@@ -67,12 +69,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @reference.nil?
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       return false if @url.nil?
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 

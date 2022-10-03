@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "height", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter height : Float64? = nil
@@ -32,6 +32,8 @@ module Stripe
 
     @[JSON::Field(key: "width", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter width : Float64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

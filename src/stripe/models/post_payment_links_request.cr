@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
     @[JSON::Field(key: "line_items", type: Array(Stripe::LineItemsCreateParams)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter line_items : Array(Stripe::LineItemsCreateParams)? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "after_completion", type: Stripe::AfterCompletionParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter after_completion : Stripe::AfterCompletionParams? = nil
@@ -154,55 +156,55 @@ module Stripe
 
       invalid_properties.push("\"line_items\" is required and cannot be null") if @line_items.nil?
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
-      if _after_completion = @after_completion
+      unless (_after_completion = @after_completion).nil?
         invalid_properties.concat(_after_completion.list_invalid_properties_for("after_completion")) if _after_completion.is_a?(OpenApi::Validatable)
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      if _billing_address_collection = @billing_address_collection
+      unless (_billing_address_collection = @billing_address_collection).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
-      if _consent_collection = @consent_collection
+      unless (_consent_collection = @consent_collection).nil?
         invalid_properties.concat(_consent_collection.list_invalid_properties_for("consent_collection")) if _consent_collection.is_a?(OpenApi::Validatable)
       end
 
-      if _customer_creation = @customer_creation
+      unless (_customer_creation = @customer_creation).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOMER_CREATION) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
-      if _payment_intent_data = @payment_intent_data
+      unless (_payment_intent_data = @payment_intent_data).nil?
         invalid_properties.concat(_payment_intent_data.list_invalid_properties_for("payment_intent_data")) if _payment_intent_data.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_collection = @payment_method_collection
+      unless (_payment_method_collection = @payment_method_collection).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
-      if _phone_number_collection = @phone_number_collection
+      unless (_phone_number_collection = @phone_number_collection).nil?
         invalid_properties.concat(_phone_number_collection.list_invalid_properties_for("phone_number_collection")) if _phone_number_collection.is_a?(OpenApi::Validatable)
       end
-      if _shipping_address_collection = @shipping_address_collection
+      unless (_shipping_address_collection = @shipping_address_collection).nil?
         invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
       end
-      if _shipping_options = @shipping_options
+      unless (_shipping_options = @shipping_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "shipping_options", container: _shipping_options)) if _shipping_options.is_a?(Array)
       end
-      if _submit_type = @submit_type
+      unless (_submit_type = @submit_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUBMIT_TYPE) unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
       end
-      if _subscription_data = @subscription_data
+      unless (_subscription_data = @subscription_data).nil?
         invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
       end
-      if _tax_id_collection = @tax_id_collection
+      unless (_tax_id_collection = @tax_id_collection).nil?
         invalid_properties.concat(_tax_id_collection.list_invalid_properties_for("tax_id_collection")) if _tax_id_collection.is_a?(OpenApi::Validatable)
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -212,67 +214,67 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @line_items.nil?
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
-      if _after_completion = @after_completion
+      unless (_after_completion = @after_completion).nil?
         return false if _after_completion.is_a?(OpenApi::Validatable) && !_after_completion.valid?
       end
 
-      if _automatic_tax = @automatic_tax
+      unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
 
-      if _billing_address_collection = @billing_address_collection
+      unless (_billing_address_collection = @billing_address_collection).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
 
-      if _consent_collection = @consent_collection
+      unless (_consent_collection = @consent_collection).nil?
         return false if _consent_collection.is_a?(OpenApi::Validatable) && !_consent_collection.valid?
       end
 
-      if _customer_creation = @customer_creation
+      unless (_customer_creation = @customer_creation).nil?
         return false unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
-      if _payment_intent_data = @payment_intent_data
+      unless (_payment_intent_data = @payment_intent_data).nil?
         return false if _payment_intent_data.is_a?(OpenApi::Validatable) && !_payment_intent_data.valid?
       end
 
-      if _payment_method_collection = @payment_method_collection
+      unless (_payment_method_collection = @payment_method_collection).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
 
-      if _payment_method_types = @payment_method_types
+      unless (_payment_method_types = @payment_method_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
 
-      if _phone_number_collection = @phone_number_collection
+      unless (_phone_number_collection = @phone_number_collection).nil?
         return false if _phone_number_collection.is_a?(OpenApi::Validatable) && !_phone_number_collection.valid?
       end
 
-      if _shipping_address_collection = @shipping_address_collection
+      unless (_shipping_address_collection = @shipping_address_collection).nil?
         return false if _shipping_address_collection.is_a?(OpenApi::Validatable) && !_shipping_address_collection.valid?
       end
 
-      if _shipping_options = @shipping_options
+      unless (_shipping_options = @shipping_options).nil?
         return false if _shipping_options.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _shipping_options)
       end
 
-      if _submit_type = @submit_type
+      unless (_submit_type = @submit_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
       end
 
-      if _subscription_data = @subscription_data
+      unless (_subscription_data = @subscription_data).nil?
         return false if _subscription_data.is_a?(OpenApi::Validatable) && !_subscription_data.valid?
       end
 
-      if _tax_id_collection = @tax_id_collection
+      unless (_tax_id_collection = @tax_id_collection).nil?
         return false if _tax_id_collection.is_a?(OpenApi::Validatable) && !_tax_id_collection.valid?
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

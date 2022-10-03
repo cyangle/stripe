@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_number : String? = nil
@@ -44,12 +44,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sort_code = @sort_code
+      unless (_sort_code = @sort_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
           invalid_properties.push(max_length_error)
         end
@@ -60,11 +60,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_number = @account_number
+      unless (_account_number = @account_number).nil?
         return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
-      if _sort_code = @sort_code
+      unless (_sort_code = @sort_code).nil?
         return false if _sort_code.to_s.size > MAX_LENGTH_FOR_SORT_CODE
       end
 

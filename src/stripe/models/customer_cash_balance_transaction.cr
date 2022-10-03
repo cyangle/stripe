@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,7 +62,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [applied_to_payment, funded, refunded_from_payment, return_canceled, return_initiated, unapplied_from_payment]."
     VALID_VALUES_FOR__TYPE  = StaticArray["applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "applied_to_payment", type: Stripe::CustomerBalanceResourceCashBalanceTransactionResourceAppliedToPaymentTransaction?, default: nil, required: false, nullable: false, emit_null: false)]
     getter applied_to_payment : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceAppliedToPaymentTransaction? = nil
@@ -107,21 +109,21 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"ending_balance\" is required and cannot be null") if @ending_balance.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -132,24 +134,24 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _applied_to_payment = @applied_to_payment
+      unless (_applied_to_payment = @applied_to_payment).nil?
         invalid_properties.concat(_applied_to_payment.list_invalid_properties_for("applied_to_payment")) if _applied_to_payment.is_a?(OpenApi::Validatable)
       end
-      if _funded = @funded
+      unless (_funded = @funded).nil?
         invalid_properties.concat(_funded.list_invalid_properties_for("funded")) if _funded.is_a?(OpenApi::Validatable)
       end
-      if _refunded_from_payment = @refunded_from_payment
+      unless (_refunded_from_payment = @refunded_from_payment).nil?
         invalid_properties.concat(_refunded_from_payment.list_invalid_properties_for("refunded_from_payment")) if _refunded_from_payment.is_a?(OpenApi::Validatable)
       end
-      if _unapplied_from_payment = @unapplied_from_payment
+      unless (_unapplied_from_payment = @unapplied_from_payment).nil?
         invalid_properties.concat(_unapplied_from_payment.list_invalid_properties_for("unapplied_from_payment")) if _unapplied_from_payment.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -161,19 +163,19 @@ module Stripe
       return false if @created.nil?
 
       return false if @currency.nil?
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
       return false if @ending_balance.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -182,28 +184,28 @@ module Stripe
       return false if @net_amount.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _applied_to_payment = @applied_to_payment
+      unless (_applied_to_payment = @applied_to_payment).nil?
         return false if _applied_to_payment.is_a?(OpenApi::Validatable) && !_applied_to_payment.valid?
       end
 
-      if _funded = @funded
+      unless (_funded = @funded).nil?
         return false if _funded.is_a?(OpenApi::Validatable) && !_funded.valid?
       end
 
-      if _refunded_from_payment = @refunded_from_payment
+      unless (_refunded_from_payment = @refunded_from_payment).nil?
         return false if _refunded_from_payment.is_a?(OpenApi::Validatable) && !_refunded_from_payment.valid?
       end
 
-      if _unapplied_from_payment = @unapplied_from_payment
+      unless (_unapplied_from_payment = @unapplied_from_payment).nil?
         return false if _unapplied_from_payment.is_a?(OpenApi::Validatable) && !_unapplied_from_payment.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.
     @[JSON::Field(key: "access_activity_log", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: access_activity_log.nil? && !access_activity_log_present?)]
@@ -259,119 +259,119 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _access_activity_log = @access_activity_log
+      unless (_access_activity_log = @access_activity_log).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, MAX_LENGTH_FOR_ACCESS_ACTIVITY_LOG)
           invalid_properties.push(max_length_error)
         end
       end
-      if _billing_address = @billing_address
+      unless (_billing_address = @billing_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_address", _billing_address.to_s.size, MAX_LENGTH_FOR_BILLING_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _cancellation_policy = @cancellation_policy
+      unless (_cancellation_policy = @cancellation_policy).nil?
         invalid_properties.concat(_cancellation_policy.list_invalid_properties_for("cancellation_policy")) if _cancellation_policy.is_a?(OpenApi::Validatable)
       end
-      if _cancellation_policy_disclosure = @cancellation_policy_disclosure
+      unless (_cancellation_policy_disclosure = @cancellation_policy_disclosure).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, MAX_LENGTH_FOR_CANCELLATION_POLICY_DISCLOSURE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _cancellation_rebuttal = @cancellation_rebuttal
+      unless (_cancellation_rebuttal = @cancellation_rebuttal).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REBUTTAL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer_communication = @customer_communication
+      unless (_customer_communication = @customer_communication).nil?
         invalid_properties.concat(_customer_communication.list_invalid_properties_for("customer_communication")) if _customer_communication.is_a?(OpenApi::Validatable)
       end
-      if _customer_email_address = @customer_email_address
+      unless (_customer_email_address = @customer_email_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_email_address", _customer_email_address.to_s.size, MAX_LENGTH_FOR_CUSTOMER_EMAIL_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer_name = @customer_name
+      unless (_customer_name = @customer_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_name", _customer_name.to_s.size, MAX_LENGTH_FOR_CUSTOMER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer_purchase_ip = @customer_purchase_ip
+      unless (_customer_purchase_ip = @customer_purchase_ip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_purchase_ip", _customer_purchase_ip.to_s.size, MAX_LENGTH_FOR_CUSTOMER_PURCHASE_IP)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer_signature = @customer_signature
+      unless (_customer_signature = @customer_signature).nil?
         invalid_properties.concat(_customer_signature.list_invalid_properties_for("customer_signature")) if _customer_signature.is_a?(OpenApi::Validatable)
       end
-      if _duplicate_charge_documentation = @duplicate_charge_documentation
+      unless (_duplicate_charge_documentation = @duplicate_charge_documentation).nil?
         invalid_properties.concat(_duplicate_charge_documentation.list_invalid_properties_for("duplicate_charge_documentation")) if _duplicate_charge_documentation.is_a?(OpenApi::Validatable)
       end
-      if _duplicate_charge_explanation = @duplicate_charge_explanation
+      unless (_duplicate_charge_explanation = @duplicate_charge_explanation).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, MAX_LENGTH_FOR_DUPLICATE_CHARGE_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _duplicate_charge_id = @duplicate_charge_id
+      unless (_duplicate_charge_id = @duplicate_charge_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_id", _duplicate_charge_id.to_s.size, MAX_LENGTH_FOR_DUPLICATE_CHARGE_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _receipt = @receipt
+      unless (_receipt = @receipt).nil?
         invalid_properties.concat(_receipt.list_invalid_properties_for("receipt")) if _receipt.is_a?(OpenApi::Validatable)
       end
-      if _refund_policy = @refund_policy
+      unless (_refund_policy = @refund_policy).nil?
         invalid_properties.concat(_refund_policy.list_invalid_properties_for("refund_policy")) if _refund_policy.is_a?(OpenApi::Validatable)
       end
-      if _refund_policy_disclosure = @refund_policy_disclosure
+      unless (_refund_policy_disclosure = @refund_policy_disclosure).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, MAX_LENGTH_FOR_REFUND_POLICY_DISCLOSURE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _refund_refusal_explanation = @refund_refusal_explanation
+      unless (_refund_refusal_explanation = @refund_refusal_explanation).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, MAX_LENGTH_FOR_REFUND_REFUSAL_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _service_date = @service_date
+      unless (_service_date = @service_date).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_date", _service_date.to_s.size, MAX_LENGTH_FOR_SERVICE_DATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _service_documentation = @service_documentation
+      unless (_service_documentation = @service_documentation).nil?
         invalid_properties.concat(_service_documentation.list_invalid_properties_for("service_documentation")) if _service_documentation.is_a?(OpenApi::Validatable)
       end
-      if _shipping_address = @shipping_address
+      unless (_shipping_address = @shipping_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_address", _shipping_address.to_s.size, MAX_LENGTH_FOR_SHIPPING_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping_carrier = @shipping_carrier
+      unless (_shipping_carrier = @shipping_carrier).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_carrier", _shipping_carrier.to_s.size, MAX_LENGTH_FOR_SHIPPING_CARRIER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping_date = @shipping_date
+      unless (_shipping_date = @shipping_date).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_date", _shipping_date.to_s.size, MAX_LENGTH_FOR_SHIPPING_DATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _shipping_documentation = @shipping_documentation
+      unless (_shipping_documentation = @shipping_documentation).nil?
         invalid_properties.concat(_shipping_documentation.list_invalid_properties_for("shipping_documentation")) if _shipping_documentation.is_a?(OpenApi::Validatable)
       end
-      if _shipping_tracking_number = @shipping_tracking_number
+      unless (_shipping_tracking_number = @shipping_tracking_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_tracking_number", _shipping_tracking_number.to_s.size, MAX_LENGTH_FOR_SHIPPING_TRACKING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _uncategorized_file = @uncategorized_file
+      unless (_uncategorized_file = @uncategorized_file).nil?
         invalid_properties.concat(_uncategorized_file.list_invalid_properties_for("uncategorized_file")) if _uncategorized_file.is_a?(OpenApi::Validatable)
       end
-      if _uncategorized_text = @uncategorized_text
+      unless (_uncategorized_text = @uncategorized_text).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("uncategorized_text", _uncategorized_text.to_s.size, MAX_LENGTH_FOR_UNCATEGORIZED_TEXT)
           invalid_properties.push(max_length_error)
         end
@@ -382,111 +382,111 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _access_activity_log = @access_activity_log
+      unless (_access_activity_log = @access_activity_log).nil?
         return false if _access_activity_log.to_s.size > MAX_LENGTH_FOR_ACCESS_ACTIVITY_LOG
       end
 
-      if _billing_address = @billing_address
+      unless (_billing_address = @billing_address).nil?
         return false if _billing_address.to_s.size > MAX_LENGTH_FOR_BILLING_ADDRESS
       end
 
-      if _cancellation_policy = @cancellation_policy
+      unless (_cancellation_policy = @cancellation_policy).nil?
         return false if _cancellation_policy.is_a?(OpenApi::Validatable) && !_cancellation_policy.valid?
       end
 
-      if _cancellation_policy_disclosure = @cancellation_policy_disclosure
+      unless (_cancellation_policy_disclosure = @cancellation_policy_disclosure).nil?
         return false if _cancellation_policy_disclosure.to_s.size > MAX_LENGTH_FOR_CANCELLATION_POLICY_DISCLOSURE
       end
 
-      if _cancellation_rebuttal = @cancellation_rebuttal
+      unless (_cancellation_rebuttal = @cancellation_rebuttal).nil?
         return false if _cancellation_rebuttal.to_s.size > MAX_LENGTH_FOR_CANCELLATION_REBUTTAL
       end
 
-      if _customer_communication = @customer_communication
+      unless (_customer_communication = @customer_communication).nil?
         return false if _customer_communication.is_a?(OpenApi::Validatable) && !_customer_communication.valid?
       end
 
-      if _customer_email_address = @customer_email_address
+      unless (_customer_email_address = @customer_email_address).nil?
         return false if _customer_email_address.to_s.size > MAX_LENGTH_FOR_CUSTOMER_EMAIL_ADDRESS
       end
 
-      if _customer_name = @customer_name
+      unless (_customer_name = @customer_name).nil?
         return false if _customer_name.to_s.size > MAX_LENGTH_FOR_CUSTOMER_NAME
       end
 
-      if _customer_purchase_ip = @customer_purchase_ip
+      unless (_customer_purchase_ip = @customer_purchase_ip).nil?
         return false if _customer_purchase_ip.to_s.size > MAX_LENGTH_FOR_CUSTOMER_PURCHASE_IP
       end
 
-      if _customer_signature = @customer_signature
+      unless (_customer_signature = @customer_signature).nil?
         return false if _customer_signature.is_a?(OpenApi::Validatable) && !_customer_signature.valid?
       end
 
-      if _duplicate_charge_documentation = @duplicate_charge_documentation
+      unless (_duplicate_charge_documentation = @duplicate_charge_documentation).nil?
         return false if _duplicate_charge_documentation.is_a?(OpenApi::Validatable) && !_duplicate_charge_documentation.valid?
       end
 
-      if _duplicate_charge_explanation = @duplicate_charge_explanation
+      unless (_duplicate_charge_explanation = @duplicate_charge_explanation).nil?
         return false if _duplicate_charge_explanation.to_s.size > MAX_LENGTH_FOR_DUPLICATE_CHARGE_EXPLANATION
       end
 
-      if _duplicate_charge_id = @duplicate_charge_id
+      unless (_duplicate_charge_id = @duplicate_charge_id).nil?
         return false if _duplicate_charge_id.to_s.size > MAX_LENGTH_FOR_DUPLICATE_CHARGE_ID
       end
 
-      if _product_description = @product_description
+      unless (_product_description = @product_description).nil?
         return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
-      if _receipt = @receipt
+      unless (_receipt = @receipt).nil?
         return false if _receipt.is_a?(OpenApi::Validatable) && !_receipt.valid?
       end
 
-      if _refund_policy = @refund_policy
+      unless (_refund_policy = @refund_policy).nil?
         return false if _refund_policy.is_a?(OpenApi::Validatable) && !_refund_policy.valid?
       end
 
-      if _refund_policy_disclosure = @refund_policy_disclosure
+      unless (_refund_policy_disclosure = @refund_policy_disclosure).nil?
         return false if _refund_policy_disclosure.to_s.size > MAX_LENGTH_FOR_REFUND_POLICY_DISCLOSURE
       end
 
-      if _refund_refusal_explanation = @refund_refusal_explanation
+      unless (_refund_refusal_explanation = @refund_refusal_explanation).nil?
         return false if _refund_refusal_explanation.to_s.size > MAX_LENGTH_FOR_REFUND_REFUSAL_EXPLANATION
       end
 
-      if _service_date = @service_date
+      unless (_service_date = @service_date).nil?
         return false if _service_date.to_s.size > MAX_LENGTH_FOR_SERVICE_DATE
       end
 
-      if _service_documentation = @service_documentation
+      unless (_service_documentation = @service_documentation).nil?
         return false if _service_documentation.is_a?(OpenApi::Validatable) && !_service_documentation.valid?
       end
 
-      if _shipping_address = @shipping_address
+      unless (_shipping_address = @shipping_address).nil?
         return false if _shipping_address.to_s.size > MAX_LENGTH_FOR_SHIPPING_ADDRESS
       end
 
-      if _shipping_carrier = @shipping_carrier
+      unless (_shipping_carrier = @shipping_carrier).nil?
         return false if _shipping_carrier.to_s.size > MAX_LENGTH_FOR_SHIPPING_CARRIER
       end
 
-      if _shipping_date = @shipping_date
+      unless (_shipping_date = @shipping_date).nil?
         return false if _shipping_date.to_s.size > MAX_LENGTH_FOR_SHIPPING_DATE
       end
 
-      if _shipping_documentation = @shipping_documentation
+      unless (_shipping_documentation = @shipping_documentation).nil?
         return false if _shipping_documentation.is_a?(OpenApi::Validatable) && !_shipping_documentation.valid?
       end
 
-      if _shipping_tracking_number = @shipping_tracking_number
+      unless (_shipping_tracking_number = @shipping_tracking_number).nil?
         return false if _shipping_tracking_number.to_s.size > MAX_LENGTH_FOR_SHIPPING_TRACKING_NUMBER
       end
 
-      if _uncategorized_file = @uncategorized_file
+      unless (_uncategorized_file = @uncategorized_file).nil?
         return false if _uncategorized_file.is_a?(OpenApi::Validatable) && !_uncategorized_file.valid?
       end
 
-      if _uncategorized_text = @uncategorized_text
+      unless (_uncategorized_text = @uncategorized_text).nil?
         return false if _uncategorized_text.to_s.size > MAX_LENGTH_FOR_UNCATEGORIZED_TEXT
       end
 

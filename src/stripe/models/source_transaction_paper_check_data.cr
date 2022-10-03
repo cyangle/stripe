@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Time at which the deposited funds will be available for use. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "available_at", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -46,12 +46,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _available_at = @available_at
+      unless (_available_at = @available_at).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("available_at", _available_at.to_s.size, MAX_LENGTH_FOR_AVAILABLE_AT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoices = @invoices
+      unless (_invoices = @invoices).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoices", _invoices.to_s.size, MAX_LENGTH_FOR_INVOICES)
           invalid_properties.push(max_length_error)
         end
@@ -62,11 +62,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _available_at = @available_at
+      unless (_available_at = @available_at).nil?
         return false if _available_at.to_s.size > MAX_LENGTH_FOR_AVAILABLE_AT
       end
 
-      if _invoices = @invoices
+      unless (_invoices = @invoices).nil?
         return false if _invoices.to_s.size > MAX_LENGTH_FOR_INVOICES
       end
 

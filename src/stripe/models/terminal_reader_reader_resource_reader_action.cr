@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Status of the action performed by the reader.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -33,7 +33,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [process_payment_intent, process_setup_intent, set_reader_display]."
     VALID_VALUES_FOR__TYPE  = StaticArray["process_payment_intent", "process_setup_intent", "set_reader_display"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Failure code, only set if status is `failed`.
     @[JSON::Field(key: "failure_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
@@ -83,31 +85,31 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _failure_code = @failure_code
+      unless (_failure_code = @failure_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, MAX_LENGTH_FOR_FAILURE_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _failure_message = @failure_message
+      unless (_failure_message = @failure_message).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, MAX_LENGTH_FOR_FAILURE_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _process_payment_intent = @process_payment_intent
+      unless (_process_payment_intent = @process_payment_intent).nil?
         invalid_properties.concat(_process_payment_intent.list_invalid_properties_for("process_payment_intent")) if _process_payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _process_setup_intent = @process_setup_intent
+      unless (_process_setup_intent = @process_setup_intent).nil?
         invalid_properties.concat(_process_setup_intent.list_invalid_properties_for("process_setup_intent")) if _process_setup_intent.is_a?(OpenApi::Validatable)
       end
-      if _set_reader_display = @set_reader_display
+      unless (_set_reader_display = @set_reader_display).nil?
         invalid_properties.concat(_set_reader_display.list_invalid_properties_for("set_reader_display")) if _set_reader_display.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -117,32 +119,32 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _failure_code = @failure_code
+      unless (_failure_code = @failure_code).nil?
         return false if _failure_code.to_s.size > MAX_LENGTH_FOR_FAILURE_CODE
       end
 
-      if _failure_message = @failure_message
+      unless (_failure_message = @failure_message).nil?
         return false if _failure_message.to_s.size > MAX_LENGTH_FOR_FAILURE_MESSAGE
       end
 
-      if _process_payment_intent = @process_payment_intent
+      unless (_process_payment_intent = @process_payment_intent).nil?
         return false if _process_payment_intent.is_a?(OpenApi::Validatable) && !_process_payment_intent.valid?
       end
 
-      if _process_setup_intent = @process_setup_intent
+      unless (_process_setup_intent = @process_setup_intent).nil?
         return false if _process_setup_intent.is_a?(OpenApi::Validatable) && !_process_setup_intent.valid?
       end
 
-      if _set_reader_display = @set_reader_display
+      unless (_set_reader_display = @set_reader_display).nil?
         return false if _set_reader_display.is_a?(OpenApi::Validatable) && !_set_reader_display.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The day of birth, between 1 and 31.
     @[JSON::Field(key: "day", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: day.nil? && !day_present?)]

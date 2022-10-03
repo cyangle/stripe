@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter ip_address : String? = nil
@@ -26,6 +26,8 @@ module Stripe
     @[JSON::Field(key: "user_agent", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter user_agent : String? = nil
     MAX_LENGTH_FOR_USER_AGENT = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,7 +48,7 @@ module Stripe
 
       invalid_properties.push("\"user_agent\" is required and cannot be null") if @user_agent.nil?
 
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
           invalid_properties.push(max_length_error)
         end
@@ -60,7 +62,7 @@ module Stripe
       return false if @ip_address.nil?
 
       return false if @user_agent.nil?
-      if _user_agent = @user_agent
+      unless (_user_agent = @user_agent).nil?
         return false if _user_agent.to_s.size > MAX_LENGTH_FOR_USER_AGENT
       end
 

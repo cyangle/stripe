@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,7 +32,9 @@ module Stripe
     getter secret : String? = nil
     MAX_LENGTH_FOR_SECRET = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The id of the location that this connection token is scoped to. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
     @[JSON::Field(key: "location", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -58,17 +60,17 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"secret\" is required and cannot be null") if @secret.nil?
 
-      if _secret = @secret
+      unless (_secret = @secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, MAX_LENGTH_FOR_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
-      if _location = @location
+      unless (_location = @location).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
           invalid_properties.push(max_length_error)
         end
@@ -80,16 +82,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @secret.nil?
-      if _secret = @secret
+      unless (_secret = @secret).nil?
         return false if _secret.to_s.size > MAX_LENGTH_FOR_SECRET
       end
 
-      if _location = @location
+      unless (_location = @location).nil?
         return false if _location.to_s.size > MAX_LENGTH_FOR_LOCATION
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
@@ -47,7 +47,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _directive = @directive
+      unless (_directive = @directive).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("directive", _directive.to_s.size, MAX_LENGTH_FOR_DIRECTIVE)
           invalid_properties.push(max_length_error)
         end
@@ -59,7 +59,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _directive = @directive
+      unless (_directive = @directive).nil?
         return false if _directive.to_s.size > MAX_LENGTH_FOR_DIRECTIVE
       end
 

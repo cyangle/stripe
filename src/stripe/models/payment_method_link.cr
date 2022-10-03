@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Account owner's email address.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
@@ -49,12 +49,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _email = @email
+      unless (_email = @email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _persistent_token = @persistent_token
+      unless (_persistent_token = @persistent_token).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
           invalid_properties.push(max_length_error)
         end
@@ -65,11 +65,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _email = @email
+      unless (_email = @email).nil?
         return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
-      if _persistent_token = @persistent_token
+      unless (_persistent_token = @persistent_token).nil?
         return false if _persistent_token.to_s.size > MAX_LENGTH_FOR_PERSISTENT_TOKEN
       end
 

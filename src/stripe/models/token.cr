@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,7 +49,9 @@ module Stripe
     @[JSON::Field(key: "used", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter used : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "bank_account", type: Stripe::BankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_account : Stripe::BankAccount? = nil
@@ -92,7 +94,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -101,25 +103,25 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"used\" is required and cannot be null") if @used.nil?
 
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _client_ip = @client_ip
+      unless (_client_ip = @client_ip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_ip", _client_ip.to_s.size, MAX_LENGTH_FOR_CLIENT_IP)
           invalid_properties.push(max_length_error)
         end
@@ -133,33 +135,33 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       return false if @used.nil?
 
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _client_ip = @client_ip
+      unless (_client_ip = @client_ip).nil?
         return false if _client_ip.to_s.size > MAX_LENGTH_FOR_CLIENT_IP
       end
 

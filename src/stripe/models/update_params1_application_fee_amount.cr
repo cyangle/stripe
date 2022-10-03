@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias UpdateParams1ApplicationFeeAmount = BusinessProfileSpecsSupportUrlOneOf | Int64
+  alias UpdateParams1ApplicationFeeAmount = BusinessProfileSpecsSupportUrlOneOf | Int32
 end

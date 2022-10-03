@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The value of the item (whose type must match the type of the parent value list).
     @[JSON::Field(key: "value", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     getter value_list : String? = nil
     MAX_LENGTH_FOR_VALUE_LIST = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -55,14 +57,14 @@ module Stripe
 
       invalid_properties.push("\"value\" is required and cannot be null") if @value.nil?
 
-      if _value = @value
+      unless (_value = @value).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"value_list\" is required and cannot be null") if @value_list.nil?
 
-      if _value_list = @value_list
+      unless (_value_list = @value_list).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value_list", _value_list.to_s.size, MAX_LENGTH_FOR_VALUE_LIST)
           invalid_properties.push(max_length_error)
         end
@@ -75,12 +77,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @value.nil?
-      if _value = @value
+      unless (_value = @value).nil?
         return false if _value.to_s.size > MAX_LENGTH_FOR_VALUE
       end
 
       return false if @value_list.nil?
-      if _value_list = @value_list
+      unless (_value_list = @value_list).nil?
         return false if _value_list.to_s.size > MAX_LENGTH_FOR_VALUE_LIST
       end
 

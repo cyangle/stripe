@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account_holder", type: Stripe::AccountholderParams1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_holder : Stripe::AccountholderParams1? = nil
@@ -29,7 +29,9 @@ module Stripe
     ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
     VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -64,19 +66,19 @@ module Stripe
 
       invalid_properties.push("\"account_holder\" is required and cannot be null") if @account_holder.nil?
 
-      if _account_holder = @account_holder
+      unless (_account_holder = @account_holder).nil?
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"permissions\" is required and cannot be null") if @permissions.nil?
 
-      if _permissions = @permissions
+      unless (_permissions = @permissions).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PERMISSIONS) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
 
-      if _filters = @filters
+      unless (_filters = @filters).nil?
         invalid_properties.concat(_filters.list_invalid_properties_for("filters")) if _filters.is_a?(OpenApi::Validatable)
       end
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
@@ -88,20 +90,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account_holder.nil?
-      if _account_holder = @account_holder
+      unless (_account_holder = @account_holder).nil?
         return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
 
       return false if @permissions.nil?
-      if _permissions = @permissions
+      unless (_permissions = @permissions).nil?
         return false unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
 
-      if _filters = @filters
+      unless (_filters = @filters).nil?
         return false if _filters.is_a?(OpenApi::Validatable) && !_filters.valid?
       end
 
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 

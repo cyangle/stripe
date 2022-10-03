@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The set of output columns requested for inclusion in the report run.
     @[JSON::Field(key: "columns", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -78,23 +78,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _connected_account = @connected_account
+      unless (_connected_account = @connected_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("connected_account", _connected_account.to_s.size, MAX_LENGTH_FOR_CONNECTED_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _payout = @payout
+      unless (_payout = @payout).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payout", _payout.to_s.size, MAX_LENGTH_FOR_PAYOUT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reporting_category = @reporting_category
+      unless (_reporting_category = @reporting_category).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, MAX_LENGTH_FOR_REPORTING_CATEGORY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _timezone = @timezone
+      unless (_timezone = @timezone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
           invalid_properties.push(max_length_error)
         end
@@ -105,19 +105,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _connected_account = @connected_account
+      unless (_connected_account = @connected_account).nil?
         return false if _connected_account.to_s.size > MAX_LENGTH_FOR_CONNECTED_ACCOUNT
       end
 
-      if _payout = @payout
+      unless (_payout = @payout).nil?
         return false if _payout.to_s.size > MAX_LENGTH_FOR_PAYOUT
       end
 
-      if _reporting_category = @reporting_category
+      unless (_reporting_category = @reporting_category).nil?
         return false if _reporting_category.to_s.size > MAX_LENGTH_FOR_REPORTING_CATEGORY
       end
 
-      if _timezone = @timezone
+      unless (_timezone = @timezone).nil?
         return false if _timezone.to_s.size > MAX_LENGTH_FOR_TIMEZONE
       end
 

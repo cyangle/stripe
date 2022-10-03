@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Amount associated with the source.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -59,16 +59,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         invalid_properties.concat(_mandate.list_invalid_properties_for("mandate")) if _mandate.is_a?(OpenApi::Validatable)
       end
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         invalid_properties.concat(_owner.list_invalid_properties_for("owner")) if _owner.is_a?(OpenApi::Validatable)
       end
-      if _source_order = @source_order
+      unless (_source_order = @source_order).nil?
         invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -77,19 +77,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.is_a?(OpenApi::Validatable) && !_mandate.valid?
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
 
-      if _source_order = @source_order
+      unless (_source_order = @source_order).nil?
         return false if _source_order.is_a?(OpenApi::Validatable) && !_source_order.valid?
       end
 

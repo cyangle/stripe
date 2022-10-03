@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "client", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter client : String? = nil
     ERROR_MESSAGE_FOR_CLIENT = "invalid value for \"client\", must be one of [android, ios, web]."
     VALID_VALUES_FOR_CLIENT  = StaticArray["android", "ios", "web"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "app_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter app_id : String? = nil
@@ -55,15 +57,15 @@ module Stripe
 
       invalid_properties.push("\"client\" is required and cannot be null") if @client.nil?
 
-      if _client = @client
+      unless (_client = @client).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CLIENT) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
-      if _app_id = @app_id
+      unless (_app_id = @app_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
           invalid_properties.push(max_length_error)
         end
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
@@ -73,15 +75,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @client.nil?
-      if _client = @client
+      unless (_client = @client).nil?
         return false unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
 
-      if _app_id = @app_id
+      unless (_app_id = @app_id).nil?
         return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # For authenticated transactions: how the customer was authenticated by the issuing bank.
     @[JSON::Field(key: "authentication_flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: authentication_flow.nil? && !authentication_flow_present?)]
@@ -74,16 +74,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _authentication_flow = @authentication_flow
+      unless (_authentication_flow = @authentication_flow).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AUTHENTICATION_FLOW) unless OpenApi::EnumValidator.valid?(_authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
       end
-      if _result = @result
+      unless (_result = @result).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RESULT) unless OpenApi::EnumValidator.valid?(_result, VALID_VALUES_FOR_RESULT)
       end
-      if _result_reason = @result_reason
+      unless (_result_reason = @result_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RESULT_REASON) unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
       end
-      if _version = @version
+      unless (_version = @version).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_VERSION) unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
       end
       invalid_properties
@@ -92,19 +92,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _authentication_flow = @authentication_flow
+      unless (_authentication_flow = @authentication_flow).nil?
         return false unless OpenApi::EnumValidator.valid?(_authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
       end
 
-      if _result = @result
+      unless (_result = @result).nil?
         return false unless OpenApi::EnumValidator.valid?(_result, VALID_VALUES_FOR_RESULT)
       end
 
-      if _result_reason = @result_reason
+      unless (_result_reason = @result_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
       end
 
-      if _version = @version
+      unless (_version = @version).nil?
         return false unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
       end
 

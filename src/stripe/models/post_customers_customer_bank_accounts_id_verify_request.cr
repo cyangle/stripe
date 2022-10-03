@@ -18,11 +18,11 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    @[JSON::Field(key: "amounts", type: Array(Int64)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter amounts : Array(Int64)? = nil
+    @[JSON::Field(key: "amounts", type: Array(Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter amounts : Array(Int32)? = nil
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -33,7 +33,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @amounts : Array(Int64)? = nil,
+      @amounts : Array(Int32)? = nil,
       @expand : Array(String)? = nil
     )
     end
@@ -54,7 +54,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amounts Object to be assigned
-    def amounts=(amounts : Array(Int64)?)
+    def amounts=(amounts : Array(Int32)?)
       if amounts.nil?
         return @amounts = nil
       end

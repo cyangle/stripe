@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # `true`` if the OutboundPayment creation request is being made on behalf of an end user by a platform. Otherwise, `false`.
     @[JSON::Field(key: "present", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter present : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # IP address of the user initiating the OutboundPayment. Set if `present` is set to `true`. IP address collection is required for risk and compliance reasons. This will be used to help determine if the OutboundPayment is authorized or should be blocked.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
@@ -53,7 +55,7 @@ module Stripe
 
       invalid_properties.push("\"present\" is required and cannot be null") if @present.nil?
 
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
@@ -66,7 +68,7 @@ module Stripe
     def valid? : Bool
       return false if @present.nil?
 
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 

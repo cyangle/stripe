@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
@@ -28,7 +28,9 @@ module Stripe
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [all_time, daily, monthly, per_authorization, weekly, yearly]."
     VALID_VALUES_FOR_INTERVAL  = StaticArray["all_time", "daily", "monthly", "per_authorization", "weekly", "yearly"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "categories", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter categories : Array(String)? = nil
@@ -56,10 +58,10 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
-      if _categories = @categories
+      unless (_categories = @categories).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CATEGORIES) unless OpenApi::EnumValidator.valid?(_categories, VALID_VALUES_FOR_CATEGORIES)
       end
       invalid_properties
@@ -71,11 +73,11 @@ module Stripe
       return false if @amount.nil?
 
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      if _categories = @categories
+      unless (_categories = @categories).nil?
         return false unless OpenApi::EnumValidator.valid?(_categories, VALID_VALUES_FOR_CATEGORIES)
       end
 

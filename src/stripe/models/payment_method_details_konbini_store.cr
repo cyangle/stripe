@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The name of the convenience store chain where the payment was completed.
     @[JSON::Field(key: "chain", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: chain.nil? && !chain_present?)]
@@ -44,7 +44,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _chain = @chain
+      unless (_chain = @chain).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CHAIN) unless OpenApi::EnumValidator.valid?(_chain, VALID_VALUES_FOR_CHAIN)
       end
       invalid_properties
@@ -53,7 +53,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _chain = @chain
+      unless (_chain = @chain).nil?
         return false unless OpenApi::EnumValidator.valid?(_chain, VALID_VALUES_FOR_CHAIN)
       end
 

@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "company", type: Stripe::CountrySpecVerificationFieldDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter company : Stripe::CountrySpecVerificationFieldDetails? = nil
 
     @[JSON::Field(key: "individual", type: Stripe::CountrySpecVerificationFieldDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter individual : Stripe::CountrySpecVerificationFieldDetails? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -44,12 +46,12 @@ module Stripe
 
       invalid_properties.push("\"company\" is required and cannot be null") if @company.nil?
 
-      if _company = @company
+      unless (_company = @company).nil?
         invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"individual\" is required and cannot be null") if @individual.nil?
 
-      if _individual = @individual
+      unless (_individual = @individual).nil?
         invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -59,12 +61,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @company.nil?
-      if _company = @company
+      unless (_company = @company).nil?
         return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
 
       return false if @individual.nil?
-      if _individual = @individual
+      unless (_individual = @individual).nil?
         return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
 

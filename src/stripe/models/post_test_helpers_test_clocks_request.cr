@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The initial frozen time for this test clock.
     @[JSON::Field(key: "frozen_time", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter frozen_time : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -54,7 +56,7 @@ module Stripe
 
       invalid_properties.push("\"frozen_time\" is required and cannot be null") if @frozen_time.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -67,7 +69,7 @@ module Stripe
     def valid? : Bool
       return false if @frozen_time.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 

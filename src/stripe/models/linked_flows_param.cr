@@ -18,12 +18,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "source_flow_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source_flow_type : String? = nil
     ERROR_MESSAGE_FOR_SOURCE_FLOW_TYPE = "invalid value for \"source_flow_type\", must be one of [credit_reversal, other, outbound_payment, payout]."
     VALID_VALUES_FOR_SOURCE_FLOW_TYPE  = StaticArray["credit_reversal", "other", "outbound_payment", "payout"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +43,7 @@ module Stripe
 
       invalid_properties.push("\"source_flow_type\" is required and cannot be null") if @source_flow_type.nil?
 
-      if _source_flow_type = @source_flow_type
+      unless (_source_flow_type = @source_flow_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_FLOW_TYPE) unless OpenApi::EnumValidator.valid?(_source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
       end
       invalid_properties
@@ -51,7 +53,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @source_flow_type.nil?
-      if _source_flow_type = @source_flow_type
+      unless (_source_flow_type = @source_flow_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
       end
 

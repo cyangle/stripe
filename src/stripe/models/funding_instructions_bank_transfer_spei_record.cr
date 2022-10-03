@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The three-digit bank code
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,6 +35,8 @@ module Stripe
     @[JSON::Field(key: "clabe", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter clabe : String? = nil
     MAX_LENGTH_FOR_CLABE = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,21 +56,21 @@ module Stripe
 
       invalid_properties.push("\"bank_code\" is required and cannot be null") if @bank_code.nil?
 
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"clabe\" is required and cannot be null") if @clabe.nil?
 
-      if _clabe = @clabe
+      unless (_clabe = @clabe).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, MAX_LENGTH_FOR_CLABE)
           invalid_properties.push(max_length_error)
         end
@@ -80,17 +82,17 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @bank_code.nil?
-      if _bank_code = @bank_code
+      unless (_bank_code = @bank_code).nil?
         return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
       return false if @bank_name.nil?
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       return false if @clabe.nil?
-      if _clabe = @clabe
+      unless (_clabe = @clabe).nil?
         return false if _clabe.to_s.size > MAX_LENGTH_FOR_CLABE
       end
 

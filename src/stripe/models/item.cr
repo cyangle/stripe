@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Total discount amount applied. If no discounts were applied, defaults to 0.
     @[JSON::Field(key: "amount_discount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -57,7 +57,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [item]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["item"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The discounts applied to the line item.
     @[JSON::Field(key: "discounts", type: Array(Stripe::LineItemsDiscountAmount)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -122,34 +124,34 @@ module Stripe
 
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discounts", container: _discounts)) if _discounts.is_a?(Array)
       end
-      if _price = @price
+      unless (_price = @price).nil?
         invalid_properties.concat(_price.list_invalid_properties_for("price")) if _price.is_a?(OpenApi::Validatable)
       end
-      if _product = @product
+      unless (_product = @product).nil?
         invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
 
-      if _taxes = @taxes
+      unless (_taxes = @taxes).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "taxes", container: _taxes)) if _taxes.is_a?(Array)
       end
       invalid_properties
@@ -169,33 +171,33 @@ module Stripe
       return false if @currency.nil?
 
       return false if @description.nil?
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _discounts = @discounts
+      unless (_discounts = @discounts).nil?
         return false if _discounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discounts)
       end
 
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
       end
 
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
 
-      if _taxes = @taxes
+      unless (_taxes = @taxes).nil?
         return false if _taxes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _taxes)
       end
 

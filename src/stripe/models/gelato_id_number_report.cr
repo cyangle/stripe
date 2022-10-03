@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Status of this `id_number` check.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [unverified, verified]."
     VALID_VALUES_FOR_STATUS  = StaticArray["unverified", "verified"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "dob", type: Stripe::GelatoIdNumberReportDob?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
     getter dob : Stripe::GelatoIdNumberReportDob? = nil
@@ -97,29 +99,29 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
-      if _error = @error
+      unless (_error = @error).nil?
         invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _id_number = @id_number
+      unless (_id_number = @id_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, MAX_LENGTH_FOR_ID_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _id_number_type = @id_number_type
+      unless (_id_number_type = @id_number_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ID_NUMBER_TYPE) unless OpenApi::EnumValidator.valid?(_id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
       end
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -131,31 +133,31 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _dob = @dob
+      unless (_dob = @dob).nil?
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
 
-      if _error = @error
+      unless (_error = @error).nil?
         return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
 
-      if _first_name = @first_name
+      unless (_first_name = @first_name).nil?
         return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
-      if _id_number = @id_number
+      unless (_id_number = @id_number).nil?
         return false if _id_number.to_s.size > MAX_LENGTH_FOR_ID_NUMBER
       end
 
-      if _id_number_type = @id_number_type
+      unless (_id_number_type = @id_number_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
       end
 
-      if _last_name = @last_name
+      unless (_last_name = @last_name).nil?
         return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 

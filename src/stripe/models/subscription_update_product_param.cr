@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "prices", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter prices : Array(String)? = nil
@@ -26,6 +26,8 @@ module Stripe
     @[JSON::Field(key: "product", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : String? = nil
     MAX_LENGTH_FOR_PRODUCT = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,7 +48,7 @@ module Stripe
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
-      if _product = @product
+      unless (_product = @product).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
@@ -60,7 +62,7 @@ module Stripe
       return false if @prices.nil?
 
       return false if @product.nil?
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 

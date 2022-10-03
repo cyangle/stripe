@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "exp_month", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter exp_month : String? = nil
@@ -32,7 +32,9 @@ module Stripe
     getter number : String? = nil
     MAX_LENGTH_FOR_NUMBER = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "address_city", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address_city : String? = nil
@@ -98,66 +100,66 @@ module Stripe
 
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
 
-      if _exp_month = @exp_month
+      unless (_exp_month = @exp_month).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("exp_month", _exp_month.to_s.size, MAX_LENGTH_FOR_EXP_MONTH)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
-      if _exp_year = @exp_year
+      unless (_exp_year = @exp_year).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("exp_year", _exp_year.to_s.size, MAX_LENGTH_FOR_EXP_YEAR)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
 
-      if _number = @number
+      unless (_number = @number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_city = @address_city
+      unless (_address_city = @address_city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_country = @address_country
+      unless (_address_country = @address_country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line1 = @address_line1
+      unless (_address_line1 = @address_line1).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line2 = @address_line2
+      unless (_address_line2 = @address_line2).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_state = @address_state
+      unless (_address_state = @address_state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_zip = @address_zip
+      unless (_address_zip = @address_zip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
           invalid_properties.push(max_length_error)
         end
       end
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
           invalid_properties.push(max_length_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -169,53 +171,53 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @exp_month.nil?
-      if _exp_month = @exp_month
+      unless (_exp_month = @exp_month).nil?
         return false if _exp_month.to_s.size > MAX_LENGTH_FOR_EXP_MONTH
       end
 
       return false if @exp_year.nil?
-      if _exp_year = @exp_year
+      unless (_exp_year = @exp_year).nil?
         return false if _exp_year.to_s.size > MAX_LENGTH_FOR_EXP_YEAR
       end
 
       return false if @number.nil?
-      if _number = @number
+      unless (_number = @number).nil?
         return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
-      if _address_city = @address_city
+      unless (_address_city = @address_city).nil?
         return false if _address_city.to_s.size > MAX_LENGTH_FOR_ADDRESS_CITY
       end
 
-      if _address_country = @address_country
+      unless (_address_country = @address_country).nil?
         return false if _address_country.to_s.size > MAX_LENGTH_FOR_ADDRESS_COUNTRY
       end
 
-      if _address_line1 = @address_line1
+      unless (_address_line1 = @address_line1).nil?
         return false if _address_line1.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1
       end
 
-      if _address_line2 = @address_line2
+      unless (_address_line2 = @address_line2).nil?
         return false if _address_line2.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE2
       end
 
-      if _address_state = @address_state
+      unless (_address_state = @address_state).nil?
         return false if _address_state.to_s.size > MAX_LENGTH_FOR_ADDRESS_STATE
       end
 
-      if _address_zip = @address_zip
+      unless (_address_zip = @address_zip).nil?
         return false if _address_zip.to_s.size > MAX_LENGTH_FOR_ADDRESS_ZIP
       end
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
-      if _cvc = @cvc
+      unless (_cvc = @cvc).nil?
         return false if _cvc.to_s.size > MAX_LENGTH_FOR_CVC
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 

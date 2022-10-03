@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The name of the person or business that owns the bank account.
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -114,64 +114,64 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _account_holder_type = @account_holder_type
+      unless (_account_holder_type = @account_holder_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
-      if _address_city = @address_city
+      unless (_address_city = @address_city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_country = @address_country
+      unless (_address_country = @address_country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line1 = @address_line1
+      unless (_address_line1 = @address_line1).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_line2 = @address_line2
+      unless (_address_line2 = @address_line2).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_state = @address_state
+      unless (_address_state = @address_state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_zip = @address_zip
+      unless (_address_zip = @address_zip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
           invalid_properties.push(max_length_error)
         end
       end
-      if _exp_month = @exp_month
+      unless (_exp_month = @exp_month).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("exp_month", _exp_month.to_s.size, MAX_LENGTH_FOR_EXP_MONTH)
           invalid_properties.push(max_length_error)
         end
       end
-      if _exp_year = @exp_year
+      unless (_exp_year = @exp_year).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("exp_year", _exp_year.to_s.size, MAX_LENGTH_FOR_EXP_YEAR)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         invalid_properties.concat(_owner.list_invalid_properties_for("owner")) if _owner.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -180,55 +180,55 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _account_holder_name = @account_holder_name
+      unless (_account_holder_name = @account_holder_name).nil?
         return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
-      if _account_holder_type = @account_holder_type
+      unless (_account_holder_type = @account_holder_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
 
-      if _address_city = @address_city
+      unless (_address_city = @address_city).nil?
         return false if _address_city.to_s.size > MAX_LENGTH_FOR_ADDRESS_CITY
       end
 
-      if _address_country = @address_country
+      unless (_address_country = @address_country).nil?
         return false if _address_country.to_s.size > MAX_LENGTH_FOR_ADDRESS_COUNTRY
       end
 
-      if _address_line1 = @address_line1
+      unless (_address_line1 = @address_line1).nil?
         return false if _address_line1.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1
       end
 
-      if _address_line2 = @address_line2
+      unless (_address_line2 = @address_line2).nil?
         return false if _address_line2.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE2
       end
 
-      if _address_state = @address_state
+      unless (_address_state = @address_state).nil?
         return false if _address_state.to_s.size > MAX_LENGTH_FOR_ADDRESS_STATE
       end
 
-      if _address_zip = @address_zip
+      unless (_address_zip = @address_zip).nil?
         return false if _address_zip.to_s.size > MAX_LENGTH_FOR_ADDRESS_ZIP
       end
 
-      if _exp_month = @exp_month
+      unless (_exp_month = @exp_month).nil?
         return false if _exp_month.to_s.size > MAX_LENGTH_FOR_EXP_MONTH
       end
 
-      if _exp_year = @exp_year
+      unless (_exp_year = @exp_year).nil?
         return false if _exp_year.to_s.size > MAX_LENGTH_FOR_EXP_YEAR
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _owner = @owner
+      unless (_owner = @owner).nil?
         return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
 

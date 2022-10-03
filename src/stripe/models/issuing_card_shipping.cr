@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
@@ -41,7 +41,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bulk, individual]."
     VALID_VALUES_FOR__TYPE  = StaticArray["bulk", "individual"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The delivery company that shipped a card.
     @[JSON::Field(key: "carrier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: carrier.nil? && !carrier_present?)]
@@ -133,48 +135,48 @@ module Stripe
 
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"service\" is required and cannot be null") if @service.nil?
 
-      if _service = @service
+      unless (_service = @service).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SERVICE) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _carrier = @carrier
+      unless (_carrier = @carrier).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CARRIER) unless OpenApi::EnumValidator.valid?(_carrier, VALID_VALUES_FOR_CARRIER)
       end
-      if _customs = @customs
+      unless (_customs = @customs).nil?
         invalid_properties.concat(_customs.list_invalid_properties_for("customs")) if _customs.is_a?(OpenApi::Validatable)
       end
 
-      if _phone_number = @phone_number
+      unless (_phone_number = @phone_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone_number", _phone_number.to_s.size, MAX_LENGTH_FOR_PHONE_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _tracking_number = @tracking_number
+      unless (_tracking_number = @tracking_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_number", _tracking_number.to_s.size, MAX_LENGTH_FOR_TRACKING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _tracking_url = @tracking_url
+      unless (_tracking_url = @tracking_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_url", _tracking_url.to_s.size, MAX_LENGTH_FOR_TRACKING_URL)
           invalid_properties.push(max_length_error)
         end
@@ -186,46 +188,46 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @address.nil?
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @service.nil?
-      if _service = @service
+      unless (_service = @service).nil?
         return false unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _carrier = @carrier
+      unless (_carrier = @carrier).nil?
         return false unless OpenApi::EnumValidator.valid?(_carrier, VALID_VALUES_FOR_CARRIER)
       end
 
-      if _customs = @customs
+      unless (_customs = @customs).nil?
         return false if _customs.is_a?(OpenApi::Validatable) && !_customs.valid?
       end
 
-      if _phone_number = @phone_number
+      unless (_phone_number = @phone_number).nil?
         return false if _phone_number.to_s.size > MAX_LENGTH_FOR_PHONE_NUMBER
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _tracking_number = @tracking_number
+      unless (_tracking_number = @tracking_number).nil?
         return false if _tracking_number.to_s.size > MAX_LENGTH_FOR_TRACKING_NUMBER
       end
 
-      if _tracking_url = @tracking_url
+      unless (_tracking_url = @tracking_url).nil?
         return false if _tracking_url.to_s.size > MAX_LENGTH_FOR_TRACKING_URL
       end
 

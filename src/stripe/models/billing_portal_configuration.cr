@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the configuration is active and can be used to create portal sessions.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,7 +61,9 @@ module Stripe
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter updated : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "application", type: Stripe::BillingPortalConfigurationApplication?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: application.nil? && !application_present?)]
     getter application : Stripe::BillingPortalConfigurationApplication? = nil
@@ -115,19 +117,19 @@ module Stripe
 
       invalid_properties.push("\"business_profile\" is required and cannot be null") if @business_profile.nil?
 
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
 
-      if _features = @features
+      unless (_features = @features).nil?
         invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -138,20 +140,20 @@ module Stripe
 
       invalid_properties.push("\"login_page\" is required and cannot be null") if @login_page.nil?
 
-      if _login_page = @login_page
+      unless (_login_page = @login_page).nil?
         invalid_properties.concat(_login_page.list_invalid_properties_for("login_page")) if _login_page.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
-      if _application = @application
+      unless (_application = @application).nil?
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
-      if _default_return_url = @default_return_url
+      unless (_default_return_url = @default_return_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_return_url", _default_return_url.to_s.size, MAX_LENGTH_FOR_DEFAULT_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
@@ -166,19 +168,19 @@ module Stripe
       return false if @active.nil?
 
       return false if @business_profile.nil?
-      if _business_profile = @business_profile
+      unless (_business_profile = @business_profile).nil?
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
 
       return false if @created.nil?
 
       return false if @features.nil?
-      if _features = @features
+      unless (_features = @features).nil?
         return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -187,22 +189,22 @@ module Stripe
       return false if @livemode.nil?
 
       return false if @login_page.nil?
-      if _login_page = @login_page
+      unless (_login_page = @login_page).nil?
         return false if _login_page.is_a?(OpenApi::Validatable) && !_login_page.valid?
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @updated.nil?
 
-      if _application = @application
+      unless (_application = @application).nil?
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
-      if _default_return_url = @default_return_url
+      unless (_default_return_url = @default_return_url).nil?
         return false if _default_return_url.to_s.size > MAX_LENGTH_FOR_DEFAULT_RETURN_URL
       end
 

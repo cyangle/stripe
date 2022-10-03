@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "accounts", type: Stripe::BankConnectionsResourceLinkedAccountList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter accounts : Stripe::BankConnectionsResourceLinkedAccountList1? = nil
@@ -50,7 +50,9 @@ module Stripe
     ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
     VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "account_holder", type: Stripe::FinancialConnectionsSessionAccountHolder?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_holder.nil? && !account_holder_present?)]
     getter account_holder : Stripe::FinancialConnectionsSessionAccountHolder? = nil
@@ -91,19 +93,19 @@ module Stripe
 
       invalid_properties.push("\"accounts\" is required and cannot be null") if @accounts.nil?
 
-      if _accounts = @accounts
+      unless (_accounts = @accounts).nil?
         invalid_properties.concat(_accounts.list_invalid_properties_for("accounts")) if _accounts.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"client_secret\" is required and cannot be null") if @client_secret.nil?
 
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -112,21 +114,21 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"permissions\" is required and cannot be null") if @permissions.nil?
 
-      if _permissions = @permissions
+      unless (_permissions = @permissions).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PERMISSIONS) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
-      if _account_holder = @account_holder
+      unless (_account_holder = @account_holder).nil?
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
-      if _filters = @filters
+      unless (_filters = @filters).nil?
         invalid_properties.concat(_filters.list_invalid_properties_for("filters")) if _filters.is_a?(OpenApi::Validatable)
       end
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
@@ -138,41 +140,41 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @accounts.nil?
-      if _accounts = @accounts
+      unless (_accounts = @accounts).nil?
         return false if _accounts.is_a?(OpenApi::Validatable) && !_accounts.valid?
       end
 
       return false if @client_secret.nil?
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @permissions.nil?
-      if _permissions = @permissions
+      unless (_permissions = @permissions).nil?
         return false unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
 
-      if _account_holder = @account_holder
+      unless (_account_holder = @account_holder).nil?
         return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
 
-      if _filters = @filters
+      unless (_filters = @filters).nil?
         return false if _filters.is_a?(OpenApi::Validatable) && !_filters.valid?
       end
 
-      if _return_url = @return_url
+      unless (_return_url = @return_url).nil?
         return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 

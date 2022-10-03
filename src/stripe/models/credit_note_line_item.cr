@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The integer amount in %s representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,7 +62,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [custom_line_item, invoice_line_item]."
     VALID_VALUES_FOR__TYPE  = StaticArray["custom_line_item", "invoice_line_item"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The integer amount in %s representing the amount being credited for this line item, excluding all tax and discounts.
     @[JSON::Field(key: "amount_excluding_tax", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_excluding_tax.nil? && !amount_excluding_tax_present?)]
@@ -148,12 +150,12 @@ module Stripe
 
       invalid_properties.push("\"discount_amounts\" is required and cannot be null") if @discount_amounts.nil?
 
-      if _discount_amounts = @discount_amounts
+      unless (_discount_amounts = @discount_amounts).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discount_amounts", container: _discount_amounts)) if _discount_amounts.is_a?(Array)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -162,31 +164,31 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"tax_amounts\" is required and cannot be null") if @tax_amounts.nil?
 
-      if _tax_amounts = @tax_amounts
+      unless (_tax_amounts = @tax_amounts).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_amounts", container: _tax_amounts)) if _tax_amounts.is_a?(Array)
       end
       invalid_properties.push("\"tax_rates\" is required and cannot be null") if @tax_rates.nil?
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_rates", container: _tax_rates)) if _tax_rates.is_a?(Array)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _invoice_line_item = @invoice_line_item
+      unless (_invoice_line_item = @invoice_line_item).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, MAX_LENGTH_FOR_INVOICE_LINE_ITEM)
           invalid_properties.push(max_length_error)
         end
@@ -203,42 +205,42 @@ module Stripe
       return false if @discount_amount.nil?
 
       return false if @discount_amounts.nil?
-      if _discount_amounts = @discount_amounts
+      unless (_discount_amounts = @discount_amounts).nil?
         return false if _discount_amounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discount_amounts)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @tax_amounts.nil?
-      if _tax_amounts = @tax_amounts
+      unless (_tax_amounts = @tax_amounts).nil?
         return false if _tax_amounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_amounts)
       end
 
       return false if @tax_rates.nil?
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         return false if _tax_rates.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_rates)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _invoice_line_item = @invoice_line_item
+      unless (_invoice_line_item = @invoice_line_item).nil?
         return false if _invoice_line_item.to_s.size > MAX_LENGTH_FOR_INVOICE_LINE_ITEM
       end
 

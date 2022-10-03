@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Bank-State-Branch number of the bank account.
     @[JSON::Field(key: "bsb_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bsb_number.nil? && !bsb_number_present?)]
@@ -67,22 +67,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bsb_number = @bsb_number
+      unless (_bsb_number = @bsb_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bsb_number", _bsb_number.to_s.size, MAX_LENGTH_FOR_BSB_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
@@ -93,19 +93,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bsb_number = @bsb_number
+      unless (_bsb_number = @bsb_number).nil?
         return false if _bsb_number.to_s.size > MAX_LENGTH_FOR_BSB_NUMBER
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 

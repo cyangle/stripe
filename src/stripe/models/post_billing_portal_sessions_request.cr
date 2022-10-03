@@ -18,14 +18,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The ID of an existing customer.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : String? = nil
     MAX_LENGTH_FOR_CUSTOMER = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
     @[JSON::Field(key: "configuration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -72,18 +74,18 @@ module Stripe
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _configuration = @configuration
+      unless (_configuration = @configuration).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration", _configuration.to_s.size, MAX_LENGTH_FOR_CONFIGURATION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _locale = @locale
+      unless (_locale = @locale).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_LOCALE) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
@@ -94,15 +96,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @customer.nil?
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _configuration = @configuration
+      unless (_configuration = @configuration).nil?
         return false if _configuration.to_s.size > MAX_LENGTH_FOR_CONFIGURATION
       end
 
-      if _locale = @locale
+      unless (_locale = @locale).nil?
         return false unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 

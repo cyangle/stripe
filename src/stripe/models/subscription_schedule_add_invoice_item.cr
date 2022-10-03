@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "price", type: Stripe::SubscriptionScheduleAddInvoiceItemPrice?, default: nil, required: true, nullable: false, emit_null: false)]
     getter price : Stripe::SubscriptionScheduleAddInvoiceItemPrice? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The quantity of the invoice item.
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
@@ -59,11 +61,11 @@ module Stripe
 
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
-      if _price = @price
+      unless (_price = @price).nil?
         invalid_properties.concat(_price.list_invalid_properties_for("price")) if _price.is_a?(OpenApi::Validatable)
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_rates", container: _tax_rates)) if _tax_rates.is_a?(Array)
       end
       invalid_properties
@@ -73,11 +75,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @price.nil?
-      if _price = @price
+      unless (_price = @price).nil?
         return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
       end
 
-      if _tax_rates = @tax_rates
+      unless (_tax_rates = @tax_rates).nil?
         return false if _tax_rates.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_rates)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The CreditReversal created as a result of this ReceivedCredit being reversed.
     @[JSON::Field(key: "credit_reversal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
@@ -86,30 +86,30 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _credit_reversal = @credit_reversal
+      unless (_credit_reversal = @credit_reversal).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, MAX_LENGTH_FOR_CREDIT_REVERSAL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _issuing_authorization = @issuing_authorization
+      unless (_issuing_authorization = @issuing_authorization).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _issuing_transaction = @issuing_transaction
+      unless (_issuing_transaction = @issuing_transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _source_flow = @source_flow
+      unless (_source_flow = @source_flow).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow", _source_flow.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW)
           invalid_properties.push(max_length_error)
         end
       end
-      if _source_flow_details = @source_flow_details
+      unless (_source_flow_details = @source_flow_details).nil?
         invalid_properties.concat(_source_flow_details.list_invalid_properties_for("source_flow_details")) if _source_flow_details.is_a?(OpenApi::Validatable)
       end
-      if _source_flow_type = @source_flow_type
+      unless (_source_flow_type = @source_flow_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow_type", _source_flow_type.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW_TYPE)
           invalid_properties.push(max_length_error)
         end
@@ -120,27 +120,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _credit_reversal = @credit_reversal
+      unless (_credit_reversal = @credit_reversal).nil?
         return false if _credit_reversal.to_s.size > MAX_LENGTH_FOR_CREDIT_REVERSAL
       end
 
-      if _issuing_authorization = @issuing_authorization
+      unless (_issuing_authorization = @issuing_authorization).nil?
         return false if _issuing_authorization.to_s.size > MAX_LENGTH_FOR_ISSUING_AUTHORIZATION
       end
 
-      if _issuing_transaction = @issuing_transaction
+      unless (_issuing_transaction = @issuing_transaction).nil?
         return false if _issuing_transaction.to_s.size > MAX_LENGTH_FOR_ISSUING_TRANSACTION
       end
 
-      if _source_flow = @source_flow
+      unless (_source_flow = @source_flow).nil?
         return false if _source_flow.to_s.size > MAX_LENGTH_FOR_SOURCE_FLOW
       end
 
-      if _source_flow_details = @source_flow_details
+      unless (_source_flow_details = @source_flow_details).nil?
         return false if _source_flow_details.is_a?(OpenApi::Validatable) && !_source_flow_details.valid?
       end
 
-      if _source_flow_type = @source_flow_type
+      unless (_source_flow_type = @source_flow_type).nil?
         return false if _source_flow_type.to_s.size > MAX_LENGTH_FOR_SOURCE_FLOW_TYPE
       end
 

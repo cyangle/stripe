@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "acss_debit", type: Stripe::PaymentIntentPaymentMethodOptionsAcssDebit?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit : Stripe::PaymentIntentPaymentMethodOptionsAcssDebit? = nil
@@ -94,49 +94,49 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
-      if _afterpay_clearpay = @afterpay_clearpay
+      unless (_afterpay_clearpay = @afterpay_clearpay).nil?
         invalid_properties.concat(_afterpay_clearpay.list_invalid_properties_for("afterpay_clearpay")) if _afterpay_clearpay.is_a?(OpenApi::Validatable)
       end
-      if _alipay = @alipay
+      unless (_alipay = @alipay).nil?
         invalid_properties.concat(_alipay.list_invalid_properties_for("alipay")) if _alipay.is_a?(OpenApi::Validatable)
       end
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _customer_balance = @customer_balance
+      unless (_customer_balance = @customer_balance).nil?
         invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance")) if _customer_balance.is_a?(OpenApi::Validatable)
       end
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         invalid_properties.concat(_ideal.list_invalid_properties_for("ideal")) if _ideal.is_a?(OpenApi::Validatable)
       end
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         invalid_properties.concat(_klarna.list_invalid_properties_for("klarna")) if _klarna.is_a?(OpenApi::Validatable)
       end
-      if _link = @link
+      unless (_link = @link).nil?
         invalid_properties.concat(_link.list_invalid_properties_for("link")) if _link.is_a?(OpenApi::Validatable)
       end
-      if _oxxo = @oxxo
+      unless (_oxxo = @oxxo).nil?
         invalid_properties.concat(_oxxo.list_invalid_properties_for("oxxo")) if _oxxo.is_a?(OpenApi::Validatable)
       end
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         invalid_properties.concat(_p24.list_invalid_properties_for("p24")) if _p24.is_a?(OpenApi::Validatable)
       end
-      if _paypal = @paypal
+      unless (_paypal = @paypal).nil?
         invalid_properties.concat(_paypal.list_invalid_properties_for("paypal")) if _paypal.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
-      if _wechat_pay = @wechat_pay
+      unless (_wechat_pay = @wechat_pay).nil?
         invalid_properties.concat(_wechat_pay.list_invalid_properties_for("wechat_pay")) if _wechat_pay.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -145,63 +145,63 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
-      if _afterpay_clearpay = @afterpay_clearpay
+      unless (_afterpay_clearpay = @afterpay_clearpay).nil?
         return false if _afterpay_clearpay.is_a?(OpenApi::Validatable) && !_afterpay_clearpay.valid?
       end
 
-      if _alipay = @alipay
+      unless (_alipay = @alipay).nil?
         return false if _alipay.is_a?(OpenApi::Validatable) && !_alipay.valid?
       end
 
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _customer_balance = @customer_balance
+      unless (_customer_balance = @customer_balance).nil?
         return false if _customer_balance.is_a?(OpenApi::Validatable) && !_customer_balance.valid?
       end
 
-      if _ideal = @ideal
+      unless (_ideal = @ideal).nil?
         return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
 
-      if _klarna = @klarna
+      unless (_klarna = @klarna).nil?
         return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
 
-      if _link = @link
+      unless (_link = @link).nil?
         return false if _link.is_a?(OpenApi::Validatable) && !_link.valid?
       end
 
-      if _oxxo = @oxxo
+      unless (_oxxo = @oxxo).nil?
         return false if _oxxo.is_a?(OpenApi::Validatable) && !_oxxo.valid?
       end
 
-      if _p24 = @p24
+      unless (_p24 = @p24).nil?
         return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
 
-      if _paypal = @paypal
+      unless (_paypal = @paypal).nil?
         return false if _paypal.is_a?(OpenApi::Validatable) && !_paypal.valid?
       end
 
-      if _sepa_debit = @sepa_debit
+      unless (_sepa_debit = @sepa_debit).nil?
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
-      if _sofort = @sofort
+      unless (_sofort = @sofort).nil?
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
 
-      if _wechat_pay = @wechat_pay
+      unless (_wechat_pay = @wechat_pay).nil?
         return false if _wechat_pay.is_a?(OpenApi::Validatable) && !_wechat_pay.valid?
       end
 

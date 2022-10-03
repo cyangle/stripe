@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "customer_notification", type: Stripe::PaymentIntentProcessingCustomerNotification?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_notification : Stripe::PaymentIntentProcessingCustomerNotification? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _customer_notification = @customer_notification
+      unless (_customer_notification = @customer_notification).nil?
         invalid_properties.concat(_customer_notification.list_invalid_properties_for("customer_notification")) if _customer_notification.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -47,7 +47,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _customer_notification = @customer_notification
+      unless (_customer_notification = @customer_notification).nil?
         return false if _customer_notification.is_a?(OpenApi::Validatable) && !_customer_notification.valid?
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "request_extended_authorization", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_extended_authorization : Bool? = nil

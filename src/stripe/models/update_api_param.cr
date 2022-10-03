@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "exp_month", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter exp_month : Int64? = nil

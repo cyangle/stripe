@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "acss_debit_payments", type: Stripe::CapabilityParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit_payments : Stripe::CapabilityParam? = nil
@@ -166,103 +166,103 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _acss_debit_payments = @acss_debit_payments
+      unless (_acss_debit_payments = @acss_debit_payments).nil?
         invalid_properties.concat(_acss_debit_payments.list_invalid_properties_for("acss_debit_payments")) if _acss_debit_payments.is_a?(OpenApi::Validatable)
       end
-      if _affirm_payments = @affirm_payments
+      unless (_affirm_payments = @affirm_payments).nil?
         invalid_properties.concat(_affirm_payments.list_invalid_properties_for("affirm_payments")) if _affirm_payments.is_a?(OpenApi::Validatable)
       end
-      if _afterpay_clearpay_payments = @afterpay_clearpay_payments
+      unless (_afterpay_clearpay_payments = @afterpay_clearpay_payments).nil?
         invalid_properties.concat(_afterpay_clearpay_payments.list_invalid_properties_for("afterpay_clearpay_payments")) if _afterpay_clearpay_payments.is_a?(OpenApi::Validatable)
       end
-      if _au_becs_debit_payments = @au_becs_debit_payments
+      unless (_au_becs_debit_payments = @au_becs_debit_payments).nil?
         invalid_properties.concat(_au_becs_debit_payments.list_invalid_properties_for("au_becs_debit_payments")) if _au_becs_debit_payments.is_a?(OpenApi::Validatable)
       end
-      if _bacs_debit_payments = @bacs_debit_payments
+      unless (_bacs_debit_payments = @bacs_debit_payments).nil?
         invalid_properties.concat(_bacs_debit_payments.list_invalid_properties_for("bacs_debit_payments")) if _bacs_debit_payments.is_a?(OpenApi::Validatable)
       end
-      if _bancontact_payments = @bancontact_payments
+      unless (_bancontact_payments = @bancontact_payments).nil?
         invalid_properties.concat(_bancontact_payments.list_invalid_properties_for("bancontact_payments")) if _bancontact_payments.is_a?(OpenApi::Validatable)
       end
-      if _bank_transfer_payments = @bank_transfer_payments
+      unless (_bank_transfer_payments = @bank_transfer_payments).nil?
         invalid_properties.concat(_bank_transfer_payments.list_invalid_properties_for("bank_transfer_payments")) if _bank_transfer_payments.is_a?(OpenApi::Validatable)
       end
-      if _blik_payments = @blik_payments
+      unless (_blik_payments = @blik_payments).nil?
         invalid_properties.concat(_blik_payments.list_invalid_properties_for("blik_payments")) if _blik_payments.is_a?(OpenApi::Validatable)
       end
-      if _boleto_payments = @boleto_payments
+      unless (_boleto_payments = @boleto_payments).nil?
         invalid_properties.concat(_boleto_payments.list_invalid_properties_for("boleto_payments")) if _boleto_payments.is_a?(OpenApi::Validatable)
       end
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
-      if _card_payments = @card_payments
+      unless (_card_payments = @card_payments).nil?
         invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments")) if _card_payments.is_a?(OpenApi::Validatable)
       end
-      if _cartes_bancaires_payments = @cartes_bancaires_payments
+      unless (_cartes_bancaires_payments = @cartes_bancaires_payments).nil?
         invalid_properties.concat(_cartes_bancaires_payments.list_invalid_properties_for("cartes_bancaires_payments")) if _cartes_bancaires_payments.is_a?(OpenApi::Validatable)
       end
-      if _eps_payments = @eps_payments
+      unless (_eps_payments = @eps_payments).nil?
         invalid_properties.concat(_eps_payments.list_invalid_properties_for("eps_payments")) if _eps_payments.is_a?(OpenApi::Validatable)
       end
-      if _fpx_payments = @fpx_payments
+      unless (_fpx_payments = @fpx_payments).nil?
         invalid_properties.concat(_fpx_payments.list_invalid_properties_for("fpx_payments")) if _fpx_payments.is_a?(OpenApi::Validatable)
       end
-      if _giropay_payments = @giropay_payments
+      unless (_giropay_payments = @giropay_payments).nil?
         invalid_properties.concat(_giropay_payments.list_invalid_properties_for("giropay_payments")) if _giropay_payments.is_a?(OpenApi::Validatable)
       end
-      if _grabpay_payments = @grabpay_payments
+      unless (_grabpay_payments = @grabpay_payments).nil?
         invalid_properties.concat(_grabpay_payments.list_invalid_properties_for("grabpay_payments")) if _grabpay_payments.is_a?(OpenApi::Validatable)
       end
-      if _ideal_payments = @ideal_payments
+      unless (_ideal_payments = @ideal_payments).nil?
         invalid_properties.concat(_ideal_payments.list_invalid_properties_for("ideal_payments")) if _ideal_payments.is_a?(OpenApi::Validatable)
       end
-      if _jcb_payments = @jcb_payments
+      unless (_jcb_payments = @jcb_payments).nil?
         invalid_properties.concat(_jcb_payments.list_invalid_properties_for("jcb_payments")) if _jcb_payments.is_a?(OpenApi::Validatable)
       end
-      if _klarna_payments = @klarna_payments
+      unless (_klarna_payments = @klarna_payments).nil?
         invalid_properties.concat(_klarna_payments.list_invalid_properties_for("klarna_payments")) if _klarna_payments.is_a?(OpenApi::Validatable)
       end
-      if _konbini_payments = @konbini_payments
+      unless (_konbini_payments = @konbini_payments).nil?
         invalid_properties.concat(_konbini_payments.list_invalid_properties_for("konbini_payments")) if _konbini_payments.is_a?(OpenApi::Validatable)
       end
-      if _legacy_payments = @legacy_payments
+      unless (_legacy_payments = @legacy_payments).nil?
         invalid_properties.concat(_legacy_payments.list_invalid_properties_for("legacy_payments")) if _legacy_payments.is_a?(OpenApi::Validatable)
       end
-      if _link_payments = @link_payments
+      unless (_link_payments = @link_payments).nil?
         invalid_properties.concat(_link_payments.list_invalid_properties_for("link_payments")) if _link_payments.is_a?(OpenApi::Validatable)
       end
-      if _oxxo_payments = @oxxo_payments
+      unless (_oxxo_payments = @oxxo_payments).nil?
         invalid_properties.concat(_oxxo_payments.list_invalid_properties_for("oxxo_payments")) if _oxxo_payments.is_a?(OpenApi::Validatable)
       end
-      if _p24_payments = @p24_payments
+      unless (_p24_payments = @p24_payments).nil?
         invalid_properties.concat(_p24_payments.list_invalid_properties_for("p24_payments")) if _p24_payments.is_a?(OpenApi::Validatable)
       end
-      if _paynow_payments = @paynow_payments
+      unless (_paynow_payments = @paynow_payments).nil?
         invalid_properties.concat(_paynow_payments.list_invalid_properties_for("paynow_payments")) if _paynow_payments.is_a?(OpenApi::Validatable)
       end
-      if _promptpay_payments = @promptpay_payments
+      unless (_promptpay_payments = @promptpay_payments).nil?
         invalid_properties.concat(_promptpay_payments.list_invalid_properties_for("promptpay_payments")) if _promptpay_payments.is_a?(OpenApi::Validatable)
       end
-      if _sepa_debit_payments = @sepa_debit_payments
+      unless (_sepa_debit_payments = @sepa_debit_payments).nil?
         invalid_properties.concat(_sepa_debit_payments.list_invalid_properties_for("sepa_debit_payments")) if _sepa_debit_payments.is_a?(OpenApi::Validatable)
       end
-      if _sofort_payments = @sofort_payments
+      unless (_sofort_payments = @sofort_payments).nil?
         invalid_properties.concat(_sofort_payments.list_invalid_properties_for("sofort_payments")) if _sofort_payments.is_a?(OpenApi::Validatable)
       end
-      if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
+      unless (_tax_reporting_us_1099_k = @tax_reporting_us_1099_k).nil?
         invalid_properties.concat(_tax_reporting_us_1099_k.list_invalid_properties_for("tax_reporting_us_1099_k")) if _tax_reporting_us_1099_k.is_a?(OpenApi::Validatable)
       end
-      if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
+      unless (_tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc).nil?
         invalid_properties.concat(_tax_reporting_us_1099_misc.list_invalid_properties_for("tax_reporting_us_1099_misc")) if _tax_reporting_us_1099_misc.is_a?(OpenApi::Validatable)
       end
-      if _transfers = @transfers
+      unless (_transfers = @transfers).nil?
         invalid_properties.concat(_transfers.list_invalid_properties_for("transfers")) if _transfers.is_a?(OpenApi::Validatable)
       end
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account_ach_payments = @us_bank_account_ach_payments
+      unless (_us_bank_account_ach_payments = @us_bank_account_ach_payments).nil?
         invalid_properties.concat(_us_bank_account_ach_payments.list_invalid_properties_for("us_bank_account_ach_payments")) if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -271,135 +271,135 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _acss_debit_payments = @acss_debit_payments
+      unless (_acss_debit_payments = @acss_debit_payments).nil?
         return false if _acss_debit_payments.is_a?(OpenApi::Validatable) && !_acss_debit_payments.valid?
       end
 
-      if _affirm_payments = @affirm_payments
+      unless (_affirm_payments = @affirm_payments).nil?
         return false if _affirm_payments.is_a?(OpenApi::Validatable) && !_affirm_payments.valid?
       end
 
-      if _afterpay_clearpay_payments = @afterpay_clearpay_payments
+      unless (_afterpay_clearpay_payments = @afterpay_clearpay_payments).nil?
         return false if _afterpay_clearpay_payments.is_a?(OpenApi::Validatable) && !_afterpay_clearpay_payments.valid?
       end
 
-      if _au_becs_debit_payments = @au_becs_debit_payments
+      unless (_au_becs_debit_payments = @au_becs_debit_payments).nil?
         return false if _au_becs_debit_payments.is_a?(OpenApi::Validatable) && !_au_becs_debit_payments.valid?
       end
 
-      if _bacs_debit_payments = @bacs_debit_payments
+      unless (_bacs_debit_payments = @bacs_debit_payments).nil?
         return false if _bacs_debit_payments.is_a?(OpenApi::Validatable) && !_bacs_debit_payments.valid?
       end
 
-      if _bancontact_payments = @bancontact_payments
+      unless (_bancontact_payments = @bancontact_payments).nil?
         return false if _bancontact_payments.is_a?(OpenApi::Validatable) && !_bancontact_payments.valid?
       end
 
-      if _bank_transfer_payments = @bank_transfer_payments
+      unless (_bank_transfer_payments = @bank_transfer_payments).nil?
         return false if _bank_transfer_payments.is_a?(OpenApi::Validatable) && !_bank_transfer_payments.valid?
       end
 
-      if _blik_payments = @blik_payments
+      unless (_blik_payments = @blik_payments).nil?
         return false if _blik_payments.is_a?(OpenApi::Validatable) && !_blik_payments.valid?
       end
 
-      if _boleto_payments = @boleto_payments
+      unless (_boleto_payments = @boleto_payments).nil?
         return false if _boleto_payments.is_a?(OpenApi::Validatable) && !_boleto_payments.valid?
       end
 
-      if _card_issuing = @card_issuing
+      unless (_card_issuing = @card_issuing).nil?
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
 
-      if _card_payments = @card_payments
+      unless (_card_payments = @card_payments).nil?
         return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
 
-      if _cartes_bancaires_payments = @cartes_bancaires_payments
+      unless (_cartes_bancaires_payments = @cartes_bancaires_payments).nil?
         return false if _cartes_bancaires_payments.is_a?(OpenApi::Validatable) && !_cartes_bancaires_payments.valid?
       end
 
-      if _eps_payments = @eps_payments
+      unless (_eps_payments = @eps_payments).nil?
         return false if _eps_payments.is_a?(OpenApi::Validatable) && !_eps_payments.valid?
       end
 
-      if _fpx_payments = @fpx_payments
+      unless (_fpx_payments = @fpx_payments).nil?
         return false if _fpx_payments.is_a?(OpenApi::Validatable) && !_fpx_payments.valid?
       end
 
-      if _giropay_payments = @giropay_payments
+      unless (_giropay_payments = @giropay_payments).nil?
         return false if _giropay_payments.is_a?(OpenApi::Validatable) && !_giropay_payments.valid?
       end
 
-      if _grabpay_payments = @grabpay_payments
+      unless (_grabpay_payments = @grabpay_payments).nil?
         return false if _grabpay_payments.is_a?(OpenApi::Validatable) && !_grabpay_payments.valid?
       end
 
-      if _ideal_payments = @ideal_payments
+      unless (_ideal_payments = @ideal_payments).nil?
         return false if _ideal_payments.is_a?(OpenApi::Validatable) && !_ideal_payments.valid?
       end
 
-      if _jcb_payments = @jcb_payments
+      unless (_jcb_payments = @jcb_payments).nil?
         return false if _jcb_payments.is_a?(OpenApi::Validatable) && !_jcb_payments.valid?
       end
 
-      if _klarna_payments = @klarna_payments
+      unless (_klarna_payments = @klarna_payments).nil?
         return false if _klarna_payments.is_a?(OpenApi::Validatable) && !_klarna_payments.valid?
       end
 
-      if _konbini_payments = @konbini_payments
+      unless (_konbini_payments = @konbini_payments).nil?
         return false if _konbini_payments.is_a?(OpenApi::Validatable) && !_konbini_payments.valid?
       end
 
-      if _legacy_payments = @legacy_payments
+      unless (_legacy_payments = @legacy_payments).nil?
         return false if _legacy_payments.is_a?(OpenApi::Validatable) && !_legacy_payments.valid?
       end
 
-      if _link_payments = @link_payments
+      unless (_link_payments = @link_payments).nil?
         return false if _link_payments.is_a?(OpenApi::Validatable) && !_link_payments.valid?
       end
 
-      if _oxxo_payments = @oxxo_payments
+      unless (_oxxo_payments = @oxxo_payments).nil?
         return false if _oxxo_payments.is_a?(OpenApi::Validatable) && !_oxxo_payments.valid?
       end
 
-      if _p24_payments = @p24_payments
+      unless (_p24_payments = @p24_payments).nil?
         return false if _p24_payments.is_a?(OpenApi::Validatable) && !_p24_payments.valid?
       end
 
-      if _paynow_payments = @paynow_payments
+      unless (_paynow_payments = @paynow_payments).nil?
         return false if _paynow_payments.is_a?(OpenApi::Validatable) && !_paynow_payments.valid?
       end
 
-      if _promptpay_payments = @promptpay_payments
+      unless (_promptpay_payments = @promptpay_payments).nil?
         return false if _promptpay_payments.is_a?(OpenApi::Validatable) && !_promptpay_payments.valid?
       end
 
-      if _sepa_debit_payments = @sepa_debit_payments
+      unless (_sepa_debit_payments = @sepa_debit_payments).nil?
         return false if _sepa_debit_payments.is_a?(OpenApi::Validatable) && !_sepa_debit_payments.valid?
       end
 
-      if _sofort_payments = @sofort_payments
+      unless (_sofort_payments = @sofort_payments).nil?
         return false if _sofort_payments.is_a?(OpenApi::Validatable) && !_sofort_payments.valid?
       end
 
-      if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
+      unless (_tax_reporting_us_1099_k = @tax_reporting_us_1099_k).nil?
         return false if _tax_reporting_us_1099_k.is_a?(OpenApi::Validatable) && !_tax_reporting_us_1099_k.valid?
       end
 
-      if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
+      unless (_tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc).nil?
         return false if _tax_reporting_us_1099_misc.is_a?(OpenApi::Validatable) && !_tax_reporting_us_1099_misc.valid?
       end
 
-      if _transfers = @transfers
+      unless (_transfers = @transfers).nil?
         return false if _transfers.is_a?(OpenApi::Validatable) && !_transfers.valid?
       end
 
-      if _treasury = @treasury
+      unless (_treasury = @treasury).nil?
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 
-      if _us_bank_account_ach_payments = @us_bank_account_ach_payments
+      unless (_us_bank_account_ach_payments = @us_bank_account_ach_payments).nil?
         return false if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable) && !_us_bank_account_ach_payments.valid?
       end
 

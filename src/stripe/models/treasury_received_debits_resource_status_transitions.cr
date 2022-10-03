@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Timestamp describing when the DebitReversal changed status to `completed`.
     @[JSON::Field(key: "completed_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: completed_at.nil? && !completed_at_present?)]

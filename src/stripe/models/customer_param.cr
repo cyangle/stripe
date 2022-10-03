@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "custom_fields", type: Stripe::CustomerParamCustomFields?, default: nil, required: false, nullable: false, emit_null: false)]
     getter custom_fields : Stripe::CustomerParamCustomFields? = nil
@@ -52,20 +52,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _custom_fields = @custom_fields
+      unless (_custom_fields = @custom_fields).nil?
         invalid_properties.concat(_custom_fields.list_invalid_properties_for("custom_fields")) if _custom_fields.is_a?(OpenApi::Validatable)
       end
-      if _default_payment_method = @default_payment_method
+      unless (_default_payment_method = @default_payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _footer = @footer
+      unless (_footer = @footer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _rendering_options = @rendering_options
+      unless (_rendering_options = @rendering_options).nil?
         invalid_properties.concat(_rendering_options.list_invalid_properties_for("rendering_options")) if _rendering_options.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -74,19 +74,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _custom_fields = @custom_fields
+      unless (_custom_fields = @custom_fields).nil?
         return false if _custom_fields.is_a?(OpenApi::Validatable) && !_custom_fields.valid?
       end
 
-      if _default_payment_method = @default_payment_method
+      unless (_default_payment_method = @default_payment_method).nil?
         return false if _default_payment_method.to_s.size > MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD
       end
 
-      if _footer = @footer
+      unless (_footer = @footer).nil?
         return false if _footer.to_s.size > MAX_LENGTH_FOR_FOOTER
       end
 
-      if _rendering_options = @rendering_options
+      unless (_rendering_options = @rendering_options).nil?
         return false if _rendering_options.is_a?(OpenApi::Validatable) && !_rendering_options.valid?
       end
 

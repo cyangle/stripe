@@ -19,13 +19,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://stripe.com/docs/api#invoice_object) as the value of the object key.
     @[JSON::Field(key: "object", type: JSON::Any?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : JSON::Any? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Object containing the names of the attributes that have changed, and their previous values (sent along only with *.updated events).
     @[JSON::Field(key: "previous_attributes", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]

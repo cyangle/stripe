@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "persistent_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter persistent_token : String? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _persistent_token = @persistent_token
+      unless (_persistent_token = @persistent_token).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
           invalid_properties.push(max_length_error)
         end
@@ -49,7 +49,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _persistent_token = @persistent_token
+      unless (_persistent_token = @persistent_token).nil?
         return false if _persistent_token.to_s.size > MAX_LENGTH_FOR_PERSISTENT_TOKEN
       end
 

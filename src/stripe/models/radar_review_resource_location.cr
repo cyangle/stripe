@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The city where the payment originated.
     @[JSON::Field(key: "city", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: city.nil? && !city_present?)]
@@ -77,18 +77,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _city = @city
+      unless (_city = @city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _region = @region
+      unless (_region = @region).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("region", _region.to_s.size, MAX_LENGTH_FOR_REGION)
           invalid_properties.push(max_length_error)
         end
@@ -99,15 +99,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _city = @city
+      unless (_city = @city).nil?
         return false if _city.to_s.size > MAX_LENGTH_FOR_CITY
       end
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _region = @region
+      unless (_region = @region).nil?
         return false if _region.to_s.size > MAX_LENGTH_FOR_REGION
       end
 

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
     VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Whether the plan is currently available for new subscriptions. Defaults to `true`.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -139,46 +141,46 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      if _aggregate_usage = @aggregate_usage
+      unless (_aggregate_usage = @aggregate_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AGGREGATE_USAGE) unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
 
-      if _billing_scheme = @billing_scheme
+      unless (_billing_scheme = @billing_scheme).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_SCHEME) unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       end
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-      if _nickname = @nickname
+      unless (_nickname = @nickname).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _product = @product
+      unless (_product = @product).nil?
         invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
-      if _tiers = @tiers
+      unless (_tiers = @tiers).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tiers", container: _tiers)) if _tiers.is_a?(Array)
       end
-      if _tiers_mode = @tiers_mode
+      unless (_tiers_mode = @tiers_mode).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TIERS_MODE) unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       end
-      if _transform_usage = @transform_usage
+      unless (_transform_usage = @transform_usage).nil?
         invalid_properties.concat(_transform_usage.list_invalid_properties_for("transform_usage")) if _transform_usage.is_a?(OpenApi::Validatable)
       end
 
-      if _usage_type = @usage_type
+      unless (_usage_type = @usage_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_USAGE_TYPE) unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
       end
       invalid_properties
@@ -190,47 +192,47 @@ module Stripe
       return false if @currency.nil?
 
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      if _aggregate_usage = @aggregate_usage
+      unless (_aggregate_usage = @aggregate_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
 
-      if _billing_scheme = @billing_scheme
+      unless (_billing_scheme = @billing_scheme).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       end
 
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      if _nickname = @nickname
+      unless (_nickname = @nickname).nil?
         return false if _nickname.to_s.size > MAX_LENGTH_FOR_NICKNAME
       end
 
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
 
-      if _tiers = @tiers
+      unless (_tiers = @tiers).nil?
         return false if _tiers.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tiers)
       end
 
-      if _tiers_mode = @tiers_mode
+      unless (_tiers_mode = @tiers_mode).nil?
         return false unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       end
 
-      if _transform_usage = @transform_usage
+      unless (_transform_usage = @transform_usage).nil?
         return false if _transform_usage.is_a?(OpenApi::Validatable) && !_transform_usage.valid?
       end
 
-      if _usage_type = @usage_type
+      unless (_usage_type = @usage_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
       end
 

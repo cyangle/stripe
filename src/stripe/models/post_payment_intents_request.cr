@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,7 +28,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
     @[JSON::Field(key: "application_fee_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -193,73 +195,73 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _automatic_payment_methods = @automatic_payment_methods
+      unless (_automatic_payment_methods = @automatic_payment_methods).nil?
         invalid_properties.concat(_automatic_payment_methods.list_invalid_properties_for("automatic_payment_methods")) if _automatic_payment_methods.is_a?(OpenApi::Validatable)
       end
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
 
-      if _confirmation_method = @confirmation_method
+      unless (_confirmation_method = @confirmation_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CONFIRMATION_METHOD) unless OpenApi::EnumValidator.valid?(_confirmation_method, VALID_VALUES_FOR_CONFIRMATION_METHOD)
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _mandate_data = @mandate_data
+      unless (_mandate_data = @mandate_data).nil?
         invalid_properties.concat(_mandate_data.list_invalid_properties_for("mandate_data")) if _mandate_data.is_a?(OpenApi::Validatable)
       end
 
-      if _off_session = @off_session
+      unless (_off_session = @off_session).nil?
         invalid_properties.concat(_off_session.list_invalid_properties_for("off_session")) if _off_session.is_a?(OpenApi::Validatable)
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_method_data = @payment_method_data
+      unless (_payment_method_data = @payment_method_data).nil?
         invalid_properties.concat(_payment_method_data.list_invalid_properties_for("payment_method_data")) if _payment_method_data.is_a?(OpenApi::Validatable)
       end
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
 
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options")) if _radar_options.is_a?(OpenApi::Validatable)
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
@@ -273,71 +275,71 @@ module Stripe
 
       return false if @currency.nil?
 
-      if _automatic_payment_methods = @automatic_payment_methods
+      unless (_automatic_payment_methods = @automatic_payment_methods).nil?
         return false if _automatic_payment_methods.is_a?(OpenApi::Validatable) && !_automatic_payment_methods.valid?
       end
 
-      if _capture_method = @capture_method
+      unless (_capture_method = @capture_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
 
-      if _confirmation_method = @confirmation_method
+      unless (_confirmation_method = @confirmation_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_confirmation_method, VALID_VALUES_FOR_CONFIRMATION_METHOD)
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _mandate = @mandate
+      unless (_mandate = @mandate).nil?
         return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 
-      if _mandate_data = @mandate_data
+      unless (_mandate_data = @mandate_data).nil?
         return false if _mandate_data.is_a?(OpenApi::Validatable) && !_mandate_data.valid?
       end
 
-      if _off_session = @off_session
+      unless (_off_session = @off_session).nil?
         return false if _off_session.is_a?(OpenApi::Validatable) && !_off_session.valid?
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
-      if _payment_method_data = @payment_method_data
+      unless (_payment_method_data = @payment_method_data).nil?
         return false if _payment_method_data.is_a?(OpenApi::Validatable) && !_payment_method_data.valid?
       end
 
-      if _payment_method_options = @payment_method_options
+      unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
 
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         return false if _statement_descriptor_suffix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 

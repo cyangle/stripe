@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "address", type: Stripe::CreateLocationAddressParam?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::CreateLocationAddressParam? = nil
@@ -28,7 +28,9 @@ module Stripe
     getter display_name : String? = nil
     MAX_LENGTH_FOR_DISPLAY_NAME = 1000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The ID of a configuration that will be used to customize all readers in this location.
     @[JSON::Field(key: "configuration_overrides", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,23 +65,23 @@ module Stripe
 
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _configuration_overrides = @configuration_overrides
+      unless (_configuration_overrides = @configuration_overrides).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -89,20 +91,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @address.nil?
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
       return false if @display_name.nil?
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
-      if _configuration_overrides = @configuration_overrides
+      unless (_configuration_overrides = @configuration_overrides).nil?
         return false if _configuration_overrides.to_s.size > MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES
       end
 
-      if _metadata = @metadata
+      unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 

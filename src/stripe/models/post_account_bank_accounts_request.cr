@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "bank_account", type: Stripe::PostAccountRequestBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_account : Stripe::PostAccountRequestBankAccount? = nil
@@ -58,11 +58,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
 
-      if _external_account = @external_account
+      unless (_external_account = @external_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
@@ -74,11 +74,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_account = @bank_account
+      unless (_bank_account = @bank_account).nil?
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
 
-      if _external_account = @external_account
+      unless (_external_account = @external_account).nil?
         return false if _external_account.to_s.size > MAX_LENGTH_FOR_EXTERNAL_ACCOUNT
       end
 

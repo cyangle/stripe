@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_tax_display.nil? && !amount_tax_display_present?)]
@@ -43,7 +43,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _amount_tax_display = @amount_tax_display
+      unless (_amount_tax_display = @amount_tax_display).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("amount_tax_display", _amount_tax_display.to_s.size, MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY)
           invalid_properties.push(max_length_error)
         end
@@ -54,7 +54,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _amount_tax_display = @amount_tax_display
+      unless (_amount_tax_display = @amount_tax_display).nil?
         return false if _amount_tax_display.to_s.size > MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY
       end
 

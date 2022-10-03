@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The secret scope type.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account, user]."
     VALID_VALUES_FOR__TYPE  = StaticArray["account", "user"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The user ID, if type is set to \"user\"
     @[JSON::Field(key: "user", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -52,10 +54,10 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _user = @user
+      unless (_user = @user).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user", _user.to_s.size, MAX_LENGTH_FOR_USER)
           invalid_properties.push(max_length_error)
         end
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _user = @user
+      unless (_user = @user).nil?
         return false if _user.to_s.size > MAX_LENGTH_FOR_USER
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Name of the bank associated with the bank account.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
@@ -79,27 +79,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _institution_number = @institution_number
+      unless (_institution_number = @institution_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transit_number = @transit_number
+      unless (_transit_number = @transit_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -110,23 +110,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _bank_name = @bank_name
+      unless (_bank_name = @bank_name).nil?
         return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _institution_number = @institution_number
+      unless (_institution_number = @institution_number).nil?
         return false if _institution_number.to_s.size > MAX_LENGTH_FOR_INSTITUTION_NUMBER
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _transit_number = @transit_number
+      unless (_transit_number = @transit_number).nil?
         return false if _transit_number.to_s.size > MAX_LENGTH_FOR_TRANSIT_NUMBER
       end
 

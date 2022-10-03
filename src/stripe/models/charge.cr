@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -85,7 +85,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, pending, succeeded]."
     VALID_VALUES_FOR_STATUS  = StaticArray["failed", "pending", "succeeded"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "application", type: Stripe::ChargeApplication?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: application.nil? && !application_present?)]
     getter application : Stripe::ChargeApplication? = nil
@@ -348,7 +350,7 @@ module Stripe
 
       invalid_properties.push("\"billing_details\" is required and cannot be null") if @billing_details.nil?
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"captured\" is required and cannot be null") if @captured.nil?
@@ -361,7 +363,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -372,7 +374,7 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"paid\" is required and cannot be null") if @paid.nil?
@@ -381,115 +383,115 @@ module Stripe
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _application = @application
+      unless (_application = @application).nil?
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
-      if _application_fee = @application_fee
+      unless (_application_fee = @application_fee).nil?
         invalid_properties.concat(_application_fee.list_invalid_properties_for("application_fee")) if _application_fee.is_a?(OpenApi::Validatable)
       end
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _calculated_statement_descriptor = @calculated_statement_descriptor
+      unless (_calculated_statement_descriptor = @calculated_statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("calculated_statement_descriptor", _calculated_statement_descriptor.to_s.size, MAX_LENGTH_FOR_CALCULATED_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _failure_balance_transaction = @failure_balance_transaction
+      unless (_failure_balance_transaction = @failure_balance_transaction).nil?
         invalid_properties.concat(_failure_balance_transaction.list_invalid_properties_for("failure_balance_transaction")) if _failure_balance_transaction.is_a?(OpenApi::Validatable)
       end
-      if _failure_code = @failure_code
+      unless (_failure_code = @failure_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, MAX_LENGTH_FOR_FAILURE_CODE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _failure_message = @failure_message
+      unless (_failure_message = @failure_message).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, MAX_LENGTH_FOR_FAILURE_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fraud_details = @fraud_details
+      unless (_fraud_details = @fraud_details).nil?
         invalid_properties.concat(_fraud_details.list_invalid_properties_for("fraud_details")) if _fraud_details.is_a?(OpenApi::Validatable)
       end
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         invalid_properties.concat(_invoice.list_invalid_properties_for("invoice")) if _invoice.is_a?(OpenApi::Validatable)
       end
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of")) if _on_behalf_of.is_a?(OpenApi::Validatable)
       end
-      if _outcome = @outcome
+      unless (_outcome = @outcome).nil?
         invalid_properties.concat(_outcome.list_invalid_properties_for("outcome")) if _outcome.is_a?(OpenApi::Validatable)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_method_details = @payment_method_details
+      unless (_payment_method_details = @payment_method_details).nil?
         invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details")) if _payment_method_details.is_a?(OpenApi::Validatable)
       end
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options")) if _radar_options.is_a?(OpenApi::Validatable)
       end
-      if _receipt_email = @receipt_email
+      unless (_receipt_email = @receipt_email).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, MAX_LENGTH_FOR_RECEIPT_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _receipt_number = @receipt_number
+      unless (_receipt_number = @receipt_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_number", _receipt_number.to_s.size, MAX_LENGTH_FOR_RECEIPT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _receipt_url = @receipt_url
+      unless (_receipt_url = @receipt_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_url", _receipt_url.to_s.size, MAX_LENGTH_FOR_RECEIPT_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _refunds = @refunds
+      unless (_refunds = @refunds).nil?
         invalid_properties.concat(_refunds.list_invalid_properties_for("refunds")) if _refunds.is_a?(OpenApi::Validatable)
       end
-      if _review = @review
+      unless (_review = @review).nil?
         invalid_properties.concat(_review.list_invalid_properties_for("review")) if _review.is_a?(OpenApi::Validatable)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _source_transfer = @source_transfer
+      unless (_source_transfer = @source_transfer).nil?
         invalid_properties.concat(_source_transfer.list_invalid_properties_for("source_transfer")) if _source_transfer.is_a?(OpenApi::Validatable)
       end
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
           invalid_properties.push(max_length_error)
         end
       end
-      if _transfer = @transfer
+      unless (_transfer = @transfer).nil?
         invalid_properties.concat(_transfer.list_invalid_properties_for("transfer")) if _transfer.is_a?(OpenApi::Validatable)
       end
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
-      if _transfer_group = @transfer_group
+      unless (_transfer_group = @transfer_group).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, MAX_LENGTH_FOR_TRANSFER_GROUP)
           invalid_properties.push(max_length_error)
         end
@@ -507,7 +509,7 @@ module Stripe
       return false if @amount_refunded.nil?
 
       return false if @billing_details.nil?
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
 
@@ -520,7 +522,7 @@ module Stripe
       return false if @disputed.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -529,7 +531,7 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
@@ -538,123 +540,123 @@ module Stripe
       return false if @refunded.nil?
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _application = @application
+      unless (_application = @application).nil?
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
-      if _application_fee = @application_fee
+      unless (_application_fee = @application_fee).nil?
         return false if _application_fee.is_a?(OpenApi::Validatable) && !_application_fee.valid?
       end
 
-      if _balance_transaction = @balance_transaction
+      unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
-      if _calculated_statement_descriptor = @calculated_statement_descriptor
+      unless (_calculated_statement_descriptor = @calculated_statement_descriptor).nil?
         return false if _calculated_statement_descriptor.to_s.size > MAX_LENGTH_FOR_CALCULATED_STATEMENT_DESCRIPTOR
       end
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _failure_balance_transaction = @failure_balance_transaction
+      unless (_failure_balance_transaction = @failure_balance_transaction).nil?
         return false if _failure_balance_transaction.is_a?(OpenApi::Validatable) && !_failure_balance_transaction.valid?
       end
 
-      if _failure_code = @failure_code
+      unless (_failure_code = @failure_code).nil?
         return false if _failure_code.to_s.size > MAX_LENGTH_FOR_FAILURE_CODE
       end
 
-      if _failure_message = @failure_message
+      unless (_failure_message = @failure_message).nil?
         return false if _failure_message.to_s.size > MAX_LENGTH_FOR_FAILURE_MESSAGE
       end
 
-      if _fraud_details = @fraud_details
+      unless (_fraud_details = @fraud_details).nil?
         return false if _fraud_details.is_a?(OpenApi::Validatable) && !_fraud_details.valid?
       end
 
-      if _invoice = @invoice
+      unless (_invoice = @invoice).nil?
         return false if _invoice.is_a?(OpenApi::Validatable) && !_invoice.valid?
       end
 
-      if _on_behalf_of = @on_behalf_of
+      unless (_on_behalf_of = @on_behalf_of).nil?
         return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
 
-      if _outcome = @outcome
+      unless (_outcome = @outcome).nil?
         return false if _outcome.is_a?(OpenApi::Validatable) && !_outcome.valid?
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
-      if _payment_method = @payment_method
+      unless (_payment_method = @payment_method).nil?
         return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
-      if _payment_method_details = @payment_method_details
+      unless (_payment_method_details = @payment_method_details).nil?
         return false if _payment_method_details.is_a?(OpenApi::Validatable) && !_payment_method_details.valid?
       end
 
-      if _radar_options = @radar_options
+      unless (_radar_options = @radar_options).nil?
         return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
 
-      if _receipt_email = @receipt_email
+      unless (_receipt_email = @receipt_email).nil?
         return false if _receipt_email.to_s.size > MAX_LENGTH_FOR_RECEIPT_EMAIL
       end
 
-      if _receipt_number = @receipt_number
+      unless (_receipt_number = @receipt_number).nil?
         return false if _receipt_number.to_s.size > MAX_LENGTH_FOR_RECEIPT_NUMBER
       end
 
-      if _receipt_url = @receipt_url
+      unless (_receipt_url = @receipt_url).nil?
         return false if _receipt_url.to_s.size > MAX_LENGTH_FOR_RECEIPT_URL
       end
 
-      if _refunds = @refunds
+      unless (_refunds = @refunds).nil?
         return false if _refunds.is_a?(OpenApi::Validatable) && !_refunds.valid?
       end
 
-      if _review = @review
+      unless (_review = @review).nil?
         return false if _review.is_a?(OpenApi::Validatable) && !_review.valid?
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _source_transfer = @source_transfer
+      unless (_source_transfer = @source_transfer).nil?
         return false if _source_transfer.is_a?(OpenApi::Validatable) && !_source_transfer.valid?
       end
 
-      if _statement_descriptor = @statement_descriptor
+      unless (_statement_descriptor = @statement_descriptor).nil?
         return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
-      if _statement_descriptor_suffix = @statement_descriptor_suffix
+      unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
         return false if _statement_descriptor_suffix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX
       end
 
-      if _transfer = @transfer
+      unless (_transfer = @transfer).nil?
         return false if _transfer.is_a?(OpenApi::Validatable) && !_transfer.valid?
       end
 
-      if _transfer_data = @transfer_data
+      unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 
-      if _transfer_group = @transfer_group
+      unless (_transfer_group = @transfer_group).nil?
         return false if _transfer_group.to_s.size > MAX_LENGTH_FOR_TRANSFER_GROUP
       end
 

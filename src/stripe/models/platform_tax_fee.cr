@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The Connected account that incurred this charge.
     @[JSON::Field(key: "account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,6 +47,8 @@ module Stripe
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE = 5000
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -67,33 +69,33 @@ module Stripe
 
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
 
-      if _account = @account
+      unless (_account = @account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"source_transaction\" is required and cannot be null") if @source_transaction.nil?
 
-      if _source_transaction = @source_transaction
+      unless (_source_transaction = @source_transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_transaction", _source_transaction.to_s.size, MAX_LENGTH_FOR_SOURCE_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
@@ -105,27 +107,27 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account.nil?
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @source_transaction.nil?
-      if _source_transaction = @source_transaction
+      unless (_source_transaction = @source_transaction).nil?
         return false if _source_transaction.to_s.size > MAX_LENGTH_FOR_SOURCE_TRANSACTION
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 

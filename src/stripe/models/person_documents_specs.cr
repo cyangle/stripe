@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "company_authorization", type: Stripe::DocumentsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter company_authorization : Stripe::DocumentsParam? = nil
@@ -46,13 +46,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _company_authorization = @company_authorization
+      unless (_company_authorization = @company_authorization).nil?
         invalid_properties.concat(_company_authorization.list_invalid_properties_for("company_authorization")) if _company_authorization.is_a?(OpenApi::Validatable)
       end
-      if _passport = @passport
+      unless (_passport = @passport).nil?
         invalid_properties.concat(_passport.list_invalid_properties_for("passport")) if _passport.is_a?(OpenApi::Validatable)
       end
-      if _visa = @visa
+      unless (_visa = @visa).nil?
         invalid_properties.concat(_visa.list_invalid_properties_for("visa")) if _visa.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -61,15 +61,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _company_authorization = @company_authorization
+      unless (_company_authorization = @company_authorization).nil?
         return false if _company_authorization.is_a?(OpenApi::Validatable) && !_company_authorization.valid?
       end
 
-      if _passport = @passport
+      unless (_passport = @passport).nil?
         return false if _passport.is_a?(OpenApi::Validatable) && !_passport.valid?
       end
 
-      if _visa = @visa
+      unless (_visa = @visa).nil?
         return false if _visa.is_a?(OpenApi::Validatable) && !_visa.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Total before any discounts or taxes are applied.
     @[JSON::Field(key: "amount_subtotal", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,6 +41,8 @@ module Stripe
 
     @[JSON::Field(key: "total_details", type: Stripe::QuotesResourceTotalDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total_details : Stripe::QuotesResourceTotalDetails? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,14 +68,14 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
 
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
 
-      if _total_details = @total_details
+      unless (_total_details = @total_details).nil?
         invalid_properties.concat(_total_details.list_invalid_properties_for("total_details")) if _total_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -87,14 +89,14 @@ module Stripe
       return false if @amount_total.nil?
 
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       return false if @interval_count.nil?
 
       return false if @total_details.nil?
-      if _total_details = @total_details
+      unless (_total_details = @total_details).nil?
         return false if _total_details.is_a?(OpenApi::Validatable) && !_total_details.valid?
       end
 

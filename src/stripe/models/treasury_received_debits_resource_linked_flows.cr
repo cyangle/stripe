@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The DebitReversal created as a result of this ReceivedDebit being reversed.
     @[JSON::Field(key: "debit_reversal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: debit_reversal.nil? && !debit_reversal_present?)]
@@ -70,22 +70,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _debit_reversal = @debit_reversal
+      unless (_debit_reversal = @debit_reversal).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("debit_reversal", _debit_reversal.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _inbound_transfer = @inbound_transfer
+      unless (_inbound_transfer = @inbound_transfer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("inbound_transfer", _inbound_transfer.to_s.size, MAX_LENGTH_FOR_INBOUND_TRANSFER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _issuing_authorization = @issuing_authorization
+      unless (_issuing_authorization = @issuing_authorization).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _issuing_transaction = @issuing_transaction
+      unless (_issuing_transaction = @issuing_transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
@@ -96,19 +96,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _debit_reversal = @debit_reversal
+      unless (_debit_reversal = @debit_reversal).nil?
         return false if _debit_reversal.to_s.size > MAX_LENGTH_FOR_DEBIT_REVERSAL
       end
 
-      if _inbound_transfer = @inbound_transfer
+      unless (_inbound_transfer = @inbound_transfer).nil?
         return false if _inbound_transfer.to_s.size > MAX_LENGTH_FOR_INBOUND_TRANSFER
       end
 
-      if _issuing_authorization = @issuing_authorization
+      unless (_issuing_authorization = @issuing_authorization).nil?
         return false if _issuing_authorization.to_s.size > MAX_LENGTH_FOR_ISSUING_AUTHORIZATION
       end
 
-      if _issuing_transaction = @issuing_transaction
+      unless (_issuing_transaction = @issuing_transaction).nil?
         return false if _issuing_transaction.to_s.size > MAX_LENGTH_FOR_ISSUING_TRANSACTION
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the promotion code is currently active. A promotion code is only active if the coupon is also valid.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -59,7 +59,9 @@ module Stripe
     @[JSON::Field(key: "times_redeemed", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter times_redeemed : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "customer", type: Stripe::PromotionCodeCustomer?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : Stripe::PromotionCodeCustomer? = nil
@@ -119,21 +121,21 @@ module Stripe
 
       invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
-      if _code = @code
+      unless (_code = @code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
 
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         invalid_properties.concat(_coupon.list_invalid_properties_for("coupon")) if _coupon.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -142,17 +144,17 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"restrictions\" is required and cannot be null") if @restrictions.nil?
 
-      if _restrictions = @restrictions
+      unless (_restrictions = @restrictions).nil?
         invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions")) if _restrictions.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"times_redeemed\" is required and cannot be null") if @times_redeemed.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
 
@@ -165,37 +167,37 @@ module Stripe
       return false if @active.nil?
 
       return false if @code.nil?
-      if _code = @code
+      unless (_code = @code).nil?
         return false if _code.to_s.size > MAX_LENGTH_FOR_CODE
       end
 
       return false if @coupon.nil?
-      if _coupon = @coupon
+      unless (_coupon = @coupon).nil?
         return false if _coupon.is_a?(OpenApi::Validatable) && !_coupon.valid?
       end
 
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @restrictions.nil?
-      if _restrictions = @restrictions
+      unless (_restrictions = @restrictions).nil?
         return false if _restrictions.is_a?(OpenApi::Validatable) && !_restrictions.valid?
       end
 
       return false if @times_redeemed.nil?
 
-      if _customer = @customer
+      unless (_customer = @customer).nil?
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 

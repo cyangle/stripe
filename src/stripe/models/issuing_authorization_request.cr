@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The `pending_request.amount` at the time of the request, presented in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -53,7 +53,9 @@ module Stripe
     ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [account_disabled, card_active, card_inactive, cardholder_inactive, cardholder_verification_required, insufficient_funds, not_allowed, spending_controls, suspected_fraud, verification_failed, webhook_approved, webhook_declined, webhook_timeout]."
     VALID_VALUES_FOR_REASON  = StaticArray["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "amount_details", type: Stripe::IssuingAuthorizationAmountDetails1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
     getter amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil
@@ -91,7 +93,7 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
@@ -100,17 +102,17 @@ module Stripe
 
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
 
-      if _merchant_currency = @merchant_currency
+      unless (_merchant_currency = @merchant_currency).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("merchant_currency", _merchant_currency.to_s.size, MAX_LENGTH_FOR_MERCHANT_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
-      if _amount_details = @amount_details
+      unless (_amount_details = @amount_details).nil?
         invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -126,23 +128,23 @@ module Stripe
       return false if @created.nil?
 
       return false if @currency.nil?
-      if _currency = @currency
+      unless (_currency = @currency).nil?
         return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
       return false if @merchant_amount.nil?
 
       return false if @merchant_currency.nil?
-      if _merchant_currency = @merchant_currency
+      unless (_merchant_currency = @merchant_currency).nil?
         return false if _merchant_currency.to_s.size > MAX_LENGTH_FOR_MERCHANT_CURRENCY
       end
 
       return false if @reason.nil?
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
-      if _amount_details = @amount_details
+      unless (_amount_details = @amount_details).nil?
         return false if _amount_details.is_a?(OpenApi::Validatable) && !_amount_details.valid?
       end
 

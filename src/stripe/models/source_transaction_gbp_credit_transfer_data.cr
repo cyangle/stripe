@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Bank account fingerprint associated with the Stripe owned bank account receiving the transfer.
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -76,37 +76,37 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _funding_method = @funding_method
+      unless (_funding_method = @funding_method).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding_method", _funding_method.to_s.size, MAX_LENGTH_FOR_FUNDING_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_account_number = @sender_account_number
+      unless (_sender_account_number = @sender_account_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_account_number", _sender_account_number.to_s.size, MAX_LENGTH_FOR_SENDER_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_name = @sender_name
+      unless (_sender_name = @sender_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _sender_sort_code = @sender_sort_code
+      unless (_sender_sort_code = @sender_sort_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_sort_code", _sender_sort_code.to_s.size, MAX_LENGTH_FOR_SENDER_SORT_CODE)
           invalid_properties.push(max_length_error)
         end
@@ -117,31 +117,31 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _funding_method = @funding_method
+      unless (_funding_method = @funding_method).nil?
         return false if _funding_method.to_s.size > MAX_LENGTH_FOR_FUNDING_METHOD
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
-      if _sender_account_number = @sender_account_number
+      unless (_sender_account_number = @sender_account_number).nil?
         return false if _sender_account_number.to_s.size > MAX_LENGTH_FOR_SENDER_ACCOUNT_NUMBER
       end
 
-      if _sender_name = @sender_name
+      unless (_sender_name = @sender_name).nil?
         return false if _sender_name.to_s.size > MAX_LENGTH_FOR_SENDER_NAME
       end
 
-      if _sender_sort_code = @sender_sort_code
+      unless (_sender_sort_code = @sender_sort_code).nil?
         return false if _sender_sort_code.to_s.size > MAX_LENGTH_FOR_SENDER_SORT_CODE
       end
 

@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "present", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter present : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ip_address : String? = nil

@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "allowed_updates", type: Stripe::CustomerUpdateCreationParamAllowedUpdates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_updates : Stripe::CustomerUpdateCreationParamAllowedUpdates? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _allowed_updates = @allowed_updates
+      unless (_allowed_updates = @allowed_updates).nil?
         invalid_properties.concat(_allowed_updates.list_invalid_properties_for("allowed_updates")) if _allowed_updates.is_a?(OpenApi::Validatable)
       end
 
@@ -51,7 +51,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _allowed_updates = @allowed_updates
+      unless (_allowed_updates = @allowed_updates).nil?
         return false if _allowed_updates.is_a?(OpenApi::Validatable) && !_allowed_updates.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The timestamp when the email was sent.
     @[JSON::Field(key: "email_sent_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,6 +29,8 @@ module Stripe
     @[JSON::Field(key: "email_sent_to", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter email_sent_to : String? = nil
     MAX_LENGTH_FOR_EMAIL_SENT_TO = 5000
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,7 +51,7 @@ module Stripe
 
       invalid_properties.push("\"email_sent_to\" is required and cannot be null") if @email_sent_to.nil?
 
-      if _email_sent_to = @email_sent_to
+      unless (_email_sent_to = @email_sent_to).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email_sent_to", _email_sent_to.to_s.size, MAX_LENGTH_FOR_EMAIL_SENT_TO)
           invalid_properties.push(max_length_error)
         end
@@ -63,7 +65,7 @@ module Stripe
       return false if @email_sent_at.nil?
 
       return false if @email_sent_to.nil?
-      if _email_sent_to = @email_sent_to
+      unless (_email_sent_to = @email_sent_to).nil?
         return false if _email_sent_to.to_s.size > MAX_LENGTH_FOR_EMAIL_SENT_TO
       end
 

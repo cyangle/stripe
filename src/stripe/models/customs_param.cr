@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "eori_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter eori_number : String? = nil
@@ -38,7 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _eori_number = @eori_number
+      unless (_eori_number = @eori_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("eori_number", _eori_number.to_s.size, MAX_LENGTH_FOR_EORI_NUMBER)
           invalid_properties.push(max_length_error)
         end
@@ -49,7 +49,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _eori_number = @eori_number
+      unless (_eori_number = @eori_number).nil?
         return false if _eori_number.to_s.size > MAX_LENGTH_FOR_EORI_NUMBER
       end
 

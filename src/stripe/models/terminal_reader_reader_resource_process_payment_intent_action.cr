@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "payment_intent", type: Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIntent?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_intent : Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIntent? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "process_config", type: Stripe::TerminalReaderReaderResourceProcessConfig?, default: nil, required: false, nullable: false, emit_null: false)]
     getter process_config : Stripe::TerminalReaderReaderResourceProcessConfig? = nil
@@ -47,10 +49,10 @@ module Stripe
 
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _process_config = @process_config
+      unless (_process_config = @process_config).nil?
         invalid_properties.concat(_process_config.list_invalid_properties_for("process_config")) if _process_config.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -60,11 +62,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @payment_intent.nil?
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
-      if _process_config = @process_config
+      unless (_process_config = @process_config).nil?
         return false if _process_config.is_a?(OpenApi::Validatable) && !_process_config.valid?
       end
 

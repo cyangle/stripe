@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "billing_details", type: Stripe::TreasurySharedResourceBillingDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_details : Stripe::TreasurySharedResourceBillingDetails? = nil
@@ -30,7 +30,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [financial_account, us_bank_account]."
     VALID_VALUES_FOR__TYPE  = StaticArray["financial_account", "us_bank_account"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "financial_account", type: Stripe::OutboundPaymentsPaymentMethodDetailsFinancialAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_account : Stripe::OutboundPaymentsPaymentMethodDetailsFinancialAccount? = nil
@@ -58,18 +60,18 @@ module Stripe
 
       invalid_properties.push("\"billing_details\" is required and cannot be null") if @billing_details.nil?
 
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         invalid_properties.concat(_financial_account.list_invalid_properties_for("financial_account")) if _financial_account.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -79,20 +81,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @billing_details.nil?
-      if _billing_details = @billing_details
+      unless (_billing_details = @billing_details).nil?
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _financial_account = @financial_account
+      unless (_financial_account = @financial_account).nil?
         return false if _financial_account.is_a?(OpenApi::Validatable) && !_financial_account.valid?
       end
 
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 

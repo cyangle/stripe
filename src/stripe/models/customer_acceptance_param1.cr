@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "online", type: Stripe::OnlineParam1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter online : Stripe::OnlineParam1? = nil
@@ -28,6 +28,8 @@ module Stripe
     MAX_LENGTH_FOR__TYPE    = 5000
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [online]."
     VALID_VALUES_FOR__TYPE  = StaticArray["online"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,12 +48,12 @@ module Stripe
 
       invalid_properties.push("\"online\" is required and cannot be null") if @online.nil?
 
-      if _online = @online
+      unless (_online = @online).nil?
         invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
@@ -61,12 +63,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @online.nil?
-      if _online = @online
+      unless (_online = @online).nil?
         return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 

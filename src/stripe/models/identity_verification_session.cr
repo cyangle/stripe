@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -59,7 +59,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
     VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The short-lived client secret used by Stripe.js to [show a verification modal](https://stripe.com/docs/js/identity/modal) inside your app. This client secret expires after 24 hours and can only be used once. Don’t store it, log it, embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS enabled on any page that includes the client secret. Refer to our docs on [passing the client secret to the frontend](https://stripe.com/docs/identity/verification-sessions#client-secret) to learn more.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
@@ -133,7 +135,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -144,44 +146,44 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
 
-      if _options = @options
+      unless (_options = @options).nil?
         invalid_properties.concat(_options.list_invalid_properties_for("options")) if _options.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
-      if _last_error = @last_error
+      unless (_last_error = @last_error).nil?
         invalid_properties.concat(_last_error.list_invalid_properties_for("last_error")) if _last_error.is_a?(OpenApi::Validatable)
       end
-      if _last_verification_report = @last_verification_report
+      unless (_last_verification_report = @last_verification_report).nil?
         invalid_properties.concat(_last_verification_report.list_invalid_properties_for("last_verification_report")) if _last_verification_report.is_a?(OpenApi::Validatable)
       end
-      if _redaction = @redaction
+      unless (_redaction = @redaction).nil?
         invalid_properties.concat(_redaction.list_invalid_properties_for("redaction")) if _redaction.is_a?(OpenApi::Validatable)
       end
-      if _url = @url
+      unless (_url = @url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
-      if _verified_outputs = @verified_outputs
+      unless (_verified_outputs = @verified_outputs).nil?
         invalid_properties.concat(_verified_outputs.list_invalid_properties_for("verified_outputs")) if _verified_outputs.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -193,7 +195,7 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -202,46 +204,46 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @options.nil?
-      if _options = @options
+      unless (_options = @options).nil?
         return false if _options.is_a?(OpenApi::Validatable) && !_options.valid?
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _client_secret = @client_secret
+      unless (_client_secret = @client_secret).nil?
         return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
-      if _last_error = @last_error
+      unless (_last_error = @last_error).nil?
         return false if _last_error.is_a?(OpenApi::Validatable) && !_last_error.valid?
       end
 
-      if _last_verification_report = @last_verification_report
+      unless (_last_verification_report = @last_verification_report).nil?
         return false if _last_verification_report.is_a?(OpenApi::Validatable) && !_last_verification_report.valid?
       end
 
-      if _redaction = @redaction
+      unless (_redaction = @redaction).nil?
         return false if _redaction.is_a?(OpenApi::Validatable) && !_redaction.valid?
       end
 
-      if _url = @url
+      unless (_url = @url).nil?
         return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
-      if _verified_outputs = @verified_outputs
+      unless (_verified_outputs = @verified_outputs).nil?
         return false if _verified_outputs.is_a?(OpenApi::Validatable) && !_verified_outputs.valid?
       end
 

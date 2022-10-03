@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The charge that created this object.
     @[JSON::Field(key: "charge", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
@@ -57,15 +57,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _payment_method_details = @payment_method_details
+      unless (_payment_method_details = @payment_method_details).nil?
         invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details")) if _payment_method_details.is_a?(OpenApi::Validatable)
       end
-      if _setup_attempt = @setup_attempt
+      unless (_setup_attempt = @setup_attempt).nil?
         invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt")) if _setup_attempt.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -74,15 +74,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.to_s.size > MAX_LENGTH_FOR_CHARGE
       end
 
-      if _payment_method_details = @payment_method_details
+      unless (_payment_method_details = @payment_method_details).nil?
         return false if _payment_method_details.is_a?(OpenApi::Validatable) && !_payment_method_details.valid?
       end
 
-      if _setup_attempt = @setup_attempt
+      unless (_setup_attempt = @setup_attempt).nil?
         return false if _setup_attempt.is_a?(OpenApi::Validatable) && !_setup_attempt.valid?
       end
 

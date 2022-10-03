@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
@@ -52,12 +52,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _timezone = @timezone
+      unless (_timezone = @timezone).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
           invalid_properties.push(max_length_error)
         end
@@ -68,11 +68,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _display_name = @display_name
+      unless (_display_name = @display_name).nil?
         return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
-      if _timezone = @timezone
+      unless (_timezone = @timezone).nil?
         return false if _timezone.to_s.size > MAX_LENGTH_FOR_TIMEZONE
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     @[JSON::Field(key: "address_line1_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
@@ -61,17 +61,17 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _address_line1_check = @address_line1_check
+      unless (_address_line1_check = @address_line1_check).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
-      if _address_postal_code_check = @address_postal_code_check
+      unless (_address_postal_code_check = @address_postal_code_check).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_postal_code_check", _address_postal_code_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
-      if _cvc_check = @cvc_check
+      unless (_cvc_check = @cvc_check).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
           invalid_properties.push(max_length_error)
         end
@@ -82,15 +82,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _address_line1_check = @address_line1_check
+      unless (_address_line1_check = @address_line1_check).nil?
         return false if _address_line1_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK
       end
 
-      if _address_postal_code_check = @address_postal_code_check
+      unless (_address_postal_code_check = @address_postal_code_check).nil?
         return false if _address_postal_code_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK
       end
 
-      if _cvc_check = @cvc_check
+      unless (_cvc_check = @cvc_check).nil?
         return false if _cvc_check.to_s.size > MAX_LENGTH_FOR_CVC_CHECK
       end
 

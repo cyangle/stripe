@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
@@ -61,18 +63,18 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_code", _tax_code.to_s.size, MAX_LENGTH_FOR_TAX_CODE)
           invalid_properties.push(max_length_error)
         end
@@ -84,15 +86,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @name.nil?
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _tax_code = @tax_code
+      unless (_tax_code = @tax_code).nil?
         return false if _tax_code.to_s.size > MAX_LENGTH_FOR_TAX_CODE
       end
 

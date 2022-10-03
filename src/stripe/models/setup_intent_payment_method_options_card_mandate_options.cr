@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Amount to be charged for future payments.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -50,7 +50,9 @@ module Stripe
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter start_date : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # A description of the mandate or subscription that is meant to be displayed to the customer.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -111,32 +113,32 @@ module Stripe
 
       invalid_properties.push("\"amount_type\" is required and cannot be null") if @amount_type.nil?
 
-      if _amount_type = @amount_type
+      unless (_amount_type = @amount_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_AMOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
 
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _supported_types = @supported_types
+      unless (_supported_types = @supported_types).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED_TYPES) unless OpenApi::EnumValidator.valid?(_supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
       end
       invalid_properties
@@ -148,29 +150,29 @@ module Stripe
       return false if @amount.nil?
 
       return false if @amount_type.nil?
-      if _amount_type = @amount_type
+      unless (_amount_type = @amount_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
 
       return false if @currency.nil?
 
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       return false if @reference.nil?
-      if _reference = @reference
+      unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       return false if @start_date.nil?
 
-      if _description = @description
+      unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
-      if _supported_types = @supported_types
+      unless (_supported_types = @supported_types).nil?
         return false unless OpenApi::EnumValidator.valid?(_supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
       end
 

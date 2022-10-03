@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The customer's country as identified by Stripe Tax.
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,7 +32,9 @@ module Stripe
     ERROR_MESSAGE_FOR_SOURCE = "invalid value for \"source\", must be one of [billing_address, ip_address, payment_method, shipping_destination]."
     VALID_VALUES_FOR_SOURCE  = StaticArray["billing_address", "ip_address", "payment_method", "shipping_destination"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The customer's state, county, province, or region as identified by Stripe Tax.
     @[JSON::Field(key: "state", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: state.nil? && !state_present?)]
@@ -61,17 +63,17 @@ module Stripe
 
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"source\" is required and cannot be null") if @source.nil?
 
-      if _source = @source
+      unless (_source = @source).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE) unless OpenApi::EnumValidator.valid?(_source, VALID_VALUES_FOR_SOURCE)
       end
-      if _state = @state
+      unless (_state = @state).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
           invalid_properties.push(max_length_error)
         end
@@ -83,16 +85,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @source.nil?
-      if _source = @source
+      unless (_source = @source).nil?
         return false unless OpenApi::EnumValidator.valid?(_source, VALID_VALUES_FOR_SOURCE)
       end
 
-      if _state = @state
+      unless (_state = @state).nil?
         return false if _state.to_s.size > MAX_LENGTH_FOR_STATE
       end
 

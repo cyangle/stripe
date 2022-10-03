@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "acss_debit", type: Stripe::SubscriptionsResourcePaymentMethodOptionsAcssDebit?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
     getter acss_debit : Stripe::SubscriptionsResourcePaymentMethodOptionsAcssDebit? = nil
@@ -76,22 +76,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
       end
-      if _card = @card
+      unless (_card = @card).nil?
         invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
-      if _customer_balance = @customer_balance
+      unless (_customer_balance = @customer_balance).nil?
         invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance")) if _customer_balance.is_a?(OpenApi::Validatable)
       end
-      if _konbini = @konbini
+      unless (_konbini = @konbini).nil?
         invalid_properties.concat(_konbini.list_invalid_properties_for("konbini")) if _konbini.is_a?(OpenApi::Validatable)
       end
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -100,27 +100,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _acss_debit = @acss_debit
+      unless (_acss_debit = @acss_debit).nil?
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
-      if _bancontact = @bancontact
+      unless (_bancontact = @bancontact).nil?
         return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
 
-      if _card = @card
+      unless (_card = @card).nil?
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
-      if _customer_balance = @customer_balance
+      unless (_customer_balance = @customer_balance).nil?
         return false if _customer_balance.is_a?(OpenApi::Validatable) && !_customer_balance.valid?
       end
 
-      if _konbini = @konbini
+      unless (_konbini = @konbini).nil?
         return false if _konbini.is_a?(OpenApi::Validatable) && !_konbini.valid?
       end
 
-      if _us_bank_account = @us_bank_account
+      unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 

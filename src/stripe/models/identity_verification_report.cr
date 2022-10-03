@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,7 +49,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
     VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "document", type: Stripe::GelatoDocumentReport?, default: nil, required: false, nullable: false, emit_null: false)]
     getter document : Stripe::GelatoDocumentReport? = nil
@@ -96,7 +98,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -105,29 +107,29 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
 
-      if _options = @options
+      unless (_options = @options).nil?
         invalid_properties.concat(_options.list_invalid_properties_for("options")) if _options.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _document = @document
+      unless (_document = @document).nil?
         invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
-      if _id_number = @id_number
+      unless (_id_number = @id_number).nil?
         invalid_properties.concat(_id_number.list_invalid_properties_for("id_number")) if _id_number.is_a?(OpenApi::Validatable)
       end
-      if _selfie = @selfie
+      unless (_selfie = @selfie).nil?
         invalid_properties.concat(_selfie.list_invalid_properties_for("selfie")) if _selfie.is_a?(OpenApi::Validatable)
       end
-      if _verification_session = @verification_session
+      unless (_verification_session = @verification_session).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verification_session", _verification_session.to_s.size, MAX_LENGTH_FOR_VERIFICATION_SESSION)
           invalid_properties.push(max_length_error)
         end
@@ -141,40 +143,40 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @options.nil?
-      if _options = @options
+      unless (_options = @options).nil?
         return false if _options.is_a?(OpenApi::Validatable) && !_options.valid?
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _document = @document
+      unless (_document = @document).nil?
         return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 
-      if _id_number = @id_number
+      unless (_id_number = @id_number).nil?
         return false if _id_number.is_a?(OpenApi::Validatable) && !_id_number.valid?
       end
 
-      if _selfie = @selfie
+      unless (_selfie = @selfie).nil?
         return false if _selfie.is_a?(OpenApi::Validatable) && !_selfie.valid?
       end
 
-      if _verification_session = @verification_session
+      unless (_verification_session = @verification_session).nil?
         return false if _verification_session.to_s.size > MAX_LENGTH_FOR_VERIFICATION_SESSION
       end
 

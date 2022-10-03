@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The number of days charges for the account will be held before being paid out.
     @[JSON::Field(key: "delay_days", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -30,7 +30,9 @@ module Stripe
     getter interval : String? = nil
     MAX_LENGTH_FOR_INTERVAL = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter months.
     @[JSON::Field(key: "monthly_anchor", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,13 +65,13 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval", _interval.to_s.size, MAX_LENGTH_FOR_INTERVAL)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _weekly_anchor = @weekly_anchor
+      unless (_weekly_anchor = @weekly_anchor).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("weekly_anchor", _weekly_anchor.to_s.size, MAX_LENGTH_FOR_WEEKLY_ANCHOR)
           invalid_properties.push(max_length_error)
         end
@@ -83,11 +85,11 @@ module Stripe
       return false if @delay_days.nil?
 
       return false if @interval.nil?
-      if _interval = @interval
+      unless (_interval = @interval).nil?
         return false if _interval.to_s.size > MAX_LENGTH_FOR_INTERVAL
       end
 
-      if _weekly_anchor = @weekly_anchor
+      unless (_weekly_anchor = @weekly_anchor).nil?
         return false if _weekly_anchor.to_s.size > MAX_LENGTH_FOR_WEEKLY_ANCHOR
       end
 

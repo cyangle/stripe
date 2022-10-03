@@ -19,14 +19,16 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of the next action to perform.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "display_details", type: Stripe::RefundNextActionDisplayDetails1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: display_details.nil? && !display_details_present?)]
     getter display_details : Stripe::RefundNextActionDisplayDetails1? = nil
@@ -52,12 +54,12 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
-      if _display_details = @display_details
+      unless (_display_details = @display_details).nil?
         invalid_properties.concat(_display_details.list_invalid_properties_for("display_details")) if _display_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
-      if _display_details = @display_details
+      unless (_display_details = @display_details).nil?
         return false if _display_details.is_a?(OpenApi::Validatable) && !_display_details.valid?
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,7 +27,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [offline, online]."
     VALID_VALUES_FOR__TYPE  = StaticArray["offline", "online"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The time at which the customer accepted the Mandate.
     @[JSON::Field(key: "accepted_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: accepted_at.nil? && !accepted_at_present?)]
@@ -63,11 +65,11 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _online = @online
+      unless (_online = @online).nil?
         invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -77,11 +79,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _online = @online
+      unless (_online = @online).nil?
         return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
       end
 

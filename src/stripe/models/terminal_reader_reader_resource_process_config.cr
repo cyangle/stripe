@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Override showing a tipping selection screen on this transaction.
     @[JSON::Field(key: "skip_tipping", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]

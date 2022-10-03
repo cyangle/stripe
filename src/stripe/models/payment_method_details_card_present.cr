@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Two-digit number representing the card's expiration month.
     @[JSON::Field(key: "exp_month", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -29,7 +29,9 @@ module Stripe
     @[JSON::Field(key: "exp_year", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter exp_year : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The authorized amount
     @[JSON::Field(key: "amount_authorized", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_authorized.nil? && !amount_authorized_present?)]
@@ -178,58 +180,58 @@ module Stripe
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _cardholder_name = @cardholder_name
+      unless (_cardholder_name = @cardholder_name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_name", _cardholder_name.to_s.size, MAX_LENGTH_FOR_CARDHOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _country = @country
+      unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _emv_auth_data = @emv_auth_data
+      unless (_emv_auth_data = @emv_auth_data).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("emv_auth_data", _emv_auth_data.to_s.size, MAX_LENGTH_FOR_EMV_AUTH_DATA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _funding = @funding
+      unless (_funding = @funding).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
           invalid_properties.push(max_length_error)
         end
       end
-      if _generated_card = @generated_card
+      unless (_generated_card = @generated_card).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, MAX_LENGTH_FOR_GENERATED_CARD)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
-      if _network = @network
+      unless (_network = @network).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, MAX_LENGTH_FOR_NETWORK)
           invalid_properties.push(max_length_error)
         end
       end
 
-      if _read_method = @read_method
+      unless (_read_method = @read_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_READ_METHOD) unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
       end
-      if _receipt = @receipt
+      unless (_receipt = @receipt).nil?
         invalid_properties.concat(_receipt.list_invalid_properties_for("receipt")) if _receipt.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -242,47 +244,47 @@ module Stripe
 
       return false if @exp_year.nil?
 
-      if _brand = @brand
+      unless (_brand = @brand).nil?
         return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
-      if _cardholder_name = @cardholder_name
+      unless (_cardholder_name = @cardholder_name).nil?
         return false if _cardholder_name.to_s.size > MAX_LENGTH_FOR_CARDHOLDER_NAME
       end
 
-      if _country = @country
+      unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
-      if _emv_auth_data = @emv_auth_data
+      unless (_emv_auth_data = @emv_auth_data).nil?
         return false if _emv_auth_data.to_s.size > MAX_LENGTH_FOR_EMV_AUTH_DATA
       end
 
-      if _fingerprint = @fingerprint
+      unless (_fingerprint = @fingerprint).nil?
         return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
-      if _funding = @funding
+      unless (_funding = @funding).nil?
         return false if _funding.to_s.size > MAX_LENGTH_FOR_FUNDING
       end
 
-      if _generated_card = @generated_card
+      unless (_generated_card = @generated_card).nil?
         return false if _generated_card.to_s.size > MAX_LENGTH_FOR_GENERATED_CARD
       end
 
-      if _last4 = @last4
+      unless (_last4 = @last4).nil?
         return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
-      if _network = @network
+      unless (_network = @network).nil?
         return false if _network.to_s.size > MAX_LENGTH_FOR_NETWORK
       end
 
-      if _read_method = @read_method
+      unless (_read_method = @read_method).nil?
         return false unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
       end
 
-      if _receipt = @receipt
+      unless (_receipt = @receipt).nil?
         return false if _receipt.is_a?(OpenApi::Validatable) && !_receipt.valid?
       end
 

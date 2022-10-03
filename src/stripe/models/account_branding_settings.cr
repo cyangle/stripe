@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "icon", type: Stripe::AccountBrandingSettingsIcon?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: icon.nil? && !icon_present?)]
     getter icon : Stripe::AccountBrandingSettingsIcon? = nil
@@ -66,18 +66,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _icon = @icon
+      unless (_icon = @icon).nil?
         invalid_properties.concat(_icon.list_invalid_properties_for("icon")) if _icon.is_a?(OpenApi::Validatable)
       end
-      if _logo = @logo
+      unless (_logo = @logo).nil?
         invalid_properties.concat(_logo.list_invalid_properties_for("logo")) if _logo.is_a?(OpenApi::Validatable)
       end
-      if _primary_color = @primary_color
+      unless (_primary_color = @primary_color).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_color", _primary_color.to_s.size, MAX_LENGTH_FOR_PRIMARY_COLOR)
           invalid_properties.push(max_length_error)
         end
       end
-      if _secondary_color = @secondary_color
+      unless (_secondary_color = @secondary_color).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secondary_color", _secondary_color.to_s.size, MAX_LENGTH_FOR_SECONDARY_COLOR)
           invalid_properties.push(max_length_error)
         end
@@ -88,19 +88,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _icon = @icon
+      unless (_icon = @icon).nil?
         return false if _icon.is_a?(OpenApi::Validatable) && !_icon.valid?
       end
 
-      if _logo = @logo
+      unless (_logo = @logo).nil?
         return false if _logo.is_a?(OpenApi::Validatable) && !_logo.valid?
       end
 
-      if _primary_color = @primary_color
+      unless (_primary_color = @primary_color).nil?
         return false if _primary_color.to_s.size > MAX_LENGTH_FOR_PRIMARY_COLOR
       end
 
-      if _secondary_color = @secondary_color
+      unless (_secondary_color = @secondary_color).nil?
         return false if _secondary_color.to_s.size > MAX_LENGTH_FOR_SECONDARY_COLOR
       end
 

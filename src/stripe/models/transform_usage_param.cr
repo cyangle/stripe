@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "divide_by", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter divide_by : Int64? = nil
@@ -28,6 +28,8 @@ module Stripe
     getter round : String? = nil
     ERROR_MESSAGE_FOR_ROUND = "invalid value for \"round\", must be one of [down, up]."
     VALID_VALUES_FOR_ROUND  = StaticArray["down", "up"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,7 +50,7 @@ module Stripe
 
       invalid_properties.push("\"round\" is required and cannot be null") if @round.nil?
 
-      if _round = @round
+      unless (_round = @round).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ROUND) unless OpenApi::EnumValidator.valid?(_round, VALID_VALUES_FOR_ROUND)
       end
       invalid_properties
@@ -60,7 +62,7 @@ module Stripe
       return false if @divide_by.nil?
 
       return false if @round.nil?
-      if _round = @round
+      unless (_round = @round).nil?
         return false unless OpenApi::EnumValidator.valid?(_round, VALID_VALUES_FOR_ROUND)
       end
 

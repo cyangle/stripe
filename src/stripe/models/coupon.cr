@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,7 +54,9 @@ module Stripe
     @[JSON::Field(key: "valid", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter valid : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.
     @[JSON::Field(key: "amount_off", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_off.nil? && !amount_off_present?)]
@@ -155,12 +157,12 @@ module Stripe
 
       invalid_properties.push("\"duration\" is required and cannot be null") if @duration.nil?
 
-      if _duration = @duration
+      unless (_duration = @duration).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DURATION) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -169,22 +171,22 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"times_redeemed\" is required and cannot be null") if @times_redeemed.nil?
 
       invalid_properties.push("\"valid\" is required and cannot be null") if @valid.nil?
 
-      if _applies_to = @applies_to
+      unless (_applies_to = @applies_to).nil?
         invalid_properties.concat(_applies_to.list_invalid_properties_for("applies_to")) if _applies_to.is_a?(OpenApi::Validatable)
       end
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
@@ -199,19 +201,19 @@ module Stripe
       return false if @created.nil?
 
       return false if @duration.nil?
-      if _duration = @duration
+      unless (_duration = @duration).nil?
         return false unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
@@ -219,15 +221,15 @@ module Stripe
 
       return false if @valid.nil?
 
-      if _applies_to = @applies_to
+      unless (_applies_to = @applies_to).nil?
         return false if _applies_to.is_a?(OpenApi::Validatable) && !_applies_to.valid?
       end
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 

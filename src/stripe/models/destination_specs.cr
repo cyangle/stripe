@@ -18,13 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account : String? = nil
     MAX_LENGTH_FOR_ACCOUNT = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
@@ -47,7 +49,7 @@ module Stripe
 
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
 
-      if _account = @account
+      unless (_account = @account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
@@ -60,7 +62,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account.nil?
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
 

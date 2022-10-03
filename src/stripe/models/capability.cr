@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "account", type: Stripe::CapabilityAccount?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account : Stripe::CapabilityAccount? = nil
@@ -45,7 +45,9 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, disabled, inactive, pending, unrequested]."
     VALID_VALUES_FOR_STATUS  = StaticArray["active", "disabled", "inactive", "pending", "unrequested"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "future_requirements", type: Stripe::AccountCapabilityFutureRequirements?, default: nil, required: false, nullable: false, emit_null: false)]
     getter future_requirements : Stripe::AccountCapabilityFutureRequirements? = nil
@@ -84,33 +86,33 @@ module Stripe
 
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
 
-      if _account = @account
+      unless (_account = @account).nil?
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"requested\" is required and cannot be null") if @requested.nil?
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      if _future_requirements = @future_requirements
+      unless (_future_requirements = @future_requirements).nil?
         invalid_properties.concat(_future_requirements.list_invalid_properties_for("future_requirements")) if _future_requirements.is_a?(OpenApi::Validatable)
       end
 
-      if _requirements = @requirements
+      unless (_requirements = @requirements).nil?
         invalid_properties.concat(_requirements.list_invalid_properties_for("requirements")) if _requirements.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -120,32 +122,32 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @account.nil?
-      if _account = @account
+      unless (_account = @account).nil?
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @requested.nil?
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
-      if _future_requirements = @future_requirements
+      unless (_future_requirements = @future_requirements).nil?
         return false if _future_requirements.is_a?(OpenApi::Validatable) && !_future_requirements.valid?
       end
 
-      if _requirements = @requirements
+      unless (_requirements = @requirements).nil?
         return false if _requirements.is_a?(OpenApi::Validatable) && !_requirements.valid?
       end
 

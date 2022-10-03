@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether this quote is a revision of a different quote.
     @[JSON::Field(key: "is_revision", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -27,6 +27,8 @@ module Stripe
 
     @[JSON::Field(key: "quote", type: Stripe::QuotesResourceFromQuoteQuote?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quote : Stripe::QuotesResourceFromQuoteQuote? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,7 +49,7 @@ module Stripe
 
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
 
-      if _quote = @quote
+      unless (_quote = @quote).nil?
         invalid_properties.concat(_quote.list_invalid_properties_for("quote")) if _quote.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -59,7 +61,7 @@ module Stripe
       return false if @is_revision.nil?
 
       return false if @quote.nil?
-      if _quote = @quote
+      unless (_quote = @quote).nil?
         return false if _quote.is_a?(OpenApi::Validatable) && !_quote.valid?
       end
 

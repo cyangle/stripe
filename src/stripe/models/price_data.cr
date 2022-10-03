@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -27,7 +27,9 @@ module Stripe
     getter product : String? = nil
     MAX_LENGTH_FOR_PRODUCT = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "recurring", type: Stripe::RecurringAdhoc?, default: nil, required: false, nullable: false, emit_null: false)]
     getter recurring : Stripe::RecurringAdhoc? = nil
@@ -67,15 +69,15 @@ module Stripe
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
-      if _product = @product
+      unless (_product = @product).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
       end
-      if _recurring = @recurring
+      unless (_recurring = @recurring).nil?
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
@@ -88,15 +90,15 @@ module Stripe
       return false if @currency.nil?
 
       return false if @product.nil?
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 
-      if _recurring = @recurring
+      unless (_recurring = @recurring).nil?
         return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 

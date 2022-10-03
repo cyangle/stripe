@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the amount your customer has pushed to the receiver.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -64,7 +64,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [ach_credit_transfer, ach_debit, alipay, bancontact, card, card_present, eps, giropay, ideal, klarna, multibanco, p24, sepa_debit, sofort, three_d_secure, wechat]."
     VALID_VALUES_FOR__TYPE  = StaticArray["ach_credit_transfer", "ach_debit", "alipay", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "ach_credit_transfer", type: Stripe::SourceTransactionAchCreditTransferData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ach_credit_transfer : Stripe::SourceTransactionAchCreditTransferData? = nil
@@ -117,7 +119,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -126,41 +128,41 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"source\" is required and cannot be null") if @source.nil?
 
-      if _source = @source
+      unless (_source = @source).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _ach_credit_transfer = @ach_credit_transfer
+      unless (_ach_credit_transfer = @ach_credit_transfer).nil?
         invalid_properties.concat(_ach_credit_transfer.list_invalid_properties_for("ach_credit_transfer")) if _ach_credit_transfer.is_a?(OpenApi::Validatable)
       end
-      if _chf_credit_transfer = @chf_credit_transfer
+      unless (_chf_credit_transfer = @chf_credit_transfer).nil?
         invalid_properties.concat(_chf_credit_transfer.list_invalid_properties_for("chf_credit_transfer")) if _chf_credit_transfer.is_a?(OpenApi::Validatable)
       end
-      if _gbp_credit_transfer = @gbp_credit_transfer
+      unless (_gbp_credit_transfer = @gbp_credit_transfer).nil?
         invalid_properties.concat(_gbp_credit_transfer.list_invalid_properties_for("gbp_credit_transfer")) if _gbp_credit_transfer.is_a?(OpenApi::Validatable)
       end
-      if _paper_check = @paper_check
+      unless (_paper_check = @paper_check).nil?
         invalid_properties.concat(_paper_check.list_invalid_properties_for("paper_check")) if _paper_check.is_a?(OpenApi::Validatable)
       end
-      if _sepa_credit_transfer = @sepa_credit_transfer
+      unless (_sepa_credit_transfer = @sepa_credit_transfer).nil?
         invalid_properties.concat(_sepa_credit_transfer.list_invalid_properties_for("sepa_credit_transfer")) if _sepa_credit_transfer.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -176,49 +178,49 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @source.nil?
-      if _source = @source
+      unless (_source = @source).nil?
         return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
       return false if @status.nil?
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _ach_credit_transfer = @ach_credit_transfer
+      unless (_ach_credit_transfer = @ach_credit_transfer).nil?
         return false if _ach_credit_transfer.is_a?(OpenApi::Validatable) && !_ach_credit_transfer.valid?
       end
 
-      if _chf_credit_transfer = @chf_credit_transfer
+      unless (_chf_credit_transfer = @chf_credit_transfer).nil?
         return false if _chf_credit_transfer.is_a?(OpenApi::Validatable) && !_chf_credit_transfer.valid?
       end
 
-      if _gbp_credit_transfer = @gbp_credit_transfer
+      unless (_gbp_credit_transfer = @gbp_credit_transfer).nil?
         return false if _gbp_credit_transfer.is_a?(OpenApi::Validatable) && !_gbp_credit_transfer.valid?
       end
 
-      if _paper_check = @paper_check
+      unless (_paper_check = @paper_check).nil?
         return false if _paper_check.is_a?(OpenApi::Validatable) && !_paper_check.valid?
       end
 
-      if _sepa_credit_transfer = @sepa_credit_transfer
+      unless (_sepa_credit_transfer = @sepa_credit_transfer).nil?
         return false if _sepa_credit_transfer.is_a?(OpenApi::Validatable) && !_sepa_credit_transfer.valid?
       end
 

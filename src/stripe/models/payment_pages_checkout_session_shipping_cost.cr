@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Total shipping cost before any discounts or taxes are applied.
     @[JSON::Field(key: "amount_subtotal", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -33,7 +33,9 @@ module Stripe
     @[JSON::Field(key: "amount_total", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_total : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "shipping_rate", type: Stripe::OrdersV2ResourceShippingCostShippingRate?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_rate.nil? && !shipping_rate_present?)]
     getter shipping_rate : Stripe::OrdersV2ResourceShippingCostShippingRate? = nil
@@ -70,10 +72,10 @@ module Stripe
 
       invalid_properties.push("\"amount_total\" is required and cannot be null") if @amount_total.nil?
 
-      if _shipping_rate = @shipping_rate
+      unless (_shipping_rate = @shipping_rate).nil?
         invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate")) if _shipping_rate.is_a?(OpenApi::Validatable)
       end
-      if _taxes = @taxes
+      unless (_taxes = @taxes).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "taxes", container: _taxes)) if _taxes.is_a?(Array)
       end
       invalid_properties
@@ -88,11 +90,11 @@ module Stripe
 
       return false if @amount_total.nil?
 
-      if _shipping_rate = @shipping_rate
+      unless (_shipping_rate = @shipping_rate).nil?
         return false if _shipping_rate.is_a?(OpenApi::Validatable) && !_shipping_rate.valid?
       end
 
-      if _taxes = @taxes
+      unless (_taxes = @taxes).nil?
         return false if _taxes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _taxes)
       end
 

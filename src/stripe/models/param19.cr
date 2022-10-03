@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
     ERROR_MESSAGE_FOR_COUNTRY = "invalid value for \"country\", must be one of [AT, BE, DE, ES, IT, NL]."
     VALID_VALUES_FOR_COUNTRY  = StaticArray["AT", "BE", "DE", "ES", "IT", "NL"]
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +44,7 @@ module Stripe
 
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
-      if _country = @country
+      unless (_country = @country).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_COUNTRY) unless OpenApi::EnumValidator.valid?(_country, VALID_VALUES_FOR_COUNTRY)
       end
       invalid_properties
@@ -52,7 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @country.nil?
-      if _country = @country
+      unless (_country = @country).nil?
         return false unless OpenApi::EnumValidator.valid?(_country, VALID_VALUES_FOR_COUNTRY)
       end
 

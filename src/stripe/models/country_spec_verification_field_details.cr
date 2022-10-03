@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Additional fields which are only required for some users.
     @[JSON::Field(key: "additional", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -28,6 +28,8 @@ module Stripe
     # Fields which every account must eventually provide.
     @[JSON::Field(key: "minimum", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter minimum : Array(String)? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

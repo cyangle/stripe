@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "store", type: Stripe::PaymentMethodDetailsKonbiniStore1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: store.nil? && !store_present?)]
     getter store : Stripe::PaymentMethodDetailsKonbiniStore1? = nil
@@ -41,7 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _store = @store
+      unless (_store = @store).nil?
         invalid_properties.concat(_store.list_invalid_properties_for("store")) if _store.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -50,7 +50,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _store = @store
+      unless (_store = @store).nil?
         return false if _store.is_a?(OpenApi::Validatable) && !_store.valid?
       end
 

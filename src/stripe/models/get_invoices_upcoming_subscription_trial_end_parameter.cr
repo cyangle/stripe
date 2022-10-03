@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias GetInvoicesUpcomingSubscriptionTrialEndParameter = Int64 | PostCustomersCustomerSubscriptionsRequestTrialEndOneOf
+  alias GetInvoicesUpcomingSubscriptionTrialEndParameter = Int32 | PostCustomersCustomerSubscriptionsRequestTrialEndOneOf
 end

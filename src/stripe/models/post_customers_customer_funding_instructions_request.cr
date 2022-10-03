@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "bank_transfer", type: Stripe::BankTransferParams?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank_transfer : Stripe::BankTransferParams? = nil
@@ -33,7 +33,9 @@ module Stripe
     ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
     VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -59,14 +61,14 @@ module Stripe
 
       invalid_properties.push("\"bank_transfer\" is required and cannot be null") if @bank_transfer.nil?
 
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"funding_type\" is required and cannot be null") if @funding_type.nil?
 
-      if _funding_type = @funding_type
+      unless (_funding_type = @funding_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FUNDING_TYPE) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
 
@@ -77,14 +79,14 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @bank_transfer.nil?
-      if _bank_transfer = @bank_transfer
+      unless (_bank_transfer = @bank_transfer).nil?
         return false if _bank_transfer.is_a?(OpenApi::Validatable) && !_bank_transfer.valid?
       end
 
       return false if @currency.nil?
 
       return false if @funding_type.nil?
-      if _funding_type = @funding_type
+      unless (_funding_type = @funding_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -30,7 +30,9 @@ module Stripe
     @[JSON::Field(key: "total", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total : Int64? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "tax", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax : Int64? = nil
@@ -57,7 +59,7 @@ module Stripe
 
       invalid_properties.push("\"line_items\" is required and cannot be null") if @line_items.nil?
 
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
       invalid_properties.push("\"total\" is required and cannot be null") if @total.nil?
@@ -71,7 +73,7 @@ module Stripe
       return false if @currency.nil?
 
       return false if @line_items.nil?
-      if _line_items = @line_items
+      unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 

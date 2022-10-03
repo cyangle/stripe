@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "address", type: Stripe::CustomerDetailsParamAddress?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::CustomerDetailsParamAddress? = nil
@@ -55,19 +55,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _address = @address
+      unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      if _tax = @tax
+      unless (_tax = @tax).nil?
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
-      if _tax_ids = @tax_ids
+      unless (_tax_ids = @tax_ids).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_ids", container: _tax_ids)) if _tax_ids.is_a?(Array)
       end
       invalid_properties
@@ -76,23 +76,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _address = @address
+      unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      if _shipping = @shipping
+      unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
-      if _tax = @tax
+      unless (_tax = @tax).nil?
         return false if _tax.is_a?(OpenApi::Validatable) && !_tax.valid?
       end
 
-      if _tax_exempt = @tax_exempt
+      unless (_tax_exempt = @tax_exempt).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
 
-      if _tax_ids = @tax_ids
+      unless (_tax_ids = @tax_ids).nil?
         return false if _tax_ids.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_ids)
       end
 

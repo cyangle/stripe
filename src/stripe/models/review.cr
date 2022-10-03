@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -55,7 +55,9 @@ module Stripe
     getter reason : String? = nil
     MAX_LENGTH_FOR_REASON = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The ZIP or postal code of the card used, if applicable.
     @[JSON::Field(key: "billing_zip", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_zip.nil? && !billing_zip_present?)]
@@ -135,7 +137,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -144,46 +146,46 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"open\" is required and cannot be null") if @open.nil?
 
       invalid_properties.push("\"opened_reason\" is required and cannot be null") if @opened_reason.nil?
 
-      if _opened_reason = @opened_reason
+      unless (_opened_reason = @opened_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OPENED_REASON) unless OpenApi::EnumValidator.valid?(_opened_reason, VALID_VALUES_FOR_OPENED_REASON)
       end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
-      if _billing_zip = @billing_zip
+      unless (_billing_zip = @billing_zip).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_zip", _billing_zip.to_s.size, MAX_LENGTH_FOR_BILLING_ZIP)
           invalid_properties.push(max_length_error)
         end
       end
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
-      if _closed_reason = @closed_reason
+      unless (_closed_reason = @closed_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_CLOSED_REASON) unless OpenApi::EnumValidator.valid?(_closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
       end
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _ip_address_location = @ip_address_location
+      unless (_ip_address_location = @ip_address_location).nil?
         invalid_properties.concat(_ip_address_location.list_invalid_properties_for("ip_address_location")) if _ip_address_location.is_a?(OpenApi::Validatable)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      if _session = @session
+      unless (_session = @session).nil?
         invalid_properties.concat(_session.list_invalid_properties_for("session")) if _session.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -195,54 +197,54 @@ module Stripe
       return false if @created.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @open.nil?
 
       return false if @opened_reason.nil?
-      if _opened_reason = @opened_reason
+      unless (_opened_reason = @opened_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_opened_reason, VALID_VALUES_FOR_OPENED_REASON)
       end
 
       return false if @reason.nil?
-      if _reason = @reason
+      unless (_reason = @reason).nil?
         return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
-      if _billing_zip = @billing_zip
+      unless (_billing_zip = @billing_zip).nil?
         return false if _billing_zip.to_s.size > MAX_LENGTH_FOR_BILLING_ZIP
       end
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
 
-      if _closed_reason = @closed_reason
+      unless (_closed_reason = @closed_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
       end
 
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
-      if _ip_address_location = @ip_address_location
+      unless (_ip_address_location = @ip_address_location).nil?
         return false if _ip_address_location.is_a?(OpenApi::Validatable) && !_ip_address_location.valid?
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
-      if _session = @session
+      unless (_session = @session).nil?
         return false if _session.is_a?(OpenApi::Validatable) && !_session.valid?
       end
 

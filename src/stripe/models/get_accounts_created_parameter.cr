@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias GetAccountsCreatedParameter = Int64 | RangeQuerySpecs
+  alias GetAccountsCreatedParameter = Int32 | RangeQuerySpecs
 end

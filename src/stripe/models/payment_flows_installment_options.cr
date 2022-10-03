@@ -19,12 +19,14 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "plan", type: Stripe::PaymentMethodDetailsCardInstallmentsPlan?, default: nil, required: false, nullable: false, emit_null: false)]
     getter plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan? = nil
@@ -47,7 +49,7 @@ module Stripe
 
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
-      if _plan = @plan
+      unless (_plan = @plan).nil?
         invalid_properties.concat(_plan.list_invalid_properties_for("plan")) if _plan.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -58,7 +60,7 @@ module Stripe
     def valid? : Bool
       return false if @enabled.nil?
 
-      if _plan = @plan
+      unless (_plan = @plan).nil?
         return false if _plan.is_a?(OpenApi::Validatable) && !_plan.valid?
       end
 

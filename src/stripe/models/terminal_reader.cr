@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, `verifone_P400`, or `simulated_wisepos_e`.
     @[JSON::Field(key: "device_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -56,7 +56,9 @@ module Stripe
     getter serial_number : String? = nil
     MAX_LENGTH_FOR_SERIAL_NUMBER = 5000
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "action", type: Stripe::TerminalReaderAction?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: action.nil? && !action_present?)]
     getter action : Stripe::TerminalReaderAction? = nil
@@ -122,19 +124,19 @@ module Stripe
 
       invalid_properties.push("\"device_type\" is required and cannot be null") if @device_type.nil?
 
-      if _device_type = @device_type
+      unless (_device_type = @device_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DEVICE_TYPE) unless OpenApi::EnumValidator.valid?(_device_type, VALID_VALUES_FOR_DEVICE_TYPE)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"label\" is required and cannot be null") if @label.nil?
 
-      if _label = @label
+      unless (_label = @label).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
           invalid_properties.push(max_length_error)
         end
@@ -145,33 +147,33 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"serial_number\" is required and cannot be null") if @serial_number.nil?
 
-      if _serial_number = @serial_number
+      unless (_serial_number = @serial_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("serial_number", _serial_number.to_s.size, MAX_LENGTH_FOR_SERIAL_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
-      if _action = @action
+      unless (_action = @action).nil?
         invalid_properties.concat(_action.list_invalid_properties_for("action")) if _action.is_a?(OpenApi::Validatable)
       end
-      if _device_sw_version = @device_sw_version
+      unless (_device_sw_version = @device_sw_version).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device_sw_version", _device_sw_version.to_s.size, MAX_LENGTH_FOR_DEVICE_SW_VERSION)
           invalid_properties.push(max_length_error)
         end
       end
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
-      if _location = @location
+      unless (_location = @location).nil?
         invalid_properties.concat(_location.list_invalid_properties_for("location")) if _location.is_a?(OpenApi::Validatable)
       end
-      if _status = @status
+      unless (_status = @status).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
@@ -183,17 +185,17 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @device_type.nil?
-      if _device_type = @device_type
+      unless (_device_type = @device_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_device_type, VALID_VALUES_FOR_DEVICE_TYPE)
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @label.nil?
-      if _label = @label
+      unless (_label = @label).nil?
         return false if _label.to_s.size > MAX_LENGTH_FOR_LABEL
       end
 
@@ -202,32 +204,32 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @serial_number.nil?
-      if _serial_number = @serial_number
+      unless (_serial_number = @serial_number).nil?
         return false if _serial_number.to_s.size > MAX_LENGTH_FOR_SERIAL_NUMBER
       end
 
-      if _action = @action
+      unless (_action = @action).nil?
         return false if _action.is_a?(OpenApi::Validatable) && !_action.valid?
       end
 
-      if _device_sw_version = @device_sw_version
+      unless (_device_sw_version = @device_sw_version).nil?
         return false if _device_sw_version.to_s.size > MAX_LENGTH_FOR_DEVICE_SW_VERSION
       end
 
-      if _ip_address = @ip_address
+      unless (_ip_address = @ip_address).nil?
         return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
-      if _location = @location
+      unless (_location = @location).nil?
         return false if _location.is_a?(OpenApi::Validatable) && !_location.valid?
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 

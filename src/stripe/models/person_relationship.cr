@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.
     @[JSON::Field(key: "director", type: Bool?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: director.nil? && !director_present?)]
@@ -83,7 +83,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _title = @title
+      unless (_title = @title).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
           invalid_properties.push(max_length_error)
         end
@@ -94,7 +94,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _title = @title
+      unless (_title = @title).nil?
         return false if _title.to_s.size > MAX_LENGTH_FOR_TITLE
       end
 

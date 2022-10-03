@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The raw data string used to generate QR code, it should be used together with QR code library.
     @[JSON::Field(key: "data", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,6 +41,8 @@ module Stripe
     getter image_url_svg : String? = nil
     MAX_LENGTH_FOR_IMAGE_URL_SVG = 5000
 
+    # End of Required Properties
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -60,28 +62,28 @@ module Stripe
 
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
 
-      if _data = @data
+      unless (_data = @data).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, MAX_LENGTH_FOR_DATA)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"hosted_instructions_url\" is required and cannot be null") if @hosted_instructions_url.nil?
 
-      if _hosted_instructions_url = @hosted_instructions_url
+      unless (_hosted_instructions_url = @hosted_instructions_url).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"image_url_png\" is required and cannot be null") if @image_url_png.nil?
 
-      if _image_url_png = @image_url_png
+      unless (_image_url_png = @image_url_png).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_PNG)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"image_url_svg\" is required and cannot be null") if @image_url_svg.nil?
 
-      if _image_url_svg = @image_url_svg
+      unless (_image_url_svg = @image_url_svg).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_SVG)
           invalid_properties.push(max_length_error)
         end
@@ -93,22 +95,22 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @data.nil?
-      if _data = @data
+      unless (_data = @data).nil?
         return false if _data.to_s.size > MAX_LENGTH_FOR_DATA
       end
 
       return false if @hosted_instructions_url.nil?
-      if _hosted_instructions_url = @hosted_instructions_url
+      unless (_hosted_instructions_url = @hosted_instructions_url).nil?
         return false if _hosted_instructions_url.to_s.size > MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL
       end
 
       return false if @image_url_png.nil?
-      if _image_url_png = @image_url_png
+      unless (_image_url_png = @image_url_png).nil?
         return false if _image_url_png.to_s.size > MAX_LENGTH_FOR_IMAGE_URL_PNG
       end
 
       return false if @image_url_svg.nil?
-      if _image_url_svg = @image_url_svg
+      unless (_image_url_svg = @image_url_svg).nil?
         return false if _image_url_svg.to_s.size > MAX_LENGTH_FOR_IMAGE_URL_SVG
       end
 

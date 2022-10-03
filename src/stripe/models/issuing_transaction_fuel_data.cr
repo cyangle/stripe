@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,7 +35,9 @@ module Stripe
     @[JSON::Field(key: "unit_cost_decimal", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter unit_cost_decimal : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # The volume of the fuel that was pumped, represented as a decimal string with at most 12 decimal places.
     @[JSON::Field(key: "volume_decimal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: volume_decimal.nil? && !volume_decimal_present?)]
@@ -64,14 +66,14 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
 
-      if _unit = @unit
+      unless (_unit = @unit).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, MAX_LENGTH_FOR_UNIT)
           invalid_properties.push(max_length_error)
         end
@@ -85,12 +87,12 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       return false if @unit.nil?
-      if _unit = @unit
+      unless (_unit = @unit).nil?
         return false if _unit.to_s.size > MAX_LENGTH_FOR_UNIT
       end
 

@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotions : String? = nil
@@ -46,10 +46,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _promotions = @promotions
+      unless (_promotions = @promotions).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PROMOTIONS) unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
       end
-      if _terms_of_service = @terms_of_service
+      unless (_terms_of_service = @terms_of_service).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TERMS_OF_SERVICE) unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
       end
       invalid_properties
@@ -58,11 +58,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _promotions = @promotions
+      unless (_promotions = @promotions).nil?
         return false unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
       end
 
-      if _terms_of_service = @terms_of_service
+      unless (_terms_of_service = @terms_of_service).nil?
         return false unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
       end
 

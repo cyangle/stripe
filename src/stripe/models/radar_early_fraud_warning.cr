@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # An EFW is actionable if it has not received a dispute and has not been fully refunded. You may wish to proactively refund a charge that receives an EFW, in order to avoid receiving a dispute later.
     @[JSON::Field(key: "actionable", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -52,7 +52,9 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [radar.early_fraud_warning]."
     VALID_VALUES_FOR_OBJECT  = StaticArray["radar.early_fraud_warning"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "payment_intent", type: Stripe::RadarEarlyFraudWarningPaymentIntent?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent : Stripe::RadarEarlyFraudWarningPaymentIntent? = nil
@@ -83,21 +85,21 @@ module Stripe
 
       invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
 
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"fraud_type\" is required and cannot be null") if @fraud_type.nil?
 
-      if _fraud_type = @fraud_type
+      unless (_fraud_type = @fraud_type).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fraud_type", _fraud_type.to_s.size, MAX_LENGTH_FOR_FRAUD_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -106,10 +108,10 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -121,30 +123,30 @@ module Stripe
       return false if @actionable.nil?
 
       return false if @charge.nil?
-      if _charge = @charge
+      unless (_charge = @charge).nil?
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
 
       return false if @created.nil?
 
       return false if @fraud_type.nil?
-      if _fraud_type = @fraud_type
+      unless (_fraud_type = @fraud_type).nil?
         return false if _fraud_type.to_s.size > MAX_LENGTH_FOR_FRAUD_TYPE
       end
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
-      if _payment_intent = @payment_intent
+      unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 

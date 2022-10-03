@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     # Whether the price can be used for new purchases.
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -67,7 +67,9 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [one_time, recurring]."
     VALID_VALUES_FOR__TYPE  = StaticArray["one_time", "recurring"]
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     # Prices defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -182,7 +184,7 @@ module Stripe
 
       invalid_properties.push("\"billing_scheme\" is required and cannot be null") if @billing_scheme.nil?
 
-      if _billing_scheme = @billing_scheme
+      unless (_billing_scheme = @billing_scheme).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_SCHEME) unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
@@ -191,7 +193,7 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
-      if _id = @id
+      unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
@@ -202,48 +204,48 @@ module Stripe
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      if _object = @object
+      unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
-      if _product = @product
+      unless (_product = @product).nil?
         invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      if __type = @_type
+      unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
-      if _custom_unit_amount = @custom_unit_amount
+      unless (_custom_unit_amount = @custom_unit_amount).nil?
         invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount")) if _custom_unit_amount.is_a?(OpenApi::Validatable)
       end
-      if _lookup_key = @lookup_key
+      unless (_lookup_key = @lookup_key).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
           invalid_properties.push(max_length_error)
         end
       end
-      if _nickname = @nickname
+      unless (_nickname = @nickname).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
           invalid_properties.push(max_length_error)
         end
       end
-      if _recurring = @recurring
+      unless (_recurring = @recurring).nil?
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      if _tiers = @tiers
+      unless (_tiers = @tiers).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tiers", container: _tiers)) if _tiers.is_a?(Array)
       end
-      if _tiers_mode = @tiers_mode
+      unless (_tiers_mode = @tiers_mode).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TIERS_MODE) unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       end
-      if _transform_quantity = @transform_quantity
+      unless (_transform_quantity = @transform_quantity).nil?
         invalid_properties.concat(_transform_quantity.list_invalid_properties_for("transform_quantity")) if _transform_quantity.is_a?(OpenApi::Validatable)
       end
 
@@ -256,7 +258,7 @@ module Stripe
       return false if @active.nil?
 
       return false if @billing_scheme.nil?
-      if _billing_scheme = @billing_scheme
+      unless (_billing_scheme = @billing_scheme).nil?
         return false unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       end
 
@@ -265,7 +267,7 @@ module Stripe
       return false if @currency.nil?
 
       return false if @id.nil?
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
@@ -274,53 +276,53 @@ module Stripe
       return false if @metadata.nil?
 
       return false if @object.nil?
-      if _object = @object
+      unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
 
       return false if @product.nil?
-      if _product = @product
+      unless (_product = @product).nil?
         return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
 
       return false if @_type.nil?
-      if __type = @_type
+      unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      if _currency_options = @currency_options
+      unless (_currency_options = @currency_options).nil?
         return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
-      if _custom_unit_amount = @custom_unit_amount
+      unless (_custom_unit_amount = @custom_unit_amount).nil?
         return false if _custom_unit_amount.is_a?(OpenApi::Validatable) && !_custom_unit_amount.valid?
       end
 
-      if _lookup_key = @lookup_key
+      unless (_lookup_key = @lookup_key).nil?
         return false if _lookup_key.to_s.size > MAX_LENGTH_FOR_LOOKUP_KEY
       end
 
-      if _nickname = @nickname
+      unless (_nickname = @nickname).nil?
         return false if _nickname.to_s.size > MAX_LENGTH_FOR_NICKNAME
       end
 
-      if _recurring = @recurring
+      unless (_recurring = @recurring).nil?
         return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
 
-      if _tax_behavior = @tax_behavior
+      unless (_tax_behavior = @tax_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
-      if _tiers = @tiers
+      unless (_tiers = @tiers).nil?
         return false if _tiers.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tiers)
       end
 
-      if _tiers_mode = @tiers_mode
+      unless (_tiers_mode = @tiers_mode).nil?
         return false unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       end
 
-      if _transform_quantity = @transform_quantity
+      unless (_transform_quantity = @transform_quantity).nil?
         return false if _transform_quantity.is_a?(OpenApi::Validatable) && !_transform_quantity.valid?
       end
 

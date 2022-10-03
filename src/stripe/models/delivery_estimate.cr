@@ -18,7 +18,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "maximum", type: Stripe::DeliveryEstimateBound?, default: nil, required: false, nullable: false, emit_null: false)]
     getter maximum : Stripe::DeliveryEstimateBound? = nil
@@ -41,10 +41,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _maximum = @maximum
+      unless (_maximum = @maximum).nil?
         invalid_properties.concat(_maximum.list_invalid_properties_for("maximum")) if _maximum.is_a?(OpenApi::Validatable)
       end
-      if _minimum = @minimum
+      unless (_minimum = @minimum).nil?
         invalid_properties.concat(_minimum.list_invalid_properties_for("minimum")) if _minimum.is_a?(OpenApi::Validatable)
       end
       invalid_properties
@@ -53,11 +53,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _maximum = @maximum
+      unless (_maximum = @maximum).nil?
         return false if _maximum.is_a?(OpenApi::Validatable) && !_maximum.valid?
       end
 
-      if _minimum = @minimum
+      unless (_minimum = @minimum).nil?
         return false if _minimum.is_a?(OpenApi::Validatable) && !_minimum.valid?
       end
 

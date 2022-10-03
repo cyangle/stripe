@@ -19,7 +19,7 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "installments", type: Stripe::CheckoutCardInstallmentsOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter installments : Stripe::CheckoutCardInstallmentsOptions? = nil
@@ -57,18 +57,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _installments = @installments
+      unless (_installments = @installments).nil?
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
+      unless (_statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
           invalid_properties.push(max_length_error)
         end
       end
-      if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
+      unless (_statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
           invalid_properties.push(max_length_error)
         end
@@ -79,19 +79,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _installments = @installments
+      unless (_installments = @installments).nil?
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
 
-      if _setup_future_usage = @setup_future_usage
+      unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 
-      if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
+      unless (_statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana).nil?
         return false if _statement_descriptor_suffix_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA
       end
 
-      if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
+      unless (_statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji).nil?
         return false if _statement_descriptor_suffix_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI
       end
 
