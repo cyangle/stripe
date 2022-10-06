@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [review]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["review"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("review")
 
     # If `true`, the review needs action.
     @[JSON::Field(key: "open", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "opened_reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter opened_reason : String? = nil
     ERROR_MESSAGE_FOR_OPENED_REASON = "invalid value for \"opened_reason\", must be one of [manual, rule]."
-    VALID_VALUES_FOR_OPENED_REASON  = StaticArray["manual", "rule"]
+    VALID_VALUES_FOR_OPENED_REASON  = String.static_array("manual", "rule")
 
     # The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -77,7 +77,7 @@ module Stripe
     @[JSON::Field(key: "closed_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: closed_reason.nil? && !closed_reason_present?)]
     getter closed_reason : String? = nil
     ERROR_MESSAGE_FOR_CLOSED_REASON = "invalid value for \"closed_reason\", must be one of [approved, disputed, redacted, refunded, refunded_as_fraud]."
-    VALID_VALUES_FOR_CLOSED_REASON  = StaticArray["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"]
+    VALID_VALUES_FOR_CLOSED_REASON  = String.static_array("approved", "disputed", "redacted", "refunded", "refunded_as_fraud")
 
     @[JSON::Field(ignore: true)]
     property? closed_reason_present : Bool = false

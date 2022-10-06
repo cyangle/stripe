@@ -32,13 +32,13 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter mode : String? = nil
     ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [at_period_end, immediately]."
-    VALID_VALUES_FOR_MODE  = StaticArray["at_period_end", "immediately"]
+    VALID_VALUES_FOR_MODE  = String.static_array("at_period_end", "immediately")
 
     # Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
     ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = String.static_array("always_invoice", "create_prorations", "none")
 
     # End of Required Properties
 

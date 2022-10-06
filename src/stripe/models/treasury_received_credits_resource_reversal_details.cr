@@ -32,7 +32,7 @@ module Stripe
     @[JSON::Field(key: "restricted_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: restricted_reason.nil? && !restricted_reason_present?)]
     getter restricted_reason : String? = nil
     ERROR_MESSAGE_FOR_RESTRICTED_REASON = "invalid value for \"restricted_reason\", must be one of [already_reversed, deadline_passed, network_restricted, other, source_flow_restricted]."
-    VALID_VALUES_FOR_RESTRICTED_REASON  = StaticArray["already_reversed", "deadline_passed", "network_restricted", "other", "source_flow_restricted"]
+    VALID_VALUES_FOR_RESTRICTED_REASON  = String.static_array("already_reversed", "deadline_passed", "network_restricted", "other", "source_flow_restricted")
 
     @[JSON::Field(ignore: true)]
     property? restricted_reason_present : Bool = false

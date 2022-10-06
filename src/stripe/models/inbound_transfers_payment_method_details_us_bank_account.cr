@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["ach"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("ach")
 
     # End of Required Properties
 
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_holder_type.nil? && !account_holder_type_present?)]
     getter account_holder_type : String? = nil
     ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE = "invalid value for \"account_holder_type\", must be one of [company, individual]."
-    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = StaticArray["company", "individual"]
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = String.static_array("company", "individual")
 
     @[JSON::Field(ignore: true)]
     property? account_holder_type_present : Bool = false
@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_type.nil? && !account_type_present?)]
     getter account_type : String? = nil
     ERROR_MESSAGE_FOR_ACCOUNT_TYPE = "invalid value for \"account_type\", must be one of [checking, savings]."
-    VALID_VALUES_FOR_ACCOUNT_TYPE  = StaticArray["checking", "savings"]
+    VALID_VALUES_FOR_ACCOUNT_TYPE  = String.static_array("checking", "savings")
 
     @[JSON::Field(ignore: true)]
     property? account_type_present : Bool = false

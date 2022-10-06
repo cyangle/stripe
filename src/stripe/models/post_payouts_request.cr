@@ -54,14 +54,14 @@ module Stripe
     getter method : String? = nil
     MAX_LENGTH_FOR_METHOD    = 5000
     ERROR_MESSAGE_FOR_METHOD = "invalid value for \"method\", must be one of [instant, standard]."
-    VALID_VALUES_FOR_METHOD  = StaticArray["instant", "standard"]
+    VALID_VALUES_FOR_METHOD  = String.static_array("instant", "standard")
 
     # The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_type : String? = nil
     MAX_LENGTH_FOR_SOURCE_TYPE    = 5000
     ERROR_MESSAGE_FOR_SOURCE_TYPE = "invalid value for \"source_type\", must be one of [bank_account, card, fpx]."
-    VALID_VALUES_FOR_SOURCE_TYPE  = StaticArray["bank_account", "card", "fpx"]
+    VALID_VALUES_FOR_SOURCE_TYPE  = String.static_array("bank_account", "card", "fpx")
 
     # A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]

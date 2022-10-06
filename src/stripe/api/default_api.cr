@@ -2346,7 +2346,7 @@ module Stripe
     end
 
     DELETE_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM                 = 5000
-    DELETE_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    DELETE_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_delete_subscription_items_item(*, item : String? = nil, clear_usage : Bool? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil) : Crest::Request
@@ -7886,7 +7886,7 @@ module Stripe
 
     GET_CREDIT_NOTES_PREVIEW_MAX_LENGTH_FOR_INVOICE  = 5000
     GET_CREDIT_NOTES_PREVIEW_MAX_LENGTH_FOR_MEMO     = 5000
-    GET_CREDIT_NOTES_PREVIEW_VALID_VALUES_FOR_REASON = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
+    GET_CREDIT_NOTES_PREVIEW_VALID_VALUES_FOR_REASON = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
 
     # @return Crest::Request
     def build_api_request_for_get_credit_notes_preview(*, invoice : String? = nil, amount : Int64? = nil, credit_amount : Int64? = nil, expand : Array(Array(String))? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, memo : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, out_of_band_amount : Int64? = nil, reason : String? = nil, refund : String? = nil, refund_amount : Int64? = nil) : Crest::Request
@@ -8026,7 +8026,7 @@ module Stripe
     GET_CREDIT_NOTES_PREVIEW_LINES_MAX_LENGTH_FOR_INVOICE        = 5000
     GET_CREDIT_NOTES_PREVIEW_LINES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_CREDIT_NOTES_PREVIEW_LINES_MAX_LENGTH_FOR_MEMO           = 5000
-    GET_CREDIT_NOTES_PREVIEW_LINES_VALID_VALUES_FOR_REASON       = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
+    GET_CREDIT_NOTES_PREVIEW_LINES_VALID_VALUES_FOR_REASON       = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
     GET_CREDIT_NOTES_PREVIEW_LINES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
@@ -9274,7 +9274,7 @@ module Stripe
     end
 
     GET_CUSTOMERS_CUSTOMER_PAYMENT_METHODS_MAX_LENGTH_FOR_CUSTOMER = 5000
-    GET_CUSTOMERS_CUSTOMER_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE  = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
+    GET_CUSTOMERS_CUSTOMER_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE  = String.static_array("acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
 
     # @return Crest::Request
     def build_api_request_for_get_customers_customer_payment_methods(*, customer : String? = nil, _type : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil) : Crest::Request
@@ -11008,7 +11008,7 @@ module Stripe
 
     GET_FILES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_FILES_MAX_LENGTH_FOR_PURPOSE        = 5000
-    GET_FILES_VALID_VALUES_FOR_PURPOSE      = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"]
+    GET_FILES_VALID_VALUES_FOR_PURPOSE      = String.static_array("account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen")
     GET_FILES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
@@ -11596,7 +11596,7 @@ module Stripe
 
     GET_IDENTITY_VERIFICATION_REPORTS_MAX_LENGTH_FOR_ENDING_BEFORE        = 5000
     GET_IDENTITY_VERIFICATION_REPORTS_MAX_LENGTH_FOR_STARTING_AFTER       = 5000
-    GET_IDENTITY_VERIFICATION_REPORTS_VALID_VALUES_FOR__TYPE              = StaticArray["document", "id_number"]
+    GET_IDENTITY_VERIFICATION_REPORTS_VALID_VALUES_FOR__TYPE              = String.static_array("document", "id_number")
     GET_IDENTITY_VERIFICATION_REPORTS_MAX_LENGTH_FOR_VERIFICATION_SESSION = 5000
 
     # @return Crest::Request
@@ -11795,7 +11795,7 @@ module Stripe
 
     GET_IDENTITY_VERIFICATION_SESSIONS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_IDENTITY_VERIFICATION_SESSIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR_STATUS       = StaticArray["canceled", "processing", "requires_input", "verified"]
+    GET_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "processing", "requires_input", "verified")
 
     # @return Crest::Request
     def build_api_request_for_get_identity_verification_sessions(*, created : Stripe::GetAccountsCreatedParameter? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -12206,12 +12206,12 @@ module Stripe
       build_api_request_for_get_invoices(collection_method: collection_method, created: created, customer: customer, due_date: due_date, ending_before: ending_before, expand: expand, limit: limit, starting_after: starting_after, status: status, subscription: subscription).execute(&block)
     end
 
-    GET_INVOICES_VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    GET_INVOICES_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
     GET_INVOICES_MAX_LENGTH_FOR_CUSTOMER            = 5000
     GET_INVOICES_MAX_LENGTH_FOR_ENDING_BEFORE       = 5000
     GET_INVOICES_MAX_LENGTH_FOR_STARTING_AFTER      = 5000
     GET_INVOICES_MAX_LENGTH_FOR_STATUS              = 5000
-    GET_INVOICES_VALID_VALUES_FOR_STATUS            = StaticArray["draft", "open", "paid", "uncollectible", "void"]
+    GET_INVOICES_VALID_VALUES_FOR_STATUS            = String.static_array("draft", "open", "paid", "uncollectible", "void")
     GET_INVOICES_MAX_LENGTH_FOR_SUBSCRIPTION        = 5000
 
     # @return Crest::Request
@@ -12670,7 +12670,7 @@ module Stripe
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_CUSTOMER                          = 5000
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_SCHEDULE                          = 5000
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_SUBSCRIPTION                      = 5000
-    GET_INVOICES_UPCOMING_VALID_VALUES_FOR_SUBSCRIPTION_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    GET_INVOICES_UPCOMING_VALID_VALUES_FOR_SUBSCRIPTION_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_get_invoices_upcoming(*, automatic_tax : Stripe::AutomaticTaxParam1? = nil, coupon : String? = nil, currency : String? = nil, customer : String? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, expand : Array(Array(String))? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, schedule : String? = nil, subscription : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_cancel_now : Bool? = nil, subscription_default_tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_proration_behavior : String? = nil, subscription_proration_date : Int64? = nil, subscription_start_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_trial_from_plan : Bool? = nil) : Crest::Request
@@ -12882,7 +12882,7 @@ module Stripe
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_SCHEDULE                          = 5000
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_STARTING_AFTER                    = 5000
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_SUBSCRIPTION                      = 5000
-    GET_INVOICES_UPCOMING_LINES_VALID_VALUES_FOR_SUBSCRIPTION_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    GET_INVOICES_UPCOMING_LINES_VALID_VALUES_FOR_SUBSCRIPTION_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_get_invoices_upcoming_lines(*, automatic_tax : Stripe::AutomaticTaxParam1? = nil, coupon : String? = nil, currency : String? = nil, customer : String? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, limit : Int64? = nil, schedule : String? = nil, starting_after : String? = nil, subscription : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_cancel_now : Bool? = nil, subscription_default_tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_proration_behavior : String? = nil, subscription_proration_date : Int64? = nil, subscription_start_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_trial_from_plan : Bool? = nil) : Crest::Request
@@ -13053,7 +13053,7 @@ module Stripe
     GET_ISSUING_AUTHORIZATIONS_MAX_LENGTH_FOR_CARDHOLDER     = 5000
     GET_ISSUING_AUTHORIZATIONS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_ISSUING_AUTHORIZATIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_ISSUING_AUTHORIZATIONS_VALID_VALUES_FOR_STATUS       = StaticArray["closed", "pending", "reversed"]
+    GET_ISSUING_AUTHORIZATIONS_VALID_VALUES_FOR_STATUS       = String.static_array("closed", "pending", "reversed")
 
     # @return Crest::Request
     def build_api_request_for_get_issuing_authorizations(*, card : String? = nil, cardholder : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -13264,8 +13264,8 @@ module Stripe
 
     GET_ISSUING_CARDHOLDERS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_ISSUING_CARDHOLDERS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_ISSUING_CARDHOLDERS_VALID_VALUES_FOR_STATUS       = StaticArray["active", "blocked", "inactive"]
-    GET_ISSUING_CARDHOLDERS_VALID_VALUES_FOR__TYPE        = StaticArray["company", "individual"]
+    GET_ISSUING_CARDHOLDERS_VALID_VALUES_FOR_STATUS       = String.static_array("active", "blocked", "inactive")
+    GET_ISSUING_CARDHOLDERS_VALID_VALUES_FOR__TYPE        = String.static_array("company", "individual")
 
     # @return Crest::Request
     def build_api_request_for_get_issuing_cardholders(*, created : Stripe::GetAccountsCreatedParameter? = nil, email : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, phone_number : String? = nil, starting_after : String? = nil, status : String? = nil, _type : String? = nil) : Crest::Request
@@ -13483,8 +13483,8 @@ module Stripe
     GET_ISSUING_CARDS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_ISSUING_CARDS_MAX_LENGTH_FOR_LAST4          = 5000
     GET_ISSUING_CARDS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_ISSUING_CARDS_VALID_VALUES_FOR_STATUS       = StaticArray["active", "canceled", "inactive"]
-    GET_ISSUING_CARDS_VALID_VALUES_FOR__TYPE        = StaticArray["physical", "virtual"]
+    GET_ISSUING_CARDS_VALID_VALUES_FOR_STATUS       = String.static_array("active", "canceled", "inactive")
+    GET_ISSUING_CARDS_VALID_VALUES_FOR__TYPE        = String.static_array("physical", "virtual")
 
     # @return Crest::Request
     def build_api_request_for_get_issuing_cards(*, cardholder : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ending_before : String? = nil, exp_month : Int64? = nil, exp_year : Int64? = nil, expand : Array(Array(String))? = nil, last4 : String? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil, _type : String? = nil) : Crest::Request
@@ -13696,7 +13696,7 @@ module Stripe
 
     GET_ISSUING_DISPUTES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_ISSUING_DISPUTES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_ISSUING_DISPUTES_VALID_VALUES_FOR_STATUS       = StaticArray["expired", "lost", "submitted", "unsubmitted", "won"]
+    GET_ISSUING_DISPUTES_VALID_VALUES_FOR_STATUS       = String.static_array("expired", "lost", "submitted", "unsubmitted", "won")
     GET_ISSUING_DISPUTES_MAX_LENGTH_FOR_TRANSACTION    = 5000
 
     # @return Crest::Request
@@ -14089,7 +14089,7 @@ module Stripe
     GET_ISSUING_TRANSACTIONS_MAX_LENGTH_FOR_CARDHOLDER     = 5000
     GET_ISSUING_TRANSACTIONS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_ISSUING_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_ISSUING_TRANSACTIONS_VALID_VALUES_FOR__TYPE        = StaticArray["capture", "refund"]
+    GET_ISSUING_TRANSACTIONS_VALID_VALUES_FOR__TYPE        = String.static_array("capture", "refund")
 
     # @return Crest::Request
     def build_api_request_for_get_issuing_transactions(*, card : String? = nil, cardholder : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, _type : String? = nil) : Crest::Request
@@ -15625,7 +15625,7 @@ module Stripe
       build_api_request_for_get_payment_methods(_type: _type, customer: customer, ending_before: ending_before, expand: expand, limit: limit, starting_after: starting_after).execute(&block)
     end
 
-    GET_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE  = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
+    GET_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE  = String.static_array("acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
     GET_PAYMENT_METHODS_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
@@ -16234,7 +16234,7 @@ module Stripe
     GET_PRICES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_PRICES_MAX_LENGTH_FOR_PRODUCT        = 5000
     GET_PRICES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_PRICES_VALID_VALUES_FOR__TYPE        = StaticArray["one_time", "recurring"]
+    GET_PRICES_VALID_VALUES_FOR__TYPE        = String.static_array("one_time", "recurring")
 
     # @return Crest::Request
     def build_api_request_for_get_prices(*, active : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, currency : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, lookup_keys : Array(Array(String))? = nil, product : String? = nil, recurring : Stripe::AllPricesRecurringParams? = nil, starting_after : String? = nil, _type : String? = nil) : Crest::Request
@@ -17058,7 +17058,7 @@ module Stripe
     GET_QUOTES_MAX_LENGTH_FOR_CUSTOMER       = 5000
     GET_QUOTES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_QUOTES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_QUOTES_VALID_VALUES_FOR_STATUS       = StaticArray["accepted", "canceled", "draft", "open"]
+    GET_QUOTES_VALID_VALUES_FOR_STATUS       = String.static_array("accepted", "canceled", "draft", "open")
     GET_QUOTES_MAX_LENGTH_FOR_TEST_CLOCK     = 5000
 
     # @return Crest::Request
@@ -20649,12 +20649,12 @@ module Stripe
       build_api_request_for_get_subscriptions(collection_method: collection_method, created: created, current_period_end: current_period_end, current_period_start: current_period_start, customer: customer, ending_before: ending_before, expand: expand, limit: limit, price: price, starting_after: starting_after, status: status, test_clock: test_clock).execute(&block)
     end
 
-    GET_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    GET_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
     GET_SUBSCRIPTIONS_MAX_LENGTH_FOR_CUSTOMER            = 5000
     GET_SUBSCRIPTIONS_MAX_LENGTH_FOR_ENDING_BEFORE       = 5000
     GET_SUBSCRIPTIONS_MAX_LENGTH_FOR_PRICE               = 5000
     GET_SUBSCRIPTIONS_MAX_LENGTH_FOR_STARTING_AFTER      = 5000
-    GET_SUBSCRIPTIONS_VALID_VALUES_FOR_STATUS            = StaticArray["active", "all", "canceled", "ended", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid"]
+    GET_SUBSCRIPTIONS_VALID_VALUES_FOR_STATUS            = String.static_array("active", "all", "canceled", "ended", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid")
     GET_SUBSCRIPTIONS_MAX_LENGTH_FOR_TEST_CLOCK          = 5000
 
     # @return Crest::Request
@@ -21696,11 +21696,11 @@ module Stripe
       build_api_request_for_get_terminal_readers(device_type: device_type, ending_before: ending_before, expand: expand, limit: limit, location: location, starting_after: starting_after, status: status).execute(&block)
     end
 
-    GET_TERMINAL_READERS_VALID_VALUES_FOR_DEVICE_TYPE  = StaticArray["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"]
+    GET_TERMINAL_READERS_VALID_VALUES_FOR_DEVICE_TYPE  = String.static_array("bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400")
     GET_TERMINAL_READERS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TERMINAL_READERS_MAX_LENGTH_FOR_LOCATION       = 5000
     GET_TERMINAL_READERS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TERMINAL_READERS_VALID_VALUES_FOR_STATUS       = StaticArray["offline", "online"]
+    GET_TERMINAL_READERS_VALID_VALUES_FOR_STATUS       = String.static_array("offline", "online")
 
     # @return Crest::Request
     def build_api_request_for_get_terminal_readers(*, device_type : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, location : String? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -22164,7 +22164,7 @@ module Stripe
     GET_TOPUPS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TOPUPS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
     GET_TOPUPS_MAX_LENGTH_FOR_STATUS         = 5000
-    GET_TOPUPS_VALID_VALUES_FOR_STATUS       = StaticArray["canceled", "failed", "pending", "succeeded"]
+    GET_TOPUPS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "failed", "pending", "succeeded")
 
     # @return Crest::Request
     def build_api_request_for_get_topups(*, amount : Stripe::GetAccountsCreatedParameter? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -22763,7 +22763,7 @@ module Stripe
     GET_TREASURY_CREDIT_REVERSALS_MAX_LENGTH_FOR_ENDING_BEFORE   = 5000
     GET_TREASURY_CREDIT_REVERSALS_MAX_LENGTH_FOR_RECEIVED_CREDIT = 5000
     GET_TREASURY_CREDIT_REVERSALS_MAX_LENGTH_FOR_STARTING_AFTER  = 5000
-    GET_TREASURY_CREDIT_REVERSALS_VALID_VALUES_FOR_STATUS        = StaticArray["canceled", "posted", "processing"]
+    GET_TREASURY_CREDIT_REVERSALS_VALID_VALUES_FOR_STATUS        = String.static_array("canceled", "posted", "processing")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_credit_reversals(*, financial_account : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, received_credit : String? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -22966,9 +22966,9 @@ module Stripe
 
     GET_TREASURY_DEBIT_REVERSALS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TREASURY_DEBIT_REVERSALS_MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000
-    GET_TREASURY_DEBIT_REVERSALS_VALID_VALUES_FOR_RESOLUTION   = StaticArray["lost", "won"]
+    GET_TREASURY_DEBIT_REVERSALS_VALID_VALUES_FOR_RESOLUTION   = String.static_array("lost", "won")
     GET_TREASURY_DEBIT_REVERSALS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_DEBIT_REVERSALS_VALID_VALUES_FOR_STATUS       = StaticArray["canceled", "completed", "processing"]
+    GET_TREASURY_DEBIT_REVERSALS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "completed", "processing")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_debit_reversals(*, financial_account : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, received_debit : String? = nil, resolution : String? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -23438,7 +23438,7 @@ module Stripe
 
     GET_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_INBOUND_TRANSFERS_VALID_VALUES_FOR_STATUS       = StaticArray["canceled", "failed", "processing", "succeeded"]
+    GET_TREASURY_INBOUND_TRANSFERS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "failed", "processing", "succeeded")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_inbound_transfers(*, financial_account : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -23635,7 +23635,7 @@ module Stripe
     GET_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_CUSTOMER       = 5000
     GET_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_OUTBOUND_PAYMENTS_VALID_VALUES_FOR_STATUS       = StaticArray["canceled", "failed", "posted", "processing", "returned"]
+    GET_TREASURY_OUTBOUND_PAYMENTS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "failed", "posted", "processing", "returned")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_outbound_payments(*, financial_account : String? = nil, customer : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -23832,7 +23832,7 @@ module Stripe
 
     GET_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_OUTBOUND_TRANSFERS_VALID_VALUES_FOR_STATUS       = StaticArray["canceled", "failed", "posted", "processing", "returned"]
+    GET_TREASURY_OUTBOUND_TRANSFERS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "failed", "posted", "processing", "returned")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_outbound_transfers(*, financial_account : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -24028,7 +24028,7 @@ module Stripe
 
     GET_TREASURY_RECEIVED_CREDITS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TREASURY_RECEIVED_CREDITS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_RECEIVED_CREDITS_VALID_VALUES_FOR_STATUS       = StaticArray["failed", "succeeded"]
+    GET_TREASURY_RECEIVED_CREDITS_VALID_VALUES_FOR_STATUS       = String.static_array("failed", "succeeded")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_received_credits(*, financial_account : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, linked_flows : Stripe::LinkedFlowsParam? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -24225,7 +24225,7 @@ module Stripe
 
     GET_TREASURY_RECEIVED_DEBITS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
     GET_TREASURY_RECEIVED_DEBITS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_RECEIVED_DEBITS_VALID_VALUES_FOR_STATUS       = StaticArray["failed", "succeeded"]
+    GET_TREASURY_RECEIVED_DEBITS_VALID_VALUES_FOR_STATUS       = String.static_array("failed", "succeeded")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_received_debits(*, financial_account : String? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, starting_after : String? = nil, status : String? = nil) : Crest::Request
@@ -24426,7 +24426,7 @@ module Stripe
     end
 
     GET_TREASURY_TRANSACTION_ENTRIES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
-    GET_TREASURY_TRANSACTION_ENTRIES_VALID_VALUES_FOR_ORDER_BY     = StaticArray["created", "effective_at"]
+    GET_TREASURY_TRANSACTION_ENTRIES_VALID_VALUES_FOR_ORDER_BY     = String.static_array("created", "effective_at")
     GET_TREASURY_TRANSACTION_ENTRIES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
     GET_TREASURY_TRANSACTION_ENTRIES_MAX_LENGTH_FOR_TRANSACTION    = 5000
 
@@ -24641,9 +24641,9 @@ module Stripe
     end
 
     GET_TREASURY_TRANSACTIONS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
-    GET_TREASURY_TRANSACTIONS_VALID_VALUES_FOR_ORDER_BY     = StaticArray["created", "posted_at"]
+    GET_TREASURY_TRANSACTIONS_VALID_VALUES_FOR_ORDER_BY     = String.static_array("created", "posted_at")
     GET_TREASURY_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
-    GET_TREASURY_TRANSACTIONS_VALID_VALUES_FOR_STATUS       = StaticArray["open", "posted", "void"]
+    GET_TREASURY_TRANSACTIONS_VALID_VALUES_FOR_STATUS       = String.static_array("open", "posted", "void")
 
     # @return Crest::Request
     def build_api_request_for_get_treasury_transactions(*, financial_account : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ending_before : String? = nil, expand : Array(Array(String))? = nil, limit : Int64? = nil, order_by : String? = nil, starting_after : String? = nil, status : String? = nil, status_transitions : Stripe::StatusTransitionTimestampSpecs? = nil) : Crest::Request
@@ -25053,7 +25053,7 @@ module Stripe
     end
 
     POST_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT_TOKEN    = 5000
-    POST_ACCOUNT_VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
+    POST_ACCOUNT_VALID_VALUES_FOR_BUSINESS_TYPE  = String.static_array("company", "government_entity", "individual", "non_profit")
     POST_ACCOUNT_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
 
     # @return Crest::Request
@@ -25324,9 +25324,9 @@ module Stripe
 
     POST_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["", "company", "individual"]
+    POST_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("", "company", "individual")
     POST_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_TYPE          = 5000
-    POST_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = StaticArray["checking", "futsu", "savings", "toza"]
+    POST_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = String.static_array("checking", "futsu", "savings", "toza")
     POST_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -25692,9 +25692,9 @@ module Stripe
 
     POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["", "company", "individual"]
+    POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("", "company", "individual")
     POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_TYPE          = 5000
-    POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = StaticArray["checking", "futsu", "savings", "toza"]
+    POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = String.static_array("checking", "futsu", "savings", "toza")
     POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -25852,8 +25852,8 @@ module Stripe
     end
 
     POST_ACCOUNT_LINKS_MAX_LENGTH_FOR_ACCOUNT   = 5000
-    POST_ACCOUNT_LINKS_VALID_VALUES_FOR__TYPE   = StaticArray["account_onboarding", "account_update"]
-    POST_ACCOUNT_LINKS_VALID_VALUES_FOR_COLLECT = StaticArray["currently_due", "eventually_due"]
+    POST_ACCOUNT_LINKS_VALID_VALUES_FOR__TYPE   = String.static_array("account_onboarding", "account_update")
+    POST_ACCOUNT_LINKS_VALID_VALUES_FOR_COLLECT = String.static_array("currently_due", "eventually_due")
 
     # @return Crest::Request
     def build_api_request_for_post_account_links(*, account : String? = nil, _type : String? = nil, collect : String? = nil, expand : Array(String)? = nil, refresh_url : String? = nil, return_url : String? = nil) : Crest::Request
@@ -27170,10 +27170,10 @@ module Stripe
     end
 
     POST_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT_TOKEN    = 5000
-    POST_ACCOUNTS_VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
+    POST_ACCOUNTS_VALID_VALUES_FOR_BUSINESS_TYPE  = String.static_array("company", "government_entity", "individual", "non_profit")
     POST_ACCOUNTS_MAX_LENGTH_FOR_COUNTRY          = 5000
     POST_ACCOUNTS_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
-    POST_ACCOUNTS_VALID_VALUES_FOR__TYPE          = StaticArray["custom", "express", "standard"]
+    POST_ACCOUNTS_VALID_VALUES_FOR__TYPE          = String.static_array("custom", "express", "standard")
 
     # @return Crest::Request
     def build_api_request_for_post_accounts(*, account_token : String? = nil, bank_account : Stripe::PostAccountRequestBankAccount? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, country : String? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, settings : Stripe::SettingsSpecs? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil, _type : String? = nil) : Crest::Request
@@ -27356,7 +27356,7 @@ module Stripe
 
     POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT          = 5000
     POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT_TOKEN    = 5000
-    POST_ACCOUNTS_ACCOUNT_VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
+    POST_ACCOUNTS_ACCOUNT_VALID_VALUES_FOR_BUSINESS_TYPE  = String.static_array("company", "government_entity", "individual", "non_profit")
     POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
 
     # @return Crest::Request
@@ -27643,9 +27643,9 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT               = 5000
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["", "company", "individual"]
+    POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("", "company", "individual")
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_TYPE          = 5000
-    POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = StaticArray["checking", "futsu", "savings", "toza"]
+    POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = String.static_array("checking", "futsu", "savings", "toza")
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_ACCOUNTS_ACCOUNT_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -28036,9 +28036,9 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT               = 5000
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["", "company", "individual"]
+    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("", "company", "individual")
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_TYPE          = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = StaticArray["checking", "futsu", "savings", "toza"]
+    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = String.static_array("checking", "futsu", "savings", "toza")
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -30255,7 +30255,7 @@ module Stripe
 
     POST_BILLING_PORTAL_SESSIONS_MAX_LENGTH_FOR_CUSTOMER      = 5000
     POST_BILLING_PORTAL_SESSIONS_MAX_LENGTH_FOR_CONFIGURATION = 5000
-    POST_BILLING_PORTAL_SESSIONS_VALID_VALUES_FOR_LOCALE      = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
+    POST_BILLING_PORTAL_SESSIONS_VALID_VALUES_FOR_LOCALE      = String.static_array("auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW")
 
     # @return Crest::Request
     def build_api_request_for_post_billing_portal_sessions(*, customer : String? = nil, configuration : String? = nil, expand : Array(String)? = nil, locale : String? = nil, on_behalf_of : String? = nil, return_url : String? = nil) : Crest::Request
@@ -31015,7 +31015,7 @@ module Stripe
     POST_CHARGES_CHARGE_REFUND_MAX_LENGTH_FOR_CHARGE         = 5000
     POST_CHARGES_CHARGE_REFUND_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
     POST_CHARGES_CHARGE_REFUND_MAX_LENGTH_FOR_REASON         = 5000
-    POST_CHARGES_CHARGE_REFUND_VALID_VALUES_FOR_REASON       = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
+    POST_CHARGES_CHARGE_REFUND_VALID_VALUES_FOR_REASON       = String.static_array("duplicate", "fraudulent", "requested_by_customer")
 
     # @return Crest::Request
     def build_api_request_for_post_charges_charge_refund(*, charge : String? = nil, amount : Int64? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil) : Crest::Request
@@ -31147,10 +31147,10 @@ module Stripe
 
     POST_CHARGES_CHARGE_REFUNDS_MAX_LENGTH_FOR_CHARGE         = 5000
     POST_CHARGES_CHARGE_REFUNDS_MAX_LENGTH_FOR_CUSTOMER       = 5000
-    POST_CHARGES_CHARGE_REFUNDS_VALID_VALUES_FOR_ORIGIN       = StaticArray["customer_balance"]
+    POST_CHARGES_CHARGE_REFUNDS_VALID_VALUES_FOR_ORIGIN       = String.static_array("customer_balance")
     POST_CHARGES_CHARGE_REFUNDS_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
     POST_CHARGES_CHARGE_REFUNDS_MAX_LENGTH_FOR_REASON         = 5000
-    POST_CHARGES_CHARGE_REFUNDS_VALID_VALUES_FOR_REASON       = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
+    POST_CHARGES_CHARGE_REFUNDS_VALID_VALUES_FOR_REASON       = String.static_array("duplicate", "fraudulent", "requested_by_customer")
 
     # @return Crest::Request
     def build_api_request_for_post_charges_charge_refunds(*, charge : String? = nil, amount : Int64? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, origin : String? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil) : Crest::Request
@@ -31437,15 +31437,15 @@ module Stripe
 
     POST_CHECKOUT_SESSIONS_MAX_LENGTH_FOR_CANCEL_URL                   = 5000
     POST_CHECKOUT_SESSIONS_MAX_LENGTH_FOR_SUCCESS_URL                  = 5000
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = StaticArray["auto", "required"]
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = String.static_array("auto", "required")
     POST_CHECKOUT_SESSIONS_MAX_LENGTH_FOR_CLIENT_REFERENCE_ID          =  200
     POST_CHECKOUT_SESSIONS_MAX_LENGTH_FOR_CUSTOMER                     = 5000
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_CUSTOMER_CREATION          = StaticArray["always", "if_required"]
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_LOCALE                     = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_MODE                       = StaticArray["payment", "setup", "subscription"]
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_PAYMENT_METHOD_TYPES       = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
-    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_SUBMIT_TYPE                = StaticArray["auto", "book", "donate", "pay"]
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_CUSTOMER_CREATION          = String.static_array("always", "if_required")
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_LOCALE                     = String.static_array("auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW")
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_MODE                       = String.static_array("payment", "setup", "subscription")
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_PAYMENT_METHOD_TYPES       = String.static_array("acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
+    POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_SUBMIT_TYPE                = String.static_array("auto", "book", "donate", "pay")
 
     # @return Crest::Request
     def build_api_request_for_post_checkout_sessions(*, cancel_url : String? = nil, success_url : String? = nil, after_expiration : Stripe::AfterExpirationParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, client_reference_id : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer : String? = nil, customer_creation : String? = nil, customer_email : String? = nil, customer_update : Stripe::CustomerUpdateParams? = nil, discounts : Array(Stripe::DiscountParams)? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, line_items : Array(Stripe::LineItemParams)? = nil, locale : String? = nil, mode : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, setup_intent_data : Stripe::SetupIntentDataParam? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil) : Crest::Request
@@ -31747,7 +31747,7 @@ module Stripe
       build_api_request_for_post_coupons(amount_off: amount_off, applies_to: applies_to, currency: currency, duration: duration, duration_in_months: duration_in_months, expand: expand, id: id, max_redemptions: max_redemptions, metadata: metadata, name: name, percent_off: percent_off, redeem_by: redeem_by).execute(&block)
     end
 
-    POST_COUPONS_VALID_VALUES_FOR_DURATION = StaticArray["forever", "once", "repeating"]
+    POST_COUPONS_VALID_VALUES_FOR_DURATION = String.static_array("forever", "once", "repeating")
     POST_COUPONS_MAX_LENGTH_FOR_ID         = 5000
     POST_COUPONS_MAX_LENGTH_FOR_NAME       =   40
 
@@ -31982,7 +31982,7 @@ module Stripe
 
     POST_CREDIT_NOTES_MAX_LENGTH_FOR_INVOICE  = 5000
     POST_CREDIT_NOTES_MAX_LENGTH_FOR_MEMO     = 5000
-    POST_CREDIT_NOTES_VALID_VALUES_FOR_REASON = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
+    POST_CREDIT_NOTES_VALID_VALUES_FOR_REASON = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
 
     # @return Crest::Request
     def build_api_request_for_post_credit_notes(*, invoice : String? = nil, amount : Int64? = nil, credit_amount : Int64? = nil, expand : Array(String)? = nil, lines : Array(Stripe::CreditNoteLineItemParams)? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, reason : String? = nil, refund : String? = nil, refund_amount : Int64? = nil) : Crest::Request
@@ -32329,7 +32329,7 @@ module Stripe
     POST_CUSTOMERS_MAX_LENGTH_FOR_PHONE          =   20
     POST_CUSTOMERS_MAX_LENGTH_FOR_PROMOTION_CODE = 5000
     POST_CUSTOMERS_MAX_LENGTH_FOR_SOURCE         = 5000
-    POST_CUSTOMERS_VALID_VALUES_FOR_TAX_EXEMPT   = StaticArray["", "exempt", "none", "reverse"]
+    POST_CUSTOMERS_VALID_VALUES_FOR_TAX_EXEMPT   = String.static_array("", "exempt", "none", "reverse")
     POST_CUSTOMERS_MAX_LENGTH_FOR_TEST_CLOCK     = 5000
 
     # @return Crest::Request
@@ -32573,7 +32573,7 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_PHONE                  =   20
     POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_PROMOTION_CODE         = 5000
     POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_SOURCE                 = 5000
-    POST_CUSTOMERS_CUSTOMER_VALID_VALUES_FOR_TAX_EXEMPT           = StaticArray["", "exempt", "none", "reverse"]
+    POST_CUSTOMERS_CUSTOMER_VALID_VALUES_FOR_TAX_EXEMPT           = String.static_array("", "exempt", "none", "reverse")
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer(*, customer : String? = nil, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, default_alipay_account : String? = nil, default_bank_account : String? = nil, default_card : String? = nil, default_source : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil) : Crest::Request
@@ -33125,7 +33125,7 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ID                    = 5000
     POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["company", "individual"]
+    POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("company", "individual")
     POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_CUSTOMERS_CUSTOMER_BANK_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -33529,7 +33529,7 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_CARDS_ID_MAX_LENGTH_FOR_ID                    = 5000
     POST_CUSTOMERS_CUSTOMER_CARDS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_CUSTOMERS_CUSTOMER_CARDS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_CUSTOMERS_CUSTOMER_CARDS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["company", "individual"]
+    POST_CUSTOMERS_CUSTOMER_CARDS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("company", "individual")
     POST_CUSTOMERS_CUSTOMER_CARDS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_CUSTOMERS_CUSTOMER_CARDS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_CUSTOMERS_CUSTOMER_CARDS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -33779,7 +33779,7 @@ module Stripe
     end
 
     POST_CUSTOMERS_CUSTOMER_FUNDING_INSTRUCTIONS_MAX_LENGTH_FOR_CUSTOMER       = 5000
-    POST_CUSTOMERS_CUSTOMER_FUNDING_INSTRUCTIONS_VALID_VALUES_FOR_FUNDING_TYPE = StaticArray["bank_transfer"]
+    POST_CUSTOMERS_CUSTOMER_FUNDING_INSTRUCTIONS_VALID_VALUES_FOR_FUNDING_TYPE = String.static_array("bank_transfer")
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_funding_instructions(*, customer : String? = nil, bank_transfer : Stripe::BankTransferParams? = nil, currency : String? = nil, funding_type : String? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -34035,7 +34035,7 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ID                    = 5000
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["company", "individual"]
+    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("company", "individual")
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
@@ -34361,13 +34361,13 @@ module Stripe
     end
 
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_MAX_LENGTH_FOR_CUSTOMER               = 5000
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD    = StaticArray["charge_automatically", "send_invoice"]
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD    = String.static_array("charge_automatically", "send_invoice")
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_MAX_LENGTH_FOR_COUPON                 = 5000
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_SOURCE         = 5000
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR     = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR     = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_MAX_LENGTH_FOR_PROMOTION_CODE         = 5000
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR   = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR   = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_subscriptions(*, customer : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, backdate_start_date : Int64? = nil, billing_cycle_anchor : Int64? = nil, billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil, cancel_at : Int64? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, currency : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemCreateParams)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, transfer_data : Stripe::TransferDataSpecs3? = nil, trial_end : Stripe::PostCustomersCustomerSubscriptionsRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, trial_period_days : Int64? = nil) : Crest::Request
@@ -34618,14 +34618,14 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_CUSTOMER                = 5000
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_BILLING_CYCLE_ANCHOR    = 5000
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = StaticArray["now", "unchanged"]
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_COLLECTION_METHOD     = StaticArray["charge_automatically", "send_invoice"]
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("now", "unchanged")
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_COLLECTION_METHOD     = String.static_array("charge_automatically", "send_invoice")
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_COUPON                  = 5000
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD  = 5000
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_SOURCE          = 5000
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PAYMENT_BEHAVIOR      = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PAYMENT_BEHAVIOR      = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
     POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_PROMOTION_CODE          = 5000
-    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR    = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_CUSTOMERS_CUSTOMER_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR    = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_subscriptions_subscription_exposed_id(*, customer : String? = nil, subscription_exposed_id : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, billing_cycle_anchor : String? = nil, billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil, cancel_at : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemUpdateParams)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, off_session : Bool? = nil, pause_collection : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, payment_behavior : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, transfer_data : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, trial_end : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil, trial_from_plan : Bool? = nil) : Crest::Request
@@ -34812,7 +34812,7 @@ module Stripe
 
     POST_CUSTOMERS_CUSTOMER_TAX_IDS_MAX_LENGTH_FOR_CUSTOMER = 5000
     POST_CUSTOMERS_CUSTOMER_TAX_IDS_MAX_LENGTH_FOR__TYPE    = 5000
-    POST_CUSTOMERS_CUSTOMER_TAX_IDS_VALID_VALUES_FOR__TYPE  = StaticArray["ae_trn", "au_abn", "au_arn", "bg_uic", "br_cnpj", "br_cpf", "ca_bn", "ca_gst_hst", "ca_pst_bc", "ca_pst_mb", "ca_pst_sk", "ca_qst", "ch_vat", "cl_tin", "es_cif", "eu_oss_vat", "eu_vat", "gb_vat", "ge_vat", "hk_br", "hu_tin", "id_npwp", "il_vat", "in_gst", "is_vat", "jp_cn", "jp_rn", "kr_brn", "li_uid", "mx_rfc", "my_frp", "my_itn", "my_sst", "no_vat", "nz_gst", "ru_inn", "ru_kpp", "sa_vat", "sg_gst", "sg_uen", "si_tin", "th_vat", "tw_vat", "ua_vat", "us_ein", "za_vat"]
+    POST_CUSTOMERS_CUSTOMER_TAX_IDS_VALID_VALUES_FOR__TYPE  = String.static_array("ae_trn", "au_abn", "au_arn", "bg_uic", "br_cnpj", "br_cpf", "ca_bn", "ca_gst_hst", "ca_pst_bc", "ca_pst_mb", "ca_pst_sk", "ca_qst", "ch_vat", "cl_tin", "es_cif", "eu_oss_vat", "eu_vat", "gb_vat", "ge_vat", "hk_br", "hu_tin", "id_npwp", "il_vat", "in_gst", "is_vat", "jp_cn", "jp_rn", "kr_brn", "li_uid", "mx_rfc", "my_frp", "my_itn", "my_sst", "no_vat", "nz_gst", "ru_inn", "ru_kpp", "sa_vat", "sg_gst", "sg_uen", "si_tin", "th_vat", "tw_vat", "ua_vat", "us_ein", "za_vat")
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_tax_ids(*, customer : String? = nil, _type : String? = nil, value : String? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -35374,7 +35374,7 @@ module Stripe
       build_api_request_for_post_files(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data).execute(&block)
     end
 
-    POST_FILES_VALID_VALUES_FOR_PURPOSE = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"]
+    POST_FILES_VALID_VALUES_FOR_PURPOSE = String.static_array("account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen")
 
     # @return Crest::Request
     def build_api_request_for_post_files(*, file : String? = nil, purpose : String? = nil, expand : Array(String)? = nil, file_link_data : Stripe::FileLinkCreationParams? = nil) : Crest::Request
@@ -35553,7 +35553,7 @@ module Stripe
     end
 
     POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_MAX_LENGTH_FOR_ACCOUNT    = 5000
-    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES = StaticArray["balance", "ownership"]
+    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES = String.static_array("balance", "ownership")
 
     # @return Crest::Request
     def build_api_request_for_post_financial_connections_accounts_account_refresh(*, account : String? = nil, features : Array(String)? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -35650,7 +35650,7 @@ module Stripe
       build_api_request_for_post_financial_connections_sessions(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url).execute(&block)
     end
 
-    POST_FINANCIAL_CONNECTIONS_SESSIONS_VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
+    POST_FINANCIAL_CONNECTIONS_SESSIONS_VALID_VALUES_FOR_PERMISSIONS = String.static_array("balances", "ownership", "payment_method", "transactions")
     POST_FINANCIAL_CONNECTIONS_SESSIONS_MAX_LENGTH_FOR_RETURN_URL    = 5000
 
     # @return Crest::Request
@@ -35755,7 +35755,7 @@ module Stripe
       build_api_request_for_post_identity_verification_sessions(_type: _type, expand: expand, options: options, return_url: return_url).execute(&block)
     end
 
-    POST_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR__TYPE = StaticArray["document", "id_number"]
+    POST_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR__TYPE = String.static_array("document", "id_number")
 
     # @return Crest::Request
     def build_api_request_for_post_identity_verification_sessions(*, _type : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, return_url : String? = nil) : Crest::Request
@@ -35852,7 +35852,7 @@ module Stripe
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_MAX_LENGTH_FOR_SESSION = 5000
-    POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_VALID_VALUES_FOR__TYPE = StaticArray["document", "id_number"]
+    POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_VALID_VALUES_FOR__TYPE = String.static_array("document", "id_number")
 
     # @return Crest::Request
     def build_api_request_for_post_identity_verification_sessions_session(*, session : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, _type : String? = nil) : Crest::Request
@@ -36516,13 +36516,13 @@ module Stripe
       build_api_request_for_post_invoices(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data).execute(&block)
     end
 
-    POST_INVOICES_VALID_VALUES_FOR_COLLECTION_METHOD              = StaticArray["charge_automatically", "send_invoice"]
+    POST_INVOICES_VALID_VALUES_FOR_COLLECTION_METHOD              = String.static_array("charge_automatically", "send_invoice")
     POST_INVOICES_MAX_LENGTH_FOR_CUSTOMER                         = 5000
     POST_INVOICES_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD           = 5000
     POST_INVOICES_MAX_LENGTH_FOR_DEFAULT_SOURCE                   = 5000
     POST_INVOICES_MAX_LENGTH_FOR_DESCRIPTION                      = 1500
     POST_INVOICES_MAX_LENGTH_FOR_FOOTER                           = 5000
-    POST_INVOICES_VALID_VALUES_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR = StaticArray["exclude", "include", "include_and_require"]
+    POST_INVOICES_VALID_VALUES_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR = String.static_array("exclude", "include", "include_and_require")
     POST_INVOICES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR             =   22
     POST_INVOICES_MAX_LENGTH_FOR_SUBSCRIPTION                     = 5000
 
@@ -36749,7 +36749,7 @@ module Stripe
     end
 
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE                = 5000
-    POST_INVOICES_INVOICE_VALID_VALUES_FOR_COLLECTION_METHOD    = StaticArray["charge_automatically", "send_invoice"]
+    POST_INVOICES_INVOICE_VALID_VALUES_FOR_COLLECTION_METHOD    = String.static_array("charge_automatically", "send_invoice")
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_SOURCE         = 5000
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DESCRIPTION            = 1500
@@ -37666,8 +37666,8 @@ module Stripe
       build_api_request_for_post_issuing_cardholders(billing: billing, name: name, _type: _type, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status).execute(&block)
     end
 
-    POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR__TYPE  = StaticArray["company", "individual"]
-    POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR_STATUS = StaticArray["active", "inactive"]
+    POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR__TYPE  = String.static_array("company", "individual")
+    POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR_STATUS = String.static_array("active", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cardholders(*, billing : Stripe::BillingSpecs? = nil, name : String? = nil, _type : String? = nil, company : Stripe::CompanyParam? = nil, email : String? = nil, expand : Array(String)? = nil, individual : Stripe::IndividualParam? = nil, phone_number : String? = nil, spending_controls : Stripe::AuthorizationControlsParamV2? = nil, status : String? = nil) : Crest::Request
@@ -37801,7 +37801,7 @@ module Stripe
     end
 
     POST_ISSUING_CARDHOLDERS_CARDHOLDER_MAX_LENGTH_FOR_CARDHOLDER = 5000
-    POST_ISSUING_CARDHOLDERS_CARDHOLDER_VALID_VALUES_FOR_STATUS   = StaticArray["active", "inactive"]
+    POST_ISSUING_CARDHOLDERS_CARDHOLDER_VALID_VALUES_FOR_STATUS   = String.static_array("active", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cardholders_cardholder(*, cardholder : String? = nil, billing : Stripe::BillingSpecs? = nil, company : Stripe::CompanyParam? = nil, email : String? = nil, expand : Array(String)? = nil, individual : Stripe::IndividualParam? = nil, phone_number : String? = nil, spending_controls : Stripe::AuthorizationControlsParamV2? = nil, status : String? = nil) : Crest::Request
@@ -37932,11 +37932,11 @@ module Stripe
       build_api_request_for_post_issuing_cards(currency: currency, _type: _type, cardholder: cardholder, expand: expand, financial_account: financial_account, replacement_for: replacement_for, replacement_reason: replacement_reason, shipping: shipping, spending_controls: spending_controls, status: status).execute(&block)
     end
 
-    POST_ISSUING_CARDS_VALID_VALUES_FOR__TYPE              = StaticArray["physical", "virtual"]
+    POST_ISSUING_CARDS_VALID_VALUES_FOR__TYPE              = String.static_array("physical", "virtual")
     POST_ISSUING_CARDS_MAX_LENGTH_FOR_CARDHOLDER           = 5000
     POST_ISSUING_CARDS_MAX_LENGTH_FOR_REPLACEMENT_FOR      = 5000
-    POST_ISSUING_CARDS_VALID_VALUES_FOR_REPLACEMENT_REASON = StaticArray["damaged", "expired", "lost", "stolen"]
-    POST_ISSUING_CARDS_VALID_VALUES_FOR_STATUS             = StaticArray["active", "inactive"]
+    POST_ISSUING_CARDS_VALID_VALUES_FOR_REPLACEMENT_REASON = String.static_array("damaged", "expired", "lost", "stolen")
+    POST_ISSUING_CARDS_VALID_VALUES_FOR_STATUS             = String.static_array("active", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cards(*, currency : String? = nil, _type : String? = nil, cardholder : String? = nil, expand : Array(String)? = nil, financial_account : String? = nil, replacement_for : String? = nil, replacement_reason : String? = nil, shipping : Stripe::ShippingSpecs? = nil, spending_controls : Stripe::AuthorizationControlsParam? = nil, status : String? = nil) : Crest::Request
@@ -38065,8 +38065,8 @@ module Stripe
     end
 
     POST_ISSUING_CARDS_CARD_MAX_LENGTH_FOR_CARD                  = 5000
-    POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["lost", "stolen"]
-    POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_STATUS              = StaticArray["active", "canceled", "inactive"]
+    POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("lost", "stolen")
+    POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_STATUS              = String.static_array("active", "canceled", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cards_card(*, card : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, pin : Stripe::EncryptedPinParam? = nil, spending_controls : Stripe::AuthorizationControlsParam? = nil, status : String? = nil) : Crest::Request
@@ -38649,7 +38649,7 @@ module Stripe
       build_api_request_for_post_link_account_sessions(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url).execute(&block)
     end
 
-    POST_LINK_ACCOUNT_SESSIONS_VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
+    POST_LINK_ACCOUNT_SESSIONS_VALID_VALUES_FOR_PERMISSIONS = String.static_array("balances", "ownership", "payment_method", "transactions")
     POST_LINK_ACCOUNT_SESSIONS_MAX_LENGTH_FOR_RETURN_URL    = 5000
 
     # @return Crest::Request
@@ -38835,7 +38835,7 @@ module Stripe
     end
 
     POST_LINKED_ACCOUNTS_ACCOUNT_REFRESH_MAX_LENGTH_FOR_ACCOUNT    = 5000
-    POST_LINKED_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES = StaticArray["balance", "ownership"]
+    POST_LINKED_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES = String.static_array("balance", "ownership")
 
     # @return Crest::Request
     def build_api_request_for_post_linked_accounts_account_refresh(*, account : String? = nil, features : Array(String)? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -39603,13 +39603,13 @@ module Stripe
       build_api_request_for_post_payment_intents(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CAPTURE_METHOD            = StaticArray["automatic", "manual"]
-    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CONFIRMATION_METHOD       = StaticArray["automatic", "manual"]
+    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CAPTURE_METHOD            = String.static_array("automatic", "manual")
+    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CONFIRMATION_METHOD       = String.static_array("automatic", "manual")
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_CUSTOMER                    = 5000
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_DESCRIPTION                 = 1000
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_MANDATE                     = 5000
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_PAYMENT_METHOD              = 5000
-    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_SETUP_FUTURE_USAGE        = StaticArray["off_session", "on_session"]
+    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_SETUP_FUTURE_USAGE        = String.static_array("off_session", "on_session")
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        = 22
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
@@ -39833,11 +39833,11 @@ module Stripe
     end
 
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_INTENT                      = 5000
-    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_CAPTURE_METHOD            = StaticArray["automatic", "manual"]
+    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_CAPTURE_METHOD            = String.static_array("automatic", "manual")
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_CUSTOMER                    = 5000
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_DESCRIPTION                 = 1000
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD              = 5000
-    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_SETUP_FUTURE_USAGE        = StaticArray["", "off_session", "on_session"]
+    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_SETUP_FUTURE_USAGE        = String.static_array("", "off_session", "on_session")
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        = 22
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
@@ -40082,7 +40082,7 @@ module Stripe
 
     POST_PAYMENT_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_INTENT                = 5000
     POST_PAYMENT_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_CANCELLATION_REASON   = 5000
-    POST_PAYMENT_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["abandoned", "duplicate", "fraudulent", "requested_by_customer"]
+    POST_PAYMENT_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("abandoned", "duplicate", "fraudulent", "requested_by_customer")
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -40333,11 +40333,11 @@ module Stripe
     end
 
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_INTENT               = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_CAPTURE_METHOD     = StaticArray["automatic", "manual"]
+    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_CAPTURE_METHOD     = String.static_array("automatic", "manual")
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_CLIENT_SECRET        = 5000
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_MANDATE              = 5000
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_PAYMENT_METHOD       = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["", "off_session", "on_session"]
+    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_SETUP_FUTURE_USAGE = String.static_array("", "off_session", "on_session")
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_confirm(*, intent : String? = nil, capture_method : String? = nil, client_secret : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, use_stripe_sdk : Bool? = nil) : Crest::Request
@@ -40756,11 +40756,11 @@ module Stripe
       build_api_request_for_post_payment_links(line_items: line_items, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, consent_collection: consent_collection, currency: currency, customer_creation: customer_creation, expand: expand, on_behalf_of: on_behalf_of, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection, transfer_data: transfer_data).execute(&block)
     end
 
-    POST_PAYMENT_LINKS_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = StaticArray["auto", "required"]
-    POST_PAYMENT_LINKS_VALID_VALUES_FOR_CUSTOMER_CREATION          = StaticArray["always", "if_required"]
-    POST_PAYMENT_LINKS_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
-    POST_PAYMENT_LINKS_VALID_VALUES_FOR_PAYMENT_METHOD_TYPES       = StaticArray["affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
-    POST_PAYMENT_LINKS_VALID_VALUES_FOR_SUBMIT_TYPE                = StaticArray["auto", "book", "donate", "pay"]
+    POST_PAYMENT_LINKS_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = String.static_array("auto", "required")
+    POST_PAYMENT_LINKS_VALID_VALUES_FOR_CUSTOMER_CREATION          = String.static_array("always", "if_required")
+    POST_PAYMENT_LINKS_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
+    POST_PAYMENT_LINKS_VALID_VALUES_FOR_PAYMENT_METHOD_TYPES       = String.static_array("affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
+    POST_PAYMENT_LINKS_VALID_VALUES_FOR_SUBMIT_TYPE                = String.static_array("auto", "book", "donate", "pay")
 
     # @return Crest::Request
     def build_api_request_for_post_payment_links(*, line_items : Array(Stripe::LineItemsCreateParams)? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, application_fee_amount : Int64? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxParams1? = nil, billing_address_collection : String? = nil, consent_collection : Stripe::ConsentCollectionParams1? = nil, currency : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, on_behalf_of : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams1? = nil, payment_method_collection : String? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams1? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams1? = nil, shipping_options : Array(Stripe::ShippingOptionParams1)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams1? = nil, tax_id_collection : Stripe::TaxIdCollectionParams1? = nil, transfer_data : Stripe::TransferDataParams1? = nil) : Crest::Request
@@ -40943,9 +40943,9 @@ module Stripe
     end
 
     POST_PAYMENT_LINKS_PAYMENT_LINK_MAX_LENGTH_FOR_PAYMENT_LINK                 = 5000
-    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = StaticArray["auto", "required"]
-    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_CUSTOMER_CREATION          = StaticArray["always", "if_required"]
-    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
+    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = String.static_array("auto", "required")
+    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_CUSTOMER_CREATION          = String.static_array("always", "if_required")
+    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
     # @return Crest::Request
     def build_api_request_for_post_payment_links_payment_link(*, payment_link : String? = nil, active : Bool? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams1? = nil, billing_address_collection : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, line_items : Array(Stripe::LineItemsUpdateParams)? = nil, payment_method_collection : String? = nil, payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil) : Crest::Request
@@ -41166,7 +41166,7 @@ module Stripe
 
     POST_PAYMENT_METHODS_MAX_LENGTH_FOR_CUSTOMER       = 5000
     POST_PAYMENT_METHODS_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
-    POST_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE        = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
+    POST_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE        = String.static_array("acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
 
     # @return Crest::Request
     def build_api_request_for_post_payment_methods(*, acss_debit : Stripe::PaymentMethodParam2? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Stripe::Param10? = nil, bacs_debit : Stripe::Param11? = nil, bancontact : JSON::Any? = nil, billing_details : Stripe::BillingDetailsInnerParams1? = nil, blik : JSON::Any? = nil, boleto : Stripe::Param12? = nil, card : Stripe::PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Stripe::Param13? = nil, expand : Array(String)? = nil, fpx : Stripe::Param14? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Stripe::Param15? = nil, interac_present : JSON::Any? = nil, klarna : Stripe::Param16? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Stripe::Param17? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, pix : JSON::Any? = nil, promptpay : JSON::Any? = nil, radar_options : Stripe::RadarOptions? = nil, sepa_debit : Stripe::Param18? = nil, sofort : Stripe::Param19? = nil, _type : String? = nil, us_bank_account : Stripe::PaymentMethodParam3? = nil, wechat_pay : JSON::Any? = nil) : Crest::Request
@@ -41653,9 +41653,9 @@ module Stripe
 
     POST_PAYOUTS_MAX_LENGTH_FOR_DESCRIPTION          = 5000
     POST_PAYOUTS_MAX_LENGTH_FOR_METHOD               = 5000
-    POST_PAYOUTS_VALID_VALUES_FOR_METHOD             = StaticArray["instant", "standard"]
+    POST_PAYOUTS_VALID_VALUES_FOR_METHOD             = String.static_array("instant", "standard")
     POST_PAYOUTS_MAX_LENGTH_FOR_SOURCE_TYPE          = 5000
-    POST_PAYOUTS_VALID_VALUES_FOR_SOURCE_TYPE        = StaticArray["bank_account", "card", "fpx"]
+    POST_PAYOUTS_VALID_VALUES_FOR_SOURCE_TYPE        = String.static_array("bank_account", "card", "fpx")
     POST_PAYOUTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 22
 
     # @return Crest::Request
@@ -42064,13 +42064,13 @@ module Stripe
       build_api_request_for_post_plans(currency: currency, interval: interval, active: active, aggregate_usage: aggregate_usage, amount: amount, amount_decimal: amount_decimal, billing_scheme: billing_scheme, expand: expand, id: id, interval_count: interval_count, metadata: metadata, nickname: nickname, product: product, tiers: tiers, tiers_mode: tiers_mode, transform_usage: transform_usage, trial_period_days: trial_period_days, usage_type: usage_type).execute(&block)
     end
 
-    POST_PLANS_VALID_VALUES_FOR_INTERVAL        = StaticArray["day", "month", "week", "year"]
-    POST_PLANS_VALID_VALUES_FOR_AGGREGATE_USAGE = StaticArray["last_during_period", "last_ever", "max", "sum"]
-    POST_PLANS_VALID_VALUES_FOR_BILLING_SCHEME  = StaticArray["per_unit", "tiered"]
+    POST_PLANS_VALID_VALUES_FOR_INTERVAL        = String.static_array("day", "month", "week", "year")
+    POST_PLANS_VALID_VALUES_FOR_AGGREGATE_USAGE = String.static_array("last_during_period", "last_ever", "max", "sum")
+    POST_PLANS_VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
     POST_PLANS_MAX_LENGTH_FOR_ID                = 5000
     POST_PLANS_MAX_LENGTH_FOR_NICKNAME          = 5000
-    POST_PLANS_VALID_VALUES_FOR_TIERS_MODE      = StaticArray["graduated", "volume"]
-    POST_PLANS_VALID_VALUES_FOR_USAGE_TYPE      = StaticArray["licensed", "metered"]
+    POST_PLANS_VALID_VALUES_FOR_TIERS_MODE      = String.static_array("graduated", "volume")
+    POST_PLANS_VALID_VALUES_FOR_USAGE_TYPE      = String.static_array("licensed", "metered")
 
     # @return Crest::Request
     def build_api_request_for_post_plans(*, currency : String? = nil, interval : String? = nil, active : Bool? = nil, aggregate_usage : String? = nil, amount : Int64? = nil, amount_decimal : String? = nil, billing_scheme : String? = nil, expand : Array(String)? = nil, id : String? = nil, interval_count : Int64? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, nickname : String? = nil, product : Stripe::PostPlansRequestProduct? = nil, tiers : Array(Stripe::Tier)? = nil, tiers_mode : String? = nil, transform_usage : Stripe::TransformUsageParam? = nil, trial_period_days : Int64? = nil, usage_type : String? = nil) : Crest::Request
@@ -42367,12 +42367,12 @@ module Stripe
       build_api_request_for_post_prices(currency: currency, active: active, billing_scheme: billing_scheme, custom_unit_amount: custom_unit_amount, expand: expand, lookup_key: lookup_key, nickname: nickname, product: product, product_data: product_data, recurring: recurring, tax_behavior: tax_behavior, tiers: tiers, tiers_mode: tiers_mode, transfer_lookup_key: transfer_lookup_key, transform_quantity: transform_quantity, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal).execute(&block)
     end
 
-    POST_PRICES_VALID_VALUES_FOR_BILLING_SCHEME = StaticArray["per_unit", "tiered"]
+    POST_PRICES_VALID_VALUES_FOR_BILLING_SCHEME = String.static_array("per_unit", "tiered")
     POST_PRICES_MAX_LENGTH_FOR_LOOKUP_KEY       =  200
     POST_PRICES_MAX_LENGTH_FOR_NICKNAME         = 5000
     POST_PRICES_MAX_LENGTH_FOR_PRODUCT          = 5000
-    POST_PRICES_VALID_VALUES_FOR_TAX_BEHAVIOR   = StaticArray["exclusive", "inclusive", "unspecified"]
-    POST_PRICES_VALID_VALUES_FOR_TIERS_MODE     = StaticArray["graduated", "volume"]
+    POST_PRICES_VALID_VALUES_FOR_TAX_BEHAVIOR   = String.static_array("exclusive", "inclusive", "unspecified")
+    POST_PRICES_VALID_VALUES_FOR_TIERS_MODE     = String.static_array("graduated", "volume")
 
     # @return Crest::Request
     def build_api_request_for_post_prices(*, currency : String? = nil, active : Bool? = nil, billing_scheme : String? = nil, custom_unit_amount : Stripe::CustomUnitAmount2? = nil, expand : Array(String)? = nil, lookup_key : String? = nil, nickname : String? = nil, product : String? = nil, product_data : Stripe::InlineProductParams1? = nil, recurring : Stripe::Recurring1? = nil, tax_behavior : String? = nil, tiers : Array(Stripe::Tier)? = nil, tiers_mode : String? = nil, transfer_lookup_key : Bool? = nil, transform_quantity : Stripe::TransformUsageParam? = nil, unit_amount : Int64? = nil, unit_amount_decimal : String? = nil) : Crest::Request
@@ -42528,7 +42528,7 @@ module Stripe
     POST_PRICES_PRICE_MAX_LENGTH_FOR_PRICE          = 5000
     POST_PRICES_PRICE_MAX_LENGTH_FOR_LOOKUP_KEY     =  200
     POST_PRICES_PRICE_MAX_LENGTH_FOR_NICKNAME       = 5000
-    POST_PRICES_PRICE_VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
+    POST_PRICES_PRICE_VALID_VALUES_FOR_TAX_BEHAVIOR = String.static_array("exclusive", "inclusive", "unspecified")
 
     # @return Crest::Request
     def build_api_request_for_post_prices_price(*, price : String? = nil, active : Bool? = nil, currency_options : Stripe::PostPricesPriceRequestCurrencyOptions? = nil, expand : Array(String)? = nil, lookup_key : String? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, nickname : String? = nil, tax_behavior : String? = nil, transfer_lookup_key : Bool? = nil) : Crest::Request
@@ -43237,7 +43237,7 @@ module Stripe
       build_api_request_for_post_quotes(application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, from_quote: from_quote, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, test_clock: test_clock, transfer_data: transfer_data).execute(&block)
     end
 
-    POST_QUOTES_VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    POST_QUOTES_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
     POST_QUOTES_MAX_LENGTH_FOR_CUSTOMER            = 5000
     POST_QUOTES_MAX_LENGTH_FOR_DESCRIPTION         =  500
     POST_QUOTES_MAX_LENGTH_FOR_FOOTER              =  500
@@ -43440,7 +43440,7 @@ module Stripe
     end
 
     POST_QUOTES_QUOTE_MAX_LENGTH_FOR_QUOTE               = 5000
-    POST_QUOTES_QUOTE_VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    POST_QUOTES_QUOTE_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
     POST_QUOTES_QUOTE_MAX_LENGTH_FOR_CUSTOMER            = 5000
     POST_QUOTES_QUOTE_MAX_LENGTH_FOR_DESCRIPTION         =  500
     POST_QUOTES_QUOTE_MAX_LENGTH_FOR_FOOTER              =  500
@@ -43944,7 +43944,7 @@ module Stripe
     POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR__ALIAS      =  100
     POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR_NAME        =  100
     POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR_ITEM_TYPE   = 5000
-    POST_RADAR_VALUE_LISTS_VALID_VALUES_FOR_ITEM_TYPE = StaticArray["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"]
+    POST_RADAR_VALUE_LISTS_VALID_VALUES_FOR_ITEM_TYPE = String.static_array("card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string")
 
     # @return Crest::Request
     def build_api_request_for_post_radar_value_lists(*, _alias : String? = nil, name : String? = nil, expand : Array(String)? = nil, item_type : String? = nil) : Crest::Request
@@ -44170,10 +44170,10 @@ module Stripe
 
     POST_REFUNDS_MAX_LENGTH_FOR_CHARGE         = 5000
     POST_REFUNDS_MAX_LENGTH_FOR_CUSTOMER       = 5000
-    POST_REFUNDS_VALID_VALUES_FOR_ORIGIN       = StaticArray["customer_balance"]
+    POST_REFUNDS_VALID_VALUES_FOR_ORIGIN       = String.static_array("customer_balance")
     POST_REFUNDS_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
     POST_REFUNDS_MAX_LENGTH_FOR_REASON         = 5000
-    POST_REFUNDS_VALID_VALUES_FOR_REASON       = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
+    POST_REFUNDS_VALID_VALUES_FOR_REASON       = String.static_array("duplicate", "fraudulent", "requested_by_customer")
 
     # @return Crest::Request
     def build_api_request_for_post_refunds(*, amount : Int64? = nil, charge : String? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, origin : String? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil) : Crest::Request
@@ -44658,9 +44658,9 @@ module Stripe
 
     POST_SETUP_INTENTS_MAX_LENGTH_FOR_CUSTOMER          = 5000
     POST_SETUP_INTENTS_MAX_LENGTH_FOR_DESCRIPTION       = 1000
-    POST_SETUP_INTENTS_VALID_VALUES_FOR_FLOW_DIRECTIONS = StaticArray["inbound", "outbound"]
+    POST_SETUP_INTENTS_VALID_VALUES_FOR_FLOW_DIRECTIONS = String.static_array("inbound", "outbound")
     POST_SETUP_INTENTS_MAX_LENGTH_FOR_PAYMENT_METHOD    = 5000
-    POST_SETUP_INTENTS_VALID_VALUES_FOR_USAGE           = StaticArray["off_session", "on_session"]
+    POST_SETUP_INTENTS_VALID_VALUES_FOR_USAGE           = String.static_array("off_session", "on_session")
 
     # @return Crest::Request
     def build_api_request_for_post_setup_intents(*, attach_to_self : Bool? = nil, confirm : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, mandate_data : Stripe::SecretKeyParam2? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams1? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam22? = nil, payment_method_types : Array(String)? = nil, return_url : String? = nil, single_use : Stripe::SetupIntentSingleUseParams? = nil, usage : String? = nil) : Crest::Request
@@ -44813,7 +44813,7 @@ module Stripe
     POST_SETUP_INTENTS_INTENT_MAX_LENGTH_FOR_INTENT            = 5000
     POST_SETUP_INTENTS_INTENT_MAX_LENGTH_FOR_CUSTOMER          = 5000
     POST_SETUP_INTENTS_INTENT_MAX_LENGTH_FOR_DESCRIPTION       = 1000
-    POST_SETUP_INTENTS_INTENT_VALID_VALUES_FOR_FLOW_DIRECTIONS = StaticArray["inbound", "outbound"]
+    POST_SETUP_INTENTS_INTENT_VALID_VALUES_FOR_FLOW_DIRECTIONS = String.static_array("inbound", "outbound")
     POST_SETUP_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD    = 5000
 
     # @return Crest::Request
@@ -44934,7 +44934,7 @@ module Stripe
 
     POST_SETUP_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_INTENT                = 5000
     POST_SETUP_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_CANCELLATION_REASON   = 5000
-    POST_SETUP_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["abandoned", "duplicate", "requested_by_customer"]
+    POST_SETUP_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("abandoned", "duplicate", "requested_by_customer")
 
     # @return Crest::Request
     def build_api_request_for_post_setup_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -45266,8 +45266,8 @@ module Stripe
     end
 
     POST_SHIPPING_RATES_MAX_LENGTH_FOR_DISPLAY_NAME   = 100
-    POST_SHIPPING_RATES_VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
-    POST_SHIPPING_RATES_VALID_VALUES_FOR__TYPE        = StaticArray["fixed_amount"]
+    POST_SHIPPING_RATES_VALID_VALUES_FOR_TAX_BEHAVIOR = String.static_array("exclusive", "inclusive", "unspecified")
+    POST_SHIPPING_RATES_VALID_VALUES_FOR__TYPE        = String.static_array("fixed_amount")
 
     # @return Crest::Request
     def build_api_request_for_post_shipping_rates(*, display_name : String? = nil, delivery_estimate : Stripe::DeliveryEstimate1? = nil, expand : Array(String)? = nil, fixed_amount : Stripe::FixedAmount1? = nil, tax_behavior : String? = nil, tax_code : String? = nil, _type : String? = nil) : Crest::Request
@@ -45383,7 +45383,7 @@ module Stripe
     end
 
     POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_MAX_LENGTH_FOR_SHIPPING_RATE_TOKEN = 5000
-    POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_VALID_VALUES_FOR_TAX_BEHAVIOR      = StaticArray["exclusive", "inclusive", "unspecified"]
+    POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_VALID_VALUES_FOR_TAX_BEHAVIOR      = String.static_array("exclusive", "inclusive", "unspecified")
 
     # @return Crest::Request
     def build_api_request_for_post_shipping_rates_shipping_rate_token(*, shipping_rate_token : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, fixed_amount : Stripe::FixedAmountUpdate? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, tax_behavior : String? = nil) : Crest::Request
@@ -45783,13 +45783,13 @@ module Stripe
 
     POST_SOURCES_MAX_LENGTH_FOR_CUSTOMER             =  500
     POST_SOURCES_MAX_LENGTH_FOR_FLOW                 = 5000
-    POST_SOURCES_VALID_VALUES_FOR_FLOW               = StaticArray["code_verification", "none", "receiver", "redirect"]
+    POST_SOURCES_VALID_VALUES_FOR_FLOW               = String.static_array("code_verification", "none", "receiver", "redirect")
     POST_SOURCES_MAX_LENGTH_FOR_ORIGINAL_SOURCE      = 5000
     POST_SOURCES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
     POST_SOURCES_MAX_LENGTH_FOR_TOKEN                = 5000
     POST_SOURCES_MAX_LENGTH_FOR__TYPE                = 5000
     POST_SOURCES_MAX_LENGTH_FOR_USAGE                = 5000
-    POST_SOURCES_VALID_VALUES_FOR_USAGE              = StaticArray["reusable", "single_use"]
+    POST_SOURCES_VALID_VALUES_FOR_USAGE              = String.static_array("reusable", "single_use")
 
     # @return Crest::Request
     def build_api_request_for_post_sources(*, amount : Int64? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, flow : String? = nil, mandate : Stripe::MandateParams? = nil, original_source : String? = nil, owner : Stripe::Owner1? = nil, receiver : Stripe::ReceiverParams? = nil, redirect : Stripe::RedirectParams? = nil, source_order : Stripe::ShallowOrderSpecs? = nil, statement_descriptor : String? = nil, token : String? = nil, _type : String? = nil, usage : String? = nil) : Crest::Request
@@ -46148,9 +46148,9 @@ module Stripe
     end
 
     POST_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_SUBSCRIPTION         = 5000
-    POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR   = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR   = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
     POST_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_PRICE                = 5000
-    POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_items(*, subscription : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData1? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Crest::Request
@@ -46293,9 +46293,9 @@ module Stripe
     end
 
     POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM                 = 5000
-    POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PAYMENT_BEHAVIOR   = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PAYMENT_BEHAVIOR   = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
     POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_PRICE                = 5000
-    POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_items_item(*, item : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData1? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Crest::Request
@@ -46421,7 +46421,7 @@ module Stripe
       build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp).execute(&block)
     end
 
-    POST_SUBSCRIPTION_ITEMS_SUBSCRIPTION_ITEM_USAGE_RECORDS_VALID_VALUES_FOR_ACTION = StaticArray["increment", "set"]
+    POST_SUBSCRIPTION_ITEMS_SUBSCRIPTION_ITEM_USAGE_RECORDS_VALID_VALUES_FOR_ACTION = String.static_array("increment", "set")
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_items_subscription_item_usage_records(*, subscription_item : String? = nil, quantity : Int64? = nil, action : String? = nil, expand : Array(String)? = nil, timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil) : Crest::Request
@@ -46533,7 +46533,7 @@ module Stripe
     end
 
     POST_SUBSCRIPTION_SCHEDULES_MAX_LENGTH_FOR_CUSTOMER          = 5000
-    POST_SUBSCRIPTION_SCHEDULES_VALID_VALUES_FOR_END_BEHAVIOR    = StaticArray["cancel", "none", "release", "renew"]
+    POST_SUBSCRIPTION_SCHEDULES_VALID_VALUES_FOR_END_BEHAVIOR    = String.static_array("cancel", "none", "release", "renew")
     POST_SUBSCRIPTION_SCHEDULES_MAX_LENGTH_FOR_FROM_SUBSCRIPTION = 5000
 
     # @return Crest::Request
@@ -46658,8 +46658,8 @@ module Stripe
     end
 
     POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_MAX_LENGTH_FOR_SCHEDULE             = 5000
-    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_END_BEHAVIOR       = StaticArray["cancel", "none", "release", "renew"]
-    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_END_BEHAVIOR       = String.static_array("cancel", "none", "release", "renew")
+    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_schedules_schedule(*, schedule : String? = nil, default_settings : Stripe::DefaultSettingsParams? = nil, end_behavior : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, phases : Array(Stripe::PhaseConfigurationParams1)? = nil, proration_behavior : String? = nil) : Crest::Request
@@ -47026,14 +47026,14 @@ module Stripe
     end
 
     POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_CUSTOMER               = 5000
-    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD    = StaticArray["charge_automatically", "send_invoice"]
+    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD    = String.static_array("charge_automatically", "send_invoice")
     POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_COUPON                 = 5000
     POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
     POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_SOURCE         = 5000
     POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DESCRIPTION            =  500
-    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR     = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR     = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
     POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_PROMOTION_CODE         = 5000
-    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR   = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR   = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscriptions(*, customer : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, backdate_start_date : Int64? = nil, billing_cycle_anchor : Int64? = nil, billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil, cancel_at : Int64? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, currency : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemCreateParams)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, transfer_data : Stripe::TransferDataSpecs3? = nil, trial_end : Stripe::PostCustomersCustomerSubscriptionsRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, trial_period_days : Int64? = nil) : Crest::Request
@@ -47288,15 +47288,15 @@ module Stripe
 
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_BILLING_CYCLE_ANCHOR    = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = StaticArray["now", "unchanged"]
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_COLLECTION_METHOD     = StaticArray["charge_automatically", "send_invoice"]
+    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("now", "unchanged")
+    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_COLLECTION_METHOD     = String.static_array("charge_automatically", "send_invoice")
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_COUPON                  = 5000
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD  = 5000
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_SOURCE          = 5000
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DESCRIPTION             =  500
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PAYMENT_BEHAVIOR      = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PAYMENT_BEHAVIOR      = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_PROMOTION_CODE          = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR    = StaticArray["always_invoice", "create_prorations", "none"]
+    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR    = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, billing_cycle_anchor : String? = nil, billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil, cancel_at : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemUpdateParams)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, off_session : Bool? = nil, pause_collection : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, payment_behavior : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, transfer_data : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, trial_end : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil, trial_from_plan : Bool? = nil) : Crest::Request
@@ -47504,7 +47504,7 @@ module Stripe
     POST_TAX_RATES_MAX_LENGTH_FOR_DESCRIPTION  = 5000
     POST_TAX_RATES_MAX_LENGTH_FOR_JURISDICTION =   50
     POST_TAX_RATES_MAX_LENGTH_FOR_STATE        =    2
-    POST_TAX_RATES_VALID_VALUES_FOR_TAX_TYPE   = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
+    POST_TAX_RATES_VALID_VALUES_FOR_TAX_TYPE   = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     # @return Crest::Request
     def build_api_request_for_post_tax_rates(*, display_name : String? = nil, inclusive : Bool? = nil, percentage : Float64? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, state : String? = nil, tax_type : String? = nil) : Crest::Request
@@ -47646,7 +47646,7 @@ module Stripe
     POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_DISPLAY_NAME =   50
     POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_JURISDICTION =   50
     POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_STATE        =    2
-    POST_TAX_RATES_TAX_RATE_VALID_VALUES_FOR_TAX_TYPE   = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
+    POST_TAX_RATES_TAX_RATE_VALID_VALUES_FOR_TAX_TYPE   = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     # @return Crest::Request
     def build_api_request_for_post_tax_rates_tax_rate(*, tax_rate : String? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, display_name : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, state : String? = nil, tax_type : String? = nil) : Crest::Request
@@ -48761,7 +48761,7 @@ module Stripe
     end
 
     POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_MAX_LENGTH_FOR_READER  = 5000
-    POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_VALID_VALUES_FOR__TYPE = StaticArray["cart"]
+    POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_VALID_VALUES_FOR__TYPE = String.static_array("cart")
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers_reader_set_reader_display(*, reader : String? = nil, _type : String? = nil, cart : Stripe::Cart? = nil, expand : Array(String)? = nil) : Crest::Request
@@ -49373,7 +49373,7 @@ module Stripe
     end
 
     POST_TEST_HELPERS_TERMINAL_READERS_READER_PRESENT_PAYMENT_METHOD_MAX_LENGTH_FOR_READER  = 5000
-    POST_TEST_HELPERS_TERMINAL_READERS_READER_PRESENT_PAYMENT_METHOD_VALID_VALUES_FOR__TYPE = StaticArray["card_present"]
+    POST_TEST_HELPERS_TERMINAL_READERS_READER_PRESENT_PAYMENT_METHOD_VALID_VALUES_FOR__TYPE = String.static_array("card_present")
 
     # @return Crest::Request
     def build_api_request_for_post_test_helpers_terminal_readers_reader_present_payment_method(*, reader : String? = nil, card_present : Stripe::CardPresent? = nil, expand : Array(String)? = nil, _type : String? = nil) : Crest::Request
@@ -50428,7 +50428,7 @@ module Stripe
       build_api_request_for_post_test_helpers_treasury_received_credits(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details).execute(&block)
     end
 
-    POST_TEST_HELPERS_TREASURY_RECEIVED_CREDITS_VALID_VALUES_FOR_NETWORK   = StaticArray["ach", "us_domestic_wire"]
+    POST_TEST_HELPERS_TREASURY_RECEIVED_CREDITS_VALID_VALUES_FOR_NETWORK   = String.static_array("ach", "us_domestic_wire")
     POST_TEST_HELPERS_TREASURY_RECEIVED_CREDITS_MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # @return Crest::Request
@@ -50546,7 +50546,7 @@ module Stripe
       build_api_request_for_post_test_helpers_treasury_received_debits(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details).execute(&block)
     end
 
-    POST_TEST_HELPERS_TREASURY_RECEIVED_DEBITS_VALID_VALUES_FOR_NETWORK   = StaticArray["ach"]
+    POST_TEST_HELPERS_TREASURY_RECEIVED_DEBITS_VALID_VALUES_FOR_NETWORK   = String.static_array("ach")
     POST_TEST_HELPERS_TREASURY_RECEIVED_DEBITS_MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # @return Crest::Request
@@ -51100,7 +51100,7 @@ module Stripe
 
     POST_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION   = 5000
     POST_TRANSFERS_MAX_LENGTH_FOR_SOURCE_TYPE   = 5000
-    POST_TRANSFERS_VALID_VALUES_FOR_SOURCE_TYPE = StaticArray["bank_account", "card", "fpx"]
+    POST_TRANSFERS_VALID_VALUES_FOR_SOURCE_TYPE = String.static_array("bank_account", "card", "fpx")
 
     # @return Crest::Request
     def build_api_request_for_post_transfers(*, currency : String? = nil, destination : String? = nil, amount : Int64? = nil, description : String? = nil, expand : Array(String)? = nil, source_transaction : String? = nil, source_type : String? = nil, transfer_group : String? = nil) : Crest::Request
@@ -52651,9 +52651,9 @@ module Stripe
       build_api_request_for_post_webhook_endpoints(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata).execute(&block)
     end
 
-    POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_ENABLED_EVENTS = StaticArray["*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created"]
+    POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_ENABLED_EVENTS = String.static_array("*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created")
     POST_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_API_VERSION      = 5000
-    POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_API_VERSION    = StaticArray["2011-01-01", "2011-06-21", "2011-06-28", "2011-08-01", "2011-09-15", "2011-11-17", "2012-02-23", "2012-03-25", "2012-06-18", "2012-06-28", "2012-07-09", "2012-09-24", "2012-10-26", "2012-11-07", "2013-02-11", "2013-02-13", "2013-07-05", "2013-08-12", "2013-08-13", "2013-10-29", "2013-12-03", "2014-01-31", "2014-03-13", "2014-03-28", "2014-05-19", "2014-06-13", "2014-06-17", "2014-07-22", "2014-07-26", "2014-08-04", "2014-08-20", "2014-09-08", "2014-10-07", "2014-11-05", "2014-11-20", "2014-12-08", "2014-12-17", "2014-12-22", "2015-01-11", "2015-01-26", "2015-02-10", "2015-02-16", "2015-02-18", "2015-03-24", "2015-04-07", "2015-06-15", "2015-07-07", "2015-07-13", "2015-07-28", "2015-08-07", "2015-08-19", "2015-09-03", "2015-09-08", "2015-09-23", "2015-10-01", "2015-10-12", "2015-10-16", "2016-02-03", "2016-02-19", "2016-02-22", "2016-02-23", "2016-02-29", "2016-03-07", "2016-06-15", "2016-07-06", "2016-10-19", "2017-01-27", "2017-02-14", "2017-04-06", "2017-05-25", "2017-06-05", "2017-08-15", "2017-12-14", "2018-01-23", "2018-02-05", "2018-02-06", "2018-02-28", "2018-05-21", "2018-07-27", "2018-08-23", "2018-09-06", "2018-09-24", "2018-10-31", "2018-11-08", "2019-02-11", "2019-02-19", "2019-03-14", "2019-05-16", "2019-08-14", "2019-09-09", "2019-10-08", "2019-10-17", "2019-11-05", "2019-12-03", "2020-03-02", "2020-08-27", "2022-08-01"]
+    POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_API_VERSION    = String.static_array("2011-01-01", "2011-06-21", "2011-06-28", "2011-08-01", "2011-09-15", "2011-11-17", "2012-02-23", "2012-03-25", "2012-06-18", "2012-06-28", "2012-07-09", "2012-09-24", "2012-10-26", "2012-11-07", "2013-02-11", "2013-02-13", "2013-07-05", "2013-08-12", "2013-08-13", "2013-10-29", "2013-12-03", "2014-01-31", "2014-03-13", "2014-03-28", "2014-05-19", "2014-06-13", "2014-06-17", "2014-07-22", "2014-07-26", "2014-08-04", "2014-08-20", "2014-09-08", "2014-10-07", "2014-11-05", "2014-11-20", "2014-12-08", "2014-12-17", "2014-12-22", "2015-01-11", "2015-01-26", "2015-02-10", "2015-02-16", "2015-02-18", "2015-03-24", "2015-04-07", "2015-06-15", "2015-07-07", "2015-07-13", "2015-07-28", "2015-08-07", "2015-08-19", "2015-09-03", "2015-09-08", "2015-09-23", "2015-10-01", "2015-10-12", "2015-10-16", "2016-02-03", "2016-02-19", "2016-02-22", "2016-02-23", "2016-02-29", "2016-03-07", "2016-06-15", "2016-07-06", "2016-10-19", "2017-01-27", "2017-02-14", "2017-04-06", "2017-05-25", "2017-06-05", "2017-08-15", "2017-12-14", "2018-01-23", "2018-02-05", "2018-02-06", "2018-02-28", "2018-05-21", "2018-07-27", "2018-08-23", "2018-09-06", "2018-09-24", "2018-10-31", "2018-11-08", "2019-02-11", "2019-02-19", "2019-03-14", "2019-05-16", "2019-08-14", "2019-09-09", "2019-10-08", "2019-10-17", "2019-11-05", "2019-12-03", "2020-03-02", "2020-08-27", "2022-08-01")
     POST_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_DESCRIPTION      = 5000
 
     # @return Crest::Request
@@ -52773,7 +52773,7 @@ module Stripe
 
     POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_WEBHOOK_ENDPOINT = 5000
     POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_DESCRIPTION      = 5000
-    POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_VALID_VALUES_FOR_ENABLED_EVENTS = StaticArray["*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created"]
+    POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_VALID_VALUES_FOR_ENABLED_EVENTS = String.static_array("*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created")
 
     # @return Crest::Request
     def build_api_request_for_post_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, description : String? = nil, disabled : Bool? = nil, enabled_events : Array(String)? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountRequestMetadata? = nil, url : String? = nil) : Crest::Request

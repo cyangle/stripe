@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "bank", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank.nil? && !bank_present?)]
     getter bank : String? = nil
     ERROR_MESSAGE_FOR_BANK = "invalid value for \"bank\", must be one of [abn_amro, asn_bank, bunq, handelsbanken, ing, knab, moneyou, rabobank, regiobank, revolut, sns_bank, triodos_bank, van_lanschot]."
-    VALID_VALUES_FOR_BANK  = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
+    VALID_VALUES_FOR_BANK  = String.static_array("abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot")
 
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
     getter bic : String? = nil
     ERROR_MESSAGE_FOR_BIC = "invalid value for \"bic\", must be one of [ABNANL2A, ASNBNL21, BUNQNL2A, FVLBNL22, HANDNL2A, INGBNL2A, KNABNL2H, MOYONL21, RABONL2U, RBRBNL21, REVOLT21, SNSBNL2A, TRIONL2U]."
-    VALID_VALUES_FOR_BIC  = StaticArray["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"]
+    VALID_VALUES_FOR_BIC  = String.static_array("ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U")
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false

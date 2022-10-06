@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [person]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["person"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("person")
 
     # End of Required Properties
 
@@ -176,7 +176,7 @@ module Stripe
     @[JSON::Field(key: "political_exposure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter political_exposure : String? = nil
     ERROR_MESSAGE_FOR_POLITICAL_EXPOSURE = "invalid value for \"political_exposure\", must be one of [existing, none]."
-    VALID_VALUES_FOR_POLITICAL_EXPOSURE  = StaticArray["existing", "none"]
+    VALID_VALUES_FOR_POLITICAL_EXPOSURE  = String.static_array("existing", "none")
 
     @[JSON::Field(key: "registered_address", type: Stripe::Address?, default: nil, required: false, nullable: false, emit_null: false)]
     getter registered_address : Stripe::Address? = nil

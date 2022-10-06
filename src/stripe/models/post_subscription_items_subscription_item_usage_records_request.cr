@@ -32,7 +32,7 @@ module Stripe
     @[JSON::Field(key: "action", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter action : String? = nil
     ERROR_MESSAGE_FOR_ACTION = "invalid value for \"action\", must be one of [increment, set]."
-    VALID_VALUES_FOR_ACTION  = StaticArray["increment", "set"]
+    VALID_VALUES_FOR_ACTION  = String.static_array("increment", "set")
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]

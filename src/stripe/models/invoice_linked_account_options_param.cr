@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
     ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
-    VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
+    VALID_VALUES_FOR_PERMISSIONS  = String.static_array("balances", "ownership", "payment_method", "transactions")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

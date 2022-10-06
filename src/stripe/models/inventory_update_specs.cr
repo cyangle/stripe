@@ -27,12 +27,12 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bucket, finite, infinite]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["bucket", "finite", "infinite"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("bucket", "finite", "infinite")
 
     @[JSON::Field(key: "value", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter value : String? = nil
     ERROR_MESSAGE_FOR_VALUE = "invalid value for \"value\", must be one of [, in_stock, limited, out_of_stock]."
-    VALID_VALUES_FOR_VALUE  = StaticArray["", "in_stock", "limited", "out_of_stock"]
+    VALID_VALUES_FOR_VALUE  = String.static_array("", "in_stock", "limited", "out_of_stock")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

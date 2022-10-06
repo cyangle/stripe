@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [event]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["event"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("event")
 
     # Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response) to the URLs you've specified.
     @[JSON::Field(key: "pending_webhooks", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

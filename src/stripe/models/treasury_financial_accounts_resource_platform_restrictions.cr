@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "inbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: inbound_flows.nil? && !inbound_flows_present?)]
     getter inbound_flows : String? = nil
     ERROR_MESSAGE_FOR_INBOUND_FLOWS = "invalid value for \"inbound_flows\", must be one of [restricted, unrestricted]."
-    VALID_VALUES_FOR_INBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
+    VALID_VALUES_FOR_INBOUND_FLOWS  = String.static_array("restricted", "unrestricted")
 
     @[JSON::Field(ignore: true)]
     property? inbound_flows_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "outbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
     getter outbound_flows : String? = nil
     ERROR_MESSAGE_FOR_OUTBOUND_FLOWS = "invalid value for \"outbound_flows\", must be one of [restricted, unrestricted]."
-    VALID_VALUES_FOR_OUTBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
+    VALID_VALUES_FOR_OUTBOUND_FLOWS  = String.static_array("restricted", "unrestricted")
 
     @[JSON::Field(ignore: true)]
     property? outbound_flows_present : Bool = false

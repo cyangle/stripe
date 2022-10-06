@@ -57,19 +57,19 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach, card, stripe, us_domestic_wire]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["ach", "card", "stripe", "us_domestic_wire"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("ach", "card", "stripe", "us_domestic_wire")
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.received_credit]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.received_credit"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.received_credit")
 
     # Status of the ReceivedCredit. ReceivedCredits are created either `succeeded` (approved) or `failed` (declined). If a ReceivedCredit is declined, the failure reason can be found in the `failure_code` field.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["failed", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("failed", "succeeded")
 
     # End of Required Properties
 
@@ -79,7 +79,7 @@ module Stripe
     @[JSON::Field(key: "failure_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
     getter failure_code : String? = nil
     ERROR_MESSAGE_FOR_FAILURE_CODE = "invalid value for \"failure_code\", must be one of [account_closed, account_frozen, other]."
-    VALID_VALUES_FOR_FAILURE_CODE  = StaticArray["account_closed", "account_frozen", "other"]
+    VALID_VALUES_FOR_FAILURE_CODE  = String.static_array("account_closed", "account_frozen", "other")
 
     @[JSON::Field(ignore: true)]
     property? failure_code_present : Bool = false

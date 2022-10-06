@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter category : String? = nil
     ERROR_MESSAGE_FOR_CATEGORY = "invalid value for \"category\", must be one of [cash, credit, investment, other]."
-    VALID_VALUES_FOR_CATEGORY  = StaticArray["cash", "credit", "investment", "other"]
+    VALID_VALUES_FOR_CATEGORY  = String.static_array("cash", "credit", "investment", "other")
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,25 +49,25 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.account]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["financial_connections.account"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("financial_connections.account")
 
     # The status of the link to the account.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, disconnected, inactive]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "disconnected", "inactive"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "disconnected", "inactive")
 
     # If `category` is `cash`, one of:   - `checking`  - `savings`  - `other`  If `category` is `credit`, one of:   - `mortgage`  - `line_of_credit`  - `credit_card`  - `other`  If `category` is `investment` or `other`, this will be `other`.
     @[JSON::Field(key: "subcategory", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subcategory : String? = nil
     ERROR_MESSAGE_FOR_SUBCATEGORY = "invalid value for \"subcategory\", must be one of [checking, credit_card, line_of_credit, mortgage, other, savings]."
-    VALID_VALUES_FOR_SUBCATEGORY  = StaticArray["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"]
+    VALID_VALUES_FOR_SUBCATEGORY  = String.static_array("checking", "credit_card", "line_of_credit", "mortgage", "other", "savings")
 
     # The [PaymentMethod type](https://stripe.com/docs/api/payment_methods/object#payment_method_object-type)(s) that can be created from this account.
     @[JSON::Field(key: "supported_payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported_payment_method_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = "invalid value for \"supported_payment_method_types\", must be one of [link, us_bank_account]."
-    VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES  = StaticArray["link", "us_bank_account"]
+    VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES  = String.static_array("link", "us_bank_account")
 
     # End of Required Properties
 
@@ -123,7 +123,7 @@ module Stripe
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: permissions.nil? && !permissions_present?)]
     getter permissions : Array(String)? = nil
     ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
-    VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
+    VALID_VALUES_FOR_PERMISSIONS  = String.static_array("balances", "ownership", "payment_method", "transactions")
 
     @[JSON::Field(ignore: true)]
     property? permissions_present : Bool = false

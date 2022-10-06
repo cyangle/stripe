@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "business_profile_specs_support_url_oneOf", must be one of [""].}
 
-    VALID_VALUES = StaticArray[""]
+    VALID_VALUES = String.static_array("")
 
     delegate to_json_object_key, to: @data
 

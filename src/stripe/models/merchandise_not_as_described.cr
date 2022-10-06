@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter return_status : String? = nil
     ERROR_MESSAGE_FOR_RETURN_STATUS = "invalid value for \"return_status\", must be one of [, merchant_rejected, successful]."
-    VALID_VALUES_FOR_RETURN_STATUS  = StaticArray["", "merchant_rejected", "successful"]
+    VALID_VALUES_FOR_RETURN_STATUS  = String.static_array("", "merchant_rejected", "successful")
 
     @[JSON::Field(key: "returned_at", type: Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil

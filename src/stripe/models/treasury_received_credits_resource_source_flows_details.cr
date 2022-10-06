@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [credit_reversal, other, outbound_payment, payout]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["credit_reversal", "other", "outbound_payment", "payout"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("credit_reversal", "other", "outbound_payment", "payout")
 
     # End of Required Properties
 

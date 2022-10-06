@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
     ERROR_MESSAGE_FOR_BILLING_SCHEME = "invalid value for \"billing_scheme\", must be one of [per_unit, tiered]."
-    VALID_VALUES_FOR_BILLING_SCHEME  = StaticArray["per_unit", "tiered"]
+    VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -56,7 +56,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [price]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["price"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("price")
 
     @[JSON::Field(key: "product", type: Stripe::PriceProduct?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : Stripe::PriceProduct? = nil
@@ -65,7 +65,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [one_time, recurring]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["one_time", "recurring"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("one_time", "recurring")
 
     # End of Required Properties
 
@@ -107,7 +107,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
     getter tax_behavior : String? = nil
     ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
-    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive", "unspecified")
 
     @[JSON::Field(ignore: true)]
     property? tax_behavior_present : Bool = false
@@ -120,7 +120,7 @@ module Stripe
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tiers_mode.nil? && !tiers_mode_present?)]
     getter tiers_mode : String? = nil
     ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
-    VALID_VALUES_FOR_TIERS_MODE  = StaticArray["graduated", "volume"]
+    VALID_VALUES_FOR_TIERS_MODE  = String.static_array("graduated", "volume")
 
     @[JSON::Field(ignore: true)]
     property? tiers_mode_present : Bool = false

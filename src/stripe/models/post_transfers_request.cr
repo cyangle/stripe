@@ -58,7 +58,7 @@ module Stripe
     getter source_type : String? = nil
     MAX_LENGTH_FOR_SOURCE_TYPE    = 5000
     ERROR_MESSAGE_FOR_SOURCE_TYPE = "invalid value for \"source_type\", must be one of [bank_account, card, fpx]."
-    VALID_VALUES_FOR_SOURCE_TYPE  = StaticArray["bank_account", "card", "fpx"]
+    VALID_VALUES_FOR_SOURCE_TYPE  = String.static_array("bank_account", "card", "fpx")
 
     # A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: false, nullable: false, emit_null: false)]

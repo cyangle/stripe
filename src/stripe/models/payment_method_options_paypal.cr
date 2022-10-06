@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("manual")
 
     # Preferred locale of the PayPal checkout page that the customer is redirected to.
     @[JSON::Field(key: "preferred_locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred_locale.nil? && !preferred_locale_present?)]

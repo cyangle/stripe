@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount_tax_display : String? = nil
     ERROR_MESSAGE_FOR_AMOUNT_TAX_DISPLAY = "invalid value for \"amount_tax_display\", must be one of [, exclude_tax, include_inclusive_tax]."
-    VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY  = StaticArray["", "exclude_tax", "include_inclusive_tax"]
+    VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY  = String.static_array("", "exclude_tax", "include_inclusive_tax")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [mandate]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["mandate"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("mandate")
 
     @[JSON::Field(key: "payment_method", type: Stripe::MandatePaymentMethod?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_method : Stripe::MandatePaymentMethod? = nil
@@ -49,13 +49,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, inactive, pending]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "inactive", "pending"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "inactive", "pending")
 
     # The type of the mandate.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [multi_use, single_use]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["multi_use", "single_use"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("multi_use", "single_use")
 
     # End of Required Properties
 

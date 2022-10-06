@@ -30,7 +30,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [tax_deducted_at_source]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["tax_deducted_at_source"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("tax_deducted_at_source")
 
     # The end of the invoicing period. This TDS applies to Stripe fees collected during this invoicing period.
     @[JSON::Field(key: "period_end", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

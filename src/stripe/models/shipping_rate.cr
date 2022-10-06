@@ -46,13 +46,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [shipping_rate]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["shipping_rate"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("shipping_rate")
 
     # The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [fixed_amount]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["fixed_amount"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("fixed_amount")
 
     # End of Required Properties
 
@@ -79,7 +79,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
     getter tax_behavior : String? = nil
     ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
-    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive", "unspecified")
 
     @[JSON::Field(ignore: true)]
     property? tax_behavior_present : Bool = false

@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "GetInvoicesUpcoming_subscription_billing_cycle_anchor_parameter_oneOf", must be one of ["now", "unchanged"].}
 
-    VALID_VALUES = StaticArray["now", "unchanged"]
+    VALID_VALUES = String.static_array("now", "unchanged")
 
     delegate to_json_object_key, to: @data
 

@@ -60,7 +60,7 @@ module Stripe
     @[JSON::Field(key: "tax_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_type : String? = nil
     ERROR_MESSAGE_FOR_TAX_TYPE = "invalid value for \"tax_type\", must be one of [gst, hst, jct, pst, qst, rst, sales_tax, vat]."
-    VALID_VALUES_FOR_TAX_TYPE  = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
+    VALID_VALUES_FOR_TAX_TYPE  = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
     ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [account_closed, account_frozen, bank_account_restricted, bank_ownership_changed, declined, incorrect_account_holder_name, invalid_account_number, invalid_currency, no_account, other]."
-    VALID_VALUES_FOR_CODE  = StaticArray["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"]
+    VALID_VALUES_FOR_CODE  = String.static_array("account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other")
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil

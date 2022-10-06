@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter preferred_language : String? = nil
     ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE = "invalid value for \"preferred_language\", must be one of [de, en, fr, nl]."
-    VALID_VALUES_FOR_PREFERRED_LANGUAGE  = StaticArray["de", "en", "fr", "nl"]
+    VALID_VALUES_FOR_PREFERRED_LANGUAGE  = String.static_array("de", "en", "fr", "nl")
 
     # End of Required Properties
 
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none, off_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none", "off_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none", "off_session")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

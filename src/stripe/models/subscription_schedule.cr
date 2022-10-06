@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
     ERROR_MESSAGE_FOR_END_BEHAVIOR = "invalid value for \"end_behavior\", must be one of [cancel, none, release, renew]."
-    VALID_VALUES_FOR_END_BEHAVIOR  = StaticArray["cancel", "none", "release", "renew"]
+    VALID_VALUES_FOR_END_BEHAVIOR  = String.static_array("cancel", "none", "release", "renew")
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -50,7 +50,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [subscription_schedule]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["subscription_schedule"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("subscription_schedule")
 
     # Configuration for the subscription schedule's phases.
     @[JSON::Field(key: "phases", type: Array(Stripe::SubscriptionSchedulePhaseConfiguration)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -60,7 +60,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, completed, not_started, released]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "completed", "not_started", "released"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "canceled", "completed", "not_started", "released")
 
     # End of Required Properties
 

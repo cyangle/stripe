@@ -46,13 +46,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [test_helpers.test_clock]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["test_helpers.test_clock"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("test_helpers.test_clock")
 
     # The status of the Test Clock.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [advancing, internal_failure, ready]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["advancing", "internal_failure", "ready"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("advancing", "internal_failure", "ready")
 
     # End of Required Properties
 

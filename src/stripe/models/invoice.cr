@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
-    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
+    VALID_VALUES_FOR_COLLECTION_METHOD  = String.static_array("charge_automatically", "send_invoice")
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -73,7 +73,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [invoice]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["invoice"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("invoice")
 
     # Whether payment was successfully collected for this invoice. An invoice can be paid (most commonly) with a charge or with credit from the customer's account balance.
     @[JSON::Field(key: "paid", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -169,7 +169,7 @@ module Stripe
     @[JSON::Field(key: "billing_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_reason.nil? && !billing_reason_present?)]
     getter billing_reason : String? = nil
     ERROR_MESSAGE_FOR_BILLING_REASON = "invalid value for \"billing_reason\", must be one of [automatic_pending_invoice_item_invoice, manual, quote_accept, subscription, subscription_create, subscription_cycle, subscription_threshold, subscription_update, upcoming]."
-    VALID_VALUES_FOR_BILLING_REASON  = StaticArray["automatic_pending_invoice_item_invoice", "manual", "quote_accept", "subscription", "subscription_create", "subscription_cycle", "subscription_threshold", "subscription_update", "upcoming"]
+    VALID_VALUES_FOR_BILLING_REASON  = String.static_array("automatic_pending_invoice_item_invoice", "manual", "quote_accept", "subscription", "subscription_create", "subscription_cycle", "subscription_threshold", "subscription_update", "upcoming")
 
     @[JSON::Field(ignore: true)]
     property? billing_reason_present : Bool = false
@@ -233,7 +233,7 @@ module Stripe
     @[JSON::Field(key: "customer_tax_exempt", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer_tax_exempt.nil? && !customer_tax_exempt_present?)]
     getter customer_tax_exempt : String? = nil
     ERROR_MESSAGE_FOR_CUSTOMER_TAX_EXEMPT = "invalid value for \"customer_tax_exempt\", must be one of [exempt, none, reverse]."
-    VALID_VALUES_FOR_CUSTOMER_TAX_EXEMPT  = StaticArray["exempt", "none", "reverse"]
+    VALID_VALUES_FOR_CUSTOMER_TAX_EXEMPT  = String.static_array("exempt", "none", "reverse")
 
     @[JSON::Field(ignore: true)]
     property? customer_tax_exempt_present : Bool = false
@@ -405,7 +405,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [deleted, draft, open, paid, uncollectible, void]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["deleted", "draft", "open", "paid", "uncollectible", "void"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("deleted", "draft", "open", "paid", "uncollectible", "void")
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false

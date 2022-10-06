@@ -53,13 +53,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [customer_balance_transaction]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["customer_balance_transaction"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("customer_balance_transaction")
 
     # Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, or `unapplied_from_invoice`. See the [Customer Balance page](https://stripe.com/docs/billing/customer/balance#types) to learn more about transaction types.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [adjustment, applied_to_invoice, credit_note, initial, invoice_too_large, invoice_too_small, migration, unapplied_from_invoice, unspent_receiver_credit]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["adjustment", "applied_to_invoice", "credit_note", "initial", "invoice_too_large", "invoice_too_small", "migration", "unapplied_from_invoice", "unspent_receiver_credit"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("adjustment", "applied_to_invoice", "credit_note", "initial", "invoice_too_large", "invoice_too_small", "migration", "unapplied_from_invoice", "unspent_receiver_credit")
 
     # End of Required Properties
 

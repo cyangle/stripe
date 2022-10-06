@@ -24,17 +24,17 @@ module Stripe
     @[JSON::Field(key: "billing_details", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_details : String? = nil
     ERROR_MESSAGE_FOR_BILLING_DETAILS = "invalid value for \"billing_details\", must be one of [allow, disallow]."
-    VALID_VALUES_FOR_BILLING_DETAILS  = StaticArray["allow", "disallow"]
+    VALID_VALUES_FOR_BILLING_DETAILS  = String.static_array("allow", "disallow")
 
     @[JSON::Field(key: "promotion_codes", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotion_codes : String? = nil
     ERROR_MESSAGE_FOR_PROMOTION_CODES = "invalid value for \"promotion_codes\", must be one of [allow, disallow]."
-    VALID_VALUES_FOR_PROMOTION_CODES  = StaticArray["allow", "disallow"]
+    VALID_VALUES_FOR_PROMOTION_CODES  = String.static_array("allow", "disallow")
 
     @[JSON::Field(key: "shipping_details", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_details : String? = nil
     ERROR_MESSAGE_FOR_SHIPPING_DETAILS = "invalid value for \"shipping_details\", must be one of [allow, disallow]."
-    VALID_VALUES_FOR_SHIPPING_DETAILS  = StaticArray["allow", "disallow"]
+    VALID_VALUES_FOR_SHIPPING_DETAILS  = String.static_array("allow", "disallow")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

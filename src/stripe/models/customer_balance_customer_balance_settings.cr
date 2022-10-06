@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "reconciliation_mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reconciliation_mode : String? = nil
     ERROR_MESSAGE_FOR_RECONCILIATION_MODE = "invalid value for \"reconciliation_mode\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_RECONCILIATION_MODE  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_RECONCILIATION_MODE  = String.static_array("automatic", "manual")
 
     # End of Required Properties
 

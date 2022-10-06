@@ -50,7 +50,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [order]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["order"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("order")
 
     @[JSON::Field(key: "payment", type: Stripe::OrdersV2ResourcePayment?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment : Stripe::OrdersV2ResourcePayment? = nil
@@ -59,7 +59,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, complete, open, processing, submitted]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "complete", "open", "processing", "submitted"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "complete", "open", "processing", "submitted")
 
     @[JSON::Field(key: "total_details", type: Stripe::OrdersV2ResourceTotalDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total_details : Stripe::OrdersV2ResourceTotalDetails? = nil

@@ -29,12 +29,12 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("automatic", "manual")
 
     @[JSON::Field(key: "confirmation_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter confirmation_method : String? = nil
     ERROR_MESSAGE_FOR_CONFIRMATION_METHOD = "invalid value for \"confirmation_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CONFIRMATION_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CONFIRMATION_METHOD  = String.static_array("automatic", "manual")
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -57,7 +57,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [payment_intent]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["payment_intent"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("payment_intent")
 
     # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -67,7 +67,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, processing, requires_action, requires_capture, requires_confirmation, requires_payment_method, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded")
 
     # End of Required Properties
 
@@ -114,7 +114,7 @@ module Stripe
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String? = nil
     ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [abandoned, automatic, duplicate, failed_invoice, fraudulent, requested_by_customer, void_invoice]."
-    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice"]
+    VALID_VALUES_FOR_CANCELLATION_REASON  = String.static_array("abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice")
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
@@ -208,7 +208,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["off_session", "on_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("off_session", "on_session")
 
     @[JSON::Field(ignore: true)]
     property? setup_future_usage_present : Bool = false

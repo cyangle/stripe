@@ -24,7 +24,7 @@ module Stripe
     getter status : String? = nil
     MAX_LENGTH_FOR_STATUS    = 5000
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [accepted, pending, refused, revoked]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["accepted", "pending", "refused", "revoked"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("accepted", "pending", "refused", "revoked")
 
     # End of Required Properties
 
@@ -46,7 +46,7 @@ module Stripe
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE    = 5000
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [offline, online]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["offline", "online"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("offline", "online")
 
     @[JSON::Field(key: "user_agent", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter user_agent : String? = nil

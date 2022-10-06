@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "PostPaymentIntents_request_off_session_oneOf", must be one of ["one_off", "recurring"].}
 
-    VALID_VALUES = StaticArray["one_off", "recurring"]
+    VALID_VALUES = String.static_array("one_off", "recurring")
 
     delegate to_json_object_key, to: @data
 

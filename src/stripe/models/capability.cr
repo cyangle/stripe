@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [capability]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["capability"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("capability")
 
     # Whether the capability has been requested.
     @[JSON::Field(key: "requested", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, disabled, inactive, pending, unrequested]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "disabled", "inactive", "pending", "unrequested"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "disabled", "inactive", "pending", "unrequested")
 
     # End of Required Properties
 

@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "week", "year")
 
     # End of Required Properties
 
@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter aggregate_usage : String? = nil
     ERROR_MESSAGE_FOR_AGGREGATE_USAGE = "invalid value for \"aggregate_usage\", must be one of [last_during_period, last_ever, max, sum]."
-    VALID_VALUES_FOR_AGGREGATE_USAGE  = StaticArray["last_during_period", "last_ever", "max", "sum"]
+    VALID_VALUES_FOR_AGGREGATE_USAGE  = String.static_array("last_during_period", "last_ever", "max", "sum")
 
     # A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much to charge on a recurring basis.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -56,7 +56,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
     ERROR_MESSAGE_FOR_BILLING_SCHEME = "invalid value for \"billing_scheme\", must be one of [per_unit, tiered]."
-    VALID_VALUES_FOR_BILLING_SCHEME  = StaticArray["per_unit", "tiered"]
+    VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -90,7 +90,7 @@ module Stripe
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tiers_mode : String? = nil
     ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
-    VALID_VALUES_FOR_TIERS_MODE  = StaticArray["graduated", "volume"]
+    VALID_VALUES_FOR_TIERS_MODE  = String.static_array("graduated", "volume")
 
     @[JSON::Field(key: "transform_usage", type: Stripe::TransformUsageParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transform_usage : Stripe::TransformUsageParam? = nil
@@ -103,7 +103,7 @@ module Stripe
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
     ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
-    VALID_VALUES_FOR_USAGE_TYPE  = StaticArray["licensed", "metered"]
+    VALID_VALUES_FOR_USAGE_TYPE  = String.static_array("licensed", "metered")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_schedule.nil? && !payment_schedule_present?)]
     getter payment_schedule : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE = "invalid value for \"payment_schedule\", must be one of [combined, interval, sporadic]."
-    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = StaticArray["combined", "interval", "sporadic"]
+    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = String.static_array("combined", "interval", "sporadic")
 
     @[JSON::Field(ignore: true)]
     property? payment_schedule_present : Bool = false
@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction_type.nil? && !transaction_type_present?)]
     getter transaction_type : String? = nil
     ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
-    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = String.static_array("business", "personal")
 
     @[JSON::Field(ignore: true)]
     property? transaction_type_present : Bool = false

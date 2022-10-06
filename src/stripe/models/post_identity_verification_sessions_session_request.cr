@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

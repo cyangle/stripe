@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "features", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter features : Array(String)? = nil
     ERROR_MESSAGE_FOR_FEATURES = "invalid value for \"features\", must be one of [balance, ownership]."
-    VALID_VALUES_FOR_FEATURES  = StaticArray["balance", "ownership"]
+    VALID_VALUES_FOR_FEATURES  = String.static_array("balance", "ownership")
 
     # End of Required Properties
 

@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [credit_note_line_item]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["credit_note_line_item"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("credit_note_line_item")
 
     # The amount of tax calculated per tax rate for this line item
     @[JSON::Field(key: "tax_amounts", type: Array(Stripe::CreditNoteTaxAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -60,7 +60,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [custom_line_item, invoice_line_item]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["custom_line_item", "invoice_line_item"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("custom_line_item", "invoice_line_item")
 
     # End of Required Properties
 

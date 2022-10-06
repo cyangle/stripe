@@ -24,12 +24,12 @@ module Stripe
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotions : String? = nil
     ERROR_MESSAGE_FOR_PROMOTIONS = "invalid value for \"promotions\", must be one of [auto, none]."
-    VALID_VALUES_FOR_PROMOTIONS  = StaticArray["auto", "none"]
+    VALID_VALUES_FOR_PROMOTIONS  = String.static_array("auto", "none")
 
     @[JSON::Field(key: "terms_of_service", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter terms_of_service : String? = nil
     ERROR_MESSAGE_FOR_TERMS_OF_SERVICE = "invalid value for \"terms_of_service\", must be one of [none, required]."
-    VALID_VALUES_FOR_TERMS_OF_SERVICE  = StaticArray["none", "required"]
+    VALID_VALUES_FOR_TERMS_OF_SERVICE  = String.static_array("none", "required")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

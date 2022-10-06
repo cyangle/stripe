@@ -46,13 +46,13 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter mode : String? = nil
     ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [payment, setup, subscription]."
-    VALID_VALUES_FOR_MODE  = StaticArray["payment", "setup", "subscription"]
+    VALID_VALUES_FOR_MODE  = String.static_array("payment", "setup", "subscription")
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [checkout.session]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["checkout.session"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("checkout.session")
 
     # A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "payment_status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_status : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_STATUS = "invalid value for \"payment_status\", must be one of [no_payment_required, paid, unpaid]."
-    VALID_VALUES_FOR_PAYMENT_STATUS  = StaticArray["no_payment_required", "paid", "unpaid"]
+    VALID_VALUES_FOR_PAYMENT_STATUS  = String.static_array("no_payment_required", "paid", "unpaid")
 
     # The shipping rate options applied to this Session.
     @[JSON::Field(key: "shipping_options", type: Array(Stripe::PaymentPagesCheckoutSessionShippingOption)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -108,7 +108,7 @@ module Stripe
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_address_collection.nil? && !billing_address_collection_present?)]
     getter billing_address_collection : String? = nil
     ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
-    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = StaticArray["auto", "required"]
+    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = String.static_array("auto", "required")
 
     @[JSON::Field(ignore: true)]
     property? billing_address_collection_present : Bool = false
@@ -150,7 +150,7 @@ module Stripe
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer_creation.nil? && !customer_creation_present?)]
     getter customer_creation : String? = nil
     ERROR_MESSAGE_FOR_CUSTOMER_CREATION = "invalid value for \"customer_creation\", must be one of [always, if_required]."
-    VALID_VALUES_FOR_CUSTOMER_CREATION  = StaticArray["always", "if_required"]
+    VALID_VALUES_FOR_CUSTOMER_CREATION  = String.static_array("always", "if_required")
 
     @[JSON::Field(ignore: true)]
     property? customer_creation_present : Bool = false
@@ -176,7 +176,7 @@ module Stripe
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: locale.nil? && !locale_present?)]
     getter locale : String? = nil
     ERROR_MESSAGE_FOR_LOCALE = "invalid value for \"locale\", must be one of [auto, bg, cs, da, de, el, en, en-GB, es, es-419, et, fi, fil, fr, fr-CA, hr, hu, id, it, ja, ko, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sv, th, tr, vi, zh, zh-HK, zh-TW]."
-    VALID_VALUES_FOR_LOCALE  = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
+    VALID_VALUES_FOR_LOCALE  = String.static_array("auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW")
 
     @[JSON::Field(ignore: true)]
     property? locale_present : Bool = false
@@ -204,7 +204,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_collection.nil? && !payment_method_collection_present?)]
     getter payment_method_collection : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION = "invalid value for \"payment_method_collection\", must be one of [always, if_required]."
-    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
+    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
     @[JSON::Field(ignore: true)]
     property? payment_method_collection_present : Bool = false
@@ -254,7 +254,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [complete, expired, open]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["complete", "expired", "open"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("complete", "expired", "open")
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
@@ -263,7 +263,7 @@ module Stripe
     @[JSON::Field(key: "submit_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: submit_type.nil? && !submit_type_present?)]
     getter submit_type : String? = nil
     ERROR_MESSAGE_FOR_SUBMIT_TYPE = "invalid value for \"submit_type\", must be one of [auto, book, donate, pay]."
-    VALID_VALUES_FOR_SUBMIT_TYPE  = StaticArray["auto", "book", "donate", "pay"]
+    VALID_VALUES_FOR_SUBMIT_TYPE  = String.static_array("auto", "book", "donate", "pay")
 
     @[JSON::Field(ignore: true)]
     property? submit_type_present : Bool = false

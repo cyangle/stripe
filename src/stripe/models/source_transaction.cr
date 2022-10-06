@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [source_transaction]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["source_transaction"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("source_transaction")
 
     # The ID of the source this transaction is attached to.
     @[JSON::Field(key: "source", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [ach_credit_transfer, ach_debit, alipay, bancontact, card, card_present, eps, giropay, ideal, klarna, multibanco, p24, sepa_debit, sofort, three_d_secure, wechat]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["ach_credit_transfer", "ach_debit", "alipay", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("ach_credit_transfer", "ach_debit", "alipay", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat")
 
     # End of Required Properties
 

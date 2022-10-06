@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_type : String? = nil
     ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE = "invalid value for \"account_holder_type\", must be one of [company, individual]."
-    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = StaticArray["company", "individual"]
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = String.static_array("company", "individual")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

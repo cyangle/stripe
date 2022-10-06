@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cancellation_reason : String? = nil
     ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [lost, stolen]."
-    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["lost", "stolen"]
+    VALID_VALUES_FOR_CANCELLATION_REASON  = String.static_array("lost", "stolen")
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, inactive]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "inactive"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "canceled", "inactive")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

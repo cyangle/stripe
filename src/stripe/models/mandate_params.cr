@@ -34,13 +34,13 @@ module Stripe
     getter interval : String? = nil
     MAX_LENGTH_FOR_INTERVAL    = 5000
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [one_time, scheduled, variable]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["one_time", "scheduled", "variable"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("one_time", "scheduled", "variable")
 
     @[JSON::Field(key: "notification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter notification_method : String? = nil
     MAX_LENGTH_FOR_NOTIFICATION_METHOD    = 5000
     ERROR_MESSAGE_FOR_NOTIFICATION_METHOD = "invalid value for \"notification_method\", must be one of [deprecated_none, email, manual, none, stripe_email]."
-    VALID_VALUES_FOR_NOTIFICATION_METHOD  = StaticArray["deprecated_none", "email", "manual", "none", "stripe_email"]
+    VALID_VALUES_FOR_NOTIFICATION_METHOD  = String.static_array("deprecated_none", "email", "manual", "none", "stripe_email")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

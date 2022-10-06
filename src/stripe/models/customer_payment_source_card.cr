@@ -73,7 +73,7 @@ module Stripe
     getter object : String? = nil
     MAX_LENGTH_FOR_OBJECT    = 5000
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [card]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["card"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("card")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

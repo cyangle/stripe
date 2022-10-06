@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter deleted : Bool? = nil
     ERROR_MESSAGE_FOR_DELETED = "invalid value for \"deleted\", must be one of [true]."
-    VALID_VALUES_FOR_DELETED  = StaticArray[Bool.new("true")]
+    VALID_VALUES_FOR_DELETED  = Bool.static_array("true")
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.reader]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.reader"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("terminal.reader")
 
     # End of Required Properties
 

@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "options", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Array(String)? = nil
     ERROR_MESSAGE_FOR_OPTIONS = "invalid value for \"options\", must be one of [customer_service, low_quality, missing_features, other, switched_service, too_complex, too_expensive, unused]."
-    VALID_VALUES_FOR_OPTIONS  = StaticArray["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"]
+    VALID_VALUES_FOR_OPTIONS  = String.static_array("customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused")
 
     # End of Required Properties
 

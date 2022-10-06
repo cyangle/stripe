@@ -76,7 +76,7 @@ module Stripe
     @[JSON::Field(key: "product_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: product_type.nil? && !product_type_present?)]
     getter product_type : String? = nil
     ERROR_MESSAGE_FOR_PRODUCT_TYPE = "invalid value for \"product_type\", must be one of [merchandise, service]."
-    VALID_VALUES_FOR_PRODUCT_TYPE  = StaticArray["merchandise", "service"]
+    VALID_VALUES_FOR_PRODUCT_TYPE  = String.static_array("merchandise", "service")
 
     @[JSON::Field(ignore: true)]
     property? product_type_present : Bool = false
@@ -85,7 +85,7 @@ module Stripe
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_status.nil? && !return_status_present?)]
     getter return_status : String? = nil
     ERROR_MESSAGE_FOR_RETURN_STATUS = "invalid value for \"return_status\", must be one of [merchant_rejected, successful]."
-    VALID_VALUES_FOR_RETURN_STATUS  = StaticArray["merchant_rejected", "successful"]
+    VALID_VALUES_FOR_RETURN_STATUS  = String.static_array("merchant_rejected", "successful")
 
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false

@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "subscription_data_create_params_effective_date_oneOf", must be one of ["current_period_end"].}
 
-    VALID_VALUES = StaticArray["current_period_end"]
+    VALID_VALUES = String.static_array("current_period_end")
 
     delegate to_json_object_key, to: @data
 

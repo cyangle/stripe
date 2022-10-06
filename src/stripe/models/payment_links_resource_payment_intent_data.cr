@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("automatic", "manual")
 
     @[JSON::Field(ignore: true)]
     property? capture_method_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["off_session", "on_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("off_session", "on_session")
 
     @[JSON::Field(ignore: true)]
     property? setup_future_usage_present : Bool = false

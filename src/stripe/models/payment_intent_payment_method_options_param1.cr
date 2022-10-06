@@ -26,12 +26,12 @@ module Stripe
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter funding_type : String? = nil
     ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
-    VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
+    VALID_VALUES_FOR_FUNDING_TYPE  = String.static_array("bank_transfer")
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -67,7 +67,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.card]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.card"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("issuing.card")
 
     @[JSON::Field(key: "spending_controls", type: Stripe::IssuingCardAuthorizationControls?, default: nil, required: true, nullable: false, emit_null: false)]
     getter spending_controls : Stripe::IssuingCardAuthorizationControls? = nil
@@ -76,13 +76,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, inactive]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "inactive"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "canceled", "inactive")
 
     # The type of the card.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [physical, virtual]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["physical", "virtual"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("physical", "virtual")
 
     # End of Required Properties
 
@@ -92,7 +92,7 @@ module Stripe
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String? = nil
     ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [design_rejected, lost, stolen]."
-    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["design_rejected", "lost", "stolen"]
+    VALID_VALUES_FOR_CANCELLATION_REASON  = String.static_array("design_rejected", "lost", "stolen")
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
@@ -131,7 +131,7 @@ module Stripe
     @[JSON::Field(key: "replacement_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: replacement_reason.nil? && !replacement_reason_present?)]
     getter replacement_reason : String? = nil
     ERROR_MESSAGE_FOR_REPLACEMENT_REASON = "invalid value for \"replacement_reason\", must be one of [damaged, expired, lost, stolen]."
-    VALID_VALUES_FOR_REPLACEMENT_REASON  = StaticArray["damaged", "expired", "lost", "stolen"]
+    VALID_VALUES_FOR_REPLACEMENT_REASON  = String.static_array("damaged", "expired", "lost", "stolen")
 
     @[JSON::Field(ignore: true)]
     property? replacement_reason_present : Bool = false

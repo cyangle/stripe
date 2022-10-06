@@ -63,7 +63,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [visa]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["visa"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("visa")
 
     # The total amount of fees owed to the network.
     @[JSON::Field(key: "network_fees", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -78,7 +78,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.settlement]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.settlement"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("issuing.settlement")
 
     # One of `international` or `uk_national_net`.
     @[JSON::Field(key: "settlement_service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

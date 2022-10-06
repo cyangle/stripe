@@ -29,13 +29,13 @@ module Stripe
     @[JSON::Field(key: "amount_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_type : String? = nil
     ERROR_MESSAGE_FOR_AMOUNT_TYPE = "invalid value for \"amount_type\", must be one of [fixed, maximum]."
-    VALID_VALUES_FOR_AMOUNT_TYPE  = StaticArray["fixed", "maximum"]
+    VALID_VALUES_FOR_AMOUNT_TYPE  = String.static_array("fixed", "maximum")
 
     # Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, sporadic, week, year]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "sporadic", "week", "year"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "sporadic", "week", "year")
 
     # Unique identifier for the mandate or subscription.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -76,7 +76,7 @@ module Stripe
     @[JSON::Field(key: "supported_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: supported_types.nil? && !supported_types_present?)]
     getter supported_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_SUPPORTED_TYPES = "invalid value for \"supported_types\", must be one of [india]."
-    VALID_VALUES_FOR_SUPPORTED_TYPES  = StaticArray["india"]
+    VALID_VALUES_FOR_SUPPORTED_TYPES  = String.static_array("india")
 
     @[JSON::Field(ignore: true)]
     property? supported_types_present : Bool = false

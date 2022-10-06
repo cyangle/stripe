@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [balance]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["balance"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("balance")
 
     # Funds that are not yet available in the balance, due to the 7-day rolling pay cycle. The pending balance for each currency, and for each payment type, can be found in the `source_types` property.
     @[JSON::Field(key: "pending", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]

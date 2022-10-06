@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter flow_directions : Array(String)? = nil
     ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
-    VALID_VALUES_FOR_FLOW_DIRECTIONS  = StaticArray["inbound", "outbound"]
+    VALID_VALUES_FOR_FLOW_DIRECTIONS  = String.static_array("inbound", "outbound")
 
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountRequestMetadata? = nil

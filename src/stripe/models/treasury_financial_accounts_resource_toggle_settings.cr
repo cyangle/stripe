@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, pending, restricted]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "pending", "restricted"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "pending", "restricted")
 
     # Additional details; includes at least one entry when the status is not `active`.
     @[JSON::Field(key: "status_details", type: Array(Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails)?, default: nil, required: true, nullable: false, emit_null: false)]

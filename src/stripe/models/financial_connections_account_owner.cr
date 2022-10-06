@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.account_owner]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["financial_connections.account_owner"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("financial_connections.account_owner")
 
     # The ownership object that this owner belongs to.
     @[JSON::Field(key: "ownership", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

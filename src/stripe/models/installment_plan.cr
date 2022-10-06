@@ -26,12 +26,12 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [month]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["month"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("month")
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [fixed_count]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["fixed_count"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("fixed_count")
 
     # End of Required Properties
 

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "supported", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported : Array(String)? = nil
     ERROR_MESSAGE_FOR_SUPPORTED = "invalid value for \"supported\", must be one of [ach, us_domestic_wire]."
-    VALID_VALUES_FOR_SUPPORTED  = StaticArray["ach", "us_domestic_wire"]
+    VALID_VALUES_FOR_SUPPORTED  = String.static_array("ach", "us_domestic_wire")
 
     # End of Required Properties
 

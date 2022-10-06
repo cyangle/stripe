@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.location]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.location"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("terminal.location")
 
     # End of Required Properties
 

@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
-    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
+    VALID_VALUES_FOR_COLLECTION_METHOD  = String.static_array("charge_automatically", "send_invoice")
 
     @[JSON::Field(key: "computed", type: Stripe::QuotesResourceComputed?, default: nil, required: true, nullable: false, emit_null: false)]
     getter computed : Stripe::QuotesResourceComputed? = nil
@@ -70,13 +70,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [quote]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["quote"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("quote")
 
     # The status of the quote.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [accepted, canceled, draft, open]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["accepted", "canceled", "draft", "open"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("accepted", "canceled", "draft", "open")
 
     @[JSON::Field(key: "status_transitions", type: Stripe::QuotesResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::QuotesResourceStatusTransitions? = nil

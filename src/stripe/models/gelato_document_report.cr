@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [unverified, verified]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["unverified", "verified"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("unverified", "verified")
 
     # End of Required Properties
 
@@ -104,7 +104,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [driving_license, id_card, passport]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["driving_license", "id_card", "passport"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("driving_license", "id_card", "passport")
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false

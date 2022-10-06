@@ -28,13 +28,13 @@ module Stripe
     @[JSON::Field(key: "requested_address_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested_address_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_REQUESTED_ADDRESS_TYPES = "invalid value for \"requested_address_types\", must be one of [iban, sepa, sort_code, spei, zengin]."
-    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES  = StaticArray["iban", "sepa", "sort_code", "spei", "zengin"]
+    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES  = String.static_array("iban", "sepa", "sort_code", "spei", "zengin")
 
     # The bank transfer type that this PaymentIntent is allowed to use for funding Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, or `mx_bank_transfer`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, gb_bank_transfer, jp_bank_transfer, mx_bank_transfer]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer")
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false

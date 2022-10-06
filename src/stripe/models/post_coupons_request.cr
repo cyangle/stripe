@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "duration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter duration : String? = nil
     ERROR_MESSAGE_FOR_DURATION = "invalid value for \"duration\", must be one of [forever, once, repeating]."
-    VALID_VALUES_FOR_DURATION  = StaticArray["forever", "once", "repeating"]
+    VALID_VALUES_FOR_DURATION  = String.static_array("forever", "once", "repeating")
 
     # Required only if `duration` is `repeating`, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
     @[JSON::Field(key: "duration_in_months", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]

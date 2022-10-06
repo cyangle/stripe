@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "item_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter item_type : String? = nil
     ERROR_MESSAGE_FOR_ITEM_TYPE = "invalid value for \"item_type\", must be one of [card_bin, card_fingerprint, case_sensitive_string, country, customer_id, email, ip_address, string]."
-    VALID_VALUES_FOR_ITEM_TYPE  = StaticArray["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"]
+    VALID_VALUES_FOR_ITEM_TYPE  = String.static_array("card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string")
 
     @[JSON::Field(key: "list_items", type: Stripe::RadarListListItemList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter list_items : Stripe::RadarListListItemList1? = nil
@@ -66,7 +66,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [radar.value_list]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["radar.value_list"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("radar.value_list")
 
     # End of Required Properties
 

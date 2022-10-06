@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [pending, unavailable, unverified, verified]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["pending", "unavailable", "unverified", "verified"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("pending", "unavailable", "unverified", "verified")
 
     # End of Required Properties
 

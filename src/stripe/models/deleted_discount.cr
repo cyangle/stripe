@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter deleted : Bool? = nil
     ERROR_MESSAGE_FOR_DELETED = "invalid value for \"deleted\", must be one of [true]."
-    VALID_VALUES_FOR_DELETED  = StaticArray[Bool.new("true")]
+    VALID_VALUES_FOR_DELETED  = Bool.static_array("true")
 
     # The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [discount]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["discount"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("discount")
 
     # Date that the coupon was applied.
     @[JSON::Field(key: "start", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

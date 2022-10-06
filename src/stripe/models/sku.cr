@@ -57,7 +57,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [sku]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["sku"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("sku")
 
     # The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     @[JSON::Field(key: "price", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

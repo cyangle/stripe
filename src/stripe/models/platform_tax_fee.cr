@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [platform_tax_fee]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["platform_tax_fee"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("platform_tax_fee")
 
     # The payment object that caused this tax to be inflicted.
     @[JSON::Field(key: "source_transaction", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

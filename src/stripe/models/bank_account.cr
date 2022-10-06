@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [bank_account]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["bank_account"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("bank_account")
 
     # For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.  For external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -89,7 +89,7 @@ module Stripe
     @[JSON::Field(key: "available_payout_methods", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available_payout_methods.nil? && !available_payout_methods_present?)]
     getter available_payout_methods : Array(String)? = nil
     ERROR_MESSAGE_FOR_AVAILABLE_PAYOUT_METHODS = "invalid value for \"available_payout_methods\", must be one of [instant, standard]."
-    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS  = StaticArray["instant", "standard"]
+    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS  = String.static_array("instant", "standard")
 
     @[JSON::Field(ignore: true)]
     property? available_payout_methods_present : Bool = false

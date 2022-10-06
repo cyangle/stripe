@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("automatic", "manual")
 
     # End of Required Properties
 
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none, off_session, on_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none", "off_session", "on_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none", "off_session", "on_session")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

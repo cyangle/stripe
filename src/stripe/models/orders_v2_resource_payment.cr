@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, complete, not_required, processing, requires_action, requires_capture, requires_confirmation, requires_payment_method]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method")
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false

@@ -34,13 +34,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [file]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["file"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("file")
 
     # The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
     ERROR_MESSAGE_FOR_PURPOSE = "invalid value for \"purpose\", must be one of [account_requirement, additional_verification, business_icon, business_logo, customer_signature, dispute_evidence, document_provider_identity_document, finance_report_run, identity_document, identity_document_downloadable, pci_document, selfie, sigma_scheduled_query, tax_document_user_upload, terminal_reader_splashscreen]."
-    VALID_VALUES_FOR_PURPOSE  = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"]
+    VALID_VALUES_FOR_PURPOSE  = String.static_array("account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen")
 
     # The size in bytes of the file object.
     @[JSON::Field(key: "size", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

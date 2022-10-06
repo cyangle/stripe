@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "automatic_tax", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter automatic_tax : String? = nil
     ERROR_MESSAGE_FOR_AUTOMATIC_TAX = "invalid value for \"automatic_tax\", must be one of [failed, not_collecting, supported, unrecognized_location]."
-    VALID_VALUES_FOR_AUTOMATIC_TAX  = StaticArray["failed", "not_collecting", "supported", "unrecognized_location"]
+    VALID_VALUES_FOR_AUTOMATIC_TAX  = String.static_array("failed", "not_collecting", "supported", "unrecognized_location")
 
     # End of Required Properties
 

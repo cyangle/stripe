@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "origin", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter origin : String? = nil
     ERROR_MESSAGE_FOR_ORIGIN = "invalid value for \"origin\", must be one of [customer_balance]."
-    VALID_VALUES_FOR_ORIGIN  = StaticArray["customer_balance"]
+    VALID_VALUES_FOR_ORIGIN  = String.static_array("customer_balance")
 
     @[JSON::Field(key: "payment_intent", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent : String? = nil
@@ -58,7 +58,7 @@ module Stripe
     getter reason : String? = nil
     MAX_LENGTH_FOR_REASON    = 5000
     ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [duplicate, fraudulent, requested_by_customer]."
-    VALID_VALUES_FOR_REASON  = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
+    VALID_VALUES_FOR_REASON  = String.static_array("duplicate", "fraudulent", "requested_by_customer")
 
     @[JSON::Field(key: "refund_application_fee", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_application_fee : Bool? = nil

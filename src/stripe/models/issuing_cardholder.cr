@@ -50,7 +50,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.cardholder]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.cardholder"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("issuing.cardholder")
 
     @[JSON::Field(key: "requirements", type: Stripe::IssuingCardholderRequirements?, default: nil, required: true, nullable: false, emit_null: false)]
     getter requirements : Stripe::IssuingCardholderRequirements? = nil
@@ -59,13 +59,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, blocked, inactive]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "blocked", "inactive"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "blocked", "inactive")
 
     # One of `individual` or `company`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [company, individual]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["company", "individual"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("company", "individual")
 
     # End of Required Properties
 

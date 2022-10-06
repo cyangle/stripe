@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.inbound_transfer]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.inbound_transfer"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.inbound_transfer")
 
     # The origin payment method to be debited for an InboundTransfer.
     @[JSON::Field(key: "origin_payment_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -78,7 +78,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, failed, processing, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "failed", "processing", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "failed", "processing", "succeeded")
 
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryInboundTransfersResourceInboundTransferResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryInboundTransfersResourceInboundTransferResourceStatusTransitions? = nil

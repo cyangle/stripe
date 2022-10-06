@@ -54,7 +54,7 @@ module Stripe
     @[JSON::Field(key: "product_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: product_type.nil? && !product_type_present?)]
     getter product_type : String? = nil
     ERROR_MESSAGE_FOR_PRODUCT_TYPE = "invalid value for \"product_type\", must be one of [merchandise, service]."
-    VALID_VALUES_FOR_PRODUCT_TYPE  = StaticArray["merchandise", "service"]
+    VALID_VALUES_FOR_PRODUCT_TYPE  = String.static_array("merchandise", "service")
 
     @[JSON::Field(ignore: true)]
     property? product_type_present : Bool = false

@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [webhook_endpoint]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["webhook_endpoint"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("webhook_endpoint")
 
     # The status of the webhook. It can be `enabled` or `disabled`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

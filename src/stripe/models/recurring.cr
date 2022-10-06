@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "week", "year")
 
     # The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
     ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
-    VALID_VALUES_FOR_USAGE_TYPE  = StaticArray["licensed", "metered"]
+    VALID_VALUES_FOR_USAGE_TYPE  = String.static_array("licensed", "metered")
 
     # End of Required Properties
 
@@ -45,7 +45,7 @@ module Stripe
     @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
     getter aggregate_usage : String? = nil
     ERROR_MESSAGE_FOR_AGGREGATE_USAGE = "invalid value for \"aggregate_usage\", must be one of [last_during_period, last_ever, max, sum]."
-    VALID_VALUES_FOR_AGGREGATE_USAGE  = StaticArray["last_during_period", "last_ever", "max", "sum"]
+    VALID_VALUES_FOR_AGGREGATE_USAGE  = String.static_array("last_during_period", "last_ever", "max", "sum")
 
     @[JSON::Field(ignore: true)]
     property? aggregate_usage_present : Bool = false

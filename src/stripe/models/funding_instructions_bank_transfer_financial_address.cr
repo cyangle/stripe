@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [iban, sort_code, spei, zengin]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["iban", "sort_code", "spei", "zengin"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("iban", "sort_code", "spei", "zengin")
 
     # End of Required Properties
 
@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "supported_networks", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter supported_networks : Array(String)? = nil
     ERROR_MESSAGE_FOR_SUPPORTED_NETWORKS = "invalid value for \"supported_networks\", must be one of [bacs, fps, sepa, spei, zengin]."
-    VALID_VALUES_FOR_SUPPORTED_NETWORKS  = StaticArray["bacs", "fps", "sepa", "spei", "zengin"]
+    VALID_VALUES_FOR_SUPPORTED_NETWORKS  = String.static_array("bacs", "fps", "sepa", "spei", "zengin")
 
     @[JSON::Field(key: "zengin", type: Stripe::FundingInstructionsBankTransferZenginRecord?, default: nil, required: false, nullable: false, emit_null: false)]
     getter zengin : Stripe::FundingInstructionsBankTransferZenginRecord? = nil

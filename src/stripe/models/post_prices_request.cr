@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
     ERROR_MESSAGE_FOR_BILLING_SCHEME = "invalid value for \"billing_scheme\", must be one of [per_unit, tiered]."
-    VALID_VALUES_FOR_BILLING_SCHEME  = StaticArray["per_unit", "tiered"]
+    VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
 
     # Prices defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -78,7 +78,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
     ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
-    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive", "unspecified")
 
     # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
     @[JSON::Field(key: "tiers", type: Array(Stripe::Tier)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -88,7 +88,7 @@ module Stripe
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tiers_mode : String? = nil
     ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
-    VALID_VALUES_FOR_TIERS_MODE  = StaticArray["graduated", "volume"]
+    VALID_VALUES_FOR_TIERS_MODE  = String.static_array("graduated", "volume")
 
     # If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
     @[JSON::Field(key: "transfer_lookup_key", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]

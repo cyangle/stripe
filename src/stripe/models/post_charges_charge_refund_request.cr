@@ -41,7 +41,7 @@ module Stripe
     getter reason : String? = nil
     MAX_LENGTH_FOR_REASON    = 5000
     ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [duplicate, fraudulent, requested_by_customer]."
-    VALID_VALUES_FOR_REASON  = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
+    VALID_VALUES_FOR_REASON  = String.static_array("duplicate", "fraudulent", "requested_by_customer")
 
     @[JSON::Field(key: "refund_application_fee", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_application_fee : Bool? = nil

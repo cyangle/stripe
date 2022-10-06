@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [customer]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["customer"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("customer")
 
     # End of Required Properties
 
@@ -168,7 +168,7 @@ module Stripe
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_exempt.nil? && !tax_exempt_present?)]
     getter tax_exempt : String? = nil
     ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [exempt, none, reverse]."
-    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["exempt", "none", "reverse"]
+    VALID_VALUES_FOR_TAX_EXEMPT  = String.static_array("exempt", "none", "reverse")
 
     @[JSON::Field(ignore: true)]
     property? tax_exempt_present : Bool = false

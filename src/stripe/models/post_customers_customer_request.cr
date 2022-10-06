@@ -122,7 +122,7 @@ module Stripe
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
     ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [, exempt, none, reverse]."
-    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["", "exempt", "none", "reverse"]
+    VALID_VALUES_FOR_TAX_EXEMPT  = String.static_array("", "exempt", "none", "reverse")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

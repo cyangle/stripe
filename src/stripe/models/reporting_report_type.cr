@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [reporting.report_type]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["reporting.report_type"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("reporting.report_type")
 
     # When this Report Type was latest updated. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

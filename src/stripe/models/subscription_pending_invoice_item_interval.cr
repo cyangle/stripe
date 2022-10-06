@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "week", "year")
 
     # The number of intervals between invoices. For example, `interval=month` and `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

@@ -86,7 +86,7 @@ module Stripe
     @[JSON::Field(key: "political_exposure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter political_exposure : String? = nil
     ERROR_MESSAGE_FOR_POLITICAL_EXPOSURE = "invalid value for \"political_exposure\", must be one of [existing, none]."
-    VALID_VALUES_FOR_POLITICAL_EXPOSURE  = StaticArray["existing", "none"]
+    VALID_VALUES_FOR_POLITICAL_EXPOSURE  = String.static_array("existing", "none")
 
     @[JSON::Field(key: "registered_address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter registered_address : Stripe::AddressSpecs? = nil

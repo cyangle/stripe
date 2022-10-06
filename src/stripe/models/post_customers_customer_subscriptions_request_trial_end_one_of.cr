@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "PostCustomersCustomerSubscriptions_request_trial_end_oneOf", must be one of ["now"].}
 
-    VALID_VALUES = StaticArray["now"]
+    VALID_VALUES = String.static_array("now")
 
     delegate to_json_object_key, to: @data
 

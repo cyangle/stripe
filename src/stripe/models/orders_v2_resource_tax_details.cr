@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
     ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [exempt, none, reverse]."
-    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["exempt", "none", "reverse"]
+    VALID_VALUES_FOR_TAX_EXEMPT  = String.static_array("exempt", "none", "reverse")
 
     # The purchaser's tax IDs to be used in calculation of tax for this Order.
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::OrdersV2ResourceTaxDetailsResourceTaxId)?, default: nil, required: true, nullable: false, emit_null: false)]

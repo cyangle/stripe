@@ -68,7 +68,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [credit_note]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["credit_note"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("credit_note")
 
     # The link to download the PDF of the credit note.
     @[JSON::Field(key: "pdf", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -79,7 +79,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [issued, void]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["issued", "void"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("issued", "void")
 
     # The integer amount in %s representing the amount of the credit note, excluding exclusive tax and invoice level discounts.
     @[JSON::Field(key: "subtotal", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -97,7 +97,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [post_payment, pre_payment]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["post_payment", "pre_payment"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("post_payment", "pre_payment")
 
     # End of Required Properties
 
@@ -135,7 +135,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
     getter reason : String? = nil
     ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [duplicate, fraudulent, order_change, product_unsatisfactory]."
-    VALID_VALUES_FOR_REASON  = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
+    VALID_VALUES_FOR_REASON  = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
 
     @[JSON::Field(ignore: true)]
     property? reason_present : Bool = false

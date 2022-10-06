@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: promotions.nil? && !promotions_present?)]
     getter promotions : String? = nil
     ERROR_MESSAGE_FOR_PROMOTIONS = "invalid value for \"promotions\", must be one of [opt_in, opt_out]."
-    VALID_VALUES_FOR_PROMOTIONS  = StaticArray["opt_in", "opt_out"]
+    VALID_VALUES_FOR_PROMOTIONS  = String.static_array("opt_in", "opt_out")
 
     @[JSON::Field(ignore: true)]
     property? promotions_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "terms_of_service", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: terms_of_service.nil? && !terms_of_service_present?)]
     getter terms_of_service : String? = nil
     ERROR_MESSAGE_FOR_TERMS_OF_SERVICE = "invalid value for \"terms_of_service\", must be one of [accepted]."
-    VALID_VALUES_FOR_TERMS_OF_SERVICE  = StaticArray["accepted"]
+    VALID_VALUES_FOR_TERMS_OF_SERVICE  = String.static_array("accepted")
 
     @[JSON::Field(ignore: true)]
     property? terms_of_service_present : Bool = false

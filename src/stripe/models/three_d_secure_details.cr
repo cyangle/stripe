@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "authentication_flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: authentication_flow.nil? && !authentication_flow_present?)]
     getter authentication_flow : String? = nil
     ERROR_MESSAGE_FOR_AUTHENTICATION_FLOW = "invalid value for \"authentication_flow\", must be one of [challenge, frictionless]."
-    VALID_VALUES_FOR_AUTHENTICATION_FLOW  = StaticArray["challenge", "frictionless"]
+    VALID_VALUES_FOR_AUTHENTICATION_FLOW  = String.static_array("challenge", "frictionless")
 
     @[JSON::Field(ignore: true)]
     property? authentication_flow_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "result", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: result.nil? && !result_present?)]
     getter result : String? = nil
     ERROR_MESSAGE_FOR_RESULT = "invalid value for \"result\", must be one of [attempt_acknowledged, authenticated, exempted, failed, not_supported, processing_error]."
-    VALID_VALUES_FOR_RESULT  = StaticArray["attempt_acknowledged", "authenticated", "exempted", "failed", "not_supported", "processing_error"]
+    VALID_VALUES_FOR_RESULT  = String.static_array("attempt_acknowledged", "authenticated", "exempted", "failed", "not_supported", "processing_error")
 
     @[JSON::Field(ignore: true)]
     property? result_present : Bool = false
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "result_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: result_reason.nil? && !result_reason_present?)]
     getter result_reason : String? = nil
     ERROR_MESSAGE_FOR_RESULT_REASON = "invalid value for \"result_reason\", must be one of [abandoned, bypassed, canceled, card_not_enrolled, network_not_supported, protocol_error, rejected]."
-    VALID_VALUES_FOR_RESULT_REASON  = StaticArray["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"]
+    VALID_VALUES_FOR_RESULT_REASON  = String.static_array("abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected")
 
     @[JSON::Field(ignore: true)]
     property? result_reason_present : Bool = false
@@ -52,7 +52,7 @@ module Stripe
     @[JSON::Field(key: "version", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: version.nil? && !version_present?)]
     getter version : String? = nil
     ERROR_MESSAGE_FOR_VERSION = "invalid value for \"version\", must be one of [1.0.2, 2.1.0, 2.2.0]."
-    VALID_VALUES_FOR_VERSION  = StaticArray["1.0.2", "2.1.0", "2.2.0"]
+    VALID_VALUES_FOR_VERSION  = String.static_array("1.0.2", "2.1.0", "2.2.0")
 
     @[JSON::Field(ignore: true)]
     property? version_present : Bool = false

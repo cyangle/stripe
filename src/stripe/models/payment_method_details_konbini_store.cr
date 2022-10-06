@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "chain", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: chain.nil? && !chain_present?)]
     getter chain : String? = nil
     ERROR_MESSAGE_FOR_CHAIN = "invalid value for \"chain\", must be one of [familymart, lawson, ministop, seicomart]."
-    VALID_VALUES_FOR_CHAIN  = StaticArray["familymart", "lawson", "ministop", "seicomart"]
+    VALID_VALUES_FOR_CHAIN  = String.static_array("familymart", "lawson", "ministop", "seicomart")
 
     @[JSON::Field(ignore: true)]
     property? chain_present : Bool = false

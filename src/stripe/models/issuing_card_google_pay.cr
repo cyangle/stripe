@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "ineligible_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ineligible_reason.nil? && !ineligible_reason_present?)]
     getter ineligible_reason : String? = nil
     ERROR_MESSAGE_FOR_INELIGIBLE_REASON = "invalid value for \"ineligible_reason\", must be one of [missing_agreement, missing_cardholder_contact, unsupported_region]."
-    VALID_VALUES_FOR_INELIGIBLE_REASON  = StaticArray["missing_agreement", "missing_cardholder_contact", "unsupported_region"]
+    VALID_VALUES_FOR_INELIGIBLE_REASON  = String.static_array("missing_agreement", "missing_cardholder_contact", "unsupported_region")
 
     @[JSON::Field(ignore: true)]
     property? ineligible_reason_present : Bool = false

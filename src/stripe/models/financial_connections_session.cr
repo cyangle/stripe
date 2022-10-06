@@ -42,13 +42,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.session]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["financial_connections.session"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("financial_connections.session")
 
     # Permissions requested for accounts collected during this session.
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
     ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
-    VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
+    VALID_VALUES_FOR_PERMISSIONS  = String.static_array("balances", "ownership", "payment_method", "transactions")
 
     # End of Required Properties
 

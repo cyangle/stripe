@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : String? = nil
     ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
-    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = StaticArray["automatic", "phase_start"]
+    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("automatic", "phase_start")
 
     # End of Required Properties
 
@@ -51,7 +51,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: collection_method.nil? && !collection_method_present?)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
-    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
+    VALID_VALUES_FOR_COLLECTION_METHOD  = String.static_array("charge_automatically", "send_invoice")
 
     @[JSON::Field(ignore: true)]
     property? collection_method_present : Bool = false

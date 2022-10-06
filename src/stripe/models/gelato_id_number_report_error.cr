@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: code.nil? && !code_present?)]
     getter code : String? = nil
     ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [id_number_insufficient_document_data, id_number_mismatch, id_number_unverified_other]."
-    VALID_VALUES_FOR_CODE  = StaticArray["id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other"]
+    VALID_VALUES_FOR_CODE  = String.static_array("id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other")
 
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false

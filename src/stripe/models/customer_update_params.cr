@@ -24,17 +24,17 @@ module Stripe
     @[JSON::Field(key: "address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : String? = nil
     ERROR_MESSAGE_FOR_ADDRESS = "invalid value for \"address\", must be one of [auto, never]."
-    VALID_VALUES_FOR_ADDRESS  = StaticArray["auto", "never"]
+    VALID_VALUES_FOR_ADDRESS  = String.static_array("auto", "never")
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
     ERROR_MESSAGE_FOR_NAME = "invalid value for \"name\", must be one of [auto, never]."
-    VALID_VALUES_FOR_NAME  = StaticArray["auto", "never"]
+    VALID_VALUES_FOR_NAME  = String.static_array("auto", "never")
 
     @[JSON::Field(key: "shipping", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : String? = nil
     ERROR_MESSAGE_FOR_SHIPPING = "invalid value for \"shipping\", must be one of [auto, never]."
-    VALID_VALUES_FOR_SHIPPING  = StaticArray["auto", "never"]
+    VALID_VALUES_FOR_SHIPPING  = String.static_array("auto", "never")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

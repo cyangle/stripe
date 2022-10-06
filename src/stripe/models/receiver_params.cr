@@ -25,7 +25,7 @@ module Stripe
     getter refund_attributes_method : String? = nil
     MAX_LENGTH_FOR_REFUND_ATTRIBUTES_METHOD    = 5000
     ERROR_MESSAGE_FOR_REFUND_ATTRIBUTES_METHOD = "invalid value for \"refund_attributes_method\", must be one of [email, manual, none]."
-    VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD  = StaticArray["email", "manual", "none"]
+    VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD  = String.static_array("email", "manual", "none")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

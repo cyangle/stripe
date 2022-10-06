@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
     ERROR_MESSAGE_FOR_CURRENCY = "invalid value for \"currency\", must be one of [cad, usd]."
-    VALID_VALUES_FOR_CURRENCY  = StaticArray["cad", "usd"]
+    VALID_VALUES_FOR_CURRENCY  = String.static_array("cad", "usd")
 
     @[JSON::Field(key: "mandate_options", type: Stripe::SetupIntentPaymentMethodOptionsMandateOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_options : Stripe::SetupIntentPaymentMethodOptionsMandateOptionsParam? = nil
@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "verification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification_method : String? = nil
     ERROR_MESSAGE_FOR_VERIFICATION_METHOD = "invalid value for \"verification_method\", must be one of [automatic, instant, microdeposits]."
-    VALID_VALUES_FOR_VERIFICATION_METHOD  = StaticArray["automatic", "instant", "microdeposits"]
+    VALID_VALUES_FOR_VERIFICATION_METHOD  = String.static_array("automatic", "instant", "microdeposits")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

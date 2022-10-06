@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
-    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
+    VALID_VALUES_FOR_COLLECTION_METHOD  = String.static_array("charge_automatically", "send_invoice")
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -77,7 +77,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [subscription]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["subscription"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("subscription")
 
     # Date when the subscription was first created. The date might differ from the `created` date due to backdating.
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -87,7 +87,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, incomplete, incomplete_expired, past_due, trialing, unpaid]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "canceled", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid")
 
     # End of Required Properties
 

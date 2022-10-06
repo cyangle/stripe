@@ -25,13 +25,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, in_progress, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["failed", "in_progress", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("failed", "in_progress", "succeeded")
 
     # Type of action performed by the reader.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [process_payment_intent, process_setup_intent, set_reader_display]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["process_payment_intent", "process_setup_intent", "set_reader_display"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("process_payment_intent", "process_setup_intent", "set_reader_display")
 
     # End of Required Properties
 

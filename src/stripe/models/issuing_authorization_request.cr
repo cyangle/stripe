@@ -51,7 +51,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
     ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [account_disabled, card_active, card_inactive, cardholder_inactive, cardholder_verification_required, insufficient_funds, not_allowed, spending_controls, suspected_fraud, verification_failed, webhook_approved, webhook_declined, webhook_timeout]."
-    VALID_VALUES_FOR_REASON  = StaticArray["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"]
+    VALID_VALUES_FOR_REASON  = String.static_array("account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout")
 
     # End of Required Properties
 

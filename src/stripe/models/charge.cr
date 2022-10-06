@@ -69,7 +69,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [charge]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["charge"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("charge")
 
     # `true` if the charge succeeded, or was successfully authorized for later capture.
     @[JSON::Field(key: "paid", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -83,7 +83,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, pending, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["failed", "pending", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("failed", "pending", "succeeded")
 
     # End of Required Properties
 

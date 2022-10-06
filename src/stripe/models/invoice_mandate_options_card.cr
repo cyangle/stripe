@@ -32,7 +32,7 @@ module Stripe
     @[JSON::Field(key: "amount_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_type.nil? && !amount_type_present?)]
     getter amount_type : String? = nil
     ERROR_MESSAGE_FOR_AMOUNT_TYPE = "invalid value for \"amount_type\", must be one of [fixed, maximum]."
-    VALID_VALUES_FOR_AMOUNT_TYPE  = StaticArray["fixed", "maximum"]
+    VALID_VALUES_FOR_AMOUNT_TYPE  = String.static_array("fixed", "maximum")
 
     @[JSON::Field(ignore: true)]
     property? amount_type_present : Bool = false

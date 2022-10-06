@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [discount]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["discount"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("discount")
 
     # Date that the coupon was applied.
     @[JSON::Field(key: "start", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

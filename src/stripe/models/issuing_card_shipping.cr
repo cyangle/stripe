@@ -33,13 +33,13 @@ module Stripe
     @[JSON::Field(key: "service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter service : String? = nil
     ERROR_MESSAGE_FOR_SERVICE = "invalid value for \"service\", must be one of [express, priority, standard]."
-    VALID_VALUES_FOR_SERVICE  = StaticArray["express", "priority", "standard"]
+    VALID_VALUES_FOR_SERVICE  = String.static_array("express", "priority", "standard")
 
     # Packaging options.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bulk, individual]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["bulk", "individual"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("bulk", "individual")
 
     # End of Required Properties
 
@@ -49,7 +49,7 @@ module Stripe
     @[JSON::Field(key: "carrier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: carrier.nil? && !carrier_present?)]
     getter carrier : String? = nil
     ERROR_MESSAGE_FOR_CARRIER = "invalid value for \"carrier\", must be one of [dhl, fedex, royal_mail, usps]."
-    VALID_VALUES_FOR_CARRIER  = StaticArray["dhl", "fedex", "royal_mail", "usps"]
+    VALID_VALUES_FOR_CARRIER  = String.static_array("dhl", "fedex", "royal_mail", "usps")
 
     @[JSON::Field(ignore: true)]
     property? carrier_present : Bool = false
@@ -86,7 +86,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, delivered, failure, pending, returned, shipped]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "delivered", "failure", "pending", "returned", "shipped"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "delivered", "failure", "pending", "returned", "shipped")
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false

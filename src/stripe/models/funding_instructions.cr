@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter funding_type : String? = nil
     ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
-    VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
+    VALID_VALUES_FOR_FUNDING_TYPE  = String.static_array("bank_transfer")
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [funding_instructions]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["funding_instructions"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("funding_instructions")
 
     # End of Required Properties
 

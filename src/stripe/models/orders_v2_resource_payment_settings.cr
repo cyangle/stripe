@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     getter payment_method_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [acss_debit, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, card, customer_balance, eps, fpx, giropay, grabpay, ideal, klarna, link, oxxo, p24, sepa_debit, sofort, wechat_pay]."
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = StaticArray["acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "sepa_debit", "sofort", "wechat_pay"]
+    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = String.static_array("acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "sepa_debit", "sofort", "wechat_pay")
 
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false

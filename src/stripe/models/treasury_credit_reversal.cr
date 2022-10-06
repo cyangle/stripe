@@ -55,13 +55,13 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach, stripe]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["ach", "stripe"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("ach", "stripe")
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.credit_reversal]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.credit_reversal"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.credit_reversal")
 
     # The ReceivedCredit being reversed.
     @[JSON::Field(key: "received_credit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -72,7 +72,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, posted, processing]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "posted", "processing"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "posted", "processing")
 
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryReceivedCreditsResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryReceivedCreditsResourceStatusTransitions? = nil

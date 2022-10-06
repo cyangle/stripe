@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [identity.verification_report]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["identity.verification_report"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("identity.verification_report")
 
     @[JSON::Field(key: "options", type: Stripe::GelatoVerificationReportOptions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Stripe::GelatoVerificationReportOptions? = nil
@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number")
 
     # End of Required Properties
 

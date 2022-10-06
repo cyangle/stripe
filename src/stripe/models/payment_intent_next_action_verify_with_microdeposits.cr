@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "microdeposit_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: microdeposit_type.nil? && !microdeposit_type_present?)]
     getter microdeposit_type : String? = nil
     ERROR_MESSAGE_FOR_MICRODEPOSIT_TYPE = "invalid value for \"microdeposit_type\", must be one of [amounts, descriptor_code]."
-    VALID_VALUES_FOR_MICRODEPOSIT_TYPE  = StaticArray["amounts", "descriptor_code"]
+    VALID_VALUES_FOR_MICRODEPOSIT_TYPE  = String.static_array("amounts", "descriptor_code")
 
     @[JSON::Field(ignore: true)]
     property? microdeposit_type_present : Bool = false

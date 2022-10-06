@@ -50,13 +50,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.financial_account]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.financial_account"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.financial_account")
 
     # The enum specifying what state the account is in.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [closed, open]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["closed", "open"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("closed", "open")
 
     @[JSON::Field(key: "status_details", type: Stripe::TreasuryFinancialAccountsResourceStatusDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_details : Stripe::TreasuryFinancialAccountsResourceStatusDetails? = nil
@@ -73,7 +73,7 @@ module Stripe
     @[JSON::Field(key: "active_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter active_features : Array(String)? = nil
     ERROR_MESSAGE_FOR_ACTIVE_FEATURES = "invalid value for \"active_features\", must be one of [card_issuing, deposit_insurance, financial_addresses.aba, inbound_transfers.ach, intra_stripe_flows, outbound_payments.ach, outbound_payments.us_domestic_wire, outbound_transfers.ach, outbound_transfers.us_domestic_wire, remote_deposit_capture]."
-    VALID_VALUES_FOR_ACTIVE_FEATURES  = StaticArray["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"]
+    VALID_VALUES_FOR_ACTIVE_FEATURES  = String.static_array("card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture")
 
     @[JSON::Field(key: "features", type: Stripe::TreasuryFinancialAccountFeatures?, default: nil, required: false, nullable: false, emit_null: false)]
     getter features : Stripe::TreasuryFinancialAccountFeatures? = nil
@@ -89,7 +89,7 @@ module Stripe
     @[JSON::Field(key: "pending_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pending_features : Array(String)? = nil
     ERROR_MESSAGE_FOR_PENDING_FEATURES = "invalid value for \"pending_features\", must be one of [card_issuing, deposit_insurance, financial_addresses.aba, inbound_transfers.ach, intra_stripe_flows, outbound_payments.ach, outbound_payments.us_domestic_wire, outbound_transfers.ach, outbound_transfers.us_domestic_wire, remote_deposit_capture]."
-    VALID_VALUES_FOR_PENDING_FEATURES  = StaticArray["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"]
+    VALID_VALUES_FOR_PENDING_FEATURES  = String.static_array("card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture")
 
     @[JSON::Field(key: "platform_restrictions", type: Stripe::TreasuryFinancialAccountPlatformRestrictions?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: platform_restrictions.nil? && !platform_restrictions_present?)]
     getter platform_restrictions : Stripe::TreasuryFinancialAccountPlatformRestrictions? = nil
@@ -101,7 +101,7 @@ module Stripe
     @[JSON::Field(key: "restricted_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter restricted_features : Array(String)? = nil
     ERROR_MESSAGE_FOR_RESTRICTED_FEATURES = "invalid value for \"restricted_features\", must be one of [card_issuing, deposit_insurance, financial_addresses.aba, inbound_transfers.ach, intra_stripe_flows, outbound_payments.ach, outbound_payments.us_domestic_wire, outbound_transfers.ach, outbound_transfers.us_domestic_wire, remote_deposit_capture]."
-    VALID_VALUES_FOR_RESTRICTED_FEATURES  = StaticArray["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"]
+    VALID_VALUES_FOR_RESTRICTED_FEATURES  = String.static_array("card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

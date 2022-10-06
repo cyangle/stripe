@@ -38,13 +38,13 @@ module Stripe
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_address_collection : String? = nil
     ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
-    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = StaticArray["auto", "required"]
+    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = String.static_array("auto", "required")
 
     # Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_creation : String? = nil
     ERROR_MESSAGE_FOR_CUSTOMER_CREATION = "invalid value for \"customer_creation\", must be one of [always, if_required]."
-    VALID_VALUES_FOR_CUSTOMER_CREATION  = StaticArray["always", "if_required"]
+    VALID_VALUES_FOR_CUSTOMER_CREATION  = String.static_array("always", "if_required")
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_collection : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION = "invalid value for \"payment_method_collection\", must be one of [always, if_required]."
-    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
+    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
     @[JSON::Field(key: "payment_method_types", type: Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil

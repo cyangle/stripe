@@ -25,7 +25,7 @@ module Stripe
     getter cancellation_reason : String? = nil
     MAX_LENGTH_FOR_CANCELLATION_REASON    = 5000
     ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [abandoned, duplicate, requested_by_customer]."
-    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["abandoned", "duplicate", "requested_by_customer"]
+    VALID_VALUES_FOR_CANCELLATION_REASON  = String.static_array("abandoned", "duplicate", "requested_by_customer")
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]

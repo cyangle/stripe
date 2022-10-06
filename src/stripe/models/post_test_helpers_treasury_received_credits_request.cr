@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach, us_domestic_wire]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["ach", "us_domestic_wire"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("ach", "us_domestic_wire")
 
     # End of Required Properties
 

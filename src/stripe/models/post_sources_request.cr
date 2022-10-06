@@ -42,7 +42,7 @@ module Stripe
     getter flow : String? = nil
     MAX_LENGTH_FOR_FLOW    = 5000
     ERROR_MESSAGE_FOR_FLOW = "invalid value for \"flow\", must be one of [code_verification, none, receiver, redirect]."
-    VALID_VALUES_FOR_FLOW  = StaticArray["code_verification", "none", "receiver", "redirect"]
+    VALID_VALUES_FOR_FLOW  = String.static_array("code_verification", "none", "receiver", "redirect")
 
     @[JSON::Field(key: "mandate", type: Stripe::MandateParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate : Stripe::MandateParams? = nil
@@ -86,7 +86,7 @@ module Stripe
     getter usage : String? = nil
     MAX_LENGTH_FOR_USAGE    = 5000
     ERROR_MESSAGE_FOR_USAGE = "invalid value for \"usage\", must be one of [reusable, single_use]."
-    VALID_VALUES_FOR_USAGE  = StaticArray["reusable", "single_use"]
+    VALID_VALUES_FOR_USAGE  = String.static_array("reusable", "single_use")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

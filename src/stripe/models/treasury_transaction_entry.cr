@@ -45,7 +45,7 @@ module Stripe
     @[JSON::Field(key: "flow_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter flow_type : String? = nil
     ERROR_MESSAGE_FOR_FLOW_TYPE = "invalid value for \"flow_type\", must be one of [credit_reversal, debit_reversal, inbound_transfer, issuing_authorization, other, outbound_payment, outbound_transfer, received_credit, received_debit]."
-    VALID_VALUES_FOR_FLOW_TYPE  = StaticArray["credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit"]
+    VALID_VALUES_FOR_FLOW_TYPE  = String.static_array("credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit")
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -60,7 +60,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.transaction_entry]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.transaction_entry"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.transaction_entry")
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
@@ -69,7 +69,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [credit_reversal, credit_reversal_posting, debit_reversal, inbound_transfer, inbound_transfer_return, issuing_authorization_hold, issuing_authorization_release, other, outbound_payment, outbound_payment_cancellation, outbound_payment_failure, outbound_payment_posting, outbound_payment_return, outbound_transfer, outbound_transfer_cancellation, outbound_transfer_failure, outbound_transfer_posting, outbound_transfer_return, received_credit, received_debit]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["credit_reversal", "credit_reversal_posting", "debit_reversal", "inbound_transfer", "inbound_transfer_return", "issuing_authorization_hold", "issuing_authorization_release", "other", "outbound_payment", "outbound_payment_cancellation", "outbound_payment_failure", "outbound_payment_posting", "outbound_payment_return", "outbound_transfer", "outbound_transfer_cancellation", "outbound_transfer_failure", "outbound_transfer_posting", "outbound_transfer_return", "received_credit", "received_debit"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("credit_reversal", "credit_reversal_posting", "debit_reversal", "inbound_transfer", "inbound_transfer_return", "issuing_authorization_hold", "issuing_authorization_release", "other", "outbound_payment", "outbound_payment_cancellation", "outbound_payment_failure", "outbound_payment_posting", "outbound_payment_return", "outbound_transfer", "outbound_transfer_cancellation", "outbound_transfer_failure", "outbound_transfer_posting", "outbound_transfer_return", "received_credit", "received_debit")
 
     # End of Required Properties
 

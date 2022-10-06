@@ -27,7 +27,7 @@ module Stripe
     @[JSON::Field(key: "round", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter round : String? = nil
     ERROR_MESSAGE_FOR_ROUND = "invalid value for \"round\", must be one of [down, up]."
-    VALID_VALUES_FOR_ROUND  = StaticArray["down", "up"]
+    VALID_VALUES_FOR_ROUND  = String.static_array("down", "up")
 
     # End of Required Properties
 

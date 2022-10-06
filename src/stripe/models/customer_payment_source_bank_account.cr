@@ -40,7 +40,7 @@ module Stripe
     getter account_holder_type : String? = nil
     MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE    = 5000
     ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE = "invalid value for \"account_holder_type\", must be one of [company, individual]."
-    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = StaticArray["company", "individual"]
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = String.static_array("company", "individual")
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -49,7 +49,7 @@ module Stripe
     getter object : String? = nil
     MAX_LENGTH_FOR_OBJECT    = 5000
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [bank_account]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["bank_account"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("bank_account")
 
     @[JSON::Field(key: "routing_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter routing_number : String? = nil

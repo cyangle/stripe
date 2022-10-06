@@ -52,7 +52,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, inactive]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["active", "inactive"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("active", "inactive")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network.nil? && !network_present?)]
     getter network : String? = nil
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [amex, cartes_bancaires, diners, discover, interac, jcb, mastercard, unionpay, unknown, visa]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa")
 
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
@@ -40,7 +40,7 @@ module Stripe
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
     getter request_three_d_secure : String? = nil
     ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic, challenge_only]."
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic", "challenge_only"]
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = String.static_array("any", "automatic", "challenge_only")
 
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false

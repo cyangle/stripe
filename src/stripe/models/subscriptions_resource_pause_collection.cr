@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter behavior : String? = nil
     ERROR_MESSAGE_FOR_BEHAVIOR = "invalid value for \"behavior\", must be one of [keep_as_draft, mark_uncollectible, void]."
-    VALID_VALUES_FOR_BEHAVIOR  = StaticArray["keep_as_draft", "mark_uncollectible", "void"]
+    VALID_VALUES_FOR_BEHAVIOR  = String.static_array("keep_as_draft", "mark_uncollectible", "void")
 
     # End of Required Properties
 

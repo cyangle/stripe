@@ -51,13 +51,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [topup]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["topup"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("topup")
 
     # The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, failed, pending, reversed, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "failed", "pending", "reversed", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "failed", "pending", "reversed", "succeeded")
 
     # End of Required Properties
 

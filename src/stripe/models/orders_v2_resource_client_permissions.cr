@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "billing_details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
     getter billing_details : String? = nil
     ERROR_MESSAGE_FOR_BILLING_DETAILS = "invalid value for \"billing_details\", must be one of [allow, disallow]."
-    VALID_VALUES_FOR_BILLING_DETAILS  = StaticArray["allow", "disallow"]
+    VALID_VALUES_FOR_BILLING_DETAILS  = String.static_array("allow", "disallow")
 
     @[JSON::Field(ignore: true)]
     property? billing_details_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "promotion_codes", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: promotion_codes.nil? && !promotion_codes_present?)]
     getter promotion_codes : String? = nil
     ERROR_MESSAGE_FOR_PROMOTION_CODES = "invalid value for \"promotion_codes\", must be one of [allow, disallow]."
-    VALID_VALUES_FOR_PROMOTION_CODES  = StaticArray["allow", "disallow"]
+    VALID_VALUES_FOR_PROMOTION_CODES  = String.static_array("allow", "disallow")
 
     @[JSON::Field(ignore: true)]
     property? promotion_codes_present : Bool = false
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "shipping_details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_details.nil? && !shipping_details_present?)]
     getter shipping_details : String? = nil
     ERROR_MESSAGE_FOR_SHIPPING_DETAILS = "invalid value for \"shipping_details\", must be one of [allow, disallow]."
-    VALID_VALUES_FOR_SHIPPING_DETAILS  = StaticArray["allow", "disallow"]
+    VALID_VALUES_FOR_SHIPPING_DETAILS  = String.static_array("allow", "disallow")
 
     @[JSON::Field(ignore: true)]
     property? shipping_details_present : Bool = false

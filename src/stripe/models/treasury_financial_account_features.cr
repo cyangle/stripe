@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.financial_account_features]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.financial_account_features"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.financial_account_features")
 
     # End of Required Properties
 

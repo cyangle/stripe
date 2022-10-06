@@ -30,14 +30,14 @@ module Stripe
     getter account_holder_type : String? = nil
     MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE    = 5000
     ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE = "invalid value for \"account_holder_type\", must be one of [, company, individual]."
-    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = StaticArray["", "company", "individual"]
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = String.static_array("", "company", "individual")
 
     # The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_type : String? = nil
     MAX_LENGTH_FOR_ACCOUNT_TYPE    = 5000
     ERROR_MESSAGE_FOR_ACCOUNT_TYPE = "invalid value for \"account_type\", must be one of [checking, futsu, savings, toza]."
-    VALID_VALUES_FOR_ACCOUNT_TYPE  = StaticArray["checking", "futsu", "savings", "toza"]
+    VALID_VALUES_FOR_ACCOUNT_TYPE  = String.static_array("checking", "futsu", "savings", "toza")
 
     # City/District/Suburb/Town/Village.
     @[JSON::Field(key: "address_city", type: String?, default: nil, required: false, nullable: false, emit_null: false)]

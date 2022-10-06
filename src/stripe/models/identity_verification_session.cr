@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [identity.verification_session]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["identity.verification_session"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("identity.verification_session")
 
     @[JSON::Field(key: "options", type: Stripe::GelatoVerificationSessionOptions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Stripe::GelatoVerificationSessionOptions? = nil
@@ -51,13 +51,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, processing, requires_input, verified]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "processing", "requires_input", "verified"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "processing", "requires_input", "verified")
 
     # The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number")
 
     # End of Required Properties
 

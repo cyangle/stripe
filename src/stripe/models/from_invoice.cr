@@ -25,7 +25,7 @@ module Stripe
     getter action : String? = nil
     MAX_LENGTH_FOR_ACTION    = 5000
     ERROR_MESSAGE_FOR_ACTION = "invalid value for \"action\", must be one of [revision]."
-    VALID_VALUES_FOR_ACTION  = StaticArray["revision"]
+    VALID_VALUES_FOR_ACTION  = String.static_array("revision")
 
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : String? = nil

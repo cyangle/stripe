@@ -53,7 +53,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [card]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["card"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("card")
 
     # End of Required Properties
 
@@ -133,7 +133,7 @@ module Stripe
     @[JSON::Field(key: "available_payout_methods", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available_payout_methods.nil? && !available_payout_methods_present?)]
     getter available_payout_methods : Array(String)? = nil
     ERROR_MESSAGE_FOR_AVAILABLE_PAYOUT_METHODS = "invalid value for \"available_payout_methods\", must be one of [instant, standard]."
-    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS  = StaticArray["instant", "standard"]
+    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS  = String.static_array("instant", "standard")
 
     @[JSON::Field(ignore: true)]
     property? available_payout_methods_present : Bool = false

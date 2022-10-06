@@ -63,7 +63,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.outbound_payment]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.outbound_payment"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.outbound_payment")
 
     # The description that appears on the receiving end for an OutboundPayment (for example, bank statement for external bank transfer).
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -74,7 +74,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, failed, posted, processing, returned]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "failed", "posted", "processing", "returned"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "failed", "posted", "processing", "returned")
 
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions? = nil

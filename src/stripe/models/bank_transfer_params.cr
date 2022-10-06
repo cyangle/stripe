@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, gb_bank_transfer, jp_bank_transfer, mx_bank_transfer]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer")
 
     # End of Required Properties
 
@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "requested_address_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested_address_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_REQUESTED_ADDRESS_TYPES = "invalid value for \"requested_address_types\", must be one of [iban, sort_code, spei, zengin]."
-    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES  = StaticArray["iban", "sort_code", "spei", "zengin"]
+    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES  = String.static_array("iban", "sort_code", "spei", "zengin")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

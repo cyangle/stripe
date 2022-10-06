@@ -27,7 +27,7 @@ module Stripe
     getter interval : String? = nil
     MAX_LENGTH_FOR_INTERVAL    = 5000
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [daily, manual, monthly, weekly]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["daily", "manual", "monthly", "weekly"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("daily", "manual", "monthly", "weekly")
 
     @[JSON::Field(key: "monthly_anchor", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter monthly_anchor : Int64? = nil
@@ -36,7 +36,7 @@ module Stripe
     getter weekly_anchor : String? = nil
     MAX_LENGTH_FOR_WEEKLY_ANCHOR    = 5000
     ERROR_MESSAGE_FOR_WEEKLY_ANCHOR = "invalid value for \"weekly_anchor\", must be one of [friday, monday, saturday, sunday, thursday, tuesday, wednesday]."
-    VALID_VALUES_FOR_WEEKLY_ANCHOR  = StaticArray["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"]
+    VALID_VALUES_FOR_WEEKLY_ANCHOR  = String.static_array("friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

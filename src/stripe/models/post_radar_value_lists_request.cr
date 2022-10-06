@@ -43,7 +43,7 @@ module Stripe
     getter item_type : String? = nil
     MAX_LENGTH_FOR_ITEM_TYPE    = 5000
     ERROR_MESSAGE_FOR_ITEM_TYPE = "invalid value for \"item_type\", must be one of [card_bin, card_fingerprint, case_sensitive_string, country, customer_id, email, ip_address, string]."
-    VALID_VALUES_FOR_ITEM_TYPE  = StaticArray["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"]
+    VALID_VALUES_FOR_ITEM_TYPE  = String.static_array("card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string")
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]

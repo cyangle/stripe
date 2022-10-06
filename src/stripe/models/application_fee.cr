@@ -59,7 +59,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [application_fee]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["application_fee"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("application_fee")
 
     # Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will still be false.
     @[JSON::Field(key: "refunded", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]

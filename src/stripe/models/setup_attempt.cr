@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [setup_attempt]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["setup_attempt"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("setup_attempt")
 
     @[JSON::Field(key: "payment_method", type: Stripe::SetupAttemptPaymentMethod?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_method : Stripe::SetupAttemptPaymentMethod? = nil
@@ -83,7 +83,7 @@ module Stripe
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_directions.nil? && !flow_directions_present?)]
     getter flow_directions : Array(String)? = nil
     ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
-    VALID_VALUES_FOR_FLOW_DIRECTIONS  = StaticArray["inbound", "outbound"]
+    VALID_VALUES_FOR_FLOW_DIRECTIONS  = String.static_array("inbound", "outbound")
 
     @[JSON::Field(ignore: true)]
     property? flow_directions_present : Bool = false

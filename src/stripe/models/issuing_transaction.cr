@@ -64,13 +64,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.transaction]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.transaction"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("issuing.transaction")
 
     # The nature of the transaction.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [capture, refund]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["capture", "refund"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("capture", "refund")
 
     # End of Required Properties
 
@@ -122,7 +122,7 @@ module Stripe
     @[JSON::Field(key: "wallet", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: wallet.nil? && !wallet_present?)]
     getter wallet : String? = nil
     ERROR_MESSAGE_FOR_WALLET = "invalid value for \"wallet\", must be one of [apple_pay, google_pay, samsung_pay]."
-    VALID_VALUES_FOR_WALLET  = StaticArray["apple_pay", "google_pay", "samsung_pay"]
+    VALID_VALUES_FOR_WALLET  = String.static_array("apple_pay", "google_pay", "samsung_pay")
 
     @[JSON::Field(ignore: true)]
     property? wallet_present : Bool = false

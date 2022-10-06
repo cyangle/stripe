@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
-    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
+    VALID_VALUES_FOR_COLLECTION_METHOD  = String.static_array("charge_automatically", "send_invoice")
 
     @[JSON::Field(key: "custom_fields", type: Stripe::PostInvoicesInvoiceRequestCustomFields?, default: nil, required: false, nullable: false, emit_null: false)]
     getter custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction_type.nil? && !transaction_type_present?)]
     getter transaction_type : String? = nil
     ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
-    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = String.static_array("business", "personal")
 
     @[JSON::Field(ignore: true)]
     property? transaction_type_present : Bool = false

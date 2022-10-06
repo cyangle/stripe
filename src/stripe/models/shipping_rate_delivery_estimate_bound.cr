@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "unit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter unit : String? = nil
     ERROR_MESSAGE_FOR_UNIT = "invalid value for \"unit\", must be one of [business_day, day, hour, month, week]."
-    VALID_VALUES_FOR_UNIT  = StaticArray["business_day", "day", "hour", "month", "week"]
+    VALID_VALUES_FOR_UNIT  = String.static_array("business_day", "day", "hour", "month", "week")
 
     # Must be greater than 0.
     @[JSON::Field(key: "value", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

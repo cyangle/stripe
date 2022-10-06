@@ -50,7 +50,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [radar.early_fraud_warning]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["radar.early_fraud_warning"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("radar.early_fraud_warning")
 
     # End of Required Properties
 

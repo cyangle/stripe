@@ -30,7 +30,7 @@ module Stripe
     @[JSON::Field(key: "source", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source : String? = nil
     ERROR_MESSAGE_FOR_SOURCE = "invalid value for \"source\", must be one of [billing_address, ip_address, payment_method, shipping_destination]."
-    VALID_VALUES_FOR_SOURCE  = StaticArray["billing_address", "ip_address", "payment_method", "shipping_destination"]
+    VALID_VALUES_FOR_SOURCE  = String.static_array("billing_address", "ip_address", "payment_method", "shipping_destination")
 
     # End of Required Properties
 

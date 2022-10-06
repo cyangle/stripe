@@ -59,7 +59,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [payout]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["payout"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("payout")
 
     # The source balance this payout came from. One of `card`, `fpx`, or `bank_account`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -75,7 +75,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bank_account, card]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["bank_account", "card"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("bank_account", "card")
 
     # End of Required Properties
 

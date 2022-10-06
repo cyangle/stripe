@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("automatic", "manual")
 
     # Order identifier shown to the user in Afterpay's online portal. We recommend using a value that helps you answer any questions a customer might have about the payment. The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

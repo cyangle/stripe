@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [, manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["", "manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("", "manual")
 
     @[JSON::Field(key: "cvc_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cvc_token : String? = nil
@@ -39,18 +39,18 @@ module Stripe
     getter network : String? = nil
     MAX_LENGTH_FOR_NETWORK    = 5000
     ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [amex, cartes_bancaires, diners, discover, interac, jcb, mastercard, unionpay, unknown, visa]."
-    VALID_VALUES_FOR_NETWORK  = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
+    VALID_VALUES_FOR_NETWORK  = String.static_array("amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa")
 
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
     MAX_LENGTH_FOR_REQUEST_THREE_D_SECURE    = 5000
     ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic]."
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic"]
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = String.static_array("any", "automatic")
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [, none, off_session, on_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["", "none", "off_session", "on_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("", "none", "off_session", "on_session")
 
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: Stripe::PaymentIntentParamStatementDescriptorSuffixKana?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kana : Stripe::PaymentIntentParamStatementDescriptorSuffixKana? = nil

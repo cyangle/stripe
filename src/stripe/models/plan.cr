@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
     ERROR_MESSAGE_FOR_BILLING_SCHEME = "invalid value for \"billing_scheme\", must be one of [per_unit, tiered]."
-    VALID_VALUES_FOR_BILLING_SCHEME  = StaticArray["per_unit", "tiered"]
+    VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "week", "year")
 
     # The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,13 +62,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [plan]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["plan"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("plan")
 
     # Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
     ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
-    VALID_VALUES_FOR_USAGE_TYPE  = StaticArray["licensed", "metered"]
+    VALID_VALUES_FOR_USAGE_TYPE  = String.static_array("licensed", "metered")
 
     # End of Required Properties
 
@@ -78,7 +78,7 @@ module Stripe
     @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
     getter aggregate_usage : String? = nil
     ERROR_MESSAGE_FOR_AGGREGATE_USAGE = "invalid value for \"aggregate_usage\", must be one of [last_during_period, last_ever, max, sum]."
-    VALID_VALUES_FOR_AGGREGATE_USAGE  = StaticArray["last_during_period", "last_ever", "max", "sum"]
+    VALID_VALUES_FOR_AGGREGATE_USAGE  = String.static_array("last_during_period", "last_ever", "max", "sum")
 
     @[JSON::Field(ignore: true)]
     property? aggregate_usage_present : Bool = false
@@ -126,7 +126,7 @@ module Stripe
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tiers_mode.nil? && !tiers_mode_present?)]
     getter tiers_mode : String? = nil
     ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
-    VALID_VALUES_FOR_TIERS_MODE  = StaticArray["graduated", "volume"]
+    VALID_VALUES_FOR_TIERS_MODE  = String.static_array("graduated", "volume")
 
     @[JSON::Field(ignore: true)]
     property? tiers_mode_present : Bool = false

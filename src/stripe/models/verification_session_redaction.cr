@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [processing, redacted]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["processing", "redacted"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("processing", "redacted")
 
     # End of Required Properties
 

@@ -77,7 +77,7 @@ module Stripe
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred_language.nil? && !preferred_language_present?)]
     getter preferred_language : String? = nil
     ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE = "invalid value for \"preferred_language\", must be one of [de, en, es, fr, it, nl, pl]."
-    VALID_VALUES_FOR_PREFERRED_LANGUAGE  = StaticArray["de", "en", "es", "fr", "it", "nl", "pl"]
+    VALID_VALUES_FOR_PREFERRED_LANGUAGE  = String.static_array("de", "en", "es", "fr", "it", "nl", "pl")
 
     @[JSON::Field(ignore: true)]
     property? preferred_language_present : Bool = false

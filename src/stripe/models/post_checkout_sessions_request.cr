@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_address_collection : String? = nil
     ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
-    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = StaticArray["auto", "required"]
+    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = String.static_array("auto", "required")
 
     # A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or similar, and can be used to reconcile the session with your internal systems.
     @[JSON::Field(key: "client_reference_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -71,7 +71,7 @@ module Stripe
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_creation : String? = nil
     ERROR_MESSAGE_FOR_CUSTOMER_CREATION = "invalid value for \"customer_creation\", must be one of [always, if_required]."
-    VALID_VALUES_FOR_CUSTOMER_CREATION  = StaticArray["always", "if_required"]
+    VALID_VALUES_FOR_CUSTOMER_CREATION  = String.static_array("always", "if_required")
 
     # If provided, this value will be used when the Customer object is created. If not provided, customers will be asked to enter their email address. Use this parameter to prefill customer data if you already have an email on file. To access information about the customer once a session is complete, use the `customer` field.
     @[JSON::Field(key: "customer_email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -100,7 +100,7 @@ module Stripe
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter locale : String? = nil
     ERROR_MESSAGE_FOR_LOCALE = "invalid value for \"locale\", must be one of [auto, bg, cs, da, de, el, en, en-GB, es, es-419, et, fi, fil, fr, fr-CA, hr, hu, id, it, ja, ko, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sv, th, tr, vi, zh, zh-HK, zh-TW]."
-    VALID_VALUES_FOR_LOCALE  = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
+    VALID_VALUES_FOR_LOCALE  = String.static_array("auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW")
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -110,7 +110,7 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
     ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [payment, setup, subscription]."
-    VALID_VALUES_FOR_MODE  = StaticArray["payment", "setup", "subscription"]
+    VALID_VALUES_FOR_MODE  = String.static_array("payment", "setup", "subscription")
 
     @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentIntentDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent_data : Stripe::PaymentIntentDataParams? = nil
@@ -119,7 +119,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_collection : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION = "invalid value for \"payment_method_collection\", must be one of [always, if_required]."
-    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
+    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
@@ -128,7 +128,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [acss_debit, affirm, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, blik, boleto, card, customer_balance, eps, fpx, giropay, grabpay, ideal, klarna, konbini, oxxo, p24, paynow, pix, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
+    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = String.static_array("acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
 
     @[JSON::Field(key: "phone_number_collection", type: Stripe::PhoneNumberCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil
@@ -147,7 +147,7 @@ module Stripe
     @[JSON::Field(key: "submit_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter submit_type : String? = nil
     ERROR_MESSAGE_FOR_SUBMIT_TYPE = "invalid value for \"submit_type\", must be one of [auto, book, donate, pay]."
-    VALID_VALUES_FOR_SUBMIT_TYPE  = StaticArray["auto", "book", "donate", "pay"]
+    VALID_VALUES_FOR_SUBMIT_TYPE  = String.static_array("auto", "book", "donate", "pay")
 
     @[JSON::Field(key: "subscription_data", type: Stripe::SubscriptionDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter subscription_data : Stripe::SubscriptionDataParams? = nil

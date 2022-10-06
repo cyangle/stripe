@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [hosted_confirmation, redirect]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["hosted_confirmation", "redirect"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("hosted_confirmation", "redirect")
 
     # End of Required Properties
 

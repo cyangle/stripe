@@ -44,12 +44,12 @@ module Stripe
     @[JSON::Field(key: "service", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter service : String? = nil
     ERROR_MESSAGE_FOR_SERVICE = "invalid value for \"service\", must be one of [express, priority, standard]."
-    VALID_VALUES_FOR_SERVICE  = StaticArray["express", "priority", "standard"]
+    VALID_VALUES_FOR_SERVICE  = String.static_array("express", "priority", "standard")
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bulk, individual]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["bulk", "individual"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("bulk", "individual")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

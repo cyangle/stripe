@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "reasons", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reasons : Array(String)? = nil
     ERROR_MESSAGE_FOR_REASONS = "invalid value for \"reasons\", must be one of [account_rejected, closed_by_platform, other]."
-    VALID_VALUES_FOR_REASONS  = StaticArray["account_rejected", "closed_by_platform", "other"]
+    VALID_VALUES_FOR_REASONS  = String.static_array("account_rejected", "closed_by_platform", "other")
 
     # End of Required Properties
 

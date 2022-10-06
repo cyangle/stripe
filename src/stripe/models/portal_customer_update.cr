@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter allowed_updates : Array(String)? = nil
     ERROR_MESSAGE_FOR_ALLOWED_UPDATES = "invalid value for \"allowed_updates\", must be one of [address, email, phone, shipping, tax_id]."
-    VALID_VALUES_FOR_ALLOWED_UPDATES  = StaticArray["address", "email", "phone", "shipping", "tax_id"]
+    VALID_VALUES_FOR_ALLOWED_UPDATES  = String.static_array("address", "email", "phone", "shipping", "tax_id")
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]

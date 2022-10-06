@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("manual")
 
     @[JSON::Field(key: "installments", type: Stripe::PaymentFlowsInstallmentOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter installments : Stripe::PaymentFlowsInstallmentOptions? = nil
@@ -34,13 +34,13 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none, off_session, on_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none", "off_session", "on_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none", "off_session", "on_session")
 
     # Bank account verification method.
     @[JSON::Field(key: "verification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification_method : String? = nil
     ERROR_MESSAGE_FOR_VERIFICATION_METHOD = "invalid value for \"verification_method\", must be one of [automatic, instant, microdeposits]."
-    VALID_VALUES_FOR_VERIFICATION_METHOD  = StaticArray["automatic", "instant", "microdeposits"]
+    VALID_VALUES_FOR_VERIFICATION_METHOD  = String.static_array("automatic", "instant", "microdeposits")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

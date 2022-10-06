@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "disabled_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: disabled_reason.nil? && !disabled_reason_present?)]
     getter disabled_reason : String? = nil
     ERROR_MESSAGE_FOR_DISABLED_REASON = "invalid value for \"disabled_reason\", must be one of [listed, rejected.listed, under_review]."
-    VALID_VALUES_FOR_DISABLED_REASON  = StaticArray["listed", "rejected.listed", "under_review"]
+    VALID_VALUES_FOR_DISABLED_REASON  = String.static_array("listed", "rejected.listed", "under_review")
 
     @[JSON::Field(ignore: true)]
     property? disabled_reason_present : Bool = false
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "past_due", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: past_due.nil? && !past_due_present?)]
     getter past_due : Array(String)? = nil
     ERROR_MESSAGE_FOR_PAST_DUE = "invalid value for \"past_due\", must be one of [company.tax_id, individual.dob.day, individual.dob.month, individual.dob.year, individual.first_name, individual.last_name, individual.verification.document]."
-    VALID_VALUES_FOR_PAST_DUE  = StaticArray["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"]
+    VALID_VALUES_FOR_PAST_DUE  = String.static_array("company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document")
 
     @[JSON::Field(ignore: true)]
     property? past_due_present : Bool = false

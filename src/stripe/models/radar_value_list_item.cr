@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [radar.value_list_item]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["radar.value_list_item"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("radar.value_list_item")
 
     # The value of the item.
     @[JSON::Field(key: "value", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

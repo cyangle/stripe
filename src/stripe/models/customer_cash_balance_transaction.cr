@@ -54,13 +54,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [customer_cash_balance_transaction]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["customer_cash_balance_transaction"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("customer_cash_balance_transaction")
 
     # The type of the cash balance transaction. One of `applied_to_payment`, `unapplied_from_payment`, `refunded_from_payment`, `funded`, `return_initiated`, or `return_canceled`. New types may be added in future. See [Customer Balance](https://stripe.com/docs/payments/customer-balance#types) to learn more about these types.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [applied_to_payment, funded, refunded_from_payment, return_canceled, return_initiated, unapplied_from_payment]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment")
 
     # End of Required Properties
 

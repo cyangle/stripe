@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "allowed_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_types : Array(String)? = nil
     ERROR_MESSAGE_FOR_ALLOWED_TYPES = "invalid value for \"allowed_types\", must be one of [driving_license, id_card, passport]."
-    VALID_VALUES_FOR_ALLOWED_TYPES  = StaticArray["driving_license", "id_card", "passport"]
+    VALID_VALUES_FOR_ALLOWED_TYPES  = String.static_array("driving_license", "id_card", "passport")
 
     @[JSON::Field(key: "require_id_number", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter require_id_number : Bool? = nil

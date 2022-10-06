@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "default_allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter default_allowed_updates : Array(String)? = nil
     ERROR_MESSAGE_FOR_DEFAULT_ALLOWED_UPDATES = "invalid value for \"default_allowed_updates\", must be one of [price, promotion_code, quantity]."
-    VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES  = StaticArray["price", "promotion_code", "quantity"]
+    VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES  = String.static_array("price", "promotion_code", "quantity")
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
     ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = String.static_array("always_invoice", "create_prorations", "none")
 
     # End of Required Properties
 

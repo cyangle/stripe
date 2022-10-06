@@ -54,7 +54,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [transfer]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["transfer"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("transfer")
 
     @[JSON::Field(key: "reversals", type: Stripe::TransferReversalList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reversals : Stripe::TransferReversalList1? = nil

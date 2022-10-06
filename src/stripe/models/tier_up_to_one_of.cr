@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "tier_up_to_oneOf", must be one of ["inf"].}
 
-    VALID_VALUES = StaticArray["inf"]
+    VALID_VALUES = String.static_array("inf")
 
     delegate to_json_object_key, to: @data
 

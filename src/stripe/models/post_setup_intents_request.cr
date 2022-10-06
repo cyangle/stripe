@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter flow_directions : Array(String)? = nil
     ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
-    VALID_VALUES_FOR_FLOW_DIRECTIONS  = StaticArray["inbound", "outbound"]
+    VALID_VALUES_FOR_FLOW_DIRECTIONS  = String.static_array("inbound", "outbound")
 
     @[JSON::Field(key: "mandate_data", type: Stripe::SecretKeyParam2?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_data : Stripe::SecretKeyParam2? = nil
@@ -85,7 +85,7 @@ module Stripe
     @[JSON::Field(key: "usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage : String? = nil
     ERROR_MESSAGE_FOR_USAGE = "invalid value for \"usage\", must be one of [off_session, on_session]."
-    VALID_VALUES_FOR_USAGE  = StaticArray["off_session", "on_session"]
+    VALID_VALUES_FOR_USAGE  = String.static_array("off_session", "on_session")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

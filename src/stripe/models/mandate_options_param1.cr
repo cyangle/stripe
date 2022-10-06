@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
     ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
-    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = String.static_array("business", "personal")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

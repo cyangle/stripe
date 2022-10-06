@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [scheduled_query_run]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["scheduled_query_run"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("scheduled_query_run")
 
     # Time at which the result expires and is no longer available for download.
     @[JSON::Field(key: "result_available_until", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

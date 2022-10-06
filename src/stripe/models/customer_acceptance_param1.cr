@@ -27,7 +27,7 @@ module Stripe
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE    = 5000
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [online]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["online"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("online")
 
     # End of Required Properties
 

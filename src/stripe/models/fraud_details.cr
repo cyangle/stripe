@@ -25,7 +25,7 @@ module Stripe
     getter user_report : String? = nil
     MAX_LENGTH_FOR_USER_REPORT    = 5000
     ERROR_MESSAGE_FOR_USER_REPORT = "invalid value for \"user_report\", must be one of [, fraudulent, safe]."
-    VALID_VALUES_FOR_USER_REPORT  = StaticArray["", "fraudulent", "safe"]
+    VALID_VALUES_FOR_USER_REPORT  = String.static_array("", "fraudulent", "safe")
 
     # End of Required Properties
 

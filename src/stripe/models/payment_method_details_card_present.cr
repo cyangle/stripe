@@ -134,7 +134,7 @@ module Stripe
     @[JSON::Field(key: "read_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: read_method.nil? && !read_method_present?)]
     getter read_method : String? = nil
     ERROR_MESSAGE_FOR_READ_METHOD = "invalid value for \"read_method\", must be one of [contact_emv, contactless_emv, contactless_magstripe_mode, magnetic_stripe_fallback, magnetic_stripe_track2]."
-    VALID_VALUES_FOR_READ_METHOD  = StaticArray["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"]
+    VALID_VALUES_FOR_READ_METHOD  = String.static_array("contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2")
 
     @[JSON::Field(ignore: true)]
     property? read_method_present : Bool = false

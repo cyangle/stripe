@@ -30,12 +30,12 @@ module Stripe
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_schedule : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE = "invalid value for \"payment_schedule\", must be one of [combined, interval, sporadic]."
-    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = StaticArray["combined", "interval", "sporadic"]
+    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = String.static_array("combined", "interval", "sporadic")
 
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
     ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
-    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = String.static_array("business", "personal")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

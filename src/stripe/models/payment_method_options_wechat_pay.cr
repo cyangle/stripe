@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "client", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: client.nil? && !client_present?)]
     getter client : String? = nil
     ERROR_MESSAGE_FOR_CLIENT = "invalid value for \"client\", must be one of [android, ios, web]."
-    VALID_VALUES_FOR_CLIENT  = StaticArray["android", "ios", "web"]
+    VALID_VALUES_FOR_CLIENT  = String.static_array("android", "ios", "web")
 
     @[JSON::Field(ignore: true)]
     property? client_present : Bool = false
@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -20,7 +20,7 @@ module Stripe
 
     ERROR_MESSAGE = %{invalid value for "transfer_schedule_specs_delay_days_oneOf", must be one of ["minimum"].}
 
-    VALID_VALUES = StaticArray["minimum"]
+    VALID_VALUES = String.static_array("minimum")
 
     delegate to_json_object_key, to: @data
 

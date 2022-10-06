@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "requested", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested : Array(String)? = nil
     ERROR_MESSAGE_FOR_REQUESTED = "invalid value for \"requested\", must be one of [ach, us_domestic_wire]."
-    VALID_VALUES_FOR_REQUESTED  = StaticArray["ach", "us_domestic_wire"]
+    VALID_VALUES_FOR_REQUESTED  = String.static_array("ach", "us_domestic_wire")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

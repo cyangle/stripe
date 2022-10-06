@@ -51,7 +51,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [tax_rate]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["tax_rate"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("tax_rate")
 
     # This represents the tax rate percent out of 100.
     @[JSON::Field(key: "percentage", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -104,7 +104,7 @@ module Stripe
     @[JSON::Field(key: "tax_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_type.nil? && !tax_type_present?)]
     getter tax_type : String? = nil
     ERROR_MESSAGE_FOR_TAX_TYPE = "invalid value for \"tax_type\", must be one of [gst, hst, jct, pst, qst, rst, sales_tax, vat]."
-    VALID_VALUES_FOR_TAX_TYPE  = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
+    VALID_VALUES_FOR_TAX_TYPE  = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     @[JSON::Field(ignore: true)]
     property? tax_type_present : Bool = false

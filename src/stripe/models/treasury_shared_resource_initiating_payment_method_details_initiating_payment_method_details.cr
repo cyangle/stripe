@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [balance, financial_account, issuing_card, stripe, us_bank_account]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["balance", "financial_account", "issuing_card", "stripe", "us_bank_account"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("balance", "financial_account", "issuing_card", "stripe", "us_bank_account")
 
     # End of Required Properties
 
@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "balance", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter balance : String? = nil
     ERROR_MESSAGE_FOR_BALANCE = "invalid value for \"balance\", must be one of [payments]."
-    VALID_VALUES_FOR_BALANCE  = StaticArray["payments"]
+    VALID_VALUES_FOR_BALANCE  = String.static_array("payments")
 
     @[JSON::Field(key: "financial_account", type: Stripe::ReceivedPaymentMethodDetailsFinancialAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_account : Stripe::ReceivedPaymentMethodDetailsFinancialAccount? = nil

@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "source_flow_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source_flow_type : String? = nil
     ERROR_MESSAGE_FOR_SOURCE_FLOW_TYPE = "invalid value for \"source_flow_type\", must be one of [credit_reversal, other, outbound_payment, payout]."
-    VALID_VALUES_FOR_SOURCE_FLOW_TYPE  = StaticArray["credit_reversal", "other", "outbound_payment", "payout"]
+    VALID_VALUES_FOR_SOURCE_FLOW_TYPE  = String.static_array("credit_reversal", "other", "outbound_payment", "payout")
 
     # End of Required Properties
 

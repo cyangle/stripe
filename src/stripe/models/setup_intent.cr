@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [setup_intent]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["setup_intent"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("setup_intent")
 
     # The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, processing, requires_action, requires_confirmation, requires_payment_method, succeeded]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded")
 
     # Indicates how the payment method is intended to be used in the future.  Use `on_session` if you intend to only reuse the payment method when the customer is in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If not provided, this value defaults to `off_session`.
     @[JSON::Field(key: "usage", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -73,7 +73,7 @@ module Stripe
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String? = nil
     ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [abandoned, duplicate, requested_by_customer]."
-    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["abandoned", "duplicate", "requested_by_customer"]
+    VALID_VALUES_FOR_CANCELLATION_REASON  = String.static_array("abandoned", "duplicate", "requested_by_customer")
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
@@ -104,7 +104,7 @@ module Stripe
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_directions.nil? && !flow_directions_present?)]
     getter flow_directions : Array(String)? = nil
     ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
-    VALID_VALUES_FOR_FLOW_DIRECTIONS  = StaticArray["inbound", "outbound"]
+    VALID_VALUES_FOR_FLOW_DIRECTIONS  = String.static_array("inbound", "outbound")
 
     @[JSON::Field(ignore: true)]
     property? flow_directions_present : Bool = false

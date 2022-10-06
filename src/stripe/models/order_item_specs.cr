@@ -41,7 +41,7 @@ module Stripe
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE    = 5000
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [discount, shipping, sku, tax]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["discount", "shipping", "sku", "tax"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("discount", "shipping", "sku", "tax")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

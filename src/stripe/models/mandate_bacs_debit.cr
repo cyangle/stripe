@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "network_status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network_status : String? = nil
     ERROR_MESSAGE_FOR_NETWORK_STATUS = "invalid value for \"network_status\", must be one of [accepted, pending, refused, revoked]."
-    VALID_VALUES_FOR_NETWORK_STATUS  = StaticArray["accepted", "pending", "refused", "revoked"]
+    VALID_VALUES_FOR_NETWORK_STATUS  = String.static_array("accepted", "pending", "refused", "revoked")
 
     # The unique reference identifying the mandate on the Bacs network.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

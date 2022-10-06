@@ -23,12 +23,12 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
-    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
+    VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "week", "year")
 
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
     ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
-    VALID_VALUES_FOR_USAGE_TYPE  = StaticArray["licensed", "metered"]
+    VALID_VALUES_FOR_USAGE_TYPE  = String.static_array("licensed", "metered")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

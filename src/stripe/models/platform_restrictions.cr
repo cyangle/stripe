@@ -24,12 +24,12 @@ module Stripe
     @[JSON::Field(key: "inbound_flows", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter inbound_flows : String? = nil
     ERROR_MESSAGE_FOR_INBOUND_FLOWS = "invalid value for \"inbound_flows\", must be one of [restricted, unrestricted]."
-    VALID_VALUES_FOR_INBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
+    VALID_VALUES_FOR_INBOUND_FLOWS  = String.static_array("restricted", "unrestricted")
 
     @[JSON::Field(key: "outbound_flows", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter outbound_flows : String? = nil
     ERROR_MESSAGE_FOR_OUTBOUND_FLOWS = "invalid value for \"outbound_flows\", must be one of [restricted, unrestricted]."
-    VALID_VALUES_FOR_OUTBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
+    VALID_VALUES_FOR_OUTBOUND_FLOWS  = String.static_array("restricted", "unrestricted")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

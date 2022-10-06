@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
     ERROR_MESSAGE_FOR_COUNTRY = "invalid value for \"country\", must be one of [DE, ES, FR, IE, NL]."
-    VALID_VALUES_FOR_COUNTRY  = StaticArray["DE", "ES", "FR", "IE", "NL"]
+    VALID_VALUES_FOR_COUNTRY  = String.static_array("DE", "ES", "FR", "IE", "NL")
 
     # End of Required Properties
 

@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "authorization_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter authorization_method : String? = nil
     ERROR_MESSAGE_FOR_AUTHORIZATION_METHOD = "invalid value for \"authorization_method\", must be one of [chip, contactless, keyed_in, online, swipe]."
-    VALID_VALUES_FOR_AUTHORIZATION_METHOD  = StaticArray["chip", "contactless", "keyed_in", "online", "swipe"]
+    VALID_VALUES_FOR_AUTHORIZATION_METHOD  = String.static_array("chip", "contactless", "keyed_in", "online", "swipe")
 
     # List of balance transactions associated with this authorization.
     @[JSON::Field(key: "balance_transactions", type: Array(Stripe::BalanceTransaction)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -78,7 +78,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.authorization]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.authorization"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("issuing.authorization")
 
     # History of every time `pending_request` was approved/denied, either by you directly or by Stripe (e.g. based on your `spending_controls`). If the merchant changes the authorization by performing an [incremental authorization](https://stripe.com/docs/issuing/purchases/authorizations), you can look at this field to see the previous requests for the authorization.
     @[JSON::Field(key: "request_history", type: Array(Stripe::IssuingAuthorizationRequest)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -88,7 +88,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [closed, pending, reversed]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["closed", "pending", "reversed"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("closed", "pending", "reversed")
 
     # List of [transactions](https://stripe.com/docs/api/issuing/transactions) associated with this authorization.
     @[JSON::Field(key: "transactions", type: Array(Stripe::IssuingTransaction)?, default: nil, required: true, nullable: false, emit_null: false)]

@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [off_session, on_session]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["off_session", "on_session"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("off_session", "on_session")
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false

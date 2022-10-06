@@ -30,7 +30,7 @@ module Stripe
     @[JSON::Field(key: "save_default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter save_default_payment_method : String? = nil
     ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD = "invalid value for \"save_default_payment_method\", must be one of [off, on_subscription]."
-    VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD  = StaticArray["off", "on_subscription"]
+    VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD  = String.static_array("off", "on_subscription")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

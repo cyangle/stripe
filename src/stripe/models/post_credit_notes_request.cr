@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
     ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [duplicate, fraudulent, order_change, product_unsatisfactory]."
-    VALID_VALUES_FOR_REASON  = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
+    VALID_VALUES_FOR_REASON  = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
 
     # ID of an existing refund to link this credit note to.
     @[JSON::Field(key: "refund", type: String?, default: nil, required: false, nullable: false, emit_null: false)]

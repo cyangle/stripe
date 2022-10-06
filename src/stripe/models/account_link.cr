@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [account_link]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["account_link"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("account_link")
 
     # The URL for the account link.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account_onboarding, account_update]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["account_onboarding", "account_update"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("account_onboarding", "account_update")
 
     # End of Required Properties
 
@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "collect", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collect : String? = nil
     ERROR_MESSAGE_FOR_COLLECT = "invalid value for \"collect\", must be one of [currently_due, eventually_due]."
-    VALID_VALUES_FOR_COLLECT  = StaticArray["currently_due", "eventually_due"]
+    VALID_VALUES_FOR_COLLECT  = String.static_array("currently_due", "eventually_due")
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]

@@ -47,12 +47,12 @@ module Stripe
     @[JSON::Field(key: "product_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product_type : String? = nil
     ERROR_MESSAGE_FOR_PRODUCT_TYPE = "invalid value for \"product_type\", must be one of [, merchandise, service]."
-    VALID_VALUES_FOR_PRODUCT_TYPE  = StaticArray["", "merchandise", "service"]
+    VALID_VALUES_FOR_PRODUCT_TYPE  = String.static_array("", "merchandise", "service")
 
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter return_status : String? = nil
     ERROR_MESSAGE_FOR_RETURN_STATUS = "invalid value for \"return_status\", must be one of [, merchant_rejected, successful]."
-    VALID_VALUES_FOR_RETURN_STATUS  = StaticArray["", "merchant_rejected", "successful"]
+    VALID_VALUES_FOR_RETURN_STATUS  = String.static_array("", "merchant_rejected", "successful")
 
     @[JSON::Field(key: "returned_at", type: Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil

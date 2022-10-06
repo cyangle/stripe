@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("none")
 
     @[JSON::Field(key: "tos_shown_and_accepted", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tos_shown_and_accepted : Bool? = nil

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "device_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter device_type : String? = nil
     ERROR_MESSAGE_FOR_DEVICE_TYPE = "invalid value for \"device_type\", must be one of [bbpos_chipper2x, bbpos_wisepad3, bbpos_wisepos_e, simulated_wisepos_e, stripe_m2, verifone_P400]."
-    VALID_VALUES_FOR_DEVICE_TYPE  = StaticArray["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"]
+    VALID_VALUES_FOR_DEVICE_TYPE  = String.static_array("bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400")
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,7 +49,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.reader]."
-    VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.reader"]
+    VALID_VALUES_FOR_OBJECT  = String.static_array("terminal.reader")
 
     # Serial number of the reader.
     @[JSON::Field(key: "serial_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]

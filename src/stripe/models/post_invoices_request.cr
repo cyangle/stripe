@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
-    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
+    VALID_VALUES_FOR_COLLECTION_METHOD  = String.static_array("charge_automatically", "send_invoice")
 
     # The currency to create this invoice in. Defaults to that of `customer` if not specified.
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -108,7 +108,7 @@ module Stripe
     @[JSON::Field(key: "pending_invoice_items_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pending_invoice_items_behavior : String? = nil
     ERROR_MESSAGE_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR = "invalid value for \"pending_invoice_items_behavior\", must be one of [exclude, include, include_and_require]."
-    VALID_VALUES_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR  = StaticArray["exclude", "include", "include_and_require"]
+    VALID_VALUES_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR  = String.static_array("exclude", "include", "include_and_require")
 
     @[JSON::Field(key: "rendering_options", type: Stripe::PostInvoicesRequestRenderingOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil

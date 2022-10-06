@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: funding_type.nil? && !funding_type_present?)]
     getter funding_type : String? = nil
     ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
-    VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
+    VALID_VALUES_FOR_FUNDING_TYPE  = String.static_array("bank_transfer")
 
     @[JSON::Field(ignore: true)]
     property? funding_type_present : Bool = false

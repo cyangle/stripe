@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_type : String? = nil
     ERROR_MESSAGE_FOR_BUSINESS_TYPE = "invalid value for \"business_type\", must be one of [company, government_entity, individual, non_profit]."
-    VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
+    VALID_VALUES_FOR_BUSINESS_TYPE  = String.static_array("company", "government_entity", "individual", "non_profit")
 
     @[JSON::Field(key: "company", type: Stripe::ConnectJsAccountTokenCompanySpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter company : Stripe::ConnectJsAccountTokenCompanySpecs? = nil

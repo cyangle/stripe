@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
     ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic]."
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic"]
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = String.static_array("any", "automatic")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

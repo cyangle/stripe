@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
     ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CAPTURE_METHOD  = String.static_array("automatic", "manual")
 
     # Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
     @[JSON::Field(key: "confirm", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -52,7 +52,7 @@ module Stripe
     @[JSON::Field(key: "confirmation_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter confirmation_method : String? = nil
     ERROR_MESSAGE_FOR_CONFIRMATION_METHOD = "invalid value for \"confirmation_method\", must be one of [automatic, manual]."
-    VALID_VALUES_FOR_CONFIRMATION_METHOD  = StaticArray["automatic", "manual"]
+    VALID_VALUES_FOR_CONFIRMATION_METHOD  = String.static_array("automatic", "manual")
 
     # ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -121,7 +121,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["off_session", "on_session"]
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("off_session", "on_session")
 
     @[JSON::Field(key: "shipping", type: Stripe::OptionalFieldsShipping1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::OptionalFieldsShipping1? = nil
