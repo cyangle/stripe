@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Configuration overrides
   class ProcessConfig
     include JSON::Serializable
     include JSON::Serializable::Unmapped

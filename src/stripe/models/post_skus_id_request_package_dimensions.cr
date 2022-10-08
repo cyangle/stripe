@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The dimensions of this SKU for shipping purposes.
-  alias PostSkusIdRequestPackageDimensions = BusinessProfileSpecsSupportUrlOneOf | PackageDimensionsSpecs
+  alias PostSkusIdRequestPackageDimensions = PackageDimensionsSpecs | PostAccountsRequestMetadataOneOf
 end

@@ -30,8 +30,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::FixedAmountCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter currency_options : Hash(String, Stripe::FixedAmountCurrencyOptionsValue)? = nil
+    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::ShippingRateCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter currency_options : Hash(String, Stripe::ShippingRateCurrencyOption)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +41,7 @@ module Stripe
       @amount : Int64? = nil,
       @currency : String? = nil,
       # Optional properties
-      @currency_options : Hash(String, Stripe::FixedAmountCurrencyOptionsValue)? = nil
+      @currency_options : Hash(String, Stripe::ShippingRateCurrencyOption)? = nil
     )
     end
 
@@ -96,7 +96,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::FixedAmountCurrencyOptionsValue)?)
+    def currency_options=(currency_options : Hash(String, Stripe::ShippingRateCurrencyOption)?)
       if currency_options.nil?
         return @currency_options = nil
       end

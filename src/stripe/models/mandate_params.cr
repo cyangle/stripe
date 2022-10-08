@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about a mandate possibility attached to a source object (generally for bank debits) as well as its acceptance status.
   class MandateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -24,8 +23,8 @@ module Stripe
     @[JSON::Field(key: "acceptance", type: Stripe::MandateAcceptanceParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acceptance : Stripe::MandateAcceptanceParams? = nil
 
-    @[JSON::Field(key: "amount", type: Stripe::UpdateParams1ApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter amount : Stripe::UpdateParams1ApplicationFeeAmount? = nil
+    @[JSON::Field(key: "amount", type: Stripe::UpdateParamsSettingsApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter amount : Stripe::UpdateParamsSettingsApplicationFeeAmount? = nil
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -48,7 +47,7 @@ module Stripe
       *,
       # Optional properties
       @acceptance : Stripe::MandateAcceptanceParams? = nil,
-      @amount : Stripe::UpdateParams1ApplicationFeeAmount? = nil,
+      @amount : Stripe::UpdateParamsSettingsApplicationFeeAmount? = nil,
       @currency : String? = nil,
       @interval : String? = nil,
       @notification_method : String? = nil
@@ -111,7 +110,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Stripe::UpdateParams1ApplicationFeeAmount?)
+    def amount=(amount : Stripe::UpdateParamsSettingsApplicationFeeAmount?)
       if amount.nil?
         return @amount = nil
       end

@@ -42,8 +42,8 @@ module Stripe
     getter statement_descriptor_suffix : String? = nil
     MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataUpdateParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataUpdateParams1? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataUpdateParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataUpdateParams? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,7 +55,7 @@ module Stripe
       @expand : Array(String)? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
-      @transfer_data : Stripe::TransferDataUpdateParams1? = nil
+      @transfer_data : Stripe::TransferDataUpdateParams? = nil
     )
     end
 
@@ -152,7 +152,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataUpdateParams1?)
+    def transfer_data=(transfer_data : Stripe::TransferDataUpdateParams?)
       if transfer_data.nil?
         return @transfer_data = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # If this hash is populated, this SetupIntent will generate a single_use Mandate on success.
   class SetupIntentSingleUseParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias PaymentIntentParamStatementDescriptorSuffixKana = BusinessProfileSpecsSupportUrlOneOf | String
+  alias PaymentIntentParamStatementDescriptorSuffixKana = String
 end

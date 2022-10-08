@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Hash used to generate the PaymentMethod to be used for this OutboundPayment. Exclusive with `destination_payment_method`.
   class PaymentMethodData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -39,8 +38,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter us_bank_account : Stripe::PaymentMethodParam1? = nil
+    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodDataParamsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +51,7 @@ module Stripe
       @billing_details : Stripe::BillingDetailsInnerParams? = nil,
       @financial_account : String? = nil,
       @metadata : Hash(String, String)? = nil,
-      @us_bank_account : Stripe::PaymentMethodParam1? = nil
+      @us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount? = nil
     )
     end
 
@@ -139,7 +138,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodParam1?)
+    def us_bank_account=(us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount?)
       if us_bank_account.nil?
         return @us_bank_account = nil
       end

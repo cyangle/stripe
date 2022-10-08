@@ -20,11 +20,14 @@ module Stripe
 
     # Required Properties
 
+    @[JSON::Field(key: "online", type: Stripe::OnlineParam?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter online : Stripe::OnlineParam? = nil
+
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
     MAX_LENGTH_FOR__TYPE    = 5000
-    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [offline, online]."
-    VALID_VALUES_FOR__TYPE  = String.static_array("offline", "online")
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [online]."
+    VALID_VALUES_FOR__TYPE  = String.static_array("online")
 
     # End of Required Properties
 
@@ -36,19 +39,16 @@ module Stripe
     @[JSON::Field(key: "offline", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]
     getter offline : JSON::Any? = nil
 
-    @[JSON::Field(key: "online", type: Stripe::OnlineParam?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter online : Stripe::OnlineParam? = nil
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
+      @online : Stripe::OnlineParam? = nil,
       @_type : String? = nil,
       # Optional properties
       @accepted_at : Int64? = nil,
-      @offline : JSON::Any? = nil,
-      @online : Stripe::OnlineParam? = nil
+      @offline : JSON::Any? = nil
     )
     end
 
@@ -57,31 +57,45 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      invalid_properties.push("\"online\" is required and cannot be null") if @online.nil?
+
+      unless (_online = @online).nil?
+        invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
+      end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      unless (_online = @online).nil?
-        invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
-      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
+      return false if @online.nil?
+      unless (_online = @online).nil?
+        return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
+      end
+
       return false if @_type.nil?
       unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
-      unless (_online = @online).nil?
-        return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
-      end
-
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] online Object to be assigned
+    def online=(online : Stripe::OnlineParam?)
+      if online.nil?
+        raise ArgumentError.new("\"online\" is required and cannot be null")
+      end
+      _online = online.not_nil!
+      _online.validate if _online.is_a?(OpenApi::Validatable)
+      @online = _online
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -115,21 +129,10 @@ module Stripe
       @offline = _offline
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] online Object to be assigned
-    def online=(online : Stripe::OnlineParam?)
-      if online.nil?
-        return @online = nil
-      end
-      _online = online.not_nil!
-      _online.validate if _online.is_a?(OpenApi::Validatable)
-      @online = _online
-    end
-
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @accepted_at, @offline, @online)
+    def_equals_and_hash(@online, @_type, @accepted_at, @offline)
   end
 end

@@ -32,7 +32,7 @@ module Stripe
     @[JSON::Field(key: "automatic_tax", type: Stripe::QuotesResourceAutomaticTax?, default: nil, required: true, nullable: false, emit_null: false)]
     getter automatic_tax : Stripe::QuotesResourceAutomaticTax? = nil
 
-    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or on finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.
+    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or on finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
@@ -171,8 +171,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_settings_present : Bool = false
 
-    @[JSON::Field(key: "line_items", type: Stripe::QuotesResourceListLineItems1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter line_items : Stripe::QuotesResourceListLineItems1? = nil
+    @[JSON::Field(key: "line_items", type: Stripe::QuotesResourceListLineItems?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter line_items : Stripe::QuotesResourceListLineItems? = nil
 
     # A unique number that identifies this particular quote. This number is assigned once the quote is [finalized](https://stripe.com/docs/quotes/overview#finalize).
     @[JSON::Field(key: "number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: number.nil? && !number_present?)]
@@ -246,7 +246,7 @@ module Stripe
       @header : String? = nil,
       @invoice : Stripe::QuoteInvoice? = nil,
       @invoice_settings : Stripe::QuoteInvoiceSettings? = nil,
-      @line_items : Stripe::QuotesResourceListLineItems1? = nil,
+      @line_items : Stripe::QuotesResourceListLineItems? = nil,
       @number : String? = nil,
       @on_behalf_of : Stripe::PaymentLinkOnBehalfOf? = nil,
       @subscription : Stripe::QuoteSubscription? = nil,
@@ -828,7 +828,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Stripe::QuotesResourceListLineItems1?)
+    def line_items=(line_items : Stripe::QuotesResourceListLineItems?)
       if line_items.nil?
         return @line_items = nil
       end

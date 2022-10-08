@@ -48,8 +48,8 @@ module Stripe
     @[JSON::Field(key: "billing_cycle_anchor", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : Int64? = nil
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::PostSubscriptionsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil
 
     # A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using `proration_behavior`. If set during a future period, this will always cause a proration for that period.
     @[JSON::Field(key: "cancel_at", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -59,7 +59,7 @@ module Stripe
     @[JSON::Field(key: "cancel_at_period_end", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cancel_at_period_end : Bool? = nil
 
-    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.
+    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
@@ -88,8 +88,8 @@ module Stripe
     getter default_source : String? = nil
     MAX_LENGTH_FOR_DEFAULT_SOURCE = 5000
 
-    @[JSON::Field(key: "default_tax_rates", type: Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates? = nil
+    @[JSON::Field(key: "default_tax_rates", type: Stripe::PostSubscriptionsRequestDefaultTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil
 
     # The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -104,24 +104,24 @@ module Stripe
     @[JSON::Field(key: "items", type: Array(Stripe::SubscriptionItemCreateParams)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter items : Array(Stripe::SubscriptionItemCreateParams)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Indicates if a customer is on or off-session while an invoice payment is attempted.
     @[JSON::Field(key: "off_session", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter off_session : Bool? = nil
 
-    # Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.
+    # Only applies to subscriptions with `collection_method=charge_automatically`.  Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.  Subscriptions with `collection_method=send_invoice` are automatically activated regardless of the first invoice status.
     @[JSON::Field(key: "payment_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_behavior : String? = nil
     ERROR_MESSAGE_FOR_PAYMENT_BEHAVIOR = "invalid value for \"payment_behavior\", must be one of [allow_incomplete, default_incomplete, error_if_incomplete, pending_if_incomplete]."
     VALID_VALUES_FOR_PAYMENT_BEHAVIOR  = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
 
-    @[JSON::Field(key: "payment_settings", type: Stripe::PaymentSettings?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_settings : Stripe::PaymentSettings? = nil
+    @[JSON::Field(key: "payment_settings", type: Stripe::SubscriptionsResourcePaymentSettings?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil
 
-    @[JSON::Field(key: "pending_invoice_item_interval", type: Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil
+    @[JSON::Field(key: "pending_invoice_item_interval", type: Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil
 
     # The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
     @[JSON::Field(key: "promotion_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -134,11 +134,11 @@ module Stripe
     ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
     VALID_VALUES_FOR_PRORATION_BEHAVIOR  = String.static_array("always_invoice", "create_prorations", "none")
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs3?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataSpecs3? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataSpecs? = nil
 
-    @[JSON::Field(key: "trial_end", type: Stripe::PostCustomersCustomerSubscriptionsRequestTrialEnd?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter trial_end : Stripe::PostCustomersCustomerSubscriptionsRequestTrialEnd? = nil
+    @[JSON::Field(key: "trial_end", type: Stripe::PostSubscriptionsRequestTrialEnd?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil
 
     # Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     @[JSON::Field(key: "trial_from_plan", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -160,7 +160,7 @@ module Stripe
       @automatic_tax : Stripe::AutomaticTaxConfig? = nil,
       @backdate_start_date : Int64? = nil,
       @billing_cycle_anchor : Int64? = nil,
-      @billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil,
+      @billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
       @cancel_at : Int64? = nil,
       @cancel_at_period_end : Bool? = nil,
       @collection_method : String? = nil,
@@ -169,19 +169,19 @@ module Stripe
       @days_until_due : Int64? = nil,
       @default_payment_method : String? = nil,
       @default_source : String? = nil,
-      @default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates? = nil,
+      @default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
       @description : String? = nil,
       @expand : Array(String)? = nil,
       @items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @off_session : Bool? = nil,
       @payment_behavior : String? = nil,
-      @payment_settings : Stripe::PaymentSettings? = nil,
-      @pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      @payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      @pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
       @promotion_code : String? = nil,
       @proration_behavior : String? = nil,
-      @transfer_data : Stripe::TransferDataSpecs3? = nil,
-      @trial_end : Stripe::PostCustomersCustomerSubscriptionsRequestTrialEnd? = nil,
+      @transfer_data : Stripe::TransferDataSpecs? = nil,
+      @trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
       @trial_from_plan : Bool? = nil,
       @trial_period_days : Int64? = nil
     )
@@ -421,7 +421,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds?)
+    def billing_thresholds=(billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds?)
       if billing_thresholds.nil?
         return @billing_thresholds = nil
       end
@@ -516,7 +516,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_tax_rates Object to be assigned
-    def default_tax_rates=(default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates?)
+    def default_tax_rates=(default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates?)
       if default_tax_rates.nil?
         return @default_tax_rates = nil
       end
@@ -559,7 +559,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -591,7 +591,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_settings Object to be assigned
-    def payment_settings=(payment_settings : Stripe::PaymentSettings?)
+    def payment_settings=(payment_settings : Stripe::SubscriptionsResourcePaymentSettings?)
       if payment_settings.nil?
         return @payment_settings = nil
       end
@@ -602,7 +602,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_invoice_item_interval Object to be assigned
-    def pending_invoice_item_interval=(pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?)
+    def pending_invoice_item_interval=(pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?)
       if pending_invoice_item_interval.nil?
         return @pending_invoice_item_interval = nil
       end
@@ -635,7 +635,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs3?)
+    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
       if transfer_data.nil?
         return @transfer_data = nil
       end
@@ -646,7 +646,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_end Object to be assigned
-    def trial_end=(trial_end : Stripe::PostCustomersCustomerSubscriptionsRequestTrialEnd?)
+    def trial_end=(trial_end : Stripe::PostSubscriptionsRequestTrialEnd?)
       if trial_end.nil?
         return @trial_end = nil
       end

@@ -20,8 +20,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "customer_acceptance", type: Stripe::CustomerAcceptanceParam1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter customer_acceptance : Stripe::CustomerAcceptanceParam1? = nil
+    @[JSON::Field(key: "customer_acceptance", type: Stripe::CustomerAcceptanceParam?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter customer_acceptance : Stripe::CustomerAcceptanceParam? = nil
 
     # End of Required Properties
 
@@ -30,7 +30,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @customer_acceptance : Stripe::CustomerAcceptanceParam1? = nil
+      @customer_acceptance : Stripe::CustomerAcceptanceParam? = nil
     )
     end
 
@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_acceptance Object to be assigned
-    def customer_acceptance=(customer_acceptance : Stripe::CustomerAcceptanceParam1?)
+    def customer_acceptance=(customer_acceptance : Stripe::CustomerAcceptanceParam?)
       if customer_acceptance.nil?
         raise ArgumentError.new("\"customer_acceptance\" is required and cannot be null")
       end

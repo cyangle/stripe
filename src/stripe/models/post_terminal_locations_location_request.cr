@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "address", type: Stripe::OptionalFieldsAddress1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter address : Stripe::OptionalFieldsAddress1? = nil
+    @[JSON::Field(key: "address", type: Stripe::OptionalFieldsAddress?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter address : Stripe::OptionalFieldsAddress? = nil
 
     # The ID of a configuration that will be used to customize all readers in this location.
     @[JSON::Field(key: "configuration_overrides", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -37,19 +37,19 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @address : Stripe::OptionalFieldsAddress1? = nil,
+      @address : Stripe::OptionalFieldsAddress? = nil,
       @configuration_overrides : String? = nil,
       @display_name : String? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil
     )
     end
 
@@ -102,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::OptionalFieldsAddress1?)
+    def address=(address : Stripe::OptionalFieldsAddress?)
       if address.nil?
         return @address = nil
       end
@@ -145,7 +145,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

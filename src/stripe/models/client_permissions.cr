@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The fields on the order that are allowed to be updated from your frontend application with a publishable key and order client secret.
   class ClientPermissions
     include JSON::Serializable
     include JSON::Serializable::Unmapped

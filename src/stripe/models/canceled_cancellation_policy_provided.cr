@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias CanceledCancellationPolicyProvided = Bool | BusinessProfileSpecsSupportUrlOneOf
+  alias CanceledCancellationPolicyProvided = Bool | String
 end

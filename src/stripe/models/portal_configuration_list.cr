@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class PortalConfigurationList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

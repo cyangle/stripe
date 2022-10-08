@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class CouponCurrencyOption
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -21,7 +20,6 @@ module Stripe
 
     # Required Properties
 
-    # Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.
     @[JSON::Field(key: "amount_off", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_off : Int64? = nil
 

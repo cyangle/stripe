@@ -55,8 +55,8 @@ module Stripe
     getter original_source : String? = nil
     MAX_LENGTH_FOR_ORIGINAL_SOURCE = 5000
 
-    @[JSON::Field(key: "owner", type: Stripe::Owner1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter owner : Stripe::Owner1? = nil
+    @[JSON::Field(key: "owner", type: Stripe::Owner?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter owner : Stripe::Owner? = nil
 
     @[JSON::Field(key: "receiver", type: Stripe::ReceiverParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter receiver : Stripe::ReceiverParams? = nil
@@ -101,7 +101,7 @@ module Stripe
       @mandate : Stripe::MandateParams? = nil,
       @metadata : Hash(String, String)? = nil,
       @original_source : String? = nil,
-      @owner : Stripe::Owner1? = nil,
+      @owner : Stripe::Owner? = nil,
       @receiver : Stripe::ReceiverParams? = nil,
       @redirect : Stripe::RedirectParams? = nil,
       @source_order : Stripe::ShallowOrderSpecs? = nil,
@@ -308,7 +308,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owner Object to be assigned
-    def owner=(owner : Stripe::Owner1?)
+    def owner=(owner : Stripe::Owner?)
       if owner.nil?
         return @owner = nil
       end

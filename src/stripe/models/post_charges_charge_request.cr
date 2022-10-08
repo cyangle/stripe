@@ -37,8 +37,8 @@ module Stripe
     @[JSON::Field(key: "fraud_details", type: Stripe::FraudDetails?, default: nil, required: false, nullable: false, emit_null: false)]
     getter fraud_details : Stripe::FraudDetails? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
     @[JSON::Field(key: "receipt_email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -61,7 +61,7 @@ module Stripe
       @description : String? = nil,
       @expand : Array(String)? = nil,
       @fraud_details : Stripe::FraudDetails? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @receipt_email : String? = nil,
       @shipping : Stripe::OptionalFieldsShipping? = nil,
       @transfer_group : String? = nil
@@ -177,7 +177,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

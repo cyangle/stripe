@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Simulated data for the card_present payment method
   class CardPresent
     include JSON::Serializable
     include JSON::Serializable::Unmapped

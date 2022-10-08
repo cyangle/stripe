@@ -20,8 +20,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter address : Stripe::Address1? = nil
+    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter address : Stripe::Address? = nil
 
     # End of Required Properties
 
@@ -48,7 +48,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::Address1? = nil,
+      @address : Stripe::Address? = nil,
       # Optional properties
       @carrier : String? = nil,
       @name : String? = nil,
@@ -119,7 +119,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::Address1?)
+    def address=(address : Stripe::Address?)
       if address.nil?
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end

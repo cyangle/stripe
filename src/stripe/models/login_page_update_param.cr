@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The hosted login page for this configuration. Learn more about the portal login page in our [integration docs](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal#share).
   class LoginPageUpdateParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

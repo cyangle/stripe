@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is an `us_bank_account` PaymentMethod, this hash contains details about the US bank account payment method.
   class UpdateParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

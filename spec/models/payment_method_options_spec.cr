@@ -20,41 +20,6 @@ describe Stripe::PaymentMethodOptions do
     end
   end
 
-  describe "test attribute 'acss_debit'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'bancontact'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'card'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'customer_balance'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'konbini'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'us_bank_account'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptions.new

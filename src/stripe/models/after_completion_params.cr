@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Behavior after the purchase is complete.
   class AfterCompletionParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

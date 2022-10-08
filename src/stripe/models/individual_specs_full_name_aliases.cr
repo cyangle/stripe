@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias IndividualSpecsFullNameAliases = Array(String) | BusinessProfileSpecsSupportUrlOneOf
+  alias IndividualSpecsFullNameAliases = Array(String) | String
 end

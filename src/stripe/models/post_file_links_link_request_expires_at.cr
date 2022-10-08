@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # A future timestamp after which the link will no longer be usable, or `now` to expire the link immediately.
-  alias PostFileLinksLinkRequestExpiresAt = BusinessProfileSpecsSupportUrlOneOf | Int32 | PostCustomersCustomerSubscriptionsRequestTrialEndOneOf
+  alias PostFileLinksLinkRequestExpiresAt = Int32 | PostAccountsRequestMetadataOneOf | PostFileLinksLinkRequestExpiresAtOneOf
 end

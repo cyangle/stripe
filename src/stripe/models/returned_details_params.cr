@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Optional hash to set the the return code.
   class ReturnedDetailsParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

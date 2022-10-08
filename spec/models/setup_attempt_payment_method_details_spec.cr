@@ -83,6 +83,13 @@ describe Stripe::SetupAttemptPaymentMethodDetails do
     end
   end
 
+  describe "test attribute 'klarna'" do
+    it "should work" do
+      # instance = Stripe::SetupAttemptPaymentMethodDetails.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'link'" do
     it "should work" do
       # instance = Stripe::SetupAttemptPaymentMethodDetails.new

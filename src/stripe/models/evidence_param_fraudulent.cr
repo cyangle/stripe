@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias EvidenceParamFraudulent = BusinessProfileSpecsSupportUrlOneOf | Fraudulent
+  alias EvidenceParamFraudulent = Fraudulent | String
 end

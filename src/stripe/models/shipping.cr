@@ -12,55 +12,46 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class Shipping
     include JSON::Serializable
     include JSON::Serializable::Unmapped
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional Properties
+    # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
 
-    # The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-    @[JSON::Field(key: "carrier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: carrier.nil? && !carrier_present?)]
-    getter carrier : String? = nil
-    MAX_LENGTH_FOR_CARRIER = 5000
-
-    @[JSON::Field(ignore: true)]
-    property? carrier_present : Bool = false
-
-    # Recipient name.
-    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    # Recipient phone (including extension).
-    @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
+    # End of Required Properties
+
+    # Optional Properties
+
+    @[JSON::Field(key: "carrier", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter carrier : String? = nil
+    MAX_LENGTH_FOR_CARRIER = 5000
+
+    @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone : String? = nil
     MAX_LENGTH_FOR_PHONE = 5000
 
-    @[JSON::Field(ignore: true)]
-    property? phone_present : Bool = false
-
-    # The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
-    @[JSON::Field(key: "tracking_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tracking_number.nil? && !tracking_number_present?)]
+    @[JSON::Field(key: "tracking_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tracking_number : String? = nil
     MAX_LENGTH_FOR_TRACKING_NUMBER = 5000
-
-    @[JSON::Field(ignore: true)]
-    property? tracking_number_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
-      # Optional properties
+      # Required properties
       @address : Stripe::Address? = nil,
-      @carrier : String? = nil,
       @name : String? = nil,
+      # Optional properties
+      @carrier : String? = nil,
       @phone : String? = nil,
       @tracking_number : String? = nil
     )
@@ -71,16 +62,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
+
       unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-      unless (_carrier = @carrier).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
+      invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
+      unless (_name = @name).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
-      unless (_name = @name).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
+      unless (_carrier = @carrier).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -100,16 +95,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
+      return false if @address.nil?
       unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
-      unless (_carrier = @carrier).nil?
-        return false if _carrier.to_s.size > MAX_LENGTH_FOR_CARRIER
-      end
-
+      return false if @name.nil?
       unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
+      end
+
+      unless (_carrier = @carrier).nil?
+        return false if _carrier.to_s.size > MAX_LENGTH_FOR_CARRIER
       end
 
       unless (_phone = @phone).nil?
@@ -127,11 +124,22 @@ module Stripe
     # @param [Object] address Object to be assigned
     def address=(address : Stripe::Address?)
       if address.nil?
-        return @address = nil
+        raise ArgumentError.new("\"address\" is required and cannot be null")
       end
       _address = address.not_nil!
       _address.validate if _address.is_a?(OpenApi::Validatable)
       @address = _address
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : String?)
+      if name.nil?
+        raise ArgumentError.new("\"name\" is required and cannot be null")
+      end
+      _name = name.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -143,17 +151,6 @@ module Stripe
       _carrier = carrier.not_nil!
       OpenApi::PrimitiveValidator.validate_max_length("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
       @carrier = _carrier
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
-      end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,6 +179,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @carrier, @carrier_present, @name, @phone, @phone_present, @tracking_number, @tracking_number_present)
+    def_equals_and_hash(@address, @name, @carrier, @phone, @tracking_number)
   end
 end

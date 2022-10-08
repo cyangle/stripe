@@ -27,8 +27,8 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Indicates if a customer is on or off-session while an invoice payment is attempted.
     @[JSON::Field(key: "off_session", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -45,8 +45,8 @@ module Stripe
     getter price : String? = nil
     MAX_LENGTH_FOR_PRICE = 5000
 
-    @[JSON::Field(key: "price_data", type: Stripe::RecurringPriceData1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter price_data : Stripe::RecurringPriceData1? = nil
+    @[JSON::Field(key: "price_data", type: Stripe::RecurringPriceData?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter price_data : Stripe::RecurringPriceData? = nil
 
     # Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -72,11 +72,11 @@ module Stripe
       # Optional properties
       @billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @off_session : Bool? = nil,
       @payment_behavior : String? = nil,
       @price : String? = nil,
-      @price_data : Stripe::RecurringPriceData1? = nil,
+      @price_data : Stripe::RecurringPriceData? = nil,
       @proration_behavior : String? = nil,
       @proration_date : Int64? = nil,
       @quantity : Int64? = nil,
@@ -175,7 +175,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -218,7 +218,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price_data Object to be assigned
-    def price_data=(price_data : Stripe::RecurringPriceData1?)
+    def price_data=(price_data : Stripe::RecurringPriceData?)
       if price_data.nil?
         return @price_data = nil
       end

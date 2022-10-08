@@ -126,8 +126,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ip_address_present : Bool = false
 
-    @[JSON::Field(key: "line_items", type: Stripe::OrdersV2ResourceLineItemList1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter line_items : Stripe::OrdersV2ResourceLineItemList1? = nil
+    @[JSON::Field(key: "line_items", type: Stripe::OrdersV2ResourceLineItemList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter line_items : Stripe::OrdersV2ResourceLineItemList? = nil
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
@@ -176,7 +176,7 @@ module Stripe
       @description : String? = nil,
       @discounts : Array(Stripe::InvoiceitemDiscountsInner)? = nil,
       @ip_address : String? = nil,
-      @line_items : Stripe::OrdersV2ResourceLineItemList1? = nil,
+      @line_items : Stripe::OrdersV2ResourceLineItemList? = nil,
       @metadata : Hash(String, String)? = nil,
       @shipping_cost : Stripe::OrderShippingCost? = nil,
       @shipping_details : Stripe::OrderShippingDetails? = nil,
@@ -574,7 +574,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Stripe::OrdersV2ResourceLineItemList1?)
+    def line_items=(line_items : Stripe::OrdersV2ResourceLineItemList?)
       if line_items.nil?
         return @line_items = nil
       end

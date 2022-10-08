@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Object representing the subscription schedule's default settings.
   class DefaultSettingsParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -24,8 +23,8 @@ module Stripe
     @[JSON::Field(key: "application_fee_percent", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter application_fee_percent : Float64? = nil
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxConfig1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTaxConfig1? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxConfig?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTaxConfig? = nil
 
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : String? = nil
@@ -60,7 +59,7 @@ module Stripe
       *,
       # Optional properties
       @application_fee_percent : Float64? = nil,
-      @automatic_tax : Stripe::AutomaticTaxConfig1? = nil,
+      @automatic_tax : Stripe::AutomaticTaxConfig? = nil,
       @billing_cycle_anchor : String? = nil,
       @billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil,
       @collection_method : String? = nil,
@@ -157,7 +156,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxConfig1?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxConfig?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end

@@ -20,35 +20,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "acss_debit", type: Stripe::PaymentMethodOptionsAcssDebit?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter acss_debit : Stripe::PaymentMethodOptionsAcssDebit? = nil
-
-    @[JSON::Field(key: "bancontact", type: Stripe::PaymentMethodOptionsBancontact1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter bancontact : Stripe::PaymentMethodOptionsBancontact1? = nil
-
-    @[JSON::Field(key: "card", type: Stripe::PaymentMethodOptionsCard?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter card : Stripe::PaymentMethodOptionsCard? = nil
-
-    @[JSON::Field(key: "customer_balance", type: Stripe::PaymentMethodOptionsCustomerBalance1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter customer_balance : Stripe::PaymentMethodOptionsCustomerBalance1? = nil
-
-    @[JSON::Field(key: "konbini", type: Stripe::PaymentMethodOptionsKonbini1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter konbini : Stripe::PaymentMethodOptionsKonbini1? = nil
-
-    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter us_bank_account : Stripe::PaymentMethodOptionsUsBankAccount? = nil
+    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter us_bank_account : Stripe::PaymentMethodOptionsParamCardPresent? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @acss_debit : Stripe::PaymentMethodOptionsAcssDebit? = nil,
-      @bancontact : Stripe::PaymentMethodOptionsBancontact1? = nil,
-      @card : Stripe::PaymentMethodOptionsCard? = nil,
-      @customer_balance : Stripe::PaymentMethodOptionsCustomerBalance1? = nil,
-      @konbini : Stripe::PaymentMethodOptionsKonbini1? = nil,
-      @us_bank_account : Stripe::PaymentMethodOptionsUsBankAccount? = nil
+      @us_bank_account : Stripe::PaymentMethodOptionsParamCardPresent? = nil
     )
     end
 
@@ -57,21 +37,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_acss_debit = @acss_debit).nil?
-        invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
-      end
-      unless (_bancontact = @bancontact).nil?
-        invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
-      end
-      unless (_card = @card).nil?
-        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
-      end
-      unless (_customer_balance = @customer_balance).nil?
-        invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance")) if _customer_balance.is_a?(OpenApi::Validatable)
-      end
-      unless (_konbini = @konbini).nil?
-        invalid_properties.concat(_konbini.list_invalid_properties_for("konbini")) if _konbini.is_a?(OpenApi::Validatable)
-      end
       unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
@@ -81,26 +46,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_acss_debit = @acss_debit).nil?
-        return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
-      end
-
-      unless (_bancontact = @bancontact).nil?
-        return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
-      end
-
-      unless (_card = @card).nil?
-        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
-      end
-
-      unless (_customer_balance = @customer_balance).nil?
-        return false if _customer_balance.is_a?(OpenApi::Validatable) && !_customer_balance.valid?
-      end
-
-      unless (_konbini = @konbini).nil?
-        return false if _konbini.is_a?(OpenApi::Validatable) && !_konbini.valid?
-      end
-
       unless (_us_bank_account = @us_bank_account).nil?
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
@@ -109,63 +54,8 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] acss_debit Object to be assigned
-    def acss_debit=(acss_debit : Stripe::PaymentMethodOptionsAcssDebit?)
-      if acss_debit.nil?
-        return @acss_debit = nil
-      end
-      _acss_debit = acss_debit.not_nil!
-      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
-      @acss_debit = _acss_debit
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] bancontact Object to be assigned
-    def bancontact=(bancontact : Stripe::PaymentMethodOptionsBancontact1?)
-      if bancontact.nil?
-        return @bancontact = nil
-      end
-      _bancontact = bancontact.not_nil!
-      _bancontact.validate if _bancontact.is_a?(OpenApi::Validatable)
-      @bancontact = _bancontact
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] card Object to be assigned
-    def card=(card : Stripe::PaymentMethodOptionsCard?)
-      if card.nil?
-        return @card = nil
-      end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] customer_balance Object to be assigned
-    def customer_balance=(customer_balance : Stripe::PaymentMethodOptionsCustomerBalance1?)
-      if customer_balance.nil?
-        return @customer_balance = nil
-      end
-      _customer_balance = customer_balance.not_nil!
-      _customer_balance.validate if _customer_balance.is_a?(OpenApi::Validatable)
-      @customer_balance = _customer_balance
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] konbini Object to be assigned
-    def konbini=(konbini : Stripe::PaymentMethodOptionsKonbini1?)
-      if konbini.nil?
-        return @konbini = nil
-      end
-      _konbini = konbini.not_nil!
-      _konbini.validate if _konbini.is_a?(OpenApi::Validatable)
-      @konbini = _konbini
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodOptionsUsBankAccount?)
+    def us_bank_account=(us_bank_account : Stripe::PaymentMethodOptionsParamCardPresent?)
       if us_bank_account.nil?
         return @us_bank_account = nil
       end
@@ -178,6 +68,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acss_debit, @bancontact, @card, @customer_balance, @konbini, @us_bank_account)
+    def_equals_and_hash(@us_bank_account)
   end
 end

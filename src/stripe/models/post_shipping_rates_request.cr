@@ -29,15 +29,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "delivery_estimate", type: Stripe::DeliveryEstimate1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter delivery_estimate : Stripe::DeliveryEstimate1? = nil
+    @[JSON::Field(key: "delivery_estimate", type: Stripe::DeliveryEstimate?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter delivery_estimate : Stripe::DeliveryEstimate? = nil
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "fixed_amount", type: Stripe::FixedAmount1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter fixed_amount : Stripe::FixedAmount1? = nil
+    @[JSON::Field(key: "fixed_amount", type: Stripe::FixedAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter fixed_amount : Stripe::FixedAmount? = nil
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -66,9 +66,9 @@ module Stripe
       # Required properties
       @display_name : String? = nil,
       # Optional properties
-      @delivery_estimate : Stripe::DeliveryEstimate1? = nil,
+      @delivery_estimate : Stripe::DeliveryEstimate? = nil,
       @expand : Array(String)? = nil,
-      @fixed_amount : Stripe::FixedAmount1? = nil,
+      @fixed_amount : Stripe::FixedAmount? = nil,
       @metadata : Hash(String, String)? = nil,
       @tax_behavior : String? = nil,
       @tax_code : String? = nil,
@@ -146,7 +146,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] delivery_estimate Object to be assigned
-    def delivery_estimate=(delivery_estimate : Stripe::DeliveryEstimate1?)
+    def delivery_estimate=(delivery_estimate : Stripe::DeliveryEstimate?)
       if delivery_estimate.nil?
         return @delivery_estimate = nil
       end
@@ -167,7 +167,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fixed_amount Object to be assigned
-    def fixed_amount=(fixed_amount : Stripe::FixedAmount1?)
+    def fixed_amount=(fixed_amount : Stripe::FixedAmount?)
       if fixed_amount.nil?
         return @fixed_amount = nil
       end

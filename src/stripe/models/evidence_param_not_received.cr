@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias EvidenceParamNotReceived = BusinessProfileSpecsSupportUrlOneOf | NotReceived
+  alias EvidenceParamNotReceived = NotReceived | String
 end

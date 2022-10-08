@@ -29,8 +29,8 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,7 +39,7 @@ module Stripe
       # Optional properties
       @description : String? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil
     )
     end
 
@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A set of options for the session’s verification checks.
   class SessionOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

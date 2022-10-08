@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about the items and shipping associated with the source. Required for transactional credit (for example Klarna) sources before you can charge it.
   class ShallowOrderSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Initiating payment method details for the object.
   class SourceParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

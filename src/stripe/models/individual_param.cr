@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Additional information about an `individual` cardholder.
   class IndividualParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

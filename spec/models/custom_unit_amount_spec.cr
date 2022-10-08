@@ -20,6 +20,13 @@ describe Stripe::CustomUnitAmount do
     end
   end
 
+  describe "test attribute 'enabled'" do
+    it "should work" do
+      # instance = Stripe::CustomUnitAmount.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'maximum'" do
     it "should work" do
       # instance = Stripe::CustomUnitAmount.new

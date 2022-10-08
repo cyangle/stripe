@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Automatic tax settings for this subscription. We recommend you only include this parameter when the existing value is being changed.
   class AutomaticTaxConfig
     include JSON::Serializable
     include JSON::Serializable::Unmapped

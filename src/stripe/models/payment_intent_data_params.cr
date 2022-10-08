@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in `payment` mode.
   class PaymentIntentDataParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -47,8 +46,8 @@ module Stripe
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
     VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("off_session", "on_session")
 
-    @[JSON::Field(key: "shipping", type: Stripe::Shipping1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter shipping : Stripe::Shipping1? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::Shipping?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shipping : Stripe::Shipping? = nil
 
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
@@ -76,7 +75,7 @@ module Stripe
       @on_behalf_of : String? = nil,
       @receipt_email : String? = nil,
       @setup_future_usage : String? = nil,
-      @shipping : Stripe::Shipping1? = nil,
+      @shipping : Stripe::Shipping? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
       @transfer_data : Stripe::TransferDataParams? = nil,
@@ -230,7 +229,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping : Stripe::Shipping1?)
+    def shipping=(shipping : Stripe::Shipping?)
       if shipping.nil?
         return @shipping = nil
       end

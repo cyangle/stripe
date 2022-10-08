@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # End user details.
   class EndUserDetailsParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The address where the card will be shipped.
   class ShippingSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

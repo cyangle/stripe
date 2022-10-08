@@ -65,8 +65,8 @@ module Stripe
     @[JSON::Field(key: "refunded", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter refunded : Bool? = nil
 
-    @[JSON::Field(key: "refunds", type: Stripe::FeeRefundList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter refunds : Stripe::FeeRefundList1? = nil
+    @[JSON::Field(key: "refunds", type: Stripe::FeeRefundList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter refunds : Stripe::FeeRefundList? = nil
 
     # End of Required Properties
 
@@ -100,7 +100,7 @@ module Stripe
       @livemode : Bool? = nil,
       @object : String? = nil,
       @refunded : Bool? = nil,
-      @refunds : Stripe::FeeRefundList1? = nil,
+      @refunds : Stripe::FeeRefundList? = nil,
       # Optional properties
       @balance_transaction : Stripe::ApplicationFeeBalanceTransaction? = nil,
       @originating_transaction : Stripe::ApplicationFeeOriginatingTransaction? = nil
@@ -338,7 +338,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refunds Object to be assigned
-    def refunds=(refunds : Stripe::FeeRefundList1?)
+    def refunds=(refunds : Stripe::FeeRefundList?)
       if refunds.nil?
         raise ArgumentError.new("\"refunds\" is required and cannot be null")
       end

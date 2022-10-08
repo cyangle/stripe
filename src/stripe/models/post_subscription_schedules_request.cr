@@ -43,8 +43,8 @@ module Stripe
     getter from_subscription : String? = nil
     MAX_LENGTH_FOR_FROM_SUBSCRIPTION = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
     @[JSON::Field(key: "phases", type: Array(Stripe::PhaseConfigurationParams)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,7 +63,7 @@ module Stripe
       @end_behavior : String? = nil,
       @expand : Array(String)? = nil,
       @from_subscription : String? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @phases : Array(Stripe::PhaseConfigurationParams)? = nil,
       @start_date : Stripe::PostSubscriptionSchedulesRequestStartDate? = nil
     )
@@ -193,7 +193,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

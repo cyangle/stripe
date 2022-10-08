@@ -30,4 +30,11 @@ describe Stripe::LinkedAccountOptionsParam do
       # end
     end
   end
+
+  describe "test attribute 'return_url'" do
+    it "should work" do
+      # instance = Stripe::LinkedAccountOptionsParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 end

@@ -56,8 +56,8 @@ module Stripe
     @[JSON::Field(key: "invoice_settings", type: Stripe::CustomerParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_settings : Stripe::CustomerParam? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # The customer's full name or business name.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -125,7 +125,7 @@ module Stripe
       @expand : Array(String)? = nil,
       @invoice_prefix : String? = nil,
       @invoice_settings : Stripe::CustomerParam? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @name : String? = nil,
       @next_invoice_sequence : Int64? = nil,
       @payment_method : String? = nil,
@@ -404,7 +404,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

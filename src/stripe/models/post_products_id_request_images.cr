@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-  alias PostProductsIdRequestImages = Array(String) | BusinessProfileSpecsSupportUrlOneOf
+  alias PostProductsIdRequestImages = Array(String) | PostAccountsRequestMetadataOneOf
 end

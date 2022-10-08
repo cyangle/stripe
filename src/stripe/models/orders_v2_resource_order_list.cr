@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class OrdersV2ResourceOrderList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

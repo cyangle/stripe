@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias DefaultSettingsParamsBillingThresholds = BillingThresholdsParam | BusinessProfileSpecsSupportUrlOneOf
+  alias DefaultSettingsParamsBillingThresholds = BillingThresholdsParam | String
 end

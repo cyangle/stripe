@@ -90,8 +90,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    @[JSON::Field(key: "external_accounts", type: Stripe::ExternalAccountList1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter external_accounts : Stripe::ExternalAccountList1? = nil
+    @[JSON::Field(key: "external_accounts", type: Stripe::ExternalAccountList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter external_accounts : Stripe::ExternalAccountList? = nil
 
     @[JSON::Field(key: "future_requirements", type: Stripe::AccountFutureRequirements?, default: nil, required: false, nullable: false, emit_null: false)]
     getter future_requirements : Stripe::AccountFutureRequirements? = nil
@@ -144,7 +144,7 @@ module Stripe
       @default_currency : String? = nil,
       @details_submitted : Bool? = nil,
       @email : String? = nil,
-      @external_accounts : Stripe::ExternalAccountList1? = nil,
+      @external_accounts : Stripe::ExternalAccountList? = nil,
       @future_requirements : Stripe::AccountFutureRequirements? = nil,
       @individual : Stripe::Person? = nil,
       @metadata : Hash(String, String)? = nil,
@@ -449,7 +449,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] external_accounts Object to be assigned
-    def external_accounts=(external_accounts : Stripe::ExternalAccountList1?)
+    def external_accounts=(external_accounts : Stripe::ExternalAccountList?)
       if external_accounts.nil?
         return @external_accounts = nil
       end

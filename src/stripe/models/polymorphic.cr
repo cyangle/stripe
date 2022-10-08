@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias Polymorphic = BankAccount | Card
+  alias Polymorphic = BankAccount | Card | Source
 end

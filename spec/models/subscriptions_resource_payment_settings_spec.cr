@@ -31,10 +31,6 @@ describe Stripe::SubscriptionsResourcePaymentSettings do
     it "should work" do
       # instance = Stripe::SubscriptionsResourcePaymentSettings.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::SubscriptionsResourcePaymentSettings::ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES
-      # validator.allowable_values.each do |value|
-      #   instance.payment_method_types = value.as(Array(String))
-      # end
     end
   end
 

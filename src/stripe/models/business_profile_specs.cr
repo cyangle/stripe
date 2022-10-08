@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Business information about the account.
   class BusinessProfileSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

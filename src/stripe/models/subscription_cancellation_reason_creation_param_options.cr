@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias SubscriptionCancellationReasonCreationParamOptions = Array(String) | BusinessProfileSpecsSupportUrlOneOf
+  alias SubscriptionCancellationReasonCreationParamOptions = Array(String) | String
 end

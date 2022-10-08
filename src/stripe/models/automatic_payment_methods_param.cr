@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # When enabled, this PaymentIntent will accept payment methods that you have enabled in the Dashboard and are compatible with this PaymentIntent's other parameters.
   class AutomaticPaymentMethodsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

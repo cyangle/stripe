@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
   class TransferDataSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -32,6 +31,9 @@ module Stripe
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
+    @[JSON::Field(key: "amount_percent", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter amount_percent : Float64? = nil
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -39,7 +41,8 @@ module Stripe
       # Required properties
       @destination : String? = nil,
       # Optional properties
-      @amount : Int64? = nil
+      @amount : Int64? = nil,
+      @amount_percent : Float64? = nil
     )
     end
 
@@ -91,10 +94,20 @@ module Stripe
       @amount = _amount
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] amount_percent Object to be assigned
+    def amount_percent=(amount_percent : Float64?)
+      if amount_percent.nil?
+        return @amount_percent = nil
+      end
+      _amount_percent = amount_percent.not_nil!
+      @amount_percent = _amount_percent
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@destination, @amount)
+    def_equals_and_hash(@destination, @amount, @amount_percent)
   end
 end

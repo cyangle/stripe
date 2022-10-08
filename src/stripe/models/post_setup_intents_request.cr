@@ -48,8 +48,8 @@ module Stripe
     ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
     VALID_VALUES_FOR_FLOW_DIRECTIONS  = String.static_array("inbound", "outbound")
 
-    @[JSON::Field(key: "mandate_data", type: Stripe::SecretKeyParam2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter mandate_data : Stripe::SecretKeyParam2? = nil
+    @[JSON::Field(key: "mandate_data", type: Stripe::SecretKeyParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter mandate_data : Stripe::SecretKeyParam? = nil
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -64,11 +64,11 @@ module Stripe
     getter payment_method : String? = nil
     MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_data : Stripe::PaymentMethodDataParams1? = nil
+    @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_data : Stripe::PaymentMethodDataParams? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam22?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_options : Stripe::PaymentMethodOptionsParam22? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
 
     # The list of payment method types (e.g. card) that this SetupIntent is allowed to use. If this is not provided, defaults to [\"card\"].
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -98,12 +98,12 @@ module Stripe
       @description : String? = nil,
       @expand : Array(String)? = nil,
       @flow_directions : Array(String)? = nil,
-      @mandate_data : Stripe::SecretKeyParam2? = nil,
+      @mandate_data : Stripe::SecretKeyParam? = nil,
       @metadata : Hash(String, String)? = nil,
       @on_behalf_of : String? = nil,
       @payment_method : String? = nil,
-      @payment_method_data : Stripe::PaymentMethodDataParams1? = nil,
-      @payment_method_options : Stripe::PaymentMethodOptionsParam22? = nil,
+      @payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      @payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       @payment_method_types : Array(String)? = nil,
       @return_url : String? = nil,
       @single_use : Stripe::SetupIntentSingleUseParams? = nil,
@@ -262,7 +262,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_data Object to be assigned
-    def mandate_data=(mandate_data : Stripe::SecretKeyParam2?)
+    def mandate_data=(mandate_data : Stripe::SecretKeyParam?)
       if mandate_data.nil?
         return @mandate_data = nil
       end
@@ -304,7 +304,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_data Object to be assigned
-    def payment_method_data=(payment_method_data : Stripe::PaymentMethodDataParams1?)
+    def payment_method_data=(payment_method_data : Stripe::PaymentMethodDataParams?)
       if payment_method_data.nil?
         return @payment_method_data = nil
       end
@@ -315,7 +315,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam22?)
+    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam?)
       if payment_method_options.nil?
         return @payment_method_options = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class SubscriptionsResourcePaymentSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -21,37 +20,24 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    getter payment_method_options : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_options : Stripe::PaymentMethodOptions? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? payment_method_options_present : Bool = false
+    @[JSON::Field(key: "payment_method_types", type: Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes? = nil
 
-    # The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).
-    @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
-    getter payment_method_types : Array(String)? = nil
-    ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [ach_credit_transfer, ach_debit, acss_debit, au_becs_debit, bacs_debit, bancontact, boleto, card, customer_balance, fpx, giropay, grabpay, ideal, konbini, link, paynow, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = String.static_array("ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
-
-    @[JSON::Field(ignore: true)]
-    property? payment_method_types_present : Bool = false
-
-    # Either `off`, or `on_subscription`. With `on_subscription` Stripe updates `subscription.default_payment_method` when a subscription payment succeeds.
-    @[JSON::Field(key: "save_default_payment_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: save_default_payment_method.nil? && !save_default_payment_method_present?)]
+    @[JSON::Field(key: "save_default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter save_default_payment_method : String? = nil
     ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD = "invalid value for \"save_default_payment_method\", must be one of [off, on_subscription]."
     VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD  = String.static_array("off", "on_subscription")
-
-    @[JSON::Field(ignore: true)]
-    property? save_default_payment_method_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @payment_method_options : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions? = nil,
-      @payment_method_types : Array(String)? = nil,
+      @payment_method_options : Stripe::PaymentMethodOptions? = nil,
+      @payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes? = nil,
       @save_default_payment_method : String? = nil
     )
     end
@@ -65,7 +51,7 @@ module Stripe
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
       unless (_payment_method_types = @payment_method_types).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+        invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types")) if _payment_method_types.is_a?(OpenApi::Validatable)
       end
       unless (_save_default_payment_method = @save_default_payment_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD) unless OpenApi::EnumValidator.valid?(_save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
@@ -81,7 +67,7 @@ module Stripe
       end
 
       unless (_payment_method_types = @payment_method_types).nil?
-        return false unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+        return false if _payment_method_types.is_a?(OpenApi::Validatable) && !_payment_method_types.valid?
       end
 
       unless (_save_default_payment_method = @save_default_payment_method).nil?
@@ -93,7 +79,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions?)
+    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptions?)
       if payment_method_options.nil?
         return @payment_method_options = nil
       end
@@ -104,12 +90,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types : Array(String)?)
+    def payment_method_types=(payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes?)
       if payment_method_types.nil?
         return @payment_method_types = nil
       end
       _payment_method_types = payment_method_types.not_nil!
-      OpenApi::EnumValidator.validate("payment_method_types", _payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+      _payment_method_types.validate if _payment_method_types.is_a?(OpenApi::Validatable)
       @payment_method_types = _payment_method_types
     end
 
@@ -128,6 +114,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@payment_method_options, @payment_method_options_present, @payment_method_types, @payment_method_types_present, @save_default_payment_method, @save_default_payment_method_present)
+    def_equals_and_hash(@payment_method_options, @payment_method_types, @save_default_payment_method)
   end
 end

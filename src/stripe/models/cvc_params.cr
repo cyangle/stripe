@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The updated CVC value this token will represent.
   class CvcParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

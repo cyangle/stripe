@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Params for disputes related to Treasury FinancialAccounts
   class TreasuryParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

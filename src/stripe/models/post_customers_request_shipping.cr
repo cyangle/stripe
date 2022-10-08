@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The customer's shipping information. Appears on invoices emailed to this customer.
-  alias PostCustomersRequestShipping = BusinessProfileSpecsSupportUrlOneOf | CustomerShipping
+  alias PostCustomersRequestShipping = CustomerShipping | PostAccountsRequestMetadataOneOf
 end

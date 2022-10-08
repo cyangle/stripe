@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A subset of parameters to be passed to subscription creation for Checkout Sessions in `subscription` mode.
   class SubscriptionDataParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -31,14 +30,11 @@ module Stripe
     getter description : String? = nil
     MAX_LENGTH_FOR_DESCRIPTION = 500
 
-    @[JSON::Field(key: "items", type: Array(Stripe::SubscriptionDataItemParam)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter items : Array(Stripe::SubscriptionDataItemParam)? = nil
-
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataSpecs2? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataSpecs? = nil
 
     @[JSON::Field(key: "trial_end", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter trial_end : Int64? = nil
@@ -54,9 +50,8 @@ module Stripe
       @application_fee_percent : Float64? = nil,
       @default_tax_rates : Array(String)? = nil,
       @description : String? = nil,
-      @items : Array(Stripe::SubscriptionDataItemParam)? = nil,
       @metadata : Hash(String, String)? = nil,
-      @transfer_data : Stripe::TransferDataSpecs2? = nil,
+      @transfer_data : Stripe::TransferDataSpecs? = nil,
       @trial_end : Int64? = nil,
       @trial_period_days : Int64? = nil
     )
@@ -72,9 +67,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      unless (_items = @items).nil?
-        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
-      end
 
       unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
@@ -88,10 +80,6 @@ module Stripe
     def valid? : Bool
       unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
-      end
-
-      unless (_items = @items).nil?
-        return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       unless (_transfer_data = @transfer_data).nil?
@@ -133,17 +121,6 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] items Object to be assigned
-    def items=(items : Array(Stripe::SubscriptionDataItemParam)?)
-      if items.nil?
-        return @items = nil
-      end
-      _items = items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
-      @items = _items
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
     def metadata=(metadata : Hash(String, String)?)
       if metadata.nil?
@@ -155,7 +132,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs2?)
+    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
       if transfer_data.nil?
         return @transfer_data = nil
       end
@@ -188,6 +165,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@application_fee_percent, @default_tax_rates, @description, @items, @metadata, @transfer_data, @trial_end, @trial_period_days)
+    def_equals_and_hash(@application_fee_percent, @default_tax_rates, @description, @metadata, @transfer_data, @trial_end, @trial_period_days)
   end
 end

@@ -36,8 +36,8 @@ module Stripe
     getter lookup_key : String? = nil
     MAX_LENGTH_FOR_LOOKUP_KEY = 200
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # A brief description of the price, hidden from customers.
     @[JSON::Field(key: "nickname", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,7 +63,7 @@ module Stripe
       @currency_options : Stripe::PostPricesPriceRequestCurrencyOptions? = nil,
       @expand : Array(String)? = nil,
       @lookup_key : String? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @nickname : String? = nil,
       @tax_behavior : String? = nil,
       @transfer_lookup_key : Bool? = nil
@@ -169,7 +169,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

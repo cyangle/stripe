@@ -99,8 +99,8 @@ module Stripe
     @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_data : Stripe::PaymentMethodDataParams? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam15?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
 
     # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this is not provided, defaults to [\"card\"]. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -123,8 +123,8 @@ module Stripe
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
     VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("off_session", "on_session")
 
-    @[JSON::Field(key: "shipping", type: Stripe::OptionalFieldsShipping1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter shipping : Stripe::OptionalFieldsShipping1? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::OptionalFieldsShipping?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shipping : Stripe::OptionalFieldsShipping? = nil
 
     # For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -171,13 +171,13 @@ module Stripe
       @on_behalf_of : String? = nil,
       @payment_method : String? = nil,
       @payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      @payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil,
+      @payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       @payment_method_types : Array(String)? = nil,
       @radar_options : Stripe::RadarOptions? = nil,
       @receipt_email : String? = nil,
       @return_url : String? = nil,
       @setup_future_usage : String? = nil,
-      @shipping : Stripe::OptionalFieldsShipping1? = nil,
+      @shipping : Stripe::OptionalFieldsShipping? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
       @transfer_data : Stripe::TransferDataCreationParams? = nil,
@@ -538,7 +538,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam15?)
+    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam?)
       if payment_method_options.nil?
         return @payment_method_options = nil
       end
@@ -601,7 +601,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping : Stripe::OptionalFieldsShipping1?)
+    def shipping=(shipping : Stripe::OptionalFieldsShipping?)
       if shipping.nil?
         return @shipping = nil
       end

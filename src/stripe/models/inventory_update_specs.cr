@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Description of the SKU's inventory.
   class InventoryUpdateSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

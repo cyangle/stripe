@@ -43,8 +43,8 @@ module Stripe
     @[JSON::Field(key: "application_fee_percent", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter application_fee_percent : Float64? = nil
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTaxParams1? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTaxParams? = nil
 
     # Configuration for collecting the customer's billing address.
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -52,8 +52,8 @@ module Stripe
     ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
     VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = String.static_array("auto", "required")
 
-    @[JSON::Field(key: "consent_collection", type: Stripe::ConsentCollectionParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter consent_collection : Stripe::ConsentCollectionParams1? = nil
+    @[JSON::Field(key: "consent_collection", type: Stripe::ConsentCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter consent_collection : Stripe::ConsentCollectionParams? = nil
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies) and supported by each line item's price.
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -77,8 +77,8 @@ module Stripe
     @[JSON::Field(key: "on_behalf_of", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter on_behalf_of : String? = nil
 
-    @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentIntentDataParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_intent_data : Stripe::PaymentIntentDataParams1? = nil
+    @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentIntentDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_intent_data : Stripe::PaymentIntentDataParams? = nil
 
     # Specify whether Checkout should collect a payment method. When set to `if_required`, Checkout will not collect a payment method when the total due for the session is 0.This may occur if the Checkout Session includes a free trial or a discount.  Can only be set in `subscription` mode.  If you'd like information on how to collect a payment method outside of Checkout, read the guide on [configuring subscriptions with a free trial](https://stripe.com/docs/payments/checkout/free-trials).
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -92,15 +92,15 @@ module Stripe
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [affirm, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, blik, boleto, card, eps, fpx, giropay, grabpay, ideal, klarna, konbini, oxxo, p24, paynow, pix, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
     VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = String.static_array("affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
 
-    @[JSON::Field(key: "phone_number_collection", type: Stripe::PhoneNumberCollectionParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter phone_number_collection : Stripe::PhoneNumberCollectionParams1? = nil
+    @[JSON::Field(key: "phone_number_collection", type: Stripe::PhoneNumberCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil
 
-    @[JSON::Field(key: "shipping_address_collection", type: Stripe::ShippingAddressCollectionParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter shipping_address_collection : Stripe::ShippingAddressCollectionParams1? = nil
+    @[JSON::Field(key: "shipping_address_collection", type: Stripe::ShippingAddressCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil
 
     # The shipping rate options to apply to [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link.
-    @[JSON::Field(key: "shipping_options", type: Array(Stripe::ShippingOptionParams1)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter shipping_options : Array(Stripe::ShippingOptionParams1)? = nil
+    @[JSON::Field(key: "shipping_options", type: Array(Stripe::ShippingOptionParams)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shipping_options : Array(Stripe::ShippingOptionParams)? = nil
 
     # Describes the type of transaction being performed in order to customize relevant text on the page, such as the submit button. Changing this value will also affect the hostname in the [url](https://stripe.com/docs/api/payment_links/payment_links/object#url) property (example: `donate.stripe.com`).
     @[JSON::Field(key: "submit_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -108,14 +108,14 @@ module Stripe
     ERROR_MESSAGE_FOR_SUBMIT_TYPE = "invalid value for \"submit_type\", must be one of [auto, book, donate, pay]."
     VALID_VALUES_FOR_SUBMIT_TYPE  = String.static_array("auto", "book", "donate", "pay")
 
-    @[JSON::Field(key: "subscription_data", type: Stripe::SubscriptionDataParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter subscription_data : Stripe::SubscriptionDataParams1? = nil
+    @[JSON::Field(key: "subscription_data", type: Stripe::SubscriptionDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter subscription_data : Stripe::SubscriptionDataParams? = nil
 
-    @[JSON::Field(key: "tax_id_collection", type: Stripe::TaxIdCollectionParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_id_collection : Stripe::TaxIdCollectionParams1? = nil
+    @[JSON::Field(key: "tax_id_collection", type: Stripe::TaxIdCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_id_collection : Stripe::TaxIdCollectionParams? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataParams1? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataParams? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -128,24 +128,24 @@ module Stripe
       @allow_promotion_codes : Bool? = nil,
       @application_fee_amount : Int64? = nil,
       @application_fee_percent : Float64? = nil,
-      @automatic_tax : Stripe::AutomaticTaxParams1? = nil,
+      @automatic_tax : Stripe::AutomaticTaxParams? = nil,
       @billing_address_collection : String? = nil,
-      @consent_collection : Stripe::ConsentCollectionParams1? = nil,
+      @consent_collection : Stripe::ConsentCollectionParams? = nil,
       @currency : String? = nil,
       @customer_creation : String? = nil,
       @expand : Array(String)? = nil,
       @metadata : Hash(String, String)? = nil,
       @on_behalf_of : String? = nil,
-      @payment_intent_data : Stripe::PaymentIntentDataParams1? = nil,
+      @payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
       @payment_method_collection : String? = nil,
       @payment_method_types : Array(String)? = nil,
-      @phone_number_collection : Stripe::PhoneNumberCollectionParams1? = nil,
-      @shipping_address_collection : Stripe::ShippingAddressCollectionParams1? = nil,
-      @shipping_options : Array(Stripe::ShippingOptionParams1)? = nil,
+      @phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      @shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      @shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
       @submit_type : String? = nil,
-      @subscription_data : Stripe::SubscriptionDataParams1? = nil,
-      @tax_id_collection : Stripe::TaxIdCollectionParams1? = nil,
-      @transfer_data : Stripe::TransferDataParams1? = nil
+      @subscription_data : Stripe::SubscriptionDataParams? = nil,
+      @tax_id_collection : Stripe::TaxIdCollectionParams? = nil,
+      @transfer_data : Stripe::TransferDataParams? = nil
     )
     end
 
@@ -335,7 +335,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParams1?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParams?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
@@ -357,7 +357,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] consent_collection Object to be assigned
-    def consent_collection=(consent_collection : Stripe::ConsentCollectionParams1?)
+    def consent_collection=(consent_collection : Stripe::ConsentCollectionParams?)
       if consent_collection.nil?
         return @consent_collection = nil
       end
@@ -419,7 +419,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_intent_data Object to be assigned
-    def payment_intent_data=(payment_intent_data : Stripe::PaymentIntentDataParams1?)
+    def payment_intent_data=(payment_intent_data : Stripe::PaymentIntentDataParams?)
       if payment_intent_data.nil?
         return @payment_intent_data = nil
       end
@@ -452,7 +452,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone_number_collection Object to be assigned
-    def phone_number_collection=(phone_number_collection : Stripe::PhoneNumberCollectionParams1?)
+    def phone_number_collection=(phone_number_collection : Stripe::PhoneNumberCollectionParams?)
       if phone_number_collection.nil?
         return @phone_number_collection = nil
       end
@@ -463,7 +463,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address_collection Object to be assigned
-    def shipping_address_collection=(shipping_address_collection : Stripe::ShippingAddressCollectionParams1?)
+    def shipping_address_collection=(shipping_address_collection : Stripe::ShippingAddressCollectionParams?)
       if shipping_address_collection.nil?
         return @shipping_address_collection = nil
       end
@@ -474,7 +474,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_options Object to be assigned
-    def shipping_options=(shipping_options : Array(Stripe::ShippingOptionParams1)?)
+    def shipping_options=(shipping_options : Array(Stripe::ShippingOptionParams)?)
       if shipping_options.nil?
         return @shipping_options = nil
       end
@@ -496,7 +496,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_data Object to be assigned
-    def subscription_data=(subscription_data : Stripe::SubscriptionDataParams1?)
+    def subscription_data=(subscription_data : Stripe::SubscriptionDataParams?)
       if subscription_data.nil?
         return @subscription_data = nil
       end
@@ -507,7 +507,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_id_collection Object to be assigned
-    def tax_id_collection=(tax_id_collection : Stripe::TaxIdCollectionParams1?)
+    def tax_id_collection=(tax_id_collection : Stripe::TaxIdCollectionParams?)
       if tax_id_collection.nil?
         return @tax_id_collection = nil
       end
@@ -518,7 +518,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataParams1?)
+    def transfer_data=(transfer_data : Stripe::TransferDataParams?)
       if transfer_data.nil?
         return @transfer_data = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The business information shown to customers in the portal.
   class BusinessProfileUpdateParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

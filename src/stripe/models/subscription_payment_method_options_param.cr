@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "mandate_options", type: Stripe::MandateOptionsParam2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter mandate_options : Stripe::MandateOptionsParam2? = nil
+    @[JSON::Field(key: "mandate_options", type: Stripe::SubscriptionPaymentMethodOptionsParamMandateOptions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter mandate_options : Stripe::SubscriptionPaymentMethodOptionsParamMandateOptions? = nil
 
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
@@ -39,7 +39,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @mandate_options : Stripe::MandateOptionsParam2? = nil,
+      @mandate_options : Stripe::SubscriptionPaymentMethodOptionsParamMandateOptions? = nil,
       @network : String? = nil,
       @request_three_d_secure : String? = nil
     )
@@ -82,7 +82,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::MandateOptionsParam2?)
+    def mandate_options=(mandate_options : Stripe::SubscriptionPaymentMethodOptionsParamMandateOptions?)
       if mandate_options.nil?
         return @mandate_options = nil
       end

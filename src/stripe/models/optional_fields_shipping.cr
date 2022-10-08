@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Shipping information for the charge. Helps prevent fraud on charges for physical goods.
   class OptionalFieldsShipping
     include JSON::Serializable
     include JSON::Serializable::Unmapped

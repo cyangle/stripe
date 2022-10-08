@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information for the account this token will represent.
   class ConnectJsAccountTokenSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -29,8 +28,8 @@ module Stripe
     @[JSON::Field(key: "company", type: Stripe::ConnectJsAccountTokenCompanySpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter company : Stripe::ConnectJsAccountTokenCompanySpecs? = nil
 
-    @[JSON::Field(key: "individual", type: Stripe::IndividualSpecs1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter individual : Stripe::IndividualSpecs1? = nil
+    @[JSON::Field(key: "individual", type: Stripe::IndividualSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter individual : Stripe::IndividualSpecs? = nil
 
     @[JSON::Field(key: "tos_shown_and_accepted", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tos_shown_and_accepted : Bool? = nil
@@ -42,7 +41,7 @@ module Stripe
       # Optional properties
       @business_type : String? = nil,
       @company : Stripe::ConnectJsAccountTokenCompanySpecs? = nil,
-      @individual : Stripe::IndividualSpecs1? = nil,
+      @individual : Stripe::IndividualSpecs? = nil,
       @tos_shown_and_accepted : Bool? = nil
     )
     end
@@ -107,7 +106,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] individual Object to be assigned
-    def individual=(individual : Stripe::IndividualSpecs1?)
+    def individual=(individual : Stripe::IndividualSpecs?)
       if individual.nil?
         return @individual = nil
       end

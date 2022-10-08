@@ -20,44 +20,44 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "card_issuing", type: Stripe::Access1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter card_issuing : Stripe::Access1? = nil
+    @[JSON::Field(key: "card_issuing", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card_issuing : Stripe::Access? = nil
 
-    @[JSON::Field(key: "deposit_insurance", type: Stripe::Access2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter deposit_insurance : Stripe::Access2? = nil
+    @[JSON::Field(key: "deposit_insurance", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter deposit_insurance : Stripe::Access? = nil
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "financial_addresses", type: Stripe::FinancialAddresses1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter financial_addresses : Stripe::FinancialAddresses1? = nil
+    @[JSON::Field(key: "financial_addresses", type: Stripe::FinancialAddresses?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter financial_addresses : Stripe::FinancialAddresses? = nil
 
-    @[JSON::Field(key: "inbound_transfers", type: Stripe::InboundTransfers2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter inbound_transfers : Stripe::InboundTransfers2? = nil
+    @[JSON::Field(key: "inbound_transfers", type: Stripe::InboundTransfers?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter inbound_transfers : Stripe::InboundTransfers? = nil
 
-    @[JSON::Field(key: "intra_stripe_flows", type: Stripe::Access3?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter intra_stripe_flows : Stripe::Access3? = nil
+    @[JSON::Field(key: "intra_stripe_flows", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter intra_stripe_flows : Stripe::Access? = nil
 
-    @[JSON::Field(key: "outbound_payments", type: Stripe::OutboundPayments1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter outbound_payments : Stripe::OutboundPayments1? = nil
+    @[JSON::Field(key: "outbound_payments", type: Stripe::OutboundPayments?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter outbound_payments : Stripe::OutboundPayments? = nil
 
-    @[JSON::Field(key: "outbound_transfers", type: Stripe::OutboundTransfers1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter outbound_transfers : Stripe::OutboundTransfers1? = nil
+    @[JSON::Field(key: "outbound_transfers", type: Stripe::OutboundTransfers?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter outbound_transfers : Stripe::OutboundTransfers? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @card_issuing : Stripe::Access1? = nil,
-      @deposit_insurance : Stripe::Access2? = nil,
+      @card_issuing : Stripe::Access? = nil,
+      @deposit_insurance : Stripe::Access? = nil,
       @expand : Array(String)? = nil,
-      @financial_addresses : Stripe::FinancialAddresses1? = nil,
-      @inbound_transfers : Stripe::InboundTransfers2? = nil,
-      @intra_stripe_flows : Stripe::Access3? = nil,
-      @outbound_payments : Stripe::OutboundPayments1? = nil,
-      @outbound_transfers : Stripe::OutboundTransfers1? = nil
+      @financial_addresses : Stripe::FinancialAddresses? = nil,
+      @inbound_transfers : Stripe::InboundTransfers? = nil,
+      @intra_stripe_flows : Stripe::Access? = nil,
+      @outbound_payments : Stripe::OutboundPayments? = nil,
+      @outbound_transfers : Stripe::OutboundTransfers? = nil
     )
     end
 
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_issuing Object to be assigned
-    def card_issuing=(card_issuing : Stripe::Access1?)
+    def card_issuing=(card_issuing : Stripe::Access?)
       if card_issuing.nil?
         return @card_issuing = nil
       end
@@ -138,7 +138,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] deposit_insurance Object to be assigned
-    def deposit_insurance=(deposit_insurance : Stripe::Access2?)
+    def deposit_insurance=(deposit_insurance : Stripe::Access?)
       if deposit_insurance.nil?
         return @deposit_insurance = nil
       end
@@ -159,7 +159,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] financial_addresses Object to be assigned
-    def financial_addresses=(financial_addresses : Stripe::FinancialAddresses1?)
+    def financial_addresses=(financial_addresses : Stripe::FinancialAddresses?)
       if financial_addresses.nil?
         return @financial_addresses = nil
       end
@@ -170,7 +170,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_transfers Object to be assigned
-    def inbound_transfers=(inbound_transfers : Stripe::InboundTransfers2?)
+    def inbound_transfers=(inbound_transfers : Stripe::InboundTransfers?)
       if inbound_transfers.nil?
         return @inbound_transfers = nil
       end
@@ -181,7 +181,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] intra_stripe_flows Object to be assigned
-    def intra_stripe_flows=(intra_stripe_flows : Stripe::Access3?)
+    def intra_stripe_flows=(intra_stripe_flows : Stripe::Access?)
       if intra_stripe_flows.nil?
         return @intra_stripe_flows = nil
       end
@@ -192,7 +192,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_payments Object to be assigned
-    def outbound_payments=(outbound_payments : Stripe::OutboundPayments1?)
+    def outbound_payments=(outbound_payments : Stripe::OutboundPayments?)
       if outbound_payments.nil?
         return @outbound_payments = nil
       end
@@ -203,7 +203,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_transfers Object to be assigned
-    def outbound_transfers=(outbound_transfers : Stripe::OutboundTransfers1?)
+    def outbound_transfers=(outbound_transfers : Stripe::OutboundTransfers?)
       if outbound_transfers.nil?
         return @outbound_transfers = nil
       end

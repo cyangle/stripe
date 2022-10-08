@@ -63,6 +63,10 @@ module Stripe
     getter ideal : Stripe::SetupAttemptPaymentMethodDetailsIdeal? = nil
 
     #
+    @[JSON::Field(key: "klarna", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter klarna : JSON::Any? = nil
+
+    #
     @[JSON::Field(key: "link", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]
     getter link : JSON::Any? = nil
 
@@ -93,6 +97,7 @@ module Stripe
       @card : Stripe::SetupAttemptPaymentMethodDetailsCard? = nil,
       @card_present2 : Stripe::SetupAttemptPaymentMethodDetailsCardPresent? = nil,
       @ideal : Stripe::SetupAttemptPaymentMethodDetailsIdeal? = nil,
+      @klarna : JSON::Any? = nil,
       @link : JSON::Any? = nil,
       @sepa_debit : JSON::Any? = nil,
       @sofort : Stripe::SetupAttemptPaymentMethodDetailsSofort? = nil,
@@ -271,6 +276,16 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] klarna Object to be assigned
+    def klarna=(klarna : JSON::Any?)
+      if klarna.nil?
+        return @klarna = nil
+      end
+      _klarna = klarna.not_nil!
+      @klarna = _klarna
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] link Object to be assigned
     def link=(link : JSON::Any?)
       if link.nil?
@@ -315,6 +330,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @acss_debit, @au_becs_debit, @bacs_debit, @bancontact, @blik, @boleto, @card, @card_present2, @ideal, @link, @sepa_debit, @sofort, @us_bank_account)
+    def_equals_and_hash(@_type, @acss_debit, @au_becs_debit, @bacs_debit, @bancontact, @blik, @boleto, @card, @card_present2, @ideal, @klarna, @link, @sepa_debit, @sofort, @us_bank_account)
   end
 end

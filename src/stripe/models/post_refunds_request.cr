@@ -45,8 +45,8 @@ module Stripe
     @[JSON::Field(key: "instructions_email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter instructions_email : String? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Origin of the refund
     @[JSON::Field(key: "origin", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -81,7 +81,7 @@ module Stripe
       @customer : String? = nil,
       @expand : Array(String)? = nil,
       @instructions_email : String? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @origin : String? = nil,
       @payment_intent : String? = nil,
       @reason : String? = nil,
@@ -219,7 +219,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

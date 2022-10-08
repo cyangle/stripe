@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Options for customizing how the account functions within Stripe.
   class SettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

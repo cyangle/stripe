@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A set of key-value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of `safe`. Stripe will use the information you send to improve our fraud detection algorithms.
   class FraudDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped

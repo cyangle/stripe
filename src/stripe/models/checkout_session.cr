@@ -29,6 +29,10 @@ module Stripe
     getter cancel_url : String? = nil
     MAX_LENGTH_FOR_CANCEL_URL = 5000
 
+    # Time at which the object was created. Measured in seconds since the Unix epoch.
+    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter created : Int64? = nil
+
     # The timestamp at which the Checkout Session will expire.
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expires_at : Int64? = nil
@@ -169,8 +173,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_email_present : Bool = false
 
-    @[JSON::Field(key: "line_items", type: Stripe::PaymentPagesCheckoutSessionListLineItems1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter line_items : Stripe::PaymentPagesCheckoutSessionListLineItems1? = nil
+    @[JSON::Field(key: "line_items", type: Stripe::PaymentPagesCheckoutSessionListLineItems?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter line_items : Stripe::PaymentPagesCheckoutSessionListLineItems? = nil
 
     # The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: locale.nil? && !locale_present?)]
@@ -298,6 +302,7 @@ module Stripe
       # Required properties
       @automatic_tax : Stripe::PaymentPagesCheckoutSessionAutomaticTax? = nil,
       @cancel_url : String? = nil,
+      @created : Int64? = nil,
       @expires_at : Int64? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
@@ -321,7 +326,7 @@ module Stripe
       @customer_creation : String? = nil,
       @customer_details : Stripe::CheckoutSessionCustomerDetails? = nil,
       @customer_email : String? = nil,
-      @line_items : Stripe::PaymentPagesCheckoutSessionListLineItems1? = nil,
+      @line_items : Stripe::PaymentPagesCheckoutSessionListLineItems? = nil,
       @locale : String? = nil,
       @metadata : Hash(String, String)? = nil,
       @payment_intent : Stripe::CheckoutSessionPaymentIntent? = nil,
@@ -360,6 +365,8 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
@@ -507,6 +514,8 @@ module Stripe
       unless (_cancel_url = @cancel_url).nil?
         return false if _cancel_url.to_s.size > MAX_LENGTH_FOR_CANCEL_URL
       end
+
+      return false if @created.nil?
 
       return false if @expires_at.nil?
 
@@ -675,6 +684,16 @@ module Stripe
       _cancel_url = cancel_url.not_nil!
       OpenApi::PrimitiveValidator.validate_max_length("cancel_url", _cancel_url.to_s.size, MAX_LENGTH_FOR_CANCEL_URL)
       @cancel_url = _cancel_url
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created Object to be assigned
+    def created=(created : Int64?)
+      if created.nil?
+        raise ArgumentError.new("\"created\" is required and cannot be null")
+      end
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -914,7 +933,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Stripe::PaymentPagesCheckoutSessionListLineItems1?)
+    def line_items=(line_items : Stripe::PaymentPagesCheckoutSessionListLineItems?)
       if line_items.nil?
         return @line_items = nil
       end
@@ -1124,6 +1143,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@automatic_tax, @cancel_url, @expires_at, @id, @livemode, @mode, @object, @payment_method_types, @payment_status, @shipping_options, @success_url, @after_expiration, @after_expiration_present, @allow_promotion_codes, @allow_promotion_codes_present, @amount_subtotal, @amount_subtotal_present, @amount_total, @amount_total_present, @billing_address_collection, @billing_address_collection_present, @client_reference_id, @client_reference_id_present, @consent, @consent_present, @consent_collection, @consent_collection_present, @currency, @currency_present, @customer, @customer_present, @customer_creation, @customer_creation_present, @customer_details, @customer_details_present, @customer_email, @customer_email_present, @line_items, @locale, @locale_present, @metadata, @metadata_present, @payment_intent, @payment_intent_present, @payment_link, @payment_link_present, @payment_method_collection, @payment_method_collection_present, @payment_method_options, @payment_method_options_present, @phone_number_collection, @recovered_from, @recovered_from_present, @setup_intent, @setup_intent_present, @shipping_address_collection, @shipping_address_collection_present, @shipping_cost, @shipping_cost_present, @shipping_details, @shipping_details_present, @status, @status_present, @submit_type, @submit_type_present, @subscription, @subscription_present, @tax_id_collection, @total_details, @total_details_present, @url, @url_present)
+    def_equals_and_hash(@automatic_tax, @cancel_url, @created, @expires_at, @id, @livemode, @mode, @object, @payment_method_types, @payment_status, @shipping_options, @success_url, @after_expiration, @after_expiration_present, @allow_promotion_codes, @allow_promotion_codes_present, @amount_subtotal, @amount_subtotal_present, @amount_total, @amount_total_present, @billing_address_collection, @billing_address_collection_present, @client_reference_id, @client_reference_id_present, @consent, @consent_present, @consent_collection, @consent_collection_present, @currency, @currency_present, @customer, @customer_present, @customer_creation, @customer_creation_present, @customer_details, @customer_details_present, @customer_email, @customer_email_present, @line_items, @locale, @locale_present, @metadata, @metadata_present, @payment_intent, @payment_intent_present, @payment_link, @payment_link_present, @payment_method_collection, @payment_method_collection_present, @payment_method_options, @payment_method_options_present, @phone_number_collection, @recovered_from, @recovered_from_present, @setup_intent, @setup_intent_present, @shipping_address_collection, @shipping_address_collection_present, @shipping_cost, @shipping_cost_present, @shipping_details, @shipping_details_present, @status, @status_present, @submit_type, @submit_type_present, @subscription, @subscription_present, @tax_id_collection, @total_details, @total_details_present, @url, @url_present)
   end
 end

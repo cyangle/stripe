@@ -28,11 +28,11 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    @[JSON::Field(key: "restrictions", type: Stripe::RestrictionsParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter restrictions : Stripe::RestrictionsParams1? = nil
+    @[JSON::Field(key: "restrictions", type: Stripe::RestrictionsParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter restrictions : Stripe::RestrictionsParams? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,8 +41,8 @@ module Stripe
       # Optional properties
       @active : Bool? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
-      @restrictions : Stripe::RestrictionsParams1? = nil
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      @restrictions : Stripe::RestrictionsParams? = nil
     )
     end
 
@@ -96,7 +96,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restrictions Object to be assigned
-    def restrictions=(restrictions : Stripe::RestrictionsParams1?)
+    def restrictions=(restrictions : Stripe::RestrictionsParams?)
       if restrictions.nil?
         return @restrictions = nil
       end

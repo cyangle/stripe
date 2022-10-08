@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # Billing details for the customer. If a customer is provided, this will be automatically populated with values from that customer if override values are not provided.
-  alias PostOrdersRequestBillingDetails = BillingDetails1 | BusinessProfileSpecsSupportUrlOneOf
+  alias PostOrdersRequestBillingDetails = BillingDetails | PostAccountsRequestMetadataOneOf
 end

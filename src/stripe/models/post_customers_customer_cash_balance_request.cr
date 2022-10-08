@@ -24,8 +24,8 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "settings", type: Stripe::BalanceSettingsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter settings : Stripe::BalanceSettingsParam1? = nil
+    @[JSON::Field(key: "settings", type: Stripe::BalanceSettingsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter settings : Stripe::BalanceSettingsParam? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -33,7 +33,7 @@ module Stripe
       *,
       # Optional properties
       @expand : Array(String)? = nil,
-      @settings : Stripe::BalanceSettingsParam1? = nil
+      @settings : Stripe::BalanceSettingsParam? = nil
     )
     end
 
@@ -70,7 +70,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] settings Object to be assigned
-    def settings=(settings : Stripe::BalanceSettingsParam1?)
+    def settings=(settings : Stripe::BalanceSettingsParam?)
       if settings.nil?
         return @settings = nil
       end

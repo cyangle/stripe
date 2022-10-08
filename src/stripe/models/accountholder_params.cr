@@ -18,6 +18,15 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
+    # Required Properties
+
+    @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter _type : String? = nil
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account, customer]."
+    VALID_VALUES_FOR__TYPE  = String.static_array("account", "customer")
+
+    # End of Required Properties
+
     # Optional Properties
 
     @[JSON::Field(key: "account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -32,6 +41,8 @@ module Stripe
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
+      # Required properties
+      @_type : String? = nil,
       # Optional properties
       @account : String? = nil,
       @customer : String? = nil
@@ -43,6 +54,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
+      unless (__type = @_type).nil?
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       unless (_account = @account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
@@ -59,6 +75,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
+      return false if @_type.nil?
+      unless (__type = @_type).nil?
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       unless (_account = @account).nil?
         return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
@@ -68,6 +89,17 @@ module Stripe
       end
 
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        raise ArgumentError.new("\"_type\" is required and cannot be null")
+      end
+      __type = _type.not_nil!
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,6 +128,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account, @customer)
+    def_equals_and_hash(@_type, @account, @customer)
   end
 end

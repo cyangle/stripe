@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # This hash contains details about the Mandate to create. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
   class SecretKeyParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

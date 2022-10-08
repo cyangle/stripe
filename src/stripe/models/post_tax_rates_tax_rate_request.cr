@@ -48,8 +48,8 @@ module Stripe
     getter jurisdiction : String? = nil
     MAX_LENGTH_FOR_JURISDICTION = 50
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.
     @[JSON::Field(key: "state", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -73,7 +73,7 @@ module Stripe
       @display_name : String? = nil,
       @expand : Array(String)? = nil,
       @jurisdiction : String? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @state : String? = nil,
       @tax_type : String? = nil
     )
@@ -219,7 +219,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

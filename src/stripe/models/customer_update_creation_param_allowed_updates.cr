@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias CustomerUpdateCreationParamAllowedUpdates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
+  alias CustomerUpdateCreationParamAllowedUpdates = Array(String) | String
 end

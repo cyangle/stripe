@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The parameters used to automatically create a Transfer when the payment succeeds. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
   class TransferDataUpdateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

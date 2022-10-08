@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class APIMethodRefundList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

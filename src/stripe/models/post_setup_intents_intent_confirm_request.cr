@@ -37,11 +37,11 @@ module Stripe
     getter payment_method : String? = nil
     MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_data : Stripe::PaymentMethodDataParams1? = nil
+    @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_data : Stripe::PaymentMethodDataParams? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam22?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_options : Stripe::PaymentMethodOptionsParam22? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
 
     # The URL to redirect your customer back to after they authenticate on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -56,8 +56,8 @@ module Stripe
       @expand : Array(String)? = nil,
       @mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
       @payment_method : String? = nil,
-      @payment_method_data : Stripe::PaymentMethodDataParams1? = nil,
-      @payment_method_options : Stripe::PaymentMethodOptionsParam22? = nil,
+      @payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      @payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       @return_url : String? = nil
     )
     end
@@ -162,7 +162,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_data Object to be assigned
-    def payment_method_data=(payment_method_data : Stripe::PaymentMethodDataParams1?)
+    def payment_method_data=(payment_method_data : Stripe::PaymentMethodDataParams?)
       if payment_method_data.nil?
         return @payment_method_data = nil
       end
@@ -173,7 +173,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam22?)
+    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam?)
       if payment_method_options.nil?
         return @payment_method_options = nil
       end

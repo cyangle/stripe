@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias GetInvoicesUpcomingDiscountsParameter = Array(DiscountsDataParam) | BusinessProfileSpecsSupportUrlOneOf
+  alias GetInvoicesUpcomingDiscountsParameter = Array(DiscountsDataParam) | PostAccountsRequestMetadataOneOf
 end

@@ -20,25 +20,7 @@ describe Stripe::InboundTransfers do
     end
   end
 
-  describe "test attribute 'billing_details'" do
-    it "should work" do
-      # instance = Stripe::InboundTransfers.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute '_type'" do
-    it "should work" do
-      # instance = Stripe::InboundTransfers.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::InboundTransfers::ENUM_VALIDATOR_FOR__TYPE
-      # validator.allowable_values.each do |value|
-      #   instance._type = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute 'us_bank_account'" do
+  describe "test attribute 'ach'" do
     it "should work" do
       # instance = Stripe::InboundTransfers.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

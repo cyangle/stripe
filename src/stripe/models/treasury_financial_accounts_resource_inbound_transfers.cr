@@ -21,15 +21,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "ach", type: Stripe::TreasuryFinancialAccountsResourceToggleSettings?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter ach : Stripe::TreasuryFinancialAccountsResourceToggleSettings? = nil
+    @[JSON::Field(key: "ach", type: Stripe::TreasuryFinancialAccountsResourceAchToggleSettings?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ach : Stripe::TreasuryFinancialAccountsResourceAchToggleSettings? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @ach : Stripe::TreasuryFinancialAccountsResourceToggleSettings? = nil
+      @ach : Stripe::TreasuryFinancialAccountsResourceAchToggleSettings? = nil
     )
     end
 
@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ach Object to be assigned
-    def ach=(ach : Stripe::TreasuryFinancialAccountsResourceToggleSettings?)
+    def ach=(ach : Stripe::TreasuryFinancialAccountsResourceAchToggleSettings?)
       if ach.nil?
         return @ach = nil
       end

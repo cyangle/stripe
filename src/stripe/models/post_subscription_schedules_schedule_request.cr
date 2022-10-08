@@ -33,12 +33,12 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    # List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase. Note that past phases can be omitted.
-    @[JSON::Field(key: "phases", type: Array(Stripe::PhaseConfigurationParams1)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter phases : Array(Stripe::PhaseConfigurationParams1)? = nil
+    # List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
+    @[JSON::Field(key: "phases", type: Array(Stripe::PhaseConfigurationParams)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter phases : Array(Stripe::PhaseConfigurationParams)? = nil
 
     # If the update changes the current phase, indicates whether the changes should be prorated. The default value is `create_prorations`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -54,8 +54,8 @@ module Stripe
       @default_settings : Stripe::DefaultSettingsParams? = nil,
       @end_behavior : String? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
-      @phases : Array(Stripe::PhaseConfigurationParams1)? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      @phases : Array(Stripe::PhaseConfigurationParams)? = nil,
       @proration_behavior : String? = nil
     )
     end
@@ -144,7 +144,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -155,7 +155,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phases Object to be assigned
-    def phases=(phases : Array(Stripe::PhaseConfigurationParams1)?)
+    def phases=(phases : Array(Stripe::PhaseConfigurationParams)?)
       if phases.nil?
         return @phases = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Documents that may be submitted to satisfy various informational requests.
   class PersonDocumentsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

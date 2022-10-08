@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `card` PaymentMethod, this hash contains the user's card details.
   class UpdateApiParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

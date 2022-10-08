@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Describes a fixed amount to charge for shipping. Must be present if type is `fixed_amount`.
   class FixedAmountUpdate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -21,15 +20,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::FixedAmountUpdateCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter currency_options : Hash(String, Stripe::FixedAmountUpdateCurrencyOptionsValue)? = nil
+    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOptionUpdate)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter currency_options : Hash(String, Stripe::CurrencyOptionUpdate)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @currency_options : Hash(String, Stripe::FixedAmountUpdateCurrencyOptionsValue)? = nil
+      @currency_options : Hash(String, Stripe::CurrencyOptionUpdate)? = nil
     )
     end
 
@@ -56,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::FixedAmountUpdateCurrencyOptionsValue)?)
+    def currency_options=(currency_options : Hash(String, Stripe::CurrencyOptionUpdate)?)
       if currency_options.nil?
         return @currency_options = nil
       end

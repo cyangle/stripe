@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class TreasuryReceivedCreditsResourceReceivedCreditList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Details about a failed InboundTransfer.
   class FailureDetailsParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

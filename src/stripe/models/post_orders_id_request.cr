@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTax1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTax1? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTax?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTax? = nil
 
     @[JSON::Field(key: "billing_details", type: Stripe::PostOrdersRequestBillingDetails?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_details : Stripe::PostOrdersRequestBillingDetails? = nil
@@ -55,14 +55,14 @@ module Stripe
     getter ip_address : String? = nil
 
     # A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    @[JSON::Field(key: "line_items", type: Array(Stripe::UpdateParams)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter line_items : Array(Stripe::UpdateParams)? = nil
+    @[JSON::Field(key: "line_items", type: Array(Stripe::PostOrdersIdRequestLineItemsInner)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    @[JSON::Field(key: "payment", type: Stripe::UpdateParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment : Stripe::UpdateParams1? = nil
+    @[JSON::Field(key: "payment", type: Stripe::UpdateParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment : Stripe::UpdateParams? = nil
 
     @[JSON::Field(key: "shipping_cost", type: Stripe::PostOrdersRequestShippingCost?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil
@@ -78,7 +78,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @automatic_tax : Stripe::AutomaticTax1? = nil,
+      @automatic_tax : Stripe::AutomaticTax? = nil,
       @billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
       @client_permissions : Stripe::ClientPermissions? = nil,
       @currency : String? = nil,
@@ -87,9 +87,9 @@ module Stripe
       @discounts : Stripe::PostOrdersIdRequestDiscounts? = nil,
       @expand : Array(String)? = nil,
       @ip_address : String? = nil,
-      @line_items : Array(Stripe::UpdateParams)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
-      @payment : Stripe::UpdateParams1? = nil,
+      @line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      @payment : Stripe::UpdateParams? = nil,
       @shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
       @shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
       @tax_details : Stripe::TaxDetails? = nil
@@ -202,7 +202,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTax1?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTax?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
@@ -298,7 +298,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Array(Stripe::UpdateParams)?)
+    def line_items=(line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)?)
       if line_items.nil?
         return @line_items = nil
       end
@@ -309,7 +309,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -320,7 +320,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment Object to be assigned
-    def payment=(payment : Stripe::UpdateParams1?)
+    def payment=(payment : Stripe::UpdateParams?)
       if payment.nil?
         return @payment = nil
       end

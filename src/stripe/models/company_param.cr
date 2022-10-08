@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Additional information about a `company` cardholder.
   class CompanyParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

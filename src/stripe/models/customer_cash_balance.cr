@@ -12,6 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The current funds being held by Stripe on behalf of the customer. These funds can be applied towards payment intents with source \"cash_balance\".The settings[reconciliation_mode] field describes whether these funds are applied to such payment intents manually or automatically.
+  # The current funds being held by Stripe on behalf of the customer. These funds can be applied towards payment intents with source \"cash_balance\". The settings[reconciliation_mode] field describes whether these funds are applied to such payment intents manually or automatically.
   alias CustomerCashBalance = CashBalance
 end

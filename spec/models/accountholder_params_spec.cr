@@ -33,4 +33,15 @@ describe Stripe::AccountholderParams do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute '_type'" do
+    it "should work" do
+      # instance = Stripe::AccountholderParams.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = Stripe::AccountholderParams::ENUM_VALIDATOR_FOR__TYPE
+      # validator.allowable_values.each do |value|
+      #   instance._type = value.as(String)
+      # end
+    end
+  end
 end

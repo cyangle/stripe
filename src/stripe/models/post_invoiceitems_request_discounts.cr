@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The coupons to redeem into discounts for the invoice item or invoice line item.
-  alias PostInvoiceitemsRequestDiscounts = Array(DiscountsDataParam) | BusinessProfileSpecsSupportUrlOneOf
+  alias PostInvoiceitemsRequestDiscounts = Array(DiscountsDataParam) | PostAccountsRequestMetadataOneOf
 end

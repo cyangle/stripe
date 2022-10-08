@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # Tipping configurations for readers supporting on-reader tips
-  alias PostTerminalConfigurationsRequestTipping = BusinessProfileSpecsSupportUrlOneOf | Tipping
+  alias PostTerminalConfigurationsRequestTipping = PostAccountsRequestMetadataOneOf | Tipping
 end

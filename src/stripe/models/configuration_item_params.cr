@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemCreateParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::SubscriptionItemCreateParamsBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemUpdateParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::SubscriptionItemUpdateParamsBillingThresholds? = nil
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price : String? = nil
@@ -33,19 +33,19 @@ module Stripe
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
 
-    @[JSON::Field(key: "tax_rates", type: Stripe::CreditNoteLineItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil
+    @[JSON::Field(key: "tax_rates", type: Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @billing_thresholds : Stripe::SubscriptionItemCreateParamsBillingThresholds? = nil,
+      @billing_thresholds : Stripe::SubscriptionItemUpdateParamsBillingThresholds? = nil,
       @price : String? = nil,
       @price_data : Stripe::RecurringPriceData? = nil,
       @quantity : Int64? = nil,
-      @tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil
+      @tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil
     )
     end
 
@@ -96,7 +96,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(billing_thresholds : Stripe::SubscriptionItemCreateParamsBillingThresholds?)
+    def billing_thresholds=(billing_thresholds : Stripe::SubscriptionItemUpdateParamsBillingThresholds?)
       if billing_thresholds.nil?
         return @billing_thresholds = nil
       end
@@ -139,7 +139,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(tax_rates : Stripe::CreditNoteLineItemParamsTaxRates?)
+    def tax_rates=(tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?)
       if tax_rates.nil?
         return @tax_rates = nil
       end

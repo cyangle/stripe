@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Each key of the dictionary represents a capability, and each capability maps to its settings (e.g. whether it has been requested or not). Each capability will be inactive until you have provided its specific requirements and Stripe has verified them. An account may have some of its requested capabilities be active and some be inactive.
   class CapabilitiesParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

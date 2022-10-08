@@ -65,11 +65,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? filename_present : Bool = false
 
-    @[JSON::Field(key: "links", type: Stripe::FileFileLinkList1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: links.nil? && !links_present?)]
-    getter links : Stripe::FileFileLinkList1? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? links_present : Bool = false
+    @[JSON::Field(key: "links", type: Stripe::FileFileLinkList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter links : Stripe::FileFileLinkList? = nil
 
     # A user friendly title for the document.
     @[JSON::Field(key: "title", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: title.nil? && !title_present?)]
@@ -108,7 +105,7 @@ module Stripe
       # Optional properties
       @expires_at : Int64? = nil,
       @filename : String? = nil,
-      @links : Stripe::FileFileLinkList1? = nil,
+      @links : Stripe::FileFileLinkList? = nil,
       @title : String? = nil,
       @_type : String? = nil,
       @url : String? = nil
@@ -288,7 +285,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] links Object to be assigned
-    def links=(links : Stripe::FileFileLinkList1?)
+    def links=(links : Stripe::FileFileLinkList?)
       if links.nil?
         return @links = nil
       end
@@ -334,6 +331,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@created, @id, @object, @purpose, @size, @expires_at, @expires_at_present, @filename, @filename_present, @links, @links_present, @title, @title_present, @_type, @_type_present, @url, @url_present)
+    def_equals_and_hash(@created, @id, @object, @purpose, @size, @expires_at, @expires_at_present, @filename, @filename_present, @links, @title, @title_present, @_type, @_type_present, @url, @url_present)
   end
 end

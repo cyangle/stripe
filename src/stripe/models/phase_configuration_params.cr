@@ -33,8 +33,8 @@ module Stripe
     @[JSON::Field(key: "application_fee_percent", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter application_fee_percent : Float64? = nil
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxConfig1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTaxConfig1? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxConfig?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTaxConfig? = nil
 
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : String? = nil
@@ -60,8 +60,8 @@ module Stripe
     getter default_payment_method : String? = nil
     MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "default_tax_rates", type: Stripe::CreditNoteLineItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter default_tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil
+    @[JSON::Field(key: "default_tax_rates", type: Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
@@ -84,8 +84,8 @@ module Stripe
     ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
     VALID_VALUES_FOR_PRORATION_BEHAVIOR  = String.static_array("always_invoice", "create_prorations", "none")
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataSpecs2? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataSpecs? = nil
 
     @[JSON::Field(key: "trial", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter trial : Bool? = nil
@@ -102,21 +102,21 @@ module Stripe
       # Optional properties
       @add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
       @application_fee_percent : Float64? = nil,
-      @automatic_tax : Stripe::AutomaticTaxConfig1? = nil,
+      @automatic_tax : Stripe::AutomaticTaxConfig? = nil,
       @billing_cycle_anchor : String? = nil,
       @billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil,
       @collection_method : String? = nil,
       @coupon : String? = nil,
       @currency : String? = nil,
       @default_payment_method : String? = nil,
-      @default_tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil,
+      @default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
       @description : String? = nil,
       @end_date : Int64? = nil,
       @invoice_settings : Stripe::SubscriptionSchedulesParam? = nil,
       @iterations : Int64? = nil,
       @metadata : Hash(String, String)? = nil,
       @proration_behavior : String? = nil,
-      @transfer_data : Stripe::TransferDataSpecs2? = nil,
+      @transfer_data : Stripe::TransferDataSpecs? = nil,
       @trial : Bool? = nil,
       @trial_end : Int64? = nil
     )
@@ -275,7 +275,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxConfig1?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxConfig?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
@@ -351,7 +351,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_tax_rates Object to be assigned
-    def default_tax_rates=(default_tax_rates : Stripe::CreditNoteLineItemParamsTaxRates?)
+    def default_tax_rates=(default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?)
       if default_tax_rates.nil?
         return @default_tax_rates = nil
       end
@@ -425,7 +425,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs2?)
+    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
       if transfer_data.nil?
         return @transfer_data = nil
       end

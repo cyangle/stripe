@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The account on behalf of which to charge.
-  alias PostQuotesRequestOnBehalfOf = BusinessProfileSpecsSupportUrlOneOf | String
+  alias PostQuotesRequestOnBehalfOf = PostAccountsRequestMetadataOneOf | String
 end

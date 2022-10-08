@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Payment-method-specific configuration.
   class PaymentMethodOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -24,77 +23,92 @@ module Stripe
     @[JSON::Field(key: "acss_debit", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "affirm", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter affirm : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "affirm", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter affirm : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "afterpay_clearpay", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter afterpay_clearpay : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "afterpay_clearpay", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter afterpay_clearpay : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "alipay", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter alipay : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "alipay", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter alipay : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "au_becs_debit", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter au_becs_debit : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "au_becs_debit", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter au_becs_debit : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "bacs_debit", type: Stripe::PaymentMethodOptionsParam2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter bacs_debit : Stripe::PaymentMethodOptionsParam2? = nil
+    @[JSON::Field(key: "bacs_debit", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter bacs_debit : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "bancontact", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter bancontact : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "bancontact", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter bancontact : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "boleto", type: Stripe::PaymentMethodOptionsParam3?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter boleto : Stripe::PaymentMethodOptionsParam3? = nil
+    @[JSON::Field(key: "boleto", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter boleto : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "card", type: Stripe::PaymentMethodOptionsParam4?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter card : Stripe::PaymentMethodOptionsParam4? = nil
+    @[JSON::Field(key: "card", type: Stripe::SetupIntentParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card : Stripe::SetupIntentParam? = nil
 
-    @[JSON::Field(key: "customer_balance", type: Stripe::PaymentMethodOptionsParam5?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter customer_balance : Stripe::PaymentMethodOptionsParam5? = nil
+    @[JSON::Field(key: "customer_balance", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter customer_balance : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "eps", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter eps : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "eps", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter eps : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "fpx", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter fpx : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "fpx", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter fpx : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "giropay", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter giropay : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "giropay", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter giropay : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "grabpay", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter grabpay : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "grabpay", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter grabpay : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "ideal", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter ideal : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "ideal", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ideal : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "klarna", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter klarna : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "klarna", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter klarna : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "konbini", type: Stripe::PaymentMethodOptionsParam6?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter konbini : Stripe::PaymentMethodOptionsParam6? = nil
+    @[JSON::Field(key: "konbini", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter konbini : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "oxxo", type: Stripe::PaymentMethodOptionsParam6?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter oxxo : Stripe::PaymentMethodOptionsParam6? = nil
+    @[JSON::Field(key: "oxxo", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter oxxo : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "p24", type: Stripe::PaymentMethodOptionsParam7?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter p24 : Stripe::PaymentMethodOptionsParam7? = nil
+    @[JSON::Field(key: "p24", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter p24 : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "paynow", type: Stripe::PaymentMethodOptionsParam7?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter paynow : Stripe::PaymentMethodOptionsParam7? = nil
+    @[JSON::Field(key: "paynow", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter paynow : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "pix", type: Stripe::PaymentMethodOptionsParam8?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter pix : Stripe::PaymentMethodOptionsParam8? = nil
+    @[JSON::Field(key: "pix", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter pix : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "sepa_debit", type: Stripe::PaymentMethodOptionsParam2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter sepa_debit : Stripe::PaymentMethodOptionsParam2? = nil
+    @[JSON::Field(key: "sepa_debit", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sepa_debit : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "sofort", type: Stripe::PaymentMethodOptionsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter sofort : Stripe::PaymentMethodOptionsParam1? = nil
+    @[JSON::Field(key: "sofort", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sofort : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodOptionsParam9?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter us_bank_account : Stripe::PaymentMethodOptionsParam9? = nil
+    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter us_bank_account : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "wechat_pay", type: Stripe::PaymentMethodOptionsParam10?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter wechat_pay : Stripe::PaymentMethodOptionsParam10? = nil
+    @[JSON::Field(key: "wechat_pay", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter wechat_pay : Stripe::PaymentMethodOptionsParam? = nil
+
+    @[JSON::Field(key: "blik", type: Stripe::PaymentMethodOptionsParamBlik?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter blik : Stripe::PaymentMethodOptionsParamBlik? = nil
+
+    @[JSON::Field(key: "card_present", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card_present : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+
+    @[JSON::Field(key: "interac_present", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter interac_present : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+
+    @[JSON::Field(key: "link", type: Stripe::PaymentMethodOptionsParamLink?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter link : Stripe::PaymentMethodOptionsParamLink? = nil
+
+    @[JSON::Field(key: "promptpay", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter promptpay : Stripe::PaymentMethodOptionsParamCardPresent? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -102,30 +116,35 @@ module Stripe
       *,
       # Optional properties
       @acss_debit : Stripe::PaymentMethodOptionsParam? = nil,
-      @affirm : Stripe::PaymentMethodOptionsParam1? = nil,
-      @afterpay_clearpay : Stripe::PaymentMethodOptionsParam1? = nil,
-      @alipay : Stripe::PaymentMethodOptionsParam1? = nil,
-      @au_becs_debit : Stripe::PaymentMethodOptionsParam1? = nil,
-      @bacs_debit : Stripe::PaymentMethodOptionsParam2? = nil,
-      @bancontact : Stripe::PaymentMethodOptionsParam1? = nil,
-      @boleto : Stripe::PaymentMethodOptionsParam3? = nil,
-      @card : Stripe::PaymentMethodOptionsParam4? = nil,
-      @customer_balance : Stripe::PaymentMethodOptionsParam5? = nil,
-      @eps : Stripe::PaymentMethodOptionsParam1? = nil,
-      @fpx : Stripe::PaymentMethodOptionsParam1? = nil,
-      @giropay : Stripe::PaymentMethodOptionsParam1? = nil,
-      @grabpay : Stripe::PaymentMethodOptionsParam1? = nil,
-      @ideal : Stripe::PaymentMethodOptionsParam1? = nil,
-      @klarna : Stripe::PaymentMethodOptionsParam1? = nil,
-      @konbini : Stripe::PaymentMethodOptionsParam6? = nil,
-      @oxxo : Stripe::PaymentMethodOptionsParam6? = nil,
-      @p24 : Stripe::PaymentMethodOptionsParam7? = nil,
-      @paynow : Stripe::PaymentMethodOptionsParam7? = nil,
-      @pix : Stripe::PaymentMethodOptionsParam8? = nil,
-      @sepa_debit : Stripe::PaymentMethodOptionsParam2? = nil,
-      @sofort : Stripe::PaymentMethodOptionsParam1? = nil,
-      @us_bank_account : Stripe::PaymentMethodOptionsParam9? = nil,
-      @wechat_pay : Stripe::PaymentMethodOptionsParam10? = nil
+      @affirm : Stripe::PaymentMethodOptionsParam? = nil,
+      @afterpay_clearpay : Stripe::PaymentMethodOptionsParam? = nil,
+      @alipay : Stripe::PaymentMethodOptionsParam? = nil,
+      @au_becs_debit : Stripe::PaymentMethodOptionsParam? = nil,
+      @bacs_debit : Stripe::PaymentMethodOptionsParam? = nil,
+      @bancontact : Stripe::PaymentMethodOptionsParam? = nil,
+      @boleto : Stripe::PaymentMethodOptionsParam? = nil,
+      @card : Stripe::SetupIntentParam? = nil,
+      @customer_balance : Stripe::PaymentMethodOptionsParam? = nil,
+      @eps : Stripe::PaymentMethodOptionsParam? = nil,
+      @fpx : Stripe::PaymentMethodOptionsParam? = nil,
+      @giropay : Stripe::PaymentMethodOptionsParam? = nil,
+      @grabpay : Stripe::PaymentMethodOptionsParam? = nil,
+      @ideal : Stripe::PaymentMethodOptionsParam? = nil,
+      @klarna : Stripe::PaymentMethodOptionsParam? = nil,
+      @konbini : Stripe::PaymentMethodOptionsParam? = nil,
+      @oxxo : Stripe::PaymentMethodOptionsParam? = nil,
+      @p24 : Stripe::PaymentMethodOptionsParam? = nil,
+      @paynow : Stripe::PaymentMethodOptionsParam? = nil,
+      @pix : Stripe::PaymentMethodOptionsParam? = nil,
+      @sepa_debit : Stripe::PaymentMethodOptionsParam? = nil,
+      @sofort : Stripe::PaymentMethodOptionsParam? = nil,
+      @us_bank_account : Stripe::PaymentMethodOptionsParam? = nil,
+      @wechat_pay : Stripe::PaymentMethodOptionsParam? = nil,
+      @blik : Stripe::PaymentMethodOptionsParamBlik? = nil,
+      @card_present2 : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
+      @interac_present : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
+      @link : Stripe::PaymentMethodOptionsParamLink? = nil,
+      @promptpay : Stripe::PaymentMethodOptionsParamCardPresent? = nil
     )
     end
 
@@ -208,6 +227,21 @@ module Stripe
       end
       unless (_wechat_pay = @wechat_pay).nil?
         invalid_properties.concat(_wechat_pay.list_invalid_properties_for("wechat_pay")) if _wechat_pay.is_a?(OpenApi::Validatable)
+      end
+      unless (_blik = @blik).nil?
+        invalid_properties.concat(_blik.list_invalid_properties_for("blik")) if _blik.is_a?(OpenApi::Validatable)
+      end
+      unless (_card_present = @card_present).nil?
+        invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
+      end
+      unless (_interac_present = @interac_present).nil?
+        invalid_properties.concat(_interac_present.list_invalid_properties_for("interac_present")) if _interac_present.is_a?(OpenApi::Validatable)
+      end
+      unless (_link = @link).nil?
+        invalid_properties.concat(_link.list_invalid_properties_for("link")) if _link.is_a?(OpenApi::Validatable)
+      end
+      unless (_promptpay = @promptpay).nil?
+        invalid_properties.concat(_promptpay.list_invalid_properties_for("promptpay")) if _promptpay.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -315,6 +349,26 @@ module Stripe
         return false if _wechat_pay.is_a?(OpenApi::Validatable) && !_wechat_pay.valid?
       end
 
+      unless (_blik = @blik).nil?
+        return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
+      end
+
+      unless (_card_present = @card_present).nil?
+        return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
+      end
+
+      unless (_interac_present = @interac_present).nil?
+        return false if _interac_present.is_a?(OpenApi::Validatable) && !_interac_present.valid?
+      end
+
+      unless (_link = @link).nil?
+        return false if _link.is_a?(OpenApi::Validatable) && !_link.valid?
+      end
+
+      unless (_promptpay = @promptpay).nil?
+        return false if _promptpay.is_a?(OpenApi::Validatable) && !_promptpay.valid?
+      end
+
       true
     end
 
@@ -331,7 +385,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] affirm Object to be assigned
-    def affirm=(affirm : Stripe::PaymentMethodOptionsParam1?)
+    def affirm=(affirm : Stripe::PaymentMethodOptionsParam?)
       if affirm.nil?
         return @affirm = nil
       end
@@ -342,7 +396,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] afterpay_clearpay Object to be assigned
-    def afterpay_clearpay=(afterpay_clearpay : Stripe::PaymentMethodOptionsParam1?)
+    def afterpay_clearpay=(afterpay_clearpay : Stripe::PaymentMethodOptionsParam?)
       if afterpay_clearpay.nil?
         return @afterpay_clearpay = nil
       end
@@ -353,7 +407,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alipay Object to be assigned
-    def alipay=(alipay : Stripe::PaymentMethodOptionsParam1?)
+    def alipay=(alipay : Stripe::PaymentMethodOptionsParam?)
       if alipay.nil?
         return @alipay = nil
       end
@@ -364,7 +418,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] au_becs_debit Object to be assigned
-    def au_becs_debit=(au_becs_debit : Stripe::PaymentMethodOptionsParam1?)
+    def au_becs_debit=(au_becs_debit : Stripe::PaymentMethodOptionsParam?)
       if au_becs_debit.nil?
         return @au_becs_debit = nil
       end
@@ -375,7 +429,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bacs_debit Object to be assigned
-    def bacs_debit=(bacs_debit : Stripe::PaymentMethodOptionsParam2?)
+    def bacs_debit=(bacs_debit : Stripe::PaymentMethodOptionsParam?)
       if bacs_debit.nil?
         return @bacs_debit = nil
       end
@@ -386,7 +440,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bancontact Object to be assigned
-    def bancontact=(bancontact : Stripe::PaymentMethodOptionsParam1?)
+    def bancontact=(bancontact : Stripe::PaymentMethodOptionsParam?)
       if bancontact.nil?
         return @bancontact = nil
       end
@@ -397,7 +451,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] boleto Object to be assigned
-    def boleto=(boleto : Stripe::PaymentMethodOptionsParam3?)
+    def boleto=(boleto : Stripe::PaymentMethodOptionsParam?)
       if boleto.nil?
         return @boleto = nil
       end
@@ -408,7 +462,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::PaymentMethodOptionsParam4?)
+    def card=(card : Stripe::SetupIntentParam?)
       if card.nil?
         return @card = nil
       end
@@ -419,7 +473,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_balance Object to be assigned
-    def customer_balance=(customer_balance : Stripe::PaymentMethodOptionsParam5?)
+    def customer_balance=(customer_balance : Stripe::PaymentMethodOptionsParam?)
       if customer_balance.nil?
         return @customer_balance = nil
       end
@@ -430,7 +484,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eps Object to be assigned
-    def eps=(eps : Stripe::PaymentMethodOptionsParam1?)
+    def eps=(eps : Stripe::PaymentMethodOptionsParam?)
       if eps.nil?
         return @eps = nil
       end
@@ -441,7 +495,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fpx Object to be assigned
-    def fpx=(fpx : Stripe::PaymentMethodOptionsParam1?)
+    def fpx=(fpx : Stripe::PaymentMethodOptionsParam?)
       if fpx.nil?
         return @fpx = nil
       end
@@ -452,7 +506,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] giropay Object to be assigned
-    def giropay=(giropay : Stripe::PaymentMethodOptionsParam1?)
+    def giropay=(giropay : Stripe::PaymentMethodOptionsParam?)
       if giropay.nil?
         return @giropay = nil
       end
@@ -463,7 +517,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] grabpay Object to be assigned
-    def grabpay=(grabpay : Stripe::PaymentMethodOptionsParam1?)
+    def grabpay=(grabpay : Stripe::PaymentMethodOptionsParam?)
       if grabpay.nil?
         return @grabpay = nil
       end
@@ -474,7 +528,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ideal Object to be assigned
-    def ideal=(ideal : Stripe::PaymentMethodOptionsParam1?)
+    def ideal=(ideal : Stripe::PaymentMethodOptionsParam?)
       if ideal.nil?
         return @ideal = nil
       end
@@ -485,7 +539,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] klarna Object to be assigned
-    def klarna=(klarna : Stripe::PaymentMethodOptionsParam1?)
+    def klarna=(klarna : Stripe::PaymentMethodOptionsParam?)
       if klarna.nil?
         return @klarna = nil
       end
@@ -496,7 +550,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] konbini Object to be assigned
-    def konbini=(konbini : Stripe::PaymentMethodOptionsParam6?)
+    def konbini=(konbini : Stripe::PaymentMethodOptionsParam?)
       if konbini.nil?
         return @konbini = nil
       end
@@ -507,7 +561,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] oxxo Object to be assigned
-    def oxxo=(oxxo : Stripe::PaymentMethodOptionsParam6?)
+    def oxxo=(oxxo : Stripe::PaymentMethodOptionsParam?)
       if oxxo.nil?
         return @oxxo = nil
       end
@@ -518,7 +572,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] p24 Object to be assigned
-    def p24=(p24 : Stripe::PaymentMethodOptionsParam7?)
+    def p24=(p24 : Stripe::PaymentMethodOptionsParam?)
       if p24.nil?
         return @p24 = nil
       end
@@ -529,7 +583,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paynow Object to be assigned
-    def paynow=(paynow : Stripe::PaymentMethodOptionsParam7?)
+    def paynow=(paynow : Stripe::PaymentMethodOptionsParam?)
       if paynow.nil?
         return @paynow = nil
       end
@@ -540,7 +594,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pix Object to be assigned
-    def pix=(pix : Stripe::PaymentMethodOptionsParam8?)
+    def pix=(pix : Stripe::PaymentMethodOptionsParam?)
       if pix.nil?
         return @pix = nil
       end
@@ -551,7 +605,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sepa_debit Object to be assigned
-    def sepa_debit=(sepa_debit : Stripe::PaymentMethodOptionsParam2?)
+    def sepa_debit=(sepa_debit : Stripe::PaymentMethodOptionsParam?)
       if sepa_debit.nil?
         return @sepa_debit = nil
       end
@@ -562,7 +616,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sofort Object to be assigned
-    def sofort=(sofort : Stripe::PaymentMethodOptionsParam1?)
+    def sofort=(sofort : Stripe::PaymentMethodOptionsParam?)
       if sofort.nil?
         return @sofort = nil
       end
@@ -573,7 +627,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodOptionsParam9?)
+    def us_bank_account=(us_bank_account : Stripe::PaymentMethodOptionsParam?)
       if us_bank_account.nil?
         return @us_bank_account = nil
       end
@@ -584,7 +638,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wechat_pay Object to be assigned
-    def wechat_pay=(wechat_pay : Stripe::PaymentMethodOptionsParam10?)
+    def wechat_pay=(wechat_pay : Stripe::PaymentMethodOptionsParam?)
       if wechat_pay.nil?
         return @wechat_pay = nil
       end
@@ -593,10 +647,65 @@ module Stripe
       @wechat_pay = _wechat_pay
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] blik Object to be assigned
+    def blik=(blik : Stripe::PaymentMethodOptionsParamBlik?)
+      if blik.nil?
+        return @blik = nil
+      end
+      _blik = blik.not_nil!
+      _blik.validate if _blik.is_a?(OpenApi::Validatable)
+      @blik = _blik
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] card_present Object to be assigned
+    def card_present=(card_present : Stripe::PaymentMethodOptionsParamCardPresent?)
+      if card_present.nil?
+        return @card_present2 = nil
+      end
+      _card_present = card_present.not_nil!
+      _card_present.validate if _card_present.is_a?(OpenApi::Validatable)
+      @card_present2 = _card_present
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] interac_present Object to be assigned
+    def interac_present=(interac_present : Stripe::PaymentMethodOptionsParamCardPresent?)
+      if interac_present.nil?
+        return @interac_present = nil
+      end
+      _interac_present = interac_present.not_nil!
+      _interac_present.validate if _interac_present.is_a?(OpenApi::Validatable)
+      @interac_present = _interac_present
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] link Object to be assigned
+    def link=(link : Stripe::PaymentMethodOptionsParamLink?)
+      if link.nil?
+        return @link = nil
+      end
+      _link = link.not_nil!
+      _link.validate if _link.is_a?(OpenApi::Validatable)
+      @link = _link
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] promptpay Object to be assigned
+    def promptpay=(promptpay : Stripe::PaymentMethodOptionsParamCardPresent?)
+      if promptpay.nil?
+        return @promptpay = nil
+      end
+      _promptpay = promptpay.not_nil!
+      _promptpay.validate if _promptpay.is_a?(OpenApi::Validatable)
+      @promptpay = _promptpay
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @klarna, @konbini, @oxxo, @p24, @paynow, @pix, @sepa_debit, @sofort, @us_bank_account, @wechat_pay)
+    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @klarna, @konbini, @oxxo, @p24, @paynow, @pix, @sepa_debit, @sofort, @us_bank_account, @wechat_pay, @blik, @card_present2, @interac_present, @link, @promptpay)
   end
 end

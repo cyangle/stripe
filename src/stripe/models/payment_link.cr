@@ -121,8 +121,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? consent_collection_present : Bool = false
 
-    @[JSON::Field(key: "line_items", type: Stripe::PaymentLinksResourceListLineItems1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter line_items : Stripe::PaymentLinksResourceListLineItems1? = nil
+    @[JSON::Field(key: "line_items", type: Stripe::PaymentLinksResourceListLineItems?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter line_items : Stripe::PaymentLinksResourceListLineItems? = nil
 
     @[JSON::Field(key: "on_behalf_of", type: Stripe::PaymentLinkOnBehalfOf?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
     getter on_behalf_of : Stripe::PaymentLinkOnBehalfOf? = nil
@@ -189,7 +189,7 @@ module Stripe
       @application_fee_amount : Int64? = nil,
       @application_fee_percent : Float64? = nil,
       @consent_collection : Stripe::PaymentLinkConsentCollection? = nil,
-      @line_items : Stripe::PaymentLinksResourceListLineItems1? = nil,
+      @line_items : Stripe::PaymentLinksResourceListLineItems? = nil,
       @on_behalf_of : Stripe::PaymentLinkOnBehalfOf? = nil,
       @payment_intent_data : Stripe::PaymentLinkPaymentIntentData? = nil,
       @payment_method_types : Array(String)? = nil,
@@ -629,7 +629,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Stripe::PaymentLinksResourceListLineItems1?)
+    def line_items=(line_items : Stripe::PaymentLinksResourceListLineItems?)
       if line_items.nil?
         return @line_items = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Configure fields for the Checkout Session to gather active consent from customers.
   class ConsentCollectionParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

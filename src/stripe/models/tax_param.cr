@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Tax details about the customer.
   class TaxParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

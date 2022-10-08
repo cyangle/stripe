@@ -29,11 +29,11 @@ module Stripe
     getter cvc_token : String? = nil
     MAX_LENGTH_FOR_CVC_TOKEN = 5000
 
-    @[JSON::Field(key: "installments", type: Stripe::InstallmentsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter installments : Stripe::InstallmentsParam1? = nil
+    @[JSON::Field(key: "installments", type: Stripe::InstallmentsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter installments : Stripe::InstallmentsParam? = nil
 
-    @[JSON::Field(key: "mandate_options", type: Stripe::MandateOptionsParam3?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter mandate_options : Stripe::MandateOptionsParam3? = nil
+    @[JSON::Field(key: "mandate_options", type: Stripe::PaymentIntentParamMandateOptions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter mandate_options : Stripe::PaymentIntentParamMandateOptions? = nil
 
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
@@ -65,8 +65,8 @@ module Stripe
       # Optional properties
       @capture_method : String? = nil,
       @cvc_token : String? = nil,
-      @installments : Stripe::InstallmentsParam1? = nil,
-      @mandate_options : Stripe::MandateOptionsParam3? = nil,
+      @installments : Stripe::InstallmentsParam? = nil,
+      @mandate_options : Stripe::PaymentIntentParamMandateOptions? = nil,
       @network : String? = nil,
       @request_three_d_secure : String? = nil,
       @setup_future_usage : String? = nil,
@@ -178,7 +178,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(installments : Stripe::InstallmentsParam1?)
+    def installments=(installments : Stripe::InstallmentsParam?)
       if installments.nil?
         return @installments = nil
       end
@@ -189,7 +189,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::MandateOptionsParam3?)
+    def mandate_options=(mandate_options : Stripe::PaymentIntentParamMandateOptions?)
       if mandate_options.nil?
         return @mandate_options = nil
       end

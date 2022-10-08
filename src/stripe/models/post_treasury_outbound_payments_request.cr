@@ -54,8 +54,8 @@ module Stripe
     @[JSON::Field(key: "destination_payment_method_data", type: Stripe::PaymentMethodData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter destination_payment_method_data : Stripe::PaymentMethodData? = nil
 
-    @[JSON::Field(key: "destination_payment_method_options", type: Stripe::PaymentMethodOptions2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter destination_payment_method_options : Stripe::PaymentMethodOptions2? = nil
+    @[JSON::Field(key: "destination_payment_method_options", type: Stripe::PaymentMethodOptions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter destination_payment_method_options : Stripe::PaymentMethodOptions? = nil
 
     @[JSON::Field(key: "end_user_details", type: Stripe::EndUserDetailsParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter end_user_details : Stripe::EndUserDetailsParams? = nil
@@ -86,7 +86,7 @@ module Stripe
       @description : String? = nil,
       @destination_payment_method : String? = nil,
       @destination_payment_method_data : Stripe::PaymentMethodData? = nil,
-      @destination_payment_method_options : Stripe::PaymentMethodOptions2? = nil,
+      @destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
       @end_user_details : Stripe::EndUserDetailsParams? = nil,
       @expand : Array(String)? = nil,
       @metadata : Hash(String, String)? = nil,
@@ -254,7 +254,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination_payment_method_options Object to be assigned
-    def destination_payment_method_options=(destination_payment_method_options : Stripe::PaymentMethodOptions2?)
+    def destination_payment_method_options=(destination_payment_method_options : Stripe::PaymentMethodOptions?)
       if destination_payment_method_options.nil?
         return @destination_payment_method_options = nil
       end

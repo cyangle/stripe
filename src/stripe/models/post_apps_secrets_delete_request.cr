@@ -25,8 +25,8 @@ module Stripe
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    @[JSON::Field(key: "scope", type: Stripe::ScopeParam1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter scope : Stripe::ScopeParam1? = nil
+    @[JSON::Field(key: "scope", type: Stripe::ScopeParam?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter scope : Stripe::ScopeParam? = nil
 
     # End of Required Properties
 
@@ -42,7 +42,7 @@ module Stripe
       *,
       # Required properties
       @name : String? = nil,
-      @scope : Stripe::ScopeParam1? = nil,
+      @scope : Stripe::ScopeParam? = nil,
       # Optional properties
       @expand : Array(String)? = nil
     )
@@ -98,7 +98,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] scope Object to be assigned
-    def scope=(scope : Stripe::ScopeParam1?)
+    def scope=(scope : Stripe::ScopeParam?)
       if scope.nil?
         raise ArgumentError.new("\"scope\" is required and cannot be null")
       end

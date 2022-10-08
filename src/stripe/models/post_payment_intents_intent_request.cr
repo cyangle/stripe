@@ -51,8 +51,8 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
     @[JSON::Field(key: "payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -62,8 +62,8 @@ module Stripe
     @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_data : Stripe::PaymentMethodDataParams? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam15?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
 
     # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -110,10 +110,10 @@ module Stripe
       @customer : String? = nil,
       @description : String? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @payment_method : String? = nil,
       @payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      @payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil,
+      @payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       @payment_method_types : Array(String)? = nil,
       @receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       @setup_future_usage : String? = nil,
@@ -327,7 +327,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -360,7 +360,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam15?)
+    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam?)
       if payment_method_options.nil?
         return @payment_method_options = nil
       end

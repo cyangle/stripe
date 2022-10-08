@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # When creating a subscription or subscription schedule, the specified configuration data will be used. There must be at least one line item with a recurring price for a subscription or subscription schedule to be created. A subscription schedule is created if `subscription_data[effective_date]` is present and in the future, otherwise a subscription is created.
   class SubscriptionDataUpdateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -28,8 +27,8 @@ module Stripe
     @[JSON::Field(key: "effective_date", type: Stripe::SubscriptionDataCreateParamsEffectiveDate?, default: nil, required: false, nullable: false, emit_null: false)]
     getter effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate? = nil
 
-    @[JSON::Field(key: "trial_period_days", type: Stripe::UpdateParams1ApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter trial_period_days : Stripe::UpdateParams1ApplicationFeeAmount? = nil
+    @[JSON::Field(key: "trial_period_days", type: Stripe::UpdateParamsSettingsApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter trial_period_days : Stripe::UpdateParamsSettingsApplicationFeeAmount? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -38,7 +37,7 @@ module Stripe
       # Optional properties
       @description : String? = nil,
       @effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate? = nil,
-      @trial_period_days : Stripe::UpdateParams1ApplicationFeeAmount? = nil
+      @trial_period_days : Stripe::UpdateParamsSettingsApplicationFeeAmount? = nil
     )
     end
 
@@ -103,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_period_days Object to be assigned
-    def trial_period_days=(trial_period_days : Stripe::UpdateParams1ApplicationFeeAmount?)
+    def trial_period_days=(trial_period_days : Stripe::UpdateParamsSettingsApplicationFeeAmount?)
       if trial_period_days.nil?
         return @trial_period_days = nil
       end

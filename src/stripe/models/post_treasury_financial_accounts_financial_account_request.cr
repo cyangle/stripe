@@ -24,8 +24,8 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "features", type: Stripe::FeatureAccess1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter features : Stripe::FeatureAccess1? = nil
+    @[JSON::Field(key: "features", type: Stripe::FeatureAccess?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter features : Stripe::FeatureAccess? = nil
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -40,7 +40,7 @@ module Stripe
       *,
       # Optional properties
       @expand : Array(String)? = nil,
-      @features : Stripe::FeatureAccess1? = nil,
+      @features : Stripe::FeatureAccess? = nil,
       @metadata : Hash(String, String)? = nil,
       @platform_restrictions : Stripe::PlatformRestrictions? = nil
     )
@@ -87,7 +87,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] features Object to be assigned
-    def features=(features : Stripe::FeatureAccess1?)
+    def features=(features : Stripe::FeatureAccess?)
       if features.nil?
         return @features = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Clone an existing quote. The new quote will be created in `status=draft`. When using this parameter, you cannot specify any other parameters except for `expires_at`.
   class FromQuoteParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

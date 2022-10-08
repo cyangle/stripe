@@ -33,4 +33,15 @@ describe Stripe::PaymentMethodOptionsPix do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'setup_future_usage'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodOptionsPix.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = Stripe::PaymentMethodOptionsPix::ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE
+      # validator.allowable_values.each do |value|
+      #   instance.setup_future_usage = value.as(String)
+      # end
+    end
+  end
 end

@@ -12,26 +12,22 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class PromotionCodeCurrencyOption
     include JSON::Serializable
     include JSON::Serializable::Unmapped
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required Properties
+    # Optional Properties
 
-    # Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
-    @[JSON::Field(key: "minimum_amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    @[JSON::Field(key: "minimum_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter minimum_amount : Int64? = nil
-
-    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
-      # Required properties
+      # Optional properties
       @minimum_amount : Int64? = nil
     )
     end
@@ -41,16 +37,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"minimum_amount\" is required and cannot be null") if @minimum_amount.nil?
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @minimum_amount.nil?
-
       true
     end
 
@@ -58,7 +50,7 @@ module Stripe
     # @param [Object] minimum_amount Object to be assigned
     def minimum_amount=(minimum_amount : Int64?)
       if minimum_amount.nil?
-        raise ArgumentError.new("\"minimum_amount\" is required and cannot be null")
+        return @minimum_amount = nil
       end
       _minimum_amount = minimum_amount.not_nil!
       @minimum_amount = _minimum_amount

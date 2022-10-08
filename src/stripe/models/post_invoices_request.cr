@@ -94,15 +94,15 @@ module Stripe
     @[JSON::Field(key: "from_invoice", type: Stripe::FromInvoice?, default: nil, required: false, nullable: false, emit_null: false)]
     getter from_invoice : Stripe::FromInvoice? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     @[JSON::Field(key: "on_behalf_of", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter on_behalf_of : String? = nil
 
-    @[JSON::Field(key: "payment_settings", type: Stripe::PaymentSettings1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_settings : Stripe::PaymentSettings1? = nil
+    @[JSON::Field(key: "payment_settings", type: Stripe::PaymentSettings?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_settings : Stripe::PaymentSettings? = nil
 
     # How to handle pending invoice items on invoice creation. One of `include` or `exclude`. `include` will include any pending invoice items, and will create an empty draft invoice if no pending invoice items exist. `exclude` will always create an empty invoice draft regardless if there are pending invoice items or not. Defaults to `exclude` if the parameter is omitted.
     @[JSON::Field(key: "pending_invoice_items_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -123,8 +123,8 @@ module Stripe
     getter subscription : String? = nil
     MAX_LENGTH_FOR_SUBSCRIPTION = 5000
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs4?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataSpecs4? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataSpecs? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -149,14 +149,14 @@ module Stripe
       @expand : Array(String)? = nil,
       @footer : String? = nil,
       @from_invoice : Stripe::FromInvoice? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @on_behalf_of : String? = nil,
-      @payment_settings : Stripe::PaymentSettings1? = nil,
+      @payment_settings : Stripe::PaymentSettings? = nil,
       @pending_invoice_items_behavior : String? = nil,
       @rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
       @statement_descriptor : String? = nil,
       @subscription : String? = nil,
-      @transfer_data : Stripe::TransferDataSpecs4? = nil
+      @transfer_data : Stripe::TransferDataSpecs? = nil
     )
     end
 
@@ -513,7 +513,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -534,7 +534,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_settings Object to be assigned
-    def payment_settings=(payment_settings : Stripe::PaymentSettings1?)
+    def payment_settings=(payment_settings : Stripe::PaymentSettings?)
       if payment_settings.nil?
         return @payment_settings = nil
       end
@@ -589,7 +589,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs4?)
+    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
       if transfer_data.nil?
         return @transfer_data = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Optional parameters to automatically create a [file link](https://stripe.com/docs/api#file_links) for the newly created file.
   class FileLinkCreationParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

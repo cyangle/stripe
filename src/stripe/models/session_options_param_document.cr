@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias SessionOptionsParamDocument = BusinessProfileSpecsSupportUrlOneOf | DocumentOptions
+  alias SessionOptionsParamDocument = DocumentOptions | String
 end

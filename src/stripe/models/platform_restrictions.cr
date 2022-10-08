@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The set of functionalities that the platform can restrict on the FinancialAccount.
   class PlatformRestrictions
     include JSON::Serializable
     include JSON::Serializable::Unmapped

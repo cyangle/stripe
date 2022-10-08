@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias CustomerParamRenderingOptions = BusinessProfileSpecsSupportUrlOneOf | RenderingOptionsParam
+  alias CustomerParamRenderingOptions = RenderingOptionsParam | String
 end

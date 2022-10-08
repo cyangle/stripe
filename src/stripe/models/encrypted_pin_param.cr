@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The desired new PIN for this card.
   class EncryptedPinParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

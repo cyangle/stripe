@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Options to configure Radar. See [Radar Session](https://stripe.com/docs/radar/radar-session) for more information.
   class RadarOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped

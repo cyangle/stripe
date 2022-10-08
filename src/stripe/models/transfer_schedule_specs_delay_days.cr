@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias TransferScheduleSpecsDelayDays = Int32 | TransferScheduleSpecsDelayDaysOneOf
+  alias TransferScheduleSpecsDelayDays = Int32 | String
 end

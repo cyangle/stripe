@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias EvidenceParamCanceled = BusinessProfileSpecsSupportUrlOneOf | Canceled
+  alias EvidenceParamCanceled = Canceled | String
 end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about the features available in the portal.
   class FeaturesUpdatingParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

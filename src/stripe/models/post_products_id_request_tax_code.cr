@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
-  alias PostProductsIdRequestTaxCode = BusinessProfileSpecsSupportUrlOneOf | String
+  alias PostProductsIdRequestTaxCode = PostAccountsRequestMetadataOneOf | String
 end

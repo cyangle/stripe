@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Encodes whether a FinancialAccount has access to a particular feature. Stripe or the platform can control features via the requested field.
   class FeatureAccess
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -30,8 +29,8 @@ module Stripe
     @[JSON::Field(key: "financial_addresses", type: Stripe::FinancialAddresses?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_addresses : Stripe::FinancialAddresses? = nil
 
-    @[JSON::Field(key: "inbound_transfers", type: Stripe::InboundTransfers1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter inbound_transfers : Stripe::InboundTransfers1? = nil
+    @[JSON::Field(key: "inbound_transfers", type: Stripe::InboundTransfers?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter inbound_transfers : Stripe::InboundTransfers? = nil
 
     @[JSON::Field(key: "intra_stripe_flows", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
     getter intra_stripe_flows : Stripe::Access? = nil
@@ -50,7 +49,7 @@ module Stripe
       @card_issuing : Stripe::Access? = nil,
       @deposit_insurance : Stripe::Access? = nil,
       @financial_addresses : Stripe::FinancialAddresses? = nil,
-      @inbound_transfers : Stripe::InboundTransfers1? = nil,
+      @inbound_transfers : Stripe::InboundTransfers? = nil,
       @intra_stripe_flows : Stripe::Access? = nil,
       @outbound_payments : Stripe::OutboundPayments? = nil,
       @outbound_transfers : Stripe::OutboundTransfers? = nil
@@ -155,7 +154,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_transfers Object to be assigned
-    def inbound_transfers=(inbound_transfers : Stripe::InboundTransfers1?)
+    def inbound_transfers=(inbound_transfers : Stripe::InboundTransfers?)
       if inbound_transfers.nil?
         return @inbound_transfers = nil
       end

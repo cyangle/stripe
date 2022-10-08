@@ -56,8 +56,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [transfer]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("transfer")
 
-    @[JSON::Field(key: "reversals", type: Stripe::TransferReversalList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter reversals : Stripe::TransferReversalList1? = nil
+    @[JSON::Field(key: "reversals", type: Stripe::TransferReversalList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter reversals : Stripe::TransferReversalList? = nil
 
     # Whether the transfer has been fully reversed. If the transfer is only partially reversed, this attribute will still be false.
     @[JSON::Field(key: "reversed", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -122,7 +122,7 @@ module Stripe
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
-      @reversals : Stripe::TransferReversalList1? = nil,
+      @reversals : Stripe::TransferReversalList? = nil,
       @reversed : Bool? = nil,
       # Optional properties
       @balance_transaction : Stripe::TransferBalanceTransaction? = nil,
@@ -348,7 +348,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reversals Object to be assigned
-    def reversals=(reversals : Stripe::TransferReversalList1?)
+    def reversals=(reversals : Stripe::TransferReversalList?)
       if reversals.nil?
         raise ArgumentError.new("\"reversals\" is required and cannot be null")
       end

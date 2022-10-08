@@ -27,6 +27,13 @@ describe Stripe::TransferDataSpecs do
     end
   end
 
+  describe "test attribute 'amount_percent'" do
+    it "should work" do
+      # instance = Stripe::TransferDataSpecs.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'destination'" do
     it "should work" do
       # instance = Stripe::TransferDataSpecs.new

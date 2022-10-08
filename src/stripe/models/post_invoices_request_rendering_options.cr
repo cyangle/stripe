@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # Options for invoice PDF rendering.
-  alias PostInvoicesRequestRenderingOptions = BusinessProfileSpecsSupportUrlOneOf | RenderingOptionsParam
+  alias PostInvoicesRequestRenderingOptions = PostAccountsRequestMetadataOneOf | RenderingOptionsParam
 end

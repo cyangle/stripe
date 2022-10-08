@@ -39,11 +39,11 @@ module Stripe
     VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
 
     # Prices defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter currency_options : Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)? = nil
+    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter currency_options : Hash(String, Stripe::CurrencyOption)? = nil
 
-    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CustomUnitAmount2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter custom_unit_amount : Stripe::CustomUnitAmount2? = nil
+    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CustomUnitAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter custom_unit_amount : Stripe::CustomUnitAmount? = nil
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -68,11 +68,11 @@ module Stripe
     getter product : String? = nil
     MAX_LENGTH_FOR_PRODUCT = 5000
 
-    @[JSON::Field(key: "product_data", type: Stripe::InlineProductParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter product_data : Stripe::InlineProductParams1? = nil
+    @[JSON::Field(key: "product_data", type: Stripe::InlineProductParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter product_data : Stripe::InlineProductParams? = nil
 
-    @[JSON::Field(key: "recurring", type: Stripe::Recurring1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter recurring : Stripe::Recurring1? = nil
+    @[JSON::Field(key: "recurring", type: Stripe::Recurring?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter recurring : Stripe::Recurring? = nil
 
     # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -114,15 +114,15 @@ module Stripe
       # Optional properties
       @active : Bool? = nil,
       @billing_scheme : String? = nil,
-      @currency_options : Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)? = nil,
-      @custom_unit_amount : Stripe::CustomUnitAmount2? = nil,
+      @currency_options : Hash(String, Stripe::CurrencyOption)? = nil,
+      @custom_unit_amount : Stripe::CustomUnitAmount? = nil,
       @expand : Array(String)? = nil,
       @lookup_key : String? = nil,
       @metadata : Hash(String, String)? = nil,
       @nickname : String? = nil,
       @product : String? = nil,
-      @product_data : Stripe::InlineProductParams1? = nil,
-      @recurring : Stripe::Recurring1? = nil,
+      @product_data : Stripe::InlineProductParams? = nil,
+      @recurring : Stripe::Recurring? = nil,
       @tax_behavior : String? = nil,
       @tiers : Array(Stripe::Tier)? = nil,
       @tiers_mode : String? = nil,
@@ -278,7 +278,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)?)
+    def currency_options=(currency_options : Hash(String, Stripe::CurrencyOption)?)
       if currency_options.nil?
         return @currency_options = nil
       end
@@ -289,7 +289,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_unit_amount Object to be assigned
-    def custom_unit_amount=(custom_unit_amount : Stripe::CustomUnitAmount2?)
+    def custom_unit_amount=(custom_unit_amount : Stripe::CustomUnitAmount?)
       if custom_unit_amount.nil?
         return @custom_unit_amount = nil
       end
@@ -353,7 +353,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product_data Object to be assigned
-    def product_data=(product_data : Stripe::InlineProductParams1?)
+    def product_data=(product_data : Stripe::InlineProductParams?)
       if product_data.nil?
         return @product_data = nil
       end
@@ -364,7 +364,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recurring Object to be assigned
-    def recurring=(recurring : Stripe::Recurring1?)
+    def recurring=(recurring : Stripe::Recurring?)
       if recurring.nil?
         return @recurring = nil
       end

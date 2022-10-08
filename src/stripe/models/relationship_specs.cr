@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The relationship that this person has with the account's legal entity.
   class RelationshipSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

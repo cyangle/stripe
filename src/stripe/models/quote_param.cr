@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # All invoices will be billed using the specified settings.
   class QuoteParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

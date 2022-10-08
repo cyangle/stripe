@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias EvidenceParamServiceNotAsDescribed = BusinessProfileSpecsSupportUrlOneOf | ServiceNotAsDescribed
+  alias EvidenceParamServiceNotAsDescribed = ServiceNotAsDescribed | String
 end

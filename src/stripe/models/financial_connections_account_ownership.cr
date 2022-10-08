@@ -36,8 +36,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.account_ownership]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("financial_connections.account_ownership")
 
-    @[JSON::Field(key: "owners", type: Stripe::BankConnectionsResourceOwnerList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter owners : Stripe::BankConnectionsResourceOwnerList1? = nil
+    @[JSON::Field(key: "owners", type: Stripe::BankConnectionsResourceOwnerList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter owners : Stripe::BankConnectionsResourceOwnerList? = nil
 
     # End of Required Properties
 
@@ -49,7 +49,7 @@ module Stripe
       @created : Int64? = nil,
       @id : String? = nil,
       @object : String? = nil,
-      @owners : Stripe::BankConnectionsResourceOwnerList1? = nil
+      @owners : Stripe::BankConnectionsResourceOwnerList? = nil
     )
     end
 
@@ -137,7 +137,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owners Object to be assigned
-    def owners=(owners : Stripe::BankConnectionsResourceOwnerList1?)
+    def owners=(owners : Stripe::BankConnectionsResourceOwnerList?)
       if owners.nil?
         raise ArgumentError.new("\"owners\" is required and cannot be null")
       end

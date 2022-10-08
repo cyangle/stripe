@@ -52,8 +52,8 @@ module Stripe
     @[JSON::Field(key: "invoice", type: Stripe::CreditNoteInvoice?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : Stripe::CreditNoteInvoice? = nil
 
-    @[JSON::Field(key: "lines", type: Stripe::CreditNoteLinesList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter lines : Stripe::CreditNoteLinesList1? = nil
+    @[JSON::Field(key: "lines", type: Stripe::CreditNoteLinesList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter lines : Stripe::CreditNoteLinesList? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -180,7 +180,7 @@ module Stripe
       @discount_amounts : Array(Stripe::DiscountsResourceDiscountAmount)? = nil,
       @id : String? = nil,
       @invoice : Stripe::CreditNoteInvoice? = nil,
-      @lines : Stripe::CreditNoteLinesList1? = nil,
+      @lines : Stripe::CreditNoteLinesList? = nil,
       @livemode : Bool? = nil,
       @number : String? = nil,
       @object : String? = nil,
@@ -479,7 +479,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lines Object to be assigned
-    def lines=(lines : Stripe::CreditNoteLinesList1?)
+    def lines=(lines : Stripe::CreditNoteLinesList?)
       if lines.nil?
         raise ArgumentError.new("\"lines\" is required and cannot be null")
       end

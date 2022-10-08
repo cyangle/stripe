@@ -65,8 +65,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "package_dimensions", type: Stripe::PackageDimensionsSpecs2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter package_dimensions : Stripe::PackageDimensionsSpecs2? = nil
+    @[JSON::Field(key: "package_dimensions", type: Stripe::PackageDimensionsSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter package_dimensions : Stripe::PackageDimensionsSpecs? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -84,7 +84,7 @@ module Stripe
       @id : String? = nil,
       @image : String? = nil,
       @metadata : Hash(String, String)? = nil,
-      @package_dimensions : Stripe::PackageDimensionsSpecs2? = nil
+      @package_dimensions : Stripe::PackageDimensionsSpecs? = nil
     )
     end
 
@@ -255,7 +255,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] package_dimensions Object to be assigned
-    def package_dimensions=(package_dimensions : Stripe::PackageDimensionsSpecs2?)
+    def package_dimensions=(package_dimensions : Stripe::PackageDimensionsSpecs?)
       if package_dimensions.nil?
         return @package_dimensions = nil
       end

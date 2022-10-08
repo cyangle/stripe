@@ -44,8 +44,8 @@ module Stripe
     @[JSON::Field(key: "inventory", type: Stripe::InventoryUpdateSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter inventory : Stripe::InventoryUpdateSpecs? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     @[JSON::Field(key: "package_dimensions", type: Stripe::PostSkusIdRequestPackageDimensions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil
@@ -70,7 +70,7 @@ module Stripe
       @expand : Array(String)? = nil,
       @image : String? = nil,
       @inventory : Stripe::InventoryUpdateSpecs? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
       @price : Int64? = nil,
       @product : String? = nil
@@ -195,7 +195,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

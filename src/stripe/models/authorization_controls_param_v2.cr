@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
   class AuthorizationControlsParamV2
     include JSON::Serializable
     include JSON::Serializable::Unmapped

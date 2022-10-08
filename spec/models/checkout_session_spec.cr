@@ -94,6 +94,13 @@ describe Stripe::CheckoutSession do
     end
   end
 
+  describe "test attribute 'created'" do
+    it "should work" do
+      # instance = Stripe::CheckoutSession.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'currency'" do
     it "should work" do
       # instance = Stripe::CheckoutSession.new

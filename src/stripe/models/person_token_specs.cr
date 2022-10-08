@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information for the person this token will represent.
   class PersonTokenSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -33,8 +32,8 @@ module Stripe
     @[JSON::Field(key: "dob", type: Stripe::IndividualSpecsDob?, default: nil, required: false, nullable: false, emit_null: false)]
     getter dob : Stripe::IndividualSpecsDob? = nil
 
-    @[JSON::Field(key: "documents", type: Stripe::PersonDocumentsSpecs1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter documents : Stripe::PersonDocumentsSpecs1? = nil
+    @[JSON::Field(key: "documents", type: Stripe::PersonDocumentsSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter documents : Stripe::PersonDocumentsSpecs? = nil
 
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter email : String? = nil
@@ -51,8 +50,8 @@ module Stripe
     getter first_name_kanji : String? = nil
     MAX_LENGTH_FOR_FIRST_NAME_KANJI = 5000
 
-    @[JSON::Field(key: "full_name_aliases", type: Stripe::CreditNoteLineItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter full_name_aliases : Stripe::CreditNoteLineItemParamsTaxRates? = nil
+    @[JSON::Field(key: "full_name_aliases", type: Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter full_name_aliases : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil
 
     @[JSON::Field(key: "gender", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter gender : String? = nil
@@ -98,8 +97,8 @@ module Stripe
     @[JSON::Field(key: "registered_address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter registered_address : Stripe::AddressSpecs? = nil
 
-    @[JSON::Field(key: "relationship", type: Stripe::RelationshipSpecs1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter relationship : Stripe::RelationshipSpecs1? = nil
+    @[JSON::Field(key: "relationship", type: Stripe::RelationshipSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter relationship : Stripe::RelationshipSpecs? = nil
 
     @[JSON::Field(key: "ssn_last_4", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ssn_last_4 : String? = nil
@@ -116,12 +115,12 @@ module Stripe
       @address_kana : Stripe::JapanAddressKanaSpecs? = nil,
       @address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
       @dob : Stripe::IndividualSpecsDob? = nil,
-      @documents : Stripe::PersonDocumentsSpecs1? = nil,
+      @documents : Stripe::PersonDocumentsSpecs? = nil,
       @email : String? = nil,
       @first_name : String? = nil,
       @first_name_kana : String? = nil,
       @first_name_kanji : String? = nil,
-      @full_name_aliases : Stripe::CreditNoteLineItemParamsTaxRates? = nil,
+      @full_name_aliases : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
       @gender : String? = nil,
       @id_number : String? = nil,
       @id_number_secondary : String? = nil,
@@ -134,7 +133,7 @@ module Stripe
       @phone : String? = nil,
       @political_exposure : String? = nil,
       @registered_address : Stripe::AddressSpecs? = nil,
-      @relationship : Stripe::RelationshipSpecs1? = nil,
+      @relationship : Stripe::RelationshipSpecs? = nil,
       @ssn_last_4 : String? = nil,
       @verification : Stripe::PersonVerificationSpecs? = nil
     )
@@ -373,7 +372,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] documents Object to be assigned
-    def documents=(documents : Stripe::PersonDocumentsSpecs1?)
+    def documents=(documents : Stripe::PersonDocumentsSpecs?)
       if documents.nil?
         return @documents = nil
       end
@@ -427,7 +426,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] full_name_aliases Object to be assigned
-    def full_name_aliases=(full_name_aliases : Stripe::CreditNoteLineItemParamsTaxRates?)
+    def full_name_aliases=(full_name_aliases : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?)
       if full_name_aliases.nil?
         return @full_name_aliases = nil
       end
@@ -568,7 +567,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] relationship Object to be assigned
-    def relationship=(relationship : Stripe::RelationshipSpecs1?)
+    def relationship=(relationship : Stripe::RelationshipSpecs?)
       if relationship.nil?
         return @relationship = nil
       end

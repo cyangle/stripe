@@ -29,6 +29,14 @@ module Stripe
     @[JSON::Field(key: "exp_year", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter exp_year : Int64? = nil
 
+    # Whether this [PaymentIntent](https://stripe.com/docs/api/payment_intents) is eligible for incremental authorizations. Request support using [request_incremental_authorization_support](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support).
+    @[JSON::Field(key: "incremental_authorization_supported", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter incremental_authorization_supported : Bool? = nil
+
+    # Defines whether the authorized amount can be over-captured or not
+    @[JSON::Field(key: "overcapture_supported", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter overcapture_supported : Bool? = nil
+
     # End of Required Properties
 
     # Optional Properties
@@ -100,13 +108,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? generated_card_present : Bool = false
 
-    # Whether this [PaymentIntent](https://stripe.com/docs/api/payment_intents) is eligible for incremental authorizations. Request support using [request_incremental_authorization_support](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support).
-    @[JSON::Field(key: "incremental_authorization_supported", type: Bool?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: incremental_authorization_supported.nil? && !incremental_authorization_supported_present?)]
-    getter incremental_authorization_supported : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? incremental_authorization_supported_present : Bool = false
-
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String? = nil
@@ -122,13 +123,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
-
-    # Defines whether the authorized amount can be over-captured or not
-    @[JSON::Field(key: "overcapture_supported", type: Bool?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: overcapture_supported.nil? && !overcapture_supported_present?)]
-    getter overcapture_supported : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? overcapture_supported_present : Bool = false
 
     # How card details were read in this transaction.
     @[JSON::Field(key: "read_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: read_method.nil? && !read_method_present?)]
@@ -152,6 +146,8 @@ module Stripe
       # Required properties
       @exp_month : Int64? = nil,
       @exp_year : Int64? = nil,
+      @incremental_authorization_supported : Bool? = nil,
+      @overcapture_supported : Bool? = nil,
       # Optional properties
       @amount_authorized : Int64? = nil,
       @brand : String? = nil,
@@ -162,10 +158,8 @@ module Stripe
       @fingerprint : String? = nil,
       @funding : String? = nil,
       @generated_card : String? = nil,
-      @incremental_authorization_supported : Bool? = nil,
       @last4 : String? = nil,
       @network : String? = nil,
-      @overcapture_supported : Bool? = nil,
       @read_method : String? = nil,
       @receipt : Stripe::PaymentMethodDetailsCardPresentReceipt1? = nil
     )
@@ -179,6 +173,10 @@ module Stripe
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
+
+      invalid_properties.push("\"incremental_authorization_supported\" is required and cannot be null") if @incremental_authorization_supported.nil?
+
+      invalid_properties.push("\"overcapture_supported\" is required and cannot be null") if @overcapture_supported.nil?
 
       unless (_brand = @brand).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
@@ -216,7 +214,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       unless (_last4 = @last4).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
@@ -227,7 +224,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       unless (_read_method = @read_method).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_READ_METHOD) unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
       end
@@ -243,6 +239,10 @@ module Stripe
       return false if @exp_month.nil?
 
       return false if @exp_year.nil?
+
+      return false if @incremental_authorization_supported.nil?
+
+      return false if @overcapture_supported.nil?
 
       unless (_brand = @brand).nil?
         return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
@@ -309,6 +309,26 @@ module Stripe
       end
       _exp_year = exp_year.not_nil!
       @exp_year = _exp_year
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] incremental_authorization_supported Object to be assigned
+    def incremental_authorization_supported=(incremental_authorization_supported : Bool?)
+      if incremental_authorization_supported.nil?
+        raise ArgumentError.new("\"incremental_authorization_supported\" is required and cannot be null")
+      end
+      _incremental_authorization_supported = incremental_authorization_supported.not_nil!
+      @incremental_authorization_supported = _incremental_authorization_supported
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] overcapture_supported Object to be assigned
+    def overcapture_supported=(overcapture_supported : Bool?)
+      if overcapture_supported.nil?
+        raise ArgumentError.new("\"overcapture_supported\" is required and cannot be null")
+      end
+      _overcapture_supported = overcapture_supported.not_nil!
+      @overcapture_supported = _overcapture_supported
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -409,16 +429,6 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] incremental_authorization_supported Object to be assigned
-    def incremental_authorization_supported=(incremental_authorization_supported : Bool?)
-      if incremental_authorization_supported.nil?
-        return @incremental_authorization_supported = nil
-      end
-      _incremental_authorization_supported = incremental_authorization_supported.not_nil!
-      @incremental_authorization_supported = _incremental_authorization_supported
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
     def last4=(last4 : String?)
       if last4.nil?
@@ -438,16 +448,6 @@ module Stripe
       _network = network.not_nil!
       OpenApi::PrimitiveValidator.validate_max_length("network", _network.to_s.size, MAX_LENGTH_FOR_NETWORK)
       @network = _network
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] overcapture_supported Object to be assigned
-    def overcapture_supported=(overcapture_supported : Bool?)
-      if overcapture_supported.nil?
-        return @overcapture_supported = nil
-      end
-      _overcapture_supported = overcapture_supported.not_nil!
-      @overcapture_supported = _overcapture_supported
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -476,6 +476,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@exp_month, @exp_year, @amount_authorized, @amount_authorized_present, @brand, @brand_present, @capture_before, @cardholder_name, @cardholder_name_present, @country, @country_present, @emv_auth_data, @emv_auth_data_present, @fingerprint, @fingerprint_present, @funding, @funding_present, @generated_card, @generated_card_present, @incremental_authorization_supported, @incremental_authorization_supported_present, @last4, @last4_present, @network, @network_present, @overcapture_supported, @overcapture_supported_present, @read_method, @read_method_present, @receipt, @receipt_present)
+    def_equals_and_hash(@exp_month, @exp_year, @incremental_authorization_supported, @overcapture_supported, @amount_authorized, @amount_authorized_present, @brand, @brand_present, @capture_before, @cardholder_name, @cardholder_name_present, @country, @country_present, @emv_auth_data, @emv_auth_data_present, @fingerprint, @fingerprint_present, @funding, @funding_present, @generated_card, @generated_card_present, @last4, @last4_present, @network, @network_present, @read_method, @read_method_present, @receipt, @receipt_present)
   end
 end

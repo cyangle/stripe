@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Data used to generate a new [Price](https://stripe.com/docs/api/prices) object. This Price will be set as the default price for this product.
   class PriceDataWithoutProduct
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -28,8 +27,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter currency_options : Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)? = nil
+    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter currency_options : Hash(String, Stripe::CurrencyOption)? = nil
 
     @[JSON::Field(key: "recurring", type: Stripe::RecurringAdhoc?, default: nil, required: false, nullable: false, emit_null: false)]
     getter recurring : Stripe::RecurringAdhoc? = nil
@@ -52,7 +51,7 @@ module Stripe
       # Required properties
       @currency : String? = nil,
       # Optional properties
-      @currency_options : Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)? = nil,
+      @currency_options : Hash(String, Stripe::CurrencyOption)? = nil,
       @recurring : Stripe::RecurringAdhoc? = nil,
       @tax_behavior : String? = nil,
       @unit_amount : Int64? = nil,
@@ -112,7 +111,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)?)
+    def currency_options=(currency_options : Hash(String, Stripe::CurrencyOption)?)
       if currency_options.nil?
         return @currency_options = nil
       end

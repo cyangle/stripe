@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The full address of the location.
   class CreateLocationAddressParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
 
-    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
+    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: collection_method.nil? && !collection_method_present?)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."

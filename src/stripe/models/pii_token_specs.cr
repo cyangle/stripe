@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The PII this token will represent.
   class PiiTokenSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

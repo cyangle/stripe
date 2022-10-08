@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Parameters required for the redirect flow. Required if the source is authenticated by a redirect (`flow` is `redirect`).
   class RedirectParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

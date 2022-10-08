@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias CardPaymentsSettingsSpecsStatementDescriptorPrefixKana = BusinessProfileSpecsSupportUrlOneOf | String
+  alias CardPaymentsSettingsSpecsStatementDescriptorPrefixKana = String
 end

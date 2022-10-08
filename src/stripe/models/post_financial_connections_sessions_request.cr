@@ -20,8 +20,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "account_holder", type: Stripe::AccountholderParams1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter account_holder : Stripe::AccountholderParams1? = nil
+    @[JSON::Field(key: "account_holder", type: Stripe::AccountholderParams?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter account_holder : Stripe::AccountholderParams? = nil
 
     # List of data features that you would like to request access to.  Possible values are `balances`, `transactions`, `ownership`, and `payment_method`.
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -50,7 +50,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @account_holder : Stripe::AccountholderParams1? = nil,
+      @account_holder : Stripe::AccountholderParams? = nil,
       @permissions : Array(String)? = nil,
       # Optional properties
       @expand : Array(String)? = nil,
@@ -112,7 +112,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder Object to be assigned
-    def account_holder=(account_holder : Stripe::AccountholderParams1?)
+    def account_holder=(account_holder : Stripe::AccountholderParams?)
       if account_holder.nil?
         raise ArgumentError.new("\"account_holder\" is required and cannot be null")
       end

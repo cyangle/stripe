@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # An object containing device type specific settings for BBPOS WisePOS E readers
   class BbposWisePose
     include JSON::Serializable
     include JSON::Serializable::Unmapped

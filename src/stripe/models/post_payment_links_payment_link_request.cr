@@ -31,8 +31,8 @@ module Stripe
     @[JSON::Field(key: "allow_promotion_codes", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allow_promotion_codes : Bool? = nil
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTaxParams1? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTaxParams? = nil
 
     # Configuration for collecting the customer's billing address.
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -78,7 +78,7 @@ module Stripe
       @active : Bool? = nil,
       @after_completion : Stripe::AfterCompletionParams? = nil,
       @allow_promotion_codes : Bool? = nil,
-      @automatic_tax : Stripe::AutomaticTaxParams1? = nil,
+      @automatic_tax : Stripe::AutomaticTaxParams? = nil,
       @billing_address_collection : String? = nil,
       @customer_creation : String? = nil,
       @expand : Array(String)? = nil,
@@ -196,7 +196,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParams1?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParams?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end

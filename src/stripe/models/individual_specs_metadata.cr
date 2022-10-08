@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias IndividualSpecsMetadata = BusinessProfileSpecsSupportUrlOneOf | Hash(String, String)
+  alias IndividualSpecsMetadata = Hash(String, String) | String
 end

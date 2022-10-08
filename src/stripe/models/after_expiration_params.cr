@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Configure actions after a Checkout Session has expired.
   class AfterExpirationParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

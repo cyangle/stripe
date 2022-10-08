@@ -81,14 +81,14 @@ module Stripe
     getter footer : String? = nil
     MAX_LENGTH_FOR_FOOTER = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     @[JSON::Field(key: "on_behalf_of", type: Stripe::PostInvoicesInvoiceRequestOnBehalfOf?, default: nil, required: false, nullable: false, emit_null: false)]
     getter on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil
 
-    @[JSON::Field(key: "payment_settings", type: Stripe::PaymentSettings1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_settings : Stripe::PaymentSettings1? = nil
+    @[JSON::Field(key: "payment_settings", type: Stripe::PaymentSettings?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_settings : Stripe::PaymentSettings? = nil
 
     @[JSON::Field(key: "rendering_options", type: Stripe::PostInvoicesRequestRenderingOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil
@@ -121,9 +121,9 @@ module Stripe
       @due_date : Int64? = nil,
       @expand : Array(String)? = nil,
       @footer : String? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
-      @payment_settings : Stripe::PaymentSettings1? = nil,
+      @payment_settings : Stripe::PaymentSettings? = nil,
       @rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
       @statement_descriptor : String? = nil,
       @transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
@@ -431,7 +431,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -453,7 +453,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_settings Object to be assigned
-    def payment_settings=(payment_settings : Stripe::PaymentSettings1?)
+    def payment_settings=(payment_settings : Stripe::PaymentSettings?)
       if payment_settings.nil?
         return @payment_settings = nil
       end

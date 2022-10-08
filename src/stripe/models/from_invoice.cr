@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Revise an existing invoice. The new invoice will be created in `status=draft`. See the [revision documentation](https://stripe.com/docs/invoicing/invoice-revisions) for more details.
   class FromInvoice
     include JSON::Serializable
     include JSON::Serializable::Unmapped

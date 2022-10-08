@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about the company or business. This field is available for any `business_type`.
   class CompanySpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Balance information and default balance settings for this customer.
   class CashBalanceParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

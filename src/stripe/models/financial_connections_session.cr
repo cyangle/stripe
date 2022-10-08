@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "accounts", type: Stripe::BankConnectionsResourceLinkedAccountList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter accounts : Stripe::BankConnectionsResourceLinkedAccountList1? = nil
+    @[JSON::Field(key: "accounts", type: Stripe::BankConnectionsResourceLinkedAccountList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter accounts : Stripe::BankConnectionsResourceLinkedAccountList? = nil
 
     # A value that will be passed to the client to launch the authentication flow.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -73,7 +73,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @accounts : Stripe::BankConnectionsResourceLinkedAccountList1? = nil,
+      @accounts : Stripe::BankConnectionsResourceLinkedAccountList? = nil,
       @client_secret : String? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
@@ -183,7 +183,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] accounts Object to be assigned
-    def accounts=(accounts : Stripe::BankConnectionsResourceLinkedAccountList1?)
+    def accounts=(accounts : Stripe::BankConnectionsResourceLinkedAccountList?)
       if accounts.nil?
         raise ArgumentError.new("\"accounts\" is required and cannot be null")
       end

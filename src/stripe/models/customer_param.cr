@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Default invoice settings for this customer.
   class CustomerParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

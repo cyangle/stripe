@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "billing_details", type: Stripe::BillingDetailsInnerParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_details : Stripe::BillingDetailsInnerParams1? = nil
+    @[JSON::Field(key: "billing_details", type: Stripe::BillingDetailsInnerParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_details : Stripe::BillingDetailsInnerParams? = nil
 
     @[JSON::Field(key: "card", type: Stripe::UpdateApiParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card : Stripe::UpdateApiParam? = nil
@@ -34,8 +34,8 @@ module Stripe
     @[JSON::Field(key: "link", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]
     getter link : JSON::Any? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     @[JSON::Field(key: "us_bank_account", type: Stripe::UpdateParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_bank_account : Stripe::UpdateParam? = nil
@@ -45,11 +45,11 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @billing_details : Stripe::BillingDetailsInnerParams1? = nil,
+      @billing_details : Stripe::BillingDetailsInnerParams? = nil,
       @card : Stripe::UpdateApiParam? = nil,
       @expand : Array(String)? = nil,
       @link : JSON::Any? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @us_bank_account : Stripe::UpdateParam? = nil
     )
     end
@@ -99,7 +99,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_details Object to be assigned
-    def billing_details=(billing_details : Stripe::BillingDetailsInnerParams1?)
+    def billing_details=(billing_details : Stripe::BillingDetailsInnerParams?)
       if billing_details.nil?
         return @billing_details = nil
       end
@@ -141,7 +141,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

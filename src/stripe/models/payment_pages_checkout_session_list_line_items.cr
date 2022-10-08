@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class PaymentPagesCheckoutSessionListLineItems
     include JSON::Serializable
     include JSON::Serializable::Unmapped

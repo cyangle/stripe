@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in `setup` mode.
   class SetupIntentDataParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

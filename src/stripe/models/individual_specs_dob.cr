@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias IndividualSpecsDob = BusinessProfileSpecsSupportUrlOneOf | DateOfBirthSpecs
+  alias IndividualSpecsDob = DateOfBirthSpecs | String
 end

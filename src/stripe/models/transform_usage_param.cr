@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Apply a transformation to the reported usage or set quantity before computing the billed price. Cannot be combined with `tiers`.
   class TransformUsageParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

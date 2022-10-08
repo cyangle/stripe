@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias RelationshipSpecsPercentOwnership = BusinessProfileSpecsSupportUrlOneOf | Float64
+  alias RelationshipSpecsPercentOwnership = Float64 | String
 end

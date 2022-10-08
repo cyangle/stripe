@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The coupons & existing discounts which apply to the invoice item or invoice line item. Item discounts are applied before invoice discounts. Pass an empty string to remove previously-defined discounts.
-  alias PostInvoiceitemsInvoiceitemRequestDiscounts = Array(DiscountsDataParam) | BusinessProfileSpecsSupportUrlOneOf
+  alias PostInvoiceitemsInvoiceitemRequestDiscounts = Array(DiscountsDataParam) | PostAccountsRequestMetadataOneOf
 end

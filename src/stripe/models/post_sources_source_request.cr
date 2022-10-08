@@ -31,11 +31,11 @@ module Stripe
     @[JSON::Field(key: "mandate", type: Stripe::MandateParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate : Stripe::MandateParams? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    @[JSON::Field(key: "owner", type: Stripe::Owner1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter owner : Stripe::Owner1? = nil
+    @[JSON::Field(key: "owner", type: Stripe::Owner?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter owner : Stripe::Owner? = nil
 
     @[JSON::Field(key: "source_order", type: Stripe::OrderParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_order : Stripe::OrderParams? = nil
@@ -48,8 +48,8 @@ module Stripe
       @amount : Int64? = nil,
       @expand : Array(String)? = nil,
       @mandate : Stripe::MandateParams? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
-      @owner : Stripe::Owner1? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      @owner : Stripe::Owner? = nil,
       @source_order : Stripe::OrderParams? = nil
     )
     end
@@ -129,7 +129,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -140,7 +140,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owner Object to be assigned
-    def owner=(owner : Stripe::Owner1?)
+    def owner=(owner : Stripe::Owner?)
       if owner.nil?
         return @owner = nil
       end

@@ -26,10 +26,10 @@ module Stripe
     @[JSON::Field(key: "application_fee_percent", type: Stripe::PostQuotesRequestApplicationFeePercent?, default: nil, required: false, nullable: false, emit_null: false)]
     getter application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxParam2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTaxParam2? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTaxParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTaxParam? = nil
 
-    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.
+    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
     ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
@@ -104,7 +104,7 @@ module Stripe
       # Optional properties
       @application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
       @application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      @automatic_tax : Stripe::AutomaticTaxParam2? = nil,
+      @automatic_tax : Stripe::AutomaticTaxParam? = nil,
       @collection_method : String? = nil,
       @customer : String? = nil,
       @default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
@@ -294,7 +294,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParam2?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParam?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end

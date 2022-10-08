@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias ProductUpsertDataPackageDimensions = BusinessProfileSpecsSupportUrlOneOf | PackageDimensionsSpecs
+  alias ProductUpsertDataPackageDimensions = PackageDimensionsSpecs | String
 end

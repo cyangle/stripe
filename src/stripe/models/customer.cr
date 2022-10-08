@@ -103,7 +103,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    # The current multi-currency balances, if any, being stored on the customer.If positive in a currency, the customer has a credit to apply to their next invoice denominated in that currency.If negative, the customer has an amount owed that will be added to their next invoice denominated in that currency. These balances do not refer to any unpaid invoices.They solely track amounts that have yet to be successfully applied to any invoice. A balance in a particular currency is only applied to any invoice as an invoice in that currency is finalized.
+    # The current multi-currency balances, if any, being stored on the customer. If positive in a currency, the customer has a credit to apply to their next invoice denominated in that currency. If negative, the customer has an amount owed that will be added to their next invoice denominated in that currency. These balances do not refer to any unpaid invoices. They solely track amounts that have yet to be successfully applied to any invoice. A balance in a particular currency is only applied to any invoice as an invoice in that currency is finalized.
     @[JSON::Field(key: "invoice_credit_balance", type: Hash(String, Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_credit_balance : Hash(String, Int32)? = nil
 
@@ -155,11 +155,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? shipping_present : Bool = false
 
-    @[JSON::Field(key: "sources", type: Stripe::ApmsSourcesSourceList1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter sources : Stripe::ApmsSourcesSourceList1? = nil
+    @[JSON::Field(key: "sources", type: Stripe::ApmsSourcesSourceList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sources : Stripe::ApmsSourcesSourceList? = nil
 
-    @[JSON::Field(key: "subscriptions", type: Stripe::SubscriptionList1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter subscriptions : Stripe::SubscriptionList1? = nil
+    @[JSON::Field(key: "subscriptions", type: Stripe::SubscriptionList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter subscriptions : Stripe::SubscriptionList? = nil
 
     @[JSON::Field(key: "tax", type: Stripe::CustomerTax?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax : Stripe::CustomerTax? = nil
@@ -173,8 +173,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tax_exempt_present : Bool = false
 
-    @[JSON::Field(key: "tax_ids", type: Stripe::TaxIDsList1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_ids : Stripe::TaxIDsList1? = nil
+    @[JSON::Field(key: "tax_ids", type: Stripe::TaxIDsList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_ids : Stripe::TaxIDsList? = nil
 
     @[JSON::Field(key: "test_clock", type: Stripe::CustomerTestClock?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: test_clock.nil? && !test_clock_present?)]
     getter test_clock : Stripe::CustomerTestClock? = nil
@@ -210,11 +210,11 @@ module Stripe
       @phone : String? = nil,
       @preferred_locales : Array(String)? = nil,
       @shipping : Stripe::CustomerShipping1? = nil,
-      @sources : Stripe::ApmsSourcesSourceList1? = nil,
-      @subscriptions : Stripe::SubscriptionList1? = nil,
+      @sources : Stripe::ApmsSourcesSourceList? = nil,
+      @subscriptions : Stripe::SubscriptionList? = nil,
       @tax : Stripe::CustomerTax? = nil,
       @tax_exempt : String? = nil,
-      @tax_ids : Stripe::TaxIDsList1? = nil,
+      @tax_ids : Stripe::TaxIDsList? = nil,
       @test_clock : Stripe::CustomerTestClock? = nil
     )
     end
@@ -643,7 +643,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sources Object to be assigned
-    def sources=(sources : Stripe::ApmsSourcesSourceList1?)
+    def sources=(sources : Stripe::ApmsSourcesSourceList?)
       if sources.nil?
         return @sources = nil
       end
@@ -654,7 +654,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscriptions Object to be assigned
-    def subscriptions=(subscriptions : Stripe::SubscriptionList1?)
+    def subscriptions=(subscriptions : Stripe::SubscriptionList?)
       if subscriptions.nil?
         return @subscriptions = nil
       end
@@ -687,7 +687,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_ids Object to be assigned
-    def tax_ids=(tax_ids : Stripe::TaxIDsList1?)
+    def tax_ids=(tax_ids : Stripe::TaxIDsList?)
       if tax_ids.nil?
         return @tax_ids = nil
       end

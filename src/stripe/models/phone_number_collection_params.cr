@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Controls phone number collection settings for the session.  We recommend that you review your privacy policy and check with your legal contacts before using this feature. Learn more about [collecting phone numbers with Checkout](https://stripe.com/docs/payments/checkout/phone-numbers).
   class PhoneNumberCollectionParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

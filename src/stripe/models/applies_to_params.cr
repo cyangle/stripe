@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A hash containing directions for what this Coupon will apply discounts to.
   class AppliesToParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

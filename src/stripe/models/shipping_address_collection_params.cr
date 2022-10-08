@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # When set, provides configuration for Checkout to collect a shipping address from a customer.
   class ShippingAddressCollectionParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

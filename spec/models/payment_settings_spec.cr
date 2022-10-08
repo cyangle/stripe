@@ -20,6 +20,13 @@ describe Stripe::PaymentSettings do
     end
   end
 
+  describe "test attribute 'default_mandate'" do
+    it "should work" do
+      # instance = Stripe::PaymentSettings.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'payment_method_options'" do
     it "should work" do
       # instance = Stripe::PaymentSettings.new
@@ -31,17 +38,6 @@ describe Stripe::PaymentSettings do
     it "should work" do
       # instance = Stripe::PaymentSettings.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'save_default_payment_method'" do
-    it "should work" do
-      # instance = Stripe::PaymentSettings.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentSettings::ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD
-      # validator.allowable_values.each do |value|
-      #   instance.save_default_payment_method = value.as(String)
-      # end
     end
   end
 end

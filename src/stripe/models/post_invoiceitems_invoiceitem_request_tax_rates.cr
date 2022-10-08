@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
-  alias PostInvoiceitemsInvoiceitemRequestTaxRates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
+  alias PostInvoiceitemsInvoiceitemRequestTaxRates = Array(String) | PostAccountsRequestMetadataOneOf
 end

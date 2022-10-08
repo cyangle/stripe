@@ -229,8 +229,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? receipt_url_present : Bool = false
 
-    @[JSON::Field(key: "refunds", type: Stripe::RefundList1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter refunds : Stripe::RefundList1? = nil
+    @[JSON::Field(key: "refunds", type: Stripe::RefundList?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter refunds : Stripe::RefundList? = nil
 
     @[JSON::Field(key: "review", type: Stripe::ChargeReview?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: review.nil? && !review_present?)]
     getter review : Stripe::ChargeReview? = nil
@@ -325,7 +325,7 @@ module Stripe
       @receipt_email : String? = nil,
       @receipt_number : String? = nil,
       @receipt_url : String? = nil,
-      @refunds : Stripe::RefundList1? = nil,
+      @refunds : Stripe::RefundList? = nil,
       @review : Stripe::ChargeReview? = nil,
       @shipping : Stripe::ChargeShipping? = nil,
       @source_transfer : Stripe::ChargeSourceTransfer? = nil,
@@ -1049,7 +1049,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refunds Object to be assigned
-    def refunds=(refunds : Stripe::RefundList1?)
+    def refunds=(refunds : Stripe::RefundList?)
       if refunds.nil?
         return @refunds = nil
       end

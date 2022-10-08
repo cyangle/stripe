@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias ProductUpsertDataImages = Array(String) | BusinessProfileSpecsSupportUrlOneOf
+  alias ProductUpsertDataImages = Array(String) | String
 end

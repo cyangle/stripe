@@ -21,15 +21,15 @@ module Stripe
     # Optional Properties
 
     # Coupons defined in each available currency option (only supported if the coupon is amount-based). Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PostCouponsRequestCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter currency_options : Hash(String, Stripe::PostCouponsRequestCurrencyOptionsValue)? = nil
+    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CouponCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter currency_options : Hash(String, Stripe::CouponCurrencyOption)? = nil
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the `id` is shown if `name` is not set.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -41,9 +41,9 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @currency_options : Hash(String, Stripe::PostCouponsRequestCurrencyOptionsValue)? = nil,
+      @currency_options : Hash(String, Stripe::CouponCurrencyOption)? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @name : String? = nil
     )
     end
@@ -88,7 +88,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::PostCouponsRequestCurrencyOptionsValue)?)
+    def currency_options=(currency_options : Hash(String, Stripe::CouponCurrencyOption)?)
       if currency_options.nil?
         return @currency_options = nil
       end
@@ -109,7 +109,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

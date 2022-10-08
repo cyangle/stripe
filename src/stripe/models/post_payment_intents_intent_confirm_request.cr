@@ -58,8 +58,8 @@ module Stripe
     @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_data : Stripe::PaymentMethodDataParams? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam15?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
 
     # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -102,7 +102,7 @@ module Stripe
       @off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
       @payment_method : String? = nil,
       @payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      @payment_method_options : Stripe::PaymentMethodOptionsParam15? = nil,
+      @payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       @payment_method_types : Array(String)? = nil,
       @radar_options : Stripe::RadarOptions? = nil,
       @receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
@@ -320,7 +320,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam15?)
+    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptionsParam?)
       if payment_method_options.nil?
         return @payment_method_options = nil
       end

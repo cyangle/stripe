@@ -20,63 +20,7 @@ describe Stripe::UpdateParams do
     end
   end
 
-  describe "test attribute 'description'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'discounts'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'price'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'price_data'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'product'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'product_data'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'quantity'" do
-    it "should work" do
-      # instance = Stripe::UpdateParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'tax_rates'" do
+  describe "test attribute 'settings'" do
     it "should work" do
       # instance = Stripe::UpdateParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Settings for automatic tax lookup for this session and resulting payments, invoices, and subscriptions.
   class AutomaticTaxParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

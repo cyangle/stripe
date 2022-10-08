@@ -26,8 +26,8 @@ module Stripe
     @[JSON::Field(key: "shipping", type: Stripe::CustomerDetailsParamShipping?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::CustomerDetailsParamShipping? = nil
 
-    @[JSON::Field(key: "tax", type: Stripe::TaxParam1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax : Stripe::TaxParam1? = nil
+    @[JSON::Field(key: "tax", type: Stripe::TaxParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax : Stripe::TaxParam? = nil
 
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
@@ -44,7 +44,7 @@ module Stripe
       # Optional properties
       @address : Stripe::CustomerDetailsParamAddress? = nil,
       @shipping : Stripe::CustomerDetailsParamShipping? = nil,
-      @tax : Stripe::TaxParam1? = nil,
+      @tax : Stripe::TaxParam? = nil,
       @tax_exempt : String? = nil,
       @tax_ids : Array(Stripe::DataParams)? = nil
     )
@@ -123,7 +123,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax Object to be assigned
-    def tax=(tax : Stripe::TaxParam1?)
+    def tax=(tax : Stripe::TaxParam?)
       if tax.nil?
         return @tax = nil
       end

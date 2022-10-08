@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The cardholder's billing address.
   class BillingSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

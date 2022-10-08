@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # An object containing device type specific settings for Verifone P400 readers
   class VerifoneP400
     include JSON::Serializable
     include JSON::Serializable::Unmapped

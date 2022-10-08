@@ -55,6 +55,14 @@ tasks:
         pattern: '(^\s+unless [^\s]+ = [^\s]+$\n^\s+end$|^\s+unless [^\s]+$\n^\s+end$)'
         new_value: ''
         multi_line: true
+      # -
+      #   name: "Replace 1?"
+      #   pattern: '1\?'
+      #   new_value: '?'
+      # -
+      #   name: "Replace 1)"
+      #   pattern: '1\)'
+      #   new_value: ')'
   - name: 'Update api error'
     file_glob: './src/stripe/api_error.cr'
     changes:

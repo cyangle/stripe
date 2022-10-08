@@ -12,71 +12,51 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class Address
     include JSON::Serializable
     include JSON::Serializable::Unmapped
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional Properties
+    # Required Properties
 
-    # City, district, suburb, town, or village.
-    @[JSON::Field(key: "city", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: city.nil? && !city_present?)]
-    getter city : String? = nil
-    MAX_LENGTH_FOR_CITY = 5000
-
-    @[JSON::Field(ignore: true)]
-    property? city_present : Bool = false
-
-    # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: country.nil? && !country_present?)]
-    getter country : String? = nil
-    MAX_LENGTH_FOR_COUNTRY = 5000
-
-    @[JSON::Field(ignore: true)]
-    property? country_present : Bool = false
-
-    # Address line 1 (e.g., street, PO Box, or company name).
-    @[JSON::Field(key: "line1", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: line1.nil? && !line1_present?)]
+    @[JSON::Field(key: "line1", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter line1 : String? = nil
     MAX_LENGTH_FOR_LINE1 = 5000
 
-    @[JSON::Field(ignore: true)]
-    property? line1_present : Bool = false
+    # End of Required Properties
 
-    # Address line 2 (e.g., apartment, suite, unit, or building).
-    @[JSON::Field(key: "line2", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: line2.nil? && !line2_present?)]
+    # Optional Properties
+
+    @[JSON::Field(key: "city", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter city : String? = nil
+    MAX_LENGTH_FOR_CITY = 5000
+
+    @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
+
+    @[JSON::Field(key: "line2", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter line2 : String? = nil
     MAX_LENGTH_FOR_LINE2 = 5000
 
-    @[JSON::Field(ignore: true)]
-    property? line2_present : Bool = false
-
-    # ZIP or postal code.
-    @[JSON::Field(key: "postal_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: postal_code.nil? && !postal_code_present?)]
+    @[JSON::Field(key: "postal_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter postal_code : String? = nil
     MAX_LENGTH_FOR_POSTAL_CODE = 5000
 
-    @[JSON::Field(ignore: true)]
-    property? postal_code_present : Bool = false
-
-    # State, county, province, or region.
-    @[JSON::Field(key: "state", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: state.nil? && !state_present?)]
+    @[JSON::Field(key: "state", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter state : String? = nil
     MAX_LENGTH_FOR_STATE = 5000
-
-    @[JSON::Field(ignore: true)]
-    property? state_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
+      # Required properties
+      @line1 : String? = nil,
       # Optional properties
       @city : String? = nil,
       @country : String? = nil,
-      @line1 : String? = nil,
       @line2 : String? = nil,
       @postal_code : String? = nil,
       @state : String? = nil
@@ -88,6 +68,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      invalid_properties.push("\"line1\" is required and cannot be null") if @line1.nil?
+
+      unless (_line1 = @line1).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("line1", _line1.to_s.size, MAX_LENGTH_FOR_LINE1)
+          invalid_properties.push(max_length_error)
+        end
+      end
       unless (_city = @city).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
           invalid_properties.push(max_length_error)
@@ -95,11 +82,6 @@ module Stripe
       end
       unless (_country = @country).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-          invalid_properties.push(max_length_error)
-        end
-      end
-      unless (_line1 = @line1).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("line1", _line1.to_s.size, MAX_LENGTH_FOR_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
@@ -124,16 +106,17 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
+      return false if @line1.nil?
+      unless (_line1 = @line1).nil?
+        return false if _line1.to_s.size > MAX_LENGTH_FOR_LINE1
+      end
+
       unless (_city = @city).nil?
         return false if _city.to_s.size > MAX_LENGTH_FOR_CITY
       end
 
       unless (_country = @country).nil?
         return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
-      end
-
-      unless (_line1 = @line1).nil?
-        return false if _line1.to_s.size > MAX_LENGTH_FOR_LINE1
       end
 
       unless (_line2 = @line2).nil?
@@ -149,6 +132,17 @@ module Stripe
       end
 
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] line1 Object to be assigned
+    def line1=(line1 : String?)
+      if line1.nil?
+        raise ArgumentError.new("\"line1\" is required and cannot be null")
+      end
+      _line1 = line1.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_length("line1", _line1.to_s.size, MAX_LENGTH_FOR_LINE1)
+      @line1 = _line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,17 +165,6 @@ module Stripe
       _country = country.not_nil!
       OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] line1 Object to be assigned
-    def line1=(line1 : String?)
-      if line1.nil?
-        return @line1 = nil
-      end
-      _line1 = line1.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("line1", _line1.to_s.size, MAX_LENGTH_FOR_LINE1)
-      @line1 = _line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -221,6 +204,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@city, @city_present, @country, @country_present, @line1, @line1_present, @line2, @line2_present, @postal_code, @postal_code_present, @state, @state_present)
+    def_equals_and_hash(@line1, @city, @country, @line2, @postal_code, @state)
   end
 end

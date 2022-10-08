@@ -62,8 +62,8 @@ module Stripe
     @[JSON::Field(key: "default_tax_rates", type: Array(Stripe::TaxRate)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter default_tax_rates : Array(Stripe::TaxRate)? = nil
 
-    @[JSON::Field(key: "lines", type: Stripe::InvoiceLinesList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter lines : Stripe::InvoiceLinesList1? = nil
+    @[JSON::Field(key: "lines", type: Stripe::InvoiceLinesList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter lines : Stripe::InvoiceLinesList? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -102,7 +102,7 @@ module Stripe
     @[JSON::Field(key: "pre_payment_credit_notes_amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter pre_payment_credit_notes_amount : Int64? = nil
 
-    # Starting customer balance before the invoice is finalized. If the invoice has not been finalized yet, this will be the current customer balance.
+    # Starting customer balance before the invoice is finalized. If the invoice has not been finalized yet, this will be the current customer balance. For revision invoices, this also includes any customer balance that was applied to the original invoice.
     @[JSON::Field(key: "starting_balance", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter starting_balance : Int64? = nil
 
@@ -485,7 +485,7 @@ module Stripe
       @created : Int64? = nil,
       @currency : String? = nil,
       @default_tax_rates : Array(Stripe::TaxRate)? = nil,
-      @lines : Stripe::InvoiceLinesList1? = nil,
+      @lines : Stripe::InvoiceLinesList? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
       @paid : Bool? = nil,
@@ -1134,7 +1134,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lines Object to be assigned
-    def lines=(lines : Stripe::InvoiceLinesList1?)
+    def lines=(lines : Stripe::InvoiceLinesList?)
       if lines.nil?
         raise ArgumentError.new("\"lines\" is required and cannot be null")
       end

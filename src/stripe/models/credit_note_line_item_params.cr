@@ -43,8 +43,8 @@ module Stripe
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
 
-    @[JSON::Field(key: "tax_rates", type: Stripe::CreditNoteLineItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil
+    @[JSON::Field(key: "tax_rates", type: Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil
 
     @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter unit_amount : Int64? = nil
@@ -63,7 +63,7 @@ module Stripe
       @description : String? = nil,
       @invoice_line_item : String? = nil,
       @quantity : Int64? = nil,
-      @tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil,
+      @tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
       @unit_amount : Int64? = nil,
       @unit_amount_decimal : String? = nil
     )
@@ -176,7 +176,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(tax_rates : Stripe::CreditNoteLineItemParamsTaxRates?)
+    def tax_rates=(tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?)
       if tax_rates.nil?
         return @tax_rates = nil
       end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Cart
   class Cart
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -24,8 +23,8 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    @[JSON::Field(key: "line_items", type: Array(Stripe::LineItem1)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter line_items : Array(Stripe::LineItem1)? = nil
+    @[JSON::Field(key: "line_items", type: Array(Stripe::LineItem)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter line_items : Array(Stripe::LineItem)? = nil
 
     @[JSON::Field(key: "total", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total : Int64? = nil
@@ -43,7 +42,7 @@ module Stripe
       *,
       # Required properties
       @currency : String? = nil,
-      @line_items : Array(Stripe::LineItem1)? = nil,
+      @line_items : Array(Stripe::LineItem)? = nil,
       @total : Int64? = nil,
       # Optional properties
       @tax : Int64? = nil
@@ -94,7 +93,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Array(Stripe::LineItem1)?)
+    def line_items=(line_items : Array(Stripe::LineItem)?)
       if line_items.nil?
         raise ArgumentError.new("\"line_items\" is required and cannot be null")
       end

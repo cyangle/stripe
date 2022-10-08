@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost. There is a maximum of 100 line items.
   class OrdersV2ResourceLineItemList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

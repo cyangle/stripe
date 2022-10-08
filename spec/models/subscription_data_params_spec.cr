@@ -41,13 +41,6 @@ describe Stripe::SubscriptionDataParams do
     end
   end
 
-  describe "test attribute 'items'" do
-    it "should work" do
-      # instance = Stripe::SubscriptionDataParams.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'metadata'" do
     it "should work" do
       # instance = Stripe::SubscriptionDataParams.new

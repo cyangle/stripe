@@ -32,8 +32,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTax1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter automatic_tax : Stripe::AutomaticTax1? = nil
+    @[JSON::Field(key: "automatic_tax", type: Stripe::AutomaticTax?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter automatic_tax : Stripe::AutomaticTax? = nil
 
     @[JSON::Field(key: "billing_details", type: Stripe::PostOrdersRequestBillingDetails?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_details : Stripe::PostOrdersRequestBillingDetails? = nil
@@ -66,8 +66,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "payment", type: Stripe::CreateParams1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment : Stripe::CreateParams1? = nil
+    @[JSON::Field(key: "payment", type: Stripe::CreateParams?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment : Stripe::CreateParams? = nil
 
     @[JSON::Field(key: "shipping_cost", type: Stripe::PostOrdersRequestShippingCost?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil
@@ -86,7 +86,7 @@ module Stripe
       @currency : String? = nil,
       @line_items : Array(Stripe::CreateParams)? = nil,
       # Optional properties
-      @automatic_tax : Stripe::AutomaticTax1? = nil,
+      @automatic_tax : Stripe::AutomaticTax? = nil,
       @billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
       @client_permissions : Stripe::ClientPermissions? = nil,
       @customer : String? = nil,
@@ -95,7 +95,7 @@ module Stripe
       @expand : Array(String)? = nil,
       @ip_address : String? = nil,
       @metadata : Hash(String, String)? = nil,
-      @payment : Stripe::CreateParams1? = nil,
+      @payment : Stripe::CreateParams? = nil,
       @shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
       @shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
       @tax_details : Stripe::TaxDetails? = nil
@@ -228,7 +228,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTax1?)
+    def automatic_tax=(automatic_tax : Stripe::AutomaticTax?)
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
@@ -324,7 +324,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment Object to be assigned
-    def payment=(payment : Stripe::CreateParams1?)
+    def payment=(payment : Stripe::CreateParams?)
       if payment.nil?
         return @payment = nil
       end

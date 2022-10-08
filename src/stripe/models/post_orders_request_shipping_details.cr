@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # Shipping details for the order.
-  alias PostOrdersRequestShippingDetails = BusinessProfileSpecsSupportUrlOneOf | ShippingDetails
+  alias PostOrdersRequestShippingDetails = PostAccountsRequestMetadataOneOf | ShippingDetails
 end

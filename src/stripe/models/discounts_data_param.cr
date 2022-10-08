@@ -28,13 +28,18 @@ module Stripe
     getter discount : String? = nil
     MAX_LENGTH_FOR_DISCOUNT = 5000
 
+    @[JSON::Field(key: "promotion_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter promotion_code : String? = nil
+    MAX_LENGTH_FOR_PROMOTION_CODE = 5000
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
       @coupon : String? = nil,
-      @discount : String? = nil
+      @discount : String? = nil,
+      @promotion_code : String? = nil
     )
     end
 
@@ -53,6 +58,11 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
+      unless (_promotion_code = @promotion_code).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
+          invalid_properties.push(max_length_error)
+        end
+      end
       invalid_properties
     end
 
@@ -65,6 +75,10 @@ module Stripe
 
       unless (_discount = @discount).nil?
         return false if _discount.to_s.size > MAX_LENGTH_FOR_DISCOUNT
+      end
+
+      unless (_promotion_code = @promotion_code).nil?
+        return false if _promotion_code.to_s.size > MAX_LENGTH_FOR_PROMOTION_CODE
       end
 
       true
@@ -92,10 +106,21 @@ module Stripe
       @discount = _discount
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] promotion_code Object to be assigned
+    def promotion_code=(promotion_code : String?)
+      if promotion_code.nil?
+        return @promotion_code = nil
+      end
+      _promotion_code = promotion_code.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_length("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
+      @promotion_code = _promotion_code
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@coupon, @discount)
+    def_equals_and_hash(@coupon, @discount, @promotion_code)
   end
 end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The product whose pricing the created plan will represent. This can either be the ID of an existing product, or a dictionary containing fields used to create a [service product](https://stripe.com/docs/api#product_object-type).
   class InlineProductParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

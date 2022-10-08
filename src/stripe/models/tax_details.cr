@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Additional tax details about the purchaser to be used for this order.
   class TaxDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about the person represented by the account. This field is null unless `business_type` is set to `individual`.
   class IndividualSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

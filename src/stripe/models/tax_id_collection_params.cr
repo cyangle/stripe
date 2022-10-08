@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Controls tax ID collection settings for the session.
   class TaxIdCollectionParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

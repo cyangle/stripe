@@ -36,8 +36,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "line_items", type: Stripe::QuotesResourceListLineItems2?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter line_items : Stripe::QuotesResourceListLineItems2? = nil
+    @[JSON::Field(key: "line_items", type: Stripe::QuotesResourceListLineItems?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter line_items : Stripe::QuotesResourceListLineItems? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,7 +48,7 @@ module Stripe
       @amount_total : Int64? = nil,
       @total_details : Stripe::QuotesResourceTotalDetails? = nil,
       # Optional properties
-      @line_items : Stripe::QuotesResourceListLineItems2? = nil
+      @line_items : Stripe::QuotesResourceListLineItems? = nil
     )
     end
 
@@ -124,7 +124,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Stripe::QuotesResourceListLineItems2?)
+    def line_items=(line_items : Stripe::QuotesResourceListLineItems?)
       if line_items.nil?
         return @line_items = nil
       end

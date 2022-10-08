@@ -50,8 +50,8 @@ module Stripe
     getter statement_descriptor_suffix : String? = nil
     MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_data : Stripe::TransferDataSpecs1? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_data : Stripe::TransferDataSpecs? = nil
 
     # A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -69,7 +69,7 @@ module Stripe
       @receipt_email : String? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
-      @transfer_data : Stripe::TransferDataSpecs1? = nil,
+      @transfer_data : Stripe::TransferDataSpecs? = nil,
       @transfer_group : String? = nil
     )
     end
@@ -188,7 +188,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs1?)
+    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
       if transfer_data.nil?
         return @transfer_data = nil
       end

@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "ach", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter ach : Stripe::Access? = nil
+    @[JSON::Field(key: "ach", type: Stripe::AccessWithAchDetails?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ach : Stripe::AccessWithAchDetails? = nil
 
     @[JSON::Field(key: "us_domestic_wire", type: Stripe::Access?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_domestic_wire : Stripe::Access? = nil
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @ach : Stripe::Access? = nil,
+      @ach : Stripe::AccessWithAchDetails? = nil,
       @us_domestic_wire : Stripe::Access? = nil
     )
     end
@@ -66,7 +66,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ach Object to be assigned
-    def ach=(ach : Stripe::Access?)
+    def ach=(ach : Stripe::AccessWithAchDetails?)
       if ach.nil?
         return @ach = nil
       end

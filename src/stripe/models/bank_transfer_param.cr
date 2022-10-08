@@ -29,8 +29,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "eu_bank_transfer", type: Stripe::EuBankTransferParams?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter eu_bank_transfer : Stripe::EuBankTransferParams? = nil
+    @[JSON::Field(key: "eu_bank_transfer", type: Stripe::EuBankTransferParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter eu_bank_transfer : Stripe::EuBankTransferParam? = nil
 
     @[JSON::Field(key: "requested_address_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested_address_types : Array(String)? = nil
@@ -44,7 +44,7 @@ module Stripe
       # Required properties
       @_type : String? = nil,
       # Optional properties
-      @eu_bank_transfer : Stripe::EuBankTransferParams? = nil,
+      @eu_bank_transfer : Stripe::EuBankTransferParam? = nil,
       @requested_address_types : Array(String)? = nil
     )
     end
@@ -100,7 +100,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eu_bank_transfer Object to be assigned
-    def eu_bank_transfer=(eu_bank_transfer : Stripe::EuBankTransferParams?)
+    def eu_bank_transfer=(eu_bank_transfer : Stripe::EuBankTransferParam?)
       if eu_bank_transfer.nil?
         return @eu_bank_transfer = nil
       end

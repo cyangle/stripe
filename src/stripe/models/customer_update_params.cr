@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Controls what fields on Customer can be updated by the Checkout Session. Can only be provided when `customer` is provided.
   class CustomerUpdateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

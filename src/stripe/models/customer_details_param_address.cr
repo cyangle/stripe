@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias CustomerDetailsParamAddress = BusinessProfileSpecsSupportUrlOneOf | OptionalFieldsAddress
+  alias CustomerDetailsParamAddress = OptionalFieldsAddress | String
 end

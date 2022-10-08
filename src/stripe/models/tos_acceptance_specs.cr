@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Details on the account's acceptance of the [Stripe Services Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).
   class TosAcceptanceSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped

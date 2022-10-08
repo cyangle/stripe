@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Filters to restrict the kinds of accounts to collect.
   class FiltersParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped

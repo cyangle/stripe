@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Evidence provided for the dispute.
   class EvidenceParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped

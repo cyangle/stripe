@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias CustomerParamCustomFields = Array(CustomFieldParams) | BusinessProfileSpecsSupportUrlOneOf
+  alias CustomerParamCustomFields = Array(CustomFieldParams) | String
 end

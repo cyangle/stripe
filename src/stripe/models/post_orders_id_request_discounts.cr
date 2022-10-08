@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # The coupons, promotion codes, and/or discounts to apply to the order. Pass the empty string `\"\"` to unset this field.
-  alias PostOrdersIdRequestDiscounts = Array(DiscountsDataParam1) | BusinessProfileSpecsSupportUrlOneOf
+  alias PostOrdersIdRequestDiscounts = Array(DiscountsDataParam) | PostAccountsRequestMetadataOneOf
 end

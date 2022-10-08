@@ -25,8 +25,8 @@ module Stripe
     getter account_token : String? = nil
     MAX_LENGTH_FOR_ACCOUNT_TOKEN = 5000
 
-    @[JSON::Field(key: "bank_account", type: Stripe::PostAccountRequestBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter bank_account : Stripe::PostAccountRequestBankAccount? = nil
+    @[JSON::Field(key: "bank_account", type: Stripe::PostAccountsRequestBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter bank_account : Stripe::PostAccountsRequestBankAccount? = nil
 
     @[JSON::Field(key: "business_profile", type: Stripe::BusinessProfileSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_profile : Stripe::BusinessProfileSpecs? = nil
@@ -71,8 +71,8 @@ module Stripe
     @[JSON::Field(key: "individual", type: Stripe::IndividualSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter individual : Stripe::IndividualSpecs? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     @[JSON::Field(key: "settings", type: Stripe::SettingsSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter settings : Stripe::SettingsSpecs? = nil
@@ -92,7 +92,7 @@ module Stripe
       *,
       # Optional properties
       @account_token : String? = nil,
-      @bank_account : Stripe::PostAccountRequestBankAccount? = nil,
+      @bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
       @business_profile : Stripe::BusinessProfileSpecs? = nil,
       @business_type : String? = nil,
       @capabilities : Stripe::CapabilitiesParam? = nil,
@@ -104,7 +104,7 @@ module Stripe
       @expand : Array(String)? = nil,
       @external_account : String? = nil,
       @individual : Stripe::IndividualSpecs? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @settings : Stripe::SettingsSpecs? = nil,
       @tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
       @_type : String? = nil
@@ -244,7 +244,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account Object to be assigned
-    def bank_account=(bank_account : Stripe::PostAccountRequestBankAccount?)
+    def bank_account=(bank_account : Stripe::PostAccountsRequestBankAccount?)
       if bank_account.nil?
         return @bank_account = nil
       end
@@ -373,7 +373,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

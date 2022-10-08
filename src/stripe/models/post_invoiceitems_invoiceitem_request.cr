@@ -40,19 +40,19 @@ module Stripe
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expand : Array(String)? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::PostAccountRequestMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    @[JSON::Field(key: "period", type: Stripe::Period1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter period : Stripe::Period1? = nil
+    @[JSON::Field(key: "period", type: Stripe::Period?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter period : Stripe::Period? = nil
 
     # The ID of the price object.
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price : String? = nil
     MAX_LENGTH_FOR_PRICE = 5000
 
-    @[JSON::Field(key: "price_data", type: Stripe::OneTimePriceData1?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter price_data : Stripe::OneTimePriceData1? = nil
+    @[JSON::Field(key: "price_data", type: Stripe::OneTimePriceData?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter price_data : Stripe::OneTimePriceData? = nil
 
     # Non-negative integer. The quantity of units for the invoice item.
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -79,10 +79,10 @@ module Stripe
       @discountable : Bool? = nil,
       @discounts : Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
       @expand : Array(String)? = nil,
-      @metadata : Stripe::PostAccountRequestMetadata? = nil,
-      @period : Stripe::Period1? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      @period : Stripe::Period? = nil,
       @price : String? = nil,
-      @price_data : Stripe::OneTimePriceData1? = nil,
+      @price_data : Stripe::OneTimePriceData? = nil,
       @quantity : Int64? = nil,
       @tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
       @unit_amount : Int64? = nil,
@@ -215,7 +215,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -226,7 +226,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] period Object to be assigned
-    def period=(period : Stripe::Period1?)
+    def period=(period : Stripe::Period?)
       if period.nil?
         return @period = nil
       end
@@ -248,7 +248,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price_data Object to be assigned
-    def price_data=(price_data : Stripe::OneTimePriceData1?)
+    def price_data=(price_data : Stripe::OneTimePriceData?)
       if price_data.nil?
         return @price_data = nil
       end

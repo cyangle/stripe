@@ -46,8 +46,8 @@ module Stripe
     ERROR_MESSAGE_FOR_ITEM_TYPE = "invalid value for \"item_type\", must be one of [card_bin, card_fingerprint, case_sensitive_string, country, customer_id, email, ip_address, string]."
     VALID_VALUES_FOR_ITEM_TYPE  = String.static_array("card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string")
 
-    @[JSON::Field(key: "list_items", type: Stripe::RadarListListItemList1?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter list_items : Stripe::RadarListListItemList1? = nil
+    @[JSON::Field(key: "list_items", type: Stripe::RadarListListItemList?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter list_items : Stripe::RadarListListItemList? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -80,7 +80,7 @@ module Stripe
       @created_by : String? = nil,
       @id : String? = nil,
       @item_type : String? = nil,
-      @list_items : Stripe::RadarListListItemList1? = nil,
+      @list_items : Stripe::RadarListListItemList? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @name : String? = nil,
@@ -248,7 +248,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] list_items Object to be assigned
-    def list_items=(list_items : Stripe::RadarListListItemList1?)
+    def list_items=(list_items : Stripe::RadarListListItemList?)
       if list_items.nil?
         raise ArgumentError.new("\"list_items\" is required and cannot be null")
       end

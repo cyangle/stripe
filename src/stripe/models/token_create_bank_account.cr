@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The bank account this token will represent.
   class TokenCreateBankAccount
     include JSON::Serializable
     include JSON::Serializable::Unmapped

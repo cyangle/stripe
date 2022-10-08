@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Payment settings to pass to invoices created by the subscription.
   class PaymentSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -21,25 +20,24 @@ module Stripe
 
     # Optional Properties
 
+    @[JSON::Field(key: "default_mandate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter default_mandate : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_MANDATE = 5000
+
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptions? = nil
 
-    @[JSON::Field(key: "payment_method_types", type: Stripe::PaymentSettingsPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes? = nil
-
-    @[JSON::Field(key: "save_default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter save_default_payment_method : String? = nil
-    ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD = "invalid value for \"save_default_payment_method\", must be one of [off, on_subscription]."
-    VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD  = String.static_array("off", "on_subscription")
+    @[JSON::Field(key: "payment_method_types", type: Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
+      @default_mandate : String? = nil,
       @payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      @payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes? = nil,
-      @save_default_payment_method : String? = nil
+      @payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes? = nil
     )
     end
 
@@ -48,14 +46,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      unless (_default_mandate = @default_mandate).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
+          invalid_properties.push(max_length_error)
+        end
+      end
       unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
       unless (_payment_method_types = @payment_method_types).nil?
         invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types")) if _payment_method_types.is_a?(OpenApi::Validatable)
-      end
-      unless (_save_default_payment_method = @save_default_payment_method).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD) unless OpenApi::EnumValidator.valid?(_save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
       end
       invalid_properties
     end
@@ -63,6 +63,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
+      unless (_default_mandate = @default_mandate).nil?
+        return false if _default_mandate.to_s.size > MAX_LENGTH_FOR_DEFAULT_MANDATE
+      end
+
       unless (_payment_method_options = @payment_method_options).nil?
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
@@ -71,11 +75,18 @@ module Stripe
         return false if _payment_method_types.is_a?(OpenApi::Validatable) && !_payment_method_types.valid?
       end
 
-      unless (_save_default_payment_method = @save_default_payment_method).nil?
-        return false unless OpenApi::EnumValidator.valid?(_save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
-      end
-
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] default_mandate Object to be assigned
+    def default_mandate=(default_mandate : String?)
+      if default_mandate.nil?
+        return @default_mandate = nil
+      end
+      _default_mandate = default_mandate.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_length("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
+      @default_mandate = _default_mandate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes?)
+    def payment_method_types=(payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes?)
       if payment_method_types.nil?
         return @payment_method_types = nil
       end
@@ -100,21 +111,10 @@ module Stripe
       @payment_method_types = _payment_method_types
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] save_default_payment_method Object to be assigned
-    def save_default_payment_method=(save_default_payment_method : String?)
-      if save_default_payment_method.nil?
-        return @save_default_payment_method = nil
-      end
-      _save_default_payment_method = save_default_payment_method.not_nil!
-      OpenApi::EnumValidator.validate("save_default_payment_method", _save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
-      @save_default_payment_method = _save_default_payment_method
-    end
-
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@payment_method_options, @payment_method_types, @save_default_payment_method)
+    def_equals_and_hash(@default_mandate, @payment_method_options, @payment_method_types)
   end
 end

@@ -33,4 +33,11 @@ describe Stripe::DiscountsDataParam do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'promotion_code'" do
+    it "should work" do
+      # instance = Stripe::DiscountsDataParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 end

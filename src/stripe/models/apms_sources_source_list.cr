@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class ApmsSourcesSourceList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -22,8 +21,8 @@ module Stripe
     # Required Properties
 
     # Details about each object.
-    @[JSON::Field(key: "data", type: Array(Stripe::Polymorphic1)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter data : Array(Stripe::Polymorphic1)? = nil
+    @[JSON::Field(key: "data", type: Array(Stripe::Polymorphic)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter data : Array(Stripe::Polymorphic)? = nil
 
     # True if this list has another page of items after this one that can be fetched.
     @[JSON::Field(key: "has_more", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +46,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @data : Array(Stripe::Polymorphic1)? = nil,
+      @data : Array(Stripe::Polymorphic)? = nil,
       @has_more : Bool? = nil,
       @object : String? = nil,
       @url : String? = nil
@@ -106,7 +105,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data Object to be assigned
-    def data=(data : Array(Stripe::Polymorphic1)?)
+    def data=(data : Array(Stripe::Polymorphic)?)
       if data.nil?
         raise ArgumentError.new("\"data\" is required and cannot be null")
       end

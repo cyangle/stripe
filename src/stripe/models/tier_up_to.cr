@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias TierUpTo = Int32 | TierUpToOneOf
+  alias TierUpTo = Int32 | String
 end

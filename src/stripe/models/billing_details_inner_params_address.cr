@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias BillingDetailsInnerParamsAddress = BillingDetailsAddress | BusinessProfileSpecsSupportUrlOneOf
+  alias BillingDetailsInnerParamsAddress = BillingDetailsAddress | String
 end

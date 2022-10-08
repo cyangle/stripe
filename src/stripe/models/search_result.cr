@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  #
   class SearchResult
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -21,8 +20,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "data", type: Array(Stripe::Charge)?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter data : Array(Stripe::Charge)? = nil
+    @[JSON::Field(key: "data", type: Array(Stripe::Subscription)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter data : Array(Stripe::Subscription)? = nil
 
     @[JSON::Field(key: "has_more", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter has_more : Bool? = nil
@@ -57,7 +56,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @data : Array(Stripe::Charge)? = nil,
+      @data : Array(Stripe::Subscription)? = nil,
       @has_more : Bool? = nil,
       @object : String? = nil,
       @url : String? = nil,
@@ -129,7 +128,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data Object to be assigned
-    def data=(data : Array(Stripe::Charge)?)
+    def data=(data : Array(Stripe::Subscription)?)
       if data.nil?
         raise ArgumentError.new("\"data\" is required and cannot be null")
       end
