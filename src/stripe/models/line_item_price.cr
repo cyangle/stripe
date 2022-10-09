@@ -12,5 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  alias SubscriptionDataCreateParamsTrialPeriodDays = Int32 | String
+  # The price of the line item.
+  alias LineItemPrice = Price
 end

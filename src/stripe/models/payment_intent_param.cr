@@ -32,8 +32,8 @@ module Stripe
     @[JSON::Field(key: "installments", type: Stripe::InstallmentsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter installments : Stripe::InstallmentsParam? = nil
 
-    @[JSON::Field(key: "mandate_options", type: Stripe::PaymentIntentParamMandateOptions?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter mandate_options : Stripe::PaymentIntentParamMandateOptions? = nil
+    @[JSON::Field(key: "mandate_options", type: Stripe::PaymentMethodOptionsCardMandateOptions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter mandate_options : Stripe::PaymentMethodOptionsCardMandateOptions? = nil
 
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
@@ -66,7 +66,7 @@ module Stripe
       @capture_method : String? = nil,
       @cvc_token : String? = nil,
       @installments : Stripe::InstallmentsParam? = nil,
-      @mandate_options : Stripe::PaymentIntentParamMandateOptions? = nil,
+      @mandate_options : Stripe::PaymentMethodOptionsCardMandateOptions? = nil,
       @network : String? = nil,
       @request_three_d_secure : String? = nil,
       @setup_future_usage : String? = nil,
@@ -189,7 +189,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::PaymentIntentParamMandateOptions?)
+    def mandate_options=(mandate_options : Stripe::PaymentMethodOptionsCardMandateOptions?)
       if mandate_options.nil?
         return @mandate_options = nil
       end

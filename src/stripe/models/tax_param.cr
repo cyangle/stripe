@@ -20,15 +20,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "ip_address", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter ip_address : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "ip_address", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ip_address : Stripe::BbposWisePoseSplashscreen? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @ip_address : Stripe::BusinessProfileSpecsSupportUrl? = nil
+      @ip_address : Stripe::BbposWisePoseSplashscreen? = nil
     )
     end
 
@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(ip_address : Stripe::BusinessProfileSpecsSupportUrl?)
+    def ip_address=(ip_address : Stripe::BbposWisePoseSplashscreen?)
       if ip_address.nil?
         return @ip_address = nil
       end

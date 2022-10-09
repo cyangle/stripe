@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  class ProductsMethodSKUList
+  class ProductsMethodSkuList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
     include OpenApi::Validatable

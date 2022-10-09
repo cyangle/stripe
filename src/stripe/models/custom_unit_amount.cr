@@ -12,36 +12,40 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class CustomUnitAmount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required Properties
-
-    @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter enabled : Bool? = nil
-
-    # End of Required Properties
-
     # Optional Properties
 
-    @[JSON::Field(key: "maximum", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
+    # The maximum unit amount the customer can specify for this item.
+    @[JSON::Field(key: "maximum", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: maximum.nil? && !maximum_present?)]
     getter maximum : Int64? = nil
 
-    @[JSON::Field(key: "minimum", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? maximum_present : Bool = false
+
+    # The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
+    @[JSON::Field(key: "minimum", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: minimum.nil? && !minimum_present?)]
     getter minimum : Int64? = nil
 
-    @[JSON::Field(key: "preset", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? minimum_present : Bool = false
+
+    # The starting unit amount which can be updated by the customer.
+    @[JSON::Field(key: "preset", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preset.nil? && !preset_present?)]
     getter preset : Int64? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? preset_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
-      # Required properties
-      @enabled : Bool? = nil,
       # Optional properties
       @maximum : Int64? = nil,
       @minimum : Int64? = nil,
@@ -54,27 +58,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @enabled.nil?
-
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,6 +101,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enabled, @maximum, @minimum, @preset)
+    def_equals_and_hash(@maximum, @maximum_present, @minimum, @minimum_present, @preset, @preset_present)
   end
 end

@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_documentation", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter additional_documentation : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "additional_documentation", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter additional_documentation : Stripe::BbposWisePoseSplashscreen? = nil
 
     @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter explanation : String? = nil
@@ -47,7 +47,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @additional_documentation : Stripe::BusinessProfileSpecsSupportUrl? = nil,
+      @additional_documentation : Stripe::BbposWisePoseSplashscreen? = nil,
       @explanation : String? = nil,
       @received_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
       @return_description : String? = nil,
@@ -118,7 +118,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::BusinessProfileSpecsSupportUrl?)
+    def additional_documentation=(additional_documentation : Stripe::BbposWisePoseSplashscreen?)
       if additional_documentation.nil?
         return @additional_documentation = nil
       end

@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "application_fee_amount", type: Stripe::UpdateParamsSettingsApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter application_fee_amount : Stripe::UpdateParamsSettingsApplicationFeeAmount? = nil
+    @[JSON::Field(key: "application_fee_amount", type: Stripe::MandateParamsAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter application_fee_amount : Stripe::MandateParamsAmount? = nil
 
     @[JSON::Field(key: "payment_method_options", type: Stripe::UpdateParamsSettingsPaymentMethodOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::UpdateParamsSettingsPaymentMethodOptions? = nil
@@ -31,8 +31,8 @@ module Stripe
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [acss_debit, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, card, customer_balance, eps, fpx, giropay, grabpay, ideal, klarna, link, oxxo, p24, sepa_debit, sofort, wechat_pay]."
     VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = String.static_array("acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "sepa_debit", "sofort", "wechat_pay")
 
-    @[JSON::Field(key: "return_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter return_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "return_url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter return_url : Stripe::BbposWisePoseSplashscreen? = nil
 
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
@@ -50,10 +50,10 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @application_fee_amount : Stripe::UpdateParamsSettingsApplicationFeeAmount? = nil,
+      @application_fee_amount : Stripe::MandateParamsAmount? = nil,
       @payment_method_options : Stripe::UpdateParamsSettingsPaymentMethodOptions? = nil,
       @payment_method_types : Array(String)? = nil,
-      @return_url : Stripe::BusinessProfileSpecsSupportUrl? = nil,
+      @return_url : Stripe::BbposWisePoseSplashscreen? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
       @transfer_data : Stripe::UpdateParamsSettingsTransferData? = nil
@@ -129,7 +129,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_fee_amount Object to be assigned
-    def application_fee_amount=(application_fee_amount : Stripe::UpdateParamsSettingsApplicationFeeAmount?)
+    def application_fee_amount=(application_fee_amount : Stripe::MandateParamsAmount?)
       if application_fee_amount.nil?
         return @application_fee_amount = nil
       end
@@ -162,7 +162,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : Stripe::BusinessProfileSpecsSupportUrl?)
+    def return_url=(return_url : Stripe::BbposWisePoseSplashscreen?)
       if return_url.nil?
         return @return_url = nil
       end

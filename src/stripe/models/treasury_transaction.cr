@@ -80,8 +80,11 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "entries", type: Stripe::TreasuryTransactionsResourceTransactionEntryList?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(key: "entries", type: Stripe::TreasuryTransactionsResourceTransactionEntryList?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: entries.nil? && !entries_present?)]
     getter entries : Stripe::TreasuryTransactionsResourceTransactionEntryList? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? entries_present : Bool = false
 
     # ID of the flow that created the Transaction.
     @[JSON::Field(key: "flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow.nil? && !flow_present?)]
@@ -425,6 +428,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @balance_impact, @created, @currency, @description, @financial_account, @flow_type, @id, @livemode, @object, @status, @status_transitions, @entries, @flow, @flow_present, @flow_details, @flow_details_present)
+    def_equals_and_hash(@amount, @balance_impact, @created, @currency, @description, @financial_account, @flow_type, @id, @livemode, @object, @status, @status_transitions, @entries, @entries_present, @flow, @flow_present, @flow_details, @flow_details_present)
   end
 end

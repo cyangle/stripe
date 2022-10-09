@@ -12,6 +12,7 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class BillingDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,26 +21,42 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "address", type: Stripe::ValidatedOptionalFieldsAddress?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter address : Stripe::ValidatedOptionalFieldsAddress? = nil
+    @[JSON::Field(key: "address", type: Stripe::BillingDetailsAddress1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    getter address : Stripe::BillingDetailsAddress1? = nil
 
-    @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? address_present : Bool = false
+
+    # Email address.
+    @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
-    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
+
+    # Full name.
+    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
+
+    # Billing phone number (including extension).
+    @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String? = nil
-    MAX_LENGTH_FOR_PHONE = 20
+    MAX_LENGTH_FOR_PHONE = 5000
+
+    @[JSON::Field(ignore: true)]
+    property? phone_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @address : Stripe::ValidatedOptionalFieldsAddress? = nil,
+      @address : Stripe::BillingDetailsAddress1? = nil,
       @email : String? = nil,
       @name : String? = nil,
       @phone : String? = nil
@@ -54,7 +71,11 @@ module Stripe
       unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
-
+      unless (_email = @email).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
+          invalid_properties.push(max_length_error)
+        end
+      end
       unless (_name = @name).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
@@ -75,6 +96,10 @@ module Stripe
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
+      unless (_email = @email).nil?
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
+      end
+
       unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
@@ -88,7 +113,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::ValidatedOptionalFieldsAddress?)
+    def address=(address : Stripe::BillingDetailsAddress1?)
       if address.nil?
         return @address = nil
       end
@@ -104,6 +129,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -133,6 +159,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @email, @name, @phone)
+    def_equals_and_hash(@address, @address_present, @email, @email_present, @name, @name_present, @phone, @phone_present)
   end
 end

@@ -12,6 +12,7 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class Recurring
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,27 +21,34 @@ module Stripe
 
     # Required Properties
 
+    # The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
     ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
     VALID_VALUES_FOR_INTERVAL  = String.static_array("day", "month", "week", "year")
 
+    # The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.
+    @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter interval_count : Int64? = nil
+
+    # Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
+    @[JSON::Field(key: "usage_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter usage_type : String? = nil
+    ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
+    VALID_VALUES_FOR_USAGE_TYPE  = String.static_array("licensed", "metered")
+
     # End of Required Properties
 
     # Optional Properties
 
-    @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    # Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
+    @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
     getter aggregate_usage : String? = nil
     ERROR_MESSAGE_FOR_AGGREGATE_USAGE = "invalid value for \"aggregate_usage\", must be one of [last_during_period, last_ever, max, sum]."
     VALID_VALUES_FOR_AGGREGATE_USAGE  = String.static_array("last_during_period", "last_ever", "max", "sum")
 
-    @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter interval_count : Int64? = nil
-
-    @[JSON::Field(key: "usage_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter usage_type : String? = nil
-    ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
-    VALID_VALUES_FOR_USAGE_TYPE  = String.static_array("licensed", "metered")
+    @[JSON::Field(ignore: true)]
+    property? aggregate_usage_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,10 +56,10 @@ module Stripe
       *,
       # Required properties
       @interval : String? = nil,
-      # Optional properties
-      @aggregate_usage : String? = nil,
       @interval_count : Int64? = nil,
-      @usage_type : String? = nil
+      @usage_type : String? = nil,
+      # Optional properties
+      @aggregate_usage : String? = nil
     )
     end
 
@@ -65,12 +73,15 @@ module Stripe
       unless (_interval = @interval).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
-      unless (_aggregate_usage = @aggregate_usage).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_AGGREGATE_USAGE) unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
-      end
+      invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
+
+      invalid_properties.push("\"usage_type\" is required and cannot be null") if @usage_type.nil?
 
       unless (_usage_type = @usage_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_USAGE_TYPE) unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
+      end
+      unless (_aggregate_usage = @aggregate_usage).nil?
+        invalid_properties.push(ERROR_MESSAGE_FOR_AGGREGATE_USAGE) unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
       invalid_properties
     end
@@ -83,12 +94,15 @@ module Stripe
         return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
-      unless (_aggregate_usage = @aggregate_usage).nil?
-        return false unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
-      end
+      return false if @interval_count.nil?
 
+      return false if @usage_type.nil?
       unless (_usage_type = @usage_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
+      end
+
+      unless (_aggregate_usage = @aggregate_usage).nil?
+        return false unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
 
       true
@@ -106,6 +120,27 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] interval_count Object to be assigned
+    def interval_count=(interval_count : Int64?)
+      if interval_count.nil?
+        raise ArgumentError.new("\"interval_count\" is required and cannot be null")
+      end
+      _interval_count = interval_count.not_nil!
+      @interval_count = _interval_count
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] usage_type Object to be assigned
+    def usage_type=(usage_type : String?)
+      if usage_type.nil?
+        raise ArgumentError.new("\"usage_type\" is required and cannot be null")
+      end
+      _usage_type = usage_type.not_nil!
+      OpenApi::EnumValidator.validate("usage_type", _usage_type, VALID_VALUES_FOR_USAGE_TYPE)
+      @usage_type = _usage_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aggregate_usage Object to be assigned
     def aggregate_usage=(aggregate_usage : String?)
       if aggregate_usage.nil?
@@ -116,31 +151,10 @@ module Stripe
       @aggregate_usage = _aggregate_usage
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] interval_count Object to be assigned
-    def interval_count=(interval_count : Int64?)
-      if interval_count.nil?
-        return @interval_count = nil
-      end
-      _interval_count = interval_count.not_nil!
-      @interval_count = _interval_count
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] usage_type Object to be assigned
-    def usage_type=(usage_type : String?)
-      if usage_type.nil?
-        return @usage_type = nil
-      end
-      _usage_type = usage_type.not_nil!
-      OpenApi::EnumValidator.validate("usage_type", _usage_type, VALID_VALUES_FOR_USAGE_TYPE)
-      @usage_type = _usage_type
-    end
-
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@interval, @aggregate_usage, @interval_count, @usage_type)
+    def_equals_and_hash(@interval, @interval_count, @usage_type, @aggregate_usage, @aggregate_usage_present)
   end
 end

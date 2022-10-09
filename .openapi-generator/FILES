@@ -1,19 +1,5 @@
 git_push.sh
 shard.yml
-spec/models/post_orders_id_request_line_items_inner_spec.cr
-spec/models/update_params_settings_application_fee_amount_spec.cr
-spec/models/update_params_settings_payment_method_options_acss_debit_one_of_spec.cr
-spec/models/update_params_settings_payment_method_options_acss_debit_spec.cr
-spec/models/update_params_settings_payment_method_options_afterpay_clearpay_spec.cr
-spec/models/update_params_settings_payment_method_options_card_spec.cr
-spec/models/update_params_settings_payment_method_options_customer_balance_one_of_spec.cr
-spec/models/update_params_settings_payment_method_options_customer_balance_spec.cr
-spec/models/update_params_settings_payment_method_options_link_spec.cr
-spec/models/update_params_settings_payment_method_options_sepa_debit_one_of_spec.cr
-spec/models/update_params_settings_payment_method_options_sepa_debit_spec.cr
-spec/models/update_params_settings_payment_method_options_spec.cr
-spec/models/update_params_settings_spec.cr
-spec/models/update_params_settings_transfer_data_spec.cr
 spec/spec_helper.cr
 spec/support/ext.cr
 spec/support/helpers.cr
@@ -73,7 +59,6 @@ src/stripe/models/all_people_relationship_specs.cr
 src/stripe/models/all_prices_recurring_params.cr
 src/stripe/models/api_errors.cr
 src/stripe/models/api_errors_source.cr
-src/stripe/models/api_method_refund_list.cr
 src/stripe/models/apms_sources_source_list.cr
 src/stripe/models/apple_pay_domain.cr
 src/stripe/models/application.cr
@@ -116,9 +101,11 @@ src/stripe/models/bank_connections_resource_owner_list.cr
 src/stripe/models/bank_connections_resource_ownership_refresh.cr
 src/stripe/models/bank_transfer_param.cr
 src/stripe/models/bbpos_wise_pose.cr
+src/stripe/models/bbpos_wise_pose_splashscreen.cr
 src/stripe/models/billing_clocks_resource_billing_clock_list.cr
 src/stripe/models/billing_details.cr
 src/stripe/models/billing_details_address.cr
+src/stripe/models/billing_details_address1.cr
 src/stripe/models/billing_details_inner_params.cr
 src/stripe/models/billing_details_inner_params_address.cr
 src/stripe/models/billing_portal_configuration.cr
@@ -130,7 +117,6 @@ src/stripe/models/billing_thresholds_param.cr
 src/stripe/models/branding_settings_specs.cr
 src/stripe/models/business_profile_create_param.cr
 src/stripe/models/business_profile_specs.cr
-src/stripe/models/business_profile_specs_support_url.cr
 src/stripe/models/business_profile_update_param.cr
 src/stripe/models/canceled.cr
 src/stripe/models/canceled_cancellation_policy_provided.cr
@@ -224,6 +210,7 @@ src/stripe/models/company_ownership_declaration.cr
 src/stripe/models/company_param.cr
 src/stripe/models/company_specs.cr
 src/stripe/models/configuration_item_params.cr
+src/stripe/models/configuration_item_params_billing_thresholds.cr
 src/stripe/models/connect_collection_transfer.cr
 src/stripe/models/connect_collection_transfer_destination.cr
 src/stripe/models/connect_js_account_token_company_specs.cr
@@ -252,6 +239,7 @@ src/stripe/models/credit_note_tax_amount.cr
 src/stripe/models/credit_note_tax_amount_tax_rate.cr
 src/stripe/models/credit_notes_list.cr
 src/stripe/models/currency_option.cr
+src/stripe/models/currency_option_custom_unit_amount.cr
 src/stripe/models/currency_option_update.cr
 src/stripe/models/currency_specific_config.cr
 src/stripe/models/custom_field_params.cr
@@ -405,6 +393,7 @@ src/stripe/models/file_file_link_list.cr
 src/stripe/models/file_file_list.cr
 src/stripe/models/file_link.cr
 src/stripe/models/file_link_creation_params.cr
+src/stripe/models/file_link_creation_params_metadata.cr
 src/stripe/models/file_link_file.cr
 src/stripe/models/filters_params.cr
 src/stripe/models/financial_addresses.cr
@@ -487,7 +476,6 @@ src/stripe/models/individual_param.cr
 src/stripe/models/individual_specs.cr
 src/stripe/models/individual_specs_dob.cr
 src/stripe/models/individual_specs_full_name_aliases.cr
-src/stripe/models/individual_specs_metadata.cr
 src/stripe/models/inline_product_params.cr
 src/stripe/models/installment_plan.cr
 src/stripe/models/installments_param.cr
@@ -678,6 +666,8 @@ src/stripe/models/legal_entity_ubo_declaration.cr
 src/stripe/models/line_item.cr
 src/stripe/models/line_item_create_params.cr
 src/stripe/models/line_item_params.cr
+src/stripe/models/line_item_price.cr
+src/stripe/models/line_item_proration_details.cr
 src/stripe/models/line_item_update_params.cr
 src/stripe/models/line_items_create_params.cr
 src/stripe/models/line_items_discount_amount.cr
@@ -700,6 +690,7 @@ src/stripe/models/mandate_offline_acceptance_params.cr
 src/stripe/models/mandate_online_acceptance_params.cr
 src/stripe/models/mandate_options_off_session_details_blik.cr
 src/stripe/models/mandate_params.cr
+src/stripe/models/mandate_params_amount.cr
 src/stripe/models/mandate_payment_method.cr
 src/stripe/models/mandate_payment_method_details.cr
 src/stripe/models/mandate_sepa_debit.cr
@@ -813,7 +804,6 @@ src/stripe/models/payment_intent_next_action_wechat_pay_redirect_to_android_app.
 src/stripe/models/payment_intent_next_action_wechat_pay_redirect_to_ios_app.cr
 src/stripe/models/payment_intent_on_behalf_of.cr
 src/stripe/models/payment_intent_param.cr
-src/stripe/models/payment_intent_param_mandate_options.cr
 src/stripe/models/payment_intent_param_statement_descriptor_suffix_kana.cr
 src/stripe/models/payment_intent_param_statement_descriptor_suffix_kanji.cr
 src/stripe/models/payment_intent_payment_method.cr
@@ -924,7 +914,7 @@ src/stripe/models/payment_method_data_params_klarna.cr
 src/stripe/models/payment_method_data_params_p24.cr
 src/stripe/models/payment_method_data_params_sepa_debit.cr
 src/stripe/models/payment_method_data_params_sofort.cr
-src/stripe/models/payment_method_data_params_us_bank_account.cr
+src/stripe/models/payment_method_data_us_bank_account.cr
 src/stripe/models/payment_method_details.cr
 src/stripe/models/payment_method_details_ach_credit_transfer.cr
 src/stripe/models/payment_method_details_ach_debit.cr
@@ -1004,14 +994,13 @@ src/stripe/models/payment_method_options_p24.cr
 src/stripe/models/payment_method_options_param.cr
 src/stripe/models/payment_method_options_param_blik.cr
 src/stripe/models/payment_method_options_param_blik_one_of.cr
-src/stripe/models/payment_method_options_param_card_present.cr
 src/stripe/models/payment_method_options_param_link.cr
-src/stripe/models/payment_method_options_param_link_one_of.cr
 src/stripe/models/payment_method_options_paynow.cr
 src/stripe/models/payment_method_options_paypal.cr
 src/stripe/models/payment_method_options_pix.cr
 src/stripe/models/payment_method_options_promptpay.cr
 src/stripe/models/payment_method_options_sofort.cr
+src/stripe/models/payment_method_options_us_bank_account.cr
 src/stripe/models/payment_method_options_wechat_pay.cr
 src/stripe/models/payment_method_p24.cr
 src/stripe/models/payment_method_sepa_debit.cr
@@ -1040,6 +1029,7 @@ src/stripe/models/payment_pages_checkout_session_tax_id_collection.cr
 src/stripe/models/payment_pages_checkout_session_total_details.cr
 src/stripe/models/payment_pages_checkout_session_total_details_resource_breakdown.cr
 src/stripe/models/payment_settings.cr
+src/stripe/models/payment_settings_payment_method_types.cr
 src/stripe/models/payment_source.cr
 src/stripe/models/payments_settings_specs.cr
 src/stripe/models/payout.cr
@@ -1313,7 +1303,6 @@ src/stripe/models/post_treasury_outbound_transfers_request.cr
 src/stripe/models/post_webhook_endpoints_request.cr
 src/stripe/models/post_webhook_endpoints_webhook_endpoint_request.cr
 src/stripe/models/price.cr
-src/stripe/models/price_custom_unit_amount.cr
 src/stripe/models/price_data.cr
 src/stripe/models/price_data_with_optional_product.cr
 src/stripe/models/price_data_with_product_data.cr
@@ -1571,14 +1560,12 @@ src/stripe/models/subscription_item_billing_thresholds1.cr
 src/stripe/models/subscription_item_create_params.cr
 src/stripe/models/subscription_item_list.cr
 src/stripe/models/subscription_item_update_params.cr
-src/stripe/models/subscription_item_update_params_billing_thresholds.cr
 src/stripe/models/subscription_latest_invoice.cr
 src/stripe/models/subscription_list.cr
 src/stripe/models/subscription_pause_collection.cr
 src/stripe/models/subscription_pause_param.cr
 src/stripe/models/subscription_payment_method_options_card.cr
 src/stripe/models/subscription_payment_method_options_param.cr
-src/stripe/models/subscription_payment_method_options_param_mandate_options.cr
 src/stripe/models/subscription_payment_settings.cr
 src/stripe/models/subscription_pending_invoice_item_interval.cr
 src/stripe/models/subscription_pending_invoice_item_interval1.cr
@@ -1625,7 +1612,7 @@ src/stripe/models/subscriptions_resource_payment_method_options_customer_balance
 src/stripe/models/subscriptions_resource_payment_method_options_konbini.cr
 src/stripe/models/subscriptions_resource_payment_method_options_us_bank_account.cr
 src/stripe/models/subscriptions_resource_payment_settings.cr
-src/stripe/models/subscriptions_resource_payment_settings_payment_method_types.cr
+src/stripe/models/subscriptions_resource_payment_settings_payment_method_options.cr
 src/stripe/models/subscriptions_resource_pending_update.cr
 src/stripe/models/subscriptions_subscription_list.cr
 src/stripe/models/tax_code.cr
@@ -1681,6 +1668,7 @@ src/stripe/models/transfer.cr
 src/stripe/models/transfer_balance_transaction.cr
 src/stripe/models/transfer_data.cr
 src/stripe/models/transfer_data_creation_params.cr
+src/stripe/models/transfer_data_destination.cr
 src/stripe/models/transfer_data_params.cr
 src/stripe/models/transfer_data_specs.cr
 src/stripe/models/transfer_data_update_params.cr
@@ -1777,17 +1765,13 @@ src/stripe/models/update_api_param.cr
 src/stripe/models/update_param.cr
 src/stripe/models/update_params.cr
 src/stripe/models/update_params_settings.cr
-src/stripe/models/update_params_settings_application_fee_amount.cr
 src/stripe/models/update_params_settings_payment_method_options.cr
 src/stripe/models/update_params_settings_payment_method_options_acss_debit.cr
-src/stripe/models/update_params_settings_payment_method_options_acss_debit_one_of.cr
 src/stripe/models/update_params_settings_payment_method_options_afterpay_clearpay.cr
 src/stripe/models/update_params_settings_payment_method_options_card.cr
 src/stripe/models/update_params_settings_payment_method_options_customer_balance.cr
-src/stripe/models/update_params_settings_payment_method_options_customer_balance_one_of.cr
 src/stripe/models/update_params_settings_payment_method_options_link.cr
 src/stripe/models/update_params_settings_payment_method_options_sepa_debit.cr
-src/stripe/models/update_params_settings_payment_method_options_sepa_debit_one_of.cr
 src/stripe/models/update_params_settings_transfer_data.cr
 src/stripe/models/us_bank_account_networks.cr
 src/stripe/models/us_bank_account_source_params.cr

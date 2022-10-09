@@ -39,8 +39,8 @@ module Stripe
     @[JSON::Field(key: "images", type: Stripe::ProductUpsertDataImages?, default: nil, required: false, nullable: false, emit_null: false)]
     getter images : Stripe::ProductUpsertDataImages? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::IndividualSpecsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::IndividualSpecsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
 
     @[JSON::Field(key: "package_dimensions", type: Stripe::ProductUpsertDataPackageDimensions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter package_dimensions : Stripe::ProductUpsertDataPackageDimensions? = nil
@@ -52,8 +52,8 @@ module Stripe
     getter tax_code : String? = nil
     MAX_LENGTH_FOR_TAX_CODE = 5000
 
-    @[JSON::Field(key: "url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter url : Stripe::BbposWisePoseSplashscreen? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -65,11 +65,11 @@ module Stripe
       # Optional properties
       @description : String? = nil,
       @images : Stripe::ProductUpsertDataImages? = nil,
-      @metadata : Stripe::IndividualSpecsMetadata? = nil,
+      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
       @package_dimensions : Stripe::ProductUpsertDataPackageDimensions? = nil,
       @shippable : Bool? = nil,
       @tax_code : String? = nil,
-      @url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+      @url : Stripe::BbposWisePoseSplashscreen? = nil
     )
     end
 
@@ -204,7 +204,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::IndividualSpecsMetadata?)
+    def metadata=(metadata : Stripe::FileLinkCreationParamsMetadata?)
       if metadata.nil?
         return @metadata = nil
       end
@@ -247,7 +247,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] url Object to be assigned
-    def url=(url : Stripe::BusinessProfileSpecsSupportUrl?)
+    def url=(url : Stripe::BbposWisePoseSplashscreen?)
       if url.nil?
         return @url = nil
       end

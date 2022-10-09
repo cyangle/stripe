@@ -38,8 +38,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodDataParamsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount? = nil
+    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodDataUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter us_bank_account : Stripe::PaymentMethodDataUsBankAccount? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,7 +51,7 @@ module Stripe
       @billing_details : Stripe::BillingDetailsInnerParams? = nil,
       @financial_account : String? = nil,
       @metadata : Hash(String, String)? = nil,
-      @us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount? = nil
+      @us_bank_account : Stripe::PaymentMethodDataUsBankAccount? = nil
     )
     end
 
@@ -138,7 +138,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount?)
+    def us_bank_account=(us_bank_account : Stripe::PaymentMethodDataUsBankAccount?)
       if us_bank_account.nil?
         return @us_bank_account = nil
       end

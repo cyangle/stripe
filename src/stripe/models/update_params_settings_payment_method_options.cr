@@ -26,11 +26,11 @@ module Stripe
     @[JSON::Field(key: "afterpay_clearpay", type: Stripe::UpdateParamsSettingsPaymentMethodOptionsAfterpayClearpay?, default: nil, required: false, nullable: false, emit_null: false)]
     getter afterpay_clearpay : Stripe::UpdateParamsSettingsPaymentMethodOptionsAfterpayClearpay? = nil
 
-    @[JSON::Field(key: "alipay", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter alipay : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "alipay", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter alipay : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
-    @[JSON::Field(key: "bancontact", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter bancontact : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "bancontact", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter bancontact : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
     @[JSON::Field(key: "card", type: Stripe::UpdateParamsSettingsPaymentMethodOptionsCard?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card : Stripe::UpdateParamsSettingsPaymentMethodOptionsCard? = nil
@@ -38,29 +38,29 @@ module Stripe
     @[JSON::Field(key: "customer_balance", type: Stripe::UpdateParamsSettingsPaymentMethodOptionsCustomerBalance?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_balance : Stripe::UpdateParamsSettingsPaymentMethodOptionsCustomerBalance? = nil
 
-    @[JSON::Field(key: "ideal", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter ideal : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "ideal", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ideal : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
-    @[JSON::Field(key: "klarna", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter klarna : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "klarna", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter klarna : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
     @[JSON::Field(key: "link", type: Stripe::UpdateParamsSettingsPaymentMethodOptionsLink?, default: nil, required: false, nullable: false, emit_null: false)]
     getter link : Stripe::UpdateParamsSettingsPaymentMethodOptionsLink? = nil
 
-    @[JSON::Field(key: "oxxo", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter oxxo : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "oxxo", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter oxxo : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
-    @[JSON::Field(key: "p24", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter p24 : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "p24", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter p24 : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
     @[JSON::Field(key: "sepa_debit", type: Stripe::UpdateParamsSettingsPaymentMethodOptionsSepaDebit?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sepa_debit : Stripe::UpdateParamsSettingsPaymentMethodOptionsSepaDebit? = nil
 
-    @[JSON::Field(key: "sofort", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter sofort : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "sofort", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter sofort : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
-    @[JSON::Field(key: "wechat_pay", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter wechat_pay : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "wechat_pay", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter wechat_pay : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -69,18 +69,18 @@ module Stripe
       # Optional properties
       @acss_debit : Stripe::UpdateParamsSettingsPaymentMethodOptionsAcssDebit? = nil,
       @afterpay_clearpay : Stripe::UpdateParamsSettingsPaymentMethodOptionsAfterpayClearpay? = nil,
-      @alipay : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
-      @bancontact : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
+      @alipay : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @bancontact : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
       @card : Stripe::UpdateParamsSettingsPaymentMethodOptionsCard? = nil,
       @customer_balance : Stripe::UpdateParamsSettingsPaymentMethodOptionsCustomerBalance? = nil,
-      @ideal : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
-      @klarna : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
+      @ideal : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @klarna : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
       @link : Stripe::UpdateParamsSettingsPaymentMethodOptionsLink? = nil,
-      @oxxo : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
-      @p24 : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
+      @oxxo : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @p24 : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
       @sepa_debit : Stripe::UpdateParamsSettingsPaymentMethodOptionsSepaDebit? = nil,
-      @sofort : Stripe::PaymentMethodOptionsParamCardPresent? = nil,
-      @wechat_pay : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+      @sofort : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @wechat_pay : Stripe::PaymentMethodOptionsUsBankAccount? = nil
     )
     end
 
@@ -220,7 +220,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alipay Object to be assigned
-    def alipay=(alipay : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def alipay=(alipay : Stripe::PaymentMethodOptionsUsBankAccount?)
       if alipay.nil?
         return @alipay = nil
       end
@@ -231,7 +231,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bancontact Object to be assigned
-    def bancontact=(bancontact : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def bancontact=(bancontact : Stripe::PaymentMethodOptionsUsBankAccount?)
       if bancontact.nil?
         return @bancontact = nil
       end
@@ -264,7 +264,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ideal Object to be assigned
-    def ideal=(ideal : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def ideal=(ideal : Stripe::PaymentMethodOptionsUsBankAccount?)
       if ideal.nil?
         return @ideal = nil
       end
@@ -275,7 +275,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] klarna Object to be assigned
-    def klarna=(klarna : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def klarna=(klarna : Stripe::PaymentMethodOptionsUsBankAccount?)
       if klarna.nil?
         return @klarna = nil
       end
@@ -297,7 +297,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] oxxo Object to be assigned
-    def oxxo=(oxxo : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def oxxo=(oxxo : Stripe::PaymentMethodOptionsUsBankAccount?)
       if oxxo.nil?
         return @oxxo = nil
       end
@@ -308,7 +308,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] p24 Object to be assigned
-    def p24=(p24 : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def p24=(p24 : Stripe::PaymentMethodOptionsUsBankAccount?)
       if p24.nil?
         return @p24 = nil
       end
@@ -330,7 +330,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sofort Object to be assigned
-    def sofort=(sofort : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def sofort=(sofort : Stripe::PaymentMethodOptionsUsBankAccount?)
       if sofort.nil?
         return @sofort = nil
       end
@@ -341,7 +341,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wechat_pay Object to be assigned
-    def wechat_pay=(wechat_pay : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def wechat_pay=(wechat_pay : Stripe::PaymentMethodOptionsUsBankAccount?)
       if wechat_pay.nil?
         return @wechat_pay = nil
       end

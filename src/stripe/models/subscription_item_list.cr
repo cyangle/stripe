@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # List of subscription items, each with an attached price.
   class SubscriptionItemList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

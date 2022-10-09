@@ -30,8 +30,8 @@ module Stripe
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expires_at : Int64? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::IndividualSpecsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::IndividualSpecsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +41,7 @@ module Stripe
       @create : Bool? = nil,
       # Optional properties
       @expires_at : Int64? = nil,
-      @metadata : Stripe::IndividualSpecsMetadata? = nil
+      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil
     )
     end
 
@@ -92,7 +92,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::IndividualSpecsMetadata?)
+    def metadata=(metadata : Stripe::FileLinkCreationParamsMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemUpdateParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::SubscriptionItemUpdateParamsBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::ConfigurationItemParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds? = nil
 
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
@@ -44,7 +44,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @billing_thresholds : Stripe::SubscriptionItemUpdateParamsBillingThresholds? = nil,
+      @billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds? = nil,
       @metadata : Hash(String, String)? = nil,
       @price : String? = nil,
       @price_data : Stripe::RecurringPriceData? = nil,
@@ -101,7 +101,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(billing_thresholds : Stripe::SubscriptionItemUpdateParamsBillingThresholds?)
+    def billing_thresholds=(billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds?)
       if billing_thresholds.nil?
         return @billing_thresholds = nil
       end

@@ -20,17 +20,17 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_documentation", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter additional_documentation : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "additional_documentation", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter additional_documentation : Stripe::BbposWisePoseSplashscreen? = nil
 
-    @[JSON::Field(key: "card_statement", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter card_statement : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "card_statement", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card_statement : Stripe::BbposWisePoseSplashscreen? = nil
 
-    @[JSON::Field(key: "cash_receipt", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter cash_receipt : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "cash_receipt", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter cash_receipt : Stripe::BbposWisePoseSplashscreen? = nil
 
-    @[JSON::Field(key: "check_image", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter check_image : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "check_image", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter check_image : Stripe::BbposWisePoseSplashscreen? = nil
 
     @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter explanation : String? = nil
@@ -45,10 +45,10 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @additional_documentation : Stripe::BusinessProfileSpecsSupportUrl? = nil,
-      @card_statement : Stripe::BusinessProfileSpecsSupportUrl? = nil,
-      @cash_receipt : Stripe::BusinessProfileSpecsSupportUrl? = nil,
-      @check_image : Stripe::BusinessProfileSpecsSupportUrl? = nil,
+      @additional_documentation : Stripe::BbposWisePoseSplashscreen? = nil,
+      @card_statement : Stripe::BbposWisePoseSplashscreen? = nil,
+      @cash_receipt : Stripe::BbposWisePoseSplashscreen? = nil,
+      @check_image : Stripe::BbposWisePoseSplashscreen? = nil,
       @explanation : String? = nil,
       @original_transaction : String? = nil
     )
@@ -116,7 +116,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::BusinessProfileSpecsSupportUrl?)
+    def additional_documentation=(additional_documentation : Stripe::BbposWisePoseSplashscreen?)
       if additional_documentation.nil?
         return @additional_documentation = nil
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_statement Object to be assigned
-    def card_statement=(card_statement : Stripe::BusinessProfileSpecsSupportUrl?)
+    def card_statement=(card_statement : Stripe::BbposWisePoseSplashscreen?)
       if card_statement.nil?
         return @card_statement = nil
       end
@@ -138,7 +138,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash_receipt Object to be assigned
-    def cash_receipt=(cash_receipt : Stripe::BusinessProfileSpecsSupportUrl?)
+    def cash_receipt=(cash_receipt : Stripe::BbposWisePoseSplashscreen?)
       if cash_receipt.nil?
         return @cash_receipt = nil
       end
@@ -149,7 +149,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] check_image Object to be assigned
-    def check_image=(check_image : Stripe::BusinessProfileSpecsSupportUrl?)
+    def check_image=(check_image : Stripe::BbposWisePoseSplashscreen?)
       if check_image.nil?
         return @check_image = nil
       end

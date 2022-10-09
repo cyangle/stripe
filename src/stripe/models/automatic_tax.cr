@@ -12,6 +12,7 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class AutomaticTax
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,17 +21,31 @@ module Stripe
 
     # Required Properties
 
+    # Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice items (invoice items with manually specified [tax rates](https://stripe.com/docs/api/tax_rates), negative amounts, or `tax_behavior=unspecified`) cannot be added to automatic tax invoices.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
     # End of Required Properties
+
+    # Optional Properties
+
+    # The status of the most recent automated tax calculation for this invoice.
+    @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
+    getter status : String? = nil
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [complete, failed, requires_location_inputs]."
+    VALID_VALUES_FOR_STATUS  = String.static_array("complete", "failed", "requires_location_inputs")
+
+    @[JSON::Field(ignore: true)]
+    property? status_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @enabled : Bool? = nil
+      @enabled : Bool? = nil,
+      # Optional properties
+      @status : String? = nil
     )
     end
 
@@ -41,6 +56,9 @@ module Stripe
 
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
+      unless (_status = @status).nil?
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       invalid_properties
     end
 
@@ -48,6 +66,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @enabled.nil?
+
+      unless (_status = @status).nil?
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
 
       true
     end
@@ -62,10 +84,21 @@ module Stripe
       @enabled = _enabled
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status : String?)
+      if status.nil?
+        return @status = nil
+      end
+      _status = status.not_nil!
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
+      @status = _status
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enabled)
+    def_equals_and_hash(@enabled, @status, @status_present)
   end
 end

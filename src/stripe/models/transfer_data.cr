@@ -12,6 +12,7 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class TransferData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,13 +21,14 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "destination", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter destination : String? = nil
+    @[JSON::Field(key: "destination", type: Stripe::TransferDataDestination?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter destination : Stripe::TransferDataDestination? = nil
 
     # End of Required Properties
 
     # Optional Properties
 
+    # Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
@@ -35,7 +37,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @destination : String? = nil,
+      @destination : Stripe::TransferDataDestination? = nil,
       # Optional properties
       @amount : Int64? = nil
     )
@@ -48,6 +50,10 @@ module Stripe
 
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
 
+      unless (_destination = @destination).nil?
+        invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
+      end
+
       invalid_properties
     end
 
@@ -55,17 +61,21 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @destination.nil?
+      unless (_destination = @destination).nil?
+        return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
+      end
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination Object to be assigned
-    def destination=(destination : String?)
+    def destination=(destination : Stripe::TransferDataDestination?)
       if destination.nil?
         raise ArgumentError.new("\"destination\" is required and cannot be null")
       end
       _destination = destination.not_nil!
+      _destination.validate if _destination.is_a?(OpenApi::Validatable)
       @destination = _destination
     end
 

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A paginated list of owners for this account.
   class BankConnectionsResourceOwnerList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

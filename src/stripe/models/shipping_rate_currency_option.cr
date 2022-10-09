@@ -12,6 +12,7 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class ShippingRateCurrencyOption
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,17 +21,17 @@ module Stripe
 
     # Required Properties
 
+    # A non-negative integer in cents representing how much to charge.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
-    # End of Required Properties
-
-    # Optional Properties
-
-    @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    # Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
+    @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
     ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
     VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive", "unspecified")
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -38,7 +39,6 @@ module Stripe
       *,
       # Required properties
       @amount : Int64? = nil,
-      # Optional properties
       @tax_behavior : String? = nil
     )
     end
@@ -49,6 +49,8 @@ module Stripe
       invalid_properties = Array(String).new
 
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
+      invalid_properties.push("\"tax_behavior\" is required and cannot be null") if @tax_behavior.nil?
 
       unless (_tax_behavior = @tax_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
@@ -61,6 +63,7 @@ module Stripe
     def valid? : Bool
       return false if @amount.nil?
 
+      return false if @tax_behavior.nil?
       unless (_tax_behavior = @tax_behavior).nil?
         return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
@@ -82,7 +85,7 @@ module Stripe
     # @param [Object] tax_behavior Object to be assigned
     def tax_behavior=(tax_behavior : String?)
       if tax_behavior.nil?
-        return @tax_behavior = nil
+        raise ArgumentError.new("\"tax_behavior\" is required and cannot be null")
       end
       _tax_behavior = tax_behavior.not_nil!
       OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)

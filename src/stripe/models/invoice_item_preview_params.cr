@@ -40,8 +40,8 @@ module Stripe
     getter invoiceitem : String? = nil
     MAX_LENGTH_FOR_INVOICEITEM = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::IndividualSpecsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::IndividualSpecsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
 
     @[JSON::Field(key: "period", type: Stripe::Period?, default: nil, required: false, nullable: false, emit_null: false)]
     getter period : Stripe::Period? = nil
@@ -76,7 +76,7 @@ module Stripe
       @discountable : Bool? = nil,
       @discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       @invoiceitem : String? = nil,
-      @metadata : Stripe::IndividualSpecsMetadata? = nil,
+      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
       @period : Stripe::Period? = nil,
       @price : String? = nil,
       @price_data : Stripe::OneTimePriceData? = nil,
@@ -231,7 +231,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::IndividualSpecsMetadata?)
+    def metadata=(metadata : Stripe::FileLinkCreationParamsMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

@@ -42,8 +42,8 @@ module Stripe
     getter support_phone : String? = nil
     MAX_LENGTH_FOR_SUPPORT_PHONE = 5000
 
-    @[JSON::Field(key: "support_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter support_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "support_url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter support_url : Stripe::BbposWisePoseSplashscreen? = nil
 
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter url : String? = nil
@@ -60,7 +60,7 @@ module Stripe
       @support_address : Stripe::AddressSpecs? = nil,
       @support_email : String? = nil,
       @support_phone : String? = nil,
-      @support_url : Stripe::BusinessProfileSpecsSupportUrl? = nil,
+      @support_url : Stripe::BbposWisePoseSplashscreen? = nil,
       @url : String? = nil
     )
     end
@@ -206,7 +206,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] support_url Object to be assigned
-    def support_url=(support_url : Stripe::BusinessProfileSpecsSupportUrl?)
+    def support_url=(support_url : Stripe::BbposWisePoseSplashscreen?)
       if support_url.nil?
         return @support_url = nil
       end

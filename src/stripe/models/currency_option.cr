@@ -12,6 +12,7 @@ require "time"
 require "log"
 
 module Stripe
+  #
   class CurrencyOption
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,31 +21,47 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CustomUnitAmount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter custom_unit_amount : Stripe::CustomUnitAmount? = nil
+    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CurrencyOptionCustomUnitAmount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: custom_unit_amount.nil? && !custom_unit_amount_present?)]
+    getter custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil
 
-    @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? custom_unit_amount_present : Bool = false
+
+    # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+    @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
     getter tax_behavior : String? = nil
     ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
     VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive", "unspecified")
 
-    @[JSON::Field(key: "tiers", type: Array(Stripe::Tier)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tiers : Array(Stripe::Tier)? = nil
+    @[JSON::Field(ignore: true)]
+    property? tax_behavior_present : Bool = false
 
-    @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
+    # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
+    @[JSON::Field(key: "tiers", type: Array(Stripe::PriceTier)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tiers : Array(Stripe::PriceTier)? = nil
+
+    # The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
+    @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
     getter unit_amount : Int64? = nil
 
-    @[JSON::Field(key: "unit_amount_decimal", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    @[JSON::Field(ignore: true)]
+    property? unit_amount_present : Bool = false
+
+    # The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
+    @[JSON::Field(key: "unit_amount_decimal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
     getter unit_amount_decimal : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? unit_amount_decimal_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @custom_unit_amount : Stripe::CustomUnitAmount? = nil,
+      @custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil,
       @tax_behavior : String? = nil,
-      @tiers : Array(Stripe::Tier)? = nil,
+      @tiers : Array(Stripe::PriceTier)? = nil,
       @unit_amount : Int64? = nil,
       @unit_amount_decimal : String? = nil
     )
@@ -88,7 +105,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_unit_amount Object to be assigned
-    def custom_unit_amount=(custom_unit_amount : Stripe::CustomUnitAmount?)
+    def custom_unit_amount=(custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount?)
       if custom_unit_amount.nil?
         return @custom_unit_amount = nil
       end
@@ -110,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tiers Object to be assigned
-    def tiers=(tiers : Array(Stripe::Tier)?)
+    def tiers=(tiers : Array(Stripe::PriceTier)?)
       if tiers.nil?
         return @tiers = nil
       end
@@ -143,6 +160,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@custom_unit_amount, @tax_behavior, @tiers, @unit_amount, @unit_amount_decimal)
+    def_equals_and_hash(@custom_unit_amount, @custom_unit_amount_present, @tax_behavior, @tax_behavior_present, @tiers, @unit_amount, @unit_amount_present, @unit_amount_decimal, @unit_amount_decimal_present)
   end
 end

@@ -20,15 +20,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodOptionsParamCardPresent?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter us_bank_account : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter us_bank_account : Stripe::PaymentMethodOptionsUsBankAccount? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @us_bank_account : Stripe::PaymentMethodOptionsParamCardPresent? = nil
+      @us_bank_account : Stripe::PaymentMethodOptionsUsBankAccount? = nil
     )
     end
 
@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodOptionsParamCardPresent?)
+    def us_bank_account=(us_bank_account : Stripe::PaymentMethodOptionsUsBankAccount?)
       if us_bank_account.nil?
         return @us_bank_account = nil
       end

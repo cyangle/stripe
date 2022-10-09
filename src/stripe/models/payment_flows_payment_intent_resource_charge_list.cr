@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # Charges that were created by this PaymentIntent, if any.
   class PaymentFlowsPaymentIntentResourceChargeList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

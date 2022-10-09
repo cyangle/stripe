@@ -116,8 +116,8 @@ module Stripe
     @[JSON::Field(key: "sofort", type: Stripe::PaymentMethodDataParamsSofort?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sofort : Stripe::PaymentMethodDataParamsSofort? = nil
 
-    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodDataParamsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount? = nil
+    @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodDataUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter us_bank_account : Stripe::PaymentMethodDataUsBankAccount? = nil
 
     @[JSON::Field(key: "wechat_pay", type: JSON::Any?, default: nil, required: false, nullable: false, emit_null: false)]
     getter wechat_pay : JSON::Any? = nil
@@ -158,7 +158,7 @@ module Stripe
       @radar_options : Stripe::RadarOptions? = nil,
       @sepa_debit : Stripe::PaymentMethodDataParamsSepaDebit? = nil,
       @sofort : Stripe::PaymentMethodDataParamsSofort? = nil,
-      @us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount? = nil,
+      @us_bank_account : Stripe::PaymentMethodDataUsBankAccount? = nil,
       @wechat_pay : JSON::Any? = nil
     )
     end
@@ -610,7 +610,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodDataParamsUsBankAccount?)
+    def us_bank_account=(us_bank_account : Stripe::PaymentMethodDataUsBankAccount?)
       if us_bank_account.nil?
         return @us_bank_account = nil
       end

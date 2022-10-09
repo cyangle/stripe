@@ -80,8 +80,8 @@ module Stripe
     getter maiden_name : String? = nil
     MAX_LENGTH_FOR_MAIDEN_NAME = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::IndividualSpecsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::IndividualSpecsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
 
     @[JSON::Field(key: "nationality", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter nationality : String? = nil
@@ -128,7 +128,7 @@ module Stripe
       @last_name_kana : String? = nil,
       @last_name_kanji : String? = nil,
       @maiden_name : String? = nil,
-      @metadata : Stripe::IndividualSpecsMetadata? = nil,
+      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
       @nationality : String? = nil,
       @phone : String? = nil,
       @political_exposure : String? = nil,
@@ -513,7 +513,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::IndividualSpecsMetadata?)
+    def metadata=(metadata : Stripe::FileLinkCreationParamsMetadata?)
       if metadata.nil?
         return @metadata = nil
       end

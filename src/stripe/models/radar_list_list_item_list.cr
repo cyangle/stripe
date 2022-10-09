@@ -20,6 +20,7 @@ module Stripe
 
     # Required Properties
 
+    # Details about each object.
     @[JSON::Field(key: "data", type: Array(Stripe::RadarValueListItem)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter data : Array(Stripe::RadarValueListItem)? = nil
 

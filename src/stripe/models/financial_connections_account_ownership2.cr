@@ -12,6 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  # The most recent information about the account's owners.
   alias FinancialConnectionsAccountOwnership2 = FinancialConnectionsAccountOwnership | String
 end

@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The customer's current subscriptions, if any.
   class SubscriptionList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

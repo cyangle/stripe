@@ -24,11 +24,11 @@ module Stripe
     getter headline : String? = nil
     MAX_LENGTH_FOR_HEADLINE = 60
 
-    @[JSON::Field(key: "privacy_policy_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter privacy_policy_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "privacy_policy_url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter privacy_policy_url : Stripe::BbposWisePoseSplashscreen? = nil
 
-    @[JSON::Field(key: "terms_of_service_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter terms_of_service_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+    @[JSON::Field(key: "terms_of_service_url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter terms_of_service_url : Stripe::BbposWisePoseSplashscreen? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -36,8 +36,8 @@ module Stripe
       *,
       # Optional properties
       @headline : String? = nil,
-      @privacy_policy_url : Stripe::BusinessProfileSpecsSupportUrl? = nil,
-      @terms_of_service_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
+      @privacy_policy_url : Stripe::BbposWisePoseSplashscreen? = nil,
+      @terms_of_service_url : Stripe::BbposWisePoseSplashscreen? = nil
     )
     end
 
@@ -91,7 +91,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] privacy_policy_url Object to be assigned
-    def privacy_policy_url=(privacy_policy_url : Stripe::BusinessProfileSpecsSupportUrl?)
+    def privacy_policy_url=(privacy_policy_url : Stripe::BbposWisePoseSplashscreen?)
       if privacy_policy_url.nil?
         return @privacy_policy_url = nil
       end
@@ -102,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terms_of_service_url Object to be assigned
-    def terms_of_service_url=(terms_of_service_url : Stripe::BusinessProfileSpecsSupportUrl?)
+    def terms_of_service_url=(terms_of_service_url : Stripe::BbposWisePoseSplashscreen?)
       if terms_of_service_url.nil?
         return @terms_of_service_url = nil
       end

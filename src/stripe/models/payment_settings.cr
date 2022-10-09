@@ -27,8 +27,8 @@ module Stripe
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptions? = nil
 
-    @[JSON::Field(key: "payment_method_types", type: Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes? = nil
+    @[JSON::Field(key: "payment_method_types", type: Stripe::PaymentSettingsPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -37,7 +37,7 @@ module Stripe
       # Optional properties
       @default_mandate : String? = nil,
       @payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      @payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes? = nil
+      @payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes? = nil
     )
     end
 
@@ -102,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodTypes?)
+    def payment_method_types=(payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes?)
       if payment_method_types.nil?
         return @payment_method_types = nil
       end

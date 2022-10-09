@@ -75,8 +75,8 @@ module Stripe
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency_options : Hash(String, Stripe::CurrencyOption)? = nil
 
-    @[JSON::Field(key: "custom_unit_amount", type: Stripe::PriceCustomUnitAmount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: custom_unit_amount.nil? && !custom_unit_amount_present?)]
-    getter custom_unit_amount : Stripe::PriceCustomUnitAmount? = nil
+    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CurrencyOptionCustomUnitAmount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: custom_unit_amount.nil? && !custom_unit_amount_present?)]
+    getter custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil
 
     @[JSON::Field(ignore: true)]
     property? custom_unit_amount_present : Bool = false
@@ -162,7 +162,7 @@ module Stripe
       @_type : String? = nil,
       # Optional properties
       @currency_options : Hash(String, Stripe::CurrencyOption)? = nil,
-      @custom_unit_amount : Stripe::PriceCustomUnitAmount? = nil,
+      @custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil,
       @lookup_key : String? = nil,
       @nickname : String? = nil,
       @recurring : Stripe::PriceRecurring? = nil,
@@ -447,7 +447,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_unit_amount Object to be assigned
-    def custom_unit_amount=(custom_unit_amount : Stripe::PriceCustomUnitAmount?)
+    def custom_unit_amount=(custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount?)
       if custom_unit_amount.nil?
         return @custom_unit_amount = nil
       end

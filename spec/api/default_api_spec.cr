@@ -4178,7 +4178,7 @@ describe "DefaultApi" do
   # @option opts [PostOrdersIdRequestDiscounts] :discounts
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :ip_address The IP address of the purchaser for this order.
-  # @option opts [Array(UpdateParams)] :line_items A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
+  # @option opts [Array(PostOrdersIdRequestLineItemsInner)] :line_items A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
   # @option opts [PostAccountsRequestMetadata] :metadata
   # @option opts [UpdateParams] :payment
   # @option opts [PostOrdersRequestShippingCost] :shipping_cost

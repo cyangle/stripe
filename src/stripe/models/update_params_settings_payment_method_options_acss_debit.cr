@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias UpdateParamsSettingsPaymentMethodOptionsAcssDebit = String | UpdateParamsSettingsPaymentMethodOptionsAcssDebitOneOf
+  alias UpdateParamsSettingsPaymentMethodOptionsAcssDebit = PaymentIntentPaymentMethodOptionsAcssDebit | String
 end

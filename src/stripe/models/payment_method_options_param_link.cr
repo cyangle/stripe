@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias PaymentMethodOptionsParamLink = PaymentMethodOptionsParamLinkOneOf | String
+  alias PaymentMethodOptionsParamLink = PaymentIntentPaymentMethodOptionsLink | String
 end
