@@ -48,8 +48,8 @@ module Stripe
     property? unit_amount_present : Bool = false
 
     # The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
-    @[JSON::Field(key: "unit_amount_decimal", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
-    getter unit_amount_decimal : Float64? = nil
+    @[JSON::Field(key: "unit_amount_decimal", type: BigDecimal?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
+    getter unit_amount_decimal : BigDecimal? = nil
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_decimal_present : Bool = false
@@ -63,7 +63,7 @@ module Stripe
       @tax_behavior : String? = nil,
       @tiers : Array(Stripe::PriceTier)? = nil,
       @unit_amount : Int64? = nil,
-      @unit_amount_decimal : Float64? = nil
+      @unit_amount_decimal : BigDecimal? = nil
     )
     end
 
@@ -148,7 +148,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_decimal Object to be assigned
-    def unit_amount_decimal=(unit_amount_decimal : Float64?)
+    def unit_amount_decimal=(unit_amount_decimal : BigDecimal?)
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end

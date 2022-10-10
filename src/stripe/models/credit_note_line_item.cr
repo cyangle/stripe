@@ -101,15 +101,15 @@ module Stripe
     property? unit_amount_present : Bool = false
 
     # Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.
-    @[JSON::Field(key: "unit_amount_decimal", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
-    getter unit_amount_decimal : Float64? = nil
+    @[JSON::Field(key: "unit_amount_decimal", type: BigDecimal?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
+    getter unit_amount_decimal : BigDecimal? = nil
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_decimal_present : Bool = false
 
     # The amount in %s representing the unit amount being credited for this line item, excluding all tax and discounts.
-    @[JSON::Field(key: "unit_amount_excluding_tax", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_excluding_tax.nil? && !unit_amount_excluding_tax_present?)]
-    getter unit_amount_excluding_tax : Float64? = nil
+    @[JSON::Field(key: "unit_amount_excluding_tax", type: BigDecimal?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_excluding_tax.nil? && !unit_amount_excluding_tax_present?)]
+    getter unit_amount_excluding_tax : BigDecimal? = nil
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_excluding_tax_present : Bool = false
@@ -134,8 +134,8 @@ module Stripe
       @invoice_line_item : String? = nil,
       @quantity : Int64? = nil,
       @unit_amount : Int64? = nil,
-      @unit_amount_decimal : Float64? = nil,
-      @unit_amount_excluding_tax : Float64? = nil
+      @unit_amount_decimal : BigDecimal? = nil,
+      @unit_amount_excluding_tax : BigDecimal? = nil
     )
     end
 
@@ -397,7 +397,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_decimal Object to be assigned
-    def unit_amount_decimal=(unit_amount_decimal : Float64?)
+    def unit_amount_decimal=(unit_amount_decimal : BigDecimal?)
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
@@ -407,7 +407,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_excluding_tax Object to be assigned
-    def unit_amount_excluding_tax=(unit_amount_excluding_tax : Float64?)
+    def unit_amount_excluding_tax=(unit_amount_excluding_tax : BigDecimal?)
       if unit_amount_excluding_tax.nil?
         return @unit_amount_excluding_tax = nil
       end

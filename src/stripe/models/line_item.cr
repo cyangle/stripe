@@ -144,8 +144,8 @@ module Stripe
     getter tax_rates : Array(Stripe::TaxRate)? = nil
 
     # The amount in %s representing the unit amount for this line item, excluding all tax and discounts.
-    @[JSON::Field(key: "unit_amount_excluding_tax", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_excluding_tax.nil? && !unit_amount_excluding_tax_present?)]
-    getter unit_amount_excluding_tax : Float64? = nil
+    @[JSON::Field(key: "unit_amount_excluding_tax", type: BigDecimal?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: unit_amount_excluding_tax.nil? && !unit_amount_excluding_tax_present?)]
+    getter unit_amount_excluding_tax : BigDecimal? = nil
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_excluding_tax_present : Bool = false
@@ -178,7 +178,7 @@ module Stripe
       @subscription_item : String? = nil,
       @tax_amounts : Array(Stripe::InvoiceTaxAmount)? = nil,
       @tax_rates : Array(Stripe::TaxRate)? = nil,
-      @unit_amount_excluding_tax : Float64? = nil
+      @unit_amount_excluding_tax : BigDecimal? = nil
     )
     end
 
@@ -579,7 +579,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_excluding_tax Object to be assigned
-    def unit_amount_excluding_tax=(unit_amount_excluding_tax : Float64?)
+    def unit_amount_excluding_tax=(unit_amount_excluding_tax : BigDecimal?)
       if unit_amount_excluding_tax.nil?
         return @unit_amount_excluding_tax = nil
       end

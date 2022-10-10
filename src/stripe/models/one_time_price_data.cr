@@ -39,8 +39,8 @@ module Stripe
     @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter unit_amount : Int64? = nil
 
-    @[JSON::Field(key: "unit_amount_decimal", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter unit_amount_decimal : Float64? = nil
+    @[JSON::Field(key: "unit_amount_decimal", type: BigDecimal?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter unit_amount_decimal : BigDecimal? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +52,7 @@ module Stripe
       # Optional properties
       @tax_behavior : String? = nil,
       @unit_amount : Int64? = nil,
-      @unit_amount_decimal : Float64? = nil
+      @unit_amount_decimal : BigDecimal? = nil
     )
     end
 
@@ -138,7 +138,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_decimal Object to be assigned
-    def unit_amount_decimal=(unit_amount_decimal : Float64?)
+    def unit_amount_decimal=(unit_amount_decimal : BigDecimal?)
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
