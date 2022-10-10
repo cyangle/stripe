@@ -27,6 +27,20 @@ describe Stripe::LineItem do
     end
   end
 
+  describe "test attribute 'amount_excluding_tax'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'currency'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'description'" do
     it "should work" do
       # instance = Stripe::LineItem.new
@@ -34,7 +48,141 @@ describe Stripe::LineItem do
     end
   end
 
+  describe "test attribute 'discount_amounts'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'discountable'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'discounts'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'id'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'invoice_item'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'livemode'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'metadata'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'object'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = Stripe::LineItem::ENUM_VALIDATOR_FOR_OBJECT
+      # validator.allowable_values.each do |value|
+      #   instance.object = value.as(String)
+      # end
+    end
+  end
+
+  describe "test attribute 'period'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'price'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'proration'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'proration_details'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'quantity'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'subscription'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'subscription_item'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'tax_amounts'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'tax_rates'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute '_type'" do
+    it "should work" do
+      # instance = Stripe::LineItem.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = Stripe::LineItem::ENUM_VALIDATOR_FOR__TYPE
+      # validator.allowable_values.each do |value|
+      #   instance._type = value.as(String)
+      # end
+    end
+  end
+
+  describe "test attribute 'unit_amount_excluding_tax'" do
     it "should work" do
       # instance = Stripe::LineItem.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

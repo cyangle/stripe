@@ -32,16 +32,16 @@ module Stripe
     MAX_LENGTH_FOR_UNIT = 5000
 
     # The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
-    @[JSON::Field(key: "unit_cost_decimal", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter unit_cost_decimal : String? = nil
+    @[JSON::Field(key: "unit_cost_decimal", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter unit_cost_decimal : Float64? = nil
 
     # End of Required Properties
 
     # Optional Properties
 
     # The volume of the fuel that was pumped, represented as a decimal string with at most 12 decimal places.
-    @[JSON::Field(key: "volume_decimal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: volume_decimal.nil? && !volume_decimal_present?)]
-    getter volume_decimal : String? = nil
+    @[JSON::Field(key: "volume_decimal", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: volume_decimal.nil? && !volume_decimal_present?)]
+    getter volume_decimal : Float64? = nil
 
     @[JSON::Field(ignore: true)]
     property? volume_decimal_present : Bool = false
@@ -53,9 +53,9 @@ module Stripe
       # Required properties
       @_type : String? = nil,
       @unit : String? = nil,
-      @unit_cost_decimal : String? = nil,
+      @unit_cost_decimal : Float64? = nil,
       # Optional properties
-      @volume_decimal : String? = nil
+      @volume_decimal : Float64? = nil
     )
     end
 
@@ -125,7 +125,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_cost_decimal Object to be assigned
-    def unit_cost_decimal=(unit_cost_decimal : String?)
+    def unit_cost_decimal=(unit_cost_decimal : Float64?)
       if unit_cost_decimal.nil?
         raise ArgumentError.new("\"unit_cost_decimal\" is required and cannot be null")
       end
@@ -135,7 +135,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] volume_decimal Object to be assigned
-    def volume_decimal=(volume_decimal : String?)
+    def volume_decimal=(volume_decimal : Float64?)
       if volume_decimal.nil?
         return @volume_decimal = nil
       end

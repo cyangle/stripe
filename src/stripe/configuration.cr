@@ -246,7 +246,7 @@ module Stripe
 
     def operation_server_settings
       {
-        "DefaultApi.post_files" => [
+        "FilesApi.post_files" => [
           {
             "url"         => "https://files.stripe.com/",
             "description" => "No description provided",

@@ -26,4 +26,15 @@ describe Stripe::AutomaticTax do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'status'" do
+    it "should work" do
+      # instance = Stripe::AutomaticTax.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = Stripe::AutomaticTax::ENUM_VALIDATOR_FOR_STATUS
+      # validator.allowable_values.each do |value|
+      #   instance.status = value.as(String)
+      # end
+    end
+  end
 end

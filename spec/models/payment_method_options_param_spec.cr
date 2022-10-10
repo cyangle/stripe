@@ -69,6 +69,13 @@ describe Stripe::PaymentMethodOptionsParam do
     end
   end
 
+  describe "test attribute 'blik'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodOptionsParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'boleto'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptionsParam.new
@@ -77,6 +84,13 @@ describe Stripe::PaymentMethodOptionsParam do
   end
 
   describe "test attribute 'card'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodOptionsParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'card_present'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptionsParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -125,6 +139,13 @@ describe Stripe::PaymentMethodOptionsParam do
     end
   end
 
+  describe "test attribute 'interac_present'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodOptionsParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'klarna'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptionsParam.new
@@ -133,6 +154,13 @@ describe Stripe::PaymentMethodOptionsParam do
   end
 
   describe "test attribute 'konbini'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodOptionsParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'link'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptionsParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -167,6 +195,13 @@ describe Stripe::PaymentMethodOptionsParam do
     end
   end
 
+  describe "test attribute 'promptpay'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodOptionsParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'sepa_debit'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptionsParam.new
@@ -189,41 +224,6 @@ describe Stripe::PaymentMethodOptionsParam do
   end
 
   describe "test attribute 'wechat_pay'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsParam.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'blik'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsParam.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'card_present'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsParam.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'interac_present'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsParam.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'link'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsParam.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'promptpay'" do
     it "should work" do
       # instance = Stripe::PaymentMethodOptionsParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
