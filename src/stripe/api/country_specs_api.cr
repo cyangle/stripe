@@ -26,7 +26,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CountrySpecList]
-    def get_country_specs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::CountrySpecList
+    def get_country_specs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CountrySpecList
       data, _status_code, _headers = get_country_specs_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -37,7 +43,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CountrySpecList, Integer, Hash)] Stripe::CountrySpecList, response status code and response headers
-    def get_country_specs_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CountrySpecList, Int32, Hash(String, Array(String) | String))
+    def get_country_specs_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CountrySpecList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_country_specs(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -55,7 +67,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_country_specs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_country_specs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_country_specs(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -63,7 +82,13 @@ module Stripe
     GET_COUNTRY_SPECS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_country_specs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_country_specs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CountrySpecsApi.get_country_specs ..." }
       end
@@ -92,6 +117,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -108,6 +136,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -117,7 +146,11 @@ module Stripe
     # @required @param country [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CountrySpec]
-    def get_country_specs_country(*, country : String? = nil, expand : Array(Array(String))? = nil) : Stripe::CountrySpec
+    def get_country_specs_country(
+      *,
+      country : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CountrySpec
       data, _status_code, _headers = get_country_specs_country_with_http_info(country: country, expand: expand)
       data
     end
@@ -126,7 +159,11 @@ module Stripe
     # @required @param country [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CountrySpec, Integer, Hash)] Stripe::CountrySpec, response status code and response headers
-    def get_country_specs_country_with_http_info(*, country : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CountrySpec, Int32, Hash(String, Array(String) | String))
+    def get_country_specs_country_with_http_info(
+      *,
+      country : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CountrySpec, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_country_specs_country(country: country, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -142,14 +179,23 @@ module Stripe
     # @required @param country [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_country_specs_country(*, country : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_country_specs_country(
+      *,
+      country : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_country_specs_country(country: country, expand: expand).execute(&block)
     end
 
     GET_COUNTRY_SPECS_COUNTRY_MAX_LENGTH_FOR_COUNTRY = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_country_specs_country(*, country : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_country_specs_country(
+      *,
+      country : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CountrySpecsApi.get_country_specs_country ..." }
       end
@@ -173,6 +219,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -189,6 +238,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

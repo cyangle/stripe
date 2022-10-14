@@ -23,7 +23,10 @@ module Stripe
     # <p>Delete a product. Deleting a product is only possible if it has no prices associated with it. Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs associated with it.</p>
     # @required @param id [String?]
     # @return [Stripe::DeletedProduct]
-    def delete_products_id(*, id : String? = nil) : Stripe::DeletedProduct
+    def delete_products_id(
+      *,
+      id : String? = nil
+    ) : Stripe::DeletedProduct
       data, _status_code, _headers = delete_products_id_with_http_info(id: id)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;Delete a product. Deleting a product is only possible if it has no prices associated with it. Additionally, deleting a product with &lt;code&gt;type&#x3D;good&lt;/code&gt; is only possible if it has no SKUs associated with it.&lt;/p&gt;
     # @required @param id [String?]
     # @return [Tuple(Stripe::DeletedProduct, Integer, Hash)] Stripe::DeletedProduct, response status code and response headers
-    def delete_products_id_with_http_info(*, id : String? = nil) : Tuple(Stripe::DeletedProduct, Int32, Hash(String, Array(String) | String))
+    def delete_products_id_with_http_info(
+      *,
+      id : String? = nil
+    ) : Tuple(Stripe::DeletedProduct, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_products_id(id: id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;Delete a product. Deleting a product is only possible if it has no prices associated with it. Additionally, deleting a product with &lt;code&gt;type&#x3D;good&lt;/code&gt; is only possible if it has no SKUs associated with it.&lt;/p&gt;
     # @required @param id [String?]
     # @return nil
-    def delete_products_id(*, id : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_products_id(
+      *,
+      id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_products_id(id: id).execute(&block)
     end
 
     DELETE_PRODUCTS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_products_id(*, id : String? = nil) : Crest::Request
+    def build_api_request_for_delete_products_id(
+      *,
+      id : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.delete_products_id ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -108,7 +125,18 @@ module Stripe
     # @optional @param url [String?] Only return products with the given url.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ProductList]
-    def get_products(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, shippable : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ids : Array(Array(String))? = nil, url : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ProductList
+    def get_products(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      shippable : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      ids : Array(Array(String))? = nil,
+      url : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ProductList
       data, _status_code, _headers = get_products_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, shippable: shippable, created: created, ids: ids, url: url, expand: expand)
       data
     end
@@ -124,7 +152,18 @@ module Stripe
     # @optional @param url [String?] Only return products with the given url.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ProductList, Integer, Hash)] Stripe::ProductList, response status code and response headers
-    def get_products_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, shippable : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ids : Array(Array(String))? = nil, url : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ProductList, Int32, Hash(String, Array(String) | String))
+    def get_products_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      shippable : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      ids : Array(Array(String))? = nil,
+      url : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ProductList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_products(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, shippable: shippable, created: created, ids: ids, url: url, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -147,7 +186,19 @@ module Stripe
     # @optional @param url [String?] Only return products with the given url.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_products(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, shippable : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ids : Array(Array(String))? = nil, url : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_products(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      shippable : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      ids : Array(Array(String))? = nil,
+      url : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_products(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, shippable: shippable, created: created, ids: ids, url: url, expand: expand).execute(&block)
     end
 
@@ -156,7 +207,18 @@ module Stripe
     GET_PRODUCTS_MAX_LENGTH_FOR_URL            = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_products(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, shippable : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, ids : Array(Array(String))? = nil, url : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_products(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      shippable : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      ids : Array(Array(String))? = nil,
+      url : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.get_products ..." }
       end
@@ -198,6 +260,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -214,6 +279,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -223,7 +289,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Product]
-    def get_products_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Product
+    def get_products_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Product
       data, _status_code, _headers = get_products_id_with_http_info(id: id, expand: expand)
       data
     end
@@ -232,7 +302,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Product, Integer, Hash)] Stripe::Product, response status code and response headers
-    def get_products_id_with_http_info(*, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
+    def get_products_id_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_products_id(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -248,14 +322,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_products_id(*, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_products_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_products_id(id: id, expand: expand).execute(&block)
     end
 
     GET_PRODUCTS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_products_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_products_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.get_products_id ..." }
       end
@@ -279,6 +362,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -295,6 +381,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -306,7 +393,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SearchResult]
-    def get_products_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SearchResult
+    def get_products_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SearchResult
       data, _status_code, _headers = get_products_search_with_http_info(query: query, page: page, limit: limit, expand: expand)
       data
     end
@@ -317,7 +410,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SearchResult, Integer, Hash)] Stripe::SearchResult, response status code and response headers
-    def get_products_search_with_http_info(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
+    def get_products_search_with_http_info(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_products_search(query: query, page: page, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -335,7 +434,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_products_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_products_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_products_search(query: query, page: page, limit: limit, expand: expand).execute(&block)
     end
 
@@ -343,7 +449,13 @@ module Stripe
     GET_PRODUCTS_SEARCH_MAX_LENGTH_FOR_PAGE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_products_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_products_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.get_products_search ..." }
       end
@@ -373,6 +485,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -389,6 +504,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -409,7 +525,22 @@ module Stripe
     # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
     # @optional @param url [String?] A URL of a publicly-accessible webpage for this product.
     # @return [Stripe::Product]
-    def post_products(*, name : String? = nil, active : Bool? = nil, default_price_data : Stripe::PriceDataWithoutProduct? = nil, description : String? = nil, expand : Array(String)? = nil, id : String? = nil, images : Array(String)? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : String? = nil, unit_label : String? = nil, url : String? = nil) : Stripe::Product
+    def post_products(
+      *,
+      name : String? = nil,
+      active : Bool? = nil,
+      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      images : Array(String)? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : String? = nil,
+      unit_label : String? = nil,
+      url : String? = nil
+    ) : Stripe::Product
       data, _status_code, _headers = post_products_with_http_info(name: name, active: active, default_price_data: default_price_data, description: description, expand: expand, id: id, images: images, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
       data
     end
@@ -429,7 +560,22 @@ module Stripe
     # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
     # @optional @param url [String?] A URL of a publicly-accessible webpage for this product.
     # @return [Tuple(Stripe::Product, Integer, Hash)] Stripe::Product, response status code and response headers
-    def post_products_with_http_info(*, name : String? = nil, active : Bool? = nil, default_price_data : Stripe::PriceDataWithoutProduct? = nil, description : String? = nil, expand : Array(String)? = nil, id : String? = nil, images : Array(String)? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : String? = nil, unit_label : String? = nil, url : String? = nil) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
+    def post_products_with_http_info(
+      *,
+      name : String? = nil,
+      active : Bool? = nil,
+      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      images : Array(String)? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : String? = nil,
+      unit_label : String? = nil,
+      url : String? = nil
+    ) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_products(name: name, active: active, default_price_data: default_price_data, description: description, expand: expand, id: id, images: images, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -456,7 +602,23 @@ module Stripe
     # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
     # @optional @param url [String?] A URL of a publicly-accessible webpage for this product.
     # @return nil
-    def post_products(*, name : String? = nil, active : Bool? = nil, default_price_data : Stripe::PriceDataWithoutProduct? = nil, description : String? = nil, expand : Array(String)? = nil, id : String? = nil, images : Array(String)? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : String? = nil, unit_label : String? = nil, url : String? = nil, &block : Crest::Response ->) : Nil
+    def post_products(
+      *,
+      name : String? = nil,
+      active : Bool? = nil,
+      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      images : Array(String)? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : String? = nil,
+      unit_label : String? = nil,
+      url : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_products(name: name, active: active, default_price_data: default_price_data, description: description, expand: expand, id: id, images: images, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url).execute(&block)
     end
 
@@ -468,7 +630,22 @@ module Stripe
     POST_PRODUCTS_MAX_LENGTH_FOR_URL                  =  5000
 
     # @return Crest::Request
-    def build_api_request_for_post_products(*, name : String? = nil, active : Bool? = nil, default_price_data : Stripe::PriceDataWithoutProduct? = nil, description : String? = nil, expand : Array(String)? = nil, id : String? = nil, images : Array(String)? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : String? = nil, unit_label : String? = nil, url : String? = nil) : Crest::Request
+    def build_api_request_for_post_products(
+      *,
+      name : String? = nil,
+      active : Bool? = nil,
+      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      images : Array(String)? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : String? = nil,
+      unit_label : String? = nil,
+      url : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.post_products ..." }
       end
@@ -519,6 +696,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -548,6 +728,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -569,7 +750,23 @@ module Stripe
     # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
     # @optional @param url [Stripe::PostProductsIdRequestUrl?]
     # @return [Stripe::Product]
-    def post_products_id(*, id : String? = nil, active : Bool? = nil, default_price : String? = nil, description : String? = nil, expand : Array(String)? = nil, images : Stripe::PostProductsIdRequestImages? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : Stripe::PostProductsIdRequestTaxCode? = nil, unit_label : String? = nil, url : Stripe::PostProductsIdRequestUrl? = nil) : Stripe::Product
+    def post_products_id(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      default_price : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      images : Stripe::PostProductsIdRequestImages? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
+      unit_label : String? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil
+    ) : Stripe::Product
       data, _status_code, _headers = post_products_id_with_http_info(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
       data
     end
@@ -590,7 +787,23 @@ module Stripe
     # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
     # @optional @param url [Stripe::PostProductsIdRequestUrl?]
     # @return [Tuple(Stripe::Product, Integer, Hash)] Stripe::Product, response status code and response headers
-    def post_products_id_with_http_info(*, id : String? = nil, active : Bool? = nil, default_price : String? = nil, description : String? = nil, expand : Array(String)? = nil, images : Stripe::PostProductsIdRequestImages? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : Stripe::PostProductsIdRequestTaxCode? = nil, unit_label : String? = nil, url : Stripe::PostProductsIdRequestUrl? = nil) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
+    def post_products_id_with_http_info(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      default_price : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      images : Stripe::PostProductsIdRequestImages? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
+      unit_label : String? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil
+    ) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_products_id(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -618,7 +831,24 @@ module Stripe
     # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
     # @optional @param url [Stripe::PostProductsIdRequestUrl?]
     # @return nil
-    def post_products_id(*, id : String? = nil, active : Bool? = nil, default_price : String? = nil, description : String? = nil, expand : Array(String)? = nil, images : Stripe::PostProductsIdRequestImages? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : Stripe::PostProductsIdRequestTaxCode? = nil, unit_label : String? = nil, url : Stripe::PostProductsIdRequestUrl? = nil, &block : Crest::Response ->) : Nil
+    def post_products_id(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      default_price : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      images : Stripe::PostProductsIdRequestImages? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
+      unit_label : String? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_products_id(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url).execute(&block)
     end
 
@@ -630,7 +860,23 @@ module Stripe
     POST_PRODUCTS_ID_MAX_LENGTH_FOR_UNIT_LABEL           =    12
 
     # @return Crest::Request
-    def build_api_request_for_post_products_id(*, id : String? = nil, active : Bool? = nil, default_price : String? = nil, description : String? = nil, expand : Array(String)? = nil, images : Stripe::PostProductsIdRequestImages? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil, shippable : Bool? = nil, statement_descriptor : String? = nil, tax_code : Stripe::PostProductsIdRequestTaxCode? = nil, unit_label : String? = nil, url : Stripe::PostProductsIdRequestUrl? = nil) : Crest::Request
+    def build_api_request_for_post_products_id(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      default_price : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      images : Stripe::PostProductsIdRequestImages? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
+      shippable : Bool? = nil,
+      statement_descriptor : String? = nil,
+      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
+      unit_label : String? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.post_products_id ..." }
       end
@@ -688,6 +934,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -717,6 +966,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

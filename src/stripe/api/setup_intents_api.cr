@@ -30,7 +30,17 @@ module Stripe
     # @optional @param customer [String?] Only return SetupIntents for the customer specified by this customer ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentFlowsSetupIntentList]
-    def get_setup_intents(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, attach_to_self : Bool? = nil, payment_method : String? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentFlowsSetupIntentList
+    def get_setup_intents(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      attach_to_self : Bool? = nil,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentFlowsSetupIntentList
       data, _status_code, _headers = get_setup_intents_with_http_info(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, attach_to_self: attach_to_self, payment_method: payment_method, customer: customer, expand: expand)
       data
     end
@@ -45,7 +55,17 @@ module Stripe
     # @optional @param customer [String?] Only return SetupIntents for the customer specified by this customer ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentFlowsSetupIntentList, Integer, Hash)] Stripe::PaymentFlowsSetupIntentList, response status code and response headers
-    def get_setup_intents_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, attach_to_self : Bool? = nil, payment_method : String? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentFlowsSetupIntentList, Int32, Hash(String, Array(String) | String))
+    def get_setup_intents_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      attach_to_self : Bool? = nil,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentFlowsSetupIntentList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_setup_intents(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, attach_to_self: attach_to_self, payment_method: payment_method, customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -67,7 +87,18 @@ module Stripe
     # @optional @param customer [String?] Only return SetupIntents for the customer specified by this customer ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_setup_intents(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, attach_to_self : Bool? = nil, payment_method : String? = nil, customer : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_setup_intents(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      attach_to_self : Bool? = nil,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_setup_intents(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, attach_to_self: attach_to_self, payment_method: payment_method, customer: customer, expand: expand).execute(&block)
     end
 
@@ -77,7 +108,17 @@ module Stripe
     GET_SETUP_INTENTS_MAX_LENGTH_FOR_CUSTOMER       = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_setup_intents(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, attach_to_self : Bool? = nil, payment_method : String? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_setup_intents(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      attach_to_self : Bool? = nil,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.get_setup_intents ..." }
       end
@@ -120,6 +161,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -136,6 +180,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -146,7 +191,12 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the SetupIntent. Required if a publishable key is used to retrieve the SetupIntent.
     # @return [Stripe::SetupIntent]
-    def get_setup_intents_intent(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Stripe::SetupIntent
+    def get_setup_intents_intent(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Stripe::SetupIntent
       data, _status_code, _headers = get_setup_intents_intent_with_http_info(intent: intent, expand: expand, client_secret: client_secret)
       data
     end
@@ -156,7 +206,12 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the SetupIntent. Required if a publishable key is used to retrieve the SetupIntent.
     # @return [Tuple(Stripe::SetupIntent, Integer, Hash)] Stripe::SetupIntent, response status code and response headers
-    def get_setup_intents_intent_with_http_info(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
+    def get_setup_intents_intent_with_http_info(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_setup_intents_intent(intent: intent, expand: expand, client_secret: client_secret)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -173,7 +228,13 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the SetupIntent. Required if a publishable key is used to retrieve the SetupIntent.
     # @return nil
-    def get_setup_intents_intent(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil, &block : Crest::Response ->) : Nil
+    def get_setup_intents_intent(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_setup_intents_intent(intent: intent, expand: expand, client_secret: client_secret).execute(&block)
     end
 
@@ -181,7 +242,12 @@ module Stripe
     GET_SETUP_INTENTS_INTENT_MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_setup_intents_intent(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Crest::Request
+    def build_api_request_for_get_setup_intents_intent(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.get_setup_intents_intent ..." }
       end
@@ -210,6 +276,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -226,6 +295,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -248,7 +318,24 @@ module Stripe
     # @optional @param single_use [Stripe::SetupIntentSingleUseParams?]
     # @optional @param usage [String?] Indicates how the payment method is intended to be used in the future. If not provided, this value defaults to `off_session`.
     # @return [Stripe::SetupIntent]
-    def post_setup_intents(*, attach_to_self : Bool? = nil, confirm : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, mandate_data : Stripe::SecretKeyParam? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, return_url : String? = nil, single_use : Stripe::SetupIntentSingleUseParams? = nil, usage : String? = nil) : Stripe::SetupIntent
+    def post_setup_intents(
+      *,
+      attach_to_self : Bool? = nil,
+      confirm : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      return_url : String? = nil,
+      single_use : Stripe::SetupIntentSingleUseParams? = nil,
+      usage : String? = nil
+    ) : Stripe::SetupIntent
       data, _status_code, _headers = post_setup_intents_with_http_info(attach_to_self: attach_to_self, confirm: confirm, customer: customer, description: description, expand: expand, flow_directions: flow_directions, mandate_data: mandate_data, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, return_url: return_url, single_use: single_use, usage: usage)
       data
     end
@@ -270,7 +357,24 @@ module Stripe
     # @optional @param single_use [Stripe::SetupIntentSingleUseParams?]
     # @optional @param usage [String?] Indicates how the payment method is intended to be used in the future. If not provided, this value defaults to `off_session`.
     # @return [Tuple(Stripe::SetupIntent, Integer, Hash)] Stripe::SetupIntent, response status code and response headers
-    def post_setup_intents_with_http_info(*, attach_to_self : Bool? = nil, confirm : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, mandate_data : Stripe::SecretKeyParam? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, return_url : String? = nil, single_use : Stripe::SetupIntentSingleUseParams? = nil, usage : String? = nil) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
+    def post_setup_intents_with_http_info(
+      *,
+      attach_to_self : Bool? = nil,
+      confirm : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      return_url : String? = nil,
+      single_use : Stripe::SetupIntentSingleUseParams? = nil,
+      usage : String? = nil
+    ) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_setup_intents(attach_to_self: attach_to_self, confirm: confirm, customer: customer, description: description, expand: expand, flow_directions: flow_directions, mandate_data: mandate_data, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, return_url: return_url, single_use: single_use, usage: usage)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -299,7 +403,25 @@ module Stripe
     # @optional @param single_use [Stripe::SetupIntentSingleUseParams?]
     # @optional @param usage [String?] Indicates how the payment method is intended to be used in the future. If not provided, this value defaults to `off_session`.
     # @return nil
-    def post_setup_intents(*, attach_to_self : Bool? = nil, confirm : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, mandate_data : Stripe::SecretKeyParam? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, return_url : String? = nil, single_use : Stripe::SetupIntentSingleUseParams? = nil, usage : String? = nil, &block : Crest::Response ->) : Nil
+    def post_setup_intents(
+      *,
+      attach_to_self : Bool? = nil,
+      confirm : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      return_url : String? = nil,
+      single_use : Stripe::SetupIntentSingleUseParams? = nil,
+      usage : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_setup_intents(attach_to_self: attach_to_self, confirm: confirm, customer: customer, description: description, expand: expand, flow_directions: flow_directions, mandate_data: mandate_data, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, return_url: return_url, single_use: single_use, usage: usage).execute(&block)
     end
 
@@ -310,7 +432,24 @@ module Stripe
     POST_SETUP_INTENTS_VALID_VALUES_FOR_USAGE           = String.static_array("off_session", "on_session")
 
     # @return Crest::Request
-    def build_api_request_for_post_setup_intents(*, attach_to_self : Bool? = nil, confirm : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, mandate_data : Stripe::SecretKeyParam? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, return_url : String? = nil, single_use : Stripe::SetupIntentSingleUseParams? = nil, usage : String? = nil) : Crest::Request
+    def build_api_request_for_post_setup_intents(
+      *,
+      attach_to_self : Bool? = nil,
+      confirm : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      return_url : String? = nil,
+      single_use : Stripe::SetupIntentSingleUseParams? = nil,
+      usage : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.post_setup_intents ..." }
       end
@@ -361,6 +500,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["attach_to_self"] = attach_to_self.to_s if !attach_to_self.nil?
@@ -392,6 +534,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -410,7 +553,20 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to [\\\"card\\\"].
     # @return [Stripe::SetupIntent]
-    def post_setup_intents_intent(*, intent : String? = nil, attach_to_self : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil) : Stripe::SetupIntent
+    def post_setup_intents_intent(
+      *,
+      intent : String? = nil,
+      attach_to_self : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil
+    ) : Stripe::SetupIntent
       data, _status_code, _headers = post_setup_intents_intent_with_http_info(intent: intent, attach_to_self: attach_to_self, customer: customer, description: description, expand: expand, flow_directions: flow_directions, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types)
       data
     end
@@ -428,7 +584,20 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to [\\\"card\\\"].
     # @return [Tuple(Stripe::SetupIntent, Integer, Hash)] Stripe::SetupIntent, response status code and response headers
-    def post_setup_intents_intent_with_http_info(*, intent : String? = nil, attach_to_self : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
+    def post_setup_intents_intent_with_http_info(
+      *,
+      intent : String? = nil,
+      attach_to_self : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil
+    ) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_setup_intents_intent(intent: intent, attach_to_self: attach_to_self, customer: customer, description: description, expand: expand, flow_directions: flow_directions, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -453,7 +622,21 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to [\\\"card\\\"].
     # @return nil
-    def post_setup_intents_intent(*, intent : String? = nil, attach_to_self : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_setup_intents_intent(
+      *,
+      intent : String? = nil,
+      attach_to_self : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_setup_intents_intent(intent: intent, attach_to_self: attach_to_self, customer: customer, description: description, expand: expand, flow_directions: flow_directions, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types).execute(&block)
     end
 
@@ -464,7 +647,20 @@ module Stripe
     POST_SETUP_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD    = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_setup_intents_intent(*, intent : String? = nil, attach_to_self : Bool? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, flow_directions : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_setup_intents_intent(
+      *,
+      intent : String? = nil,
+      attach_to_self : Bool? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      flow_directions : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.post_setup_intents_intent ..." }
       end
@@ -512,6 +708,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["attach_to_self"] = attach_to_self.to_s if !attach_to_self.nil?
@@ -538,6 +737,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -548,7 +748,12 @@ module Stripe
     # @optional @param cancellation_reason [String?] Reason for canceling this SetupIntent. Possible values are `abandoned`, `requested_by_customer`, or `duplicate`
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SetupIntent]
-    def post_setup_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Stripe::SetupIntent
+    def post_setup_intents_intent_cancel(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::SetupIntent
       data, _status_code, _headers = post_setup_intents_intent_cancel_with_http_info(intent: intent, cancellation_reason: cancellation_reason, expand: expand)
       data
     end
@@ -558,7 +763,12 @@ module Stripe
     # @optional @param cancellation_reason [String?] Reason for canceling this SetupIntent. Possible values are `abandoned`, `requested_by_customer`, or `duplicate`
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SetupIntent, Integer, Hash)] Stripe::SetupIntent, response status code and response headers
-    def post_setup_intents_intent_cancel_with_http_info(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
+    def post_setup_intents_intent_cancel_with_http_info(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_setup_intents_intent_cancel(intent: intent, cancellation_reason: cancellation_reason, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -575,7 +785,13 @@ module Stripe
     # @optional @param cancellation_reason [String?] Reason for canceling this SetupIntent. Possible values are `abandoned`, `requested_by_customer`, or `duplicate`
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_setup_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_setup_intents_intent_cancel(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_setup_intents_intent_cancel(intent: intent, cancellation_reason: cancellation_reason, expand: expand).execute(&block)
     end
 
@@ -584,7 +800,12 @@ module Stripe
     POST_SETUP_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("abandoned", "duplicate", "requested_by_customer")
 
     # @return Crest::Request
-    def build_api_request_for_post_setup_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_setup_intents_intent_cancel(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.post_setup_intents_intent_cancel ..." }
       end
@@ -612,6 +833,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["cancellation_reason"] = cancellation_reason.to_s if !cancellation_reason.nil?
@@ -630,6 +854,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -645,7 +870,17 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     # @return [Stripe::SetupIntent]
-    def post_setup_intents_intent_confirm(*, intent : String? = nil, client_secret : String? = nil, expand : Array(String)? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, return_url : String? = nil) : Stripe::SetupIntent
+    def post_setup_intents_intent_confirm(
+      *,
+      intent : String? = nil,
+      client_secret : String? = nil,
+      expand : Array(String)? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      return_url : String? = nil
+    ) : Stripe::SetupIntent
       data, _status_code, _headers = post_setup_intents_intent_confirm_with_http_info(intent: intent, client_secret: client_secret, expand: expand, mandate_data: mandate_data, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, return_url: return_url)
       data
     end
@@ -660,7 +895,17 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     # @return [Tuple(Stripe::SetupIntent, Integer, Hash)] Stripe::SetupIntent, response status code and response headers
-    def post_setup_intents_intent_confirm_with_http_info(*, intent : String? = nil, client_secret : String? = nil, expand : Array(String)? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, return_url : String? = nil) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
+    def post_setup_intents_intent_confirm_with_http_info(
+      *,
+      intent : String? = nil,
+      client_secret : String? = nil,
+      expand : Array(String)? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      return_url : String? = nil
+    ) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_setup_intents_intent_confirm(intent: intent, client_secret: client_secret, expand: expand, mandate_data: mandate_data, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, return_url: return_url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -682,7 +927,18 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     # @return nil
-    def post_setup_intents_intent_confirm(*, intent : String? = nil, client_secret : String? = nil, expand : Array(String)? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, return_url : String? = nil, &block : Crest::Response ->) : Nil
+    def post_setup_intents_intent_confirm(
+      *,
+      intent : String? = nil,
+      client_secret : String? = nil,
+      expand : Array(String)? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      return_url : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_setup_intents_intent_confirm(intent: intent, client_secret: client_secret, expand: expand, mandate_data: mandate_data, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, return_url: return_url).execute(&block)
     end
 
@@ -691,7 +947,17 @@ module Stripe
     POST_SETUP_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_setup_intents_intent_confirm(*, intent : String? = nil, client_secret : String? = nil, expand : Array(String)? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, return_url : String? = nil) : Crest::Request
+    def build_api_request_for_post_setup_intents_intent_confirm(
+      *,
+      intent : String? = nil,
+      client_secret : String? = nil,
+      expand : Array(String)? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      return_url : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.post_setup_intents_intent_confirm ..." }
       end
@@ -732,6 +998,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["client_secret"] = client_secret.to_s if !client_secret.nil?
@@ -755,6 +1024,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -767,7 +1037,14 @@ module Stripe
     # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SetupIntent]
-    def post_setup_intents_intent_verify_microdeposits(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil) : Stripe::SetupIntent
+    def post_setup_intents_intent_verify_microdeposits(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::SetupIntent
       data, _status_code, _headers = post_setup_intents_intent_verify_microdeposits_with_http_info(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand)
       data
     end
@@ -779,7 +1056,14 @@ module Stripe
     # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SetupIntent, Integer, Hash)] Stripe::SetupIntent, response status code and response headers
-    def post_setup_intents_intent_verify_microdeposits_with_http_info(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
+    def post_setup_intents_intent_verify_microdeposits_with_http_info(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::SetupIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_setup_intents_intent_verify_microdeposits(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -798,7 +1082,15 @@ module Stripe
     # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_setup_intents_intent_verify_microdeposits(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_setup_intents_intent_verify_microdeposits(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_setup_intents_intent_verify_microdeposits(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand).execute(&block)
     end
 
@@ -807,7 +1099,14 @@ module Stripe
     POST_SETUP_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_DESCRIPTOR_CODE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_setup_intents_intent_verify_microdeposits(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_setup_intents_intent_verify_microdeposits(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupIntentsApi.post_setup_intents_intent_verify_microdeposits ..." }
       end
@@ -839,6 +1138,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amounts"] = @api_client.build_collection_param(amounts, "csv") if !amounts.nil? && !amounts.empty?
@@ -859,6 +1161,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

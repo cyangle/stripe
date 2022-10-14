@@ -27,7 +27,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SecretServiceResourceSecretList]
-    def get_apps_secrets(*, scope : Stripe::ScopeParam? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SecretServiceResourceSecretList
+    def get_apps_secrets(
+      *,
+      scope : Stripe::ScopeParam? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SecretServiceResourceSecretList
       data, _status_code, _headers = get_apps_secrets_with_http_info(scope: scope, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -39,7 +46,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SecretServiceResourceSecretList, Integer, Hash)] Stripe::SecretServiceResourceSecretList, response status code and response headers
-    def get_apps_secrets_with_http_info(*, scope : Stripe::ScopeParam? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SecretServiceResourceSecretList, Int32, Hash(String, Array(String) | String))
+    def get_apps_secrets_with_http_info(
+      *,
+      scope : Stripe::ScopeParam? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SecretServiceResourceSecretList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_apps_secrets(scope: scope, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -58,7 +72,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_apps_secrets(*, scope : Stripe::ScopeParam? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_apps_secrets(
+      *,
+      scope : Stripe::ScopeParam? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_apps_secrets(scope: scope, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -66,7 +88,14 @@ module Stripe
     GET_APPS_SECRETS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_apps_secrets(*, scope : Stripe::ScopeParam? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_apps_secrets(
+      *,
+      scope : Stripe::ScopeParam? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AppsApi.get_apps_secrets ..." }
       end
@@ -100,6 +129,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -116,6 +148,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -126,7 +159,12 @@ module Stripe
     # @required @param scope [Stripe::ScopeParam?] Specifies the scoping of the secret. Requests originating from UI extensions can only access account-scoped secrets or secrets scoped to their own user.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::AppsSecret]
-    def get_apps_secrets_find(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(Array(String))? = nil) : Stripe::AppsSecret
+    def get_apps_secrets_find(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::AppsSecret
       data, _status_code, _headers = get_apps_secrets_find_with_http_info(name: name, scope: scope, expand: expand)
       data
     end
@@ -136,7 +174,12 @@ module Stripe
     # @required @param scope [Stripe::ScopeParam?] Specifies the scoping of the secret. Requests originating from UI extensions can only access account-scoped secrets or secrets scoped to their own user.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::AppsSecret, Integer, Hash)] Stripe::AppsSecret, response status code and response headers
-    def get_apps_secrets_find_with_http_info(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
+    def get_apps_secrets_find_with_http_info(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_apps_secrets_find(name: name, scope: scope, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -153,14 +196,25 @@ module Stripe
     # @required @param scope [Stripe::ScopeParam?] Specifies the scoping of the secret. Requests originating from UI extensions can only access account-scoped secrets or secrets scoped to their own user.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_apps_secrets_find(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_apps_secrets_find(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_apps_secrets_find(name: name, scope: scope, expand: expand).execute(&block)
     end
 
     GET_APPS_SECRETS_FIND_MAX_LENGTH_FOR_NAME = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_apps_secrets_find(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_apps_secrets_find(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AppsApi.get_apps_secrets_find ..." }
       end
@@ -190,6 +244,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -206,6 +263,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -218,7 +276,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] The Unix timestamp for the expiry time of the secret, after which the secret deletes.
     # @return [Stripe::AppsSecret]
-    def post_apps_secrets(*, name : String? = nil, payload : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil) : Stripe::AppsSecret
+    def post_apps_secrets(
+      *,
+      name : String? = nil,
+      payload : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil
+    ) : Stripe::AppsSecret
       data, _status_code, _headers = post_apps_secrets_with_http_info(name: name, payload: payload, scope: scope, expand: expand, expires_at: expires_at)
       data
     end
@@ -230,7 +295,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] The Unix timestamp for the expiry time of the secret, after which the secret deletes.
     # @return [Tuple(Stripe::AppsSecret, Integer, Hash)] Stripe::AppsSecret, response status code and response headers
-    def post_apps_secrets_with_http_info(*, name : String? = nil, payload : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
+    def post_apps_secrets_with_http_info(
+      *,
+      name : String? = nil,
+      payload : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil
+    ) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_apps_secrets(name: name, payload: payload, scope: scope, expand: expand, expires_at: expires_at)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -249,7 +321,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] The Unix timestamp for the expiry time of the secret, after which the secret deletes.
     # @return nil
-    def post_apps_secrets(*, name : String? = nil, payload : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, &block : Crest::Response ->) : Nil
+    def post_apps_secrets(
+      *,
+      name : String? = nil,
+      payload : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_apps_secrets(name: name, payload: payload, scope: scope, expand: expand, expires_at: expires_at).execute(&block)
     end
 
@@ -257,7 +337,14 @@ module Stripe
     POST_APPS_SECRETS_MAX_LENGTH_FOR_PAYLOAD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_apps_secrets(*, name : String? = nil, payload : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil) : Crest::Request
+    def build_api_request_for_post_apps_secrets(
+      *,
+      name : String? = nil,
+      payload : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AppsApi.post_apps_secrets ..." }
       end
@@ -290,6 +377,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -311,6 +401,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -321,7 +412,12 @@ module Stripe
     # @required @param scope [Stripe::ScopeParam?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::AppsSecret]
-    def post_apps_secrets_delete(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil) : Stripe::AppsSecret
+    def post_apps_secrets_delete(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::AppsSecret
       data, _status_code, _headers = post_apps_secrets_delete_with_http_info(name: name, scope: scope, expand: expand)
       data
     end
@@ -331,7 +427,12 @@ module Stripe
     # @required @param scope [Stripe::ScopeParam?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::AppsSecret, Integer, Hash)] Stripe::AppsSecret, response status code and response headers
-    def post_apps_secrets_delete_with_http_info(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
+    def post_apps_secrets_delete_with_http_info(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_apps_secrets_delete(name: name, scope: scope, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -348,14 +449,25 @@ module Stripe
     # @required @param scope [Stripe::ScopeParam?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_apps_secrets_delete(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_apps_secrets_delete(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_apps_secrets_delete(name: name, scope: scope, expand: expand).execute(&block)
     end
 
     POST_APPS_SECRETS_DELETE_MAX_LENGTH_FOR_NAME = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_apps_secrets_delete(*, name : String? = nil, scope : Stripe::ScopeParam? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_apps_secrets_delete(
+      *,
+      name : String? = nil,
+      scope : Stripe::ScopeParam? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AppsApi.post_apps_secrets_delete ..." }
       end
@@ -384,6 +496,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -403,6 +518,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

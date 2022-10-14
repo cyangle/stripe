@@ -30,7 +30,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::NotificationEventList]
-    def get_events(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, _type : String? = nil, types : Array(Array(String))? = nil, delivery_success : Bool? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::NotificationEventList
+    def get_events(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      _type : String? = nil,
+      types : Array(Array(String))? = nil,
+      delivery_success : Bool? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::NotificationEventList
       data, _status_code, _headers = get_events_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, _type: _type, types: types, delivery_success: delivery_success, expand: expand, created: created)
       data
     end
@@ -45,7 +55,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::NotificationEventList, Integer, Hash)] Stripe::NotificationEventList, response status code and response headers
-    def get_events_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, _type : String? = nil, types : Array(Array(String))? = nil, delivery_success : Bool? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::NotificationEventList, Int32, Hash(String, Array(String) | String))
+    def get_events_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      _type : String? = nil,
+      types : Array(Array(String))? = nil,
+      delivery_success : Bool? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::NotificationEventList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_events(ending_before: ending_before, starting_after: starting_after, limit: limit, _type: _type, types: types, delivery_success: delivery_success, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -67,7 +87,18 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_events(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, _type : String? = nil, types : Array(Array(String))? = nil, delivery_success : Bool? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_events(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      _type : String? = nil,
+      types : Array(Array(String))? = nil,
+      delivery_success : Bool? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_events(ending_before: ending_before, starting_after: starting_after, limit: limit, _type: _type, types: types, delivery_success: delivery_success, expand: expand, created: created).execute(&block)
     end
 
@@ -76,7 +107,17 @@ module Stripe
     GET_EVENTS_MAX_LENGTH_FOR__TYPE          = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_events(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, _type : String? = nil, types : Array(Array(String))? = nil, delivery_success : Bool? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_events(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      _type : String? = nil,
+      types : Array(Array(String))? = nil,
+      delivery_success : Bool? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: EventsApi.get_events ..." }
       end
@@ -117,6 +158,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -133,6 +177,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -142,7 +187,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Event]
-    def get_events_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Event
+    def get_events_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Event
       data, _status_code, _headers = get_events_id_with_http_info(id: id, expand: expand)
       data
     end
@@ -151,7 +200,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Event, Integer, Hash)] Stripe::Event, response status code and response headers
-    def get_events_id_with_http_info(*, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Event, Int32, Hash(String, Array(String) | String))
+    def get_events_id_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Event, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_events_id(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -167,14 +220,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_events_id(*, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_events_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_events_id(id: id, expand: expand).execute(&block)
     end
 
     GET_EVENTS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_events_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_events_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: EventsApi.get_events_id ..." }
       end
@@ -198,6 +260,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -214,6 +279,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

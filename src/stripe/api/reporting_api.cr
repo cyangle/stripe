@@ -27,7 +27,14 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::FinancialReportingFinanceReportRunList]
-    def get_reporting_report_runs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::FinancialReportingFinanceReportRunList
+    def get_reporting_report_runs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::FinancialReportingFinanceReportRunList
       data, _status_code, _headers = get_reporting_report_runs_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created)
       data
     end
@@ -39,7 +46,14 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::FinancialReportingFinanceReportRunList, Integer, Hash)] Stripe::FinancialReportingFinanceReportRunList, response status code and response headers
-    def get_reporting_report_runs_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::FinancialReportingFinanceReportRunList, Int32, Hash(String, Array(String) | String))
+    def get_reporting_report_runs_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::FinancialReportingFinanceReportRunList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_reporting_report_runs(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -58,7 +72,15 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_reporting_report_runs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_reporting_report_runs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_reporting_report_runs(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created).execute(&block)
     end
 
@@ -66,7 +88,14 @@ module Stripe
     GET_REPORTING_REPORT_RUNS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_reporting_report_runs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_reporting_report_runs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReportingApi.get_reporting_report_runs ..." }
       end
@@ -100,6 +129,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -116,6 +148,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -125,7 +158,11 @@ module Stripe
     # @required @param report_run [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ReportingReportRun]
-    def get_reporting_report_runs_report_run(*, report_run : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ReportingReportRun
+    def get_reporting_report_runs_report_run(
+      *,
+      report_run : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ReportingReportRun
       data, _status_code, _headers = get_reporting_report_runs_report_run_with_http_info(report_run: report_run, expand: expand)
       data
     end
@@ -134,7 +171,11 @@ module Stripe
     # @required @param report_run [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ReportingReportRun, Integer, Hash)] Stripe::ReportingReportRun, response status code and response headers
-    def get_reporting_report_runs_report_run_with_http_info(*, report_run : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ReportingReportRun, Int32, Hash(String, Array(String) | String))
+    def get_reporting_report_runs_report_run_with_http_info(
+      *,
+      report_run : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ReportingReportRun, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_reporting_report_runs_report_run(report_run: report_run, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -150,14 +191,23 @@ module Stripe
     # @required @param report_run [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_reporting_report_runs_report_run(*, report_run : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_reporting_report_runs_report_run(
+      *,
+      report_run : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_reporting_report_runs_report_run(report_run: report_run, expand: expand).execute(&block)
     end
 
     GET_REPORTING_REPORT_RUNS_REPORT_RUN_MAX_LENGTH_FOR_REPORT_RUN = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_reporting_report_runs_report_run(*, report_run : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_reporting_report_runs_report_run(
+      *,
+      report_run : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReportingApi.get_reporting_report_runs_report_run ..." }
       end
@@ -181,6 +231,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -197,6 +250,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -205,7 +259,10 @@ module Stripe
     # <p>Returns a full list of Report Types.</p>
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::FinancialReportingFinanceReportTypeList]
-    def get_reporting_report_types(*, expand : Array(Array(String))? = nil) : Stripe::FinancialReportingFinanceReportTypeList
+    def get_reporting_report_types(
+      *,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::FinancialReportingFinanceReportTypeList
       data, _status_code, _headers = get_reporting_report_types_with_http_info(expand: expand)
       data
     end
@@ -213,7 +270,10 @@ module Stripe
     # &lt;p&gt;Returns a full list of Report Types.&lt;/p&gt;
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::FinancialReportingFinanceReportTypeList, Integer, Hash)] Stripe::FinancialReportingFinanceReportTypeList, response status code and response headers
-    def get_reporting_report_types_with_http_info(*, expand : Array(Array(String))? = nil) : Tuple(Stripe::FinancialReportingFinanceReportTypeList, Int32, Hash(String, Array(String) | String))
+    def get_reporting_report_types_with_http_info(
+      *,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::FinancialReportingFinanceReportTypeList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_reporting_report_types(expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -228,12 +288,19 @@ module Stripe
     # &lt;p&gt;Returns a full list of Report Types.&lt;/p&gt;
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_reporting_report_types(*, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_reporting_report_types(
+      *,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_reporting_report_types(expand: expand).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_reporting_report_types(*, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_reporting_report_types(
+      *,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReportingApi.get_reporting_report_types ..." }
       end
@@ -253,6 +320,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -269,6 +339,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -278,7 +349,11 @@ module Stripe
     # @required @param report_type [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ReportingReportType]
-    def get_reporting_report_types_report_type(*, report_type : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ReportingReportType
+    def get_reporting_report_types_report_type(
+      *,
+      report_type : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ReportingReportType
       data, _status_code, _headers = get_reporting_report_types_report_type_with_http_info(report_type: report_type, expand: expand)
       data
     end
@@ -287,7 +362,11 @@ module Stripe
     # @required @param report_type [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ReportingReportType, Integer, Hash)] Stripe::ReportingReportType, response status code and response headers
-    def get_reporting_report_types_report_type_with_http_info(*, report_type : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ReportingReportType, Int32, Hash(String, Array(String) | String))
+    def get_reporting_report_types_report_type_with_http_info(
+      *,
+      report_type : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ReportingReportType, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_reporting_report_types_report_type(report_type: report_type, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -303,12 +382,21 @@ module Stripe
     # @required @param report_type [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_reporting_report_types_report_type(*, report_type : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_reporting_report_types_report_type(
+      *,
+      report_type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_reporting_report_types_report_type(report_type: report_type, expand: expand).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_reporting_report_types_report_type(*, report_type : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_reporting_report_types_report_type(
+      *,
+      report_type : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReportingApi.get_reporting_report_types_report_type ..." }
       end
@@ -329,6 +417,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -345,6 +436,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -355,7 +447,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param parameters [Stripe::RunParameterSpecs?]
     # @return [Stripe::ReportingReportRun]
-    def post_reporting_report_runs(*, report_type : String? = nil, expand : Array(String)? = nil, parameters : Stripe::RunParameterSpecs? = nil) : Stripe::ReportingReportRun
+    def post_reporting_report_runs(
+      *,
+      report_type : String? = nil,
+      expand : Array(String)? = nil,
+      parameters : Stripe::RunParameterSpecs? = nil
+    ) : Stripe::ReportingReportRun
       data, _status_code, _headers = post_reporting_report_runs_with_http_info(report_type: report_type, expand: expand, parameters: parameters)
       data
     end
@@ -365,7 +462,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param parameters [Stripe::RunParameterSpecs?]
     # @return [Tuple(Stripe::ReportingReportRun, Integer, Hash)] Stripe::ReportingReportRun, response status code and response headers
-    def post_reporting_report_runs_with_http_info(*, report_type : String? = nil, expand : Array(String)? = nil, parameters : Stripe::RunParameterSpecs? = nil) : Tuple(Stripe::ReportingReportRun, Int32, Hash(String, Array(String) | String))
+    def post_reporting_report_runs_with_http_info(
+      *,
+      report_type : String? = nil,
+      expand : Array(String)? = nil,
+      parameters : Stripe::RunParameterSpecs? = nil
+    ) : Tuple(Stripe::ReportingReportRun, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_reporting_report_runs(report_type: report_type, expand: expand, parameters: parameters)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -382,12 +484,23 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param parameters [Stripe::RunParameterSpecs?]
     # @return nil
-    def post_reporting_report_runs(*, report_type : String? = nil, expand : Array(String)? = nil, parameters : Stripe::RunParameterSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_reporting_report_runs(
+      *,
+      report_type : String? = nil,
+      expand : Array(String)? = nil,
+      parameters : Stripe::RunParameterSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_reporting_report_runs(report_type: report_type, expand: expand, parameters: parameters).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_post_reporting_report_runs(*, report_type : String? = nil, expand : Array(String)? = nil, parameters : Stripe::RunParameterSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_reporting_report_runs(
+      *,
+      report_type : String? = nil,
+      expand : Array(String)? = nil,
+      parameters : Stripe::RunParameterSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReportingApi.post_reporting_report_runs ..." }
       end
@@ -413,6 +526,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -432,6 +548,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

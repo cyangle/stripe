@@ -31,7 +31,18 @@ module Stripe
     # @optional @param code [String?] Only return promotion codes that have this case-insensitive code.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PromotionCodesResourcePromotionCodeList]
-    def get_promotion_codes(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, active : Bool? = nil, coupon : String? = nil, customer : String? = nil, code : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PromotionCodesResourcePromotionCodeList
+    def get_promotion_codes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      coupon : String? = nil,
+      customer : String? = nil,
+      code : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PromotionCodesResourcePromotionCodeList
       data, _status_code, _headers = get_promotion_codes_with_http_info(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, active: active, coupon: coupon, customer: customer, code: code, expand: expand)
       data
     end
@@ -47,7 +58,18 @@ module Stripe
     # @optional @param code [String?] Only return promotion codes that have this case-insensitive code.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PromotionCodesResourcePromotionCodeList, Integer, Hash)] Stripe::PromotionCodesResourcePromotionCodeList, response status code and response headers
-    def get_promotion_codes_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, active : Bool? = nil, coupon : String? = nil, customer : String? = nil, code : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PromotionCodesResourcePromotionCodeList, Int32, Hash(String, Array(String) | String))
+    def get_promotion_codes_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      coupon : String? = nil,
+      customer : String? = nil,
+      code : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PromotionCodesResourcePromotionCodeList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_promotion_codes(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, active: active, coupon: coupon, customer: customer, code: code, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -70,7 +92,19 @@ module Stripe
     # @optional @param code [String?] Only return promotion codes that have this case-insensitive code.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_promotion_codes(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, active : Bool? = nil, coupon : String? = nil, customer : String? = nil, code : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_promotion_codes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      coupon : String? = nil,
+      customer : String? = nil,
+      code : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_promotion_codes(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, active: active, coupon: coupon, customer: customer, code: code, expand: expand).execute(&block)
     end
 
@@ -81,7 +115,18 @@ module Stripe
     GET_PROMOTION_CODES_MAX_LENGTH_FOR_CODE           = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_promotion_codes(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, active : Bool? = nil, coupon : String? = nil, customer : String? = nil, code : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_promotion_codes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      coupon : String? = nil,
+      customer : String? = nil,
+      code : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PromotionCodesApi.get_promotion_codes ..." }
       end
@@ -128,6 +173,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -144,6 +192,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -153,7 +202,11 @@ module Stripe
     # @required @param promotion_code [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PromotionCode]
-    def get_promotion_codes_promotion_code(*, promotion_code : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PromotionCode
+    def get_promotion_codes_promotion_code(
+      *,
+      promotion_code : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PromotionCode
       data, _status_code, _headers = get_promotion_codes_promotion_code_with_http_info(promotion_code: promotion_code, expand: expand)
       data
     end
@@ -162,7 +215,11 @@ module Stripe
     # @required @param promotion_code [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PromotionCode, Integer, Hash)] Stripe::PromotionCode, response status code and response headers
-    def get_promotion_codes_promotion_code_with_http_info(*, promotion_code : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
+    def get_promotion_codes_promotion_code_with_http_info(
+      *,
+      promotion_code : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_promotion_codes_promotion_code(promotion_code: promotion_code, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -178,14 +235,23 @@ module Stripe
     # @required @param promotion_code [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_promotion_codes_promotion_code(*, promotion_code : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_promotion_codes_promotion_code(
+      *,
+      promotion_code : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_promotion_codes_promotion_code(promotion_code: promotion_code, expand: expand).execute(&block)
     end
 
     GET_PROMOTION_CODES_PROMOTION_CODE_MAX_LENGTH_FOR_PROMOTION_CODE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_promotion_codes_promotion_code(*, promotion_code : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_promotion_codes_promotion_code(
+      *,
+      promotion_code : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PromotionCodesApi.get_promotion_codes_promotion_code ..." }
       end
@@ -209,6 +275,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -225,6 +294,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -240,7 +310,17 @@ module Stripe
     # @optional @param max_redemptions [Int32?] A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
     # @optional @param restrictions [Stripe::RestrictionsParams?]
     # @return [Stripe::PromotionCode]
-    def post_promotion_codes(*, coupon : String? = nil, active : Bool? = nil, code : String? = nil, customer : String? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, max_redemptions : Int64? = nil, restrictions : Stripe::RestrictionsParams? = nil) : Stripe::PromotionCode
+    def post_promotion_codes(
+      *,
+      coupon : String? = nil,
+      active : Bool? = nil,
+      code : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      max_redemptions : Int64? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil
+    ) : Stripe::PromotionCode
       data, _status_code, _headers = post_promotion_codes_with_http_info(coupon: coupon, active: active, code: code, customer: customer, expand: expand, expires_at: expires_at, max_redemptions: max_redemptions, restrictions: restrictions)
       data
     end
@@ -255,7 +335,17 @@ module Stripe
     # @optional @param max_redemptions [Int32?] A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
     # @optional @param restrictions [Stripe::RestrictionsParams?]
     # @return [Tuple(Stripe::PromotionCode, Integer, Hash)] Stripe::PromotionCode, response status code and response headers
-    def post_promotion_codes_with_http_info(*, coupon : String? = nil, active : Bool? = nil, code : String? = nil, customer : String? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, max_redemptions : Int64? = nil, restrictions : Stripe::RestrictionsParams? = nil) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
+    def post_promotion_codes_with_http_info(
+      *,
+      coupon : String? = nil,
+      active : Bool? = nil,
+      code : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      max_redemptions : Int64? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil
+    ) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_promotion_codes(coupon: coupon, active: active, code: code, customer: customer, expand: expand, expires_at: expires_at, max_redemptions: max_redemptions, restrictions: restrictions)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -277,7 +367,18 @@ module Stripe
     # @optional @param max_redemptions [Int32?] A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
     # @optional @param restrictions [Stripe::RestrictionsParams?]
     # @return nil
-    def post_promotion_codes(*, coupon : String? = nil, active : Bool? = nil, code : String? = nil, customer : String? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, max_redemptions : Int64? = nil, restrictions : Stripe::RestrictionsParams? = nil, &block : Crest::Response ->) : Nil
+    def post_promotion_codes(
+      *,
+      coupon : String? = nil,
+      active : Bool? = nil,
+      code : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      max_redemptions : Int64? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_promotion_codes(coupon: coupon, active: active, code: code, customer: customer, expand: expand, expires_at: expires_at, max_redemptions: max_redemptions, restrictions: restrictions).execute(&block)
     end
 
@@ -286,7 +387,17 @@ module Stripe
     POST_PROMOTION_CODES_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_promotion_codes(*, coupon : String? = nil, active : Bool? = nil, code : String? = nil, customer : String? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, max_redemptions : Int64? = nil, restrictions : Stripe::RestrictionsParams? = nil) : Crest::Request
+    def build_api_request_for_post_promotion_codes(
+      *,
+      coupon : String? = nil,
+      active : Bool? = nil,
+      code : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      max_redemptions : Int64? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PromotionCodesApi.post_promotion_codes ..." }
       end
@@ -322,6 +433,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -346,6 +460,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -358,7 +473,14 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param restrictions [Stripe::RestrictionsParams?]
     # @return [Stripe::PromotionCode]
-    def post_promotion_codes_promotion_code(*, promotion_code : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, restrictions : Stripe::RestrictionsParams? = nil) : Stripe::PromotionCode
+    def post_promotion_codes_promotion_code(
+      *,
+      promotion_code : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil
+    ) : Stripe::PromotionCode
       data, _status_code, _headers = post_promotion_codes_promotion_code_with_http_info(promotion_code: promotion_code, active: active, expand: expand, metadata: metadata, restrictions: restrictions)
       data
     end
@@ -370,7 +492,14 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param restrictions [Stripe::RestrictionsParams?]
     # @return [Tuple(Stripe::PromotionCode, Integer, Hash)] Stripe::PromotionCode, response status code and response headers
-    def post_promotion_codes_promotion_code_with_http_info(*, promotion_code : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, restrictions : Stripe::RestrictionsParams? = nil) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
+    def post_promotion_codes_promotion_code_with_http_info(
+      *,
+      promotion_code : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil
+    ) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_promotion_codes_promotion_code(promotion_code: promotion_code, active: active, expand: expand, metadata: metadata, restrictions: restrictions)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -389,14 +518,29 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param restrictions [Stripe::RestrictionsParams?]
     # @return nil
-    def post_promotion_codes_promotion_code(*, promotion_code : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, restrictions : Stripe::RestrictionsParams? = nil, &block : Crest::Response ->) : Nil
+    def post_promotion_codes_promotion_code(
+      *,
+      promotion_code : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_promotion_codes_promotion_code(promotion_code: promotion_code, active: active, expand: expand, metadata: metadata, restrictions: restrictions).execute(&block)
     end
 
     POST_PROMOTION_CODES_PROMOTION_CODE_MAX_LENGTH_FOR_PROMOTION_CODE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_promotion_codes_promotion_code(*, promotion_code : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, restrictions : Stripe::RestrictionsParams? = nil) : Crest::Request
+    def build_api_request_for_post_promotion_codes_promotion_code(
+      *,
+      promotion_code : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      restrictions : Stripe::RestrictionsParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PromotionCodesApi.post_promotion_codes_promotion_code ..." }
       end
@@ -428,6 +572,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -448,6 +595,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

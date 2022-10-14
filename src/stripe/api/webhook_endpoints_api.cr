@@ -23,7 +23,10 @@ module Stripe
     # <p>You can also delete webhook endpoints via the <a href=\"https://dashboard.stripe.com/account/webhooks\">webhook endpoint management</a> page of the Stripe dashboard.</p>
     # @required @param webhook_endpoint [String?]
     # @return [Stripe::DeletedWebhookEndpoint]
-    def delete_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil) : Stripe::DeletedWebhookEndpoint
+    def delete_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil
+    ) : Stripe::DeletedWebhookEndpoint
       data, _status_code, _headers = delete_webhook_endpoints_webhook_endpoint_with_http_info(webhook_endpoint: webhook_endpoint)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;You can also delete webhook endpoints via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/webhooks\&quot;&gt;webhook endpoint management&lt;/a&gt; page of the Stripe dashboard.&lt;/p&gt;
     # @required @param webhook_endpoint [String?]
     # @return [Tuple(Stripe::DeletedWebhookEndpoint, Integer, Hash)] Stripe::DeletedWebhookEndpoint, response status code and response headers
-    def delete_webhook_endpoints_webhook_endpoint_with_http_info(*, webhook_endpoint : String? = nil) : Tuple(Stripe::DeletedWebhookEndpoint, Int32, Hash(String, Array(String) | String))
+    def delete_webhook_endpoints_webhook_endpoint_with_http_info(
+      *,
+      webhook_endpoint : String? = nil
+    ) : Tuple(Stripe::DeletedWebhookEndpoint, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;You can also delete webhook endpoints via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/webhooks\&quot;&gt;webhook endpoint management&lt;/a&gt; page of the Stripe dashboard.&lt;/p&gt;
     # @required @param webhook_endpoint [String?]
     # @return nil
-    def delete_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint).execute(&block)
     end
 
     DELETE_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_WEBHOOK_ENDPOINT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil) : Crest::Request
+    def build_api_request_for_delete_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.delete_webhook_endpoints_webhook_endpoint ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -103,7 +120,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::NotificationWebhookEndpointList]
-    def get_webhook_endpoints(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::NotificationWebhookEndpointList
+    def get_webhook_endpoints(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::NotificationWebhookEndpointList
       data, _status_code, _headers = get_webhook_endpoints_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -114,7 +137,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::NotificationWebhookEndpointList, Integer, Hash)] Stripe::NotificationWebhookEndpointList, response status code and response headers
-    def get_webhook_endpoints_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::NotificationWebhookEndpointList, Int32, Hash(String, Array(String) | String))
+    def get_webhook_endpoints_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::NotificationWebhookEndpointList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_webhook_endpoints(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -132,7 +161,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_webhook_endpoints(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_webhook_endpoints(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_webhook_endpoints(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -140,7 +176,13 @@ module Stripe
     GET_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_webhook_endpoints(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_webhook_endpoints(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.get_webhook_endpoints ..." }
       end
@@ -169,6 +211,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -185,6 +230,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -194,7 +240,11 @@ module Stripe
     # @required @param webhook_endpoint [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::WebhookEndpoint]
-    def get_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, expand : Array(Array(String))? = nil) : Stripe::WebhookEndpoint
+    def get_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::WebhookEndpoint
       data, _status_code, _headers = get_webhook_endpoints_webhook_endpoint_with_http_info(webhook_endpoint: webhook_endpoint, expand: expand)
       data
     end
@@ -203,7 +253,11 @@ module Stripe
     # @required @param webhook_endpoint [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::WebhookEndpoint, Integer, Hash)] Stripe::WebhookEndpoint, response status code and response headers
-    def get_webhook_endpoints_webhook_endpoint_with_http_info(*, webhook_endpoint : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
+    def get_webhook_endpoints_webhook_endpoint_with_http_info(
+      *,
+      webhook_endpoint : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -219,14 +273,23 @@ module Stripe
     # @required @param webhook_endpoint [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, expand: expand).execute(&block)
     end
 
     GET_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_WEBHOOK_ENDPOINT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.get_webhook_endpoints_webhook_endpoint ..." }
       end
@@ -250,6 +313,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -266,6 +332,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -280,7 +347,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Stripe::WebhookEndpoint]
-    def post_webhook_endpoints(*, enabled_events : Array(String)? = nil, url : String? = nil, api_version : String? = nil, connect : Bool? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Stripe::WebhookEndpoint
+    def post_webhook_endpoints(
+      *,
+      enabled_events : Array(String)? = nil,
+      url : String? = nil,
+      api_version : String? = nil,
+      connect : Bool? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Stripe::WebhookEndpoint
       data, _status_code, _headers = post_webhook_endpoints_with_http_info(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata)
       data
     end
@@ -294,7 +370,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Tuple(Stripe::WebhookEndpoint, Integer, Hash)] Stripe::WebhookEndpoint, response status code and response headers
-    def post_webhook_endpoints_with_http_info(*, enabled_events : Array(String)? = nil, url : String? = nil, api_version : String? = nil, connect : Bool? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
+    def post_webhook_endpoints_with_http_info(
+      *,
+      enabled_events : Array(String)? = nil,
+      url : String? = nil,
+      api_version : String? = nil,
+      connect : Bool? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_webhook_endpoints(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -315,7 +400,17 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return nil
-    def post_webhook_endpoints(*, enabled_events : Array(String)? = nil, url : String? = nil, api_version : String? = nil, connect : Bool? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, &block : Crest::Response ->) : Nil
+    def post_webhook_endpoints(
+      *,
+      enabled_events : Array(String)? = nil,
+      url : String? = nil,
+      api_version : String? = nil,
+      connect : Bool? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_webhook_endpoints(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata).execute(&block)
     end
 
@@ -325,7 +420,16 @@ module Stripe
     POST_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_DESCRIPTION      = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_webhook_endpoints(*, enabled_events : Array(String)? = nil, url : String? = nil, api_version : String? = nil, connect : Bool? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Crest::Request
+    def build_api_request_for_post_webhook_endpoints(
+      *,
+      enabled_events : Array(String)? = nil,
+      url : String? = nil,
+      api_version : String? = nil,
+      connect : Bool? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.post_webhook_endpoints ..." }
       end
@@ -363,6 +467,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["api_version"] = api_version.to_s if !api_version.nil?
@@ -386,6 +493,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -400,7 +508,16 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param url [String?] The URL of the webhook endpoint.
     # @return [Stripe::WebhookEndpoint]
-    def post_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, description : String? = nil, disabled : Bool? = nil, enabled_events : Array(String)? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, url : String? = nil) : Stripe::WebhookEndpoint
+    def post_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      description : String? = nil,
+      disabled : Bool? = nil,
+      enabled_events : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      url : String? = nil
+    ) : Stripe::WebhookEndpoint
       data, _status_code, _headers = post_webhook_endpoints_webhook_endpoint_with_http_info(webhook_endpoint: webhook_endpoint, description: description, disabled: disabled, enabled_events: enabled_events, expand: expand, metadata: metadata, url: url)
       data
     end
@@ -414,7 +531,16 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param url [String?] The URL of the webhook endpoint.
     # @return [Tuple(Stripe::WebhookEndpoint, Integer, Hash)] Stripe::WebhookEndpoint, response status code and response headers
-    def post_webhook_endpoints_webhook_endpoint_with_http_info(*, webhook_endpoint : String? = nil, description : String? = nil, disabled : Bool? = nil, enabled_events : Array(String)? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, url : String? = nil) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
+    def post_webhook_endpoints_webhook_endpoint_with_http_info(
+      *,
+      webhook_endpoint : String? = nil,
+      description : String? = nil,
+      disabled : Bool? = nil,
+      enabled_events : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      url : String? = nil
+    ) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, description: description, disabled: disabled, enabled_events: enabled_events, expand: expand, metadata: metadata, url: url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -435,7 +561,17 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param url [String?] The URL of the webhook endpoint.
     # @return nil
-    def post_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, description : String? = nil, disabled : Bool? = nil, enabled_events : Array(String)? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, url : String? = nil, &block : Crest::Response ->) : Nil
+    def post_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      description : String? = nil,
+      disabled : Bool? = nil,
+      enabled_events : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      url : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, description: description, disabled: disabled, enabled_events: enabled_events, expand: expand, metadata: metadata, url: url).execute(&block)
     end
 
@@ -444,7 +580,16 @@ module Stripe
     POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_VALID_VALUES_FOR_ENABLED_EVENTS = String.static_array("*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created")
 
     # @return Crest::Request
-    def build_api_request_for_post_webhook_endpoints_webhook_endpoint(*, webhook_endpoint : String? = nil, description : String? = nil, disabled : Bool? = nil, enabled_events : Array(String)? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, url : String? = nil) : Crest::Request
+    def build_api_request_for_post_webhook_endpoints_webhook_endpoint(
+      *,
+      webhook_endpoint : String? = nil,
+      description : String? = nil,
+      disabled : Bool? = nil,
+      enabled_events : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      url : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.post_webhook_endpoints_webhook_endpoint ..." }
       end
@@ -480,6 +625,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["description"] = description.to_s if !description.nil?
@@ -502,6 +650,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

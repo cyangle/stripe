@@ -29,7 +29,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::GelatoVerificationReportList]
-    def get_identity_verification_reports(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, verification_session : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::GelatoVerificationReportList
+    def get_identity_verification_reports(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      verification_session : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::GelatoVerificationReportList
       data, _status_code, _headers = get_identity_verification_reports_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, verification_session: verification_session, _type: _type, expand: expand, created: created)
       data
     end
@@ -43,7 +52,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::GelatoVerificationReportList, Integer, Hash)] Stripe::GelatoVerificationReportList, response status code and response headers
-    def get_identity_verification_reports_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, verification_session : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::GelatoVerificationReportList, Int32, Hash(String, Array(String) | String))
+    def get_identity_verification_reports_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      verification_session : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::GelatoVerificationReportList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_identity_verification_reports(ending_before: ending_before, starting_after: starting_after, limit: limit, verification_session: verification_session, _type: _type, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -64,7 +82,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_identity_verification_reports(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, verification_session : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_identity_verification_reports(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      verification_session : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_identity_verification_reports(ending_before: ending_before, starting_after: starting_after, limit: limit, verification_session: verification_session, _type: _type, expand: expand, created: created).execute(&block)
     end
 
@@ -74,7 +102,16 @@ module Stripe
     GET_IDENTITY_VERIFICATION_REPORTS_VALID_VALUES_FOR__TYPE              = String.static_array("document", "id_number")
 
     # @return Crest::Request
-    def build_api_request_for_get_identity_verification_reports(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, verification_session : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_identity_verification_reports(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      verification_session : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.get_identity_verification_reports ..." }
       end
@@ -117,6 +154,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -133,6 +173,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -142,7 +183,11 @@ module Stripe
     # @required @param report [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IdentityVerificationReport]
-    def get_identity_verification_reports_report(*, report : String? = nil, expand : Array(Array(String))? = nil) : Stripe::IdentityVerificationReport
+    def get_identity_verification_reports_report(
+      *,
+      report : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IdentityVerificationReport
       data, _status_code, _headers = get_identity_verification_reports_report_with_http_info(report: report, expand: expand)
       data
     end
@@ -151,7 +196,11 @@ module Stripe
     # @required @param report [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IdentityVerificationReport, Integer, Hash)] Stripe::IdentityVerificationReport, response status code and response headers
-    def get_identity_verification_reports_report_with_http_info(*, report : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::IdentityVerificationReport, Int32, Hash(String, Array(String) | String))
+    def get_identity_verification_reports_report_with_http_info(
+      *,
+      report : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IdentityVerificationReport, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_identity_verification_reports_report(report: report, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -167,14 +216,23 @@ module Stripe
     # @required @param report [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_identity_verification_reports_report(*, report : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_identity_verification_reports_report(
+      *,
+      report : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_identity_verification_reports_report(report: report, expand: expand).execute(&block)
     end
 
     GET_IDENTITY_VERIFICATION_REPORTS_REPORT_MAX_LENGTH_FOR_REPORT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_identity_verification_reports_report(*, report : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_identity_verification_reports_report(
+      *,
+      report : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.get_identity_verification_reports_report ..." }
       end
@@ -198,6 +256,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -214,6 +275,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -227,7 +289,15 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::GelatoVerificationSessionList]
-    def get_identity_verification_sessions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, status : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::GelatoVerificationSessionList
+    def get_identity_verification_sessions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::GelatoVerificationSessionList
       data, _status_code, _headers = get_identity_verification_sessions_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, status: status, expand: expand, created: created)
       data
     end
@@ -240,7 +310,15 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::GelatoVerificationSessionList, Integer, Hash)] Stripe::GelatoVerificationSessionList, response status code and response headers
-    def get_identity_verification_sessions_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, status : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::GelatoVerificationSessionList, Int32, Hash(String, Array(String) | String))
+    def get_identity_verification_sessions_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::GelatoVerificationSessionList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_identity_verification_sessions(ending_before: ending_before, starting_after: starting_after, limit: limit, status: status, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -260,7 +338,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_identity_verification_sessions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, status : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_identity_verification_sessions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_identity_verification_sessions(ending_before: ending_before, starting_after: starting_after, limit: limit, status: status, expand: expand, created: created).execute(&block)
     end
 
@@ -269,7 +356,15 @@ module Stripe
     GET_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR_STATUS       = String.static_array("canceled", "processing", "requires_input", "verified")
 
     # @return Crest::Request
-    def build_api_request_for_get_identity_verification_sessions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, status : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_identity_verification_sessions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.get_identity_verification_sessions ..." }
       end
@@ -308,6 +403,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -324,6 +422,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -333,7 +432,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IdentityVerificationSession]
-    def get_identity_verification_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil) : Stripe::IdentityVerificationSession
+    def get_identity_verification_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IdentityVerificationSession
       data, _status_code, _headers = get_identity_verification_sessions_session_with_http_info(session: session, expand: expand)
       data
     end
@@ -342,7 +445,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
-    def get_identity_verification_sessions_session_with_http_info(*, session : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
+    def get_identity_verification_sessions_session_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_identity_verification_sessions_session(session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -358,14 +465,23 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_identity_verification_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_identity_verification_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_identity_verification_sessions_session(session: session, expand: expand).execute(&block)
     end
 
     GET_IDENTITY_VERIFICATION_SESSIONS_SESSION_MAX_LENGTH_FOR_SESSION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_identity_verification_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_identity_verification_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.get_identity_verification_sessions_session ..." }
       end
@@ -389,6 +505,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -405,6 +524,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -416,7 +536,13 @@ module Stripe
     # @optional @param options [Stripe::SessionOptionsParam?]
     # @optional @param return_url [String?] The URL that the user will be redirected to upon completing the verification flow.
     # @return [Stripe::IdentityVerificationSession]
-    def post_identity_verification_sessions(*, _type : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, return_url : String? = nil) : Stripe::IdentityVerificationSession
+    def post_identity_verification_sessions(
+      *,
+      _type : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      return_url : String? = nil
+    ) : Stripe::IdentityVerificationSession
       data, _status_code, _headers = post_identity_verification_sessions_with_http_info(_type: _type, expand: expand, options: options, return_url: return_url)
       data
     end
@@ -427,7 +553,13 @@ module Stripe
     # @optional @param options [Stripe::SessionOptionsParam?]
     # @optional @param return_url [String?] The URL that the user will be redirected to upon completing the verification flow.
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
-    def post_identity_verification_sessions_with_http_info(*, _type : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, return_url : String? = nil) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
+    def post_identity_verification_sessions_with_http_info(
+      *,
+      _type : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      return_url : String? = nil
+    ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_identity_verification_sessions(_type: _type, expand: expand, options: options, return_url: return_url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -445,14 +577,27 @@ module Stripe
     # @optional @param options [Stripe::SessionOptionsParam?]
     # @optional @param return_url [String?] The URL that the user will be redirected to upon completing the verification flow.
     # @return nil
-    def post_identity_verification_sessions(*, _type : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, return_url : String? = nil, &block : Crest::Response ->) : Nil
+    def post_identity_verification_sessions(
+      *,
+      _type : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      return_url : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_identity_verification_sessions(_type: _type, expand: expand, options: options, return_url: return_url).execute(&block)
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR__TYPE = String.static_array("document", "id_number")
 
     # @return Crest::Request
-    def build_api_request_for_post_identity_verification_sessions(*, _type : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, return_url : String? = nil) : Crest::Request
+    def build_api_request_for_post_identity_verification_sessions(
+      *,
+      _type : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      return_url : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions ..." }
       end
@@ -481,6 +626,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -501,6 +649,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -512,7 +661,13 @@ module Stripe
     # @optional @param options [Stripe::SessionOptionsParam?]
     # @optional @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
     # @return [Stripe::IdentityVerificationSession]
-    def post_identity_verification_sessions_session(*, session : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, _type : String? = nil) : Stripe::IdentityVerificationSession
+    def post_identity_verification_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      _type : String? = nil
+    ) : Stripe::IdentityVerificationSession
       data, _status_code, _headers = post_identity_verification_sessions_session_with_http_info(session: session, expand: expand, options: options, _type: _type)
       data
     end
@@ -523,7 +678,13 @@ module Stripe
     # @optional @param options [Stripe::SessionOptionsParam?]
     # @optional @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
-    def post_identity_verification_sessions_session_with_http_info(*, session : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, _type : String? = nil) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
+    def post_identity_verification_sessions_session_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      _type : String? = nil
+    ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_identity_verification_sessions_session(session: session, expand: expand, options: options, _type: _type)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -541,7 +702,14 @@ module Stripe
     # @optional @param options [Stripe::SessionOptionsParam?]
     # @optional @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
     # @return nil
-    def post_identity_verification_sessions_session(*, session : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, _type : String? = nil, &block : Crest::Response ->) : Nil
+    def post_identity_verification_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      _type : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_identity_verification_sessions_session(session: session, expand: expand, options: options, _type: _type).execute(&block)
     end
 
@@ -549,7 +717,13 @@ module Stripe
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_VALID_VALUES_FOR__TYPE = String.static_array("document", "id_number")
 
     # @return Crest::Request
-    def build_api_request_for_post_identity_verification_sessions_session(*, session : String? = nil, expand : Array(String)? = nil, options : Stripe::SessionOptionsParam? = nil, _type : String? = nil) : Crest::Request
+    def build_api_request_for_post_identity_verification_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      options : Stripe::SessionOptionsParam? = nil,
+      _type : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions_session ..." }
       end
@@ -581,6 +755,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -600,6 +777,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -609,7 +787,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IdentityVerificationSession]
-    def post_identity_verification_sessions_session_cancel(*, session : String? = nil, expand : Array(String)? = nil) : Stripe::IdentityVerificationSession
+    def post_identity_verification_sessions_session_cancel(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IdentityVerificationSession
       data, _status_code, _headers = post_identity_verification_sessions_session_cancel_with_http_info(session: session, expand: expand)
       data
     end
@@ -618,7 +800,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
-    def post_identity_verification_sessions_session_cancel_with_http_info(*, session : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
+    def post_identity_verification_sessions_session_cancel_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_identity_verification_sessions_session_cancel(session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -634,14 +820,23 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_identity_verification_sessions_session_cancel(*, session : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_identity_verification_sessions_session_cancel(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_identity_verification_sessions_session_cancel(session: session, expand: expand).execute(&block)
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_CANCEL_MAX_LENGTH_FOR_SESSION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_identity_verification_sessions_session_cancel(*, session : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_identity_verification_sessions_session_cancel(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions_session_cancel ..." }
       end
@@ -666,6 +861,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -683,6 +881,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -692,7 +891,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IdentityVerificationSession]
-    def post_identity_verification_sessions_session_redact(*, session : String? = nil, expand : Array(String)? = nil) : Stripe::IdentityVerificationSession
+    def post_identity_verification_sessions_session_redact(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IdentityVerificationSession
       data, _status_code, _headers = post_identity_verification_sessions_session_redact_with_http_info(session: session, expand: expand)
       data
     end
@@ -701,7 +904,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
-    def post_identity_verification_sessions_session_redact_with_http_info(*, session : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
+    def post_identity_verification_sessions_session_redact_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_identity_verification_sessions_session_redact(session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -717,14 +924,23 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_identity_verification_sessions_session_redact(*, session : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_identity_verification_sessions_session_redact(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_identity_verification_sessions_session_redact(session: session, expand: expand).execute(&block)
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_REDACT_MAX_LENGTH_FOR_SESSION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_identity_verification_sessions_session_redact(*, session : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_identity_verification_sessions_session_redact(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions_session_redact ..." }
       end
@@ -749,6 +965,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -766,6 +985,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

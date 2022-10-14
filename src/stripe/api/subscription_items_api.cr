@@ -26,7 +26,13 @@ module Stripe
     # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
     # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
     # @return [Stripe::DeletedSubscriptionItem]
-    def delete_subscription_items_item(*, item : String? = nil, clear_usage : Bool? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil) : Stripe::DeletedSubscriptionItem
+    def delete_subscription_items_item(
+      *,
+      item : String? = nil,
+      clear_usage : Bool? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil
+    ) : Stripe::DeletedSubscriptionItem
       data, _status_code, _headers = delete_subscription_items_item_with_http_info(item: item, clear_usage: clear_usage, proration_behavior: proration_behavior, proration_date: proration_date)
       data
     end
@@ -37,7 +43,13 @@ module Stripe
     # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
     # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
     # @return [Tuple(Stripe::DeletedSubscriptionItem, Integer, Hash)] Stripe::DeletedSubscriptionItem, response status code and response headers
-    def delete_subscription_items_item_with_http_info(*, item : String? = nil, clear_usage : Bool? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil) : Tuple(Stripe::DeletedSubscriptionItem, Int32, Hash(String, Array(String) | String))
+    def delete_subscription_items_item_with_http_info(
+      *,
+      item : String? = nil,
+      clear_usage : Bool? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil
+    ) : Tuple(Stripe::DeletedSubscriptionItem, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_subscription_items_item(item: item, clear_usage: clear_usage, proration_behavior: proration_behavior, proration_date: proration_date)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -55,7 +67,14 @@ module Stripe
     # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
     # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
     # @return nil
-    def delete_subscription_items_item(*, item : String? = nil, clear_usage : Bool? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, &block : Crest::Response ->) : Nil
+    def delete_subscription_items_item(
+      *,
+      item : String? = nil,
+      clear_usage : Bool? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_subscription_items_item(item: item, clear_usage: clear_usage, proration_behavior: proration_behavior, proration_date: proration_date).execute(&block)
     end
 
@@ -63,7 +82,13 @@ module Stripe
     DELETE_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
-    def build_api_request_for_delete_subscription_items_item(*, item : String? = nil, clear_usage : Bool? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil) : Crest::Request
+    def build_api_request_for_delete_subscription_items_item(
+      *,
+      item : String? = nil,
+      clear_usage : Bool? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.delete_subscription_items_item ..." }
       end
@@ -92,6 +117,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["clear_usage"] = clear_usage.to_s if !clear_usage.nil?
@@ -111,6 +139,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -123,7 +152,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SubscriptionsItemsSubscriptionItemList]
-    def get_subscription_items(*, subscription : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SubscriptionsItemsSubscriptionItemList
+    def get_subscription_items(
+      *,
+      subscription : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SubscriptionsItemsSubscriptionItemList
       data, _status_code, _headers = get_subscription_items_with_http_info(subscription: subscription, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -135,7 +171,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SubscriptionsItemsSubscriptionItemList, Integer, Hash)] Stripe::SubscriptionsItemsSubscriptionItemList, response status code and response headers
-    def get_subscription_items_with_http_info(*, subscription : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SubscriptionsItemsSubscriptionItemList, Int32, Hash(String, Array(String) | String))
+    def get_subscription_items_with_http_info(
+      *,
+      subscription : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SubscriptionsItemsSubscriptionItemList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_subscription_items(subscription: subscription, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -154,14 +197,29 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_subscription_items(*, subscription : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_subscription_items(
+      *,
+      subscription : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_subscription_items(subscription: subscription, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
     GET_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_SUBSCRIPTION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_subscription_items(*, subscription : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_subscription_items(
+      *,
+      subscription : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.get_subscription_items ..." }
       end
@@ -189,6 +247,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -205,6 +266,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -214,7 +276,11 @@ module Stripe
     # @required @param item [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SubscriptionItem]
-    def get_subscription_items_item(*, item : String? = nil, expand : Array(Array(String))? = nil) : Stripe::SubscriptionItem
+    def get_subscription_items_item(
+      *,
+      item : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SubscriptionItem
       data, _status_code, _headers = get_subscription_items_item_with_http_info(item: item, expand: expand)
       data
     end
@@ -223,7 +289,11 @@ module Stripe
     # @required @param item [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SubscriptionItem, Integer, Hash)] Stripe::SubscriptionItem, response status code and response headers
-    def get_subscription_items_item_with_http_info(*, item : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
+    def get_subscription_items_item_with_http_info(
+      *,
+      item : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_subscription_items_item(item: item, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -239,14 +309,23 @@ module Stripe
     # @required @param item [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_subscription_items_item(*, item : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_subscription_items_item(
+      *,
+      item : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_subscription_items_item(item: item, expand: expand).execute(&block)
     end
 
     GET_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_subscription_items_item(*, item : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_subscription_items_item(
+      *,
+      item : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.get_subscription_items_item ..." }
       end
@@ -270,6 +349,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -286,6 +368,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -298,7 +381,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::UsageEventsResourceUsageRecordSummaryList]
-    def get_subscription_items_subscription_item_usage_record_summaries(*, subscription_item : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::UsageEventsResourceUsageRecordSummaryList
+    def get_subscription_items_subscription_item_usage_record_summaries(
+      *,
+      subscription_item : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::UsageEventsResourceUsageRecordSummaryList
       data, _status_code, _headers = get_subscription_items_subscription_item_usage_record_summaries_with_http_info(subscription_item: subscription_item, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -310,7 +400,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::UsageEventsResourceUsageRecordSummaryList, Integer, Hash)] Stripe::UsageEventsResourceUsageRecordSummaryList, response status code and response headers
-    def get_subscription_items_subscription_item_usage_record_summaries_with_http_info(*, subscription_item : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::UsageEventsResourceUsageRecordSummaryList, Int32, Hash(String, Array(String) | String))
+    def get_subscription_items_subscription_item_usage_record_summaries_with_http_info(
+      *,
+      subscription_item : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::UsageEventsResourceUsageRecordSummaryList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_subscription_items_subscription_item_usage_record_summaries(subscription_item: subscription_item, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -329,7 +426,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_subscription_items_subscription_item_usage_record_summaries(*, subscription_item : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_subscription_items_subscription_item_usage_record_summaries(
+      *,
+      subscription_item : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_subscription_items_subscription_item_usage_record_summaries(subscription_item: subscription_item, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -337,7 +442,14 @@ module Stripe
     GET_SUBSCRIPTION_ITEMS_SUBSCRIPTION_ITEM_USAGE_RECORD_SUMMARIES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_subscription_items_subscription_item_usage_record_summaries(*, subscription_item : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_subscription_items_subscription_item_usage_record_summaries(
+      *,
+      subscription_item : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.get_subscription_items_subscription_item_usage_record_summaries ..." }
       end
@@ -368,6 +480,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -384,6 +499,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -401,7 +517,19 @@ module Stripe
     # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
     # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
     # @return [Stripe::SubscriptionItem]
-    def post_subscription_items(*, subscription : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Stripe::SubscriptionItem
+    def post_subscription_items(
+      *,
+      subscription : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+    ) : Stripe::SubscriptionItem
       data, _status_code, _headers = post_subscription_items_with_http_info(subscription: subscription, billing_thresholds: billing_thresholds, expand: expand, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
       data
     end
@@ -418,7 +546,19 @@ module Stripe
     # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
     # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
     # @return [Tuple(Stripe::SubscriptionItem, Integer, Hash)] Stripe::SubscriptionItem, response status code and response headers
-    def post_subscription_items_with_http_info(*, subscription : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
+    def post_subscription_items_with_http_info(
+      *,
+      subscription : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+    ) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_subscription_items(subscription: subscription, billing_thresholds: billing_thresholds, expand: expand, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -442,7 +582,20 @@ module Stripe
     # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
     # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
     # @return nil
-    def post_subscription_items(*, subscription : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil, &block : Crest::Response ->) : Nil
+    def post_subscription_items(
+      *,
+      subscription : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_subscription_items(subscription: subscription, billing_thresholds: billing_thresholds, expand: expand, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates).execute(&block)
     end
 
@@ -452,7 +605,19 @@ module Stripe
     POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
-    def build_api_request_for_post_subscription_items(*, subscription : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Crest::Request
+    def build_api_request_for_post_subscription_items(
+      *,
+      subscription : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.post_subscription_items ..." }
       end
@@ -497,6 +662,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["billing_thresholds"] = billing_thresholds.to_s if !billing_thresholds.nil?
@@ -523,6 +691,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -542,7 +711,21 @@ module Stripe
     # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
     # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
     # @return [Stripe::SubscriptionItem]
-    def post_subscription_items_item(*, item : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Stripe::SubscriptionItem
+    def post_subscription_items_item(
+      *,
+      item : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+    ) : Stripe::SubscriptionItem
       data, _status_code, _headers = post_subscription_items_item_with_http_info(item: item, billing_thresholds: billing_thresholds, expand: expand, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
       data
     end
@@ -561,7 +744,21 @@ module Stripe
     # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
     # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
     # @return [Tuple(Stripe::SubscriptionItem, Integer, Hash)] Stripe::SubscriptionItem, response status code and response headers
-    def post_subscription_items_item_with_http_info(*, item : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
+    def post_subscription_items_item_with_http_info(
+      *,
+      item : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+    ) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_subscription_items_item(item: item, billing_thresholds: billing_thresholds, expand: expand, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -587,7 +784,22 @@ module Stripe
     # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
     # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
     # @return nil
-    def post_subscription_items_item(*, item : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil, &block : Crest::Response ->) : Nil
+    def post_subscription_items_item(
+      *,
+      item : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_subscription_items_item(item: item, billing_thresholds: billing_thresholds, expand: expand, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates).execute(&block)
     end
 
@@ -597,7 +809,21 @@ module Stripe
     POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
-    def build_api_request_for_post_subscription_items_item(*, item : String? = nil, billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, price : String? = nil, price_data : Stripe::RecurringPriceData? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, quantity : Int64? = nil, tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil) : Crest::Request
+    def build_api_request_for_post_subscription_items_item(
+      *,
+      item : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      price : String? = nil,
+      price_data : Stripe::RecurringPriceData? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      quantity : Int64? = nil,
+      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.post_subscription_items_item ..." }
       end
@@ -646,6 +872,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["billing_thresholds"] = billing_thresholds.to_s if !billing_thresholds.nil?
@@ -673,6 +902,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -685,7 +915,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param timestamp [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?]
     # @return [Stripe::UsageRecord]
-    def post_subscription_items_subscription_item_usage_records(*, subscription_item : String? = nil, quantity : Int64? = nil, action : String? = nil, expand : Array(String)? = nil, timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil) : Stripe::UsageRecord
+    def post_subscription_items_subscription_item_usage_records(
+      *,
+      subscription_item : String? = nil,
+      quantity : Int64? = nil,
+      action : String? = nil,
+      expand : Array(String)? = nil,
+      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
+    ) : Stripe::UsageRecord
       data, _status_code, _headers = post_subscription_items_subscription_item_usage_records_with_http_info(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp)
       data
     end
@@ -697,7 +934,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param timestamp [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?]
     # @return [Tuple(Stripe::UsageRecord, Integer, Hash)] Stripe::UsageRecord, response status code and response headers
-    def post_subscription_items_subscription_item_usage_records_with_http_info(*, subscription_item : String? = nil, quantity : Int64? = nil, action : String? = nil, expand : Array(String)? = nil, timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil) : Tuple(Stripe::UsageRecord, Int32, Hash(String, Array(String) | String))
+    def post_subscription_items_subscription_item_usage_records_with_http_info(
+      *,
+      subscription_item : String? = nil,
+      quantity : Int64? = nil,
+      action : String? = nil,
+      expand : Array(String)? = nil,
+      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
+    ) : Tuple(Stripe::UsageRecord, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -716,14 +960,29 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param timestamp [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?]
     # @return nil
-    def post_subscription_items_subscription_item_usage_records(*, subscription_item : String? = nil, quantity : Int64? = nil, action : String? = nil, expand : Array(String)? = nil, timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil, &block : Crest::Response ->) : Nil
+    def post_subscription_items_subscription_item_usage_records(
+      *,
+      subscription_item : String? = nil,
+      quantity : Int64? = nil,
+      action : String? = nil,
+      expand : Array(String)? = nil,
+      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp).execute(&block)
     end
 
     POST_SUBSCRIPTION_ITEMS_SUBSCRIPTION_ITEM_USAGE_RECORDS_VALID_VALUES_FOR_ACTION = String.static_array("increment", "set")
 
     # @return Crest::Request
-    def build_api_request_for_post_subscription_items_subscription_item_usage_records(*, subscription_item : String? = nil, quantity : Int64? = nil, action : String? = nil, expand : Array(String)? = nil, timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil) : Crest::Request
+    def build_api_request_for_post_subscription_items_subscription_item_usage_records(
+      *,
+      subscription_item : String? = nil,
+      quantity : Int64? = nil,
+      action : String? = nil,
+      expand : Array(String)? = nil,
+      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.post_subscription_items_subscription_item_usage_records ..." }
       end
@@ -755,6 +1014,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["action"] = action.to_s if !action.nil?
@@ -775,6 +1037,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

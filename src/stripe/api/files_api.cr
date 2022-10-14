@@ -28,7 +28,15 @@ module Stripe
     # @optional @param purpose [String?] The file purpose to filter queries by. If none is provided, files will not be filtered by purpose.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::FileFileList]
-    def get_files(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, purpose : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::FileFileList
+    def get_files(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      purpose : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::FileFileList
       data, _status_code, _headers = get_files_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, purpose: purpose, created: created)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param purpose [String?] The file purpose to filter queries by. If none is provided, files will not be filtered by purpose.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::FileFileList, Integer, Hash)] Stripe::FileFileList, response status code and response headers
-    def get_files_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, purpose : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::FileFileList, Int32, Hash(String, Array(String) | String))
+    def get_files_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      purpose : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::FileFileList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_files(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, purpose: purpose, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param purpose [String?] The file purpose to filter queries by. If none is provided, files will not be filtered by purpose.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_files(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, purpose : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_files(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      purpose : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_files(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, purpose: purpose, created: created).execute(&block)
     end
 
@@ -71,7 +96,15 @@ module Stripe
     GET_FILES_VALID_VALUES_FOR_PURPOSE      = String.static_array("account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen")
 
     # @return Crest::Request
-    def build_api_request_for_get_files(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, purpose : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_files(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      purpose : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FilesApi.get_files ..." }
       end
@@ -109,6 +142,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -125,6 +161,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -134,7 +171,11 @@ module Stripe
     # @required @param file [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::File]
-    def get_files_file(*, file : String? = nil, expand : Array(Array(String))? = nil) : Stripe::File
+    def get_files_file(
+      *,
+      file : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::File
       data, _status_code, _headers = get_files_file_with_http_info(file: file, expand: expand)
       data
     end
@@ -143,7 +184,11 @@ module Stripe
     # @required @param file [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::File, Integer, Hash)] Stripe::File, response status code and response headers
-    def get_files_file_with_http_info(*, file : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::File, Int32, Hash(String, Array(String) | String))
+    def get_files_file_with_http_info(
+      *,
+      file : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_files_file(file: file, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -159,14 +204,23 @@ module Stripe
     # @required @param file [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_files_file(*, file : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_files_file(
+      *,
+      file : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_files_file(file: file, expand: expand).execute(&block)
     end
 
     GET_FILES_FILE_MAX_LENGTH_FOR_FILE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_files_file(*, file : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_files_file(
+      *,
+      file : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FilesApi.get_files_file ..." }
       end
@@ -190,6 +244,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -206,6 +263,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -217,7 +275,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param file_link_data [Stripe::FileLinkCreationParams?]
     # @return [Stripe::File]
-    def post_files(*, file : String? = nil, purpose : String? = nil, expand : Array(String)? = nil, file_link_data : Stripe::FileLinkCreationParams? = nil) : Stripe::File
+    def post_files(
+      *,
+      file : String? = nil,
+      purpose : String? = nil,
+      expand : Array(String)? = nil,
+      file_link_data : Stripe::FileLinkCreationParams? = nil
+    ) : Stripe::File
       data, _status_code, _headers = post_files_with_http_info(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data)
       data
     end
@@ -228,7 +292,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param file_link_data [Stripe::FileLinkCreationParams?]
     # @return [Tuple(Stripe::File, Integer, Hash)] Stripe::File, response status code and response headers
-    def post_files_with_http_info(*, file : String? = nil, purpose : String? = nil, expand : Array(String)? = nil, file_link_data : Stripe::FileLinkCreationParams? = nil) : Tuple(Stripe::File, Int32, Hash(String, Array(String) | String))
+    def post_files_with_http_info(
+      *,
+      file : String? = nil,
+      purpose : String? = nil,
+      expand : Array(String)? = nil,
+      file_link_data : Stripe::FileLinkCreationParams? = nil
+    ) : Tuple(Stripe::File, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_files(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -246,14 +316,27 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param file_link_data [Stripe::FileLinkCreationParams?]
     # @return nil
-    def post_files(*, file : String? = nil, purpose : String? = nil, expand : Array(String)? = nil, file_link_data : Stripe::FileLinkCreationParams? = nil, &block : Crest::Response ->) : Nil
+    def post_files(
+      *,
+      file : String? = nil,
+      purpose : String? = nil,
+      expand : Array(String)? = nil,
+      file_link_data : Stripe::FileLinkCreationParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_files(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data).execute(&block)
     end
 
     POST_FILES_VALID_VALUES_FOR_PURPOSE = String.static_array("account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen")
 
     # @return Crest::Request
-    def build_api_request_for_post_files(*, file : String? = nil, purpose : String? = nil, expand : Array(String)? = nil, file_link_data : Stripe::FileLinkCreationParams? = nil) : Crest::Request
+    def build_api_request_for_post_files(
+      *,
+      file : String? = nil,
+      purpose : String? = nil,
+      expand : Array(String)? = nil,
+      file_link_data : Stripe::FileLinkCreationParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FilesApi.post_files ..." }
       end
@@ -284,6 +367,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -304,6 +390,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

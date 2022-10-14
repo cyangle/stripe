@@ -26,7 +26,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SigmaScheduledQueryRunList]
-    def get_sigma_scheduled_query_runs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SigmaScheduledQueryRunList
+    def get_sigma_scheduled_query_runs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SigmaScheduledQueryRunList
       data, _status_code, _headers = get_sigma_scheduled_query_runs_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -37,7 +43,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SigmaScheduledQueryRunList, Integer, Hash)] Stripe::SigmaScheduledQueryRunList, response status code and response headers
-    def get_sigma_scheduled_query_runs_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SigmaScheduledQueryRunList, Int32, Hash(String, Array(String) | String))
+    def get_sigma_scheduled_query_runs_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SigmaScheduledQueryRunList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_sigma_scheduled_query_runs(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -55,7 +67,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_sigma_scheduled_query_runs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_sigma_scheduled_query_runs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_sigma_scheduled_query_runs(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -63,7 +82,13 @@ module Stripe
     GET_SIGMA_SCHEDULED_QUERY_RUNS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_sigma_scheduled_query_runs(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_sigma_scheduled_query_runs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SigmaApi.get_sigma_scheduled_query_runs ..." }
       end
@@ -92,6 +117,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -108,6 +136,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -117,7 +146,11 @@ module Stripe
     # @required @param scheduled_query_run [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ScheduledQueryRun]
-    def get_sigma_scheduled_query_runs_scheduled_query_run(*, scheduled_query_run : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ScheduledQueryRun
+    def get_sigma_scheduled_query_runs_scheduled_query_run(
+      *,
+      scheduled_query_run : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ScheduledQueryRun
       data, _status_code, _headers = get_sigma_scheduled_query_runs_scheduled_query_run_with_http_info(scheduled_query_run: scheduled_query_run, expand: expand)
       data
     end
@@ -126,7 +159,11 @@ module Stripe
     # @required @param scheduled_query_run [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ScheduledQueryRun, Integer, Hash)] Stripe::ScheduledQueryRun, response status code and response headers
-    def get_sigma_scheduled_query_runs_scheduled_query_run_with_http_info(*, scheduled_query_run : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ScheduledQueryRun, Int32, Hash(String, Array(String) | String))
+    def get_sigma_scheduled_query_runs_scheduled_query_run_with_http_info(
+      *,
+      scheduled_query_run : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ScheduledQueryRun, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_sigma_scheduled_query_runs_scheduled_query_run(scheduled_query_run: scheduled_query_run, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -142,14 +179,23 @@ module Stripe
     # @required @param scheduled_query_run [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_sigma_scheduled_query_runs_scheduled_query_run(*, scheduled_query_run : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_sigma_scheduled_query_runs_scheduled_query_run(
+      *,
+      scheduled_query_run : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_sigma_scheduled_query_runs_scheduled_query_run(scheduled_query_run: scheduled_query_run, expand: expand).execute(&block)
     end
 
     GET_SIGMA_SCHEDULED_QUERY_RUNS_SCHEDULED_QUERY_RUN_MAX_LENGTH_FOR_SCHEDULED_QUERY_RUN = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_sigma_scheduled_query_runs_scheduled_query_run(*, scheduled_query_run : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_sigma_scheduled_query_runs_scheduled_query_run(
+      *,
+      scheduled_query_run : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SigmaApi.get_sigma_scheduled_query_runs_scheduled_query_run ..." }
       end
@@ -173,6 +219,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -189,6 +238,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

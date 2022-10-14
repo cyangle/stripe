@@ -30,7 +30,17 @@ module Stripe
     # @optional @param customer [String?] Only return the Checkout Sessions for the Customer specified.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentPagesCheckoutSessionList]
-    def get_checkout_sessions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, subscription : String? = nil, customer_details : Stripe::CustomerDetailsParams? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentPagesCheckoutSessionList
+    def get_checkout_sessions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      subscription : String? = nil,
+      customer_details : Stripe::CustomerDetailsParams? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentPagesCheckoutSessionList
       data, _status_code, _headers = get_checkout_sessions_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, subscription: subscription, customer_details: customer_details, customer: customer, expand: expand)
       data
     end
@@ -45,7 +55,17 @@ module Stripe
     # @optional @param customer [String?] Only return the Checkout Sessions for the Customer specified.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentPagesCheckoutSessionList, Integer, Hash)] Stripe::PaymentPagesCheckoutSessionList, response status code and response headers
-    def get_checkout_sessions_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, subscription : String? = nil, customer_details : Stripe::CustomerDetailsParams? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentPagesCheckoutSessionList, Int32, Hash(String, Array(String) | String))
+    def get_checkout_sessions_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      subscription : String? = nil,
+      customer_details : Stripe::CustomerDetailsParams? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentPagesCheckoutSessionList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_checkout_sessions(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, subscription: subscription, customer_details: customer_details, customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -67,7 +87,18 @@ module Stripe
     # @optional @param customer [String?] Only return the Checkout Sessions for the Customer specified.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_checkout_sessions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, subscription : String? = nil, customer_details : Stripe::CustomerDetailsParams? = nil, customer : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_checkout_sessions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      subscription : String? = nil,
+      customer_details : Stripe::CustomerDetailsParams? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_checkout_sessions(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, subscription: subscription, customer_details: customer_details, customer: customer, expand: expand).execute(&block)
     end
 
@@ -78,7 +109,17 @@ module Stripe
     GET_CHECKOUT_SESSIONS_MAX_LENGTH_FOR_CUSTOMER       = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_checkout_sessions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, subscription : String? = nil, customer_details : Stripe::CustomerDetailsParams? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_checkout_sessions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      subscription : String? = nil,
+      customer_details : Stripe::CustomerDetailsParams? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CheckoutApi.get_checkout_sessions ..." }
       end
@@ -124,6 +165,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -140,6 +184,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -149,7 +194,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CheckoutSession]
-    def get_checkout_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil) : Stripe::CheckoutSession
+    def get_checkout_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CheckoutSession
       data, _status_code, _headers = get_checkout_sessions_session_with_http_info(session: session, expand: expand)
       data
     end
@@ -158,7 +207,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CheckoutSession, Integer, Hash)] Stripe::CheckoutSession, response status code and response headers
-    def get_checkout_sessions_session_with_http_info(*, session : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CheckoutSession, Int32, Hash(String, Array(String) | String))
+    def get_checkout_sessions_session_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CheckoutSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_checkout_sessions_session(session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -174,14 +227,23 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_checkout_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_checkout_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_checkout_sessions_session(session: session, expand: expand).execute(&block)
     end
 
     GET_CHECKOUT_SESSIONS_SESSION_MAX_LENGTH_FOR_SESSION = 66
 
     # @return Crest::Request
-    def build_api_request_for_get_checkout_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_checkout_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CheckoutApi.get_checkout_sessions_session ..." }
       end
@@ -205,6 +267,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -221,6 +286,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -233,7 +299,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentPagesCheckoutSessionListLineItems]
-    def get_checkout_sessions_session_line_items(*, session : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentPagesCheckoutSessionListLineItems
+    def get_checkout_sessions_session_line_items(
+      *,
+      session : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentPagesCheckoutSessionListLineItems
       data, _status_code, _headers = get_checkout_sessions_session_line_items_with_http_info(session: session, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -245,7 +318,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentPagesCheckoutSessionListLineItems, Integer, Hash)] Stripe::PaymentPagesCheckoutSessionListLineItems, response status code and response headers
-    def get_checkout_sessions_session_line_items_with_http_info(*, session : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentPagesCheckoutSessionListLineItems, Int32, Hash(String, Array(String) | String))
+    def get_checkout_sessions_session_line_items_with_http_info(
+      *,
+      session : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentPagesCheckoutSessionListLineItems, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_checkout_sessions_session_line_items(session: session, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -264,7 +344,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_checkout_sessions_session_line_items(*, session : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_checkout_sessions_session_line_items(
+      *,
+      session : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_checkout_sessions_session_line_items(session: session, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -273,7 +361,14 @@ module Stripe
     GET_CHECKOUT_SESSIONS_SESSION_LINE_ITEMS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_checkout_sessions_session_line_items(*, session : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_checkout_sessions_session_line_items(
+      *,
+      session : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CheckoutApi.get_checkout_sessions_session_line_items ..." }
       end
@@ -306,6 +401,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -322,6 +420,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -359,7 +458,39 @@ module Stripe
     # @optional @param subscription_data [Stripe::SubscriptionDataParams?]
     # @optional @param tax_id_collection [Stripe::TaxIdCollectionParams?]
     # @return [Stripe::CheckoutSession]
-    def post_checkout_sessions(*, cancel_url : String? = nil, success_url : String? = nil, after_expiration : Stripe::AfterExpirationParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, client_reference_id : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer : String? = nil, customer_creation : String? = nil, customer_email : String? = nil, customer_update : Stripe::CustomerUpdateParams? = nil, discounts : Array(Stripe::DiscountParams)? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, line_items : Array(Stripe::LineItemParams)? = nil, locale : String? = nil, mode : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, setup_intent_data : Stripe::SetupIntentDataParam? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil) : Stripe::CheckoutSession
+    def post_checkout_sessions(
+      *,
+      cancel_url : String? = nil,
+      success_url : String? = nil,
+      after_expiration : Stripe::AfterExpirationParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      client_reference_id : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      customer_creation : String? = nil,
+      customer_email : String? = nil,
+      customer_update : Stripe::CustomerUpdateParams? = nil,
+      discounts : Array(Stripe::DiscountParams)? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      line_items : Array(Stripe::LineItemParams)? = nil,
+      locale : String? = nil,
+      mode : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      setup_intent_data : Stripe::SetupIntentDataParam? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil
+    ) : Stripe::CheckoutSession
       data, _status_code, _headers = post_checkout_sessions_with_http_info(cancel_url: cancel_url, success_url: success_url, after_expiration: after_expiration, allow_promotion_codes: allow_promotion_codes, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, client_reference_id: client_reference_id, consent_collection: consent_collection, currency: currency, customer: customer, customer_creation: customer_creation, customer_email: customer_email, customer_update: customer_update, discounts: discounts, expand: expand, expires_at: expires_at, line_items: line_items, locale: locale, mode: mode, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_options: payment_method_options, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, setup_intent_data: setup_intent_data, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection)
       data
     end
@@ -396,7 +527,39 @@ module Stripe
     # @optional @param subscription_data [Stripe::SubscriptionDataParams?]
     # @optional @param tax_id_collection [Stripe::TaxIdCollectionParams?]
     # @return [Tuple(Stripe::CheckoutSession, Integer, Hash)] Stripe::CheckoutSession, response status code and response headers
-    def post_checkout_sessions_with_http_info(*, cancel_url : String? = nil, success_url : String? = nil, after_expiration : Stripe::AfterExpirationParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, client_reference_id : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer : String? = nil, customer_creation : String? = nil, customer_email : String? = nil, customer_update : Stripe::CustomerUpdateParams? = nil, discounts : Array(Stripe::DiscountParams)? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, line_items : Array(Stripe::LineItemParams)? = nil, locale : String? = nil, mode : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, setup_intent_data : Stripe::SetupIntentDataParam? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil) : Tuple(Stripe::CheckoutSession, Int32, Hash(String, Array(String) | String))
+    def post_checkout_sessions_with_http_info(
+      *,
+      cancel_url : String? = nil,
+      success_url : String? = nil,
+      after_expiration : Stripe::AfterExpirationParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      client_reference_id : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      customer_creation : String? = nil,
+      customer_email : String? = nil,
+      customer_update : Stripe::CustomerUpdateParams? = nil,
+      discounts : Array(Stripe::DiscountParams)? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      line_items : Array(Stripe::LineItemParams)? = nil,
+      locale : String? = nil,
+      mode : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      setup_intent_data : Stripe::SetupIntentDataParam? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil
+    ) : Tuple(Stripe::CheckoutSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_checkout_sessions(cancel_url: cancel_url, success_url: success_url, after_expiration: after_expiration, allow_promotion_codes: allow_promotion_codes, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, client_reference_id: client_reference_id, consent_collection: consent_collection, currency: currency, customer: customer, customer_creation: customer_creation, customer_email: customer_email, customer_update: customer_update, discounts: discounts, expand: expand, expires_at: expires_at, line_items: line_items, locale: locale, mode: mode, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_options: payment_method_options, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, setup_intent_data: setup_intent_data, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -440,7 +603,40 @@ module Stripe
     # @optional @param subscription_data [Stripe::SubscriptionDataParams?]
     # @optional @param tax_id_collection [Stripe::TaxIdCollectionParams?]
     # @return nil
-    def post_checkout_sessions(*, cancel_url : String? = nil, success_url : String? = nil, after_expiration : Stripe::AfterExpirationParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, client_reference_id : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer : String? = nil, customer_creation : String? = nil, customer_email : String? = nil, customer_update : Stripe::CustomerUpdateParams? = nil, discounts : Array(Stripe::DiscountParams)? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, line_items : Array(Stripe::LineItemParams)? = nil, locale : String? = nil, mode : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, setup_intent_data : Stripe::SetupIntentDataParam? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil, &block : Crest::Response ->) : Nil
+    def post_checkout_sessions(
+      *,
+      cancel_url : String? = nil,
+      success_url : String? = nil,
+      after_expiration : Stripe::AfterExpirationParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      client_reference_id : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      customer_creation : String? = nil,
+      customer_email : String? = nil,
+      customer_update : Stripe::CustomerUpdateParams? = nil,
+      discounts : Array(Stripe::DiscountParams)? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      line_items : Array(Stripe::LineItemParams)? = nil,
+      locale : String? = nil,
+      mode : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      setup_intent_data : Stripe::SetupIntentDataParam? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_checkout_sessions(cancel_url: cancel_url, success_url: success_url, after_expiration: after_expiration, allow_promotion_codes: allow_promotion_codes, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, client_reference_id: client_reference_id, consent_collection: consent_collection, currency: currency, customer: customer, customer_creation: customer_creation, customer_email: customer_email, customer_update: customer_update, discounts: discounts, expand: expand, expires_at: expires_at, line_items: line_items, locale: locale, mode: mode, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_options: payment_method_options, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, setup_intent_data: setup_intent_data, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection).execute(&block)
     end
 
@@ -457,7 +653,39 @@ module Stripe
     POST_CHECKOUT_SESSIONS_VALID_VALUES_FOR_SUBMIT_TYPE                = String.static_array("auto", "book", "donate", "pay")
 
     # @return Crest::Request
-    def build_api_request_for_post_checkout_sessions(*, cancel_url : String? = nil, success_url : String? = nil, after_expiration : Stripe::AfterExpirationParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, client_reference_id : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer : String? = nil, customer_creation : String? = nil, customer_email : String? = nil, customer_update : Stripe::CustomerUpdateParams? = nil, discounts : Array(Stripe::DiscountParams)? = nil, expand : Array(String)? = nil, expires_at : Int64? = nil, line_items : Array(Stripe::LineItemParams)? = nil, locale : String? = nil, mode : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, setup_intent_data : Stripe::SetupIntentDataParam? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil) : Crest::Request
+    def build_api_request_for_post_checkout_sessions(
+      *,
+      cancel_url : String? = nil,
+      success_url : String? = nil,
+      after_expiration : Stripe::AfterExpirationParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      client_reference_id : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      customer_creation : String? = nil,
+      customer_email : String? = nil,
+      customer_update : Stripe::CustomerUpdateParams? = nil,
+      discounts : Array(Stripe::DiscountParams)? = nil,
+      expand : Array(String)? = nil,
+      expires_at : Int64? = nil,
+      line_items : Array(Stripe::LineItemParams)? = nil,
+      locale : String? = nil,
+      mode : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      setup_intent_data : Stripe::SetupIntentDataParam? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CheckoutApi.post_checkout_sessions ..." }
       end
@@ -559,6 +787,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["after_expiration"] = after_expiration.to_s if !after_expiration.nil?
@@ -605,6 +836,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -614,7 +846,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CheckoutSession]
-    def post_checkout_sessions_session_expire(*, session : String? = nil, expand : Array(String)? = nil) : Stripe::CheckoutSession
+    def post_checkout_sessions_session_expire(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::CheckoutSession
       data, _status_code, _headers = post_checkout_sessions_session_expire_with_http_info(session: session, expand: expand)
       data
     end
@@ -623,7 +859,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CheckoutSession, Integer, Hash)] Stripe::CheckoutSession, response status code and response headers
-    def post_checkout_sessions_session_expire_with_http_info(*, session : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::CheckoutSession, Int32, Hash(String, Array(String) | String))
+    def post_checkout_sessions_session_expire_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::CheckoutSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_checkout_sessions_session_expire(session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -639,14 +879,23 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_checkout_sessions_session_expire(*, session : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_checkout_sessions_session_expire(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_checkout_sessions_session_expire(session: session, expand: expand).execute(&block)
     end
 
     POST_CHECKOUT_SESSIONS_SESSION_EXPIRE_MAX_LENGTH_FOR_SESSION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_checkout_sessions_session_expire(*, session : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_checkout_sessions_session_expire(
+      *,
+      session : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CheckoutApi.post_checkout_sessions_session_expire ..." }
       end
@@ -671,6 +920,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -688,6 +940,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

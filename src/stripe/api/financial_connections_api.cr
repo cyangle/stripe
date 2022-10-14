@@ -28,7 +28,15 @@ module Stripe
     # @optional @param session [String?] If present, only return accounts that were collected as part of the given session.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::BankConnectionsResourceLinkedAccountList]
-    def get_financial_connections_accounts(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, account_holder : Stripe::AccountholderParams? = nil, session : String? = nil, expand : Array(Array(String))? = nil) : Stripe::BankConnectionsResourceLinkedAccountList
+    def get_financial_connections_accounts(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      account_holder : Stripe::AccountholderParams? = nil,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::BankConnectionsResourceLinkedAccountList
       data, _status_code, _headers = get_financial_connections_accounts_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, account_holder: account_holder, session: session, expand: expand)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param session [String?] If present, only return accounts that were collected as part of the given session.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::BankConnectionsResourceLinkedAccountList, Integer, Hash)] Stripe::BankConnectionsResourceLinkedAccountList, response status code and response headers
-    def get_financial_connections_accounts_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, account_holder : Stripe::AccountholderParams? = nil, session : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::BankConnectionsResourceLinkedAccountList, Int32, Hash(String, Array(String) | String))
+    def get_financial_connections_accounts_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      account_holder : Stripe::AccountholderParams? = nil,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::BankConnectionsResourceLinkedAccountList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_financial_connections_accounts(ending_before: ending_before, starting_after: starting_after, limit: limit, account_holder: account_holder, session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param session [String?] If present, only return accounts that were collected as part of the given session.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_financial_connections_accounts(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, account_holder : Stripe::AccountholderParams? = nil, session : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_financial_connections_accounts(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      account_holder : Stripe::AccountholderParams? = nil,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_financial_connections_accounts(ending_before: ending_before, starting_after: starting_after, limit: limit, account_holder: account_holder, session: session, expand: expand).execute(&block)
     end
 
@@ -70,7 +95,15 @@ module Stripe
     GET_FINANCIAL_CONNECTIONS_ACCOUNTS_MAX_LENGTH_FOR_SESSION        = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_financial_connections_accounts(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, account_holder : Stripe::AccountholderParams? = nil, session : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_financial_connections_accounts(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      account_holder : Stripe::AccountholderParams? = nil,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.get_financial_connections_accounts ..." }
       end
@@ -108,6 +141,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -124,6 +160,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -133,7 +170,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::FinancialConnectionsAccount]
-    def get_financial_connections_accounts_account(*, account : String? = nil, expand : Array(Array(String))? = nil) : Stripe::FinancialConnectionsAccount
+    def get_financial_connections_accounts_account(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::FinancialConnectionsAccount
       data, _status_code, _headers = get_financial_connections_accounts_account_with_http_info(account: account, expand: expand)
       data
     end
@@ -142,7 +183,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
-    def get_financial_connections_accounts_account_with_http_info(*, account : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
+    def get_financial_connections_accounts_account_with_http_info(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_financial_connections_accounts_account(account: account, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -158,14 +203,23 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_financial_connections_accounts_account(*, account : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_financial_connections_accounts_account(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_financial_connections_accounts_account(account: account, expand: expand).execute(&block)
     end
 
     GET_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_financial_connections_accounts_account(*, account : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_financial_connections_accounts_account(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.get_financial_connections_accounts_account ..." }
       end
@@ -189,6 +243,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -205,6 +262,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -214,7 +272,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::FinancialConnectionsSession]
-    def get_financial_connections_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil) : Stripe::FinancialConnectionsSession
+    def get_financial_connections_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::FinancialConnectionsSession
       data, _status_code, _headers = get_financial_connections_sessions_session_with_http_info(session: session, expand: expand)
       data
     end
@@ -223,7 +285,11 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::FinancialConnectionsSession, Integer, Hash)] Stripe::FinancialConnectionsSession, response status code and response headers
-    def get_financial_connections_sessions_session_with_http_info(*, session : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::FinancialConnectionsSession, Int32, Hash(String, Array(String) | String))
+    def get_financial_connections_sessions_session_with_http_info(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::FinancialConnectionsSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_financial_connections_sessions_session(session: session, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -239,14 +305,23 @@ module Stripe
     # @required @param session [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_financial_connections_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_financial_connections_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_financial_connections_sessions_session(session: session, expand: expand).execute(&block)
     end
 
     GET_FINANCIAL_CONNECTIONS_SESSIONS_SESSION_MAX_LENGTH_FOR_SESSION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_financial_connections_sessions_session(*, session : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_financial_connections_sessions_session(
+      *,
+      session : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.get_financial_connections_sessions_session ..." }
       end
@@ -270,6 +345,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -286,6 +364,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -295,7 +374,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::FinancialConnectionsAccount]
-    def post_financial_connections_accounts_account_disconnect(*, account : String? = nil, expand : Array(String)? = nil) : Stripe::FinancialConnectionsAccount
+    def post_financial_connections_accounts_account_disconnect(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::FinancialConnectionsAccount
       data, _status_code, _headers = post_financial_connections_accounts_account_disconnect_with_http_info(account: account, expand: expand)
       data
     end
@@ -304,7 +387,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
-    def post_financial_connections_accounts_account_disconnect_with_http_info(*, account : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
+    def post_financial_connections_accounts_account_disconnect_with_http_info(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_financial_connections_accounts_account_disconnect(account: account, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -320,14 +407,23 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_financial_connections_accounts_account_disconnect(*, account : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_financial_connections_accounts_account_disconnect(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_financial_connections_accounts_account_disconnect(account: account, expand: expand).execute(&block)
     end
 
     POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_DISCONNECT_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_financial_connections_accounts_account_disconnect(*, account : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_financial_connections_accounts_account_disconnect(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_accounts_account_disconnect ..." }
       end
@@ -352,6 +448,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -369,6 +468,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -379,7 +479,12 @@ module Stripe
     # @required @param features [Array(String)?] The list of account features that you would like to refresh.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::FinancialConnectionsAccount]
-    def post_financial_connections_accounts_account_refresh(*, account : String? = nil, features : Array(String)? = nil, expand : Array(String)? = nil) : Stripe::FinancialConnectionsAccount
+    def post_financial_connections_accounts_account_refresh(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::FinancialConnectionsAccount
       data, _status_code, _headers = post_financial_connections_accounts_account_refresh_with_http_info(account: account, features: features, expand: expand)
       data
     end
@@ -389,7 +494,12 @@ module Stripe
     # @required @param features [Array(String)?] The list of account features that you would like to refresh.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
-    def post_financial_connections_accounts_account_refresh_with_http_info(*, account : String? = nil, features : Array(String)? = nil, expand : Array(String)? = nil) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
+    def post_financial_connections_accounts_account_refresh_with_http_info(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_financial_connections_accounts_account_refresh(account: account, features: features, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -406,7 +516,13 @@ module Stripe
     # @required @param features [Array(String)?] The list of account features that you would like to refresh.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_financial_connections_accounts_account_refresh(*, account : String? = nil, features : Array(String)? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_financial_connections_accounts_account_refresh(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_financial_connections_accounts_account_refresh(account: account, features: features, expand: expand).execute(&block)
     end
 
@@ -414,7 +530,12 @@ module Stripe
     POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES = String.static_array("balance", "ownership")
 
     # @return Crest::Request
-    def build_api_request_for_post_financial_connections_accounts_account_refresh(*, account : String? = nil, features : Array(String)? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_financial_connections_accounts_account_refresh(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_accounts_account_refresh ..." }
       end
@@ -443,6 +564,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -461,6 +585,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -473,7 +598,14 @@ module Stripe
     # @optional @param filters [Stripe::FiltersParams?]
     # @optional @param return_url [String?] For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     # @return [Stripe::FinancialConnectionsSession]
-    def post_financial_connections_sessions(*, account_holder : Stripe::AccountholderParams? = nil, permissions : Array(String)? = nil, expand : Array(String)? = nil, filters : Stripe::FiltersParams? = nil, return_url : String? = nil) : Stripe::FinancialConnectionsSession
+    def post_financial_connections_sessions(
+      *,
+      account_holder : Stripe::AccountholderParams? = nil,
+      permissions : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      filters : Stripe::FiltersParams? = nil,
+      return_url : String? = nil
+    ) : Stripe::FinancialConnectionsSession
       data, _status_code, _headers = post_financial_connections_sessions_with_http_info(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url)
       data
     end
@@ -485,7 +617,14 @@ module Stripe
     # @optional @param filters [Stripe::FiltersParams?]
     # @optional @param return_url [String?] For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     # @return [Tuple(Stripe::FinancialConnectionsSession, Integer, Hash)] Stripe::FinancialConnectionsSession, response status code and response headers
-    def post_financial_connections_sessions_with_http_info(*, account_holder : Stripe::AccountholderParams? = nil, permissions : Array(String)? = nil, expand : Array(String)? = nil, filters : Stripe::FiltersParams? = nil, return_url : String? = nil) : Tuple(Stripe::FinancialConnectionsSession, Int32, Hash(String, Array(String) | String))
+    def post_financial_connections_sessions_with_http_info(
+      *,
+      account_holder : Stripe::AccountholderParams? = nil,
+      permissions : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      filters : Stripe::FiltersParams? = nil,
+      return_url : String? = nil
+    ) : Tuple(Stripe::FinancialConnectionsSession, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_financial_connections_sessions(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -504,7 +643,15 @@ module Stripe
     # @optional @param filters [Stripe::FiltersParams?]
     # @optional @param return_url [String?] For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     # @return nil
-    def post_financial_connections_sessions(*, account_holder : Stripe::AccountholderParams? = nil, permissions : Array(String)? = nil, expand : Array(String)? = nil, filters : Stripe::FiltersParams? = nil, return_url : String? = nil, &block : Crest::Response ->) : Nil
+    def post_financial_connections_sessions(
+      *,
+      account_holder : Stripe::AccountholderParams? = nil,
+      permissions : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      filters : Stripe::FiltersParams? = nil,
+      return_url : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_financial_connections_sessions(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url).execute(&block)
     end
 
@@ -512,7 +659,14 @@ module Stripe
     POST_FINANCIAL_CONNECTIONS_SESSIONS_MAX_LENGTH_FOR_RETURN_URL    = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_financial_connections_sessions(*, account_holder : Stripe::AccountholderParams? = nil, permissions : Array(String)? = nil, expand : Array(String)? = nil, filters : Stripe::FiltersParams? = nil, return_url : String? = nil) : Crest::Request
+    def build_api_request_for_post_financial_connections_sessions(
+      *,
+      account_holder : Stripe::AccountholderParams? = nil,
+      permissions : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      filters : Stripe::FiltersParams? = nil,
+      return_url : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_sessions ..." }
       end
@@ -548,6 +702,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_holder"] = account_holder.to_s if !account_holder.nil?
@@ -569,6 +726,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

@@ -31,7 +31,18 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::BalanceTransactionsList]
-    def get_balance_transactions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payout : String? = nil, currency : String? = nil, source : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::BalanceTransactionsList
+    def get_balance_transactions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payout : String? = nil,
+      currency : String? = nil,
+      source : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::BalanceTransactionsList
       data, _status_code, _headers = get_balance_transactions_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, payout: payout, currency: currency, source: source, _type: _type, expand: expand, created: created)
       data
     end
@@ -47,7 +58,18 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::BalanceTransactionsList, Integer, Hash)] Stripe::BalanceTransactionsList, response status code and response headers
-    def get_balance_transactions_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payout : String? = nil, currency : String? = nil, source : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::BalanceTransactionsList, Int32, Hash(String, Array(String) | String))
+    def get_balance_transactions_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payout : String? = nil,
+      currency : String? = nil,
+      source : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::BalanceTransactionsList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_balance_transactions(ending_before: ending_before, starting_after: starting_after, limit: limit, payout: payout, currency: currency, source: source, _type: _type, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -70,7 +92,19 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_balance_transactions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payout : String? = nil, currency : String? = nil, source : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_balance_transactions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payout : String? = nil,
+      currency : String? = nil,
+      source : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_balance_transactions(ending_before: ending_before, starting_after: starting_after, limit: limit, payout: payout, currency: currency, source: source, _type: _type, expand: expand, created: created).execute(&block)
     end
 
@@ -81,7 +115,18 @@ module Stripe
     GET_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR__TYPE          = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_balance_transactions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payout : String? = nil, currency : String? = nil, source : String? = nil, _type : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_balance_transactions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payout : String? = nil,
+      currency : String? = nil,
+      source : String? = nil,
+      _type : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: BalanceTransactionsApi.get_balance_transactions ..." }
       end
@@ -130,6 +175,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -146,6 +194,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -155,7 +204,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::BalanceTransaction]
-    def get_balance_transactions_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::BalanceTransaction
+    def get_balance_transactions_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::BalanceTransaction
       data, _status_code, _headers = get_balance_transactions_id_with_http_info(id: id, expand: expand)
       data
     end
@@ -164,7 +217,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::BalanceTransaction, Integer, Hash)] Stripe::BalanceTransaction, response status code and response headers
-    def get_balance_transactions_id_with_http_info(*, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::BalanceTransaction, Int32, Hash(String, Array(String) | String))
+    def get_balance_transactions_id_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::BalanceTransaction, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_balance_transactions_id(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -180,14 +237,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_balance_transactions_id(*, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_balance_transactions_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_balance_transactions_id(id: id, expand: expand).execute(&block)
     end
 
     GET_BALANCE_TRANSACTIONS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_balance_transactions_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_balance_transactions_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: BalanceTransactionsApi.get_balance_transactions_id ..." }
       end
@@ -211,6 +277,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -227,6 +296,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

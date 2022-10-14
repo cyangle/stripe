@@ -24,7 +24,11 @@ module Stripe
     # @required @param token [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Token]
-    def get_tokens_token(*, token : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Token
+    def get_tokens_token(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Token
       data, _status_code, _headers = get_tokens_token_with_http_info(token: token, expand: expand)
       data
     end
@@ -33,7 +37,11 @@ module Stripe
     # @required @param token [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Token, Integer, Hash)] Stripe::Token, response status code and response headers
-    def get_tokens_token_with_http_info(*, token : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Token, Int32, Hash(String, Array(String) | String))
+    def get_tokens_token_with_http_info(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Token, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_tokens_token(token: token, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -49,14 +57,23 @@ module Stripe
     # @required @param token [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_tokens_token(*, token : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_tokens_token(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_tokens_token(token: token, expand: expand).execute(&block)
     end
 
     GET_TOKENS_TOKEN_MAX_LENGTH_FOR_TOKEN = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_tokens_token(*, token : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_tokens_token(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TokensApi.get_tokens_token ..." }
       end
@@ -80,6 +97,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -96,6 +116,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -111,7 +132,17 @@ module Stripe
     # @optional @param person [Stripe::PersonTokenSpecs?]
     # @optional @param pii [Stripe::PiiTokenSpecs?]
     # @return [Stripe::Token]
-    def post_tokens(*, account : Stripe::ConnectJsAccountTokenSpecs? = nil, bank_account : Stripe::TokenCreateBankAccount? = nil, card : Stripe::PostTokensRequestCard? = nil, customer : String? = nil, cvc_update : Stripe::CvcParams? = nil, expand : Array(String)? = nil, person : Stripe::PersonTokenSpecs? = nil, pii : Stripe::PiiTokenSpecs? = nil) : Stripe::Token
+    def post_tokens(
+      *,
+      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
+      bank_account : Stripe::TokenCreateBankAccount? = nil,
+      card : Stripe::PostTokensRequestCard? = nil,
+      customer : String? = nil,
+      cvc_update : Stripe::CvcParams? = nil,
+      expand : Array(String)? = nil,
+      person : Stripe::PersonTokenSpecs? = nil,
+      pii : Stripe::PiiTokenSpecs? = nil
+    ) : Stripe::Token
       data, _status_code, _headers = post_tokens_with_http_info(account: account, bank_account: bank_account, card: card, customer: customer, cvc_update: cvc_update, expand: expand, person: person, pii: pii)
       data
     end
@@ -126,7 +157,17 @@ module Stripe
     # @optional @param person [Stripe::PersonTokenSpecs?]
     # @optional @param pii [Stripe::PiiTokenSpecs?]
     # @return [Tuple(Stripe::Token, Integer, Hash)] Stripe::Token, response status code and response headers
-    def post_tokens_with_http_info(*, account : Stripe::ConnectJsAccountTokenSpecs? = nil, bank_account : Stripe::TokenCreateBankAccount? = nil, card : Stripe::PostTokensRequestCard? = nil, customer : String? = nil, cvc_update : Stripe::CvcParams? = nil, expand : Array(String)? = nil, person : Stripe::PersonTokenSpecs? = nil, pii : Stripe::PiiTokenSpecs? = nil) : Tuple(Stripe::Token, Int32, Hash(String, Array(String) | String))
+    def post_tokens_with_http_info(
+      *,
+      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
+      bank_account : Stripe::TokenCreateBankAccount? = nil,
+      card : Stripe::PostTokensRequestCard? = nil,
+      customer : String? = nil,
+      cvc_update : Stripe::CvcParams? = nil,
+      expand : Array(String)? = nil,
+      person : Stripe::PersonTokenSpecs? = nil,
+      pii : Stripe::PiiTokenSpecs? = nil
+    ) : Tuple(Stripe::Token, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_tokens(account: account, bank_account: bank_account, card: card, customer: customer, cvc_update: cvc_update, expand: expand, person: person, pii: pii)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -148,14 +189,35 @@ module Stripe
     # @optional @param person [Stripe::PersonTokenSpecs?]
     # @optional @param pii [Stripe::PiiTokenSpecs?]
     # @return nil
-    def post_tokens(*, account : Stripe::ConnectJsAccountTokenSpecs? = nil, bank_account : Stripe::TokenCreateBankAccount? = nil, card : Stripe::PostTokensRequestCard? = nil, customer : String? = nil, cvc_update : Stripe::CvcParams? = nil, expand : Array(String)? = nil, person : Stripe::PersonTokenSpecs? = nil, pii : Stripe::PiiTokenSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_tokens(
+      *,
+      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
+      bank_account : Stripe::TokenCreateBankAccount? = nil,
+      card : Stripe::PostTokensRequestCard? = nil,
+      customer : String? = nil,
+      cvc_update : Stripe::CvcParams? = nil,
+      expand : Array(String)? = nil,
+      person : Stripe::PersonTokenSpecs? = nil,
+      pii : Stripe::PiiTokenSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_tokens(account: account, bank_account: bank_account, card: card, customer: customer, cvc_update: cvc_update, expand: expand, person: person, pii: pii).execute(&block)
     end
 
     POST_TOKENS_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_tokens(*, account : Stripe::ConnectJsAccountTokenSpecs? = nil, bank_account : Stripe::TokenCreateBankAccount? = nil, card : Stripe::PostTokensRequestCard? = nil, customer : String? = nil, cvc_update : Stripe::CvcParams? = nil, expand : Array(String)? = nil, person : Stripe::PersonTokenSpecs? = nil, pii : Stripe::PiiTokenSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_tokens(
+      *,
+      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
+      bank_account : Stripe::TokenCreateBankAccount? = nil,
+      card : Stripe::PostTokensRequestCard? = nil,
+      customer : String? = nil,
+      cvc_update : Stripe::CvcParams? = nil,
+      expand : Array(String)? = nil,
+      person : Stripe::PersonTokenSpecs? = nil,
+      pii : Stripe::PiiTokenSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TokensApi.post_tokens ..." }
       end
@@ -198,6 +260,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account"] = account.to_s if !account.nil?
@@ -222,6 +287,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

@@ -23,7 +23,10 @@ module Stripe
     # <p>Retrieves the current account balance, based on the authentication that was used to make the request.  For a sample request, see <a href=\"/docs/connect/account-balances#accounting-for-negative-balances\">Accounting for negative balances</a>.</p>
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Balance]
-    def get_balance(*, expand : Array(Array(String))? = nil) : Stripe::Balance
+    def get_balance(
+      *,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Balance
       data, _status_code, _headers = get_balance_with_http_info(expand: expand)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;Retrieves the current account balance, based on the authentication that was used to make the request.  For a sample request, see &lt;a href&#x3D;\&quot;/docs/connect/account-balances#accounting-for-negative-balances\&quot;&gt;Accounting for negative balances&lt;/a&gt;.&lt;/p&gt;
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Balance, Integer, Hash)] Stripe::Balance, response status code and response headers
-    def get_balance_with_http_info(*, expand : Array(Array(String))? = nil) : Tuple(Stripe::Balance, Int32, Hash(String, Array(String) | String))
+    def get_balance_with_http_info(
+      *,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Balance, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_balance(expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,12 +52,19 @@ module Stripe
     # &lt;p&gt;Retrieves the current account balance, based on the authentication that was used to make the request.  For a sample request, see &lt;a href&#x3D;\&quot;/docs/connect/account-balances#accounting-for-negative-balances\&quot;&gt;Accounting for negative balances&lt;/a&gt;.&lt;/p&gt;
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_balance(*, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_balance(
+      *,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_balance(expand: expand).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_balance(*, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_balance(
+      *,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: BalanceApi.get_balance ..." }
       end
@@ -71,6 +84,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -87,6 +103,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

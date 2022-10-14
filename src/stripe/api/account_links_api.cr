@@ -28,7 +28,15 @@ module Stripe
     # @optional @param refresh_url [String?] The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
     # @optional @param return_url [String?] The URL that the user will be redirected to upon leaving or completing the linked flow.
     # @return [Stripe::AccountLink]
-    def post_account_links(*, account : String? = nil, _type : String? = nil, collect : String? = nil, expand : Array(String)? = nil, refresh_url : String? = nil, return_url : String? = nil) : Stripe::AccountLink
+    def post_account_links(
+      *,
+      account : String? = nil,
+      _type : String? = nil,
+      collect : String? = nil,
+      expand : Array(String)? = nil,
+      refresh_url : String? = nil,
+      return_url : String? = nil
+    ) : Stripe::AccountLink
       data, _status_code, _headers = post_account_links_with_http_info(account: account, _type: _type, collect: collect, expand: expand, refresh_url: refresh_url, return_url: return_url)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param refresh_url [String?] The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
     # @optional @param return_url [String?] The URL that the user will be redirected to upon leaving or completing the linked flow.
     # @return [Tuple(Stripe::AccountLink, Integer, Hash)] Stripe::AccountLink, response status code and response headers
-    def post_account_links_with_http_info(*, account : String? = nil, _type : String? = nil, collect : String? = nil, expand : Array(String)? = nil, refresh_url : String? = nil, return_url : String? = nil) : Tuple(Stripe::AccountLink, Int32, Hash(String, Array(String) | String))
+    def post_account_links_with_http_info(
+      *,
+      account : String? = nil,
+      _type : String? = nil,
+      collect : String? = nil,
+      expand : Array(String)? = nil,
+      refresh_url : String? = nil,
+      return_url : String? = nil
+    ) : Tuple(Stripe::AccountLink, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_account_links(account: account, _type: _type, collect: collect, expand: expand, refresh_url: refresh_url, return_url: return_url)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param refresh_url [String?] The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
     # @optional @param return_url [String?] The URL that the user will be redirected to upon leaving or completing the linked flow.
     # @return nil
-    def post_account_links(*, account : String? = nil, _type : String? = nil, collect : String? = nil, expand : Array(String)? = nil, refresh_url : String? = nil, return_url : String? = nil, &block : Crest::Response ->) : Nil
+    def post_account_links(
+      *,
+      account : String? = nil,
+      _type : String? = nil,
+      collect : String? = nil,
+      expand : Array(String)? = nil,
+      refresh_url : String? = nil,
+      return_url : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_account_links(account: account, _type: _type, collect: collect, expand: expand, refresh_url: refresh_url, return_url: return_url).execute(&block)
     end
 
@@ -70,7 +95,15 @@ module Stripe
     POST_ACCOUNT_LINKS_VALID_VALUES_FOR_COLLECT = String.static_array("currently_due", "eventually_due")
 
     # @return Crest::Request
-    def build_api_request_for_post_account_links(*, account : String? = nil, _type : String? = nil, collect : String? = nil, expand : Array(String)? = nil, refresh_url : String? = nil, return_url : String? = nil) : Crest::Request
+    def build_api_request_for_post_account_links(
+      *,
+      account : String? = nil,
+      _type : String? = nil,
+      collect : String? = nil,
+      expand : Array(String)? = nil,
+      refresh_url : String? = nil,
+      return_url : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountLinksApi.post_account_links ..." }
       end
@@ -102,6 +135,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account"] = account.to_s if !account.nil?
@@ -124,6 +160,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

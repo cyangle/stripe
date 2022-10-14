@@ -28,7 +28,15 @@ module Stripe
     # @optional @param customer [String?] Only return PaymentIntents for the customer specified by this customer ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentFlowsPaymentIntentList]
-    def get_payment_intents(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentFlowsPaymentIntentList
+    def get_payment_intents(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentFlowsPaymentIntentList
       data, _status_code, _headers = get_payment_intents_with_http_info(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, customer: customer, expand: expand)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param customer [String?] Only return PaymentIntents for the customer specified by this customer ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentFlowsPaymentIntentList, Integer, Hash)] Stripe::PaymentFlowsPaymentIntentList, response status code and response headers
-    def get_payment_intents_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentFlowsPaymentIntentList, Int32, Hash(String, Array(String) | String))
+    def get_payment_intents_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentFlowsPaymentIntentList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_intents(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param customer [String?] Only return PaymentIntents for the customer specified by this customer ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_payment_intents(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, customer : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_intents(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_intents(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, customer: customer, expand: expand).execute(&block)
     end
 
@@ -70,7 +95,15 @@ module Stripe
     GET_PAYMENT_INTENTS_MAX_LENGTH_FOR_CUSTOMER       = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_intents(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, customer : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_payment_intents(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.get_payment_intents ..." }
       end
@@ -108,6 +141,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -124,6 +160,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -134,7 +171,12 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the source.
     # @return [Stripe::PaymentIntent]
-    def get_payment_intents_intent(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Stripe::PaymentIntent
+    def get_payment_intents_intent(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = get_payment_intents_intent_with_http_info(intent: intent, expand: expand, client_secret: client_secret)
       data
     end
@@ -144,7 +186,12 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the source.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def get_payment_intents_intent_with_http_info(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def get_payment_intents_intent_with_http_info(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_intents_intent(intent: intent, expand: expand, client_secret: client_secret)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -161,7 +208,13 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the source.
     # @return nil
-    def get_payment_intents_intent(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_intents_intent(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_intents_intent(intent: intent, expand: expand, client_secret: client_secret).execute(&block)
     end
 
@@ -169,7 +222,12 @@ module Stripe
     GET_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_intents_intent(*, intent : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Crest::Request
+    def build_api_request_for_get_payment_intents_intent(
+      *,
+      intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.get_payment_intents_intent ..." }
       end
@@ -198,6 +256,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -214,6 +275,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -225,7 +287,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SearchResult]
-    def get_payment_intents_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SearchResult
+    def get_payment_intents_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SearchResult
       data, _status_code, _headers = get_payment_intents_search_with_http_info(query: query, page: page, limit: limit, expand: expand)
       data
     end
@@ -236,7 +304,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SearchResult, Integer, Hash)] Stripe::SearchResult, response status code and response headers
-    def get_payment_intents_search_with_http_info(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
+    def get_payment_intents_search_with_http_info(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_intents_search(query: query, page: page, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -254,7 +328,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_payment_intents_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_intents_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_intents_search(query: query, page: page, limit: limit, expand: expand).execute(&block)
     end
 
@@ -262,7 +343,13 @@ module Stripe
     GET_PAYMENT_INTENTS_SEARCH_MAX_LENGTH_FOR_PAGE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_intents_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_payment_intents_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.get_payment_intents_search ..." }
       end
@@ -292,6 +379,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -308,6 +398,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -344,7 +435,38 @@ module Stripe
     # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents(*, amount : Int64? = nil, currency : String? = nil, application_fee_amount : Int64? = nil, automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil, capture_method : String? = nil, confirm : Bool? = nil, confirmation_method : String? = nil, customer : String? = nil, description : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::SecretKeyParam? = nil, off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataCreationParams? = nil, transfer_group : String? = nil, use_stripe_sdk : Bool? = nil) : Stripe::PaymentIntent
+    def post_payment_intents(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      application_fee_amount : Int64? = nil,
+      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
+      capture_method : String? = nil,
+      confirm : Bool? = nil,
+      confirmation_method : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataCreationParams? = nil,
+      transfer_group : String? = nil,
+      use_stripe_sdk : Bool? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_with_http_info(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk)
       data
     end
@@ -380,7 +502,38 @@ module Stripe
     # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_with_http_info(*, amount : Int64? = nil, currency : String? = nil, application_fee_amount : Int64? = nil, automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil, capture_method : String? = nil, confirm : Bool? = nil, confirmation_method : String? = nil, customer : String? = nil, description : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::SecretKeyParam? = nil, off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataCreationParams? = nil, transfer_group : String? = nil, use_stripe_sdk : Bool? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_with_http_info(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      application_fee_amount : Int64? = nil,
+      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
+      capture_method : String? = nil,
+      confirm : Bool? = nil,
+      confirmation_method : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataCreationParams? = nil,
+      transfer_group : String? = nil,
+      use_stripe_sdk : Bool? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -423,7 +576,39 @@ module Stripe
     # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
     # @return nil
-    def post_payment_intents(*, amount : Int64? = nil, currency : String? = nil, application_fee_amount : Int64? = nil, automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil, capture_method : String? = nil, confirm : Bool? = nil, confirmation_method : String? = nil, customer : String? = nil, description : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::SecretKeyParam? = nil, off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataCreationParams? = nil, transfer_group : String? = nil, use_stripe_sdk : Bool? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      application_fee_amount : Int64? = nil,
+      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
+      capture_method : String? = nil,
+      confirm : Bool? = nil,
+      confirmation_method : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataCreationParams? = nil,
+      transfer_group : String? = nil,
+      use_stripe_sdk : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk).execute(&block)
     end
 
@@ -438,7 +623,38 @@ module Stripe
     POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents(*, amount : Int64? = nil, currency : String? = nil, application_fee_amount : Int64? = nil, automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil, capture_method : String? = nil, confirm : Bool? = nil, confirmation_method : String? = nil, customer : String? = nil, description : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::SecretKeyParam? = nil, off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil, on_behalf_of : String? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataCreationParams? = nil, transfer_group : String? = nil, use_stripe_sdk : Bool? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      application_fee_amount : Int64? = nil,
+      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
+      capture_method : String? = nil,
+      confirm : Bool? = nil,
+      confirmation_method : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::SecretKeyParam? = nil,
+      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
+      on_behalf_of : String? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataCreationParams? = nil,
+      transfer_group : String? = nil,
+      use_stripe_sdk : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents ..." }
       end
@@ -519,6 +735,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -564,6 +783,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -591,7 +811,29 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil, capture_method : String? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil, transfer_group : String? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
+      capture_method : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      transfer_group : String? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_with_http_info(intent: intent, amount: amount, application_fee_amount: application_fee_amount, capture_method: capture_method, currency: currency, customer: customer, description: description, expand: expand, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, receipt_email: receipt_email, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
       data
     end
@@ -618,7 +860,29 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_with_http_info(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil, capture_method : String? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil, transfer_group : String? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_with_http_info(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
+      capture_method : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      transfer_group : String? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent(intent: intent, amount: amount, application_fee_amount: application_fee_amount, capture_method: capture_method, currency: currency, customer: customer, description: description, expand: expand, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, receipt_email: receipt_email, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -652,7 +916,30 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     # @return nil
-    def post_payment_intents_intent(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil, capture_method : String? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil, transfer_group : String? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
+      capture_method : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      transfer_group : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent(intent: intent, amount: amount, application_fee_amount: application_fee_amount, capture_method: capture_method, currency: currency, customer: customer, description: description, expand: expand, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, receipt_email: receipt_email, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group).execute(&block)
     end
 
@@ -666,7 +953,29 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil, capture_method : String? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil, transfer_group : String? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
+      capture_method : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      transfer_group : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent ..." }
       end
@@ -737,6 +1046,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -772,6 +1084,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -783,7 +1096,13 @@ module Stripe
     # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent_apply_customer_balance(*, intent : String? = nil, amount : Int64? = nil, currency : String? = nil, expand : Array(String)? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent_apply_customer_balance(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_apply_customer_balance_with_http_info(intent: intent, amount: amount, currency: currency, expand: expand)
       data
     end
@@ -794,7 +1113,13 @@ module Stripe
     # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_apply_customer_balance_with_http_info(*, intent : String? = nil, amount : Int64? = nil, currency : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_apply_customer_balance_with_http_info(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent_apply_customer_balance(intent: intent, amount: amount, currency: currency, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -812,14 +1137,27 @@ module Stripe
     # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_payment_intents_intent_apply_customer_balance(*, intent : String? = nil, amount : Int64? = nil, currency : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent_apply_customer_balance(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent_apply_customer_balance(intent: intent, amount: amount, currency: currency, expand: expand).execute(&block)
     end
 
     POST_PAYMENT_INTENTS_INTENT_APPLY_CUSTOMER_BALANCE_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent_apply_customer_balance(*, intent : String? = nil, amount : Int64? = nil, currency : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent_apply_customer_balance(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_apply_customer_balance ..." }
       end
@@ -844,6 +1182,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -863,6 +1204,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -873,7 +1215,12 @@ module Stripe
     # @optional @param cancellation_reason [String?] Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent_cancel(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_cancel_with_http_info(intent: intent, cancellation_reason: cancellation_reason, expand: expand)
       data
     end
@@ -883,7 +1230,12 @@ module Stripe
     # @optional @param cancellation_reason [String?] Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_cancel_with_http_info(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_cancel_with_http_info(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent_cancel(intent: intent, cancellation_reason: cancellation_reason, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -900,7 +1252,13 @@ module Stripe
     # @optional @param cancellation_reason [String?] Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_payment_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent_cancel(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent_cancel(intent: intent, cancellation_reason: cancellation_reason, expand: expand).execute(&block)
     end
 
@@ -909,7 +1267,12 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("abandoned", "duplicate", "fraudulent", "requested_by_customer")
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent_cancel(*, intent : String? = nil, cancellation_reason : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent_cancel(
+      *,
+      intent : String? = nil,
+      cancellation_reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_cancel ..." }
       end
@@ -937,6 +1300,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["cancellation_reason"] = cancellation_reason.to_s if !cancellation_reason.nil?
@@ -955,6 +1321,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -969,7 +1336,16 @@ module Stripe
     # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent_capture(*, intent : String? = nil, amount_to_capture : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent_capture(
+      *,
+      intent : String? = nil,
+      amount_to_capture : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_capture_with_http_info(intent: intent, amount_to_capture: amount_to_capture, application_fee_amount: application_fee_amount, expand: expand, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data)
       data
     end
@@ -983,7 +1359,16 @@ module Stripe
     # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_capture_with_http_info(*, intent : String? = nil, amount_to_capture : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_capture_with_http_info(
+      *,
+      intent : String? = nil,
+      amount_to_capture : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent_capture(intent: intent, amount_to_capture: amount_to_capture, application_fee_amount: application_fee_amount, expand: expand, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1004,7 +1389,17 @@ module Stripe
     # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @return nil
-    def post_payment_intents_intent_capture(*, intent : String? = nil, amount_to_capture : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent_capture(
+      *,
+      intent : String? = nil,
+      amount_to_capture : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent_capture(intent: intent, amount_to_capture: amount_to_capture, application_fee_amount: application_fee_amount, expand: expand, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data).execute(&block)
     end
 
@@ -1013,7 +1408,16 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX =   22
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent_capture(*, intent : String? = nil, amount_to_capture : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent_capture(
+      *,
+      intent : String? = nil,
+      amount_to_capture : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_capture ..." }
       end
@@ -1048,6 +1452,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount_to_capture"] = amount_to_capture.to_s if !amount_to_capture.nil?
@@ -1070,6 +1477,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1095,7 +1503,27 @@ module Stripe
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
     # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent_confirm(*, intent : String? = nil, capture_method : String? = nil, client_secret : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, use_stripe_sdk : Bool? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent_confirm(
+      *,
+      intent : String? = nil,
+      capture_method : String? = nil,
+      client_secret : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      use_stripe_sdk : Bool? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_confirm_with_http_info(intent: intent, capture_method: capture_method, client_secret: client_secret, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, use_stripe_sdk: use_stripe_sdk)
       data
     end
@@ -1120,7 +1548,27 @@ module Stripe
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
     # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_confirm_with_http_info(*, intent : String? = nil, capture_method : String? = nil, client_secret : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, use_stripe_sdk : Bool? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_confirm_with_http_info(
+      *,
+      intent : String? = nil,
+      capture_method : String? = nil,
+      client_secret : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      use_stripe_sdk : Bool? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent_confirm(intent: intent, capture_method: capture_method, client_secret: client_secret, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, use_stripe_sdk: use_stripe_sdk)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1152,7 +1600,28 @@ module Stripe
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
     # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
     # @return nil
-    def post_payment_intents_intent_confirm(*, intent : String? = nil, capture_method : String? = nil, client_secret : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, use_stripe_sdk : Bool? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent_confirm(
+      *,
+      intent : String? = nil,
+      capture_method : String? = nil,
+      client_secret : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      use_stripe_sdk : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent_confirm(intent: intent, capture_method: capture_method, client_secret: client_secret, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, use_stripe_sdk: use_stripe_sdk).execute(&block)
     end
 
@@ -1164,7 +1633,27 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_SETUP_FUTURE_USAGE = String.static_array("", "off_session", "on_session")
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent_confirm(*, intent : String? = nil, capture_method : String? = nil, client_secret : String? = nil, error_on_requires_action : Bool? = nil, expand : Array(String)? = nil, mandate : String? = nil, mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil, off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil, payment_method : String? = nil, payment_method_data : Stripe::PaymentMethodDataParams? = nil, payment_method_options : Stripe::PaymentMethodOptionsParam? = nil, payment_method_types : Array(String)? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil, return_url : String? = nil, setup_future_usage : String? = nil, shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil, use_stripe_sdk : Bool? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent_confirm(
+      *,
+      intent : String? = nil,
+      capture_method : String? = nil,
+      client_secret : String? = nil,
+      error_on_requires_action : Bool? = nil,
+      expand : Array(String)? = nil,
+      mandate : String? = nil,
+      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
+      payment_method_types : Array(String)? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
+      use_stripe_sdk : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_confirm ..." }
       end
@@ -1228,6 +1717,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["capture_method"] = capture_method.to_s if !capture_method.nil?
@@ -1261,6 +1753,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1275,7 +1768,16 @@ module Stripe
     # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent_increment_authorization(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Int64? = nil, description : String? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent_increment_authorization(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_increment_authorization_with_http_info(intent: intent, amount: amount, application_fee_amount: application_fee_amount, description: description, expand: expand, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
       data
     end
@@ -1289,7 +1791,16 @@ module Stripe
     # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_increment_authorization_with_http_info(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Int64? = nil, description : String? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_increment_authorization_with_http_info(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent_increment_authorization(intent: intent, amount: amount, application_fee_amount: application_fee_amount, description: description, expand: expand, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1310,7 +1821,17 @@ module Stripe
     # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
     # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
     # @return nil
-    def post_payment_intents_intent_increment_authorization(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Int64? = nil, description : String? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent_increment_authorization(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent_increment_authorization(intent: intent, amount: amount, application_fee_amount: application_fee_amount, description: description, expand: expand, statement_descriptor: statement_descriptor, transfer_data: transfer_data).execute(&block)
     end
 
@@ -1319,7 +1840,16 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR =   22
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent_increment_authorization(*, intent : String? = nil, amount : Int64? = nil, application_fee_amount : Int64? = nil, description : String? = nil, expand : Array(String)? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::TransferDataUpdateParams? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent_increment_authorization(
+      *,
+      intent : String? = nil,
+      amount : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::TransferDataUpdateParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_increment_authorization ..." }
       end
@@ -1356,6 +1886,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -1378,6 +1911,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1390,7 +1924,14 @@ module Stripe
     # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentIntent]
-    def post_payment_intents_intent_verify_microdeposits(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil) : Stripe::PaymentIntent
+    def post_payment_intents_intent_verify_microdeposits(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::PaymentIntent
       data, _status_code, _headers = post_payment_intents_intent_verify_microdeposits_with_http_info(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand)
       data
     end
@@ -1402,7 +1943,14 @@ module Stripe
     # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
-    def post_payment_intents_intent_verify_microdeposits_with_http_info(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
+    def post_payment_intents_intent_verify_microdeposits_with_http_info(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_intents_intent_verify_microdeposits(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1421,7 +1969,15 @@ module Stripe
     # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_payment_intents_intent_verify_microdeposits(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_intents_intent_verify_microdeposits(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_intents_intent_verify_microdeposits(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand).execute(&block)
     end
 
@@ -1430,7 +1986,14 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_DESCRIPTOR_CODE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_intents_intent_verify_microdeposits(*, intent : String? = nil, amounts : Array(Int32)? = nil, client_secret : String? = nil, descriptor_code : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_payment_intents_intent_verify_microdeposits(
+      *,
+      intent : String? = nil,
+      amounts : Array(Int32)? = nil,
+      client_secret : String? = nil,
+      descriptor_code : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_verify_microdeposits ..." }
       end
@@ -1462,6 +2025,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amounts"] = @api_client.build_collection_param(amounts, "csv") if !amounts.nil? && !amounts.empty?
@@ -1482,6 +2048,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

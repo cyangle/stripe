@@ -26,7 +26,13 @@ module Stripe
     # @optional @param invoice_now [Bool?] Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
     # @optional @param prorate [Bool?] Will generate a proration invoice item that credits remaining unused time until the subscription period end.
     # @return [Stripe::Subscription]
-    def delete_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, expand : Array(String)? = nil, invoice_now : Bool? = nil, prorate : Bool? = nil) : Stripe::Subscription
+    def delete_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_now : Bool? = nil,
+      prorate : Bool? = nil
+    ) : Stripe::Subscription
       data, _status_code, _headers = delete_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, expand: expand, invoice_now: invoice_now, prorate: prorate)
       data
     end
@@ -37,7 +43,13 @@ module Stripe
     # @optional @param invoice_now [Bool?] Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
     # @optional @param prorate [Bool?] Will generate a proration invoice item that credits remaining unused time until the subscription period end.
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
-    def delete_subscriptions_subscription_exposed_id_with_http_info(*, subscription_exposed_id : String? = nil, expand : Array(String)? = nil, invoice_now : Bool? = nil, prorate : Bool? = nil) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
+    def delete_subscriptions_subscription_exposed_id_with_http_info(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_now : Bool? = nil,
+      prorate : Bool? = nil
+    ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, expand: expand, invoice_now: invoice_now, prorate: prorate)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -55,14 +67,27 @@ module Stripe
     # @optional @param invoice_now [Bool?] Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
     # @optional @param prorate [Bool?] Will generate a proration invoice item that credits remaining unused time until the subscription period end.
     # @return nil
-    def delete_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, expand : Array(String)? = nil, invoice_now : Bool? = nil, prorate : Bool? = nil, &block : Crest::Response ->) : Nil
+    def delete_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_now : Bool? = nil,
+      prorate : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, expand: expand, invoice_now: invoice_now, prorate: prorate).execute(&block)
     end
 
     DELETE_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, expand : Array(String)? = nil, invoice_now : Bool? = nil, prorate : Bool? = nil) : Crest::Request
+    def build_api_request_for_delete_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_now : Bool? = nil,
+      prorate : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.delete_subscriptions_subscription_exposed_id ..." }
       end
@@ -87,6 +112,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -106,6 +134,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -114,7 +143,10 @@ module Stripe
     # <p>Removes the currently applied discount on a subscription.</p>
     # @required @param subscription_exposed_id [String?]
     # @return [Stripe::DeletedDiscount]
-    def delete_subscriptions_subscription_exposed_id_discount(*, subscription_exposed_id : String? = nil) : Stripe::DeletedDiscount
+    def delete_subscriptions_subscription_exposed_id_discount(
+      *,
+      subscription_exposed_id : String? = nil
+    ) : Stripe::DeletedDiscount
       data, _status_code, _headers = delete_subscriptions_subscription_exposed_id_discount_with_http_info(subscription_exposed_id: subscription_exposed_id)
       data
     end
@@ -122,7 +154,10 @@ module Stripe
     # &lt;p&gt;Removes the currently applied discount on a subscription.&lt;/p&gt;
     # @required @param subscription_exposed_id [String?]
     # @return [Tuple(Stripe::DeletedDiscount, Integer, Hash)] Stripe::DeletedDiscount, response status code and response headers
-    def delete_subscriptions_subscription_exposed_id_discount_with_http_info(*, subscription_exposed_id : String? = nil) : Tuple(Stripe::DeletedDiscount, Int32, Hash(String, Array(String) | String))
+    def delete_subscriptions_subscription_exposed_id_discount_with_http_info(
+      *,
+      subscription_exposed_id : String? = nil
+    ) : Tuple(Stripe::DeletedDiscount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_subscriptions_subscription_exposed_id_discount(subscription_exposed_id: subscription_exposed_id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -137,14 +172,21 @@ module Stripe
     # &lt;p&gt;Removes the currently applied discount on a subscription.&lt;/p&gt;
     # @required @param subscription_exposed_id [String?]
     # @return nil
-    def delete_subscriptions_subscription_exposed_id_discount(*, subscription_exposed_id : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_subscriptions_subscription_exposed_id_discount(
+      *,
+      subscription_exposed_id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_subscriptions_subscription_exposed_id_discount(subscription_exposed_id: subscription_exposed_id).execute(&block)
     end
 
     DELETE_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_DISCOUNT_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_subscriptions_subscription_exposed_id_discount(*, subscription_exposed_id : String? = nil) : Crest::Request
+    def build_api_request_for_delete_subscriptions_subscription_exposed_id_discount(
+      *,
+      subscription_exposed_id : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.delete_subscriptions_subscription_exposed_id_discount ..." }
       end
@@ -169,6 +211,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -185,6 +230,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -204,7 +250,21 @@ module Stripe
     # @optional @param current_period_end [Stripe::GetAccountsCreatedParameter?]
     # @optional @param current_period_start [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::SubscriptionsSubscriptionList]
-    def get_subscriptions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, price : String? = nil, expand : Array(Array(String))? = nil, customer : String? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, current_period_end : Stripe::GetAccountsCreatedParameter? = nil, current_period_start : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::SubscriptionsSubscriptionList
+    def get_subscriptions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      price : String? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_end : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_start : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::SubscriptionsSubscriptionList
       data, _status_code, _headers = get_subscriptions_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, test_clock: test_clock, price: price, expand: expand, customer: customer, collection_method: collection_method, status: status, created: created, current_period_end: current_period_end, current_period_start: current_period_start)
       data
     end
@@ -223,7 +283,21 @@ module Stripe
     # @optional @param current_period_end [Stripe::GetAccountsCreatedParameter?]
     # @optional @param current_period_start [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::SubscriptionsSubscriptionList, Integer, Hash)] Stripe::SubscriptionsSubscriptionList, response status code and response headers
-    def get_subscriptions_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, price : String? = nil, expand : Array(Array(String))? = nil, customer : String? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, current_period_end : Stripe::GetAccountsCreatedParameter? = nil, current_period_start : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::SubscriptionsSubscriptionList, Int32, Hash(String, Array(String) | String))
+    def get_subscriptions_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      price : String? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_end : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_start : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::SubscriptionsSubscriptionList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_subscriptions(ending_before: ending_before, starting_after: starting_after, limit: limit, test_clock: test_clock, price: price, expand: expand, customer: customer, collection_method: collection_method, status: status, created: created, current_period_end: current_period_end, current_period_start: current_period_start)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -249,7 +323,22 @@ module Stripe
     # @optional @param current_period_end [Stripe::GetAccountsCreatedParameter?]
     # @optional @param current_period_start [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_subscriptions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, price : String? = nil, expand : Array(Array(String))? = nil, customer : String? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, current_period_end : Stripe::GetAccountsCreatedParameter? = nil, current_period_start : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_subscriptions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      price : String? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_end : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_start : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_subscriptions(ending_before: ending_before, starting_after: starting_after, limit: limit, test_clock: test_clock, price: price, expand: expand, customer: customer, collection_method: collection_method, status: status, created: created, current_period_end: current_period_end, current_period_start: current_period_start).execute(&block)
     end
 
@@ -262,7 +351,21 @@ module Stripe
     GET_SUBSCRIPTIONS_VALID_VALUES_FOR_STATUS            = String.static_array("active", "all", "canceled", "ended", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid")
 
     # @return Crest::Request
-    def build_api_request_for_get_subscriptions(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, price : String? = nil, expand : Array(Array(String))? = nil, customer : String? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, current_period_end : Stripe::GetAccountsCreatedParameter? = nil, current_period_start : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_subscriptions(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      price : String? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_end : Stripe::GetAccountsCreatedParameter? = nil,
+      current_period_start : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.get_subscriptions ..." }
       end
@@ -325,6 +428,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -341,6 +447,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -352,7 +459,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SearchResult]
-    def get_subscriptions_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SearchResult
+    def get_subscriptions_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SearchResult
       data, _status_code, _headers = get_subscriptions_search_with_http_info(query: query, page: page, limit: limit, expand: expand)
       data
     end
@@ -363,7 +476,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SearchResult, Integer, Hash)] Stripe::SearchResult, response status code and response headers
-    def get_subscriptions_search_with_http_info(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
+    def get_subscriptions_search_with_http_info(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_subscriptions_search(query: query, page: page, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -381,7 +500,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_subscriptions_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_subscriptions_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_subscriptions_search(query: query, page: page, limit: limit, expand: expand).execute(&block)
     end
 
@@ -389,7 +515,13 @@ module Stripe
     GET_SUBSCRIPTIONS_SEARCH_MAX_LENGTH_FOR_PAGE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_subscriptions_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_subscriptions_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.get_subscriptions_search ..." }
       end
@@ -419,6 +551,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -435,6 +570,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -444,7 +580,11 @@ module Stripe
     # @required @param subscription_exposed_id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Subscription]
-    def get_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Subscription
+    def get_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Subscription
       data, _status_code, _headers = get_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, expand: expand)
       data
     end
@@ -453,7 +593,11 @@ module Stripe
     # @required @param subscription_exposed_id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
-    def get_subscriptions_subscription_exposed_id_with_http_info(*, subscription_exposed_id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
+    def get_subscriptions_subscription_exposed_id_with_http_info(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -469,14 +613,23 @@ module Stripe
     # @required @param subscription_exposed_id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, expand: expand).execute(&block)
     end
 
     GET_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.get_subscriptions_subscription_exposed_id ..." }
       end
@@ -500,6 +653,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -516,6 +672,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -553,7 +710,39 @@ module Stripe
     # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @optional @param trial_period_days [Int32?] Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @return [Stripe::Subscription]
-    def post_subscriptions(*, customer : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, backdate_start_date : Int64? = nil, billing_cycle_anchor : Int64? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Int64? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, currency : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemCreateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, trial_period_days : Int64? = nil) : Stripe::Subscription
+    def post_subscriptions(
+      *,
+      customer : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      backdate_start_date : Int64? = nil,
+      billing_cycle_anchor : Int64? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Int64? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      currency : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil,
+      trial_period_days : Int64? = nil
+    ) : Stripe::Subscription
       data, _status_code, _headers = post_subscriptions_with_http_info(customer: customer, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, backdate_start_date: backdate_start_date, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, currency: currency, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan, trial_period_days: trial_period_days)
       data
     end
@@ -590,7 +779,39 @@ module Stripe
     # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @optional @param trial_period_days [Int32?] Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
-    def post_subscriptions_with_http_info(*, customer : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, backdate_start_date : Int64? = nil, billing_cycle_anchor : Int64? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Int64? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, currency : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemCreateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, trial_period_days : Int64? = nil) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
+    def post_subscriptions_with_http_info(
+      *,
+      customer : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      backdate_start_date : Int64? = nil,
+      billing_cycle_anchor : Int64? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Int64? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      currency : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil,
+      trial_period_days : Int64? = nil
+    ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_subscriptions(customer: customer, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, backdate_start_date: backdate_start_date, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, currency: currency, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan, trial_period_days: trial_period_days)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -634,7 +855,40 @@ module Stripe
     # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @optional @param trial_period_days [Int32?] Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @return nil
-    def post_subscriptions(*, customer : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, backdate_start_date : Int64? = nil, billing_cycle_anchor : Int64? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Int64? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, currency : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemCreateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, trial_period_days : Int64? = nil, &block : Crest::Response ->) : Nil
+    def post_subscriptions(
+      *,
+      customer : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      backdate_start_date : Int64? = nil,
+      billing_cycle_anchor : Int64? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Int64? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      currency : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil,
+      trial_period_days : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_subscriptions(customer: customer, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, backdate_start_date: backdate_start_date, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, currency: currency, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan, trial_period_days: trial_period_days).execute(&block)
     end
 
@@ -649,7 +903,39 @@ module Stripe
     POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR   = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
-    def build_api_request_for_post_subscriptions(*, customer : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, backdate_start_date : Int64? = nil, billing_cycle_anchor : Int64? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Int64? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, currency : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemCreateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, trial_period_days : Int64? = nil) : Crest::Request
+    def build_api_request_for_post_subscriptions(
+      *,
+      customer : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      backdate_start_date : Int64? = nil,
+      billing_cycle_anchor : Int64? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Int64? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      currency : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil,
+      trial_period_days : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.post_subscriptions ..." }
       end
@@ -734,6 +1020,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["add_invoice_items"] = @api_client.build_collection_param(add_invoice_items, "csv") if !add_invoice_items.nil? && !add_invoice_items.empty?
@@ -780,6 +1069,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -816,7 +1106,38 @@ module Stripe
     # @optional @param trial_end [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd?]
     # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @return [Stripe::Subscription]
-    def post_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, billing_cycle_anchor : String? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemUpdateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil, trial_from_plan : Bool? = nil) : Stripe::Subscription
+    def post_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      billing_cycle_anchor : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
+      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil
+    ) : Stripe::Subscription
       data, _status_code, _headers = post_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, pause_collection: pause_collection, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, proration_date: proration_date, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan)
       data
     end
@@ -852,7 +1173,38 @@ module Stripe
     # @optional @param trial_end [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd?]
     # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
-    def post_subscriptions_subscription_exposed_id_with_http_info(*, subscription_exposed_id : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, billing_cycle_anchor : String? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemUpdateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil, trial_from_plan : Bool? = nil) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
+    def post_subscriptions_subscription_exposed_id_with_http_info(
+      *,
+      subscription_exposed_id : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      billing_cycle_anchor : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
+      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil
+    ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, pause_collection: pause_collection, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, proration_date: proration_date, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -895,7 +1247,39 @@ module Stripe
     # @optional @param trial_end [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd?]
     # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     # @return nil
-    def post_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, billing_cycle_anchor : String? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemUpdateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil, trial_from_plan : Bool? = nil, &block : Crest::Response ->) : Nil
+    def post_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      billing_cycle_anchor : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
+      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, pause_collection: pause_collection, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, proration_date: proration_date, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan).execute(&block)
     end
 
@@ -912,7 +1296,38 @@ module Stripe
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR    = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
-    def build_api_request_for_post_subscriptions_subscription_exposed_id(*, subscription_exposed_id : String? = nil, add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxConfig? = nil, billing_cycle_anchor : String? = nil, billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil, cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, cancel_at_period_end : Bool? = nil, collection_method : String? = nil, coupon : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, description : String? = nil, expand : Array(String)? = nil, items : Array(Stripe::SubscriptionItemUpdateParams)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, off_session : Bool? = nil, pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, payment_behavior : String? = nil, payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil, pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, promotion_code : String? = nil, proration_behavior : String? = nil, proration_date : Int64? = nil, transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil, trial_from_plan : Bool? = nil) : Crest::Request
+    def build_api_request_for_post_subscriptions_subscription_exposed_id(
+      *,
+      subscription_exposed_id : String? = nil,
+      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
+      billing_cycle_anchor : String? = nil,
+      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
+      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
+      cancel_at_period_end : Bool? = nil,
+      collection_method : String? = nil,
+      coupon : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      off_session : Bool? = nil,
+      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
+      payment_behavior : String? = nil,
+      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
+      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      promotion_code : String? = nil,
+      proration_behavior : String? = nil,
+      proration_date : Int64? = nil,
+      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
+      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
+      trial_from_plan : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.post_subscriptions_subscription_exposed_id ..." }
       end
@@ -1006,6 +1421,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["add_invoice_items"] = @api_client.build_collection_param(add_invoice_items, "csv") if !add_invoice_items.nil? && !add_invoice_items.empty?
@@ -1050,6 +1468,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

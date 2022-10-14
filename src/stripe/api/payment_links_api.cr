@@ -27,7 +27,14 @@ module Stripe
     # @optional @param active [Bool?] Only return payment links that are active or inactive (e.g., pass `false` to list all inactive payment links).
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentLinksResourcePaymentLinkList]
-    def get_payment_links(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentLinksResourcePaymentLinkList
+    def get_payment_links(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentLinksResourcePaymentLinkList
       data, _status_code, _headers = get_payment_links_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, expand: expand)
       data
     end
@@ -39,7 +46,14 @@ module Stripe
     # @optional @param active [Bool?] Only return payment links that are active or inactive (e.g., pass `false` to list all inactive payment links).
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentLinksResourcePaymentLinkList, Integer, Hash)] Stripe::PaymentLinksResourcePaymentLinkList, response status code and response headers
-    def get_payment_links_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentLinksResourcePaymentLinkList, Int32, Hash(String, Array(String) | String))
+    def get_payment_links_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentLinksResourcePaymentLinkList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_links(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -58,7 +72,15 @@ module Stripe
     # @optional @param active [Bool?] Only return payment links that are active or inactive (e.g., pass `false` to list all inactive payment links).
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_payment_links(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_links(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_links(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, expand: expand).execute(&block)
     end
 
@@ -66,7 +88,14 @@ module Stripe
     GET_PAYMENT_LINKS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_links(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_payment_links(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentLinksApi.get_payment_links ..." }
       end
@@ -96,6 +125,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -112,6 +144,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -121,7 +154,11 @@ module Stripe
     # @required @param payment_link [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentLink]
-    def get_payment_links_payment_link(*, payment_link : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentLink
+    def get_payment_links_payment_link(
+      *,
+      payment_link : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentLink
       data, _status_code, _headers = get_payment_links_payment_link_with_http_info(payment_link: payment_link, expand: expand)
       data
     end
@@ -130,7 +167,11 @@ module Stripe
     # @required @param payment_link [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentLink, Integer, Hash)] Stripe::PaymentLink, response status code and response headers
-    def get_payment_links_payment_link_with_http_info(*, payment_link : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentLink, Int32, Hash(String, Array(String) | String))
+    def get_payment_links_payment_link_with_http_info(
+      *,
+      payment_link : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentLink, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_links_payment_link(payment_link: payment_link, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -146,14 +187,23 @@ module Stripe
     # @required @param payment_link [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_payment_links_payment_link(*, payment_link : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_links_payment_link(
+      *,
+      payment_link : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_links_payment_link(payment_link: payment_link, expand: expand).execute(&block)
     end
 
     GET_PAYMENT_LINKS_PAYMENT_LINK_MAX_LENGTH_FOR_PAYMENT_LINK = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_links_payment_link(*, payment_link : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_payment_links_payment_link(
+      *,
+      payment_link : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentLinksApi.get_payment_links_payment_link ..." }
       end
@@ -177,6 +227,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -193,6 +246,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -205,7 +259,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentLinksResourceListLineItems]
-    def get_payment_links_payment_link_line_items(*, payment_link : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentLinksResourceListLineItems
+    def get_payment_links_payment_link_line_items(
+      *,
+      payment_link : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentLinksResourceListLineItems
       data, _status_code, _headers = get_payment_links_payment_link_line_items_with_http_info(payment_link: payment_link, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -217,7 +278,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentLinksResourceListLineItems, Integer, Hash)] Stripe::PaymentLinksResourceListLineItems, response status code and response headers
-    def get_payment_links_payment_link_line_items_with_http_info(*, payment_link : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentLinksResourceListLineItems, Int32, Hash(String, Array(String) | String))
+    def get_payment_links_payment_link_line_items_with_http_info(
+      *,
+      payment_link : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentLinksResourceListLineItems, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_links_payment_link_line_items(payment_link: payment_link, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -236,7 +304,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_payment_links_payment_link_line_items(*, payment_link : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_links_payment_link_line_items(
+      *,
+      payment_link : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_links_payment_link_line_items(payment_link: payment_link, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -245,7 +321,14 @@ module Stripe
     GET_PAYMENT_LINKS_PAYMENT_LINK_LINE_ITEMS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_links_payment_link_line_items(*, payment_link : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_payment_links_payment_link_line_items(
+      *,
+      payment_link : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentLinksApi.get_payment_links_payment_link_line_items ..." }
       end
@@ -278,6 +361,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -294,6 +380,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -323,7 +410,31 @@ module Stripe
     # @optional @param tax_id_collection [Stripe::TaxIdCollectionParams?]
     # @optional @param transfer_data [Stripe::TransferDataParams?]
     # @return [Stripe::PaymentLink]
-    def post_payment_links(*, line_items : Array(Stripe::LineItemsCreateParams)? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, application_fee_amount : Int64? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, on_behalf_of : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil, transfer_data : Stripe::TransferDataParams? = nil) : Stripe::PaymentLink
+    def post_payment_links(
+      *,
+      line_items : Array(Stripe::LineItemsCreateParams)? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      application_fee_amount : Int64? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      on_behalf_of : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil,
+      transfer_data : Stripe::TransferDataParams? = nil
+    ) : Stripe::PaymentLink
       data, _status_code, _headers = post_payment_links_with_http_info(line_items: line_items, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, consent_collection: consent_collection, currency: currency, customer_creation: customer_creation, expand: expand, on_behalf_of: on_behalf_of, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection, transfer_data: transfer_data)
       data
     end
@@ -352,7 +463,31 @@ module Stripe
     # @optional @param tax_id_collection [Stripe::TaxIdCollectionParams?]
     # @optional @param transfer_data [Stripe::TransferDataParams?]
     # @return [Tuple(Stripe::PaymentLink, Integer, Hash)] Stripe::PaymentLink, response status code and response headers
-    def post_payment_links_with_http_info(*, line_items : Array(Stripe::LineItemsCreateParams)? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, application_fee_amount : Int64? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, on_behalf_of : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil, transfer_data : Stripe::TransferDataParams? = nil) : Tuple(Stripe::PaymentLink, Int32, Hash(String, Array(String) | String))
+    def post_payment_links_with_http_info(
+      *,
+      line_items : Array(Stripe::LineItemsCreateParams)? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      application_fee_amount : Int64? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      on_behalf_of : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil,
+      transfer_data : Stripe::TransferDataParams? = nil
+    ) : Tuple(Stripe::PaymentLink, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_links(line_items: line_items, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, consent_collection: consent_collection, currency: currency, customer_creation: customer_creation, expand: expand, on_behalf_of: on_behalf_of, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection, transfer_data: transfer_data)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -388,7 +523,32 @@ module Stripe
     # @optional @param tax_id_collection [Stripe::TaxIdCollectionParams?]
     # @optional @param transfer_data [Stripe::TransferDataParams?]
     # @return nil
-    def post_payment_links(*, line_items : Array(Stripe::LineItemsCreateParams)? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, application_fee_amount : Int64? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, on_behalf_of : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil, transfer_data : Stripe::TransferDataParams? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_links(
+      *,
+      line_items : Array(Stripe::LineItemsCreateParams)? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      application_fee_amount : Int64? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      on_behalf_of : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil,
+      transfer_data : Stripe::TransferDataParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_links(line_items: line_items, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, consent_collection: consent_collection, currency: currency, customer_creation: customer_creation, expand: expand, on_behalf_of: on_behalf_of, payment_intent_data: payment_intent_data, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, phone_number_collection: phone_number_collection, shipping_address_collection: shipping_address_collection, shipping_options: shipping_options, submit_type: submit_type, subscription_data: subscription_data, tax_id_collection: tax_id_collection, transfer_data: transfer_data).execute(&block)
     end
 
@@ -399,7 +559,31 @@ module Stripe
     POST_PAYMENT_LINKS_VALID_VALUES_FOR_SUBMIT_TYPE                = String.static_array("auto", "book", "donate", "pay")
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_links(*, line_items : Array(Stripe::LineItemsCreateParams)? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, application_fee_amount : Int64? = nil, application_fee_percent : Float64? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, consent_collection : Stripe::ConsentCollectionParams? = nil, currency : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, on_behalf_of : String? = nil, payment_intent_data : Stripe::PaymentIntentDataParams? = nil, payment_method_collection : String? = nil, payment_method_types : Array(String)? = nil, phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil, shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil, shipping_options : Array(Stripe::ShippingOptionParams)? = nil, submit_type : String? = nil, subscription_data : Stripe::SubscriptionDataParams? = nil, tax_id_collection : Stripe::TaxIdCollectionParams? = nil, transfer_data : Stripe::TransferDataParams? = nil) : Crest::Request
+    def build_api_request_for_post_payment_links(
+      *,
+      line_items : Array(Stripe::LineItemsCreateParams)? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      application_fee_amount : Int64? = nil,
+      application_fee_percent : Float64? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      consent_collection : Stripe::ConsentCollectionParams? = nil,
+      currency : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      on_behalf_of : String? = nil,
+      payment_intent_data : Stripe::PaymentIntentDataParams? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Array(String)? = nil,
+      phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil,
+      shipping_address_collection : Stripe::ShippingAddressCollectionParams? = nil,
+      shipping_options : Array(Stripe::ShippingOptionParams)? = nil,
+      submit_type : String? = nil,
+      subscription_data : Stripe::SubscriptionDataParams? = nil,
+      tax_id_collection : Stripe::TaxIdCollectionParams? = nil,
+      transfer_data : Stripe::TransferDataParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentLinksApi.post_payment_links ..." }
       end
@@ -472,6 +656,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["after_completion"] = after_completion.to_s if !after_completion.nil?
@@ -510,6 +697,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -529,7 +717,21 @@ module Stripe
     # @optional @param payment_method_types [Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?]
     # @optional @param shipping_address_collection [Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection?]
     # @return [Stripe::PaymentLink]
-    def post_payment_links_payment_link(*, payment_link : String? = nil, active : Bool? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, line_items : Array(Stripe::LineItemsUpdateParams)? = nil, payment_method_collection : String? = nil, payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil) : Stripe::PaymentLink
+    def post_payment_links_payment_link(
+      *,
+      payment_link : String? = nil,
+      active : Bool? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil,
+      shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil
+    ) : Stripe::PaymentLink
       data, _status_code, _headers = post_payment_links_payment_link_with_http_info(payment_link: payment_link, active: active, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, customer_creation: customer_creation, expand: expand, line_items: line_items, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, shipping_address_collection: shipping_address_collection)
       data
     end
@@ -548,7 +750,21 @@ module Stripe
     # @optional @param payment_method_types [Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?]
     # @optional @param shipping_address_collection [Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection?]
     # @return [Tuple(Stripe::PaymentLink, Integer, Hash)] Stripe::PaymentLink, response status code and response headers
-    def post_payment_links_payment_link_with_http_info(*, payment_link : String? = nil, active : Bool? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, line_items : Array(Stripe::LineItemsUpdateParams)? = nil, payment_method_collection : String? = nil, payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil) : Tuple(Stripe::PaymentLink, Int32, Hash(String, Array(String) | String))
+    def post_payment_links_payment_link_with_http_info(
+      *,
+      payment_link : String? = nil,
+      active : Bool? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil,
+      shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil
+    ) : Tuple(Stripe::PaymentLink, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_links_payment_link(payment_link: payment_link, active: active, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, customer_creation: customer_creation, expand: expand, line_items: line_items, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, shipping_address_collection: shipping_address_collection)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -574,7 +790,22 @@ module Stripe
     # @optional @param payment_method_types [Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?]
     # @optional @param shipping_address_collection [Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection?]
     # @return nil
-    def post_payment_links_payment_link(*, payment_link : String? = nil, active : Bool? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, line_items : Array(Stripe::LineItemsUpdateParams)? = nil, payment_method_collection : String? = nil, payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_links_payment_link(
+      *,
+      payment_link : String? = nil,
+      active : Bool? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil,
+      shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_links_payment_link(payment_link: payment_link, active: active, after_completion: after_completion, allow_promotion_codes: allow_promotion_codes, automatic_tax: automatic_tax, billing_address_collection: billing_address_collection, customer_creation: customer_creation, expand: expand, line_items: line_items, payment_method_collection: payment_method_collection, payment_method_types: payment_method_types, shipping_address_collection: shipping_address_collection).execute(&block)
     end
 
@@ -584,7 +815,21 @@ module Stripe
     POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_links_payment_link(*, payment_link : String? = nil, active : Bool? = nil, after_completion : Stripe::AfterCompletionParams? = nil, allow_promotion_codes : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParams? = nil, billing_address_collection : String? = nil, customer_creation : String? = nil, expand : Array(String)? = nil, line_items : Array(Stripe::LineItemsUpdateParams)? = nil, payment_method_collection : String? = nil, payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil) : Crest::Request
+    def build_api_request_for_post_payment_links_payment_link(
+      *,
+      payment_link : String? = nil,
+      active : Bool? = nil,
+      after_completion : Stripe::AfterCompletionParams? = nil,
+      allow_promotion_codes : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParams? = nil,
+      billing_address_collection : String? = nil,
+      customer_creation : String? = nil,
+      expand : Array(String)? = nil,
+      line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
+      payment_method_collection : String? = nil,
+      payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil,
+      shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentLinksApi.post_payment_links_payment_link ..." }
       end
@@ -636,6 +881,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -663,6 +911,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

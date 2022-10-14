@@ -29,7 +29,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::DisputeList]
-    def get_disputes(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::DisputeList
+    def get_disputes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::DisputeList
       data, _status_code, _headers = get_disputes_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, charge: charge, expand: expand, created: created)
       data
     end
@@ -43,7 +52,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::DisputeList, Integer, Hash)] Stripe::DisputeList, response status code and response headers
-    def get_disputes_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::DisputeList, Int32, Hash(String, Array(String) | String))
+    def get_disputes_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::DisputeList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_disputes(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, charge: charge, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -64,7 +82,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_disputes(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_disputes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_disputes(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, charge: charge, expand: expand, created: created).execute(&block)
     end
 
@@ -74,7 +102,16 @@ module Stripe
     GET_DISPUTES_MAX_LENGTH_FOR_CHARGE         = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_disputes(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_disputes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: DisputesApi.get_disputes ..." }
       end
@@ -117,6 +154,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -133,6 +173,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -142,7 +183,11 @@ module Stripe
     # @required @param dispute [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Dispute]
-    def get_disputes_dispute(*, dispute : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Dispute
+    def get_disputes_dispute(
+      *,
+      dispute : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Dispute
       data, _status_code, _headers = get_disputes_dispute_with_http_info(dispute: dispute, expand: expand)
       data
     end
@@ -151,7 +196,11 @@ module Stripe
     # @required @param dispute [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Dispute, Integer, Hash)] Stripe::Dispute, response status code and response headers
-    def get_disputes_dispute_with_http_info(*, dispute : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
+    def get_disputes_dispute_with_http_info(
+      *,
+      dispute : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_disputes_dispute(dispute: dispute, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -167,14 +216,23 @@ module Stripe
     # @required @param dispute [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_disputes_dispute(*, dispute : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_disputes_dispute(
+      *,
+      dispute : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_disputes_dispute(dispute: dispute, expand: expand).execute(&block)
     end
 
     GET_DISPUTES_DISPUTE_MAX_LENGTH_FOR_DISPUTE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_disputes_dispute(*, dispute : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_disputes_dispute(
+      *,
+      dispute : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: DisputesApi.get_disputes_dispute ..." }
       end
@@ -198,6 +256,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -214,6 +275,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -226,7 +288,14 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param submit [Bool?] Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
     # @return [Stripe::Dispute]
-    def post_disputes_dispute(*, dispute : String? = nil, evidence : Stripe::DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, submit : Bool? = nil) : Stripe::Dispute
+    def post_disputes_dispute(
+      *,
+      dispute : String? = nil,
+      evidence : Stripe::DisputeEvidenceParams? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      submit : Bool? = nil
+    ) : Stripe::Dispute
       data, _status_code, _headers = post_disputes_dispute_with_http_info(dispute: dispute, evidence: evidence, expand: expand, metadata: metadata, submit: submit)
       data
     end
@@ -238,7 +307,14 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param submit [Bool?] Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
     # @return [Tuple(Stripe::Dispute, Integer, Hash)] Stripe::Dispute, response status code and response headers
-    def post_disputes_dispute_with_http_info(*, dispute : String? = nil, evidence : Stripe::DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, submit : Bool? = nil) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
+    def post_disputes_dispute_with_http_info(
+      *,
+      dispute : String? = nil,
+      evidence : Stripe::DisputeEvidenceParams? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      submit : Bool? = nil
+    ) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_disputes_dispute(dispute: dispute, evidence: evidence, expand: expand, metadata: metadata, submit: submit)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -257,14 +333,29 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param submit [Bool?] Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
     # @return nil
-    def post_disputes_dispute(*, dispute : String? = nil, evidence : Stripe::DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, submit : Bool? = nil, &block : Crest::Response ->) : Nil
+    def post_disputes_dispute(
+      *,
+      dispute : String? = nil,
+      evidence : Stripe::DisputeEvidenceParams? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      submit : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_disputes_dispute(dispute: dispute, evidence: evidence, expand: expand, metadata: metadata, submit: submit).execute(&block)
     end
 
     POST_DISPUTES_DISPUTE_MAX_LENGTH_FOR_DISPUTE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_disputes_dispute(*, dispute : String? = nil, evidence : Stripe::DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, submit : Bool? = nil) : Crest::Request
+    def build_api_request_for_post_disputes_dispute(
+      *,
+      dispute : String? = nil,
+      evidence : Stripe::DisputeEvidenceParams? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      submit : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: DisputesApi.post_disputes_dispute ..." }
       end
@@ -296,6 +387,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["evidence"] = evidence.to_s if !evidence.nil?
@@ -316,6 +410,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -325,7 +420,11 @@ module Stripe
     # @required @param dispute [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Dispute]
-    def post_disputes_dispute_close(*, dispute : String? = nil, expand : Array(String)? = nil) : Stripe::Dispute
+    def post_disputes_dispute_close(
+      *,
+      dispute : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Dispute
       data, _status_code, _headers = post_disputes_dispute_close_with_http_info(dispute: dispute, expand: expand)
       data
     end
@@ -334,7 +433,11 @@ module Stripe
     # @required @param dispute [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Dispute, Integer, Hash)] Stripe::Dispute, response status code and response headers
-    def post_disputes_dispute_close_with_http_info(*, dispute : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
+    def post_disputes_dispute_close_with_http_info(
+      *,
+      dispute : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_disputes_dispute_close(dispute: dispute, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -350,14 +453,23 @@ module Stripe
     # @required @param dispute [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_disputes_dispute_close(*, dispute : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_disputes_dispute_close(
+      *,
+      dispute : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_disputes_dispute_close(dispute: dispute, expand: expand).execute(&block)
     end
 
     POST_DISPUTES_DISPUTE_CLOSE_MAX_LENGTH_FOR_DISPUTE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_disputes_dispute_close(*, dispute : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_disputes_dispute_close(
+      *,
+      dispute : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: DisputesApi.post_disputes_dispute_close ..." }
       end
@@ -382,6 +494,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -399,6 +514,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

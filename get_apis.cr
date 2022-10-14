@@ -9,6 +9,8 @@ Stripe.configure do |config|
   config.access_token = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 end
 
+Stripe::ApiClient.default.default_headers["Stripe-Version"] = "2022-08-01"
+
 get_accounts = Stripe::AccountsApi.new.get_accounts(expand: nil)
 File.write("local/gets/get_accounts.json", get_accounts.to_json)
 # get_accounts_bank_accounts_id = api.get_accounts_bank_accounts_id(id: nil)

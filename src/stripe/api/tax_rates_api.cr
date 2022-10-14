@@ -29,7 +29,16 @@ module Stripe
     # @optional @param created [Stripe::GetAccountsCreatedParameter?] Optional range for filtering created date.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TaxRatesList]
-    def get_tax_rates(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, inclusive : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, expand : Array(Array(String))? = nil) : Stripe::TaxRatesList
+    def get_tax_rates(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      inclusive : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::TaxRatesList
       data, _status_code, _headers = get_tax_rates_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, inclusive: inclusive, created: created, expand: expand)
       data
     end
@@ -43,7 +52,16 @@ module Stripe
     # @optional @param created [Stripe::GetAccountsCreatedParameter?] Optional range for filtering created date.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TaxRatesList, Integer, Hash)] Stripe::TaxRatesList, response status code and response headers
-    def get_tax_rates_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, inclusive : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::TaxRatesList, Int32, Hash(String, Array(String) | String))
+    def get_tax_rates_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      inclusive : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::TaxRatesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_tax_rates(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, inclusive: inclusive, created: created, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -64,7 +82,17 @@ module Stripe
     # @optional @param created [Stripe::GetAccountsCreatedParameter?] Optional range for filtering created date.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_tax_rates(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, inclusive : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_tax_rates(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      inclusive : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_tax_rates(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, inclusive: inclusive, created: created, expand: expand).execute(&block)
     end
 
@@ -72,7 +100,16 @@ module Stripe
     GET_TAX_RATES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_tax_rates(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, inclusive : Bool? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_tax_rates(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      inclusive : Bool? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TaxRatesApi.get_tax_rates ..." }
       end
@@ -108,6 +145,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -124,6 +164,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -133,7 +174,11 @@ module Stripe
     # @required @param tax_rate [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TaxRate]
-    def get_tax_rates_tax_rate(*, tax_rate : String? = nil, expand : Array(Array(String))? = nil) : Stripe::TaxRate
+    def get_tax_rates_tax_rate(
+      *,
+      tax_rate : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::TaxRate
       data, _status_code, _headers = get_tax_rates_tax_rate_with_http_info(tax_rate: tax_rate, expand: expand)
       data
     end
@@ -142,7 +187,11 @@ module Stripe
     # @required @param tax_rate [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TaxRate, Integer, Hash)] Stripe::TaxRate, response status code and response headers
-    def get_tax_rates_tax_rate_with_http_info(*, tax_rate : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
+    def get_tax_rates_tax_rate_with_http_info(
+      *,
+      tax_rate : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_tax_rates_tax_rate(tax_rate: tax_rate, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -158,14 +207,23 @@ module Stripe
     # @required @param tax_rate [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_tax_rates_tax_rate(*, tax_rate : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_tax_rates_tax_rate(
+      *,
+      tax_rate : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_tax_rates_tax_rate(tax_rate: tax_rate, expand: expand).execute(&block)
     end
 
     GET_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_TAX_RATE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_tax_rates_tax_rate(*, tax_rate : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_tax_rates_tax_rate(
+      *,
+      tax_rate : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TaxRatesApi.get_tax_rates_tax_rate ..." }
       end
@@ -189,6 +247,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -205,6 +266,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -222,7 +284,19 @@ module Stripe
     # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
     # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
     # @return [Stripe::TaxRate]
-    def post_tax_rates(*, display_name : String? = nil, inclusive : Bool? = nil, percentage : Float64? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, state : String? = nil, tax_type : String? = nil) : Stripe::TaxRate
+    def post_tax_rates(
+      *,
+      display_name : String? = nil,
+      inclusive : Bool? = nil,
+      percentage : Float64? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      state : String? = nil,
+      tax_type : String? = nil
+    ) : Stripe::TaxRate
       data, _status_code, _headers = post_tax_rates_with_http_info(display_name: display_name, inclusive: inclusive, percentage: percentage, active: active, country: country, description: description, expand: expand, jurisdiction: jurisdiction, state: state, tax_type: tax_type)
       data
     end
@@ -239,7 +313,19 @@ module Stripe
     # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
     # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
     # @return [Tuple(Stripe::TaxRate, Integer, Hash)] Stripe::TaxRate, response status code and response headers
-    def post_tax_rates_with_http_info(*, display_name : String? = nil, inclusive : Bool? = nil, percentage : Float64? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, state : String? = nil, tax_type : String? = nil) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
+    def post_tax_rates_with_http_info(
+      *,
+      display_name : String? = nil,
+      inclusive : Bool? = nil,
+      percentage : Float64? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      state : String? = nil,
+      tax_type : String? = nil
+    ) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_tax_rates(display_name: display_name, inclusive: inclusive, percentage: percentage, active: active, country: country, description: description, expand: expand, jurisdiction: jurisdiction, state: state, tax_type: tax_type)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -263,7 +349,20 @@ module Stripe
     # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
     # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
     # @return nil
-    def post_tax_rates(*, display_name : String? = nil, inclusive : Bool? = nil, percentage : Float64? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, state : String? = nil, tax_type : String? = nil, &block : Crest::Response ->) : Nil
+    def post_tax_rates(
+      *,
+      display_name : String? = nil,
+      inclusive : Bool? = nil,
+      percentage : Float64? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      state : String? = nil,
+      tax_type : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_tax_rates(display_name: display_name, inclusive: inclusive, percentage: percentage, active: active, country: country, description: description, expand: expand, jurisdiction: jurisdiction, state: state, tax_type: tax_type).execute(&block)
     end
 
@@ -275,7 +374,19 @@ module Stripe
     POST_TAX_RATES_VALID_VALUES_FOR_TAX_TYPE   = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     # @return Crest::Request
-    def build_api_request_for_post_tax_rates(*, display_name : String? = nil, inclusive : Bool? = nil, percentage : Float64? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, state : String? = nil, tax_type : String? = nil) : Crest::Request
+    def build_api_request_for_post_tax_rates(
+      *,
+      display_name : String? = nil,
+      inclusive : Bool? = nil,
+      percentage : Float64? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      state : String? = nil,
+      tax_type : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TaxRatesApi.post_tax_rates ..." }
       end
@@ -320,6 +431,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -346,6 +460,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -363,7 +478,19 @@ module Stripe
     # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
     # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
     # @return [Stripe::TaxRate]
-    def post_tax_rates_tax_rate(*, tax_rate : String? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, display_name : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, state : String? = nil, tax_type : String? = nil) : Stripe::TaxRate
+    def post_tax_rates_tax_rate(
+      *,
+      tax_rate : String? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      display_name : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      state : String? = nil,
+      tax_type : String? = nil
+    ) : Stripe::TaxRate
       data, _status_code, _headers = post_tax_rates_tax_rate_with_http_info(tax_rate: tax_rate, active: active, country: country, description: description, display_name: display_name, expand: expand, jurisdiction: jurisdiction, metadata: metadata, state: state, tax_type: tax_type)
       data
     end
@@ -380,7 +507,19 @@ module Stripe
     # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
     # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
     # @return [Tuple(Stripe::TaxRate, Integer, Hash)] Stripe::TaxRate, response status code and response headers
-    def post_tax_rates_tax_rate_with_http_info(*, tax_rate : String? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, display_name : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, state : String? = nil, tax_type : String? = nil) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
+    def post_tax_rates_tax_rate_with_http_info(
+      *,
+      tax_rate : String? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      display_name : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      state : String? = nil,
+      tax_type : String? = nil
+    ) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_tax_rates_tax_rate(tax_rate: tax_rate, active: active, country: country, description: description, display_name: display_name, expand: expand, jurisdiction: jurisdiction, metadata: metadata, state: state, tax_type: tax_type)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -404,7 +543,20 @@ module Stripe
     # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
     # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
     # @return nil
-    def post_tax_rates_tax_rate(*, tax_rate : String? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, display_name : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, state : String? = nil, tax_type : String? = nil, &block : Crest::Response ->) : Nil
+    def post_tax_rates_tax_rate(
+      *,
+      tax_rate : String? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      display_name : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      state : String? = nil,
+      tax_type : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_tax_rates_tax_rate(tax_rate: tax_rate, active: active, country: country, description: description, display_name: display_name, expand: expand, jurisdiction: jurisdiction, metadata: metadata, state: state, tax_type: tax_type).execute(&block)
     end
 
@@ -417,7 +569,19 @@ module Stripe
     POST_TAX_RATES_TAX_RATE_VALID_VALUES_FOR_TAX_TYPE   = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     # @return Crest::Request
-    def build_api_request_for_post_tax_rates_tax_rate(*, tax_rate : String? = nil, active : Bool? = nil, country : String? = nil, description : String? = nil, display_name : String? = nil, expand : Array(String)? = nil, jurisdiction : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, state : String? = nil, tax_type : String? = nil) : Crest::Request
+    def build_api_request_for_post_tax_rates_tax_rate(
+      *,
+      tax_rate : String? = nil,
+      active : Bool? = nil,
+      country : String? = nil,
+      description : String? = nil,
+      display_name : String? = nil,
+      expand : Array(String)? = nil,
+      jurisdiction : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      state : String? = nil,
+      tax_type : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TaxRatesApi.post_tax_rates_tax_rate ..." }
       end
@@ -465,6 +629,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -490,6 +657,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

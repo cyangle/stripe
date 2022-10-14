@@ -27,7 +27,14 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::RadarReviewList]
-    def get_reviews(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::RadarReviewList
+    def get_reviews(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::RadarReviewList
       data, _status_code, _headers = get_reviews_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created)
       data
     end
@@ -39,7 +46,14 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::RadarReviewList, Integer, Hash)] Stripe::RadarReviewList, response status code and response headers
-    def get_reviews_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::RadarReviewList, Int32, Hash(String, Array(String) | String))
+    def get_reviews_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::RadarReviewList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_reviews(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -58,7 +72,15 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_reviews(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_reviews(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_reviews(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created).execute(&block)
     end
 
@@ -66,7 +88,14 @@ module Stripe
     GET_REVIEWS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_reviews(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_reviews(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReviewsApi.get_reviews ..." }
       end
@@ -100,6 +129,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -116,6 +148,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -125,7 +158,11 @@ module Stripe
     # @required @param review [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Review]
-    def get_reviews_review(*, review : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Review
+    def get_reviews_review(
+      *,
+      review : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Review
       data, _status_code, _headers = get_reviews_review_with_http_info(review: review, expand: expand)
       data
     end
@@ -134,7 +171,11 @@ module Stripe
     # @required @param review [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Review, Integer, Hash)] Stripe::Review, response status code and response headers
-    def get_reviews_review_with_http_info(*, review : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Review, Int32, Hash(String, Array(String) | String))
+    def get_reviews_review_with_http_info(
+      *,
+      review : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Review, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_reviews_review(review: review, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -150,14 +191,23 @@ module Stripe
     # @required @param review [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_reviews_review(*, review : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_reviews_review(
+      *,
+      review : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_reviews_review(review: review, expand: expand).execute(&block)
     end
 
     GET_REVIEWS_REVIEW_MAX_LENGTH_FOR_REVIEW = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_reviews_review(*, review : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_reviews_review(
+      *,
+      review : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReviewsApi.get_reviews_review ..." }
       end
@@ -181,6 +231,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -197,6 +250,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -206,7 +260,11 @@ module Stripe
     # @required @param review [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Review]
-    def post_reviews_review_approve(*, review : String? = nil, expand : Array(String)? = nil) : Stripe::Review
+    def post_reviews_review_approve(
+      *,
+      review : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Review
       data, _status_code, _headers = post_reviews_review_approve_with_http_info(review: review, expand: expand)
       data
     end
@@ -215,7 +273,11 @@ module Stripe
     # @required @param review [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Review, Integer, Hash)] Stripe::Review, response status code and response headers
-    def post_reviews_review_approve_with_http_info(*, review : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Review, Int32, Hash(String, Array(String) | String))
+    def post_reviews_review_approve_with_http_info(
+      *,
+      review : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Review, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_reviews_review_approve(review: review, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -231,14 +293,23 @@ module Stripe
     # @required @param review [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_reviews_review_approve(*, review : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_reviews_review_approve(
+      *,
+      review : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_reviews_review_approve(review: review, expand: expand).execute(&block)
     end
 
     POST_REVIEWS_REVIEW_APPROVE_MAX_LENGTH_FOR_REVIEW = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_reviews_review_approve(*, review : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_reviews_review_approve(
+      *,
+      review : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReviewsApi.post_reviews_review_approve ..." }
       end
@@ -263,6 +334,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -280,6 +354,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

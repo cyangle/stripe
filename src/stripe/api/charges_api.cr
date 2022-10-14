@@ -30,7 +30,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::ChargeList]
-    def get_charges(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, transfer_group : String? = nil, payment_intent : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::ChargeList
+    def get_charges(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      transfer_group : String? = nil,
+      payment_intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::ChargeList
       data, _status_code, _headers = get_charges_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, transfer_group: transfer_group, payment_intent: payment_intent, expand: expand, created: created)
       data
     end
@@ -45,7 +55,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::ChargeList, Integer, Hash)] Stripe::ChargeList, response status code and response headers
-    def get_charges_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, transfer_group : String? = nil, payment_intent : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::ChargeList, Int32, Hash(String, Array(String) | String))
+    def get_charges_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      transfer_group : String? = nil,
+      payment_intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::ChargeList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_charges(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, transfer_group: transfer_group, payment_intent: payment_intent, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -67,7 +87,18 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_charges(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, transfer_group : String? = nil, payment_intent : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_charges(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      transfer_group : String? = nil,
+      payment_intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_charges(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, transfer_group: transfer_group, payment_intent: payment_intent, expand: expand, created: created).execute(&block)
     end
 
@@ -76,7 +107,17 @@ module Stripe
     GET_CHARGES_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_charges(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, transfer_group : String? = nil, payment_intent : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_charges(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      transfer_group : String? = nil,
+      payment_intent : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.get_charges ..." }
       end
@@ -116,6 +157,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -132,6 +176,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -141,7 +186,11 @@ module Stripe
     # @required @param charge [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Charge]
-    def get_charges_charge(*, charge : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Charge
+    def get_charges_charge(
+      *,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Charge
       data, _status_code, _headers = get_charges_charge_with_http_info(charge: charge, expand: expand)
       data
     end
@@ -150,7 +199,11 @@ module Stripe
     # @required @param charge [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
-    def get_charges_charge_with_http_info(*, charge : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
+    def get_charges_charge_with_http_info(
+      *,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_charges_charge(charge: charge, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -166,14 +219,23 @@ module Stripe
     # @required @param charge [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_charges_charge(*, charge : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_charges_charge(
+      *,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_charges_charge(charge: charge, expand: expand).execute(&block)
     end
 
     GET_CHARGES_CHARGE_MAX_LENGTH_FOR_CHARGE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_charges_charge(*, charge : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_charges_charge(
+      *,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.get_charges_charge ..." }
       end
@@ -197,6 +259,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -213,6 +278,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -224,7 +290,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SearchResult]
-    def get_charges_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SearchResult
+    def get_charges_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SearchResult
       data, _status_code, _headers = get_charges_search_with_http_info(query: query, page: page, limit: limit, expand: expand)
       data
     end
@@ -235,7 +307,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SearchResult, Integer, Hash)] Stripe::SearchResult, response status code and response headers
-    def get_charges_search_with_http_info(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
+    def get_charges_search_with_http_info(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_charges_search(query: query, page: page, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -253,7 +331,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_charges_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_charges_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_charges_search(query: query, page: page, limit: limit, expand: expand).execute(&block)
     end
 
@@ -261,7 +346,13 @@ module Stripe
     GET_CHARGES_SEARCH_MAX_LENGTH_FOR_PAGE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_charges_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_charges_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.get_charges_search ..." }
       end
@@ -291,6 +382,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -307,6 +401,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -334,7 +429,29 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
     # @return [Stripe::Charge]
-    def post_charges(*, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, capture : Bool? = nil, card : Stripe::PostChargesRequestCard? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, destination : Stripe::PostChargesRequestDestination? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, source : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil) : Stripe::Charge
+    def post_charges(
+      *,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      capture : Bool? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      destination : Stripe::PostChargesRequestDestination? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      source : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil
+    ) : Stripe::Charge
       data, _status_code, _headers = post_charges_with_http_info(amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, capture: capture, card: card, currency: currency, customer: customer, description: description, destination: destination, expand: expand, metadata: metadata, on_behalf_of: on_behalf_of, radar_options: radar_options, receipt_email: receipt_email, shipping: shipping, source: source, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
       data
     end
@@ -361,7 +478,29 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
-    def post_charges_with_http_info(*, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, capture : Bool? = nil, card : Stripe::PostChargesRequestCard? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, destination : Stripe::PostChargesRequestDestination? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, source : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
+    def post_charges_with_http_info(
+      *,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      capture : Bool? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      destination : Stripe::PostChargesRequestDestination? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      source : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil
+    ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_charges(amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, capture: capture, card: card, currency: currency, customer: customer, description: description, destination: destination, expand: expand, metadata: metadata, on_behalf_of: on_behalf_of, radar_options: radar_options, receipt_email: receipt_email, shipping: shipping, source: source, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -395,7 +534,30 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
     # @return nil
-    def post_charges(*, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, capture : Bool? = nil, card : Stripe::PostChargesRequestCard? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, destination : Stripe::PostChargesRequestDestination? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, source : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil, &block : Crest::Response ->) : Nil
+    def post_charges(
+      *,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      capture : Bool? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      destination : Stripe::PostChargesRequestDestination? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      source : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_charges(amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, capture: capture, card: card, currency: currency, customer: customer, description: description, destination: destination, expand: expand, metadata: metadata, on_behalf_of: on_behalf_of, radar_options: radar_options, receipt_email: receipt_email, shipping: shipping, source: source, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group).execute(&block)
     end
 
@@ -407,7 +569,29 @@ module Stripe
     POST_CHARGES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX =    22
 
     # @return Crest::Request
-    def build_api_request_for_post_charges(*, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, capture : Bool? = nil, card : Stripe::PostChargesRequestCard? = nil, currency : String? = nil, customer : String? = nil, description : String? = nil, destination : Stripe::PostChargesRequestDestination? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, radar_options : Stripe::RadarOptions? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, source : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil) : Crest::Request
+    def build_api_request_for_post_charges(
+      *,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      capture : Bool? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      destination : Stripe::PostChargesRequestDestination? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      source : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.post_charges ..." }
       end
@@ -467,6 +651,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -503,6 +690,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -519,7 +707,18 @@ module Stripe
     # @optional @param shipping [Stripe::OptionalFieldsShipping?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     # @return [Stripe::Charge]
-    def post_charges_charge(*, charge : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, fraud_details : Stripe::FraudDetails? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, transfer_group : String? = nil) : Stripe::Charge
+    def post_charges_charge(
+      *,
+      charge : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      fraud_details : Stripe::FraudDetails? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      transfer_group : String? = nil
+    ) : Stripe::Charge
       data, _status_code, _headers = post_charges_charge_with_http_info(charge: charge, customer: customer, description: description, expand: expand, fraud_details: fraud_details, metadata: metadata, receipt_email: receipt_email, shipping: shipping, transfer_group: transfer_group)
       data
     end
@@ -535,7 +734,18 @@ module Stripe
     # @optional @param shipping [Stripe::OptionalFieldsShipping?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
-    def post_charges_charge_with_http_info(*, charge : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, fraud_details : Stripe::FraudDetails? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, transfer_group : String? = nil) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
+    def post_charges_charge_with_http_info(
+      *,
+      charge : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      fraud_details : Stripe::FraudDetails? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      transfer_group : String? = nil
+    ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_charges_charge(charge: charge, customer: customer, description: description, expand: expand, fraud_details: fraud_details, metadata: metadata, receipt_email: receipt_email, shipping: shipping, transfer_group: transfer_group)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -558,7 +768,19 @@ module Stripe
     # @optional @param shipping [Stripe::OptionalFieldsShipping?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     # @return nil
-    def post_charges_charge(*, charge : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, fraud_details : Stripe::FraudDetails? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, transfer_group : String? = nil, &block : Crest::Response ->) : Nil
+    def post_charges_charge(
+      *,
+      charge : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      fraud_details : Stripe::FraudDetails? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      transfer_group : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_charges_charge(charge: charge, customer: customer, description: description, expand: expand, fraud_details: fraud_details, metadata: metadata, receipt_email: receipt_email, shipping: shipping, transfer_group: transfer_group).execute(&block)
     end
 
@@ -568,7 +790,18 @@ module Stripe
     POST_CHARGES_CHARGE_MAX_LENGTH_FOR_RECEIPT_EMAIL =  5000
 
     # @return Crest::Request
-    def build_api_request_for_post_charges_charge(*, charge : String? = nil, customer : String? = nil, description : String? = nil, expand : Array(String)? = nil, fraud_details : Stripe::FraudDetails? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, receipt_email : String? = nil, shipping : Stripe::OptionalFieldsShipping? = nil, transfer_group : String? = nil) : Crest::Request
+    def build_api_request_for_post_charges_charge(
+      *,
+      charge : String? = nil,
+      customer : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      fraud_details : Stripe::FraudDetails? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      receipt_email : String? = nil,
+      shipping : Stripe::OptionalFieldsShipping? = nil,
+      transfer_group : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.post_charges_charge ..." }
       end
@@ -612,6 +845,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["customer"] = customer.to_s if !customer.nil?
@@ -636,6 +872,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -653,7 +890,19 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     # @return [Stripe::Charge]
-    def post_charges_charge_capture(*, charge : String? = nil, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, receipt_email : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil) : Stripe::Charge
+    def post_charges_charge_capture(
+      *,
+      charge : String? = nil,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      receipt_email : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil
+    ) : Stripe::Charge
       data, _status_code, _headers = post_charges_charge_capture_with_http_info(charge: charge, amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, expand: expand, receipt_email: receipt_email, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
       data
     end
@@ -670,7 +919,19 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
-    def post_charges_charge_capture_with_http_info(*, charge : String? = nil, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, receipt_email : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
+    def post_charges_charge_capture_with_http_info(
+      *,
+      charge : String? = nil,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      receipt_email : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil
+    ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_charges_charge_capture(charge: charge, amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, expand: expand, receipt_email: receipt_email, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -694,7 +955,20 @@ module Stripe
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     # @return nil
-    def post_charges_charge_capture(*, charge : String? = nil, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, receipt_email : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil, &block : Crest::Response ->) : Nil
+    def post_charges_charge_capture(
+      *,
+      charge : String? = nil,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      receipt_email : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_charges_charge_capture(charge: charge, amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, expand: expand, receipt_email: receipt_email, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group).execute(&block)
     end
 
@@ -703,7 +977,19 @@ module Stripe
     POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX =   22
 
     # @return Crest::Request
-    def build_api_request_for_post_charges_charge_capture(*, charge : String? = nil, amount : Int64? = nil, application_fee : Int64? = nil, application_fee_amount : Int64? = nil, expand : Array(String)? = nil, receipt_email : String? = nil, statement_descriptor : String? = nil, statement_descriptor_suffix : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, transfer_group : String? = nil) : Crest::Request
+    def build_api_request_for_post_charges_charge_capture(
+      *,
+      charge : String? = nil,
+      amount : Int64? = nil,
+      application_fee : Int64? = nil,
+      application_fee_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      receipt_email : String? = nil,
+      statement_descriptor : String? = nil,
+      statement_descriptor_suffix : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      transfer_group : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.post_charges_charge_capture ..." }
       end
@@ -738,6 +1024,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -763,6 +1052,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

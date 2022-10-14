@@ -26,7 +26,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ExchangeRateList]
-    def get_exchange_rates(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::ExchangeRateList
+    def get_exchange_rates(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ExchangeRateList
       data, _status_code, _headers = get_exchange_rates_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -37,7 +43,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ExchangeRateList, Integer, Hash)] Stripe::ExchangeRateList, response status code and response headers
-    def get_exchange_rates_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ExchangeRateList, Int32, Hash(String, Array(String) | String))
+    def get_exchange_rates_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ExchangeRateList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_exchange_rates(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -55,7 +67,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_exchange_rates(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_exchange_rates(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_exchange_rates(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -63,7 +82,13 @@ module Stripe
     GET_EXCHANGE_RATES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_exchange_rates(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_exchange_rates(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ExchangeRatesApi.get_exchange_rates ..." }
       end
@@ -92,6 +117,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -108,6 +136,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -117,7 +146,11 @@ module Stripe
     # @required @param rate_id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ExchangeRate]
-    def get_exchange_rates_rate_id(*, rate_id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ExchangeRate
+    def get_exchange_rates_rate_id(
+      *,
+      rate_id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ExchangeRate
       data, _status_code, _headers = get_exchange_rates_rate_id_with_http_info(rate_id: rate_id, expand: expand)
       data
     end
@@ -126,7 +159,11 @@ module Stripe
     # @required @param rate_id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ExchangeRate, Integer, Hash)] Stripe::ExchangeRate, response status code and response headers
-    def get_exchange_rates_rate_id_with_http_info(*, rate_id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ExchangeRate, Int32, Hash(String, Array(String) | String))
+    def get_exchange_rates_rate_id_with_http_info(
+      *,
+      rate_id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ExchangeRate, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_exchange_rates_rate_id(rate_id: rate_id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -142,14 +179,23 @@ module Stripe
     # @required @param rate_id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_exchange_rates_rate_id(*, rate_id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_exchange_rates_rate_id(
+      *,
+      rate_id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_exchange_rates_rate_id(rate_id: rate_id, expand: expand).execute(&block)
     end
 
     GET_EXCHANGE_RATES_RATE_ID_MAX_LENGTH_FOR_RATE_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_exchange_rates_rate_id(*, rate_id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_exchange_rates_rate_id(
+      *,
+      rate_id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ExchangeRatesApi.get_exchange_rates_rate_id ..." }
       end
@@ -173,6 +219,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -189,6 +238,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

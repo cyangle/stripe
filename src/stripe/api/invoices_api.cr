@@ -23,7 +23,10 @@ module Stripe
     # <p>Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices that are no longer in a draft state will fail; once an invoice has been finalized or if an invoice is for a subscription, it must be <a href=\"#void_invoice\">voided</a>.</p>
     # @required @param invoice [String?]
     # @return [Stripe::DeletedInvoice]
-    def delete_invoices_invoice(*, invoice : String? = nil) : Stripe::DeletedInvoice
+    def delete_invoices_invoice(
+      *,
+      invoice : String? = nil
+    ) : Stripe::DeletedInvoice
       data, _status_code, _headers = delete_invoices_invoice_with_http_info(invoice: invoice)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices that are no longer in a draft state will fail; once an invoice has been finalized or if an invoice is for a subscription, it must be &lt;a href&#x3D;\&quot;#void_invoice\&quot;&gt;voided&lt;/a&gt;.&lt;/p&gt;
     # @required @param invoice [String?]
     # @return [Tuple(Stripe::DeletedInvoice, Integer, Hash)] Stripe::DeletedInvoice, response status code and response headers
-    def delete_invoices_invoice_with_http_info(*, invoice : String? = nil) : Tuple(Stripe::DeletedInvoice, Int32, Hash(String, Array(String) | String))
+    def delete_invoices_invoice_with_http_info(
+      *,
+      invoice : String? = nil
+    ) : Tuple(Stripe::DeletedInvoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_invoices_invoice(invoice: invoice)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices that are no longer in a draft state will fail; once an invoice has been finalized or if an invoice is for a subscription, it must be &lt;a href&#x3D;\&quot;#void_invoice\&quot;&gt;voided&lt;/a&gt;.&lt;/p&gt;
     # @required @param invoice [String?]
     # @return nil
-    def delete_invoices_invoice(*, invoice : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_invoices_invoice(invoice: invoice).execute(&block)
     end
 
     DELETE_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_invoices_invoice(*, invoice : String? = nil) : Crest::Request
+    def build_api_request_for_delete_invoices_invoice(
+      *,
+      invoice : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.delete_invoices_invoice ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -109,7 +126,19 @@ module Stripe
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @optional @param due_date [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::InvoicesList]
-    def get_invoices(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, subscription : String? = nil, expand : Array(Array(String))? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, due_date : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::InvoicesList
+    def get_invoices(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      expand : Array(Array(String))? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      due_date : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::InvoicesList
       data, _status_code, _headers = get_invoices_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, subscription: subscription, expand: expand, collection_method: collection_method, status: status, created: created, due_date: due_date)
       data
     end
@@ -126,7 +155,19 @@ module Stripe
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @optional @param due_date [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::InvoicesList, Integer, Hash)] Stripe::InvoicesList, response status code and response headers
-    def get_invoices_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, subscription : String? = nil, expand : Array(Array(String))? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, due_date : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::InvoicesList, Int32, Hash(String, Array(String) | String))
+    def get_invoices_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      expand : Array(Array(String))? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      due_date : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::InvoicesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_invoices(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, subscription: subscription, expand: expand, collection_method: collection_method, status: status, created: created, due_date: due_date)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -150,7 +191,20 @@ module Stripe
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @optional @param due_date [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_invoices(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, subscription : String? = nil, expand : Array(Array(String))? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, due_date : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_invoices(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      expand : Array(Array(String))? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      due_date : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_invoices(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, subscription: subscription, expand: expand, collection_method: collection_method, status: status, created: created, due_date: due_date).execute(&block)
     end
 
@@ -163,7 +217,19 @@ module Stripe
     GET_INVOICES_VALID_VALUES_FOR_STATUS            = String.static_array("draft", "open", "paid", "uncollectible", "void")
 
     # @return Crest::Request
-    def build_api_request_for_get_invoices(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, subscription : String? = nil, expand : Array(Array(String))? = nil, collection_method : String? = nil, status : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, due_date : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_invoices(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      expand : Array(Array(String))? = nil,
+      collection_method : String? = nil,
+      status : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      due_date : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.get_invoices ..." }
       end
@@ -218,6 +284,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -234,6 +303,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -243,7 +313,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Invoice]
-    def get_invoices_invoice(*, invoice : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Invoice
+    def get_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = get_invoices_invoice_with_http_info(invoice: invoice, expand: expand)
       data
     end
@@ -252,7 +326,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def get_invoices_invoice_with_http_info(*, invoice : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def get_invoices_invoice_with_http_info(
+      *,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_invoices_invoice(invoice: invoice, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -268,14 +346,23 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_invoices_invoice(*, invoice : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_invoices_invoice(invoice: invoice, expand: expand).execute(&block)
     end
 
     GET_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_invoices_invoice(*, invoice : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.get_invoices_invoice ..." }
       end
@@ -299,6 +386,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -315,6 +405,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -327,7 +418,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::InvoiceLinesList]
-    def get_invoices_invoice_lines(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::InvoiceLinesList
+    def get_invoices_invoice_lines(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::InvoiceLinesList
       data, _status_code, _headers = get_invoices_invoice_lines_with_http_info(invoice: invoice, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -339,7 +437,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::InvoiceLinesList, Integer, Hash)] Stripe::InvoiceLinesList, response status code and response headers
-    def get_invoices_invoice_lines_with_http_info(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::InvoiceLinesList, Int32, Hash(String, Array(String) | String))
+    def get_invoices_invoice_lines_with_http_info(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::InvoiceLinesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_invoices_invoice_lines(invoice: invoice, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -358,7 +463,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_invoices_invoice_lines(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_invoices_invoice_lines(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_invoices_invoice_lines(invoice: invoice, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -367,7 +480,14 @@ module Stripe
     GET_INVOICES_INVOICE_LINES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_invoices_invoice_lines(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_invoices_invoice_lines(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.get_invoices_invoice_lines ..." }
       end
@@ -400,6 +520,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -416,6 +539,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -427,7 +551,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SearchResult]
-    def get_invoices_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SearchResult
+    def get_invoices_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SearchResult
       data, _status_code, _headers = get_invoices_search_with_http_info(query: query, page: page, limit: limit, expand: expand)
       data
     end
@@ -438,7 +568,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SearchResult, Integer, Hash)] Stripe::SearchResult, response status code and response headers
-    def get_invoices_search_with_http_info(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
+    def get_invoices_search_with_http_info(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_invoices_search(query: query, page: page, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -456,7 +592,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_invoices_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_invoices_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_invoices_search(query: query, page: page, limit: limit, expand: expand).execute(&block)
     end
 
@@ -464,7 +607,13 @@ module Stripe
     GET_INVOICES_SEARCH_MAX_LENGTH_FOR_PAGE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_invoices_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_invoices_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.get_invoices_search ..." }
       end
@@ -494,6 +643,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -510,6 +662,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -538,7 +691,30 @@ module Stripe
     # @optional @param subscription_cancel_now [Bool?] This simulates the subscription being canceled or expired immediately.
     # @optional @param subscription_cancel_at [Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?] Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using `proration_behavior`.
     # @return [Stripe::Invoice]
-    def get_invoices_upcoming(*, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil) : Stripe::Invoice
+    def get_invoices_upcoming(
+      *,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = get_invoices_upcoming_with_http_info(subscription_items: subscription_items, subscription_cancel_at_period_end: subscription_cancel_at_period_end, subscription_start_date: subscription_start_date, customer_details: customer_details, subscription_proration_behavior: subscription_proration_behavior, subscription_billing_cycle_anchor: subscription_billing_cycle_anchor, subscription_proration_date: subscription_proration_date, subscription_trial_end: subscription_trial_end, subscription_default_tax_rates: subscription_default_tax_rates, subscription_trial_from_plan: subscription_trial_from_plan, invoice_items: invoice_items, automatic_tax: automatic_tax, expand: expand, coupon: coupon, discounts: discounts, currency: currency, customer: customer, subscription: subscription, schedule: schedule, subscription_cancel_now: subscription_cancel_now, subscription_cancel_at: subscription_cancel_at)
       data
     end
@@ -566,7 +742,30 @@ module Stripe
     # @optional @param subscription_cancel_now [Bool?] This simulates the subscription being canceled or expired immediately.
     # @optional @param subscription_cancel_at [Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?] Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using `proration_behavior`.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def get_invoices_upcoming_with_http_info(*, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def get_invoices_upcoming_with_http_info(
+      *,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_invoices_upcoming(subscription_items: subscription_items, subscription_cancel_at_period_end: subscription_cancel_at_period_end, subscription_start_date: subscription_start_date, customer_details: customer_details, subscription_proration_behavior: subscription_proration_behavior, subscription_billing_cycle_anchor: subscription_billing_cycle_anchor, subscription_proration_date: subscription_proration_date, subscription_trial_end: subscription_trial_end, subscription_default_tax_rates: subscription_default_tax_rates, subscription_trial_from_plan: subscription_trial_from_plan, invoice_items: invoice_items, automatic_tax: automatic_tax, expand: expand, coupon: coupon, discounts: discounts, currency: currency, customer: customer, subscription: subscription, schedule: schedule, subscription_cancel_now: subscription_cancel_now, subscription_cancel_at: subscription_cancel_at)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -601,7 +800,31 @@ module Stripe
     # @optional @param subscription_cancel_now [Bool?] This simulates the subscription being canceled or expired immediately.
     # @optional @param subscription_cancel_at [Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?] Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using `proration_behavior`.
     # @return nil
-    def get_invoices_upcoming(*, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_invoices_upcoming(
+      *,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_invoices_upcoming(subscription_items: subscription_items, subscription_cancel_at_period_end: subscription_cancel_at_period_end, subscription_start_date: subscription_start_date, customer_details: customer_details, subscription_proration_behavior: subscription_proration_behavior, subscription_billing_cycle_anchor: subscription_billing_cycle_anchor, subscription_proration_date: subscription_proration_date, subscription_trial_end: subscription_trial_end, subscription_default_tax_rates: subscription_default_tax_rates, subscription_trial_from_plan: subscription_trial_from_plan, invoice_items: invoice_items, automatic_tax: automatic_tax, expand: expand, coupon: coupon, discounts: discounts, currency: currency, customer: customer, subscription: subscription, schedule: schedule, subscription_cancel_now: subscription_cancel_now, subscription_cancel_at: subscription_cancel_at).execute(&block)
     end
 
@@ -612,7 +835,30 @@ module Stripe
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_SCHEDULE                          = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_invoices_upcoming(*, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil) : Crest::Request
+    def build_api_request_for_get_invoices_upcoming(
+      *,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.get_invoices_upcoming ..." }
       end
@@ -693,6 +939,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -709,6 +958,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -740,7 +990,33 @@ module Stripe
     # @optional @param subscription_cancel_now [Bool?] This simulates the subscription being canceled or expired immediately.
     # @optional @param subscription_cancel_at [Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?] Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using `proration_behavior`.
     # @return [Stripe::InvoiceLinesList]
-    def get_invoices_upcoming_lines(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil) : Stripe::InvoiceLinesList
+    def get_invoices_upcoming_lines(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    ) : Stripe::InvoiceLinesList
       data, _status_code, _headers = get_invoices_upcoming_lines_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, subscription_items: subscription_items, subscription_cancel_at_period_end: subscription_cancel_at_period_end, subscription_start_date: subscription_start_date, customer_details: customer_details, subscription_proration_behavior: subscription_proration_behavior, subscription_billing_cycle_anchor: subscription_billing_cycle_anchor, subscription_proration_date: subscription_proration_date, subscription_trial_end: subscription_trial_end, subscription_default_tax_rates: subscription_default_tax_rates, subscription_trial_from_plan: subscription_trial_from_plan, invoice_items: invoice_items, automatic_tax: automatic_tax, expand: expand, coupon: coupon, discounts: discounts, currency: currency, customer: customer, subscription: subscription, schedule: schedule, subscription_cancel_now: subscription_cancel_now, subscription_cancel_at: subscription_cancel_at)
       data
     end
@@ -771,7 +1047,33 @@ module Stripe
     # @optional @param subscription_cancel_now [Bool?] This simulates the subscription being canceled or expired immediately.
     # @optional @param subscription_cancel_at [Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?] Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using `proration_behavior`.
     # @return [Tuple(Stripe::InvoiceLinesList, Integer, Hash)] Stripe::InvoiceLinesList, response status code and response headers
-    def get_invoices_upcoming_lines_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil) : Tuple(Stripe::InvoiceLinesList, Int32, Hash(String, Array(String) | String))
+    def get_invoices_upcoming_lines_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    ) : Tuple(Stripe::InvoiceLinesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_invoices_upcoming_lines(ending_before: ending_before, starting_after: starting_after, limit: limit, subscription_items: subscription_items, subscription_cancel_at_period_end: subscription_cancel_at_period_end, subscription_start_date: subscription_start_date, customer_details: customer_details, subscription_proration_behavior: subscription_proration_behavior, subscription_billing_cycle_anchor: subscription_billing_cycle_anchor, subscription_proration_date: subscription_proration_date, subscription_trial_end: subscription_trial_end, subscription_default_tax_rates: subscription_default_tax_rates, subscription_trial_from_plan: subscription_trial_from_plan, invoice_items: invoice_items, automatic_tax: automatic_tax, expand: expand, coupon: coupon, discounts: discounts, currency: currency, customer: customer, subscription: subscription, schedule: schedule, subscription_cancel_now: subscription_cancel_now, subscription_cancel_at: subscription_cancel_at)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -809,7 +1111,34 @@ module Stripe
     # @optional @param subscription_cancel_now [Bool?] This simulates the subscription being canceled or expired immediately.
     # @optional @param subscription_cancel_at [Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?] Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using `proration_behavior`.
     # @return nil
-    def get_invoices_upcoming_lines(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_invoices_upcoming_lines(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_invoices_upcoming_lines(ending_before: ending_before, starting_after: starting_after, limit: limit, subscription_items: subscription_items, subscription_cancel_at_period_end: subscription_cancel_at_period_end, subscription_start_date: subscription_start_date, customer_details: customer_details, subscription_proration_behavior: subscription_proration_behavior, subscription_billing_cycle_anchor: subscription_billing_cycle_anchor, subscription_proration_date: subscription_proration_date, subscription_trial_end: subscription_trial_end, subscription_default_tax_rates: subscription_default_tax_rates, subscription_trial_from_plan: subscription_trial_from_plan, invoice_items: invoice_items, automatic_tax: automatic_tax, expand: expand, coupon: coupon, discounts: discounts, currency: currency, customer: customer, subscription: subscription, schedule: schedule, subscription_cancel_now: subscription_cancel_now, subscription_cancel_at: subscription_cancel_at).execute(&block)
     end
 
@@ -822,7 +1151,33 @@ module Stripe
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_SCHEDULE                          = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_invoices_upcoming_lines(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil, subscription_cancel_at_period_end : Bool? = nil, subscription_start_date : Int64? = nil, customer_details : Stripe::CustomerDetailsParam? = nil, subscription_proration_behavior : String? = nil, subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil, subscription_proration_date : Int64? = nil, subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil, subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil, subscription_trial_from_plan : Bool? = nil, invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, expand : Array(Array(String))? = nil, coupon : String? = nil, discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil, currency : String? = nil, customer : String? = nil, subscription : String? = nil, schedule : String? = nil, subscription_cancel_now : Bool? = nil, subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil) : Crest::Request
+    def build_api_request_for_get_invoices_upcoming_lines(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      subscription_items : Array(Array(SubscriptionItemUpdateParams))? = nil,
+      subscription_cancel_at_period_end : Bool? = nil,
+      subscription_start_date : Int64? = nil,
+      customer_details : Stripe::CustomerDetailsParam? = nil,
+      subscription_proration_behavior : String? = nil,
+      subscription_billing_cycle_anchor : Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter? = nil,
+      subscription_proration_date : Int64? = nil,
+      subscription_trial_end : Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter? = nil,
+      subscription_default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
+      subscription_trial_from_plan : Bool? = nil,
+      invoice_items : Array(Array(InvoiceItemPreviewParams))? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      expand : Array(Array(String))? = nil,
+      coupon : String? = nil,
+      discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      subscription : String? = nil,
+      schedule : String? = nil,
+      subscription_cancel_now : Bool? = nil,
+      subscription_cancel_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.get_invoices_upcoming_lines ..." }
       end
@@ -913,6 +1268,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -929,6 +1287,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -962,7 +1321,35 @@ module Stripe
     # @optional @param subscription [String?] The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if `pending_invoice_items_behavior` is `include`. The subscription's billing cycle and regular subscription events won't be affected.
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @return [Stripe::Invoice]
-    def post_invoices(*, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, currency : String? = nil, custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil, customer : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Array(String)? = nil, description : String? = nil, discounts : Stripe::PostInvoicesRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, from_invoice : Stripe::FromInvoice? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_items_behavior : String? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, subscription : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil) : Stripe::Invoice
+    def post_invoices(
+      *,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      currency : String? = nil,
+      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
+      customer : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Array(String)? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      from_invoice : Stripe::FromInvoice? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      pending_invoice_items_behavior : String? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      subscription : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_with_http_info(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data)
       data
     end
@@ -995,7 +1382,35 @@ module Stripe
     # @optional @param subscription [String?] The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if `pending_invoice_items_behavior` is `include`. The subscription's billing cycle and regular subscription events won't be affected.
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_with_http_info(*, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, currency : String? = nil, custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil, customer : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Array(String)? = nil, description : String? = nil, discounts : Stripe::PostInvoicesRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, from_invoice : Stripe::FromInvoice? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_items_behavior : String? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, subscription : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_with_http_info(
+      *,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      currency : String? = nil,
+      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
+      customer : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Array(String)? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      from_invoice : Stripe::FromInvoice? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      pending_invoice_items_behavior : String? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      subscription : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1035,7 +1450,36 @@ module Stripe
     # @optional @param subscription [String?] The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if `pending_invoice_items_behavior` is `include`. The subscription's billing cycle and regular subscription events won't be affected.
     # @optional @param transfer_data [Stripe::TransferDataSpecs?]
     # @return nil
-    def post_invoices(*, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, currency : String? = nil, custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil, customer : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Array(String)? = nil, description : String? = nil, discounts : Stripe::PostInvoicesRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, from_invoice : Stripe::FromInvoice? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_items_behavior : String? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, subscription : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices(
+      *,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      currency : String? = nil,
+      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
+      customer : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Array(String)? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      from_invoice : Stripe::FromInvoice? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      pending_invoice_items_behavior : String? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      subscription : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data).execute(&block)
     end
 
@@ -1050,7 +1494,35 @@ module Stripe
     POST_INVOICES_MAX_LENGTH_FOR_SUBSCRIPTION                     = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices(*, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, currency : String? = nil, custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil, customer : String? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Array(String)? = nil, description : String? = nil, discounts : Stripe::PostInvoicesRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, from_invoice : Stripe::FromInvoice? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : String? = nil, payment_settings : Stripe::PaymentSettings? = nil, pending_invoice_items_behavior : String? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, subscription : String? = nil, transfer_data : Stripe::TransferDataSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_invoices(
+      *,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      currency : String? = nil,
+      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
+      customer : String? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Array(String)? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      from_invoice : Stripe::FromInvoice? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : String? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      pending_invoice_items_behavior : String? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      subscription : String? = nil,
+      transfer_data : Stripe::TransferDataSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices ..." }
       end
@@ -1131,6 +1603,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_tax_ids"] = account_tax_ids.to_s if !account_tax_ids.nil?
@@ -1173,6 +1648,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1202,7 +1678,31 @@ module Stripe
     # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
     # @optional @param transfer_data [Stripe::PostInvoicesInvoiceRequestTransferData?]
     # @return [Stripe::Invoice]
-    def post_invoices_invoice(*, invoice : String? = nil, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil, description : String? = nil, discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil, payment_settings : Stripe::PaymentSettings? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil) : Stripe::Invoice
+    def post_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_invoice_with_http_info(invoice: invoice, account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, custom_fields: custom_fields, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, rendering_options: rendering_options, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
       data
     end
@@ -1231,7 +1731,31 @@ module Stripe
     # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
     # @optional @param transfer_data [Stripe::PostInvoicesInvoiceRequestTransferData?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_invoice_with_http_info(*, invoice : String? = nil, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil, description : String? = nil, discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil, payment_settings : Stripe::PaymentSettings? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_invoice_with_http_info(
+      *,
+      invoice : String? = nil,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices_invoice(invoice: invoice, account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, custom_fields: custom_fields, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, rendering_options: rendering_options, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1267,7 +1791,32 @@ module Stripe
     # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
     # @optional @param transfer_data [Stripe::PostInvoicesInvoiceRequestTransferData?]
     # @return nil
-    def post_invoices_invoice(*, invoice : String? = nil, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil, description : String? = nil, discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil, payment_settings : Stripe::PaymentSettings? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices_invoice(invoice: invoice, account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, custom_fields: custom_fields, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, rendering_options: rendering_options, statement_descriptor: statement_descriptor, transfer_data: transfer_data).execute(&block)
     end
 
@@ -1280,7 +1829,31 @@ module Stripe
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR   =   22
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices_invoice(*, invoice : String? = nil, account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil, application_fee_amount : Int64? = nil, auto_advance : Bool? = nil, automatic_tax : Stripe::AutomaticTaxParam? = nil, collection_method : String? = nil, custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil, days_until_due : Int64? = nil, default_payment_method : String? = nil, default_source : String? = nil, default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil, description : String? = nil, discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil, due_date : Int64? = nil, expand : Array(String)? = nil, footer : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil, payment_settings : Stripe::PaymentSettings? = nil, rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil, statement_descriptor : String? = nil, transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil) : Crest::Request
+    def build_api_request_for_post_invoices_invoice(
+      *,
+      invoice : String? = nil,
+      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
+      application_fee_amount : Int64? = nil,
+      auto_advance : Bool? = nil,
+      automatic_tax : Stripe::AutomaticTaxParam? = nil,
+      collection_method : String? = nil,
+      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
+      days_until_due : Int64? = nil,
+      default_payment_method : String? = nil,
+      default_source : String? = nil,
+      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
+      description : String? = nil,
+      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
+      due_date : Int64? = nil,
+      expand : Array(String)? = nil,
+      footer : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
+      payment_settings : Stripe::PaymentSettings? = nil,
+      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
+      statement_descriptor : String? = nil,
+      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice ..." }
       end
@@ -1356,6 +1929,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_tax_ids"] = account_tax_ids.to_s if !account_tax_ids.nil?
@@ -1393,6 +1969,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1403,7 +1980,12 @@ module Stripe
     # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Invoice]
-    def post_invoices_invoice_finalize(*, invoice : String? = nil, auto_advance : Bool? = nil, expand : Array(String)? = nil) : Stripe::Invoice
+    def post_invoices_invoice_finalize(
+      *,
+      invoice : String? = nil,
+      auto_advance : Bool? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_invoice_finalize_with_http_info(invoice: invoice, auto_advance: auto_advance, expand: expand)
       data
     end
@@ -1413,7 +1995,12 @@ module Stripe
     # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_invoice_finalize_with_http_info(*, invoice : String? = nil, auto_advance : Bool? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_invoice_finalize_with_http_info(
+      *,
+      invoice : String? = nil,
+      auto_advance : Bool? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices_invoice_finalize(invoice: invoice, auto_advance: auto_advance, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1430,14 +2017,25 @@ module Stripe
     # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_invoices_invoice_finalize(*, invoice : String? = nil, auto_advance : Bool? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices_invoice_finalize(
+      *,
+      invoice : String? = nil,
+      auto_advance : Bool? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices_invoice_finalize(invoice: invoice, auto_advance: auto_advance, expand: expand).execute(&block)
     end
 
     POST_INVOICES_INVOICE_FINALIZE_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices_invoice_finalize(*, invoice : String? = nil, auto_advance : Bool? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_invoices_invoice_finalize(
+      *,
+      invoice : String? = nil,
+      auto_advance : Bool? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_finalize ..." }
       end
@@ -1462,6 +2060,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["auto_advance"] = auto_advance.to_s if !auto_advance.nil?
@@ -1480,6 +2081,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1489,7 +2091,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Invoice]
-    def post_invoices_invoice_mark_uncollectible(*, invoice : String? = nil, expand : Array(String)? = nil) : Stripe::Invoice
+    def post_invoices_invoice_mark_uncollectible(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_invoice_mark_uncollectible_with_http_info(invoice: invoice, expand: expand)
       data
     end
@@ -1498,7 +2104,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_invoice_mark_uncollectible_with_http_info(*, invoice : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_invoice_mark_uncollectible_with_http_info(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices_invoice_mark_uncollectible(invoice: invoice, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1514,14 +2124,23 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_invoices_invoice_mark_uncollectible(*, invoice : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices_invoice_mark_uncollectible(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices_invoice_mark_uncollectible(invoice: invoice, expand: expand).execute(&block)
     end
 
     POST_INVOICES_INVOICE_MARK_UNCOLLECTIBLE_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices_invoice_mark_uncollectible(*, invoice : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_invoices_invoice_mark_uncollectible(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_mark_uncollectible ..." }
       end
@@ -1546,6 +2165,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1563,6 +2185,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1578,7 +2201,17 @@ module Stripe
     # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
     # @optional @param source [String?] A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
     # @return [Stripe::Invoice]
-    def post_invoices_invoice_pay(*, invoice : String? = nil, expand : Array(String)? = nil, forgive : Bool? = nil, mandate : String? = nil, off_session : Bool? = nil, paid_out_of_band : Bool? = nil, payment_method : String? = nil, source : String? = nil) : Stripe::Invoice
+    def post_invoices_invoice_pay(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      forgive : Bool? = nil,
+      mandate : String? = nil,
+      off_session : Bool? = nil,
+      paid_out_of_band : Bool? = nil,
+      payment_method : String? = nil,
+      source : String? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_invoice_pay_with_http_info(invoice: invoice, expand: expand, forgive: forgive, mandate: mandate, off_session: off_session, paid_out_of_band: paid_out_of_band, payment_method: payment_method, source: source)
       data
     end
@@ -1593,7 +2226,17 @@ module Stripe
     # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
     # @optional @param source [String?] A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_invoice_pay_with_http_info(*, invoice : String? = nil, expand : Array(String)? = nil, forgive : Bool? = nil, mandate : String? = nil, off_session : Bool? = nil, paid_out_of_band : Bool? = nil, payment_method : String? = nil, source : String? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_invoice_pay_with_http_info(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      forgive : Bool? = nil,
+      mandate : String? = nil,
+      off_session : Bool? = nil,
+      paid_out_of_band : Bool? = nil,
+      payment_method : String? = nil,
+      source : String? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices_invoice_pay(invoice: invoice, expand: expand, forgive: forgive, mandate: mandate, off_session: off_session, paid_out_of_band: paid_out_of_band, payment_method: payment_method, source: source)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1615,7 +2258,18 @@ module Stripe
     # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
     # @optional @param source [String?] A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
     # @return nil
-    def post_invoices_invoice_pay(*, invoice : String? = nil, expand : Array(String)? = nil, forgive : Bool? = nil, mandate : String? = nil, off_session : Bool? = nil, paid_out_of_band : Bool? = nil, payment_method : String? = nil, source : String? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices_invoice_pay(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      forgive : Bool? = nil,
+      mandate : String? = nil,
+      off_session : Bool? = nil,
+      paid_out_of_band : Bool? = nil,
+      payment_method : String? = nil,
+      source : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices_invoice_pay(invoice: invoice, expand: expand, forgive: forgive, mandate: mandate, off_session: off_session, paid_out_of_band: paid_out_of_band, payment_method: payment_method, source: source).execute(&block)
     end
 
@@ -1625,7 +2279,17 @@ module Stripe
     POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_SOURCE         = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices_invoice_pay(*, invoice : String? = nil, expand : Array(String)? = nil, forgive : Bool? = nil, mandate : String? = nil, off_session : Bool? = nil, paid_out_of_band : Bool? = nil, payment_method : String? = nil, source : String? = nil) : Crest::Request
+    def build_api_request_for_post_invoices_invoice_pay(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      forgive : Bool? = nil,
+      mandate : String? = nil,
+      off_session : Bool? = nil,
+      paid_out_of_band : Bool? = nil,
+      payment_method : String? = nil,
+      source : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_pay ..." }
       end
@@ -1661,6 +2325,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1684,6 +2351,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1693,7 +2361,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Invoice]
-    def post_invoices_invoice_send(*, invoice : String? = nil, expand : Array(String)? = nil) : Stripe::Invoice
+    def post_invoices_invoice_send(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_invoice_send_with_http_info(invoice: invoice, expand: expand)
       data
     end
@@ -1702,7 +2374,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_invoice_send_with_http_info(*, invoice : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_invoice_send_with_http_info(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices_invoice_send(invoice: invoice, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1718,14 +2394,23 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_invoices_invoice_send(*, invoice : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices_invoice_send(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices_invoice_send(invoice: invoice, expand: expand).execute(&block)
     end
 
     POST_INVOICES_INVOICE_SEND_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices_invoice_send(*, invoice : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_invoices_invoice_send(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_send ..." }
       end
@@ -1750,6 +2435,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1767,6 +2455,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1776,7 +2465,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Invoice]
-    def post_invoices_invoice_void(*, invoice : String? = nil, expand : Array(String)? = nil) : Stripe::Invoice
+    def post_invoices_invoice_void(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Invoice
       data, _status_code, _headers = post_invoices_invoice_void_with_http_info(invoice: invoice, expand: expand)
       data
     end
@@ -1785,7 +2478,11 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
-    def post_invoices_invoice_void_with_http_info(*, invoice : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
+    def post_invoices_invoice_void_with_http_info(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_invoices_invoice_void(invoice: invoice, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1801,14 +2498,23 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_invoices_invoice_void(*, invoice : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_invoices_invoice_void(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_invoices_invoice_void(invoice: invoice, expand: expand).execute(&block)
     end
 
     POST_INVOICES_INVOICE_VOID_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_invoices_invoice_void(*, invoice : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_invoices_invoice_void(
+      *,
+      invoice : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_void ..." }
       end
@@ -1833,6 +2539,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1850,6 +2559,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

@@ -28,7 +28,15 @@ module Stripe
     # @optional @param invoice [String?] Only return credit notes for the invoice specified by this invoice ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CreditNotesList]
-    def get_credit_notes(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, invoice : String? = nil, expand : Array(Array(String))? = nil) : Stripe::CreditNotesList
+    def get_credit_notes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CreditNotesList
       data, _status_code, _headers = get_credit_notes_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, invoice: invoice, expand: expand)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param invoice [String?] Only return credit notes for the invoice specified by this invoice ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CreditNotesList, Integer, Hash)] Stripe::CreditNotesList, response status code and response headers
-    def get_credit_notes_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, invoice : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CreditNotesList, Int32, Hash(String, Array(String) | String))
+    def get_credit_notes_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CreditNotesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_credit_notes(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, invoice: invoice, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param invoice [String?] Only return credit notes for the invoice specified by this invoice ID.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_credit_notes(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, invoice : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_credit_notes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_credit_notes(ending_before: ending_before, starting_after: starting_after, limit: limit, customer: customer, invoice: invoice, expand: expand).execute(&block)
     end
 
@@ -71,7 +96,15 @@ module Stripe
     GET_CREDIT_NOTES_MAX_LENGTH_FOR_INVOICE        = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_credit_notes(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, customer : String? = nil, invoice : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_credit_notes(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      customer : String? = nil,
+      invoice : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.get_credit_notes ..." }
       end
@@ -109,6 +142,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -125,6 +161,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -137,7 +174,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CreditNoteLinesList]
-    def get_credit_notes_credit_note_lines(*, credit_note : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::CreditNoteLinesList
+    def get_credit_notes_credit_note_lines(
+      *,
+      credit_note : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CreditNoteLinesList
       data, _status_code, _headers = get_credit_notes_credit_note_lines_with_http_info(credit_note: credit_note, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -149,7 +193,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CreditNoteLinesList, Integer, Hash)] Stripe::CreditNoteLinesList, response status code and response headers
-    def get_credit_notes_credit_note_lines_with_http_info(*, credit_note : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CreditNoteLinesList, Int32, Hash(String, Array(String) | String))
+    def get_credit_notes_credit_note_lines_with_http_info(
+      *,
+      credit_note : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CreditNoteLinesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_credit_notes_credit_note_lines(credit_note: credit_note, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -168,7 +219,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_credit_notes_credit_note_lines(*, credit_note : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_credit_notes_credit_note_lines(
+      *,
+      credit_note : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_credit_notes_credit_note_lines(credit_note: credit_note, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -177,7 +236,14 @@ module Stripe
     GET_CREDIT_NOTES_CREDIT_NOTE_LINES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_credit_notes_credit_note_lines(*, credit_note : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_credit_notes_credit_note_lines(
+      *,
+      credit_note : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.get_credit_notes_credit_note_lines ..." }
       end
@@ -210,6 +276,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -226,6 +295,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -235,7 +305,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CreditNote]
-    def get_credit_notes_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::CreditNote
+    def get_credit_notes_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CreditNote
       data, _status_code, _headers = get_credit_notes_id_with_http_info(id: id, expand: expand)
       data
     end
@@ -244,7 +318,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
-    def get_credit_notes_id_with_http_info(*, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
+    def get_credit_notes_id_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_credit_notes_id(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -260,14 +338,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_credit_notes_id(*, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_credit_notes_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_credit_notes_id(id: id, expand: expand).execute(&block)
     end
 
     GET_CREDIT_NOTES_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_credit_notes_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_credit_notes_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.get_credit_notes_id ..." }
       end
@@ -291,6 +378,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -307,6 +397,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -325,7 +416,20 @@ module Stripe
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     # @return [Stripe::CreditNote]
-    def get_credit_notes_preview(*, invoice : String? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil) : Stripe::CreditNote
+    def get_credit_notes_preview(
+      *,
+      invoice : String? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil
+    ) : Stripe::CreditNote
       data, _status_code, _headers = get_credit_notes_preview_with_http_info(invoice: invoice, refund: refund, lines: lines, reason: reason, metadata: metadata, expand: expand, memo: memo, out_of_band_amount: out_of_band_amount, credit_amount: credit_amount, refund_amount: refund_amount, amount: amount)
       data
     end
@@ -343,7 +447,20 @@ module Stripe
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
-    def get_credit_notes_preview_with_http_info(*, invoice : String? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
+    def get_credit_notes_preview_with_http_info(
+      *,
+      invoice : String? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil
+    ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_credit_notes_preview(invoice: invoice, refund: refund, lines: lines, reason: reason, metadata: metadata, expand: expand, memo: memo, out_of_band_amount: out_of_band_amount, credit_amount: credit_amount, refund_amount: refund_amount, amount: amount)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -368,7 +485,21 @@ module Stripe
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     # @return nil
-    def get_credit_notes_preview(*, invoice : String? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil, &block : Crest::Response ->) : Nil
+    def get_credit_notes_preview(
+      *,
+      invoice : String? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_credit_notes_preview(invoice: invoice, refund: refund, lines: lines, reason: reason, metadata: metadata, expand: expand, memo: memo, out_of_band_amount: out_of_band_amount, credit_amount: credit_amount, refund_amount: refund_amount, amount: amount).execute(&block)
     end
 
@@ -377,7 +508,20 @@ module Stripe
     GET_CREDIT_NOTES_PREVIEW_MAX_LENGTH_FOR_MEMO     = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_credit_notes_preview(*, invoice : String? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil) : Crest::Request
+    def build_api_request_for_get_credit_notes_preview(
+      *,
+      invoice : String? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.get_credit_notes_preview ..." }
       end
@@ -419,6 +563,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -435,6 +582,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -456,7 +604,23 @@ module Stripe
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     # @return [Stripe::CreditNoteLinesList]
-    def get_credit_notes_preview_lines(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil) : Stripe::CreditNoteLinesList
+    def get_credit_notes_preview_lines(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil
+    ) : Stripe::CreditNoteLinesList
       data, _status_code, _headers = get_credit_notes_preview_lines_with_http_info(invoice: invoice, ending_before: ending_before, starting_after: starting_after, limit: limit, refund: refund, lines: lines, reason: reason, metadata: metadata, expand: expand, memo: memo, out_of_band_amount: out_of_band_amount, credit_amount: credit_amount, refund_amount: refund_amount, amount: amount)
       data
     end
@@ -477,7 +641,23 @@ module Stripe
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     # @return [Tuple(Stripe::CreditNoteLinesList, Integer, Hash)] Stripe::CreditNoteLinesList, response status code and response headers
-    def get_credit_notes_preview_lines_with_http_info(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil) : Tuple(Stripe::CreditNoteLinesList, Int32, Hash(String, Array(String) | String))
+    def get_credit_notes_preview_lines_with_http_info(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil
+    ) : Tuple(Stripe::CreditNoteLinesList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_credit_notes_preview_lines(invoice: invoice, ending_before: ending_before, starting_after: starting_after, limit: limit, refund: refund, lines: lines, reason: reason, metadata: metadata, expand: expand, memo: memo, out_of_band_amount: out_of_band_amount, credit_amount: credit_amount, refund_amount: refund_amount, amount: amount)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -505,7 +685,24 @@ module Stripe
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
     # @return nil
-    def get_credit_notes_preview_lines(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil, &block : Crest::Response ->) : Nil
+    def get_credit_notes_preview_lines(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_credit_notes_preview_lines(invoice: invoice, ending_before: ending_before, starting_after: starting_after, limit: limit, refund: refund, lines: lines, reason: reason, metadata: metadata, expand: expand, memo: memo, out_of_band_amount: out_of_band_amount, credit_amount: credit_amount, refund_amount: refund_amount, amount: amount).execute(&block)
     end
 
@@ -516,7 +713,23 @@ module Stripe
     GET_CREDIT_NOTES_PREVIEW_LINES_MAX_LENGTH_FOR_MEMO           = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_credit_notes_preview_lines(*, invoice : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, refund : String? = nil, lines : Array(Array(CreditNoteLineItemParams))? = nil, reason : String? = nil, metadata : Hash(String, Hash(String, String))? = nil, expand : Array(Array(String))? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, credit_amount : Int64? = nil, refund_amount : Int64? = nil, amount : Int64? = nil) : Crest::Request
+    def build_api_request_for_get_credit_notes_preview_lines(
+      *,
+      invoice : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      refund : String? = nil,
+      lines : Array(Array(CreditNoteLineItemParams))? = nil,
+      reason : String? = nil,
+      metadata : Hash(String, Hash(String, String))? = nil,
+      expand : Array(Array(String))? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      refund_amount : Int64? = nil,
+      amount : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.get_credit_notes_preview_lines ..." }
       end
@@ -567,6 +780,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -583,6 +799,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -600,7 +817,19 @@ module Stripe
     # @optional @param refund [String?] ID of an existing refund to link this credit note to.
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @return [Stripe::CreditNote]
-    def post_credit_notes(*, invoice : String? = nil, amount : Int64? = nil, credit_amount : Int64? = nil, expand : Array(String)? = nil, lines : Array(Stripe::CreditNoteLineItemParams)? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, reason : String? = nil, refund : String? = nil, refund_amount : Int64? = nil) : Stripe::CreditNote
+    def post_credit_notes(
+      *,
+      invoice : String? = nil,
+      amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      reason : String? = nil,
+      refund : String? = nil,
+      refund_amount : Int64? = nil
+    ) : Stripe::CreditNote
       data, _status_code, _headers = post_credit_notes_with_http_info(invoice: invoice, amount: amount, credit_amount: credit_amount, expand: expand, lines: lines, memo: memo, out_of_band_amount: out_of_band_amount, reason: reason, refund: refund, refund_amount: refund_amount)
       data
     end
@@ -617,7 +846,19 @@ module Stripe
     # @optional @param refund [String?] ID of an existing refund to link this credit note to.
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
-    def post_credit_notes_with_http_info(*, invoice : String? = nil, amount : Int64? = nil, credit_amount : Int64? = nil, expand : Array(String)? = nil, lines : Array(Stripe::CreditNoteLineItemParams)? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, reason : String? = nil, refund : String? = nil, refund_amount : Int64? = nil) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
+    def post_credit_notes_with_http_info(
+      *,
+      invoice : String? = nil,
+      amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      reason : String? = nil,
+      refund : String? = nil,
+      refund_amount : Int64? = nil
+    ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_credit_notes(invoice: invoice, amount: amount, credit_amount: credit_amount, expand: expand, lines: lines, memo: memo, out_of_band_amount: out_of_band_amount, reason: reason, refund: refund, refund_amount: refund_amount)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -641,7 +882,20 @@ module Stripe
     # @optional @param refund [String?] ID of an existing refund to link this credit note to.
     # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     # @return nil
-    def post_credit_notes(*, invoice : String? = nil, amount : Int64? = nil, credit_amount : Int64? = nil, expand : Array(String)? = nil, lines : Array(Stripe::CreditNoteLineItemParams)? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, reason : String? = nil, refund : String? = nil, refund_amount : Int64? = nil, &block : Crest::Response ->) : Nil
+    def post_credit_notes(
+      *,
+      invoice : String? = nil,
+      amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      reason : String? = nil,
+      refund : String? = nil,
+      refund_amount : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_credit_notes(invoice: invoice, amount: amount, credit_amount: credit_amount, expand: expand, lines: lines, memo: memo, out_of_band_amount: out_of_band_amount, reason: reason, refund: refund, refund_amount: refund_amount).execute(&block)
     end
 
@@ -650,7 +904,19 @@ module Stripe
     POST_CREDIT_NOTES_VALID_VALUES_FOR_REASON = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
 
     # @return Crest::Request
-    def build_api_request_for_post_credit_notes(*, invoice : String? = nil, amount : Int64? = nil, credit_amount : Int64? = nil, expand : Array(String)? = nil, lines : Array(Stripe::CreditNoteLineItemParams)? = nil, memo : String? = nil, out_of_band_amount : Int64? = nil, reason : String? = nil, refund : String? = nil, refund_amount : Int64? = nil) : Crest::Request
+    def build_api_request_for_post_credit_notes(
+      *,
+      invoice : String? = nil,
+      amount : Int64? = nil,
+      credit_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
+      memo : String? = nil,
+      out_of_band_amount : Int64? = nil,
+      reason : String? = nil,
+      refund : String? = nil,
+      refund_amount : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.post_credit_notes ..." }
       end
@@ -686,6 +952,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -712,6 +981,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -722,7 +992,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param memo [String?] Credit note memo.
     # @return [Stripe::CreditNote]
-    def post_credit_notes_id(*, id : String? = nil, expand : Array(String)? = nil, memo : String? = nil) : Stripe::CreditNote
+    def post_credit_notes_id(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      memo : String? = nil
+    ) : Stripe::CreditNote
       data, _status_code, _headers = post_credit_notes_id_with_http_info(id: id, expand: expand, memo: memo)
       data
     end
@@ -732,7 +1007,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param memo [String?] Credit note memo.
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
-    def post_credit_notes_id_with_http_info(*, id : String? = nil, expand : Array(String)? = nil, memo : String? = nil) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
+    def post_credit_notes_id_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      memo : String? = nil
+    ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_credit_notes_id(id: id, expand: expand, memo: memo)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -749,7 +1029,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param memo [String?] Credit note memo.
     # @return nil
-    def post_credit_notes_id(*, id : String? = nil, expand : Array(String)? = nil, memo : String? = nil, &block : Crest::Response ->) : Nil
+    def post_credit_notes_id(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      memo : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_credit_notes_id(id: id, expand: expand, memo: memo).execute(&block)
     end
 
@@ -757,7 +1043,12 @@ module Stripe
     POST_CREDIT_NOTES_ID_MAX_LENGTH_FOR_MEMO = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_credit_notes_id(*, id : String? = nil, expand : Array(String)? = nil, memo : String? = nil) : Crest::Request
+    def build_api_request_for_post_credit_notes_id(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      memo : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.post_credit_notes_id ..." }
       end
@@ -786,6 +1077,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -804,6 +1098,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -813,7 +1108,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CreditNote]
-    def post_credit_notes_id_void(*, id : String? = nil, expand : Array(String)? = nil) : Stripe::CreditNote
+    def post_credit_notes_id_void(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::CreditNote
       data, _status_code, _headers = post_credit_notes_id_void_with_http_info(id: id, expand: expand)
       data
     end
@@ -822,7 +1121,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
-    def post_credit_notes_id_void_with_http_info(*, id : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
+    def post_credit_notes_id_void_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_credit_notes_id_void(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -838,14 +1141,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_credit_notes_id_void(*, id : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_credit_notes_id_void(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_credit_notes_id_void(id: id, expand: expand).execute(&block)
     end
 
     POST_CREDIT_NOTES_ID_VOID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_credit_notes_id_void(*, id : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_credit_notes_id_void(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.post_credit_notes_id_void ..." }
       end
@@ -870,6 +1182,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -887,6 +1202,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

@@ -23,7 +23,10 @@ module Stripe
     # <p>With <a href=\"/docs/connect\">Connect</a>, you can delete accounts you manage.</p>  <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys can only be deleted once all balances are zero.</p>  <p>If you want to delete your own account, use the <a href=\"https://dashboard.stripe.com/account\">account information tab in your account settings</a> instead.</p>
     # @required @param account [String?]
     # @return [Stripe::DeletedAccount]
-    def delete_accounts_account(*, account : String? = nil) : Stripe::DeletedAccount
+    def delete_accounts_account(
+      *,
+      account : String? = nil
+    ) : Stripe::DeletedAccount
       data, _status_code, _headers = delete_accounts_account_with_http_info(account: account)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can delete accounts you manage.&lt;/p&gt;  &lt;p&gt;Accounts created using test-mode keys can be deleted at any time. Standard accounts created using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys can only be deleted once all balances are zero.&lt;/p&gt;  &lt;p&gt;If you want to delete your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;account information tab in your account settings&lt;/a&gt; instead.&lt;/p&gt;
     # @required @param account [String?]
     # @return [Tuple(Stripe::DeletedAccount, Integer, Hash)] Stripe::DeletedAccount, response status code and response headers
-    def delete_accounts_account_with_http_info(*, account : String? = nil) : Tuple(Stripe::DeletedAccount, Int32, Hash(String, Array(String) | String))
+    def delete_accounts_account_with_http_info(
+      *,
+      account : String? = nil
+    ) : Tuple(Stripe::DeletedAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_accounts_account(account: account)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can delete accounts you manage.&lt;/p&gt;  &lt;p&gt;Accounts created using test-mode keys can be deleted at any time. Standard accounts created using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys can only be deleted once all balances are zero.&lt;/p&gt;  &lt;p&gt;If you want to delete your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;account information tab in your account settings&lt;/a&gt; instead.&lt;/p&gt;
     # @required @param account [String?]
     # @return nil
-    def delete_accounts_account(*, account : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_accounts_account(
+      *,
+      account : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_accounts_account(account: account).execute(&block)
     end
 
     DELETE_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_accounts_account(*, account : String? = nil) : Crest::Request
+    def build_api_request_for_delete_accounts_account(
+      *,
+      account : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.delete_accounts_account ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -101,7 +118,11 @@ module Stripe
     # @required @param account [String?]
     # @required @param id [String?]
     # @return [Stripe::DeletedExternalAccount]
-    def delete_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil) : Stripe::DeletedExternalAccount
+    def delete_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil
+    ) : Stripe::DeletedExternalAccount
       data, _status_code, _headers = delete_accounts_account_external_accounts_id_with_http_info(account: account, id: id)
       data
     end
@@ -110,7 +131,11 @@ module Stripe
     # @required @param account [String?]
     # @required @param id [String?]
     # @return [Tuple(Stripe::DeletedExternalAccount, Integer, Hash)] Stripe::DeletedExternalAccount, response status code and response headers
-    def delete_accounts_account_external_accounts_id_with_http_info(*, account : String? = nil, id : String? = nil) : Tuple(Stripe::DeletedExternalAccount, Int32, Hash(String, Array(String) | String))
+    def delete_accounts_account_external_accounts_id_with_http_info(
+      *,
+      account : String? = nil,
+      id : String? = nil
+    ) : Tuple(Stripe::DeletedExternalAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_accounts_account_external_accounts_id(account: account, id: id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -126,14 +151,23 @@ module Stripe
     # @required @param account [String?]
     # @required @param id [String?]
     # @return nil
-    def delete_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_accounts_account_external_accounts_id(account: account, id: id).execute(&block)
     end
 
     DELETE_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil) : Crest::Request
+    def build_api_request_for_delete_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.delete_accounts_account_external_accounts_id ..." }
       end
@@ -157,6 +191,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -173,6 +210,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -182,7 +220,11 @@ module Stripe
     # @required @param account [String?]
     # @required @param person [String?]
     # @return [Stripe::DeletedPerson]
-    def delete_accounts_account_persons_person(*, account : String? = nil, person : String? = nil) : Stripe::DeletedPerson
+    def delete_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil
+    ) : Stripe::DeletedPerson
       data, _status_code, _headers = delete_accounts_account_persons_person_with_http_info(account: account, person: person)
       data
     end
@@ -191,7 +233,11 @@ module Stripe
     # @required @param account [String?]
     # @required @param person [String?]
     # @return [Tuple(Stripe::DeletedPerson, Integer, Hash)] Stripe::DeletedPerson, response status code and response headers
-    def delete_accounts_account_persons_person_with_http_info(*, account : String? = nil, person : String? = nil) : Tuple(Stripe::DeletedPerson, Int32, Hash(String, Array(String) | String))
+    def delete_accounts_account_persons_person_with_http_info(
+      *,
+      account : String? = nil,
+      person : String? = nil
+    ) : Tuple(Stripe::DeletedPerson, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_accounts_account_persons_person(account: account, person: person)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -207,7 +253,12 @@ module Stripe
     # @required @param account [String?]
     # @required @param person [String?]
     # @return nil
-    def delete_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_accounts_account_persons_person(account: account, person: person).execute(&block)
     end
 
@@ -215,7 +266,11 @@ module Stripe
     DELETE_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_accounts_account_persons_person(*, account : String? = nil, person : String? = nil) : Crest::Request
+    def build_api_request_for_delete_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.delete_accounts_account_persons_person ..." }
       end
@@ -242,6 +297,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -258,6 +316,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -270,7 +329,14 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::AccountList]
-    def get_accounts(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::AccountList
+    def get_accounts(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::AccountList
       data, _status_code, _headers = get_accounts_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created)
       data
     end
@@ -282,7 +348,14 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::AccountList, Integer, Hash)] Stripe::AccountList, response status code and response headers
-    def get_accounts_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::AccountList, Int32, Hash(String, Array(String) | String))
+    def get_accounts_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::AccountList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -301,12 +374,27 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_accounts(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, created: created).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_accounts(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts ..." }
       end
@@ -333,6 +421,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -349,6 +440,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -358,7 +450,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Account]
-    def get_accounts_account(*, account : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Account
+    def get_accounts_account(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Account
       data, _status_code, _headers = get_accounts_account_with_http_info(account: account, expand: expand)
       data
     end
@@ -367,7 +463,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
-    def get_accounts_account_with_http_info(*, account : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_with_http_info(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account(account: account, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -383,14 +483,23 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account(*, account : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account(account: account, expand: expand).execute(&block)
     end
 
     GET_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account(*, account : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account ..." }
       end
@@ -414,6 +523,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -430,6 +542,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -439,7 +552,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ListAccountCapability]
-    def get_accounts_account_capabilities(*, account : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ListAccountCapability
+    def get_accounts_account_capabilities(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ListAccountCapability
       data, _status_code, _headers = get_accounts_account_capabilities_with_http_info(account: account, expand: expand)
       data
     end
@@ -448,7 +565,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ListAccountCapability, Integer, Hash)] Stripe::ListAccountCapability, response status code and response headers
-    def get_accounts_account_capabilities_with_http_info(*, account : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ListAccountCapability, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_capabilities_with_http_info(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ListAccountCapability, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account_capabilities(account: account, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -464,14 +585,23 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account_capabilities(*, account : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account_capabilities(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account_capabilities(account: account, expand: expand).execute(&block)
     end
 
     GET_ACCOUNTS_ACCOUNT_CAPABILITIES_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account_capabilities(*, account : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account_capabilities(
+      *,
+      account : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account_capabilities ..." }
       end
@@ -495,6 +625,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -511,6 +644,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -521,7 +655,12 @@ module Stripe
     # @required @param capability [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Capability]
-    def get_accounts_account_capabilities_capability(*, account : String? = nil, capability : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Capability
+    def get_accounts_account_capabilities_capability(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Capability
       data, _status_code, _headers = get_accounts_account_capabilities_capability_with_http_info(account: account, capability: capability, expand: expand)
       data
     end
@@ -531,7 +670,12 @@ module Stripe
     # @required @param capability [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Capability, Integer, Hash)] Stripe::Capability, response status code and response headers
-    def get_accounts_account_capabilities_capability_with_http_info(*, account : String? = nil, capability : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Capability, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_capabilities_capability_with_http_info(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Capability, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account_capabilities_capability(account: account, capability: capability, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -548,14 +692,25 @@ module Stripe
     # @required @param capability [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account_capabilities_capability(*, account : String? = nil, capability : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account_capabilities_capability(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account_capabilities_capability(account: account, capability: capability, expand: expand).execute(&block)
     end
 
     GET_ACCOUNTS_ACCOUNT_CAPABILITIES_CAPABILITY_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account_capabilities_capability(*, account : String? = nil, capability : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account_capabilities_capability(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account_capabilities_capability ..." }
       end
@@ -580,6 +735,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -596,6 +754,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -608,7 +767,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ExternalAccountList]
-    def get_accounts_account_external_accounts(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::ExternalAccountList
+    def get_accounts_account_external_accounts(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ExternalAccountList
       data, _status_code, _headers = get_accounts_account_external_accounts_with_http_info(account: account, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -620,7 +786,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ExternalAccountList, Integer, Hash)] Stripe::ExternalAccountList, response status code and response headers
-    def get_accounts_account_external_accounts_with_http_info(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ExternalAccountList, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_external_accounts_with_http_info(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ExternalAccountList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account_external_accounts(account: account, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -639,14 +812,29 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account_external_accounts(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account_external_accounts(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account_external_accounts(account: account, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
     GET_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account_external_accounts(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account_external_accounts(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account_external_accounts ..." }
       end
@@ -673,6 +861,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -689,6 +880,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -699,7 +891,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ExternalAccount]
-    def get_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ExternalAccount
+    def get_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ExternalAccount
       data, _status_code, _headers = get_accounts_account_external_accounts_id_with_http_info(account: account, id: id, expand: expand)
       data
     end
@@ -709,7 +906,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ExternalAccount, Integer, Hash)] Stripe::ExternalAccount, response status code and response headers
-    def get_accounts_account_external_accounts_id_with_http_info(*, account : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_external_accounts_id_with_http_info(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account_external_accounts_id(account: account, id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -726,14 +928,25 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account_external_accounts_id(account: account, id: id, expand: expand).execute(&block)
     end
 
     GET_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account_external_accounts_id ..." }
       end
@@ -758,6 +971,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -774,6 +990,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -787,7 +1004,15 @@ module Stripe
     # @optional @param relationship [Stripe::AllPeopleRelationshipSpecs?] Filters on the list of people returned based on the person's relationship to the account's company.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PersonList]
-    def get_accounts_account_persons(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, relationship : Stripe::AllPeopleRelationshipSpecs? = nil, expand : Array(Array(String))? = nil) : Stripe::PersonList
+    def get_accounts_account_persons(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      relationship : Stripe::AllPeopleRelationshipSpecs? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PersonList
       data, _status_code, _headers = get_accounts_account_persons_with_http_info(account: account, ending_before: ending_before, starting_after: starting_after, limit: limit, relationship: relationship, expand: expand)
       data
     end
@@ -800,7 +1025,15 @@ module Stripe
     # @optional @param relationship [Stripe::AllPeopleRelationshipSpecs?] Filters on the list of people returned based on the person's relationship to the account's company.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PersonList, Integer, Hash)] Stripe::PersonList, response status code and response headers
-    def get_accounts_account_persons_with_http_info(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, relationship : Stripe::AllPeopleRelationshipSpecs? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PersonList, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_persons_with_http_info(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      relationship : Stripe::AllPeopleRelationshipSpecs? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PersonList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account_persons(account: account, ending_before: ending_before, starting_after: starting_after, limit: limit, relationship: relationship, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -820,7 +1053,16 @@ module Stripe
     # @optional @param relationship [Stripe::AllPeopleRelationshipSpecs?] Filters on the list of people returned based on the person's relationship to the account's company.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account_persons(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, relationship : Stripe::AllPeopleRelationshipSpecs? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account_persons(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      relationship : Stripe::AllPeopleRelationshipSpecs? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account_persons(account: account, ending_before: ending_before, starting_after: starting_after, limit: limit, relationship: relationship, expand: expand).execute(&block)
     end
 
@@ -829,7 +1071,15 @@ module Stripe
     GET_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account_persons(*, account : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, relationship : Stripe::AllPeopleRelationshipSpecs? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account_persons(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      relationship : Stripe::AllPeopleRelationshipSpecs? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account_persons ..." }
       end
@@ -867,6 +1117,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -883,6 +1136,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -893,7 +1147,12 @@ module Stripe
     # @required @param person [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Person]
-    def get_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Person
+    def get_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Person
       data, _status_code, _headers = get_accounts_account_persons_person_with_http_info(account: account, person: person, expand: expand)
       data
     end
@@ -903,7 +1162,12 @@ module Stripe
     # @required @param person [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Person, Integer, Hash)] Stripe::Person, response status code and response headers
-    def get_accounts_account_persons_person_with_http_info(*, account : String? = nil, person : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
+    def get_accounts_account_persons_person_with_http_info(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_accounts_account_persons_person(account: account, person: person, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -920,7 +1184,13 @@ module Stripe
     # @required @param person [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_accounts_account_persons_person(account: account, person: person, expand: expand).execute(&block)
     end
 
@@ -928,7 +1198,12 @@ module Stripe
     GET_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.get_accounts_account_persons_person ..." }
       end
@@ -956,6 +1231,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -972,6 +1250,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -996,7 +1275,26 @@ module Stripe
     # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
     # @optional @param _type [String?] The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
     # @return [Stripe::Account]
-    def post_accounts(*, account_token : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, country : String? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecs? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil, _type : String? = nil) : Stripe::Account
+    def post_accounts(
+      *,
+      account_token : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      country : String? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecs? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
+      _type : String? = nil
+    ) : Stripe::Account
       data, _status_code, _headers = post_accounts_with_http_info(account_token: account_token, bank_account: bank_account, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, country: country, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance, _type: _type)
       data
     end
@@ -1020,7 +1318,26 @@ module Stripe
     # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
     # @optional @param _type [String?] The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
-    def post_accounts_with_http_info(*, account_token : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, country : String? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecs? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil, _type : String? = nil) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
+    def post_accounts_with_http_info(
+      *,
+      account_token : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      country : String? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecs? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
+      _type : String? = nil
+    ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts(account_token: account_token, bank_account: bank_account, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, country: country, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance, _type: _type)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1051,7 +1368,27 @@ module Stripe
     # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
     # @optional @param _type [String?] The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
     # @return nil
-    def post_accounts(*, account_token : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, country : String? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecs? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil, _type : String? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts(
+      *,
+      account_token : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      country : String? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecs? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
+      _type : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts(account_token: account_token, bank_account: bank_account, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, country: country, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance, _type: _type).execute(&block)
     end
 
@@ -1062,7 +1399,26 @@ module Stripe
     POST_ACCOUNTS_VALID_VALUES_FOR__TYPE          = String.static_array("custom", "express", "standard")
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts(*, account_token : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, country : String? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecs? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil, _type : String? = nil) : Crest::Request
+    def build_api_request_for_post_accounts(
+      *,
+      account_token : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      country : String? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecs? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
+      _type : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts ..." }
       end
@@ -1127,6 +1483,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_token"] = account_token.to_s if !account_token.nil?
@@ -1160,6 +1519,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1182,7 +1542,24 @@ module Stripe
     # @optional @param settings [Stripe::SettingsSpecsUpdate?]
     # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
     # @return [Stripe::Account]
-    def post_accounts_account(*, account : String? = nil, account_token : String? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecsUpdate? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil) : Stripe::Account
+    def post_accounts_account(
+      *,
+      account : String? = nil,
+      account_token : String? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecsUpdate? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil
+    ) : Stripe::Account
       data, _status_code, _headers = post_accounts_account_with_http_info(account: account, account_token: account_token, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance)
       data
     end
@@ -1204,7 +1581,24 @@ module Stripe
     # @optional @param settings [Stripe::SettingsSpecsUpdate?]
     # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
-    def post_accounts_account_with_http_info(*, account : String? = nil, account_token : String? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecsUpdate? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_with_http_info(
+      *,
+      account : String? = nil,
+      account_token : String? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecsUpdate? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil
+    ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account(account: account, account_token: account_token, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1233,7 +1627,25 @@ module Stripe
     # @optional @param settings [Stripe::SettingsSpecsUpdate?]
     # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
     # @return nil
-    def post_accounts_account(*, account : String? = nil, account_token : String? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecsUpdate? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account(
+      *,
+      account : String? = nil,
+      account_token : String? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecsUpdate? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account(account: account, account_token: account_token, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance).execute(&block)
     end
 
@@ -1243,7 +1655,24 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account(*, account : String? = nil, account_token : String? = nil, business_profile : Stripe::BusinessProfileSpecs? = nil, business_type : String? = nil, capabilities : Stripe::CapabilitiesParam? = nil, company : Stripe::CompanySpecs? = nil, default_currency : String? = nil, documents : Stripe::DocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, external_account : String? = nil, individual : Stripe::IndividualSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, settings : Stripe::SettingsSpecsUpdate? = nil, tos_acceptance : Stripe::TosAcceptanceSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account(
+      *,
+      account : String? = nil,
+      account_token : String? = nil,
+      business_profile : Stripe::BusinessProfileSpecs? = nil,
+      business_type : String? = nil,
+      capabilities : Stripe::CapabilitiesParam? = nil,
+      company : Stripe::CompanySpecs? = nil,
+      default_currency : String? = nil,
+      documents : Stripe::DocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      individual : Stripe::IndividualSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      settings : Stripe::SettingsSpecsUpdate? = nil,
+      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account ..." }
       end
@@ -1303,6 +1732,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_token"] = account_token.to_s if !account_token.nil?
@@ -1333,6 +1765,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1344,7 +1777,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param requested [Bool?] Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the `requirements` arrays.
     # @return [Stripe::Capability]
-    def post_accounts_account_capabilities_capability(*, account : String? = nil, capability : String? = nil, expand : Array(String)? = nil, requested : Bool? = nil) : Stripe::Capability
+    def post_accounts_account_capabilities_capability(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(String)? = nil,
+      requested : Bool? = nil
+    ) : Stripe::Capability
       data, _status_code, _headers = post_accounts_account_capabilities_capability_with_http_info(account: account, capability: capability, expand: expand, requested: requested)
       data
     end
@@ -1355,7 +1794,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param requested [Bool?] Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the `requirements` arrays.
     # @return [Tuple(Stripe::Capability, Integer, Hash)] Stripe::Capability, response status code and response headers
-    def post_accounts_account_capabilities_capability_with_http_info(*, account : String? = nil, capability : String? = nil, expand : Array(String)? = nil, requested : Bool? = nil) : Tuple(Stripe::Capability, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_capabilities_capability_with_http_info(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(String)? = nil,
+      requested : Bool? = nil
+    ) : Tuple(Stripe::Capability, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_capabilities_capability(account: account, capability: capability, expand: expand, requested: requested)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1373,14 +1818,27 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param requested [Bool?] Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the `requirements` arrays.
     # @return nil
-    def post_accounts_account_capabilities_capability(*, account : String? = nil, capability : String? = nil, expand : Array(String)? = nil, requested : Bool? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_capabilities_capability(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(String)? = nil,
+      requested : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_capabilities_capability(account: account, capability: capability, expand: expand, requested: requested).execute(&block)
     end
 
     POST_ACCOUNTS_ACCOUNT_CAPABILITIES_CAPABILITY_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_capabilities_capability(*, account : String? = nil, capability : String? = nil, expand : Array(String)? = nil, requested : Bool? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_capabilities_capability(
+      *,
+      account : String? = nil,
+      capability : String? = nil,
+      expand : Array(String)? = nil,
+      requested : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_capabilities_capability ..." }
       end
@@ -1406,6 +1864,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1424,6 +1885,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1436,7 +1898,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param external_account [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
     # @return [Stripe::ExternalAccount]
-    def post_accounts_account_external_accounts(*, account : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, default_for_currency : Bool? = nil, expand : Array(String)? = nil, external_account : String? = nil) : Stripe::ExternalAccount
+    def post_accounts_account_external_accounts(
+      *,
+      account : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      default_for_currency : Bool? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil
+    ) : Stripe::ExternalAccount
       data, _status_code, _headers = post_accounts_account_external_accounts_with_http_info(account: account, bank_account: bank_account, default_for_currency: default_for_currency, expand: expand, external_account: external_account)
       data
     end
@@ -1448,7 +1917,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param external_account [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
     # @return [Tuple(Stripe::ExternalAccount, Integer, Hash)] Stripe::ExternalAccount, response status code and response headers
-    def post_accounts_account_external_accounts_with_http_info(*, account : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, default_for_currency : Bool? = nil, expand : Array(String)? = nil, external_account : String? = nil) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_external_accounts_with_http_info(
+      *,
+      account : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      default_for_currency : Bool? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil
+    ) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_external_accounts(account: account, bank_account: bank_account, default_for_currency: default_for_currency, expand: expand, external_account: external_account)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1467,7 +1943,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param external_account [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
     # @return nil
-    def post_accounts_account_external_accounts(*, account : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, default_for_currency : Bool? = nil, expand : Array(String)? = nil, external_account : String? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_external_accounts(
+      *,
+      account : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      default_for_currency : Bool? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_external_accounts(account: account, bank_account: bank_account, default_for_currency: default_for_currency, expand: expand, external_account: external_account).execute(&block)
     end
 
@@ -1475,7 +1959,14 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_external_accounts(*, account : String? = nil, bank_account : Stripe::PostAccountsRequestBankAccount? = nil, default_for_currency : Bool? = nil, expand : Array(String)? = nil, external_account : String? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_external_accounts(
+      *,
+      account : String? = nil,
+      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
+      default_for_currency : Bool? = nil,
+      expand : Array(String)? = nil,
+      external_account : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_external_accounts ..." }
       end
@@ -1507,6 +1998,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["bank_account"] = bank_account.to_s if !bank_account.nil?
@@ -1527,6 +2021,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1551,7 +2046,26 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param name [String?] Cardholder name.
     # @return [Stripe::ExternalAccount]
-    def post_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, account_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, default_for_currency : Bool? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil) : Stripe::ExternalAccount
+    def post_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      account_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      default_for_currency : Bool? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil
+    ) : Stripe::ExternalAccount
       data, _status_code, _headers = post_accounts_account_external_accounts_id_with_http_info(account: account, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, account_type: account_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, default_for_currency: default_for_currency, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name)
       data
     end
@@ -1575,7 +2089,26 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param name [String?] Cardholder name.
     # @return [Tuple(Stripe::ExternalAccount, Integer, Hash)] Stripe::ExternalAccount, response status code and response headers
-    def post_accounts_account_external_accounts_id_with_http_info(*, account : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, account_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, default_for_currency : Bool? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_external_accounts_id_with_http_info(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      account_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      default_for_currency : Bool? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil
+    ) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_external_accounts_id(account: account, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, account_type: account_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, default_for_currency: default_for_currency, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1606,7 +2139,27 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param name [String?] Cardholder name.
     # @return nil
-    def post_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, account_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, default_for_currency : Bool? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      account_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      default_for_currency : Bool? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_external_accounts_id(account: account, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, account_type: account_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, default_for_currency: default_for_currency, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name).execute(&block)
     end
 
@@ -1627,7 +2180,26 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_NAME                  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_external_accounts_id(*, account : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, account_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, default_for_currency : Bool? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_external_accounts_id(
+      *,
+      account : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      account_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      default_for_currency : Bool? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_external_accounts_id ..." }
       end
@@ -1695,6 +2267,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_holder_name"] = account_holder_name.to_s if !account_holder_name.nil?
@@ -1726,6 +2301,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1735,7 +2311,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::LoginLink]
-    def post_accounts_account_login_links(*, account : String? = nil, expand : Array(String)? = nil) : Stripe::LoginLink
+    def post_accounts_account_login_links(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::LoginLink
       data, _status_code, _headers = post_accounts_account_login_links_with_http_info(account: account, expand: expand)
       data
     end
@@ -1744,7 +2324,11 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::LoginLink, Integer, Hash)] Stripe::LoginLink, response status code and response headers
-    def post_accounts_account_login_links_with_http_info(*, account : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::LoginLink, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_login_links_with_http_info(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::LoginLink, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_login_links(account: account, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1760,14 +2344,23 @@ module Stripe
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_accounts_account_login_links(*, account : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_login_links(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_login_links(account: account, expand: expand).execute(&block)
     end
 
     POST_ACCOUNTS_ACCOUNT_LOGIN_LINKS_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_login_links(*, account : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_login_links(
+      *,
+      account : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_login_links ..." }
       end
@@ -1792,6 +2385,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1809,6 +2405,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1844,7 +2441,37 @@ module Stripe
     # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
     # @optional @param verification [Stripe::PersonVerificationSpecs?]
     # @return [Stripe::Person]
-    def post_accounts_account_persons(*, account : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil) : Stripe::Person
+    def post_accounts_account_persons(
+      *,
+      account : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil
+    ) : Stripe::Person
       data, _status_code, _headers = post_accounts_account_persons_with_http_info(account: account, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
       data
     end
@@ -1879,7 +2506,37 @@ module Stripe
     # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
     # @optional @param verification [Stripe::PersonVerificationSpecs?]
     # @return [Tuple(Stripe::Person, Integer, Hash)] Stripe::Person, response status code and response headers
-    def post_accounts_account_persons_with_http_info(*, account : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_persons_with_http_info(
+      *,
+      account : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil
+    ) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_persons(account: account, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1921,7 +2578,38 @@ module Stripe
     # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
     # @optional @param verification [Stripe::PersonVerificationSpecs?]
     # @return nil
-    def post_accounts_account_persons(*, account : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_persons(
+      *,
+      account : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_persons(account: account, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification).execute(&block)
     end
 
@@ -1940,7 +2628,37 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_POLITICAL_EXPOSURE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_persons(*, account : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_persons(
+      *,
+      account : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_persons ..." }
       end
@@ -2035,6 +2753,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["address"] = address.to_s if !address.nil?
@@ -2078,6 +2799,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2114,7 +2836,38 @@ module Stripe
     # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
     # @optional @param verification [Stripe::PersonVerificationSpecs?]
     # @return [Stripe::Person]
-    def post_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil) : Stripe::Person
+    def post_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil
+    ) : Stripe::Person
       data, _status_code, _headers = post_accounts_account_persons_person_with_http_info(account: account, person: person, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
       data
     end
@@ -2150,7 +2903,38 @@ module Stripe
     # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
     # @optional @param verification [Stripe::PersonVerificationSpecs?]
     # @return [Tuple(Stripe::Person, Integer, Hash)] Stripe::Person, response status code and response headers
-    def post_accounts_account_persons_person_with_http_info(*, account : String? = nil, person : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_persons_person_with_http_info(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil
+    ) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_persons_person(account: account, person: person, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2193,7 +2977,39 @@ module Stripe
     # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
     # @optional @param verification [Stripe::PersonVerificationSpecs?]
     # @return nil
-    def post_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_persons_person(account: account, person: person, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification).execute(&block)
     end
 
@@ -2213,7 +3029,38 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_POLITICAL_EXPOSURE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_persons_person(*, account : String? = nil, person : String? = nil, address : Stripe::AddressSpecs? = nil, address_kana : Stripe::JapanAddressKanaSpecs? = nil, address_kanji : Stripe::JapanAddressKanjiSpecs? = nil, dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil, documents : Stripe::PersonDocumentsSpecs? = nil, email : String? = nil, expand : Array(String)? = nil, first_name : String? = nil, first_name_kana : String? = nil, first_name_kanji : String? = nil, full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil, gender : String? = nil, id_number : String? = nil, id_number_secondary : String? = nil, last_name : String? = nil, last_name_kana : String? = nil, last_name_kanji : String? = nil, maiden_name : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, nationality : String? = nil, person_token : String? = nil, phone : String? = nil, political_exposure : String? = nil, registered_address : Stripe::AddressSpecs? = nil, relationship : Stripe::RelationshipSpecs? = nil, ssn_last_4 : String? = nil, verification : Stripe::PersonVerificationSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_persons_person(
+      *,
+      account : String? = nil,
+      person : String? = nil,
+      address : Stripe::AddressSpecs? = nil,
+      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
+      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
+      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
+      documents : Stripe::PersonDocumentsSpecs? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      first_name : String? = nil,
+      first_name_kana : String? = nil,
+      first_name_kanji : String? = nil,
+      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
+      gender : String? = nil,
+      id_number : String? = nil,
+      id_number_secondary : String? = nil,
+      last_name : String? = nil,
+      last_name_kana : String? = nil,
+      last_name_kanji : String? = nil,
+      maiden_name : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      nationality : String? = nil,
+      person_token : String? = nil,
+      phone : String? = nil,
+      political_exposure : String? = nil,
+      registered_address : Stripe::AddressSpecs? = nil,
+      relationship : Stripe::RelationshipSpecs? = nil,
+      ssn_last_4 : String? = nil,
+      verification : Stripe::PersonVerificationSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_persons_person ..." }
       end
@@ -2312,6 +3159,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["address"] = address.to_s if !address.nil?
@@ -2355,6 +3205,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2365,7 +3216,12 @@ module Stripe
     # @required @param reason [String?] The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Account]
-    def post_accounts_account_reject(*, account : String? = nil, reason : String? = nil, expand : Array(String)? = nil) : Stripe::Account
+    def post_accounts_account_reject(
+      *,
+      account : String? = nil,
+      reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::Account
       data, _status_code, _headers = post_accounts_account_reject_with_http_info(account: account, reason: reason, expand: expand)
       data
     end
@@ -2375,7 +3231,12 @@ module Stripe
     # @required @param reason [String?] The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
-    def post_accounts_account_reject_with_http_info(*, account : String? = nil, reason : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
+    def post_accounts_account_reject_with_http_info(
+      *,
+      account : String? = nil,
+      reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_accounts_account_reject(account: account, reason: reason, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2392,7 +3253,13 @@ module Stripe
     # @required @param reason [String?] The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_accounts_account_reject(*, account : String? = nil, reason : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_accounts_account_reject(
+      *,
+      account : String? = nil,
+      reason : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_accounts_account_reject(account: account, reason: reason, expand: expand).execute(&block)
     end
 
@@ -2400,7 +3267,12 @@ module Stripe
     POST_ACCOUNTS_ACCOUNT_REJECT_MAX_LENGTH_FOR_REASON  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_accounts_account_reject(*, account : String? = nil, reason : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_accounts_account_reject(
+      *,
+      account : String? = nil,
+      reason : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_reject ..." }
       end
@@ -2429,6 +3301,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -2447,6 +3322,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

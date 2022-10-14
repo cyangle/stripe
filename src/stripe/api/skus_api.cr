@@ -23,7 +23,10 @@ module Stripe
     # <p>Delete a SKU. Deleting a SKU is only possible until it has been used in an order.</p>
     # @required @param id [String?]
     # @return [Stripe::DeletedSku]
-    def delete_skus_id(*, id : String? = nil) : Stripe::DeletedSku
+    def delete_skus_id(
+      *,
+      id : String? = nil
+    ) : Stripe::DeletedSku
       data, _status_code, _headers = delete_skus_id_with_http_info(id: id)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;Delete a SKU. Deleting a SKU is only possible until it has been used in an order.&lt;/p&gt;
     # @required @param id [String?]
     # @return [Tuple(Stripe::DeletedSku, Integer, Hash)] Stripe::DeletedSku, response status code and response headers
-    def delete_skus_id_with_http_info(*, id : String? = nil) : Tuple(Stripe::DeletedSku, Int32, Hash(String, Array(String) | String))
+    def delete_skus_id_with_http_info(
+      *,
+      id : String? = nil
+    ) : Tuple(Stripe::DeletedSku, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_skus_id(id: id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;Delete a SKU. Deleting a SKU is only possible until it has been used in an order.&lt;/p&gt;
     # @required @param id [String?]
     # @return nil
-    def delete_skus_id(*, id : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_skus_id(
+      *,
+      id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_skus_id(id: id).execute(&block)
     end
 
     DELETE_SKUS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_skus_id(*, id : String? = nil) : Crest::Request
+    def build_api_request_for_delete_skus_id(
+      *,
+      id : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.delete_skus_id ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -108,7 +125,18 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param product [String?] The ID of the product whose SKUs will be retrieved. Must be a product with type `good`.
     # @return [Stripe::ProductsMethodSkuList]
-    def get_skus(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, in_stock : Bool? = nil, attributes : Hash(String, Hash(String, String))? = nil, ids : Array(Array(String))? = nil, expand : Array(Array(String))? = nil, product : String? = nil) : Stripe::ProductsMethodSkuList
+    def get_skus(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      in_stock : Bool? = nil,
+      attributes : Hash(String, Hash(String, String))? = nil,
+      ids : Array(Array(String))? = nil,
+      expand : Array(Array(String))? = nil,
+      product : String? = nil
+    ) : Stripe::ProductsMethodSkuList
       data, _status_code, _headers = get_skus_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, in_stock: in_stock, attributes: attributes, ids: ids, expand: expand, product: product)
       data
     end
@@ -124,7 +152,18 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param product [String?] The ID of the product whose SKUs will be retrieved. Must be a product with type `good`.
     # @return [Tuple(Stripe::ProductsMethodSkuList, Integer, Hash)] Stripe::ProductsMethodSkuList, response status code and response headers
-    def get_skus_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, in_stock : Bool? = nil, attributes : Hash(String, Hash(String, String))? = nil, ids : Array(Array(String))? = nil, expand : Array(Array(String))? = nil, product : String? = nil) : Tuple(Stripe::ProductsMethodSkuList, Int32, Hash(String, Array(String) | String))
+    def get_skus_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      in_stock : Bool? = nil,
+      attributes : Hash(String, Hash(String, String))? = nil,
+      ids : Array(Array(String))? = nil,
+      expand : Array(Array(String))? = nil,
+      product : String? = nil
+    ) : Tuple(Stripe::ProductsMethodSkuList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_skus(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, in_stock: in_stock, attributes: attributes, ids: ids, expand: expand, product: product)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -147,7 +186,19 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param product [String?] The ID of the product whose SKUs will be retrieved. Must be a product with type `good`.
     # @return nil
-    def get_skus(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, in_stock : Bool? = nil, attributes : Hash(String, Hash(String, String))? = nil, ids : Array(Array(String))? = nil, expand : Array(Array(String))? = nil, product : String? = nil, &block : Crest::Response ->) : Nil
+    def get_skus(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      in_stock : Bool? = nil,
+      attributes : Hash(String, Hash(String, String))? = nil,
+      ids : Array(Array(String))? = nil,
+      expand : Array(Array(String))? = nil,
+      product : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_skus(ending_before: ending_before, starting_after: starting_after, limit: limit, active: active, in_stock: in_stock, attributes: attributes, ids: ids, expand: expand, product: product).execute(&block)
     end
 
@@ -156,7 +207,18 @@ module Stripe
     GET_SKUS_MAX_LENGTH_FOR_PRODUCT        = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_skus(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, active : Bool? = nil, in_stock : Bool? = nil, attributes : Hash(String, Hash(String, String))? = nil, ids : Array(Array(String))? = nil, expand : Array(Array(String))? = nil, product : String? = nil) : Crest::Request
+    def build_api_request_for_get_skus(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      active : Bool? = nil,
+      in_stock : Bool? = nil,
+      attributes : Hash(String, Hash(String, String))? = nil,
+      ids : Array(Array(String))? = nil,
+      expand : Array(Array(String))? = nil,
+      product : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.get_skus ..." }
       end
@@ -194,6 +256,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -210,6 +275,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -219,7 +285,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::GetSkusId200Response]
-    def get_skus_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::GetSkusId200Response
+    def get_skus_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::GetSkusId200Response
       data, _status_code, _headers = get_skus_id_with_http_info(id: id, expand: expand)
       data
     end
@@ -228,7 +298,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::GetSkusId200Response, Integer, Hash)] Stripe::GetSkusId200Response, response status code and response headers
-    def get_skus_id_with_http_info(*, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::GetSkusId200Response, Int32, Hash(String, Array(String) | String))
+    def get_skus_id_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::GetSkusId200Response, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_skus_id(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -244,14 +318,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_skus_id(*, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_skus_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_skus_id(id: id, expand: expand).execute(&block)
     end
 
     GET_SKUS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_skus_id(*, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_skus_id(
+      *,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.get_skus_id ..." }
       end
@@ -275,6 +358,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -291,6 +377,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -307,7 +394,18 @@ module Stripe
     # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
     # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
     # @return [Stripe::Sku]
-    def post_skus(*, currency : String? = nil, inventory : Stripe::InventoryCreateSpecs? = nil, price : Int64? = nil, product : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, id : String? = nil, image : String? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil) : Stripe::Sku
+    def post_skus(
+      *,
+      currency : String? = nil,
+      inventory : Stripe::InventoryCreateSpecs? = nil,
+      price : Int64? = nil,
+      product : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      image : String? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil
+    ) : Stripe::Sku
       data, _status_code, _headers = post_skus_with_http_info(currency: currency, inventory: inventory, price: price, product: product, active: active, expand: expand, id: id, image: image, package_dimensions: package_dimensions)
       data
     end
@@ -323,7 +421,18 @@ module Stripe
     # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
     # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
     # @return [Tuple(Stripe::Sku, Integer, Hash)] Stripe::Sku, response status code and response headers
-    def post_skus_with_http_info(*, currency : String? = nil, inventory : Stripe::InventoryCreateSpecs? = nil, price : Int64? = nil, product : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, id : String? = nil, image : String? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil) : Tuple(Stripe::Sku, Int32, Hash(String, Array(String) | String))
+    def post_skus_with_http_info(
+      *,
+      currency : String? = nil,
+      inventory : Stripe::InventoryCreateSpecs? = nil,
+      price : Int64? = nil,
+      product : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      image : String? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil
+    ) : Tuple(Stripe::Sku, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_skus(currency: currency, inventory: inventory, price: price, product: product, active: active, expand: expand, id: id, image: image, package_dimensions: package_dimensions)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -346,7 +455,19 @@ module Stripe
     # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
     # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
     # @return nil
-    def post_skus(*, currency : String? = nil, inventory : Stripe::InventoryCreateSpecs? = nil, price : Int64? = nil, product : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, id : String? = nil, image : String? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil, &block : Crest::Response ->) : Nil
+    def post_skus(
+      *,
+      currency : String? = nil,
+      inventory : Stripe::InventoryCreateSpecs? = nil,
+      price : Int64? = nil,
+      product : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      image : String? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_skus(currency: currency, inventory: inventory, price: price, product: product, active: active, expand: expand, id: id, image: image, package_dimensions: package_dimensions).execute(&block)
     end
 
@@ -354,7 +475,18 @@ module Stripe
     POST_SKUS_MAX_LENGTH_FOR_IMAGE   = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_skus(*, currency : String? = nil, inventory : Stripe::InventoryCreateSpecs? = nil, price : Int64? = nil, product : String? = nil, active : Bool? = nil, expand : Array(String)? = nil, id : String? = nil, image : String? = nil, package_dimensions : Stripe::PackageDimensionsSpecs? = nil) : Crest::Request
+    def build_api_request_for_post_skus(
+      *,
+      currency : String? = nil,
+      inventory : Stripe::InventoryCreateSpecs? = nil,
+      price : Int64? = nil,
+      product : String? = nil,
+      active : Bool? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      image : String? = nil,
+      package_dimensions : Stripe::PackageDimensionsSpecs? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.post_skus ..." }
       end
@@ -394,6 +526,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -419,6 +554,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -436,7 +572,19 @@ module Stripe
     # @optional @param price [Int32?] The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     # @optional @param product [String?] The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU's current product, and be of type `good`.
     # @return [Stripe::Sku]
-    def post_skus_id(*, id : String? = nil, active : Bool? = nil, currency : String? = nil, expand : Array(String)? = nil, image : String? = nil, inventory : Stripe::InventoryUpdateSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil, price : Int64? = nil, product : String? = nil) : Stripe::Sku
+    def post_skus_id(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      image : String? = nil,
+      inventory : Stripe::InventoryUpdateSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
+      price : Int64? = nil,
+      product : String? = nil
+    ) : Stripe::Sku
       data, _status_code, _headers = post_skus_id_with_http_info(id: id, active: active, currency: currency, expand: expand, image: image, inventory: inventory, metadata: metadata, package_dimensions: package_dimensions, price: price, product: product)
       data
     end
@@ -453,7 +601,19 @@ module Stripe
     # @optional @param price [Int32?] The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     # @optional @param product [String?] The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU's current product, and be of type `good`.
     # @return [Tuple(Stripe::Sku, Integer, Hash)] Stripe::Sku, response status code and response headers
-    def post_skus_id_with_http_info(*, id : String? = nil, active : Bool? = nil, currency : String? = nil, expand : Array(String)? = nil, image : String? = nil, inventory : Stripe::InventoryUpdateSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil, price : Int64? = nil, product : String? = nil) : Tuple(Stripe::Sku, Int32, Hash(String, Array(String) | String))
+    def post_skus_id_with_http_info(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      image : String? = nil,
+      inventory : Stripe::InventoryUpdateSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
+      price : Int64? = nil,
+      product : String? = nil
+    ) : Tuple(Stripe::Sku, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_skus_id(id: id, active: active, currency: currency, expand: expand, image: image, inventory: inventory, metadata: metadata, package_dimensions: package_dimensions, price: price, product: product)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -477,7 +637,20 @@ module Stripe
     # @optional @param price [Int32?] The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     # @optional @param product [String?] The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU's current product, and be of type `good`.
     # @return nil
-    def post_skus_id(*, id : String? = nil, active : Bool? = nil, currency : String? = nil, expand : Array(String)? = nil, image : String? = nil, inventory : Stripe::InventoryUpdateSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil, price : Int64? = nil, product : String? = nil, &block : Crest::Response ->) : Nil
+    def post_skus_id(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      image : String? = nil,
+      inventory : Stripe::InventoryUpdateSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
+      price : Int64? = nil,
+      product : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_skus_id(id: id, active: active, currency: currency, expand: expand, image: image, inventory: inventory, metadata: metadata, package_dimensions: package_dimensions, price: price, product: product).execute(&block)
     end
 
@@ -486,7 +659,19 @@ module Stripe
     POST_SKUS_ID_MAX_LENGTH_FOR_PRODUCT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_skus_id(*, id : String? = nil, active : Bool? = nil, currency : String? = nil, expand : Array(String)? = nil, image : String? = nil, inventory : Stripe::InventoryUpdateSpecs? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil, price : Int64? = nil, product : String? = nil) : Crest::Request
+    def build_api_request_for_post_skus_id(
+      *,
+      id : String? = nil,
+      active : Bool? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      image : String? = nil,
+      inventory : Stripe::InventoryUpdateSpecs? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
+      price : Int64? = nil,
+      product : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.post_skus_id ..." }
       end
@@ -528,6 +713,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["active"] = active.to_s if !active.nil?
@@ -553,6 +741,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

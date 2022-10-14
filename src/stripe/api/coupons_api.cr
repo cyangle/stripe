@@ -23,7 +23,10 @@ module Stripe
     # <p>You can delete coupons via the <a href=\"https://dashboard.stripe.com/coupons\">coupon management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any customers who have already applied the coupon; it means that new customers can’t redeem the coupon. You can also delete coupons via the API.</p>
     # @required @param coupon [String?]
     # @return [Stripe::DeletedCoupon]
-    def delete_coupons_coupon(*, coupon : String? = nil) : Stripe::DeletedCoupon
+    def delete_coupons_coupon(
+      *,
+      coupon : String? = nil
+    ) : Stripe::DeletedCoupon
       data, _status_code, _headers = delete_coupons_coupon_with_http_info(coupon: coupon)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;You can delete coupons via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/coupons\&quot;&gt;coupon management&lt;/a&gt; page of the Stripe dashboard. However, deleting a coupon does not affect any customers who have already applied the coupon; it means that new customers can’t redeem the coupon. You can also delete coupons via the API.&lt;/p&gt;
     # @required @param coupon [String?]
     # @return [Tuple(Stripe::DeletedCoupon, Integer, Hash)] Stripe::DeletedCoupon, response status code and response headers
-    def delete_coupons_coupon_with_http_info(*, coupon : String? = nil) : Tuple(Stripe::DeletedCoupon, Int32, Hash(String, Array(String) | String))
+    def delete_coupons_coupon_with_http_info(
+      *,
+      coupon : String? = nil
+    ) : Tuple(Stripe::DeletedCoupon, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_coupons_coupon(coupon: coupon)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;You can delete coupons via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/coupons\&quot;&gt;coupon management&lt;/a&gt; page of the Stripe dashboard. However, deleting a coupon does not affect any customers who have already applied the coupon; it means that new customers can’t redeem the coupon. You can also delete coupons via the API.&lt;/p&gt;
     # @required @param coupon [String?]
     # @return nil
-    def delete_coupons_coupon(*, coupon : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_coupons_coupon(coupon: coupon).execute(&block)
     end
 
     DELETE_COUPONS_COUPON_MAX_LENGTH_FOR_COUPON = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_coupons_coupon(*, coupon : String? = nil) : Crest::Request
+    def build_api_request_for_delete_coupons_coupon(
+      *,
+      coupon : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CouponsApi.delete_coupons_coupon ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -104,7 +121,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CouponsResourceCouponList]
-    def get_coupons(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::CouponsResourceCouponList
+    def get_coupons(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CouponsResourceCouponList
       data, _status_code, _headers = get_coupons_with_http_info(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, expand: expand)
       data
     end
@@ -116,7 +140,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CouponsResourceCouponList, Integer, Hash)] Stripe::CouponsResourceCouponList, response status code and response headers
-    def get_coupons_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CouponsResourceCouponList, Int32, Hash(String, Array(String) | String))
+    def get_coupons_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CouponsResourceCouponList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_coupons(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -135,7 +166,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_coupons(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_coupons(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_coupons(ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, expand: expand).execute(&block)
     end
 
@@ -143,7 +182,14 @@ module Stripe
     GET_COUPONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_coupons(*, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_coupons(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CouponsApi.get_coupons ..." }
       end
@@ -176,6 +222,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -192,6 +241,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -201,7 +251,11 @@ module Stripe
     # @required @param coupon [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Coupon]
-    def get_coupons_coupon(*, coupon : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Coupon
+    def get_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Coupon
       data, _status_code, _headers = get_coupons_coupon_with_http_info(coupon: coupon, expand: expand)
       data
     end
@@ -210,7 +264,11 @@ module Stripe
     # @required @param coupon [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Coupon, Integer, Hash)] Stripe::Coupon, response status code and response headers
-    def get_coupons_coupon_with_http_info(*, coupon : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Coupon, Int32, Hash(String, Array(String) | String))
+    def get_coupons_coupon_with_http_info(
+      *,
+      coupon : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Coupon, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_coupons_coupon(coupon: coupon, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -226,14 +284,23 @@ module Stripe
     # @required @param coupon [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_coupons_coupon(*, coupon : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_coupons_coupon(coupon: coupon, expand: expand).execute(&block)
     end
 
     GET_COUPONS_COUPON_MAX_LENGTH_FOR_COUPON = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_coupons_coupon(*, coupon : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CouponsApi.get_coupons_coupon ..." }
       end
@@ -257,6 +324,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -273,6 +343,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -292,7 +363,21 @@ module Stripe
     # @optional @param percent_off [Float64?] A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (required if `amount_off` is not passed).
     # @optional @param redeem_by [Int32?] Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.
     # @return [Stripe::Coupon]
-    def post_coupons(*, amount_off : Int64? = nil, applies_to : Stripe::AppliesToParams? = nil, currency : String? = nil, duration : String? = nil, duration_in_months : Int64? = nil, expand : Array(String)? = nil, id : String? = nil, max_redemptions : Int64? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, percent_off : Float64? = nil, redeem_by : Int64? = nil) : Stripe::Coupon
+    def post_coupons(
+      *,
+      amount_off : Int64? = nil,
+      applies_to : Stripe::AppliesToParams? = nil,
+      currency : String? = nil,
+      duration : String? = nil,
+      duration_in_months : Int64? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      max_redemptions : Int64? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      percent_off : Float64? = nil,
+      redeem_by : Int64? = nil
+    ) : Stripe::Coupon
       data, _status_code, _headers = post_coupons_with_http_info(amount_off: amount_off, applies_to: applies_to, currency: currency, duration: duration, duration_in_months: duration_in_months, expand: expand, id: id, max_redemptions: max_redemptions, metadata: metadata, name: name, percent_off: percent_off, redeem_by: redeem_by)
       data
     end
@@ -311,7 +396,21 @@ module Stripe
     # @optional @param percent_off [Float64?] A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (required if `amount_off` is not passed).
     # @optional @param redeem_by [Int32?] Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.
     # @return [Tuple(Stripe::Coupon, Integer, Hash)] Stripe::Coupon, response status code and response headers
-    def post_coupons_with_http_info(*, amount_off : Int64? = nil, applies_to : Stripe::AppliesToParams? = nil, currency : String? = nil, duration : String? = nil, duration_in_months : Int64? = nil, expand : Array(String)? = nil, id : String? = nil, max_redemptions : Int64? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, percent_off : Float64? = nil, redeem_by : Int64? = nil) : Tuple(Stripe::Coupon, Int32, Hash(String, Array(String) | String))
+    def post_coupons_with_http_info(
+      *,
+      amount_off : Int64? = nil,
+      applies_to : Stripe::AppliesToParams? = nil,
+      currency : String? = nil,
+      duration : String? = nil,
+      duration_in_months : Int64? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      max_redemptions : Int64? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      percent_off : Float64? = nil,
+      redeem_by : Int64? = nil
+    ) : Tuple(Stripe::Coupon, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_coupons(amount_off: amount_off, applies_to: applies_to, currency: currency, duration: duration, duration_in_months: duration_in_months, expand: expand, id: id, max_redemptions: max_redemptions, metadata: metadata, name: name, percent_off: percent_off, redeem_by: redeem_by)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -337,7 +436,22 @@ module Stripe
     # @optional @param percent_off [Float64?] A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (required if `amount_off` is not passed).
     # @optional @param redeem_by [Int32?] Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.
     # @return nil
-    def post_coupons(*, amount_off : Int64? = nil, applies_to : Stripe::AppliesToParams? = nil, currency : String? = nil, duration : String? = nil, duration_in_months : Int64? = nil, expand : Array(String)? = nil, id : String? = nil, max_redemptions : Int64? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, percent_off : Float64? = nil, redeem_by : Int64? = nil, &block : Crest::Response ->) : Nil
+    def post_coupons(
+      *,
+      amount_off : Int64? = nil,
+      applies_to : Stripe::AppliesToParams? = nil,
+      currency : String? = nil,
+      duration : String? = nil,
+      duration_in_months : Int64? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      max_redemptions : Int64? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      percent_off : Float64? = nil,
+      redeem_by : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_coupons(amount_off: amount_off, applies_to: applies_to, currency: currency, duration: duration, duration_in_months: duration_in_months, expand: expand, id: id, max_redemptions: max_redemptions, metadata: metadata, name: name, percent_off: percent_off, redeem_by: redeem_by).execute(&block)
     end
 
@@ -346,7 +460,21 @@ module Stripe
     POST_COUPONS_MAX_LENGTH_FOR_NAME       =   40
 
     # @return Crest::Request
-    def build_api_request_for_post_coupons(*, amount_off : Int64? = nil, applies_to : Stripe::AppliesToParams? = nil, currency : String? = nil, duration : String? = nil, duration_in_months : Int64? = nil, expand : Array(String)? = nil, id : String? = nil, max_redemptions : Int64? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, percent_off : Float64? = nil, redeem_by : Int64? = nil) : Crest::Request
+    def build_api_request_for_post_coupons(
+      *,
+      amount_off : Int64? = nil,
+      applies_to : Stripe::AppliesToParams? = nil,
+      currency : String? = nil,
+      duration : String? = nil,
+      duration_in_months : Int64? = nil,
+      expand : Array(String)? = nil,
+      id : String? = nil,
+      max_redemptions : Int64? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      percent_off : Float64? = nil,
+      redeem_by : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CouponsApi.post_coupons ..." }
       end
@@ -385,6 +513,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount_off"] = amount_off.to_s if !amount_off.nil?
@@ -413,6 +544,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -424,7 +556,13 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param name [String?] Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the `id` is shown if `name` is not set.
     # @return [Stripe::Coupon]
-    def post_coupons_coupon(*, coupon : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil) : Stripe::Coupon
+    def post_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil
+    ) : Stripe::Coupon
       data, _status_code, _headers = post_coupons_coupon_with_http_info(coupon: coupon, expand: expand, metadata: metadata, name: name)
       data
     end
@@ -435,7 +573,13 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param name [String?] Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the `id` is shown if `name` is not set.
     # @return [Tuple(Stripe::Coupon, Integer, Hash)] Stripe::Coupon, response status code and response headers
-    def post_coupons_coupon_with_http_info(*, coupon : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil) : Tuple(Stripe::Coupon, Int32, Hash(String, Array(String) | String))
+    def post_coupons_coupon_with_http_info(
+      *,
+      coupon : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil
+    ) : Tuple(Stripe::Coupon, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_coupons_coupon(coupon: coupon, expand: expand, metadata: metadata, name: name)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -453,7 +597,14 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param name [String?] Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the `id` is shown if `name` is not set.
     # @return nil
-    def post_coupons_coupon(*, coupon : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, &block : Crest::Response ->) : Nil
+    def post_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_coupons_coupon(coupon: coupon, expand: expand, metadata: metadata, name: name).execute(&block)
     end
 
@@ -461,7 +612,13 @@ module Stripe
     POST_COUPONS_COUPON_MAX_LENGTH_FOR_NAME   =   40
 
     # @return Crest::Request
-    def build_api_request_for_post_coupons_coupon(*, coupon : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil) : Crest::Request
+    def build_api_request_for_post_coupons_coupon(
+      *,
+      coupon : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CouponsApi.post_coupons_coupon ..." }
       end
@@ -493,6 +650,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -512,6 +672,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

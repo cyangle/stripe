@@ -29,7 +29,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::RefundList]
-    def get_refunds(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::RefundList
+    def get_refunds(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::RefundList
       data, _status_code, _headers = get_refunds_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, charge: charge, expand: expand, created: created)
       data
     end
@@ -43,7 +52,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::RefundList, Integer, Hash)] Stripe::RefundList, response status code and response headers
-    def get_refunds_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::RefundList, Int32, Hash(String, Array(String) | String))
+    def get_refunds_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::RefundList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_refunds(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, charge: charge, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -64,14 +82,33 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_refunds(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_refunds(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_refunds(ending_before: ending_before, starting_after: starting_after, limit: limit, payment_intent: payment_intent, charge: charge, expand: expand, created: created).execute(&block)
     end
 
     GET_REFUNDS_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_refunds(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, payment_intent : String? = nil, charge : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_refunds(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      payment_intent : String? = nil,
+      charge : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RefundsApi.get_refunds ..." }
       end
@@ -104,6 +141,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -120,6 +160,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -129,7 +170,11 @@ module Stripe
     # @required @param refund [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Refund]
-    def get_refunds_refund(*, refund : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Refund
+    def get_refunds_refund(
+      *,
+      refund : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Refund
       data, _status_code, _headers = get_refunds_refund_with_http_info(refund: refund, expand: expand)
       data
     end
@@ -138,7 +183,11 @@ module Stripe
     # @required @param refund [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Refund, Integer, Hash)] Stripe::Refund, response status code and response headers
-    def get_refunds_refund_with_http_info(*, refund : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Refund, Int32, Hash(String, Array(String) | String))
+    def get_refunds_refund_with_http_info(
+      *,
+      refund : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Refund, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_refunds_refund(refund: refund, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -154,12 +203,21 @@ module Stripe
     # @required @param refund [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_refunds_refund(*, refund : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_refunds_refund(
+      *,
+      refund : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_refunds_refund(refund: refund, expand: expand).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_refunds_refund(*, refund : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_refunds_refund(
+      *,
+      refund : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RefundsApi.get_refunds_refund ..." }
       end
@@ -180,6 +238,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -196,6 +257,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -215,7 +277,21 @@ module Stripe
     # @optional @param refund_application_fee [Bool?]
     # @optional @param reverse_transfer [Bool?]
     # @return [Stripe::Refund]
-    def post_refunds(*, amount : Int64? = nil, charge : String? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, origin : String? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil) : Stripe::Refund
+    def post_refunds(
+      *,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      instructions_email : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      origin : String? = nil,
+      payment_intent : String? = nil,
+      reason : String? = nil,
+      refund_application_fee : Bool? = nil,
+      reverse_transfer : Bool? = nil
+    ) : Stripe::Refund
       data, _status_code, _headers = post_refunds_with_http_info(amount: amount, charge: charge, currency: currency, customer: customer, expand: expand, instructions_email: instructions_email, metadata: metadata, origin: origin, payment_intent: payment_intent, reason: reason, refund_application_fee: refund_application_fee, reverse_transfer: reverse_transfer)
       data
     end
@@ -234,7 +310,21 @@ module Stripe
     # @optional @param refund_application_fee [Bool?]
     # @optional @param reverse_transfer [Bool?]
     # @return [Tuple(Stripe::Refund, Integer, Hash)] Stripe::Refund, response status code and response headers
-    def post_refunds_with_http_info(*, amount : Int64? = nil, charge : String? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, origin : String? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil) : Tuple(Stripe::Refund, Int32, Hash(String, Array(String) | String))
+    def post_refunds_with_http_info(
+      *,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      instructions_email : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      origin : String? = nil,
+      payment_intent : String? = nil,
+      reason : String? = nil,
+      refund_application_fee : Bool? = nil,
+      reverse_transfer : Bool? = nil
+    ) : Tuple(Stripe::Refund, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_refunds(amount: amount, charge: charge, currency: currency, customer: customer, expand: expand, instructions_email: instructions_email, metadata: metadata, origin: origin, payment_intent: payment_intent, reason: reason, refund_application_fee: refund_application_fee, reverse_transfer: reverse_transfer)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -260,7 +350,22 @@ module Stripe
     # @optional @param refund_application_fee [Bool?]
     # @optional @param reverse_transfer [Bool?]
     # @return nil
-    def post_refunds(*, amount : Int64? = nil, charge : String? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, origin : String? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil, &block : Crest::Response ->) : Nil
+    def post_refunds(
+      *,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      instructions_email : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      origin : String? = nil,
+      payment_intent : String? = nil,
+      reason : String? = nil,
+      refund_application_fee : Bool? = nil,
+      reverse_transfer : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_refunds(amount: amount, charge: charge, currency: currency, customer: customer, expand: expand, instructions_email: instructions_email, metadata: metadata, origin: origin, payment_intent: payment_intent, reason: reason, refund_application_fee: refund_application_fee, reverse_transfer: reverse_transfer).execute(&block)
     end
 
@@ -272,7 +377,21 @@ module Stripe
     POST_REFUNDS_VALID_VALUES_FOR_REASON       = String.static_array("duplicate", "fraudulent", "requested_by_customer")
 
     # @return Crest::Request
-    def build_api_request_for_post_refunds(*, amount : Int64? = nil, charge : String? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, instructions_email : String? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, origin : String? = nil, payment_intent : String? = nil, reason : String? = nil, refund_application_fee : Bool? = nil, reverse_transfer : Bool? = nil) : Crest::Request
+    def build_api_request_for_post_refunds(
+      *,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      instructions_email : String? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      origin : String? = nil,
+      payment_intent : String? = nil,
+      reason : String? = nil,
+      refund_application_fee : Bool? = nil,
+      reverse_transfer : Bool? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RefundsApi.post_refunds ..." }
       end
@@ -313,6 +432,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -341,6 +463,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -351,7 +474,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Stripe::Refund]
-    def post_refunds_refund(*, refund : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Stripe::Refund
+    def post_refunds_refund(
+      *,
+      refund : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Stripe::Refund
       data, _status_code, _headers = post_refunds_refund_with_http_info(refund: refund, expand: expand, metadata: metadata)
       data
     end
@@ -361,7 +489,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Tuple(Stripe::Refund, Integer, Hash)] Stripe::Refund, response status code and response headers
-    def post_refunds_refund_with_http_info(*, refund : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Tuple(Stripe::Refund, Int32, Hash(String, Array(String) | String))
+    def post_refunds_refund_with_http_info(
+      *,
+      refund : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Tuple(Stripe::Refund, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_refunds_refund(refund: refund, expand: expand, metadata: metadata)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -378,12 +511,23 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return nil
-    def post_refunds_refund(*, refund : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, &block : Crest::Response ->) : Nil
+    def post_refunds_refund(
+      *,
+      refund : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_refunds_refund(refund: refund, expand: expand, metadata: metadata).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_post_refunds_refund(*, refund : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Crest::Request
+    def build_api_request_for_post_refunds_refund(
+      *,
+      refund : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RefundsApi.post_refunds_refund ..." }
       end
@@ -409,6 +553,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -427,6 +574,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

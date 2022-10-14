@@ -28,7 +28,15 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param customer [String?] The ID of the customer whose PaymentMethods will be retrieved.
     # @return [Stripe::PaymentFlowsPaymentMethodList]
-    def get_payment_methods(*, _type : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, customer : String? = nil) : Stripe::PaymentFlowsPaymentMethodList
+    def get_payment_methods(
+      *,
+      _type : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil
+    ) : Stripe::PaymentFlowsPaymentMethodList
       data, _status_code, _headers = get_payment_methods_with_http_info(_type: _type, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, customer: customer)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param customer [String?] The ID of the customer whose PaymentMethods will be retrieved.
     # @return [Tuple(Stripe::PaymentFlowsPaymentMethodList, Integer, Hash)] Stripe::PaymentFlowsPaymentMethodList, response status code and response headers
-    def get_payment_methods_with_http_info(*, _type : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, customer : String? = nil) : Tuple(Stripe::PaymentFlowsPaymentMethodList, Int32, Hash(String, Array(String) | String))
+    def get_payment_methods_with_http_info(
+      *,
+      _type : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil
+    ) : Tuple(Stripe::PaymentFlowsPaymentMethodList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_methods(_type: _type, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, customer: customer)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param customer [String?] The ID of the customer whose PaymentMethods will be retrieved.
     # @return nil
-    def get_payment_methods(*, _type : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, customer : String? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_methods(
+      *,
+      _type : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_methods(_type: _type, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand, customer: customer).execute(&block)
     end
 
@@ -69,7 +94,15 @@ module Stripe
     GET_PAYMENT_METHODS_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_methods(*, _type : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, customer : String? = nil) : Crest::Request
+    def build_api_request_for_get_payment_methods(
+      *,
+      _type : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      customer : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentMethodsApi.get_payment_methods ..." }
       end
@@ -102,6 +135,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -118,6 +154,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -127,7 +164,11 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentMethod]
-    def get_payment_methods_payment_method(*, payment_method : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentMethod
+    def get_payment_methods_payment_method(
+      *,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentMethod
       data, _status_code, _headers = get_payment_methods_payment_method_with_http_info(payment_method: payment_method, expand: expand)
       data
     end
@@ -136,7 +177,11 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentMethod, Integer, Hash)] Stripe::PaymentMethod, response status code and response headers
-    def get_payment_methods_payment_method_with_http_info(*, payment_method : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
+    def get_payment_methods_payment_method_with_http_info(
+      *,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_payment_methods_payment_method(payment_method: payment_method, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -152,14 +197,23 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_payment_methods_payment_method(*, payment_method : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_payment_methods_payment_method(
+      *,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_payment_methods_payment_method(payment_method: payment_method, expand: expand).execute(&block)
     end
 
     GET_PAYMENT_METHODS_PAYMENT_METHOD_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_payment_methods_payment_method(*, payment_method : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_payment_methods_payment_method(
+      *,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentMethodsApi.get_payment_methods_payment_method ..." }
       end
@@ -183,6 +237,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -199,6 +256,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -241,7 +299,44 @@ module Stripe
     # @optional @param us_bank_account [Stripe::PostPaymentMethodsRequestUsBankAccount?]
     # @optional @param wechat_pay [JSON::Any?] If this is an `wechat_pay` PaymentMethod, this hash contains details about the wechat_pay payment method.
     # @return [Stripe::PaymentMethod]
-    def post_payment_methods(*, acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil, bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil, bancontact : JSON::Any? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, blik : JSON::Any? = nil, boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil, card : Stripe::PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Stripe::PostPaymentMethodsRequestEps? = nil, expand : Array(String)? = nil, fpx : Stripe::PostPaymentMethodsRequestFpx? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil, interac_present : JSON::Any? = nil, klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Stripe::PostPaymentMethodsRequestP24? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, pix : JSON::Any? = nil, promptpay : JSON::Any? = nil, radar_options : Stripe::RadarOptions? = nil, sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil, sofort : Stripe::PostPaymentMethodsRequestSofort? = nil, _type : String? = nil, us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil, wechat_pay : JSON::Any? = nil) : Stripe::PaymentMethod
+    def post_payment_methods(
+      *,
+      acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil,
+      affirm : JSON::Any? = nil,
+      afterpay_clearpay : JSON::Any? = nil,
+      alipay : JSON::Any? = nil,
+      au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil,
+      bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil,
+      bancontact : JSON::Any? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      blik : JSON::Any? = nil,
+      boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil,
+      card : Stripe::PostPaymentMethodsRequestCard? = nil,
+      customer : String? = nil,
+      customer_balance : JSON::Any? = nil,
+      eps : Stripe::PostPaymentMethodsRequestEps? = nil,
+      expand : Array(String)? = nil,
+      fpx : Stripe::PostPaymentMethodsRequestFpx? = nil,
+      giropay : JSON::Any? = nil,
+      grabpay : JSON::Any? = nil,
+      ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil,
+      interac_present : JSON::Any? = nil,
+      klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil,
+      konbini : JSON::Any? = nil,
+      link : JSON::Any? = nil,
+      oxxo : JSON::Any? = nil,
+      p24 : Stripe::PostPaymentMethodsRequestP24? = nil,
+      payment_method : String? = nil,
+      paynow : JSON::Any? = nil,
+      pix : JSON::Any? = nil,
+      promptpay : JSON::Any? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil,
+      sofort : Stripe::PostPaymentMethodsRequestSofort? = nil,
+      _type : String? = nil,
+      us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil,
+      wechat_pay : JSON::Any? = nil
+    ) : Stripe::PaymentMethod
       data, _status_code, _headers = post_payment_methods_with_http_info(acss_debit: acss_debit, affirm: affirm, afterpay_clearpay: afterpay_clearpay, alipay: alipay, au_becs_debit: au_becs_debit, bacs_debit: bacs_debit, bancontact: bancontact, billing_details: billing_details, blik: blik, boleto: boleto, card: card, customer: customer, customer_balance: customer_balance, eps: eps, expand: expand, fpx: fpx, giropay: giropay, grabpay: grabpay, ideal: ideal, interac_present: interac_present, klarna: klarna, konbini: konbini, link: link, oxxo: oxxo, p24: p24, payment_method: payment_method, paynow: paynow, pix: pix, promptpay: promptpay, radar_options: radar_options, sepa_debit: sepa_debit, sofort: sofort, _type: _type, us_bank_account: us_bank_account, wechat_pay: wechat_pay)
       data
     end
@@ -283,7 +378,44 @@ module Stripe
     # @optional @param us_bank_account [Stripe::PostPaymentMethodsRequestUsBankAccount?]
     # @optional @param wechat_pay [JSON::Any?] If this is an `wechat_pay` PaymentMethod, this hash contains details about the wechat_pay payment method.
     # @return [Tuple(Stripe::PaymentMethod, Integer, Hash)] Stripe::PaymentMethod, response status code and response headers
-    def post_payment_methods_with_http_info(*, acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil, bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil, bancontact : JSON::Any? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, blik : JSON::Any? = nil, boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil, card : Stripe::PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Stripe::PostPaymentMethodsRequestEps? = nil, expand : Array(String)? = nil, fpx : Stripe::PostPaymentMethodsRequestFpx? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil, interac_present : JSON::Any? = nil, klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Stripe::PostPaymentMethodsRequestP24? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, pix : JSON::Any? = nil, promptpay : JSON::Any? = nil, radar_options : Stripe::RadarOptions? = nil, sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil, sofort : Stripe::PostPaymentMethodsRequestSofort? = nil, _type : String? = nil, us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil, wechat_pay : JSON::Any? = nil) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
+    def post_payment_methods_with_http_info(
+      *,
+      acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil,
+      affirm : JSON::Any? = nil,
+      afterpay_clearpay : JSON::Any? = nil,
+      alipay : JSON::Any? = nil,
+      au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil,
+      bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil,
+      bancontact : JSON::Any? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      blik : JSON::Any? = nil,
+      boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil,
+      card : Stripe::PostPaymentMethodsRequestCard? = nil,
+      customer : String? = nil,
+      customer_balance : JSON::Any? = nil,
+      eps : Stripe::PostPaymentMethodsRequestEps? = nil,
+      expand : Array(String)? = nil,
+      fpx : Stripe::PostPaymentMethodsRequestFpx? = nil,
+      giropay : JSON::Any? = nil,
+      grabpay : JSON::Any? = nil,
+      ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil,
+      interac_present : JSON::Any? = nil,
+      klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil,
+      konbini : JSON::Any? = nil,
+      link : JSON::Any? = nil,
+      oxxo : JSON::Any? = nil,
+      p24 : Stripe::PostPaymentMethodsRequestP24? = nil,
+      payment_method : String? = nil,
+      paynow : JSON::Any? = nil,
+      pix : JSON::Any? = nil,
+      promptpay : JSON::Any? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil,
+      sofort : Stripe::PostPaymentMethodsRequestSofort? = nil,
+      _type : String? = nil,
+      us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil,
+      wechat_pay : JSON::Any? = nil
+    ) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_methods(acss_debit: acss_debit, affirm: affirm, afterpay_clearpay: afterpay_clearpay, alipay: alipay, au_becs_debit: au_becs_debit, bacs_debit: bacs_debit, bancontact: bancontact, billing_details: billing_details, blik: blik, boleto: boleto, card: card, customer: customer, customer_balance: customer_balance, eps: eps, expand: expand, fpx: fpx, giropay: giropay, grabpay: grabpay, ideal: ideal, interac_present: interac_present, klarna: klarna, konbini: konbini, link: link, oxxo: oxxo, p24: p24, payment_method: payment_method, paynow: paynow, pix: pix, promptpay: promptpay, radar_options: radar_options, sepa_debit: sepa_debit, sofort: sofort, _type: _type, us_bank_account: us_bank_account, wechat_pay: wechat_pay)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -332,7 +464,45 @@ module Stripe
     # @optional @param us_bank_account [Stripe::PostPaymentMethodsRequestUsBankAccount?]
     # @optional @param wechat_pay [JSON::Any?] If this is an `wechat_pay` PaymentMethod, this hash contains details about the wechat_pay payment method.
     # @return nil
-    def post_payment_methods(*, acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil, bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil, bancontact : JSON::Any? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, blik : JSON::Any? = nil, boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil, card : Stripe::PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Stripe::PostPaymentMethodsRequestEps? = nil, expand : Array(String)? = nil, fpx : Stripe::PostPaymentMethodsRequestFpx? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil, interac_present : JSON::Any? = nil, klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Stripe::PostPaymentMethodsRequestP24? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, pix : JSON::Any? = nil, promptpay : JSON::Any? = nil, radar_options : Stripe::RadarOptions? = nil, sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil, sofort : Stripe::PostPaymentMethodsRequestSofort? = nil, _type : String? = nil, us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil, wechat_pay : JSON::Any? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_methods(
+      *,
+      acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil,
+      affirm : JSON::Any? = nil,
+      afterpay_clearpay : JSON::Any? = nil,
+      alipay : JSON::Any? = nil,
+      au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil,
+      bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil,
+      bancontact : JSON::Any? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      blik : JSON::Any? = nil,
+      boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil,
+      card : Stripe::PostPaymentMethodsRequestCard? = nil,
+      customer : String? = nil,
+      customer_balance : JSON::Any? = nil,
+      eps : Stripe::PostPaymentMethodsRequestEps? = nil,
+      expand : Array(String)? = nil,
+      fpx : Stripe::PostPaymentMethodsRequestFpx? = nil,
+      giropay : JSON::Any? = nil,
+      grabpay : JSON::Any? = nil,
+      ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil,
+      interac_present : JSON::Any? = nil,
+      klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil,
+      konbini : JSON::Any? = nil,
+      link : JSON::Any? = nil,
+      oxxo : JSON::Any? = nil,
+      p24 : Stripe::PostPaymentMethodsRequestP24? = nil,
+      payment_method : String? = nil,
+      paynow : JSON::Any? = nil,
+      pix : JSON::Any? = nil,
+      promptpay : JSON::Any? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil,
+      sofort : Stripe::PostPaymentMethodsRequestSofort? = nil,
+      _type : String? = nil,
+      us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil,
+      wechat_pay : JSON::Any? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_methods(acss_debit: acss_debit, affirm: affirm, afterpay_clearpay: afterpay_clearpay, alipay: alipay, au_becs_debit: au_becs_debit, bacs_debit: bacs_debit, bancontact: bancontact, billing_details: billing_details, blik: blik, boleto: boleto, card: card, customer: customer, customer_balance: customer_balance, eps: eps, expand: expand, fpx: fpx, giropay: giropay, grabpay: grabpay, ideal: ideal, interac_present: interac_present, klarna: klarna, konbini: konbini, link: link, oxxo: oxxo, p24: p24, payment_method: payment_method, paynow: paynow, pix: pix, promptpay: promptpay, radar_options: radar_options, sepa_debit: sepa_debit, sofort: sofort, _type: _type, us_bank_account: us_bank_account, wechat_pay: wechat_pay).execute(&block)
     end
 
@@ -341,7 +511,44 @@ module Stripe
     POST_PAYMENT_METHODS_VALID_VALUES_FOR__TYPE        = String.static_array("acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay")
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_methods(*, acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil, bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil, bancontact : JSON::Any? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, blik : JSON::Any? = nil, boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil, card : Stripe::PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Stripe::PostPaymentMethodsRequestEps? = nil, expand : Array(String)? = nil, fpx : Stripe::PostPaymentMethodsRequestFpx? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil, interac_present : JSON::Any? = nil, klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Stripe::PostPaymentMethodsRequestP24? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, pix : JSON::Any? = nil, promptpay : JSON::Any? = nil, radar_options : Stripe::RadarOptions? = nil, sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil, sofort : Stripe::PostPaymentMethodsRequestSofort? = nil, _type : String? = nil, us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil, wechat_pay : JSON::Any? = nil) : Crest::Request
+    def build_api_request_for_post_payment_methods(
+      *,
+      acss_debit : Stripe::PostPaymentMethodsRequestAcssDebit? = nil,
+      affirm : JSON::Any? = nil,
+      afterpay_clearpay : JSON::Any? = nil,
+      alipay : JSON::Any? = nil,
+      au_becs_debit : Stripe::PostPaymentMethodsRequestAuBecsDebit? = nil,
+      bacs_debit : Stripe::PostPaymentMethodsRequestBacsDebit? = nil,
+      bancontact : JSON::Any? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      blik : JSON::Any? = nil,
+      boleto : Stripe::PostPaymentMethodsRequestBoleto? = nil,
+      card : Stripe::PostPaymentMethodsRequestCard? = nil,
+      customer : String? = nil,
+      customer_balance : JSON::Any? = nil,
+      eps : Stripe::PostPaymentMethodsRequestEps? = nil,
+      expand : Array(String)? = nil,
+      fpx : Stripe::PostPaymentMethodsRequestFpx? = nil,
+      giropay : JSON::Any? = nil,
+      grabpay : JSON::Any? = nil,
+      ideal : Stripe::PostPaymentMethodsRequestIdeal? = nil,
+      interac_present : JSON::Any? = nil,
+      klarna : Stripe::PostPaymentMethodsRequestKlarna? = nil,
+      konbini : JSON::Any? = nil,
+      link : JSON::Any? = nil,
+      oxxo : JSON::Any? = nil,
+      p24 : Stripe::PostPaymentMethodsRequestP24? = nil,
+      payment_method : String? = nil,
+      paynow : JSON::Any? = nil,
+      pix : JSON::Any? = nil,
+      promptpay : JSON::Any? = nil,
+      radar_options : Stripe::RadarOptions? = nil,
+      sepa_debit : Stripe::PostPaymentMethodsRequestSepaDebit? = nil,
+      sofort : Stripe::PostPaymentMethodsRequestSofort? = nil,
+      _type : String? = nil,
+      us_bank_account : Stripe::PostPaymentMethodsRequestUsBankAccount? = nil,
+      wechat_pay : JSON::Any? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentMethodsApi.post_payment_methods ..." }
       end
@@ -425,6 +632,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["acss_debit"] = acss_debit.to_s if !acss_debit.nil?
@@ -476,6 +686,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -490,7 +701,16 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param us_bank_account [Stripe::UpdateParam?]
     # @return [Stripe::PaymentMethod]
-    def post_payment_methods_payment_method(*, payment_method : String? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, card : Stripe::UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, us_bank_account : Stripe::UpdateParam? = nil) : Stripe::PaymentMethod
+    def post_payment_methods_payment_method(
+      *,
+      payment_method : String? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      card : Stripe::UpdateApiParam? = nil,
+      expand : Array(String)? = nil,
+      link : JSON::Any? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      us_bank_account : Stripe::UpdateParam? = nil
+    ) : Stripe::PaymentMethod
       data, _status_code, _headers = post_payment_methods_payment_method_with_http_info(payment_method: payment_method, billing_details: billing_details, card: card, expand: expand, link: link, metadata: metadata, us_bank_account: us_bank_account)
       data
     end
@@ -504,7 +724,16 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param us_bank_account [Stripe::UpdateParam?]
     # @return [Tuple(Stripe::PaymentMethod, Integer, Hash)] Stripe::PaymentMethod, response status code and response headers
-    def post_payment_methods_payment_method_with_http_info(*, payment_method : String? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, card : Stripe::UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, us_bank_account : Stripe::UpdateParam? = nil) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
+    def post_payment_methods_payment_method_with_http_info(
+      *,
+      payment_method : String? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      card : Stripe::UpdateApiParam? = nil,
+      expand : Array(String)? = nil,
+      link : JSON::Any? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      us_bank_account : Stripe::UpdateParam? = nil
+    ) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_methods_payment_method(payment_method: payment_method, billing_details: billing_details, card: card, expand: expand, link: link, metadata: metadata, us_bank_account: us_bank_account)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -525,14 +754,33 @@ module Stripe
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @optional @param us_bank_account [Stripe::UpdateParam?]
     # @return nil
-    def post_payment_methods_payment_method(*, payment_method : String? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, card : Stripe::UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, us_bank_account : Stripe::UpdateParam? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_methods_payment_method(
+      *,
+      payment_method : String? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      card : Stripe::UpdateApiParam? = nil,
+      expand : Array(String)? = nil,
+      link : JSON::Any? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      us_bank_account : Stripe::UpdateParam? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_methods_payment_method(payment_method: payment_method, billing_details: billing_details, card: card, expand: expand, link: link, metadata: metadata, us_bank_account: us_bank_account).execute(&block)
     end
 
     POST_PAYMENT_METHODS_PAYMENT_METHOD_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_methods_payment_method(*, payment_method : String? = nil, billing_details : Stripe::BillingDetailsInnerParams? = nil, card : Stripe::UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, us_bank_account : Stripe::UpdateParam? = nil) : Crest::Request
+    def build_api_request_for_post_payment_methods_payment_method(
+      *,
+      payment_method : String? = nil,
+      billing_details : Stripe::BillingDetailsInnerParams? = nil,
+      card : Stripe::UpdateApiParam? = nil,
+      expand : Array(String)? = nil,
+      link : JSON::Any? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      us_bank_account : Stripe::UpdateParam? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentMethodsApi.post_payment_methods_payment_method ..." }
       end
@@ -570,6 +818,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["billing_details"] = billing_details.to_s if !billing_details.nil?
@@ -592,6 +843,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -602,7 +854,12 @@ module Stripe
     # @required @param customer [String?] The ID of the customer to which to attach the PaymentMethod.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentMethod]
-    def post_payment_methods_payment_method_attach(*, payment_method : String? = nil, customer : String? = nil, expand : Array(String)? = nil) : Stripe::PaymentMethod
+    def post_payment_methods_payment_method_attach(
+      *,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::PaymentMethod
       data, _status_code, _headers = post_payment_methods_payment_method_attach_with_http_info(payment_method: payment_method, customer: customer, expand: expand)
       data
     end
@@ -612,7 +869,12 @@ module Stripe
     # @required @param customer [String?] The ID of the customer to which to attach the PaymentMethod.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentMethod, Integer, Hash)] Stripe::PaymentMethod, response status code and response headers
-    def post_payment_methods_payment_method_attach_with_http_info(*, payment_method : String? = nil, customer : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
+    def post_payment_methods_payment_method_attach_with_http_info(
+      *,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_methods_payment_method_attach(payment_method: payment_method, customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -629,7 +891,13 @@ module Stripe
     # @required @param customer [String?] The ID of the customer to which to attach the PaymentMethod.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_payment_methods_payment_method_attach(*, payment_method : String? = nil, customer : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_methods_payment_method_attach(
+      *,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_methods_payment_method_attach(payment_method: payment_method, customer: customer, expand: expand).execute(&block)
     end
 
@@ -637,7 +905,12 @@ module Stripe
     POST_PAYMENT_METHODS_PAYMENT_METHOD_ATTACH_MAX_LENGTH_FOR_CUSTOMER       = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_methods_payment_method_attach(*, payment_method : String? = nil, customer : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_payment_methods_payment_method_attach(
+      *,
+      payment_method : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentMethodsApi.post_payment_methods_payment_method_attach ..." }
       end
@@ -666,6 +939,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["customer"] = customer.to_s if !customer.nil?
@@ -684,6 +960,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -693,7 +970,11 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentMethod]
-    def post_payment_methods_payment_method_detach(*, payment_method : String? = nil, expand : Array(String)? = nil) : Stripe::PaymentMethod
+    def post_payment_methods_payment_method_detach(
+      *,
+      payment_method : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::PaymentMethod
       data, _status_code, _headers = post_payment_methods_payment_method_detach_with_http_info(payment_method: payment_method, expand: expand)
       data
     end
@@ -702,7 +983,11 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentMethod, Integer, Hash)] Stripe::PaymentMethod, response status code and response headers
-    def post_payment_methods_payment_method_detach_with_http_info(*, payment_method : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
+    def post_payment_methods_payment_method_detach_with_http_info(
+      *,
+      payment_method : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_payment_methods_payment_method_detach(payment_method: payment_method, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -718,14 +1003,23 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_payment_methods_payment_method_detach(*, payment_method : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_payment_methods_payment_method_detach(
+      *,
+      payment_method : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_payment_methods_payment_method_detach(payment_method: payment_method, expand: expand).execute(&block)
     end
 
     POST_PAYMENT_METHODS_PAYMENT_METHOD_DETACH_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_methods_payment_method_detach(*, payment_method : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_payment_methods_payment_method_detach(
+      *,
+      payment_method : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentMethodsApi.post_payment_methods_payment_method_detach ..." }
       end
@@ -750,6 +1044,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -767,6 +1064,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

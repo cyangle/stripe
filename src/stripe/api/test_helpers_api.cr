@@ -23,7 +23,10 @@ module Stripe
     # <p>Deletes a test clock.</p>
     # @required @param test_clock [String?]
     # @return [Stripe::DeletedTestHelpersTestClock]
-    def delete_test_helpers_test_clocks_test_clock(*, test_clock : String? = nil) : Stripe::DeletedTestHelpersTestClock
+    def delete_test_helpers_test_clocks_test_clock(
+      *,
+      test_clock : String? = nil
+    ) : Stripe::DeletedTestHelpersTestClock
       data, _status_code, _headers = delete_test_helpers_test_clocks_test_clock_with_http_info(test_clock: test_clock)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;Deletes a test clock.&lt;/p&gt;
     # @required @param test_clock [String?]
     # @return [Tuple(Stripe::DeletedTestHelpersTestClock, Integer, Hash)] Stripe::DeletedTestHelpersTestClock, response status code and response headers
-    def delete_test_helpers_test_clocks_test_clock_with_http_info(*, test_clock : String? = nil) : Tuple(Stripe::DeletedTestHelpersTestClock, Int32, Hash(String, Array(String) | String))
+    def delete_test_helpers_test_clocks_test_clock_with_http_info(
+      *,
+      test_clock : String? = nil
+    ) : Tuple(Stripe::DeletedTestHelpersTestClock, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_test_helpers_test_clocks_test_clock(test_clock: test_clock)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;Deletes a test clock.&lt;/p&gt;
     # @required @param test_clock [String?]
     # @return nil
-    def delete_test_helpers_test_clocks_test_clock(*, test_clock : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_test_helpers_test_clocks_test_clock(
+      *,
+      test_clock : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_test_helpers_test_clocks_test_clock(test_clock: test_clock).execute(&block)
     end
 
     DELETE_TEST_HELPERS_TEST_CLOCKS_TEST_CLOCK_MAX_LENGTH_FOR_TEST_CLOCK = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_test_helpers_test_clocks_test_clock(*, test_clock : String? = nil) : Crest::Request
+    def build_api_request_for_delete_test_helpers_test_clocks_test_clock(
+      *,
+      test_clock : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.delete_test_helpers_test_clocks_test_clock ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -103,7 +120,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::BillingClocksResourceBillingClockList]
-    def get_test_helpers_test_clocks(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::BillingClocksResourceBillingClockList
+    def get_test_helpers_test_clocks(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::BillingClocksResourceBillingClockList
       data, _status_code, _headers = get_test_helpers_test_clocks_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -114,7 +137,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::BillingClocksResourceBillingClockList, Integer, Hash)] Stripe::BillingClocksResourceBillingClockList, response status code and response headers
-    def get_test_helpers_test_clocks_with_http_info(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::BillingClocksResourceBillingClockList, Int32, Hash(String, Array(String) | String))
+    def get_test_helpers_test_clocks_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::BillingClocksResourceBillingClockList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_test_helpers_test_clocks(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -132,7 +161,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_test_helpers_test_clocks(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_test_helpers_test_clocks(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_test_helpers_test_clocks(ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -140,7 +176,13 @@ module Stripe
     GET_TEST_HELPERS_TEST_CLOCKS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_test_helpers_test_clocks(*, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_test_helpers_test_clocks(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.get_test_helpers_test_clocks ..." }
       end
@@ -169,6 +211,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -185,6 +230,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -194,7 +240,11 @@ module Stripe
     # @required @param test_clock [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TestHelpersTestClock]
-    def get_test_helpers_test_clocks_test_clock(*, test_clock : String? = nil, expand : Array(Array(String))? = nil) : Stripe::TestHelpersTestClock
+    def get_test_helpers_test_clocks_test_clock(
+      *,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::TestHelpersTestClock
       data, _status_code, _headers = get_test_helpers_test_clocks_test_clock_with_http_info(test_clock: test_clock, expand: expand)
       data
     end
@@ -203,7 +253,11 @@ module Stripe
     # @required @param test_clock [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TestHelpersTestClock, Integer, Hash)] Stripe::TestHelpersTestClock, response status code and response headers
-    def get_test_helpers_test_clocks_test_clock_with_http_info(*, test_clock : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::TestHelpersTestClock, Int32, Hash(String, Array(String) | String))
+    def get_test_helpers_test_clocks_test_clock_with_http_info(
+      *,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::TestHelpersTestClock, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_test_helpers_test_clocks_test_clock(test_clock: test_clock, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -219,14 +273,23 @@ module Stripe
     # @required @param test_clock [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_test_helpers_test_clocks_test_clock(*, test_clock : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_test_helpers_test_clocks_test_clock(
+      *,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_test_helpers_test_clocks_test_clock(test_clock: test_clock, expand: expand).execute(&block)
     end
 
     GET_TEST_HELPERS_TEST_CLOCKS_TEST_CLOCK_MAX_LENGTH_FOR_TEST_CLOCK = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_test_helpers_test_clocks_test_clock(*, test_clock : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_test_helpers_test_clocks_test_clock(
+      *,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.get_test_helpers_test_clocks_test_clock ..." }
       end
@@ -250,6 +313,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -266,6 +332,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -275,7 +342,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IssuingCard]
-    def post_test_helpers_issuing_cards_card_shipping_deliver(*, card : String? = nil, expand : Array(String)? = nil) : Stripe::IssuingCard
+    def post_test_helpers_issuing_cards_card_shipping_deliver(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingCard
       data, _status_code, _headers = post_test_helpers_issuing_cards_card_shipping_deliver_with_http_info(card: card, expand: expand)
       data
     end
@@ -284,7 +355,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
-    def post_test_helpers_issuing_cards_card_shipping_deliver_with_http_info(*, card : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_issuing_cards_card_shipping_deliver_with_http_info(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(card: card, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -300,14 +375,23 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_issuing_cards_card_shipping_deliver(*, card : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_issuing_cards_card_shipping_deliver(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(card: card, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_ISSUING_CARDS_CARD_SHIPPING_DELIVER_MAX_LENGTH_FOR_CARD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(*, card : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_deliver ..." }
       end
@@ -332,6 +416,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -349,6 +436,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -358,7 +446,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IssuingCard]
-    def post_test_helpers_issuing_cards_card_shipping_fail(*, card : String? = nil, expand : Array(String)? = nil) : Stripe::IssuingCard
+    def post_test_helpers_issuing_cards_card_shipping_fail(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingCard
       data, _status_code, _headers = post_test_helpers_issuing_cards_card_shipping_fail_with_http_info(card: card, expand: expand)
       data
     end
@@ -367,7 +459,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
-    def post_test_helpers_issuing_cards_card_shipping_fail_with_http_info(*, card : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_issuing_cards_card_shipping_fail_with_http_info(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_issuing_cards_card_shipping_fail(card: card, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -383,14 +479,23 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_issuing_cards_card_shipping_fail(*, card : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_issuing_cards_card_shipping_fail(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_issuing_cards_card_shipping_fail(card: card, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_ISSUING_CARDS_CARD_SHIPPING_FAIL_MAX_LENGTH_FOR_CARD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_fail(*, card : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_fail(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_fail ..." }
       end
@@ -415,6 +520,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -432,6 +540,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -441,7 +550,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IssuingCard]
-    def post_test_helpers_issuing_cards_card_shipping_return(*, card : String? = nil, expand : Array(String)? = nil) : Stripe::IssuingCard
+    def post_test_helpers_issuing_cards_card_shipping_return(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingCard
       data, _status_code, _headers = post_test_helpers_issuing_cards_card_shipping_return_with_http_info(card: card, expand: expand)
       data
     end
@@ -450,7 +563,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
-    def post_test_helpers_issuing_cards_card_shipping_return_with_http_info(*, card : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_issuing_cards_card_shipping_return_with_http_info(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_issuing_cards_card_shipping_return(card: card, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -466,14 +583,23 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_issuing_cards_card_shipping_return(*, card : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_issuing_cards_card_shipping_return(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_issuing_cards_card_shipping_return(card: card, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_ISSUING_CARDS_CARD_SHIPPING_RETURN_MAX_LENGTH_FOR_CARD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_return(*, card : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_return(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_return ..." }
       end
@@ -498,6 +624,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -515,6 +644,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -524,7 +654,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::IssuingCard]
-    def post_test_helpers_issuing_cards_card_shipping_ship(*, card : String? = nil, expand : Array(String)? = nil) : Stripe::IssuingCard
+    def post_test_helpers_issuing_cards_card_shipping_ship(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingCard
       data, _status_code, _headers = post_test_helpers_issuing_cards_card_shipping_ship_with_http_info(card: card, expand: expand)
       data
     end
@@ -533,7 +667,11 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
-    def post_test_helpers_issuing_cards_card_shipping_ship_with_http_info(*, card : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_issuing_cards_card_shipping_ship_with_http_info(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_issuing_cards_card_shipping_ship(card: card, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -549,14 +687,23 @@ module Stripe
     # @required @param card [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_issuing_cards_card_shipping_ship(*, card : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_issuing_cards_card_shipping_ship(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_issuing_cards_card_shipping_ship(card: card, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_ISSUING_CARDS_CARD_SHIPPING_SHIP_MAX_LENGTH_FOR_CARD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_ship(*, card : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_ship(
+      *,
+      card : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_ship ..." }
       end
@@ -581,6 +728,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -598,6 +748,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -609,7 +760,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param _type [String?] Simulated payment type
     # @return [Stripe::TerminalReader]
-    def post_test_helpers_terminal_readers_reader_present_payment_method(*, reader : String? = nil, card_present : Stripe::CardPresent? = nil, expand : Array(String)? = nil, _type : String? = nil) : Stripe::TerminalReader
+    def post_test_helpers_terminal_readers_reader_present_payment_method(
+      *,
+      reader : String? = nil,
+      card_present : Stripe::CardPresent? = nil,
+      expand : Array(String)? = nil,
+      _type : String? = nil
+    ) : Stripe::TerminalReader
       data, _status_code, _headers = post_test_helpers_terminal_readers_reader_present_payment_method_with_http_info(reader: reader, card_present: card_present, expand: expand, _type: _type)
       data
     end
@@ -620,7 +777,13 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param _type [String?] Simulated payment type
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
-    def post_test_helpers_terminal_readers_reader_present_payment_method_with_http_info(*, reader : String? = nil, card_present : Stripe::CardPresent? = nil, expand : Array(String)? = nil, _type : String? = nil) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_terminal_readers_reader_present_payment_method_with_http_info(
+      *,
+      reader : String? = nil,
+      card_present : Stripe::CardPresent? = nil,
+      expand : Array(String)? = nil,
+      _type : String? = nil
+    ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_terminal_readers_reader_present_payment_method(reader: reader, card_present: card_present, expand: expand, _type: _type)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -638,7 +801,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param _type [String?] Simulated payment type
     # @return nil
-    def post_test_helpers_terminal_readers_reader_present_payment_method(*, reader : String? = nil, card_present : Stripe::CardPresent? = nil, expand : Array(String)? = nil, _type : String? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_terminal_readers_reader_present_payment_method(
+      *,
+      reader : String? = nil,
+      card_present : Stripe::CardPresent? = nil,
+      expand : Array(String)? = nil,
+      _type : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_terminal_readers_reader_present_payment_method(reader: reader, card_present: card_present, expand: expand, _type: _type).execute(&block)
     end
 
@@ -646,7 +816,13 @@ module Stripe
     POST_TEST_HELPERS_TERMINAL_READERS_READER_PRESENT_PAYMENT_METHOD_VALID_VALUES_FOR__TYPE = String.static_array("card_present")
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_terminal_readers_reader_present_payment_method(*, reader : String? = nil, card_present : Stripe::CardPresent? = nil, expand : Array(String)? = nil, _type : String? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_terminal_readers_reader_present_payment_method(
+      *,
+      reader : String? = nil,
+      card_present : Stripe::CardPresent? = nil,
+      expand : Array(String)? = nil,
+      _type : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_terminal_readers_reader_present_payment_method ..." }
       end
@@ -678,6 +854,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["card_present"] = card_present.to_s if !card_present.nil?
@@ -697,6 +876,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -707,7 +887,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param name [String?] The name for this test clock.
     # @return [Stripe::TestHelpersTestClock]
-    def post_test_helpers_test_clocks(*, frozen_time : Int64? = nil, expand : Array(String)? = nil, name : String? = nil) : Stripe::TestHelpersTestClock
+    def post_test_helpers_test_clocks(
+      *,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil,
+      name : String? = nil
+    ) : Stripe::TestHelpersTestClock
       data, _status_code, _headers = post_test_helpers_test_clocks_with_http_info(frozen_time: frozen_time, expand: expand, name: name)
       data
     end
@@ -717,7 +902,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param name [String?] The name for this test clock.
     # @return [Tuple(Stripe::TestHelpersTestClock, Integer, Hash)] Stripe::TestHelpersTestClock, response status code and response headers
-    def post_test_helpers_test_clocks_with_http_info(*, frozen_time : Int64? = nil, expand : Array(String)? = nil, name : String? = nil) : Tuple(Stripe::TestHelpersTestClock, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_test_clocks_with_http_info(
+      *,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil,
+      name : String? = nil
+    ) : Tuple(Stripe::TestHelpersTestClock, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_test_clocks(frozen_time: frozen_time, expand: expand, name: name)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -734,14 +924,25 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param name [String?] The name for this test clock.
     # @return nil
-    def post_test_helpers_test_clocks(*, frozen_time : Int64? = nil, expand : Array(String)? = nil, name : String? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_test_clocks(
+      *,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil,
+      name : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_test_clocks(frozen_time: frozen_time, expand: expand, name: name).execute(&block)
     end
 
     POST_TEST_HELPERS_TEST_CLOCKS_MAX_LENGTH_FOR_NAME = 300
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_test_clocks(*, frozen_time : Int64? = nil, expand : Array(String)? = nil, name : String? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_test_clocks(
+      *,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil,
+      name : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_test_clocks ..." }
       end
@@ -767,6 +968,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -786,6 +990,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -796,7 +1001,12 @@ module Stripe
     # @required @param frozen_time [Int32?] The time to advance the test clock. Must be after the test clock's current frozen time. Cannot be more than two intervals in the future from the shortest subscription in this test clock. If there are no subscriptions in this test clock, it cannot be more than two years in the future.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TestHelpersTestClock]
-    def post_test_helpers_test_clocks_test_clock_advance(*, test_clock : String? = nil, frozen_time : Int64? = nil, expand : Array(String)? = nil) : Stripe::TestHelpersTestClock
+    def post_test_helpers_test_clocks_test_clock_advance(
+      *,
+      test_clock : String? = nil,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TestHelpersTestClock
       data, _status_code, _headers = post_test_helpers_test_clocks_test_clock_advance_with_http_info(test_clock: test_clock, frozen_time: frozen_time, expand: expand)
       data
     end
@@ -806,7 +1016,12 @@ module Stripe
     # @required @param frozen_time [Int32?] The time to advance the test clock. Must be after the test clock's current frozen time. Cannot be more than two intervals in the future from the shortest subscription in this test clock. If there are no subscriptions in this test clock, it cannot be more than two years in the future.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TestHelpersTestClock, Integer, Hash)] Stripe::TestHelpersTestClock, response status code and response headers
-    def post_test_helpers_test_clocks_test_clock_advance_with_http_info(*, test_clock : String? = nil, frozen_time : Int64? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TestHelpersTestClock, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_test_clocks_test_clock_advance_with_http_info(
+      *,
+      test_clock : String? = nil,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TestHelpersTestClock, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_test_clocks_test_clock_advance(test_clock: test_clock, frozen_time: frozen_time, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -823,14 +1038,25 @@ module Stripe
     # @required @param frozen_time [Int32?] The time to advance the test clock. Must be after the test clock's current frozen time. Cannot be more than two intervals in the future from the shortest subscription in this test clock. If there are no subscriptions in this test clock, it cannot be more than two years in the future.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_test_clocks_test_clock_advance(*, test_clock : String? = nil, frozen_time : Int64? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_test_clocks_test_clock_advance(
+      *,
+      test_clock : String? = nil,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_test_clocks_test_clock_advance(test_clock: test_clock, frozen_time: frozen_time, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_TEST_CLOCKS_TEST_CLOCK_ADVANCE_MAX_LENGTH_FOR_TEST_CLOCK = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_test_clocks_test_clock_advance(*, test_clock : String? = nil, frozen_time : Int64? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_test_clocks_test_clock_advance(
+      *,
+      test_clock : String? = nil,
+      frozen_time : Int64? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_test_clocks_test_clock_advance ..." }
       end
@@ -856,6 +1082,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -874,6 +1103,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -884,7 +1114,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param failure_details [Stripe::FailureDetailsParams?]
     # @return [Stripe::TreasuryInboundTransfer]
-    def post_test_helpers_treasury_inbound_transfers_id_fail(*, id : String? = nil, expand : Array(String)? = nil, failure_details : Stripe::FailureDetailsParams? = nil) : Stripe::TreasuryInboundTransfer
+    def post_test_helpers_treasury_inbound_transfers_id_fail(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      failure_details : Stripe::FailureDetailsParams? = nil
+    ) : Stripe::TreasuryInboundTransfer
       data, _status_code, _headers = post_test_helpers_treasury_inbound_transfers_id_fail_with_http_info(id: id, expand: expand, failure_details: failure_details)
       data
     end
@@ -894,7 +1129,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param failure_details [Stripe::FailureDetailsParams?]
     # @return [Tuple(Stripe::TreasuryInboundTransfer, Integer, Hash)] Stripe::TreasuryInboundTransfer, response status code and response headers
-    def post_test_helpers_treasury_inbound_transfers_id_fail_with_http_info(*, id : String? = nil, expand : Array(String)? = nil, failure_details : Stripe::FailureDetailsParams? = nil) : Tuple(Stripe::TreasuryInboundTransfer, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_inbound_transfers_id_fail_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      failure_details : Stripe::FailureDetailsParams? = nil
+    ) : Tuple(Stripe::TreasuryInboundTransfer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_fail(id: id, expand: expand, failure_details: failure_details)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -911,14 +1151,25 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param failure_details [Stripe::FailureDetailsParams?]
     # @return nil
-    def post_test_helpers_treasury_inbound_transfers_id_fail(*, id : String? = nil, expand : Array(String)? = nil, failure_details : Stripe::FailureDetailsParams? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_inbound_transfers_id_fail(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      failure_details : Stripe::FailureDetailsParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_fail(id: id, expand: expand, failure_details: failure_details).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_INBOUND_TRANSFERS_ID_FAIL_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_fail(*, id : String? = nil, expand : Array(String)? = nil, failure_details : Stripe::FailureDetailsParams? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_fail(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      failure_details : Stripe::FailureDetailsParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_inbound_transfers_id_fail ..." }
       end
@@ -947,6 +1198,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -965,6 +1219,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -974,7 +1229,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TreasuryInboundTransfer]
-    def post_test_helpers_treasury_inbound_transfers_id_succeed(*, id : String? = nil, expand : Array(String)? = nil) : Stripe::TreasuryInboundTransfer
+    def post_test_helpers_treasury_inbound_transfers_id_succeed(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TreasuryInboundTransfer
       data, _status_code, _headers = post_test_helpers_treasury_inbound_transfers_id_succeed_with_http_info(id: id, expand: expand)
       data
     end
@@ -983,7 +1242,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TreasuryInboundTransfer, Integer, Hash)] Stripe::TreasuryInboundTransfer, response status code and response headers
-    def post_test_helpers_treasury_inbound_transfers_id_succeed_with_http_info(*, id : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TreasuryInboundTransfer, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_inbound_transfers_id_succeed_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TreasuryInboundTransfer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_succeed(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -999,14 +1262,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_treasury_inbound_transfers_id_succeed(*, id : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_inbound_transfers_id_succeed(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_succeed(id: id, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_INBOUND_TRANSFERS_ID_SUCCEED_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_succeed(*, id : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_inbound_transfers_id_succeed(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_inbound_transfers_id_succeed ..." }
       end
@@ -1031,6 +1303,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1048,6 +1323,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1057,7 +1333,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TreasuryOutboundPayment]
-    def post_test_helpers_treasury_outbound_payments_id_fail(*, id : String? = nil, expand : Array(String)? = nil) : Stripe::TreasuryOutboundPayment
+    def post_test_helpers_treasury_outbound_payments_id_fail(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TreasuryOutboundPayment
       data, _status_code, _headers = post_test_helpers_treasury_outbound_payments_id_fail_with_http_info(id: id, expand: expand)
       data
     end
@@ -1066,7 +1346,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TreasuryOutboundPayment, Integer, Hash)] Stripe::TreasuryOutboundPayment, response status code and response headers
-    def post_test_helpers_treasury_outbound_payments_id_fail_with_http_info(*, id : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_outbound_payments_id_fail_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_outbound_payments_id_fail(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1082,14 +1366,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_treasury_outbound_payments_id_fail(*, id : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_outbound_payments_id_fail(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_outbound_payments_id_fail(id: id, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_OUTBOUND_PAYMENTS_ID_FAIL_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_outbound_payments_id_fail(*, id : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_outbound_payments_id_fail(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_outbound_payments_id_fail ..." }
       end
@@ -1114,6 +1407,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1131,6 +1427,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1140,7 +1437,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TreasuryOutboundPayment]
-    def post_test_helpers_treasury_outbound_payments_id_post(*, id : String? = nil, expand : Array(String)? = nil) : Stripe::TreasuryOutboundPayment
+    def post_test_helpers_treasury_outbound_payments_id_post(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TreasuryOutboundPayment
       data, _status_code, _headers = post_test_helpers_treasury_outbound_payments_id_post_with_http_info(id: id, expand: expand)
       data
     end
@@ -1149,7 +1450,11 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TreasuryOutboundPayment, Integer, Hash)] Stripe::TreasuryOutboundPayment, response status code and response headers
-    def post_test_helpers_treasury_outbound_payments_id_post_with_http_info(*, id : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_outbound_payments_id_post_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_outbound_payments_id_post(id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1165,14 +1470,23 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_treasury_outbound_payments_id_post(*, id : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_outbound_payments_id_post(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_outbound_payments_id_post(id: id, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_OUTBOUND_PAYMENTS_ID_POST_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_outbound_payments_id_post(*, id : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_outbound_payments_id_post(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_outbound_payments_id_post ..." }
       end
@@ -1197,6 +1511,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1214,6 +1531,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1224,7 +1542,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param returned_details [Stripe::ReturnedDetailsParams?]
     # @return [Stripe::TreasuryOutboundPayment]
-    def post_test_helpers_treasury_outbound_payments_id_return(*, id : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil) : Stripe::TreasuryOutboundPayment
+    def post_test_helpers_treasury_outbound_payments_id_return(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil
+    ) : Stripe::TreasuryOutboundPayment
       data, _status_code, _headers = post_test_helpers_treasury_outbound_payments_id_return_with_http_info(id: id, expand: expand, returned_details: returned_details)
       data
     end
@@ -1234,7 +1557,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param returned_details [Stripe::ReturnedDetailsParams?]
     # @return [Tuple(Stripe::TreasuryOutboundPayment, Integer, Hash)] Stripe::TreasuryOutboundPayment, response status code and response headers
-    def post_test_helpers_treasury_outbound_payments_id_return_with_http_info(*, id : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_outbound_payments_id_return_with_http_info(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil
+    ) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_outbound_payments_id_return(id: id, expand: expand, returned_details: returned_details)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1251,14 +1579,25 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param returned_details [Stripe::ReturnedDetailsParams?]
     # @return nil
-    def post_test_helpers_treasury_outbound_payments_id_return(*, id : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_outbound_payments_id_return(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_outbound_payments_id_return(id: id, expand: expand, returned_details: returned_details).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_OUTBOUND_PAYMENTS_ID_RETURN_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_outbound_payments_id_return(*, id : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_outbound_payments_id_return(
+      *,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_outbound_payments_id_return ..." }
       end
@@ -1287,6 +1626,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1305,6 +1647,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1314,7 +1657,11 @@ module Stripe
     # @required @param outbound_transfer [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TreasuryOutboundTransfer]
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(*, outbound_transfer : String? = nil, expand : Array(String)? = nil) : Stripe::TreasuryOutboundTransfer
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TreasuryOutboundTransfer
       data, _status_code, _headers = post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail_with_http_info(outbound_transfer: outbound_transfer, expand: expand)
       data
     end
@@ -1323,7 +1670,11 @@ module Stripe
     # @required @param outbound_transfer [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TreasuryOutboundTransfer, Integer, Hash)] Stripe::TreasuryOutboundTransfer, response status code and response headers
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail_with_http_info(*, outbound_transfer : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail_with_http_info(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(outbound_transfer: outbound_transfer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1339,14 +1690,23 @@ module Stripe
     # @required @param outbound_transfer [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(*, outbound_transfer : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(outbound_transfer: outbound_transfer, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_OUTBOUND_TRANSFERS_OUTBOUND_TRANSFER_FAIL_MAX_LENGTH_FOR_OUTBOUND_TRANSFER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(*, outbound_transfer : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail ..." }
       end
@@ -1371,6 +1731,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1388,6 +1751,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1397,7 +1761,11 @@ module Stripe
     # @required @param outbound_transfer [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TreasuryOutboundTransfer]
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(*, outbound_transfer : String? = nil, expand : Array(String)? = nil) : Stripe::TreasuryOutboundTransfer
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TreasuryOutboundTransfer
       data, _status_code, _headers = post_test_helpers_treasury_outbound_transfers_outbound_transfer_post_with_http_info(outbound_transfer: outbound_transfer, expand: expand)
       data
     end
@@ -1406,7 +1774,11 @@ module Stripe
     # @required @param outbound_transfer [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TreasuryOutboundTransfer, Integer, Hash)] Stripe::TreasuryOutboundTransfer, response status code and response headers
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_post_with_http_info(*, outbound_transfer : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_post_with_http_info(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(outbound_transfer: outbound_transfer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1422,14 +1794,23 @@ module Stripe
     # @required @param outbound_transfer [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(*, outbound_transfer : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(outbound_transfer: outbound_transfer, expand: expand).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_OUTBOUND_TRANSFERS_OUTBOUND_TRANSFER_POST_MAX_LENGTH_FOR_OUTBOUND_TRANSFER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(*, outbound_transfer : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_post(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_outbound_transfers_outbound_transfer_post ..." }
       end
@@ -1454,6 +1835,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1471,6 +1855,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1481,7 +1866,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param returned_details [Stripe::ReturnedDetailsParams?]
     # @return [Stripe::TreasuryOutboundTransfer]
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(*, outbound_transfer : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil) : Stripe::TreasuryOutboundTransfer
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil
+    ) : Stripe::TreasuryOutboundTransfer
       data, _status_code, _headers = post_test_helpers_treasury_outbound_transfers_outbound_transfer_return_with_http_info(outbound_transfer: outbound_transfer, expand: expand, returned_details: returned_details)
       data
     end
@@ -1491,7 +1881,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param returned_details [Stripe::ReturnedDetailsParams?]
     # @return [Tuple(Stripe::TreasuryOutboundTransfer, Integer, Hash)] Stripe::TreasuryOutboundTransfer, response status code and response headers
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_return_with_http_info(*, outbound_transfer : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_return_with_http_info(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil
+    ) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(outbound_transfer: outbound_transfer, expand: expand, returned_details: returned_details)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1508,14 +1903,25 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param returned_details [Stripe::ReturnedDetailsParams?]
     # @return nil
-    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(*, outbound_transfer : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(outbound_transfer: outbound_transfer, expand: expand, returned_details: returned_details).execute(&block)
     end
 
     POST_TEST_HELPERS_TREASURY_OUTBOUND_TRANSFERS_OUTBOUND_TRANSFER_RETURN_MAX_LENGTH_FOR_OUTBOUND_TRANSFER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(*, outbound_transfer : String? = nil, expand : Array(String)? = nil, returned_details : Stripe::ReturnedDetailsParams? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_outbound_transfers_outbound_transfer_return(
+      *,
+      outbound_transfer : String? = nil,
+      expand : Array(String)? = nil,
+      returned_details : Stripe::ReturnedDetailsParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_outbound_transfers_outbound_transfer_return ..." }
       end
@@ -1544,6 +1950,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -1562,6 +1971,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1576,7 +1986,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param initiating_payment_method_details [Stripe::SourceParams?]
     # @return [Stripe::TreasuryReceivedCredit]
-    def post_test_helpers_treasury_received_credits(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil) : Stripe::TreasuryReceivedCredit
+    def post_test_helpers_treasury_received_credits(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil
+    ) : Stripe::TreasuryReceivedCredit
       data, _status_code, _headers = post_test_helpers_treasury_received_credits_with_http_info(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details)
       data
     end
@@ -1590,7 +2009,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param initiating_payment_method_details [Stripe::SourceParams?]
     # @return [Tuple(Stripe::TreasuryReceivedCredit, Integer, Hash)] Stripe::TreasuryReceivedCredit, response status code and response headers
-    def post_test_helpers_treasury_received_credits_with_http_info(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil) : Tuple(Stripe::TreasuryReceivedCredit, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_received_credits_with_http_info(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil
+    ) : Tuple(Stripe::TreasuryReceivedCredit, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_received_credits(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1611,7 +2039,17 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param initiating_payment_method_details [Stripe::SourceParams?]
     # @return nil
-    def post_test_helpers_treasury_received_credits(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_received_credits(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_received_credits(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details).execute(&block)
     end
 
@@ -1619,7 +2057,16 @@ module Stripe
     POST_TEST_HELPERS_TREASURY_RECEIVED_CREDITS_MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_received_credits(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_received_credits(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_received_credits ..." }
       end
@@ -1657,6 +2104,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -1680,6 +2130,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1694,7 +2145,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param initiating_payment_method_details [Stripe::SourceParams?]
     # @return [Stripe::TreasuryReceivedDebit]
-    def post_test_helpers_treasury_received_debits(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil) : Stripe::TreasuryReceivedDebit
+    def post_test_helpers_treasury_received_debits(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil
+    ) : Stripe::TreasuryReceivedDebit
       data, _status_code, _headers = post_test_helpers_treasury_received_debits_with_http_info(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details)
       data
     end
@@ -1708,7 +2168,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param initiating_payment_method_details [Stripe::SourceParams?]
     # @return [Tuple(Stripe::TreasuryReceivedDebit, Integer, Hash)] Stripe::TreasuryReceivedDebit, response status code and response headers
-    def post_test_helpers_treasury_received_debits_with_http_info(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil) : Tuple(Stripe::TreasuryReceivedDebit, Int32, Hash(String, Array(String) | String))
+    def post_test_helpers_treasury_received_debits_with_http_info(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil
+    ) : Tuple(Stripe::TreasuryReceivedDebit, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_test_helpers_treasury_received_debits(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1729,7 +2198,17 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param initiating_payment_method_details [Stripe::SourceParams?]
     # @return nil
-    def post_test_helpers_treasury_received_debits(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil, &block : Crest::Response ->) : Nil
+    def post_test_helpers_treasury_received_debits(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_test_helpers_treasury_received_debits(amount: amount, currency: currency, financial_account: financial_account, network: network, description: description, expand: expand, initiating_payment_method_details: initiating_payment_method_details).execute(&block)
     end
 
@@ -1737,7 +2216,16 @@ module Stripe
     POST_TEST_HELPERS_TREASURY_RECEIVED_DEBITS_MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_treasury_received_debits(*, amount : Int64? = nil, currency : String? = nil, financial_account : String? = nil, network : String? = nil, description : String? = nil, expand : Array(String)? = nil, initiating_payment_method_details : Stripe::SourceParams? = nil) : Crest::Request
+    def build_api_request_for_post_test_helpers_treasury_received_debits(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      financial_account : String? = nil,
+      network : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      initiating_payment_method_details : Stripe::SourceParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TestHelpersApi.post_test_helpers_treasury_received_debits ..." }
       end
@@ -1775,6 +2263,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -1798,6 +2289,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

@@ -23,7 +23,10 @@ module Stripe
     # <p>Permanently deletes a customer. It cannot be undone. Also immediately cancels any active subscriptions on the customer.</p>
     # @required @param customer [String?]
     # @return [Stripe::DeletedCustomer]
-    def delete_customers_customer(*, customer : String? = nil) : Stripe::DeletedCustomer
+    def delete_customers_customer(
+      *,
+      customer : String? = nil
+    ) : Stripe::DeletedCustomer
       data, _status_code, _headers = delete_customers_customer_with_http_info(customer: customer)
       data
     end
@@ -31,7 +34,10 @@ module Stripe
     # &lt;p&gt;Permanently deletes a customer. It cannot be undone. Also immediately cancels any active subscriptions on the customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @return [Tuple(Stripe::DeletedCustomer, Integer, Hash)] Stripe::DeletedCustomer, response status code and response headers
-    def delete_customers_customer_with_http_info(*, customer : String? = nil) : Tuple(Stripe::DeletedCustomer, Int32, Hash(String, Array(String) | String))
+    def delete_customers_customer_with_http_info(
+      *,
+      customer : String? = nil
+    ) : Tuple(Stripe::DeletedCustomer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_customers_customer(customer: customer)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -46,14 +52,21 @@ module Stripe
     # &lt;p&gt;Permanently deletes a customer. It cannot be undone. Also immediately cancels any active subscriptions on the customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @return nil
-    def delete_customers_customer(*, customer : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_customers_customer(
+      *,
+      customer : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_customers_customer(customer: customer).execute(&block)
     end
 
     DELETE_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_customers_customer(*, customer : String? = nil) : Crest::Request
+    def build_api_request_for_delete_customers_customer(
+      *,
+      customer : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.delete_customers_customer ..." }
       end
@@ -76,6 +89,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -92,6 +108,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -100,7 +117,10 @@ module Stripe
     # <p>Removes the currently applied discount on a customer.</p>
     # @required @param customer [String?]
     # @return [Stripe::DeletedDiscount]
-    def delete_customers_customer_discount(*, customer : String? = nil) : Stripe::DeletedDiscount
+    def delete_customers_customer_discount(
+      *,
+      customer : String? = nil
+    ) : Stripe::DeletedDiscount
       data, _status_code, _headers = delete_customers_customer_discount_with_http_info(customer: customer)
       data
     end
@@ -108,7 +128,10 @@ module Stripe
     # &lt;p&gt;Removes the currently applied discount on a customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @return [Tuple(Stripe::DeletedDiscount, Integer, Hash)] Stripe::DeletedDiscount, response status code and response headers
-    def delete_customers_customer_discount_with_http_info(*, customer : String? = nil) : Tuple(Stripe::DeletedDiscount, Int32, Hash(String, Array(String) | String))
+    def delete_customers_customer_discount_with_http_info(
+      *,
+      customer : String? = nil
+    ) : Tuple(Stripe::DeletedDiscount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_customers_customer_discount(customer: customer)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -123,14 +146,21 @@ module Stripe
     # &lt;p&gt;Removes the currently applied discount on a customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @return nil
-    def delete_customers_customer_discount(*, customer : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_customers_customer_discount(
+      *,
+      customer : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_customers_customer_discount(customer: customer).execute(&block)
     end
 
     DELETE_CUSTOMERS_CUSTOMER_DISCOUNT_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_customers_customer_discount(*, customer : String? = nil) : Crest::Request
+    def build_api_request_for_delete_customers_customer_discount(
+      *,
+      customer : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.delete_customers_customer_discount ..." }
       end
@@ -153,6 +183,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -169,6 +202,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -179,7 +213,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::DeleteCustomersCustomerSourcesId200Response]
-    def delete_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, expand : Array(String)? = nil) : Stripe::DeleteCustomersCustomerSourcesId200Response
+    def delete_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::DeleteCustomersCustomerSourcesId200Response
       data, _status_code, _headers = delete_customers_customer_sources_id_with_http_info(customer: customer, id: id, expand: expand)
       data
     end
@@ -189,7 +228,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::DeleteCustomersCustomerSourcesId200Response, Integer, Hash)] Stripe::DeleteCustomersCustomerSourcesId200Response, response status code and response headers
-    def delete_customers_customer_sources_id_with_http_info(*, customer : String? = nil, id : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::DeleteCustomersCustomerSourcesId200Response, Int32, Hash(String, Array(String) | String))
+    def delete_customers_customer_sources_id_with_http_info(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::DeleteCustomersCustomerSourcesId200Response, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_customers_customer_sources_id(customer: customer, id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -206,14 +250,25 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def delete_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def delete_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_customers_customer_sources_id(customer: customer, id: id, expand: expand).execute(&block)
     end
 
     DELETE_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_delete_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.delete_customers_customer_sources_id ..." }
       end
@@ -239,6 +294,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -256,6 +314,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -265,7 +324,11 @@ module Stripe
     # @required @param customer [String?]
     # @required @param id [String?]
     # @return [Stripe::DeletedTaxId]
-    def delete_customers_customer_tax_ids_id(*, customer : String? = nil, id : String? = nil) : Stripe::DeletedTaxId
+    def delete_customers_customer_tax_ids_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil
+    ) : Stripe::DeletedTaxId
       data, _status_code, _headers = delete_customers_customer_tax_ids_id_with_http_info(customer: customer, id: id)
       data
     end
@@ -274,7 +337,11 @@ module Stripe
     # @required @param customer [String?]
     # @required @param id [String?]
     # @return [Tuple(Stripe::DeletedTaxId, Integer, Hash)] Stripe::DeletedTaxId, response status code and response headers
-    def delete_customers_customer_tax_ids_id_with_http_info(*, customer : String? = nil, id : String? = nil) : Tuple(Stripe::DeletedTaxId, Int32, Hash(String, Array(String) | String))
+    def delete_customers_customer_tax_ids_id_with_http_info(
+      *,
+      customer : String? = nil,
+      id : String? = nil
+    ) : Tuple(Stripe::DeletedTaxId, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_customers_customer_tax_ids_id(customer: customer, id: id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -290,14 +357,23 @@ module Stripe
     # @required @param customer [String?]
     # @required @param id [String?]
     # @return nil
-    def delete_customers_customer_tax_ids_id(*, customer : String? = nil, id : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_customers_customer_tax_ids_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_customers_customer_tax_ids_id(customer: customer, id: id).execute(&block)
     end
 
     DELETE_CUSTOMERS_CUSTOMER_TAX_IDS_ID_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_delete_customers_customer_tax_ids_id(*, customer : String? = nil, id : String? = nil) : Crest::Request
+    def build_api_request_for_delete_customers_customer_tax_ids_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.delete_customers_customer_tax_ids_id ..." }
       end
@@ -321,6 +397,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -337,6 +416,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -351,7 +431,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Stripe::CustomerResourceCustomerList]
-    def get_customers(*, email : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Stripe::CustomerResourceCustomerList
+    def get_customers(
+      *,
+      email : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Stripe::CustomerResourceCustomerList
       data, _status_code, _headers = get_customers_with_http_info(email: email, ending_before: ending_before, starting_after: starting_after, limit: limit, test_clock: test_clock, expand: expand, created: created)
       data
     end
@@ -365,7 +454,16 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return [Tuple(Stripe::CustomerResourceCustomerList, Integer, Hash)] Stripe::CustomerResourceCustomerList, response status code and response headers
-    def get_customers_with_http_info(*, email : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Tuple(Stripe::CustomerResourceCustomerList, Int32, Hash(String, Array(String) | String))
+    def get_customers_with_http_info(
+      *,
+      email : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Tuple(Stripe::CustomerResourceCustomerList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers(email: email, ending_before: ending_before, starting_after: starting_after, limit: limit, test_clock: test_clock, expand: expand, created: created)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -386,7 +484,17 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param created [Stripe::GetAccountsCreatedParameter?]
     # @return nil
-    def get_customers(*, email : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, &block : Crest::Response ->) : Nil
+    def get_customers(
+      *,
+      email : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers(email: email, ending_before: ending_before, starting_after: starting_after, limit: limit, test_clock: test_clock, expand: expand, created: created).execute(&block)
     end
 
@@ -396,7 +504,16 @@ module Stripe
     GET_CUSTOMERS_MAX_LENGTH_FOR_TEST_CLOCK     = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers(*, email : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, test_clock : String? = nil, expand : Array(Array(String))? = nil, created : Stripe::GetAccountsCreatedParameter? = nil) : Crest::Request
+    def build_api_request_for_get_customers(
+      *,
+      email : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      test_clock : String? = nil,
+      expand : Array(Array(String))? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers ..." }
       end
@@ -439,6 +556,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -455,6 +575,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -464,7 +585,11 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::GetCustomersCustomer200Response]
-    def get_customers_customer(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Stripe::GetCustomersCustomer200Response
+    def get_customers_customer(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::GetCustomersCustomer200Response
       data, _status_code, _headers = get_customers_customer_with_http_info(customer: customer, expand: expand)
       data
     end
@@ -473,7 +598,11 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::GetCustomersCustomer200Response, Integer, Hash)] Stripe::GetCustomersCustomer200Response, response status code and response headers
-    def get_customers_customer_with_http_info(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::GetCustomersCustomer200Response, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_with_http_info(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::GetCustomersCustomer200Response, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer(customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -489,14 +618,23 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer(*, customer : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer(customer: customer, expand: expand).execute(&block)
     end
 
     GET_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer ..." }
       end
@@ -520,6 +658,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -536,6 +677,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -548,7 +690,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CustomerBalanceTransactionList]
-    def get_customers_customer_balance_transactions(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::CustomerBalanceTransactionList
+    def get_customers_customer_balance_transactions(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CustomerBalanceTransactionList
       data, _status_code, _headers = get_customers_customer_balance_transactions_with_http_info(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -560,7 +709,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CustomerBalanceTransactionList, Integer, Hash)] Stripe::CustomerBalanceTransactionList, response status code and response headers
-    def get_customers_customer_balance_transactions_with_http_info(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CustomerBalanceTransactionList, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_balance_transactions_with_http_info(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CustomerBalanceTransactionList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_balance_transactions(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -579,7 +735,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_balance_transactions(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_balance_transactions(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_balance_transactions(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -588,7 +752,14 @@ module Stripe
     GET_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_balance_transactions(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_balance_transactions(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_balance_transactions ..." }
       end
@@ -621,6 +792,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -637,6 +811,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -647,7 +822,12 @@ module Stripe
     # @required @param transaction [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CustomerBalanceTransaction]
-    def get_customers_customer_balance_transactions_transaction(*, customer : String? = nil, transaction : String? = nil, expand : Array(Array(String))? = nil) : Stripe::CustomerBalanceTransaction
+    def get_customers_customer_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CustomerBalanceTransaction
       data, _status_code, _headers = get_customers_customer_balance_transactions_transaction_with_http_info(customer: customer, transaction: transaction, expand: expand)
       data
     end
@@ -657,7 +837,12 @@ module Stripe
     # @required @param transaction [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CustomerBalanceTransaction, Integer, Hash)] Stripe::CustomerBalanceTransaction, response status code and response headers
-    def get_customers_customer_balance_transactions_transaction_with_http_info(*, customer : String? = nil, transaction : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_balance_transactions_transaction_with_http_info(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -674,14 +859,25 @@ module Stripe
     # @required @param transaction [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_balance_transactions_transaction(*, customer : String? = nil, transaction : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, expand: expand).execute(&block)
     end
 
     GET_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_balance_transactions_transaction(*, customer : String? = nil, transaction : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_balance_transactions_transaction ..." }
       end
@@ -706,6 +902,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -722,6 +921,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -731,7 +931,11 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CashBalance]
-    def get_customers_customer_cash_balance(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Stripe::CashBalance
+    def get_customers_customer_cash_balance(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CashBalance
       data, _status_code, _headers = get_customers_customer_cash_balance_with_http_info(customer: customer, expand: expand)
       data
     end
@@ -740,7 +944,11 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CashBalance, Integer, Hash)] Stripe::CashBalance, response status code and response headers
-    def get_customers_customer_cash_balance_with_http_info(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CashBalance, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_cash_balance_with_http_info(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CashBalance, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_cash_balance(customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -756,14 +964,23 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_cash_balance(*, customer : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_cash_balance(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_cash_balance(customer: customer, expand: expand).execute(&block)
     end
 
     GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_cash_balance(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_cash_balance(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_cash_balance ..." }
       end
@@ -787,6 +1004,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -803,6 +1023,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -812,7 +1033,11 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::Discount]
-    def get_customers_customer_discount(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Stripe::Discount
+    def get_customers_customer_discount(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::Discount
       data, _status_code, _headers = get_customers_customer_discount_with_http_info(customer: customer, expand: expand)
       data
     end
@@ -821,7 +1046,11 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::Discount, Integer, Hash)] Stripe::Discount, response status code and response headers
-    def get_customers_customer_discount_with_http_info(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::Discount, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_discount_with_http_info(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::Discount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_discount(customer: customer, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -837,14 +1066,23 @@ module Stripe
     # @required @param customer [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_discount(*, customer : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_discount(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_discount(customer: customer, expand: expand).execute(&block)
     end
 
     GET_CUSTOMERS_CUSTOMER_DISCOUNT_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_discount(*, customer : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_discount(
+      *,
+      customer : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_discount ..." }
       end
@@ -868,6 +1106,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -884,6 +1125,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -897,7 +1139,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::CustomerPaymentMethodResourceList]
-    def get_customers_customer_payment_methods(*, _type : String? = nil, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::CustomerPaymentMethodResourceList
+    def get_customers_customer_payment_methods(
+      *,
+      _type : String? = nil,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CustomerPaymentMethodResourceList
       data, _status_code, _headers = get_customers_customer_payment_methods_with_http_info(_type: _type, customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -910,7 +1160,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::CustomerPaymentMethodResourceList, Integer, Hash)] Stripe::CustomerPaymentMethodResourceList, response status code and response headers
-    def get_customers_customer_payment_methods_with_http_info(*, _type : String? = nil, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::CustomerPaymentMethodResourceList, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_payment_methods_with_http_info(
+      *,
+      _type : String? = nil,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CustomerPaymentMethodResourceList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_payment_methods(_type: _type, customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -930,7 +1188,16 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_payment_methods(*, _type : String? = nil, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_payment_methods(
+      *,
+      _type : String? = nil,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_payment_methods(_type: _type, customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -938,7 +1205,15 @@ module Stripe
     GET_CUSTOMERS_CUSTOMER_PAYMENT_METHODS_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_payment_methods(*, _type : String? = nil, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_payment_methods(
+      *,
+      _type : String? = nil,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_payment_methods ..." }
       end
@@ -970,6 +1245,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -986,6 +1264,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -996,7 +1275,12 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentMethod]
-    def get_customers_customer_payment_methods_payment_method(*, customer : String? = nil, payment_method : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentMethod
+    def get_customers_customer_payment_methods_payment_method(
+      *,
+      customer : String? = nil,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentMethod
       data, _status_code, _headers = get_customers_customer_payment_methods_payment_method_with_http_info(customer: customer, payment_method: payment_method, expand: expand)
       data
     end
@@ -1006,7 +1290,12 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentMethod, Integer, Hash)] Stripe::PaymentMethod, response status code and response headers
-    def get_customers_customer_payment_methods_payment_method_with_http_info(*, customer : String? = nil, payment_method : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_payment_methods_payment_method_with_http_info(
+      *,
+      customer : String? = nil,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentMethod, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_payment_methods_payment_method(customer: customer, payment_method: payment_method, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1023,7 +1312,13 @@ module Stripe
     # @required @param payment_method [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_payment_methods_payment_method(*, customer : String? = nil, payment_method : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_payment_methods_payment_method(
+      *,
+      customer : String? = nil,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_payment_methods_payment_method(customer: customer, payment_method: payment_method, expand: expand).execute(&block)
     end
 
@@ -1031,7 +1326,12 @@ module Stripe
     GET_CUSTOMERS_CUSTOMER_PAYMENT_METHODS_PAYMENT_METHOD_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_payment_methods_payment_method(*, customer : String? = nil, payment_method : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_payment_methods_payment_method(
+      *,
+      customer : String? = nil,
+      payment_method : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_payment_methods_payment_method ..." }
       end
@@ -1059,6 +1359,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -1075,6 +1378,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1088,7 +1392,15 @@ module Stripe
     # @optional @param object [String?] Filter sources according to a particular object type.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::ApmsSourcesSourceList]
-    def get_customers_customer_sources(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, object : String? = nil, expand : Array(Array(String))? = nil) : Stripe::ApmsSourcesSourceList
+    def get_customers_customer_sources(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      object : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ApmsSourcesSourceList
       data, _status_code, _headers = get_customers_customer_sources_with_http_info(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, object: object, expand: expand)
       data
     end
@@ -1101,7 +1413,15 @@ module Stripe
     # @optional @param object [String?] Filter sources according to a particular object type.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::ApmsSourcesSourceList, Integer, Hash)] Stripe::ApmsSourcesSourceList, response status code and response headers
-    def get_customers_customer_sources_with_http_info(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, object : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::ApmsSourcesSourceList, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_sources_with_http_info(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      object : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ApmsSourcesSourceList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_sources(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, object: object, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1121,7 +1441,16 @@ module Stripe
     # @optional @param object [String?] Filter sources according to a particular object type.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_sources(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, object : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_sources(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      object : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_sources(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, object: object, expand: expand).execute(&block)
     end
 
@@ -1129,7 +1458,15 @@ module Stripe
     GET_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_OBJECT   = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_sources(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, object : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_sources(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      object : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_sources ..." }
       end
@@ -1161,6 +1498,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -1177,6 +1517,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1187,7 +1528,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentSource]
-    def get_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentSource
+    def get_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentSource
       data, _status_code, _headers = get_customers_customer_sources_id_with_http_info(customer: customer, id: id, expand: expand)
       data
     end
@@ -1197,7 +1543,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentSource, Integer, Hash)] Stripe::PaymentSource, response status code and response headers
-    def get_customers_customer_sources_id_with_http_info(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentSource, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_sources_id_with_http_info(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentSource, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_sources_id(customer: customer, id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1214,7 +1565,13 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_sources_id(customer: customer, id: id, expand: expand).execute(&block)
     end
 
@@ -1222,7 +1579,12 @@ module Stripe
     GET_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ID       =  500
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_sources_id ..." }
       end
@@ -1250,6 +1612,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -1266,6 +1631,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1278,7 +1644,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TaxIDsList]
-    def get_customers_customer_tax_ids(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::TaxIDsList
+    def get_customers_customer_tax_ids(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::TaxIDsList
       data, _status_code, _headers = get_customers_customer_tax_ids_with_http_info(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
       data
     end
@@ -1290,7 +1663,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TaxIDsList, Integer, Hash)] Stripe::TaxIDsList, response status code and response headers
-    def get_customers_customer_tax_ids_with_http_info(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::TaxIDsList, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_tax_ids_with_http_info(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::TaxIDsList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_tax_ids(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1309,7 +1689,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_tax_ids(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_tax_ids(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_tax_ids(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
     end
 
@@ -1318,7 +1706,14 @@ module Stripe
     GET_CUSTOMERS_CUSTOMER_TAX_IDS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_tax_ids(*, customer : String? = nil, ending_before : String? = nil, starting_after : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_tax_ids(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_tax_ids ..." }
       end
@@ -1351,6 +1746,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -1367,6 +1765,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1377,7 +1776,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TaxId]
-    def get_customers_customer_tax_ids_id(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Stripe::TaxId
+    def get_customers_customer_tax_ids_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::TaxId
       data, _status_code, _headers = get_customers_customer_tax_ids_id_with_http_info(customer: customer, id: id, expand: expand)
       data
     end
@@ -1387,7 +1791,12 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TaxId, Integer, Hash)] Stripe::TaxId, response status code and response headers
-    def get_customers_customer_tax_ids_id_with_http_info(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::TaxId, Int32, Hash(String, Array(String) | String))
+    def get_customers_customer_tax_ids_id_with_http_info(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::TaxId, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_customer_tax_ids_id(customer: customer, id: id, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1404,14 +1813,25 @@ module Stripe
     # @required @param id [String?]
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_customer_tax_ids_id(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_customer_tax_ids_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_customer_tax_ids_id(customer: customer, id: id, expand: expand).execute(&block)
     end
 
     GET_CUSTOMERS_CUSTOMER_TAX_IDS_ID_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_customer_tax_ids_id(*, customer : String? = nil, id : String? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_customer_tax_ids_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_customer_tax_ids_id ..." }
       end
@@ -1436,6 +1856,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -1452,6 +1875,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1463,7 +1887,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::SearchResult]
-    def get_customers_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::SearchResult
+    def get_customers_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::SearchResult
       data, _status_code, _headers = get_customers_search_with_http_info(query: query, page: page, limit: limit, expand: expand)
       data
     end
@@ -1474,7 +1904,13 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::SearchResult, Integer, Hash)] Stripe::SearchResult, response status code and response headers
-    def get_customers_search_with_http_info(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
+    def get_customers_search_with_http_info(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::SearchResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_customers_search(query: query, page: page, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1492,7 +1928,14 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_customers_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_customers_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_customers_search(query: query, page: page, limit: limit, expand: expand).execute(&block)
     end
 
@@ -1500,7 +1943,13 @@ module Stripe
     GET_CUSTOMERS_SEARCH_MAX_LENGTH_FOR_PAGE  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_customers_search(*, query : String? = nil, page : String? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_customers_search(
+      *,
+      query : String? = nil,
+      page : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.get_customers_search ..." }
       end
@@ -1530,6 +1979,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -1546,6 +1998,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1575,7 +2028,31 @@ module Stripe
     # @optional @param tax_id_data [Array(Stripe::DataParams)?] The customer's tax IDs.
     # @optional @param test_clock [String?] ID of the test clock to attach to the customer.
     # @return [Stripe::Customer]
-    def post_customers(*, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, payment_method : String? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil, tax_id_data : Array(Stripe::DataParams)? = nil, test_clock : String? = nil) : Stripe::Customer
+    def post_customers(
+      *,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      payment_method : String? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil,
+      tax_id_data : Array(Stripe::DataParams)? = nil,
+      test_clock : String? = nil
+    ) : Stripe::Customer
       data, _status_code, _headers = post_customers_with_http_info(address: address, balance: balance, cash_balance: cash_balance, coupon: coupon, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, payment_method: payment_method, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt, tax_id_data: tax_id_data, test_clock: test_clock)
       data
     end
@@ -1604,7 +2081,31 @@ module Stripe
     # @optional @param tax_id_data [Array(Stripe::DataParams)?] The customer's tax IDs.
     # @optional @param test_clock [String?] ID of the test clock to attach to the customer.
     # @return [Tuple(Stripe::Customer, Integer, Hash)] Stripe::Customer, response status code and response headers
-    def post_customers_with_http_info(*, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, payment_method : String? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil, tax_id_data : Array(Stripe::DataParams)? = nil, test_clock : String? = nil) : Tuple(Stripe::Customer, Int32, Hash(String, Array(String) | String))
+    def post_customers_with_http_info(
+      *,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      payment_method : String? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil,
+      tax_id_data : Array(Stripe::DataParams)? = nil,
+      test_clock : String? = nil
+    ) : Tuple(Stripe::Customer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers(address: address, balance: balance, cash_balance: cash_balance, coupon: coupon, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, payment_method: payment_method, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt, tax_id_data: tax_id_data, test_clock: test_clock)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1640,7 +2141,32 @@ module Stripe
     # @optional @param tax_id_data [Array(Stripe::DataParams)?] The customer's tax IDs.
     # @optional @param test_clock [String?] ID of the test clock to attach to the customer.
     # @return nil
-    def post_customers(*, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, payment_method : String? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil, tax_id_data : Array(Stripe::DataParams)? = nil, test_clock : String? = nil, &block : Crest::Response ->) : Nil
+    def post_customers(
+      *,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      payment_method : String? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil,
+      tax_id_data : Array(Stripe::DataParams)? = nil,
+      test_clock : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers(address: address, balance: balance, cash_balance: cash_balance, coupon: coupon, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, payment_method: payment_method, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt, tax_id_data: tax_id_data, test_clock: test_clock).execute(&block)
     end
 
@@ -1657,7 +2183,31 @@ module Stripe
     POST_CUSTOMERS_MAX_LENGTH_FOR_TEST_CLOCK     = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_customers(*, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, payment_method : String? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil, tax_id_data : Array(Stripe::DataParams)? = nil, test_clock : String? = nil) : Crest::Request
+    def build_api_request_for_post_customers(
+      *,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      payment_method : String? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil,
+      tax_id_data : Array(Stripe::DataParams)? = nil,
+      test_clock : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers ..." }
       end
@@ -1736,6 +2286,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["address"] = address.to_s if !address.nil?
@@ -1774,6 +2327,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -1807,7 +2361,35 @@ module Stripe
     # @optional @param tax [Stripe::TaxParam?]
     # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
     # @return [Stripe::Customer]
-    def post_customers_customer(*, customer : String? = nil, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, default_alipay_account : String? = nil, default_bank_account : String? = nil, default_card : String? = nil, default_source : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil) : Stripe::Customer
+    def post_customers_customer(
+      *,
+      customer : String? = nil,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      default_alipay_account : String? = nil,
+      default_bank_account : String? = nil,
+      default_card : String? = nil,
+      default_source : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil
+    ) : Stripe::Customer
       data, _status_code, _headers = post_customers_customer_with_http_info(customer: customer, address: address, balance: balance, bank_account: bank_account, card: card, cash_balance: cash_balance, coupon: coupon, default_alipay_account: default_alipay_account, default_bank_account: default_bank_account, default_card: default_card, default_source: default_source, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt)
       data
     end
@@ -1840,7 +2422,35 @@ module Stripe
     # @optional @param tax [Stripe::TaxParam?]
     # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
     # @return [Tuple(Stripe::Customer, Integer, Hash)] Stripe::Customer, response status code and response headers
-    def post_customers_customer_with_http_info(*, customer : String? = nil, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, default_alipay_account : String? = nil, default_bank_account : String? = nil, default_card : String? = nil, default_source : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil) : Tuple(Stripe::Customer, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_with_http_info(
+      *,
+      customer : String? = nil,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      default_alipay_account : String? = nil,
+      default_bank_account : String? = nil,
+      default_card : String? = nil,
+      default_source : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil
+    ) : Tuple(Stripe::Customer, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer(customer: customer, address: address, balance: balance, bank_account: bank_account, card: card, cash_balance: cash_balance, coupon: coupon, default_alipay_account: default_alipay_account, default_bank_account: default_bank_account, default_card: default_card, default_source: default_source, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -1880,7 +2490,36 @@ module Stripe
     # @optional @param tax [Stripe::TaxParam?]
     # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
     # @return nil
-    def post_customers_customer(*, customer : String? = nil, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, default_alipay_account : String? = nil, default_bank_account : String? = nil, default_card : String? = nil, default_source : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer(
+      *,
+      customer : String? = nil,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      default_alipay_account : String? = nil,
+      default_bank_account : String? = nil,
+      default_card : String? = nil,
+      default_source : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer(customer: customer, address: address, balance: balance, bank_account: bank_account, card: card, cash_balance: cash_balance, coupon: coupon, default_alipay_account: default_alipay_account, default_bank_account: default_bank_account, default_card: default_card, default_source: default_source, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt).execute(&block)
     end
 
@@ -1900,7 +2539,35 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_VALID_VALUES_FOR_TAX_EXEMPT           = String.static_array("", "exempt", "none", "reverse")
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer(*, customer : String? = nil, address : Stripe::PostCustomersRequestAddress? = nil, balance : Int64? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, cash_balance : Stripe::CashBalanceParam? = nil, coupon : String? = nil, default_alipay_account : String? = nil, default_bank_account : String? = nil, default_card : String? = nil, default_source : String? = nil, description : String? = nil, email : String? = nil, expand : Array(String)? = nil, invoice_prefix : String? = nil, invoice_settings : Stripe::CustomerParam? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, next_invoice_sequence : Int64? = nil, phone : String? = nil, preferred_locales : Array(String)? = nil, promotion_code : String? = nil, shipping : Stripe::PostCustomersRequestShipping? = nil, source : String? = nil, tax : Stripe::TaxParam? = nil, tax_exempt : String? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer(
+      *,
+      customer : String? = nil,
+      address : Stripe::PostCustomersRequestAddress? = nil,
+      balance : Int64? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      cash_balance : Stripe::CashBalanceParam? = nil,
+      coupon : String? = nil,
+      default_alipay_account : String? = nil,
+      default_bank_account : String? = nil,
+      default_card : String? = nil,
+      default_source : String? = nil,
+      description : String? = nil,
+      email : String? = nil,
+      expand : Array(String)? = nil,
+      invoice_prefix : String? = nil,
+      invoice_settings : Stripe::CustomerParam? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      next_invoice_sequence : Int64? = nil,
+      phone : String? = nil,
+      preferred_locales : Array(String)? = nil,
+      promotion_code : String? = nil,
+      shipping : Stripe::PostCustomersRequestShipping? = nil,
+      source : String? = nil,
+      tax : Stripe::TaxParam? = nil,
+      tax_exempt : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer ..." }
       end
@@ -1992,6 +2659,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["address"] = address.to_s if !address.nil?
@@ -2033,6 +2703,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2046,7 +2717,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Stripe::CustomerBalanceTransaction]
-    def post_customers_customer_balance_transactions(*, customer : String? = nil, amount : Int64? = nil, currency : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Stripe::CustomerBalanceTransaction
+    def post_customers_customer_balance_transactions(
+      *,
+      customer : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Stripe::CustomerBalanceTransaction
       data, _status_code, _headers = post_customers_customer_balance_transactions_with_http_info(customer: customer, amount: amount, currency: currency, description: description, expand: expand, metadata: metadata)
       data
     end
@@ -2059,7 +2738,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Tuple(Stripe::CustomerBalanceTransaction, Integer, Hash)] Stripe::CustomerBalanceTransaction, response status code and response headers
-    def post_customers_customer_balance_transactions_with_http_info(*, customer : String? = nil, amount : Int64? = nil, currency : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_balance_transactions_with_http_info(
+      *,
+      customer : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_balance_transactions(customer: customer, amount: amount, currency: currency, description: description, expand: expand, metadata: metadata)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2079,7 +2766,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return nil
-    def post_customers_customer_balance_transactions(*, customer : String? = nil, amount : Int64? = nil, currency : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_balance_transactions(
+      *,
+      customer : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_balance_transactions(customer: customer, amount: amount, currency: currency, description: description, expand: expand, metadata: metadata).execute(&block)
     end
 
@@ -2087,7 +2783,15 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_DESCRIPTION =  350
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_balance_transactions(*, customer : String? = nil, amount : Int64? = nil, currency : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_balance_transactions(
+      *,
+      customer : String? = nil,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_balance_transactions ..." }
       end
@@ -2123,6 +2827,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -2144,6 +2851,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2156,7 +2864,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Stripe::CustomerBalanceTransaction]
-    def post_customers_customer_balance_transactions_transaction(*, customer : String? = nil, transaction : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Stripe::CustomerBalanceTransaction
+    def post_customers_customer_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Stripe::CustomerBalanceTransaction
       data, _status_code, _headers = post_customers_customer_balance_transactions_transaction_with_http_info(customer: customer, transaction: transaction, description: description, expand: expand, metadata: metadata)
       data
     end
@@ -2168,7 +2883,14 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Tuple(Stripe::CustomerBalanceTransaction, Integer, Hash)] Stripe::CustomerBalanceTransaction, response status code and response headers
-    def post_customers_customer_balance_transactions_transaction_with_http_info(*, customer : String? = nil, transaction : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_balance_transactions_transaction_with_http_info(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, description: description, expand: expand, metadata: metadata)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2187,7 +2909,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return nil
-    def post_customers_customer_balance_transactions_transaction(*, customer : String? = nil, transaction : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, description: description, expand: expand, metadata: metadata).execute(&block)
     end
 
@@ -2196,7 +2926,14 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_DESCRIPTION =  350
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_balance_transactions_transaction(*, customer : String? = nil, transaction : String? = nil, description : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      description : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_balance_transactions_transaction ..." }
       end
@@ -2232,6 +2969,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["description"] = description.to_s if !description.nil?
@@ -2251,6 +2991,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2261,7 +3002,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param settings [Stripe::BalanceSettingsParam?]
     # @return [Stripe::CashBalance]
-    def post_customers_customer_cash_balance(*, customer : String? = nil, expand : Array(String)? = nil, settings : Stripe::BalanceSettingsParam? = nil) : Stripe::CashBalance
+    def post_customers_customer_cash_balance(
+      *,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      settings : Stripe::BalanceSettingsParam? = nil
+    ) : Stripe::CashBalance
       data, _status_code, _headers = post_customers_customer_cash_balance_with_http_info(customer: customer, expand: expand, settings: settings)
       data
     end
@@ -2271,7 +3017,12 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param settings [Stripe::BalanceSettingsParam?]
     # @return [Tuple(Stripe::CashBalance, Integer, Hash)] Stripe::CashBalance, response status code and response headers
-    def post_customers_customer_cash_balance_with_http_info(*, customer : String? = nil, expand : Array(String)? = nil, settings : Stripe::BalanceSettingsParam? = nil) : Tuple(Stripe::CashBalance, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_cash_balance_with_http_info(
+      *,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      settings : Stripe::BalanceSettingsParam? = nil
+    ) : Tuple(Stripe::CashBalance, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_cash_balance(customer: customer, expand: expand, settings: settings)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2288,14 +3039,25 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param settings [Stripe::BalanceSettingsParam?]
     # @return nil
-    def post_customers_customer_cash_balance(*, customer : String? = nil, expand : Array(String)? = nil, settings : Stripe::BalanceSettingsParam? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_cash_balance(
+      *,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      settings : Stripe::BalanceSettingsParam? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_cash_balance(customer: customer, expand: expand, settings: settings).execute(&block)
     end
 
     POST_CUSTOMERS_CUSTOMER_CASH_BALANCE_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_cash_balance(*, customer : String? = nil, expand : Array(String)? = nil, settings : Stripe::BalanceSettingsParam? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_cash_balance(
+      *,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      settings : Stripe::BalanceSettingsParam? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_cash_balance ..." }
       end
@@ -2324,6 +3086,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -2342,6 +3107,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2355,7 +3121,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param source [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
     # @return [Stripe::PaymentSource]
-    def post_customers_customer_sources(*, customer : String? = nil, alipay_account : String? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, expand : Array(String)? = nil, source : String? = nil) : Stripe::PaymentSource
+    def post_customers_customer_sources(
+      *,
+      customer : String? = nil,
+      alipay_account : String? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      expand : Array(String)? = nil,
+      source : String? = nil
+    ) : Stripe::PaymentSource
       data, _status_code, _headers = post_customers_customer_sources_with_http_info(customer: customer, alipay_account: alipay_account, bank_account: bank_account, card: card, expand: expand, source: source)
       data
     end
@@ -2368,7 +3142,15 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param source [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
     # @return [Tuple(Stripe::PaymentSource, Integer, Hash)] Stripe::PaymentSource, response status code and response headers
-    def post_customers_customer_sources_with_http_info(*, customer : String? = nil, alipay_account : String? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, expand : Array(String)? = nil, source : String? = nil) : Tuple(Stripe::PaymentSource, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_sources_with_http_info(
+      *,
+      customer : String? = nil,
+      alipay_account : String? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      expand : Array(String)? = nil,
+      source : String? = nil
+    ) : Tuple(Stripe::PaymentSource, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_sources(customer: customer, alipay_account: alipay_account, bank_account: bank_account, card: card, expand: expand, source: source)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2388,7 +3170,16 @@ module Stripe
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param source [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
     # @return nil
-    def post_customers_customer_sources(*, customer : String? = nil, alipay_account : String? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, expand : Array(String)? = nil, source : String? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_sources(
+      *,
+      customer : String? = nil,
+      alipay_account : String? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      expand : Array(String)? = nil,
+      source : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_sources(customer: customer, alipay_account: alipay_account, bank_account: bank_account, card: card, expand: expand, source: source).execute(&block)
     end
 
@@ -2397,7 +3188,15 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_SOURCE         = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_sources(*, customer : String? = nil, alipay_account : String? = nil, bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil, card : Stripe::PostChargesRequestCard? = nil, expand : Array(String)? = nil, source : String? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_sources(
+      *,
+      customer : String? = nil,
+      alipay_account : String? = nil,
+      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
+      card : Stripe::PostChargesRequestCard? = nil,
+      expand : Array(String)? = nil,
+      source : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_sources ..." }
       end
@@ -2435,6 +3234,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["alipay_account"] = alipay_account.to_s if !alipay_account.nil?
@@ -2456,6 +3258,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2479,7 +3282,25 @@ module Stripe
     # @optional @param name [String?] Cardholder name.
     # @optional @param owner [Stripe::Owner?]
     # @return [Stripe::PostCustomersCustomerSourcesId200Response]
-    def post_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, owner : Stripe::Owner? = nil) : Stripe::PostCustomersCustomerSourcesId200Response
+    def post_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      owner : Stripe::Owner? = nil
+    ) : Stripe::PostCustomersCustomerSourcesId200Response
       data, _status_code, _headers = post_customers_customer_sources_id_with_http_info(customer: customer, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name, owner: owner)
       data
     end
@@ -2502,7 +3323,25 @@ module Stripe
     # @optional @param name [String?] Cardholder name.
     # @optional @param owner [Stripe::Owner?]
     # @return [Tuple(Stripe::PostCustomersCustomerSourcesId200Response, Integer, Hash)] Stripe::PostCustomersCustomerSourcesId200Response, response status code and response headers
-    def post_customers_customer_sources_id_with_http_info(*, customer : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, owner : Stripe::Owner? = nil) : Tuple(Stripe::PostCustomersCustomerSourcesId200Response, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_sources_id_with_http_info(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      owner : Stripe::Owner? = nil
+    ) : Tuple(Stripe::PostCustomersCustomerSourcesId200Response, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_sources_id(customer: customer, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name, owner: owner)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2532,7 +3371,26 @@ module Stripe
     # @optional @param name [String?] Cardholder name.
     # @optional @param owner [Stripe::Owner?]
     # @return nil
-    def post_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, owner : Stripe::Owner? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      owner : Stripe::Owner? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_sources_id(customer: customer, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name, owner: owner).execute(&block)
     end
 
@@ -2552,7 +3410,25 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_NAME                  = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_sources_id(*, customer : String? = nil, id : String? = nil, account_holder_name : String? = nil, account_holder_type : String? = nil, address_city : String? = nil, address_country : String? = nil, address_line1 : String? = nil, address_line2 : String? = nil, address_state : String? = nil, address_zip : String? = nil, exp_month : String? = nil, exp_year : String? = nil, expand : Array(String)? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, name : String? = nil, owner : Stripe::Owner? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_sources_id(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      account_holder_name : String? = nil,
+      account_holder_type : String? = nil,
+      address_city : String? = nil,
+      address_country : String? = nil,
+      address_line1 : String? = nil,
+      address_line2 : String? = nil,
+      address_state : String? = nil,
+      address_zip : String? = nil,
+      exp_month : String? = nil,
+      exp_year : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      name : String? = nil,
+      owner : Stripe::Owner? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_sources_id ..." }
       end
@@ -2621,6 +3497,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["account_holder_name"] = account_holder_name.to_s if !account_holder_name.nil?
@@ -2651,6 +3530,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2662,7 +3542,13 @@ module Stripe
     # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::BankAccount]
-    def post_customers_customer_sources_id_verify(*, customer : String? = nil, id : String? = nil, amounts : Array(Int32)? = nil, expand : Array(String)? = nil) : Stripe::BankAccount
+    def post_customers_customer_sources_id_verify(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      amounts : Array(Int32)? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::BankAccount
       data, _status_code, _headers = post_customers_customer_sources_id_verify_with_http_info(customer: customer, id: id, amounts: amounts, expand: expand)
       data
     end
@@ -2673,7 +3559,13 @@ module Stripe
     # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::BankAccount, Integer, Hash)] Stripe::BankAccount, response status code and response headers
-    def post_customers_customer_sources_id_verify_with_http_info(*, customer : String? = nil, id : String? = nil, amounts : Array(Int32)? = nil, expand : Array(String)? = nil) : Tuple(Stripe::BankAccount, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_sources_id_verify_with_http_info(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      amounts : Array(Int32)? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::BankAccount, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_sources_id_verify(customer: customer, id: id, amounts: amounts, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2691,7 +3583,14 @@ module Stripe
     # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_customers_customer_sources_id_verify(*, customer : String? = nil, id : String? = nil, amounts : Array(Int32)? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_sources_id_verify(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      amounts : Array(Int32)? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_sources_id_verify(customer: customer, id: id, amounts: amounts, expand: expand).execute(&block)
     end
 
@@ -2699,7 +3598,13 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VERIFY_MAX_LENGTH_FOR_ID       = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_sources_id_verify(*, customer : String? = nil, id : String? = nil, amounts : Array(Int32)? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_sources_id_verify(
+      *,
+      customer : String? = nil,
+      id : String? = nil,
+      amounts : Array(Int32)? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_sources_id_verify ..." }
       end
@@ -2728,6 +3633,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amounts"] = @api_client.build_collection_param(amounts, "csv") if !amounts.nil? && !amounts.empty?
@@ -2746,6 +3654,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -2757,7 +3666,13 @@ module Stripe
     # @required @param value [String?] Value of the tax ID.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Stripe::TaxId]
-    def post_customers_customer_tax_ids(*, customer : String? = nil, _type : String? = nil, value : String? = nil, expand : Array(String)? = nil) : Stripe::TaxId
+    def post_customers_customer_tax_ids(
+      *,
+      customer : String? = nil,
+      _type : String? = nil,
+      value : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::TaxId
       data, _status_code, _headers = post_customers_customer_tax_ids_with_http_info(customer: customer, _type: _type, value: value, expand: expand)
       data
     end
@@ -2768,7 +3683,13 @@ module Stripe
     # @required @param value [String?] Value of the tax ID.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::TaxId, Integer, Hash)] Stripe::TaxId, response status code and response headers
-    def post_customers_customer_tax_ids_with_http_info(*, customer : String? = nil, _type : String? = nil, value : String? = nil, expand : Array(String)? = nil) : Tuple(Stripe::TaxId, Int32, Hash(String, Array(String) | String))
+    def post_customers_customer_tax_ids_with_http_info(
+      *,
+      customer : String? = nil,
+      _type : String? = nil,
+      value : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::TaxId, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_customers_customer_tax_ids(customer: customer, _type: _type, value: value, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -2786,7 +3707,14 @@ module Stripe
     # @required @param value [String?] Value of the tax ID.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @return nil
-    def post_customers_customer_tax_ids(*, customer : String? = nil, _type : String? = nil, value : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def post_customers_customer_tax_ids(
+      *,
+      customer : String? = nil,
+      _type : String? = nil,
+      value : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_customers_customer_tax_ids(customer: customer, _type: _type, value: value, expand: expand).execute(&block)
     end
 
@@ -2795,7 +3723,13 @@ module Stripe
     POST_CUSTOMERS_CUSTOMER_TAX_IDS_VALID_VALUES_FOR__TYPE  = String.static_array("ae_trn", "au_abn", "au_arn", "bg_uic", "br_cnpj", "br_cpf", "ca_bn", "ca_gst_hst", "ca_pst_bc", "ca_pst_mb", "ca_pst_sk", "ca_qst", "ch_vat", "cl_tin", "es_cif", "eu_oss_vat", "eu_vat", "gb_vat", "ge_vat", "hk_br", "hu_tin", "id_npwp", "il_vat", "in_gst", "is_vat", "jp_cn", "jp_rn", "kr_brn", "li_uid", "mx_rfc", "my_frp", "my_itn", "my_sst", "no_vat", "nz_gst", "ru_inn", "ru_kpp", "sa_vat", "sg_gst", "sg_uen", "si_tin", "th_vat", "tw_vat", "ua_vat", "us_ein", "za_vat")
 
     # @return Crest::Request
-    def build_api_request_for_post_customers_customer_tax_ids(*, customer : String? = nil, _type : String? = nil, value : String? = nil, expand : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_post_customers_customer_tax_ids(
+      *,
+      customer : String? = nil,
+      _type : String? = nil,
+      value : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_tax_ids ..." }
       end
@@ -2825,6 +3759,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
@@ -2844,6 +3781,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

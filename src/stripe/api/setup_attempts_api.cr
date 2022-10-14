@@ -28,7 +28,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Stripe::PaymentFlowsSetupIntentSetupAttemptList]
-    def get_setup_attempts(*, setup_intent : String? = nil, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Stripe::PaymentFlowsSetupIntentSetupAttemptList
+    def get_setup_attempts(
+      *,
+      setup_intent : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::PaymentFlowsSetupIntentSetupAttemptList
       data, _status_code, _headers = get_setup_attempts_with_http_info(setup_intent: setup_intent, ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, expand: expand)
       data
     end
@@ -41,7 +49,15 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return [Tuple(Stripe::PaymentFlowsSetupIntentSetupAttemptList, Integer, Hash)] Stripe::PaymentFlowsSetupIntentSetupAttemptList, response status code and response headers
-    def get_setup_attempts_with_http_info(*, setup_intent : String? = nil, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Tuple(Stripe::PaymentFlowsSetupIntentSetupAttemptList, Int32, Hash(String, Array(String) | String))
+    def get_setup_attempts_with_http_info(
+      *,
+      setup_intent : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::PaymentFlowsSetupIntentSetupAttemptList, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_setup_attempts(setup_intent: setup_intent, ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, expand: expand)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -61,7 +77,16 @@ module Stripe
     # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @return nil
-    def get_setup_attempts(*, setup_intent : String? = nil, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil, &block : Crest::Response ->) : Nil
+    def get_setup_attempts(
+      *,
+      setup_intent : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_setup_attempts(setup_intent: setup_intent, ending_before: ending_before, starting_after: starting_after, created: created, limit: limit, expand: expand).execute(&block)
     end
 
@@ -70,7 +95,15 @@ module Stripe
     GET_SETUP_ATTEMPTS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_setup_attempts(*, setup_intent : String? = nil, ending_before : String? = nil, starting_after : String? = nil, created : Stripe::GetAccountsCreatedParameter? = nil, limit : Int64? = nil, expand : Array(Array(String))? = nil) : Crest::Request
+    def build_api_request_for_get_setup_attempts(
+      *,
+      setup_intent : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SetupAttemptsApi.get_setup_attempts ..." }
       end
@@ -108,6 +141,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -124,6 +160,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

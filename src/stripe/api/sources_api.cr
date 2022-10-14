@@ -25,7 +25,12 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the source. Required if a publishable key is used to retrieve the source.
     # @return [Stripe::Source]
-    def get_sources_source(*, source : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Stripe::Source
+    def get_sources_source(
+      *,
+      source : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Stripe::Source
       data, _status_code, _headers = get_sources_source_with_http_info(source: source, expand: expand, client_secret: client_secret)
       data
     end
@@ -35,7 +40,12 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the source. Required if a publishable key is used to retrieve the source.
     # @return [Tuple(Stripe::Source, Integer, Hash)] Stripe::Source, response status code and response headers
-    def get_sources_source_with_http_info(*, source : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
+    def get_sources_source_with_http_info(
+      *,
+      source : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_sources_source(source: source, expand: expand, client_secret: client_secret)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -52,7 +62,13 @@ module Stripe
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param client_secret [String?] The client secret of the source. Required if a publishable key is used to retrieve the source.
     # @return nil
-    def get_sources_source(*, source : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil, &block : Crest::Response ->) : Nil
+    def get_sources_source(
+      *,
+      source : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_sources_source(source: source, expand: expand, client_secret: client_secret).execute(&block)
     end
 
@@ -60,7 +76,12 @@ module Stripe
     GET_SOURCES_SOURCE_MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # @return Crest::Request
-    def build_api_request_for_get_sources_source(*, source : String? = nil, expand : Array(Array(String))? = nil, client_secret : String? = nil) : Crest::Request
+    def build_api_request_for_get_sources_source(
+      *,
+      source : String? = nil,
+      expand : Array(Array(String))? = nil,
+      client_secret : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SourcesApi.get_sources_source ..." }
       end
@@ -89,6 +110,9 @@ module Stripe
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -105,6 +129,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -127,7 +152,24 @@ module Stripe
     # @optional @param _type [String?] The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
     # @optional @param usage [String?]
     # @return [Stripe::Source]
-    def post_sources(*, amount : Int64? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, flow : String? = nil, mandate : Stripe::MandateParams? = nil, original_source : String? = nil, owner : Stripe::Owner? = nil, receiver : Stripe::ReceiverParams? = nil, redirect : Stripe::RedirectParams? = nil, source_order : Stripe::ShallowOrderSpecs? = nil, statement_descriptor : String? = nil, token : String? = nil, _type : String? = nil, usage : String? = nil) : Stripe::Source
+    def post_sources(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      flow : String? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      original_source : String? = nil,
+      owner : Stripe::Owner? = nil,
+      receiver : Stripe::ReceiverParams? = nil,
+      redirect : Stripe::RedirectParams? = nil,
+      source_order : Stripe::ShallowOrderSpecs? = nil,
+      statement_descriptor : String? = nil,
+      token : String? = nil,
+      _type : String? = nil,
+      usage : String? = nil
+    ) : Stripe::Source
       data, _status_code, _headers = post_sources_with_http_info(amount: amount, currency: currency, customer: customer, expand: expand, flow: flow, mandate: mandate, original_source: original_source, owner: owner, receiver: receiver, redirect: redirect, source_order: source_order, statement_descriptor: statement_descriptor, token: token, _type: _type, usage: usage)
       data
     end
@@ -149,7 +191,24 @@ module Stripe
     # @optional @param _type [String?] The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
     # @optional @param usage [String?]
     # @return [Tuple(Stripe::Source, Integer, Hash)] Stripe::Source, response status code and response headers
-    def post_sources_with_http_info(*, amount : Int64? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, flow : String? = nil, mandate : Stripe::MandateParams? = nil, original_source : String? = nil, owner : Stripe::Owner? = nil, receiver : Stripe::ReceiverParams? = nil, redirect : Stripe::RedirectParams? = nil, source_order : Stripe::ShallowOrderSpecs? = nil, statement_descriptor : String? = nil, token : String? = nil, _type : String? = nil, usage : String? = nil) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
+    def post_sources_with_http_info(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      flow : String? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      original_source : String? = nil,
+      owner : Stripe::Owner? = nil,
+      receiver : Stripe::ReceiverParams? = nil,
+      redirect : Stripe::RedirectParams? = nil,
+      source_order : Stripe::ShallowOrderSpecs? = nil,
+      statement_descriptor : String? = nil,
+      token : String? = nil,
+      _type : String? = nil,
+      usage : String? = nil
+    ) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_sources(amount: amount, currency: currency, customer: customer, expand: expand, flow: flow, mandate: mandate, original_source: original_source, owner: owner, receiver: receiver, redirect: redirect, source_order: source_order, statement_descriptor: statement_descriptor, token: token, _type: _type, usage: usage)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -178,7 +237,25 @@ module Stripe
     # @optional @param _type [String?] The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
     # @optional @param usage [String?]
     # @return nil
-    def post_sources(*, amount : Int64? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, flow : String? = nil, mandate : Stripe::MandateParams? = nil, original_source : String? = nil, owner : Stripe::Owner? = nil, receiver : Stripe::ReceiverParams? = nil, redirect : Stripe::RedirectParams? = nil, source_order : Stripe::ShallowOrderSpecs? = nil, statement_descriptor : String? = nil, token : String? = nil, _type : String? = nil, usage : String? = nil, &block : Crest::Response ->) : Nil
+    def post_sources(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      flow : String? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      original_source : String? = nil,
+      owner : Stripe::Owner? = nil,
+      receiver : Stripe::ReceiverParams? = nil,
+      redirect : Stripe::RedirectParams? = nil,
+      source_order : Stripe::ShallowOrderSpecs? = nil,
+      statement_descriptor : String? = nil,
+      token : String? = nil,
+      _type : String? = nil,
+      usage : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_sources(amount: amount, currency: currency, customer: customer, expand: expand, flow: flow, mandate: mandate, original_source: original_source, owner: owner, receiver: receiver, redirect: redirect, source_order: source_order, statement_descriptor: statement_descriptor, token: token, _type: _type, usage: usage).execute(&block)
     end
 
@@ -193,7 +270,24 @@ module Stripe
     POST_SOURCES_VALID_VALUES_FOR_USAGE              = String.static_array("reusable", "single_use")
 
     # @return Crest::Request
-    def build_api_request_for_post_sources(*, amount : Int64? = nil, currency : String? = nil, customer : String? = nil, expand : Array(String)? = nil, flow : String? = nil, mandate : Stripe::MandateParams? = nil, original_source : String? = nil, owner : Stripe::Owner? = nil, receiver : Stripe::ReceiverParams? = nil, redirect : Stripe::RedirectParams? = nil, source_order : Stripe::ShallowOrderSpecs? = nil, statement_descriptor : String? = nil, token : String? = nil, _type : String? = nil, usage : String? = nil) : Crest::Request
+    def build_api_request_for_post_sources(
+      *,
+      amount : Int64? = nil,
+      currency : String? = nil,
+      customer : String? = nil,
+      expand : Array(String)? = nil,
+      flow : String? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      original_source : String? = nil,
+      owner : Stripe::Owner? = nil,
+      receiver : Stripe::ReceiverParams? = nil,
+      redirect : Stripe::RedirectParams? = nil,
+      source_order : Stripe::ShallowOrderSpecs? = nil,
+      statement_descriptor : String? = nil,
+      token : String? = nil,
+      _type : String? = nil,
+      usage : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SourcesApi.post_sources ..." }
       end
@@ -251,6 +345,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -282,6 +379,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -296,7 +394,16 @@ module Stripe
     # @optional @param owner [Stripe::Owner?]
     # @optional @param source_order [Stripe::OrderParams?]
     # @return [Stripe::Source]
-    def post_sources_source(*, source : String? = nil, amount : Int64? = nil, expand : Array(String)? = nil, mandate : Stripe::MandateParams? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, owner : Stripe::Owner? = nil, source_order : Stripe::OrderParams? = nil) : Stripe::Source
+    def post_sources_source(
+      *,
+      source : String? = nil,
+      amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      owner : Stripe::Owner? = nil,
+      source_order : Stripe::OrderParams? = nil
+    ) : Stripe::Source
       data, _status_code, _headers = post_sources_source_with_http_info(source: source, amount: amount, expand: expand, mandate: mandate, metadata: metadata, owner: owner, source_order: source_order)
       data
     end
@@ -310,7 +417,16 @@ module Stripe
     # @optional @param owner [Stripe::Owner?]
     # @optional @param source_order [Stripe::OrderParams?]
     # @return [Tuple(Stripe::Source, Integer, Hash)] Stripe::Source, response status code and response headers
-    def post_sources_source_with_http_info(*, source : String? = nil, amount : Int64? = nil, expand : Array(String)? = nil, mandate : Stripe::MandateParams? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, owner : Stripe::Owner? = nil, source_order : Stripe::OrderParams? = nil) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
+    def post_sources_source_with_http_info(
+      *,
+      source : String? = nil,
+      amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      owner : Stripe::Owner? = nil,
+      source_order : Stripe::OrderParams? = nil
+    ) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_sources_source(source: source, amount: amount, expand: expand, mandate: mandate, metadata: metadata, owner: owner, source_order: source_order)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -331,14 +447,33 @@ module Stripe
     # @optional @param owner [Stripe::Owner?]
     # @optional @param source_order [Stripe::OrderParams?]
     # @return nil
-    def post_sources_source(*, source : String? = nil, amount : Int64? = nil, expand : Array(String)? = nil, mandate : Stripe::MandateParams? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, owner : Stripe::Owner? = nil, source_order : Stripe::OrderParams? = nil, &block : Crest::Response ->) : Nil
+    def post_sources_source(
+      *,
+      source : String? = nil,
+      amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      owner : Stripe::Owner? = nil,
+      source_order : Stripe::OrderParams? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_post_sources_source(source: source, amount: amount, expand: expand, mandate: mandate, metadata: metadata, owner: owner, source_order: source_order).execute(&block)
     end
 
     POST_SOURCES_SOURCE_MAX_LENGTH_FOR_SOURCE = 5000
 
     # @return Crest::Request
-    def build_api_request_for_post_sources_source(*, source : String? = nil, amount : Int64? = nil, expand : Array(String)? = nil, mandate : Stripe::MandateParams? = nil, metadata : Stripe::PostAccountsRequestMetadata? = nil, owner : Stripe::Owner? = nil, source_order : Stripe::OrderParams? = nil) : Crest::Request
+    def build_api_request_for_post_sources_source(
+      *,
+      source : String? = nil,
+      amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      mandate : Stripe::MandateParams? = nil,
+      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      owner : Stripe::Owner? = nil,
+      source_order : Stripe::OrderParams? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SourcesApi.post_sources_source ..." }
       end
@@ -376,6 +511,9 @@ module Stripe
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["amount"] = amount.to_s if !amount.nil?
@@ -398,6 +536,7 @@ module Stripe
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

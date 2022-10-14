@@ -32,6 +32,11 @@ module Stripe
     # @return [Hash]
     property default_headers : Hash(String, String)
 
+    # Defines the cookies to be used in HTTP requests of all API calls by default.
+    #
+    # @return [Hash]
+    property default_cookies : Hash(String, String)
+
     # Initializes the ApiClient
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(@config = Configuration.default)
@@ -39,6 +44,7 @@ module Stripe
       @default_headers = {
         "User-Agent" => @user_agent,
       }
+      @default_cookies = Hash(String, String).new
     end
 
     def self.default : ApiClient
@@ -70,6 +76,7 @@ module Stripe
     # @param [String] auth_names Authentication scheme name
     def update_params_for_auth!(
       header_params : Hash(String, String),
+      cookie_params : Hash(String, String),
       query_params : Hash(String, (String | Array(String))),
       auth_names : Array(String)
     ) : Nil
@@ -79,6 +86,8 @@ module Stripe
         case auth_setting["in"]
         when "header"
           header_params[auth_setting["key"]] = auth_setting["value"]
+        when "cookie"
+          cookie_params[auth_setting["key"]] = auth_setting["value"]
         when "query"
           query_params[auth_setting["key"]] = auth_setting["value"]
         else
@@ -150,6 +159,7 @@ module Stripe
       post_body : IO | String | Nil = nil,
       auth_names : Array(String) = Array(String).new,
       header_params : Hash(String, String) = Hash(String, String).new,
+      cookie_params : Hash(String, String) = Hash(String, String).new,
       query_params : Hash(String, (String | Array(String))) = Hash(String, (String | Array(String))).new,
       form_params : Hash(String, (String | Array(String) | IO)) | Nil = nil
     ) : Crest::Request
@@ -161,7 +171,11 @@ module Stripe
       #   "client_key" => @config.ssl_client_key
       # }
 
-      update_params_for_auth! header_params, query_params, auth_names
+      update_params_for_auth! header_params, cookie_params, query_params, auth_names
+      header_params.merge!(default_headers)
+      cookie_params.merge!(default_cookies)
+
+      form_or_body : Hash(String, (String | Array(String) | IO)) | IO | String | Nil = nil
 
       if !post_body.nil? && (post_body.is_a?(IO) || post_body.is_a?(String) && !post_body.empty?)
         # use JSON string in the payload
@@ -177,7 +191,7 @@ module Stripe
         build_request_url(path, operation),
         params: query_params,
         headers: header_params,
-        # cookies: cookie_params, # TODO add cookies support
+        cookies: cookie_params,
         form: form_or_body,
         logging: @config.debugging,
         handle_errors: false,
