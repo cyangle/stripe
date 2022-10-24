@@ -50,11 +50,8 @@ describe "FilesApi" do
 
   # unit tests for post_files
   # &lt;p&gt;To upload a file to Stripe, you’ll need to send a request of type &lt;code&gt;multipart/form-data&lt;/code&gt;. The request should contain the file you would like to upload, as well as the parameters for creating a file.&lt;/p&gt;  &lt;p&gt;All of Stripe’s officially supported Client libraries should have support for sending &lt;code&gt;multipart/form-data&lt;/code&gt;.&lt;/p&gt;
-  # @param file A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the &#x60;multipart/form-data&#x60; protocol).
-  # @param purpose The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
+  # @param post_files_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FileLinkCreationParams] :file_link_data
   # @return [::File]
   describe "post_files test" do
     it "should work" do

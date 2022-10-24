@@ -145,8 +145,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/payouts"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -156,19 +164,11 @@ module Stripe
       query_params["arrival_date"] = arrival_date.to_s if !arrival_date.nil?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -254,23 +254,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/payouts/{payout}".sub("{" + "payout" + "}", URI.encode_path(payout.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -289,52 +289,24 @@ module Stripe
     end
 
     # <p>To send funds to your own bank account, you create a new payout object. Your <a href=\"#balance\">Stripe balance</a> must be able to cover the payout amount, or you’ll receive an “Insufficient Funds” error.</p>  <p>If your API key is in test mode, money won’t actually be sent, though everything else will occur as if in live mode.</p>  <p>If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The <a href=\"#balance_object\">balance object</a> details available and pending amounts by source type.</p>
-    # @required @param amount [Int32?] A positive integer in cents representing how much to payout.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination [String?] The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param method [String?] The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
-    # @optional @param source_type [String?] The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
-    # @optional @param statement_descriptor [String?] A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
+    # @required @param post_payouts_request [Stripe::PostPayoutsRequest?]
     # @return [Stripe::Payout]
     def post_payouts(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      destination : String? = nil,
-      expand : Array(String)? = nil,
-      method : String? = nil,
-      source_type : String? = nil,
-      statement_descriptor : String? = nil
+      post_payouts_request : Stripe::PostPayoutsRequest? = nil
     ) : Stripe::Payout
-      data, _status_code, _headers = post_payouts_with_http_info(amount: amount, currency: currency, description: description, destination: destination, expand: expand, method: method, source_type: source_type, statement_descriptor: statement_descriptor)
+      data, _status_code, _headers = post_payouts_with_http_info(post_payouts_request: post_payouts_request)
       data
     end
 
     # &lt;p&gt;To send funds to your own bank account, you create a new payout object. Your &lt;a href&#x3D;\&quot;#balance\&quot;&gt;Stripe balance&lt;/a&gt; must be able to cover the payout amount, or you’ll receive an “Insufficient Funds” error.&lt;/p&gt;  &lt;p&gt;If your API key is in test mode, money won’t actually be sent, though everything else will occur as if in live mode.&lt;/p&gt;  &lt;p&gt;If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The &lt;a href&#x3D;\&quot;#balance_object\&quot;&gt;balance object&lt;/a&gt; details available and pending amounts by source type.&lt;/p&gt;
-    # @required @param amount [Int32?] A positive integer in cents representing how much to payout.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination [String?] The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param method [String?] The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
-    # @optional @param source_type [String?] The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
-    # @optional @param statement_descriptor [String?] A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
+    # @required @param post_payouts_request [Stripe::PostPayoutsRequest?]
     # @return [Tuple(Stripe::Payout, Integer, Hash)] Stripe::Payout, response status code and response headers
     def post_payouts_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      destination : String? = nil,
-      expand : Array(String)? = nil,
-      method : String? = nil,
-      source_type : String? = nil,
-      statement_descriptor : String? = nil
+      post_payouts_request : Stripe::PostPayoutsRequest? = nil
     ) : Tuple(Stripe::Payout, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payouts(amount: amount, currency: currency, description: description, destination: destination, expand: expand, method: method, source_type: source_type, statement_descriptor: statement_descriptor)
+      request = build_api_request_for_post_payouts(post_payouts_request: post_payouts_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -346,102 +318,53 @@ module Stripe
     end
 
     # &lt;p&gt;To send funds to your own bank account, you create a new payout object. Your &lt;a href&#x3D;\&quot;#balance\&quot;&gt;Stripe balance&lt;/a&gt; must be able to cover the payout amount, or you’ll receive an “Insufficient Funds” error.&lt;/p&gt;  &lt;p&gt;If your API key is in test mode, money won’t actually be sent, though everything else will occur as if in live mode.&lt;/p&gt;  &lt;p&gt;If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The &lt;a href&#x3D;\&quot;#balance_object\&quot;&gt;balance object&lt;/a&gt; details available and pending amounts by source type.&lt;/p&gt;
-    # @required @param amount [Int32?] A positive integer in cents representing how much to payout.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination [String?] The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param method [String?] The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
-    # @optional @param source_type [String?] The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
-    # @optional @param statement_descriptor [String?] A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
+    # @required @param post_payouts_request [Stripe::PostPayoutsRequest?]
     # @return nil
     def post_payouts(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      destination : String? = nil,
-      expand : Array(String)? = nil,
-      method : String? = nil,
-      source_type : String? = nil,
-      statement_descriptor : String? = nil,
+      post_payouts_request : Stripe::PostPayoutsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payouts(amount: amount, currency: currency, description: description, destination: destination, expand: expand, method: method, source_type: source_type, statement_descriptor: statement_descriptor).execute(&block)
+      build_api_request_for_post_payouts(post_payouts_request: post_payouts_request).execute(&block)
     end
-
-    POST_PAYOUTS_MAX_LENGTH_FOR_DESCRIPTION          = 5000
-    POST_PAYOUTS_MAX_LENGTH_FOR_METHOD               = 5000
-    POST_PAYOUTS_VALID_VALUES_FOR_METHOD             = String.static_array("instant", "standard")
-    POST_PAYOUTS_MAX_LENGTH_FOR_SOURCE_TYPE          = 5000
-    POST_PAYOUTS_VALID_VALUES_FOR_SOURCE_TYPE        = String.static_array("bank_account", "card", "fpx")
-    POST_PAYOUTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 22
 
     # @return Crest::Request
     def build_api_request_for_post_payouts(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      destination : String? = nil,
-      expand : Array(String)? = nil,
-      method : String? = nil,
-      source_type : String? = nil,
-      statement_descriptor : String? = nil
+      post_payouts_request : Stripe::PostPayoutsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PayoutsApi.post_payouts ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_PAYOUTS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_method = method).nil?
-          OpenApi::EnumValidator.validate("method", _method, POST_PAYOUTS_VALID_VALUES_FOR_METHOD)
-        end
-        unless (_source_type = source_type).nil?
-          OpenApi::EnumValidator.validate("source_type", _source_type, POST_PAYOUTS_VALID_VALUES_FOR_SOURCE_TYPE)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PAYOUTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
+        raise ArgumentError.new("\"post_payouts_request\" is required and cannot be null") if post_payouts_request.nil?
+        unless (_post_payouts_request = post_payouts_request).nil?
+          _post_payouts_request.validate if _post_payouts_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payouts"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["destination"] = destination.to_s if !destination.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["method"] = method.to_s if !method.nil?
-      form_params["source_type"] = source_type.to_s if !source_type.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payouts_request, content_type: header_params["Content-Type"]?) if !post_payouts_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -461,31 +384,27 @@ module Stripe
 
     # <p>Updates the specified payout by setting the values of the parameters passed. Any parameters not provided will be left unchanged. This request accepts only the metadata as arguments.</p>
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::Payout]
     def post_payouts_payout(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::Payout
-      data, _status_code, _headers = post_payouts_payout_with_http_info(payout: payout, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_payouts_payout_with_http_info(payout: payout, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specified payout by setting the values of the parameters passed. Any parameters not provided will be left unchanged. This request accepts only the metadata as arguments.&lt;/p&gt;
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::Payout, Integer, Hash)] Stripe::Payout, response status code and response headers
     def post_payouts_payout_with_http_info(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::Payout, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payouts_payout(payout: payout, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_payouts_payout(payout: payout, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -498,17 +417,15 @@ module Stripe
 
     # &lt;p&gt;Updates the specified payout by setting the values of the parameters passed. Any parameters not provided will be left unchanged. This request accepts only the metadata as arguments.&lt;/p&gt;
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_payouts_payout(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payouts_payout(payout: payout, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_payouts_payout(payout: payout, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_PAYOUTS_PAYOUT_MAX_LENGTH_FOR_PAYOUT = 5000
@@ -517,8 +434,7 @@ module Stripe
     def build_api_request_for_post_payouts_payout(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PayoutsApi.post_payouts_payout ..." }
@@ -529,35 +445,32 @@ module Stripe
         unless (_payout = payout).nil?
           OpenApi::PrimitiveValidator.validate_max_length("payout", payout.to_s.size, POST_PAYOUTS_PAYOUT_MAX_LENGTH_FOR_PAYOUT)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payouts/{payout}".sub("{" + "payout" + "}", URI.encode_path(payout.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -577,27 +490,27 @@ module Stripe
 
     # <p>A previously created payout can be canceled if it has not yet been paid out. Funds will be refunded to your available balance. You may not cancel automatic Stripe payouts.</p>
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Payout]
     def post_payouts_payout_cancel(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Payout
-      data, _status_code, _headers = post_payouts_payout_cancel_with_http_info(payout: payout, expand: expand)
+      data, _status_code, _headers = post_payouts_payout_cancel_with_http_info(payout: payout, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;A previously created payout can be canceled if it has not yet been paid out. Funds will be refunded to your available balance. You may not cancel automatic Stripe payouts.&lt;/p&gt;
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Payout, Integer, Hash)] Stripe::Payout, response status code and response headers
     def post_payouts_payout_cancel_with_http_info(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Payout, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payouts_payout_cancel(payout: payout, expand: expand)
+      request = build_api_request_for_post_payouts_payout_cancel(payout: payout, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -610,15 +523,15 @@ module Stripe
 
     # &lt;p&gt;A previously created payout can be canceled if it has not yet been paid out. Funds will be refunded to your available balance. You may not cancel automatic Stripe payouts.&lt;/p&gt;
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_payouts_payout_cancel(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payouts_payout_cancel(payout: payout, expand: expand).execute(&block)
+      build_api_request_for_post_payouts_payout_cancel(payout: payout, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_PAYOUTS_PAYOUT_CANCEL_MAX_LENGTH_FOR_PAYOUT = 5000
@@ -627,7 +540,7 @@ module Stripe
     def build_api_request_for_post_payouts_payout_cancel(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PayoutsApi.post_payouts_payout_cancel ..." }
@@ -638,30 +551,32 @@ module Stripe
         unless (_payout = payout).nil?
           OpenApi::PrimitiveValidator.validate_max_length("payout", payout.to_s.size, POST_PAYOUTS_PAYOUT_CANCEL_MAX_LENGTH_FOR_PAYOUT)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/payouts/{payout}/cancel".sub("{" + "payout" + "}", URI.encode_path(payout.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -681,27 +596,27 @@ module Stripe
 
     # <p>Reverses a payout by debiting the destination bank account. Only payouts for connected accounts to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code> status, <code>/v1/payouts/:id/cancel</code> should be used instead.</p>  <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the authorized signatory of the selected bank account has authorized the debit on the bank account and that no other authorization is required.</p>
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payouts_payout_reverse_request [Stripe::PostPayoutsPayoutReverseRequest?]
     # @return [Stripe::Payout]
     def post_payouts_payout_reverse(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil
+      post_payouts_payout_reverse_request : Stripe::PostPayoutsPayoutReverseRequest? = nil
     ) : Stripe::Payout
-      data, _status_code, _headers = post_payouts_payout_reverse_with_http_info(payout: payout, expand: expand)
+      data, _status_code, _headers = post_payouts_payout_reverse_with_http_info(payout: payout, post_payouts_payout_reverse_request: post_payouts_payout_reverse_request)
       data
     end
 
     # &lt;p&gt;Reverses a payout by debiting the destination bank account. Only payouts for connected accounts to US bank accounts may be reversed at this time. If the payout is in the &lt;code&gt;pending&lt;/code&gt; status, &lt;code&gt;/v1/payouts/:id/cancel&lt;/code&gt; should be used instead.&lt;/p&gt;  &lt;p&gt;By requesting a reversal via &lt;code&gt;/v1/payouts/:id/reverse&lt;/code&gt;, you confirm that the authorized signatory of the selected bank account has authorized the debit on the bank account and that no other authorization is required.&lt;/p&gt;
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payouts_payout_reverse_request [Stripe::PostPayoutsPayoutReverseRequest?]
     # @return [Tuple(Stripe::Payout, Integer, Hash)] Stripe::Payout, response status code and response headers
     def post_payouts_payout_reverse_with_http_info(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil
+      post_payouts_payout_reverse_request : Stripe::PostPayoutsPayoutReverseRequest? = nil
     ) : Tuple(Stripe::Payout, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payouts_payout_reverse(payout: payout, expand: expand)
+      request = build_api_request_for_post_payouts_payout_reverse(payout: payout, post_payouts_payout_reverse_request: post_payouts_payout_reverse_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -714,15 +629,15 @@ module Stripe
 
     # &lt;p&gt;Reverses a payout by debiting the destination bank account. Only payouts for connected accounts to US bank accounts may be reversed at this time. If the payout is in the &lt;code&gt;pending&lt;/code&gt; status, &lt;code&gt;/v1/payouts/:id/cancel&lt;/code&gt; should be used instead.&lt;/p&gt;  &lt;p&gt;By requesting a reversal via &lt;code&gt;/v1/payouts/:id/reverse&lt;/code&gt;, you confirm that the authorized signatory of the selected bank account has authorized the debit on the bank account and that no other authorization is required.&lt;/p&gt;
     # @required @param payout [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payouts_payout_reverse_request [Stripe::PostPayoutsPayoutReverseRequest?]
     # @return nil
     def post_payouts_payout_reverse(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil,
+      post_payouts_payout_reverse_request : Stripe::PostPayoutsPayoutReverseRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payouts_payout_reverse(payout: payout, expand: expand).execute(&block)
+      build_api_request_for_post_payouts_payout_reverse(payout: payout, post_payouts_payout_reverse_request: post_payouts_payout_reverse_request).execute(&block)
     end
 
     POST_PAYOUTS_PAYOUT_REVERSE_MAX_LENGTH_FOR_PAYOUT = 5000
@@ -731,7 +646,7 @@ module Stripe
     def build_api_request_for_post_payouts_payout_reverse(
       *,
       payout : String? = nil,
-      expand : Array(String)? = nil
+      post_payouts_payout_reverse_request : Stripe::PostPayoutsPayoutReverseRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PayoutsApi.post_payouts_payout_reverse ..." }
@@ -742,30 +657,32 @@ module Stripe
         unless (_payout = payout).nil?
           OpenApi::PrimitiveValidator.validate_max_length("payout", payout.to_s.size, POST_PAYOUTS_PAYOUT_REVERSE_MAX_LENGTH_FOR_PAYOUT)
         end
+        unless (_post_payouts_payout_reverse_request = post_payouts_payout_reverse_request).nil?
+          _post_payouts_payout_reverse_request.validate if _post_payouts_payout_reverse_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/payouts/{payout}/reverse".sub("{" + "payout" + "}", URI.encode_path(payout.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payouts_payout_reverse_request, content_type: header_params["Content-Type"]?) if !post_payouts_payout_reverse_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

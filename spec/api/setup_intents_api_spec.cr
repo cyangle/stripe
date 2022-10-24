@@ -54,21 +54,7 @@ describe "SetupIntentsApi" do
   # unit tests for post_setup_intents
   # &lt;p&gt;Creates a SetupIntent object.&lt;/p&gt;  &lt;p&gt;After the SetupIntent is created, attach a payment method and &lt;a href&#x3D;\&quot;/docs/api/setup_intents/confirm\&quot;&gt;confirm&lt;/a&gt; to collect any required permissions to charge the payment method later.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :attach_to_self If present, the SetupIntent&#39;s payment method will be attached to the in-context Stripe Account.  It can only be used for this Stripe Account’s own money movement flows like InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a Customer.
-  # @option opts [Bool] :confirm Set to &#x60;true&#x60; to attempt to confirm this SetupIntent immediately. This parameter defaults to &#x60;false&#x60;. If the payment method attached is a card, a return_url may be provided in case additional authentication is required.
-  # @option opts [String] :customer ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent&#39;s payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Array(String)] :flow_directions Indicates the directions of money movement for which this payment method is intended to be used.  Include &#x60;inbound&#x60; if you intend to use the payment method as the origin to pull funds from. Include &#x60;outbound&#x60; if you intend to use the payment method as the destination to send funds to. You can include both if you intend to use the payment method for both purposes.
-  # @option opts [SecretKeyParam] :mandate_data
-  # @option opts [String] :on_behalf_of The Stripe account ID for which this SetupIntent is created.
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
-  # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this SetupIntent is allowed to use. If this is not provided, defaults to [\\\&quot;card\\\&quot;].
-  # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm).
-  # @option opts [SetupIntentSingleUseParams] :single_use
-  # @option opts [String] :usage Indicates how the payment method is intended to be used in the future. If not provided, this value defaults to &#x60;off_session&#x60;.
+  # @option opts [PostSetupIntentsRequest] :post_setup_intents_request
   # @return [SetupIntent]
   describe "post_setup_intents test" do
     it "should work" do
@@ -80,16 +66,7 @@ describe "SetupIntentsApi" do
   # &lt;p&gt;Updates a SetupIntent object.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :attach_to_self If present, the SetupIntent&#39;s payment method will be attached to the in-context Stripe Account.  It can only be used for this Stripe Account’s own money movement flows like InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a Customer.
-  # @option opts [String] :customer ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent&#39;s payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Array(String)] :flow_directions Indicates the directions of money movement for which this payment method is intended to be used.  Include &#x60;inbound&#x60; if you intend to use the payment method as the origin to pull funds from. Include &#x60;outbound&#x60; if you intend to use the payment method as the destination to send funds to. You can include both if you intend to use the payment method for both purposes.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
-  # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to [\\\&quot;card\\\&quot;].
+  # @option opts [PostSetupIntentsIntentRequest] :post_setup_intents_intent_request
   # @return [SetupIntent]
   describe "post_setup_intents_intent test" do
     it "should work" do
@@ -101,8 +78,7 @@ describe "SetupIntentsApi" do
   # &lt;p&gt;A SetupIntent object can be canceled when it is in one of these statuses: &lt;code&gt;requires_payment_method&lt;/code&gt;, &lt;code&gt;requires_confirmation&lt;/code&gt;, or &lt;code&gt;requires_action&lt;/code&gt;. &lt;/p&gt;  &lt;p&gt;Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an error.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :cancellation_reason Reason for canceling this SetupIntent. Possible values are &#x60;abandoned&#x60;, &#x60;requested_by_customer&#x60;, or &#x60;duplicate&#x60;
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostSetupIntentsIntentCancelRequest] :post_setup_intents_intent_cancel_request
   # @return [SetupIntent]
   describe "post_setup_intents_intent_cancel test" do
     it "should work" do
@@ -114,13 +90,7 @@ describe "SetupIntentsApi" do
   # &lt;p&gt;Confirm that your customer intends to set up the current or provided payment method. For example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment method management page on your website.&lt;/p&gt;  &lt;p&gt;If the selected payment method does not require any additional steps from the customer, the SetupIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status.&lt;/p&gt;  &lt;p&gt;Otherwise, it will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If setup fails, the SetupIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :client_secret The client secret of the SetupIntent.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostPaymentIntentsIntentConfirmRequestMandateData] :mandate_data
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
-  # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam] :payment_method_options
-  # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
+  # @option opts [PostSetupIntentsIntentConfirmRequest] :post_setup_intents_intent_confirm_request
   # @return [SetupIntent]
   describe "post_setup_intents_intent_confirm test" do
     it "should work" do
@@ -132,10 +102,7 @@ describe "SetupIntentsApi" do
   # &lt;p&gt;Verifies microdeposits on a SetupIntent object.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-  # @option opts [String] :client_secret The client secret of the SetupIntent.
-  # @option opts [String] :descriptor_code A six-character code starting with SM present in the microdeposit sent to the bank account.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostSetupIntentsIntentVerifyMicrodepositsRequest] :post_setup_intents_intent_verify_microdeposits_request
   # @return [SetupIntent]
   describe "post_setup_intents_intent_verify_microdeposits test" do
     it "should work" do

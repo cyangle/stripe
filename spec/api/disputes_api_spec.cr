@@ -53,10 +53,7 @@ describe "DisputesApi" do
   # &lt;p&gt;When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/disputes\&quot;&gt;dashboard&lt;/a&gt;, but if you prefer, you can use the API to submit evidence programmatically.&lt;/p&gt;  &lt;p&gt;Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our &lt;a href&#x3D;\&quot;/docs/disputes/categories\&quot;&gt;guide to dispute types&lt;/a&gt;.&lt;/p&gt;
   # @param dispute
   # @param [Hash] opts the optional parameters
-  # @option opts [DisputeEvidenceParams] :evidence
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [Bool] :submit Whether to immediately submit evidence to the bank. If &#x60;false&#x60;, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to &#x60;true&#x60; (the default).
+  # @option opts [PostDisputesDisputeRequest] :post_disputes_dispute_request
   # @return [Dispute]
   describe "post_disputes_dispute test" do
     it "should work" do
@@ -68,7 +65,7 @@ describe "DisputesApi" do
   # &lt;p&gt;Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.&lt;/p&gt;  &lt;p&gt;The status of the dispute will change from &lt;code&gt;needs_response&lt;/code&gt; to &lt;code&gt;lost&lt;/code&gt;. &lt;em&gt;Closing a dispute is irreversible&lt;/em&gt;.&lt;/p&gt;
   # @param dispute
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Dispute]
   describe "post_disputes_dispute_close test" do
     it "should work" do

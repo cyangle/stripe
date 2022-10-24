@@ -26,4 +26,11 @@ describe Stripe::TerminalReaderReaderResourceProcessConfig do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'tipping'" do
+    it "should work" do
+      # instance = Stripe::TerminalReaderReaderResourceProcessConfig.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 end

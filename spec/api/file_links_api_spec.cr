@@ -51,11 +51,8 @@ describe "FileLinksApi" do
 
   # unit tests for post_file_links
   # &lt;p&gt;Creates a new file link object.&lt;/p&gt;
-  # @param file The ID of the file. The file&#39;s &#x60;purpose&#x60; must be one of the following: &#x60;business_icon&#x60;, &#x60;business_logo&#x60;, &#x60;customer_signature&#x60;, &#x60;dispute_evidence&#x60;, &#x60;finance_report_run&#x60;, &#x60;identity_document_downloadable&#x60;, &#x60;pci_document&#x60;, &#x60;selfie&#x60;, &#x60;sigma_scheduled_query&#x60;, &#x60;tax_document_user_upload&#x60;, or &#x60;terminal_reader_splashscreen&#x60;.
+  # @param post_file_links_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int32] :expires_at A future timestamp after which the link will no longer be usable.
-  # @option opts [PostAccountsRequestMetadata] :metadata
   # @return [FileLink]
   describe "post_file_links test" do
     it "should work" do
@@ -67,9 +64,7 @@ describe "FileLinksApi" do
   # &lt;p&gt;Updates an existing file link object. Expired links can no longer be updated.&lt;/p&gt;
   # @param link
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostFileLinksLinkRequestExpiresAt] :expires_at
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostFileLinksLinkRequest] :post_file_links_link_request
   # @return [FileLink]
   describe "post_file_links_link test" do
     it "should work" do

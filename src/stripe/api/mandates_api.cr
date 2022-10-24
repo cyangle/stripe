@@ -83,23 +83,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/mandates/{mandate}".sub("{" + "mandate" + "}", URI.encode_path(mandate.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -183,22 +183,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/external_accounts/{id}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -289,22 +289,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/persons/{person}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "person" + "}", URI.encode_path(person.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -408,27 +408,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -514,23 +514,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -616,23 +616,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/capabilities".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -726,23 +726,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/capabilities/{capability}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "capability" + "}", URI.encode_path(capability.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -849,26 +849,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/external_accounts".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -962,23 +962,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/external_accounts/{id}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1104,27 +1104,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/persons".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["relationship"] = relationship.to_s if !relationship.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1222,23 +1222,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/accounts/{account}/persons/{person}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "person" + "}", URI.encode_path(person.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1257,88 +1257,24 @@ module Stripe
     end
 
     # <p>With <a href=\"/docs/connect\">Connect</a>, you can create Stripe accounts for your users. To do this, you’ll first need to <a href=\"https://dashboard.stripe.com/account/applications/settings\">register your platform</a>.</p>
-    # @optional @param account_token [String?] An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-    # @optional @param bank_account [Stripe::PostAccountsRequestBankAccount?]
-    # @optional @param business_profile [Stripe::BusinessProfileSpecs?]
-    # @optional @param business_type [String?] The business type.
-    # @optional @param capabilities [Stripe::CapabilitiesParam?]
-    # @optional @param company [Stripe::CompanySpecs?]
-    # @optional @param country [String?] The country in which the account holder resides, or in which the business is legally established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the United States and the business for which you're creating an account is legally represented in Canada, you would use `CA` as the country for the account being created. Available countries include [Stripe's global markets](https://stripe.com/global) as well as countries where [cross-border payouts](https://stripe.com/docs/connect/cross-border-payouts) are supported.
-    # @optional @param default_currency [String?] Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    # @optional @param documents [Stripe::DocumentsSpecs?]
-    # @optional @param email [String?] The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-    # @optional @param individual [Stripe::IndividualSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param settings [Stripe::SettingsSpecs?]
-    # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
-    # @optional @param _type [String?] The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
+    # @optional @param post_accounts_request [Stripe::PostAccountsRequest?]
     # @return [Stripe::Account]
     def post_accounts(
       *,
-      account_token : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      country : String? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecs? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
-      _type : String? = nil
+      post_accounts_request : Stripe::PostAccountsRequest? = nil
     ) : Stripe::Account
-      data, _status_code, _headers = post_accounts_with_http_info(account_token: account_token, bank_account: bank_account, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, country: country, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance, _type: _type)
+      data, _status_code, _headers = post_accounts_with_http_info(post_accounts_request: post_accounts_request)
       data
     end
 
     # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can create Stripe accounts for your users. To do this, you’ll first need to &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/applications/settings\&quot;&gt;register your platform&lt;/a&gt;.&lt;/p&gt;
-    # @optional @param account_token [String?] An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-    # @optional @param bank_account [Stripe::PostAccountsRequestBankAccount?]
-    # @optional @param business_profile [Stripe::BusinessProfileSpecs?]
-    # @optional @param business_type [String?] The business type.
-    # @optional @param capabilities [Stripe::CapabilitiesParam?]
-    # @optional @param company [Stripe::CompanySpecs?]
-    # @optional @param country [String?] The country in which the account holder resides, or in which the business is legally established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the United States and the business for which you're creating an account is legally represented in Canada, you would use `CA` as the country for the account being created. Available countries include [Stripe's global markets](https://stripe.com/global) as well as countries where [cross-border payouts](https://stripe.com/docs/connect/cross-border-payouts) are supported.
-    # @optional @param default_currency [String?] Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    # @optional @param documents [Stripe::DocumentsSpecs?]
-    # @optional @param email [String?] The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-    # @optional @param individual [Stripe::IndividualSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param settings [Stripe::SettingsSpecs?]
-    # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
-    # @optional @param _type [String?] The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
+    # @optional @param post_accounts_request [Stripe::PostAccountsRequest?]
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
     def post_accounts_with_http_info(
       *,
-      account_token : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      country : String? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecs? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
-      _type : String? = nil
+      post_accounts_request : Stripe::PostAccountsRequest? = nil
     ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts(account_token: account_token, bank_account: bank_account, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, country: country, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance, _type: _type)
+      request = build_api_request_for_post_accounts(post_accounts_request: post_accounts_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1350,164 +1286,52 @@ module Stripe
     end
 
     # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can create Stripe accounts for your users. To do this, you’ll first need to &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/applications/settings\&quot;&gt;register your platform&lt;/a&gt;.&lt;/p&gt;
-    # @optional @param account_token [String?] An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-    # @optional @param bank_account [Stripe::PostAccountsRequestBankAccount?]
-    # @optional @param business_profile [Stripe::BusinessProfileSpecs?]
-    # @optional @param business_type [String?] The business type.
-    # @optional @param capabilities [Stripe::CapabilitiesParam?]
-    # @optional @param company [Stripe::CompanySpecs?]
-    # @optional @param country [String?] The country in which the account holder resides, or in which the business is legally established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the United States and the business for which you're creating an account is legally represented in Canada, you would use `CA` as the country for the account being created. Available countries include [Stripe's global markets](https://stripe.com/global) as well as countries where [cross-border payouts](https://stripe.com/docs/connect/cross-border-payouts) are supported.
-    # @optional @param default_currency [String?] Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    # @optional @param documents [Stripe::DocumentsSpecs?]
-    # @optional @param email [String?] The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-    # @optional @param individual [Stripe::IndividualSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param settings [Stripe::SettingsSpecs?]
-    # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
-    # @optional @param _type [String?] The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
+    # @optional @param post_accounts_request [Stripe::PostAccountsRequest?]
     # @return nil
     def post_accounts(
       *,
-      account_token : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      country : String? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecs? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
-      _type : String? = nil,
+      post_accounts_request : Stripe::PostAccountsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts(account_token: account_token, bank_account: bank_account, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, country: country, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance, _type: _type).execute(&block)
+      build_api_request_for_post_accounts(post_accounts_request: post_accounts_request).execute(&block)
     end
-
-    POST_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT_TOKEN    = 5000
-    POST_ACCOUNTS_VALID_VALUES_FOR_BUSINESS_TYPE  = String.static_array("company", "government_entity", "individual", "non_profit")
-    POST_ACCOUNTS_MAX_LENGTH_FOR_COUNTRY          = 5000
-    POST_ACCOUNTS_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
-    POST_ACCOUNTS_VALID_VALUES_FOR__TYPE          = String.static_array("custom", "express", "standard")
 
     # @return Crest::Request
     def build_api_request_for_post_accounts(
       *,
-      account_token : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      country : String? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecs? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
-      _type : String? = nil
+      post_accounts_request : Stripe::PostAccountsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts ..." }
       end
 
       if client_side_validation
-        unless (_account_token = account_token).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("account_token", account_token.to_s.size, POST_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT_TOKEN)
-        end
-        unless (_bank_account = bank_account).nil?
-          _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-        end
-        unless (_business_profile = business_profile).nil?
-          _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
-        end
-        unless (_business_type = business_type).nil?
-          OpenApi::EnumValidator.validate("business_type", _business_type, POST_ACCOUNTS_VALID_VALUES_FOR_BUSINESS_TYPE)
-        end
-        unless (_capabilities = capabilities).nil?
-          _capabilities.validate if _capabilities.is_a?(OpenApi::Validatable)
-        end
-        unless (_company = company).nil?
-          _company.validate if _company.is_a?(OpenApi::Validatable)
-        end
-        unless (_country = country).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("country", country.to_s.size, POST_ACCOUNTS_MAX_LENGTH_FOR_COUNTRY)
-        end
-
-        unless (_documents = documents).nil?
-          _documents.validate if _documents.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_external_account = external_account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("external_account", external_account.to_s.size, POST_ACCOUNTS_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
-        end
-        unless (_individual = individual).nil?
-          _individual.validate if _individual.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_settings = settings).nil?
-          _settings.validate if _settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_tos_acceptance = tos_acceptance).nil?
-          _tos_acceptance.validate if _tos_acceptance.is_a?(OpenApi::Validatable)
-        end
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_ACCOUNTS_VALID_VALUES_FOR__TYPE)
+        unless (_post_accounts_request = post_accounts_request).nil?
+          _post_accounts_request.validate if _post_accounts_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_token"] = account_token.to_s if !account_token.nil?
-      form_params["bank_account"] = bank_account.to_s if !bank_account.nil?
-      form_params["business_profile"] = business_profile.to_s if !business_profile.nil?
-      form_params["business_type"] = business_type.to_s if !business_type.nil?
-      form_params["capabilities"] = capabilities.to_s if !capabilities.nil?
-      form_params["company"] = company.to_s if !company.nil?
-      form_params["country"] = country.to_s if !country.nil?
-      form_params["default_currency"] = default_currency.to_s if !default_currency.nil?
-      form_params["documents"] = documents.to_s if !documents.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["external_account"] = external_account.to_s if !external_account.nil?
-      form_params["individual"] = individual.to_s if !individual.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["settings"] = settings.to_s if !settings.nil?
-      form_params["tos_acceptance"] = tos_acceptance.to_s if !tos_acceptance.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_request, content_type: header_params["Content-Type"]?) if !post_accounts_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1527,79 +1351,27 @@ module Stripe
 
     # <p>Updates a <a href=\"/docs/connect/accounts\">connected account</a> by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can be changed only for Custom accounts. (These are marked <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported for Standard accounts.</p>  <p>To update your own account, use the <a href=\"https://dashboard.stripe.com/account\">Dashboard</a>. Refer to our <a href=\"/docs/connect/updating-accounts\">Connect</a> documentation to learn more about updating accounts.</p>
     # @required @param account [String?]
-    # @optional @param account_token [String?] An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-    # @optional @param business_profile [Stripe::BusinessProfileSpecs?]
-    # @optional @param business_type [String?] The business type.
-    # @optional @param capabilities [Stripe::CapabilitiesParam?]
-    # @optional @param company [Stripe::CompanySpecs?]
-    # @optional @param default_currency [String?] Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    # @optional @param documents [Stripe::DocumentsSpecs?]
-    # @optional @param email [String?] The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-    # @optional @param individual [Stripe::IndividualSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param settings [Stripe::SettingsSpecsUpdate?]
-    # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
+    # @optional @param post_accounts_account_request [Stripe::PostAccountsAccountRequest?]
     # @return [Stripe::Account]
     def post_accounts_account(
       *,
       account : String? = nil,
-      account_token : String? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecsUpdate? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil
+      post_accounts_account_request : Stripe::PostAccountsAccountRequest? = nil
     ) : Stripe::Account
-      data, _status_code, _headers = post_accounts_account_with_http_info(account: account, account_token: account_token, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance)
+      data, _status_code, _headers = post_accounts_account_with_http_info(account: account, post_accounts_account_request: post_accounts_account_request)
       data
     end
 
     # &lt;p&gt;Updates a &lt;a href&#x3D;\&quot;/docs/connect/accounts\&quot;&gt;connected account&lt;/a&gt; by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can be changed only for Custom accounts. (These are marked &lt;strong&gt;Custom Only&lt;/strong&gt; below.) Parameters marked &lt;strong&gt;Custom and Express&lt;/strong&gt; are not supported for Standard accounts.&lt;/p&gt;  &lt;p&gt;To update your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;Dashboard&lt;/a&gt;. Refer to our &lt;a href&#x3D;\&quot;/docs/connect/updating-accounts\&quot;&gt;Connect&lt;/a&gt; documentation to learn more about updating accounts.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param account_token [String?] An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-    # @optional @param business_profile [Stripe::BusinessProfileSpecs?]
-    # @optional @param business_type [String?] The business type.
-    # @optional @param capabilities [Stripe::CapabilitiesParam?]
-    # @optional @param company [Stripe::CompanySpecs?]
-    # @optional @param default_currency [String?] Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    # @optional @param documents [Stripe::DocumentsSpecs?]
-    # @optional @param email [String?] The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-    # @optional @param individual [Stripe::IndividualSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param settings [Stripe::SettingsSpecsUpdate?]
-    # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
+    # @optional @param post_accounts_account_request [Stripe::PostAccountsAccountRequest?]
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
     def post_accounts_account_with_http_info(
       *,
       account : String? = nil,
-      account_token : String? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecsUpdate? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil
+      post_accounts_account_request : Stripe::PostAccountsAccountRequest? = nil
     ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account(account: account, account_token: account_token, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance)
+      request = build_api_request_for_post_accounts_account(account: account, post_accounts_account_request: post_accounts_account_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1612,66 +1384,24 @@ module Stripe
 
     # &lt;p&gt;Updates a &lt;a href&#x3D;\&quot;/docs/connect/accounts\&quot;&gt;connected account&lt;/a&gt; by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can be changed only for Custom accounts. (These are marked &lt;strong&gt;Custom Only&lt;/strong&gt; below.) Parameters marked &lt;strong&gt;Custom and Express&lt;/strong&gt; are not supported for Standard accounts.&lt;/p&gt;  &lt;p&gt;To update your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;Dashboard&lt;/a&gt;. Refer to our &lt;a href&#x3D;\&quot;/docs/connect/updating-accounts\&quot;&gt;Connect&lt;/a&gt; documentation to learn more about updating accounts.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param account_token [String?] An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-    # @optional @param business_profile [Stripe::BusinessProfileSpecs?]
-    # @optional @param business_type [String?] The business type.
-    # @optional @param capabilities [Stripe::CapabilitiesParam?]
-    # @optional @param company [Stripe::CompanySpecs?]
-    # @optional @param default_currency [String?] Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    # @optional @param documents [Stripe::DocumentsSpecs?]
-    # @optional @param email [String?] The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-    # @optional @param individual [Stripe::IndividualSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param settings [Stripe::SettingsSpecsUpdate?]
-    # @optional @param tos_acceptance [Stripe::TosAcceptanceSpecs?]
+    # @optional @param post_accounts_account_request [Stripe::PostAccountsAccountRequest?]
     # @return nil
     def post_accounts_account(
       *,
       account : String? = nil,
-      account_token : String? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecsUpdate? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil,
+      post_accounts_account_request : Stripe::PostAccountsAccountRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account(account: account, account_token: account_token, business_profile: business_profile, business_type: business_type, capabilities: capabilities, company: company, default_currency: default_currency, documents: documents, email: email, expand: expand, external_account: external_account, individual: individual, metadata: metadata, settings: settings, tos_acceptance: tos_acceptance).execute(&block)
+      build_api_request_for_post_accounts_account(account: account, post_accounts_account_request: post_accounts_account_request).execute(&block)
     end
 
-    POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT          = 5000
-    POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT_TOKEN    = 5000
-    POST_ACCOUNTS_ACCOUNT_VALID_VALUES_FOR_BUSINESS_TYPE  = String.static_array("company", "government_entity", "individual", "non_profit")
-    POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
+    POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_accounts_account(
       *,
       account : String? = nil,
-      account_token : String? = nil,
-      business_profile : Stripe::BusinessProfileSpecs? = nil,
-      business_type : String? = nil,
-      capabilities : Stripe::CapabilitiesParam? = nil,
-      company : Stripe::CompanySpecs? = nil,
-      default_currency : String? = nil,
-      documents : Stripe::DocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
-      individual : Stripe::IndividualSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      settings : Stripe::SettingsSpecsUpdate? = nil,
-      tos_acceptance : Stripe::TosAcceptanceSpecs? = nil
+      post_accounts_account_request : Stripe::PostAccountsAccountRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account ..." }
@@ -1682,78 +1412,32 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT)
         end
-        unless (_account_token = account_token).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("account_token", account_token.to_s.size, POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_ACCOUNT_TOKEN)
-        end
-        unless (_business_profile = business_profile).nil?
-          _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
-        end
-        unless (_business_type = business_type).nil?
-          OpenApi::EnumValidator.validate("business_type", _business_type, POST_ACCOUNTS_ACCOUNT_VALID_VALUES_FOR_BUSINESS_TYPE)
-        end
-        unless (_capabilities = capabilities).nil?
-          _capabilities.validate if _capabilities.is_a?(OpenApi::Validatable)
-        end
-        unless (_company = company).nil?
-          _company.validate if _company.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_documents = documents).nil?
-          _documents.validate if _documents.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_external_account = external_account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("external_account", external_account.to_s.size, POST_ACCOUNTS_ACCOUNT_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
-        end
-        unless (_individual = individual).nil?
-          _individual.validate if _individual.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_settings = settings).nil?
-          _settings.validate if _settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_tos_acceptance = tos_acceptance).nil?
-          _tos_acceptance.validate if _tos_acceptance.is_a?(OpenApi::Validatable)
+        unless (_post_accounts_account_request = post_accounts_account_request).nil?
+          _post_accounts_account_request.validate if _post_accounts_account_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_token"] = account_token.to_s if !account_token.nil?
-      form_params["business_profile"] = business_profile.to_s if !business_profile.nil?
-      form_params["business_type"] = business_type.to_s if !business_type.nil?
-      form_params["capabilities"] = capabilities.to_s if !capabilities.nil?
-      form_params["company"] = company.to_s if !company.nil?
-      form_params["default_currency"] = default_currency.to_s if !default_currency.nil?
-      form_params["documents"] = documents.to_s if !documents.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["external_account"] = external_account.to_s if !external_account.nil?
-      form_params["individual"] = individual.to_s if !individual.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["settings"] = settings.to_s if !settings.nil?
-      form_params["tos_acceptance"] = tos_acceptance.to_s if !tos_acceptance.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1774,34 +1458,30 @@ module Stripe
     # <p>Updates an existing Account Capability.</p>
     # @required @param account [String?]
     # @required @param capability [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param requested [Bool?] Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the `requirements` arrays.
+    # @optional @param post_accounts_account_capabilities_capability_request [Stripe::PostAccountsAccountCapabilitiesCapabilityRequest?]
     # @return [Stripe::Capability]
     def post_accounts_account_capabilities_capability(
       *,
       account : String? = nil,
       capability : String? = nil,
-      expand : Array(String)? = nil,
-      requested : Bool? = nil
+      post_accounts_account_capabilities_capability_request : Stripe::PostAccountsAccountCapabilitiesCapabilityRequest? = nil
     ) : Stripe::Capability
-      data, _status_code, _headers = post_accounts_account_capabilities_capability_with_http_info(account: account, capability: capability, expand: expand, requested: requested)
+      data, _status_code, _headers = post_accounts_account_capabilities_capability_with_http_info(account: account, capability: capability, post_accounts_account_capabilities_capability_request: post_accounts_account_capabilities_capability_request)
       data
     end
 
     # &lt;p&gt;Updates an existing Account Capability.&lt;/p&gt;
     # @required @param account [String?]
     # @required @param capability [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param requested [Bool?] Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the `requirements` arrays.
+    # @optional @param post_accounts_account_capabilities_capability_request [Stripe::PostAccountsAccountCapabilitiesCapabilityRequest?]
     # @return [Tuple(Stripe::Capability, Integer, Hash)] Stripe::Capability, response status code and response headers
     def post_accounts_account_capabilities_capability_with_http_info(
       *,
       account : String? = nil,
       capability : String? = nil,
-      expand : Array(String)? = nil,
-      requested : Bool? = nil
+      post_accounts_account_capabilities_capability_request : Stripe::PostAccountsAccountCapabilitiesCapabilityRequest? = nil
     ) : Tuple(Stripe::Capability, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_capabilities_capability(account: account, capability: capability, expand: expand, requested: requested)
+      request = build_api_request_for_post_accounts_account_capabilities_capability(account: account, capability: capability, post_accounts_account_capabilities_capability_request: post_accounts_account_capabilities_capability_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1815,18 +1495,16 @@ module Stripe
     # &lt;p&gt;Updates an existing Account Capability.&lt;/p&gt;
     # @required @param account [String?]
     # @required @param capability [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param requested [Bool?] Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the `requirements` arrays.
+    # @optional @param post_accounts_account_capabilities_capability_request [Stripe::PostAccountsAccountCapabilitiesCapabilityRequest?]
     # @return nil
     def post_accounts_account_capabilities_capability(
       *,
       account : String? = nil,
       capability : String? = nil,
-      expand : Array(String)? = nil,
-      requested : Bool? = nil,
+      post_accounts_account_capabilities_capability_request : Stripe::PostAccountsAccountCapabilitiesCapabilityRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_capabilities_capability(account: account, capability: capability, expand: expand, requested: requested).execute(&block)
+      build_api_request_for_post_accounts_account_capabilities_capability(account: account, capability: capability, post_accounts_account_capabilities_capability_request: post_accounts_account_capabilities_capability_request).execute(&block)
     end
 
     POST_ACCOUNTS_ACCOUNT_CAPABILITIES_CAPABILITY_MAX_LENGTH_FOR_ACCOUNT = 5000
@@ -1836,8 +1514,7 @@ module Stripe
       *,
       account : String? = nil,
       capability : String? = nil,
-      expand : Array(String)? = nil,
-      requested : Bool? = nil
+      post_accounts_account_capabilities_capability_request : Stripe::PostAccountsAccountCapabilitiesCapabilityRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_capabilities_capability ..." }
@@ -1849,31 +1526,33 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNTS_ACCOUNT_CAPABILITIES_CAPABILITY_MAX_LENGTH_FOR_ACCOUNT)
         end
         raise ArgumentError.new("\"capability\" is required and cannot be null") if capability.nil?
+
+        unless (_post_accounts_account_capabilities_capability_request = post_accounts_account_capabilities_capability_request).nil?
+          _post_accounts_account_capabilities_capability_request.validate if _post_accounts_account_capabilities_capability_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/capabilities/{capability}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "capability" + "}", URI.encode_path(capability.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["requested"] = requested.to_s if !requested.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_capabilities_capability_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_capabilities_capability_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1893,39 +1572,27 @@ module Stripe
 
     # <p>Create an external account for a given account.</p>
     # @required @param account [String?]
-    # @optional @param bank_account [Stripe::PostAccountsRequestBankAccount?]
-    # @optional @param default_for_currency [Bool?] When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
+    # @optional @param post_accounts_account_external_accounts_request [Stripe::PostAccountsAccountExternalAccountsRequest?]
     # @return [Stripe::ExternalAccount]
     def post_accounts_account_external_accounts(
       *,
       account : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      default_for_currency : Bool? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil
+      post_accounts_account_external_accounts_request : Stripe::PostAccountsAccountExternalAccountsRequest? = nil
     ) : Stripe::ExternalAccount
-      data, _status_code, _headers = post_accounts_account_external_accounts_with_http_info(account: account, bank_account: bank_account, default_for_currency: default_for_currency, expand: expand, external_account: external_account)
+      data, _status_code, _headers = post_accounts_account_external_accounts_with_http_info(account: account, post_accounts_account_external_accounts_request: post_accounts_account_external_accounts_request)
       data
     end
 
     # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param bank_account [Stripe::PostAccountsRequestBankAccount?]
-    # @optional @param default_for_currency [Bool?] When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
+    # @optional @param post_accounts_account_external_accounts_request [Stripe::PostAccountsAccountExternalAccountsRequest?]
     # @return [Tuple(Stripe::ExternalAccount, Integer, Hash)] Stripe::ExternalAccount, response status code and response headers
     def post_accounts_account_external_accounts_with_http_info(
       *,
       account : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      default_for_currency : Bool? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil
+      post_accounts_account_external_accounts_request : Stripe::PostAccountsAccountExternalAccountsRequest? = nil
     ) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_external_accounts(account: account, bank_account: bank_account, default_for_currency: default_for_currency, expand: expand, external_account: external_account)
+      request = build_api_request_for_post_accounts_account_external_accounts(account: account, post_accounts_account_external_accounts_request: post_accounts_account_external_accounts_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1938,34 +1605,24 @@ module Stripe
 
     # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param bank_account [Stripe::PostAccountsRequestBankAccount?]
-    # @optional @param default_for_currency [Bool?] When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param external_account [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
+    # @optional @param post_accounts_account_external_accounts_request [Stripe::PostAccountsAccountExternalAccountsRequest?]
     # @return nil
     def post_accounts_account_external_accounts(
       *,
       account : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      default_for_currency : Bool? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil,
+      post_accounts_account_external_accounts_request : Stripe::PostAccountsAccountExternalAccountsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_external_accounts(account: account, bank_account: bank_account, default_for_currency: default_for_currency, expand: expand, external_account: external_account).execute(&block)
+      build_api_request_for_post_accounts_account_external_accounts(account: account, post_accounts_account_external_accounts_request: post_accounts_account_external_accounts_request).execute(&block)
     end
 
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT          = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
+    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_accounts_account_external_accounts(
       *,
       account : String? = nil,
-      bank_account : Stripe::PostAccountsRequestBankAccount? = nil,
-      default_for_currency : Bool? = nil,
-      expand : Array(String)? = nil,
-      external_account : String? = nil
+      post_accounts_account_external_accounts_request : Stripe::PostAccountsAccountExternalAccountsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_external_accounts ..." }
@@ -1976,40 +1633,32 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_ACCOUNT)
         end
-        unless (_bank_account = bank_account).nil?
-          _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_external_account = external_account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("external_account", external_account.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
+        unless (_post_accounts_account_external_accounts_request = post_accounts_account_external_accounts_request).nil?
+          _post_accounts_account_external_accounts_request.validate if _post_accounts_account_external_accounts_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/external_accounts".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["bank_account"] = bank_account.to_s if !bank_account.nil?
-      form_params["default_for_currency"] = default_for_currency.to_s if !default_for_currency.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["external_account"] = external_account.to_s if !external_account.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_external_accounts_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_external_accounts_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2030,86 +1679,30 @@ module Stripe
     # <p>Updates the metadata, account holder name, account holder type of a bank account belonging to a <a href=\"/docs/connect/custom-accounts\">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>  <p>You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.</p>
     # @required @param account [String?]
     # @required @param id [String?]
-    # @optional @param account_holder_name [String?] The name of the person or business that owns the bank account.
-    # @optional @param account_holder_type [String?] The type of entity that holds the account. This can be either `individual` or `company`.
-    # @optional @param account_type [String?] The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
-    # @optional @param address_city [String?] City/District/Suburb/Town/Village.
-    # @optional @param address_country [String?] Billing address country, if provided when creating card.
-    # @optional @param address_line1 [String?] Address line 1 (Street address/PO Box/Company name).
-    # @optional @param address_line2 [String?] Address line 2 (Apartment/Suite/Unit/Building).
-    # @optional @param address_state [String?] State/County/Province/Region.
-    # @optional @param address_zip [String?] ZIP or postal code.
-    # @optional @param default_for_currency [Bool?] When set to true, this becomes the default external account for its currency.
-    # @optional @param exp_month [String?] Two digit number representing the card’s expiration month.
-    # @optional @param exp_year [String?] Four digit number representing the card’s expiration year.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] Cardholder name.
+    # @optional @param post_accounts_account_external_accounts_id_request [Stripe::PostAccountsAccountExternalAccountsIdRequest?]
     # @return [Stripe::ExternalAccount]
     def post_accounts_account_external_accounts_id(
       *,
       account : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      account_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      default_for_currency : Bool? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil
+      post_accounts_account_external_accounts_id_request : Stripe::PostAccountsAccountExternalAccountsIdRequest? = nil
     ) : Stripe::ExternalAccount
-      data, _status_code, _headers = post_accounts_account_external_accounts_id_with_http_info(account: account, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, account_type: account_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, default_for_currency: default_for_currency, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name)
+      data, _status_code, _headers = post_accounts_account_external_accounts_id_with_http_info(account: account, id: id, post_accounts_account_external_accounts_id_request: post_accounts_account_external_accounts_id_request)
       data
     end
 
     # &lt;p&gt;Updates the metadata, account holder name, account holder type of a bank account belonging to a &lt;a href&#x3D;\&quot;/docs/connect/custom-accounts\&quot;&gt;Custom account&lt;/a&gt;, and optionally sets it as the default for its currency. Other bank account details are not editable by design.&lt;/p&gt;  &lt;p&gt;You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.&lt;/p&gt;
     # @required @param account [String?]
     # @required @param id [String?]
-    # @optional @param account_holder_name [String?] The name of the person or business that owns the bank account.
-    # @optional @param account_holder_type [String?] The type of entity that holds the account. This can be either `individual` or `company`.
-    # @optional @param account_type [String?] The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
-    # @optional @param address_city [String?] City/District/Suburb/Town/Village.
-    # @optional @param address_country [String?] Billing address country, if provided when creating card.
-    # @optional @param address_line1 [String?] Address line 1 (Street address/PO Box/Company name).
-    # @optional @param address_line2 [String?] Address line 2 (Apartment/Suite/Unit/Building).
-    # @optional @param address_state [String?] State/County/Province/Region.
-    # @optional @param address_zip [String?] ZIP or postal code.
-    # @optional @param default_for_currency [Bool?] When set to true, this becomes the default external account for its currency.
-    # @optional @param exp_month [String?] Two digit number representing the card’s expiration month.
-    # @optional @param exp_year [String?] Four digit number representing the card’s expiration year.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] Cardholder name.
+    # @optional @param post_accounts_account_external_accounts_id_request [Stripe::PostAccountsAccountExternalAccountsIdRequest?]
     # @return [Tuple(Stripe::ExternalAccount, Integer, Hash)] Stripe::ExternalAccount, response status code and response headers
     def post_accounts_account_external_accounts_id_with_http_info(
       *,
       account : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      account_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      default_for_currency : Bool? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil
+      post_accounts_account_external_accounts_id_request : Stripe::PostAccountsAccountExternalAccountsIdRequest? = nil
     ) : Tuple(Stripe::ExternalAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_external_accounts_id(account: account, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, account_type: account_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, default_for_currency: default_for_currency, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name)
+      request = build_api_request_for_post_accounts_account_external_accounts_id(account: account, id: id, post_accounts_account_external_accounts_id_request: post_accounts_account_external_accounts_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2123,82 +1716,26 @@ module Stripe
     # &lt;p&gt;Updates the metadata, account holder name, account holder type of a bank account belonging to a &lt;a href&#x3D;\&quot;/docs/connect/custom-accounts\&quot;&gt;Custom account&lt;/a&gt;, and optionally sets it as the default for its currency. Other bank account details are not editable by design.&lt;/p&gt;  &lt;p&gt;You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.&lt;/p&gt;
     # @required @param account [String?]
     # @required @param id [String?]
-    # @optional @param account_holder_name [String?] The name of the person or business that owns the bank account.
-    # @optional @param account_holder_type [String?] The type of entity that holds the account. This can be either `individual` or `company`.
-    # @optional @param account_type [String?] The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
-    # @optional @param address_city [String?] City/District/Suburb/Town/Village.
-    # @optional @param address_country [String?] Billing address country, if provided when creating card.
-    # @optional @param address_line1 [String?] Address line 1 (Street address/PO Box/Company name).
-    # @optional @param address_line2 [String?] Address line 2 (Apartment/Suite/Unit/Building).
-    # @optional @param address_state [String?] State/County/Province/Region.
-    # @optional @param address_zip [String?] ZIP or postal code.
-    # @optional @param default_for_currency [Bool?] When set to true, this becomes the default external account for its currency.
-    # @optional @param exp_month [String?] Two digit number representing the card’s expiration month.
-    # @optional @param exp_year [String?] Four digit number representing the card’s expiration year.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] Cardholder name.
+    # @optional @param post_accounts_account_external_accounts_id_request [Stripe::PostAccountsAccountExternalAccountsIdRequest?]
     # @return nil
     def post_accounts_account_external_accounts_id(
       *,
       account : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      account_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      default_for_currency : Bool? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
+      post_accounts_account_external_accounts_id_request : Stripe::PostAccountsAccountExternalAccountsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_external_accounts_id(account: account, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, account_type: account_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, default_for_currency: default_for_currency, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name).execute(&block)
+      build_api_request_for_post_accounts_account_external_accounts_id(account: account, id: id, post_accounts_account_external_accounts_id_request: post_accounts_account_external_accounts_id_request).execute(&block)
     end
 
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT               = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("", "company", "individual")
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_TYPE          = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE        = String.static_array("checking", "futsu", "savings", "toza")
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE2         = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_STATE         = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_ZIP           = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_EXP_MONTH             = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_EXP_YEAR              = 5000
-    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_NAME                  = 5000
+    POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_accounts_account_external_accounts_id(
       *,
       account : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      account_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      default_for_currency : Bool? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil
+      post_accounts_account_external_accounts_id_request : Stripe::PostAccountsAccountExternalAccountsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_external_accounts_id ..." }
@@ -2211,85 +1748,32 @@ module Stripe
         end
         raise ArgumentError.new("\"id\" is required and cannot be null") if id.nil?
 
-        unless (_account_holder_name = account_holder_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", account_holder_name.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
-        end
-        unless (_account_holder_type = account_holder_type).nil?
-          OpenApi::EnumValidator.validate("account_holder_type", _account_holder_type, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
-        end
-        unless (_account_type = account_type).nil?
-          OpenApi::EnumValidator.validate("account_type", _account_type, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_VALID_VALUES_FOR_ACCOUNT_TYPE)
-        end
-        unless (_address_city = address_city).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_city", address_city.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_CITY)
-        end
-        unless (_address_country = address_country).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_country", address_country.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY)
-        end
-        unless (_address_line1 = address_line1).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_line1", address_line1.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE1)
-        end
-        unless (_address_line2 = address_line2).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_line2", address_line2.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_LINE2)
-        end
-        unless (_address_state = address_state).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_state", address_state.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_STATE)
-        end
-        unless (_address_zip = address_zip).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_zip", address_zip.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_ADDRESS_ZIP)
-        end
-
-        unless (_exp_month = exp_month).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("exp_month", exp_month.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_EXP_MONTH)
-        end
-        unless (_exp_year = exp_year).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("exp_year", exp_year.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_EXP_YEAR)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_ACCOUNTS_ACCOUNT_EXTERNAL_ACCOUNTS_ID_MAX_LENGTH_FOR_NAME)
+        unless (_post_accounts_account_external_accounts_id_request = post_accounts_account_external_accounts_id_request).nil?
+          _post_accounts_account_external_accounts_id_request.validate if _post_accounts_account_external_accounts_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/external_accounts/{id}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_holder_name"] = account_holder_name.to_s if !account_holder_name.nil?
-      form_params["account_holder_type"] = account_holder_type.to_s if !account_holder_type.nil?
-      form_params["account_type"] = account_type.to_s if !account_type.nil?
-      form_params["address_city"] = address_city.to_s if !address_city.nil?
-      form_params["address_country"] = address_country.to_s if !address_country.nil?
-      form_params["address_line1"] = address_line1.to_s if !address_line1.nil?
-      form_params["address_line2"] = address_line2.to_s if !address_line2.nil?
-      form_params["address_state"] = address_state.to_s if !address_state.nil?
-      form_params["address_zip"] = address_zip.to_s if !address_zip.nil?
-      form_params["default_for_currency"] = default_for_currency.to_s if !default_for_currency.nil?
-      form_params["exp_month"] = exp_month.to_s if !exp_month.nil?
-      form_params["exp_year"] = exp_year.to_s if !exp_year.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["name"] = name.to_s if !name.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_external_accounts_id_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_external_accounts_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2309,27 +1793,27 @@ module Stripe
 
     # <p>Creates a single-use login link for an Express account to access their Stripe dashboard.</p>  <p><strong>You may only create login links for <a href=\"/docs/connect/express-accounts\">Express accounts</a> connected to your platform</strong>.</p>
     # @required @param account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::LoginLink]
     def post_accounts_account_login_links(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::LoginLink
-      data, _status_code, _headers = post_accounts_account_login_links_with_http_info(account: account, expand: expand)
+      data, _status_code, _headers = post_accounts_account_login_links_with_http_info(account: account, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Creates a single-use login link for an Express account to access their Stripe dashboard.&lt;/p&gt;  &lt;p&gt;&lt;strong&gt;You may only create login links for &lt;a href&#x3D;\&quot;/docs/connect/express-accounts\&quot;&gt;Express accounts&lt;/a&gt; connected to your platform&lt;/strong&gt;.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::LoginLink, Integer, Hash)] Stripe::LoginLink, response status code and response headers
     def post_accounts_account_login_links_with_http_info(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::LoginLink, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_login_links(account: account, expand: expand)
+      request = build_api_request_for_post_accounts_account_login_links(account: account, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2342,15 +1826,15 @@ module Stripe
 
     # &lt;p&gt;Creates a single-use login link for an Express account to access their Stripe dashboard.&lt;/p&gt;  &lt;p&gt;&lt;strong&gt;You may only create login links for &lt;a href&#x3D;\&quot;/docs/connect/express-accounts\&quot;&gt;Express accounts&lt;/a&gt; connected to your platform&lt;/strong&gt;.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_accounts_account_login_links(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_login_links(account: account, expand: expand).execute(&block)
+      build_api_request_for_post_accounts_account_login_links(account: account, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_ACCOUNTS_ACCOUNT_LOGIN_LINKS_MAX_LENGTH_FOR_ACCOUNT = 5000
@@ -2359,7 +1843,7 @@ module Stripe
     def build_api_request_for_post_accounts_account_login_links(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_login_links ..." }
@@ -2370,30 +1854,32 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNTS_ACCOUNT_LOGIN_LINKS_MAX_LENGTH_FOR_ACCOUNT)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/login_links".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2413,131 +1899,27 @@ module Stripe
 
     # <p>Creates a new person.</p>
     # @required @param account [String?]
-    # @optional @param address [Stripe::AddressSpecs?]
-    # @optional @param address_kana [Stripe::JapanAddressKanaSpecs?]
-    # @optional @param address_kanji [Stripe::JapanAddressKanjiSpecs?]
-    # @optional @param dob [Stripe::PostAccountsAccountPersonsRequestDob?]
-    # @optional @param documents [Stripe::PersonDocumentsSpecs?]
-    # @optional @param email [String?] The person's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param first_name [String?] The person's first name.
-    # @optional @param first_name_kana [String?] The Kana variation of the person's first name (Japan only).
-    # @optional @param first_name_kanji [String?] The Kanji variation of the person's first name (Japan only).
-    # @optional @param full_name_aliases [Stripe::PostAccountsAccountPersonsRequestFullNameAliases?]
-    # @optional @param gender [String?] The person's gender (International regulations require either \\\"male\\\" or \\\"female\\\").
-    # @optional @param id_number [String?] The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param id_number_secondary [String?] The person's secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param last_name [String?] The person's last name.
-    # @optional @param last_name_kana [String?] The Kana variation of the person's last name (Japan only).
-    # @optional @param last_name_kanji [String?] The Kanji variation of the person's last name (Japan only).
-    # @optional @param maiden_name [String?] The person's maiden name.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nationality [String?] The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\"XX\\\" if unavailable.
-    # @optional @param person_token [String?] A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-    # @optional @param phone [String?] The person's phone number.
-    # @optional @param political_exposure [String?] Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-    # @optional @param registered_address [Stripe::AddressSpecs?]
-    # @optional @param relationship [Stripe::RelationshipSpecs?]
-    # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
-    # @optional @param verification [Stripe::PersonVerificationSpecs?]
+    # @optional @param post_accounts_account_persons_request [Stripe::PostAccountsAccountPersonsRequest?]
     # @return [Stripe::Person]
     def post_accounts_account_persons(
       *,
       account : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil
     ) : Stripe::Person
-      data, _status_code, _headers = post_accounts_account_persons_with_http_info(account: account, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
+      data, _status_code, _headers = post_accounts_account_persons_with_http_info(account: account, post_accounts_account_persons_request: post_accounts_account_persons_request)
       data
     end
 
     # &lt;p&gt;Creates a new person.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param address [Stripe::AddressSpecs?]
-    # @optional @param address_kana [Stripe::JapanAddressKanaSpecs?]
-    # @optional @param address_kanji [Stripe::JapanAddressKanjiSpecs?]
-    # @optional @param dob [Stripe::PostAccountsAccountPersonsRequestDob?]
-    # @optional @param documents [Stripe::PersonDocumentsSpecs?]
-    # @optional @param email [String?] The person's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param first_name [String?] The person's first name.
-    # @optional @param first_name_kana [String?] The Kana variation of the person's first name (Japan only).
-    # @optional @param first_name_kanji [String?] The Kanji variation of the person's first name (Japan only).
-    # @optional @param full_name_aliases [Stripe::PostAccountsAccountPersonsRequestFullNameAliases?]
-    # @optional @param gender [String?] The person's gender (International regulations require either \\\"male\\\" or \\\"female\\\").
-    # @optional @param id_number [String?] The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param id_number_secondary [String?] The person's secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param last_name [String?] The person's last name.
-    # @optional @param last_name_kana [String?] The Kana variation of the person's last name (Japan only).
-    # @optional @param last_name_kanji [String?] The Kanji variation of the person's last name (Japan only).
-    # @optional @param maiden_name [String?] The person's maiden name.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nationality [String?] The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\"XX\\\" if unavailable.
-    # @optional @param person_token [String?] A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-    # @optional @param phone [String?] The person's phone number.
-    # @optional @param political_exposure [String?] Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-    # @optional @param registered_address [Stripe::AddressSpecs?]
-    # @optional @param relationship [Stripe::RelationshipSpecs?]
-    # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
-    # @optional @param verification [Stripe::PersonVerificationSpecs?]
+    # @optional @param post_accounts_account_persons_request [Stripe::PostAccountsAccountPersonsRequest?]
     # @return [Tuple(Stripe::Person, Integer, Hash)] Stripe::Person, response status code and response headers
     def post_accounts_account_persons_with_http_info(
       *,
       account : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil
     ) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_persons(account: account, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
+      request = build_api_request_for_post_accounts_account_persons(account: account, post_accounts_account_persons_request: post_accounts_account_persons_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2550,114 +1932,24 @@ module Stripe
 
     # &lt;p&gt;Creates a new person.&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param address [Stripe::AddressSpecs?]
-    # @optional @param address_kana [Stripe::JapanAddressKanaSpecs?]
-    # @optional @param address_kanji [Stripe::JapanAddressKanjiSpecs?]
-    # @optional @param dob [Stripe::PostAccountsAccountPersonsRequestDob?]
-    # @optional @param documents [Stripe::PersonDocumentsSpecs?]
-    # @optional @param email [String?] The person's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param first_name [String?] The person's first name.
-    # @optional @param first_name_kana [String?] The Kana variation of the person's first name (Japan only).
-    # @optional @param first_name_kanji [String?] The Kanji variation of the person's first name (Japan only).
-    # @optional @param full_name_aliases [Stripe::PostAccountsAccountPersonsRequestFullNameAliases?]
-    # @optional @param gender [String?] The person's gender (International regulations require either \\\"male\\\" or \\\"female\\\").
-    # @optional @param id_number [String?] The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param id_number_secondary [String?] The person's secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param last_name [String?] The person's last name.
-    # @optional @param last_name_kana [String?] The Kana variation of the person's last name (Japan only).
-    # @optional @param last_name_kanji [String?] The Kanji variation of the person's last name (Japan only).
-    # @optional @param maiden_name [String?] The person's maiden name.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nationality [String?] The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\"XX\\\" if unavailable.
-    # @optional @param person_token [String?] A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-    # @optional @param phone [String?] The person's phone number.
-    # @optional @param political_exposure [String?] Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-    # @optional @param registered_address [Stripe::AddressSpecs?]
-    # @optional @param relationship [Stripe::RelationshipSpecs?]
-    # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
-    # @optional @param verification [Stripe::PersonVerificationSpecs?]
+    # @optional @param post_accounts_account_persons_request [Stripe::PostAccountsAccountPersonsRequest?]
     # @return nil
     def post_accounts_account_persons(
       *,
       account : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil,
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_persons(account: account, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification).execute(&block)
+      build_api_request_for_post_accounts_account_persons(account: account, post_accounts_account_persons_request: post_accounts_account_persons_request).execute(&block)
     end
 
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ACCOUNT             = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_FIRST_NAME          = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_FIRST_NAME_KANA     = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_FIRST_NAME_KANJI    = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ID_NUMBER           = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ID_NUMBER_SECONDARY = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_LAST_NAME           = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_LAST_NAME_KANA      = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_LAST_NAME_KANJI     = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_MAIDEN_NAME         = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_NATIONALITY         = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_PERSON_TOKEN        = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_POLITICAL_EXPOSURE  = 5000
+    POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_accounts_account_persons(
       *,
       account : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_persons ..." }
@@ -2668,126 +1960,32 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ACCOUNT)
         end
-        unless (_address = address).nil?
-          _address.validate if _address.is_a?(OpenApi::Validatable)
-        end
-        unless (_address_kana = address_kana).nil?
-          _address_kana.validate if _address_kana.is_a?(OpenApi::Validatable)
-        end
-        unless (_address_kanji = address_kanji).nil?
-          _address_kanji.validate if _address_kanji.is_a?(OpenApi::Validatable)
-        end
-        unless (_dob = dob).nil?
-          _dob.validate if _dob.is_a?(OpenApi::Validatable)
-        end
-        unless (_documents = documents).nil?
-          _documents.validate if _documents.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_first_name = first_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("first_name", first_name.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_FIRST_NAME)
-        end
-        unless (_first_name_kana = first_name_kana).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("first_name_kana", first_name_kana.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_FIRST_NAME_KANA)
-        end
-        unless (_first_name_kanji = first_name_kanji).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("first_name_kanji", first_name_kanji.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_FIRST_NAME_KANJI)
-        end
-        unless (_full_name_aliases = full_name_aliases).nil?
-          _full_name_aliases.validate if _full_name_aliases.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_id_number = id_number).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("id_number", id_number.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ID_NUMBER)
-        end
-        unless (_id_number_secondary = id_number_secondary).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("id_number_secondary", id_number_secondary.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_ID_NUMBER_SECONDARY)
-        end
-        unless (_last_name = last_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("last_name", last_name.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_LAST_NAME)
-        end
-        unless (_last_name_kana = last_name_kana).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("last_name_kana", last_name_kana.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_LAST_NAME_KANA)
-        end
-        unless (_last_name_kanji = last_name_kanji).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("last_name_kanji", last_name_kanji.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_LAST_NAME_KANJI)
-        end
-        unless (_maiden_name = maiden_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("maiden_name", maiden_name.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_MAIDEN_NAME)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_nationality = nationality).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("nationality", nationality.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_NATIONALITY)
-        end
-        unless (_person_token = person_token).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("person_token", person_token.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_PERSON_TOKEN)
-        end
-
-        unless (_political_exposure = political_exposure).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("political_exposure", political_exposure.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_MAX_LENGTH_FOR_POLITICAL_EXPOSURE)
-        end
-        unless (_registered_address = registered_address).nil?
-          _registered_address.validate if _registered_address.is_a?(OpenApi::Validatable)
-        end
-        unless (_relationship = relationship).nil?
-          _relationship.validate if _relationship.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_verification = verification).nil?
-          _verification.validate if _verification.is_a?(OpenApi::Validatable)
+        unless (_post_accounts_account_persons_request = post_accounts_account_persons_request).nil?
+          _post_accounts_account_persons_request.validate if _post_accounts_account_persons_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/persons".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["address"] = address.to_s if !address.nil?
-      form_params["address_kana"] = address_kana.to_s if !address_kana.nil?
-      form_params["address_kanji"] = address_kanji.to_s if !address_kanji.nil?
-      form_params["dob"] = dob.to_s if !dob.nil?
-      form_params["documents"] = documents.to_s if !documents.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["first_name"] = first_name.to_s if !first_name.nil?
-      form_params["first_name_kana"] = first_name_kana.to_s if !first_name_kana.nil?
-      form_params["first_name_kanji"] = first_name_kanji.to_s if !first_name_kanji.nil?
-      form_params["full_name_aliases"] = full_name_aliases.to_s if !full_name_aliases.nil?
-      form_params["gender"] = gender.to_s if !gender.nil?
-      form_params["id_number"] = id_number.to_s if !id_number.nil?
-      form_params["id_number_secondary"] = id_number_secondary.to_s if !id_number_secondary.nil?
-      form_params["last_name"] = last_name.to_s if !last_name.nil?
-      form_params["last_name_kana"] = last_name_kana.to_s if !last_name_kana.nil?
-      form_params["last_name_kanji"] = last_name_kanji.to_s if !last_name_kanji.nil?
-      form_params["maiden_name"] = maiden_name.to_s if !maiden_name.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["nationality"] = nationality.to_s if !nationality.nil?
-      form_params["person_token"] = person_token.to_s if !person_token.nil?
-      form_params["phone"] = phone.to_s if !phone.nil?
-      form_params["political_exposure"] = political_exposure.to_s if !political_exposure.nil?
-      form_params["registered_address"] = registered_address.to_s if !registered_address.nil?
-      form_params["relationship"] = relationship.to_s if !relationship.nil?
-      form_params["ssn_last_4"] = ssn_last_4.to_s if !ssn_last_4.nil?
-      form_params["verification"] = verification.to_s if !verification.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_persons_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_persons_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2808,134 +2006,30 @@ module Stripe
     # <p>Updates an existing person.</p>
     # @required @param account [String?]
     # @required @param person [String?]
-    # @optional @param address [Stripe::AddressSpecs?]
-    # @optional @param address_kana [Stripe::JapanAddressKanaSpecs?]
-    # @optional @param address_kanji [Stripe::JapanAddressKanjiSpecs?]
-    # @optional @param dob [Stripe::PostAccountsAccountPersonsRequestDob?]
-    # @optional @param documents [Stripe::PersonDocumentsSpecs?]
-    # @optional @param email [String?] The person's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param first_name [String?] The person's first name.
-    # @optional @param first_name_kana [String?] The Kana variation of the person's first name (Japan only).
-    # @optional @param first_name_kanji [String?] The Kanji variation of the person's first name (Japan only).
-    # @optional @param full_name_aliases [Stripe::PostAccountsAccountPersonsRequestFullNameAliases?]
-    # @optional @param gender [String?] The person's gender (International regulations require either \\\"male\\\" or \\\"female\\\").
-    # @optional @param id_number [String?] The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param id_number_secondary [String?] The person's secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param last_name [String?] The person's last name.
-    # @optional @param last_name_kana [String?] The Kana variation of the person's last name (Japan only).
-    # @optional @param last_name_kanji [String?] The Kanji variation of the person's last name (Japan only).
-    # @optional @param maiden_name [String?] The person's maiden name.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nationality [String?] The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\"XX\\\" if unavailable.
-    # @optional @param person_token [String?] A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-    # @optional @param phone [String?] The person's phone number.
-    # @optional @param political_exposure [String?] Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-    # @optional @param registered_address [Stripe::AddressSpecs?]
-    # @optional @param relationship [Stripe::RelationshipSpecs?]
-    # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
-    # @optional @param verification [Stripe::PersonVerificationSpecs?]
+    # @optional @param post_accounts_account_persons_request [Stripe::PostAccountsAccountPersonsRequest?]
     # @return [Stripe::Person]
     def post_accounts_account_persons_person(
       *,
       account : String? = nil,
       person : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil
     ) : Stripe::Person
-      data, _status_code, _headers = post_accounts_account_persons_person_with_http_info(account: account, person: person, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
+      data, _status_code, _headers = post_accounts_account_persons_person_with_http_info(account: account, person: person, post_accounts_account_persons_request: post_accounts_account_persons_request)
       data
     end
 
     # &lt;p&gt;Updates an existing person.&lt;/p&gt;
     # @required @param account [String?]
     # @required @param person [String?]
-    # @optional @param address [Stripe::AddressSpecs?]
-    # @optional @param address_kana [Stripe::JapanAddressKanaSpecs?]
-    # @optional @param address_kanji [Stripe::JapanAddressKanjiSpecs?]
-    # @optional @param dob [Stripe::PostAccountsAccountPersonsRequestDob?]
-    # @optional @param documents [Stripe::PersonDocumentsSpecs?]
-    # @optional @param email [String?] The person's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param first_name [String?] The person's first name.
-    # @optional @param first_name_kana [String?] The Kana variation of the person's first name (Japan only).
-    # @optional @param first_name_kanji [String?] The Kanji variation of the person's first name (Japan only).
-    # @optional @param full_name_aliases [Stripe::PostAccountsAccountPersonsRequestFullNameAliases?]
-    # @optional @param gender [String?] The person's gender (International regulations require either \\\"male\\\" or \\\"female\\\").
-    # @optional @param id_number [String?] The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param id_number_secondary [String?] The person's secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param last_name [String?] The person's last name.
-    # @optional @param last_name_kana [String?] The Kana variation of the person's last name (Japan only).
-    # @optional @param last_name_kanji [String?] The Kanji variation of the person's last name (Japan only).
-    # @optional @param maiden_name [String?] The person's maiden name.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nationality [String?] The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\"XX\\\" if unavailable.
-    # @optional @param person_token [String?] A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-    # @optional @param phone [String?] The person's phone number.
-    # @optional @param political_exposure [String?] Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-    # @optional @param registered_address [Stripe::AddressSpecs?]
-    # @optional @param relationship [Stripe::RelationshipSpecs?]
-    # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
-    # @optional @param verification [Stripe::PersonVerificationSpecs?]
+    # @optional @param post_accounts_account_persons_request [Stripe::PostAccountsAccountPersonsRequest?]
     # @return [Tuple(Stripe::Person, Integer, Hash)] Stripe::Person, response status code and response headers
     def post_accounts_account_persons_person_with_http_info(
       *,
       account : String? = nil,
       person : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil
     ) : Tuple(Stripe::Person, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_persons_person(account: account, person: person, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification)
+      request = build_api_request_for_post_accounts_account_persons_person(account: account, person: person, post_accounts_account_persons_request: post_accounts_account_persons_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2949,117 +2043,27 @@ module Stripe
     # &lt;p&gt;Updates an existing person.&lt;/p&gt;
     # @required @param account [String?]
     # @required @param person [String?]
-    # @optional @param address [Stripe::AddressSpecs?]
-    # @optional @param address_kana [Stripe::JapanAddressKanaSpecs?]
-    # @optional @param address_kanji [Stripe::JapanAddressKanjiSpecs?]
-    # @optional @param dob [Stripe::PostAccountsAccountPersonsRequestDob?]
-    # @optional @param documents [Stripe::PersonDocumentsSpecs?]
-    # @optional @param email [String?] The person's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param first_name [String?] The person's first name.
-    # @optional @param first_name_kana [String?] The Kana variation of the person's first name (Japan only).
-    # @optional @param first_name_kanji [String?] The Kanji variation of the person's first name (Japan only).
-    # @optional @param full_name_aliases [Stripe::PostAccountsAccountPersonsRequestFullNameAliases?]
-    # @optional @param gender [String?] The person's gender (International regulations require either \\\"male\\\" or \\\"female\\\").
-    # @optional @param id_number [String?] The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param id_number_secondary [String?] The person's secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
-    # @optional @param last_name [String?] The person's last name.
-    # @optional @param last_name_kana [String?] The Kana variation of the person's last name (Japan only).
-    # @optional @param last_name_kanji [String?] The Kanji variation of the person's last name (Japan only).
-    # @optional @param maiden_name [String?] The person's maiden name.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nationality [String?] The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\"XX\\\" if unavailable.
-    # @optional @param person_token [String?] A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-    # @optional @param phone [String?] The person's phone number.
-    # @optional @param political_exposure [String?] Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-    # @optional @param registered_address [Stripe::AddressSpecs?]
-    # @optional @param relationship [Stripe::RelationshipSpecs?]
-    # @optional @param ssn_last_4 [String?] The last four digits of the person's Social Security number (U.S. only).
-    # @optional @param verification [Stripe::PersonVerificationSpecs?]
+    # @optional @param post_accounts_account_persons_request [Stripe::PostAccountsAccountPersonsRequest?]
     # @return nil
     def post_accounts_account_persons_person(
       *,
       account : String? = nil,
       person : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil,
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_persons_person(account: account, person: person, address: address, address_kana: address_kana, address_kanji: address_kanji, dob: dob, documents: documents, email: email, expand: expand, first_name: first_name, first_name_kana: first_name_kana, first_name_kanji: first_name_kanji, full_name_aliases: full_name_aliases, gender: gender, id_number: id_number, id_number_secondary: id_number_secondary, last_name: last_name, last_name_kana: last_name_kana, last_name_kanji: last_name_kanji, maiden_name: maiden_name, metadata: metadata, nationality: nationality, person_token: person_token, phone: phone, political_exposure: political_exposure, registered_address: registered_address, relationship: relationship, ssn_last_4: ssn_last_4, verification: verification).execute(&block)
+      build_api_request_for_post_accounts_account_persons_person(account: account, person: person, post_accounts_account_persons_request: post_accounts_account_persons_request).execute(&block)
     end
 
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_ACCOUNT             = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON              = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_FIRST_NAME          = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_FIRST_NAME_KANA     = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_FIRST_NAME_KANJI    = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_ID_NUMBER           = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_ID_NUMBER_SECONDARY = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_LAST_NAME           = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_LAST_NAME_KANA      = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_LAST_NAME_KANJI     = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_MAIDEN_NAME         = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_NATIONALITY         = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON_TOKEN        = 5000
-    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_POLITICAL_EXPOSURE  = 5000
+    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_ACCOUNT = 5000
+    POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON  = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_accounts_account_persons_person(
       *,
       account : String? = nil,
       person : String? = nil,
-      address : Stripe::AddressSpecs? = nil,
-      address_kana : Stripe::JapanAddressKanaSpecs? = nil,
-      address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
-      documents : Stripe::PersonDocumentsSpecs? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      first_name : String? = nil,
-      first_name_kana : String? = nil,
-      first_name_kanji : String? = nil,
-      full_name_aliases : Stripe::PostAccountsAccountPersonsRequestFullNameAliases? = nil,
-      gender : String? = nil,
-      id_number : String? = nil,
-      id_number_secondary : String? = nil,
-      last_name : String? = nil,
-      last_name_kana : String? = nil,
-      last_name_kanji : String? = nil,
-      maiden_name : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nationality : String? = nil,
-      person_token : String? = nil,
-      phone : String? = nil,
-      political_exposure : String? = nil,
-      registered_address : Stripe::AddressSpecs? = nil,
-      relationship : Stripe::RelationshipSpecs? = nil,
-      ssn_last_4 : String? = nil,
-      verification : Stripe::PersonVerificationSpecs? = nil
+      post_accounts_account_persons_request : Stripe::PostAccountsAccountPersonsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_persons_person ..." }
@@ -3074,126 +2078,32 @@ module Stripe
         unless (_person = person).nil?
           OpenApi::PrimitiveValidator.validate_max_length("person", person.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON)
         end
-        unless (_address = address).nil?
-          _address.validate if _address.is_a?(OpenApi::Validatable)
-        end
-        unless (_address_kana = address_kana).nil?
-          _address_kana.validate if _address_kana.is_a?(OpenApi::Validatable)
-        end
-        unless (_address_kanji = address_kanji).nil?
-          _address_kanji.validate if _address_kanji.is_a?(OpenApi::Validatable)
-        end
-        unless (_dob = dob).nil?
-          _dob.validate if _dob.is_a?(OpenApi::Validatable)
-        end
-        unless (_documents = documents).nil?
-          _documents.validate if _documents.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_first_name = first_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("first_name", first_name.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_FIRST_NAME)
-        end
-        unless (_first_name_kana = first_name_kana).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("first_name_kana", first_name_kana.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_FIRST_NAME_KANA)
-        end
-        unless (_first_name_kanji = first_name_kanji).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("first_name_kanji", first_name_kanji.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_FIRST_NAME_KANJI)
-        end
-        unless (_full_name_aliases = full_name_aliases).nil?
-          _full_name_aliases.validate if _full_name_aliases.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_id_number = id_number).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("id_number", id_number.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_ID_NUMBER)
-        end
-        unless (_id_number_secondary = id_number_secondary).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("id_number_secondary", id_number_secondary.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_ID_NUMBER_SECONDARY)
-        end
-        unless (_last_name = last_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("last_name", last_name.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_LAST_NAME)
-        end
-        unless (_last_name_kana = last_name_kana).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("last_name_kana", last_name_kana.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_LAST_NAME_KANA)
-        end
-        unless (_last_name_kanji = last_name_kanji).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("last_name_kanji", last_name_kanji.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_LAST_NAME_KANJI)
-        end
-        unless (_maiden_name = maiden_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("maiden_name", maiden_name.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_MAIDEN_NAME)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_nationality = nationality).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("nationality", nationality.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_NATIONALITY)
-        end
-        unless (_person_token = person_token).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("person_token", person_token.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_PERSON_TOKEN)
-        end
-
-        unless (_political_exposure = political_exposure).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("political_exposure", political_exposure.to_s.size, POST_ACCOUNTS_ACCOUNT_PERSONS_PERSON_MAX_LENGTH_FOR_POLITICAL_EXPOSURE)
-        end
-        unless (_registered_address = registered_address).nil?
-          _registered_address.validate if _registered_address.is_a?(OpenApi::Validatable)
-        end
-        unless (_relationship = relationship).nil?
-          _relationship.validate if _relationship.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_verification = verification).nil?
-          _verification.validate if _verification.is_a?(OpenApi::Validatable)
+        unless (_post_accounts_account_persons_request = post_accounts_account_persons_request).nil?
+          _post_accounts_account_persons_request.validate if _post_accounts_account_persons_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/persons/{person}".sub("{" + "account" + "}", URI.encode_path(account.to_s)).sub("{" + "person" + "}", URI.encode_path(person.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["address"] = address.to_s if !address.nil?
-      form_params["address_kana"] = address_kana.to_s if !address_kana.nil?
-      form_params["address_kanji"] = address_kanji.to_s if !address_kanji.nil?
-      form_params["dob"] = dob.to_s if !dob.nil?
-      form_params["documents"] = documents.to_s if !documents.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["first_name"] = first_name.to_s if !first_name.nil?
-      form_params["first_name_kana"] = first_name_kana.to_s if !first_name_kana.nil?
-      form_params["first_name_kanji"] = first_name_kanji.to_s if !first_name_kanji.nil?
-      form_params["full_name_aliases"] = full_name_aliases.to_s if !full_name_aliases.nil?
-      form_params["gender"] = gender.to_s if !gender.nil?
-      form_params["id_number"] = id_number.to_s if !id_number.nil?
-      form_params["id_number_secondary"] = id_number_secondary.to_s if !id_number_secondary.nil?
-      form_params["last_name"] = last_name.to_s if !last_name.nil?
-      form_params["last_name_kana"] = last_name_kana.to_s if !last_name_kana.nil?
-      form_params["last_name_kanji"] = last_name_kanji.to_s if !last_name_kanji.nil?
-      form_params["maiden_name"] = maiden_name.to_s if !maiden_name.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["nationality"] = nationality.to_s if !nationality.nil?
-      form_params["person_token"] = person_token.to_s if !person_token.nil?
-      form_params["phone"] = phone.to_s if !phone.nil?
-      form_params["political_exposure"] = political_exposure.to_s if !political_exposure.nil?
-      form_params["registered_address"] = registered_address.to_s if !registered_address.nil?
-      form_params["relationship"] = relationship.to_s if !relationship.nil?
-      form_params["ssn_last_4"] = ssn_last_4.to_s if !ssn_last_4.nil?
-      form_params["verification"] = verification.to_s if !verification.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_persons_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_persons_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3213,31 +2123,27 @@ module Stripe
 
     # <p>With <a href=\"/docs/connect\">Connect</a>, you may flag accounts as suspicious.</p>  <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using live-mode keys may only be rejected once all balances are zero.</p>
     # @required @param account [String?]
-    # @required @param reason [String?] The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_accounts_account_reject_request [Stripe::PostAccountsAccountRejectRequest?]
     # @return [Stripe::Account]
     def post_accounts_account_reject(
       *,
       account : String? = nil,
-      reason : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_reject_request : Stripe::PostAccountsAccountRejectRequest? = nil
     ) : Stripe::Account
-      data, _status_code, _headers = post_accounts_account_reject_with_http_info(account: account, reason: reason, expand: expand)
+      data, _status_code, _headers = post_accounts_account_reject_with_http_info(account: account, post_accounts_account_reject_request: post_accounts_account_reject_request)
       data
     end
 
     # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you may flag accounts as suspicious.&lt;/p&gt;  &lt;p&gt;Test-mode Custom and Express accounts can be rejected at any time. Accounts created using live-mode keys may only be rejected once all balances are zero.&lt;/p&gt;
     # @required @param account [String?]
-    # @required @param reason [String?] The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_accounts_account_reject_request [Stripe::PostAccountsAccountRejectRequest?]
     # @return [Tuple(Stripe::Account, Integer, Hash)] Stripe::Account, response status code and response headers
     def post_accounts_account_reject_with_http_info(
       *,
       account : String? = nil,
-      reason : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_reject_request : Stripe::PostAccountsAccountRejectRequest? = nil
     ) : Tuple(Stripe::Account, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_accounts_account_reject(account: account, reason: reason, expand: expand)
+      request = build_api_request_for_post_accounts_account_reject(account: account, post_accounts_account_reject_request: post_accounts_account_reject_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3250,28 +2156,24 @@ module Stripe
 
     # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you may flag accounts as suspicious.&lt;/p&gt;  &lt;p&gt;Test-mode Custom and Express accounts can be rejected at any time. Accounts created using live-mode keys may only be rejected once all balances are zero.&lt;/p&gt;
     # @required @param account [String?]
-    # @required @param reason [String?] The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_accounts_account_reject_request [Stripe::PostAccountsAccountRejectRequest?]
     # @return nil
     def post_accounts_account_reject(
       *,
       account : String? = nil,
-      reason : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_reject_request : Stripe::PostAccountsAccountRejectRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_accounts_account_reject(account: account, reason: reason, expand: expand).execute(&block)
+      build_api_request_for_post_accounts_account_reject(account: account, post_accounts_account_reject_request: post_accounts_account_reject_request).execute(&block)
     end
 
     POST_ACCOUNTS_ACCOUNT_REJECT_MAX_LENGTH_FOR_ACCOUNT = 5000
-    POST_ACCOUNTS_ACCOUNT_REJECT_MAX_LENGTH_FOR_REASON  = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_accounts_account_reject(
       *,
       account : String? = nil,
-      reason : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_reject_request : Stripe::PostAccountsAccountRejectRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountsApi.post_accounts_account_reject ..." }
@@ -3282,35 +2184,33 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNTS_ACCOUNT_REJECT_MAX_LENGTH_FOR_ACCOUNT)
         end
-        raise ArgumentError.new("\"reason\" is required and cannot be null") if reason.nil?
-        unless (_reason = reason).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("reason", reason.to_s.size, POST_ACCOUNTS_ACCOUNT_REJECT_MAX_LENGTH_FOR_REASON)
+        raise ArgumentError.new("\"post_accounts_account_reject_request\" is required and cannot be null") if post_accounts_account_reject_request.nil?
+        unless (_post_accounts_account_reject_request = post_accounts_account_reject_request).nil?
+          _post_accounts_account_reject_request.validate if _post_accounts_account_reject_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/accounts/{account}/reject".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["reason"] = reason.to_s if !reason.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_reject_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_reject_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

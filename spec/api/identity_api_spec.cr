@@ -79,11 +79,8 @@ describe "IdentityApi" do
 
   # unit tests for post_identity_verification_sessions
   # &lt;p&gt;Creates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;After the VerificationSession is created, display a verification modal using the session &lt;code&gt;client_secret&lt;/code&gt; or send your users to the session’s &lt;code&gt;url&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;If your API key is in test mode, verification checks won’t actually process, though everything else will occur as if in live mode.&lt;/p&gt;  &lt;p&gt;Related guide: &lt;a href&#x3D;\&quot;/docs/identity/verify-identity-documents\&quot;&gt;Verify your users’ identity documents&lt;/a&gt;.&lt;/p&gt;
-  # @param _type The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
+  # @param post_identity_verification_sessions_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [SessionOptionsParam] :options
-  # @option opts [String] :return_url The URL that the user will be redirected to upon completing the verification flow.
   # @return [IdentityVerificationSession]
   describe "post_identity_verification_sessions test" do
     it "should work" do
@@ -95,9 +92,7 @@ describe "IdentityApi" do
   # &lt;p&gt;Updates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;When the session status is &lt;code&gt;requires_input&lt;/code&gt;, you can use this method to update the verification check and options.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [SessionOptionsParam] :options
-  # @option opts [String] :_type The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
+  # @option opts [PostIdentityVerificationSessionsSessionRequest] :post_identity_verification_sessions_session_request
   # @return [IdentityVerificationSession]
   describe "post_identity_verification_sessions_session test" do
     it "should work" do
@@ -109,7 +104,7 @@ describe "IdentityApi" do
   # &lt;p&gt;A VerificationSession object can be canceled when it is in &lt;code&gt;requires_input&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;Once canceled, future submission attempts are disabled. This cannot be undone. &lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#cancel\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [IdentityVerificationSession]
   describe "post_identity_verification_sessions_session_cancel test" do
     it "should work" do
@@ -121,7 +116,7 @@ describe "IdentityApi" do
   # &lt;p&gt;Redact a VerificationSession to remove all collected information from Stripe. This will redact the VerificationSession and all objects related to it, including VerificationReports, Events, request logs, etc.&lt;/p&gt;  &lt;p&gt;A VerificationSession object can be redacted when it is in &lt;code&gt;requires_input&lt;/code&gt; or &lt;code&gt;verified&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;. Redacting a VerificationSession in &lt;code&gt;requires_action&lt;/code&gt; state will automatically cancel it.&lt;/p&gt;  &lt;p&gt;The redaction process may take up to four days. When the redaction process is in progress, the VerificationSession’s &lt;code&gt;redaction.status&lt;/code&gt; field will be set to &lt;code&gt;processing&lt;/code&gt;; when the process is finished, it will change to &lt;code&gt;redacted&lt;/code&gt; and an &lt;code&gt;identity.verification_session.redacted&lt;/code&gt; event will be emitted.&lt;/p&gt;  &lt;p&gt;Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all the fields that contain personal data will be replaced by the string &lt;code&gt;[redacted]&lt;/code&gt; or a similar placeholder. The &lt;code&gt;metadata&lt;/code&gt; field will also be erased. Redacted objects cannot be updated or used for any purpose.&lt;/p&gt;  &lt;p&gt;&lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#redact\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [IdentityVerificationSession]
   describe "post_identity_verification_sessions_session_redact test" do
     it "should work" do

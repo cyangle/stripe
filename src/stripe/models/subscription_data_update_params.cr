@@ -27,8 +27,8 @@ module Stripe
     @[JSON::Field(key: "effective_date", type: Stripe::SubscriptionDataCreateParamsEffectiveDate?, default: nil, required: false, nullable: false, emit_null: false)]
     getter effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate? = nil
 
-    @[JSON::Field(key: "trial_period_days", type: Stripe::MandateParamsAmount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter trial_period_days : Stripe::MandateParamsAmount? = nil
+    @[JSON::Field(key: "trial_period_days", type: Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter trial_period_days : Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -37,7 +37,7 @@ module Stripe
       # Optional properties
       @description : String? = nil,
       @effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate? = nil,
-      @trial_period_days : Stripe::MandateParamsAmount? = nil
+      @trial_period_days : Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount? = nil
     )
     end
 
@@ -102,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_period_days Object to be assigned
-    def trial_period_days=(trial_period_days : Stripe::MandateParamsAmount?)
+    def trial_period_days=(trial_period_days : Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount?)
       if trial_period_days.nil?
         return @trial_period_days = nil
       end

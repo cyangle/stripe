@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/skus/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -239,8 +239,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/skus"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -251,19 +259,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["product"] = product.to_s if !product.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -349,23 +349,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/skus/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -384,56 +384,24 @@ module Stripe
     end
 
     # <p>Creates a new SKU associated with a product.</p>
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param inventory [Stripe::InventoryCreateSpecs?]
-    # @required @param price [Int32?] The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-    # @required @param product [String?] The ID of the product this SKU is associated with. Must be a product with type `good`.
-    # @optional @param active [Bool?] Whether the SKU is available for purchase. Default to `true`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param id [String?] The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly generated.
-    # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
+    # @required @param post_skus_request [Stripe::PostSkusRequest?]
     # @return [Stripe::Sku]
     def post_skus(
       *,
-      currency : String? = nil,
-      inventory : Stripe::InventoryCreateSpecs? = nil,
-      price : Int64? = nil,
-      product : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      image : String? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil
+      post_skus_request : Stripe::PostSkusRequest? = nil
     ) : Stripe::Sku
-      data, _status_code, _headers = post_skus_with_http_info(currency: currency, inventory: inventory, price: price, product: product, active: active, expand: expand, id: id, image: image, package_dimensions: package_dimensions)
+      data, _status_code, _headers = post_skus_with_http_info(post_skus_request: post_skus_request)
       data
     end
 
     # &lt;p&gt;Creates a new SKU associated with a product.&lt;/p&gt;
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param inventory [Stripe::InventoryCreateSpecs?]
-    # @required @param price [Int32?] The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-    # @required @param product [String?] The ID of the product this SKU is associated with. Must be a product with type `good`.
-    # @optional @param active [Bool?] Whether the SKU is available for purchase. Default to `true`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param id [String?] The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly generated.
-    # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
+    # @required @param post_skus_request [Stripe::PostSkusRequest?]
     # @return [Tuple(Stripe::Sku, Integer, Hash)] Stripe::Sku, response status code and response headers
     def post_skus_with_http_info(
       *,
-      currency : String? = nil,
-      inventory : Stripe::InventoryCreateSpecs? = nil,
-      price : Int64? = nil,
-      product : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      image : String? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil
+      post_skus_request : Stripe::PostSkusRequest? = nil
     ) : Tuple(Stripe::Sku, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_skus(currency: currency, inventory: inventory, price: price, product: product, active: active, expand: expand, id: id, image: image, package_dimensions: package_dimensions)
+      request = build_api_request_for_post_skus(post_skus_request: post_skus_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -445,104 +413,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new SKU associated with a product.&lt;/p&gt;
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param inventory [Stripe::InventoryCreateSpecs?]
-    # @required @param price [Int32?] The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-    # @required @param product [String?] The ID of the product this SKU is associated with. Must be a product with type `good`.
-    # @optional @param active [Bool?] Whether the SKU is available for purchase. Default to `true`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param id [String?] The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly generated.
-    # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
+    # @required @param post_skus_request [Stripe::PostSkusRequest?]
     # @return nil
     def post_skus(
       *,
-      currency : String? = nil,
-      inventory : Stripe::InventoryCreateSpecs? = nil,
-      price : Int64? = nil,
-      product : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      image : String? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
+      post_skus_request : Stripe::PostSkusRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_skus(currency: currency, inventory: inventory, price: price, product: product, active: active, expand: expand, id: id, image: image, package_dimensions: package_dimensions).execute(&block)
+      build_api_request_for_post_skus(post_skus_request: post_skus_request).execute(&block)
     end
-
-    POST_SKUS_MAX_LENGTH_FOR_PRODUCT = 5000
-    POST_SKUS_MAX_LENGTH_FOR_IMAGE   = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_skus(
       *,
-      currency : String? = nil,
-      inventory : Stripe::InventoryCreateSpecs? = nil,
-      price : Int64? = nil,
-      product : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      image : String? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil
+      post_skus_request : Stripe::PostSkusRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.post_skus ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"inventory\" is required and cannot be null") if inventory.nil?
-        unless (_inventory = inventory).nil?
-          _inventory.validate if _inventory.is_a?(OpenApi::Validatable)
-        end
-        raise ArgumentError.new("\"price\" is required and cannot be null") if price.nil?
-
-        raise ArgumentError.new("\"product\" is required and cannot be null") if product.nil?
-        unless (_product = product).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, POST_SKUS_MAX_LENGTH_FOR_PRODUCT)
-        end
-
-        unless (_image = image).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("image", image.to_s.size, POST_SKUS_MAX_LENGTH_FOR_IMAGE)
-        end
-        unless (_package_dimensions = package_dimensions).nil?
-          _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_skus_request\" is required and cannot be null") if post_skus_request.nil?
+        unless (_post_skus_request = post_skus_request).nil?
+          _post_skus_request.validate if _post_skus_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/skus"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["id"] = id.to_s if !id.nil?
-      form_params["image"] = image.to_s if !image.nil?
-      form_params["inventory"] = inventory.to_s if !inventory.nil?
-      form_params["package_dimensions"] = package_dimensions.to_s if !package_dimensions.nil?
-      form_params["price"] = price.to_s if !price.nil?
-      form_params["product"] = product.to_s if !product.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_skus_request, content_type: header_params["Content-Type"]?) if !post_skus_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -562,59 +479,27 @@ module Stripe
 
     # <p>Updates the specific SKU by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>  <p>Note that a SKU’s <code>attributes</code> are not editable. Instead, you would need to deactivate the existing SKU and create a new one with the new attribute values.</p>
     # @required @param id [String?]
-    # @optional @param active [Bool?] Whether this SKU is available for purchase.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
-    # @optional @param inventory [Stripe::InventoryUpdateSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param package_dimensions [Stripe::PostSkusIdRequestPackageDimensions?]
-    # @optional @param price [Int32?] The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-    # @optional @param product [String?] The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU's current product, and be of type `good`.
+    # @optional @param post_skus_id_request [Stripe::PostSkusIdRequest?]
     # @return [Stripe::Sku]
     def post_skus_id(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil,
-      image : String? = nil,
-      inventory : Stripe::InventoryUpdateSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
-      price : Int64? = nil,
-      product : String? = nil
+      post_skus_id_request : Stripe::PostSkusIdRequest? = nil
     ) : Stripe::Sku
-      data, _status_code, _headers = post_skus_id_with_http_info(id: id, active: active, currency: currency, expand: expand, image: image, inventory: inventory, metadata: metadata, package_dimensions: package_dimensions, price: price, product: product)
+      data, _status_code, _headers = post_skus_id_with_http_info(id: id, post_skus_id_request: post_skus_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specific SKU by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;Note that a SKU’s &lt;code&gt;attributes&lt;/code&gt; are not editable. Instead, you would need to deactivate the existing SKU and create a new one with the new attribute values.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param active [Bool?] Whether this SKU is available for purchase.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
-    # @optional @param inventory [Stripe::InventoryUpdateSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param package_dimensions [Stripe::PostSkusIdRequestPackageDimensions?]
-    # @optional @param price [Int32?] The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-    # @optional @param product [String?] The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU's current product, and be of type `good`.
+    # @optional @param post_skus_id_request [Stripe::PostSkusIdRequest?]
     # @return [Tuple(Stripe::Sku, Integer, Hash)] Stripe::Sku, response status code and response headers
     def post_skus_id_with_http_info(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil,
-      image : String? = nil,
-      inventory : Stripe::InventoryUpdateSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
-      price : Int64? = nil,
-      product : String? = nil
+      post_skus_id_request : Stripe::PostSkusIdRequest? = nil
     ) : Tuple(Stripe::Sku, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_skus_id(id: id, active: active, currency: currency, expand: expand, image: image, inventory: inventory, metadata: metadata, package_dimensions: package_dimensions, price: price, product: product)
+      request = build_api_request_for_post_skus_id(id: id, post_skus_id_request: post_skus_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -627,50 +512,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specific SKU by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;Note that a SKU’s &lt;code&gt;attributes&lt;/code&gt; are not editable. Instead, you would need to deactivate the existing SKU and create a new one with the new attribute values.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param active [Bool?] Whether this SKU is available for purchase.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param image [String?] The URL of an image for this SKU, meant to be displayable to the customer.
-    # @optional @param inventory [Stripe::InventoryUpdateSpecs?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param package_dimensions [Stripe::PostSkusIdRequestPackageDimensions?]
-    # @optional @param price [Int32?] The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-    # @optional @param product [String?] The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU's current product, and be of type `good`.
+    # @optional @param post_skus_id_request [Stripe::PostSkusIdRequest?]
     # @return nil
     def post_skus_id(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil,
-      image : String? = nil,
-      inventory : Stripe::InventoryUpdateSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
-      price : Int64? = nil,
-      product : String? = nil,
+      post_skus_id_request : Stripe::PostSkusIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_skus_id(id: id, active: active, currency: currency, expand: expand, image: image, inventory: inventory, metadata: metadata, package_dimensions: package_dimensions, price: price, product: product).execute(&block)
+      build_api_request_for_post_skus_id(id: id, post_skus_id_request: post_skus_id_request).execute(&block)
     end
 
-    POST_SKUS_ID_MAX_LENGTH_FOR_ID      = 5000
-    POST_SKUS_ID_MAX_LENGTH_FOR_IMAGE   = 5000
-    POST_SKUS_ID_MAX_LENGTH_FOR_PRODUCT = 5000
+    POST_SKUS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_skus_id(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil,
-      image : String? = nil,
-      inventory : Stripe::InventoryUpdateSpecs? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      package_dimensions : Stripe::PostSkusIdRequestPackageDimensions? = nil,
-      price : Int64? = nil,
-      product : String? = nil
+      post_skus_id_request : Stripe::PostSkusIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SkusApi.post_skus_id ..." }
@@ -681,55 +540,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_SKUS_ID_MAX_LENGTH_FOR_ID)
         end
-
-        unless (_image = image).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("image", image.to_s.size, POST_SKUS_ID_MAX_LENGTH_FOR_IMAGE)
-        end
-        unless (_inventory = inventory).nil?
-          _inventory.validate if _inventory.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_package_dimensions = package_dimensions).nil?
-          _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_product = product).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, POST_SKUS_ID_MAX_LENGTH_FOR_PRODUCT)
+        unless (_post_skus_id_request = post_skus_id_request).nil?
+          _post_skus_id_request.validate if _post_skus_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/skus/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["image"] = image.to_s if !image.nil?
-      form_params["inventory"] = inventory.to_s if !inventory.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["package_dimensions"] = package_dimensions.to_s if !package_dimensions.nil?
-      form_params["price"] = price.to_s if !price.nil?
-      form_params["product"] = product.to_s if !product.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_skus_id_request, content_type: header_params["Content-Type"]?) if !post_skus_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

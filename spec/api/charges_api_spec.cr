@@ -67,26 +67,7 @@ describe "ChargesApi" do
   # unit tests for post_charges
   # &lt;p&gt;To charge a credit card or other payment source, you create a &lt;code&gt;Charge&lt;/code&gt; object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-  # @option opts [Int32] :application_fee
-  # @option opts [Int32] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the charge and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the &#x60;Stripe-Account&#x60; header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
-  # @option opts [Bool] :capture Whether to immediately capture the charge. Defaults to &#x60;true&#x60;. When &#x60;false&#x60;, the charge issues an authorization (or pre-authorization), and will need to be [captured](https://stripe.com/docs/api#capture_charge) later. Uncaptured charges expire after a set number of days (7 by default). For more information, see the [authorizing charges and settling later](https://stripe.com/docs/charges/placing-a-hold) documentation.
-  # @option opts [PostChargesRequestCard] :card
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [String] :customer The ID of an existing customer that will be charged in this request.
-  # @option opts [String] :description An arbitrary string which you can attach to a &#x60;Charge&#x60; object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the &#x60;description&#x60; of the charge(s) that they are describing.
-  # @option opts [PostChargesRequestDestination] :destination
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :on_behalf_of The Stripe account ID for which these funds are intended. Automatically set if you use the &#x60;destination&#x60; parameter. For details, see [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
-  # @option opts [RadarOptions] :radar_options
-  # @option opts [String] :receipt_email The email address to which this charge&#39;s [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will override the customer&#39;s email address. If &#x60;receipt_email&#x60; is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-  # @option opts [OptionalFieldsShipping] :shipping
-  # @option opts [String] :source A payment source to be charged. This can be the ID of a [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank account](https://stripe.com/docs/api#bank_accounts), a [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens), or a [connected account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank accounts](https://stripe.com/docs/api#bank_accounts), and attached [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated customer.
-  # @option opts [String] :statement_descriptor For card charges, use &#x60;statement_descriptor_suffix&#x60; instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-  # @option opts [String] :statement_descriptor_suffix Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-  # @option opts [TransferDataSpecs] :transfer_data
-  # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
+  # @option opts [PostChargesRequest] :post_charges_request
   # @return [Charge]
   describe "post_charges test" do
     it "should work" do
@@ -98,14 +79,7 @@ describe "ChargesApi" do
   # &lt;p&gt;Updates the specified charge by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param charge
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :customer The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
-  # @option opts [String] :description An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the &#x60;description&#x60; of the charge(s) that they are describing.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FraudDetails] :fraud_details
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :receipt_email This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
-  # @option opts [OptionalFieldsShipping] :shipping
-  # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. &#x60;transfer_group&#x60; may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+  # @option opts [PostChargesChargeRequest] :post_charges_charge_request
   # @return [Charge]
   describe "post_charges_charge test" do
     it "should work" do
@@ -117,15 +91,7 @@ describe "ChargesApi" do
   # &lt;p&gt;Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you &lt;a href&#x3D;\&quot;#create_charge\&quot;&gt;created a charge&lt;/a&gt; with the capture option set to false.&lt;/p&gt;  &lt;p&gt;Uncaptured payments expire a set number of days after they are created (&lt;a href&#x3D;\&quot;/docs/charges/placing-a-hold\&quot;&gt;7 by default&lt;/a&gt;). If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.&lt;/p&gt;
   # @param charge
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
-  # @option opts [Int32] :application_fee An application fee to add on to this charge.
-  # @option opts [Int32] :application_fee_amount An application fee amount to add on to this charge, which must be less than or equal to the original amount.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :receipt_email The email address to send this charge&#39;s receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
-  # @option opts [String] :statement_descriptor For card charges, use &#x60;statement_descriptor_suffix&#x60; instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-  # @option opts [String] :statement_descriptor_suffix Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-  # @option opts [TransferDataSpecs] :transfer_data
-  # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. &#x60;transfer_group&#x60; may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+  # @option opts [PostChargesChargeCaptureRequest] :post_charges_charge_capture_request
   # @return [Charge]
   describe "post_charges_charge_capture test" do
     it "should work" do

@@ -100,24 +100,24 @@ module Stripe
       # resource path
       local_var_path = "/v1/sources/{source}".sub("{" + "source" + "}", URI.encode_path(source.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      query_params["client_secret"] = client_secret.to_s if !client_secret.nil?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      query_params["client_secret"] = client_secret.to_s if !client_secret.nil?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -136,80 +136,24 @@ module Stripe
     end
 
     # <p>Creates a new source object.</p>
-    # @optional @param amount [Int32?] Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where charge amount may not be specified until funds land.
-    # @optional @param currency [String?] Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready.
-    # @optional @param customer [String?] The `Customer` to whom the original source is attached to. Must be set when the original source is not a `Source` (e.g., `Card`).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param flow [String?] The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
-    # @optional @param mandate [Stripe::MandateParams?]
-    # @optional @param original_source [String?] The source to share.
-    # @optional @param owner [Stripe::Owner?]
-    # @optional @param receiver [Stripe::ReceiverParams?]
-    # @optional @param redirect [Stripe::RedirectParams?]
-    # @optional @param source_order [Stripe::ShallowOrderSpecs?]
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's statement. As an example, if your website is `RunClub` and the item you're charging for is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race ticket.` While many payment types will display this information, some may not display it at all.
-    # @optional @param token [String?] An optional token used to create the source. When passed, token properties will override source parameters.
-    # @optional @param _type [String?] The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
-    # @optional @param usage [String?]
+    # @optional @param post_sources_request [Stripe::PostSourcesRequest?]
     # @return [Stripe::Source]
     def post_sources(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      flow : String? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      original_source : String? = nil,
-      owner : Stripe::Owner? = nil,
-      receiver : Stripe::ReceiverParams? = nil,
-      redirect : Stripe::RedirectParams? = nil,
-      source_order : Stripe::ShallowOrderSpecs? = nil,
-      statement_descriptor : String? = nil,
-      token : String? = nil,
-      _type : String? = nil,
-      usage : String? = nil
+      post_sources_request : Stripe::PostSourcesRequest? = nil
     ) : Stripe::Source
-      data, _status_code, _headers = post_sources_with_http_info(amount: amount, currency: currency, customer: customer, expand: expand, flow: flow, mandate: mandate, original_source: original_source, owner: owner, receiver: receiver, redirect: redirect, source_order: source_order, statement_descriptor: statement_descriptor, token: token, _type: _type, usage: usage)
+      data, _status_code, _headers = post_sources_with_http_info(post_sources_request: post_sources_request)
       data
     end
 
     # &lt;p&gt;Creates a new source object.&lt;/p&gt;
-    # @optional @param amount [Int32?] Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where charge amount may not be specified until funds land.
-    # @optional @param currency [String?] Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready.
-    # @optional @param customer [String?] The `Customer` to whom the original source is attached to. Must be set when the original source is not a `Source` (e.g., `Card`).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param flow [String?] The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
-    # @optional @param mandate [Stripe::MandateParams?]
-    # @optional @param original_source [String?] The source to share.
-    # @optional @param owner [Stripe::Owner?]
-    # @optional @param receiver [Stripe::ReceiverParams?]
-    # @optional @param redirect [Stripe::RedirectParams?]
-    # @optional @param source_order [Stripe::ShallowOrderSpecs?]
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's statement. As an example, if your website is `RunClub` and the item you're charging for is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race ticket.` While many payment types will display this information, some may not display it at all.
-    # @optional @param token [String?] An optional token used to create the source. When passed, token properties will override source parameters.
-    # @optional @param _type [String?] The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
-    # @optional @param usage [String?]
+    # @optional @param post_sources_request [Stripe::PostSourcesRequest?]
     # @return [Tuple(Stripe::Source, Integer, Hash)] Stripe::Source, response status code and response headers
     def post_sources_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      flow : String? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      original_source : String? = nil,
-      owner : Stripe::Owner? = nil,
-      receiver : Stripe::ReceiverParams? = nil,
-      redirect : Stripe::RedirectParams? = nil,
-      source_order : Stripe::ShallowOrderSpecs? = nil,
-      statement_descriptor : String? = nil,
-      token : String? = nil,
-      _type : String? = nil,
-      usage : String? = nil
+      post_sources_request : Stripe::PostSourcesRequest? = nil
     ) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_sources(amount: amount, currency: currency, customer: customer, expand: expand, flow: flow, mandate: mandate, original_source: original_source, owner: owner, receiver: receiver, redirect: redirect, source_order: source_order, statement_descriptor: statement_descriptor, token: token, _type: _type, usage: usage)
+      request = build_api_request_for_post_sources(post_sources_request: post_sources_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -221,153 +165,52 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new source object.&lt;/p&gt;
-    # @optional @param amount [Int32?] Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where charge amount may not be specified until funds land.
-    # @optional @param currency [String?] Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready.
-    # @optional @param customer [String?] The `Customer` to whom the original source is attached to. Must be set when the original source is not a `Source` (e.g., `Card`).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param flow [String?] The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
-    # @optional @param mandate [Stripe::MandateParams?]
-    # @optional @param original_source [String?] The source to share.
-    # @optional @param owner [Stripe::Owner?]
-    # @optional @param receiver [Stripe::ReceiverParams?]
-    # @optional @param redirect [Stripe::RedirectParams?]
-    # @optional @param source_order [Stripe::ShallowOrderSpecs?]
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's statement. As an example, if your website is `RunClub` and the item you're charging for is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race ticket.` While many payment types will display this information, some may not display it at all.
-    # @optional @param token [String?] An optional token used to create the source. When passed, token properties will override source parameters.
-    # @optional @param _type [String?] The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
-    # @optional @param usage [String?]
+    # @optional @param post_sources_request [Stripe::PostSourcesRequest?]
     # @return nil
     def post_sources(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      flow : String? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      original_source : String? = nil,
-      owner : Stripe::Owner? = nil,
-      receiver : Stripe::ReceiverParams? = nil,
-      redirect : Stripe::RedirectParams? = nil,
-      source_order : Stripe::ShallowOrderSpecs? = nil,
-      statement_descriptor : String? = nil,
-      token : String? = nil,
-      _type : String? = nil,
-      usage : String? = nil,
+      post_sources_request : Stripe::PostSourcesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_sources(amount: amount, currency: currency, customer: customer, expand: expand, flow: flow, mandate: mandate, original_source: original_source, owner: owner, receiver: receiver, redirect: redirect, source_order: source_order, statement_descriptor: statement_descriptor, token: token, _type: _type, usage: usage).execute(&block)
+      build_api_request_for_post_sources(post_sources_request: post_sources_request).execute(&block)
     end
-
-    POST_SOURCES_MAX_LENGTH_FOR_CUSTOMER             =  500
-    POST_SOURCES_MAX_LENGTH_FOR_FLOW                 = 5000
-    POST_SOURCES_VALID_VALUES_FOR_FLOW               = String.static_array("code_verification", "none", "receiver", "redirect")
-    POST_SOURCES_MAX_LENGTH_FOR_ORIGINAL_SOURCE      = 5000
-    POST_SOURCES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
-    POST_SOURCES_MAX_LENGTH_FOR_TOKEN                = 5000
-    POST_SOURCES_MAX_LENGTH_FOR__TYPE                = 5000
-    POST_SOURCES_MAX_LENGTH_FOR_USAGE                = 5000
-    POST_SOURCES_VALID_VALUES_FOR_USAGE              = String.static_array("reusable", "single_use")
 
     # @return Crest::Request
     def build_api_request_for_post_sources(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      flow : String? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      original_source : String? = nil,
-      owner : Stripe::Owner? = nil,
-      receiver : Stripe::ReceiverParams? = nil,
-      redirect : Stripe::RedirectParams? = nil,
-      source_order : Stripe::ShallowOrderSpecs? = nil,
-      statement_descriptor : String? = nil,
-      token : String? = nil,
-      _type : String? = nil,
-      usage : String? = nil
+      post_sources_request : Stripe::PostSourcesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SourcesApi.post_sources ..." }
       end
 
       if client_side_validation
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_SOURCES_MAX_LENGTH_FOR_CUSTOMER)
-        end
-
-        unless (_flow = flow).nil?
-          OpenApi::EnumValidator.validate("flow", _flow, POST_SOURCES_VALID_VALUES_FOR_FLOW)
-        end
-        unless (_mandate = mandate).nil?
-          _mandate.validate if _mandate.is_a?(OpenApi::Validatable)
-        end
-        unless (_original_source = original_source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("original_source", original_source.to_s.size, POST_SOURCES_MAX_LENGTH_FOR_ORIGINAL_SOURCE)
-        end
-        unless (_owner = owner).nil?
-          _owner.validate if _owner.is_a?(OpenApi::Validatable)
-        end
-        unless (_receiver = receiver).nil?
-          _receiver.validate if _receiver.is_a?(OpenApi::Validatable)
-        end
-        unless (_redirect = redirect).nil?
-          _redirect.validate if _redirect.is_a?(OpenApi::Validatable)
-        end
-        unless (_source_order = source_order).nil?
-          _source_order.validate if _source_order.is_a?(OpenApi::Validatable)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_SOURCES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_token = token).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("token", token.to_s.size, POST_SOURCES_MAX_LENGTH_FOR_TOKEN)
-        end
-        unless (__type = _type).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("_type", _type.to_s.size, POST_SOURCES_MAX_LENGTH_FOR__TYPE)
-        end
-        unless (_usage = usage).nil?
-          OpenApi::EnumValidator.validate("usage", _usage, POST_SOURCES_VALID_VALUES_FOR_USAGE)
+        unless (_post_sources_request = post_sources_request).nil?
+          _post_sources_request.validate if _post_sources_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/sources"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["flow"] = flow.to_s if !flow.nil?
-      form_params["mandate"] = mandate.to_s if !mandate.nil?
-      form_params["original_source"] = original_source.to_s if !original_source.nil?
-      form_params["owner"] = owner.to_s if !owner.nil?
-      form_params["receiver"] = receiver.to_s if !receiver.nil?
-      form_params["redirect"] = redirect.to_s if !redirect.nil?
-      form_params["source_order"] = source_order.to_s if !source_order.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["token"] = token.to_s if !token.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
-      form_params["usage"] = usage.to_s if !usage.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_sources_request, content_type: header_params["Content-Type"]?) if !post_sources_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -387,47 +230,27 @@ module Stripe
 
     # <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>  <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href=\"/docs/sources\">payment method guides</a> for more detail.</p>
     # @required @param source [String?]
-    # @optional @param amount [Int32?] Amount associated with the source.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [Stripe::MandateParams?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param owner [Stripe::Owner?]
-    # @optional @param source_order [Stripe::OrderParams?]
+    # @optional @param post_sources_source_request [Stripe::PostSourcesSourceRequest?]
     # @return [Stripe::Source]
     def post_sources_source(
       *,
       source : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      owner : Stripe::Owner? = nil,
-      source_order : Stripe::OrderParams? = nil
+      post_sources_source_request : Stripe::PostSourcesSourceRequest? = nil
     ) : Stripe::Source
-      data, _status_code, _headers = post_sources_source_with_http_info(source: source, amount: amount, expand: expand, mandate: mandate, metadata: metadata, owner: owner, source_order: source_order)
+      data, _status_code, _headers = post_sources_source_with_http_info(source: source, post_sources_source_request: post_sources_source_request)
       data
     end
 
     # &lt;p&gt;Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request accepts the &lt;code&gt;metadata&lt;/code&gt; and &lt;code&gt;owner&lt;/code&gt; as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our &lt;a href&#x3D;\&quot;/docs/sources\&quot;&gt;payment method guides&lt;/a&gt; for more detail.&lt;/p&gt;
     # @required @param source [String?]
-    # @optional @param amount [Int32?] Amount associated with the source.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [Stripe::MandateParams?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param owner [Stripe::Owner?]
-    # @optional @param source_order [Stripe::OrderParams?]
+    # @optional @param post_sources_source_request [Stripe::PostSourcesSourceRequest?]
     # @return [Tuple(Stripe::Source, Integer, Hash)] Stripe::Source, response status code and response headers
     def post_sources_source_with_http_info(
       *,
       source : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      owner : Stripe::Owner? = nil,
-      source_order : Stripe::OrderParams? = nil
+      post_sources_source_request : Stripe::PostSourcesSourceRequest? = nil
     ) : Tuple(Stripe::Source, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_sources_source(source: source, amount: amount, expand: expand, mandate: mandate, metadata: metadata, owner: owner, source_order: source_order)
+      request = build_api_request_for_post_sources_source(source: source, post_sources_source_request: post_sources_source_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -440,25 +263,15 @@ module Stripe
 
     # &lt;p&gt;Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request accepts the &lt;code&gt;metadata&lt;/code&gt; and &lt;code&gt;owner&lt;/code&gt; as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our &lt;a href&#x3D;\&quot;/docs/sources\&quot;&gt;payment method guides&lt;/a&gt; for more detail.&lt;/p&gt;
     # @required @param source [String?]
-    # @optional @param amount [Int32?] Amount associated with the source.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [Stripe::MandateParams?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param owner [Stripe::Owner?]
-    # @optional @param source_order [Stripe::OrderParams?]
+    # @optional @param post_sources_source_request [Stripe::PostSourcesSourceRequest?]
     # @return nil
     def post_sources_source(
       *,
       source : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      owner : Stripe::Owner? = nil,
-      source_order : Stripe::OrderParams? = nil,
+      post_sources_source_request : Stripe::PostSourcesSourceRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_sources_source(source: source, amount: amount, expand: expand, mandate: mandate, metadata: metadata, owner: owner, source_order: source_order).execute(&block)
+      build_api_request_for_post_sources_source(source: source, post_sources_source_request: post_sources_source_request).execute(&block)
     end
 
     POST_SOURCES_SOURCE_MAX_LENGTH_FOR_SOURCE = 5000
@@ -467,12 +280,7 @@ module Stripe
     def build_api_request_for_post_sources_source(
       *,
       source : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      mandate : Stripe::MandateParams? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      owner : Stripe::Owner? = nil,
-      source_order : Stripe::OrderParams? = nil
+      post_sources_source_request : Stripe::PostSourcesSourceRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SourcesApi.post_sources_source ..." }
@@ -483,48 +291,32 @@ module Stripe
         unless (_source = source).nil?
           OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_SOURCES_SOURCE_MAX_LENGTH_FOR_SOURCE)
         end
-
-        unless (_mandate = mandate).nil?
-          _mandate.validate if _mandate.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_owner = owner).nil?
-          _owner.validate if _owner.is_a?(OpenApi::Validatable)
-        end
-        unless (_source_order = source_order).nil?
-          _source_order.validate if _source_order.is_a?(OpenApi::Validatable)
+        unless (_post_sources_source_request = post_sources_source_request).nil?
+          _post_sources_source_request.validate if _post_sources_source_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/sources/{source}".sub("{" + "source" + "}", URI.encode_path(source.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["mandate"] = mandate.to_s if !mandate.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["owner"] = owner.to_s if !owner.nil?
-      form_params["source_order"] = source_order.to_s if !source_order.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_sources_source_request, content_type: header_params["Content-Type"]?) if !post_sources_source_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

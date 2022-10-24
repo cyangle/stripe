@@ -88,23 +88,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/tokens/{token}".sub("{" + "token" + "}", URI.encode_path(token.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -123,52 +123,24 @@ module Stripe
     end
 
     # <p>Creates a single-use token that represents a bank account’s details. This token can be used with any API method in place of a bank account dictionary. This token can be used only once, by attaching it to a <a href=\"#accounts\">Custom account</a>.</p>
-    # @optional @param account [Stripe::ConnectJsAccountTokenSpecs?]
-    # @optional @param bank_account [Stripe::TokenCreateBankAccount?]
-    # @optional @param card [Stripe::PostTokensRequestCard?]
-    # @optional @param customer [String?] The customer (owned by the application's account) for which to create a token. This can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
-    # @optional @param cvc_update [Stripe::CvcParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param person [Stripe::PersonTokenSpecs?]
-    # @optional @param pii [Stripe::PiiTokenSpecs?]
+    # @optional @param post_tokens_request [Stripe::PostTokensRequest?]
     # @return [Stripe::Token]
     def post_tokens(
       *,
-      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
-      bank_account : Stripe::TokenCreateBankAccount? = nil,
-      card : Stripe::PostTokensRequestCard? = nil,
-      customer : String? = nil,
-      cvc_update : Stripe::CvcParams? = nil,
-      expand : Array(String)? = nil,
-      person : Stripe::PersonTokenSpecs? = nil,
-      pii : Stripe::PiiTokenSpecs? = nil
+      post_tokens_request : Stripe::PostTokensRequest? = nil
     ) : Stripe::Token
-      data, _status_code, _headers = post_tokens_with_http_info(account: account, bank_account: bank_account, card: card, customer: customer, cvc_update: cvc_update, expand: expand, person: person, pii: pii)
+      data, _status_code, _headers = post_tokens_with_http_info(post_tokens_request: post_tokens_request)
       data
     end
 
     # &lt;p&gt;Creates a single-use token that represents a bank account’s details. This token can be used with any API method in place of a bank account dictionary. This token can be used only once, by attaching it to a &lt;a href&#x3D;\&quot;#accounts\&quot;&gt;Custom account&lt;/a&gt;.&lt;/p&gt;
-    # @optional @param account [Stripe::ConnectJsAccountTokenSpecs?]
-    # @optional @param bank_account [Stripe::TokenCreateBankAccount?]
-    # @optional @param card [Stripe::PostTokensRequestCard?]
-    # @optional @param customer [String?] The customer (owned by the application's account) for which to create a token. This can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
-    # @optional @param cvc_update [Stripe::CvcParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param person [Stripe::PersonTokenSpecs?]
-    # @optional @param pii [Stripe::PiiTokenSpecs?]
+    # @optional @param post_tokens_request [Stripe::PostTokensRequest?]
     # @return [Tuple(Stripe::Token, Integer, Hash)] Stripe::Token, response status code and response headers
     def post_tokens_with_http_info(
       *,
-      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
-      bank_account : Stripe::TokenCreateBankAccount? = nil,
-      card : Stripe::PostTokensRequestCard? = nil,
-      customer : String? = nil,
-      cvc_update : Stripe::CvcParams? = nil,
-      expand : Array(String)? = nil,
-      person : Stripe::PersonTokenSpecs? = nil,
-      pii : Stripe::PiiTokenSpecs? = nil
+      post_tokens_request : Stripe::PostTokensRequest? = nil
     ) : Tuple(Stripe::Token, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_tokens(account: account, bank_account: bank_account, card: card, customer: customer, cvc_update: cvc_update, expand: expand, person: person, pii: pii)
+      request = build_api_request_for_post_tokens(post_tokens_request: post_tokens_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -180,102 +152,52 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a single-use token that represents a bank account’s details. This token can be used with any API method in place of a bank account dictionary. This token can be used only once, by attaching it to a &lt;a href&#x3D;\&quot;#accounts\&quot;&gt;Custom account&lt;/a&gt;.&lt;/p&gt;
-    # @optional @param account [Stripe::ConnectJsAccountTokenSpecs?]
-    # @optional @param bank_account [Stripe::TokenCreateBankAccount?]
-    # @optional @param card [Stripe::PostTokensRequestCard?]
-    # @optional @param customer [String?] The customer (owned by the application's account) for which to create a token. This can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
-    # @optional @param cvc_update [Stripe::CvcParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param person [Stripe::PersonTokenSpecs?]
-    # @optional @param pii [Stripe::PiiTokenSpecs?]
+    # @optional @param post_tokens_request [Stripe::PostTokensRequest?]
     # @return nil
     def post_tokens(
       *,
-      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
-      bank_account : Stripe::TokenCreateBankAccount? = nil,
-      card : Stripe::PostTokensRequestCard? = nil,
-      customer : String? = nil,
-      cvc_update : Stripe::CvcParams? = nil,
-      expand : Array(String)? = nil,
-      person : Stripe::PersonTokenSpecs? = nil,
-      pii : Stripe::PiiTokenSpecs? = nil,
+      post_tokens_request : Stripe::PostTokensRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_tokens(account: account, bank_account: bank_account, card: card, customer: customer, cvc_update: cvc_update, expand: expand, person: person, pii: pii).execute(&block)
+      build_api_request_for_post_tokens(post_tokens_request: post_tokens_request).execute(&block)
     end
-
-    POST_TOKENS_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_tokens(
       *,
-      account : Stripe::ConnectJsAccountTokenSpecs? = nil,
-      bank_account : Stripe::TokenCreateBankAccount? = nil,
-      card : Stripe::PostTokensRequestCard? = nil,
-      customer : String? = nil,
-      cvc_update : Stripe::CvcParams? = nil,
-      expand : Array(String)? = nil,
-      person : Stripe::PersonTokenSpecs? = nil,
-      pii : Stripe::PiiTokenSpecs? = nil
+      post_tokens_request : Stripe::PostTokensRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TokensApi.post_tokens ..." }
       end
 
       if client_side_validation
-        unless (_account = account).nil?
-          _account.validate if _account.is_a?(OpenApi::Validatable)
-        end
-        unless (_bank_account = bank_account).nil?
-          _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-        end
-        unless (_card = card).nil?
-          _card.validate if _card.is_a?(OpenApi::Validatable)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_TOKENS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_cvc_update = cvc_update).nil?
-          _cvc_update.validate if _cvc_update.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_person = person).nil?
-          _person.validate if _person.is_a?(OpenApi::Validatable)
-        end
-        unless (_pii = pii).nil?
-          _pii.validate if _pii.is_a?(OpenApi::Validatable)
+        unless (_post_tokens_request = post_tokens_request).nil?
+          _post_tokens_request.validate if _post_tokens_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/tokens"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account"] = account.to_s if !account.nil?
-      form_params["bank_account"] = bank_account.to_s if !bank_account.nil?
-      form_params["card"] = card.to_s if !card.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["cvc_update"] = cvc_update.to_s if !cvc_update.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["person"] = person.to_s if !person.nil?
-      form_params["pii"] = pii.to_s if !pii.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_tokens_request, content_type: header_params["Content-Type"]?) if !post_tokens_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

@@ -21,15 +21,12 @@ module Stripe
 
     # Required Properties
 
-    # Funds the user can spend right now.
     @[JSON::Field(key: "cash", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cash : Hash(String, Int32)? = nil
 
-    # Funds not spendable yet, but will become available at a later time.
     @[JSON::Field(key: "inbound_pending", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter inbound_pending : Hash(String, Int32)? = nil
 
-    # Funds in the account, but not spendable because they are being held for pending outbound flows.
     @[JSON::Field(key: "outbound_pending", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter outbound_pending : Hash(String, Int32)? = nil
 

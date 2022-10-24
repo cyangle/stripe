@@ -75,7 +75,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
 
-    # Coupons defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CouponCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency_options : Hash(String, Stripe::CouponCurrencyOption)? = nil
 
@@ -93,7 +92,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? max_redemptions_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     getter metadata : Hash(String, String)? = nil
 

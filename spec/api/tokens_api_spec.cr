@@ -35,14 +35,7 @@ describe "TokensApi" do
   # unit tests for post_tokens
   # &lt;p&gt;Creates a single-use token that represents a bank account’s details. This token can be used with any API method in place of a bank account dictionary. This token can be used only once, by attaching it to a &lt;a href&#x3D;\&quot;#accounts\&quot;&gt;Custom account&lt;/a&gt;.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [ConnectJsAccountTokenSpecs] :account
-  # @option opts [TokenCreateBankAccount] :bank_account
-  # @option opts [PostTokensRequestCard] :card
-  # @option opts [String] :customer The customer (owned by the application&#39;s account) for which to create a token. This can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
-  # @option opts [CvcParams] :cvc_update
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PersonTokenSpecs] :person
-  # @option opts [PiiTokenSpecs] :pii
+  # @option opts [PostTokensRequest] :post_tokens_request
   # @return [Token]
   describe "post_tokens test" do
     it "should work" do

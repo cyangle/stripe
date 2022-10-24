@@ -116,27 +116,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/reporting/report_runs"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -222,23 +222,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/reporting/report_runs/{report_run}".sub("{" + "report_run" + "}", URI.encode_path(report_run.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -311,23 +311,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/reporting/report_types"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -408,23 +408,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/reporting/report_types/{report_type}".sub("{" + "report_type" + "}", URI.encode_path(report_type.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -443,32 +443,24 @@ module Stripe
     end
 
     # <p>Creates a new object and begin running the report. (Certain report types require a <a href=\"https://stripe.com/docs/keys#test-live-modes\">live-mode API key</a>.)</p>
-    # @required @param report_type [String?] The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `\\\"balance.summary.1\\\"`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param parameters [Stripe::RunParameterSpecs?]
+    # @required @param post_reporting_report_runs_request [Stripe::PostReportingReportRunsRequest?]
     # @return [Stripe::ReportingReportRun]
     def post_reporting_report_runs(
       *,
-      report_type : String? = nil,
-      expand : Array(String)? = nil,
-      parameters : Stripe::RunParameterSpecs? = nil
+      post_reporting_report_runs_request : Stripe::PostReportingReportRunsRequest? = nil
     ) : Stripe::ReportingReportRun
-      data, _status_code, _headers = post_reporting_report_runs_with_http_info(report_type: report_type, expand: expand, parameters: parameters)
+      data, _status_code, _headers = post_reporting_report_runs_with_http_info(post_reporting_report_runs_request: post_reporting_report_runs_request)
       data
     end
 
     # &lt;p&gt;Creates a new object and begin running the report. (Certain report types require a &lt;a href&#x3D;\&quot;https://stripe.com/docs/keys#test-live-modes\&quot;&gt;live-mode API key&lt;/a&gt;.)&lt;/p&gt;
-    # @required @param report_type [String?] The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `\\\"balance.summary.1\\\"`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param parameters [Stripe::RunParameterSpecs?]
+    # @required @param post_reporting_report_runs_request [Stripe::PostReportingReportRunsRequest?]
     # @return [Tuple(Stripe::ReportingReportRun, Integer, Hash)] Stripe::ReportingReportRun, response status code and response headers
     def post_reporting_report_runs_with_http_info(
       *,
-      report_type : String? = nil,
-      expand : Array(String)? = nil,
-      parameters : Stripe::RunParameterSpecs? = nil
+      post_reporting_report_runs_request : Stripe::PostReportingReportRunsRequest? = nil
     ) : Tuple(Stripe::ReportingReportRun, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_reporting_report_runs(report_type: report_type, expand: expand, parameters: parameters)
+      request = build_api_request_for_post_reporting_report_runs(post_reporting_report_runs_request: post_reporting_report_runs_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -480,63 +472,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new object and begin running the report. (Certain report types require a &lt;a href&#x3D;\&quot;https://stripe.com/docs/keys#test-live-modes\&quot;&gt;live-mode API key&lt;/a&gt;.)&lt;/p&gt;
-    # @required @param report_type [String?] The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `\\\"balance.summary.1\\\"`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param parameters [Stripe::RunParameterSpecs?]
+    # @required @param post_reporting_report_runs_request [Stripe::PostReportingReportRunsRequest?]
     # @return nil
     def post_reporting_report_runs(
       *,
-      report_type : String? = nil,
-      expand : Array(String)? = nil,
-      parameters : Stripe::RunParameterSpecs? = nil,
+      post_reporting_report_runs_request : Stripe::PostReportingReportRunsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_reporting_report_runs(report_type: report_type, expand: expand, parameters: parameters).execute(&block)
+      build_api_request_for_post_reporting_report_runs(post_reporting_report_runs_request: post_reporting_report_runs_request).execute(&block)
     end
 
     # @return Crest::Request
     def build_api_request_for_post_reporting_report_runs(
       *,
-      report_type : String? = nil,
-      expand : Array(String)? = nil,
-      parameters : Stripe::RunParameterSpecs? = nil
+      post_reporting_report_runs_request : Stripe::PostReportingReportRunsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ReportingApi.post_reporting_report_runs ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"report_type\" is required and cannot be null") if report_type.nil?
-
-        unless (_parameters = parameters).nil?
-          _parameters.validate if _parameters.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_reporting_report_runs_request\" is required and cannot be null") if post_reporting_report_runs_request.nil?
+        unless (_post_reporting_report_runs_request = post_reporting_report_runs_request).nil?
+          _post_reporting_report_runs_request.validate if _post_reporting_report_runs_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/reporting/report_runs"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["parameters"] = parameters.to_s if !parameters.nil?
-      form_params["report_type"] = report_type.to_s if !report_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_reporting_report_runs_request, content_type: header_params["Content-Type"]?) if !post_reporting_report_runs_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

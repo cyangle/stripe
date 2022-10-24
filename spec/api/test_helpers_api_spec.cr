@@ -61,7 +61,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Updates the shipping status of the specified Issuing &lt;code&gt;Card&lt;/code&gt; object to &lt;code&gt;delivered&lt;/code&gt;.&lt;/p&gt;
   # @param card
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [IssuingCard]
   describe "post_test_helpers_issuing_cards_card_shipping_deliver test" do
     it "should work" do
@@ -73,7 +73,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Updates the shipping status of the specified Issuing &lt;code&gt;Card&lt;/code&gt; object to &lt;code&gt;failure&lt;/code&gt;.&lt;/p&gt;
   # @param card
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [IssuingCard]
   describe "post_test_helpers_issuing_cards_card_shipping_fail test" do
     it "should work" do
@@ -85,7 +85,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Updates the shipping status of the specified Issuing &lt;code&gt;Card&lt;/code&gt; object to &lt;code&gt;returned&lt;/code&gt;.&lt;/p&gt;
   # @param card
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [IssuingCard]
   describe "post_test_helpers_issuing_cards_card_shipping_return test" do
     it "should work" do
@@ -97,7 +97,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Updates the shipping status of the specified Issuing &lt;code&gt;Card&lt;/code&gt; object to &lt;code&gt;shipped&lt;/code&gt;.&lt;/p&gt;
   # @param card
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [IssuingCard]
   describe "post_test_helpers_issuing_cards_card_shipping_ship test" do
     it "should work" do
@@ -109,9 +109,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Presents a payment method on a simulated reader. Can be used to simulate accepting a payment, saving a card or refunding a transaction.&lt;/p&gt;
   # @param reader
   # @param [Hash] opts the optional parameters
-  # @option opts [CardPresent] :card_present
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :_type Simulated payment type
+  # @option opts [PostTestHelpersTerminalReadersReaderPresentPaymentMethodRequest] :post_test_helpers_terminal_readers_reader_present_payment_method_request
   # @return [TerminalReader]
   describe "post_test_helpers_terminal_readers_reader_present_payment_method test" do
     it "should work" do
@@ -121,10 +119,8 @@ describe "TestHelpersApi" do
 
   # unit tests for post_test_helpers_test_clocks
   # &lt;p&gt;Creates a new test clock that can be attached to new customers and quotes.&lt;/p&gt;
-  # @param frozen_time The initial frozen time for this test clock.
+  # @param post_test_helpers_test_clocks_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :name The name for this test clock.
   # @return [TestHelpersTestClock]
   describe "post_test_helpers_test_clocks test" do
     it "should work" do
@@ -135,9 +131,8 @@ describe "TestHelpersApi" do
   # unit tests for post_test_helpers_test_clocks_test_clock_advance
   # &lt;p&gt;Starts advancing a test clock to a specified time in the future. Advancement is done when status changes to &lt;code&gt;Ready&lt;/code&gt;.&lt;/p&gt;
   # @param test_clock
-  # @param frozen_time The time to advance the test clock. Must be after the test clock&#39;s current frozen time. Cannot be more than two intervals in the future from the shortest subscription in this test clock. If there are no subscriptions in this test clock, it cannot be more than two years in the future.
+  # @param post_test_helpers_test_clocks_test_clock_advance_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TestHelpersTestClock]
   describe "post_test_helpers_test_clocks_test_clock_advance test" do
     it "should work" do
@@ -149,8 +144,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created InboundTransfer to the &lt;code&gt;failed&lt;/code&gt; status. The InboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FailureDetailsParams] :failure_details
+  # @option opts [PostTestHelpersTreasuryInboundTransfersIdFailRequest] :post_test_helpers_treasury_inbound_transfers_id_fail_request
   # @return [TreasuryInboundTransfer]
   describe "post_test_helpers_treasury_inbound_transfers_id_fail test" do
     it "should work" do
@@ -162,7 +156,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created InboundTransfer to the &lt;code&gt;succeeded&lt;/code&gt; status. The InboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryInboundTransfer]
   describe "post_test_helpers_treasury_inbound_transfers_id_succeed test" do
     it "should work" do
@@ -174,7 +168,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created OutboundPayment to the &lt;code&gt;failed&lt;/code&gt; status. The OutboundPayment must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryOutboundPayment]
   describe "post_test_helpers_treasury_outbound_payments_id_fail test" do
     it "should work" do
@@ -186,7 +180,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created OutboundPayment to the &lt;code&gt;posted&lt;/code&gt; status. The OutboundPayment must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryOutboundPayment]
   describe "post_test_helpers_treasury_outbound_payments_id_post test" do
     it "should work" do
@@ -198,8 +192,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created OutboundPayment to the &lt;code&gt;returned&lt;/code&gt; status. The OutboundPayment must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [ReturnedDetailsParams] :returned_details
+  # @option opts [PostTestHelpersTreasuryOutboundPaymentsIdReturnRequest] :post_test_helpers_treasury_outbound_payments_id_return_request
   # @return [TreasuryOutboundPayment]
   describe "post_test_helpers_treasury_outbound_payments_id_return test" do
     it "should work" do
@@ -211,7 +204,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created OutboundTransfer to the &lt;code&gt;failed&lt;/code&gt; status. The OutboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryOutboundTransfer]
   describe "post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail test" do
     it "should work" do
@@ -223,7 +216,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created OutboundTransfer to the &lt;code&gt;posted&lt;/code&gt; status. The OutboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryOutboundTransfer]
   describe "post_test_helpers_treasury_outbound_transfers_outbound_transfer_post test" do
     it "should work" do
@@ -235,8 +228,7 @@ describe "TestHelpersApi" do
   # &lt;p&gt;Transitions a test mode created OutboundTransfer to the &lt;code&gt;returned&lt;/code&gt; status. The OutboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [ReturnedDetailsParams] :returned_details
+  # @option opts [PostTestHelpersTreasuryOutboundPaymentsIdReturnRequest] :post_test_helpers_treasury_outbound_payments_id_return_request
   # @return [TreasuryOutboundTransfer]
   describe "post_test_helpers_treasury_outbound_transfers_outbound_transfer_return test" do
     it "should work" do
@@ -246,14 +238,8 @@ describe "TestHelpersApi" do
 
   # unit tests for post_test_helpers_treasury_received_credits
   # &lt;p&gt;Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live mode, you can’t directly create ReceivedCredits initiated by third parties.&lt;/p&gt;
-  # @param amount Amount (in cents) to be transferred.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param financial_account The FinancialAccount to send funds to.
-  # @param network The rails used for the object.
+  # @param post_test_helpers_treasury_received_credits_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [SourceParams] :initiating_payment_method_details
   # @return [TreasuryReceivedCredit]
   describe "post_test_helpers_treasury_received_credits test" do
     it "should work" do
@@ -263,14 +249,8 @@ describe "TestHelpersApi" do
 
   # unit tests for post_test_helpers_treasury_received_debits
   # &lt;p&gt;Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live mode, you can’t directly create ReceivedDebits initiated by third parties.&lt;/p&gt;
-  # @param amount Amount (in cents) to be transferred.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param financial_account The FinancialAccount to pull funds from.
-  # @param network The rails used for the object.
+  # @param post_test_helpers_treasury_received_debits_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [SourceParams] :initiating_payment_method_details
   # @return [TreasuryReceivedDebit]
   describe "post_test_helpers_treasury_received_debits test" do
     it "should work" do

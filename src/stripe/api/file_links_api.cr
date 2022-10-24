@@ -126,8 +126,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/file_links"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -136,19 +144,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -229,23 +229,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/file_links/{link}".sub("{" + "link" + "}", URI.encode_path(link.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -264,36 +264,24 @@ module Stripe
     end
 
     # <p>Creates a new file link object.</p>
-    # @required @param file [String?] The ID of the file. The file's `purpose` must be one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`, `identity_document_downloadable`, `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp after which the link will no longer be usable.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_file_links_request [Stripe::PostFileLinksRequest?]
     # @return [Stripe::FileLink]
     def post_file_links(
       *,
-      file : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_file_links_request : Stripe::PostFileLinksRequest? = nil
     ) : Stripe::FileLink
-      data, _status_code, _headers = post_file_links_with_http_info(file: file, expand: expand, expires_at: expires_at, metadata: metadata)
+      data, _status_code, _headers = post_file_links_with_http_info(post_file_links_request: post_file_links_request)
       data
     end
 
     # &lt;p&gt;Creates a new file link object.&lt;/p&gt;
-    # @required @param file [String?] The ID of the file. The file's `purpose` must be one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`, `identity_document_downloadable`, `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp after which the link will no longer be usable.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_file_links_request [Stripe::PostFileLinksRequest?]
     # @return [Tuple(Stripe::FileLink, Integer, Hash)] Stripe::FileLink, response status code and response headers
     def post_file_links_with_http_info(
       *,
-      file : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_file_links_request : Stripe::PostFileLinksRequest? = nil
     ) : Tuple(Stripe::FileLink, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_file_links(file: file, expand: expand, expires_at: expires_at, metadata: metadata)
+      request = build_api_request_for_post_file_links(post_file_links_request: post_file_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -305,72 +293,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new file link object.&lt;/p&gt;
-    # @required @param file [String?] The ID of the file. The file's `purpose` must be one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`, `identity_document_downloadable`, `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp after which the link will no longer be usable.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_file_links_request [Stripe::PostFileLinksRequest?]
     # @return nil
     def post_file_links(
       *,
-      file : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_file_links_request : Stripe::PostFileLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_file_links(file: file, expand: expand, expires_at: expires_at, metadata: metadata).execute(&block)
+      build_api_request_for_post_file_links(post_file_links_request: post_file_links_request).execute(&block)
     end
-
-    POST_FILE_LINKS_MAX_LENGTH_FOR_FILE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_file_links(
       *,
-      file : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_file_links_request : Stripe::PostFileLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FileLinksApi.post_file_links ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"file\" is required and cannot be null") if file.nil?
-        unless (_file = file).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("file", file.to_s.size, POST_FILE_LINKS_MAX_LENGTH_FOR_FILE)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_file_links_request\" is required and cannot be null") if post_file_links_request.nil?
+        unless (_post_file_links_request = post_file_links_request).nil?
+          _post_file_links_request.validate if _post_file_links_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/file_links"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
-      form_params["file"] = file.to_s if !file.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_file_links_request, content_type: header_params["Content-Type"]?) if !post_file_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -390,35 +359,27 @@ module Stripe
 
     # <p>Updates an existing file link object. Expired links can no longer be updated.</p>
     # @required @param link [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Stripe::PostFileLinksLinkRequestExpiresAt?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_file_links_link_request [Stripe::PostFileLinksLinkRequest?]
     # @return [Stripe::FileLink]
     def post_file_links_link(
       *,
       link : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Stripe::PostFileLinksLinkRequestExpiresAt? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_file_links_link_request : Stripe::PostFileLinksLinkRequest? = nil
     ) : Stripe::FileLink
-      data, _status_code, _headers = post_file_links_link_with_http_info(link: link, expand: expand, expires_at: expires_at, metadata: metadata)
+      data, _status_code, _headers = post_file_links_link_with_http_info(link: link, post_file_links_link_request: post_file_links_link_request)
       data
     end
 
     # &lt;p&gt;Updates an existing file link object. Expired links can no longer be updated.&lt;/p&gt;
     # @required @param link [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Stripe::PostFileLinksLinkRequestExpiresAt?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_file_links_link_request [Stripe::PostFileLinksLinkRequest?]
     # @return [Tuple(Stripe::FileLink, Integer, Hash)] Stripe::FileLink, response status code and response headers
     def post_file_links_link_with_http_info(
       *,
       link : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Stripe::PostFileLinksLinkRequestExpiresAt? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_file_links_link_request : Stripe::PostFileLinksLinkRequest? = nil
     ) : Tuple(Stripe::FileLink, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_file_links_link(link: link, expand: expand, expires_at: expires_at, metadata: metadata)
+      request = build_api_request_for_post_file_links_link(link: link, post_file_links_link_request: post_file_links_link_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -431,28 +392,22 @@ module Stripe
 
     # &lt;p&gt;Updates an existing file link object. Expired links can no longer be updated.&lt;/p&gt;
     # @required @param link [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Stripe::PostFileLinksLinkRequestExpiresAt?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_file_links_link_request [Stripe::PostFileLinksLinkRequest?]
     # @return nil
     def post_file_links_link(
       *,
       link : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Stripe::PostFileLinksLinkRequestExpiresAt? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_file_links_link_request : Stripe::PostFileLinksLinkRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_file_links_link(link: link, expand: expand, expires_at: expires_at, metadata: metadata).execute(&block)
+      build_api_request_for_post_file_links_link(link: link, post_file_links_link_request: post_file_links_link_request).execute(&block)
     end
 
     # @return Crest::Request
     def build_api_request_for_post_file_links_link(
       *,
       link : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Stripe::PostFileLinksLinkRequestExpiresAt? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_file_links_link_request : Stripe::PostFileLinksLinkRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FileLinksApi.post_file_links_link ..." }
@@ -461,38 +416,32 @@ module Stripe
       if client_side_validation
         raise ArgumentError.new("\"link\" is required and cannot be null") if link.nil?
 
-        unless (_expires_at = expires_at).nil?
-          _expires_at.validate if _expires_at.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_file_links_link_request = post_file_links_link_request).nil?
+          _post_file_links_link_request.validate if _post_file_links_link_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/file_links/{link}".sub("{" + "link" + "}", URI.encode_path(link.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_file_links_link_request, content_type: header_params["Content-Type"]?) if !post_file_links_link_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

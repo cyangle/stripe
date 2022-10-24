@@ -30,7 +30,7 @@ describe "RefundsApi" do
   # @option opts [String] :charge Only return refunds for the charge specified by this charge ID.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [GetAccountsCreatedParameter] :created
-  # @return [RefundList]
+  # @return [ApiMethodRefundList]
   describe "get_refunds test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -52,18 +52,7 @@ describe "RefundsApi" do
   # unit tests for post_refunds
   # &lt;p&gt;Create a refund.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount A positive integer representing how much to refund.
-  # @option opts [String] :charge
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [String] :customer Customer whose customer balance to refund from.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :instructions_email Address to send refund email, use customer email if not specified
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :origin Origin of the refund
-  # @option opts [String] :payment_intent
-  # @option opts [String] :reason
-  # @option opts [Bool] :refund_application_fee
-  # @option opts [Bool] :reverse_transfer
+  # @option opts [PostRefundsRequest] :post_refunds_request
   # @return [Refund]
   describe "post_refunds test" do
     it "should work" do
@@ -75,8 +64,7 @@ describe "RefundsApi" do
   # &lt;p&gt;Updates the specified refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request only accepts &lt;code&gt;metadata&lt;/code&gt; as an argument.&lt;/p&gt;
   # @param refund
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [Refund]
   describe "post_refunds_refund test" do
     it "should work" do

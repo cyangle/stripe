@@ -128,8 +128,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/credit_notes"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -137,19 +145,11 @@ module Stripe
       query_params["invoice"] = invoice.to_s if !invoice.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -264,26 +264,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/credit_notes/{credit_note}/lines".sub("{" + "credit_note" + "}", URI.encode_path(credit_note.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -369,23 +369,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/credit_notes/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -544,8 +544,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/credit_notes/preview"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["refund"] = refund.to_s if !refund.nil?
       query_params["invoice"] = invoice.to_s if !invoice.nil?
       query_params["lines"] = @api_client.build_collection_param(lines, "csv") if !lines.nil? && !lines.empty?
@@ -558,19 +566,11 @@ module Stripe
       query_params["refund_amount"] = refund_amount.to_s if !refund_amount.nil?
       query_params["amount"] = amount.to_s if !amount.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -758,8 +758,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/credit_notes/preview/lines"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -775,19 +783,11 @@ module Stripe
       query_params["refund_amount"] = refund_amount.to_s if !refund_amount.nil?
       query_params["amount"] = amount.to_s if !amount.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -806,60 +806,24 @@ module Stripe
     end
 
     # <p>Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code> invoice, a credit note reduces its <code>amount_due</code>. For a <code>status=paid</code> invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result in any combination of the following:</p>  <ul> <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund (using <code>refund</code>).</li> <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>) which will be automatically applied to their next invoice when it’s finalized.</li> <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using <code>out_of_band_amount</code>).</li> </ul>  <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.</p>  <p>You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s <code>pre_payment_credit_notes_amount</code> or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
-    # @required @param invoice [String?] ID of the invoice.
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-    # @optional @param credit_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lines [Array(Stripe::CreditNoteLineItemParams)?] Line items that make up the credit note.
-    # @optional @param memo [String?] The credit note's memo appears on the credit note PDF.
-    # @optional @param out_of_band_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
-    # @optional @param reason [String?] Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
-    # @optional @param refund [String?] ID of an existing refund to link this credit note to.
-    # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+    # @required @param post_credit_notes_request [Stripe::PostCreditNotesRequest?]
     # @return [Stripe::CreditNote]
     def post_credit_notes(
       *,
-      invoice : String? = nil,
-      amount : Int64? = nil,
-      credit_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
-      memo : String? = nil,
-      out_of_band_amount : Int64? = nil,
-      reason : String? = nil,
-      refund : String? = nil,
-      refund_amount : Int64? = nil
+      post_credit_notes_request : Stripe::PostCreditNotesRequest? = nil
     ) : Stripe::CreditNote
-      data, _status_code, _headers = post_credit_notes_with_http_info(invoice: invoice, amount: amount, credit_amount: credit_amount, expand: expand, lines: lines, memo: memo, out_of_band_amount: out_of_band_amount, reason: reason, refund: refund, refund_amount: refund_amount)
+      data, _status_code, _headers = post_credit_notes_with_http_info(post_credit_notes_request: post_credit_notes_request)
       data
     end
 
     # &lt;p&gt;Issue a credit note to adjust the amount of a finalized invoice. For a &lt;code&gt;status&#x3D;open&lt;/code&gt; invoice, a credit note reduces its &lt;code&gt;amount_due&lt;/code&gt;. For a &lt;code&gt;status&#x3D;paid&lt;/code&gt; invoice, a credit note does not affect its &lt;code&gt;amount_due&lt;/code&gt;. Instead, it can result in any combination of the following:&lt;/p&gt;  &lt;ul&gt; &lt;li&gt;Refund: create a new refund (using &lt;code&gt;refund_amount&lt;/code&gt;) or link an existing refund (using &lt;code&gt;refund&lt;/code&gt;).&lt;/li&gt; &lt;li&gt;Customer balance credit: credit the customer’s balance (using &lt;code&gt;credit_amount&lt;/code&gt;) which will be automatically applied to their next invoice when it’s finalized.&lt;/li&gt; &lt;li&gt;Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using &lt;code&gt;out_of_band_amount&lt;/code&gt;).&lt;/li&gt; &lt;/ul&gt;  &lt;p&gt;For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.&lt;/p&gt;  &lt;p&gt;You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s &lt;code&gt;pre_payment_credit_notes_amount&lt;/code&gt; or &lt;code&gt;post_payment_credit_notes_amount&lt;/code&gt; depending on its &lt;code&gt;status&lt;/code&gt; at the time of credit note creation.&lt;/p&gt;
-    # @required @param invoice [String?] ID of the invoice.
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-    # @optional @param credit_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lines [Array(Stripe::CreditNoteLineItemParams)?] Line items that make up the credit note.
-    # @optional @param memo [String?] The credit note's memo appears on the credit note PDF.
-    # @optional @param out_of_band_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
-    # @optional @param reason [String?] Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
-    # @optional @param refund [String?] ID of an existing refund to link this credit note to.
-    # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+    # @required @param post_credit_notes_request [Stripe::PostCreditNotesRequest?]
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
     def post_credit_notes_with_http_info(
       *,
-      invoice : String? = nil,
-      amount : Int64? = nil,
-      credit_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
-      memo : String? = nil,
-      out_of_band_amount : Int64? = nil,
-      reason : String? = nil,
-      refund : String? = nil,
-      refund_amount : Int64? = nil
+      post_credit_notes_request : Stripe::PostCreditNotesRequest? = nil
     ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_credit_notes(invoice: invoice, amount: amount, credit_amount: credit_amount, expand: expand, lines: lines, memo: memo, out_of_band_amount: out_of_band_amount, reason: reason, refund: refund, refund_amount: refund_amount)
+      request = build_api_request_for_post_credit_notes(post_credit_notes_request: post_credit_notes_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -871,105 +835,53 @@ module Stripe
     end
 
     # &lt;p&gt;Issue a credit note to adjust the amount of a finalized invoice. For a &lt;code&gt;status&#x3D;open&lt;/code&gt; invoice, a credit note reduces its &lt;code&gt;amount_due&lt;/code&gt;. For a &lt;code&gt;status&#x3D;paid&lt;/code&gt; invoice, a credit note does not affect its &lt;code&gt;amount_due&lt;/code&gt;. Instead, it can result in any combination of the following:&lt;/p&gt;  &lt;ul&gt; &lt;li&gt;Refund: create a new refund (using &lt;code&gt;refund_amount&lt;/code&gt;) or link an existing refund (using &lt;code&gt;refund&lt;/code&gt;).&lt;/li&gt; &lt;li&gt;Customer balance credit: credit the customer’s balance (using &lt;code&gt;credit_amount&lt;/code&gt;) which will be automatically applied to their next invoice when it’s finalized.&lt;/li&gt; &lt;li&gt;Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using &lt;code&gt;out_of_band_amount&lt;/code&gt;).&lt;/li&gt; &lt;/ul&gt;  &lt;p&gt;For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.&lt;/p&gt;  &lt;p&gt;You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s &lt;code&gt;pre_payment_credit_notes_amount&lt;/code&gt; or &lt;code&gt;post_payment_credit_notes_amount&lt;/code&gt; depending on its &lt;code&gt;status&lt;/code&gt; at the time of credit note creation.&lt;/p&gt;
-    # @required @param invoice [String?] ID of the invoice.
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-    # @optional @param credit_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lines [Array(Stripe::CreditNoteLineItemParams)?] Line items that make up the credit note.
-    # @optional @param memo [String?] The credit note's memo appears on the credit note PDF.
-    # @optional @param out_of_band_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
-    # @optional @param reason [String?] Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
-    # @optional @param refund [String?] ID of an existing refund to link this credit note to.
-    # @optional @param refund_amount [Int32?] The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+    # @required @param post_credit_notes_request [Stripe::PostCreditNotesRequest?]
     # @return nil
     def post_credit_notes(
       *,
-      invoice : String? = nil,
-      amount : Int64? = nil,
-      credit_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
-      memo : String? = nil,
-      out_of_band_amount : Int64? = nil,
-      reason : String? = nil,
-      refund : String? = nil,
-      refund_amount : Int64? = nil,
+      post_credit_notes_request : Stripe::PostCreditNotesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_credit_notes(invoice: invoice, amount: amount, credit_amount: credit_amount, expand: expand, lines: lines, memo: memo, out_of_band_amount: out_of_band_amount, reason: reason, refund: refund, refund_amount: refund_amount).execute(&block)
+      build_api_request_for_post_credit_notes(post_credit_notes_request: post_credit_notes_request).execute(&block)
     end
-
-    POST_CREDIT_NOTES_MAX_LENGTH_FOR_INVOICE  = 5000
-    POST_CREDIT_NOTES_MAX_LENGTH_FOR_MEMO     = 5000
-    POST_CREDIT_NOTES_VALID_VALUES_FOR_REASON = String.static_array("duplicate", "fraudulent", "order_change", "product_unsatisfactory")
 
     # @return Crest::Request
     def build_api_request_for_post_credit_notes(
       *,
-      invoice : String? = nil,
-      amount : Int64? = nil,
-      credit_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      lines : Array(Stripe::CreditNoteLineItemParams)? = nil,
-      memo : String? = nil,
-      out_of_band_amount : Int64? = nil,
-      reason : String? = nil,
-      refund : String? = nil,
-      refund_amount : Int64? = nil
+      post_credit_notes_request : Stripe::PostCreditNotesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.post_credit_notes ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"invoice\" is required and cannot be null") if invoice.nil?
-        unless (_invoice = invoice).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_CREDIT_NOTES_MAX_LENGTH_FOR_INVOICE)
-        end
-
-        unless (_lines = lines).nil?
-          OpenApi::ContainerValidator.validate(container: _lines) if _lines.is_a?(Array)
-        end
-        unless (_memo = memo).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("memo", memo.to_s.size, POST_CREDIT_NOTES_MAX_LENGTH_FOR_MEMO)
-        end
-
-        unless (_reason = reason).nil?
-          OpenApi::EnumValidator.validate("reason", _reason, POST_CREDIT_NOTES_VALID_VALUES_FOR_REASON)
+        raise ArgumentError.new("\"post_credit_notes_request\" is required and cannot be null") if post_credit_notes_request.nil?
+        unless (_post_credit_notes_request = post_credit_notes_request).nil?
+          _post_credit_notes_request.validate if _post_credit_notes_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/credit_notes"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["credit_amount"] = credit_amount.to_s if !credit_amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["invoice"] = invoice.to_s if !invoice.nil?
-      form_params["lines"] = @api_client.build_collection_param(lines, "csv") if !lines.nil? && !lines.empty?
-      form_params["memo"] = memo.to_s if !memo.nil?
-      form_params["out_of_band_amount"] = out_of_band_amount.to_s if !out_of_band_amount.nil?
-      form_params["reason"] = reason.to_s if !reason.nil?
-      form_params["refund"] = refund.to_s if !refund.nil?
-      form_params["refund_amount"] = refund_amount.to_s if !refund_amount.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_credit_notes_request, content_type: header_params["Content-Type"]?) if !post_credit_notes_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -989,31 +901,27 @@ module Stripe
 
     # <p>Updates an existing credit note.</p>
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param memo [String?] Credit note memo.
+    # @optional @param post_credit_notes_id_request [Stripe::PostCreditNotesIdRequest?]
     # @return [Stripe::CreditNote]
     def post_credit_notes_id(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      memo : String? = nil
+      post_credit_notes_id_request : Stripe::PostCreditNotesIdRequest? = nil
     ) : Stripe::CreditNote
-      data, _status_code, _headers = post_credit_notes_id_with_http_info(id: id, expand: expand, memo: memo)
+      data, _status_code, _headers = post_credit_notes_id_with_http_info(id: id, post_credit_notes_id_request: post_credit_notes_id_request)
       data
     end
 
     # &lt;p&gt;Updates an existing credit note.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param memo [String?] Credit note memo.
+    # @optional @param post_credit_notes_id_request [Stripe::PostCreditNotesIdRequest?]
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
     def post_credit_notes_id_with_http_info(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      memo : String? = nil
+      post_credit_notes_id_request : Stripe::PostCreditNotesIdRequest? = nil
     ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_credit_notes_id(id: id, expand: expand, memo: memo)
+      request = build_api_request_for_post_credit_notes_id(id: id, post_credit_notes_id_request: post_credit_notes_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1026,28 +934,24 @@ module Stripe
 
     # &lt;p&gt;Updates an existing credit note.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param memo [String?] Credit note memo.
+    # @optional @param post_credit_notes_id_request [Stripe::PostCreditNotesIdRequest?]
     # @return nil
     def post_credit_notes_id(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      memo : String? = nil,
+      post_credit_notes_id_request : Stripe::PostCreditNotesIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_credit_notes_id(id: id, expand: expand, memo: memo).execute(&block)
+      build_api_request_for_post_credit_notes_id(id: id, post_credit_notes_id_request: post_credit_notes_id_request).execute(&block)
     end
 
-    POST_CREDIT_NOTES_ID_MAX_LENGTH_FOR_ID   = 5000
-    POST_CREDIT_NOTES_ID_MAX_LENGTH_FOR_MEMO = 5000
+    POST_CREDIT_NOTES_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_credit_notes_id(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      memo : String? = nil
+      post_credit_notes_id_request : Stripe::PostCreditNotesIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.post_credit_notes_id ..." }
@@ -1058,35 +962,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_CREDIT_NOTES_ID_MAX_LENGTH_FOR_ID)
         end
-
-        unless (_memo = memo).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("memo", memo.to_s.size, POST_CREDIT_NOTES_ID_MAX_LENGTH_FOR_MEMO)
+        unless (_post_credit_notes_id_request = post_credit_notes_id_request).nil?
+          _post_credit_notes_id_request.validate if _post_credit_notes_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/credit_notes/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["memo"] = memo.to_s if !memo.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_credit_notes_id_request, content_type: header_params["Content-Type"]?) if !post_credit_notes_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1106,27 +1007,27 @@ module Stripe
 
     # <p>Marks a credit note as void. Learn more about <a href=\"/docs/billing/invoices/credit-notes#voiding\">voiding credit notes</a>.</p>
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::CreditNote]
     def post_credit_notes_id_void(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::CreditNote
-      data, _status_code, _headers = post_credit_notes_id_void_with_http_info(id: id, expand: expand)
+      data, _status_code, _headers = post_credit_notes_id_void_with_http_info(id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Marks a credit note as void. Learn more about &lt;a href&#x3D;\&quot;/docs/billing/invoices/credit-notes#voiding\&quot;&gt;voiding credit notes&lt;/a&gt;.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::CreditNote, Integer, Hash)] Stripe::CreditNote, response status code and response headers
     def post_credit_notes_id_void_with_http_info(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::CreditNote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_credit_notes_id_void(id: id, expand: expand)
+      request = build_api_request_for_post_credit_notes_id_void(id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1139,15 +1040,15 @@ module Stripe
 
     # &lt;p&gt;Marks a credit note as void. Learn more about &lt;a href&#x3D;\&quot;/docs/billing/invoices/credit-notes#voiding\&quot;&gt;voiding credit notes&lt;/a&gt;.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_credit_notes_id_void(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_credit_notes_id_void(id: id, expand: expand).execute(&block)
+      build_api_request_for_post_credit_notes_id_void(id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_CREDIT_NOTES_ID_VOID_MAX_LENGTH_FOR_ID = 5000
@@ -1156,7 +1057,7 @@ module Stripe
     def build_api_request_for_post_credit_notes_id_void(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CreditNotesApi.post_credit_notes_id_void ..." }
@@ -1167,30 +1068,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_CREDIT_NOTES_ID_VOID_MAX_LENGTH_FOR_ID)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/credit_notes/{id}/void".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

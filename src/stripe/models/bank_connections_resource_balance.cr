@@ -25,7 +25,6 @@ module Stripe
     @[JSON::Field(key: "as_of", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter as_of : Int64? = nil
 
-    # The balances owed to (or by) the account holder.  Each key is a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.  Each value is a integer amount. A positive amount indicates money owed to the account holder. A negative amount indicates money owed by the account holder.
     @[JSON::Field(key: "current", type: Hash(String, Int32)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter current : Hash(String, Int32)? = nil
 

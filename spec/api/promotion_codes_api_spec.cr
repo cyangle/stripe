@@ -53,15 +53,8 @@ describe "PromotionCodesApi" do
 
   # unit tests for post_promotion_codes
   # &lt;p&gt;A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.&lt;/p&gt;
-  # @param coupon The coupon for this promotion code.
+  # @param post_promotion_codes_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the promotion code is currently active.
-  # @option opts [String] :code The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
-  # @option opts [String] :customer The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int32] :expires_at The timestamp at which this promotion code will expire. If the coupon has specified a &#x60;redeems_by&#x60;, then this value cannot be after the coupon&#39;s &#x60;redeems_by&#x60;.
-  # @option opts [Int32] :max_redemptions A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a &#x60;max_redemptions&#x60;, then this value cannot be greater than the coupon&#39;s &#x60;max_redemptions&#x60;.
-  # @option opts [RestrictionsParams] :restrictions
   # @return [PromotionCode]
   describe "post_promotion_codes test" do
     it "should work" do
@@ -73,10 +66,7 @@ describe "PromotionCodesApi" do
   # &lt;p&gt;Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.&lt;/p&gt;
   # @param promotion_code
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [RestrictionsParams] :restrictions
+  # @option opts [PostPromotionCodesPromotionCodeRequest] :post_promotion_codes_promotion_code_request
   # @return [PromotionCode]
   describe "post_promotion_codes_promotion_code test" do
     it "should work" do

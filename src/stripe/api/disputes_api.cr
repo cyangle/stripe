@@ -139,8 +139,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/disputes"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -149,19 +157,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -247,23 +247,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/disputes/{dispute}".sub("{" + "dispute" + "}", URI.encode_path(dispute.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -283,39 +283,27 @@ module Stripe
 
     # <p>When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your <a href=\"https://dashboard.stripe.com/disputes\">dashboard</a>, but if you prefer, you can use the API to submit evidence programmatically.</p>  <p>Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our <a href=\"/docs/disputes/categories\">guide to dispute types</a>.</p>
     # @required @param dispute [String?]
-    # @optional @param evidence [Stripe::DisputeEvidenceParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param submit [Bool?] Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
+    # @optional @param post_disputes_dispute_request [Stripe::PostDisputesDisputeRequest?]
     # @return [Stripe::Dispute]
     def post_disputes_dispute(
       *,
       dispute : String? = nil,
-      evidence : Stripe::DisputeEvidenceParams? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      submit : Bool? = nil
+      post_disputes_dispute_request : Stripe::PostDisputesDisputeRequest? = nil
     ) : Stripe::Dispute
-      data, _status_code, _headers = post_disputes_dispute_with_http_info(dispute: dispute, evidence: evidence, expand: expand, metadata: metadata, submit: submit)
+      data, _status_code, _headers = post_disputes_dispute_with_http_info(dispute: dispute, post_disputes_dispute_request: post_disputes_dispute_request)
       data
     end
 
     # &lt;p&gt;When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/disputes\&quot;&gt;dashboard&lt;/a&gt;, but if you prefer, you can use the API to submit evidence programmatically.&lt;/p&gt;  &lt;p&gt;Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our &lt;a href&#x3D;\&quot;/docs/disputes/categories\&quot;&gt;guide to dispute types&lt;/a&gt;.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param evidence [Stripe::DisputeEvidenceParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param submit [Bool?] Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
+    # @optional @param post_disputes_dispute_request [Stripe::PostDisputesDisputeRequest?]
     # @return [Tuple(Stripe::Dispute, Integer, Hash)] Stripe::Dispute, response status code and response headers
     def post_disputes_dispute_with_http_info(
       *,
       dispute : String? = nil,
-      evidence : Stripe::DisputeEvidenceParams? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      submit : Bool? = nil
+      post_disputes_dispute_request : Stripe::PostDisputesDisputeRequest? = nil
     ) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_disputes_dispute(dispute: dispute, evidence: evidence, expand: expand, metadata: metadata, submit: submit)
+      request = build_api_request_for_post_disputes_dispute(dispute: dispute, post_disputes_dispute_request: post_disputes_dispute_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -328,21 +316,15 @@ module Stripe
 
     # &lt;p&gt;When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/disputes\&quot;&gt;dashboard&lt;/a&gt;, but if you prefer, you can use the API to submit evidence programmatically.&lt;/p&gt;  &lt;p&gt;Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our &lt;a href&#x3D;\&quot;/docs/disputes/categories\&quot;&gt;guide to dispute types&lt;/a&gt;.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param evidence [Stripe::DisputeEvidenceParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param submit [Bool?] Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
+    # @optional @param post_disputes_dispute_request [Stripe::PostDisputesDisputeRequest?]
     # @return nil
     def post_disputes_dispute(
       *,
       dispute : String? = nil,
-      evidence : Stripe::DisputeEvidenceParams? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      submit : Bool? = nil,
+      post_disputes_dispute_request : Stripe::PostDisputesDisputeRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_disputes_dispute(dispute: dispute, evidence: evidence, expand: expand, metadata: metadata, submit: submit).execute(&block)
+      build_api_request_for_post_disputes_dispute(dispute: dispute, post_disputes_dispute_request: post_disputes_dispute_request).execute(&block)
     end
 
     POST_DISPUTES_DISPUTE_MAX_LENGTH_FOR_DISPUTE = 5000
@@ -351,10 +333,7 @@ module Stripe
     def build_api_request_for_post_disputes_dispute(
       *,
       dispute : String? = nil,
-      evidence : Stripe::DisputeEvidenceParams? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      submit : Bool? = nil
+      post_disputes_dispute_request : Stripe::PostDisputesDisputeRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: DisputesApi.post_disputes_dispute ..." }
@@ -365,40 +344,32 @@ module Stripe
         unless (_dispute = dispute).nil?
           OpenApi::PrimitiveValidator.validate_max_length("dispute", dispute.to_s.size, POST_DISPUTES_DISPUTE_MAX_LENGTH_FOR_DISPUTE)
         end
-        unless (_evidence = evidence).nil?
-          _evidence.validate if _evidence.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_disputes_dispute_request = post_disputes_dispute_request).nil?
+          _post_disputes_dispute_request.validate if _post_disputes_dispute_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/disputes/{dispute}".sub("{" + "dispute" + "}", URI.encode_path(dispute.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["evidence"] = evidence.to_s if !evidence.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["submit"] = submit.to_s if !submit.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_disputes_dispute_request, content_type: header_params["Content-Type"]?) if !post_disputes_dispute_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -418,27 +389,27 @@ module Stripe
 
     # <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>  <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
     # @required @param dispute [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Dispute]
     def post_disputes_dispute_close(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Dispute
-      data, _status_code, _headers = post_disputes_dispute_close_with_http_info(dispute: dispute, expand: expand)
+      data, _status_code, _headers = post_disputes_dispute_close_with_http_info(dispute: dispute, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.&lt;/p&gt;  &lt;p&gt;The status of the dispute will change from &lt;code&gt;needs_response&lt;/code&gt; to &lt;code&gt;lost&lt;/code&gt;. &lt;em&gt;Closing a dispute is irreversible&lt;/em&gt;.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Dispute, Integer, Hash)] Stripe::Dispute, response status code and response headers
     def post_disputes_dispute_close_with_http_info(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Dispute, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_disputes_dispute_close(dispute: dispute, expand: expand)
+      request = build_api_request_for_post_disputes_dispute_close(dispute: dispute, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -451,15 +422,15 @@ module Stripe
 
     # &lt;p&gt;Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.&lt;/p&gt;  &lt;p&gt;The status of the dispute will change from &lt;code&gt;needs_response&lt;/code&gt; to &lt;code&gt;lost&lt;/code&gt;. &lt;em&gt;Closing a dispute is irreversible&lt;/em&gt;.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_disputes_dispute_close(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_disputes_dispute_close(dispute: dispute, expand: expand).execute(&block)
+      build_api_request_for_post_disputes_dispute_close(dispute: dispute, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_DISPUTES_DISPUTE_CLOSE_MAX_LENGTH_FOR_DISPUTE = 5000
@@ -468,7 +439,7 @@ module Stripe
     def build_api_request_for_post_disputes_dispute_close(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: DisputesApi.post_disputes_dispute_close ..." }
@@ -479,30 +450,32 @@ module Stripe
         unless (_dispute = dispute).nil?
           OpenApi::PrimitiveValidator.validate_max_length("dispute", dispute.to_s.size, POST_DISPUTES_DISPUTE_CLOSE_MAX_LENGTH_FOR_DISPUTE)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/disputes/{dispute}/close".sub("{" + "dispute" + "}", URI.encode_path(dispute.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

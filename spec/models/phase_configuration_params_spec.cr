@@ -151,6 +151,13 @@ describe Stripe::PhaseConfigurationParams do
     end
   end
 
+  describe "test attribute 'start_date'" do
+    it "should work" do
+      # instance = Stripe::PhaseConfigurationParams.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'transfer_data'" do
     it "should work" do
       # instance = Stripe::PhaseConfigurationParams.new

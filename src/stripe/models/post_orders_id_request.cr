@@ -61,8 +61,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    @[JSON::Field(key: "payment", type: Stripe::UpdateParams?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter payment : Stripe::UpdateParams? = nil
+    @[JSON::Field(key: "payment", type: Stripe::PostOrdersIdRequestPayment?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payment : Stripe::PostOrdersIdRequestPayment? = nil
 
     @[JSON::Field(key: "shipping_cost", type: Stripe::PostOrdersRequestShippingCost?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil
@@ -89,7 +89,7 @@ module Stripe
       @ip_address : String? = nil,
       @line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil,
       @metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      @payment : Stripe::UpdateParams? = nil,
+      @payment : Stripe::PostOrdersIdRequestPayment? = nil,
       @shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
       @shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
       @tax_details : Stripe::TaxDetails? = nil
@@ -320,7 +320,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment Object to be assigned
-    def payment=(payment : Stripe::UpdateParams?)
+    def payment=(payment : Stripe::PostOrdersIdRequestPayment?)
       if payment.nil?
         return @payment = nil
       end

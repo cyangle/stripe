@@ -129,6 +129,13 @@ describe Stripe::IssuingAuthorization do
     end
   end
 
+  describe "test attribute 'network_data'" do
+    it "should work" do
+      # instance = Stripe::IssuingAuthorization.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'object'" do
     it "should work" do
       # instance = Stripe::IssuingAuthorization.new

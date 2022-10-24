@@ -324,9 +324,8 @@ describe "TreasuryApi" do
 
   # unit tests for post_treasury_credit_reversals
   # &lt;p&gt;Reverses a ReceivedCredit and creates a CreditReversal object.&lt;/p&gt;
-  # @param received_credit The ReceivedCredit to reverse.
+  # @param post_treasury_credit_reversals_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryCreditReversal]
   describe "post_treasury_credit_reversals test" do
     it "should work" do
@@ -336,9 +335,8 @@ describe "TreasuryApi" do
 
   # unit tests for post_treasury_debit_reversals
   # &lt;p&gt;Reverses a ReceivedDebit and creates a DebitReversal object.&lt;/p&gt;
-  # @param received_debit The ReceivedDebit to reverse.
+  # @param post_treasury_debit_reversals_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryDebitReversal]
   describe "post_treasury_debit_reversals test" do
     it "should work" do
@@ -348,11 +346,8 @@ describe "TreasuryApi" do
 
   # unit tests for post_treasury_financial_accounts
   # &lt;p&gt;Creates a new FinancialAccount. For now, each connected account can only have one FinancialAccount.&lt;/p&gt;
-  # @param supported_currencies The currencies the FinancialAccount can hold a balance in.
+  # @param post_treasury_financial_accounts_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FeatureAccess] :features
-  # @option opts [PlatformRestrictions] :platform_restrictions
   # @return [TreasuryFinancialAccount]
   describe "post_treasury_financial_accounts test" do
     it "should work" do
@@ -364,9 +359,7 @@ describe "TreasuryApi" do
   # &lt;p&gt;Updates the details of a FinancialAccount.&lt;/p&gt;
   # @param financial_account
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FeatureAccess] :features
-  # @option opts [PlatformRestrictions] :platform_restrictions
+  # @option opts [PostTreasuryFinancialAccountsFinancialAccountRequest] :post_treasury_financial_accounts_financial_account_request
   # @return [TreasuryFinancialAccount]
   describe "post_treasury_financial_accounts_financial_account test" do
     it "should work" do
@@ -378,14 +371,7 @@ describe "TreasuryApi" do
   # &lt;p&gt;Updates the Features associated with a FinancialAccount.&lt;/p&gt;
   # @param financial_account
   # @param [Hash] opts the optional parameters
-  # @option opts [Access] :card_issuing
-  # @option opts [Access] :deposit_insurance
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FinancialAddresses] :financial_addresses
-  # @option opts [InboundTransfers] :inbound_transfers
-  # @option opts [Access] :intra_stripe_flows
-  # @option opts [OutboundPayments] :outbound_payments
-  # @option opts [OutboundTransfers] :outbound_transfers
+  # @option opts [PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest] :post_treasury_financial_accounts_financial_account_features_request
   # @return [TreasuryFinancialAccountFeatures]
   describe "post_treasury_financial_accounts_financial_account_features test" do
     it "should work" do
@@ -395,14 +381,8 @@ describe "TreasuryApi" do
 
   # unit tests for post_treasury_inbound_transfers
   # &lt;p&gt;Creates an InboundTransfer.&lt;/p&gt;
-  # @param amount Amount (in cents) to be transferred.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param financial_account The FinancialAccount to send funds to.
-  # @param origin_payment_method The origin payment method to be debited for the InboundTransfer.
+  # @param post_treasury_inbound_transfers_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :statement_descriptor The complete description that appears on your customers&#39; statements. Maximum 10 characters.
   # @return [TreasuryInboundTransfer]
   describe "post_treasury_inbound_transfers test" do
     it "should work" do
@@ -414,7 +394,7 @@ describe "TreasuryApi" do
   # &lt;p&gt;Cancels an InboundTransfer.&lt;/p&gt;
   # @param inbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryInboundTransfer]
   describe "post_treasury_inbound_transfers_inbound_transfer_cancel test" do
     it "should work" do
@@ -424,18 +404,8 @@ describe "TreasuryApi" do
 
   # unit tests for post_treasury_outbound_payments
   # &lt;p&gt;Creates an OutboundPayment.&lt;/p&gt;
-  # @param amount Amount (in cents) to be transferred.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param financial_account The FinancialAccount to pull funds from.
+  # @param post_treasury_outbound_payments_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :customer ID of the customer to whom the OutboundPayment is sent. Must match the Customer attached to the &#x60;destination_payment_method&#x60; passed in.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [String] :destination_payment_method The PaymentMethod to use as the payment instrument for the OutboundPayment. Exclusive with &#x60;destination_payment_method_data&#x60;.
-  # @option opts [PaymentMethodData] :destination_payment_method_data
-  # @option opts [PaymentMethodOptions] :destination_payment_method_options
-  # @option opts [EndUserDetailsParams] :end_user_details
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :statement_descriptor The description that appears on the receiving end for this OutboundPayment (for example, bank statement for external bank transfer). Maximum 10 characters for &#x60;ach&#x60; payments, 140 characters for &#x60;wire&#x60; payments, or 500 characters for &#x60;stripe&#x60; network transfers. The default value is &#x60;payment&#x60;.
   # @return [TreasuryOutboundPayment]
   describe "post_treasury_outbound_payments test" do
     it "should work" do
@@ -447,7 +417,7 @@ describe "TreasuryApi" do
   # &lt;p&gt;Cancel an OutboundPayment.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryOutboundPayment]
   describe "post_treasury_outbound_payments_id_cancel test" do
     it "should work" do
@@ -457,15 +427,8 @@ describe "TreasuryApi" do
 
   # unit tests for post_treasury_outbound_transfers
   # &lt;p&gt;Creates an OutboundTransfer.&lt;/p&gt;
-  # @param amount Amount (in cents) to be transferred.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param financial_account The FinancialAccount to pull funds from.
+  # @param post_treasury_outbound_transfers_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [String] :destination_payment_method The PaymentMethod to use as the payment instrument for the OutboundTransfer.
-  # @option opts [PaymentMethodOptions] :destination_payment_method_options
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :statement_descriptor Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10 characters for &#x60;ach&#x60; transfers or 140 characters for &#x60;wire&#x60; transfers. The default value is &#x60;transfer&#x60;.
   # @return [TreasuryOutboundTransfer]
   describe "post_treasury_outbound_transfers test" do
     it "should work" do
@@ -477,7 +440,7 @@ describe "TreasuryApi" do
   # &lt;p&gt;An OutboundTransfer can be canceled if the funds have not yet been paid out.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [TreasuryOutboundTransfer]
   describe "post_treasury_outbound_transfers_outbound_transfer_cancel test" do
     it "should work" do

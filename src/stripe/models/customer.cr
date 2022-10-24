@@ -103,7 +103,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    # The current multi-currency balances, if any, being stored on the customer. If positive in a currency, the customer has a credit to apply to their next invoice denominated in that currency. If negative, the customer has an amount owed that will be added to their next invoice denominated in that currency. These balances do not refer to any unpaid invoices. They solely track amounts that have yet to be successfully applied to any invoice. A balance in a particular currency is only applied to any invoice as an invoice in that currency is finalized.
     @[JSON::Field(key: "invoice_credit_balance", type: Hash(String, Int32)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_credit_balance : Hash(String, Int32)? = nil
 
@@ -118,7 +117,6 @@ module Stripe
     @[JSON::Field(key: "invoice_settings", type: Stripe::InvoiceSettingCustomerSetting?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_settings : Stripe::InvoiceSettingCustomerSetting? = nil
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 

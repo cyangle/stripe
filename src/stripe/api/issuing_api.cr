@@ -149,8 +149,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/authorizations"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -160,19 +168,11 @@ module Stripe
       query_params["status"] = status.to_s if !status.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -258,23 +258,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/authorizations/{authorization}".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -424,8 +424,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/cardholders"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -436,19 +444,11 @@ module Stripe
       query_params["created"] = created.to_s if !created.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -534,23 +534,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/cardholders/{cardholder}".sub("{" + "cardholder" + "}", URI.encode_path(cardholder.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -723,8 +723,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/cards"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -737,19 +745,11 @@ module Stripe
       query_params["created"] = created.to_s if !created.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -835,23 +835,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/cards/{card}".sub("{" + "card" + "}", URI.encode_path(card.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -987,8 +987,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/disputes"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -997,19 +1005,11 @@ module Stripe
       query_params["transaction"] = transaction.to_s if !transaction.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1095,23 +1095,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/disputes/{dispute}".sub("{" + "dispute" + "}", URI.encode_path(dispute.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1258,8 +1258,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/transactions"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -1269,19 +1277,11 @@ module Stripe
       query_params["created"] = created.to_s if !created.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1367,23 +1367,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/issuing/transactions/{transaction}".sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1403,31 +1403,27 @@ module Stripe
 
     # <p>Updates the specified Issuing <code>Authorization</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param authorization [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::IssuingAuthorization]
     def post_issuing_authorizations_authorization(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::IssuingAuthorization
-      data, _status_code, _headers = post_issuing_authorizations_authorization_with_http_info(authorization: authorization, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_issuing_authorizations_authorization_with_http_info(authorization: authorization, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Authorization&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param authorization [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
     def post_issuing_authorizations_authorization_with_http_info(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_authorizations_authorization(authorization: authorization, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_issuing_authorizations_authorization(authorization: authorization, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1440,17 +1436,15 @@ module Stripe
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Authorization&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param authorization [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_issuing_authorizations_authorization(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_authorizations_authorization(authorization: authorization, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_issuing_authorizations_authorization(authorization: authorization, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_ISSUING_AUTHORIZATIONS_AUTHORIZATION_MAX_LENGTH_FOR_AUTHORIZATION = 5000
@@ -1459,8 +1453,7 @@ module Stripe
     def build_api_request_for_post_issuing_authorizations_authorization(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_authorizations_authorization ..." }
@@ -1471,35 +1464,32 @@ module Stripe
         unless (_authorization = authorization).nil?
           OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_ISSUING_AUTHORIZATIONS_AUTHORIZATION_MAX_LENGTH_FOR_AUTHORIZATION)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/authorizations/{authorization}".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1519,35 +1509,27 @@ module Stripe
 
     # <p>Approves a pending Issuing <code>Authorization</code> object. This request should be made within the timeout window of the <a href=\"/docs/issuing/controls/real-time-authorizations\">real-time authorization</a> flow.</p>
     # @required @param authorization [String?]
-    # @optional @param amount [Int32?] If the authorization's `pending_request.is_amount_controllable` property is `true`, you may provide this value to control how much to hold for the authorization. Must be positive (use [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_issuing_authorizations_authorization_approve_request [Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest?]
     # @return [Stripe::IssuingAuthorization]
     def post_issuing_authorizations_authorization_approve(
       *,
       authorization : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_issuing_authorizations_authorization_approve_request : Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest? = nil
     ) : Stripe::IssuingAuthorization
-      data, _status_code, _headers = post_issuing_authorizations_authorization_approve_with_http_info(authorization: authorization, amount: amount, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_issuing_authorizations_authorization_approve_with_http_info(authorization: authorization, post_issuing_authorizations_authorization_approve_request: post_issuing_authorizations_authorization_approve_request)
       data
     end
 
     # &lt;p&gt;Approves a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real-time authorization&lt;/a&gt; flow.&lt;/p&gt;
     # @required @param authorization [String?]
-    # @optional @param amount [Int32?] If the authorization's `pending_request.is_amount_controllable` property is `true`, you may provide this value to control how much to hold for the authorization. Must be positive (use [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_issuing_authorizations_authorization_approve_request [Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest?]
     # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
     def post_issuing_authorizations_authorization_approve_with_http_info(
       *,
       authorization : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_issuing_authorizations_authorization_approve_request : Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest? = nil
     ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_authorizations_authorization_approve(authorization: authorization, amount: amount, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_issuing_authorizations_authorization_approve(authorization: authorization, post_issuing_authorizations_authorization_approve_request: post_issuing_authorizations_authorization_approve_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1560,19 +1542,15 @@ module Stripe
 
     # &lt;p&gt;Approves a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real-time authorization&lt;/a&gt; flow.&lt;/p&gt;
     # @required @param authorization [String?]
-    # @optional @param amount [Int32?] If the authorization's `pending_request.is_amount_controllable` property is `true`, you may provide this value to control how much to hold for the authorization. Must be positive (use [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_issuing_authorizations_authorization_approve_request [Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest?]
     # @return nil
     def post_issuing_authorizations_authorization_approve(
       *,
       authorization : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_issuing_authorizations_authorization_approve_request : Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_authorizations_authorization_approve(authorization: authorization, amount: amount, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_issuing_authorizations_authorization_approve(authorization: authorization, post_issuing_authorizations_authorization_approve_request: post_issuing_authorizations_authorization_approve_request).execute(&block)
     end
 
     POST_ISSUING_AUTHORIZATIONS_AUTHORIZATION_APPROVE_MAX_LENGTH_FOR_AUTHORIZATION = 5000
@@ -1581,9 +1559,7 @@ module Stripe
     def build_api_request_for_post_issuing_authorizations_authorization_approve(
       *,
       authorization : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_issuing_authorizations_authorization_approve_request : Stripe::PostIssuingAuthorizationsAuthorizationApproveRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_authorizations_authorization_approve ..." }
@@ -1594,36 +1570,32 @@ module Stripe
         unless (_authorization = authorization).nil?
           OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_ISSUING_AUTHORIZATIONS_AUTHORIZATION_APPROVE_MAX_LENGTH_FOR_AUTHORIZATION)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_issuing_authorizations_authorization_approve_request = post_issuing_authorizations_authorization_approve_request).nil?
+          _post_issuing_authorizations_authorization_approve_request.validate if _post_issuing_authorizations_authorization_approve_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/authorizations/{authorization}/approve".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_authorizations_authorization_approve_request, content_type: header_params["Content-Type"]?) if !post_issuing_authorizations_authorization_approve_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1643,31 +1615,27 @@ module Stripe
 
     # <p>Declines a pending Issuing <code>Authorization</code> object. This request should be made within the timeout window of the <a href=\"/docs/issuing/controls/real-time-authorizations\">real time authorization</a> flow.</p>
     # @required @param authorization [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::IssuingAuthorization]
     def post_issuing_authorizations_authorization_decline(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::IssuingAuthorization
-      data, _status_code, _headers = post_issuing_authorizations_authorization_decline_with_http_info(authorization: authorization, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_issuing_authorizations_authorization_decline_with_http_info(authorization: authorization, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Declines a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real time authorization&lt;/a&gt; flow.&lt;/p&gt;
     # @required @param authorization [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
     def post_issuing_authorizations_authorization_decline_with_http_info(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_authorizations_authorization_decline(authorization: authorization, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_issuing_authorizations_authorization_decline(authorization: authorization, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1680,17 +1648,15 @@ module Stripe
 
     # &lt;p&gt;Declines a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real time authorization&lt;/a&gt; flow.&lt;/p&gt;
     # @required @param authorization [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_issuing_authorizations_authorization_decline(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_authorizations_authorization_decline(authorization: authorization, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_issuing_authorizations_authorization_decline(authorization: authorization, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_ISSUING_AUTHORIZATIONS_AUTHORIZATION_DECLINE_MAX_LENGTH_FOR_AUTHORIZATION = 5000
@@ -1699,8 +1665,7 @@ module Stripe
     def build_api_request_for_post_issuing_authorizations_authorization_decline(
       *,
       authorization : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_authorizations_authorization_decline ..." }
@@ -1711,35 +1676,32 @@ module Stripe
         unless (_authorization = authorization).nil?
           OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_ISSUING_AUTHORIZATIONS_AUTHORIZATION_DECLINE_MAX_LENGTH_FOR_AUTHORIZATION)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/authorizations/{authorization}/decline".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1758,60 +1720,24 @@ module Stripe
     end
 
     # <p>Creates a new Issuing <code>Cardholder</code> object that can be issued cards.</p>
-    # @required @param billing [Stripe::BillingSpecs?]
-    # @required @param name [String?] The cardholder's name. This will be printed on cards issued to them. The maximum length of this field is 24 characters. This field cannot contain any special characters or numbers.
-    # @required @param _type [String?] One of `individual` or `company`.
-    # @optional @param company [Stripe::CompanyParam?]
-    # @optional @param email [String?] The cardholder's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param individual [Stripe::IndividualParam?]
-    # @optional @param phone_number [String?] The cardholder's phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParamV2?]
-    # @optional @param status [String?] Specifies whether to permit authorizations on this cardholder's cards. Defaults to `active`.
+    # @required @param post_issuing_cardholders_request [Stripe::PostIssuingCardholdersRequest?]
     # @return [Stripe::IssuingCardholder]
     def post_issuing_cardholders(
       *,
-      billing : Stripe::BillingSpecs? = nil,
-      name : String? = nil,
-      _type : String? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil
+      post_issuing_cardholders_request : Stripe::PostIssuingCardholdersRequest? = nil
     ) : Stripe::IssuingCardholder
-      data, _status_code, _headers = post_issuing_cardholders_with_http_info(billing: billing, name: name, _type: _type, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status)
+      data, _status_code, _headers = post_issuing_cardholders_with_http_info(post_issuing_cardholders_request: post_issuing_cardholders_request)
       data
     end
 
     # &lt;p&gt;Creates a new Issuing &lt;code&gt;Cardholder&lt;/code&gt; object that can be issued cards.&lt;/p&gt;
-    # @required @param billing [Stripe::BillingSpecs?]
-    # @required @param name [String?] The cardholder's name. This will be printed on cards issued to them. The maximum length of this field is 24 characters. This field cannot contain any special characters or numbers.
-    # @required @param _type [String?] One of `individual` or `company`.
-    # @optional @param company [Stripe::CompanyParam?]
-    # @optional @param email [String?] The cardholder's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param individual [Stripe::IndividualParam?]
-    # @optional @param phone_number [String?] The cardholder's phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParamV2?]
-    # @optional @param status [String?] Specifies whether to permit authorizations on this cardholder's cards. Defaults to `active`.
+    # @required @param post_issuing_cardholders_request [Stripe::PostIssuingCardholdersRequest?]
     # @return [Tuple(Stripe::IssuingCardholder, Integer, Hash)] Stripe::IssuingCardholder, response status code and response headers
     def post_issuing_cardholders_with_http_info(
       *,
-      billing : Stripe::BillingSpecs? = nil,
-      name : String? = nil,
-      _type : String? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil
+      post_issuing_cardholders_request : Stripe::PostIssuingCardholdersRequest? = nil
     ) : Tuple(Stripe::IssuingCardholder, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_cardholders(billing: billing, name: name, _type: _type, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status)
+      request = build_api_request_for_post_issuing_cardholders(post_issuing_cardholders_request: post_issuing_cardholders_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1823,113 +1749,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new Issuing &lt;code&gt;Cardholder&lt;/code&gt; object that can be issued cards.&lt;/p&gt;
-    # @required @param billing [Stripe::BillingSpecs?]
-    # @required @param name [String?] The cardholder's name. This will be printed on cards issued to them. The maximum length of this field is 24 characters. This field cannot contain any special characters or numbers.
-    # @required @param _type [String?] One of `individual` or `company`.
-    # @optional @param company [Stripe::CompanyParam?]
-    # @optional @param email [String?] The cardholder's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param individual [Stripe::IndividualParam?]
-    # @optional @param phone_number [String?] The cardholder's phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParamV2?]
-    # @optional @param status [String?] Specifies whether to permit authorizations on this cardholder's cards. Defaults to `active`.
+    # @required @param post_issuing_cardholders_request [Stripe::PostIssuingCardholdersRequest?]
     # @return nil
     def post_issuing_cardholders(
       *,
-      billing : Stripe::BillingSpecs? = nil,
-      name : String? = nil,
-      _type : String? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil,
+      post_issuing_cardholders_request : Stripe::PostIssuingCardholdersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_cardholders(billing: billing, name: name, _type: _type, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status).execute(&block)
+      build_api_request_for_post_issuing_cardholders(post_issuing_cardholders_request: post_issuing_cardholders_request).execute(&block)
     end
-
-    POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR__TYPE  = String.static_array("company", "individual")
-    POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR_STATUS = String.static_array("active", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cardholders(
       *,
-      billing : Stripe::BillingSpecs? = nil,
-      name : String? = nil,
-      _type : String? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil
+      post_issuing_cardholders_request : Stripe::PostIssuingCardholdersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_cardholders ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"billing\" is required and cannot be null") if billing.nil?
-        unless (_billing = billing).nil?
-          _billing.validate if _billing.is_a?(OpenApi::Validatable)
-        end
-        raise ArgumentError.new("\"name\" is required and cannot be null") if name.nil?
-
-        raise ArgumentError.new("\"_type\" is required and cannot be null") if _type.nil?
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR__TYPE)
-        end
-        unless (_company = company).nil?
-          _company.validate if _company.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_individual = individual).nil?
-          _individual.validate if _individual.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_spending_controls = spending_controls).nil?
-          _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
-        end
-        unless (_status = status).nil?
-          OpenApi::EnumValidator.validate("status", _status, POST_ISSUING_CARDHOLDERS_VALID_VALUES_FOR_STATUS)
+        raise ArgumentError.new("\"post_issuing_cardholders_request\" is required and cannot be null") if post_issuing_cardholders_request.nil?
+        unless (_post_issuing_cardholders_request = post_issuing_cardholders_request).nil?
+          _post_issuing_cardholders_request.validate if _post_issuing_cardholders_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/cardholders"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["billing"] = billing.to_s if !billing.nil?
-      form_params["company"] = company.to_s if !company.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["individual"] = individual.to_s if !individual.nil?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["phone_number"] = phone_number.to_s if !phone_number.nil?
-      form_params["spending_controls"] = spending_controls.to_s if !spending_controls.nil?
-      form_params["status"] = status.to_s if !status.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_cardholders_request, content_type: header_params["Content-Type"]?) if !post_issuing_cardholders_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1949,55 +1815,27 @@ module Stripe
 
     # <p>Updates the specified Issuing <code>Cardholder</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param cardholder [String?]
-    # @optional @param billing [Stripe::BillingSpecs?]
-    # @optional @param company [Stripe::CompanyParam?]
-    # @optional @param email [String?] The cardholder's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param individual [Stripe::IndividualParam?]
-    # @optional @param phone_number [String?] The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure) for more details.
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParamV2?]
-    # @optional @param status [String?] Specifies whether to permit authorizations on this cardholder's cards.
+    # @optional @param post_issuing_cardholders_cardholder_request [Stripe::PostIssuingCardholdersCardholderRequest?]
     # @return [Stripe::IssuingCardholder]
     def post_issuing_cardholders_cardholder(
       *,
       cardholder : String? = nil,
-      billing : Stripe::BillingSpecs? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil
+      post_issuing_cardholders_cardholder_request : Stripe::PostIssuingCardholdersCardholderRequest? = nil
     ) : Stripe::IssuingCardholder
-      data, _status_code, _headers = post_issuing_cardholders_cardholder_with_http_info(cardholder: cardholder, billing: billing, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status)
+      data, _status_code, _headers = post_issuing_cardholders_cardholder_with_http_info(cardholder: cardholder, post_issuing_cardholders_cardholder_request: post_issuing_cardholders_cardholder_request)
       data
     end
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Cardholder&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param cardholder [String?]
-    # @optional @param billing [Stripe::BillingSpecs?]
-    # @optional @param company [Stripe::CompanyParam?]
-    # @optional @param email [String?] The cardholder's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param individual [Stripe::IndividualParam?]
-    # @optional @param phone_number [String?] The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure) for more details.
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParamV2?]
-    # @optional @param status [String?] Specifies whether to permit authorizations on this cardholder's cards.
+    # @optional @param post_issuing_cardholders_cardholder_request [Stripe::PostIssuingCardholdersCardholderRequest?]
     # @return [Tuple(Stripe::IssuingCardholder, Integer, Hash)] Stripe::IssuingCardholder, response status code and response headers
     def post_issuing_cardholders_cardholder_with_http_info(
       *,
       cardholder : String? = nil,
-      billing : Stripe::BillingSpecs? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil
+      post_issuing_cardholders_cardholder_request : Stripe::PostIssuingCardholdersCardholderRequest? = nil
     ) : Tuple(Stripe::IssuingCardholder, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_cardholders_cardholder(cardholder: cardholder, billing: billing, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status)
+      request = build_api_request_for_post_issuing_cardholders_cardholder(cardholder: cardholder, post_issuing_cardholders_cardholder_request: post_issuing_cardholders_cardholder_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2010,46 +1848,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Cardholder&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param cardholder [String?]
-    # @optional @param billing [Stripe::BillingSpecs?]
-    # @optional @param company [Stripe::CompanyParam?]
-    # @optional @param email [String?] The cardholder's email address.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param individual [Stripe::IndividualParam?]
-    # @optional @param phone_number [String?] The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure) for more details.
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParamV2?]
-    # @optional @param status [String?] Specifies whether to permit authorizations on this cardholder's cards.
+    # @optional @param post_issuing_cardholders_cardholder_request [Stripe::PostIssuingCardholdersCardholderRequest?]
     # @return nil
     def post_issuing_cardholders_cardholder(
       *,
       cardholder : String? = nil,
-      billing : Stripe::BillingSpecs? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil,
+      post_issuing_cardholders_cardholder_request : Stripe::PostIssuingCardholdersCardholderRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_cardholders_cardholder(cardholder: cardholder, billing: billing, company: company, email: email, expand: expand, individual: individual, phone_number: phone_number, spending_controls: spending_controls, status: status).execute(&block)
+      build_api_request_for_post_issuing_cardholders_cardholder(cardholder: cardholder, post_issuing_cardholders_cardholder_request: post_issuing_cardholders_cardholder_request).execute(&block)
     end
 
     POST_ISSUING_CARDHOLDERS_CARDHOLDER_MAX_LENGTH_FOR_CARDHOLDER = 5000
-    POST_ISSUING_CARDHOLDERS_CARDHOLDER_VALID_VALUES_FOR_STATUS   = String.static_array("active", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cardholders_cardholder(
       *,
       cardholder : String? = nil,
-      billing : Stripe::BillingSpecs? = nil,
-      company : Stripe::CompanyParam? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      individual : Stripe::IndividualParam? = nil,
-      phone_number : String? = nil,
-      spending_controls : Stripe::AuthorizationControlsParamV2? = nil,
-      status : String? = nil
+      post_issuing_cardholders_cardholder_request : Stripe::PostIssuingCardholdersCardholderRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_cardholders_cardholder ..." }
@@ -2060,54 +1876,32 @@ module Stripe
         unless (_cardholder = cardholder).nil?
           OpenApi::PrimitiveValidator.validate_max_length("cardholder", cardholder.to_s.size, POST_ISSUING_CARDHOLDERS_CARDHOLDER_MAX_LENGTH_FOR_CARDHOLDER)
         end
-        unless (_billing = billing).nil?
-          _billing.validate if _billing.is_a?(OpenApi::Validatable)
-        end
-        unless (_company = company).nil?
-          _company.validate if _company.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_individual = individual).nil?
-          _individual.validate if _individual.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_spending_controls = spending_controls).nil?
-          _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
-        end
-        unless (_status = status).nil?
-          OpenApi::EnumValidator.validate("status", _status, POST_ISSUING_CARDHOLDERS_CARDHOLDER_VALID_VALUES_FOR_STATUS)
+        unless (_post_issuing_cardholders_cardholder_request = post_issuing_cardholders_cardholder_request).nil?
+          _post_issuing_cardholders_cardholder_request.validate if _post_issuing_cardholders_cardholder_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/cardholders/{cardholder}".sub("{" + "cardholder" + "}", URI.encode_path(cardholder.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["billing"] = billing.to_s if !billing.nil?
-      form_params["company"] = company.to_s if !company.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["individual"] = individual.to_s if !individual.nil?
-      form_params["phone_number"] = phone_number.to_s if !phone_number.nil?
-      form_params["spending_controls"] = spending_controls.to_s if !spending_controls.nil?
-      form_params["status"] = status.to_s if !status.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_cardholders_cardholder_request, content_type: header_params["Content-Type"]?) if !post_issuing_cardholders_cardholder_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2126,60 +1920,24 @@ module Stripe
     end
 
     # <p>Creates an Issuing <code>Card</code> object.</p>
-    # @required @param currency [String?] The currency for the card.
-    # @required @param _type [String?] The type of card to issue. Possible values are `physical` or `virtual`.
-    # @optional @param cardholder [String?] The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param financial_account [String?]
-    # @optional @param replacement_for [String?] The card this is meant to be a replacement for (if any).
-    # @optional @param replacement_reason [String?] If `replacement_for` is specified, this should indicate why that card is being replaced.
-    # @optional @param shipping [Stripe::ShippingSpecs?]
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
-    # @optional @param status [String?] Whether authorizations can be approved on this card. Defaults to `inactive`.
+    # @required @param post_issuing_cards_request [Stripe::PostIssuingCardsRequest?]
     # @return [Stripe::IssuingCard]
     def post_issuing_cards(
       *,
-      currency : String? = nil,
-      _type : String? = nil,
-      cardholder : String? = nil,
-      expand : Array(String)? = nil,
-      financial_account : String? = nil,
-      replacement_for : String? = nil,
-      replacement_reason : String? = nil,
-      shipping : Stripe::ShippingSpecs? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil
+      post_issuing_cards_request : Stripe::PostIssuingCardsRequest? = nil
     ) : Stripe::IssuingCard
-      data, _status_code, _headers = post_issuing_cards_with_http_info(currency: currency, _type: _type, cardholder: cardholder, expand: expand, financial_account: financial_account, replacement_for: replacement_for, replacement_reason: replacement_reason, shipping: shipping, spending_controls: spending_controls, status: status)
+      data, _status_code, _headers = post_issuing_cards_with_http_info(post_issuing_cards_request: post_issuing_cards_request)
       data
     end
 
     # &lt;p&gt;Creates an Issuing &lt;code&gt;Card&lt;/code&gt; object.&lt;/p&gt;
-    # @required @param currency [String?] The currency for the card.
-    # @required @param _type [String?] The type of card to issue. Possible values are `physical` or `virtual`.
-    # @optional @param cardholder [String?] The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param financial_account [String?]
-    # @optional @param replacement_for [String?] The card this is meant to be a replacement for (if any).
-    # @optional @param replacement_reason [String?] If `replacement_for` is specified, this should indicate why that card is being replaced.
-    # @optional @param shipping [Stripe::ShippingSpecs?]
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
-    # @optional @param status [String?] Whether authorizations can be approved on this card. Defaults to `inactive`.
+    # @required @param post_issuing_cards_request [Stripe::PostIssuingCardsRequest?]
     # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
     def post_issuing_cards_with_http_info(
       *,
-      currency : String? = nil,
-      _type : String? = nil,
-      cardholder : String? = nil,
-      expand : Array(String)? = nil,
-      financial_account : String? = nil,
-      replacement_for : String? = nil,
-      replacement_reason : String? = nil,
-      shipping : Stripe::ShippingSpecs? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil
+      post_issuing_cards_request : Stripe::PostIssuingCardsRequest? = nil
     ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_cards(currency: currency, _type: _type, cardholder: cardholder, expand: expand, financial_account: financial_account, replacement_for: replacement_for, replacement_reason: replacement_reason, shipping: shipping, spending_controls: spending_controls, status: status)
+      request = build_api_request_for_post_issuing_cards(post_issuing_cards_request: post_issuing_cards_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2191,117 +1949,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an Issuing &lt;code&gt;Card&lt;/code&gt; object.&lt;/p&gt;
-    # @required @param currency [String?] The currency for the card.
-    # @required @param _type [String?] The type of card to issue. Possible values are `physical` or `virtual`.
-    # @optional @param cardholder [String?] The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param financial_account [String?]
-    # @optional @param replacement_for [String?] The card this is meant to be a replacement for (if any).
-    # @optional @param replacement_reason [String?] If `replacement_for` is specified, this should indicate why that card is being replaced.
-    # @optional @param shipping [Stripe::ShippingSpecs?]
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
-    # @optional @param status [String?] Whether authorizations can be approved on this card. Defaults to `inactive`.
+    # @required @param post_issuing_cards_request [Stripe::PostIssuingCardsRequest?]
     # @return nil
     def post_issuing_cards(
       *,
-      currency : String? = nil,
-      _type : String? = nil,
-      cardholder : String? = nil,
-      expand : Array(String)? = nil,
-      financial_account : String? = nil,
-      replacement_for : String? = nil,
-      replacement_reason : String? = nil,
-      shipping : Stripe::ShippingSpecs? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil,
+      post_issuing_cards_request : Stripe::PostIssuingCardsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_cards(currency: currency, _type: _type, cardholder: cardholder, expand: expand, financial_account: financial_account, replacement_for: replacement_for, replacement_reason: replacement_reason, shipping: shipping, spending_controls: spending_controls, status: status).execute(&block)
+      build_api_request_for_post_issuing_cards(post_issuing_cards_request: post_issuing_cards_request).execute(&block)
     end
-
-    POST_ISSUING_CARDS_VALID_VALUES_FOR__TYPE              = String.static_array("physical", "virtual")
-    POST_ISSUING_CARDS_MAX_LENGTH_FOR_CARDHOLDER           = 5000
-    POST_ISSUING_CARDS_MAX_LENGTH_FOR_REPLACEMENT_FOR      = 5000
-    POST_ISSUING_CARDS_VALID_VALUES_FOR_REPLACEMENT_REASON = String.static_array("damaged", "expired", "lost", "stolen")
-    POST_ISSUING_CARDS_VALID_VALUES_FOR_STATUS             = String.static_array("active", "inactive")
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cards(
       *,
-      currency : String? = nil,
-      _type : String? = nil,
-      cardholder : String? = nil,
-      expand : Array(String)? = nil,
-      financial_account : String? = nil,
-      replacement_for : String? = nil,
-      replacement_reason : String? = nil,
-      shipping : Stripe::ShippingSpecs? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil
+      post_issuing_cards_request : Stripe::PostIssuingCardsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_cards ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"_type\" is required and cannot be null") if _type.nil?
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_ISSUING_CARDS_VALID_VALUES_FOR__TYPE)
-        end
-        unless (_cardholder = cardholder).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("cardholder", cardholder.to_s.size, POST_ISSUING_CARDS_MAX_LENGTH_FOR_CARDHOLDER)
-        end
-
-        unless (_replacement_for = replacement_for).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("replacement_for", replacement_for.to_s.size, POST_ISSUING_CARDS_MAX_LENGTH_FOR_REPLACEMENT_FOR)
-        end
-        unless (_replacement_reason = replacement_reason).nil?
-          OpenApi::EnumValidator.validate("replacement_reason", _replacement_reason, POST_ISSUING_CARDS_VALID_VALUES_FOR_REPLACEMENT_REASON)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_spending_controls = spending_controls).nil?
-          _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
-        end
-        unless (_status = status).nil?
-          OpenApi::EnumValidator.validate("status", _status, POST_ISSUING_CARDS_VALID_VALUES_FOR_STATUS)
+        raise ArgumentError.new("\"post_issuing_cards_request\" is required and cannot be null") if post_issuing_cards_request.nil?
+        unless (_post_issuing_cards_request = post_issuing_cards_request).nil?
+          _post_issuing_cards_request.validate if _post_issuing_cards_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/cards"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["cardholder"] = cardholder.to_s if !cardholder.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["financial_account"] = financial_account.to_s if !financial_account.nil?
-      form_params["replacement_for"] = replacement_for.to_s if !replacement_for.nil?
-      form_params["replacement_reason"] = replacement_reason.to_s if !replacement_reason.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["spending_controls"] = spending_controls.to_s if !spending_controls.nil?
-      form_params["status"] = status.to_s if !status.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_cards_request, content_type: header_params["Content-Type"]?) if !post_issuing_cards_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2321,47 +2015,27 @@ module Stripe
 
     # <p>Updates the specified Issuing <code>Card</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param card [String?]
-    # @optional @param cancellation_reason [String?] Reason why the `status` of this card is `canceled`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param pin [Stripe::EncryptedPinParam?]
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
-    # @optional @param status [String?] Dictates whether authorizations can be approved on this card. If this card is being canceled because it was lost or stolen, this information should be provided as `cancellation_reason`.
+    # @optional @param post_issuing_cards_card_request [Stripe::PostIssuingCardsCardRequest?]
     # @return [Stripe::IssuingCard]
     def post_issuing_cards_card(
       *,
       card : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      pin : Stripe::EncryptedPinParam? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil
+      post_issuing_cards_card_request : Stripe::PostIssuingCardsCardRequest? = nil
     ) : Stripe::IssuingCard
-      data, _status_code, _headers = post_issuing_cards_card_with_http_info(card: card, cancellation_reason: cancellation_reason, expand: expand, metadata: metadata, pin: pin, spending_controls: spending_controls, status: status)
+      data, _status_code, _headers = post_issuing_cards_card_with_http_info(card: card, post_issuing_cards_card_request: post_issuing_cards_card_request)
       data
     end
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Card&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param card [String?]
-    # @optional @param cancellation_reason [String?] Reason why the `status` of this card is `canceled`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param pin [Stripe::EncryptedPinParam?]
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
-    # @optional @param status [String?] Dictates whether authorizations can be approved on this card. If this card is being canceled because it was lost or stolen, this information should be provided as `cancellation_reason`.
+    # @optional @param post_issuing_cards_card_request [Stripe::PostIssuingCardsCardRequest?]
     # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
     def post_issuing_cards_card_with_http_info(
       *,
       card : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      pin : Stripe::EncryptedPinParam? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil
+      post_issuing_cards_card_request : Stripe::PostIssuingCardsCardRequest? = nil
     ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_cards_card(card: card, cancellation_reason: cancellation_reason, expand: expand, metadata: metadata, pin: pin, spending_controls: spending_controls, status: status)
+      request = build_api_request_for_post_issuing_cards_card(card: card, post_issuing_cards_card_request: post_issuing_cards_card_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2374,41 +2048,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Card&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param card [String?]
-    # @optional @param cancellation_reason [String?] Reason why the `status` of this card is `canceled`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param pin [Stripe::EncryptedPinParam?]
-    # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
-    # @optional @param status [String?] Dictates whether authorizations can be approved on this card. If this card is being canceled because it was lost or stolen, this information should be provided as `cancellation_reason`.
+    # @optional @param post_issuing_cards_card_request [Stripe::PostIssuingCardsCardRequest?]
     # @return nil
     def post_issuing_cards_card(
       *,
       card : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      pin : Stripe::EncryptedPinParam? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil,
+      post_issuing_cards_card_request : Stripe::PostIssuingCardsCardRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_cards_card(card: card, cancellation_reason: cancellation_reason, expand: expand, metadata: metadata, pin: pin, spending_controls: spending_controls, status: status).execute(&block)
+      build_api_request_for_post_issuing_cards_card(card: card, post_issuing_cards_card_request: post_issuing_cards_card_request).execute(&block)
     end
 
-    POST_ISSUING_CARDS_CARD_MAX_LENGTH_FOR_CARD                  = 5000
-    POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("lost", "stolen")
-    POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_STATUS              = String.static_array("active", "canceled", "inactive")
+    POST_ISSUING_CARDS_CARD_MAX_LENGTH_FOR_CARD = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_cards_card(
       *,
       card : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      pin : Stripe::EncryptedPinParam? = nil,
-      spending_controls : Stripe::AuthorizationControlsParam? = nil,
-      status : String? = nil
+      post_issuing_cards_card_request : Stripe::PostIssuingCardsCardRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_cards_card ..." }
@@ -2419,51 +2076,32 @@ module Stripe
         unless (_card = card).nil?
           OpenApi::PrimitiveValidator.validate_max_length("card", card.to_s.size, POST_ISSUING_CARDS_CARD_MAX_LENGTH_FOR_CARD)
         end
-        unless (_cancellation_reason = cancellation_reason).nil?
-          OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_CANCELLATION_REASON)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_pin = pin).nil?
-          _pin.validate if _pin.is_a?(OpenApi::Validatable)
-        end
-        unless (_spending_controls = spending_controls).nil?
-          _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
-        end
-        unless (_status = status).nil?
-          OpenApi::EnumValidator.validate("status", _status, POST_ISSUING_CARDS_CARD_VALID_VALUES_FOR_STATUS)
+        unless (_post_issuing_cards_card_request = post_issuing_cards_card_request).nil?
+          _post_issuing_cards_card_request.validate if _post_issuing_cards_card_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/cards/{card}".sub("{" + "card" + "}", URI.encode_path(card.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["cancellation_reason"] = cancellation_reason.to_s if !cancellation_reason.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["pin"] = pin.to_s if !pin.nil?
-      form_params["spending_controls"] = spending_controls.to_s if !spending_controls.nil?
-      form_params["status"] = status.to_s if !status.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_cards_card_request, content_type: header_params["Content-Type"]?) if !post_issuing_cards_card_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2482,40 +2120,24 @@ module Stripe
     end
 
     # <p>Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>evidence</code> object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to <a href=\"/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\">Dispute reasons and evidence</a> for more details about evidence requirements.</p>
-    # @optional @param amount [Int32?] The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). If not set, defaults to the full transaction amount.
-    # @optional @param evidence [Stripe::EvidenceParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param transaction [String?] The ID of the issuing transaction to create a dispute for. For transaction on Treasury FinancialAccounts, use `treasury.received_debit`.
-    # @optional @param treasury [Stripe::TreasuryParam?]
+    # @optional @param post_issuing_disputes_request [Stripe::PostIssuingDisputesRequest?]
     # @return [Stripe::IssuingDispute]
     def post_issuing_disputes(
       *,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      transaction : String? = nil,
-      treasury : Stripe::TreasuryParam? = nil
+      post_issuing_disputes_request : Stripe::PostIssuingDisputesRequest? = nil
     ) : Stripe::IssuingDispute
-      data, _status_code, _headers = post_issuing_disputes_with_http_info(amount: amount, evidence: evidence, expand: expand, transaction: transaction, treasury: treasury)
+      data, _status_code, _headers = post_issuing_disputes_with_http_info(post_issuing_disputes_request: post_issuing_disputes_request)
       data
     end
 
     # &lt;p&gt;Creates an Issuing &lt;code&gt;Dispute&lt;/code&gt; object. Individual pieces of evidence within the &lt;code&gt;evidence&lt;/code&gt; object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt; for more details about evidence requirements.&lt;/p&gt;
-    # @optional @param amount [Int32?] The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). If not set, defaults to the full transaction amount.
-    # @optional @param evidence [Stripe::EvidenceParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param transaction [String?] The ID of the issuing transaction to create a dispute for. For transaction on Treasury FinancialAccounts, use `treasury.received_debit`.
-    # @optional @param treasury [Stripe::TreasuryParam?]
+    # @optional @param post_issuing_disputes_request [Stripe::PostIssuingDisputesRequest?]
     # @return [Tuple(Stripe::IssuingDispute, Integer, Hash)] Stripe::IssuingDispute, response status code and response headers
     def post_issuing_disputes_with_http_info(
       *,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      transaction : String? = nil,
-      treasury : Stripe::TreasuryParam? = nil
+      post_issuing_disputes_request : Stripe::PostIssuingDisputesRequest? = nil
     ) : Tuple(Stripe::IssuingDispute, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_disputes(amount: amount, evidence: evidence, expand: expand, transaction: transaction, treasury: treasury)
+      request = build_api_request_for_post_issuing_disputes(post_issuing_disputes_request: post_issuing_disputes_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2527,78 +2149,52 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an Issuing &lt;code&gt;Dispute&lt;/code&gt; object. Individual pieces of evidence within the &lt;code&gt;evidence&lt;/code&gt; object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt; for more details about evidence requirements.&lt;/p&gt;
-    # @optional @param amount [Int32?] The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). If not set, defaults to the full transaction amount.
-    # @optional @param evidence [Stripe::EvidenceParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param transaction [String?] The ID of the issuing transaction to create a dispute for. For transaction on Treasury FinancialAccounts, use `treasury.received_debit`.
-    # @optional @param treasury [Stripe::TreasuryParam?]
+    # @optional @param post_issuing_disputes_request [Stripe::PostIssuingDisputesRequest?]
     # @return nil
     def post_issuing_disputes(
       *,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      transaction : String? = nil,
-      treasury : Stripe::TreasuryParam? = nil,
+      post_issuing_disputes_request : Stripe::PostIssuingDisputesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_disputes(amount: amount, evidence: evidence, expand: expand, transaction: transaction, treasury: treasury).execute(&block)
+      build_api_request_for_post_issuing_disputes(post_issuing_disputes_request: post_issuing_disputes_request).execute(&block)
     end
-
-    POST_ISSUING_DISPUTES_MAX_LENGTH_FOR_TRANSACTION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_issuing_disputes(
       *,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      transaction : String? = nil,
-      treasury : Stripe::TreasuryParam? = nil
+      post_issuing_disputes_request : Stripe::PostIssuingDisputesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_disputes ..." }
       end
 
       if client_side_validation
-        unless (_evidence = evidence).nil?
-          _evidence.validate if _evidence.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_transaction = transaction).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("transaction", transaction.to_s.size, POST_ISSUING_DISPUTES_MAX_LENGTH_FOR_TRANSACTION)
-        end
-        unless (_treasury = treasury).nil?
-          _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
+        unless (_post_issuing_disputes_request = post_issuing_disputes_request).nil?
+          _post_issuing_disputes_request.validate if _post_issuing_disputes_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/disputes"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["evidence"] = evidence.to_s if !evidence.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["transaction"] = transaction.to_s if !transaction.nil?
-      form_params["treasury"] = treasury.to_s if !treasury.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_disputes_request, content_type: header_params["Content-Type"]?) if !post_issuing_disputes_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2618,39 +2214,27 @@ module Stripe
 
     # <p>Updates the specified Issuing <code>Dispute</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>evidence</code> object can be unset by passing in an empty string.</p>
     # @required @param dispute [String?]
-    # @optional @param amount [Int32?] The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
-    # @optional @param evidence [Stripe::EvidenceParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_issuing_disputes_dispute_request [Stripe::PostIssuingDisputesDisputeRequest?]
     # @return [Stripe::IssuingDispute]
     def post_issuing_disputes_dispute(
       *,
       dispute : String? = nil,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_issuing_disputes_dispute_request : Stripe::PostIssuingDisputesDisputeRequest? = nil
     ) : Stripe::IssuingDispute
-      data, _status_code, _headers = post_issuing_disputes_dispute_with_http_info(dispute: dispute, amount: amount, evidence: evidence, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_issuing_disputes_dispute_with_http_info(dispute: dispute, post_issuing_disputes_dispute_request: post_issuing_disputes_dispute_request)
       data
     end
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Dispute&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Properties on the &lt;code&gt;evidence&lt;/code&gt; object can be unset by passing in an empty string.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param amount [Int32?] The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
-    # @optional @param evidence [Stripe::EvidenceParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_issuing_disputes_dispute_request [Stripe::PostIssuingDisputesDisputeRequest?]
     # @return [Tuple(Stripe::IssuingDispute, Integer, Hash)] Stripe::IssuingDispute, response status code and response headers
     def post_issuing_disputes_dispute_with_http_info(
       *,
       dispute : String? = nil,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_issuing_disputes_dispute_request : Stripe::PostIssuingDisputesDisputeRequest? = nil
     ) : Tuple(Stripe::IssuingDispute, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_disputes_dispute(dispute: dispute, amount: amount, evidence: evidence, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_issuing_disputes_dispute(dispute: dispute, post_issuing_disputes_dispute_request: post_issuing_disputes_dispute_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2663,21 +2247,15 @@ module Stripe
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Dispute&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Properties on the &lt;code&gt;evidence&lt;/code&gt; object can be unset by passing in an empty string.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param amount [Int32?] The dispute amount in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
-    # @optional @param evidence [Stripe::EvidenceParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_issuing_disputes_dispute_request [Stripe::PostIssuingDisputesDisputeRequest?]
     # @return nil
     def post_issuing_disputes_dispute(
       *,
       dispute : String? = nil,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_issuing_disputes_dispute_request : Stripe::PostIssuingDisputesDisputeRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_disputes_dispute(dispute: dispute, amount: amount, evidence: evidence, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_issuing_disputes_dispute(dispute: dispute, post_issuing_disputes_dispute_request: post_issuing_disputes_dispute_request).execute(&block)
     end
 
     POST_ISSUING_DISPUTES_DISPUTE_MAX_LENGTH_FOR_DISPUTE = 5000
@@ -2686,10 +2264,7 @@ module Stripe
     def build_api_request_for_post_issuing_disputes_dispute(
       *,
       dispute : String? = nil,
-      amount : Int64? = nil,
-      evidence : Stripe::EvidenceParam? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_issuing_disputes_dispute_request : Stripe::PostIssuingDisputesDisputeRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_disputes_dispute ..." }
@@ -2700,41 +2275,32 @@ module Stripe
         unless (_dispute = dispute).nil?
           OpenApi::PrimitiveValidator.validate_max_length("dispute", dispute.to_s.size, POST_ISSUING_DISPUTES_DISPUTE_MAX_LENGTH_FOR_DISPUTE)
         end
-
-        unless (_evidence = evidence).nil?
-          _evidence.validate if _evidence.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_issuing_disputes_dispute_request = post_issuing_disputes_dispute_request).nil?
+          _post_issuing_disputes_dispute_request.validate if _post_issuing_disputes_dispute_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/disputes/{dispute}".sub("{" + "dispute" + "}", URI.encode_path(dispute.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["evidence"] = evidence.to_s if !evidence.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_issuing_disputes_dispute_request, content_type: header_params["Content-Type"]?) if !post_issuing_disputes_dispute_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2754,31 +2320,27 @@ module Stripe
 
     # <p>Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence fields required for the dispute’s reason are present. For more details, see <a href=\"/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\">Dispute reasons and evidence</a>.</p>
     # @required @param dispute [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::IssuingDispute]
     def post_issuing_disputes_dispute_submit(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::IssuingDispute
-      data, _status_code, _headers = post_issuing_disputes_dispute_submit_with_http_info(dispute: dispute, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_issuing_disputes_dispute_submit_with_http_info(dispute: dispute, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Submits an Issuing &lt;code&gt;Dispute&lt;/code&gt; to the card network. Stripe validates that all evidence fields required for the dispute’s reason are present. For more details, see &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt;.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::IssuingDispute, Integer, Hash)] Stripe::IssuingDispute, response status code and response headers
     def post_issuing_disputes_dispute_submit_with_http_info(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::IssuingDispute, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_disputes_dispute_submit(dispute: dispute, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_issuing_disputes_dispute_submit(dispute: dispute, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2791,17 +2353,15 @@ module Stripe
 
     # &lt;p&gt;Submits an Issuing &lt;code&gt;Dispute&lt;/code&gt; to the card network. Stripe validates that all evidence fields required for the dispute’s reason are present. For more details, see &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt;.&lt;/p&gt;
     # @required @param dispute [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_issuing_disputes_dispute_submit(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_disputes_dispute_submit(dispute: dispute, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_issuing_disputes_dispute_submit(dispute: dispute, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_ISSUING_DISPUTES_DISPUTE_SUBMIT_MAX_LENGTH_FOR_DISPUTE = 5000
@@ -2810,8 +2370,7 @@ module Stripe
     def build_api_request_for_post_issuing_disputes_dispute_submit(
       *,
       dispute : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_disputes_dispute_submit ..." }
@@ -2822,35 +2381,32 @@ module Stripe
         unless (_dispute = dispute).nil?
           OpenApi::PrimitiveValidator.validate_max_length("dispute", dispute.to_s.size, POST_ISSUING_DISPUTES_DISPUTE_SUBMIT_MAX_LENGTH_FOR_DISPUTE)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/disputes/{dispute}/submit".sub("{" + "dispute" + "}", URI.encode_path(dispute.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2870,31 +2426,27 @@ module Stripe
 
     # <p>Updates the specified Issuing <code>Transaction</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param transaction [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::IssuingTransaction]
     def post_issuing_transactions_transaction(
       *,
       transaction : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::IssuingTransaction
-      data, _status_code, _headers = post_issuing_transactions_transaction_with_http_info(transaction: transaction, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_issuing_transactions_transaction_with_http_info(transaction: transaction, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Transaction&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param transaction [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::IssuingTransaction, Integer, Hash)] Stripe::IssuingTransaction, response status code and response headers
     def post_issuing_transactions_transaction_with_http_info(
       *,
       transaction : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::IssuingTransaction, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_issuing_transactions_transaction(transaction: transaction, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_issuing_transactions_transaction(transaction: transaction, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2907,17 +2459,15 @@ module Stripe
 
     # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Transaction&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param transaction [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_issuing_transactions_transaction(
       *,
       transaction : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_issuing_transactions_transaction(transaction: transaction, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_issuing_transactions_transaction(transaction: transaction, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_ISSUING_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_TRANSACTION = 5000
@@ -2926,8 +2476,7 @@ module Stripe
     def build_api_request_for_post_issuing_transactions_transaction(
       *,
       transaction : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IssuingApi.post_issuing_transactions_transaction ..." }
@@ -2938,35 +2487,32 @@ module Stripe
         unless (_transaction = transaction).nil?
           OpenApi::PrimitiveValidator.validate_max_length("transaction", transaction.to_s.size, POST_ISSUING_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_TRANSACTION)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/issuing/transactions/{transaction}".sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

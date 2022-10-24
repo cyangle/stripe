@@ -70,7 +70,6 @@ module Stripe
     @[JSON::Field(key: "merchant_data", type: Stripe::IssuingAuthorizationMerchantData?, default: nil, required: true, nullable: false, emit_null: false)]
     getter merchant_data : Stripe::IssuingAuthorizationMerchantData? = nil
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
@@ -112,6 +111,12 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? cardholder_present : Bool = false
+
+    @[JSON::Field(key: "network_data", type: Stripe::IssuingAuthorizationNetworkData1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network_data.nil? && !network_data_present?)]
+    getter network_data : Stripe::IssuingAuthorizationNetworkData1? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? network_data_present : Bool = false
 
     @[JSON::Field(key: "pending_request", type: Stripe::IssuingAuthorizationPendingRequest1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: pending_request.nil? && !pending_request_present?)]
     getter pending_request : Stripe::IssuingAuthorizationPendingRequest1? = nil
@@ -159,6 +164,7 @@ module Stripe
       # Optional properties
       @amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil,
       @cardholder : Stripe::IssuingAuthorizationCardholder? = nil,
+      @network_data : Stripe::IssuingAuthorizationNetworkData1? = nil,
       @pending_request : Stripe::IssuingAuthorizationPendingRequest1? = nil,
       @treasury : Stripe::IssuingAuthorizationTreasury1? = nil,
       @wallet : String? = nil
@@ -243,6 +249,9 @@ module Stripe
       end
       unless (_cardholder = @cardholder).nil?
         invalid_properties.concat(_cardholder.list_invalid_properties_for("cardholder")) if _cardholder.is_a?(OpenApi::Validatable)
+      end
+      unless (_network_data = @network_data).nil?
+        invalid_properties.concat(_network_data.list_invalid_properties_for("network_data")) if _network_data.is_a?(OpenApi::Validatable)
       end
       unless (_pending_request = @pending_request).nil?
         invalid_properties.concat(_pending_request.list_invalid_properties_for("pending_request")) if _pending_request.is_a?(OpenApi::Validatable)
@@ -333,6 +342,10 @@ module Stripe
 
       unless (_cardholder = @cardholder).nil?
         return false if _cardholder.is_a?(OpenApi::Validatable) && !_cardholder.valid?
+      end
+
+      unless (_network_data = @network_data).nil?
+        return false if _network_data.is_a?(OpenApi::Validatable) && !_network_data.valid?
       end
 
       unless (_pending_request = @pending_request).nil?
@@ -563,6 +576,17 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] network_data Object to be assigned
+    def network_data=(network_data : Stripe::IssuingAuthorizationNetworkData1?)
+      if network_data.nil?
+        return @network_data = nil
+      end
+      _network_data = network_data.not_nil!
+      _network_data.validate if _network_data.is_a?(OpenApi::Validatable)
+      @network_data = _network_data
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_request Object to be assigned
     def pending_request=(pending_request : Stripe::IssuingAuthorizationPendingRequest1?)
       if pending_request.nil?
@@ -599,6 +623,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @approved, @authorization_method, @balance_transactions, @card, @created, @currency, @id, @livemode, @merchant_amount, @merchant_currency, @merchant_data, @metadata, @object, @request_history, @status, @transactions, @verification_data, @amount_details, @amount_details_present, @cardholder, @cardholder_present, @pending_request, @pending_request_present, @treasury, @treasury_present, @wallet, @wallet_present)
+    def_equals_and_hash(@amount, @approved, @authorization_method, @balance_transactions, @card, @created, @currency, @id, @livemode, @merchant_amount, @merchant_currency, @merchant_data, @metadata, @object, @request_history, @status, @transactions, @verification_data, @amount_details, @amount_details_present, @cardholder, @cardholder_present, @network_data, @network_data_present, @pending_request, @pending_request_present, @treasury, @treasury_present, @wallet, @wallet_present)
   end
 end

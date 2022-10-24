@@ -20,15 +20,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "splashscreen", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter splashscreen : Stripe::BbposWisePoseSplashscreen? = nil
+    @[JSON::Field(key: "splashscreen", type: Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter splashscreen : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @splashscreen : Stripe::BbposWisePoseSplashscreen? = nil
+      @splashscreen : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
     )
     end
 
@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] splashscreen Object to be assigned
-    def splashscreen=(splashscreen : Stripe::BbposWisePoseSplashscreen?)
+    def splashscreen=(splashscreen : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?)
       if splashscreen.nil?
         return @splashscreen = nil
       end

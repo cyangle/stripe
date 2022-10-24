@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -175,22 +175,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/discount".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -211,30 +211,30 @@ module Stripe
     # <p>Delete a specified source for a given customer.</p>
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::DeleteCustomersCustomerSourcesId200Response]
     def delete_customers_customer_sources_id(
       *,
       customer : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::DeleteCustomersCustomerSourcesId200Response
-      data, _status_code, _headers = delete_customers_customer_sources_id_with_http_info(customer: customer, id: id, expand: expand)
+      data, _status_code, _headers = delete_customers_customer_sources_id_with_http_info(customer: customer, id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Delete a specified source for a given customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::DeleteCustomersCustomerSourcesId200Response, Integer, Hash)] Stripe::DeleteCustomersCustomerSourcesId200Response, response status code and response headers
     def delete_customers_customer_sources_id_with_http_info(
       *,
       customer : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::DeleteCustomersCustomerSourcesId200Response, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_delete_customers_customer_sources_id(customer: customer, id: id, expand: expand)
+      request = build_api_request_for_delete_customers_customer_sources_id(customer: customer, id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -248,16 +248,16 @@ module Stripe
     # &lt;p&gt;Delete a specified source for a given customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def delete_customers_customer_sources_id(
       *,
       customer : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_delete_customers_customer_sources_id(customer: customer, id: id, expand: expand).execute(&block)
+      build_api_request_for_delete_customers_customer_sources_id(customer: customer, id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     DELETE_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_CUSTOMER = 5000
@@ -267,7 +267,7 @@ module Stripe
       *,
       customer : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.delete_customers_customer_sources_id ..." }
@@ -279,30 +279,33 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, DELETE_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_CUSTOMER)
         end
         raise ArgumentError.new("\"id\" is required and cannot be null") if id.nil?
+
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/sources/{id}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -389,22 +392,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/tax_ids/{id}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -541,8 +544,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["email"] = email.to_s if !email.nil?
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
@@ -551,19 +562,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -649,23 +652,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -780,26 +783,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/balance_transactions".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -893,23 +896,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/balance_transactions/{transaction}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -995,23 +998,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/cash_balance".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1097,23 +1100,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/discount".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1232,27 +1235,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/payment_methods".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["type"] = _type.to_s if !_type.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1350,23 +1353,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/payment_methods/{payment_method}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "payment_method" + "}", URI.encode_path(payment_method.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1485,27 +1488,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/sources".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["object"] = object.to_s if !object.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1603,23 +1606,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/sources/{id}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1734,26 +1737,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/tax_ids".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1847,23 +1850,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/{customer}/tax_ids/{id}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1967,26 +1970,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/customers/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2005,108 +2008,24 @@ module Stripe
     end
 
     # <p>Creates a new customer object.</p>
-    # @optional @param address [Stripe::PostCustomersRequestAddress?]
-    # @optional @param balance [Int32?] An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the customer's future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-    # @optional @param cash_balance [Stripe::CashBalanceParam?]
-    # @optional @param coupon [String?]
-    # @optional @param description [String?] An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-    # @optional @param email [String?] Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_prefix [String?] The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-    # @optional @param invoice_settings [Stripe::CustomerParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The customer's full name or business name.
-    # @optional @param next_invoice_sequence [Int32?] The sequence to be used on the customer's next invoice. Defaults to 1.
-    # @optional @param payment_method [String?]
-    # @optional @param phone [String?] The customer's phone number.
-    # @optional @param preferred_locales [Array(String)?] Customer's preferred languages, ordered by preference.
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-    # @optional @param shipping [Stripe::PostCustomersRequestShipping?]
-    # @optional @param source [String?]
-    # @optional @param tax [Stripe::TaxParam?]
-    # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
-    # @optional @param tax_id_data [Array(Stripe::DataParams)?] The customer's tax IDs.
-    # @optional @param test_clock [String?] ID of the test clock to attach to the customer.
+    # @optional @param post_customers_request [Stripe::PostCustomersRequest?]
     # @return [Stripe::Customer]
     def post_customers(
       *,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      payment_method : String? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil,
-      tax_id_data : Array(Stripe::DataParams)? = nil,
-      test_clock : String? = nil
+      post_customers_request : Stripe::PostCustomersRequest? = nil
     ) : Stripe::Customer
-      data, _status_code, _headers = post_customers_with_http_info(address: address, balance: balance, cash_balance: cash_balance, coupon: coupon, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, payment_method: payment_method, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt, tax_id_data: tax_id_data, test_clock: test_clock)
+      data, _status_code, _headers = post_customers_with_http_info(post_customers_request: post_customers_request)
       data
     end
 
     # &lt;p&gt;Creates a new customer object.&lt;/p&gt;
-    # @optional @param address [Stripe::PostCustomersRequestAddress?]
-    # @optional @param balance [Int32?] An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the customer's future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-    # @optional @param cash_balance [Stripe::CashBalanceParam?]
-    # @optional @param coupon [String?]
-    # @optional @param description [String?] An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-    # @optional @param email [String?] Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_prefix [String?] The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-    # @optional @param invoice_settings [Stripe::CustomerParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The customer's full name or business name.
-    # @optional @param next_invoice_sequence [Int32?] The sequence to be used on the customer's next invoice. Defaults to 1.
-    # @optional @param payment_method [String?]
-    # @optional @param phone [String?] The customer's phone number.
-    # @optional @param preferred_locales [Array(String)?] Customer's preferred languages, ordered by preference.
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-    # @optional @param shipping [Stripe::PostCustomersRequestShipping?]
-    # @optional @param source [String?]
-    # @optional @param tax [Stripe::TaxParam?]
-    # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
-    # @optional @param tax_id_data [Array(Stripe::DataParams)?] The customer's tax IDs.
-    # @optional @param test_clock [String?] ID of the test clock to attach to the customer.
+    # @optional @param post_customers_request [Stripe::PostCustomersRequest?]
     # @return [Tuple(Stripe::Customer, Integer, Hash)] Stripe::Customer, response status code and response headers
     def post_customers_with_http_info(
       *,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      payment_method : String? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil,
-      tax_id_data : Array(Stripe::DataParams)? = nil,
-      test_clock : String? = nil
+      post_customers_request : Stripe::PostCustomersRequest? = nil
     ) : Tuple(Stripe::Customer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers(address: address, balance: balance, cash_balance: cash_balance, coupon: coupon, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, payment_method: payment_method, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt, tax_id_data: tax_id_data, test_clock: test_clock)
+      request = build_api_request_for_post_customers(post_customers_request: post_customers_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2118,204 +2037,52 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new customer object.&lt;/p&gt;
-    # @optional @param address [Stripe::PostCustomersRequestAddress?]
-    # @optional @param balance [Int32?] An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the customer's future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-    # @optional @param cash_balance [Stripe::CashBalanceParam?]
-    # @optional @param coupon [String?]
-    # @optional @param description [String?] An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-    # @optional @param email [String?] Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_prefix [String?] The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-    # @optional @param invoice_settings [Stripe::CustomerParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The customer's full name or business name.
-    # @optional @param next_invoice_sequence [Int32?] The sequence to be used on the customer's next invoice. Defaults to 1.
-    # @optional @param payment_method [String?]
-    # @optional @param phone [String?] The customer's phone number.
-    # @optional @param preferred_locales [Array(String)?] Customer's preferred languages, ordered by preference.
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-    # @optional @param shipping [Stripe::PostCustomersRequestShipping?]
-    # @optional @param source [String?]
-    # @optional @param tax [Stripe::TaxParam?]
-    # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
-    # @optional @param tax_id_data [Array(Stripe::DataParams)?] The customer's tax IDs.
-    # @optional @param test_clock [String?] ID of the test clock to attach to the customer.
+    # @optional @param post_customers_request [Stripe::PostCustomersRequest?]
     # @return nil
     def post_customers(
       *,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      payment_method : String? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil,
-      tax_id_data : Array(Stripe::DataParams)? = nil,
-      test_clock : String? = nil,
+      post_customers_request : Stripe::PostCustomersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers(address: address, balance: balance, cash_balance: cash_balance, coupon: coupon, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, payment_method: payment_method, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt, tax_id_data: tax_id_data, test_clock: test_clock).execute(&block)
+      build_api_request_for_post_customers(post_customers_request: post_customers_request).execute(&block)
     end
-
-    POST_CUSTOMERS_MAX_LENGTH_FOR_COUPON         = 5000
-    POST_CUSTOMERS_MAX_LENGTH_FOR_DESCRIPTION    = 5000
-    POST_CUSTOMERS_MAX_LENGTH_FOR_EMAIL          =  512
-    POST_CUSTOMERS_MAX_LENGTH_FOR_INVOICE_PREFIX = 5000
-    POST_CUSTOMERS_MAX_LENGTH_FOR_NAME           =  256
-    POST_CUSTOMERS_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
-    POST_CUSTOMERS_MAX_LENGTH_FOR_PHONE          =   20
-    POST_CUSTOMERS_MAX_LENGTH_FOR_PROMOTION_CODE = 5000
-    POST_CUSTOMERS_MAX_LENGTH_FOR_SOURCE         = 5000
-    POST_CUSTOMERS_VALID_VALUES_FOR_TAX_EXEMPT   = String.static_array("", "exempt", "none", "reverse")
-    POST_CUSTOMERS_MAX_LENGTH_FOR_TEST_CLOCK     = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_customers(
       *,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      payment_method : String? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil,
-      tax_id_data : Array(Stripe::DataParams)? = nil,
-      test_clock : String? = nil
+      post_customers_request : Stripe::PostCustomersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers ..." }
       end
 
       if client_side_validation
-        unless (_address = address).nil?
-          _address.validate if _address.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_cash_balance = cash_balance).nil?
-          _cash_balance.validate if _cash_balance.is_a?(OpenApi::Validatable)
-        end
-        unless (_coupon = coupon).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_COUPON)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_email = email).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("email", email.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_EMAIL)
-        end
-
-        unless (_invoice_prefix = invoice_prefix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("invoice_prefix", invoice_prefix.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_INVOICE_PREFIX)
-        end
-        unless (_invoice_settings = invoice_settings).nil?
-          _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_NAME)
-        end
-
-        unless (_payment_method = payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payment_method", payment_method.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_PAYMENT_METHOD)
-        end
-        unless (_phone = phone).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("phone", phone.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_PHONE)
-        end
-
-        unless (_promotion_code = promotion_code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("promotion_code", promotion_code.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_PROMOTION_CODE)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_source = source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_SOURCE)
-        end
-        unless (_tax = tax).nil?
-          _tax.validate if _tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_exempt = tax_exempt).nil?
-          OpenApi::EnumValidator.validate("tax_exempt", _tax_exempt, POST_CUSTOMERS_VALID_VALUES_FOR_TAX_EXEMPT)
-        end
-        unless (_tax_id_data = tax_id_data).nil?
-          OpenApi::ContainerValidator.validate(container: _tax_id_data) if _tax_id_data.is_a?(Array)
-        end
-        unless (_test_clock = test_clock).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("test_clock", test_clock.to_s.size, POST_CUSTOMERS_MAX_LENGTH_FOR_TEST_CLOCK)
+        unless (_post_customers_request = post_customers_request).nil?
+          _post_customers_request.validate if _post_customers_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["address"] = address.to_s if !address.nil?
-      form_params["balance"] = balance.to_s if !balance.nil?
-      form_params["cash_balance"] = cash_balance.to_s if !cash_balance.nil?
-      form_params["coupon"] = coupon.to_s if !coupon.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["invoice_prefix"] = invoice_prefix.to_s if !invoice_prefix.nil?
-      form_params["invoice_settings"] = invoice_settings.to_s if !invoice_settings.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["next_invoice_sequence"] = next_invoice_sequence.to_s if !next_invoice_sequence.nil?
-      form_params["payment_method"] = payment_method.to_s if !payment_method.nil?
-      form_params["phone"] = phone.to_s if !phone.nil?
-      form_params["preferred_locales"] = @api_client.build_collection_param(preferred_locales, "csv") if !preferred_locales.nil? && !preferred_locales.empty?
-      form_params["promotion_code"] = promotion_code.to_s if !promotion_code.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["source"] = source.to_s if !source.nil?
-      form_params["tax"] = tax.to_s if !tax.nil?
-      form_params["tax_exempt"] = tax_exempt.to_s if !tax_exempt.nil?
-      form_params["tax_id_data"] = @api_client.build_collection_param(tax_id_data, "csv") if !tax_id_data.nil? && !tax_id_data.empty?
-      form_params["test_clock"] = test_clock.to_s if !test_clock.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_request, content_type: header_params["Content-Type"]?) if !post_customers_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2335,123 +2102,27 @@ module Stripe
 
     # <p>Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the <strong>source</strong> parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid card source by passing the <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the subscription bills automatically and is in the <code>past_due</code> state, then the latest open invoice for the subscription with automatic collection enabled will be retried. This retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this behavior.</p>  <p>This request accepts mostly the same arguments as the customer creation call.</p>
     # @required @param customer [String?]
-    # @optional @param address [Stripe::PostCustomersRequestAddress?]
-    # @optional @param balance [Int32?] An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the customer's future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-    # @optional @param bank_account [Stripe::PostCustomersCustomerRequestBankAccount?]
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param cash_balance [Stripe::CashBalanceParam?]
-    # @optional @param coupon [String?]
-    # @optional @param default_alipay_account [String?] ID of Alipay account to make the customer's new default for invoice payments.
-    # @optional @param default_bank_account [String?] ID of bank account to make the customer's new default for invoice payments.
-    # @optional @param default_card [String?] ID of card to make the customer's new default for invoice payments.
-    # @optional @param default_source [String?] If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) parameter.  Provide the ID of a payment source already attached to this customer to make it this customer's default payment source.  If you want to add a new payment source and make it the default, see the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
-    # @optional @param description [String?] An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-    # @optional @param email [String?] Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_prefix [String?] The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-    # @optional @param invoice_settings [Stripe::CustomerParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The customer's full name or business name.
-    # @optional @param next_invoice_sequence [Int32?] The sequence to be used on the customer's next invoice. Defaults to 1.
-    # @optional @param phone [String?] The customer's phone number.
-    # @optional @param preferred_locales [Array(String)?] Customer's preferred languages, ordered by preference.
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-    # @optional @param shipping [Stripe::PostCustomersRequestShipping?]
-    # @optional @param source [String?]
-    # @optional @param tax [Stripe::TaxParam?]
-    # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
+    # @optional @param post_customers_customer_request [Stripe::PostCustomersCustomerRequest?]
     # @return [Stripe::Customer]
     def post_customers_customer(
       *,
       customer : String? = nil,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      default_alipay_account : String? = nil,
-      default_bank_account : String? = nil,
-      default_card : String? = nil,
-      default_source : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil
+      post_customers_customer_request : Stripe::PostCustomersCustomerRequest? = nil
     ) : Stripe::Customer
-      data, _status_code, _headers = post_customers_customer_with_http_info(customer: customer, address: address, balance: balance, bank_account: bank_account, card: card, cash_balance: cash_balance, coupon: coupon, default_alipay_account: default_alipay_account, default_bank_account: default_bank_account, default_card: default_card, default_source: default_source, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt)
+      data, _status_code, _headers = post_customers_customer_with_http_info(customer: customer, post_customers_customer_request: post_customers_customer_request)
       data
     end
 
     # &lt;p&gt;Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the &lt;strong&gt;source&lt;/strong&gt; parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid card source by passing the &lt;strong&gt;source&lt;/strong&gt; parameter: for each of the customer’s current subscriptions, if the subscription bills automatically and is in the &lt;code&gt;past_due&lt;/code&gt; state, then the latest open invoice for the subscription with automatic collection enabled will be retried. This retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice. Changing the &lt;strong&gt;default_source&lt;/strong&gt; for a customer will not trigger this behavior.&lt;/p&gt;  &lt;p&gt;This request accepts mostly the same arguments as the customer creation call.&lt;/p&gt;
     # @required @param customer [String?]
-    # @optional @param address [Stripe::PostCustomersRequestAddress?]
-    # @optional @param balance [Int32?] An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the customer's future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-    # @optional @param bank_account [Stripe::PostCustomersCustomerRequestBankAccount?]
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param cash_balance [Stripe::CashBalanceParam?]
-    # @optional @param coupon [String?]
-    # @optional @param default_alipay_account [String?] ID of Alipay account to make the customer's new default for invoice payments.
-    # @optional @param default_bank_account [String?] ID of bank account to make the customer's new default for invoice payments.
-    # @optional @param default_card [String?] ID of card to make the customer's new default for invoice payments.
-    # @optional @param default_source [String?] If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) parameter.  Provide the ID of a payment source already attached to this customer to make it this customer's default payment source.  If you want to add a new payment source and make it the default, see the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
-    # @optional @param description [String?] An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-    # @optional @param email [String?] Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_prefix [String?] The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-    # @optional @param invoice_settings [Stripe::CustomerParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The customer's full name or business name.
-    # @optional @param next_invoice_sequence [Int32?] The sequence to be used on the customer's next invoice. Defaults to 1.
-    # @optional @param phone [String?] The customer's phone number.
-    # @optional @param preferred_locales [Array(String)?] Customer's preferred languages, ordered by preference.
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-    # @optional @param shipping [Stripe::PostCustomersRequestShipping?]
-    # @optional @param source [String?]
-    # @optional @param tax [Stripe::TaxParam?]
-    # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
+    # @optional @param post_customers_customer_request [Stripe::PostCustomersCustomerRequest?]
     # @return [Tuple(Stripe::Customer, Integer, Hash)] Stripe::Customer, response status code and response headers
     def post_customers_customer_with_http_info(
       *,
       customer : String? = nil,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      default_alipay_account : String? = nil,
-      default_bank_account : String? = nil,
-      default_card : String? = nil,
-      default_source : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil
+      post_customers_customer_request : Stripe::PostCustomersCustomerRequest? = nil
     ) : Tuple(Stripe::Customer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer(customer: customer, address: address, balance: balance, bank_account: bank_account, card: card, cash_balance: cash_balance, coupon: coupon, default_alipay_account: default_alipay_account, default_bank_account: default_bank_account, default_card: default_card, default_source: default_source, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt)
+      request = build_api_request_for_post_customers_customer(customer: customer, post_customers_customer_request: post_customers_customer_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2464,109 +2135,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the &lt;strong&gt;source&lt;/strong&gt; parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid card source by passing the &lt;strong&gt;source&lt;/strong&gt; parameter: for each of the customer’s current subscriptions, if the subscription bills automatically and is in the &lt;code&gt;past_due&lt;/code&gt; state, then the latest open invoice for the subscription with automatic collection enabled will be retried. This retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice. Changing the &lt;strong&gt;default_source&lt;/strong&gt; for a customer will not trigger this behavior.&lt;/p&gt;  &lt;p&gt;This request accepts mostly the same arguments as the customer creation call.&lt;/p&gt;
     # @required @param customer [String?]
-    # @optional @param address [Stripe::PostCustomersRequestAddress?]
-    # @optional @param balance [Int32?] An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the customer's future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-    # @optional @param bank_account [Stripe::PostCustomersCustomerRequestBankAccount?]
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param cash_balance [Stripe::CashBalanceParam?]
-    # @optional @param coupon [String?]
-    # @optional @param default_alipay_account [String?] ID of Alipay account to make the customer's new default for invoice payments.
-    # @optional @param default_bank_account [String?] ID of bank account to make the customer's new default for invoice payments.
-    # @optional @param default_card [String?] ID of card to make the customer's new default for invoice payments.
-    # @optional @param default_source [String?] If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) parameter.  Provide the ID of a payment source already attached to this customer to make it this customer's default payment source.  If you want to add a new payment source and make it the default, see the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
-    # @optional @param description [String?] An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-    # @optional @param email [String?] Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_prefix [String?] The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-    # @optional @param invoice_settings [Stripe::CustomerParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The customer's full name or business name.
-    # @optional @param next_invoice_sequence [Int32?] The sequence to be used on the customer's next invoice. Defaults to 1.
-    # @optional @param phone [String?] The customer's phone number.
-    # @optional @param preferred_locales [Array(String)?] Customer's preferred languages, ordered by preference.
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-    # @optional @param shipping [Stripe::PostCustomersRequestShipping?]
-    # @optional @param source [String?]
-    # @optional @param tax [Stripe::TaxParam?]
-    # @optional @param tax_exempt [String?] The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
+    # @optional @param post_customers_customer_request [Stripe::PostCustomersCustomerRequest?]
     # @return nil
     def post_customers_customer(
       *,
       customer : String? = nil,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      default_alipay_account : String? = nil,
-      default_bank_account : String? = nil,
-      default_card : String? = nil,
-      default_source : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil,
+      post_customers_customer_request : Stripe::PostCustomersCustomerRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer(customer: customer, address: address, balance: balance, bank_account: bank_account, card: card, cash_balance: cash_balance, coupon: coupon, default_alipay_account: default_alipay_account, default_bank_account: default_bank_account, default_card: default_card, default_source: default_source, description: description, email: email, expand: expand, invoice_prefix: invoice_prefix, invoice_settings: invoice_settings, metadata: metadata, name: name, next_invoice_sequence: next_invoice_sequence, phone: phone, preferred_locales: preferred_locales, promotion_code: promotion_code, shipping: shipping, source: source, tax: tax, tax_exempt: tax_exempt).execute(&block)
+      build_api_request_for_post_customers_customer(customer: customer, post_customers_customer_request: post_customers_customer_request).execute(&block)
     end
 
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_CUSTOMER               = 5000
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_COUPON                 = 5000
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_ALIPAY_ACCOUNT =  500
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_BANK_ACCOUNT   =  500
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_CARD           =  500
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_SOURCE         =  500
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DESCRIPTION            = 5000
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_EMAIL                  =  512
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_INVOICE_PREFIX         = 5000
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_NAME                   =  256
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_PHONE                  =   20
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_PROMOTION_CODE         = 5000
-    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_SOURCE                 = 5000
-    POST_CUSTOMERS_CUSTOMER_VALID_VALUES_FOR_TAX_EXEMPT           = String.static_array("", "exempt", "none", "reverse")
+    POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer(
       *,
       customer : String? = nil,
-      address : Stripe::PostCustomersRequestAddress? = nil,
-      balance : Int64? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      cash_balance : Stripe::CashBalanceParam? = nil,
-      coupon : String? = nil,
-      default_alipay_account : String? = nil,
-      default_bank_account : String? = nil,
-      default_card : String? = nil,
-      default_source : String? = nil,
-      description : String? = nil,
-      email : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_prefix : String? = nil,
-      invoice_settings : Stripe::CustomerParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      next_invoice_sequence : Int64? = nil,
-      phone : String? = nil,
-      preferred_locales : Array(String)? = nil,
-      promotion_code : String? = nil,
-      shipping : Stripe::PostCustomersRequestShipping? = nil,
-      source : String? = nil,
-      tax : Stripe::TaxParam? = nil,
-      tax_exempt : String? = nil
+      post_customers_customer_request : Stripe::PostCustomersCustomerRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer ..." }
@@ -2577,121 +2163,32 @@ module Stripe
         unless (_customer = customer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_CUSTOMER)
         end
-        unless (_address = address).nil?
-          _address.validate if _address.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_bank_account = bank_account).nil?
-          _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-        end
-        unless (_card = card).nil?
-          _card.validate if _card.is_a?(OpenApi::Validatable)
-        end
-        unless (_cash_balance = cash_balance).nil?
-          _cash_balance.validate if _cash_balance.is_a?(OpenApi::Validatable)
-        end
-        unless (_coupon = coupon).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_COUPON)
-        end
-        unless (_default_alipay_account = default_alipay_account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_alipay_account", default_alipay_account.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_ALIPAY_ACCOUNT)
-        end
-        unless (_default_bank_account = default_bank_account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_bank_account", default_bank_account.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_BANK_ACCOUNT)
-        end
-        unless (_default_card = default_card).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_card", default_card.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_CARD)
-        end
-        unless (_default_source = default_source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_source", default_source.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DEFAULT_SOURCE)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_email = email).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("email", email.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_EMAIL)
-        end
-
-        unless (_invoice_prefix = invoice_prefix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("invoice_prefix", invoice_prefix.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_INVOICE_PREFIX)
-        end
-        unless (_invoice_settings = invoice_settings).nil?
-          _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_NAME)
-        end
-
-        unless (_phone = phone).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("phone", phone.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_PHONE)
-        end
-
-        unless (_promotion_code = promotion_code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("promotion_code", promotion_code.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_PROMOTION_CODE)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_source = source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_CUSTOMERS_CUSTOMER_MAX_LENGTH_FOR_SOURCE)
-        end
-        unless (_tax = tax).nil?
-          _tax.validate if _tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_exempt = tax_exempt).nil?
-          OpenApi::EnumValidator.validate("tax_exempt", _tax_exempt, POST_CUSTOMERS_CUSTOMER_VALID_VALUES_FOR_TAX_EXEMPT)
+        unless (_post_customers_customer_request = post_customers_customer_request).nil?
+          _post_customers_customer_request.validate if _post_customers_customer_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["address"] = address.to_s if !address.nil?
-      form_params["balance"] = balance.to_s if !balance.nil?
-      form_params["bank_account"] = bank_account.to_s if !bank_account.nil?
-      form_params["card"] = card.to_s if !card.nil?
-      form_params["cash_balance"] = cash_balance.to_s if !cash_balance.nil?
-      form_params["coupon"] = coupon.to_s if !coupon.nil?
-      form_params["default_alipay_account"] = default_alipay_account.to_s if !default_alipay_account.nil?
-      form_params["default_bank_account"] = default_bank_account.to_s if !default_bank_account.nil?
-      form_params["default_card"] = default_card.to_s if !default_card.nil?
-      form_params["default_source"] = default_source.to_s if !default_source.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["email"] = email.to_s if !email.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["invoice_prefix"] = invoice_prefix.to_s if !invoice_prefix.nil?
-      form_params["invoice_settings"] = invoice_settings.to_s if !invoice_settings.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["next_invoice_sequence"] = next_invoice_sequence.to_s if !next_invoice_sequence.nil?
-      form_params["phone"] = phone.to_s if !phone.nil?
-      form_params["preferred_locales"] = @api_client.build_collection_param(preferred_locales, "csv") if !preferred_locales.nil? && !preferred_locales.empty?
-      form_params["promotion_code"] = promotion_code.to_s if !promotion_code.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["source"] = source.to_s if !source.nil?
-      form_params["tax"] = tax.to_s if !tax.nil?
-      form_params["tax_exempt"] = tax_exempt.to_s if !tax_exempt.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2711,43 +2208,27 @@ module Stripe
 
     # <p>Creates an immutable transaction that updates the customer’s credit <a href=\"/docs/billing/customer/balance\">balance</a>.</p>
     # @required @param customer [String?]
-    # @required @param amount [Int32?] The integer amount in **cents (or local equivalent)** to apply to the customer's credit balance.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the customer's [`currency`](https://stripe.com/docs/api/customers/object#customer_object-currency) is set, this value must match it. If the customer's `currency` is not set, it will be updated to this value.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_customers_customer_balance_transactions_request [Stripe::PostCustomersCustomerBalanceTransactionsRequest?]
     # @return [Stripe::CustomerBalanceTransaction]
     def post_customers_customer_balance_transactions(
       *,
       customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_customers_customer_balance_transactions_request : Stripe::PostCustomersCustomerBalanceTransactionsRequest? = nil
     ) : Stripe::CustomerBalanceTransaction
-      data, _status_code, _headers = post_customers_customer_balance_transactions_with_http_info(customer: customer, amount: amount, currency: currency, description: description, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_customers_customer_balance_transactions_with_http_info(customer: customer, post_customers_customer_balance_transactions_request: post_customers_customer_balance_transactions_request)
       data
     end
 
     # &lt;p&gt;Creates an immutable transaction that updates the customer’s credit &lt;a href&#x3D;\&quot;/docs/billing/customer/balance\&quot;&gt;balance&lt;/a&gt;.&lt;/p&gt;
     # @required @param customer [String?]
-    # @required @param amount [Int32?] The integer amount in **cents (or local equivalent)** to apply to the customer's credit balance.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the customer's [`currency`](https://stripe.com/docs/api/customers/object#customer_object-currency) is set, this value must match it. If the customer's `currency` is not set, it will be updated to this value.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_customers_customer_balance_transactions_request [Stripe::PostCustomersCustomerBalanceTransactionsRequest?]
     # @return [Tuple(Stripe::CustomerBalanceTransaction, Integer, Hash)] Stripe::CustomerBalanceTransaction, response status code and response headers
     def post_customers_customer_balance_transactions_with_http_info(
       *,
       customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_customers_customer_balance_transactions_request : Stripe::PostCustomersCustomerBalanceTransactionsRequest? = nil
     ) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_balance_transactions(customer: customer, amount: amount, currency: currency, description: description, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_customers_customer_balance_transactions(customer: customer, post_customers_customer_balance_transactions_request: post_customers_customer_balance_transactions_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2760,37 +2241,24 @@ module Stripe
 
     # &lt;p&gt;Creates an immutable transaction that updates the customer’s credit &lt;a href&#x3D;\&quot;/docs/billing/customer/balance\&quot;&gt;balance&lt;/a&gt;.&lt;/p&gt;
     # @required @param customer [String?]
-    # @required @param amount [Int32?] The integer amount in **cents (or local equivalent)** to apply to the customer's credit balance.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the customer's [`currency`](https://stripe.com/docs/api/customers/object#customer_object-currency) is set, this value must match it. If the customer's `currency` is not set, it will be updated to this value.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_customers_customer_balance_transactions_request [Stripe::PostCustomersCustomerBalanceTransactionsRequest?]
     # @return nil
     def post_customers_customer_balance_transactions(
       *,
       customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_customers_customer_balance_transactions_request : Stripe::PostCustomersCustomerBalanceTransactionsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_balance_transactions(customer: customer, amount: amount, currency: currency, description: description, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_customers_customer_balance_transactions(customer: customer, post_customers_customer_balance_transactions_request: post_customers_customer_balance_transactions_request).execute(&block)
     end
 
-    POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_CUSTOMER    = 5000
-    POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_DESCRIPTION =  350
+    POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_balance_transactions(
       *,
       customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_customers_customer_balance_transactions_request : Stripe::PostCustomersCustomerBalanceTransactionsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_balance_transactions ..." }
@@ -2801,45 +2269,33 @@ module Stripe
         unless (_customer = customer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_CUSTOMER)
         end
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_customers_customer_balance_transactions_request\" is required and cannot be null") if post_customers_customer_balance_transactions_request.nil?
+        unless (_post_customers_customer_balance_transactions_request = post_customers_customer_balance_transactions_request).nil?
+          _post_customers_customer_balance_transactions_request.validate if _post_customers_customer_balance_transactions_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/balance_transactions".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_balance_transactions_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_balance_transactions_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2860,38 +2316,30 @@ module Stripe
     # <p>Most credit balance transaction fields are immutable, but you may update its <code>description</code> and <code>metadata</code>.</p>
     # @required @param customer [String?]
     # @required @param transaction [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_customers_customer_balance_transactions_transaction_request [Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest?]
     # @return [Stripe::CustomerBalanceTransaction]
     def post_customers_customer_balance_transactions_transaction(
       *,
       customer : String? = nil,
       transaction : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_customers_customer_balance_transactions_transaction_request : Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest? = nil
     ) : Stripe::CustomerBalanceTransaction
-      data, _status_code, _headers = post_customers_customer_balance_transactions_transaction_with_http_info(customer: customer, transaction: transaction, description: description, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_customers_customer_balance_transactions_transaction_with_http_info(customer: customer, transaction: transaction, post_customers_customer_balance_transactions_transaction_request: post_customers_customer_balance_transactions_transaction_request)
       data
     end
 
     # &lt;p&gt;Most credit balance transaction fields are immutable, but you may update its &lt;code&gt;description&lt;/code&gt; and &lt;code&gt;metadata&lt;/code&gt;.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param transaction [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_customers_customer_balance_transactions_transaction_request [Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest?]
     # @return [Tuple(Stripe::CustomerBalanceTransaction, Integer, Hash)] Stripe::CustomerBalanceTransaction, response status code and response headers
     def post_customers_customer_balance_transactions_transaction_with_http_info(
       *,
       customer : String? = nil,
       transaction : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_customers_customer_balance_transactions_transaction_request : Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest? = nil
     ) : Tuple(Stripe::CustomerBalanceTransaction, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, description: description, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, post_customers_customer_balance_transactions_transaction_request: post_customers_customer_balance_transactions_transaction_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2905,34 +2353,27 @@ module Stripe
     # &lt;p&gt;Most credit balance transaction fields are immutable, but you may update its &lt;code&gt;description&lt;/code&gt; and &lt;code&gt;metadata&lt;/code&gt;.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param transaction [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_customers_customer_balance_transactions_transaction_request [Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest?]
     # @return nil
     def post_customers_customer_balance_transactions_transaction(
       *,
       customer : String? = nil,
       transaction : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_customers_customer_balance_transactions_transaction_request : Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, description: description, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_customers_customer_balance_transactions_transaction(customer: customer, transaction: transaction, post_customers_customer_balance_transactions_transaction_request: post_customers_customer_balance_transactions_transaction_request).execute(&block)
     end
 
     POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_CUSTOMER    = 5000
     POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_TRANSACTION = 5000
-    POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_DESCRIPTION =  350
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_balance_transactions_transaction(
       *,
       customer : String? = nil,
       transaction : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_customers_customer_balance_transactions_transaction_request : Stripe::PostCustomersCustomerBalanceTransactionsTransactionRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_balance_transactions_transaction ..." }
@@ -2947,39 +2388,32 @@ module Stripe
         unless (_transaction = transaction).nil?
           OpenApi::PrimitiveValidator.validate_max_length("transaction", transaction.to_s.size, POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_TRANSACTION)
         end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_CUSTOMERS_CUSTOMER_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_customers_customer_balance_transactions_transaction_request = post_customers_customer_balance_transactions_transaction_request).nil?
+          _post_customers_customer_balance_transactions_transaction_request.validate if _post_customers_customer_balance_transactions_transaction_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/balance_transactions/{transaction}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_balance_transactions_transaction_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_balance_transactions_transaction_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2999,31 +2433,27 @@ module Stripe
 
     # <p>Changes the settings on a customer’s cash balance.</p>
     # @required @param customer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param settings [Stripe::BalanceSettingsParam?]
+    # @optional @param post_customers_customer_cash_balance_request [Stripe::PostCustomersCustomerCashBalanceRequest?]
     # @return [Stripe::CashBalance]
     def post_customers_customer_cash_balance(
       *,
       customer : String? = nil,
-      expand : Array(String)? = nil,
-      settings : Stripe::BalanceSettingsParam? = nil
+      post_customers_customer_cash_balance_request : Stripe::PostCustomersCustomerCashBalanceRequest? = nil
     ) : Stripe::CashBalance
-      data, _status_code, _headers = post_customers_customer_cash_balance_with_http_info(customer: customer, expand: expand, settings: settings)
+      data, _status_code, _headers = post_customers_customer_cash_balance_with_http_info(customer: customer, post_customers_customer_cash_balance_request: post_customers_customer_cash_balance_request)
       data
     end
 
     # &lt;p&gt;Changes the settings on a customer’s cash balance.&lt;/p&gt;
     # @required @param customer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param settings [Stripe::BalanceSettingsParam?]
+    # @optional @param post_customers_customer_cash_balance_request [Stripe::PostCustomersCustomerCashBalanceRequest?]
     # @return [Tuple(Stripe::CashBalance, Integer, Hash)] Stripe::CashBalance, response status code and response headers
     def post_customers_customer_cash_balance_with_http_info(
       *,
       customer : String? = nil,
-      expand : Array(String)? = nil,
-      settings : Stripe::BalanceSettingsParam? = nil
+      post_customers_customer_cash_balance_request : Stripe::PostCustomersCustomerCashBalanceRequest? = nil
     ) : Tuple(Stripe::CashBalance, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_cash_balance(customer: customer, expand: expand, settings: settings)
+      request = build_api_request_for_post_customers_customer_cash_balance(customer: customer, post_customers_customer_cash_balance_request: post_customers_customer_cash_balance_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3036,17 +2466,15 @@ module Stripe
 
     # &lt;p&gt;Changes the settings on a customer’s cash balance.&lt;/p&gt;
     # @required @param customer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param settings [Stripe::BalanceSettingsParam?]
+    # @optional @param post_customers_customer_cash_balance_request [Stripe::PostCustomersCustomerCashBalanceRequest?]
     # @return nil
     def post_customers_customer_cash_balance(
       *,
       customer : String? = nil,
-      expand : Array(String)? = nil,
-      settings : Stripe::BalanceSettingsParam? = nil,
+      post_customers_customer_cash_balance_request : Stripe::PostCustomersCustomerCashBalanceRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_cash_balance(customer: customer, expand: expand, settings: settings).execute(&block)
+      build_api_request_for_post_customers_customer_cash_balance(customer: customer, post_customers_customer_cash_balance_request: post_customers_customer_cash_balance_request).execute(&block)
     end
 
     POST_CUSTOMERS_CUSTOMER_CASH_BALANCE_MAX_LENGTH_FOR_CUSTOMER = 5000
@@ -3055,8 +2483,7 @@ module Stripe
     def build_api_request_for_post_customers_customer_cash_balance(
       *,
       customer : String? = nil,
-      expand : Array(String)? = nil,
-      settings : Stripe::BalanceSettingsParam? = nil
+      post_customers_customer_cash_balance_request : Stripe::PostCustomersCustomerCashBalanceRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_cash_balance ..." }
@@ -3067,35 +2494,32 @@ module Stripe
         unless (_customer = customer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CUSTOMERS_CUSTOMER_CASH_BALANCE_MAX_LENGTH_FOR_CUSTOMER)
         end
-
-        unless (_settings = settings).nil?
-          _settings.validate if _settings.is_a?(OpenApi::Validatable)
+        unless (_post_customers_customer_cash_balance_request = post_customers_customer_cash_balance_request).nil?
+          _post_customers_customer_cash_balance_request.validate if _post_customers_customer_cash_balance_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/cash_balance".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["settings"] = settings.to_s if !settings.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_cash_balance_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_cash_balance_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3115,43 +2539,27 @@ module Stripe
 
     # <p>When you create a new credit card, you must specify a customer or recipient on which to create it.</p>  <p>If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should <a href=\"/docs/api#update_customer\">update the customer</a> to have a new <code>default_source</code>.</p>
     # @required @param customer [String?]
-    # @optional @param alipay_account [String?] A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
-    # @optional @param bank_account [Stripe::PostCustomersCustomerRequestBankAccount?]
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param source [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
+    # @optional @param post_customers_customer_sources_request [Stripe::PostCustomersCustomerSourcesRequest?]
     # @return [Stripe::PaymentSource]
     def post_customers_customer_sources(
       *,
       customer : String? = nil,
-      alipay_account : String? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      expand : Array(String)? = nil,
-      source : String? = nil
+      post_customers_customer_sources_request : Stripe::PostCustomersCustomerSourcesRequest? = nil
     ) : Stripe::PaymentSource
-      data, _status_code, _headers = post_customers_customer_sources_with_http_info(customer: customer, alipay_account: alipay_account, bank_account: bank_account, card: card, expand: expand, source: source)
+      data, _status_code, _headers = post_customers_customer_sources_with_http_info(customer: customer, post_customers_customer_sources_request: post_customers_customer_sources_request)
       data
     end
 
     # &lt;p&gt;When you create a new credit card, you must specify a customer or recipient on which to create it.&lt;/p&gt;  &lt;p&gt;If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should &lt;a href&#x3D;\&quot;/docs/api#update_customer\&quot;&gt;update the customer&lt;/a&gt; to have a new &lt;code&gt;default_source&lt;/code&gt;.&lt;/p&gt;
     # @required @param customer [String?]
-    # @optional @param alipay_account [String?] A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
-    # @optional @param bank_account [Stripe::PostCustomersCustomerRequestBankAccount?]
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param source [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
+    # @optional @param post_customers_customer_sources_request [Stripe::PostCustomersCustomerSourcesRequest?]
     # @return [Tuple(Stripe::PaymentSource, Integer, Hash)] Stripe::PaymentSource, response status code and response headers
     def post_customers_customer_sources_with_http_info(
       *,
       customer : String? = nil,
-      alipay_account : String? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      expand : Array(String)? = nil,
-      source : String? = nil
+      post_customers_customer_sources_request : Stripe::PostCustomersCustomerSourcesRequest? = nil
     ) : Tuple(Stripe::PaymentSource, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_sources(customer: customer, alipay_account: alipay_account, bank_account: bank_account, card: card, expand: expand, source: source)
+      request = build_api_request_for_post_customers_customer_sources(customer: customer, post_customers_customer_sources_request: post_customers_customer_sources_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3164,38 +2572,24 @@ module Stripe
 
     # &lt;p&gt;When you create a new credit card, you must specify a customer or recipient on which to create it.&lt;/p&gt;  &lt;p&gt;If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should &lt;a href&#x3D;\&quot;/docs/api#update_customer\&quot;&gt;update the customer&lt;/a&gt; to have a new &lt;code&gt;default_source&lt;/code&gt;.&lt;/p&gt;
     # @required @param customer [String?]
-    # @optional @param alipay_account [String?] A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
-    # @optional @param bank_account [Stripe::PostCustomersCustomerRequestBankAccount?]
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param source [String?] Please refer to full [documentation](https://stripe.com/docs/api) instead.
+    # @optional @param post_customers_customer_sources_request [Stripe::PostCustomersCustomerSourcesRequest?]
     # @return nil
     def post_customers_customer_sources(
       *,
       customer : String? = nil,
-      alipay_account : String? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      expand : Array(String)? = nil,
-      source : String? = nil,
+      post_customers_customer_sources_request : Stripe::PostCustomersCustomerSourcesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_sources(customer: customer, alipay_account: alipay_account, bank_account: bank_account, card: card, expand: expand, source: source).execute(&block)
+      build_api_request_for_post_customers_customer_sources(customer: customer, post_customers_customer_sources_request: post_customers_customer_sources_request).execute(&block)
     end
 
-    POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_CUSTOMER       = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_ALIPAY_ACCOUNT = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_SOURCE         = 5000
+    POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_sources(
       *,
       customer : String? = nil,
-      alipay_account : String? = nil,
-      bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      expand : Array(String)? = nil,
-      source : String? = nil
+      post_customers_customer_sources_request : Stripe::PostCustomersCustomerSourcesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_sources ..." }
@@ -3206,47 +2600,32 @@ module Stripe
         unless (_customer = customer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_CUSTOMER)
         end
-        unless (_alipay_account = alipay_account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("alipay_account", alipay_account.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_ALIPAY_ACCOUNT)
-        end
-        unless (_bank_account = bank_account).nil?
-          _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-        end
-        unless (_card = card).nil?
-          _card.validate if _card.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_source = source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_MAX_LENGTH_FOR_SOURCE)
+        unless (_post_customers_customer_sources_request = post_customers_customer_sources_request).nil?
+          _post_customers_customer_sources_request.validate if _post_customers_customer_sources_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/sources".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["alipay_account"] = alipay_account.to_s if !alipay_account.nil?
-      form_params["bank_account"] = bank_account.to_s if !bank_account.nil?
-      form_params["card"] = card.to_s if !card.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["source"] = source.to_s if !source.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_sources_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_sources_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3267,82 +2646,30 @@ module Stripe
     # <p>Update a specified source for a given customer.</p>
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param account_holder_name [String?] The name of the person or business that owns the bank account.
-    # @optional @param account_holder_type [String?] The type of entity that holds the account. This can be either `individual` or `company`.
-    # @optional @param address_city [String?] City/District/Suburb/Town/Village.
-    # @optional @param address_country [String?] Billing address country, if provided when creating card.
-    # @optional @param address_line1 [String?] Address line 1 (Street address/PO Box/Company name).
-    # @optional @param address_line2 [String?] Address line 2 (Apartment/Suite/Unit/Building).
-    # @optional @param address_state [String?] State/County/Province/Region.
-    # @optional @param address_zip [String?] ZIP or postal code.
-    # @optional @param exp_month [String?] Two digit number representing the card’s expiration month.
-    # @optional @param exp_year [String?] Four digit number representing the card’s expiration year.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] Cardholder name.
-    # @optional @param owner [Stripe::Owner?]
+    # @optional @param post_customers_customer_sources_id_request [Stripe::PostCustomersCustomerSourcesIdRequest?]
     # @return [Stripe::PostCustomersCustomerSourcesId200Response]
     def post_customers_customer_sources_id(
       *,
       customer : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      owner : Stripe::Owner? = nil
+      post_customers_customer_sources_id_request : Stripe::PostCustomersCustomerSourcesIdRequest? = nil
     ) : Stripe::PostCustomersCustomerSourcesId200Response
-      data, _status_code, _headers = post_customers_customer_sources_id_with_http_info(customer: customer, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name, owner: owner)
+      data, _status_code, _headers = post_customers_customer_sources_id_with_http_info(customer: customer, id: id, post_customers_customer_sources_id_request: post_customers_customer_sources_id_request)
       data
     end
 
     # &lt;p&gt;Update a specified source for a given customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param account_holder_name [String?] The name of the person or business that owns the bank account.
-    # @optional @param account_holder_type [String?] The type of entity that holds the account. This can be either `individual` or `company`.
-    # @optional @param address_city [String?] City/District/Suburb/Town/Village.
-    # @optional @param address_country [String?] Billing address country, if provided when creating card.
-    # @optional @param address_line1 [String?] Address line 1 (Street address/PO Box/Company name).
-    # @optional @param address_line2 [String?] Address line 2 (Apartment/Suite/Unit/Building).
-    # @optional @param address_state [String?] State/County/Province/Region.
-    # @optional @param address_zip [String?] ZIP or postal code.
-    # @optional @param exp_month [String?] Two digit number representing the card’s expiration month.
-    # @optional @param exp_year [String?] Four digit number representing the card’s expiration year.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] Cardholder name.
-    # @optional @param owner [Stripe::Owner?]
+    # @optional @param post_customers_customer_sources_id_request [Stripe::PostCustomersCustomerSourcesIdRequest?]
     # @return [Tuple(Stripe::PostCustomersCustomerSourcesId200Response, Integer, Hash)] Stripe::PostCustomersCustomerSourcesId200Response, response status code and response headers
     def post_customers_customer_sources_id_with_http_info(
       *,
       customer : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      owner : Stripe::Owner? = nil
+      post_customers_customer_sources_id_request : Stripe::PostCustomersCustomerSourcesIdRequest? = nil
     ) : Tuple(Stripe::PostCustomersCustomerSourcesId200Response, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_sources_id(customer: customer, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name, owner: owner)
+      request = build_api_request_for_post_customers_customer_sources_id(customer: customer, id: id, post_customers_customer_sources_id_request: post_customers_customer_sources_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3356,78 +2683,27 @@ module Stripe
     # &lt;p&gt;Update a specified source for a given customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param account_holder_name [String?] The name of the person or business that owns the bank account.
-    # @optional @param account_holder_type [String?] The type of entity that holds the account. This can be either `individual` or `company`.
-    # @optional @param address_city [String?] City/District/Suburb/Town/Village.
-    # @optional @param address_country [String?] Billing address country, if provided when creating card.
-    # @optional @param address_line1 [String?] Address line 1 (Street address/PO Box/Company name).
-    # @optional @param address_line2 [String?] Address line 2 (Apartment/Suite/Unit/Building).
-    # @optional @param address_state [String?] State/County/Province/Region.
-    # @optional @param address_zip [String?] ZIP or postal code.
-    # @optional @param exp_month [String?] Two digit number representing the card’s expiration month.
-    # @optional @param exp_year [String?] Four digit number representing the card’s expiration year.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] Cardholder name.
-    # @optional @param owner [Stripe::Owner?]
+    # @optional @param post_customers_customer_sources_id_request [Stripe::PostCustomersCustomerSourcesIdRequest?]
     # @return nil
     def post_customers_customer_sources_id(
       *,
       customer : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      owner : Stripe::Owner? = nil,
+      post_customers_customer_sources_id_request : Stripe::PostCustomersCustomerSourcesIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_sources_id(customer: customer, id: id, account_holder_name: account_holder_name, account_holder_type: account_holder_type, address_city: address_city, address_country: address_country, address_line1: address_line1, address_line2: address_line2, address_state: address_state, address_zip: address_zip, exp_month: exp_month, exp_year: exp_year, expand: expand, metadata: metadata, name: name, owner: owner).execute(&block)
+      build_api_request_for_post_customers_customer_sources_id(customer: customer, id: id, post_customers_customer_sources_id_request: post_customers_customer_sources_id_request).execute(&block)
     end
 
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_CUSTOMER              = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ID                    = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME   = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_TYPE   = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = String.static_array("company", "individual")
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_CITY          = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY       = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_LINE1         = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_LINE2         = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_STATE         = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_ZIP           = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_EXP_MONTH             = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_EXP_YEAR              = 5000
-    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_NAME                  = 5000
+    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_CUSTOMER = 5000
+    POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ID       = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_sources_id(
       *,
       customer : String? = nil,
       id : String? = nil,
-      account_holder_name : String? = nil,
-      account_holder_type : String? = nil,
-      address_city : String? = nil,
-      address_country : String? = nil,
-      address_line1 : String? = nil,
-      address_line2 : String? = nil,
-      address_state : String? = nil,
-      address_zip : String? = nil,
-      exp_month : String? = nil,
-      exp_year : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      owner : Stripe::Owner? = nil
+      post_customers_customer_sources_id_request : Stripe::PostCustomersCustomerSourcesIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_sources_id ..." }
@@ -3442,83 +2718,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ID)
         end
-        unless (_account_holder_name = account_holder_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", account_holder_name.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
-        end
-        unless (_account_holder_type = account_holder_type).nil?
-          OpenApi::EnumValidator.validate("account_holder_type", _account_holder_type, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
-        end
-        unless (_address_city = address_city).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_city", address_city.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_CITY)
-        end
-        unless (_address_country = address_country).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_country", address_country.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_COUNTRY)
-        end
-        unless (_address_line1 = address_line1).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_line1", address_line1.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_LINE1)
-        end
-        unless (_address_line2 = address_line2).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_line2", address_line2.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_LINE2)
-        end
-        unless (_address_state = address_state).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_state", address_state.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_STATE)
-        end
-        unless (_address_zip = address_zip).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("address_zip", address_zip.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_ADDRESS_ZIP)
-        end
-        unless (_exp_month = exp_month).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("exp_month", exp_month.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_EXP_MONTH)
-        end
-        unless (_exp_year = exp_year).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("exp_year", exp_year.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_EXP_YEAR)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_MAX_LENGTH_FOR_NAME)
-        end
-        unless (_owner = owner).nil?
-          _owner.validate if _owner.is_a?(OpenApi::Validatable)
+        unless (_post_customers_customer_sources_id_request = post_customers_customer_sources_id_request).nil?
+          _post_customers_customer_sources_id_request.validate if _post_customers_customer_sources_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/sources/{id}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_holder_name"] = account_holder_name.to_s if !account_holder_name.nil?
-      form_params["account_holder_type"] = account_holder_type.to_s if !account_holder_type.nil?
-      form_params["address_city"] = address_city.to_s if !address_city.nil?
-      form_params["address_country"] = address_country.to_s if !address_country.nil?
-      form_params["address_line1"] = address_line1.to_s if !address_line1.nil?
-      form_params["address_line2"] = address_line2.to_s if !address_line2.nil?
-      form_params["address_state"] = address_state.to_s if !address_state.nil?
-      form_params["address_zip"] = address_zip.to_s if !address_zip.nil?
-      form_params["exp_month"] = exp_month.to_s if !exp_month.nil?
-      form_params["exp_year"] = exp_year.to_s if !exp_year.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["owner"] = owner.to_s if !owner.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_sources_id_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_sources_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3539,34 +2764,30 @@ module Stripe
     # <p>Verify a specified bank account for a given customer.</p>
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_customers_customer_sources_id_verify_request [Stripe::PostCustomersCustomerSourcesIdVerifyRequest?]
     # @return [Stripe::BankAccount]
     def post_customers_customer_sources_id_verify(
       *,
       customer : String? = nil,
       id : String? = nil,
-      amounts : Array(Int32)? = nil,
-      expand : Array(String)? = nil
+      post_customers_customer_sources_id_verify_request : Stripe::PostCustomersCustomerSourcesIdVerifyRequest? = nil
     ) : Stripe::BankAccount
-      data, _status_code, _headers = post_customers_customer_sources_id_verify_with_http_info(customer: customer, id: id, amounts: amounts, expand: expand)
+      data, _status_code, _headers = post_customers_customer_sources_id_verify_with_http_info(customer: customer, id: id, post_customers_customer_sources_id_verify_request: post_customers_customer_sources_id_verify_request)
       data
     end
 
     # &lt;p&gt;Verify a specified bank account for a given customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_customers_customer_sources_id_verify_request [Stripe::PostCustomersCustomerSourcesIdVerifyRequest?]
     # @return [Tuple(Stripe::BankAccount, Integer, Hash)] Stripe::BankAccount, response status code and response headers
     def post_customers_customer_sources_id_verify_with_http_info(
       *,
       customer : String? = nil,
       id : String? = nil,
-      amounts : Array(Int32)? = nil,
-      expand : Array(String)? = nil
+      post_customers_customer_sources_id_verify_request : Stripe::PostCustomersCustomerSourcesIdVerifyRequest? = nil
     ) : Tuple(Stripe::BankAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_sources_id_verify(customer: customer, id: id, amounts: amounts, expand: expand)
+      request = build_api_request_for_post_customers_customer_sources_id_verify(customer: customer, id: id, post_customers_customer_sources_id_verify_request: post_customers_customer_sources_id_verify_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3580,18 +2801,16 @@ module Stripe
     # &lt;p&gt;Verify a specified bank account for a given customer.&lt;/p&gt;
     # @required @param customer [String?]
     # @required @param id [String?]
-    # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_customers_customer_sources_id_verify_request [Stripe::PostCustomersCustomerSourcesIdVerifyRequest?]
     # @return nil
     def post_customers_customer_sources_id_verify(
       *,
       customer : String? = nil,
       id : String? = nil,
-      amounts : Array(Int32)? = nil,
-      expand : Array(String)? = nil,
+      post_customers_customer_sources_id_verify_request : Stripe::PostCustomersCustomerSourcesIdVerifyRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_sources_id_verify(customer: customer, id: id, amounts: amounts, expand: expand).execute(&block)
+      build_api_request_for_post_customers_customer_sources_id_verify(customer: customer, id: id, post_customers_customer_sources_id_verify_request: post_customers_customer_sources_id_verify_request).execute(&block)
     end
 
     POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VERIFY_MAX_LENGTH_FOR_CUSTOMER = 5000
@@ -3602,8 +2821,7 @@ module Stripe
       *,
       customer : String? = nil,
       id : String? = nil,
-      amounts : Array(Int32)? = nil,
-      expand : Array(String)? = nil
+      post_customers_customer_sources_id_verify_request : Stripe::PostCustomersCustomerSourcesIdVerifyRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_sources_id_verify ..." }
@@ -3618,31 +2836,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_CUSTOMERS_CUSTOMER_SOURCES_ID_VERIFY_MAX_LENGTH_FOR_ID)
         end
+        unless (_post_customers_customer_sources_id_verify_request = post_customers_customer_sources_id_verify_request).nil?
+          _post_customers_customer_sources_id_verify_request.validate if _post_customers_customer_sources_id_verify_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/sources/{id}/verify".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amounts"] = @api_client.build_collection_param(amounts, "csv") if !amounts.nil? && !amounts.empty?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_sources_id_verify_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_sources_id_verify_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3662,35 +2881,27 @@ module Stripe
 
     # <p>Creates a new <code>TaxID</code> object for a customer.</p>
     # @required @param customer [String?]
-    # @required @param _type [String?] Type of the tax ID, one of `ae_trn`, `au_abn`, `au_arn`, `bg_uic`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_oss_vat`, `eu_vat`, `gb_vat`, `ge_vat`, `hk_br`, `hu_tin`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `th_vat`, `tw_vat`, `ua_vat`, `us_ein`, or `za_vat`
-    # @required @param value [String?] Value of the tax ID.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_customers_customer_tax_ids_request [Stripe::PostCustomersCustomerTaxIdsRequest?]
     # @return [Stripe::TaxId]
     def post_customers_customer_tax_ids(
       *,
       customer : String? = nil,
-      _type : String? = nil,
-      value : String? = nil,
-      expand : Array(String)? = nil
+      post_customers_customer_tax_ids_request : Stripe::PostCustomersCustomerTaxIdsRequest? = nil
     ) : Stripe::TaxId
-      data, _status_code, _headers = post_customers_customer_tax_ids_with_http_info(customer: customer, _type: _type, value: value, expand: expand)
+      data, _status_code, _headers = post_customers_customer_tax_ids_with_http_info(customer: customer, post_customers_customer_tax_ids_request: post_customers_customer_tax_ids_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;TaxID&lt;/code&gt; object for a customer.&lt;/p&gt;
     # @required @param customer [String?]
-    # @required @param _type [String?] Type of the tax ID, one of `ae_trn`, `au_abn`, `au_arn`, `bg_uic`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_oss_vat`, `eu_vat`, `gb_vat`, `ge_vat`, `hk_br`, `hu_tin`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `th_vat`, `tw_vat`, `ua_vat`, `us_ein`, or `za_vat`
-    # @required @param value [String?] Value of the tax ID.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_customers_customer_tax_ids_request [Stripe::PostCustomersCustomerTaxIdsRequest?]
     # @return [Tuple(Stripe::TaxId, Integer, Hash)] Stripe::TaxId, response status code and response headers
     def post_customers_customer_tax_ids_with_http_info(
       *,
       customer : String? = nil,
-      _type : String? = nil,
-      value : String? = nil,
-      expand : Array(String)? = nil
+      post_customers_customer_tax_ids_request : Stripe::PostCustomersCustomerTaxIdsRequest? = nil
     ) : Tuple(Stripe::TaxId, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_customers_customer_tax_ids(customer: customer, _type: _type, value: value, expand: expand)
+      request = build_api_request_for_post_customers_customer_tax_ids(customer: customer, post_customers_customer_tax_ids_request: post_customers_customer_tax_ids_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3703,32 +2914,24 @@ module Stripe
 
     # &lt;p&gt;Creates a new &lt;code&gt;TaxID&lt;/code&gt; object for a customer.&lt;/p&gt;
     # @required @param customer [String?]
-    # @required @param _type [String?] Type of the tax ID, one of `ae_trn`, `au_abn`, `au_arn`, `bg_uic`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_oss_vat`, `eu_vat`, `gb_vat`, `ge_vat`, `hk_br`, `hu_tin`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `th_vat`, `tw_vat`, `ua_vat`, `us_ein`, or `za_vat`
-    # @required @param value [String?] Value of the tax ID.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_customers_customer_tax_ids_request [Stripe::PostCustomersCustomerTaxIdsRequest?]
     # @return nil
     def post_customers_customer_tax_ids(
       *,
       customer : String? = nil,
-      _type : String? = nil,
-      value : String? = nil,
-      expand : Array(String)? = nil,
+      post_customers_customer_tax_ids_request : Stripe::PostCustomersCustomerTaxIdsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_customers_customer_tax_ids(customer: customer, _type: _type, value: value, expand: expand).execute(&block)
+      build_api_request_for_post_customers_customer_tax_ids(customer: customer, post_customers_customer_tax_ids_request: post_customers_customer_tax_ids_request).execute(&block)
     end
 
     POST_CUSTOMERS_CUSTOMER_TAX_IDS_MAX_LENGTH_FOR_CUSTOMER = 5000
-    POST_CUSTOMERS_CUSTOMER_TAX_IDS_MAX_LENGTH_FOR__TYPE    = 5000
-    POST_CUSTOMERS_CUSTOMER_TAX_IDS_VALID_VALUES_FOR__TYPE  = String.static_array("ae_trn", "au_abn", "au_arn", "bg_uic", "br_cnpj", "br_cpf", "ca_bn", "ca_gst_hst", "ca_pst_bc", "ca_pst_mb", "ca_pst_sk", "ca_qst", "ch_vat", "cl_tin", "es_cif", "eu_oss_vat", "eu_vat", "gb_vat", "ge_vat", "hk_br", "hu_tin", "id_npwp", "il_vat", "in_gst", "is_vat", "jp_cn", "jp_rn", "kr_brn", "li_uid", "mx_rfc", "my_frp", "my_itn", "my_sst", "no_vat", "nz_gst", "ru_inn", "ru_kpp", "sa_vat", "sg_gst", "sg_uen", "si_tin", "th_vat", "tw_vat", "ua_vat", "us_ein", "za_vat")
 
     # @return Crest::Request
     def build_api_request_for_post_customers_customer_tax_ids(
       *,
       customer : String? = nil,
-      _type : String? = nil,
-      value : String? = nil,
-      expand : Array(String)? = nil
+      post_customers_customer_tax_ids_request : Stripe::PostCustomersCustomerTaxIdsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: CustomersApi.post_customers_customer_tax_ids ..." }
@@ -3739,37 +2942,33 @@ module Stripe
         unless (_customer = customer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CUSTOMERS_CUSTOMER_TAX_IDS_MAX_LENGTH_FOR_CUSTOMER)
         end
-        raise ArgumentError.new("\"_type\" is required and cannot be null") if _type.nil?
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_CUSTOMERS_CUSTOMER_TAX_IDS_VALID_VALUES_FOR__TYPE)
+        raise ArgumentError.new("\"post_customers_customer_tax_ids_request\" is required and cannot be null") if post_customers_customer_tax_ids_request.nil?
+        unless (_post_customers_customer_tax_ids_request = post_customers_customer_tax_ids_request).nil?
+          _post_customers_customer_tax_ids_request.validate if _post_customers_customer_tax_ids_request.is_a?(OpenApi::Validatable)
         end
-        raise ArgumentError.new("\"value\" is required and cannot be null") if value.nil?
       end
 
       # resource path
       local_var_path = "/v1/customers/{customer}/tax_ids".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["type"] = _type.to_s if !_type.nil?
-      form_params["value"] = value.to_s if !value.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_customers_customer_tax_ids_request, content_type: header_params["Content-Type"]?) if !post_customers_customer_tax_ids_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

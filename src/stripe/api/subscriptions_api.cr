@@ -22,35 +22,27 @@ module Stripe
 
     # <p>Cancels a customer’s subscription immediately. The customer will not be charged again for the subscription.</p>  <p>Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually <a href=\"#delete_invoiceitem\">deleted</a>. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.</p>  <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.</p>
     # @required @param subscription_exposed_id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_now [Bool?] Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
-    # @optional @param prorate [Bool?] Will generate a proration invoice item that credits remaining unused time until the subscription period end.
+    # @optional @param delete_subscriptions_subscription_exposed_id_request [Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest?]
     # @return [Stripe::Subscription]
     def delete_subscriptions_subscription_exposed_id(
       *,
       subscription_exposed_id : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil
+      delete_subscriptions_subscription_exposed_id_request : Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest? = nil
     ) : Stripe::Subscription
-      data, _status_code, _headers = delete_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, expand: expand, invoice_now: invoice_now, prorate: prorate)
+      data, _status_code, _headers = delete_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, delete_subscriptions_subscription_exposed_id_request: delete_subscriptions_subscription_exposed_id_request)
       data
     end
 
     # &lt;p&gt;Cancels a customer’s subscription immediately. The customer will not be charged again for the subscription.&lt;/p&gt;  &lt;p&gt;Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually &lt;a href&#x3D;\&quot;#delete_invoiceitem\&quot;&gt;deleted&lt;/a&gt;. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.&lt;/p&gt;  &lt;p&gt;By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.&lt;/p&gt;
     # @required @param subscription_exposed_id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_now [Bool?] Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
-    # @optional @param prorate [Bool?] Will generate a proration invoice item that credits remaining unused time until the subscription period end.
+    # @optional @param delete_subscriptions_subscription_exposed_id_request [Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest?]
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
     def delete_subscriptions_subscription_exposed_id_with_http_info(
       *,
       subscription_exposed_id : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil
+      delete_subscriptions_subscription_exposed_id_request : Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest? = nil
     ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_delete_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, expand: expand, invoice_now: invoice_now, prorate: prorate)
+      request = build_api_request_for_delete_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, delete_subscriptions_subscription_exposed_id_request: delete_subscriptions_subscription_exposed_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -63,19 +55,15 @@ module Stripe
 
     # &lt;p&gt;Cancels a customer’s subscription immediately. The customer will not be charged again for the subscription.&lt;/p&gt;  &lt;p&gt;Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually &lt;a href&#x3D;\&quot;#delete_invoiceitem\&quot;&gt;deleted&lt;/a&gt;. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.&lt;/p&gt;  &lt;p&gt;By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.&lt;/p&gt;
     # @required @param subscription_exposed_id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_now [Bool?] Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
-    # @optional @param prorate [Bool?] Will generate a proration invoice item that credits remaining unused time until the subscription period end.
+    # @optional @param delete_subscriptions_subscription_exposed_id_request [Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest?]
     # @return nil
     def delete_subscriptions_subscription_exposed_id(
       *,
       subscription_exposed_id : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil,
+      delete_subscriptions_subscription_exposed_id_request : Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_delete_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, expand: expand, invoice_now: invoice_now, prorate: prorate).execute(&block)
+      build_api_request_for_delete_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, delete_subscriptions_subscription_exposed_id_request: delete_subscriptions_subscription_exposed_id_request).execute(&block)
     end
 
     DELETE_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
@@ -84,9 +72,7 @@ module Stripe
     def build_api_request_for_delete_subscriptions_subscription_exposed_id(
       *,
       subscription_exposed_id : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil
+      delete_subscriptions_subscription_exposed_id_request : Stripe::DeleteSubscriptionsSubscriptionExposedIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.delete_subscriptions_subscription_exposed_id ..." }
@@ -97,32 +83,32 @@ module Stripe
         unless (_subscription_exposed_id = subscription_exposed_id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("subscription_exposed_id", subscription_exposed_id.to_s.size, DELETE_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID)
         end
+        unless (_delete_subscriptions_subscription_exposed_id_request = delete_subscriptions_subscription_exposed_id_request).nil?
+          _delete_subscriptions_subscription_exposed_id_request.validate if _delete_subscriptions_subscription_exposed_id_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/subscriptions/{subscription_exposed_id}".sub("{" + "subscription_exposed_id" + "}", URI.encode_path(subscription_exposed_id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["invoice_now"] = invoice_now.to_s if !invoice_now.nil?
-      form_params["prorate"] = prorate.to_s if !prorate.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: delete_subscriptions_subscription_exposed_id_request, content_type: header_params["Content-Type"]?) if !delete_subscriptions_subscription_exposed_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -201,24 +187,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscriptions/{subscription_exposed_id}/discount".sub("{" + "subscription_exposed_id" + "}", URI.encode_path(subscription_exposed_id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      # HTTP header "Content-Type"
-      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -408,8 +392,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscriptions"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -423,19 +415,11 @@ module Stripe
       query_params["current_period_end"] = current_period_end.to_s if !current_period_end.nil?
       query_params["current_period_start"] = current_period_start.to_s if !current_period_start.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -539,26 +523,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscriptions/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -644,23 +628,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscriptions/{subscription_exposed_id}".sub("{" + "subscription_exposed_id" + "}", URI.encode_path(subscription_exposed_id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -679,140 +663,24 @@ module Stripe
     end
 
     # <p>Creates a new subscription on an existing customer. Each customer can have up to 500 active or scheduled subscriptions.</p>  <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter determines the exact behavior of the initial payment.</p>  <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status, use <a href=\"/docs/billing/subscriptions/subscription-schedules#managing\">subscription schedules</a> instead. Schedules provide the flexibility to model more complex billing configurations that change over time.</p>
-    # @required @param customer [String?] The identifier of the customer to subscribe.
-    # @optional @param add_invoice_items [Array(Stripe::AddInvoiceItemEntry)?] A list of prices and quantities that will generate invoice items appended to the next invoice for this subscription. You may pass up to 20 items.
-    # @optional @param application_fee_percent [Float64?] A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-    # @optional @param automatic_tax [Stripe::AutomaticTaxConfig?]
-    # @optional @param backdate_start_date [Int32?] For new subscriptions, a past timestamp to backdate the subscription's start date to. If set, the first invoice will contain a proration for the timespan between the start date and the current time. Can be combined with trials and the billing cycle anchor.
-    # @optional @param billing_cycle_anchor [Int32?] A future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionsRequestBillingThresholds?]
-    # @optional @param cancel_at [Int32?] A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using `proration_behavior`. If set during a future period, this will always cause a proration for that period.
-    # @optional @param cancel_at_period_end [Bool?] Boolean indicating whether this subscription should cancel at the end of the current period.
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param coupon [String?] The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param days_until_due [Int32?] Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_source [String?] ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_tax_rates [Stripe::PostSubscriptionsRequestDefaultTaxRates?]
-    # @optional @param description [String?] The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param items [Array(Stripe::SubscriptionItemCreateParams)?] A list of up to 20 subscription items, each with an attached price.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param payment_behavior [String?] Only applies to subscriptions with `collection_method=charge_automatically`.  Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.  Subscriptions with `collection_method=send_invoice` are automatically activated regardless of the first invoice status.
-    # @optional @param payment_settings [Stripe::SubscriptionsResourcePaymentSettings?]
-    # @optional @param pending_invoice_item_interval [Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?]
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the `billing_cycle_anchor`. If no value is passed, the default is `create_prorations`.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param trial_end [Stripe::PostSubscriptionsRequestTrialEnd?]
-    # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param trial_period_days [Int32?] Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+    # @required @param post_subscriptions_request [Stripe::PostSubscriptionsRequest?]
     # @return [Stripe::Subscription]
     def post_subscriptions(
       *,
-      customer : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      backdate_start_date : Int64? = nil,
-      billing_cycle_anchor : Int64? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Int64? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      currency : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil,
-      trial_period_days : Int64? = nil
+      post_subscriptions_request : Stripe::PostSubscriptionsRequest? = nil
     ) : Stripe::Subscription
-      data, _status_code, _headers = post_subscriptions_with_http_info(customer: customer, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, backdate_start_date: backdate_start_date, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, currency: currency, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan, trial_period_days: trial_period_days)
+      data, _status_code, _headers = post_subscriptions_with_http_info(post_subscriptions_request: post_subscriptions_request)
       data
     end
 
     # &lt;p&gt;Creates a new subscription on an existing customer. Each customer can have up to 500 active or scheduled subscriptions.&lt;/p&gt;  &lt;p&gt;When you create a subscription with &lt;code&gt;collection_method&#x3D;charge_automatically&lt;/code&gt;, the first invoice is finalized as part of the request. The &lt;code&gt;payment_behavior&lt;/code&gt; parameter determines the exact behavior of the initial payment.&lt;/p&gt;  &lt;p&gt;To start subscriptions where the first invoice always begins in a &lt;code&gt;draft&lt;/code&gt; status, use &lt;a href&#x3D;\&quot;/docs/billing/subscriptions/subscription-schedules#managing\&quot;&gt;subscription schedules&lt;/a&gt; instead. Schedules provide the flexibility to model more complex billing configurations that change over time.&lt;/p&gt;
-    # @required @param customer [String?] The identifier of the customer to subscribe.
-    # @optional @param add_invoice_items [Array(Stripe::AddInvoiceItemEntry)?] A list of prices and quantities that will generate invoice items appended to the next invoice for this subscription. You may pass up to 20 items.
-    # @optional @param application_fee_percent [Float64?] A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-    # @optional @param automatic_tax [Stripe::AutomaticTaxConfig?]
-    # @optional @param backdate_start_date [Int32?] For new subscriptions, a past timestamp to backdate the subscription's start date to. If set, the first invoice will contain a proration for the timespan between the start date and the current time. Can be combined with trials and the billing cycle anchor.
-    # @optional @param billing_cycle_anchor [Int32?] A future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionsRequestBillingThresholds?]
-    # @optional @param cancel_at [Int32?] A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using `proration_behavior`. If set during a future period, this will always cause a proration for that period.
-    # @optional @param cancel_at_period_end [Bool?] Boolean indicating whether this subscription should cancel at the end of the current period.
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param coupon [String?] The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param days_until_due [Int32?] Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_source [String?] ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_tax_rates [Stripe::PostSubscriptionsRequestDefaultTaxRates?]
-    # @optional @param description [String?] The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param items [Array(Stripe::SubscriptionItemCreateParams)?] A list of up to 20 subscription items, each with an attached price.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param payment_behavior [String?] Only applies to subscriptions with `collection_method=charge_automatically`.  Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.  Subscriptions with `collection_method=send_invoice` are automatically activated regardless of the first invoice status.
-    # @optional @param payment_settings [Stripe::SubscriptionsResourcePaymentSettings?]
-    # @optional @param pending_invoice_item_interval [Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?]
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the `billing_cycle_anchor`. If no value is passed, the default is `create_prorations`.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param trial_end [Stripe::PostSubscriptionsRequestTrialEnd?]
-    # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param trial_period_days [Int32?] Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+    # @required @param post_subscriptions_request [Stripe::PostSubscriptionsRequest?]
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
     def post_subscriptions_with_http_info(
       *,
-      customer : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      backdate_start_date : Int64? = nil,
-      billing_cycle_anchor : Int64? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Int64? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      currency : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil,
-      trial_period_days : Int64? = nil
+      post_subscriptions_request : Stripe::PostSubscriptionsRequest? = nil
     ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscriptions(customer: customer, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, backdate_start_date: backdate_start_date, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, currency: currency, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan, trial_period_days: trial_period_days)
+      request = build_api_request_for_post_subscriptions(post_subscriptions_request: post_subscriptions_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -824,240 +692,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new subscription on an existing customer. Each customer can have up to 500 active or scheduled subscriptions.&lt;/p&gt;  &lt;p&gt;When you create a subscription with &lt;code&gt;collection_method&#x3D;charge_automatically&lt;/code&gt;, the first invoice is finalized as part of the request. The &lt;code&gt;payment_behavior&lt;/code&gt; parameter determines the exact behavior of the initial payment.&lt;/p&gt;  &lt;p&gt;To start subscriptions where the first invoice always begins in a &lt;code&gt;draft&lt;/code&gt; status, use &lt;a href&#x3D;\&quot;/docs/billing/subscriptions/subscription-schedules#managing\&quot;&gt;subscription schedules&lt;/a&gt; instead. Schedules provide the flexibility to model more complex billing configurations that change over time.&lt;/p&gt;
-    # @required @param customer [String?] The identifier of the customer to subscribe.
-    # @optional @param add_invoice_items [Array(Stripe::AddInvoiceItemEntry)?] A list of prices and quantities that will generate invoice items appended to the next invoice for this subscription. You may pass up to 20 items.
-    # @optional @param application_fee_percent [Float64?] A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-    # @optional @param automatic_tax [Stripe::AutomaticTaxConfig?]
-    # @optional @param backdate_start_date [Int32?] For new subscriptions, a past timestamp to backdate the subscription's start date to. If set, the first invoice will contain a proration for the timespan between the start date and the current time. Can be combined with trials and the billing cycle anchor.
-    # @optional @param billing_cycle_anchor [Int32?] A future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionsRequestBillingThresholds?]
-    # @optional @param cancel_at [Int32?] A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using `proration_behavior`. If set during a future period, this will always cause a proration for that period.
-    # @optional @param cancel_at_period_end [Bool?] Boolean indicating whether this subscription should cancel at the end of the current period.
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param coupon [String?] The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param days_until_due [Int32?] Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_source [String?] ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_tax_rates [Stripe::PostSubscriptionsRequestDefaultTaxRates?]
-    # @optional @param description [String?] The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param items [Array(Stripe::SubscriptionItemCreateParams)?] A list of up to 20 subscription items, each with an attached price.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param payment_behavior [String?] Only applies to subscriptions with `collection_method=charge_automatically`.  Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.  Subscriptions with `collection_method=send_invoice` are automatically activated regardless of the first invoice status.
-    # @optional @param payment_settings [Stripe::SubscriptionsResourcePaymentSettings?]
-    # @optional @param pending_invoice_item_interval [Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?]
-    # @optional @param promotion_code [String?] The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the `billing_cycle_anchor`. If no value is passed, the default is `create_prorations`.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param trial_end [Stripe::PostSubscriptionsRequestTrialEnd?]
-    # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param trial_period_days [Int32?] Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+    # @required @param post_subscriptions_request [Stripe::PostSubscriptionsRequest?]
     # @return nil
     def post_subscriptions(
       *,
-      customer : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      backdate_start_date : Int64? = nil,
-      billing_cycle_anchor : Int64? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Int64? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      currency : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil,
-      trial_period_days : Int64? = nil,
+      post_subscriptions_request : Stripe::PostSubscriptionsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscriptions(customer: customer, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, backdate_start_date: backdate_start_date, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, currency: currency, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan, trial_period_days: trial_period_days).execute(&block)
+      build_api_request_for_post_subscriptions(post_subscriptions_request: post_subscriptions_request).execute(&block)
     end
-
-    POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_CUSTOMER               = 5000
-    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD    = String.static_array("charge_automatically", "send_invoice")
-    POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_COUPON                 = 5000
-    POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
-    POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_SOURCE         = 5000
-    POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DESCRIPTION            =  500
-    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR     = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
-    POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_PROMOTION_CODE         = 5000
-    POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR   = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscriptions(
       *,
-      customer : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      backdate_start_date : Int64? = nil,
-      billing_cycle_anchor : Int64? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Int64? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      currency : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemCreateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      trial_end : Stripe::PostSubscriptionsRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil,
-      trial_period_days : Int64? = nil
+      post_subscriptions_request : Stripe::PostSubscriptionsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.post_subscriptions ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"customer\" is required and cannot be null") if customer.nil?
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_add_invoice_items = add_invoice_items).nil?
-          OpenApi::ContainerValidator.validate(container: _add_invoice_items) if _add_invoice_items.is_a?(Array)
-        end
-
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_billing_thresholds = billing_thresholds).nil?
-          _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_collection_method = collection_method).nil?
-          OpenApi::EnumValidator.validate("collection_method", _collection_method, POST_SUBSCRIPTIONS_VALID_VALUES_FOR_COLLECTION_METHOD)
-        end
-        unless (_coupon = coupon).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_COUPON)
-        end
-
-        unless (_default_payment_method = default_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", default_payment_method.to_s.size, POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
-        end
-        unless (_default_source = default_source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_source", default_source.to_s.size, POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DEFAULT_SOURCE)
-        end
-        unless (_default_tax_rates = default_tax_rates).nil?
-          _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_items = items).nil?
-          OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_payment_behavior = payment_behavior).nil?
-          OpenApi::EnumValidator.validate("payment_behavior", _payment_behavior, POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
-        end
-        unless (_payment_settings = payment_settings).nil?
-          _payment_settings.validate if _payment_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_pending_invoice_item_interval = pending_invoice_item_interval).nil?
-          _pending_invoice_item_interval.validate if _pending_invoice_item_interval.is_a?(OpenApi::Validatable)
-        end
-        unless (_promotion_code = promotion_code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("promotion_code", promotion_code.to_s.size, POST_SUBSCRIPTIONS_MAX_LENGTH_FOR_PROMOTION_CODE)
-        end
-        unless (_proration_behavior = proration_behavior).nil?
-          OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, POST_SUBSCRIPTIONS_VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_trial_end = trial_end).nil?
-          _trial_end.validate if _trial_end.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_subscriptions_request\" is required and cannot be null") if post_subscriptions_request.nil?
+        unless (_post_subscriptions_request = post_subscriptions_request).nil?
+          _post_subscriptions_request.validate if _post_subscriptions_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscriptions"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["add_invoice_items"] = @api_client.build_collection_param(add_invoice_items, "csv") if !add_invoice_items.nil? && !add_invoice_items.empty?
-      form_params["application_fee_percent"] = application_fee_percent.to_s if !application_fee_percent.nil?
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["backdate_start_date"] = backdate_start_date.to_s if !backdate_start_date.nil?
-      form_params["billing_cycle_anchor"] = billing_cycle_anchor.to_s if !billing_cycle_anchor.nil?
-      form_params["billing_thresholds"] = billing_thresholds.to_s if !billing_thresholds.nil?
-      form_params["cancel_at"] = cancel_at.to_s if !cancel_at.nil?
-      form_params["cancel_at_period_end"] = cancel_at_period_end.to_s if !cancel_at_period_end.nil?
-      form_params["collection_method"] = collection_method.to_s if !collection_method.nil?
-      form_params["coupon"] = coupon.to_s if !coupon.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["days_until_due"] = days_until_due.to_s if !days_until_due.nil?
-      form_params["default_payment_method"] = default_payment_method.to_s if !default_payment_method.nil?
-      form_params["default_source"] = default_source.to_s if !default_source.nil?
-      form_params["default_tax_rates"] = default_tax_rates.to_s if !default_tax_rates.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["items"] = @api_client.build_collection_param(items, "csv") if !items.nil? && !items.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["off_session"] = off_session.to_s if !off_session.nil?
-      form_params["payment_behavior"] = payment_behavior.to_s if !payment_behavior.nil?
-      form_params["payment_settings"] = payment_settings.to_s if !payment_settings.nil?
-      form_params["pending_invoice_item_interval"] = pending_invoice_item_interval.to_s if !pending_invoice_item_interval.nil?
-      form_params["promotion_code"] = promotion_code.to_s if !promotion_code.nil?
-      form_params["proration_behavior"] = proration_behavior.to_s if !proration_behavior.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
-      form_params["trial_end"] = trial_end.to_s if !trial_end.nil?
-      form_params["trial_from_plan"] = trial_from_plan.to_s if !trial_from_plan.nil?
-      form_params["trial_period_days"] = trial_period_days.to_s if !trial_period_days.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscriptions_request, content_type: header_params["Content-Type"]?) if !post_subscriptions_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1077,135 +758,27 @@ module Stripe
 
     # <p>Updates an existing subscription on a customer to match the specified parameters. When changing plans or quantities, we will optionally prorate the price we charge next month to make up for any price changes. To preview how the proration will be calculated, use the <a href=\"#upcoming_invoice\">upcoming invoice</a> endpoint.</p>
     # @required @param subscription_exposed_id [String?]
-    # @optional @param add_invoice_items [Array(Stripe::AddInvoiceItemEntry)?] A list of prices and quantities that will generate invoice items appended to the next invoice for this subscription. You may pass up to 20 items.
-    # @optional @param application_fee_percent [Float64?] A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-    # @optional @param automatic_tax [Stripe::AutomaticTaxConfig?]
-    # @optional @param billing_cycle_anchor [String?] Either `now` or `unchanged`. Setting the value to `now` resets the subscription's billing cycle anchor to the current time (in UTC). For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionsRequestBillingThresholds?]
-    # @optional @param cancel_at [Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt?]
-    # @optional @param cancel_at_period_end [Bool?] Boolean indicating whether this subscription should cancel at the end of the current period.
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param coupon [String?] The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param days_until_due [Int32?] Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_source [String?] ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_tax_rates [Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?]
-    # @optional @param description [String?] The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param items [Array(Stripe::SubscriptionItemUpdateParams)?] A list of up to 20 subscription items, each with an attached price.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param pause_collection [Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection?]
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param payment_settings [Stripe::SubscriptionsResourcePaymentSettings?]
-    # @optional @param pending_invoice_item_interval [Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?]
-    # @optional @param promotion_code [String?] The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.
-    # @optional @param transfer_data [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData?]
-    # @optional @param trial_end [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd?]
-    # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+    # @optional @param post_subscriptions_subscription_exposed_id_request [Stripe::PostSubscriptionsSubscriptionExposedIdRequest?]
     # @return [Stripe::Subscription]
     def post_subscriptions_subscription_exposed_id(
       *,
       subscription_exposed_id : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      billing_cycle_anchor : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
-      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil
+      post_subscriptions_subscription_exposed_id_request : Stripe::PostSubscriptionsSubscriptionExposedIdRequest? = nil
     ) : Stripe::Subscription
-      data, _status_code, _headers = post_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, pause_collection: pause_collection, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, proration_date: proration_date, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan)
+      data, _status_code, _headers = post_subscriptions_subscription_exposed_id_with_http_info(subscription_exposed_id: subscription_exposed_id, post_subscriptions_subscription_exposed_id_request: post_subscriptions_subscription_exposed_id_request)
       data
     end
 
     # &lt;p&gt;Updates an existing subscription on a customer to match the specified parameters. When changing plans or quantities, we will optionally prorate the price we charge next month to make up for any price changes. To preview how the proration will be calculated, use the &lt;a href&#x3D;\&quot;#upcoming_invoice\&quot;&gt;upcoming invoice&lt;/a&gt; endpoint.&lt;/p&gt;
     # @required @param subscription_exposed_id [String?]
-    # @optional @param add_invoice_items [Array(Stripe::AddInvoiceItemEntry)?] A list of prices and quantities that will generate invoice items appended to the next invoice for this subscription. You may pass up to 20 items.
-    # @optional @param application_fee_percent [Float64?] A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-    # @optional @param automatic_tax [Stripe::AutomaticTaxConfig?]
-    # @optional @param billing_cycle_anchor [String?] Either `now` or `unchanged`. Setting the value to `now` resets the subscription's billing cycle anchor to the current time (in UTC). For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionsRequestBillingThresholds?]
-    # @optional @param cancel_at [Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt?]
-    # @optional @param cancel_at_period_end [Bool?] Boolean indicating whether this subscription should cancel at the end of the current period.
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param coupon [String?] The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param days_until_due [Int32?] Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_source [String?] ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_tax_rates [Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?]
-    # @optional @param description [String?] The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param items [Array(Stripe::SubscriptionItemUpdateParams)?] A list of up to 20 subscription items, each with an attached price.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param pause_collection [Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection?]
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param payment_settings [Stripe::SubscriptionsResourcePaymentSettings?]
-    # @optional @param pending_invoice_item_interval [Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?]
-    # @optional @param promotion_code [String?] The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.
-    # @optional @param transfer_data [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData?]
-    # @optional @param trial_end [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd?]
-    # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+    # @optional @param post_subscriptions_subscription_exposed_id_request [Stripe::PostSubscriptionsSubscriptionExposedIdRequest?]
     # @return [Tuple(Stripe::Subscription, Integer, Hash)] Stripe::Subscription, response status code and response headers
     def post_subscriptions_subscription_exposed_id_with_http_info(
       *,
       subscription_exposed_id : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      billing_cycle_anchor : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
-      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil
+      post_subscriptions_subscription_exposed_id_request : Stripe::PostSubscriptionsSubscriptionExposedIdRequest? = nil
     ) : Tuple(Stripe::Subscription, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, pause_collection: pause_collection, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, proration_date: proration_date, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan)
+      request = build_api_request_for_post_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, post_subscriptions_subscription_exposed_id_request: post_subscriptions_subscription_exposed_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1218,115 +791,24 @@ module Stripe
 
     # &lt;p&gt;Updates an existing subscription on a customer to match the specified parameters. When changing plans or quantities, we will optionally prorate the price we charge next month to make up for any price changes. To preview how the proration will be calculated, use the &lt;a href&#x3D;\&quot;#upcoming_invoice\&quot;&gt;upcoming invoice&lt;/a&gt; endpoint.&lt;/p&gt;
     # @required @param subscription_exposed_id [String?]
-    # @optional @param add_invoice_items [Array(Stripe::AddInvoiceItemEntry)?] A list of prices and quantities that will generate invoice items appended to the next invoice for this subscription. You may pass up to 20 items.
-    # @optional @param application_fee_percent [Float64?] A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-    # @optional @param automatic_tax [Stripe::AutomaticTaxConfig?]
-    # @optional @param billing_cycle_anchor [String?] Either `now` or `unchanged`. Setting the value to `now` resets the subscription's billing cycle anchor to the current time (in UTC). For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionsRequestBillingThresholds?]
-    # @optional @param cancel_at [Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt?]
-    # @optional @param cancel_at_period_end [Bool?] Boolean indicating whether this subscription should cancel at the end of the current period.
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param coupon [String?] The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param days_until_due [Int32?] Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_source [String?] ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-    # @optional @param default_tax_rates [Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?]
-    # @optional @param description [String?] The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param items [Array(Stripe::SubscriptionItemUpdateParams)?] A list of up to 20 subscription items, each with an attached price.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param pause_collection [Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection?]
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param payment_settings [Stripe::SubscriptionsResourcePaymentSettings?]
-    # @optional @param pending_invoice_item_interval [Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval?]
-    # @optional @param promotion_code [String?] The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.
-    # @optional @param transfer_data [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData?]
-    # @optional @param trial_end [Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd?]
-    # @optional @param trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+    # @optional @param post_subscriptions_subscription_exposed_id_request [Stripe::PostSubscriptionsSubscriptionExposedIdRequest?]
     # @return nil
     def post_subscriptions_subscription_exposed_id(
       *,
       subscription_exposed_id : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      billing_cycle_anchor : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
-      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil,
+      post_subscriptions_subscription_exposed_id_request : Stripe::PostSubscriptionsSubscriptionExposedIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, add_invoice_items: add_invoice_items, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, billing_cycle_anchor: billing_cycle_anchor, billing_thresholds: billing_thresholds, cancel_at: cancel_at, cancel_at_period_end: cancel_at_period_end, collection_method: collection_method, coupon: coupon, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, expand: expand, items: items, metadata: metadata, off_session: off_session, pause_collection: pause_collection, payment_behavior: payment_behavior, payment_settings: payment_settings, pending_invoice_item_interval: pending_invoice_item_interval, promotion_code: promotion_code, proration_behavior: proration_behavior, proration_date: proration_date, transfer_data: transfer_data, trial_end: trial_end, trial_from_plan: trial_from_plan).execute(&block)
+      build_api_request_for_post_subscriptions_subscription_exposed_id(subscription_exposed_id: subscription_exposed_id, post_subscriptions_subscription_exposed_id_request: post_subscriptions_subscription_exposed_id_request).execute(&block)
     end
 
     POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_BILLING_CYCLE_ANCHOR    = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("now", "unchanged")
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_COLLECTION_METHOD     = String.static_array("charge_automatically", "send_invoice")
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_COUPON                  = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD  = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_SOURCE          = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DESCRIPTION             =  500
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PAYMENT_BEHAVIOR      = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_PROMOTION_CODE          = 5000
-    POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR    = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscriptions_subscription_exposed_id(
       *,
       subscription_exposed_id : String? = nil,
-      add_invoice_items : Array(Stripe::AddInvoiceItemEntry)? = nil,
-      application_fee_percent : Float64? = nil,
-      automatic_tax : Stripe::AutomaticTaxConfig? = nil,
-      billing_cycle_anchor : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
-      cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
-      cancel_at_period_end : Bool? = nil,
-      collection_method : String? = nil,
-      coupon : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      items : Array(Stripe::SubscriptionItemUpdateParams)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      pause_collection : Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
-      payment_behavior : String? = nil,
-      payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      pending_invoice_item_interval : Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      promotion_code : String? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      transfer_data : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
-      trial_end : Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd? = nil,
-      trial_from_plan : Bool? = nil
+      post_subscriptions_subscription_exposed_id_request : Stripe::PostSubscriptionsSubscriptionExposedIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionsApi.post_subscriptions_subscription_exposed_id ..." }
@@ -1337,126 +819,32 @@ module Stripe
         unless (_subscription_exposed_id = subscription_exposed_id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("subscription_exposed_id", subscription_exposed_id.to_s.size, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_SUBSCRIPTION_EXPOSED_ID)
         end
-        unless (_add_invoice_items = add_invoice_items).nil?
-          OpenApi::ContainerValidator.validate(container: _add_invoice_items) if _add_invoice_items.is_a?(Array)
-        end
-
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_billing_cycle_anchor = billing_cycle_anchor).nil?
-          OpenApi::EnumValidator.validate("billing_cycle_anchor", _billing_cycle_anchor, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
-        end
-        unless (_billing_thresholds = billing_thresholds).nil?
-          _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
-        end
-        unless (_cancel_at = cancel_at).nil?
-          _cancel_at.validate if _cancel_at.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_collection_method = collection_method).nil?
-          OpenApi::EnumValidator.validate("collection_method", _collection_method, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_COLLECTION_METHOD)
-        end
-        unless (_coupon = coupon).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_COUPON)
-        end
-
-        unless (_default_payment_method = default_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", default_payment_method.to_s.size, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
-        end
-        unless (_default_source = default_source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_source", default_source.to_s.size, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DEFAULT_SOURCE)
-        end
-        unless (_default_tax_rates = default_tax_rates).nil?
-          _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_items = items).nil?
-          OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_pause_collection = pause_collection).nil?
-          _pause_collection.validate if _pause_collection.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_behavior = payment_behavior).nil?
-          OpenApi::EnumValidator.validate("payment_behavior", _payment_behavior, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
-        end
-        unless (_payment_settings = payment_settings).nil?
-          _payment_settings.validate if _payment_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_pending_invoice_item_interval = pending_invoice_item_interval).nil?
-          _pending_invoice_item_interval.validate if _pending_invoice_item_interval.is_a?(OpenApi::Validatable)
-        end
-        unless (_promotion_code = promotion_code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("promotion_code", promotion_code.to_s.size, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_MAX_LENGTH_FOR_PROMOTION_CODE)
-        end
-        unless (_proration_behavior = proration_behavior).nil?
-          OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, POST_SUBSCRIPTIONS_SUBSCRIPTION_EXPOSED_ID_VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-        end
-
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_trial_end = trial_end).nil?
-          _trial_end.validate if _trial_end.is_a?(OpenApi::Validatable)
+        unless (_post_subscriptions_subscription_exposed_id_request = post_subscriptions_subscription_exposed_id_request).nil?
+          _post_subscriptions_subscription_exposed_id_request.validate if _post_subscriptions_subscription_exposed_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscriptions/{subscription_exposed_id}".sub("{" + "subscription_exposed_id" + "}", URI.encode_path(subscription_exposed_id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["add_invoice_items"] = @api_client.build_collection_param(add_invoice_items, "csv") if !add_invoice_items.nil? && !add_invoice_items.empty?
-      form_params["application_fee_percent"] = application_fee_percent.to_s if !application_fee_percent.nil?
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["billing_cycle_anchor"] = billing_cycle_anchor.to_s if !billing_cycle_anchor.nil?
-      form_params["billing_thresholds"] = billing_thresholds.to_s if !billing_thresholds.nil?
-      form_params["cancel_at"] = cancel_at.to_s if !cancel_at.nil?
-      form_params["cancel_at_period_end"] = cancel_at_period_end.to_s if !cancel_at_period_end.nil?
-      form_params["collection_method"] = collection_method.to_s if !collection_method.nil?
-      form_params["coupon"] = coupon.to_s if !coupon.nil?
-      form_params["days_until_due"] = days_until_due.to_s if !days_until_due.nil?
-      form_params["default_payment_method"] = default_payment_method.to_s if !default_payment_method.nil?
-      form_params["default_source"] = default_source.to_s if !default_source.nil?
-      form_params["default_tax_rates"] = default_tax_rates.to_s if !default_tax_rates.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["items"] = @api_client.build_collection_param(items, "csv") if !items.nil? && !items.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["off_session"] = off_session.to_s if !off_session.nil?
-      form_params["pause_collection"] = pause_collection.to_s if !pause_collection.nil?
-      form_params["payment_behavior"] = payment_behavior.to_s if !payment_behavior.nil?
-      form_params["payment_settings"] = payment_settings.to_s if !payment_settings.nil?
-      form_params["pending_invoice_item_interval"] = pending_invoice_item_interval.to_s if !pending_invoice_item_interval.nil?
-      form_params["promotion_code"] = promotion_code.to_s if !promotion_code.nil?
-      form_params["proration_behavior"] = proration_behavior.to_s if !proration_behavior.nil?
-      form_params["proration_date"] = proration_date.to_s if !proration_date.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
-      form_params["trial_end"] = trial_end.to_s if !trial_end.nil?
-      form_params["trial_from_plan"] = trial_from_plan.to_s if !trial_from_plan.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscriptions_subscription_exposed_id_request, content_type: header_params["Content-Type"]?) if !post_subscriptions_subscription_exposed_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

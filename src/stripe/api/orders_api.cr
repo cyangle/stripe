@@ -108,27 +108,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/orders"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["customer"] = customer.to_s if !customer.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -214,23 +214,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/orders/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -249,76 +249,24 @@ module Stripe
     end
 
     # <p>Creates a new <code>open</code> order object.</p>
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param line_items [Array(Stripe::CreateParams)?] A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param automatic_tax [Stripe::AutomaticTax?]
-    # @optional @param billing_details [Stripe::PostOrdersRequestBillingDetails?]
-    # @optional @param client_permissions [Stripe::ClientPermissions?]
-    # @optional @param customer [String?] The customer associated with this order.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param discounts [Stripe::PostOrdersRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param ip_address [String?] The IP address of the purchaser for this order.
-    # @optional @param payment [Stripe::CreateParams?]
-    # @optional @param shipping_cost [Stripe::PostOrdersRequestShippingCost?]
-    # @optional @param shipping_details [Stripe::PostOrdersRequestShippingDetails?]
-    # @optional @param tax_details [Stripe::TaxDetails?]
+    # @required @param post_orders_request [Stripe::PostOrdersRequest?]
     # @return [Stripe::Order]
     def post_orders(
       *,
-      currency : String? = nil,
-      line_items : Array(Stripe::CreateParams)? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      payment : Stripe::CreateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil
+      post_orders_request : Stripe::PostOrdersRequest? = nil
     ) : Stripe::Order
-      data, _status_code, _headers = post_orders_with_http_info(currency: currency, line_items: line_items, automatic_tax: automatic_tax, billing_details: billing_details, client_permissions: client_permissions, customer: customer, description: description, discounts: discounts, expand: expand, ip_address: ip_address, payment: payment, shipping_cost: shipping_cost, shipping_details: shipping_details, tax_details: tax_details)
+      data, _status_code, _headers = post_orders_with_http_info(post_orders_request: post_orders_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;open&lt;/code&gt; order object.&lt;/p&gt;
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param line_items [Array(Stripe::CreateParams)?] A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param automatic_tax [Stripe::AutomaticTax?]
-    # @optional @param billing_details [Stripe::PostOrdersRequestBillingDetails?]
-    # @optional @param client_permissions [Stripe::ClientPermissions?]
-    # @optional @param customer [String?] The customer associated with this order.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param discounts [Stripe::PostOrdersRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param ip_address [String?] The IP address of the purchaser for this order.
-    # @optional @param payment [Stripe::CreateParams?]
-    # @optional @param shipping_cost [Stripe::PostOrdersRequestShippingCost?]
-    # @optional @param shipping_details [Stripe::PostOrdersRequestShippingDetails?]
-    # @optional @param tax_details [Stripe::TaxDetails?]
+    # @required @param post_orders_request [Stripe::PostOrdersRequest?]
     # @return [Tuple(Stripe::Order, Integer, Hash)] Stripe::Order, response status code and response headers
     def post_orders_with_http_info(
       *,
-      currency : String? = nil,
-      line_items : Array(Stripe::CreateParams)? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      payment : Stripe::CreateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil
+      post_orders_request : Stripe::PostOrdersRequest? = nil
     ) : Tuple(Stripe::Order, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_orders(currency: currency, line_items: line_items, automatic_tax: automatic_tax, billing_details: billing_details, client_permissions: client_permissions, customer: customer, description: description, discounts: discounts, expand: expand, ip_address: ip_address, payment: payment, shipping_cost: shipping_cost, shipping_details: shipping_details, tax_details: tax_details)
+      request = build_api_request_for_post_orders(post_orders_request: post_orders_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -330,142 +278,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;open&lt;/code&gt; order object.&lt;/p&gt;
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param line_items [Array(Stripe::CreateParams)?] A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param automatic_tax [Stripe::AutomaticTax?]
-    # @optional @param billing_details [Stripe::PostOrdersRequestBillingDetails?]
-    # @optional @param client_permissions [Stripe::ClientPermissions?]
-    # @optional @param customer [String?] The customer associated with this order.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param discounts [Stripe::PostOrdersRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param ip_address [String?] The IP address of the purchaser for this order.
-    # @optional @param payment [Stripe::CreateParams?]
-    # @optional @param shipping_cost [Stripe::PostOrdersRequestShippingCost?]
-    # @optional @param shipping_details [Stripe::PostOrdersRequestShippingDetails?]
-    # @optional @param tax_details [Stripe::TaxDetails?]
+    # @required @param post_orders_request [Stripe::PostOrdersRequest?]
     # @return nil
     def post_orders(
       *,
-      currency : String? = nil,
-      line_items : Array(Stripe::CreateParams)? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      payment : Stripe::CreateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil,
+      post_orders_request : Stripe::PostOrdersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_orders(currency: currency, line_items: line_items, automatic_tax: automatic_tax, billing_details: billing_details, client_permissions: client_permissions, customer: customer, description: description, discounts: discounts, expand: expand, ip_address: ip_address, payment: payment, shipping_cost: shipping_cost, shipping_details: shipping_details, tax_details: tax_details).execute(&block)
+      build_api_request_for_post_orders(post_orders_request: post_orders_request).execute(&block)
     end
-
-    POST_ORDERS_MAX_LENGTH_FOR_CUSTOMER    = 5000
-    POST_ORDERS_MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_orders(
       *,
-      currency : String? = nil,
-      line_items : Array(Stripe::CreateParams)? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      payment : Stripe::CreateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil
+      post_orders_request : Stripe::PostOrdersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: OrdersApi.post_orders ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"line_items\" is required and cannot be null") if line_items.nil?
-        unless (_line_items = line_items).nil?
-          OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
-        end
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_billing_details = billing_details).nil?
-          _billing_details.validate if _billing_details.is_a?(OpenApi::Validatable)
-        end
-        unless (_client_permissions = client_permissions).nil?
-          _client_permissions.validate if _client_permissions.is_a?(OpenApi::Validatable)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_ORDERS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_ORDERS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_payment = payment).nil?
-          _payment.validate if _payment.is_a?(OpenApi::Validatable)
-        end
-        unless (_shipping_cost = shipping_cost).nil?
-          _shipping_cost.validate if _shipping_cost.is_a?(OpenApi::Validatable)
-        end
-        unless (_shipping_details = shipping_details).nil?
-          _shipping_details.validate if _shipping_details.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_details = tax_details).nil?
-          _tax_details.validate if _tax_details.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_orders_request\" is required and cannot be null") if post_orders_request.nil?
+        unless (_post_orders_request = post_orders_request).nil?
+          _post_orders_request.validate if _post_orders_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/orders"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["billing_details"] = billing_details.to_s if !billing_details.nil?
-      form_params["client_permissions"] = client_permissions.to_s if !client_permissions.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["ip_address"] = ip_address.to_s if !ip_address.nil?
-      form_params["line_items"] = @api_client.build_collection_param(line_items, "csv") if !line_items.nil? && !line_items.empty?
-      form_params["payment"] = payment.to_s if !payment.nil?
-      form_params["shipping_cost"] = shipping_cost.to_s if !shipping_cost.nil?
-      form_params["shipping_details"] = shipping_details.to_s if !shipping_details.nil?
-      form_params["tax_details"] = tax_details.to_s if !tax_details.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_orders_request, content_type: header_params["Content-Type"]?) if !post_orders_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -485,83 +344,27 @@ module Stripe
 
     # <p>Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param id [String?]
-    # @optional @param automatic_tax [Stripe::AutomaticTax?]
-    # @optional @param billing_details [Stripe::PostOrdersRequestBillingDetails?]
-    # @optional @param client_permissions [Stripe::ClientPermissions?]
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] The customer associated with this order.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param discounts [Stripe::PostOrdersIdRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param ip_address [String?] The IP address of the purchaser for this order.
-    # @optional @param line_items [Array(Stripe::PostOrdersIdRequestLineItemsInner)?] A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param payment [Stripe::UpdateParams?]
-    # @optional @param shipping_cost [Stripe::PostOrdersRequestShippingCost?]
-    # @optional @param shipping_details [Stripe::PostOrdersRequestShippingDetails?]
-    # @optional @param tax_details [Stripe::TaxDetails?]
+    # @optional @param post_orders_id_request [Stripe::PostOrdersIdRequest?]
     # @return [Stripe::Order]
     def post_orders_id(
       *,
       id : String? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersIdRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment : Stripe::UpdateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil
+      post_orders_id_request : Stripe::PostOrdersIdRequest? = nil
     ) : Stripe::Order
-      data, _status_code, _headers = post_orders_id_with_http_info(id: id, automatic_tax: automatic_tax, billing_details: billing_details, client_permissions: client_permissions, currency: currency, customer: customer, description: description, discounts: discounts, expand: expand, ip_address: ip_address, line_items: line_items, metadata: metadata, payment: payment, shipping_cost: shipping_cost, shipping_details: shipping_details, tax_details: tax_details)
+      data, _status_code, _headers = post_orders_id_with_http_info(id: id, post_orders_id_request: post_orders_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param automatic_tax [Stripe::AutomaticTax?]
-    # @optional @param billing_details [Stripe::PostOrdersRequestBillingDetails?]
-    # @optional @param client_permissions [Stripe::ClientPermissions?]
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] The customer associated with this order.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param discounts [Stripe::PostOrdersIdRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param ip_address [String?] The IP address of the purchaser for this order.
-    # @optional @param line_items [Array(Stripe::PostOrdersIdRequestLineItemsInner)?] A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param payment [Stripe::UpdateParams?]
-    # @optional @param shipping_cost [Stripe::PostOrdersRequestShippingCost?]
-    # @optional @param shipping_details [Stripe::PostOrdersRequestShippingDetails?]
-    # @optional @param tax_details [Stripe::TaxDetails?]
+    # @optional @param post_orders_id_request [Stripe::PostOrdersIdRequest?]
     # @return [Tuple(Stripe::Order, Integer, Hash)] Stripe::Order, response status code and response headers
     def post_orders_id_with_http_info(
       *,
       id : String? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersIdRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment : Stripe::UpdateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil
+      post_orders_id_request : Stripe::PostOrdersIdRequest? = nil
     ) : Tuple(Stripe::Order, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_orders_id(id: id, automatic_tax: automatic_tax, billing_details: billing_details, client_permissions: client_permissions, currency: currency, customer: customer, description: description, discounts: discounts, expand: expand, ip_address: ip_address, line_items: line_items, metadata: metadata, payment: payment, shipping_cost: shipping_cost, shipping_details: shipping_details, tax_details: tax_details)
+      request = build_api_request_for_post_orders_id(id: id, post_orders_id_request: post_orders_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -574,68 +377,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param automatic_tax [Stripe::AutomaticTax?]
-    # @optional @param billing_details [Stripe::PostOrdersRequestBillingDetails?]
-    # @optional @param client_permissions [Stripe::ClientPermissions?]
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] The customer associated with this order.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param discounts [Stripe::PostOrdersIdRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param ip_address [String?] The IP address of the purchaser for this order.
-    # @optional @param line_items [Array(Stripe::PostOrdersIdRequestLineItemsInner)?] A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param payment [Stripe::UpdateParams?]
-    # @optional @param shipping_cost [Stripe::PostOrdersRequestShippingCost?]
-    # @optional @param shipping_details [Stripe::PostOrdersRequestShippingDetails?]
-    # @optional @param tax_details [Stripe::TaxDetails?]
+    # @optional @param post_orders_id_request [Stripe::PostOrdersIdRequest?]
     # @return nil
     def post_orders_id(
       *,
       id : String? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersIdRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment : Stripe::UpdateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil,
+      post_orders_id_request : Stripe::PostOrdersIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_orders_id(id: id, automatic_tax: automatic_tax, billing_details: billing_details, client_permissions: client_permissions, currency: currency, customer: customer, description: description, discounts: discounts, expand: expand, ip_address: ip_address, line_items: line_items, metadata: metadata, payment: payment, shipping_cost: shipping_cost, shipping_details: shipping_details, tax_details: tax_details).execute(&block)
+      build_api_request_for_post_orders_id(id: id, post_orders_id_request: post_orders_id_request).execute(&block)
     end
 
-    POST_ORDERS_ID_MAX_LENGTH_FOR_ID          = 5000
-    POST_ORDERS_ID_MAX_LENGTH_FOR_CUSTOMER    = 5000
-    POST_ORDERS_ID_MAX_LENGTH_FOR_DESCRIPTION = 5000
+    POST_ORDERS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_orders_id(
       *,
       id : String? = nil,
-      automatic_tax : Stripe::AutomaticTax? = nil,
-      billing_details : Stripe::PostOrdersRequestBillingDetails? = nil,
-      client_permissions : Stripe::ClientPermissions? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostOrdersIdRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      ip_address : String? = nil,
-      line_items : Array(Stripe::PostOrdersIdRequestLineItemsInner)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment : Stripe::UpdateParams? = nil,
-      shipping_cost : Stripe::PostOrdersRequestShippingCost? = nil,
-      shipping_details : Stripe::PostOrdersRequestShippingDetails? = nil,
-      tax_details : Stripe::TaxDetails? = nil
+      post_orders_id_request : Stripe::PostOrdersIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: OrdersApi.post_orders_id ..." }
@@ -646,82 +405,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_ORDERS_ID_MAX_LENGTH_FOR_ID)
         end
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_billing_details = billing_details).nil?
-          _billing_details.validate if _billing_details.is_a?(OpenApi::Validatable)
-        end
-        unless (_client_permissions = client_permissions).nil?
-          _client_permissions.validate if _client_permissions.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_ORDERS_ID_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_ORDERS_ID_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_line_items = line_items).nil?
-          OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment = payment).nil?
-          _payment.validate if _payment.is_a?(OpenApi::Validatable)
-        end
-        unless (_shipping_cost = shipping_cost).nil?
-          _shipping_cost.validate if _shipping_cost.is_a?(OpenApi::Validatable)
-        end
-        unless (_shipping_details = shipping_details).nil?
-          _shipping_details.validate if _shipping_details.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_details = tax_details).nil?
-          _tax_details.validate if _tax_details.is_a?(OpenApi::Validatable)
+        unless (_post_orders_id_request = post_orders_id_request).nil?
+          _post_orders_id_request.validate if _post_orders_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/orders/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["billing_details"] = billing_details.to_s if !billing_details.nil?
-      form_params["client_permissions"] = client_permissions.to_s if !client_permissions.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["ip_address"] = ip_address.to_s if !ip_address.nil?
-      form_params["line_items"] = @api_client.build_collection_param(line_items, "csv") if !line_items.nil? && !line_items.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["payment"] = payment.to_s if !payment.nil?
-      form_params["shipping_cost"] = shipping_cost.to_s if !shipping_cost.nil?
-      form_params["shipping_details"] = shipping_details.to_s if !shipping_details.nil?
-      form_params["tax_details"] = tax_details.to_s if !tax_details.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_orders_id_request, content_type: header_params["Content-Type"]?) if !post_orders_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

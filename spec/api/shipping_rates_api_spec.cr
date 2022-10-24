@@ -51,14 +51,8 @@ describe "ShippingRatesApi" do
 
   # unit tests for post_shipping_rates
   # &lt;p&gt;Creates a new shipping rate object.&lt;/p&gt;
-  # @param display_name The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
+  # @param post_shipping_rates_request
   # @param [Hash] opts the optional parameters
-  # @option opts [DeliveryEstimate] :delivery_estimate
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FixedAmount] :fixed_amount
-  # @option opts [String] :tax_behavior Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;.
-  # @option opts [String] :tax_code A [tax code](https://stripe.com/docs/tax/tax-categories) ID. The Shipping tax code is &#x60;txcd_92010001&#x60;.
-  # @option opts [String] :_type The type of calculation to use on the shipping rate. Can only be &#x60;fixed_amount&#x60; for now.
   # @return [ShippingRate]
   describe "post_shipping_rates test" do
     it "should work" do
@@ -70,11 +64,7 @@ describe "ShippingRatesApi" do
   # &lt;p&gt;Updates an existing shipping rate object.&lt;/p&gt;
   # @param shipping_rate_token
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the shipping rate can be used for new purchases. Defaults to &#x60;true&#x60;.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FixedAmountUpdate] :fixed_amount
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :tax_behavior Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;.
+  # @option opts [PostShippingRatesShippingRateTokenRequest] :post_shipping_rates_shipping_rate_token_request
   # @return [ShippingRate]
   describe "post_shipping_rates_shipping_rate_token test" do
     it "should work" do

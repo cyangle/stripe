@@ -177,8 +177,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Authorization&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param authorization
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [IssuingAuthorization]
   describe "post_issuing_authorizations_authorization test" do
     it "should work" do
@@ -190,9 +189,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Approves a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real-time authorization&lt;/a&gt; flow.&lt;/p&gt;
   # @param authorization
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount If the authorization&#39;s &#x60;pending_request.is_amount_controllable&#x60; property is &#x60;true&#x60;, you may provide this value to control how much to hold for the authorization. Must be positive (use [&#x60;decline&#x60;](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostIssuingAuthorizationsAuthorizationApproveRequest] :post_issuing_authorizations_authorization_approve_request
   # @return [IssuingAuthorization]
   describe "post_issuing_authorizations_authorization_approve test" do
     it "should work" do
@@ -204,8 +201,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Declines a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real time authorization&lt;/a&gt; flow.&lt;/p&gt;
   # @param authorization
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [IssuingAuthorization]
   describe "post_issuing_authorizations_authorization_decline test" do
     it "should work" do
@@ -215,17 +211,8 @@ describe "IssuingApi" do
 
   # unit tests for post_issuing_cardholders
   # &lt;p&gt;Creates a new Issuing &lt;code&gt;Cardholder&lt;/code&gt; object that can be issued cards.&lt;/p&gt;
-  # @param billing
-  # @param name The cardholder&#39;s name. This will be printed on cards issued to them. The maximum length of this field is 24 characters. This field cannot contain any special characters or numbers.
-  # @param _type One of &#x60;individual&#x60; or &#x60;company&#x60;.
+  # @param post_issuing_cardholders_request
   # @param [Hash] opts the optional parameters
-  # @option opts [CompanyParam] :company
-  # @option opts [String] :email The cardholder&#39;s email address.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [IndividualParam] :individual
-  # @option opts [String] :phone_number The cardholder&#39;s phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
-  # @option opts [AuthorizationControlsParamV2] :spending_controls
-  # @option opts [String] :status Specifies whether to permit authorizations on this cardholder&#39;s cards. Defaults to &#x60;active&#x60;.
   # @return [IssuingCardholder]
   describe "post_issuing_cardholders test" do
     it "should work" do
@@ -237,14 +224,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Cardholder&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param cardholder
   # @param [Hash] opts the optional parameters
-  # @option opts [BillingSpecs] :billing
-  # @option opts [CompanyParam] :company
-  # @option opts [String] :email The cardholder&#39;s email address.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [IndividualParam] :individual
-  # @option opts [String] :phone_number The cardholder&#39;s phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure) for more details.
-  # @option opts [AuthorizationControlsParamV2] :spending_controls
-  # @option opts [String] :status Specifies whether to permit authorizations on this cardholder&#39;s cards.
+  # @option opts [PostIssuingCardholdersCardholderRequest] :post_issuing_cardholders_cardholder_request
   # @return [IssuingCardholder]
   describe "post_issuing_cardholders_cardholder test" do
     it "should work" do
@@ -254,17 +234,8 @@ describe "IssuingApi" do
 
   # unit tests for post_issuing_cards
   # &lt;p&gt;Creates an Issuing &lt;code&gt;Card&lt;/code&gt; object.&lt;/p&gt;
-  # @param currency The currency for the card.
-  # @param _type The type of card to issue. Possible values are &#x60;physical&#x60; or &#x60;virtual&#x60;.
+  # @param post_issuing_cards_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :cardholder The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :financial_account
-  # @option opts [String] :replacement_for The card this is meant to be a replacement for (if any).
-  # @option opts [String] :replacement_reason If &#x60;replacement_for&#x60; is specified, this should indicate why that card is being replaced.
-  # @option opts [ShippingSpecs] :shipping
-  # @option opts [AuthorizationControlsParam] :spending_controls
-  # @option opts [String] :status Whether authorizations can be approved on this card. Defaults to &#x60;inactive&#x60;.
   # @return [IssuingCard]
   describe "post_issuing_cards test" do
     it "should work" do
@@ -276,12 +247,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Card&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param card
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :cancellation_reason Reason why the &#x60;status&#x60; of this card is &#x60;canceled&#x60;.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [EncryptedPinParam] :pin
-  # @option opts [AuthorizationControlsParam] :spending_controls
-  # @option opts [String] :status Dictates whether authorizations can be approved on this card. If this card is being canceled because it was lost or stolen, this information should be provided as &#x60;cancellation_reason&#x60;.
+  # @option opts [PostIssuingCardsCardRequest] :post_issuing_cards_card_request
   # @return [IssuingCard]
   describe "post_issuing_cards_card test" do
     it "should work" do
@@ -292,11 +258,7 @@ describe "IssuingApi" do
   # unit tests for post_issuing_disputes
   # &lt;p&gt;Creates an Issuing &lt;code&gt;Dispute&lt;/code&gt; object. Individual pieces of evidence within the &lt;code&gt;evidence&lt;/code&gt; object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt; for more details about evidence requirements.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount The dispute amount in the card&#39;s currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). If not set, defaults to the full transaction amount.
-  # @option opts [EvidenceParam] :evidence
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :transaction The ID of the issuing transaction to create a dispute for. For transaction on Treasury FinancialAccounts, use &#x60;treasury.received_debit&#x60;.
-  # @option opts [TreasuryParam] :treasury
+  # @option opts [PostIssuingDisputesRequest] :post_issuing_disputes_request
   # @return [IssuingDispute]
   describe "post_issuing_disputes test" do
     it "should work" do
@@ -308,10 +270,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Dispute&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Properties on the &lt;code&gt;evidence&lt;/code&gt; object can be unset by passing in an empty string.&lt;/p&gt;
   # @param dispute
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount The dispute amount in the card&#39;s currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
-  # @option opts [EvidenceParam] :evidence
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostIssuingDisputesDisputeRequest] :post_issuing_disputes_dispute_request
   # @return [IssuingDispute]
   describe "post_issuing_disputes_dispute test" do
     it "should work" do
@@ -323,8 +282,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Submits an Issuing &lt;code&gt;Dispute&lt;/code&gt; to the card network. Stripe validates that all evidence fields required for the dispute’s reason are present. For more details, see &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt;.&lt;/p&gt;
   # @param dispute
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [IssuingDispute]
   describe "post_issuing_disputes_dispute_submit test" do
     it "should work" do
@@ -336,8 +294,7 @@ describe "IssuingApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Transaction&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param transaction
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [IssuingTransaction]
   describe "post_issuing_transactions_transaction test" do
     it "should work" do

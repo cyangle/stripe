@@ -127,8 +127,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/financial_connections/accounts"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -136,19 +144,11 @@ module Stripe
       query_params["session"] = session.to_s if !session.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -234,23 +234,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/financial_connections/accounts/{account}".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -336,23 +336,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/financial_connections/sessions/{session}".sub("{" + "session" + "}", URI.encode_path(session.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -372,27 +372,27 @@ module Stripe
 
     # <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
     # @required @param account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::FinancialConnectionsAccount]
     def post_financial_connections_accounts_account_disconnect(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::FinancialConnectionsAccount
-      data, _status_code, _headers = post_financial_connections_accounts_account_disconnect_with_http_info(account: account, expand: expand)
+      data, _status_code, _headers = post_financial_connections_accounts_account_disconnect_with_http_info(account: account, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Disables your access to a Financial Connections &lt;code&gt;Account&lt;/code&gt;. You will no longer be able to access data associated with the account (e.g. balances, transactions).&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
     def post_financial_connections_accounts_account_disconnect_with_http_info(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_financial_connections_accounts_account_disconnect(account: account, expand: expand)
+      request = build_api_request_for_post_financial_connections_accounts_account_disconnect(account: account, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -405,15 +405,15 @@ module Stripe
 
     # &lt;p&gt;Disables your access to a Financial Connections &lt;code&gt;Account&lt;/code&gt;. You will no longer be able to access data associated with the account (e.g. balances, transactions).&lt;/p&gt;
     # @required @param account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_financial_connections_accounts_account_disconnect(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_financial_connections_accounts_account_disconnect(account: account, expand: expand).execute(&block)
+      build_api_request_for_post_financial_connections_accounts_account_disconnect(account: account, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_DISCONNECT_MAX_LENGTH_FOR_ACCOUNT = 5000
@@ -422,7 +422,7 @@ module Stripe
     def build_api_request_for_post_financial_connections_accounts_account_disconnect(
       *,
       account : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_accounts_account_disconnect ..." }
@@ -433,30 +433,32 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_DISCONNECT_MAX_LENGTH_FOR_ACCOUNT)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/financial_connections/accounts/{account}/disconnect".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -476,31 +478,27 @@ module Stripe
 
     # <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
     # @required @param account [String?]
-    # @required @param features [Array(String)?] The list of account features that you would like to refresh.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_financial_connections_accounts_account_refresh_request [Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest?]
     # @return [Stripe::FinancialConnectionsAccount]
     def post_financial_connections_accounts_account_refresh(
       *,
       account : String? = nil,
-      features : Array(String)? = nil,
-      expand : Array(String)? = nil
+      post_financial_connections_accounts_account_refresh_request : Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest? = nil
     ) : Stripe::FinancialConnectionsAccount
-      data, _status_code, _headers = post_financial_connections_accounts_account_refresh_with_http_info(account: account, features: features, expand: expand)
+      data, _status_code, _headers = post_financial_connections_accounts_account_refresh_with_http_info(account: account, post_financial_connections_accounts_account_refresh_request: post_financial_connections_accounts_account_refresh_request)
       data
     end
 
     # &lt;p&gt;Refreshes the data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
     # @required @param account [String?]
-    # @required @param features [Array(String)?] The list of account features that you would like to refresh.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_financial_connections_accounts_account_refresh_request [Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest?]
     # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
     def post_financial_connections_accounts_account_refresh_with_http_info(
       *,
       account : String? = nil,
-      features : Array(String)? = nil,
-      expand : Array(String)? = nil
+      post_financial_connections_accounts_account_refresh_request : Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest? = nil
     ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_financial_connections_accounts_account_refresh(account: account, features: features, expand: expand)
+      request = build_api_request_for_post_financial_connections_accounts_account_refresh(account: account, post_financial_connections_accounts_account_refresh_request: post_financial_connections_accounts_account_refresh_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -513,28 +511,24 @@ module Stripe
 
     # &lt;p&gt;Refreshes the data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
     # @required @param account [String?]
-    # @required @param features [Array(String)?] The list of account features that you would like to refresh.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_financial_connections_accounts_account_refresh_request [Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest?]
     # @return nil
     def post_financial_connections_accounts_account_refresh(
       *,
       account : String? = nil,
-      features : Array(String)? = nil,
-      expand : Array(String)? = nil,
+      post_financial_connections_accounts_account_refresh_request : Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_financial_connections_accounts_account_refresh(account: account, features: features, expand: expand).execute(&block)
+      build_api_request_for_post_financial_connections_accounts_account_refresh(account: account, post_financial_connections_accounts_account_refresh_request: post_financial_connections_accounts_account_refresh_request).execute(&block)
     end
 
-    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_MAX_LENGTH_FOR_ACCOUNT    = 5000
-    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES = String.static_array("balance", "ownership")
+    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_financial_connections_accounts_account_refresh(
       *,
       account : String? = nil,
-      features : Array(String)? = nil,
-      expand : Array(String)? = nil
+      post_financial_connections_accounts_account_refresh_request : Stripe::PostFinancialConnectionsAccountsAccountRefreshRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_accounts_account_refresh ..." }
@@ -545,35 +539,33 @@ module Stripe
         unless (_account = account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_MAX_LENGTH_FOR_ACCOUNT)
         end
-        raise ArgumentError.new("\"features\" is required and cannot be null") if features.nil?
-        unless (_features = features).nil?
-          OpenApi::EnumValidator.validate("features", _features, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_REFRESH_VALID_VALUES_FOR_FEATURES)
+        raise ArgumentError.new("\"post_financial_connections_accounts_account_refresh_request\" is required and cannot be null") if post_financial_connections_accounts_account_refresh_request.nil?
+        unless (_post_financial_connections_accounts_account_refresh_request = post_financial_connections_accounts_account_refresh_request).nil?
+          _post_financial_connections_accounts_account_refresh_request.validate if _post_financial_connections_accounts_account_refresh_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/financial_connections/accounts/{account}/refresh".sub("{" + "account" + "}", URI.encode_path(account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["features"] = @api_client.build_collection_param(features, "csv") if !features.nil? && !features.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_financial_connections_accounts_account_refresh_request, content_type: header_params["Content-Type"]?) if !post_financial_connections_accounts_account_refresh_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -592,40 +584,24 @@ module Stripe
     end
 
     # <p>To launch the Financial Connections authorization flow, create a <code>Session</code>. The session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.</p>
-    # @required @param account_holder [Stripe::AccountholderParams?]
-    # @required @param permissions [Array(String)?] List of data features that you would like to request access to.  Possible values are `balances`, `transactions`, `ownership`, and `payment_method`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param filters [Stripe::FiltersParams?]
-    # @optional @param return_url [String?] For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
+    # @required @param post_financial_connections_sessions_request [Stripe::PostFinancialConnectionsSessionsRequest?]
     # @return [Stripe::FinancialConnectionsSession]
     def post_financial_connections_sessions(
       *,
-      account_holder : Stripe::AccountholderParams? = nil,
-      permissions : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      filters : Stripe::FiltersParams? = nil,
-      return_url : String? = nil
+      post_financial_connections_sessions_request : Stripe::PostFinancialConnectionsSessionsRequest? = nil
     ) : Stripe::FinancialConnectionsSession
-      data, _status_code, _headers = post_financial_connections_sessions_with_http_info(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url)
+      data, _status_code, _headers = post_financial_connections_sessions_with_http_info(post_financial_connections_sessions_request: post_financial_connections_sessions_request)
       data
     end
 
     # &lt;p&gt;To launch the Financial Connections authorization flow, create a &lt;code&gt;Session&lt;/code&gt;. The session’s &lt;code&gt;client_secret&lt;/code&gt; can be used to launch the flow using Stripe.js.&lt;/p&gt;
-    # @required @param account_holder [Stripe::AccountholderParams?]
-    # @required @param permissions [Array(String)?] List of data features that you would like to request access to.  Possible values are `balances`, `transactions`, `ownership`, and `payment_method`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param filters [Stripe::FiltersParams?]
-    # @optional @param return_url [String?] For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
+    # @required @param post_financial_connections_sessions_request [Stripe::PostFinancialConnectionsSessionsRequest?]
     # @return [Tuple(Stripe::FinancialConnectionsSession, Integer, Hash)] Stripe::FinancialConnectionsSession, response status code and response headers
     def post_financial_connections_sessions_with_http_info(
       *,
-      account_holder : Stripe::AccountholderParams? = nil,
-      permissions : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      filters : Stripe::FiltersParams? = nil,
-      return_url : String? = nil
+      post_financial_connections_sessions_request : Stripe::PostFinancialConnectionsSessionsRequest? = nil
     ) : Tuple(Stripe::FinancialConnectionsSession, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_financial_connections_sessions(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url)
+      request = build_api_request_for_post_financial_connections_sessions(post_financial_connections_sessions_request: post_financial_connections_sessions_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -637,84 +613,53 @@ module Stripe
     end
 
     # &lt;p&gt;To launch the Financial Connections authorization flow, create a &lt;code&gt;Session&lt;/code&gt;. The session’s &lt;code&gt;client_secret&lt;/code&gt; can be used to launch the flow using Stripe.js.&lt;/p&gt;
-    # @required @param account_holder [Stripe::AccountholderParams?]
-    # @required @param permissions [Array(String)?] List of data features that you would like to request access to.  Possible values are `balances`, `transactions`, `ownership`, and `payment_method`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param filters [Stripe::FiltersParams?]
-    # @optional @param return_url [String?] For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
+    # @required @param post_financial_connections_sessions_request [Stripe::PostFinancialConnectionsSessionsRequest?]
     # @return nil
     def post_financial_connections_sessions(
       *,
-      account_holder : Stripe::AccountholderParams? = nil,
-      permissions : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      filters : Stripe::FiltersParams? = nil,
-      return_url : String? = nil,
+      post_financial_connections_sessions_request : Stripe::PostFinancialConnectionsSessionsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_financial_connections_sessions(account_holder: account_holder, permissions: permissions, expand: expand, filters: filters, return_url: return_url).execute(&block)
+      build_api_request_for_post_financial_connections_sessions(post_financial_connections_sessions_request: post_financial_connections_sessions_request).execute(&block)
     end
-
-    POST_FINANCIAL_CONNECTIONS_SESSIONS_VALID_VALUES_FOR_PERMISSIONS = String.static_array("balances", "ownership", "payment_method", "transactions")
-    POST_FINANCIAL_CONNECTIONS_SESSIONS_MAX_LENGTH_FOR_RETURN_URL    = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_financial_connections_sessions(
       *,
-      account_holder : Stripe::AccountholderParams? = nil,
-      permissions : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      filters : Stripe::FiltersParams? = nil,
-      return_url : String? = nil
+      post_financial_connections_sessions_request : Stripe::PostFinancialConnectionsSessionsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_sessions ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"account_holder\" is required and cannot be null") if account_holder.nil?
-        unless (_account_holder = account_holder).nil?
-          _account_holder.validate if _account_holder.is_a?(OpenApi::Validatable)
-        end
-        raise ArgumentError.new("\"permissions\" is required and cannot be null") if permissions.nil?
-        unless (_permissions = permissions).nil?
-          OpenApi::EnumValidator.validate("permissions", _permissions, POST_FINANCIAL_CONNECTIONS_SESSIONS_VALID_VALUES_FOR_PERMISSIONS)
-        end
-
-        unless (_filters = filters).nil?
-          _filters.validate if _filters.is_a?(OpenApi::Validatable)
-        end
-        unless (_return_url = return_url).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("return_url", return_url.to_s.size, POST_FINANCIAL_CONNECTIONS_SESSIONS_MAX_LENGTH_FOR_RETURN_URL)
+        raise ArgumentError.new("\"post_financial_connections_sessions_request\" is required and cannot be null") if post_financial_connections_sessions_request.nil?
+        unless (_post_financial_connections_sessions_request = post_financial_connections_sessions_request).nil?
+          _post_financial_connections_sessions_request.validate if _post_financial_connections_sessions_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/financial_connections/sessions"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_holder"] = account_holder.to_s if !account_holder.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["filters"] = filters.to_s if !filters.nil?
-      form_params["permissions"] = @api_client.build_collection_param(permissions, "csv") if !permissions.nil? && !permissions.empty?
-      form_params["return_url"] = return_url.to_s if !return_url.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_financial_connections_sessions_request, content_type: header_params["Content-Type"]?) if !post_financial_connections_sessions_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

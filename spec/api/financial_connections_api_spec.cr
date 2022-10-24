@@ -64,7 +64,7 @@ describe "FinancialConnectionsApi" do
   # &lt;p&gt;Disables your access to a Financial Connections &lt;code&gt;Account&lt;/code&gt;. You will no longer be able to access data associated with the account (e.g. balances, transactions).&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [FinancialConnectionsAccount]
   describe "post_financial_connections_accounts_account_disconnect test" do
     it "should work" do
@@ -75,9 +75,8 @@ describe "FinancialConnectionsApi" do
   # unit tests for post_financial_connections_accounts_account_refresh
   # &lt;p&gt;Refreshes the data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
   # @param account
-  # @param features The list of account features that you would like to refresh.
+  # @param post_financial_connections_accounts_account_refresh_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [FinancialConnectionsAccount]
   describe "post_financial_connections_accounts_account_refresh test" do
     it "should work" do
@@ -87,12 +86,8 @@ describe "FinancialConnectionsApi" do
 
   # unit tests for post_financial_connections_sessions
   # &lt;p&gt;To launch the Financial Connections authorization flow, create a &lt;code&gt;Session&lt;/code&gt;. The session’s &lt;code&gt;client_secret&lt;/code&gt; can be used to launch the flow using Stripe.js.&lt;/p&gt;
-  # @param account_holder
-  # @param permissions List of data features that you would like to request access to.  Possible values are &#x60;balances&#x60;, &#x60;transactions&#x60;, &#x60;ownership&#x60;, and &#x60;payment_method&#x60;.
+  # @param post_financial_connections_sessions_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FiltersParams] :filters
-  # @option opts [String] :return_url For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
   # @return [FinancialConnectionsSession]
   describe "post_financial_connections_sessions test" do
     it "should work" do

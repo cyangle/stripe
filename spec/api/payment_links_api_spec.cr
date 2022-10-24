@@ -64,29 +64,8 @@ describe "PaymentLinksApi" do
 
   # unit tests for post_payment_links
   # &lt;p&gt;Creates a payment link.&lt;/p&gt;
-  # @param line_items The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
+  # @param post_payment_links_request
   # @param [Hash] opts the optional parameters
-  # @option opts [AfterCompletionParams] :after_completion
-  # @option opts [Bool] :allow_promotion_codes Enables user redeemable promotion codes.
-  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. Can only be applied when there are no line items with recurring prices.
-  # @option opts [Float64] :application_fee_percent A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner&#39;s Stripe account. There must be at least 1 line item with a recurring price to use this field.
-  # @option opts [AutomaticTaxParams] :automatic_tax
-  # @option opts [String] :billing_address_collection Configuration for collecting the customer&#39;s billing address.
-  # @option opts [ConsentCollectionParams] :consent_collection
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies) and supported by each line item&#39;s price.
-  # @option opts [String] :customer_creation Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :on_behalf_of The account on behalf of which to charge.
-  # @option opts [PaymentIntentDataParams] :payment_intent_data
-  # @option opts [String] :payment_method_collection Specify whether Checkout should collect a payment method. When set to &#x60;if_required&#x60;, Checkout will not collect a payment method when the total due for the session is 0.This may occur if the Checkout Session includes a free trial or a discount.  Can only be set in &#x60;subscription&#x60; mode.  If you&#39;d like information on how to collect a payment method outside of Checkout, read the guide on [configuring subscriptions with a free trial](https://stripe.com/docs/payments/checkout/free-trials).
-  # @option opts [Array(String)] :payment_method_types The list of payment method types that customers can use. If no value is passed, Stripe will dynamically show relevant payment methods from your [payment method settings](https://dashboard.stripe.com/settings/payment_methods) (20+ payment methods [supported](https://stripe.com/docs/payments/payment-methods/integration-options#payment-method-product-support)).
-  # @option opts [PhoneNumberCollectionParams] :phone_number_collection
-  # @option opts [ShippingAddressCollectionParams] :shipping_address_collection
-  # @option opts [Array(ShippingOptionParams)] :shipping_options The shipping rate options to apply to [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link.
-  # @option opts [String] :submit_type Describes the type of transaction being performed in order to customize relevant text on the page, such as the submit button. Changing this value will also affect the hostname in the [url](https://stripe.com/docs/api/payment_links/payment_links/object#url) property (example: &#x60;donate.stripe.com&#x60;).
-  # @option opts [SubscriptionDataParams] :subscription_data
-  # @option opts [TaxIdCollectionParams] :tax_id_collection
-  # @option opts [TransferDataParams] :transfer_data
   # @return [PaymentLink]
   describe "post_payment_links test" do
     it "should work" do
@@ -98,17 +77,7 @@ describe "PaymentLinksApi" do
   # &lt;p&gt;Updates a payment link.&lt;/p&gt;
   # @param payment_link
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the payment link&#39;s &#x60;url&#x60; is active. If &#x60;false&#x60;, customers visiting the URL will be shown a page saying that the link has been deactivated.
-  # @option opts [AfterCompletionParams] :after_completion
-  # @option opts [Bool] :allow_promotion_codes Enables user redeemable promotion codes.
-  # @option opts [AutomaticTaxParams] :automatic_tax
-  # @option opts [String] :billing_address_collection Configuration for collecting the customer&#39;s billing address.
-  # @option opts [String] :customer_creation Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Array(LineItemsUpdateParams)] :line_items The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
-  # @option opts [String] :payment_method_collection Specify whether Checkout should collect a payment method. When set to &#x60;if_required&#x60;, Checkout will not collect a payment method when the total due for the session is 0.This may occur if the Checkout Session includes a free trial or a discount.  Can only be set in &#x60;subscription&#x60; mode.  If you&#39;d like information on how to collect a payment method outside of Checkout, read the guide on [configuring subscriptions with a free trial](https://stripe.com/docs/payments/checkout/free-trials).
-  # @option opts [PostPaymentLinksPaymentLinkRequestPaymentMethodTypes] :payment_method_types
-  # @option opts [PostPaymentLinksPaymentLinkRequestShippingAddressCollection] :shipping_address_collection
+  # @option opts [PostPaymentLinksPaymentLinkRequest] :post_payment_links_payment_link_request
   # @return [PaymentLink]
   describe "post_payment_links_payment_link test" do
     it "should work" do

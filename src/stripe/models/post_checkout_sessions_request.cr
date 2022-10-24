@@ -102,11 +102,10 @@ module Stripe
     ERROR_MESSAGE_FOR_LOCALE = "invalid value for \"locale\", must be one of [auto, bg, cs, da, de, el, en, en-GB, es, es-419, et, fi, fil, fr, fr-CA, hr, hu, id, it, ja, ko, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sv, th, tr, vi, zh, zh-HK, zh-TW]."
     VALID_VALUES_FOR_LOCALE  = String.static_array("auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW")
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    # The mode of the Checkout Session. Required when using prices or `setup` mode. Pass `subscription` if the Checkout Session includes at least one recurring item.
+    # The mode of the Checkout Session. Pass `subscription` if the Checkout Session includes at least one recurring item.
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
     ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [payment, setup, subscription]."

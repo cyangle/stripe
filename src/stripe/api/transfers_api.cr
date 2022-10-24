@@ -139,8 +139,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/transfers"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -149,19 +157,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -276,26 +276,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/transfers/{id}/reversals".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -381,23 +381,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/transfers/{transfer}".sub("{" + "transfer" + "}", URI.encode_path(transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -495,23 +495,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/transfers/{transfer}/reversals/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s)).sub("{" + "transfer" + "}", URI.encode_path(transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -530,52 +530,24 @@ module Stripe
     end
 
     # <p>To send funds from your Stripe account to a connected account, you create a new transfer object. Your <a href=\"#balance\">Stripe balance</a> must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.</p>
-    # @required @param currency [String?] 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
-    # @required @param destination [String?] The ID of a connected Stripe account. <a href=\\\"/docs/connect/charges-transfers\\\">See the Connect documentation</a> for details.
-    # @optional @param amount [Int32?] A positive integer in cents (or local equivalent) representing how much to transfer.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param source_transaction [String?] You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for details.
-    # @optional @param source_type [String?] The source balance to use for this transfer. One of `bank_account`, `card`, or `fpx`. For most users, this will default to `card`.
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @required @param post_transfers_request [Stripe::PostTransfersRequest?]
     # @return [Stripe::Transfer]
     def post_transfers(
       *,
-      currency : String? = nil,
-      destination : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      source_transaction : String? = nil,
-      source_type : String? = nil,
-      transfer_group : String? = nil
+      post_transfers_request : Stripe::PostTransfersRequest? = nil
     ) : Stripe::Transfer
-      data, _status_code, _headers = post_transfers_with_http_info(currency: currency, destination: destination, amount: amount, description: description, expand: expand, source_transaction: source_transaction, source_type: source_type, transfer_group: transfer_group)
+      data, _status_code, _headers = post_transfers_with_http_info(post_transfers_request: post_transfers_request)
       data
     end
 
     # &lt;p&gt;To send funds from your Stripe account to a connected account, you create a new transfer object. Your &lt;a href&#x3D;\&quot;#balance\&quot;&gt;Stripe balance&lt;/a&gt; must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.&lt;/p&gt;
-    # @required @param currency [String?] 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
-    # @required @param destination [String?] The ID of a connected Stripe account. <a href=\\\"/docs/connect/charges-transfers\\\">See the Connect documentation</a> for details.
-    # @optional @param amount [Int32?] A positive integer in cents (or local equivalent) representing how much to transfer.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param source_transaction [String?] You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for details.
-    # @optional @param source_type [String?] The source balance to use for this transfer. One of `bank_account`, `card`, or `fpx`. For most users, this will default to `card`.
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @required @param post_transfers_request [Stripe::PostTransfersRequest?]
     # @return [Tuple(Stripe::Transfer, Integer, Hash)] Stripe::Transfer, response status code and response headers
     def post_transfers_with_http_info(
       *,
-      currency : String? = nil,
-      destination : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      source_transaction : String? = nil,
-      source_type : String? = nil,
-      transfer_group : String? = nil
+      post_transfers_request : Stripe::PostTransfersRequest? = nil
     ) : Tuple(Stripe::Transfer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_transfers(currency: currency, destination: destination, amount: amount, description: description, expand: expand, source_transaction: source_transaction, source_type: source_type, transfer_group: transfer_group)
+      request = build_api_request_for_post_transfers(post_transfers_request: post_transfers_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -587,93 +559,53 @@ module Stripe
     end
 
     # &lt;p&gt;To send funds from your Stripe account to a connected account, you create a new transfer object. Your &lt;a href&#x3D;\&quot;#balance\&quot;&gt;Stripe balance&lt;/a&gt; must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.&lt;/p&gt;
-    # @required @param currency [String?] 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
-    # @required @param destination [String?] The ID of a connected Stripe account. <a href=\\\"/docs/connect/charges-transfers\\\">See the Connect documentation</a> for details.
-    # @optional @param amount [Int32?] A positive integer in cents (or local equivalent) representing how much to transfer.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param source_transaction [String?] You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for details.
-    # @optional @param source_type [String?] The source balance to use for this transfer. One of `bank_account`, `card`, or `fpx`. For most users, this will default to `card`.
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @required @param post_transfers_request [Stripe::PostTransfersRequest?]
     # @return nil
     def post_transfers(
       *,
-      currency : String? = nil,
-      destination : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      source_transaction : String? = nil,
-      source_type : String? = nil,
-      transfer_group : String? = nil,
+      post_transfers_request : Stripe::PostTransfersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_transfers(currency: currency, destination: destination, amount: amount, description: description, expand: expand, source_transaction: source_transaction, source_type: source_type, transfer_group: transfer_group).execute(&block)
+      build_api_request_for_post_transfers(post_transfers_request: post_transfers_request).execute(&block)
     end
-
-    POST_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION   = 5000
-    POST_TRANSFERS_MAX_LENGTH_FOR_SOURCE_TYPE   = 5000
-    POST_TRANSFERS_VALID_VALUES_FOR_SOURCE_TYPE = String.static_array("bank_account", "card", "fpx")
 
     # @return Crest::Request
     def build_api_request_for_post_transfers(
       *,
-      currency : String? = nil,
-      destination : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      source_transaction : String? = nil,
-      source_type : String? = nil,
-      transfer_group : String? = nil
+      post_transfers_request : Stripe::PostTransfersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TransfersApi.post_transfers ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"destination\" is required and cannot be null") if destination.nil?
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_source_type = source_type).nil?
-          OpenApi::EnumValidator.validate("source_type", _source_type, POST_TRANSFERS_VALID_VALUES_FOR_SOURCE_TYPE)
+        raise ArgumentError.new("\"post_transfers_request\" is required and cannot be null") if post_transfers_request.nil?
+        unless (_post_transfers_request = post_transfers_request).nil?
+          _post_transfers_request.validate if _post_transfers_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/transfers"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["destination"] = destination.to_s if !destination.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["source_transaction"] = source_transaction.to_s if !source_transaction.nil?
-      form_params["source_type"] = source_type.to_s if !source_type.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_transfers_request, content_type: header_params["Content-Type"]?) if !post_transfers_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -693,43 +625,27 @@ module Stripe
 
     # <p>When you create a new reversal, you must specify a transfer to create it on.</p>  <p>When reversing transfers, you can optionally reverse part of the transfer. You can do so as many times as you wish until the entire transfer has been reversed.</p>  <p>Once entirely reversed, a transfer can’t be reversed again. This method will return an error when called on an already-reversed transfer, or when trying to reverse more money than is left on a transfer.</p>
     # @required @param id [String?]
-    # @optional @param amount [Int32?] A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
-    # @optional @param description [String?] An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the Dashboard. This will be unset if you POST an empty value.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param refund_application_fee [Bool?] Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
+    # @optional @param post_transfers_id_reversals_request [Stripe::PostTransfersIdReversalsRequest?]
     # @return [Stripe::TransferReversal]
     def post_transfers_id_reversals(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      refund_application_fee : Bool? = nil
+      post_transfers_id_reversals_request : Stripe::PostTransfersIdReversalsRequest? = nil
     ) : Stripe::TransferReversal
-      data, _status_code, _headers = post_transfers_id_reversals_with_http_info(id: id, amount: amount, description: description, expand: expand, metadata: metadata, refund_application_fee: refund_application_fee)
+      data, _status_code, _headers = post_transfers_id_reversals_with_http_info(id: id, post_transfers_id_reversals_request: post_transfers_id_reversals_request)
       data
     end
 
     # &lt;p&gt;When you create a new reversal, you must specify a transfer to create it on.&lt;/p&gt;  &lt;p&gt;When reversing transfers, you can optionally reverse part of the transfer. You can do so as many times as you wish until the entire transfer has been reversed.&lt;/p&gt;  &lt;p&gt;Once entirely reversed, a transfer can’t be reversed again. This method will return an error when called on an already-reversed transfer, or when trying to reverse more money than is left on a transfer.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param amount [Int32?] A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
-    # @optional @param description [String?] An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the Dashboard. This will be unset if you POST an empty value.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param refund_application_fee [Bool?] Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
+    # @optional @param post_transfers_id_reversals_request [Stripe::PostTransfersIdReversalsRequest?]
     # @return [Tuple(Stripe::TransferReversal, Integer, Hash)] Stripe::TransferReversal, response status code and response headers
     def post_transfers_id_reversals_with_http_info(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      refund_application_fee : Bool? = nil
+      post_transfers_id_reversals_request : Stripe::PostTransfersIdReversalsRequest? = nil
     ) : Tuple(Stripe::TransferReversal, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_transfers_id_reversals(id: id, amount: amount, description: description, expand: expand, metadata: metadata, refund_application_fee: refund_application_fee)
+      request = build_api_request_for_post_transfers_id_reversals(id: id, post_transfers_id_reversals_request: post_transfers_id_reversals_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -742,37 +658,24 @@ module Stripe
 
     # &lt;p&gt;When you create a new reversal, you must specify a transfer to create it on.&lt;/p&gt;  &lt;p&gt;When reversing transfers, you can optionally reverse part of the transfer. You can do so as many times as you wish until the entire transfer has been reversed.&lt;/p&gt;  &lt;p&gt;Once entirely reversed, a transfer can’t be reversed again. This method will return an error when called on an already-reversed transfer, or when trying to reverse more money than is left on a transfer.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param amount [Int32?] A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
-    # @optional @param description [String?] An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the Dashboard. This will be unset if you POST an empty value.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param refund_application_fee [Bool?] Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
+    # @optional @param post_transfers_id_reversals_request [Stripe::PostTransfersIdReversalsRequest?]
     # @return nil
     def post_transfers_id_reversals(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      refund_application_fee : Bool? = nil,
+      post_transfers_id_reversals_request : Stripe::PostTransfersIdReversalsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_transfers_id_reversals(id: id, amount: amount, description: description, expand: expand, metadata: metadata, refund_application_fee: refund_application_fee).execute(&block)
+      build_api_request_for_post_transfers_id_reversals(id: id, post_transfers_id_reversals_request: post_transfers_id_reversals_request).execute(&block)
     end
 
-    POST_TRANSFERS_ID_REVERSALS_MAX_LENGTH_FOR_ID          = 5000
-    POST_TRANSFERS_ID_REVERSALS_MAX_LENGTH_FOR_DESCRIPTION = 5000
+    POST_TRANSFERS_ID_REVERSALS_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_transfers_id_reversals(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      refund_application_fee : Bool? = nil
+      post_transfers_id_reversals_request : Stripe::PostTransfersIdReversalsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TransfersApi.post_transfers_id_reversals ..." }
@@ -783,42 +686,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_TRANSFERS_ID_REVERSALS_MAX_LENGTH_FOR_ID)
         end
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TRANSFERS_ID_REVERSALS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_transfers_id_reversals_request = post_transfers_id_reversals_request).nil?
+          _post_transfers_id_reversals_request.validate if _post_transfers_id_reversals_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/transfers/{id}/reversals".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["refund_application_fee"] = refund_application_fee.to_s if !refund_application_fee.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_transfers_id_reversals_request, content_type: header_params["Content-Type"]?) if !post_transfers_id_reversals_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -838,35 +731,27 @@ module Stripe
 
     # <p>Updates the specified transfer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>  <p>This request accepts only metadata as an argument.</p>
     # @required @param transfer [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_topups_topup_request [Stripe::PostTopupsTopupRequest?]
     # @return [Stripe::Transfer]
     def post_transfers_transfer(
       *,
       transfer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil
     ) : Stripe::Transfer
-      data, _status_code, _headers = post_transfers_transfer_with_http_info(transfer: transfer, description: description, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_transfers_transfer_with_http_info(transfer: transfer, post_topups_topup_request: post_topups_topup_request)
       data
     end
 
     # &lt;p&gt;Updates the specified transfer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request accepts only metadata as an argument.&lt;/p&gt;
     # @required @param transfer [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_topups_topup_request [Stripe::PostTopupsTopupRequest?]
     # @return [Tuple(Stripe::Transfer, Integer, Hash)] Stripe::Transfer, response status code and response headers
     def post_transfers_transfer_with_http_info(
       *,
       transfer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil
     ) : Tuple(Stripe::Transfer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_transfers_transfer(transfer: transfer, description: description, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_transfers_transfer(transfer: transfer, post_topups_topup_request: post_topups_topup_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -879,31 +764,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specified transfer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request accepts only metadata as an argument.&lt;/p&gt;
     # @required @param transfer [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_topups_topup_request [Stripe::PostTopupsTopupRequest?]
     # @return nil
     def post_transfers_transfer(
       *,
       transfer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_transfers_transfer(transfer: transfer, description: description, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_transfers_transfer(transfer: transfer, post_topups_topup_request: post_topups_topup_request).execute(&block)
     end
 
-    POST_TRANSFERS_TRANSFER_MAX_LENGTH_FOR_TRANSFER    = 5000
-    POST_TRANSFERS_TRANSFER_MAX_LENGTH_FOR_DESCRIPTION = 5000
+    POST_TRANSFERS_TRANSFER_MAX_LENGTH_FOR_TRANSFER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_transfers_transfer(
       *,
       transfer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TransfersApi.post_transfers_transfer ..." }
@@ -914,39 +792,32 @@ module Stripe
         unless (_transfer = transfer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("transfer", transfer.to_s.size, POST_TRANSFERS_TRANSFER_MAX_LENGTH_FOR_TRANSFER)
         end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TRANSFERS_TRANSFER_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_topups_topup_request = post_topups_topup_request).nil?
+          _post_topups_topup_request.validate if _post_topups_topup_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/transfers/{transfer}".sub("{" + "transfer" + "}", URI.encode_path(transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_topups_topup_request, content_type: header_params["Content-Type"]?) if !post_topups_topup_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -967,34 +838,30 @@ module Stripe
     # <p>Updates the specified reversal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>  <p>This request only accepts metadata and description as arguments.</p>
     # @required @param id [String?]
     # @required @param transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::TransferReversal]
     def post_transfers_transfer_reversals_id(
       *,
       id : String? = nil,
       transfer : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::TransferReversal
-      data, _status_code, _headers = post_transfers_transfer_reversals_id_with_http_info(id: id, transfer: transfer, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_transfers_transfer_reversals_id_with_http_info(id: id, transfer: transfer, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specified reversal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request only accepts metadata and description as arguments.&lt;/p&gt;
     # @required @param id [String?]
     # @required @param transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::TransferReversal, Integer, Hash)] Stripe::TransferReversal, response status code and response headers
     def post_transfers_transfer_reversals_id_with_http_info(
       *,
       id : String? = nil,
       transfer : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::TransferReversal, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_transfers_transfer_reversals_id(id: id, transfer: transfer, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_transfers_transfer_reversals_id(id: id, transfer: transfer, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1008,18 +875,16 @@ module Stripe
     # &lt;p&gt;Updates the specified reversal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request only accepts metadata and description as arguments.&lt;/p&gt;
     # @required @param id [String?]
     # @required @param transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_transfers_transfer_reversals_id(
       *,
       id : String? = nil,
       transfer : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_transfers_transfer_reversals_id(id: id, transfer: transfer, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_transfers_transfer_reversals_id(id: id, transfer: transfer, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_TRANSFERS_TRANSFER_REVERSALS_ID_MAX_LENGTH_FOR_ID       = 5000
@@ -1030,8 +895,7 @@ module Stripe
       *,
       id : String? = nil,
       transfer : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TransfersApi.post_transfers_transfer_reversals_id ..." }
@@ -1046,35 +910,32 @@ module Stripe
         unless (_transfer = transfer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("transfer", transfer.to_s.size, POST_TRANSFERS_TRANSFER_REVERSALS_ID_MAX_LENGTH_FOR_TRANSFER)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/transfers/{transfer}/reversals/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s)).sub("{" + "transfer" + "}", URI.encode_path(transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

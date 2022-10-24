@@ -167,23 +167,7 @@ describe "AccountsApi" do
   # unit tests for post_accounts
   # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can create Stripe accounts for your users. To do this, you’ll first need to &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/applications/settings\&quot;&gt;register your platform&lt;/a&gt;.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :account_token An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-  # @option opts [PostAccountsRequestBankAccount] :bank_account
-  # @option opts [BusinessProfileSpecs] :business_profile
-  # @option opts [String] :business_type The business type.
-  # @option opts [CapabilitiesParam] :capabilities
-  # @option opts [CompanySpecs] :company
-  # @option opts [String] :country The country in which the account holder resides, or in which the business is legally established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the United States and the business for which you&#39;re creating an account is legally represented in Canada, you would use &#x60;CA&#x60; as the country for the account being created. Available countries include [Stripe&#39;s global markets](https://stripe.com/global) as well as countries where [cross-border payouts](https://stripe.com/docs/connect/cross-border-payouts) are supported.
-  # @option opts [String] :default_currency Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account&#39;s country](https://stripe.com/docs/payouts).
-  # @option opts [DocumentsSpecs] :documents
-  # @option opts [String] :email The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :external_account A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the &#x60;external_account&#x60; parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-  # @option opts [IndividualSpecs] :individual
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [SettingsSpecs] :settings
-  # @option opts [TosAcceptanceSpecs] :tos_acceptance
-  # @option opts [String] :_type The type of Stripe account to create. May be one of &#x60;custom&#x60;, &#x60;express&#x60; or &#x60;standard&#x60;.
+  # @option opts [PostAccountsRequest] :post_accounts_request
   # @return [Account]
   describe "post_accounts test" do
     it "should work" do
@@ -195,20 +179,7 @@ describe "AccountsApi" do
   # &lt;p&gt;Updates a &lt;a href&#x3D;\&quot;/docs/connect/accounts\&quot;&gt;connected account&lt;/a&gt; by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can be changed only for Custom accounts. (These are marked &lt;strong&gt;Custom Only&lt;/strong&gt; below.) Parameters marked &lt;strong&gt;Custom and Express&lt;/strong&gt; are not supported for Standard accounts.&lt;/p&gt;  &lt;p&gt;To update your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;Dashboard&lt;/a&gt;. Refer to our &lt;a href&#x3D;\&quot;/docs/connect/updating-accounts\&quot;&gt;Connect&lt;/a&gt; documentation to learn more about updating accounts.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :account_token An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
-  # @option opts [BusinessProfileSpecs] :business_profile
-  # @option opts [String] :business_type The business type.
-  # @option opts [CapabilitiesParam] :capabilities
-  # @option opts [CompanySpecs] :company
-  # @option opts [String] :default_currency Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account&#39;s country](https://stripe.com/docs/payouts).
-  # @option opts [DocumentsSpecs] :documents
-  # @option opts [String] :email The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :external_account A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the &#x60;external_account&#x60; parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
-  # @option opts [IndividualSpecs] :individual
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [SettingsSpecsUpdate] :settings
-  # @option opts [TosAcceptanceSpecs] :tos_acceptance
+  # @option opts [PostAccountsAccountRequest] :post_accounts_account_request
   # @return [Account]
   describe "post_accounts_account test" do
     it "should work" do
@@ -221,8 +192,7 @@ describe "AccountsApi" do
   # @param account
   # @param capability
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Bool] :requested Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the &#x60;requirements&#x60; arrays.
+  # @option opts [PostAccountsAccountCapabilitiesCapabilityRequest] :post_accounts_account_capabilities_capability_request
   # @return [Capability]
   describe "post_accounts_account_capabilities_capability test" do
     it "should work" do
@@ -234,10 +204,7 @@ describe "AccountsApi" do
   # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [PostAccountsRequestBankAccount] :bank_account
-  # @option opts [Bool] :default_for_currency When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :external_account Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @option opts [PostAccountsAccountExternalAccountsRequest] :post_accounts_account_external_accounts_request
   # @return [ExternalAccount]
   describe "post_accounts_account_external_accounts test" do
     it "should work" do
@@ -250,21 +217,7 @@ describe "AccountsApi" do
   # @param account
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
-  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
-  # @option opts [String] :account_type The bank account type. This can only be &#x60;checking&#x60; or &#x60;savings&#x60; in most countries. In Japan, this can only be &#x60;futsu&#x60; or &#x60;toza&#x60;.
-  # @option opts [String] :address_city City/District/Suburb/Town/Village.
-  # @option opts [String] :address_country Billing address country, if provided when creating card.
-  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
-  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
-  # @option opts [String] :address_state State/County/Province/Region.
-  # @option opts [String] :address_zip ZIP or postal code.
-  # @option opts [Bool] :default_for_currency When set to true, this becomes the default external account for its currency.
-  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
-  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :name Cardholder name.
+  # @option opts [PostAccountsAccountExternalAccountsIdRequest] :post_accounts_account_external_accounts_id_request
   # @return [ExternalAccount]
   describe "post_accounts_account_external_accounts_id test" do
     it "should work" do
@@ -276,7 +229,7 @@ describe "AccountsApi" do
   # &lt;p&gt;Creates a single-use login link for an Express account to access their Stripe dashboard.&lt;/p&gt;  &lt;p&gt;&lt;strong&gt;You may only create login links for &lt;a href&#x3D;\&quot;/docs/connect/express-accounts\&quot;&gt;Express accounts&lt;/a&gt; connected to your platform&lt;/strong&gt;.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [LoginLink]
   describe "post_accounts_account_login_links test" do
     it "should work" do
@@ -288,33 +241,7 @@ describe "AccountsApi" do
   # &lt;p&gt;Creates a new person.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [AddressSpecs] :address
-  # @option opts [JapanAddressKanaSpecs] :address_kana
-  # @option opts [JapanAddressKanjiSpecs] :address_kanji
-  # @option opts [PostAccountsAccountPersonsRequestDob] :dob
-  # @option opts [PersonDocumentsSpecs] :documents
-  # @option opts [String] :email The person&#39;s email address.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :first_name The person&#39;s first name.
-  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
-  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
-  # @option opts [PostAccountsAccountPersonsRequestFullNameAliases] :full_name_aliases
-  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
-  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
-  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
-  # @option opts [String] :last_name The person&#39;s last name.
-  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
-  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
-  # @option opts [String] :maiden_name The person&#39;s maiden name.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
-  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-  # @option opts [String] :phone The person&#39;s phone number.
-  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-  # @option opts [AddressSpecs] :registered_address
-  # @option opts [RelationshipSpecs] :relationship
-  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
-  # @option opts [PersonVerificationSpecs] :verification
+  # @option opts [PostAccountsAccountPersonsRequest] :post_accounts_account_persons_request
   # @return [Person]
   describe "post_accounts_account_persons test" do
     it "should work" do
@@ -327,33 +254,7 @@ describe "AccountsApi" do
   # @param account
   # @param person
   # @param [Hash] opts the optional parameters
-  # @option opts [AddressSpecs] :address
-  # @option opts [JapanAddressKanaSpecs] :address_kana
-  # @option opts [JapanAddressKanjiSpecs] :address_kanji
-  # @option opts [PostAccountsAccountPersonsRequestDob] :dob
-  # @option opts [PersonDocumentsSpecs] :documents
-  # @option opts [String] :email The person&#39;s email address.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :first_name The person&#39;s first name.
-  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
-  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
-  # @option opts [PostAccountsAccountPersonsRequestFullNameAliases] :full_name_aliases
-  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
-  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
-  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
-  # @option opts [String] :last_name The person&#39;s last name.
-  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
-  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
-  # @option opts [String] :maiden_name The person&#39;s maiden name.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
-  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
-  # @option opts [String] :phone The person&#39;s phone number.
-  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-  # @option opts [AddressSpecs] :registered_address
-  # @option opts [RelationshipSpecs] :relationship
-  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
-  # @option opts [PersonVerificationSpecs] :verification
+  # @option opts [PostAccountsAccountPersonsRequest] :post_accounts_account_persons_request
   # @return [Person]
   describe "post_accounts_account_persons_person test" do
     it "should work" do
@@ -364,9 +265,8 @@ describe "AccountsApi" do
   # unit tests for post_accounts_account_reject
   # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you may flag accounts as suspicious.&lt;/p&gt;  &lt;p&gt;Test-mode Custom and Express accounts can be rejected at any time. Accounts created using live-mode keys may only be rejected once all balances are zero.&lt;/p&gt;
   # @param account
-  # @param reason The reason for rejecting the account. Can be &#x60;fraud&#x60;, &#x60;terms_of_service&#x60;, or &#x60;other&#x60;.
+  # @param post_accounts_account_reject_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Account]
   describe "post_accounts_account_reject test" do
     it "should work" do

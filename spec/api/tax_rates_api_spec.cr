@@ -51,17 +51,8 @@ describe "TaxRatesApi" do
 
   # unit tests for post_tax_rates
   # &lt;p&gt;Creates a new tax rate.&lt;/p&gt;
-  # @param display_name The display name of the tax rate, which will be shown to users.
-  # @param inclusive This specifies if the tax rate is inclusive or exclusive.
-  # @param percentage This represents the tax rate percent out of 100.
+  # @param post_tax_rates_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-  # @option opts [String] :country Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-  # @option opts [String] :description An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :jurisdiction The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-  # @option opts [String] :state [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\&quot;NY\\\&quot; for New York, United States.
-  # @option opts [String] :tax_type The high-level tax type, such as &#x60;vat&#x60; or &#x60;sales_tax&#x60;.
   # @return [TaxRate]
   describe "post_tax_rates test" do
     it "should work" do
@@ -73,15 +64,7 @@ describe "TaxRatesApi" do
   # &lt;p&gt;Updates an existing tax rate.&lt;/p&gt;
   # @param tax_rate
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-  # @option opts [String] :country Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-  # @option opts [String] :description An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-  # @option opts [String] :display_name The display name of the tax rate, which will be shown to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :jurisdiction The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :state [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\&quot;NY\\\&quot; for New York, United States.
-  # @option opts [String] :tax_type The high-level tax type, such as &#x60;vat&#x60; or &#x60;sales_tax&#x60;.
+  # @option opts [PostTaxRatesTaxRateRequest] :post_tax_rates_tax_rate_request
   # @return [TaxRate]
   describe "post_tax_rates_tax_rate test" do
     it "should work" do

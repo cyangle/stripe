@@ -110,17 +110,8 @@ describe "CreditNotesApi" do
 
   # unit tests for post_credit_notes
   # &lt;p&gt;Issue a credit note to adjust the amount of a finalized invoice. For a &lt;code&gt;status&#x3D;open&lt;/code&gt; invoice, a credit note reduces its &lt;code&gt;amount_due&lt;/code&gt;. For a &lt;code&gt;status&#x3D;paid&lt;/code&gt; invoice, a credit note does not affect its &lt;code&gt;amount_due&lt;/code&gt;. Instead, it can result in any combination of the following:&lt;/p&gt;  &lt;ul&gt; &lt;li&gt;Refund: create a new refund (using &lt;code&gt;refund_amount&lt;/code&gt;) or link an existing refund (using &lt;code&gt;refund&lt;/code&gt;).&lt;/li&gt; &lt;li&gt;Customer balance credit: credit the customer’s balance (using &lt;code&gt;credit_amount&lt;/code&gt;) which will be automatically applied to their next invoice when it’s finalized.&lt;/li&gt; &lt;li&gt;Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using &lt;code&gt;out_of_band_amount&lt;/code&gt;).&lt;/li&gt; &lt;/ul&gt;  &lt;p&gt;For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.&lt;/p&gt;  &lt;p&gt;You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s &lt;code&gt;pre_payment_credit_notes_amount&lt;/code&gt; or &lt;code&gt;post_payment_credit_notes_amount&lt;/code&gt; depending on its &lt;code&gt;status&lt;/code&gt; at the time of credit note creation.&lt;/p&gt;
-  # @param invoice ID of the invoice.
+  # @param post_credit_notes_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-  # @option opts [Int32] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Array(CreditNoteLineItemParams)] :lines Line items that make up the credit note.
-  # @option opts [String] :memo The credit note&#39;s memo appears on the credit note PDF.
-  # @option opts [Int32] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
-  # @option opts [String] :reason Reason for issuing this credit note, one of &#x60;duplicate&#x60;, &#x60;fraudulent&#x60;, &#x60;order_change&#x60;, or &#x60;product_unsatisfactory&#x60;
-  # @option opts [String] :refund ID of an existing refund to link this credit note to.
-  # @option opts [Int32] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
   # @return [CreditNote]
   describe "post_credit_notes test" do
     it "should work" do
@@ -132,8 +123,7 @@ describe "CreditNotesApi" do
   # &lt;p&gt;Updates an existing credit note.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :memo Credit note memo.
+  # @option opts [PostCreditNotesIdRequest] :post_credit_notes_id_request
   # @return [CreditNote]
   describe "post_credit_notes_id test" do
     it "should work" do
@@ -145,7 +135,7 @@ describe "CreditNotesApi" do
   # &lt;p&gt;Marks a credit note as void. Learn more about &lt;a href&#x3D;\&quot;/docs/billing/invoices/credit-notes#voiding\&quot;&gt;voiding credit notes&lt;/a&gt;.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [CreditNote]
   describe "post_credit_notes_id_void test" do
     it "should work" do

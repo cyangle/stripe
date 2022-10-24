@@ -72,6 +72,11 @@ module Stripe
     getter payment_method_type : String? = nil
     MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE = 5000
 
+    # A URL to the request log entry in your dashboard.
+    @[JSON::Field(key: "request_log_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter request_log_url : String? = nil
+    MAX_LENGTH_FOR_REQUEST_LOG_URL = 5000
+
     @[JSON::Field(key: "setup_intent", type: Stripe::SetupIntent?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_intent : Stripe::SetupIntent? = nil
 
@@ -94,6 +99,7 @@ module Stripe
       @payment_intent : Stripe::PaymentIntent? = nil,
       @payment_method : Stripe::PaymentMethod? = nil,
       @payment_method_type : String? = nil,
+      @request_log_url : String? = nil,
       @setup_intent : Stripe::SetupIntent? = nil,
       @source : Stripe::ApiErrorsSource? = nil
     )
@@ -150,6 +156,11 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
+      unless (_request_log_url = @request_log_url).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("request_log_url", _request_log_url.to_s.size, MAX_LENGTH_FOR_REQUEST_LOG_URL)
+          invalid_properties.push(max_length_error)
+        end
+      end
       unless (_setup_intent = @setup_intent).nil?
         invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent")) if _setup_intent.is_a?(OpenApi::Validatable)
       end
@@ -201,6 +212,10 @@ module Stripe
 
       unless (_payment_method_type = @payment_method_type).nil?
         return false if _payment_method_type.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE
+      end
+
+      unless (_request_log_url = @request_log_url).nil?
+        return false if _request_log_url.to_s.size > MAX_LENGTH_FOR_REQUEST_LOG_URL
       end
 
       unless (_setup_intent = @setup_intent).nil?
@@ -325,6 +340,17 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] request_log_url Object to be assigned
+    def request_log_url=(request_log_url : String?)
+      if request_log_url.nil?
+        return @request_log_url = nil
+      end
+      _request_log_url = request_log_url.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_length("request_log_url", _request_log_url.to_s.size, MAX_LENGTH_FOR_REQUEST_LOG_URL)
+      @request_log_url = _request_log_url
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_intent Object to be assigned
     def setup_intent=(setup_intent : Stripe::SetupIntent?)
       if setup_intent.nil?
@@ -350,6 +376,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @charge, @code, @decline_code, @doc_url, @message, @param, @payment_intent, @payment_method, @payment_method_type, @setup_intent, @source)
+    def_equals_and_hash(@_type, @charge, @code, @decline_code, @doc_url, @message, @param, @payment_intent, @payment_method, @payment_method_type, @request_log_url, @setup_intent, @source)
   end
 end

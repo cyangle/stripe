@@ -63,24 +63,8 @@ describe "InvoiceitemsApi" do
 
   # unit tests for post_invoiceitems
   # &lt;p&gt;Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.&lt;/p&gt;
-  # @param customer The ID of the customer who will be billed when this invoice item is billed.
+  # @param post_invoiceitems_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative &#x60;amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [String] :description An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-  # @option opts [Bool] :discountable Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
-  # @option opts [PostInvoiceitemsRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :invoice The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. This is useful when adding invoice items in response to an invoice.created webhook. You can only add invoice items to draft invoices and there is a maximum of 250 items per invoice.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [Period] :period
-  # @option opts [String] :price The ID of the price object.
-  # @option opts [OneTimePriceData] :price_data
-  # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the invoice item.
-  # @option opts [String] :subscription The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
-  # @option opts [Array(String)] :tax_rates The tax rates which apply to the invoice item. When set, the &#x60;default_tax_rates&#x60; on the invoice do not apply to this invoice item.
-  # @option opts [Int32] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This &#x60;unit_amount&#x60; will be multiplied by the quantity to get the full amount. Passing in a negative &#x60;unit_amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
-  # @option opts [Float64] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
   # @return [Invoiceitem]
   describe "post_invoiceitems test" do
     it "should work" do
@@ -92,19 +76,7 @@ describe "InvoiceitemsApi" do
   # &lt;p&gt;Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it’s attached to is closed.&lt;/p&gt;
   # @param invoiceitem
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer&#39;s account, pass a negative amount.
-  # @option opts [String] :description An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-  # @option opts [Bool] :discountable Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
-  # @option opts [PostInvoiceitemsInvoiceitemRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [Period] :period
-  # @option opts [String] :price The ID of the price object.
-  # @option opts [OneTimePriceData] :price_data
-  # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the invoice item.
-  # @option opts [PostInvoiceitemsInvoiceitemRequestTaxRates] :tax_rates
-  # @option opts [Int32] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer&#39;s account, pass a negative unit_amount.
-  # @option opts [Float64] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
+  # @option opts [PostInvoiceitemsInvoiceitemRequest] :post_invoiceitems_invoiceitem_request
   # @return [Invoiceitem]
   describe "post_invoiceitems_invoiceitem test" do
     it "should work" do

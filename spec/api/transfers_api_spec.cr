@@ -79,15 +79,8 @@ describe "TransfersApi" do
 
   # unit tests for post_transfers
   # &lt;p&gt;To send funds from your Stripe account to a connected account, you create a new transfer object. Your &lt;a href&#x3D;\&quot;#balance\&quot;&gt;Stripe balance&lt;/a&gt; must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.&lt;/p&gt;
-  # @param currency 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
-  # @param destination The ID of a connected Stripe account. &lt;a href&#x3D;\\\&quot;/docs/connect/charges-transfers\\\&quot;&gt;See the Connect documentation&lt;/a&gt; for details.
+  # @param post_transfers_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount A positive integer in cents (or local equivalent) representing how much to transfer.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :source_transaction You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for details.
-  # @option opts [String] :source_type The source balance to use for this transfer. One of &#x60;bank_account&#x60;, &#x60;card&#x60;, or &#x60;fpx&#x60;. For most users, this will default to &#x60;card&#x60;.
-  # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
   # @return [Transfer]
   describe "post_transfers test" do
     it "should work" do
@@ -99,11 +92,7 @@ describe "TransfersApi" do
   # &lt;p&gt;When you create a new reversal, you must specify a transfer to create it on.&lt;/p&gt;  &lt;p&gt;When reversing transfers, you can optionally reverse part of the transfer. You can do so as many times as you wish until the entire transfer has been reversed.&lt;/p&gt;  &lt;p&gt;Once entirely reversed, a transfer can’t be reversed again. This method will return an error when called on an already-reversed transfer, or when trying to reverse more money than is left on a transfer.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
-  # @option opts [String] :description An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the Dashboard. This will be unset if you POST an empty value.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [Bool] :refund_application_fee Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
+  # @option opts [PostTransfersIdReversalsRequest] :post_transfers_id_reversals_request
   # @return [TransferReversal]
   describe "post_transfers_id_reversals test" do
     it "should work" do
@@ -115,9 +104,7 @@ describe "TransfersApi" do
   # &lt;p&gt;Updates the specified transfer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request accepts only metadata as an argument.&lt;/p&gt;
   # @param transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostTopupsTopupRequest] :post_topups_topup_request
   # @return [Transfer]
   describe "post_transfers_transfer test" do
     it "should work" do
@@ -130,8 +117,7 @@ describe "TransfersApi" do
   # @param id
   # @param transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [TransferReversal]
   describe "post_transfers_transfer_reversals_id test" do
     it "should work" do

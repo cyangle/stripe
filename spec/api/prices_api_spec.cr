@@ -69,24 +69,8 @@ describe "PricesApi" do
 
   # unit tests for post_prices
   # &lt;p&gt;Creates a new price for an existing product. The price can be recurring or one-time.&lt;/p&gt;
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  # @param post_prices_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the price can be used for new purchases. Defaults to &#x60;true&#x60;.
-  # @option opts [String] :billing_scheme Describes how to compute the price per period. Either &#x60;per_unit&#x60; or &#x60;tiered&#x60;. &#x60;per_unit&#x60; indicates that the fixed amount (specified in &#x60;unit_amount&#x60; or &#x60;unit_amount_decimal&#x60;) will be charged per unit in &#x60;quantity&#x60; (for prices with &#x60;usage_type&#x3D;licensed&#x60;), or per unit of total usage (for prices with &#x60;usage_type&#x3D;metered&#x60;). &#x60;tiered&#x60; indicates that the unit pricing will be computed using a tiering strategy as defined using the &#x60;tiers&#x60; and &#x60;tiers_mode&#x60; attributes.
-  # @option opts [CustomUnitAmount] :custom_unit_amount
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :lookup_key A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-  # @option opts [String] :nickname A brief description of the price, hidden from customers.
-  # @option opts [String] :product The ID of the product that this price will belong to.
-  # @option opts [InlineProductParams] :product_data
-  # @option opts [Recurring] :recurring
-  # @option opts [String] :tax_behavior Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;. Once specified as either &#x60;inclusive&#x60; or &#x60;exclusive&#x60;, it cannot be changed.
-  # @option opts [Array(Tier)] :tiers Each element represents a pricing tier. This parameter requires &#x60;billing_scheme&#x60; to be set to &#x60;tiered&#x60;. See also the documentation for &#x60;billing_scheme&#x60;.
-  # @option opts [String] :tiers_mode Defines if the tiering price should be &#x60;graduated&#x60; or &#x60;volume&#x60; based. In &#x60;volume&#x60;-based tiering, the maximum quantity within a period determines the per unit price, in &#x60;graduated&#x60; tiering pricing can successively change as the quantity grows.
-  # @option opts [Bool] :transfer_lookup_key If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
-  # @option opts [TransformUsageParam] :transform_quantity
-  # @option opts [Int32] :unit_amount A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge. One of &#x60;unit_amount&#x60; or &#x60;custom_unit_amount&#x60; is required, unless &#x60;billing_scheme&#x3D;tiered&#x60;.
-  # @option opts [Float64] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
   # @return [Price]
   describe "post_prices test" do
     it "should work" do
@@ -98,14 +82,7 @@ describe "PricesApi" do
   # &lt;p&gt;Updates the specified price by setting the values of the parameters passed. Any parameters not provided are left unchanged.&lt;/p&gt;
   # @param price
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the price can be used for new purchases. Defaults to &#x60;true&#x60;.
-  # @option opts [PostPricesPriceRequestCurrencyOptions] :currency_options
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :lookup_key A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :nickname A brief description of the price, hidden from customers.
-  # @option opts [String] :tax_behavior Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;. Once specified as either &#x60;inclusive&#x60; or &#x60;exclusive&#x60;, it cannot be changed.
-  # @option opts [Bool] :transfer_lookup_key If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
+  # @option opts [PostPricesPriceRequest] :post_prices_price_request
   # @return [Price]
   describe "post_prices_price test" do
     it "should work" do

@@ -20,7 +20,6 @@ module Stripe
 
     # Optional Properties
 
-    # Coupons defined in each available currency option (only supported if the coupon is amount-based). Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CouponCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency_options : Hash(String, Stripe::CouponCurrencyOption)? = nil
 

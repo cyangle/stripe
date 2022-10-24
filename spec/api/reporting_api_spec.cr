@@ -72,10 +72,8 @@ describe "ReportingApi" do
 
   # unit tests for post_reporting_report_runs
   # &lt;p&gt;Creates a new object and begin running the report. (Certain report types require a &lt;a href&#x3D;\&quot;https://stripe.com/docs/keys#test-live-modes\&quot;&gt;live-mode API key&lt;/a&gt;.)&lt;/p&gt;
-  # @param report_type The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as &#x60;\\\&quot;balance.summary.1\\\&quot;&#x60;.
+  # @param post_reporting_report_runs_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [RunParameterSpecs] :parameters
   # @return [ReportingReportRun]
   describe "post_reporting_report_runs test" do
     it "should work" do

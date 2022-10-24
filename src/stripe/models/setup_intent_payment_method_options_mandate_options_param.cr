@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "custom_mandate_url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter custom_mandate_url : Stripe::BbposWisePoseSplashscreen? = nil
+    @[JSON::Field(key: "custom_mandate_url", type: Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter custom_mandate_url : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
 
     @[JSON::Field(key: "default_for", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_for : Array(String)? = nil
@@ -47,7 +47,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @custom_mandate_url : Stripe::BbposWisePoseSplashscreen? = nil,
+      @custom_mandate_url : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil,
       @default_for : Array(String)? = nil,
       @interval_description : String? = nil,
       @payment_schedule : String? = nil,
@@ -108,7 +108,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_mandate_url Object to be assigned
-    def custom_mandate_url=(custom_mandate_url : Stripe::BbposWisePoseSplashscreen?)
+    def custom_mandate_url=(custom_mandate_url : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?)
       if custom_mandate_url.nil?
         return @custom_mandate_url = nil
       end

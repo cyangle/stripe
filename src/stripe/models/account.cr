@@ -99,7 +99,6 @@ module Stripe
     @[JSON::Field(key: "individual", type: Stripe::Person?, default: nil, required: false, nullable: false, emit_null: false)]
     getter individual : Stripe::Person? = nil
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 

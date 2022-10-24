@@ -137,8 +137,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/credit_reversals"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -147,19 +155,11 @@ module Stripe
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -245,23 +245,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/credit_reversals/{credit_reversal}".sub("{" + "credit_reversal" + "}", URI.encode_path(credit_reversal.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -407,8 +407,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/debit_reversals"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -418,19 +426,11 @@ module Stripe
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -516,23 +516,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/debit_reversals/{debit_reversal}".sub("{" + "debit_reversal" + "}", URI.encode_path(debit_reversal.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -646,27 +646,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/financial_accounts"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -752,23 +752,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/financial_accounts/{financial_account}".sub("{" + "financial_account" + "}", URI.encode_path(financial_account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -854,23 +854,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/financial_accounts/{financial_account}/features".sub("{" + "financial_account" + "}", URI.encode_path(financial_account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -994,8 +994,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/inbound_transfers"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -1003,19 +1011,11 @@ module Stripe
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1101,23 +1101,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/inbound_transfers/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1252,8 +1252,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/outbound_payments"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -1262,19 +1270,11 @@ module Stripe
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1360,23 +1360,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/outbound_payments/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1500,8 +1500,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/outbound_transfers"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -1509,19 +1517,11 @@ module Stripe
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1607,23 +1607,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/outbound_transfers/{outbound_transfer}".sub("{" + "outbound_transfer" + "}", URI.encode_path(outbound_transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1757,8 +1757,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/received_credits"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -1767,19 +1775,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1865,23 +1865,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/received_credits/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2005,8 +2005,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/received_debits"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -2014,19 +2022,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["financial_account"] = financial_account.to_s if !financial_account.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2112,23 +2112,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/received_debits/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2284,8 +2284,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/transaction_entries"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -2296,19 +2304,11 @@ module Stripe
       query_params["created"] = created.to_s if !created.nil?
       query_params["effective_at"] = effective_at.to_s if !effective_at.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2394,23 +2394,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/transaction_entries/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2566,8 +2566,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/transactions"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["status_transitions"] = status_transitions.to_s if !status_transitions.nil?
@@ -2578,19 +2586,11 @@ module Stripe
       query_params["order_by"] = order_by.to_s if !order_by.nil?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2676,23 +2676,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/treasury/transactions/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2711,28 +2711,24 @@ module Stripe
     end
 
     # <p>Reverses a ReceivedCredit and creates a CreditReversal object.</p>
-    # @required @param received_credit [String?] The ReceivedCredit to reverse.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_treasury_credit_reversals_request [Stripe::PostTreasuryCreditReversalsRequest?]
     # @return [Stripe::TreasuryCreditReversal]
     def post_treasury_credit_reversals(
       *,
-      received_credit : String? = nil,
-      expand : Array(String)? = nil
+      post_treasury_credit_reversals_request : Stripe::PostTreasuryCreditReversalsRequest? = nil
     ) : Stripe::TreasuryCreditReversal
-      data, _status_code, _headers = post_treasury_credit_reversals_with_http_info(received_credit: received_credit, expand: expand)
+      data, _status_code, _headers = post_treasury_credit_reversals_with_http_info(post_treasury_credit_reversals_request: post_treasury_credit_reversals_request)
       data
     end
 
     # &lt;p&gt;Reverses a ReceivedCredit and creates a CreditReversal object.&lt;/p&gt;
-    # @required @param received_credit [String?] The ReceivedCredit to reverse.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_treasury_credit_reversals_request [Stripe::PostTreasuryCreditReversalsRequest?]
     # @return [Tuple(Stripe::TreasuryCreditReversal, Integer, Hash)] Stripe::TreasuryCreditReversal, response status code and response headers
     def post_treasury_credit_reversals_with_http_info(
       *,
-      received_credit : String? = nil,
-      expand : Array(String)? = nil
+      post_treasury_credit_reversals_request : Stripe::PostTreasuryCreditReversalsRequest? = nil
     ) : Tuple(Stripe::TreasuryCreditReversal, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_credit_reversals(received_credit: received_credit, expand: expand)
+      request = build_api_request_for_post_treasury_credit_reversals(post_treasury_credit_reversals_request: post_treasury_credit_reversals_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2744,60 +2740,53 @@ module Stripe
     end
 
     # &lt;p&gt;Reverses a ReceivedCredit and creates a CreditReversal object.&lt;/p&gt;
-    # @required @param received_credit [String?] The ReceivedCredit to reverse.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_treasury_credit_reversals_request [Stripe::PostTreasuryCreditReversalsRequest?]
     # @return nil
     def post_treasury_credit_reversals(
       *,
-      received_credit : String? = nil,
-      expand : Array(String)? = nil,
+      post_treasury_credit_reversals_request : Stripe::PostTreasuryCreditReversalsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_credit_reversals(received_credit: received_credit, expand: expand).execute(&block)
+      build_api_request_for_post_treasury_credit_reversals(post_treasury_credit_reversals_request: post_treasury_credit_reversals_request).execute(&block)
     end
-
-    POST_TREASURY_CREDIT_REVERSALS_MAX_LENGTH_FOR_RECEIVED_CREDIT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_treasury_credit_reversals(
       *,
-      received_credit : String? = nil,
-      expand : Array(String)? = nil
+      post_treasury_credit_reversals_request : Stripe::PostTreasuryCreditReversalsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_credit_reversals ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"received_credit\" is required and cannot be null") if received_credit.nil?
-        unless (_received_credit = received_credit).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("received_credit", received_credit.to_s.size, POST_TREASURY_CREDIT_REVERSALS_MAX_LENGTH_FOR_RECEIVED_CREDIT)
+        raise ArgumentError.new("\"post_treasury_credit_reversals_request\" is required and cannot be null") if post_treasury_credit_reversals_request.nil?
+        unless (_post_treasury_credit_reversals_request = post_treasury_credit_reversals_request).nil?
+          _post_treasury_credit_reversals_request.validate if _post_treasury_credit_reversals_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/credit_reversals"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["received_credit"] = received_credit.to_s if !received_credit.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_credit_reversals_request, content_type: header_params["Content-Type"]?) if !post_treasury_credit_reversals_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2816,28 +2805,24 @@ module Stripe
     end
 
     # <p>Reverses a ReceivedDebit and creates a DebitReversal object.</p>
-    # @required @param received_debit [String?] The ReceivedDebit to reverse.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_treasury_debit_reversals_request [Stripe::PostTreasuryDebitReversalsRequest?]
     # @return [Stripe::TreasuryDebitReversal]
     def post_treasury_debit_reversals(
       *,
-      received_debit : String? = nil,
-      expand : Array(String)? = nil
+      post_treasury_debit_reversals_request : Stripe::PostTreasuryDebitReversalsRequest? = nil
     ) : Stripe::TreasuryDebitReversal
-      data, _status_code, _headers = post_treasury_debit_reversals_with_http_info(received_debit: received_debit, expand: expand)
+      data, _status_code, _headers = post_treasury_debit_reversals_with_http_info(post_treasury_debit_reversals_request: post_treasury_debit_reversals_request)
       data
     end
 
     # &lt;p&gt;Reverses a ReceivedDebit and creates a DebitReversal object.&lt;/p&gt;
-    # @required @param received_debit [String?] The ReceivedDebit to reverse.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_treasury_debit_reversals_request [Stripe::PostTreasuryDebitReversalsRequest?]
     # @return [Tuple(Stripe::TreasuryDebitReversal, Integer, Hash)] Stripe::TreasuryDebitReversal, response status code and response headers
     def post_treasury_debit_reversals_with_http_info(
       *,
-      received_debit : String? = nil,
-      expand : Array(String)? = nil
+      post_treasury_debit_reversals_request : Stripe::PostTreasuryDebitReversalsRequest? = nil
     ) : Tuple(Stripe::TreasuryDebitReversal, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_debit_reversals(received_debit: received_debit, expand: expand)
+      request = build_api_request_for_post_treasury_debit_reversals(post_treasury_debit_reversals_request: post_treasury_debit_reversals_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2849,60 +2834,53 @@ module Stripe
     end
 
     # &lt;p&gt;Reverses a ReceivedDebit and creates a DebitReversal object.&lt;/p&gt;
-    # @required @param received_debit [String?] The ReceivedDebit to reverse.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_treasury_debit_reversals_request [Stripe::PostTreasuryDebitReversalsRequest?]
     # @return nil
     def post_treasury_debit_reversals(
       *,
-      received_debit : String? = nil,
-      expand : Array(String)? = nil,
+      post_treasury_debit_reversals_request : Stripe::PostTreasuryDebitReversalsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_debit_reversals(received_debit: received_debit, expand: expand).execute(&block)
+      build_api_request_for_post_treasury_debit_reversals(post_treasury_debit_reversals_request: post_treasury_debit_reversals_request).execute(&block)
     end
-
-    POST_TREASURY_DEBIT_REVERSALS_MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_treasury_debit_reversals(
       *,
-      received_debit : String? = nil,
-      expand : Array(String)? = nil
+      post_treasury_debit_reversals_request : Stripe::PostTreasuryDebitReversalsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_debit_reversals ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"received_debit\" is required and cannot be null") if received_debit.nil?
-        unless (_received_debit = received_debit).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("received_debit", received_debit.to_s.size, POST_TREASURY_DEBIT_REVERSALS_MAX_LENGTH_FOR_RECEIVED_DEBIT)
+        raise ArgumentError.new("\"post_treasury_debit_reversals_request\" is required and cannot be null") if post_treasury_debit_reversals_request.nil?
+        unless (_post_treasury_debit_reversals_request = post_treasury_debit_reversals_request).nil?
+          _post_treasury_debit_reversals_request.validate if _post_treasury_debit_reversals_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/debit_reversals"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["received_debit"] = received_debit.to_s if !received_debit.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_debit_reversals_request, content_type: header_params["Content-Type"]?) if !post_treasury_debit_reversals_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2921,36 +2899,24 @@ module Stripe
     end
 
     # <p>Creates a new FinancialAccount. For now, each connected account can only have one FinancialAccount.</p>
-    # @required @param supported_currencies [Array(String)?] The currencies the FinancialAccount can hold a balance in.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeatureAccess?]
-    # @optional @param platform_restrictions [Stripe::PlatformRestrictions?]
+    # @required @param post_treasury_financial_accounts_request [Stripe::PostTreasuryFinancialAccountsRequest?]
     # @return [Stripe::TreasuryFinancialAccount]
     def post_treasury_financial_accounts(
       *,
-      supported_currencies : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil
+      post_treasury_financial_accounts_request : Stripe::PostTreasuryFinancialAccountsRequest? = nil
     ) : Stripe::TreasuryFinancialAccount
-      data, _status_code, _headers = post_treasury_financial_accounts_with_http_info(supported_currencies: supported_currencies, expand: expand, features: features, platform_restrictions: platform_restrictions)
+      data, _status_code, _headers = post_treasury_financial_accounts_with_http_info(post_treasury_financial_accounts_request: post_treasury_financial_accounts_request)
       data
     end
 
     # &lt;p&gt;Creates a new FinancialAccount. For now, each connected account can only have one FinancialAccount.&lt;/p&gt;
-    # @required @param supported_currencies [Array(String)?] The currencies the FinancialAccount can hold a balance in.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeatureAccess?]
-    # @optional @param platform_restrictions [Stripe::PlatformRestrictions?]
+    # @required @param post_treasury_financial_accounts_request [Stripe::PostTreasuryFinancialAccountsRequest?]
     # @return [Tuple(Stripe::TreasuryFinancialAccount, Integer, Hash)] Stripe::TreasuryFinancialAccount, response status code and response headers
     def post_treasury_financial_accounts_with_http_info(
       *,
-      supported_currencies : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil
+      post_treasury_financial_accounts_request : Stripe::PostTreasuryFinancialAccountsRequest? = nil
     ) : Tuple(Stripe::TreasuryFinancialAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_financial_accounts(supported_currencies: supported_currencies, expand: expand, features: features, platform_restrictions: platform_restrictions)
+      request = build_api_request_for_post_treasury_financial_accounts(post_treasury_financial_accounts_request: post_treasury_financial_accounts_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2962,70 +2928,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new FinancialAccount. For now, each connected account can only have one FinancialAccount.&lt;/p&gt;
-    # @required @param supported_currencies [Array(String)?] The currencies the FinancialAccount can hold a balance in.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeatureAccess?]
-    # @optional @param platform_restrictions [Stripe::PlatformRestrictions?]
+    # @required @param post_treasury_financial_accounts_request [Stripe::PostTreasuryFinancialAccountsRequest?]
     # @return nil
     def post_treasury_financial_accounts(
       *,
-      supported_currencies : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil,
+      post_treasury_financial_accounts_request : Stripe::PostTreasuryFinancialAccountsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_financial_accounts(supported_currencies: supported_currencies, expand: expand, features: features, platform_restrictions: platform_restrictions).execute(&block)
+      build_api_request_for_post_treasury_financial_accounts(post_treasury_financial_accounts_request: post_treasury_financial_accounts_request).execute(&block)
     end
 
     # @return Crest::Request
     def build_api_request_for_post_treasury_financial_accounts(
       *,
-      supported_currencies : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil
+      post_treasury_financial_accounts_request : Stripe::PostTreasuryFinancialAccountsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_financial_accounts ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"supported_currencies\" is required and cannot be null") if supported_currencies.nil?
-
-        unless (_features = features).nil?
-          _features.validate if _features.is_a?(OpenApi::Validatable)
-        end
-        unless (_platform_restrictions = platform_restrictions).nil?
-          _platform_restrictions.validate if _platform_restrictions.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_treasury_financial_accounts_request\" is required and cannot be null") if post_treasury_financial_accounts_request.nil?
+        unless (_post_treasury_financial_accounts_request = post_treasury_financial_accounts_request).nil?
+          _post_treasury_financial_accounts_request.validate if _post_treasury_financial_accounts_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/financial_accounts"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["features"] = features.to_s if !features.nil?
-      form_params["platform_restrictions"] = platform_restrictions.to_s if !platform_restrictions.nil?
-      form_params["supported_currencies"] = @api_client.build_collection_param(supported_currencies, "csv") if !supported_currencies.nil? && !supported_currencies.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_financial_accounts_request, content_type: header_params["Content-Type"]?) if !post_treasury_financial_accounts_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3045,35 +2994,27 @@ module Stripe
 
     # <p>Updates the details of a FinancialAccount.</p>
     # @required @param financial_account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeatureAccess?]
-    # @optional @param platform_restrictions [Stripe::PlatformRestrictions?]
+    # @optional @param post_treasury_financial_accounts_financial_account_request [Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest?]
     # @return [Stripe::TreasuryFinancialAccount]
     def post_treasury_financial_accounts_financial_account(
       *,
       financial_account : String? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil
+      post_treasury_financial_accounts_financial_account_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest? = nil
     ) : Stripe::TreasuryFinancialAccount
-      data, _status_code, _headers = post_treasury_financial_accounts_financial_account_with_http_info(financial_account: financial_account, expand: expand, features: features, platform_restrictions: platform_restrictions)
+      data, _status_code, _headers = post_treasury_financial_accounts_financial_account_with_http_info(financial_account: financial_account, post_treasury_financial_accounts_financial_account_request: post_treasury_financial_accounts_financial_account_request)
       data
     end
 
     # &lt;p&gt;Updates the details of a FinancialAccount.&lt;/p&gt;
     # @required @param financial_account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeatureAccess?]
-    # @optional @param platform_restrictions [Stripe::PlatformRestrictions?]
+    # @optional @param post_treasury_financial_accounts_financial_account_request [Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest?]
     # @return [Tuple(Stripe::TreasuryFinancialAccount, Integer, Hash)] Stripe::TreasuryFinancialAccount, response status code and response headers
     def post_treasury_financial_accounts_financial_account_with_http_info(
       *,
       financial_account : String? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil
+      post_treasury_financial_accounts_financial_account_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest? = nil
     ) : Tuple(Stripe::TreasuryFinancialAccount, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_financial_accounts_financial_account(financial_account: financial_account, expand: expand, features: features, platform_restrictions: platform_restrictions)
+      request = build_api_request_for_post_treasury_financial_accounts_financial_account(financial_account: financial_account, post_treasury_financial_accounts_financial_account_request: post_treasury_financial_accounts_financial_account_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3086,19 +3027,15 @@ module Stripe
 
     # &lt;p&gt;Updates the details of a FinancialAccount.&lt;/p&gt;
     # @required @param financial_account [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeatureAccess?]
-    # @optional @param platform_restrictions [Stripe::PlatformRestrictions?]
+    # @optional @param post_treasury_financial_accounts_financial_account_request [Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest?]
     # @return nil
     def post_treasury_financial_accounts_financial_account(
       *,
       financial_account : String? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil,
+      post_treasury_financial_accounts_financial_account_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_financial_accounts_financial_account(financial_account: financial_account, expand: expand, features: features, platform_restrictions: platform_restrictions).execute(&block)
+      build_api_request_for_post_treasury_financial_accounts_financial_account(financial_account: financial_account, post_treasury_financial_accounts_financial_account_request: post_treasury_financial_accounts_financial_account_request).execute(&block)
     end
 
     POST_TREASURY_FINANCIAL_ACCOUNTS_FINANCIAL_ACCOUNT_MAX_LENGTH_FOR_FINANCIAL_ACCOUNT = 5000
@@ -3107,9 +3044,7 @@ module Stripe
     def build_api_request_for_post_treasury_financial_accounts_financial_account(
       *,
       financial_account : String? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeatureAccess? = nil,
-      platform_restrictions : Stripe::PlatformRestrictions? = nil
+      post_treasury_financial_accounts_financial_account_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_financial_accounts_financial_account ..." }
@@ -3120,39 +3055,32 @@ module Stripe
         unless (_financial_account = financial_account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("financial_account", financial_account.to_s.size, POST_TREASURY_FINANCIAL_ACCOUNTS_FINANCIAL_ACCOUNT_MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
         end
-
-        unless (_features = features).nil?
-          _features.validate if _features.is_a?(OpenApi::Validatable)
-        end
-        unless (_platform_restrictions = platform_restrictions).nil?
-          _platform_restrictions.validate if _platform_restrictions.is_a?(OpenApi::Validatable)
+        unless (_post_treasury_financial_accounts_financial_account_request = post_treasury_financial_accounts_financial_account_request).nil?
+          _post_treasury_financial_accounts_financial_account_request.validate if _post_treasury_financial_accounts_financial_account_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/financial_accounts/{financial_account}".sub("{" + "financial_account" + "}", URI.encode_path(financial_account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["features"] = features.to_s if !features.nil?
-      form_params["platform_restrictions"] = platform_restrictions.to_s if !platform_restrictions.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_financial_accounts_financial_account_request, content_type: header_params["Content-Type"]?) if !post_treasury_financial_accounts_financial_account_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3172,55 +3100,27 @@ module Stripe
 
     # <p>Updates the Features associated with a FinancialAccount.</p>
     # @required @param financial_account [String?]
-    # @optional @param card_issuing [Stripe::Access?]
-    # @optional @param deposit_insurance [Stripe::Access?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param financial_addresses [Stripe::FinancialAddresses?]
-    # @optional @param inbound_transfers [Stripe::InboundTransfers?]
-    # @optional @param intra_stripe_flows [Stripe::Access?]
-    # @optional @param outbound_payments [Stripe::OutboundPayments?]
-    # @optional @param outbound_transfers [Stripe::OutboundTransfers?]
+    # @optional @param post_treasury_financial_accounts_financial_account_features_request [Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest?]
     # @return [Stripe::TreasuryFinancialAccountFeatures]
     def post_treasury_financial_accounts_financial_account_features(
       *,
       financial_account : String? = nil,
-      card_issuing : Stripe::Access? = nil,
-      deposit_insurance : Stripe::Access? = nil,
-      expand : Array(String)? = nil,
-      financial_addresses : Stripe::FinancialAddresses? = nil,
-      inbound_transfers : Stripe::InboundTransfers? = nil,
-      intra_stripe_flows : Stripe::Access? = nil,
-      outbound_payments : Stripe::OutboundPayments? = nil,
-      outbound_transfers : Stripe::OutboundTransfers? = nil
+      post_treasury_financial_accounts_financial_account_features_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest? = nil
     ) : Stripe::TreasuryFinancialAccountFeatures
-      data, _status_code, _headers = post_treasury_financial_accounts_financial_account_features_with_http_info(financial_account: financial_account, card_issuing: card_issuing, deposit_insurance: deposit_insurance, expand: expand, financial_addresses: financial_addresses, inbound_transfers: inbound_transfers, intra_stripe_flows: intra_stripe_flows, outbound_payments: outbound_payments, outbound_transfers: outbound_transfers)
+      data, _status_code, _headers = post_treasury_financial_accounts_financial_account_features_with_http_info(financial_account: financial_account, post_treasury_financial_accounts_financial_account_features_request: post_treasury_financial_accounts_financial_account_features_request)
       data
     end
 
     # &lt;p&gt;Updates the Features associated with a FinancialAccount.&lt;/p&gt;
     # @required @param financial_account [String?]
-    # @optional @param card_issuing [Stripe::Access?]
-    # @optional @param deposit_insurance [Stripe::Access?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param financial_addresses [Stripe::FinancialAddresses?]
-    # @optional @param inbound_transfers [Stripe::InboundTransfers?]
-    # @optional @param intra_stripe_flows [Stripe::Access?]
-    # @optional @param outbound_payments [Stripe::OutboundPayments?]
-    # @optional @param outbound_transfers [Stripe::OutboundTransfers?]
+    # @optional @param post_treasury_financial_accounts_financial_account_features_request [Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest?]
     # @return [Tuple(Stripe::TreasuryFinancialAccountFeatures, Integer, Hash)] Stripe::TreasuryFinancialAccountFeatures, response status code and response headers
     def post_treasury_financial_accounts_financial_account_features_with_http_info(
       *,
       financial_account : String? = nil,
-      card_issuing : Stripe::Access? = nil,
-      deposit_insurance : Stripe::Access? = nil,
-      expand : Array(String)? = nil,
-      financial_addresses : Stripe::FinancialAddresses? = nil,
-      inbound_transfers : Stripe::InboundTransfers? = nil,
-      intra_stripe_flows : Stripe::Access? = nil,
-      outbound_payments : Stripe::OutboundPayments? = nil,
-      outbound_transfers : Stripe::OutboundTransfers? = nil
+      post_treasury_financial_accounts_financial_account_features_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest? = nil
     ) : Tuple(Stripe::TreasuryFinancialAccountFeatures, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_financial_accounts_financial_account_features(financial_account: financial_account, card_issuing: card_issuing, deposit_insurance: deposit_insurance, expand: expand, financial_addresses: financial_addresses, inbound_transfers: inbound_transfers, intra_stripe_flows: intra_stripe_flows, outbound_payments: outbound_payments, outbound_transfers: outbound_transfers)
+      request = build_api_request_for_post_treasury_financial_accounts_financial_account_features(financial_account: financial_account, post_treasury_financial_accounts_financial_account_features_request: post_treasury_financial_accounts_financial_account_features_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3233,29 +3133,15 @@ module Stripe
 
     # &lt;p&gt;Updates the Features associated with a FinancialAccount.&lt;/p&gt;
     # @required @param financial_account [String?]
-    # @optional @param card_issuing [Stripe::Access?]
-    # @optional @param deposit_insurance [Stripe::Access?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param financial_addresses [Stripe::FinancialAddresses?]
-    # @optional @param inbound_transfers [Stripe::InboundTransfers?]
-    # @optional @param intra_stripe_flows [Stripe::Access?]
-    # @optional @param outbound_payments [Stripe::OutboundPayments?]
-    # @optional @param outbound_transfers [Stripe::OutboundTransfers?]
+    # @optional @param post_treasury_financial_accounts_financial_account_features_request [Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest?]
     # @return nil
     def post_treasury_financial_accounts_financial_account_features(
       *,
       financial_account : String? = nil,
-      card_issuing : Stripe::Access? = nil,
-      deposit_insurance : Stripe::Access? = nil,
-      expand : Array(String)? = nil,
-      financial_addresses : Stripe::FinancialAddresses? = nil,
-      inbound_transfers : Stripe::InboundTransfers? = nil,
-      intra_stripe_flows : Stripe::Access? = nil,
-      outbound_payments : Stripe::OutboundPayments? = nil,
-      outbound_transfers : Stripe::OutboundTransfers? = nil,
+      post_treasury_financial_accounts_financial_account_features_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_financial_accounts_financial_account_features(financial_account: financial_account, card_issuing: card_issuing, deposit_insurance: deposit_insurance, expand: expand, financial_addresses: financial_addresses, inbound_transfers: inbound_transfers, intra_stripe_flows: intra_stripe_flows, outbound_payments: outbound_payments, outbound_transfers: outbound_transfers).execute(&block)
+      build_api_request_for_post_treasury_financial_accounts_financial_account_features(financial_account: financial_account, post_treasury_financial_accounts_financial_account_features_request: post_treasury_financial_accounts_financial_account_features_request).execute(&block)
     end
 
     POST_TREASURY_FINANCIAL_ACCOUNTS_FINANCIAL_ACCOUNT_FEATURES_MAX_LENGTH_FOR_FINANCIAL_ACCOUNT = 5000
@@ -3264,14 +3150,7 @@ module Stripe
     def build_api_request_for_post_treasury_financial_accounts_financial_account_features(
       *,
       financial_account : String? = nil,
-      card_issuing : Stripe::Access? = nil,
-      deposit_insurance : Stripe::Access? = nil,
-      expand : Array(String)? = nil,
-      financial_addresses : Stripe::FinancialAddresses? = nil,
-      inbound_transfers : Stripe::InboundTransfers? = nil,
-      intra_stripe_flows : Stripe::Access? = nil,
-      outbound_payments : Stripe::OutboundPayments? = nil,
-      outbound_transfers : Stripe::OutboundTransfers? = nil
+      post_treasury_financial_accounts_financial_account_features_request : Stripe::PostTreasuryFinancialAccountsFinancialAccountFeaturesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_financial_accounts_financial_account_features ..." }
@@ -3282,59 +3161,32 @@ module Stripe
         unless (_financial_account = financial_account).nil?
           OpenApi::PrimitiveValidator.validate_max_length("financial_account", financial_account.to_s.size, POST_TREASURY_FINANCIAL_ACCOUNTS_FINANCIAL_ACCOUNT_FEATURES_MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
         end
-        unless (_card_issuing = card_issuing).nil?
-          _card_issuing.validate if _card_issuing.is_a?(OpenApi::Validatable)
-        end
-        unless (_deposit_insurance = deposit_insurance).nil?
-          _deposit_insurance.validate if _deposit_insurance.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_financial_addresses = financial_addresses).nil?
-          _financial_addresses.validate if _financial_addresses.is_a?(OpenApi::Validatable)
-        end
-        unless (_inbound_transfers = inbound_transfers).nil?
-          _inbound_transfers.validate if _inbound_transfers.is_a?(OpenApi::Validatable)
-        end
-        unless (_intra_stripe_flows = intra_stripe_flows).nil?
-          _intra_stripe_flows.validate if _intra_stripe_flows.is_a?(OpenApi::Validatable)
-        end
-        unless (_outbound_payments = outbound_payments).nil?
-          _outbound_payments.validate if _outbound_payments.is_a?(OpenApi::Validatable)
-        end
-        unless (_outbound_transfers = outbound_transfers).nil?
-          _outbound_transfers.validate if _outbound_transfers.is_a?(OpenApi::Validatable)
+        unless (_post_treasury_financial_accounts_financial_account_features_request = post_treasury_financial_accounts_financial_account_features_request).nil?
+          _post_treasury_financial_accounts_financial_account_features_request.validate if _post_treasury_financial_accounts_financial_account_features_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/financial_accounts/{financial_account}/features".sub("{" + "financial_account" + "}", URI.encode_path(financial_account.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["card_issuing"] = card_issuing.to_s if !card_issuing.nil?
-      form_params["deposit_insurance"] = deposit_insurance.to_s if !deposit_insurance.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["financial_addresses"] = financial_addresses.to_s if !financial_addresses.nil?
-      form_params["inbound_transfers"] = inbound_transfers.to_s if !inbound_transfers.nil?
-      form_params["intra_stripe_flows"] = intra_stripe_flows.to_s if !intra_stripe_flows.nil?
-      form_params["outbound_payments"] = outbound_payments.to_s if !outbound_payments.nil?
-      form_params["outbound_transfers"] = outbound_transfers.to_s if !outbound_transfers.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_financial_accounts_financial_account_features_request, content_type: header_params["Content-Type"]?) if !post_treasury_financial_accounts_financial_account_features_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3353,48 +3205,24 @@ module Stripe
     end
 
     # <p>Creates an InboundTransfer.</p>
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to send funds to.
-    # @required @param origin_payment_method [String?] The origin payment method to be debited for the InboundTransfer.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] The complete description that appears on your customers' statements. Maximum 10 characters.
+    # @required @param post_treasury_inbound_transfers_request [Stripe::PostTreasuryInboundTransfersRequest?]
     # @return [Stripe::TreasuryInboundTransfer]
     def post_treasury_inbound_transfers(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      origin_payment_method : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_inbound_transfers_request : Stripe::PostTreasuryInboundTransfersRequest? = nil
     ) : Stripe::TreasuryInboundTransfer
-      data, _status_code, _headers = post_treasury_inbound_transfers_with_http_info(amount: amount, currency: currency, financial_account: financial_account, origin_payment_method: origin_payment_method, description: description, expand: expand, statement_descriptor: statement_descriptor)
+      data, _status_code, _headers = post_treasury_inbound_transfers_with_http_info(post_treasury_inbound_transfers_request: post_treasury_inbound_transfers_request)
       data
     end
 
     # &lt;p&gt;Creates an InboundTransfer.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to send funds to.
-    # @required @param origin_payment_method [String?] The origin payment method to be debited for the InboundTransfer.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] The complete description that appears on your customers' statements. Maximum 10 characters.
+    # @required @param post_treasury_inbound_transfers_request [Stripe::PostTreasuryInboundTransfersRequest?]
     # @return [Tuple(Stripe::TreasuryInboundTransfer, Integer, Hash)] Stripe::TreasuryInboundTransfer, response status code and response headers
     def post_treasury_inbound_transfers_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      origin_payment_method : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_inbound_transfers_request : Stripe::PostTreasuryInboundTransfersRequest? = nil
     ) : Tuple(Stripe::TreasuryInboundTransfer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_inbound_transfers(amount: amount, currency: currency, financial_account: financial_account, origin_payment_method: origin_payment_method, description: description, expand: expand, statement_descriptor: statement_descriptor)
+      request = build_api_request_for_post_treasury_inbound_transfers(post_treasury_inbound_transfers_request: post_treasury_inbound_transfers_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3406,95 +3234,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an InboundTransfer.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to send funds to.
-    # @required @param origin_payment_method [String?] The origin payment method to be debited for the InboundTransfer.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] The complete description that appears on your customers' statements. Maximum 10 characters.
+    # @required @param post_treasury_inbound_transfers_request [Stripe::PostTreasuryInboundTransfersRequest?]
     # @return nil
     def post_treasury_inbound_transfers(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      origin_payment_method : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
+      post_treasury_inbound_transfers_request : Stripe::PostTreasuryInboundTransfersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_inbound_transfers(amount: amount, currency: currency, financial_account: financial_account, origin_payment_method: origin_payment_method, description: description, expand: expand, statement_descriptor: statement_descriptor).execute(&block)
+      build_api_request_for_post_treasury_inbound_transfers(post_treasury_inbound_transfers_request: post_treasury_inbound_transfers_request).execute(&block)
     end
-
-    POST_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_ORIGIN_PAYMENT_METHOD = 5000
-    POST_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION           = 5000
-    POST_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR  =   10
 
     # @return Crest::Request
     def build_api_request_for_post_treasury_inbound_transfers(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      origin_payment_method : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_inbound_transfers_request : Stripe::PostTreasuryInboundTransfersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_inbound_transfers ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"financial_account\" is required and cannot be null") if financial_account.nil?
-
-        raise ArgumentError.new("\"origin_payment_method\" is required and cannot be null") if origin_payment_method.nil?
-        unless (_origin_payment_method = origin_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("origin_payment_method", origin_payment_method.to_s.size, POST_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_ORIGIN_PAYMENT_METHOD)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_TREASURY_INBOUND_TRANSFERS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
+        raise ArgumentError.new("\"post_treasury_inbound_transfers_request\" is required and cannot be null") if post_treasury_inbound_transfers_request.nil?
+        unless (_post_treasury_inbound_transfers_request = post_treasury_inbound_transfers_request).nil?
+          _post_treasury_inbound_transfers_request.validate if _post_treasury_inbound_transfers_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/inbound_transfers"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["financial_account"] = financial_account.to_s if !financial_account.nil?
-      form_params["origin_payment_method"] = origin_payment_method.to_s if !origin_payment_method.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_inbound_transfers_request, content_type: header_params["Content-Type"]?) if !post_treasury_inbound_transfers_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3514,27 +3300,27 @@ module Stripe
 
     # <p>Cancels an InboundTransfer.</p>
     # @required @param inbound_transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::TreasuryInboundTransfer]
     def post_treasury_inbound_transfers_inbound_transfer_cancel(
       *,
       inbound_transfer : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::TreasuryInboundTransfer
-      data, _status_code, _headers = post_treasury_inbound_transfers_inbound_transfer_cancel_with_http_info(inbound_transfer: inbound_transfer, expand: expand)
+      data, _status_code, _headers = post_treasury_inbound_transfers_inbound_transfer_cancel_with_http_info(inbound_transfer: inbound_transfer, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Cancels an InboundTransfer.&lt;/p&gt;
     # @required @param inbound_transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::TreasuryInboundTransfer, Integer, Hash)] Stripe::TreasuryInboundTransfer, response status code and response headers
     def post_treasury_inbound_transfers_inbound_transfer_cancel_with_http_info(
       *,
       inbound_transfer : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::TreasuryInboundTransfer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_inbound_transfers_inbound_transfer_cancel(inbound_transfer: inbound_transfer, expand: expand)
+      request = build_api_request_for_post_treasury_inbound_transfers_inbound_transfer_cancel(inbound_transfer: inbound_transfer, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3547,15 +3333,15 @@ module Stripe
 
     # &lt;p&gt;Cancels an InboundTransfer.&lt;/p&gt;
     # @required @param inbound_transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_treasury_inbound_transfers_inbound_transfer_cancel(
       *,
       inbound_transfer : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_inbound_transfers_inbound_transfer_cancel(inbound_transfer: inbound_transfer, expand: expand).execute(&block)
+      build_api_request_for_post_treasury_inbound_transfers_inbound_transfer_cancel(inbound_transfer: inbound_transfer, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_TREASURY_INBOUND_TRANSFERS_INBOUND_TRANSFER_CANCEL_MAX_LENGTH_FOR_INBOUND_TRANSFER = 5000
@@ -3564,7 +3350,7 @@ module Stripe
     def build_api_request_for_post_treasury_inbound_transfers_inbound_transfer_cancel(
       *,
       inbound_transfer : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_inbound_transfers_inbound_transfer_cancel ..." }
@@ -3575,30 +3361,32 @@ module Stripe
         unless (_inbound_transfer = inbound_transfer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("inbound_transfer", inbound_transfer.to_s.size, POST_TREASURY_INBOUND_TRANSFERS_INBOUND_TRANSFER_CANCEL_MAX_LENGTH_FOR_INBOUND_TRANSFER)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/treasury/inbound_transfers/{inbound_transfer}/cancel".sub("{" + "inbound_transfer" + "}", URI.encode_path(inbound_transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3617,64 +3405,24 @@ module Stripe
     end
 
     # <p>Creates an OutboundPayment.</p>
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to pull funds from.
-    # @optional @param customer [String?] ID of the customer to whom the OutboundPayment is sent. Must match the Customer attached to the `destination_payment_method` passed in.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination_payment_method [String?] The PaymentMethod to use as the payment instrument for the OutboundPayment. Exclusive with `destination_payment_method_data`.
-    # @optional @param destination_payment_method_data [Stripe::PaymentMethodData?]
-    # @optional @param destination_payment_method_options [Stripe::PaymentMethodOptions?]
-    # @optional @param end_user_details [Stripe::EndUserDetailsParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] The description that appears on the receiving end for this OutboundPayment (for example, bank statement for external bank transfer). Maximum 10 characters for `ach` payments, 140 characters for `wire` payments, or 500 characters for `stripe` network transfers. The default value is `payment`.
+    # @required @param post_treasury_outbound_payments_request [Stripe::PostTreasuryOutboundPaymentsRequest?]
     # @return [Stripe::TreasuryOutboundPayment]
     def post_treasury_outbound_payments(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_data : Stripe::PaymentMethodData? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      end_user_details : Stripe::EndUserDetailsParams? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_outbound_payments_request : Stripe::PostTreasuryOutboundPaymentsRequest? = nil
     ) : Stripe::TreasuryOutboundPayment
-      data, _status_code, _headers = post_treasury_outbound_payments_with_http_info(amount: amount, currency: currency, financial_account: financial_account, customer: customer, description: description, destination_payment_method: destination_payment_method, destination_payment_method_data: destination_payment_method_data, destination_payment_method_options: destination_payment_method_options, end_user_details: end_user_details, expand: expand, statement_descriptor: statement_descriptor)
+      data, _status_code, _headers = post_treasury_outbound_payments_with_http_info(post_treasury_outbound_payments_request: post_treasury_outbound_payments_request)
       data
     end
 
     # &lt;p&gt;Creates an OutboundPayment.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to pull funds from.
-    # @optional @param customer [String?] ID of the customer to whom the OutboundPayment is sent. Must match the Customer attached to the `destination_payment_method` passed in.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination_payment_method [String?] The PaymentMethod to use as the payment instrument for the OutboundPayment. Exclusive with `destination_payment_method_data`.
-    # @optional @param destination_payment_method_data [Stripe::PaymentMethodData?]
-    # @optional @param destination_payment_method_options [Stripe::PaymentMethodOptions?]
-    # @optional @param end_user_details [Stripe::EndUserDetailsParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] The description that appears on the receiving end for this OutboundPayment (for example, bank statement for external bank transfer). Maximum 10 characters for `ach` payments, 140 characters for `wire` payments, or 500 characters for `stripe` network transfers. The default value is `payment`.
+    # @required @param post_treasury_outbound_payments_request [Stripe::PostTreasuryOutboundPaymentsRequest?]
     # @return [Tuple(Stripe::TreasuryOutboundPayment, Integer, Hash)] Stripe::TreasuryOutboundPayment, response status code and response headers
     def post_treasury_outbound_payments_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_data : Stripe::PaymentMethodData? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      end_user_details : Stripe::EndUserDetailsParams? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_outbound_payments_request : Stripe::PostTreasuryOutboundPaymentsRequest? = nil
     ) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_outbound_payments(amount: amount, currency: currency, financial_account: financial_account, customer: customer, description: description, destination_payment_method: destination_payment_method, destination_payment_method_data: destination_payment_method_data, destination_payment_method_options: destination_payment_method_options, end_user_details: end_user_details, expand: expand, statement_descriptor: statement_descriptor)
+      request = build_api_request_for_post_treasury_outbound_payments(post_treasury_outbound_payments_request: post_treasury_outbound_payments_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3686,123 +3434,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an OutboundPayment.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to pull funds from.
-    # @optional @param customer [String?] ID of the customer to whom the OutboundPayment is sent. Must match the Customer attached to the `destination_payment_method` passed in.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination_payment_method [String?] The PaymentMethod to use as the payment instrument for the OutboundPayment. Exclusive with `destination_payment_method_data`.
-    # @optional @param destination_payment_method_data [Stripe::PaymentMethodData?]
-    # @optional @param destination_payment_method_options [Stripe::PaymentMethodOptions?]
-    # @optional @param end_user_details [Stripe::EndUserDetailsParams?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] The description that appears on the receiving end for this OutboundPayment (for example, bank statement for external bank transfer). Maximum 10 characters for `ach` payments, 140 characters for `wire` payments, or 500 characters for `stripe` network transfers. The default value is `payment`.
+    # @required @param post_treasury_outbound_payments_request [Stripe::PostTreasuryOutboundPaymentsRequest?]
     # @return nil
     def post_treasury_outbound_payments(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_data : Stripe::PaymentMethodData? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      end_user_details : Stripe::EndUserDetailsParams? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
+      post_treasury_outbound_payments_request : Stripe::PostTreasuryOutboundPaymentsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_outbound_payments(amount: amount, currency: currency, financial_account: financial_account, customer: customer, description: description, destination_payment_method: destination_payment_method, destination_payment_method_data: destination_payment_method_data, destination_payment_method_options: destination_payment_method_options, end_user_details: end_user_details, expand: expand, statement_descriptor: statement_descriptor).execute(&block)
+      build_api_request_for_post_treasury_outbound_payments(post_treasury_outbound_payments_request: post_treasury_outbound_payments_request).execute(&block)
     end
-
-    POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_CUSTOMER                   = 5000
-    POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_DESCRIPTION                = 5000
-    POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD = 5000
-    POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR       = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_treasury_outbound_payments(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_data : Stripe::PaymentMethodData? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      end_user_details : Stripe::EndUserDetailsParams? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_outbound_payments_request : Stripe::PostTreasuryOutboundPaymentsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_outbound_payments ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"financial_account\" is required and cannot be null") if financial_account.nil?
-
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_destination_payment_method = destination_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("destination_payment_method", destination_payment_method.to_s.size, POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD)
-        end
-        unless (_destination_payment_method_data = destination_payment_method_data).nil?
-          _destination_payment_method_data.validate if _destination_payment_method_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_destination_payment_method_options = destination_payment_method_options).nil?
-          _destination_payment_method_options.validate if _destination_payment_method_options.is_a?(OpenApi::Validatable)
-        end
-        unless (_end_user_details = end_user_details).nil?
-          _end_user_details.validate if _end_user_details.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_TREASURY_OUTBOUND_PAYMENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
+        raise ArgumentError.new("\"post_treasury_outbound_payments_request\" is required and cannot be null") if post_treasury_outbound_payments_request.nil?
+        unless (_post_treasury_outbound_payments_request = post_treasury_outbound_payments_request).nil?
+          _post_treasury_outbound_payments_request.validate if _post_treasury_outbound_payments_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/outbound_payments"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["destination_payment_method"] = destination_payment_method.to_s if !destination_payment_method.nil?
-      form_params["destination_payment_method_data"] = destination_payment_method_data.to_s if !destination_payment_method_data.nil?
-      form_params["destination_payment_method_options"] = destination_payment_method_options.to_s if !destination_payment_method_options.nil?
-      form_params["end_user_details"] = end_user_details.to_s if !end_user_details.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["financial_account"] = financial_account.to_s if !financial_account.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_outbound_payments_request, content_type: header_params["Content-Type"]?) if !post_treasury_outbound_payments_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3822,27 +3500,27 @@ module Stripe
 
     # <p>Cancel an OutboundPayment.</p>
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::TreasuryOutboundPayment]
     def post_treasury_outbound_payments_id_cancel(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::TreasuryOutboundPayment
-      data, _status_code, _headers = post_treasury_outbound_payments_id_cancel_with_http_info(id: id, expand: expand)
+      data, _status_code, _headers = post_treasury_outbound_payments_id_cancel_with_http_info(id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Cancel an OutboundPayment.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::TreasuryOutboundPayment, Integer, Hash)] Stripe::TreasuryOutboundPayment, response status code and response headers
     def post_treasury_outbound_payments_id_cancel_with_http_info(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::TreasuryOutboundPayment, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_outbound_payments_id_cancel(id: id, expand: expand)
+      request = build_api_request_for_post_treasury_outbound_payments_id_cancel(id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3855,15 +3533,15 @@ module Stripe
 
     # &lt;p&gt;Cancel an OutboundPayment.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_treasury_outbound_payments_id_cancel(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_outbound_payments_id_cancel(id: id, expand: expand).execute(&block)
+      build_api_request_for_post_treasury_outbound_payments_id_cancel(id: id, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_TREASURY_OUTBOUND_PAYMENTS_ID_CANCEL_MAX_LENGTH_FOR_ID = 5000
@@ -3872,7 +3550,7 @@ module Stripe
     def build_api_request_for_post_treasury_outbound_payments_id_cancel(
       *,
       id : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_outbound_payments_id_cancel ..." }
@@ -3883,30 +3561,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_TREASURY_OUTBOUND_PAYMENTS_ID_CANCEL_MAX_LENGTH_FOR_ID)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/treasury/outbound_payments/{id}/cancel".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -3925,52 +3605,24 @@ module Stripe
     end
 
     # <p>Creates an OutboundTransfer.</p>
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to pull funds from.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination_payment_method [String?] The PaymentMethod to use as the payment instrument for the OutboundTransfer.
-    # @optional @param destination_payment_method_options [Stripe::PaymentMethodOptions?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10 characters for `ach` transfers or 140 characters for `wire` transfers. The default value is `transfer`.
+    # @required @param post_treasury_outbound_transfers_request [Stripe::PostTreasuryOutboundTransfersRequest?]
     # @return [Stripe::TreasuryOutboundTransfer]
     def post_treasury_outbound_transfers(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_outbound_transfers_request : Stripe::PostTreasuryOutboundTransfersRequest? = nil
     ) : Stripe::TreasuryOutboundTransfer
-      data, _status_code, _headers = post_treasury_outbound_transfers_with_http_info(amount: amount, currency: currency, financial_account: financial_account, description: description, destination_payment_method: destination_payment_method, destination_payment_method_options: destination_payment_method_options, expand: expand, statement_descriptor: statement_descriptor)
+      data, _status_code, _headers = post_treasury_outbound_transfers_with_http_info(post_treasury_outbound_transfers_request: post_treasury_outbound_transfers_request)
       data
     end
 
     # &lt;p&gt;Creates an OutboundTransfer.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to pull funds from.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination_payment_method [String?] The PaymentMethod to use as the payment instrument for the OutboundTransfer.
-    # @optional @param destination_payment_method_options [Stripe::PaymentMethodOptions?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10 characters for `ach` transfers or 140 characters for `wire` transfers. The default value is `transfer`.
+    # @required @param post_treasury_outbound_transfers_request [Stripe::PostTreasuryOutboundTransfersRequest?]
     # @return [Tuple(Stripe::TreasuryOutboundTransfer, Integer, Hash)] Stripe::TreasuryOutboundTransfer, response status code and response headers
     def post_treasury_outbound_transfers_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_outbound_transfers_request : Stripe::PostTreasuryOutboundTransfersRequest? = nil
     ) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_outbound_transfers(amount: amount, currency: currency, financial_account: financial_account, description: description, destination_payment_method: destination_payment_method, destination_payment_method_options: destination_payment_method_options, expand: expand, statement_descriptor: statement_descriptor)
+      request = build_api_request_for_post_treasury_outbound_transfers(post_treasury_outbound_transfers_request: post_treasury_outbound_transfers_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -3982,101 +3634,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an OutboundTransfer.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount (in cents) to be transferred.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @required @param financial_account [String?] The FinancialAccount to pull funds from.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param destination_payment_method [String?] The PaymentMethod to use as the payment instrument for the OutboundTransfer.
-    # @optional @param destination_payment_method_options [Stripe::PaymentMethodOptions?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10 characters for `ach` transfers or 140 characters for `wire` transfers. The default value is `transfer`.
+    # @required @param post_treasury_outbound_transfers_request [Stripe::PostTreasuryOutboundTransfersRequest?]
     # @return nil
     def post_treasury_outbound_transfers(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
+      post_treasury_outbound_transfers_request : Stripe::PostTreasuryOutboundTransfersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_outbound_transfers(amount: amount, currency: currency, financial_account: financial_account, description: description, destination_payment_method: destination_payment_method, destination_payment_method_options: destination_payment_method_options, expand: expand, statement_descriptor: statement_descriptor).execute(&block)
+      build_api_request_for_post_treasury_outbound_transfers(post_treasury_outbound_transfers_request: post_treasury_outbound_transfers_request).execute(&block)
     end
-
-    POST_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION                = 5000
-    POST_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD = 5000
-    POST_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR       = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_treasury_outbound_transfers(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      financial_account : String? = nil,
-      description : String? = nil,
-      destination_payment_method : String? = nil,
-      destination_payment_method_options : Stripe::PaymentMethodOptions? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil
+      post_treasury_outbound_transfers_request : Stripe::PostTreasuryOutboundTransfersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_outbound_transfers ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        raise ArgumentError.new("\"financial_account\" is required and cannot be null") if financial_account.nil?
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_destination_payment_method = destination_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("destination_payment_method", destination_payment_method.to_s.size, POST_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD)
-        end
-        unless (_destination_payment_method_options = destination_payment_method_options).nil?
-          _destination_payment_method_options.validate if _destination_payment_method_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_TREASURY_OUTBOUND_TRANSFERS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
+        raise ArgumentError.new("\"post_treasury_outbound_transfers_request\" is required and cannot be null") if post_treasury_outbound_transfers_request.nil?
+        unless (_post_treasury_outbound_transfers_request = post_treasury_outbound_transfers_request).nil?
+          _post_treasury_outbound_transfers_request.validate if _post_treasury_outbound_transfers_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/treasury/outbound_transfers"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["destination_payment_method"] = destination_payment_method.to_s if !destination_payment_method.nil?
-      form_params["destination_payment_method_options"] = destination_payment_method_options.to_s if !destination_payment_method_options.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["financial_account"] = financial_account.to_s if !financial_account.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_treasury_outbound_transfers_request, content_type: header_params["Content-Type"]?) if !post_treasury_outbound_transfers_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -4096,27 +3700,27 @@ module Stripe
 
     # <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
     # @required @param outbound_transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::TreasuryOutboundTransfer]
     def post_treasury_outbound_transfers_outbound_transfer_cancel(
       *,
       outbound_transfer : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::TreasuryOutboundTransfer
-      data, _status_code, _headers = post_treasury_outbound_transfers_outbound_transfer_cancel_with_http_info(outbound_transfer: outbound_transfer, expand: expand)
+      data, _status_code, _headers = post_treasury_outbound_transfers_outbound_transfer_cancel_with_http_info(outbound_transfer: outbound_transfer, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;An OutboundTransfer can be canceled if the funds have not yet been paid out.&lt;/p&gt;
     # @required @param outbound_transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::TreasuryOutboundTransfer, Integer, Hash)] Stripe::TreasuryOutboundTransfer, response status code and response headers
     def post_treasury_outbound_transfers_outbound_transfer_cancel_with_http_info(
       *,
       outbound_transfer : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::TreasuryOutboundTransfer, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_treasury_outbound_transfers_outbound_transfer_cancel(outbound_transfer: outbound_transfer, expand: expand)
+      request = build_api_request_for_post_treasury_outbound_transfers_outbound_transfer_cancel(outbound_transfer: outbound_transfer, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -4129,15 +3733,15 @@ module Stripe
 
     # &lt;p&gt;An OutboundTransfer can be canceled if the funds have not yet been paid out.&lt;/p&gt;
     # @required @param outbound_transfer [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_treasury_outbound_transfers_outbound_transfer_cancel(
       *,
       outbound_transfer : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_treasury_outbound_transfers_outbound_transfer_cancel(outbound_transfer: outbound_transfer, expand: expand).execute(&block)
+      build_api_request_for_post_treasury_outbound_transfers_outbound_transfer_cancel(outbound_transfer: outbound_transfer, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_TREASURY_OUTBOUND_TRANSFERS_OUTBOUND_TRANSFER_CANCEL_MAX_LENGTH_FOR_OUTBOUND_TRANSFER = 5000
@@ -4146,7 +3750,7 @@ module Stripe
     def build_api_request_for_post_treasury_outbound_transfers_outbound_transfer_cancel(
       *,
       outbound_transfer : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TreasuryApi.post_treasury_outbound_transfers_outbound_transfer_cancel ..." }
@@ -4157,30 +3761,32 @@ module Stripe
         unless (_outbound_transfer = outbound_transfer).nil?
           OpenApi::PrimitiveValidator.validate_max_length("outbound_transfer", outbound_transfer.to_s.size, POST_TREASURY_OUTBOUND_TRANSFERS_OUTBOUND_TRANSFER_CANCEL_MAX_LENGTH_FOR_OUTBOUND_TRANSFER)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/treasury/outbound_transfers/{outbound_transfer}/cancel".sub("{" + "outbound_transfer" + "}", URI.encode_path(outbound_transfer.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

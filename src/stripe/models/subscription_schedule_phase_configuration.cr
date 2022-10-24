@@ -118,7 +118,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_settings_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to a phase. Metadata on a schedule's phase will update the underlying subscription's `metadata` when the phase is entered. Updating the underlying subscription's `metadata` directly will not affect the current phase's `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     getter metadata : Hash(String, String)? = nil
 

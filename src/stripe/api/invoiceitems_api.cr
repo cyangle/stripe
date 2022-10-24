@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoiceitems/{invoiceitem}".sub("{" + "invoiceitem" + "}", URI.encode_path(invoiceitem.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -240,8 +240,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoiceitems"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -251,19 +259,11 @@ module Stripe
       query_params["customer"] = customer.to_s if !customer.nil?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -349,23 +349,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoiceitems/{invoiceitem}".sub("{" + "invoiceitem" + "}", URI.encode_path(invoiceitem.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -384,88 +384,24 @@ module Stripe
     end
 
     # <p>Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.</p>
-    # @required @param customer [String?] The ID of the customer who will be billed when this invoice item is billed.
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative `amount` will reduce the `amount_due` on the invoice.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-    # @optional @param discountable [Bool?] Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
-    # @optional @param discounts [Stripe::PostInvoiceitemsRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice [String?] The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. This is useful when adding invoice items in response to an invoice.created webhook. You can only add invoice items to draft invoices and there is a maximum of 250 items per invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param period [Stripe::Period?]
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::OneTimePriceData?]
-    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
-    # @optional @param subscription [String?] The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
-    # @optional @param tax_rates [Array(String)?] The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
-    # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @required @param post_invoiceitems_request [Stripe::PostInvoiceitemsRequest?]
     # @return [Stripe::Invoiceitem]
     def post_invoiceitems(
       *,
-      customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      invoice : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      subscription : String? = nil,
-      tax_rates : Array(String)? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_invoiceitems_request : Stripe::PostInvoiceitemsRequest? = nil
     ) : Stripe::Invoiceitem
-      data, _status_code, _headers = post_invoiceitems_with_http_info(customer: customer, amount: amount, currency: currency, description: description, discountable: discountable, discounts: discounts, expand: expand, invoice: invoice, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, subscription: subscription, tax_rates: tax_rates, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal)
+      data, _status_code, _headers = post_invoiceitems_with_http_info(post_invoiceitems_request: post_invoiceitems_request)
       data
     end
 
     # &lt;p&gt;Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.&lt;/p&gt;
-    # @required @param customer [String?] The ID of the customer who will be billed when this invoice item is billed.
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative `amount` will reduce the `amount_due` on the invoice.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-    # @optional @param discountable [Bool?] Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
-    # @optional @param discounts [Stripe::PostInvoiceitemsRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice [String?] The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. This is useful when adding invoice items in response to an invoice.created webhook. You can only add invoice items to draft invoices and there is a maximum of 250 items per invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param period [Stripe::Period?]
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::OneTimePriceData?]
-    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
-    # @optional @param subscription [String?] The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
-    # @optional @param tax_rates [Array(String)?] The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
-    # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @required @param post_invoiceitems_request [Stripe::PostInvoiceitemsRequest?]
     # @return [Tuple(Stripe::Invoiceitem, Integer, Hash)] Stripe::Invoiceitem, response status code and response headers
     def post_invoiceitems_with_http_info(
       *,
-      customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      invoice : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      subscription : String? = nil,
-      tax_rates : Array(String)? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_invoiceitems_request : Stripe::PostInvoiceitemsRequest? = nil
     ) : Tuple(Stripe::Invoiceitem, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoiceitems(customer: customer, amount: amount, currency: currency, description: description, discountable: discountable, discounts: discounts, expand: expand, invoice: invoice, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, subscription: subscription, tax_rates: tax_rates, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal)
+      request = build_api_request_for_post_invoiceitems(post_invoiceitems_request: post_invoiceitems_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -477,152 +413,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.&lt;/p&gt;
-    # @required @param customer [String?] The ID of the customer who will be billed when this invoice item is billed.
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative `amount` will reduce the `amount_due` on the invoice.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-    # @optional @param discountable [Bool?] Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
-    # @optional @param discounts [Stripe::PostInvoiceitemsRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice [String?] The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. This is useful when adding invoice items in response to an invoice.created webhook. You can only add invoice items to draft invoices and there is a maximum of 250 items per invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param period [Stripe::Period?]
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::OneTimePriceData?]
-    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
-    # @optional @param subscription [String?] The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
-    # @optional @param tax_rates [Array(String)?] The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
-    # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @required @param post_invoiceitems_request [Stripe::PostInvoiceitemsRequest?]
     # @return nil
     def post_invoiceitems(
       *,
-      customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      invoice : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      subscription : String? = nil,
-      tax_rates : Array(String)? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil,
+      post_invoiceitems_request : Stripe::PostInvoiceitemsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoiceitems(customer: customer, amount: amount, currency: currency, description: description, discountable: discountable, discounts: discounts, expand: expand, invoice: invoice, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, subscription: subscription, tax_rates: tax_rates, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal).execute(&block)
+      build_api_request_for_post_invoiceitems(post_invoiceitems_request: post_invoiceitems_request).execute(&block)
     end
-
-    POST_INVOICEITEMS_MAX_LENGTH_FOR_CUSTOMER     = 5000
-    POST_INVOICEITEMS_MAX_LENGTH_FOR_DESCRIPTION  = 5000
-    POST_INVOICEITEMS_MAX_LENGTH_FOR_INVOICE      = 5000
-    POST_INVOICEITEMS_MAX_LENGTH_FOR_PRICE        = 5000
-    POST_INVOICEITEMS_MAX_LENGTH_FOR_SUBSCRIPTION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_invoiceitems(
       *,
-      customer : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      invoice : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      subscription : String? = nil,
-      tax_rates : Array(String)? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_invoiceitems_request : Stripe::PostInvoiceitemsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoiceitemsApi.post_invoiceitems ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"customer\" is required and cannot be null") if customer.nil?
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_INVOICEITEMS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_INVOICEITEMS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_invoice = invoice).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICEITEMS_MAX_LENGTH_FOR_INVOICE)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_period = period).nil?
-          _period.validate if _period.is_a?(OpenApi::Validatable)
-        end
-        unless (_price = price).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("price", price.to_s.size, POST_INVOICEITEMS_MAX_LENGTH_FOR_PRICE)
-        end
-        unless (_price_data = price_data).nil?
-          _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_subscription = subscription).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("subscription", subscription.to_s.size, POST_INVOICEITEMS_MAX_LENGTH_FOR_SUBSCRIPTION)
+        raise ArgumentError.new("\"post_invoiceitems_request\" is required and cannot be null") if post_invoiceitems_request.nil?
+        unless (_post_invoiceitems_request = post_invoiceitems_request).nil?
+          _post_invoiceitems_request.validate if _post_invoiceitems_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/invoiceitems"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discountable"] = discountable.to_s if !discountable.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["invoice"] = invoice.to_s if !invoice.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["period"] = period.to_s if !period.nil?
-      form_params["price"] = price.to_s if !price.nil?
-      form_params["price_data"] = price_data.to_s if !price_data.nil?
-      form_params["quantity"] = quantity.to_s if !quantity.nil?
-      form_params["subscription"] = subscription.to_s if !subscription.nil?
-      form_params["tax_rates"] = @api_client.build_collection_param(tax_rates, "csv") if !tax_rates.nil? && !tax_rates.empty?
-      form_params["unit_amount"] = unit_amount.to_s if !unit_amount.nil?
-      form_params["unit_amount_decimal"] = unit_amount_decimal.to_s if !unit_amount_decimal.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_invoiceitems_request, content_type: header_params["Content-Type"]?) if !post_invoiceitems_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -642,75 +479,27 @@ module Stripe
 
     # <p>Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it’s attached to is closed.</p>
     # @required @param invoiceitem [String?]
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
-    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-    # @optional @param discountable [Bool?] Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
-    # @optional @param discounts [Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param period [Stripe::Period?]
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::OneTimePriceData?]
-    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
-    # @optional @param tax_rates [Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates?]
-    # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @optional @param post_invoiceitems_invoiceitem_request [Stripe::PostInvoiceitemsInvoiceitemRequest?]
     # @return [Stripe::Invoiceitem]
     def post_invoiceitems_invoiceitem(
       *,
       invoiceitem : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_invoiceitems_invoiceitem_request : Stripe::PostInvoiceitemsInvoiceitemRequest? = nil
     ) : Stripe::Invoiceitem
-      data, _status_code, _headers = post_invoiceitems_invoiceitem_with_http_info(invoiceitem: invoiceitem, amount: amount, description: description, discountable: discountable, discounts: discounts, expand: expand, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, tax_rates: tax_rates, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal)
+      data, _status_code, _headers = post_invoiceitems_invoiceitem_with_http_info(invoiceitem: invoiceitem, post_invoiceitems_invoiceitem_request: post_invoiceitems_invoiceitem_request)
       data
     end
 
     # &lt;p&gt;Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it’s attached to is closed.&lt;/p&gt;
     # @required @param invoiceitem [String?]
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
-    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-    # @optional @param discountable [Bool?] Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
-    # @optional @param discounts [Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param period [Stripe::Period?]
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::OneTimePriceData?]
-    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
-    # @optional @param tax_rates [Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates?]
-    # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @optional @param post_invoiceitems_invoiceitem_request [Stripe::PostInvoiceitemsInvoiceitemRequest?]
     # @return [Tuple(Stripe::Invoiceitem, Integer, Hash)] Stripe::Invoiceitem, response status code and response headers
     def post_invoiceitems_invoiceitem_with_http_info(
       *,
       invoiceitem : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_invoiceitems_invoiceitem_request : Stripe::PostInvoiceitemsInvoiceitemRequest? = nil
     ) : Tuple(Stripe::Invoiceitem, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoiceitems_invoiceitem(invoiceitem: invoiceitem, amount: amount, description: description, discountable: discountable, discounts: discounts, expand: expand, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, tax_rates: tax_rates, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal)
+      request = build_api_request_for_post_invoiceitems_invoiceitem(invoiceitem: invoiceitem, post_invoiceitems_invoiceitem_request: post_invoiceitems_invoiceitem_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -723,62 +512,24 @@ module Stripe
 
     # &lt;p&gt;Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it’s attached to is closed.&lt;/p&gt;
     # @required @param invoiceitem [String?]
-    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
-    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
-    # @optional @param discountable [Bool?] Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
-    # @optional @param discounts [Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param period [Stripe::Period?]
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::OneTimePriceData?]
-    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
-    # @optional @param tax_rates [Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates?]
-    # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @optional @param post_invoiceitems_invoiceitem_request [Stripe::PostInvoiceitemsInvoiceitemRequest?]
     # @return nil
     def post_invoiceitems_invoiceitem(
       *,
       invoiceitem : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil,
+      post_invoiceitems_invoiceitem_request : Stripe::PostInvoiceitemsInvoiceitemRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoiceitems_invoiceitem(invoiceitem: invoiceitem, amount: amount, description: description, discountable: discountable, discounts: discounts, expand: expand, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, tax_rates: tax_rates, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal).execute(&block)
+      build_api_request_for_post_invoiceitems_invoiceitem(invoiceitem: invoiceitem, post_invoiceitems_invoiceitem_request: post_invoiceitems_invoiceitem_request).execute(&block)
     end
 
     POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_INVOICEITEM = 5000
-    POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_DESCRIPTION = 5000
-    POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_PRICE       = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_invoiceitems_invoiceitem(
       *,
       invoiceitem : String? = nil,
-      amount : Int64? = nil,
-      description : String? = nil,
-      discountable : Bool? = nil,
-      discounts : Stripe::PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      period : Stripe::Period? = nil,
-      price : String? = nil,
-      price_data : Stripe::OneTimePriceData? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_invoiceitems_invoiceitem_request : Stripe::PostInvoiceitemsInvoiceitemRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoiceitemsApi.post_invoiceitems_invoiceitem ..." }
@@ -789,67 +540,32 @@ module Stripe
         unless (_invoiceitem = invoiceitem).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoiceitem", invoiceitem.to_s.size, POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_INVOICEITEM)
         end
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_period = period).nil?
-          _period.validate if _period.is_a?(OpenApi::Validatable)
-        end
-        unless (_price = price).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("price", price.to_s.size, POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_PRICE)
-        end
-        unless (_price_data = price_data).nil?
-          _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_tax_rates = tax_rates).nil?
-          _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
+        unless (_post_invoiceitems_invoiceitem_request = post_invoiceitems_invoiceitem_request).nil?
+          _post_invoiceitems_invoiceitem_request.validate if _post_invoiceitems_invoiceitem_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/invoiceitems/{invoiceitem}".sub("{" + "invoiceitem" + "}", URI.encode_path(invoiceitem.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discountable"] = discountable.to_s if !discountable.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["period"] = period.to_s if !period.nil?
-      form_params["price"] = price.to_s if !price.nil?
-      form_params["price_data"] = price_data.to_s if !price_data.nil?
-      form_params["quantity"] = quantity.to_s if !quantity.nil?
-      form_params["tax_rates"] = tax_rates.to_s if !tax_rates.nil?
-      form_params["unit_amount"] = unit_amount.to_s if !unit_amount.nil?
-      form_params["unit_amount_decimal"] = unit_amount_decimal.to_s if !unit_amount_decimal.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_invoiceitems_invoiceitem_request, content_type: header_params["Content-Type"]?) if !post_invoiceitems_invoiceitem_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

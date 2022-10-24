@@ -22,13 +22,8 @@ describe "AccountLinksApi" do
 
   # unit tests for post_account_links
   # &lt;p&gt;Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.&lt;/p&gt;
-  # @param account The identifier of the account to create an account link for.
-  # @param _type The type of account link the user is requesting. Possible values are &#x60;account_onboarding&#x60; or &#x60;account_update&#x60;.
+  # @param post_account_links_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :collect Which information the platform needs to collect from the user. One of &#x60;currently_due&#x60; or &#x60;eventually_due&#x60;. Default is &#x60;currently_due&#x60;.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :refresh_url The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link&#39;s URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
-  # @option opts [String] :return_url The URL that the user will be redirected to upon leaving or completing the linked flow.
   # @return [AccountLink]
   describe "post_account_links test" do
     it "should work" do

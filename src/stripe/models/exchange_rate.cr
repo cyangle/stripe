@@ -32,7 +32,6 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [exchange_rate]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("exchange_rate")
 
-    # Hash where the keys are supported currencies and the values are the exchange rate at which the base id currency converts to the key currency.
     @[JSON::Field(key: "rates", type: Hash(String, Float64)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter rates : Hash(String, Float64)? = nil
 

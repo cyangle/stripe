@@ -21,44 +21,24 @@ module Stripe
     end
 
     # <p>Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.</p>
-    # @required @param account [String?] The identifier of the account to create an account link for.
-    # @required @param _type [String?] The type of account link the user is requesting. Possible values are `account_onboarding` or `account_update`.
-    # @optional @param collect [String?] Which information the platform needs to collect from the user. One of `currently_due` or `eventually_due`. Default is `currently_due`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param refresh_url [String?] The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
-    # @optional @param return_url [String?] The URL that the user will be redirected to upon leaving or completing the linked flow.
+    # @required @param post_account_links_request [Stripe::PostAccountLinksRequest?]
     # @return [Stripe::AccountLink]
     def post_account_links(
       *,
-      account : String? = nil,
-      _type : String? = nil,
-      collect : String? = nil,
-      expand : Array(String)? = nil,
-      refresh_url : String? = nil,
-      return_url : String? = nil
+      post_account_links_request : Stripe::PostAccountLinksRequest? = nil
     ) : Stripe::AccountLink
-      data, _status_code, _headers = post_account_links_with_http_info(account: account, _type: _type, collect: collect, expand: expand, refresh_url: refresh_url, return_url: return_url)
+      data, _status_code, _headers = post_account_links_with_http_info(post_account_links_request: post_account_links_request)
       data
     end
 
     # &lt;p&gt;Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.&lt;/p&gt;
-    # @required @param account [String?] The identifier of the account to create an account link for.
-    # @required @param _type [String?] The type of account link the user is requesting. Possible values are `account_onboarding` or `account_update`.
-    # @optional @param collect [String?] Which information the platform needs to collect from the user. One of `currently_due` or `eventually_due`. Default is `currently_due`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param refresh_url [String?] The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
-    # @optional @param return_url [String?] The URL that the user will be redirected to upon leaving or completing the linked flow.
+    # @required @param post_account_links_request [Stripe::PostAccountLinksRequest?]
     # @return [Tuple(Stripe::AccountLink, Integer, Hash)] Stripe::AccountLink, response status code and response headers
     def post_account_links_with_http_info(
       *,
-      account : String? = nil,
-      _type : String? = nil,
-      collect : String? = nil,
-      expand : Array(String)? = nil,
-      refresh_url : String? = nil,
-      return_url : String? = nil
+      post_account_links_request : Stripe::PostAccountLinksRequest? = nil
     ) : Tuple(Stripe::AccountLink, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_account_links(account: account, _type: _type, collect: collect, expand: expand, refresh_url: refresh_url, return_url: return_url)
+      request = build_api_request_for_post_account_links(post_account_links_request: post_account_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -70,85 +50,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.&lt;/p&gt;
-    # @required @param account [String?] The identifier of the account to create an account link for.
-    # @required @param _type [String?] The type of account link the user is requesting. Possible values are `account_onboarding` or `account_update`.
-    # @optional @param collect [String?] Which information the platform needs to collect from the user. One of `currently_due` or `eventually_due`. Default is `currently_due`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param refresh_url [String?] The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
-    # @optional @param return_url [String?] The URL that the user will be redirected to upon leaving or completing the linked flow.
+    # @required @param post_account_links_request [Stripe::PostAccountLinksRequest?]
     # @return nil
     def post_account_links(
       *,
-      account : String? = nil,
-      _type : String? = nil,
-      collect : String? = nil,
-      expand : Array(String)? = nil,
-      refresh_url : String? = nil,
-      return_url : String? = nil,
+      post_account_links_request : Stripe::PostAccountLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_account_links(account: account, _type: _type, collect: collect, expand: expand, refresh_url: refresh_url, return_url: return_url).execute(&block)
+      build_api_request_for_post_account_links(post_account_links_request: post_account_links_request).execute(&block)
     end
-
-    POST_ACCOUNT_LINKS_MAX_LENGTH_FOR_ACCOUNT   = 5000
-    POST_ACCOUNT_LINKS_VALID_VALUES_FOR__TYPE   = String.static_array("account_onboarding", "account_update")
-    POST_ACCOUNT_LINKS_VALID_VALUES_FOR_COLLECT = String.static_array("currently_due", "eventually_due")
 
     # @return Crest::Request
     def build_api_request_for_post_account_links(
       *,
-      account : String? = nil,
-      _type : String? = nil,
-      collect : String? = nil,
-      expand : Array(String)? = nil,
-      refresh_url : String? = nil,
-      return_url : String? = nil
+      post_account_links_request : Stripe::PostAccountLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AccountLinksApi.post_account_links ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"account\" is required and cannot be null") if account.nil?
-        unless (_account = account).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_ACCOUNT_LINKS_MAX_LENGTH_FOR_ACCOUNT)
-        end
-        raise ArgumentError.new("\"_type\" is required and cannot be null") if _type.nil?
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_ACCOUNT_LINKS_VALID_VALUES_FOR__TYPE)
-        end
-        unless (_collect = collect).nil?
-          OpenApi::EnumValidator.validate("collect", _collect, POST_ACCOUNT_LINKS_VALID_VALUES_FOR_COLLECT)
+        raise ArgumentError.new("\"post_account_links_request\" is required and cannot be null") if post_account_links_request.nil?
+        unless (_post_account_links_request = post_account_links_request).nil?
+          _post_account_links_request.validate if _post_account_links_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/account_links"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account"] = account.to_s if !account.nil?
-      form_params["collect"] = collect.to_s if !collect.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["refresh_url"] = refresh_url.to_s if !refresh_url.nil?
-      form_params["return_url"] = return_url.to_s if !return_url.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_account_links_request, content_type: header_params["Content-Type"]?) if !post_account_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

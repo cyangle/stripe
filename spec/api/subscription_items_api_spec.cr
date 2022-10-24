@@ -24,9 +24,7 @@ describe "SubscriptionItemsApi" do
   # &lt;p&gt;Deletes an item from the subscription. Removing a subscription item from a subscription will not cancel the subscription.&lt;/p&gt;
   # @param item
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :clear_usage Delete all usage for the given subscription item. Allowed only when the current plan&#39;s &#x60;usage_type&#x60; is &#x60;metered&#x60;.
-  # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes.
-  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+  # @option opts [DeleteSubscriptionItemsItemRequest] :delete_subscription_items_item_request
   # @return [DeletedSubscriptionItem]
   describe "delete_subscription_items_item test" do
     it "should work" do
@@ -78,17 +76,8 @@ describe "SubscriptionItemsApi" do
 
   # unit tests for post_subscription_items
   # &lt;p&gt;Adds a new item to an existing subscription. No existing items will be changed or replaced.&lt;/p&gt;
-  # @param subscription The identifier of the subscription to modify.
+  # @param post_subscription_items_request
   # @param [Hash] opts the optional parameters
-  # @option opts [PostSubscriptionItemsRequestBillingThresholds] :billing_thresholds
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-  # @option opts [String] :price The ID of the price object.
-  # @option opts [RecurringPriceData] :price_data
-  # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes.
-  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-  # @option opts [Int32] :quantity The quantity you&#39;d like to apply to the subscription item you&#39;re creating.
-  # @option opts [PostSubscriptionItemsRequestTaxRates] :tax_rates
   # @return [SubscriptionItem]
   describe "post_subscription_items test" do
     it "should work" do
@@ -100,17 +89,7 @@ describe "SubscriptionItemsApi" do
   # &lt;p&gt;Updates the plan or quantity of an item on a current subscription.&lt;/p&gt;
   # @param item
   # @param [Hash] opts the optional parameters
-  # @option opts [PostSubscriptionItemsRequestBillingThresholds] :billing_thresholds
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted.
-  # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-  # @option opts [String] :price The ID of the price object. When changing a subscription item&#39;s price, &#x60;quantity&#x60; is set to 1 unless a &#x60;quantity&#x60; parameter is provided.
-  # @option opts [RecurringPriceData] :price_data
-  # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes.
-  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-  # @option opts [Int32] :quantity The quantity you&#39;d like to apply to the subscription item you&#39;re creating.
-  # @option opts [PostSubscriptionItemsRequestTaxRates] :tax_rates
+  # @option opts [PostSubscriptionItemsItemRequest] :post_subscription_items_item_request
   # @return [SubscriptionItem]
   describe "post_subscription_items_item test" do
     it "should work" do
@@ -121,11 +100,8 @@ describe "SubscriptionItemsApi" do
   # unit tests for post_subscription_items_subscription_item_usage_records
   # &lt;p&gt;Creates a usage record for a specified subscription item and date, and fills it with a quantity.&lt;/p&gt;  &lt;p&gt;Usage records provide &lt;code&gt;quantity&lt;/code&gt; information that Stripe uses to track how much a customer is using your service. With usage information and the pricing model set up by the &lt;a href&#x3D;\&quot;https://stripe.com/docs/billing/subscriptions/metered-billing\&quot;&gt;metered billing&lt;/a&gt; plan, Stripe helps you send accurate invoices to your customers.&lt;/p&gt;  &lt;p&gt;The default calculation for usage is to add up all the &lt;code&gt;quantity&lt;/code&gt; values of the usage records within a billing period. You can change this default behavior with the billing plan’s &lt;code&gt;aggregate_usage&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/api/plans/create#create_plan-aggregate_usage\&quot;&gt;parameter&lt;/a&gt;. When there is more than one usage record with the same timestamp, Stripe adds the &lt;code&gt;quantity&lt;/code&gt; values together. In most cases, this is the desired resolution, however, you can change this behavior with the &lt;code&gt;action&lt;/code&gt; parameter.&lt;/p&gt;  &lt;p&gt;The default pricing model for metered billing is &lt;a href&#x3D;\&quot;/docs/api/plans/object#plan_object-billing_scheme\&quot;&gt;per-unit pricing&lt;/a&gt;. For finer granularity, you can configure metered billing to have a &lt;a href&#x3D;\&quot;https://stripe.com/docs/billing/subscriptions/tiers\&quot;&gt;tiered pricing&lt;/a&gt; model.&lt;/p&gt;
   # @param subscription_item
-  # @param quantity The usage quantity for the specified timestamp.
+  # @param post_subscription_items_subscription_item_usage_records_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :action Valid values are &#x60;increment&#x60; (default) or &#x60;set&#x60;. When using &#x60;increment&#x60; the specified &#x60;quantity&#x60; will be added to the usage at the specified timestamp. The &#x60;set&#x60; action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), &#x60;increment&#x60; is the only allowed value.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp] :timestamp
   # @return [UsageRecord]
   describe "post_subscription_items_subscription_item_usage_records test" do
     it "should work" do

@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_documentation", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter additional_documentation : Stripe::BbposWisePoseSplashscreen? = nil
+    @[JSON::Field(key: "additional_documentation", type: Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter additional_documentation : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
 
     @[JSON::Field(key: "expected_at", type: Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expected_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
@@ -44,7 +44,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @additional_documentation : Stripe::BbposWisePoseSplashscreen? = nil,
+      @additional_documentation : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil,
       @expected_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
       @explanation : String? = nil,
       @product_description : String? = nil,
@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::BbposWisePoseSplashscreen?)
+    def additional_documentation=(additional_documentation : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?)
       if additional_documentation.nil?
         return @additional_documentation = nil
       end

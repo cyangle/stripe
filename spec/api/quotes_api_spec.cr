@@ -94,25 +94,7 @@ describe "QuotesApi" do
   # unit tests for post_quotes
   # &lt;p&gt;A quote models prices and services for a customer. Default options for &lt;code&gt;header&lt;/code&gt;, &lt;code&gt;description&lt;/code&gt;, &lt;code&gt;footer&lt;/code&gt;, and &lt;code&gt;expires_at&lt;/code&gt; can be set in the dashboard via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/settings/billing/quote\&quot;&gt;quote template&lt;/a&gt;.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [PostQuotesRequestApplicationFeeAmount] :application_fee_amount
-  # @option opts [PostQuotesRequestApplicationFeePercent] :application_fee_percent
-  # @option opts [AutomaticTaxParam] :automatic_tax
-  # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as &#x60;active&#x60;. Defaults to &#x60;charge_automatically&#x60;.
-  # @option opts [String] :customer The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-  # @option opts [PostQuotesRequestDefaultTaxRates] :default_tax_rates
-  # @option opts [String] :description A description that will be displayed on the quote PDF. If no value is passed, the default description configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-  # @option opts [PostQuotesRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-  # @option opts [String] :footer A footer that will be displayed on the quote PDF. If no value is passed, the default footer configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-  # @option opts [FromQuoteParams] :from_quote
-  # @option opts [String] :header A header that will be displayed on the quote PDF. If no value is passed, the default header configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-  # @option opts [QuoteParam] :invoice_settings
-  # @option opts [Array(LineItemCreateParams)] :line_items A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-  # @option opts [PostQuotesRequestOnBehalfOf] :on_behalf_of
-  # @option opts [SubscriptionDataCreateParams] :subscription_data
-  # @option opts [String] :test_clock ID of the test clock to attach to the quote.
-  # @option opts [PostQuotesRequestTransferData] :transfer_data
+  # @option opts [PostQuotesRequest] :post_quotes_request
   # @return [Quote]
   describe "post_quotes test" do
     it "should work" do
@@ -124,23 +106,7 @@ describe "QuotesApi" do
   # &lt;p&gt;A quote models prices and services for a customer.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [PostQuotesRequestApplicationFeeAmount] :application_fee_amount
-  # @option opts [PostQuotesRequestApplicationFeePercent] :application_fee_percent
-  # @option opts [AutomaticTaxParam] :automatic_tax
-  # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as &#x60;active&#x60;. Defaults to &#x60;charge_automatically&#x60;.
-  # @option opts [String] :customer The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-  # @option opts [PostQuotesRequestDefaultTaxRates] :default_tax_rates
-  # @option opts [String] :description A description that will be displayed on the quote PDF.
-  # @option opts [PostQuotesRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
-  # @option opts [String] :footer A footer that will be displayed on the quote PDF.
-  # @option opts [String] :header A header that will be displayed on the quote PDF.
-  # @option opts [QuoteParam] :invoice_settings
-  # @option opts [Array(LineItemUpdateParams)] :line_items A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-  # @option opts [PostQuotesRequestOnBehalfOf] :on_behalf_of
-  # @option opts [SubscriptionDataUpdateParams] :subscription_data
-  # @option opts [PostQuotesRequestTransferData] :transfer_data
+  # @option opts [PostQuotesQuoteRequest] :post_quotes_quote_request
   # @return [Quote]
   describe "post_quotes_quote test" do
     it "should work" do
@@ -152,7 +118,7 @@ describe "QuotesApi" do
   # &lt;p&gt;Accepts the specified quote.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Quote]
   describe "post_quotes_quote_accept test" do
     it "should work" do
@@ -164,7 +130,7 @@ describe "QuotesApi" do
   # &lt;p&gt;Cancels the quote.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Quote]
   describe "post_quotes_quote_cancel test" do
     it "should work" do
@@ -176,8 +142,7 @@ describe "QuotesApi" do
   # &lt;p&gt;Finalizes the quote.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
+  # @option opts [PostQuotesQuoteFinalizeRequest] :post_quotes_quote_finalize_request
   # @return [Quote]
   describe "post_quotes_quote_finalize test" do
     it "should work" do

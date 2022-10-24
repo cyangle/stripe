@@ -119,8 +119,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/billing_portal/configurations"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -128,19 +136,11 @@ module Stripe
       query_params["is_default"] = is_default.to_s if !is_default.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -226,23 +226,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/billing_portal/configurations/{configuration}".sub("{" + "configuration" + "}", URI.encode_path(configuration.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -261,40 +261,24 @@ module Stripe
     end
 
     # <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
-    # @required @param business_profile [Stripe::BusinessProfileCreateParam?]
-    # @required @param features [Stripe::FeaturesCreationParam?]
-    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param login_page [Stripe::LoginPageCreateParam?]
+    # @required @param post_billing_portal_configurations_request [Stripe::PostBillingPortalConfigurationsRequest?]
     # @return [Stripe::BillingPortalConfiguration]
     def post_billing_portal_configurations(
       *,
-      business_profile : Stripe::BusinessProfileCreateParam? = nil,
-      features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      login_page : Stripe::LoginPageCreateParam? = nil
+      post_billing_portal_configurations_request : Stripe::PostBillingPortalConfigurationsRequest? = nil
     ) : Stripe::BillingPortalConfiguration
-      data, _status_code, _headers = post_billing_portal_configurations_with_http_info(business_profile: business_profile, features: features, default_return_url: default_return_url, expand: expand, login_page: login_page)
+      data, _status_code, _headers = post_billing_portal_configurations_with_http_info(post_billing_portal_configurations_request: post_billing_portal_configurations_request)
       data
     end
 
     # &lt;p&gt;Creates a configuration that describes the functionality and behavior of a PortalSession&lt;/p&gt;
-    # @required @param business_profile [Stripe::BusinessProfileCreateParam?]
-    # @required @param features [Stripe::FeaturesCreationParam?]
-    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param login_page [Stripe::LoginPageCreateParam?]
+    # @required @param post_billing_portal_configurations_request [Stripe::PostBillingPortalConfigurationsRequest?]
     # @return [Tuple(Stripe::BillingPortalConfiguration, Integer, Hash)] Stripe::BillingPortalConfiguration, response status code and response headers
     def post_billing_portal_configurations_with_http_info(
       *,
-      business_profile : Stripe::BusinessProfileCreateParam? = nil,
-      features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      login_page : Stripe::LoginPageCreateParam? = nil
+      post_billing_portal_configurations_request : Stripe::PostBillingPortalConfigurationsRequest? = nil
     ) : Tuple(Stripe::BillingPortalConfiguration, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_billing_portal_configurations(business_profile: business_profile, features: features, default_return_url: default_return_url, expand: expand, login_page: login_page)
+      request = build_api_request_for_post_billing_portal_configurations(post_billing_portal_configurations_request: post_billing_portal_configurations_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -306,81 +290,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a configuration that describes the functionality and behavior of a PortalSession&lt;/p&gt;
-    # @required @param business_profile [Stripe::BusinessProfileCreateParam?]
-    # @required @param features [Stripe::FeaturesCreationParam?]
-    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param login_page [Stripe::LoginPageCreateParam?]
+    # @required @param post_billing_portal_configurations_request [Stripe::PostBillingPortalConfigurationsRequest?]
     # @return nil
     def post_billing_portal_configurations(
       *,
-      business_profile : Stripe::BusinessProfileCreateParam? = nil,
-      features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      login_page : Stripe::LoginPageCreateParam? = nil,
+      post_billing_portal_configurations_request : Stripe::PostBillingPortalConfigurationsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_billing_portal_configurations(business_profile: business_profile, features: features, default_return_url: default_return_url, expand: expand, login_page: login_page).execute(&block)
+      build_api_request_for_post_billing_portal_configurations(post_billing_portal_configurations_request: post_billing_portal_configurations_request).execute(&block)
     end
 
     # @return Crest::Request
     def build_api_request_for_post_billing_portal_configurations(
       *,
-      business_profile : Stripe::BusinessProfileCreateParam? = nil,
-      features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      login_page : Stripe::LoginPageCreateParam? = nil
+      post_billing_portal_configurations_request : Stripe::PostBillingPortalConfigurationsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: BillingPortalApi.post_billing_portal_configurations ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"business_profile\" is required and cannot be null") if business_profile.nil?
-        unless (_business_profile = business_profile).nil?
-          _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
-        end
-        raise ArgumentError.new("\"features\" is required and cannot be null") if features.nil?
-        unless (_features = features).nil?
-          _features.validate if _features.is_a?(OpenApi::Validatable)
-        end
-        unless (_default_return_url = default_return_url).nil?
-          _default_return_url.validate if _default_return_url.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_login_page = login_page).nil?
-          _login_page.validate if _login_page.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_billing_portal_configurations_request\" is required and cannot be null") if post_billing_portal_configurations_request.nil?
+        unless (_post_billing_portal_configurations_request = post_billing_portal_configurations_request).nil?
+          _post_billing_portal_configurations_request.validate if _post_billing_portal_configurations_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/billing_portal/configurations"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["business_profile"] = business_profile.to_s if !business_profile.nil?
-      form_params["default_return_url"] = default_return_url.to_s if !default_return_url.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["features"] = features.to_s if !features.nil?
-      form_params["login_page"] = login_page.to_s if !login_page.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_billing_portal_configurations_request, content_type: header_params["Content-Type"]?) if !post_billing_portal_configurations_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -400,51 +356,27 @@ module Stripe
 
     # <p>Updates a configuration that describes the functionality of the customer portal.</p>
     # @required @param configuration [String?]
-    # @optional @param active [Bool?] Whether the configuration is active and can be used to create portal sessions.
-    # @optional @param business_profile [Stripe::BusinessProfileUpdateParam?]
-    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeaturesUpdatingParam?]
-    # @optional @param login_page [Stripe::LoginPageUpdateParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_billing_portal_configurations_configuration_request [Stripe::PostBillingPortalConfigurationsConfigurationRequest?]
     # @return [Stripe::BillingPortalConfiguration]
     def post_billing_portal_configurations_configuration(
       *,
       configuration : String? = nil,
-      active : Bool? = nil,
-      business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeaturesUpdatingParam? = nil,
-      login_page : Stripe::LoginPageUpdateParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_billing_portal_configurations_configuration_request : Stripe::PostBillingPortalConfigurationsConfigurationRequest? = nil
     ) : Stripe::BillingPortalConfiguration
-      data, _status_code, _headers = post_billing_portal_configurations_configuration_with_http_info(configuration: configuration, active: active, business_profile: business_profile, default_return_url: default_return_url, expand: expand, features: features, login_page: login_page, metadata: metadata)
+      data, _status_code, _headers = post_billing_portal_configurations_configuration_with_http_info(configuration: configuration, post_billing_portal_configurations_configuration_request: post_billing_portal_configurations_configuration_request)
       data
     end
 
     # &lt;p&gt;Updates a configuration that describes the functionality of the customer portal.&lt;/p&gt;
     # @required @param configuration [String?]
-    # @optional @param active [Bool?] Whether the configuration is active and can be used to create portal sessions.
-    # @optional @param business_profile [Stripe::BusinessProfileUpdateParam?]
-    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeaturesUpdatingParam?]
-    # @optional @param login_page [Stripe::LoginPageUpdateParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_billing_portal_configurations_configuration_request [Stripe::PostBillingPortalConfigurationsConfigurationRequest?]
     # @return [Tuple(Stripe::BillingPortalConfiguration, Integer, Hash)] Stripe::BillingPortalConfiguration, response status code and response headers
     def post_billing_portal_configurations_configuration_with_http_info(
       *,
       configuration : String? = nil,
-      active : Bool? = nil,
-      business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeaturesUpdatingParam? = nil,
-      login_page : Stripe::LoginPageUpdateParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_billing_portal_configurations_configuration_request : Stripe::PostBillingPortalConfigurationsConfigurationRequest? = nil
     ) : Tuple(Stripe::BillingPortalConfiguration, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_billing_portal_configurations_configuration(configuration: configuration, active: active, business_profile: business_profile, default_return_url: default_return_url, expand: expand, features: features, login_page: login_page, metadata: metadata)
+      request = build_api_request_for_post_billing_portal_configurations_configuration(configuration: configuration, post_billing_portal_configurations_configuration_request: post_billing_portal_configurations_configuration_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -457,27 +389,15 @@ module Stripe
 
     # &lt;p&gt;Updates a configuration that describes the functionality of the customer portal.&lt;/p&gt;
     # @required @param configuration [String?]
-    # @optional @param active [Bool?] Whether the configuration is active and can be used to create portal sessions.
-    # @optional @param business_profile [Stripe::BusinessProfileUpdateParam?]
-    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param features [Stripe::FeaturesUpdatingParam?]
-    # @optional @param login_page [Stripe::LoginPageUpdateParam?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_billing_portal_configurations_configuration_request [Stripe::PostBillingPortalConfigurationsConfigurationRequest?]
     # @return nil
     def post_billing_portal_configurations_configuration(
       *,
       configuration : String? = nil,
-      active : Bool? = nil,
-      business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeaturesUpdatingParam? = nil,
-      login_page : Stripe::LoginPageUpdateParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_billing_portal_configurations_configuration_request : Stripe::PostBillingPortalConfigurationsConfigurationRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_billing_portal_configurations_configuration(configuration: configuration, active: active, business_profile: business_profile, default_return_url: default_return_url, expand: expand, features: features, login_page: login_page, metadata: metadata).execute(&block)
+      build_api_request_for_post_billing_portal_configurations_configuration(configuration: configuration, post_billing_portal_configurations_configuration_request: post_billing_portal_configurations_configuration_request).execute(&block)
     end
 
     POST_BILLING_PORTAL_CONFIGURATIONS_CONFIGURATION_MAX_LENGTH_FOR_CONFIGURATION = 5000
@@ -486,13 +406,7 @@ module Stripe
     def build_api_request_for_post_billing_portal_configurations_configuration(
       *,
       configuration : String? = nil,
-      active : Bool? = nil,
-      business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
-      expand : Array(String)? = nil,
-      features : Stripe::FeaturesUpdatingParam? = nil,
-      login_page : Stripe::LoginPageUpdateParam? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_billing_portal_configurations_configuration_request : Stripe::PostBillingPortalConfigurationsConfigurationRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: BillingPortalApi.post_billing_portal_configurations_configuration ..." }
@@ -503,53 +417,32 @@ module Stripe
         unless (_configuration = configuration).nil?
           OpenApi::PrimitiveValidator.validate_max_length("configuration", configuration.to_s.size, POST_BILLING_PORTAL_CONFIGURATIONS_CONFIGURATION_MAX_LENGTH_FOR_CONFIGURATION)
         end
-
-        unless (_business_profile = business_profile).nil?
-          _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
-        end
-        unless (_default_return_url = default_return_url).nil?
-          _default_return_url.validate if _default_return_url.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_features = features).nil?
-          _features.validate if _features.is_a?(OpenApi::Validatable)
-        end
-        unless (_login_page = login_page).nil?
-          _login_page.validate if _login_page.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_billing_portal_configurations_configuration_request = post_billing_portal_configurations_configuration_request).nil?
+          _post_billing_portal_configurations_configuration_request.validate if _post_billing_portal_configurations_configuration_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/billing_portal/configurations/{configuration}".sub("{" + "configuration" + "}", URI.encode_path(configuration.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["business_profile"] = business_profile.to_s if !business_profile.nil?
-      form_params["default_return_url"] = default_return_url.to_s if !default_return_url.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["features"] = features.to_s if !features.nil?
-      form_params["login_page"] = login_page.to_s if !login_page.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_billing_portal_configurations_configuration_request, content_type: header_params["Content-Type"]?) if !post_billing_portal_configurations_configuration_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -568,44 +461,24 @@ module Stripe
     end
 
     # <p>Creates a session of the customer portal.</p>
-    # @required @param customer [String?] The ID of an existing customer.
-    # @optional @param configuration [String?] The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param locale [String?] The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
-    # @optional @param on_behalf_of [String?] The `on_behalf_of` account to use for this session. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
-    # @optional @param return_url [String?] The default URL to redirect customers to when they click on the portal's link to return to your website.
+    # @required @param post_billing_portal_sessions_request [Stripe::PostBillingPortalSessionsRequest?]
     # @return [Stripe::BillingPortalSession]
     def post_billing_portal_sessions(
       *,
-      customer : String? = nil,
-      configuration : String? = nil,
-      expand : Array(String)? = nil,
-      locale : String? = nil,
-      on_behalf_of : String? = nil,
-      return_url : String? = nil
+      post_billing_portal_sessions_request : Stripe::PostBillingPortalSessionsRequest? = nil
     ) : Stripe::BillingPortalSession
-      data, _status_code, _headers = post_billing_portal_sessions_with_http_info(customer: customer, configuration: configuration, expand: expand, locale: locale, on_behalf_of: on_behalf_of, return_url: return_url)
+      data, _status_code, _headers = post_billing_portal_sessions_with_http_info(post_billing_portal_sessions_request: post_billing_portal_sessions_request)
       data
     end
 
     # &lt;p&gt;Creates a session of the customer portal.&lt;/p&gt;
-    # @required @param customer [String?] The ID of an existing customer.
-    # @optional @param configuration [String?] The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param locale [String?] The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
-    # @optional @param on_behalf_of [String?] The `on_behalf_of` account to use for this session. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
-    # @optional @param return_url [String?] The default URL to redirect customers to when they click on the portal's link to return to your website.
+    # @required @param post_billing_portal_sessions_request [Stripe::PostBillingPortalSessionsRequest?]
     # @return [Tuple(Stripe::BillingPortalSession, Integer, Hash)] Stripe::BillingPortalSession, response status code and response headers
     def post_billing_portal_sessions_with_http_info(
       *,
-      customer : String? = nil,
-      configuration : String? = nil,
-      expand : Array(String)? = nil,
-      locale : String? = nil,
-      on_behalf_of : String? = nil,
-      return_url : String? = nil
+      post_billing_portal_sessions_request : Stripe::PostBillingPortalSessionsRequest? = nil
     ) : Tuple(Stripe::BillingPortalSession, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_billing_portal_sessions(customer: customer, configuration: configuration, expand: expand, locale: locale, on_behalf_of: on_behalf_of, return_url: return_url)
+      request = build_api_request_for_post_billing_portal_sessions(post_billing_portal_sessions_request: post_billing_portal_sessions_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -617,85 +490,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a session of the customer portal.&lt;/p&gt;
-    # @required @param customer [String?] The ID of an existing customer.
-    # @optional @param configuration [String?] The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param locale [String?] The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
-    # @optional @param on_behalf_of [String?] The `on_behalf_of` account to use for this session. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
-    # @optional @param return_url [String?] The default URL to redirect customers to when they click on the portal's link to return to your website.
+    # @required @param post_billing_portal_sessions_request [Stripe::PostBillingPortalSessionsRequest?]
     # @return nil
     def post_billing_portal_sessions(
       *,
-      customer : String? = nil,
-      configuration : String? = nil,
-      expand : Array(String)? = nil,
-      locale : String? = nil,
-      on_behalf_of : String? = nil,
-      return_url : String? = nil,
+      post_billing_portal_sessions_request : Stripe::PostBillingPortalSessionsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_billing_portal_sessions(customer: customer, configuration: configuration, expand: expand, locale: locale, on_behalf_of: on_behalf_of, return_url: return_url).execute(&block)
+      build_api_request_for_post_billing_portal_sessions(post_billing_portal_sessions_request: post_billing_portal_sessions_request).execute(&block)
     end
-
-    POST_BILLING_PORTAL_SESSIONS_MAX_LENGTH_FOR_CUSTOMER      = 5000
-    POST_BILLING_PORTAL_SESSIONS_MAX_LENGTH_FOR_CONFIGURATION = 5000
-    POST_BILLING_PORTAL_SESSIONS_VALID_VALUES_FOR_LOCALE      = String.static_array("auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW")
 
     # @return Crest::Request
     def build_api_request_for_post_billing_portal_sessions(
       *,
-      customer : String? = nil,
-      configuration : String? = nil,
-      expand : Array(String)? = nil,
-      locale : String? = nil,
-      on_behalf_of : String? = nil,
-      return_url : String? = nil
+      post_billing_portal_sessions_request : Stripe::PostBillingPortalSessionsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: BillingPortalApi.post_billing_portal_sessions ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"customer\" is required and cannot be null") if customer.nil?
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_BILLING_PORTAL_SESSIONS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_configuration = configuration).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("configuration", configuration.to_s.size, POST_BILLING_PORTAL_SESSIONS_MAX_LENGTH_FOR_CONFIGURATION)
-        end
-
-        unless (_locale = locale).nil?
-          OpenApi::EnumValidator.validate("locale", _locale, POST_BILLING_PORTAL_SESSIONS_VALID_VALUES_FOR_LOCALE)
+        raise ArgumentError.new("\"post_billing_portal_sessions_request\" is required and cannot be null") if post_billing_portal_sessions_request.nil?
+        unless (_post_billing_portal_sessions_request = post_billing_portal_sessions_request).nil?
+          _post_billing_portal_sessions_request.validate if _post_billing_portal_sessions_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/billing_portal/sessions"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["configuration"] = configuration.to_s if !configuration.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["locale"] = locale.to_s if !locale.nil?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["return_url"] = return_url.to_s if !return_url.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_billing_portal_sessions_request, content_type: header_params["Content-Type"]?) if !post_billing_portal_sessions_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

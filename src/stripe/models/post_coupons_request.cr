@@ -31,11 +31,10 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # Coupons defined in each available currency option (only supported if `amount_off` is passed). Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CouponCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency_options : Hash(String, Stripe::CouponCurrencyOption)? = nil
 
-    # Specifies how long the discount will be in effect if used on a subscription. Can be `forever`, `once`, or `repeating`. Defaults to `once`.
+    # Specifies how long the discount will be in effect if used on a subscription. Defaults to `once`.
     @[JSON::Field(key: "duration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter duration : String? = nil
     ERROR_MESSAGE_FOR_DURATION = "invalid value for \"duration\", must be one of [forever, once, repeating]."

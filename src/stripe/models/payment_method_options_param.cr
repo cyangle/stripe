@@ -50,8 +50,8 @@ module Stripe
     @[JSON::Field(key: "card", type: Stripe::SetupIntentParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card : Stripe::SetupIntentParam? = nil
 
-    @[JSON::Field(key: "card_present", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter card_present : Stripe::PaymentMethodOptionsUsBankAccount? = nil
+    @[JSON::Field(key: "card_present", type: Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card_present : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay? = nil
 
     @[JSON::Field(key: "customer_balance", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_balance : Stripe::PaymentMethodOptionsParam? = nil
@@ -71,8 +71,8 @@ module Stripe
     @[JSON::Field(key: "ideal", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ideal : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "interac_present", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter interac_present : Stripe::PaymentMethodOptionsUsBankAccount? = nil
+    @[JSON::Field(key: "interac_present", type: Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter interac_present : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay? = nil
 
     @[JSON::Field(key: "klarna", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter klarna : Stripe::PaymentMethodOptionsParam? = nil
@@ -95,8 +95,8 @@ module Stripe
     @[JSON::Field(key: "pix", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pix : Stripe::PaymentMethodOptionsParam? = nil
 
-    @[JSON::Field(key: "promptpay", type: Stripe::PaymentMethodOptionsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter promptpay : Stripe::PaymentMethodOptionsUsBankAccount? = nil
+    @[JSON::Field(key: "promptpay", type: Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter promptpay : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay? = nil
 
     @[JSON::Field(key: "sepa_debit", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sepa_debit : Stripe::PaymentMethodOptionsParam? = nil
@@ -125,14 +125,14 @@ module Stripe
       @blik : Stripe::PaymentMethodOptionsParamBlik? = nil,
       @boleto : Stripe::PaymentMethodOptionsParam? = nil,
       @card : Stripe::SetupIntentParam? = nil,
-      @card_present2 : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @card_present2 : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay? = nil,
       @customer_balance : Stripe::PaymentMethodOptionsParam? = nil,
       @eps : Stripe::PaymentMethodOptionsParam? = nil,
       @fpx : Stripe::PaymentMethodOptionsParam? = nil,
       @giropay : Stripe::PaymentMethodOptionsParam? = nil,
       @grabpay : Stripe::PaymentMethodOptionsParam? = nil,
       @ideal : Stripe::PaymentMethodOptionsParam? = nil,
-      @interac_present : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @interac_present : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay? = nil,
       @klarna : Stripe::PaymentMethodOptionsParam? = nil,
       @konbini : Stripe::PaymentMethodOptionsParam? = nil,
       @link : Stripe::PaymentMethodOptionsParamLink? = nil,
@@ -140,7 +140,7 @@ module Stripe
       @p24 : Stripe::PaymentMethodOptionsParam? = nil,
       @paynow : Stripe::PaymentMethodOptionsParam? = nil,
       @pix : Stripe::PaymentMethodOptionsParam? = nil,
-      @promptpay : Stripe::PaymentMethodOptionsUsBankAccount? = nil,
+      @promptpay : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay? = nil,
       @sepa_debit : Stripe::PaymentMethodOptionsParam? = nil,
       @sofort : Stripe::PaymentMethodOptionsParam? = nil,
       @us_bank_account : Stripe::PaymentMethodOptionsParam? = nil,
@@ -484,7 +484,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_present Object to be assigned
-    def card_present=(card_present : Stripe::PaymentMethodOptionsUsBankAccount?)
+    def card_present=(card_present : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay?)
       if card_present.nil?
         return @card_present2 = nil
       end
@@ -561,7 +561,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interac_present Object to be assigned
-    def interac_present=(interac_present : Stripe::PaymentMethodOptionsUsBankAccount?)
+    def interac_present=(interac_present : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay?)
       if interac_present.nil?
         return @interac_present = nil
       end
@@ -649,7 +649,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] promptpay Object to be assigned
-    def promptpay=(promptpay : Stripe::PaymentMethodOptionsUsBankAccount?)
+    def promptpay=(promptpay : Stripe::PostOrdersIdRequestPaymentSettingsPaymentMethodOptionsAlipay?)
       if promptpay.nil?
         return @promptpay = nil
       end

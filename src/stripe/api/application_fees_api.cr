@@ -128,8 +128,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/application_fees"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -137,19 +145,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -247,23 +247,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/application_fees/{fee}/refunds/{id}".sub("{" + "fee" + "}", URI.encode_path(fee.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -349,23 +349,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/application_fees/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -480,26 +480,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/application_fees/{id}/refunds".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -520,34 +520,30 @@ module Stripe
     # <p>Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>  <p>This request only accepts metadata as an argument.</p>
     # @required @param fee [String?]
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Stripe::FeeRefund]
     def post_application_fees_fee_refunds_id(
       *,
       fee : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Stripe::FeeRefund
-      data, _status_code, _headers = post_application_fees_fee_refunds_id_with_http_info(fee: fee, id: id, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_application_fees_fee_refunds_id_with_http_info(fee: fee, id: id, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request only accepts metadata as an argument.&lt;/p&gt;
     # @required @param fee [String?]
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return [Tuple(Stripe::FeeRefund, Integer, Hash)] Stripe::FeeRefund, response status code and response headers
     def post_application_fees_fee_refunds_id_with_http_info(
       *,
       fee : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Tuple(Stripe::FeeRefund, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_application_fees_fee_refunds_id(fee: fee, id: id, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_application_fees_fee_refunds_id(fee: fee, id: id, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -561,18 +557,16 @@ module Stripe
     # &lt;p&gt;Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request only accepts metadata as an argument.&lt;/p&gt;
     # @required @param fee [String?]
     # @required @param id [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_application_fees_fee_refunds_id_request [Stripe::PostApplicationFeesFeeRefundsIdRequest?]
     # @return nil
     def post_application_fees_fee_refunds_id(
       *,
       fee : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_application_fees_fee_refunds_id(fee: fee, id: id, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_application_fees_fee_refunds_id(fee: fee, id: id, post_application_fees_fee_refunds_id_request: post_application_fees_fee_refunds_id_request).execute(&block)
     end
 
     POST_APPLICATION_FEES_FEE_REFUNDS_ID_MAX_LENGTH_FOR_FEE = 5000
@@ -583,8 +577,7 @@ module Stripe
       *,
       fee : String? = nil,
       id : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_application_fees_fee_refunds_id_request : Stripe::PostApplicationFeesFeeRefundsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ApplicationFeesApi.post_application_fees_fee_refunds_id ..." }
@@ -599,35 +592,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_APPLICATION_FEES_FEE_REFUNDS_ID_MAX_LENGTH_FOR_ID)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_application_fees_fee_refunds_id_request = post_application_fees_fee_refunds_id_request).nil?
+          _post_application_fees_fee_refunds_id_request.validate if _post_application_fees_fee_refunds_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/application_fees/{fee}/refunds/{id}".sub("{" + "fee" + "}", URI.encode_path(fee.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_fee_refunds_id_request, content_type: header_params["Content-Type"]?) if !post_application_fees_fee_refunds_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -647,35 +637,27 @@ module Stripe
 
     #
     # @required @param id [String?]
-    # @optional @param amount [Int32?]
-    # @optional @param directive [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_application_fees_id_refund_request [Stripe::PostApplicationFeesIdRefundRequest?]
     # @return [Stripe::ApplicationFee]
     def post_application_fees_id_refund(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      directive : String? = nil,
-      expand : Array(String)? = nil
+      post_application_fees_id_refund_request : Stripe::PostApplicationFeesIdRefundRequest? = nil
     ) : Stripe::ApplicationFee
-      data, _status_code, _headers = post_application_fees_id_refund_with_http_info(id: id, amount: amount, directive: directive, expand: expand)
+      data, _status_code, _headers = post_application_fees_id_refund_with_http_info(id: id, post_application_fees_id_refund_request: post_application_fees_id_refund_request)
       data
     end
 
     #
     # @required @param id [String?]
-    # @optional @param amount [Int32?]
-    # @optional @param directive [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_application_fees_id_refund_request [Stripe::PostApplicationFeesIdRefundRequest?]
     # @return [Tuple(Stripe::ApplicationFee, Integer, Hash)] Stripe::ApplicationFee, response status code and response headers
     def post_application_fees_id_refund_with_http_info(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      directive : String? = nil,
-      expand : Array(String)? = nil
+      post_application_fees_id_refund_request : Stripe::PostApplicationFeesIdRefundRequest? = nil
     ) : Tuple(Stripe::ApplicationFee, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_application_fees_id_refund(id: id, amount: amount, directive: directive, expand: expand)
+      request = build_api_request_for_post_application_fees_id_refund(id: id, post_application_fees_id_refund_request: post_application_fees_id_refund_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -688,31 +670,24 @@ module Stripe
 
     #
     # @required @param id [String?]
-    # @optional @param amount [Int32?]
-    # @optional @param directive [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_application_fees_id_refund_request [Stripe::PostApplicationFeesIdRefundRequest?]
     # @return nil
     def post_application_fees_id_refund(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      directive : String? = nil,
-      expand : Array(String)? = nil,
+      post_application_fees_id_refund_request : Stripe::PostApplicationFeesIdRefundRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_application_fees_id_refund(id: id, amount: amount, directive: directive, expand: expand).execute(&block)
+      build_api_request_for_post_application_fees_id_refund(id: id, post_application_fees_id_refund_request: post_application_fees_id_refund_request).execute(&block)
     end
 
-    POST_APPLICATION_FEES_ID_REFUND_MAX_LENGTH_FOR_ID        = 5000
-    POST_APPLICATION_FEES_ID_REFUND_MAX_LENGTH_FOR_DIRECTIVE = 5000
+    POST_APPLICATION_FEES_ID_REFUND_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_application_fees_id_refund(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      directive : String? = nil,
-      expand : Array(String)? = nil
+      post_application_fees_id_refund_request : Stripe::PostApplicationFeesIdRefundRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ApplicationFeesApi.post_application_fees_id_refund ..." }
@@ -723,36 +698,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_APPLICATION_FEES_ID_REFUND_MAX_LENGTH_FOR_ID)
         end
-
-        unless (_directive = directive).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("directive", directive.to_s.size, POST_APPLICATION_FEES_ID_REFUND_MAX_LENGTH_FOR_DIRECTIVE)
+        unless (_post_application_fees_id_refund_request = post_application_fees_id_refund_request).nil?
+          _post_application_fees_id_refund_request.validate if _post_application_fees_id_refund_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/application_fees/{id}/refund".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["directive"] = directive.to_s if !directive.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_id_refund_request, content_type: header_params["Content-Type"]?) if !post_application_fees_id_refund_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -772,31 +743,27 @@ module Stripe
 
     # <p>Refunds an application fee that has previously been collected but not yet refunded. Funds will be refunded to the Stripe account from which the fee was originally collected.</p>  <p>You can optionally refund only part of an application fee. You can do so multiple times, until the entire fee has been refunded.</p>  <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise an error when called on an already-refunded application fee, or when trying to refund more money than is left on an application fee.</p>
     # @required @param id [String?]
-    # @optional @param amount [Int32?] A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_application_fees_id_refunds_request [Stripe::PostApplicationFeesIdRefundsRequest?]
     # @return [Stripe::FeeRefund]
     def post_application_fees_id_refunds(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil
+      post_application_fees_id_refunds_request : Stripe::PostApplicationFeesIdRefundsRequest? = nil
     ) : Stripe::FeeRefund
-      data, _status_code, _headers = post_application_fees_id_refunds_with_http_info(id: id, amount: amount, expand: expand)
+      data, _status_code, _headers = post_application_fees_id_refunds_with_http_info(id: id, post_application_fees_id_refunds_request: post_application_fees_id_refunds_request)
       data
     end
 
     # &lt;p&gt;Refunds an application fee that has previously been collected but not yet refunded. Funds will be refunded to the Stripe account from which the fee was originally collected.&lt;/p&gt;  &lt;p&gt;You can optionally refund only part of an application fee. You can do so multiple times, until the entire fee has been refunded.&lt;/p&gt;  &lt;p&gt;Once entirely refunded, an application fee can’t be refunded again. This method will raise an error when called on an already-refunded application fee, or when trying to refund more money than is left on an application fee.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param amount [Int32?] A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_application_fees_id_refunds_request [Stripe::PostApplicationFeesIdRefundsRequest?]
     # @return [Tuple(Stripe::FeeRefund, Integer, Hash)] Stripe::FeeRefund, response status code and response headers
     def post_application_fees_id_refunds_with_http_info(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil
+      post_application_fees_id_refunds_request : Stripe::PostApplicationFeesIdRefundsRequest? = nil
     ) : Tuple(Stripe::FeeRefund, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_application_fees_id_refunds(id: id, amount: amount, expand: expand)
+      request = build_api_request_for_post_application_fees_id_refunds(id: id, post_application_fees_id_refunds_request: post_application_fees_id_refunds_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -809,17 +776,15 @@ module Stripe
 
     # &lt;p&gt;Refunds an application fee that has previously been collected but not yet refunded. Funds will be refunded to the Stripe account from which the fee was originally collected.&lt;/p&gt;  &lt;p&gt;You can optionally refund only part of an application fee. You can do so multiple times, until the entire fee has been refunded.&lt;/p&gt;  &lt;p&gt;Once entirely refunded, an application fee can’t be refunded again. This method will raise an error when called on an already-refunded application fee, or when trying to refund more money than is left on an application fee.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param amount [Int32?] A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_application_fees_id_refunds_request [Stripe::PostApplicationFeesIdRefundsRequest?]
     # @return nil
     def post_application_fees_id_refunds(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil,
+      post_application_fees_id_refunds_request : Stripe::PostApplicationFeesIdRefundsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_application_fees_id_refunds(id: id, amount: amount, expand: expand).execute(&block)
+      build_api_request_for_post_application_fees_id_refunds(id: id, post_application_fees_id_refunds_request: post_application_fees_id_refunds_request).execute(&block)
     end
 
     POST_APPLICATION_FEES_ID_REFUNDS_MAX_LENGTH_FOR_ID = 5000
@@ -828,8 +793,7 @@ module Stripe
     def build_api_request_for_post_application_fees_id_refunds(
       *,
       id : String? = nil,
-      amount : Int64? = nil,
-      expand : Array(String)? = nil
+      post_application_fees_id_refunds_request : Stripe::PostApplicationFeesIdRefundsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ApplicationFeesApi.post_application_fees_id_refunds ..." }
@@ -840,31 +804,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_APPLICATION_FEES_ID_REFUNDS_MAX_LENGTH_FOR_ID)
         end
+        unless (_post_application_fees_id_refunds_request = post_application_fees_id_refunds_request).nil?
+          _post_application_fees_id_refunds_request.validate if _post_application_fees_id_refunds_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/application_fees/{id}/refunds".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_application_fees_id_refunds_request, content_type: header_params["Content-Type"]?) if !post_application_fees_id_refunds_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

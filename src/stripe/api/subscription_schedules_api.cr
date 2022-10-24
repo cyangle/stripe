@@ -165,8 +165,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscription_schedules"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -178,19 +186,11 @@ module Stripe
       query_params["released_at"] = released_at.to_s if !released_at.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -276,23 +276,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscription_schedules/{schedule}".sub("{" + "schedule" + "}", URI.encode_path(schedule.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -311,52 +311,24 @@ module Stripe
     end
 
     # <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
-    # @optional @param customer [String?] The identifier of the customer to create the subscription schedule for.
-    # @optional @param default_settings [Stripe::DefaultSettingsParams?]
-    # @optional @param end_behavior [String?] Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param from_subscription [String?] Migrate an existing subscription to be managed by a subscription schedule. If this parameter is set, a subscription schedule will be created using the subscription's item(s), set to auto-renew using the subscription's interval. When using this parameter, other parameters (such as phase values) cannot be set. To create a subscription schedule with other modifications, we recommend making two separate API calls.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param phases [Array(Stripe::PhaseConfigurationParams)?] List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
-    # @optional @param start_date [Stripe::PostSubscriptionSchedulesRequestStartDate?]
+    # @optional @param post_subscription_schedules_request [Stripe::PostSubscriptionSchedulesRequest?]
     # @return [Stripe::SubscriptionSchedule]
     def post_subscription_schedules(
       *,
-      customer : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      from_subscription : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      start_date : Stripe::PostSubscriptionSchedulesRequestStartDate? = nil
+      post_subscription_schedules_request : Stripe::PostSubscriptionSchedulesRequest? = nil
     ) : Stripe::SubscriptionSchedule
-      data, _status_code, _headers = post_subscription_schedules_with_http_info(customer: customer, default_settings: default_settings, end_behavior: end_behavior, expand: expand, from_subscription: from_subscription, metadata: metadata, phases: phases, start_date: start_date)
+      data, _status_code, _headers = post_subscription_schedules_with_http_info(post_subscription_schedules_request: post_subscription_schedules_request)
       data
     end
 
     # &lt;p&gt;Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.&lt;/p&gt;
-    # @optional @param customer [String?] The identifier of the customer to create the subscription schedule for.
-    # @optional @param default_settings [Stripe::DefaultSettingsParams?]
-    # @optional @param end_behavior [String?] Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param from_subscription [String?] Migrate an existing subscription to be managed by a subscription schedule. If this parameter is set, a subscription schedule will be created using the subscription's item(s), set to auto-renew using the subscription's interval. When using this parameter, other parameters (such as phase values) cannot be set. To create a subscription schedule with other modifications, we recommend making two separate API calls.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param phases [Array(Stripe::PhaseConfigurationParams)?] List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
-    # @optional @param start_date [Stripe::PostSubscriptionSchedulesRequestStartDate?]
+    # @optional @param post_subscription_schedules_request [Stripe::PostSubscriptionSchedulesRequest?]
     # @return [Tuple(Stripe::SubscriptionSchedule, Integer, Hash)] Stripe::SubscriptionSchedule, response status code and response headers
     def post_subscription_schedules_with_http_info(
       *,
-      customer : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      from_subscription : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      start_date : Stripe::PostSubscriptionSchedulesRequestStartDate? = nil
+      post_subscription_schedules_request : Stripe::PostSubscriptionSchedulesRequest? = nil
     ) : Tuple(Stripe::SubscriptionSchedule, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_schedules(customer: customer, default_settings: default_settings, end_behavior: end_behavior, expand: expand, from_subscription: from_subscription, metadata: metadata, phases: phases, start_date: start_date)
+      request = build_api_request_for_post_subscription_schedules(post_subscription_schedules_request: post_subscription_schedules_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -368,104 +340,52 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.&lt;/p&gt;
-    # @optional @param customer [String?] The identifier of the customer to create the subscription schedule for.
-    # @optional @param default_settings [Stripe::DefaultSettingsParams?]
-    # @optional @param end_behavior [String?] Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param from_subscription [String?] Migrate an existing subscription to be managed by a subscription schedule. If this parameter is set, a subscription schedule will be created using the subscription's item(s), set to auto-renew using the subscription's interval. When using this parameter, other parameters (such as phase values) cannot be set. To create a subscription schedule with other modifications, we recommend making two separate API calls.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param phases [Array(Stripe::PhaseConfigurationParams)?] List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
-    # @optional @param start_date [Stripe::PostSubscriptionSchedulesRequestStartDate?]
+    # @optional @param post_subscription_schedules_request [Stripe::PostSubscriptionSchedulesRequest?]
     # @return nil
     def post_subscription_schedules(
       *,
-      customer : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      from_subscription : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      start_date : Stripe::PostSubscriptionSchedulesRequestStartDate? = nil,
+      post_subscription_schedules_request : Stripe::PostSubscriptionSchedulesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_schedules(customer: customer, default_settings: default_settings, end_behavior: end_behavior, expand: expand, from_subscription: from_subscription, metadata: metadata, phases: phases, start_date: start_date).execute(&block)
+      build_api_request_for_post_subscription_schedules(post_subscription_schedules_request: post_subscription_schedules_request).execute(&block)
     end
-
-    POST_SUBSCRIPTION_SCHEDULES_MAX_LENGTH_FOR_CUSTOMER          = 5000
-    POST_SUBSCRIPTION_SCHEDULES_VALID_VALUES_FOR_END_BEHAVIOR    = String.static_array("cancel", "none", "release", "renew")
-    POST_SUBSCRIPTION_SCHEDULES_MAX_LENGTH_FOR_FROM_SUBSCRIPTION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_schedules(
       *,
-      customer : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      from_subscription : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      start_date : Stripe::PostSubscriptionSchedulesRequestStartDate? = nil
+      post_subscription_schedules_request : Stripe::PostSubscriptionSchedulesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionSchedulesApi.post_subscription_schedules ..." }
       end
 
       if client_side_validation
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_SUBSCRIPTION_SCHEDULES_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_default_settings = default_settings).nil?
-          _default_settings.validate if _default_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_end_behavior = end_behavior).nil?
-          OpenApi::EnumValidator.validate("end_behavior", _end_behavior, POST_SUBSCRIPTION_SCHEDULES_VALID_VALUES_FOR_END_BEHAVIOR)
-        end
-
-        unless (_from_subscription = from_subscription).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("from_subscription", from_subscription.to_s.size, POST_SUBSCRIPTION_SCHEDULES_MAX_LENGTH_FOR_FROM_SUBSCRIPTION)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_phases = phases).nil?
-          OpenApi::ContainerValidator.validate(container: _phases) if _phases.is_a?(Array)
-        end
-        unless (_start_date = start_date).nil?
-          _start_date.validate if _start_date.is_a?(OpenApi::Validatable)
+        unless (_post_subscription_schedules_request = post_subscription_schedules_request).nil?
+          _post_subscription_schedules_request.validate if _post_subscription_schedules_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscription_schedules"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["default_settings"] = default_settings.to_s if !default_settings.nil?
-      form_params["end_behavior"] = end_behavior.to_s if !end_behavior.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["from_subscription"] = from_subscription.to_s if !from_subscription.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["phases"] = @api_client.build_collection_param(phases, "csv") if !phases.nil? && !phases.empty?
-      form_params["start_date"] = start_date.to_s if !start_date.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_schedules_request, content_type: header_params["Content-Type"]?) if !post_subscription_schedules_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -485,47 +405,27 @@ module Stripe
 
     # <p>Updates an existing subscription schedule.</p>
     # @required @param schedule [String?]
-    # @optional @param default_settings [Stripe::DefaultSettingsParams?]
-    # @optional @param end_behavior [String?] Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param phases [Array(Stripe::PhaseConfigurationParams)?] List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
-    # @optional @param proration_behavior [String?] If the update changes the current phase, indicates whether the changes should be prorated. The default value is `create_prorations`.
+    # @optional @param post_subscription_schedules_schedule_request [Stripe::PostSubscriptionSchedulesScheduleRequest?]
     # @return [Stripe::SubscriptionSchedule]
     def post_subscription_schedules_schedule(
       *,
       schedule : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      proration_behavior : String? = nil
+      post_subscription_schedules_schedule_request : Stripe::PostSubscriptionSchedulesScheduleRequest? = nil
     ) : Stripe::SubscriptionSchedule
-      data, _status_code, _headers = post_subscription_schedules_schedule_with_http_info(schedule: schedule, default_settings: default_settings, end_behavior: end_behavior, expand: expand, metadata: metadata, phases: phases, proration_behavior: proration_behavior)
+      data, _status_code, _headers = post_subscription_schedules_schedule_with_http_info(schedule: schedule, post_subscription_schedules_schedule_request: post_subscription_schedules_schedule_request)
       data
     end
 
     # &lt;p&gt;Updates an existing subscription schedule.&lt;/p&gt;
     # @required @param schedule [String?]
-    # @optional @param default_settings [Stripe::DefaultSettingsParams?]
-    # @optional @param end_behavior [String?] Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param phases [Array(Stripe::PhaseConfigurationParams)?] List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
-    # @optional @param proration_behavior [String?] If the update changes the current phase, indicates whether the changes should be prorated. The default value is `create_prorations`.
+    # @optional @param post_subscription_schedules_schedule_request [Stripe::PostSubscriptionSchedulesScheduleRequest?]
     # @return [Tuple(Stripe::SubscriptionSchedule, Integer, Hash)] Stripe::SubscriptionSchedule, response status code and response headers
     def post_subscription_schedules_schedule_with_http_info(
       *,
       schedule : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      proration_behavior : String? = nil
+      post_subscription_schedules_schedule_request : Stripe::PostSubscriptionSchedulesScheduleRequest? = nil
     ) : Tuple(Stripe::SubscriptionSchedule, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_schedules_schedule(schedule: schedule, default_settings: default_settings, end_behavior: end_behavior, expand: expand, metadata: metadata, phases: phases, proration_behavior: proration_behavior)
+      request = build_api_request_for_post_subscription_schedules_schedule(schedule: schedule, post_subscription_schedules_schedule_request: post_subscription_schedules_schedule_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -538,41 +438,24 @@ module Stripe
 
     # &lt;p&gt;Updates an existing subscription schedule.&lt;/p&gt;
     # @required @param schedule [String?]
-    # @optional @param default_settings [Stripe::DefaultSettingsParams?]
-    # @optional @param end_behavior [String?] Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param phases [Array(Stripe::PhaseConfigurationParams)?] List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
-    # @optional @param proration_behavior [String?] If the update changes the current phase, indicates whether the changes should be prorated. The default value is `create_prorations`.
+    # @optional @param post_subscription_schedules_schedule_request [Stripe::PostSubscriptionSchedulesScheduleRequest?]
     # @return nil
     def post_subscription_schedules_schedule(
       *,
       schedule : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      proration_behavior : String? = nil,
+      post_subscription_schedules_schedule_request : Stripe::PostSubscriptionSchedulesScheduleRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_schedules_schedule(schedule: schedule, default_settings: default_settings, end_behavior: end_behavior, expand: expand, metadata: metadata, phases: phases, proration_behavior: proration_behavior).execute(&block)
+      build_api_request_for_post_subscription_schedules_schedule(schedule: schedule, post_subscription_schedules_schedule_request: post_subscription_schedules_schedule_request).execute(&block)
     end
 
-    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_MAX_LENGTH_FOR_SCHEDULE             = 5000
-    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_END_BEHAVIOR       = String.static_array("cancel", "none", "release", "renew")
-    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
+    POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_MAX_LENGTH_FOR_SCHEDULE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_schedules_schedule(
       *,
       schedule : String? = nil,
-      default_settings : Stripe::DefaultSettingsParams? = nil,
-      end_behavior : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      phases : Array(Stripe::PhaseConfigurationParams)? = nil,
-      proration_behavior : String? = nil
+      post_subscription_schedules_schedule_request : Stripe::PostSubscriptionSchedulesScheduleRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionSchedulesApi.post_subscription_schedules_schedule ..." }
@@ -583,51 +466,32 @@ module Stripe
         unless (_schedule = schedule).nil?
           OpenApi::PrimitiveValidator.validate_max_length("schedule", schedule.to_s.size, POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_MAX_LENGTH_FOR_SCHEDULE)
         end
-        unless (_default_settings = default_settings).nil?
-          _default_settings.validate if _default_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_end_behavior = end_behavior).nil?
-          OpenApi::EnumValidator.validate("end_behavior", _end_behavior, POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_END_BEHAVIOR)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_phases = phases).nil?
-          OpenApi::ContainerValidator.validate(container: _phases) if _phases.is_a?(Array)
-        end
-        unless (_proration_behavior = proration_behavior).nil?
-          OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        unless (_post_subscription_schedules_schedule_request = post_subscription_schedules_schedule_request).nil?
+          _post_subscription_schedules_schedule_request.validate if _post_subscription_schedules_schedule_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscription_schedules/{schedule}".sub("{" + "schedule" + "}", URI.encode_path(schedule.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["default_settings"] = default_settings.to_s if !default_settings.nil?
-      form_params["end_behavior"] = end_behavior.to_s if !end_behavior.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["phases"] = @api_client.build_collection_param(phases, "csv") if !phases.nil? && !phases.empty?
-      form_params["proration_behavior"] = proration_behavior.to_s if !proration_behavior.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_schedules_schedule_request, content_type: header_params["Content-Type"]?) if !post_subscription_schedules_schedule_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -647,35 +511,27 @@ module Stripe
 
     # <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
     # @required @param schedule [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_now [Bool?] If the subscription schedule is `active`, indicates if a final invoice will be generated that contains any un-invoiced metered usage and new/pending proration invoice items. Defaults to `true`.
-    # @optional @param prorate [Bool?] If the subscription schedule is `active`, indicates if the cancellation should be prorated. Defaults to `true`.
+    # @optional @param post_subscription_schedules_schedule_cancel_request [Stripe::PostSubscriptionSchedulesScheduleCancelRequest?]
     # @return [Stripe::SubscriptionSchedule]
     def post_subscription_schedules_schedule_cancel(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil
+      post_subscription_schedules_schedule_cancel_request : Stripe::PostSubscriptionSchedulesScheduleCancelRequest? = nil
     ) : Stripe::SubscriptionSchedule
-      data, _status_code, _headers = post_subscription_schedules_schedule_cancel_with_http_info(schedule: schedule, expand: expand, invoice_now: invoice_now, prorate: prorate)
+      data, _status_code, _headers = post_subscription_schedules_schedule_cancel_with_http_info(schedule: schedule, post_subscription_schedules_schedule_cancel_request: post_subscription_schedules_schedule_cancel_request)
       data
     end
 
     # &lt;p&gt;Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is &lt;code&gt;not_started&lt;/code&gt; or &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
     # @required @param schedule [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_now [Bool?] If the subscription schedule is `active`, indicates if a final invoice will be generated that contains any un-invoiced metered usage and new/pending proration invoice items. Defaults to `true`.
-    # @optional @param prorate [Bool?] If the subscription schedule is `active`, indicates if the cancellation should be prorated. Defaults to `true`.
+    # @optional @param post_subscription_schedules_schedule_cancel_request [Stripe::PostSubscriptionSchedulesScheduleCancelRequest?]
     # @return [Tuple(Stripe::SubscriptionSchedule, Integer, Hash)] Stripe::SubscriptionSchedule, response status code and response headers
     def post_subscription_schedules_schedule_cancel_with_http_info(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil
+      post_subscription_schedules_schedule_cancel_request : Stripe::PostSubscriptionSchedulesScheduleCancelRequest? = nil
     ) : Tuple(Stripe::SubscriptionSchedule, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_schedules_schedule_cancel(schedule: schedule, expand: expand, invoice_now: invoice_now, prorate: prorate)
+      request = build_api_request_for_post_subscription_schedules_schedule_cancel(schedule: schedule, post_subscription_schedules_schedule_cancel_request: post_subscription_schedules_schedule_cancel_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -688,19 +544,15 @@ module Stripe
 
     # &lt;p&gt;Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is &lt;code&gt;not_started&lt;/code&gt; or &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
     # @required @param schedule [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param invoice_now [Bool?] If the subscription schedule is `active`, indicates if a final invoice will be generated that contains any un-invoiced metered usage and new/pending proration invoice items. Defaults to `true`.
-    # @optional @param prorate [Bool?] If the subscription schedule is `active`, indicates if the cancellation should be prorated. Defaults to `true`.
+    # @optional @param post_subscription_schedules_schedule_cancel_request [Stripe::PostSubscriptionSchedulesScheduleCancelRequest?]
     # @return nil
     def post_subscription_schedules_schedule_cancel(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil,
+      post_subscription_schedules_schedule_cancel_request : Stripe::PostSubscriptionSchedulesScheduleCancelRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_schedules_schedule_cancel(schedule: schedule, expand: expand, invoice_now: invoice_now, prorate: prorate).execute(&block)
+      build_api_request_for_post_subscription_schedules_schedule_cancel(schedule: schedule, post_subscription_schedules_schedule_cancel_request: post_subscription_schedules_schedule_cancel_request).execute(&block)
     end
 
     POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_CANCEL_MAX_LENGTH_FOR_SCHEDULE = 5000
@@ -709,9 +561,7 @@ module Stripe
     def build_api_request_for_post_subscription_schedules_schedule_cancel(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      invoice_now : Bool? = nil,
-      prorate : Bool? = nil
+      post_subscription_schedules_schedule_cancel_request : Stripe::PostSubscriptionSchedulesScheduleCancelRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionSchedulesApi.post_subscription_schedules_schedule_cancel ..." }
@@ -722,32 +572,32 @@ module Stripe
         unless (_schedule = schedule).nil?
           OpenApi::PrimitiveValidator.validate_max_length("schedule", schedule.to_s.size, POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_CANCEL_MAX_LENGTH_FOR_SCHEDULE)
         end
+        unless (_post_subscription_schedules_schedule_cancel_request = post_subscription_schedules_schedule_cancel_request).nil?
+          _post_subscription_schedules_schedule_cancel_request.validate if _post_subscription_schedules_schedule_cancel_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/subscription_schedules/{schedule}/cancel".sub("{" + "schedule" + "}", URI.encode_path(schedule.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["invoice_now"] = invoice_now.to_s if !invoice_now.nil?
-      form_params["prorate"] = prorate.to_s if !prorate.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_schedules_schedule_cancel_request, content_type: header_params["Content-Type"]?) if !post_subscription_schedules_schedule_cancel_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -767,31 +617,27 @@ module Stripe
 
     # <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
     # @required @param schedule [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param preserve_cancel_date [Bool?] Keep any cancellation on the subscription that the schedule has set
+    # @optional @param post_subscription_schedules_schedule_release_request [Stripe::PostSubscriptionSchedulesScheduleReleaseRequest?]
     # @return [Stripe::SubscriptionSchedule]
     def post_subscription_schedules_schedule_release(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      preserve_cancel_date : Bool? = nil
+      post_subscription_schedules_schedule_release_request : Stripe::PostSubscriptionSchedulesScheduleReleaseRequest? = nil
     ) : Stripe::SubscriptionSchedule
-      data, _status_code, _headers = post_subscription_schedules_schedule_release_with_http_info(schedule: schedule, expand: expand, preserve_cancel_date: preserve_cancel_date)
+      data, _status_code, _headers = post_subscription_schedules_schedule_release_with_http_info(schedule: schedule, post_subscription_schedules_schedule_release_request: post_subscription_schedules_schedule_release_request)
       data
     end
 
     # &lt;p&gt;Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is &lt;code&gt;not_started&lt;/code&gt; or &lt;code&gt;active&lt;/code&gt;. If the subscription schedule is currently associated with a subscription, releasing it will remove its &lt;code&gt;subscription&lt;/code&gt; property and set the subscription’s ID to the &lt;code&gt;released_subscription&lt;/code&gt; property.&lt;/p&gt;
     # @required @param schedule [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param preserve_cancel_date [Bool?] Keep any cancellation on the subscription that the schedule has set
+    # @optional @param post_subscription_schedules_schedule_release_request [Stripe::PostSubscriptionSchedulesScheduleReleaseRequest?]
     # @return [Tuple(Stripe::SubscriptionSchedule, Integer, Hash)] Stripe::SubscriptionSchedule, response status code and response headers
     def post_subscription_schedules_schedule_release_with_http_info(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      preserve_cancel_date : Bool? = nil
+      post_subscription_schedules_schedule_release_request : Stripe::PostSubscriptionSchedulesScheduleReleaseRequest? = nil
     ) : Tuple(Stripe::SubscriptionSchedule, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_schedules_schedule_release(schedule: schedule, expand: expand, preserve_cancel_date: preserve_cancel_date)
+      request = build_api_request_for_post_subscription_schedules_schedule_release(schedule: schedule, post_subscription_schedules_schedule_release_request: post_subscription_schedules_schedule_release_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -804,17 +650,15 @@ module Stripe
 
     # &lt;p&gt;Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is &lt;code&gt;not_started&lt;/code&gt; or &lt;code&gt;active&lt;/code&gt;. If the subscription schedule is currently associated with a subscription, releasing it will remove its &lt;code&gt;subscription&lt;/code&gt; property and set the subscription’s ID to the &lt;code&gt;released_subscription&lt;/code&gt; property.&lt;/p&gt;
     # @required @param schedule [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param preserve_cancel_date [Bool?] Keep any cancellation on the subscription that the schedule has set
+    # @optional @param post_subscription_schedules_schedule_release_request [Stripe::PostSubscriptionSchedulesScheduleReleaseRequest?]
     # @return nil
     def post_subscription_schedules_schedule_release(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      preserve_cancel_date : Bool? = nil,
+      post_subscription_schedules_schedule_release_request : Stripe::PostSubscriptionSchedulesScheduleReleaseRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_schedules_schedule_release(schedule: schedule, expand: expand, preserve_cancel_date: preserve_cancel_date).execute(&block)
+      build_api_request_for_post_subscription_schedules_schedule_release(schedule: schedule, post_subscription_schedules_schedule_release_request: post_subscription_schedules_schedule_release_request).execute(&block)
     end
 
     POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_RELEASE_MAX_LENGTH_FOR_SCHEDULE = 5000
@@ -823,8 +667,7 @@ module Stripe
     def build_api_request_for_post_subscription_schedules_schedule_release(
       *,
       schedule : String? = nil,
-      expand : Array(String)? = nil,
-      preserve_cancel_date : Bool? = nil
+      post_subscription_schedules_schedule_release_request : Stripe::PostSubscriptionSchedulesScheduleReleaseRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionSchedulesApi.post_subscription_schedules_schedule_release ..." }
@@ -835,31 +678,32 @@ module Stripe
         unless (_schedule = schedule).nil?
           OpenApi::PrimitiveValidator.validate_max_length("schedule", schedule.to_s.size, POST_SUBSCRIPTION_SCHEDULES_SCHEDULE_RELEASE_MAX_LENGTH_FOR_SCHEDULE)
         end
+        unless (_post_subscription_schedules_schedule_release_request = post_subscription_schedules_schedule_release_request).nil?
+          _post_subscription_schedules_schedule_release_request.validate if _post_subscription_schedules_schedule_release_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/subscription_schedules/{schedule}/release".sub("{" + "schedule" + "}", URI.encode_path(schedule.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["preserve_cancel_date"] = preserve_cancel_date.to_s if !preserve_cancel_date.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_schedules_schedule_release_request, content_type: header_params["Content-Type"]?) if !post_subscription_schedules_schedule_release_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

@@ -129,8 +129,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/shipping_rates"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["created"] = created.to_s if !created.nil?
@@ -139,19 +147,11 @@ module Stripe
       query_params["active"] = active.to_s if !active.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -237,23 +237,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/shipping_rates/{shipping_rate_token}".sub("{" + "shipping_rate_token" + "}", URI.encode_path(shipping_rate_token.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -272,48 +272,24 @@ module Stripe
     end
 
     # <p>Creates a new shipping rate object.</p>
-    # @required @param display_name [String?] The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
-    # @optional @param delivery_estimate [Stripe::DeliveryEstimate?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fixed_amount [Stripe::FixedAmount?]
-    # @optional @param tax_behavior [String?] Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
-    # @optional @param tax_code [String?] A [tax code](https://stripe.com/docs/tax/tax-categories) ID. The Shipping tax code is `txcd_92010001`.
-    # @optional @param _type [String?] The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+    # @required @param post_shipping_rates_request [Stripe::PostShippingRatesRequest?]
     # @return [Stripe::ShippingRate]
     def post_shipping_rates(
       *,
-      display_name : String? = nil,
-      delivery_estimate : Stripe::DeliveryEstimate? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmount? = nil,
-      tax_behavior : String? = nil,
-      tax_code : String? = nil,
-      _type : String? = nil
+      post_shipping_rates_request : Stripe::PostShippingRatesRequest? = nil
     ) : Stripe::ShippingRate
-      data, _status_code, _headers = post_shipping_rates_with_http_info(display_name: display_name, delivery_estimate: delivery_estimate, expand: expand, fixed_amount: fixed_amount, tax_behavior: tax_behavior, tax_code: tax_code, _type: _type)
+      data, _status_code, _headers = post_shipping_rates_with_http_info(post_shipping_rates_request: post_shipping_rates_request)
       data
     end
 
     # &lt;p&gt;Creates a new shipping rate object.&lt;/p&gt;
-    # @required @param display_name [String?] The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
-    # @optional @param delivery_estimate [Stripe::DeliveryEstimate?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fixed_amount [Stripe::FixedAmount?]
-    # @optional @param tax_behavior [String?] Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
-    # @optional @param tax_code [String?] A [tax code](https://stripe.com/docs/tax/tax-categories) ID. The Shipping tax code is `txcd_92010001`.
-    # @optional @param _type [String?] The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+    # @required @param post_shipping_rates_request [Stripe::PostShippingRatesRequest?]
     # @return [Tuple(Stripe::ShippingRate, Integer, Hash)] Stripe::ShippingRate, response status code and response headers
     def post_shipping_rates_with_http_info(
       *,
-      display_name : String? = nil,
-      delivery_estimate : Stripe::DeliveryEstimate? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmount? = nil,
-      tax_behavior : String? = nil,
-      tax_code : String? = nil,
-      _type : String? = nil
+      post_shipping_rates_request : Stripe::PostShippingRatesRequest? = nil
     ) : Tuple(Stripe::ShippingRate, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_shipping_rates(display_name: display_name, delivery_estimate: delivery_estimate, expand: expand, fixed_amount: fixed_amount, tax_behavior: tax_behavior, tax_code: tax_code, _type: _type)
+      request = build_api_request_for_post_shipping_rates(post_shipping_rates_request: post_shipping_rates_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -325,96 +301,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new shipping rate object.&lt;/p&gt;
-    # @required @param display_name [String?] The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
-    # @optional @param delivery_estimate [Stripe::DeliveryEstimate?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fixed_amount [Stripe::FixedAmount?]
-    # @optional @param tax_behavior [String?] Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
-    # @optional @param tax_code [String?] A [tax code](https://stripe.com/docs/tax/tax-categories) ID. The Shipping tax code is `txcd_92010001`.
-    # @optional @param _type [String?] The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+    # @required @param post_shipping_rates_request [Stripe::PostShippingRatesRequest?]
     # @return nil
     def post_shipping_rates(
       *,
-      display_name : String? = nil,
-      delivery_estimate : Stripe::DeliveryEstimate? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmount? = nil,
-      tax_behavior : String? = nil,
-      tax_code : String? = nil,
-      _type : String? = nil,
+      post_shipping_rates_request : Stripe::PostShippingRatesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_shipping_rates(display_name: display_name, delivery_estimate: delivery_estimate, expand: expand, fixed_amount: fixed_amount, tax_behavior: tax_behavior, tax_code: tax_code, _type: _type).execute(&block)
+      build_api_request_for_post_shipping_rates(post_shipping_rates_request: post_shipping_rates_request).execute(&block)
     end
-
-    POST_SHIPPING_RATES_MAX_LENGTH_FOR_DISPLAY_NAME   = 100
-    POST_SHIPPING_RATES_VALID_VALUES_FOR_TAX_BEHAVIOR = String.static_array("exclusive", "inclusive", "unspecified")
-    POST_SHIPPING_RATES_VALID_VALUES_FOR__TYPE        = String.static_array("fixed_amount")
 
     # @return Crest::Request
     def build_api_request_for_post_shipping_rates(
       *,
-      display_name : String? = nil,
-      delivery_estimate : Stripe::DeliveryEstimate? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmount? = nil,
-      tax_behavior : String? = nil,
-      tax_code : String? = nil,
-      _type : String? = nil
+      post_shipping_rates_request : Stripe::PostShippingRatesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ShippingRatesApi.post_shipping_rates ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"display_name\" is required and cannot be null") if display_name.nil?
-        unless (_display_name = display_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("display_name", display_name.to_s.size, POST_SHIPPING_RATES_MAX_LENGTH_FOR_DISPLAY_NAME)
-        end
-        unless (_delivery_estimate = delivery_estimate).nil?
-          _delivery_estimate.validate if _delivery_estimate.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_fixed_amount = fixed_amount).nil?
-          _fixed_amount.validate if _fixed_amount.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_behavior = tax_behavior).nil?
-          OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, POST_SHIPPING_RATES_VALID_VALUES_FOR_TAX_BEHAVIOR)
-        end
-
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_SHIPPING_RATES_VALID_VALUES_FOR__TYPE)
+        raise ArgumentError.new("\"post_shipping_rates_request\" is required and cannot be null") if post_shipping_rates_request.nil?
+        unless (_post_shipping_rates_request = post_shipping_rates_request).nil?
+          _post_shipping_rates_request.validate if _post_shipping_rates_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/shipping_rates"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["delivery_estimate"] = delivery_estimate.to_s if !delivery_estimate.nil?
-      form_params["display_name"] = display_name.to_s if !display_name.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["fixed_amount"] = fixed_amount.to_s if !fixed_amount.nil?
-      form_params["tax_behavior"] = tax_behavior.to_s if !tax_behavior.nil?
-      form_params["tax_code"] = tax_code.to_s if !tax_code.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_shipping_rates_request, content_type: header_params["Content-Type"]?) if !post_shipping_rates_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -434,43 +367,27 @@ module Stripe
 
     # <p>Updates an existing shipping rate object.</p>
     # @required @param shipping_rate_token [String?]
-    # @optional @param active [Bool?] Whether the shipping rate can be used for new purchases. Defaults to `true`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fixed_amount [Stripe::FixedAmountUpdate?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param tax_behavior [String?] Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
+    # @optional @param post_shipping_rates_shipping_rate_token_request [Stripe::PostShippingRatesShippingRateTokenRequest?]
     # @return [Stripe::ShippingRate]
     def post_shipping_rates_shipping_rate_token(
       *,
       shipping_rate_token : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmountUpdate? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      tax_behavior : String? = nil
+      post_shipping_rates_shipping_rate_token_request : Stripe::PostShippingRatesShippingRateTokenRequest? = nil
     ) : Stripe::ShippingRate
-      data, _status_code, _headers = post_shipping_rates_shipping_rate_token_with_http_info(shipping_rate_token: shipping_rate_token, active: active, expand: expand, fixed_amount: fixed_amount, metadata: metadata, tax_behavior: tax_behavior)
+      data, _status_code, _headers = post_shipping_rates_shipping_rate_token_with_http_info(shipping_rate_token: shipping_rate_token, post_shipping_rates_shipping_rate_token_request: post_shipping_rates_shipping_rate_token_request)
       data
     end
 
     # &lt;p&gt;Updates an existing shipping rate object.&lt;/p&gt;
     # @required @param shipping_rate_token [String?]
-    # @optional @param active [Bool?] Whether the shipping rate can be used for new purchases. Defaults to `true`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fixed_amount [Stripe::FixedAmountUpdate?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param tax_behavior [String?] Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
+    # @optional @param post_shipping_rates_shipping_rate_token_request [Stripe::PostShippingRatesShippingRateTokenRequest?]
     # @return [Tuple(Stripe::ShippingRate, Integer, Hash)] Stripe::ShippingRate, response status code and response headers
     def post_shipping_rates_shipping_rate_token_with_http_info(
       *,
       shipping_rate_token : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmountUpdate? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      tax_behavior : String? = nil
+      post_shipping_rates_shipping_rate_token_request : Stripe::PostShippingRatesShippingRateTokenRequest? = nil
     ) : Tuple(Stripe::ShippingRate, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_shipping_rates_shipping_rate_token(shipping_rate_token: shipping_rate_token, active: active, expand: expand, fixed_amount: fixed_amount, metadata: metadata, tax_behavior: tax_behavior)
+      request = build_api_request_for_post_shipping_rates_shipping_rate_token(shipping_rate_token: shipping_rate_token, post_shipping_rates_shipping_rate_token_request: post_shipping_rates_shipping_rate_token_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -483,37 +400,24 @@ module Stripe
 
     # &lt;p&gt;Updates an existing shipping rate object.&lt;/p&gt;
     # @required @param shipping_rate_token [String?]
-    # @optional @param active [Bool?] Whether the shipping rate can be used for new purchases. Defaults to `true`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fixed_amount [Stripe::FixedAmountUpdate?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param tax_behavior [String?] Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
+    # @optional @param post_shipping_rates_shipping_rate_token_request [Stripe::PostShippingRatesShippingRateTokenRequest?]
     # @return nil
     def post_shipping_rates_shipping_rate_token(
       *,
       shipping_rate_token : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmountUpdate? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      tax_behavior : String? = nil,
+      post_shipping_rates_shipping_rate_token_request : Stripe::PostShippingRatesShippingRateTokenRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_shipping_rates_shipping_rate_token(shipping_rate_token: shipping_rate_token, active: active, expand: expand, fixed_amount: fixed_amount, metadata: metadata, tax_behavior: tax_behavior).execute(&block)
+      build_api_request_for_post_shipping_rates_shipping_rate_token(shipping_rate_token: shipping_rate_token, post_shipping_rates_shipping_rate_token_request: post_shipping_rates_shipping_rate_token_request).execute(&block)
     end
 
     POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_MAX_LENGTH_FOR_SHIPPING_RATE_TOKEN = 5000
-    POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_VALID_VALUES_FOR_TAX_BEHAVIOR      = String.static_array("exclusive", "inclusive", "unspecified")
 
     # @return Crest::Request
     def build_api_request_for_post_shipping_rates_shipping_rate_token(
       *,
       shipping_rate_token : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      fixed_amount : Stripe::FixedAmountUpdate? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      tax_behavior : String? = nil
+      post_shipping_rates_shipping_rate_token_request : Stripe::PostShippingRatesShippingRateTokenRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ShippingRatesApi.post_shipping_rates_shipping_rate_token ..." }
@@ -524,44 +428,32 @@ module Stripe
         unless (_shipping_rate_token = shipping_rate_token).nil?
           OpenApi::PrimitiveValidator.validate_max_length("shipping_rate_token", shipping_rate_token.to_s.size, POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_MAX_LENGTH_FOR_SHIPPING_RATE_TOKEN)
         end
-
-        unless (_fixed_amount = fixed_amount).nil?
-          _fixed_amount.validate if _fixed_amount.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_behavior = tax_behavior).nil?
-          OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, POST_SHIPPING_RATES_SHIPPING_RATE_TOKEN_VALID_VALUES_FOR_TAX_BEHAVIOR)
+        unless (_post_shipping_rates_shipping_rate_token_request = post_shipping_rates_shipping_rate_token_request).nil?
+          _post_shipping_rates_shipping_rate_token_request.validate if _post_shipping_rates_shipping_rate_token_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/shipping_rates/{shipping_rate_token}".sub("{" + "shipping_rate_token" + "}", URI.encode_path(shipping_rate_token.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["fixed_amount"] = fixed_amount.to_s if !fixed_amount.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["tax_behavior"] = tax_behavior.to_s if !tax_behavior.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_shipping_rates_shipping_rate_token_request, content_type: header_params["Content-Type"]?) if !post_shipping_rates_shipping_rate_token_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

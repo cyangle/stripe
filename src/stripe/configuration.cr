@@ -217,7 +217,7 @@ module Stripe
 
     # Returns Auth Settings hash for api client.
     def auth_settings
-      Hash{
+      {
         "basicAuth" => {
           "type"  => "basic",
           "in"    => "header",
@@ -231,7 +231,7 @@ module Stripe
           "key"    => "Authorization",
           "value"  => "Bearer #{access_token}",
         },
-      }
+      } of String => Hash(String, String)
     end
 
     # Returns an array of Server setting

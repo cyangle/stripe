@@ -50,12 +50,8 @@ describe "AppsApi" do
 
   # unit tests for post_apps_secrets
   # &lt;p&gt;Create or replace a secret in the secret store.&lt;/p&gt;
-  # @param name A name for the secret that&#39;s unique within the scope.
-  # @param payload The plaintext secret value to be stored.
-  # @param scope
+  # @param post_apps_secrets_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int32] :expires_at The Unix timestamp for the expiry time of the secret, after which the secret deletes.
   # @return [AppsSecret]
   describe "post_apps_secrets test" do
     it "should work" do
@@ -65,10 +61,8 @@ describe "AppsApi" do
 
   # unit tests for post_apps_secrets_delete
   # &lt;p&gt;Deletes a secret from the secret store by name and scope.&lt;/p&gt;
-  # @param name A name for the secret that&#39;s unique within the scope.
-  # @param scope
+  # @param post_apps_secrets_delete_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [AppsSecret]
   describe "post_apps_secrets_delete test" do
     it "should work" do

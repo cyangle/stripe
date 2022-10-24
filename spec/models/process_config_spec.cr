@@ -26,4 +26,11 @@ describe Stripe::ProcessConfig do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'tipping'" do
+    it "should work" do
+      # instance = Stripe::ProcessConfig.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 end

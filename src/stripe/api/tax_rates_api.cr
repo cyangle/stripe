@@ -130,8 +130,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/tax_rates"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -140,19 +148,11 @@ module Stripe
       query_params["created"] = created.to_s if !created.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -238,23 +238,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/tax_rates/{tax_rate}".sub("{" + "tax_rate" + "}", URI.encode_path(tax_rate.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -273,60 +273,24 @@ module Stripe
     end
 
     # <p>Creates a new tax rate.</p>
-    # @required @param display_name [String?] The display name of the tax rate, which will be shown to users.
-    # @required @param inclusive [Bool?] This specifies if the tax rate is inclusive or exclusive.
-    # @required @param percentage [Float64?] This represents the tax rate percent out of 100.
-    # @optional @param active [Bool?] Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-    # @optional @param country [String?] Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    # @optional @param description [String?] An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param jurisdiction [String?] The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
-    # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
+    # @required @param post_tax_rates_request [Stripe::PostTaxRatesRequest?]
     # @return [Stripe::TaxRate]
     def post_tax_rates(
       *,
-      display_name : String? = nil,
-      inclusive : Bool? = nil,
-      percentage : Float64? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      state : String? = nil,
-      tax_type : String? = nil
+      post_tax_rates_request : Stripe::PostTaxRatesRequest? = nil
     ) : Stripe::TaxRate
-      data, _status_code, _headers = post_tax_rates_with_http_info(display_name: display_name, inclusive: inclusive, percentage: percentage, active: active, country: country, description: description, expand: expand, jurisdiction: jurisdiction, state: state, tax_type: tax_type)
+      data, _status_code, _headers = post_tax_rates_with_http_info(post_tax_rates_request: post_tax_rates_request)
       data
     end
 
     # &lt;p&gt;Creates a new tax rate.&lt;/p&gt;
-    # @required @param display_name [String?] The display name of the tax rate, which will be shown to users.
-    # @required @param inclusive [Bool?] This specifies if the tax rate is inclusive or exclusive.
-    # @required @param percentage [Float64?] This represents the tax rate percent out of 100.
-    # @optional @param active [Bool?] Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-    # @optional @param country [String?] Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    # @optional @param description [String?] An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param jurisdiction [String?] The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
-    # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
+    # @required @param post_tax_rates_request [Stripe::PostTaxRatesRequest?]
     # @return [Tuple(Stripe::TaxRate, Integer, Hash)] Stripe::TaxRate, response status code and response headers
     def post_tax_rates_with_http_info(
       *,
-      display_name : String? = nil,
-      inclusive : Bool? = nil,
-      percentage : Float64? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      state : String? = nil,
-      tax_type : String? = nil
+      post_tax_rates_request : Stripe::PostTaxRatesRequest? = nil
     ) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_tax_rates(display_name: display_name, inclusive: inclusive, percentage: percentage, active: active, country: country, description: description, expand: expand, jurisdiction: jurisdiction, state: state, tax_type: tax_type)
+      request = build_api_request_for_post_tax_rates(post_tax_rates_request: post_tax_rates_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -338,117 +302,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new tax rate.&lt;/p&gt;
-    # @required @param display_name [String?] The display name of the tax rate, which will be shown to users.
-    # @required @param inclusive [Bool?] This specifies if the tax rate is inclusive or exclusive.
-    # @required @param percentage [Float64?] This represents the tax rate percent out of 100.
-    # @optional @param active [Bool?] Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-    # @optional @param country [String?] Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    # @optional @param description [String?] An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param jurisdiction [String?] The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
-    # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
+    # @required @param post_tax_rates_request [Stripe::PostTaxRatesRequest?]
     # @return nil
     def post_tax_rates(
       *,
-      display_name : String? = nil,
-      inclusive : Bool? = nil,
-      percentage : Float64? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      state : String? = nil,
-      tax_type : String? = nil,
+      post_tax_rates_request : Stripe::PostTaxRatesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_tax_rates(display_name: display_name, inclusive: inclusive, percentage: percentage, active: active, country: country, description: description, expand: expand, jurisdiction: jurisdiction, state: state, tax_type: tax_type).execute(&block)
+      build_api_request_for_post_tax_rates(post_tax_rates_request: post_tax_rates_request).execute(&block)
     end
-
-    POST_TAX_RATES_MAX_LENGTH_FOR_DISPLAY_NAME =   50
-    POST_TAX_RATES_MAX_LENGTH_FOR_COUNTRY      = 5000
-    POST_TAX_RATES_MAX_LENGTH_FOR_DESCRIPTION  = 5000
-    POST_TAX_RATES_MAX_LENGTH_FOR_JURISDICTION =   50
-    POST_TAX_RATES_MAX_LENGTH_FOR_STATE        =    2
-    POST_TAX_RATES_VALID_VALUES_FOR_TAX_TYPE   = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
 
     # @return Crest::Request
     def build_api_request_for_post_tax_rates(
       *,
-      display_name : String? = nil,
-      inclusive : Bool? = nil,
-      percentage : Float64? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      state : String? = nil,
-      tax_type : String? = nil
+      post_tax_rates_request : Stripe::PostTaxRatesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TaxRatesApi.post_tax_rates ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"display_name\" is required and cannot be null") if display_name.nil?
-        unless (_display_name = display_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("display_name", display_name.to_s.size, POST_TAX_RATES_MAX_LENGTH_FOR_DISPLAY_NAME)
-        end
-        raise ArgumentError.new("\"inclusive\" is required and cannot be null") if inclusive.nil?
-
-        raise ArgumentError.new("\"percentage\" is required and cannot be null") if percentage.nil?
-
-        unless (_country = country).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("country", country.to_s.size, POST_TAX_RATES_MAX_LENGTH_FOR_COUNTRY)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TAX_RATES_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_jurisdiction = jurisdiction).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("jurisdiction", jurisdiction.to_s.size, POST_TAX_RATES_MAX_LENGTH_FOR_JURISDICTION)
-        end
-        unless (_state = state).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("state", state.to_s.size, POST_TAX_RATES_MAX_LENGTH_FOR_STATE)
-        end
-        unless (_tax_type = tax_type).nil?
-          OpenApi::EnumValidator.validate("tax_type", _tax_type, POST_TAX_RATES_VALID_VALUES_FOR_TAX_TYPE)
+        raise ArgumentError.new("\"post_tax_rates_request\" is required and cannot be null") if post_tax_rates_request.nil?
+        unless (_post_tax_rates_request = post_tax_rates_request).nil?
+          _post_tax_rates_request.validate if _post_tax_rates_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/tax_rates"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["country"] = country.to_s if !country.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["display_name"] = display_name.to_s if !display_name.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["inclusive"] = inclusive.to_s if !inclusive.nil?
-      form_params["jurisdiction"] = jurisdiction.to_s if !jurisdiction.nil?
-      form_params["percentage"] = percentage.to_s if !percentage.nil?
-      form_params["state"] = state.to_s if !state.nil?
-      form_params["tax_type"] = tax_type.to_s if !tax_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_tax_rates_request, content_type: header_params["Content-Type"]?) if !post_tax_rates_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -468,59 +368,27 @@ module Stripe
 
     # <p>Updates an existing tax rate.</p>
     # @required @param tax_rate [String?]
-    # @optional @param active [Bool?] Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-    # @optional @param country [String?] Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    # @optional @param description [String?] An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    # @optional @param display_name [String?] The display name of the tax rate, which will be shown to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param jurisdiction [String?] The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
-    # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
+    # @optional @param post_tax_rates_tax_rate_request [Stripe::PostTaxRatesTaxRateRequest?]
     # @return [Stripe::TaxRate]
     def post_tax_rates_tax_rate(
       *,
       tax_rate : String? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      state : String? = nil,
-      tax_type : String? = nil
+      post_tax_rates_tax_rate_request : Stripe::PostTaxRatesTaxRateRequest? = nil
     ) : Stripe::TaxRate
-      data, _status_code, _headers = post_tax_rates_tax_rate_with_http_info(tax_rate: tax_rate, active: active, country: country, description: description, display_name: display_name, expand: expand, jurisdiction: jurisdiction, metadata: metadata, state: state, tax_type: tax_type)
+      data, _status_code, _headers = post_tax_rates_tax_rate_with_http_info(tax_rate: tax_rate, post_tax_rates_tax_rate_request: post_tax_rates_tax_rate_request)
       data
     end
 
     # &lt;p&gt;Updates an existing tax rate.&lt;/p&gt;
     # @required @param tax_rate [String?]
-    # @optional @param active [Bool?] Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-    # @optional @param country [String?] Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    # @optional @param description [String?] An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    # @optional @param display_name [String?] The display name of the tax rate, which will be shown to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param jurisdiction [String?] The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
-    # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
+    # @optional @param post_tax_rates_tax_rate_request [Stripe::PostTaxRatesTaxRateRequest?]
     # @return [Tuple(Stripe::TaxRate, Integer, Hash)] Stripe::TaxRate, response status code and response headers
     def post_tax_rates_tax_rate_with_http_info(
       *,
       tax_rate : String? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      state : String? = nil,
-      tax_type : String? = nil
+      post_tax_rates_tax_rate_request : Stripe::PostTaxRatesTaxRateRequest? = nil
     ) : Tuple(Stripe::TaxRate, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_tax_rates_tax_rate(tax_rate: tax_rate, active: active, country: country, description: description, display_name: display_name, expand: expand, jurisdiction: jurisdiction, metadata: metadata, state: state, tax_type: tax_type)
+      request = build_api_request_for_post_tax_rates_tax_rate(tax_rate: tax_rate, post_tax_rates_tax_rate_request: post_tax_rates_tax_rate_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -533,54 +401,24 @@ module Stripe
 
     # &lt;p&gt;Updates an existing tax rate.&lt;/p&gt;
     # @required @param tax_rate [String?]
-    # @optional @param active [Bool?] Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
-    # @optional @param country [String?] Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    # @optional @param description [String?] An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    # @optional @param display_name [String?] The display name of the tax rate, which will be shown to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param jurisdiction [String?] The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param state [String?] [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\"NY\\\" for New York, United States.
-    # @optional @param tax_type [String?] The high-level tax type, such as `vat` or `sales_tax`.
+    # @optional @param post_tax_rates_tax_rate_request [Stripe::PostTaxRatesTaxRateRequest?]
     # @return nil
     def post_tax_rates_tax_rate(
       *,
       tax_rate : String? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      state : String? = nil,
-      tax_type : String? = nil,
+      post_tax_rates_tax_rate_request : Stripe::PostTaxRatesTaxRateRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_tax_rates_tax_rate(tax_rate: tax_rate, active: active, country: country, description: description, display_name: display_name, expand: expand, jurisdiction: jurisdiction, metadata: metadata, state: state, tax_type: tax_type).execute(&block)
+      build_api_request_for_post_tax_rates_tax_rate(tax_rate: tax_rate, post_tax_rates_tax_rate_request: post_tax_rates_tax_rate_request).execute(&block)
     end
 
-    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_TAX_RATE     = 5000
-    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_COUNTRY      = 5000
-    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_DESCRIPTION  = 5000
-    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_DISPLAY_NAME =   50
-    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_JURISDICTION =   50
-    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_STATE        =    2
-    POST_TAX_RATES_TAX_RATE_VALID_VALUES_FOR_TAX_TYPE   = String.static_array("gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat")
+    POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_TAX_RATE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_tax_rates_tax_rate(
       *,
       tax_rate : String? = nil,
-      active : Bool? = nil,
-      country : String? = nil,
-      description : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      jurisdiction : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      state : String? = nil,
-      tax_type : String? = nil
+      post_tax_rates_tax_rate_request : Stripe::PostTaxRatesTaxRateRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TaxRatesApi.post_tax_rates_tax_rate ..." }
@@ -591,61 +429,32 @@ module Stripe
         unless (_tax_rate = tax_rate).nil?
           OpenApi::PrimitiveValidator.validate_max_length("tax_rate", tax_rate.to_s.size, POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_TAX_RATE)
         end
-
-        unless (_country = country).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("country", country.to_s.size, POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_COUNTRY)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_display_name = display_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("display_name", display_name.to_s.size, POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_DISPLAY_NAME)
-        end
-
-        unless (_jurisdiction = jurisdiction).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("jurisdiction", jurisdiction.to_s.size, POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_JURISDICTION)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_state = state).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("state", state.to_s.size, POST_TAX_RATES_TAX_RATE_MAX_LENGTH_FOR_STATE)
-        end
-        unless (_tax_type = tax_type).nil?
-          OpenApi::EnumValidator.validate("tax_type", _tax_type, POST_TAX_RATES_TAX_RATE_VALID_VALUES_FOR_TAX_TYPE)
+        unless (_post_tax_rates_tax_rate_request = post_tax_rates_tax_rate_request).nil?
+          _post_tax_rates_tax_rate_request.validate if _post_tax_rates_tax_rate_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/tax_rates/{tax_rate}".sub("{" + "tax_rate" + "}", URI.encode_path(tax_rate.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["country"] = country.to_s if !country.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["display_name"] = display_name.to_s if !display_name.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["jurisdiction"] = jurisdiction.to_s if !jurisdiction.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["state"] = state.to_s if !state.nil?
-      form_params["tax_type"] = tax_type.to_s if !tax_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_tax_rates_tax_rate_request, content_type: header_params["Content-Type"]?) if !post_tax_rates_tax_rate_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

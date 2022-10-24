@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/configurations/{configuration}".sub("{" + "configuration" + "}", URI.encode_path(configuration.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -175,22 +175,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/locations/{location}".sub("{" + "location" + "}", URI.encode_path(location.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -269,22 +269,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -394,27 +394,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/configurations"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["is_account_default"] = is_account_default.to_s if !is_account_default.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -500,23 +500,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/configurations/{configuration}".sub("{" + "configuration" + "}", URI.encode_path(configuration.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -619,26 +619,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/locations"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -724,23 +724,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/locations/{location}".sub("{" + "location" + "}", URI.encode_path(location.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -877,8 +877,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/readers"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -887,19 +895,11 @@ module Stripe
       query_params["device_type"] = device_type.to_s if !device_type.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -985,23 +985,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1020,36 +1020,24 @@ module Stripe
     end
 
     # <p>Creates a new <code>Configuration</code> object.</p>
-    # @optional @param bbpos_wisepos_e [Stripe::BbposWisePose?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param tipping [Stripe::PostTerminalConfigurationsRequestTipping?]
-    # @optional @param verifone_p400 [Stripe::VerifoneP400?]
+    # @optional @param post_terminal_configurations_request [Stripe::PostTerminalConfigurationsRequest?]
     # @return [Stripe::TerminalConfiguration]
     def post_terminal_configurations(
       *,
-      bbpos_wisepos_e : Stripe::BbposWisePose? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::VerifoneP400? = nil
+      post_terminal_configurations_request : Stripe::PostTerminalConfigurationsRequest? = nil
     ) : Stripe::TerminalConfiguration
-      data, _status_code, _headers = post_terminal_configurations_with_http_info(bbpos_wisepos_e: bbpos_wisepos_e, expand: expand, tipping: tipping, verifone_p400: verifone_p400)
+      data, _status_code, _headers = post_terminal_configurations_with_http_info(post_terminal_configurations_request: post_terminal_configurations_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;Configuration&lt;/code&gt; object.&lt;/p&gt;
-    # @optional @param bbpos_wisepos_e [Stripe::BbposWisePose?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param tipping [Stripe::PostTerminalConfigurationsRequestTipping?]
-    # @optional @param verifone_p400 [Stripe::VerifoneP400?]
+    # @optional @param post_terminal_configurations_request [Stripe::PostTerminalConfigurationsRequest?]
     # @return [Tuple(Stripe::TerminalConfiguration, Integer, Hash)] Stripe::TerminalConfiguration, response status code and response headers
     def post_terminal_configurations_with_http_info(
       *,
-      bbpos_wisepos_e : Stripe::BbposWisePose? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::VerifoneP400? = nil
+      post_terminal_configurations_request : Stripe::PostTerminalConfigurationsRequest? = nil
     ) : Tuple(Stripe::TerminalConfiguration, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_configurations(bbpos_wisepos_e: bbpos_wisepos_e, expand: expand, tipping: tipping, verifone_p400: verifone_p400)
+      request = build_api_request_for_post_terminal_configurations(post_terminal_configurations_request: post_terminal_configurations_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1061,72 +1049,52 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;Configuration&lt;/code&gt; object.&lt;/p&gt;
-    # @optional @param bbpos_wisepos_e [Stripe::BbposWisePose?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param tipping [Stripe::PostTerminalConfigurationsRequestTipping?]
-    # @optional @param verifone_p400 [Stripe::VerifoneP400?]
+    # @optional @param post_terminal_configurations_request [Stripe::PostTerminalConfigurationsRequest?]
     # @return nil
     def post_terminal_configurations(
       *,
-      bbpos_wisepos_e : Stripe::BbposWisePose? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::VerifoneP400? = nil,
+      post_terminal_configurations_request : Stripe::PostTerminalConfigurationsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_configurations(bbpos_wisepos_e: bbpos_wisepos_e, expand: expand, tipping: tipping, verifone_p400: verifone_p400).execute(&block)
+      build_api_request_for_post_terminal_configurations(post_terminal_configurations_request: post_terminal_configurations_request).execute(&block)
     end
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_configurations(
       *,
-      bbpos_wisepos_e : Stripe::BbposWisePose? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::VerifoneP400? = nil
+      post_terminal_configurations_request : Stripe::PostTerminalConfigurationsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_configurations ..." }
       end
 
       if client_side_validation
-        unless (_bbpos_wisepos_e = bbpos_wisepos_e).nil?
-          _bbpos_wisepos_e.validate if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_tipping = tipping).nil?
-          _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_verifone_p400 = verifone_p400).nil?
-          _verifone_p400.validate if _verifone_p400.is_a?(OpenApi::Validatable)
+        unless (_post_terminal_configurations_request = post_terminal_configurations_request).nil?
+          _post_terminal_configurations_request.validate if _post_terminal_configurations_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/configurations"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["bbpos_wisepos_e"] = bbpos_wisepos_e.to_s if !bbpos_wisepos_e.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["tipping"] = tipping.to_s if !tipping.nil?
-      form_params["verifone_p400"] = verifone_p400.to_s if !verifone_p400.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_configurations_request, content_type: header_params["Content-Type"]?) if !post_terminal_configurations_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1146,39 +1114,27 @@ module Stripe
 
     # <p>Updates a new <code>Configuration</code> object.</p>
     # @required @param configuration [String?]
-    # @optional @param bbpos_wisepos_e [Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param tipping [Stripe::PostTerminalConfigurationsRequestTipping?]
-    # @optional @param verifone_p400 [Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400?]
+    # @optional @param post_terminal_configurations_configuration_request [Stripe::PostTerminalConfigurationsConfigurationRequest?]
     # @return [Stripe::GetTerminalConfigurationsConfiguration200Response]
     def post_terminal_configurations_configuration(
       *,
       configuration : String? = nil,
-      bbpos_wisepos_e : Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400? = nil
+      post_terminal_configurations_configuration_request : Stripe::PostTerminalConfigurationsConfigurationRequest? = nil
     ) : Stripe::GetTerminalConfigurationsConfiguration200Response
-      data, _status_code, _headers = post_terminal_configurations_configuration_with_http_info(configuration: configuration, bbpos_wisepos_e: bbpos_wisepos_e, expand: expand, tipping: tipping, verifone_p400: verifone_p400)
+      data, _status_code, _headers = post_terminal_configurations_configuration_with_http_info(configuration: configuration, post_terminal_configurations_configuration_request: post_terminal_configurations_configuration_request)
       data
     end
 
     # &lt;p&gt;Updates a new &lt;code&gt;Configuration&lt;/code&gt; object.&lt;/p&gt;
     # @required @param configuration [String?]
-    # @optional @param bbpos_wisepos_e [Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param tipping [Stripe::PostTerminalConfigurationsRequestTipping?]
-    # @optional @param verifone_p400 [Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400?]
+    # @optional @param post_terminal_configurations_configuration_request [Stripe::PostTerminalConfigurationsConfigurationRequest?]
     # @return [Tuple(Stripe::GetTerminalConfigurationsConfiguration200Response, Integer, Hash)] Stripe::GetTerminalConfigurationsConfiguration200Response, response status code and response headers
     def post_terminal_configurations_configuration_with_http_info(
       *,
       configuration : String? = nil,
-      bbpos_wisepos_e : Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400? = nil
+      post_terminal_configurations_configuration_request : Stripe::PostTerminalConfigurationsConfigurationRequest? = nil
     ) : Tuple(Stripe::GetTerminalConfigurationsConfiguration200Response, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_configurations_configuration(configuration: configuration, bbpos_wisepos_e: bbpos_wisepos_e, expand: expand, tipping: tipping, verifone_p400: verifone_p400)
+      request = build_api_request_for_post_terminal_configurations_configuration(configuration: configuration, post_terminal_configurations_configuration_request: post_terminal_configurations_configuration_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1191,21 +1147,15 @@ module Stripe
 
     # &lt;p&gt;Updates a new &lt;code&gt;Configuration&lt;/code&gt; object.&lt;/p&gt;
     # @required @param configuration [String?]
-    # @optional @param bbpos_wisepos_e [Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param tipping [Stripe::PostTerminalConfigurationsRequestTipping?]
-    # @optional @param verifone_p400 [Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400?]
+    # @optional @param post_terminal_configurations_configuration_request [Stripe::PostTerminalConfigurationsConfigurationRequest?]
     # @return nil
     def post_terminal_configurations_configuration(
       *,
       configuration : String? = nil,
-      bbpos_wisepos_e : Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400? = nil,
+      post_terminal_configurations_configuration_request : Stripe::PostTerminalConfigurationsConfigurationRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_configurations_configuration(configuration: configuration, bbpos_wisepos_e: bbpos_wisepos_e, expand: expand, tipping: tipping, verifone_p400: verifone_p400).execute(&block)
+      build_api_request_for_post_terminal_configurations_configuration(configuration: configuration, post_terminal_configurations_configuration_request: post_terminal_configurations_configuration_request).execute(&block)
     end
 
     POST_TERMINAL_CONFIGURATIONS_CONFIGURATION_MAX_LENGTH_FOR_CONFIGURATION = 5000
@@ -1214,10 +1164,7 @@ module Stripe
     def build_api_request_for_post_terminal_configurations_configuration(
       *,
       configuration : String? = nil,
-      bbpos_wisepos_e : Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE? = nil,
-      expand : Array(String)? = nil,
-      tipping : Stripe::PostTerminalConfigurationsRequestTipping? = nil,
-      verifone_p400 : Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400? = nil
+      post_terminal_configurations_configuration_request : Stripe::PostTerminalConfigurationsConfigurationRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_configurations_configuration ..." }
@@ -1228,43 +1175,32 @@ module Stripe
         unless (_configuration = configuration).nil?
           OpenApi::PrimitiveValidator.validate_max_length("configuration", configuration.to_s.size, POST_TERMINAL_CONFIGURATIONS_CONFIGURATION_MAX_LENGTH_FOR_CONFIGURATION)
         end
-        unless (_bbpos_wisepos_e = bbpos_wisepos_e).nil?
-          _bbpos_wisepos_e.validate if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_tipping = tipping).nil?
-          _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_verifone_p400 = verifone_p400).nil?
-          _verifone_p400.validate if _verifone_p400.is_a?(OpenApi::Validatable)
+        unless (_post_terminal_configurations_configuration_request = post_terminal_configurations_configuration_request).nil?
+          _post_terminal_configurations_configuration_request.validate if _post_terminal_configurations_configuration_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/configurations/{configuration}".sub("{" + "configuration" + "}", URI.encode_path(configuration.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["bbpos_wisepos_e"] = bbpos_wisepos_e.to_s if !bbpos_wisepos_e.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["tipping"] = tipping.to_s if !tipping.nil?
-      form_params["verifone_p400"] = verifone_p400.to_s if !verifone_p400.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_configurations_configuration_request, content_type: header_params["Content-Type"]?) if !post_terminal_configurations_configuration_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1283,28 +1219,24 @@ module Stripe
     end
 
     # <p>To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived connection token from Stripe, proxied through your server. On your backend, add an endpoint that creates and returns a connection token.</p>
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param location [String?] The id of the location that this connection token is scoped to. If specified the connection token will only be usable with readers assigned to that location, otherwise the connection token will be usable with all readers. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
+    # @optional @param post_terminal_connection_tokens_request [Stripe::PostTerminalConnectionTokensRequest?]
     # @return [Stripe::TerminalConnectionToken]
     def post_terminal_connection_tokens(
       *,
-      expand : Array(String)? = nil,
-      location : String? = nil
+      post_terminal_connection_tokens_request : Stripe::PostTerminalConnectionTokensRequest? = nil
     ) : Stripe::TerminalConnectionToken
-      data, _status_code, _headers = post_terminal_connection_tokens_with_http_info(expand: expand, location: location)
+      data, _status_code, _headers = post_terminal_connection_tokens_with_http_info(post_terminal_connection_tokens_request: post_terminal_connection_tokens_request)
       data
     end
 
     # &lt;p&gt;To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived connection token from Stripe, proxied through your server. On your backend, add an endpoint that creates and returns a connection token.&lt;/p&gt;
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param location [String?] The id of the location that this connection token is scoped to. If specified the connection token will only be usable with readers assigned to that location, otherwise the connection token will be usable with all readers. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
+    # @optional @param post_terminal_connection_tokens_request [Stripe::PostTerminalConnectionTokensRequest?]
     # @return [Tuple(Stripe::TerminalConnectionToken, Integer, Hash)] Stripe::TerminalConnectionToken, response status code and response headers
     def post_terminal_connection_tokens_with_http_info(
       *,
-      expand : Array(String)? = nil,
-      location : String? = nil
+      post_terminal_connection_tokens_request : Stripe::PostTerminalConnectionTokensRequest? = nil
     ) : Tuple(Stripe::TerminalConnectionToken, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_connection_tokens(expand: expand, location: location)
+      request = build_api_request_for_post_terminal_connection_tokens(post_terminal_connection_tokens_request: post_terminal_connection_tokens_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1316,59 +1248,52 @@ module Stripe
     end
 
     # &lt;p&gt;To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived connection token from Stripe, proxied through your server. On your backend, add an endpoint that creates and returns a connection token.&lt;/p&gt;
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param location [String?] The id of the location that this connection token is scoped to. If specified the connection token will only be usable with readers assigned to that location, otherwise the connection token will be usable with all readers. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
+    # @optional @param post_terminal_connection_tokens_request [Stripe::PostTerminalConnectionTokensRequest?]
     # @return nil
     def post_terminal_connection_tokens(
       *,
-      expand : Array(String)? = nil,
-      location : String? = nil,
+      post_terminal_connection_tokens_request : Stripe::PostTerminalConnectionTokensRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_connection_tokens(expand: expand, location: location).execute(&block)
+      build_api_request_for_post_terminal_connection_tokens(post_terminal_connection_tokens_request: post_terminal_connection_tokens_request).execute(&block)
     end
-
-    POST_TERMINAL_CONNECTION_TOKENS_MAX_LENGTH_FOR_LOCATION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_connection_tokens(
       *,
-      expand : Array(String)? = nil,
-      location : String? = nil
+      post_terminal_connection_tokens_request : Stripe::PostTerminalConnectionTokensRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_connection_tokens ..." }
       end
 
       if client_side_validation
-        unless (_location = location).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("location", location.to_s.size, POST_TERMINAL_CONNECTION_TOKENS_MAX_LENGTH_FOR_LOCATION)
+        unless (_post_terminal_connection_tokens_request = post_terminal_connection_tokens_request).nil?
+          _post_terminal_connection_tokens_request.validate if _post_terminal_connection_tokens_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/connection_tokens"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["location"] = location.to_s if !location.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_connection_tokens_request, content_type: header_params["Content-Type"]?) if !post_terminal_connection_tokens_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1387,40 +1312,24 @@ module Stripe
     end
 
     # <p>Creates a new <code>Location</code> object. For further details, including which address fields are required in each country, see the <a href=\"/docs/terminal/fleet/locations\">Manage locations</a> guide.</p>
-    # @required @param address [Stripe::CreateLocationAddressParam?]
-    # @required @param display_name [String?] A name for the location.
-    # @optional @param configuration_overrides [String?] The ID of a configuration that will be used to customize all readers in this location.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_terminal_locations_request [Stripe::PostTerminalLocationsRequest?]
     # @return [Stripe::TerminalLocation]
     def post_terminal_locations(
       *,
-      address : Stripe::CreateLocationAddressParam? = nil,
-      display_name : String? = nil,
-      configuration_overrides : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_locations_request : Stripe::PostTerminalLocationsRequest? = nil
     ) : Stripe::TerminalLocation
-      data, _status_code, _headers = post_terminal_locations_with_http_info(address: address, display_name: display_name, configuration_overrides: configuration_overrides, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_terminal_locations_with_http_info(post_terminal_locations_request: post_terminal_locations_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;Location&lt;/code&gt; object. For further details, including which address fields are required in each country, see the &lt;a href&#x3D;\&quot;/docs/terminal/fleet/locations\&quot;&gt;Manage locations&lt;/a&gt; guide.&lt;/p&gt;
-    # @required @param address [Stripe::CreateLocationAddressParam?]
-    # @required @param display_name [String?] A name for the location.
-    # @optional @param configuration_overrides [String?] The ID of a configuration that will be used to customize all readers in this location.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_terminal_locations_request [Stripe::PostTerminalLocationsRequest?]
     # @return [Tuple(Stripe::TerminalLocation, Integer, Hash)] Stripe::TerminalLocation, response status code and response headers
     def post_terminal_locations_with_http_info(
       *,
-      address : Stripe::CreateLocationAddressParam? = nil,
-      display_name : String? = nil,
-      configuration_overrides : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_locations_request : Stripe::PostTerminalLocationsRequest? = nil
     ) : Tuple(Stripe::TerminalLocation, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_locations(address: address, display_name: display_name, configuration_overrides: configuration_overrides, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_terminal_locations(post_terminal_locations_request: post_terminal_locations_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1432,84 +1341,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;Location&lt;/code&gt; object. For further details, including which address fields are required in each country, see the &lt;a href&#x3D;\&quot;/docs/terminal/fleet/locations\&quot;&gt;Manage locations&lt;/a&gt; guide.&lt;/p&gt;
-    # @required @param address [Stripe::CreateLocationAddressParam?]
-    # @required @param display_name [String?] A name for the location.
-    # @optional @param configuration_overrides [String?] The ID of a configuration that will be used to customize all readers in this location.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_terminal_locations_request [Stripe::PostTerminalLocationsRequest?]
     # @return nil
     def post_terminal_locations(
       *,
-      address : Stripe::CreateLocationAddressParam? = nil,
-      display_name : String? = nil,
-      configuration_overrides : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_terminal_locations_request : Stripe::PostTerminalLocationsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_locations(address: address, display_name: display_name, configuration_overrides: configuration_overrides, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_terminal_locations(post_terminal_locations_request: post_terminal_locations_request).execute(&block)
     end
-
-    POST_TERMINAL_LOCATIONS_MAX_LENGTH_FOR_DISPLAY_NAME            = 1000
-    POST_TERMINAL_LOCATIONS_MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES = 1000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_locations(
       *,
-      address : Stripe::CreateLocationAddressParam? = nil,
-      display_name : String? = nil,
-      configuration_overrides : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_locations_request : Stripe::PostTerminalLocationsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_locations ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"address\" is required and cannot be null") if address.nil?
-        unless (_address = address).nil?
-          _address.validate if _address.is_a?(OpenApi::Validatable)
-        end
-        raise ArgumentError.new("\"display_name\" is required and cannot be null") if display_name.nil?
-        unless (_display_name = display_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("display_name", display_name.to_s.size, POST_TERMINAL_LOCATIONS_MAX_LENGTH_FOR_DISPLAY_NAME)
-        end
-        unless (_configuration_overrides = configuration_overrides).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("configuration_overrides", configuration_overrides.to_s.size, POST_TERMINAL_LOCATIONS_MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_terminal_locations_request\" is required and cannot be null") if post_terminal_locations_request.nil?
+        unless (_post_terminal_locations_request = post_terminal_locations_request).nil?
+          _post_terminal_locations_request.validate if _post_terminal_locations_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/locations"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["address"] = address.to_s if !address.nil?
-      form_params["configuration_overrides"] = configuration_overrides.to_s if !configuration_overrides.nil?
-      form_params["display_name"] = display_name.to_s if !display_name.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_locations_request, content_type: header_params["Content-Type"]?) if !post_terminal_locations_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1529,43 +1407,27 @@ module Stripe
 
     # <p>Updates a <code>Location</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param location [String?]
-    # @optional @param address [Stripe::OptionalFieldsAddress?]
-    # @optional @param configuration_overrides [String?] The ID of a configuration that will be used to customize all readers in this location.
-    # @optional @param display_name [String?] A name for the location.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_terminal_locations_location_request [Stripe::PostTerminalLocationsLocationRequest?]
     # @return [Stripe::GetTerminalLocationsLocation200Response]
     def post_terminal_locations_location(
       *,
       location : String? = nil,
-      address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_locations_location_request : Stripe::PostTerminalLocationsLocationRequest? = nil
     ) : Stripe::GetTerminalLocationsLocation200Response
-      data, _status_code, _headers = post_terminal_locations_location_with_http_info(location: location, address: address, configuration_overrides: configuration_overrides, display_name: display_name, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_terminal_locations_location_with_http_info(location: location, post_terminal_locations_location_request: post_terminal_locations_location_request)
       data
     end
 
     # &lt;p&gt;Updates a &lt;code&gt;Location&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param location [String?]
-    # @optional @param address [Stripe::OptionalFieldsAddress?]
-    # @optional @param configuration_overrides [String?] The ID of a configuration that will be used to customize all readers in this location.
-    # @optional @param display_name [String?] A name for the location.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_terminal_locations_location_request [Stripe::PostTerminalLocationsLocationRequest?]
     # @return [Tuple(Stripe::GetTerminalLocationsLocation200Response, Integer, Hash)] Stripe::GetTerminalLocationsLocation200Response, response status code and response headers
     def post_terminal_locations_location_with_http_info(
       *,
       location : String? = nil,
-      address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_locations_location_request : Stripe::PostTerminalLocationsLocationRequest? = nil
     ) : Tuple(Stripe::GetTerminalLocationsLocation200Response, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_locations_location(location: location, address: address, configuration_overrides: configuration_overrides, display_name: display_name, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_terminal_locations_location(location: location, post_terminal_locations_location_request: post_terminal_locations_location_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1578,38 +1440,24 @@ module Stripe
 
     # &lt;p&gt;Updates a &lt;code&gt;Location&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param location [String?]
-    # @optional @param address [Stripe::OptionalFieldsAddress?]
-    # @optional @param configuration_overrides [String?] The ID of a configuration that will be used to customize all readers in this location.
-    # @optional @param display_name [String?] A name for the location.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_terminal_locations_location_request [Stripe::PostTerminalLocationsLocationRequest?]
     # @return nil
     def post_terminal_locations_location(
       *,
       location : String? = nil,
-      address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_terminal_locations_location_request : Stripe::PostTerminalLocationsLocationRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_locations_location(location: location, address: address, configuration_overrides: configuration_overrides, display_name: display_name, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_terminal_locations_location(location: location, post_terminal_locations_location_request: post_terminal_locations_location_request).execute(&block)
     end
 
-    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_LOCATION                = 5000
-    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES = 1000
-    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_DISPLAY_NAME            = 1000
+    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_LOCATION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_locations_location(
       *,
       location : String? = nil,
-      address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
-      display_name : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_locations_location_request : Stripe::PostTerminalLocationsLocationRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_locations_location ..." }
@@ -1620,47 +1468,32 @@ module Stripe
         unless (_location = location).nil?
           OpenApi::PrimitiveValidator.validate_max_length("location", location.to_s.size, POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_LOCATION)
         end
-        unless (_address = address).nil?
-          _address.validate if _address.is_a?(OpenApi::Validatable)
-        end
-        unless (_configuration_overrides = configuration_overrides).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("configuration_overrides", configuration_overrides.to_s.size, POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES)
-        end
-        unless (_display_name = display_name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("display_name", display_name.to_s.size, POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_DISPLAY_NAME)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_terminal_locations_location_request = post_terminal_locations_location_request).nil?
+          _post_terminal_locations_location_request.validate if _post_terminal_locations_location_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/locations/{location}".sub("{" + "location" + "}", URI.encode_path(location.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["address"] = address.to_s if !address.nil?
-      form_params["configuration_overrides"] = configuration_overrides.to_s if !configuration_overrides.nil?
-      form_params["display_name"] = display_name.to_s if !display_name.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_locations_location_request, content_type: header_params["Content-Type"]?) if !post_terminal_locations_location_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1679,40 +1512,24 @@ module Stripe
     end
 
     # <p>Creates a new <code>Reader</code> object.</p>
-    # @required @param registration_code [String?] A code generated by the reader used for registering to an account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?] Custom label given to the reader for easier identification. If no label is specified, the registration code will be used.
-    # @optional @param location [String?] The location to assign the reader to.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_terminal_readers_request [Stripe::PostTerminalReadersRequest?]
     # @return [Stripe::TerminalReader]
     def post_terminal_readers(
       *,
-      registration_code : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      location : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_readers_request : Stripe::PostTerminalReadersRequest? = nil
     ) : Stripe::TerminalReader
-      data, _status_code, _headers = post_terminal_readers_with_http_info(registration_code: registration_code, expand: expand, label: label, location: location, metadata: metadata)
+      data, _status_code, _headers = post_terminal_readers_with_http_info(post_terminal_readers_request: post_terminal_readers_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;Reader&lt;/code&gt; object.&lt;/p&gt;
-    # @required @param registration_code [String?] A code generated by the reader used for registering to an account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?] Custom label given to the reader for easier identification. If no label is specified, the registration code will be used.
-    # @optional @param location [String?] The location to assign the reader to.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_terminal_readers_request [Stripe::PostTerminalReadersRequest?]
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
     def post_terminal_readers_with_http_info(
       *,
-      registration_code : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      location : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_readers_request : Stripe::PostTerminalReadersRequest? = nil
     ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers(registration_code: registration_code, expand: expand, label: label, location: location, metadata: metadata)
+      request = build_api_request_for_post_terminal_readers(post_terminal_readers_request: post_terminal_readers_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1724,84 +1541,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;Reader&lt;/code&gt; object.&lt;/p&gt;
-    # @required @param registration_code [String?] A code generated by the reader used for registering to an account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?] Custom label given to the reader for easier identification. If no label is specified, the registration code will be used.
-    # @optional @param location [String?] The location to assign the reader to.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_terminal_readers_request [Stripe::PostTerminalReadersRequest?]
     # @return nil
     def post_terminal_readers(
       *,
-      registration_code : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      location : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_terminal_readers_request : Stripe::PostTerminalReadersRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers(registration_code: registration_code, expand: expand, label: label, location: location, metadata: metadata).execute(&block)
+      build_api_request_for_post_terminal_readers(post_terminal_readers_request: post_terminal_readers_request).execute(&block)
     end
-
-    POST_TERMINAL_READERS_MAX_LENGTH_FOR_REGISTRATION_CODE = 5000
-    POST_TERMINAL_READERS_MAX_LENGTH_FOR_LABEL             = 5000
-    POST_TERMINAL_READERS_MAX_LENGTH_FOR_LOCATION          = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers(
       *,
-      registration_code : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      location : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_readers_request : Stripe::PostTerminalReadersRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_readers ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"registration_code\" is required and cannot be null") if registration_code.nil?
-        unless (_registration_code = registration_code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("registration_code", registration_code.to_s.size, POST_TERMINAL_READERS_MAX_LENGTH_FOR_REGISTRATION_CODE)
-        end
-
-        unless (_label = label).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("label", label.to_s.size, POST_TERMINAL_READERS_MAX_LENGTH_FOR_LABEL)
-        end
-        unless (_location = location).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("location", location.to_s.size, POST_TERMINAL_READERS_MAX_LENGTH_FOR_LOCATION)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_terminal_readers_request\" is required and cannot be null") if post_terminal_readers_request.nil?
+        unless (_post_terminal_readers_request = post_terminal_readers_request).nil?
+          _post_terminal_readers_request.validate if _post_terminal_readers_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/readers"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["label"] = label.to_s if !label.nil?
-      form_params["location"] = location.to_s if !location.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["registration_code"] = registration_code.to_s if !registration_code.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_readers_request, content_type: header_params["Content-Type"]?) if !post_terminal_readers_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1821,35 +1607,27 @@ module Stripe
 
     # <p>Updates a <code>Reader</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param reader [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?] The new label of the reader.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_terminal_readers_reader_request [Stripe::PostTerminalReadersReaderRequest?]
     # @return [Stripe::GetTerminalReadersReader200Response]
     def post_terminal_readers_reader(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_readers_reader_request : Stripe::PostTerminalReadersReaderRequest? = nil
     ) : Stripe::GetTerminalReadersReader200Response
-      data, _status_code, _headers = post_terminal_readers_reader_with_http_info(reader: reader, expand: expand, label: label, metadata: metadata)
+      data, _status_code, _headers = post_terminal_readers_reader_with_http_info(reader: reader, post_terminal_readers_reader_request: post_terminal_readers_reader_request)
       data
     end
 
     # &lt;p&gt;Updates a &lt;code&gt;Reader&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param reader [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?] The new label of the reader.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_terminal_readers_reader_request [Stripe::PostTerminalReadersReaderRequest?]
     # @return [Tuple(Stripe::GetTerminalReadersReader200Response, Integer, Hash)] Stripe::GetTerminalReadersReader200Response, response status code and response headers
     def post_terminal_readers_reader_with_http_info(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_readers_reader_request : Stripe::PostTerminalReadersReaderRequest? = nil
     ) : Tuple(Stripe::GetTerminalReadersReader200Response, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers_reader(reader: reader, expand: expand, label: label, metadata: metadata)
+      request = build_api_request_for_post_terminal_readers_reader(reader: reader, post_terminal_readers_reader_request: post_terminal_readers_reader_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1862,31 +1640,24 @@ module Stripe
 
     # &lt;p&gt;Updates a &lt;code&gt;Reader&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param reader [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?] The new label of the reader.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_terminal_readers_reader_request [Stripe::PostTerminalReadersReaderRequest?]
     # @return nil
     def post_terminal_readers_reader(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_terminal_readers_reader_request : Stripe::PostTerminalReadersReaderRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers_reader(reader: reader, expand: expand, label: label, metadata: metadata).execute(&block)
+      build_api_request_for_post_terminal_readers_reader(reader: reader, post_terminal_readers_reader_request: post_terminal_readers_reader_request).execute(&block)
     end
 
     POST_TERMINAL_READERS_READER_MAX_LENGTH_FOR_READER = 5000
-    POST_TERMINAL_READERS_READER_MAX_LENGTH_FOR_LABEL  = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers_reader(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil,
-      label : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_terminal_readers_reader_request : Stripe::PostTerminalReadersReaderRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_readers_reader ..." }
@@ -1897,39 +1668,32 @@ module Stripe
         unless (_reader = reader).nil?
           OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_MAX_LENGTH_FOR_READER)
         end
-
-        unless (_label = label).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("label", label.to_s.size, POST_TERMINAL_READERS_READER_MAX_LENGTH_FOR_LABEL)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_terminal_readers_reader_request = post_terminal_readers_reader_request).nil?
+          _post_terminal_readers_reader_request.validate if _post_terminal_readers_reader_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["label"] = label.to_s if !label.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_readers_reader_request, content_type: header_params["Content-Type"]?) if !post_terminal_readers_reader_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1949,27 +1713,27 @@ module Stripe
 
     # <p>Cancels the current reader action.</p>
     # @required @param reader [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::TerminalReader]
     def post_terminal_readers_reader_cancel_action(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::TerminalReader
-      data, _status_code, _headers = post_terminal_readers_reader_cancel_action_with_http_info(reader: reader, expand: expand)
+      data, _status_code, _headers = post_terminal_readers_reader_cancel_action_with_http_info(reader: reader, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Cancels the current reader action.&lt;/p&gt;
     # @required @param reader [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
     def post_terminal_readers_reader_cancel_action_with_http_info(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers_reader_cancel_action(reader: reader, expand: expand)
+      request = build_api_request_for_post_terminal_readers_reader_cancel_action(reader: reader, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1982,15 +1746,15 @@ module Stripe
 
     # &lt;p&gt;Cancels the current reader action.&lt;/p&gt;
     # @required @param reader [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_terminal_readers_reader_cancel_action(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers_reader_cancel_action(reader: reader, expand: expand).execute(&block)
+      build_api_request_for_post_terminal_readers_reader_cancel_action(reader: reader, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_TERMINAL_READERS_READER_CANCEL_ACTION_MAX_LENGTH_FOR_READER = 5000
@@ -1999,7 +1763,7 @@ module Stripe
     def build_api_request_for_post_terminal_readers_reader_cancel_action(
       *,
       reader : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_readers_reader_cancel_action ..." }
@@ -2010,30 +1774,32 @@ module Stripe
         unless (_reader = reader).nil?
           OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_CANCEL_ACTION_MAX_LENGTH_FOR_READER)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}/cancel_action".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2053,35 +1819,27 @@ module Stripe
 
     # <p>Initiates a payment flow on a Reader.</p>
     # @required @param reader [String?]
-    # @required @param payment_intent [String?] PaymentIntent ID
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param process_config [Stripe::ProcessConfig?]
+    # @required @param post_terminal_readers_reader_process_payment_intent_request [Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest?]
     # @return [Stripe::TerminalReader]
     def post_terminal_readers_reader_process_payment_intent(
       *,
       reader : String? = nil,
-      payment_intent : String? = nil,
-      expand : Array(String)? = nil,
-      process_config : Stripe::ProcessConfig? = nil
+      post_terminal_readers_reader_process_payment_intent_request : Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest? = nil
     ) : Stripe::TerminalReader
-      data, _status_code, _headers = post_terminal_readers_reader_process_payment_intent_with_http_info(reader: reader, payment_intent: payment_intent, expand: expand, process_config: process_config)
+      data, _status_code, _headers = post_terminal_readers_reader_process_payment_intent_with_http_info(reader: reader, post_terminal_readers_reader_process_payment_intent_request: post_terminal_readers_reader_process_payment_intent_request)
       data
     end
 
     # &lt;p&gt;Initiates a payment flow on a Reader.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param payment_intent [String?] PaymentIntent ID
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param process_config [Stripe::ProcessConfig?]
+    # @required @param post_terminal_readers_reader_process_payment_intent_request [Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest?]
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
     def post_terminal_readers_reader_process_payment_intent_with_http_info(
       *,
       reader : String? = nil,
-      payment_intent : String? = nil,
-      expand : Array(String)? = nil,
-      process_config : Stripe::ProcessConfig? = nil
+      post_terminal_readers_reader_process_payment_intent_request : Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest? = nil
     ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers_reader_process_payment_intent(reader: reader, payment_intent: payment_intent, expand: expand, process_config: process_config)
+      request = build_api_request_for_post_terminal_readers_reader_process_payment_intent(reader: reader, post_terminal_readers_reader_process_payment_intent_request: post_terminal_readers_reader_process_payment_intent_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2094,31 +1852,24 @@ module Stripe
 
     # &lt;p&gt;Initiates a payment flow on a Reader.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param payment_intent [String?] PaymentIntent ID
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param process_config [Stripe::ProcessConfig?]
+    # @required @param post_terminal_readers_reader_process_payment_intent_request [Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest?]
     # @return nil
     def post_terminal_readers_reader_process_payment_intent(
       *,
       reader : String? = nil,
-      payment_intent : String? = nil,
-      expand : Array(String)? = nil,
-      process_config : Stripe::ProcessConfig? = nil,
+      post_terminal_readers_reader_process_payment_intent_request : Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers_reader_process_payment_intent(reader: reader, payment_intent: payment_intent, expand: expand, process_config: process_config).execute(&block)
+      build_api_request_for_post_terminal_readers_reader_process_payment_intent(reader: reader, post_terminal_readers_reader_process_payment_intent_request: post_terminal_readers_reader_process_payment_intent_request).execute(&block)
     end
 
-    POST_TERMINAL_READERS_READER_PROCESS_PAYMENT_INTENT_MAX_LENGTH_FOR_READER         = 5000
-    POST_TERMINAL_READERS_READER_PROCESS_PAYMENT_INTENT_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
+    POST_TERMINAL_READERS_READER_PROCESS_PAYMENT_INTENT_MAX_LENGTH_FOR_READER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers_reader_process_payment_intent(
       *,
       reader : String? = nil,
-      payment_intent : String? = nil,
-      expand : Array(String)? = nil,
-      process_config : Stripe::ProcessConfig? = nil
+      post_terminal_readers_reader_process_payment_intent_request : Stripe::PostTerminalReadersReaderProcessPaymentIntentRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_readers_reader_process_payment_intent ..." }
@@ -2129,40 +1880,33 @@ module Stripe
         unless (_reader = reader).nil?
           OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_PROCESS_PAYMENT_INTENT_MAX_LENGTH_FOR_READER)
         end
-        raise ArgumentError.new("\"payment_intent\" is required and cannot be null") if payment_intent.nil?
-        unless (_payment_intent = payment_intent).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payment_intent", payment_intent.to_s.size, POST_TERMINAL_READERS_READER_PROCESS_PAYMENT_INTENT_MAX_LENGTH_FOR_PAYMENT_INTENT)
-        end
-
-        unless (_process_config = process_config).nil?
-          _process_config.validate if _process_config.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_terminal_readers_reader_process_payment_intent_request\" is required and cannot be null") if post_terminal_readers_reader_process_payment_intent_request.nil?
+        unless (_post_terminal_readers_reader_process_payment_intent_request = post_terminal_readers_reader_process_payment_intent_request).nil?
+          _post_terminal_readers_reader_process_payment_intent_request.validate if _post_terminal_readers_reader_process_payment_intent_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}/process_payment_intent".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["payment_intent"] = payment_intent.to_s if !payment_intent.nil?
-      form_params["process_config"] = process_config.to_s if !process_config.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_readers_reader_process_payment_intent_request, content_type: header_params["Content-Type"]?) if !post_terminal_readers_reader_process_payment_intent_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2182,35 +1926,27 @@ module Stripe
 
     # <p>Initiates a setup intent flow on a Reader.</p>
     # @required @param reader [String?]
-    # @required @param customer_consent_collected [Bool?] Customer Consent Collected
-    # @required @param setup_intent [String?] SetupIntent ID
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_terminal_readers_reader_process_setup_intent_request [Stripe::PostTerminalReadersReaderProcessSetupIntentRequest?]
     # @return [Stripe::TerminalReader]
     def post_terminal_readers_reader_process_setup_intent(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
-      setup_intent : String? = nil,
-      expand : Array(String)? = nil
+      post_terminal_readers_reader_process_setup_intent_request : Stripe::PostTerminalReadersReaderProcessSetupIntentRequest? = nil
     ) : Stripe::TerminalReader
-      data, _status_code, _headers = post_terminal_readers_reader_process_setup_intent_with_http_info(reader: reader, customer_consent_collected: customer_consent_collected, setup_intent: setup_intent, expand: expand)
+      data, _status_code, _headers = post_terminal_readers_reader_process_setup_intent_with_http_info(reader: reader, post_terminal_readers_reader_process_setup_intent_request: post_terminal_readers_reader_process_setup_intent_request)
       data
     end
 
     # &lt;p&gt;Initiates a setup intent flow on a Reader.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param customer_consent_collected [Bool?] Customer Consent Collected
-    # @required @param setup_intent [String?] SetupIntent ID
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_terminal_readers_reader_process_setup_intent_request [Stripe::PostTerminalReadersReaderProcessSetupIntentRequest?]
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
     def post_terminal_readers_reader_process_setup_intent_with_http_info(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
-      setup_intent : String? = nil,
-      expand : Array(String)? = nil
+      post_terminal_readers_reader_process_setup_intent_request : Stripe::PostTerminalReadersReaderProcessSetupIntentRequest? = nil
     ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, customer_consent_collected: customer_consent_collected, setup_intent: setup_intent, expand: expand)
+      request = build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, post_terminal_readers_reader_process_setup_intent_request: post_terminal_readers_reader_process_setup_intent_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2223,31 +1959,24 @@ module Stripe
 
     # &lt;p&gt;Initiates a setup intent flow on a Reader.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param customer_consent_collected [Bool?] Customer Consent Collected
-    # @required @param setup_intent [String?] SetupIntent ID
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_terminal_readers_reader_process_setup_intent_request [Stripe::PostTerminalReadersReaderProcessSetupIntentRequest?]
     # @return nil
     def post_terminal_readers_reader_process_setup_intent(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
-      setup_intent : String? = nil,
-      expand : Array(String)? = nil,
+      post_terminal_readers_reader_process_setup_intent_request : Stripe::PostTerminalReadersReaderProcessSetupIntentRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, customer_consent_collected: customer_consent_collected, setup_intent: setup_intent, expand: expand).execute(&block)
+      build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, post_terminal_readers_reader_process_setup_intent_request: post_terminal_readers_reader_process_setup_intent_request).execute(&block)
     end
 
-    POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_READER       = 5000
-    POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_SETUP_INTENT = 5000
+    POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_READER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers_reader_process_setup_intent(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
-      setup_intent : String? = nil,
-      expand : Array(String)? = nil
+      post_terminal_readers_reader_process_setup_intent_request : Stripe::PostTerminalReadersReaderProcessSetupIntentRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_readers_reader_process_setup_intent ..." }
@@ -2258,38 +1987,33 @@ module Stripe
         unless (_reader = reader).nil?
           OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_READER)
         end
-        raise ArgumentError.new("\"customer_consent_collected\" is required and cannot be null") if customer_consent_collected.nil?
-
-        raise ArgumentError.new("\"setup_intent\" is required and cannot be null") if setup_intent.nil?
-        unless (_setup_intent = setup_intent).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("setup_intent", setup_intent.to_s.size, POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_SETUP_INTENT)
+        raise ArgumentError.new("\"post_terminal_readers_reader_process_setup_intent_request\" is required and cannot be null") if post_terminal_readers_reader_process_setup_intent_request.nil?
+        unless (_post_terminal_readers_reader_process_setup_intent_request = post_terminal_readers_reader_process_setup_intent_request).nil?
+          _post_terminal_readers_reader_process_setup_intent_request.validate if _post_terminal_readers_reader_process_setup_intent_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}/process_setup_intent".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["customer_consent_collected"] = customer_consent_collected.to_s if !customer_consent_collected.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["setup_intent"] = setup_intent.to_s if !setup_intent.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_readers_reader_process_setup_intent_request, content_type: header_params["Content-Type"]?) if !post_terminal_readers_reader_process_setup_intent_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2309,35 +2033,27 @@ module Stripe
 
     # <p>Sets reader display to show cart details.</p>
     # @required @param reader [String?]
-    # @required @param _type [String?] Type
-    # @optional @param cart [Stripe::Cart?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_terminal_readers_reader_set_reader_display_request [Stripe::PostTerminalReadersReaderSetReaderDisplayRequest?]
     # @return [Stripe::TerminalReader]
     def post_terminal_readers_reader_set_reader_display(
       *,
       reader : String? = nil,
-      _type : String? = nil,
-      cart : Stripe::Cart? = nil,
-      expand : Array(String)? = nil
+      post_terminal_readers_reader_set_reader_display_request : Stripe::PostTerminalReadersReaderSetReaderDisplayRequest? = nil
     ) : Stripe::TerminalReader
-      data, _status_code, _headers = post_terminal_readers_reader_set_reader_display_with_http_info(reader: reader, _type: _type, cart: cart, expand: expand)
+      data, _status_code, _headers = post_terminal_readers_reader_set_reader_display_with_http_info(reader: reader, post_terminal_readers_reader_set_reader_display_request: post_terminal_readers_reader_set_reader_display_request)
       data
     end
 
     # &lt;p&gt;Sets reader display to show cart details.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param _type [String?] Type
-    # @optional @param cart [Stripe::Cart?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_terminal_readers_reader_set_reader_display_request [Stripe::PostTerminalReadersReaderSetReaderDisplayRequest?]
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
     def post_terminal_readers_reader_set_reader_display_with_http_info(
       *,
       reader : String? = nil,
-      _type : String? = nil,
-      cart : Stripe::Cart? = nil,
-      expand : Array(String)? = nil
+      post_terminal_readers_reader_set_reader_display_request : Stripe::PostTerminalReadersReaderSetReaderDisplayRequest? = nil
     ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers_reader_set_reader_display(reader: reader, _type: _type, cart: cart, expand: expand)
+      request = build_api_request_for_post_terminal_readers_reader_set_reader_display(reader: reader, post_terminal_readers_reader_set_reader_display_request: post_terminal_readers_reader_set_reader_display_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2350,31 +2066,24 @@ module Stripe
 
     # &lt;p&gt;Sets reader display to show cart details.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param _type [String?] Type
-    # @optional @param cart [Stripe::Cart?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_terminal_readers_reader_set_reader_display_request [Stripe::PostTerminalReadersReaderSetReaderDisplayRequest?]
     # @return nil
     def post_terminal_readers_reader_set_reader_display(
       *,
       reader : String? = nil,
-      _type : String? = nil,
-      cart : Stripe::Cart? = nil,
-      expand : Array(String)? = nil,
+      post_terminal_readers_reader_set_reader_display_request : Stripe::PostTerminalReadersReaderSetReaderDisplayRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers_reader_set_reader_display(reader: reader, _type: _type, cart: cart, expand: expand).execute(&block)
+      build_api_request_for_post_terminal_readers_reader_set_reader_display(reader: reader, post_terminal_readers_reader_set_reader_display_request: post_terminal_readers_reader_set_reader_display_request).execute(&block)
     end
 
-    POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_MAX_LENGTH_FOR_READER  = 5000
-    POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_VALID_VALUES_FOR__TYPE = String.static_array("cart")
+    POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_MAX_LENGTH_FOR_READER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers_reader_set_reader_display(
       *,
       reader : String? = nil,
-      _type : String? = nil,
-      cart : Stripe::Cart? = nil,
-      expand : Array(String)? = nil
+      post_terminal_readers_reader_set_reader_display_request : Stripe::PostTerminalReadersReaderSetReaderDisplayRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TerminalApi.post_terminal_readers_reader_set_reader_display ..." }
@@ -2385,39 +2094,33 @@ module Stripe
         unless (_reader = reader).nil?
           OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_MAX_LENGTH_FOR_READER)
         end
-        raise ArgumentError.new("\"_type\" is required and cannot be null") if _type.nil?
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_TERMINAL_READERS_READER_SET_READER_DISPLAY_VALID_VALUES_FOR__TYPE)
-        end
-        unless (_cart = cart).nil?
-          _cart.validate if _cart.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_terminal_readers_reader_set_reader_display_request\" is required and cannot be null") if post_terminal_readers_reader_set_reader_display_request.nil?
+        unless (_post_terminal_readers_reader_set_reader_display_request = post_terminal_readers_reader_set_reader_display_request).nil?
+          _post_terminal_readers_reader_set_reader_display_request.validate if _post_terminal_readers_reader_set_reader_display_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/terminal/readers/{reader}/set_reader_display".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["cart"] = cart.to_s if !cart.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_terminal_readers_reader_set_reader_display_request, content_type: header_params["Content-Type"]?) if !post_terminal_readers_reader_set_reader_display_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

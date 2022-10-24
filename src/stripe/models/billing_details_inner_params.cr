@@ -23,8 +23,8 @@ module Stripe
     @[JSON::Field(key: "address", type: Stripe::BillingDetailsInnerParamsAddress?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::BillingDetailsInnerParamsAddress? = nil
 
-    @[JSON::Field(key: "email", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter email : Stripe::BbposWisePoseSplashscreen? = nil
+    @[JSON::Field(key: "email", type: Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter email : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
@@ -40,7 +40,7 @@ module Stripe
       *,
       # Optional properties
       @address : Stripe::BillingDetailsInnerParamsAddress? = nil,
-      @email : Stripe::BbposWisePoseSplashscreen? = nil,
+      @email : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil,
       @name : String? = nil,
       @phone : String? = nil
     )
@@ -105,7 +105,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : Stripe::BbposWisePoseSplashscreen?)
+    def email=(email : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?)
       if email.nil?
         return @email = nil
       end

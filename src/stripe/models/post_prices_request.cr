@@ -38,7 +38,6 @@ module Stripe
     ERROR_MESSAGE_FOR_BILLING_SCHEME = "invalid value for \"billing_scheme\", must be one of [per_unit, tiered]."
     VALID_VALUES_FOR_BILLING_SCHEME  = String.static_array("per_unit", "tiered")
 
-    # Prices defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency_options : Hash(String, Stripe::CurrencyOption)? = nil
 
@@ -54,7 +53,6 @@ module Stripe
     getter lookup_key : String? = nil
     MAX_LENGTH_FOR_LOOKUP_KEY = 200
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 

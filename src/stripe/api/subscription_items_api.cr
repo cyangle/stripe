@@ -22,35 +22,27 @@ module Stripe
 
     # <p>Deletes an item from the subscription. Removing a subscription item from a subscription will not cancel the subscription.</p>
     # @required @param item [String?]
-    # @optional @param clear_usage [Bool?] Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+    # @optional @param delete_subscription_items_item_request [Stripe::DeleteSubscriptionItemsItemRequest?]
     # @return [Stripe::DeletedSubscriptionItem]
     def delete_subscription_items_item(
       *,
       item : String? = nil,
-      clear_usage : Bool? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil
+      delete_subscription_items_item_request : Stripe::DeleteSubscriptionItemsItemRequest? = nil
     ) : Stripe::DeletedSubscriptionItem
-      data, _status_code, _headers = delete_subscription_items_item_with_http_info(item: item, clear_usage: clear_usage, proration_behavior: proration_behavior, proration_date: proration_date)
+      data, _status_code, _headers = delete_subscription_items_item_with_http_info(item: item, delete_subscription_items_item_request: delete_subscription_items_item_request)
       data
     end
 
     # &lt;p&gt;Deletes an item from the subscription. Removing a subscription item from a subscription will not cancel the subscription.&lt;/p&gt;
     # @required @param item [String?]
-    # @optional @param clear_usage [Bool?] Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+    # @optional @param delete_subscription_items_item_request [Stripe::DeleteSubscriptionItemsItemRequest?]
     # @return [Tuple(Stripe::DeletedSubscriptionItem, Integer, Hash)] Stripe::DeletedSubscriptionItem, response status code and response headers
     def delete_subscription_items_item_with_http_info(
       *,
       item : String? = nil,
-      clear_usage : Bool? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil
+      delete_subscription_items_item_request : Stripe::DeleteSubscriptionItemsItemRequest? = nil
     ) : Tuple(Stripe::DeletedSubscriptionItem, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_delete_subscription_items_item(item: item, clear_usage: clear_usage, proration_behavior: proration_behavior, proration_date: proration_date)
+      request = build_api_request_for_delete_subscription_items_item(item: item, delete_subscription_items_item_request: delete_subscription_items_item_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -63,31 +55,24 @@ module Stripe
 
     # &lt;p&gt;Deletes an item from the subscription. Removing a subscription item from a subscription will not cancel the subscription.&lt;/p&gt;
     # @required @param item [String?]
-    # @optional @param clear_usage [Bool?] Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+    # @optional @param delete_subscription_items_item_request [Stripe::DeleteSubscriptionItemsItemRequest?]
     # @return nil
     def delete_subscription_items_item(
       *,
       item : String? = nil,
-      clear_usage : Bool? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
+      delete_subscription_items_item_request : Stripe::DeleteSubscriptionItemsItemRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_delete_subscription_items_item(item: item, clear_usage: clear_usage, proration_behavior: proration_behavior, proration_date: proration_date).execute(&block)
+      build_api_request_for_delete_subscription_items_item(item: item, delete_subscription_items_item_request: delete_subscription_items_item_request).execute(&block)
     end
 
-    DELETE_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM                 = 5000
-    DELETE_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
+    DELETE_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM = 5000
 
     # @return Crest::Request
     def build_api_request_for_delete_subscription_items_item(
       *,
       item : String? = nil,
-      clear_usage : Bool? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil
+      delete_subscription_items_item_request : Stripe::DeleteSubscriptionItemsItemRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.delete_subscription_items_item ..." }
@@ -98,36 +83,32 @@ module Stripe
         unless (_item = item).nil?
           OpenApi::PrimitiveValidator.validate_max_length("item", item.to_s.size, DELETE_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM)
         end
-
-        unless (_proration_behavior = proration_behavior).nil?
-          OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, DELETE_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        unless (_delete_subscription_items_item_request = delete_subscription_items_item_request).nil?
+          _delete_subscription_items_item_request.validate if _delete_subscription_items_item_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscription_items/{item}".sub("{" + "item" + "}", URI.encode_path(item.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["clear_usage"] = clear_usage.to_s if !clear_usage.nil?
-      form_params["proration_behavior"] = proration_behavior.to_s if !proration_behavior.nil?
-      form_params["proration_date"] = proration_date.to_s if !proration_date.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: delete_subscription_items_item_request, content_type: header_params["Content-Type"]?) if !delete_subscription_items_item_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -234,27 +215,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscription_items"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["subscription"] = subscription.to_s if !subscription.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -340,23 +321,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscription_items/{item}".sub("{" + "item" + "}", URI.encode_path(item.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -468,26 +449,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/subscription_items/{subscription_item}/usage_record_summaries".sub("{" + "subscription_item" + "}", URI.encode_path(subscription_item.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -506,60 +487,24 @@ module Stripe
     end
 
     # <p>Adds a new item to an existing subscription. No existing items will be changed or replaced.</p>
-    # @required @param subscription [String?] The identifier of the subscription to modify.
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionItemsRequestBillingThresholds?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::RecurringPriceData?]
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-    # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
-    # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
+    # @required @param post_subscription_items_request [Stripe::PostSubscriptionItemsRequest?]
     # @return [Stripe::SubscriptionItem]
     def post_subscription_items(
       *,
-      subscription : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+      post_subscription_items_request : Stripe::PostSubscriptionItemsRequest? = nil
     ) : Stripe::SubscriptionItem
-      data, _status_code, _headers = post_subscription_items_with_http_info(subscription: subscription, billing_thresholds: billing_thresholds, expand: expand, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
+      data, _status_code, _headers = post_subscription_items_with_http_info(post_subscription_items_request: post_subscription_items_request)
       data
     end
 
     # &lt;p&gt;Adds a new item to an existing subscription. No existing items will be changed or replaced.&lt;/p&gt;
-    # @required @param subscription [String?] The identifier of the subscription to modify.
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionItemsRequestBillingThresholds?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::RecurringPriceData?]
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-    # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
-    # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
+    # @required @param post_subscription_items_request [Stripe::PostSubscriptionItemsRequest?]
     # @return [Tuple(Stripe::SubscriptionItem, Integer, Hash)] Stripe::SubscriptionItem, response status code and response headers
     def post_subscription_items_with_http_info(
       *,
-      subscription : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+      post_subscription_items_request : Stripe::PostSubscriptionItemsRequest? = nil
     ) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_items(subscription: subscription, billing_thresholds: billing_thresholds, expand: expand, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
+      request = build_api_request_for_post_subscription_items(post_subscription_items_request: post_subscription_items_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -571,115 +516,53 @@ module Stripe
     end
 
     # &lt;p&gt;Adds a new item to an existing subscription. No existing items will be changed or replaced.&lt;/p&gt;
-    # @required @param subscription [String?] The identifier of the subscription to modify.
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionItemsRequestBillingThresholds?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param price [String?] The ID of the price object.
-    # @optional @param price_data [Stripe::RecurringPriceData?]
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-    # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
-    # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
+    # @required @param post_subscription_items_request [Stripe::PostSubscriptionItemsRequest?]
     # @return nil
     def post_subscription_items(
       *,
-      subscription : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil,
+      post_subscription_items_request : Stripe::PostSubscriptionItemsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_items(subscription: subscription, billing_thresholds: billing_thresholds, expand: expand, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates).execute(&block)
+      build_api_request_for_post_subscription_items(post_subscription_items_request: post_subscription_items_request).execute(&block)
     end
-
-    POST_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_SUBSCRIPTION         = 5000
-    POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR   = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
-    POST_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_PRICE                = 5000
-    POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_items(
       *,
-      subscription : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+      post_subscription_items_request : Stripe::PostSubscriptionItemsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.post_subscription_items ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"subscription\" is required and cannot be null") if subscription.nil?
-        unless (_subscription = subscription).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("subscription", subscription.to_s.size, POST_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_SUBSCRIPTION)
-        end
-        unless (_billing_thresholds = billing_thresholds).nil?
-          _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_payment_behavior = payment_behavior).nil?
-          OpenApi::EnumValidator.validate("payment_behavior", _payment_behavior, POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
-        end
-        unless (_price = price).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("price", price.to_s.size, POST_SUBSCRIPTION_ITEMS_MAX_LENGTH_FOR_PRICE)
-        end
-        unless (_price_data = price_data).nil?
-          _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_proration_behavior = proration_behavior).nil?
-          OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, POST_SUBSCRIPTION_ITEMS_VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-        end
-
-        unless (_tax_rates = tax_rates).nil?
-          _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_subscription_items_request\" is required and cannot be null") if post_subscription_items_request.nil?
+        unless (_post_subscription_items_request = post_subscription_items_request).nil?
+          _post_subscription_items_request.validate if _post_subscription_items_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscription_items"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["billing_thresholds"] = billing_thresholds.to_s if !billing_thresholds.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["payment_behavior"] = payment_behavior.to_s if !payment_behavior.nil?
-      form_params["price"] = price.to_s if !price.nil?
-      form_params["price_data"] = price_data.to_s if !price_data.nil?
-      form_params["proration_behavior"] = proration_behavior.to_s if !proration_behavior.nil?
-      form_params["proration_date"] = proration_date.to_s if !proration_date.nil?
-      form_params["quantity"] = quantity.to_s if !quantity.nil?
-      form_params["subscription"] = subscription.to_s if !subscription.nil?
-      form_params["tax_rates"] = tax_rates.to_s if !tax_rates.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_items_request, content_type: header_params["Content-Type"]?) if !post_subscription_items_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -699,67 +582,27 @@ module Stripe
 
     # <p>Updates the plan or quantity of an item on a current subscription.</p>
     # @required @param item [String?]
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionItemsRequestBillingThresholds?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param price [String?] The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
-    # @optional @param price_data [Stripe::RecurringPriceData?]
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-    # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
-    # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
+    # @optional @param post_subscription_items_item_request [Stripe::PostSubscriptionItemsItemRequest?]
     # @return [Stripe::SubscriptionItem]
     def post_subscription_items_item(
       *,
       item : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+      post_subscription_items_item_request : Stripe::PostSubscriptionItemsItemRequest? = nil
     ) : Stripe::SubscriptionItem
-      data, _status_code, _headers = post_subscription_items_item_with_http_info(item: item, billing_thresholds: billing_thresholds, expand: expand, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
+      data, _status_code, _headers = post_subscription_items_item_with_http_info(item: item, post_subscription_items_item_request: post_subscription_items_item_request)
       data
     end
 
     # &lt;p&gt;Updates the plan or quantity of an item on a current subscription.&lt;/p&gt;
     # @required @param item [String?]
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionItemsRequestBillingThresholds?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param price [String?] The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
-    # @optional @param price_data [Stripe::RecurringPriceData?]
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-    # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
-    # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
+    # @optional @param post_subscription_items_item_request [Stripe::PostSubscriptionItemsItemRequest?]
     # @return [Tuple(Stripe::SubscriptionItem, Integer, Hash)] Stripe::SubscriptionItem, response status code and response headers
     def post_subscription_items_item_with_http_info(
       *,
       item : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+      post_subscription_items_item_request : Stripe::PostSubscriptionItemsItemRequest? = nil
     ) : Tuple(Stripe::SubscriptionItem, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_items_item(item: item, billing_thresholds: billing_thresholds, expand: expand, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates)
+      request = build_api_request_for_post_subscription_items_item(item: item, post_subscription_items_item_request: post_subscription_items_item_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -772,57 +615,24 @@ module Stripe
 
     # &lt;p&gt;Updates the plan or quantity of an item on a current subscription.&lt;/p&gt;
     # @required @param item [String?]
-    # @optional @param billing_thresholds [Stripe::PostSubscriptionItemsRequestBillingThresholds?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted.
-    # @optional @param payment_behavior [String?] Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice's payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use `pending_if_incomplete` to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use `pending_if_incomplete` you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-    # @optional @param price [String?] The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
-    # @optional @param price_data [Stripe::RecurringPriceData?]
-    # @optional @param proration_behavior [String?] Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes.
-    # @optional @param proration_date [Int32?] If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-    # @optional @param quantity [Int32?] The quantity you'd like to apply to the subscription item you're creating.
-    # @optional @param tax_rates [Stripe::PostSubscriptionItemsRequestTaxRates?]
+    # @optional @param post_subscription_items_item_request [Stripe::PostSubscriptionItemsItemRequest?]
     # @return nil
     def post_subscription_items_item(
       *,
       item : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil,
+      post_subscription_items_item_request : Stripe::PostSubscriptionItemsItemRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_items_item(item: item, billing_thresholds: billing_thresholds, expand: expand, metadata: metadata, off_session: off_session, payment_behavior: payment_behavior, price: price, price_data: price_data, proration_behavior: proration_behavior, proration_date: proration_date, quantity: quantity, tax_rates: tax_rates).execute(&block)
+      build_api_request_for_post_subscription_items_item(item: item, post_subscription_items_item_request: post_subscription_items_item_request).execute(&block)
     end
 
-    POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM                 = 5000
-    POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PAYMENT_BEHAVIOR   = String.static_array("allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete")
-    POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_PRICE                = 5000
-    POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR = String.static_array("always_invoice", "create_prorations", "none")
+    POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_items_item(
       *,
       item : String? = nil,
-      billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      off_session : Bool? = nil,
-      payment_behavior : String? = nil,
-      price : String? = nil,
-      price_data : Stripe::RecurringPriceData? = nil,
-      proration_behavior : String? = nil,
-      proration_date : Int64? = nil,
-      quantity : Int64? = nil,
-      tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
+      post_subscription_items_item_request : Stripe::PostSubscriptionItemsItemRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.post_subscription_items_item ..." }
@@ -833,64 +643,32 @@ module Stripe
         unless (_item = item).nil?
           OpenApi::PrimitiveValidator.validate_max_length("item", item.to_s.size, POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_ITEM)
         end
-        unless (_billing_thresholds = billing_thresholds).nil?
-          _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_payment_behavior = payment_behavior).nil?
-          OpenApi::EnumValidator.validate("payment_behavior", _payment_behavior, POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
-        end
-        unless (_price = price).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("price", price.to_s.size, POST_SUBSCRIPTION_ITEMS_ITEM_MAX_LENGTH_FOR_PRICE)
-        end
-        unless (_price_data = price_data).nil?
-          _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_proration_behavior = proration_behavior).nil?
-          OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, POST_SUBSCRIPTION_ITEMS_ITEM_VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-        end
-
-        unless (_tax_rates = tax_rates).nil?
-          _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
+        unless (_post_subscription_items_item_request = post_subscription_items_item_request).nil?
+          _post_subscription_items_item_request.validate if _post_subscription_items_item_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscription_items/{item}".sub("{" + "item" + "}", URI.encode_path(item.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["billing_thresholds"] = billing_thresholds.to_s if !billing_thresholds.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["off_session"] = off_session.to_s if !off_session.nil?
-      form_params["payment_behavior"] = payment_behavior.to_s if !payment_behavior.nil?
-      form_params["price"] = price.to_s if !price.nil?
-      form_params["price_data"] = price_data.to_s if !price_data.nil?
-      form_params["proration_behavior"] = proration_behavior.to_s if !proration_behavior.nil?
-      form_params["proration_date"] = proration_date.to_s if !proration_date.nil?
-      form_params["quantity"] = quantity.to_s if !quantity.nil?
-      form_params["tax_rates"] = tax_rates.to_s if !tax_rates.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_items_item_request, content_type: header_params["Content-Type"]?) if !post_subscription_items_item_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -910,39 +688,27 @@ module Stripe
 
     # <p>Creates a usage record for a specified subscription item and date, and fills it with a quantity.</p>  <p>Usage records provide <code>quantity</code> information that Stripe uses to track how much a customer is using your service. With usage information and the pricing model set up by the <a href=\"https://stripe.com/docs/billing/subscriptions/metered-billing\">metered billing</a> plan, Stripe helps you send accurate invoices to your customers.</p>  <p>The default calculation for usage is to add up all the <code>quantity</code> values of the usage records within a billing period. You can change this default behavior with the billing plan’s <code>aggregate_usage</code> <a href=\"/docs/api/plans/create#create_plan-aggregate_usage\">parameter</a>. When there is more than one usage record with the same timestamp, Stripe adds the <code>quantity</code> values together. In most cases, this is the desired resolution, however, you can change this behavior with the <code>action</code> parameter.</p>  <p>The default pricing model for metered billing is <a href=\"/docs/api/plans/object#plan_object-billing_scheme\">per-unit pricing</a>. For finer granularity, you can configure metered billing to have a <a href=\"https://stripe.com/docs/billing/subscriptions/tiers\">tiered pricing</a> model.</p>
     # @required @param subscription_item [String?]
-    # @required @param quantity [Int32?] The usage quantity for the specified timestamp.
-    # @optional @param action [String?] Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param timestamp [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?]
+    # @required @param post_subscription_items_subscription_item_usage_records_request [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest?]
     # @return [Stripe::UsageRecord]
     def post_subscription_items_subscription_item_usage_records(
       *,
       subscription_item : String? = nil,
-      quantity : Int64? = nil,
-      action : String? = nil,
-      expand : Array(String)? = nil,
-      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
+      post_subscription_items_subscription_item_usage_records_request : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest? = nil
     ) : Stripe::UsageRecord
-      data, _status_code, _headers = post_subscription_items_subscription_item_usage_records_with_http_info(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp)
+      data, _status_code, _headers = post_subscription_items_subscription_item_usage_records_with_http_info(subscription_item: subscription_item, post_subscription_items_subscription_item_usage_records_request: post_subscription_items_subscription_item_usage_records_request)
       data
     end
 
     # &lt;p&gt;Creates a usage record for a specified subscription item and date, and fills it with a quantity.&lt;/p&gt;  &lt;p&gt;Usage records provide &lt;code&gt;quantity&lt;/code&gt; information that Stripe uses to track how much a customer is using your service. With usage information and the pricing model set up by the &lt;a href&#x3D;\&quot;https://stripe.com/docs/billing/subscriptions/metered-billing\&quot;&gt;metered billing&lt;/a&gt; plan, Stripe helps you send accurate invoices to your customers.&lt;/p&gt;  &lt;p&gt;The default calculation for usage is to add up all the &lt;code&gt;quantity&lt;/code&gt; values of the usage records within a billing period. You can change this default behavior with the billing plan’s &lt;code&gt;aggregate_usage&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/api/plans/create#create_plan-aggregate_usage\&quot;&gt;parameter&lt;/a&gt;. When there is more than one usage record with the same timestamp, Stripe adds the &lt;code&gt;quantity&lt;/code&gt; values together. In most cases, this is the desired resolution, however, you can change this behavior with the &lt;code&gt;action&lt;/code&gt; parameter.&lt;/p&gt;  &lt;p&gt;The default pricing model for metered billing is &lt;a href&#x3D;\&quot;/docs/api/plans/object#plan_object-billing_scheme\&quot;&gt;per-unit pricing&lt;/a&gt;. For finer granularity, you can configure metered billing to have a &lt;a href&#x3D;\&quot;https://stripe.com/docs/billing/subscriptions/tiers\&quot;&gt;tiered pricing&lt;/a&gt; model.&lt;/p&gt;
     # @required @param subscription_item [String?]
-    # @required @param quantity [Int32?] The usage quantity for the specified timestamp.
-    # @optional @param action [String?] Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param timestamp [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?]
+    # @required @param post_subscription_items_subscription_item_usage_records_request [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest?]
     # @return [Tuple(Stripe::UsageRecord, Integer, Hash)] Stripe::UsageRecord, response status code and response headers
     def post_subscription_items_subscription_item_usage_records_with_http_info(
       *,
       subscription_item : String? = nil,
-      quantity : Int64? = nil,
-      action : String? = nil,
-      expand : Array(String)? = nil,
-      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
+      post_subscription_items_subscription_item_usage_records_request : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest? = nil
     ) : Tuple(Stripe::UsageRecord, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp)
+      request = build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, post_subscription_items_subscription_item_usage_records_request: post_subscription_items_subscription_item_usage_records_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -955,33 +721,22 @@ module Stripe
 
     # &lt;p&gt;Creates a usage record for a specified subscription item and date, and fills it with a quantity.&lt;/p&gt;  &lt;p&gt;Usage records provide &lt;code&gt;quantity&lt;/code&gt; information that Stripe uses to track how much a customer is using your service. With usage information and the pricing model set up by the &lt;a href&#x3D;\&quot;https://stripe.com/docs/billing/subscriptions/metered-billing\&quot;&gt;metered billing&lt;/a&gt; plan, Stripe helps you send accurate invoices to your customers.&lt;/p&gt;  &lt;p&gt;The default calculation for usage is to add up all the &lt;code&gt;quantity&lt;/code&gt; values of the usage records within a billing period. You can change this default behavior with the billing plan’s &lt;code&gt;aggregate_usage&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/api/plans/create#create_plan-aggregate_usage\&quot;&gt;parameter&lt;/a&gt;. When there is more than one usage record with the same timestamp, Stripe adds the &lt;code&gt;quantity&lt;/code&gt; values together. In most cases, this is the desired resolution, however, you can change this behavior with the &lt;code&gt;action&lt;/code&gt; parameter.&lt;/p&gt;  &lt;p&gt;The default pricing model for metered billing is &lt;a href&#x3D;\&quot;/docs/api/plans/object#plan_object-billing_scheme\&quot;&gt;per-unit pricing&lt;/a&gt;. For finer granularity, you can configure metered billing to have a &lt;a href&#x3D;\&quot;https://stripe.com/docs/billing/subscriptions/tiers\&quot;&gt;tiered pricing&lt;/a&gt; model.&lt;/p&gt;
     # @required @param subscription_item [String?]
-    # @required @param quantity [Int32?] The usage quantity for the specified timestamp.
-    # @optional @param action [String?] Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param timestamp [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?]
+    # @required @param post_subscription_items_subscription_item_usage_records_request [Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest?]
     # @return nil
     def post_subscription_items_subscription_item_usage_records(
       *,
       subscription_item : String? = nil,
-      quantity : Int64? = nil,
-      action : String? = nil,
-      expand : Array(String)? = nil,
-      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil,
+      post_subscription_items_subscription_item_usage_records_request : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, quantity: quantity, action: action, expand: expand, timestamp: timestamp).execute(&block)
+      build_api_request_for_post_subscription_items_subscription_item_usage_records(subscription_item: subscription_item, post_subscription_items_subscription_item_usage_records_request: post_subscription_items_subscription_item_usage_records_request).execute(&block)
     end
-
-    POST_SUBSCRIPTION_ITEMS_SUBSCRIPTION_ITEM_USAGE_RECORDS_VALID_VALUES_FOR_ACTION = String.static_array("increment", "set")
 
     # @return Crest::Request
     def build_api_request_for_post_subscription_items_subscription_item_usage_records(
       *,
       subscription_item : String? = nil,
-      quantity : Int64? = nil,
-      action : String? = nil,
-      expand : Array(String)? = nil,
-      timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
+      post_subscription_items_subscription_item_usage_records_request : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: SubscriptionItemsApi.post_subscription_items_subscription_item_usage_records ..." }
@@ -990,42 +745,33 @@ module Stripe
       if client_side_validation
         raise ArgumentError.new("\"subscription_item\" is required and cannot be null") if subscription_item.nil?
 
-        raise ArgumentError.new("\"quantity\" is required and cannot be null") if quantity.nil?
-
-        unless (_action = action).nil?
-          OpenApi::EnumValidator.validate("action", _action, POST_SUBSCRIPTION_ITEMS_SUBSCRIPTION_ITEM_USAGE_RECORDS_VALID_VALUES_FOR_ACTION)
-        end
-
-        unless (_timestamp = timestamp).nil?
-          _timestamp.validate if _timestamp.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_subscription_items_subscription_item_usage_records_request\" is required and cannot be null") if post_subscription_items_subscription_item_usage_records_request.nil?
+        unless (_post_subscription_items_subscription_item_usage_records_request = post_subscription_items_subscription_item_usage_records_request).nil?
+          _post_subscription_items_subscription_item_usage_records_request.validate if _post_subscription_items_subscription_item_usage_records_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/subscription_items/{subscription_item}/usage_records".sub("{" + "subscription_item" + "}", URI.encode_path(subscription_item.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["action"] = action.to_s if !action.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["quantity"] = quantity.to_s if !quantity.nil?
-      form_params["timestamp"] = timestamp.to_s if !timestamp.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_subscription_items_subscription_item_usage_records_request, content_type: header_params["Content-Type"]?) if !post_subscription_items_subscription_item_usage_records_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

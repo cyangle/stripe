@@ -160,32 +160,7 @@ describe "InvoicesApi" do
   # unit tests for post_invoices
   # &lt;p&gt;This endpoint creates a draft invoice for a given customer. The invoice remains a draft until you &lt;a href&#x3D;\&quot;#finalize_invoice\&quot;&gt;finalize&lt;/a&gt; the invoice, which allows you to &lt;a href&#x3D;\&quot;#pay_invoice\&quot;&gt;pay&lt;/a&gt; or &lt;a href&#x3D;\&quot;#send_invoice\&quot;&gt;send&lt;/a&gt; the invoice to your customers.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [PostInvoicesRequestAccountTaxIds] :account_tax_ids
-  # @option opts [Int32] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-  # @option opts [Bool] :auto_advance Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When &#x60;false&#x60;, the invoice&#39;s state will not automatically advance without an explicit action.
-  # @option opts [AutomaticTaxParam] :automatic_tax
-  # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to &#x60;charge_automatically&#x60;.
-  # @option opts [String] :currency The currency to create this invoice in. Defaults to that of &#x60;customer&#x60; if not specified.
-  # @option opts [PostInvoicesRequestCustomFields] :custom_fields
-  # @option opts [String] :customer The ID of the customer who will be billed.
-  # @option opts [Int32] :days_until_due The number of days from when the invoice is created until it is due. Valid only for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;.
-  # @option opts [String] :default_payment_method ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription&#39;s default payment method, if any, or to the default payment method in the customer&#39;s invoice settings.
-  # @option opts [String] :default_source ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription&#39;s default source, if any, or to the customer&#39;s default source.
-  # @option opts [Array(String)] :default_tax_rates The tax rates that will apply to any line item that does not have &#x60;tax_rates&#x60; set.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users. Referenced as &#39;memo&#39; in the Dashboard.
-  # @option opts [PostInvoicesRequestDiscounts] :discounts
-  # @option opts [Int32] :due_date The date on which payment for this invoice is due. Valid only for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :footer Footer to be displayed on the invoice.
-  # @option opts [FromInvoice] :from_invoice
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :on_behalf_of The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
-  # @option opts [PaymentSettings] :payment_settings
-  # @option opts [String] :pending_invoice_items_behavior How to handle pending invoice items on invoice creation. One of &#x60;include&#x60; or &#x60;exclude&#x60;. &#x60;include&#x60; will include any pending invoice items, and will create an empty draft invoice if no pending invoice items exist. &#x60;exclude&#x60; will always create an empty invoice draft regardless if there are pending invoice items or not. Defaults to &#x60;exclude&#x60; if the parameter is omitted.
-  # @option opts [PostInvoicesRequestRenderingOptions] :rendering_options
-  # @option opts [String] :statement_descriptor Extra information about a charge for the customer&#39;s credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default &#x60;statement_descriptor&#x60; will be set to the first subscription item&#39;s product&#39;s &#x60;statement_descriptor&#x60;.
-  # @option opts [String] :subscription The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if &#x60;pending_invoice_items_behavior&#x60; is &#x60;include&#x60;. The subscription&#39;s billing cycle and regular subscription events won&#39;t be affected.
-  # @option opts [TransferDataSpecs] :transfer_data
+  # @option opts [PostInvoicesRequest] :post_invoices_request
   # @return [Invoice]
   describe "post_invoices test" do
     it "should work" do
@@ -197,27 +172,7 @@ describe "InvoicesApi" do
   # &lt;p&gt;Draft invoices are fully editable. Once an invoice is &lt;a href&#x3D;\&quot;/docs/billing/invoices/workflow#finalized\&quot;&gt;finalized&lt;/a&gt;, monetary values, as well as &lt;code&gt;collection_method&lt;/code&gt;, become uneditable.&lt;/p&gt;  &lt;p&gt;If you would like to stop the Stripe Billing engine from automatically finalizing, reattempting payments on, sending reminders for, or &lt;a href&#x3D;\&quot;/docs/billing/invoices/reconciliation\&quot;&gt;automatically reconciling&lt;/a&gt; invoices, pass &lt;code&gt;auto_advance&#x3D;false&lt;/code&gt;.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [PostInvoicesRequestAccountTaxIds] :account_tax_ids
-  # @option opts [Int32] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-  # @option opts [Bool] :auto_advance Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-  # @option opts [AutomaticTaxParam] :automatic_tax
-  # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60; or &#x60;send_invoice&#x60;. This field can be updated only on &#x60;draft&#x60; invoices.
-  # @option opts [PostInvoicesInvoiceRequestCustomFields] :custom_fields
-  # @option opts [Int32] :days_until_due The number of days from which the invoice is created until it is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
-  # @option opts [String] :default_payment_method ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription&#39;s default payment method, if any, or to the default payment method in the customer&#39;s invoice settings.
-  # @option opts [String] :default_source ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription&#39;s default source, if any, or to the customer&#39;s default source.
-  # @option opts [PostInvoicesInvoiceRequestDefaultTaxRates] :default_tax_rates
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users. Referenced as &#39;memo&#39; in the Dashboard.
-  # @option opts [PostInvoicesInvoiceRequestDiscounts] :discounts
-  # @option opts [Int32] :due_date The date on which payment for this invoice is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :footer Footer to be displayed on the invoice.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [PostInvoicesInvoiceRequestOnBehalfOf] :on_behalf_of
-  # @option opts [PaymentSettings] :payment_settings
-  # @option opts [PostInvoicesRequestRenderingOptions] :rendering_options
-  # @option opts [String] :statement_descriptor Extra information about a charge for the customer&#39;s credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default &#x60;statement_descriptor&#x60; will be set to the first subscription item&#39;s product&#39;s &#x60;statement_descriptor&#x60;.
-  # @option opts [PostInvoicesInvoiceRequestTransferData] :transfer_data
+  # @option opts [PostInvoicesInvoiceRequest] :post_invoices_invoice_request
   # @return [Invoice]
   describe "post_invoices_invoice test" do
     it "should work" do
@@ -229,8 +184,7 @@ describe "InvoicesApi" do
   # &lt;p&gt;Stripe automatically finalizes drafts before sending and attempting payment on invoices. However, if you’d like to finalize a draft invoice manually, you can do so using this method.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :auto_advance Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When &#x60;false&#x60;, the invoice&#39;s state will not automatically advance without an explicit action.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostInvoicesInvoiceFinalizeRequest] :post_invoices_invoice_finalize_request
   # @return [Invoice]
   describe "post_invoices_invoice_finalize test" do
     it "should work" do
@@ -242,7 +196,7 @@ describe "InvoicesApi" do
   # &lt;p&gt;Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Invoice]
   describe "post_invoices_invoice_mark_uncollectible test" do
     it "should work" do
@@ -254,13 +208,7 @@ describe "InvoicesApi" do
   # &lt;p&gt;Stripe automatically creates and then attempts to collect payment on invoices for customers on subscriptions according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to attempt payment on an invoice out of the normal collection schedule or for some other reason, you can do so.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Bool] :forgive In cases where the source used to pay the invoice has insufficient funds, passing &#x60;forgive&#x3D;true&#x60; controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing &#x60;forgive&#x3D;false&#x60; will fail the charge if the source hasn&#39;t been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to &#x60;false&#x60;.
-  # @option opts [String] :mandate ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the payment_method param or the invoice&#39;s default_payment_method or default_source, if set.
-  # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to &#x60;true&#x60; (off-session).
-  # @option opts [Bool] :paid_out_of_band Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to &#x60;false&#x60;.
-  # @option opts [String] :payment_method A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
-  # @option opts [String] :source A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
+  # @option opts [PostInvoicesInvoicePayRequest] :post_invoices_invoice_pay_request
   # @return [Invoice]
   describe "post_invoices_invoice_pay test" do
     it "should work" do
@@ -272,7 +220,7 @@ describe "InvoicesApi" do
   # &lt;p&gt;Stripe will automatically send invoices to customers according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to manually send an invoice to your customer out of the normal schedule, you can do so. When sending invoices that have already been paid, there will be no reference to the payment in the email.&lt;/p&gt;  &lt;p&gt;Requests made in test-mode result in no emails being sent, despite sending an &lt;code&gt;invoice.sent&lt;/code&gt; event.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Invoice]
   describe "post_invoices_invoice_send test" do
     it "should work" do
@@ -284,7 +232,7 @@ describe "InvoicesApi" do
   # &lt;p&gt;Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to &lt;a href&#x3D;\&quot;#delete_invoice\&quot;&gt;deletion&lt;/a&gt;, however it only applies to finalized invoices and maintains a papertrail where the invoice can still be found.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Invoice]
   describe "post_invoices_invoice_void test" do
     it "should work" do

@@ -170,8 +170,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/prices"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["created"] = created.to_s if !created.nil?
@@ -184,19 +192,11 @@ module Stripe
       query_params["lookup_keys"] = @api_client.build_collection_param(lookup_keys, "csv") if !lookup_keys.nil? && !lookup_keys.empty?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -282,23 +282,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/prices/{price}".sub("{" + "price" + "}", URI.encode_path(price.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -402,26 +402,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/prices/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -440,88 +440,24 @@ module Stripe
     end
 
     # <p>Creates a new price for an existing product. The price can be recurring or one-time.</p>
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param active [Bool?] Whether the price can be used for new purchases. Defaults to `true`.
-    # @optional @param billing_scheme [String?] Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
-    # @optional @param custom_unit_amount [Stripe::CustomUnitAmount?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lookup_key [String?] A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    # @optional @param nickname [String?] A brief description of the price, hidden from customers.
-    # @optional @param product [String?] The ID of the product that this price will belong to.
-    # @optional @param product_data [Stripe::InlineProductParams?]
-    # @optional @param recurring [Stripe::Recurring?]
-    # @optional @param tax_behavior [String?] Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tiers [Array(Stripe::Tier)?] Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
-    # @optional @param tiers_mode [String?] Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price, in `graduated` tiering pricing can successively change as the quantity grows.
-    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
-    # @optional @param transform_quantity [Stripe::TransformUsageParam?]
-    # @optional @param unit_amount [Int32?] A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge. One of `unit_amount` or `custom_unit_amount` is required, unless `billing_scheme=tiered`.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @required @param post_prices_request [Stripe::PostPricesRequest?]
     # @return [Stripe::Price]
     def post_prices(
       *,
-      currency : String? = nil,
-      active : Bool? = nil,
-      billing_scheme : String? = nil,
-      custom_unit_amount : Stripe::CustomUnitAmount? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      nickname : String? = nil,
-      product : String? = nil,
-      product_data : Stripe::InlineProductParams? = nil,
-      recurring : Stripe::Recurring? = nil,
-      tax_behavior : String? = nil,
-      tiers : Array(Stripe::Tier)? = nil,
-      tiers_mode : String? = nil,
-      transfer_lookup_key : Bool? = nil,
-      transform_quantity : Stripe::TransformUsageParam? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_prices_request : Stripe::PostPricesRequest? = nil
     ) : Stripe::Price
-      data, _status_code, _headers = post_prices_with_http_info(currency: currency, active: active, billing_scheme: billing_scheme, custom_unit_amount: custom_unit_amount, expand: expand, lookup_key: lookup_key, nickname: nickname, product: product, product_data: product_data, recurring: recurring, tax_behavior: tax_behavior, tiers: tiers, tiers_mode: tiers_mode, transfer_lookup_key: transfer_lookup_key, transform_quantity: transform_quantity, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal)
+      data, _status_code, _headers = post_prices_with_http_info(post_prices_request: post_prices_request)
       data
     end
 
     # &lt;p&gt;Creates a new price for an existing product. The price can be recurring or one-time.&lt;/p&gt;
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param active [Bool?] Whether the price can be used for new purchases. Defaults to `true`.
-    # @optional @param billing_scheme [String?] Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
-    # @optional @param custom_unit_amount [Stripe::CustomUnitAmount?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lookup_key [String?] A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    # @optional @param nickname [String?] A brief description of the price, hidden from customers.
-    # @optional @param product [String?] The ID of the product that this price will belong to.
-    # @optional @param product_data [Stripe::InlineProductParams?]
-    # @optional @param recurring [Stripe::Recurring?]
-    # @optional @param tax_behavior [String?] Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tiers [Array(Stripe::Tier)?] Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
-    # @optional @param tiers_mode [String?] Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price, in `graduated` tiering pricing can successively change as the quantity grows.
-    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
-    # @optional @param transform_quantity [Stripe::TransformUsageParam?]
-    # @optional @param unit_amount [Int32?] A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge. One of `unit_amount` or `custom_unit_amount` is required, unless `billing_scheme=tiered`.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @required @param post_prices_request [Stripe::PostPricesRequest?]
     # @return [Tuple(Stripe::Price, Integer, Hash)] Stripe::Price, response status code and response headers
     def post_prices_with_http_info(
       *,
-      currency : String? = nil,
-      active : Bool? = nil,
-      billing_scheme : String? = nil,
-      custom_unit_amount : Stripe::CustomUnitAmount? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      nickname : String? = nil,
-      product : String? = nil,
-      product_data : Stripe::InlineProductParams? = nil,
-      recurring : Stripe::Recurring? = nil,
-      tax_behavior : String? = nil,
-      tiers : Array(Stripe::Tier)? = nil,
-      tiers_mode : String? = nil,
-      transfer_lookup_key : Bool? = nil,
-      transform_quantity : Stripe::TransformUsageParam? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_prices_request : Stripe::PostPricesRequest? = nil
     ) : Tuple(Stripe::Price, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_prices(currency: currency, active: active, billing_scheme: billing_scheme, custom_unit_amount: custom_unit_amount, expand: expand, lookup_key: lookup_key, nickname: nickname, product: product, product_data: product_data, recurring: recurring, tax_behavior: tax_behavior, tiers: tiers, tiers_mode: tiers_mode, transfer_lookup_key: transfer_lookup_key, transform_quantity: transform_quantity, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal)
+      request = build_api_request_for_post_prices(post_prices_request: post_prices_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -533,158 +469,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new price for an existing product. The price can be recurring or one-time.&lt;/p&gt;
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param active [Bool?] Whether the price can be used for new purchases. Defaults to `true`.
-    # @optional @param billing_scheme [String?] Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
-    # @optional @param custom_unit_amount [Stripe::CustomUnitAmount?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lookup_key [String?] A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    # @optional @param nickname [String?] A brief description of the price, hidden from customers.
-    # @optional @param product [String?] The ID of the product that this price will belong to.
-    # @optional @param product_data [Stripe::InlineProductParams?]
-    # @optional @param recurring [Stripe::Recurring?]
-    # @optional @param tax_behavior [String?] Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tiers [Array(Stripe::Tier)?] Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
-    # @optional @param tiers_mode [String?] Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price, in `graduated` tiering pricing can successively change as the quantity grows.
-    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
-    # @optional @param transform_quantity [Stripe::TransformUsageParam?]
-    # @optional @param unit_amount [Int32?] A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge. One of `unit_amount` or `custom_unit_amount` is required, unless `billing_scheme=tiered`.
-    # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+    # @required @param post_prices_request [Stripe::PostPricesRequest?]
     # @return nil
     def post_prices(
       *,
-      currency : String? = nil,
-      active : Bool? = nil,
-      billing_scheme : String? = nil,
-      custom_unit_amount : Stripe::CustomUnitAmount? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      nickname : String? = nil,
-      product : String? = nil,
-      product_data : Stripe::InlineProductParams? = nil,
-      recurring : Stripe::Recurring? = nil,
-      tax_behavior : String? = nil,
-      tiers : Array(Stripe::Tier)? = nil,
-      tiers_mode : String? = nil,
-      transfer_lookup_key : Bool? = nil,
-      transform_quantity : Stripe::TransformUsageParam? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil,
+      post_prices_request : Stripe::PostPricesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_prices(currency: currency, active: active, billing_scheme: billing_scheme, custom_unit_amount: custom_unit_amount, expand: expand, lookup_key: lookup_key, nickname: nickname, product: product, product_data: product_data, recurring: recurring, tax_behavior: tax_behavior, tiers: tiers, tiers_mode: tiers_mode, transfer_lookup_key: transfer_lookup_key, transform_quantity: transform_quantity, unit_amount: unit_amount, unit_amount_decimal: unit_amount_decimal).execute(&block)
+      build_api_request_for_post_prices(post_prices_request: post_prices_request).execute(&block)
     end
-
-    POST_PRICES_VALID_VALUES_FOR_BILLING_SCHEME = String.static_array("per_unit", "tiered")
-    POST_PRICES_MAX_LENGTH_FOR_LOOKUP_KEY       =  200
-    POST_PRICES_MAX_LENGTH_FOR_NICKNAME         = 5000
-    POST_PRICES_MAX_LENGTH_FOR_PRODUCT          = 5000
-    POST_PRICES_VALID_VALUES_FOR_TAX_BEHAVIOR   = String.static_array("exclusive", "inclusive", "unspecified")
-    POST_PRICES_VALID_VALUES_FOR_TIERS_MODE     = String.static_array("graduated", "volume")
 
     # @return Crest::Request
     def build_api_request_for_post_prices(
       *,
-      currency : String? = nil,
-      active : Bool? = nil,
-      billing_scheme : String? = nil,
-      custom_unit_amount : Stripe::CustomUnitAmount? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      nickname : String? = nil,
-      product : String? = nil,
-      product_data : Stripe::InlineProductParams? = nil,
-      recurring : Stripe::Recurring? = nil,
-      tax_behavior : String? = nil,
-      tiers : Array(Stripe::Tier)? = nil,
-      tiers_mode : String? = nil,
-      transfer_lookup_key : Bool? = nil,
-      transform_quantity : Stripe::TransformUsageParam? = nil,
-      unit_amount : Int64? = nil,
-      unit_amount_decimal : BigDecimal? = nil
+      post_prices_request : Stripe::PostPricesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PricesApi.post_prices ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        unless (_billing_scheme = billing_scheme).nil?
-          OpenApi::EnumValidator.validate("billing_scheme", _billing_scheme, POST_PRICES_VALID_VALUES_FOR_BILLING_SCHEME)
-        end
-        unless (_custom_unit_amount = custom_unit_amount).nil?
-          _custom_unit_amount.validate if _custom_unit_amount.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_lookup_key = lookup_key).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("lookup_key", lookup_key.to_s.size, POST_PRICES_MAX_LENGTH_FOR_LOOKUP_KEY)
-        end
-        unless (_nickname = nickname).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("nickname", nickname.to_s.size, POST_PRICES_MAX_LENGTH_FOR_NICKNAME)
-        end
-        unless (_product = product).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, POST_PRICES_MAX_LENGTH_FOR_PRODUCT)
-        end
-        unless (_product_data = product_data).nil?
-          _product_data.validate if _product_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_recurring = recurring).nil?
-          _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
-        end
-        unless (_tax_behavior = tax_behavior).nil?
-          OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, POST_PRICES_VALID_VALUES_FOR_TAX_BEHAVIOR)
-        end
-        unless (_tiers = tiers).nil?
-          OpenApi::ContainerValidator.validate(container: _tiers) if _tiers.is_a?(Array)
-        end
-        unless (_tiers_mode = tiers_mode).nil?
-          OpenApi::EnumValidator.validate("tiers_mode", _tiers_mode, POST_PRICES_VALID_VALUES_FOR_TIERS_MODE)
-        end
-
-        unless (_transform_quantity = transform_quantity).nil?
-          _transform_quantity.validate if _transform_quantity.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_prices_request\" is required and cannot be null") if post_prices_request.nil?
+        unless (_post_prices_request = post_prices_request).nil?
+          _post_prices_request.validate if _post_prices_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/prices"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["billing_scheme"] = billing_scheme.to_s if !billing_scheme.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["custom_unit_amount"] = custom_unit_amount.to_s if !custom_unit_amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["lookup_key"] = lookup_key.to_s if !lookup_key.nil?
-      form_params["nickname"] = nickname.to_s if !nickname.nil?
-      form_params["product"] = product.to_s if !product.nil?
-      form_params["product_data"] = product_data.to_s if !product_data.nil?
-      form_params["recurring"] = recurring.to_s if !recurring.nil?
-      form_params["tax_behavior"] = tax_behavior.to_s if !tax_behavior.nil?
-      form_params["tiers"] = @api_client.build_collection_param(tiers, "csv") if !tiers.nil? && !tiers.empty?
-      form_params["tiers_mode"] = tiers_mode.to_s if !tiers_mode.nil?
-      form_params["transfer_lookup_key"] = transfer_lookup_key.to_s if !transfer_lookup_key.nil?
-      form_params["transform_quantity"] = transform_quantity.to_s if !transform_quantity.nil?
-      form_params["unit_amount"] = unit_amount.to_s if !unit_amount.nil?
-      form_params["unit_amount_decimal"] = unit_amount_decimal.to_s if !unit_amount_decimal.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_prices_request, content_type: header_params["Content-Type"]?) if !post_prices_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -704,55 +535,27 @@ module Stripe
 
     # <p>Updates the specified price by setting the values of the parameters passed. Any parameters not provided are left unchanged.</p>
     # @required @param price [String?]
-    # @optional @param active [Bool?] Whether the price can be used for new purchases. Defaults to `true`.
-    # @optional @param currency_options [Stripe::PostPricesPriceRequestCurrencyOptions?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lookup_key [String?] A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nickname [String?] A brief description of the price, hidden from customers.
-    # @optional @param tax_behavior [String?] Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
+    # @optional @param post_prices_price_request [Stripe::PostPricesPriceRequest?]
     # @return [Stripe::Price]
     def post_prices_price(
       *,
       price : String? = nil,
-      active : Bool? = nil,
-      currency_options : Stripe::PostPricesPriceRequestCurrencyOptions? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nickname : String? = nil,
-      tax_behavior : String? = nil,
-      transfer_lookup_key : Bool? = nil
+      post_prices_price_request : Stripe::PostPricesPriceRequest? = nil
     ) : Stripe::Price
-      data, _status_code, _headers = post_prices_price_with_http_info(price: price, active: active, currency_options: currency_options, expand: expand, lookup_key: lookup_key, metadata: metadata, nickname: nickname, tax_behavior: tax_behavior, transfer_lookup_key: transfer_lookup_key)
+      data, _status_code, _headers = post_prices_price_with_http_info(price: price, post_prices_price_request: post_prices_price_request)
       data
     end
 
     # &lt;p&gt;Updates the specified price by setting the values of the parameters passed. Any parameters not provided are left unchanged.&lt;/p&gt;
     # @required @param price [String?]
-    # @optional @param active [Bool?] Whether the price can be used for new purchases. Defaults to `true`.
-    # @optional @param currency_options [Stripe::PostPricesPriceRequestCurrencyOptions?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lookup_key [String?] A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nickname [String?] A brief description of the price, hidden from customers.
-    # @optional @param tax_behavior [String?] Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
+    # @optional @param post_prices_price_request [Stripe::PostPricesPriceRequest?]
     # @return [Tuple(Stripe::Price, Integer, Hash)] Stripe::Price, response status code and response headers
     def post_prices_price_with_http_info(
       *,
       price : String? = nil,
-      active : Bool? = nil,
-      currency_options : Stripe::PostPricesPriceRequestCurrencyOptions? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nickname : String? = nil,
-      tax_behavior : String? = nil,
-      transfer_lookup_key : Bool? = nil
+      post_prices_price_request : Stripe::PostPricesPriceRequest? = nil
     ) : Tuple(Stripe::Price, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_prices_price(price: price, active: active, currency_options: currency_options, expand: expand, lookup_key: lookup_key, metadata: metadata, nickname: nickname, tax_behavior: tax_behavior, transfer_lookup_key: transfer_lookup_key)
+      request = build_api_request_for_post_prices_price(price: price, post_prices_price_request: post_prices_price_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -765,48 +568,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specified price by setting the values of the parameters passed. Any parameters not provided are left unchanged.&lt;/p&gt;
     # @required @param price [String?]
-    # @optional @param active [Bool?] Whether the price can be used for new purchases. Defaults to `true`.
-    # @optional @param currency_options [Stripe::PostPricesPriceRequestCurrencyOptions?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param lookup_key [String?] A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param nickname [String?] A brief description of the price, hidden from customers.
-    # @optional @param tax_behavior [String?] Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
+    # @optional @param post_prices_price_request [Stripe::PostPricesPriceRequest?]
     # @return nil
     def post_prices_price(
       *,
       price : String? = nil,
-      active : Bool? = nil,
-      currency_options : Stripe::PostPricesPriceRequestCurrencyOptions? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nickname : String? = nil,
-      tax_behavior : String? = nil,
-      transfer_lookup_key : Bool? = nil,
+      post_prices_price_request : Stripe::PostPricesPriceRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_prices_price(price: price, active: active, currency_options: currency_options, expand: expand, lookup_key: lookup_key, metadata: metadata, nickname: nickname, tax_behavior: tax_behavior, transfer_lookup_key: transfer_lookup_key).execute(&block)
+      build_api_request_for_post_prices_price(price: price, post_prices_price_request: post_prices_price_request).execute(&block)
     end
 
-    POST_PRICES_PRICE_MAX_LENGTH_FOR_PRICE          = 5000
-    POST_PRICES_PRICE_MAX_LENGTH_FOR_LOOKUP_KEY     =  200
-    POST_PRICES_PRICE_MAX_LENGTH_FOR_NICKNAME       = 5000
-    POST_PRICES_PRICE_VALID_VALUES_FOR_TAX_BEHAVIOR = String.static_array("exclusive", "inclusive", "unspecified")
+    POST_PRICES_PRICE_MAX_LENGTH_FOR_PRICE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_prices_price(
       *,
       price : String? = nil,
-      active : Bool? = nil,
-      currency_options : Stripe::PostPricesPriceRequestCurrencyOptions? = nil,
-      expand : Array(String)? = nil,
-      lookup_key : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      nickname : String? = nil,
-      tax_behavior : String? = nil,
-      transfer_lookup_key : Bool? = nil
+      post_prices_price_request : Stripe::PostPricesPriceRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PricesApi.post_prices_price ..." }
@@ -817,54 +596,32 @@ module Stripe
         unless (_price = price).nil?
           OpenApi::PrimitiveValidator.validate_max_length("price", price.to_s.size, POST_PRICES_PRICE_MAX_LENGTH_FOR_PRICE)
         end
-
-        unless (_currency_options = currency_options).nil?
-          _currency_options.validate if _currency_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_lookup_key = lookup_key).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("lookup_key", lookup_key.to_s.size, POST_PRICES_PRICE_MAX_LENGTH_FOR_LOOKUP_KEY)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_nickname = nickname).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("nickname", nickname.to_s.size, POST_PRICES_PRICE_MAX_LENGTH_FOR_NICKNAME)
-        end
-        unless (_tax_behavior = tax_behavior).nil?
-          OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, POST_PRICES_PRICE_VALID_VALUES_FOR_TAX_BEHAVIOR)
+        unless (_post_prices_price_request = post_prices_price_request).nil?
+          _post_prices_price_request.validate if _post_prices_price_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/prices/{price}".sub("{" + "price" + "}", URI.encode_path(price.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["currency_options"] = currency_options.to_s if !currency_options.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["lookup_key"] = lookup_key.to_s if !lookup_key.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["nickname"] = nickname.to_s if !nickname.nil?
-      form_params["tax_behavior"] = tax_behavior.to_s if !tax_behavior.nil?
-      form_params["transfer_lookup_key"] = transfer_lookup_key.to_s if !transfer_lookup_key.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_prices_price_request, content_type: header_params["Content-Type"]?) if !post_prices_price_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

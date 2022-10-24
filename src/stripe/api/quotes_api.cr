@@ -140,8 +140,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/quotes"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -150,19 +158,11 @@ module Stripe
       query_params["customer"] = customer.to_s if !customer.nil?
       query_params["status"] = status.to_s if !status.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -248,23 +248,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/quotes/{quote}".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -379,26 +379,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/quotes/{quote}/computed_upfront_line_items".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -513,26 +513,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/quotes/{quote}/line_items".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -618,23 +618,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/quotes/{quote}/pdf".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/pdf", "application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -653,96 +653,24 @@ module Stripe
     end
 
     # <p>A quote models prices and services for a customer. Default options for <code>header</code>, <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the dashboard via the <a href=\"https://dashboard.stripe.com/settings/billing/quote\">quote template</a>.</p>
-    # @optional @param application_fee_amount [Stripe::PostQuotesRequestApplicationFeeAmount?]
-    # @optional @param application_fee_percent [Stripe::PostQuotesRequestApplicationFeePercent?]
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-    # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?] A description that will be displayed on the quote PDF. If no value is passed, the default description configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param footer [String?] A footer that will be displayed on the quote PDF. If no value is passed, the default footer configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param from_quote [Stripe::FromQuoteParams?]
-    # @optional @param header [String?] A header that will be displayed on the quote PDF. If no value is passed, the default header configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param invoice_settings [Stripe::QuoteParam?]
-    # @optional @param line_items [Array(Stripe::LineItemCreateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
-    # @optional @param subscription_data [Stripe::SubscriptionDataCreateParams?]
-    # @optional @param test_clock [String?] ID of the test clock to attach to the quote.
-    # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
+    # @optional @param post_quotes_request [Stripe::PostQuotesRequest?]
     # @return [Stripe::Quote]
     def post_quotes(
       *,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemCreateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
-      test_clock : String? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil
+      post_quotes_request : Stripe::PostQuotesRequest? = nil
     ) : Stripe::Quote
-      data, _status_code, _headers = post_quotes_with_http_info(application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, from_quote: from_quote, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, test_clock: test_clock, transfer_data: transfer_data)
+      data, _status_code, _headers = post_quotes_with_http_info(post_quotes_request: post_quotes_request)
       data
     end
 
     # &lt;p&gt;A quote models prices and services for a customer. Default options for &lt;code&gt;header&lt;/code&gt;, &lt;code&gt;description&lt;/code&gt;, &lt;code&gt;footer&lt;/code&gt;, and &lt;code&gt;expires_at&lt;/code&gt; can be set in the dashboard via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/settings/billing/quote\&quot;&gt;quote template&lt;/a&gt;.&lt;/p&gt;
-    # @optional @param application_fee_amount [Stripe::PostQuotesRequestApplicationFeeAmount?]
-    # @optional @param application_fee_percent [Stripe::PostQuotesRequestApplicationFeePercent?]
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-    # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?] A description that will be displayed on the quote PDF. If no value is passed, the default description configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param footer [String?] A footer that will be displayed on the quote PDF. If no value is passed, the default footer configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param from_quote [Stripe::FromQuoteParams?]
-    # @optional @param header [String?] A header that will be displayed on the quote PDF. If no value is passed, the default header configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param invoice_settings [Stripe::QuoteParam?]
-    # @optional @param line_items [Array(Stripe::LineItemCreateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
-    # @optional @param subscription_data [Stripe::SubscriptionDataCreateParams?]
-    # @optional @param test_clock [String?] ID of the test clock to attach to the quote.
-    # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
+    # @optional @param post_quotes_request [Stripe::PostQuotesRequest?]
     # @return [Tuple(Stripe::Quote, Integer, Hash)] Stripe::Quote, response status code and response headers
     def post_quotes_with_http_info(
       *,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemCreateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
-      test_clock : String? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil
+      post_quotes_request : Stripe::PostQuotesRequest? = nil
     ) : Tuple(Stripe::Quote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_quotes(application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, from_quote: from_quote, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, test_clock: test_clock, transfer_data: transfer_data)
+      request = build_api_request_for_post_quotes(post_quotes_request: post_quotes_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -754,181 +682,52 @@ module Stripe
     end
 
     # &lt;p&gt;A quote models prices and services for a customer. Default options for &lt;code&gt;header&lt;/code&gt;, &lt;code&gt;description&lt;/code&gt;, &lt;code&gt;footer&lt;/code&gt;, and &lt;code&gt;expires_at&lt;/code&gt; can be set in the dashboard via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/settings/billing/quote\&quot;&gt;quote template&lt;/a&gt;.&lt;/p&gt;
-    # @optional @param application_fee_amount [Stripe::PostQuotesRequestApplicationFeeAmount?]
-    # @optional @param application_fee_percent [Stripe::PostQuotesRequestApplicationFeePercent?]
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-    # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?] A description that will be displayed on the quote PDF. If no value is passed, the default description configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param footer [String?] A footer that will be displayed on the quote PDF. If no value is passed, the default footer configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param from_quote [Stripe::FromQuoteParams?]
-    # @optional @param header [String?] A header that will be displayed on the quote PDF. If no value is passed, the default header configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param invoice_settings [Stripe::QuoteParam?]
-    # @optional @param line_items [Array(Stripe::LineItemCreateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
-    # @optional @param subscription_data [Stripe::SubscriptionDataCreateParams?]
-    # @optional @param test_clock [String?] ID of the test clock to attach to the quote.
-    # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
+    # @optional @param post_quotes_request [Stripe::PostQuotesRequest?]
     # @return nil
     def post_quotes(
       *,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemCreateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
-      test_clock : String? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil,
+      post_quotes_request : Stripe::PostQuotesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_quotes(application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, from_quote: from_quote, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, test_clock: test_clock, transfer_data: transfer_data).execute(&block)
+      build_api_request_for_post_quotes(post_quotes_request: post_quotes_request).execute(&block)
     end
-
-    POST_QUOTES_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
-    POST_QUOTES_MAX_LENGTH_FOR_CUSTOMER            = 5000
-    POST_QUOTES_MAX_LENGTH_FOR_DESCRIPTION         =  500
-    POST_QUOTES_MAX_LENGTH_FOR_FOOTER              =  500
-    POST_QUOTES_MAX_LENGTH_FOR_HEADER              =   50
-    POST_QUOTES_MAX_LENGTH_FOR_TEST_CLOCK          = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_quotes(
       *,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemCreateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
-      test_clock : String? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil
+      post_quotes_request : Stripe::PostQuotesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: QuotesApi.post_quotes ..." }
       end
 
       if client_side_validation
-        unless (_application_fee_amount = application_fee_amount).nil?
-          _application_fee_amount.validate if _application_fee_amount.is_a?(OpenApi::Validatable)
-        end
-        unless (_application_fee_percent = application_fee_percent).nil?
-          _application_fee_percent.validate if _application_fee_percent.is_a?(OpenApi::Validatable)
-        end
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_collection_method = collection_method).nil?
-          OpenApi::EnumValidator.validate("collection_method", _collection_method, POST_QUOTES_VALID_VALUES_FOR_COLLECTION_METHOD)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_QUOTES_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_default_tax_rates = default_tax_rates).nil?
-          _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_QUOTES_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_footer = footer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("footer", footer.to_s.size, POST_QUOTES_MAX_LENGTH_FOR_FOOTER)
-        end
-        unless (_from_quote = from_quote).nil?
-          _from_quote.validate if _from_quote.is_a?(OpenApi::Validatable)
-        end
-        unless (_header = header).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("header", header.to_s.size, POST_QUOTES_MAX_LENGTH_FOR_HEADER)
-        end
-        unless (_invoice_settings = invoice_settings).nil?
-          _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_line_items = line_items).nil?
-          OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
-        end
-        unless (_on_behalf_of = on_behalf_of).nil?
-          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
-        end
-        unless (_subscription_data = subscription_data).nil?
-          _subscription_data.validate if _subscription_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_test_clock = test_clock).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("test_clock", test_clock.to_s.size, POST_QUOTES_MAX_LENGTH_FOR_TEST_CLOCK)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_quotes_request = post_quotes_request).nil?
+          _post_quotes_request.validate if _post_quotes_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/quotes"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["application_fee_percent"] = application_fee_percent.to_s if !application_fee_percent.nil?
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["collection_method"] = collection_method.to_s if !collection_method.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["default_tax_rates"] = default_tax_rates.to_s if !default_tax_rates.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
-      form_params["footer"] = footer.to_s if !footer.nil?
-      form_params["from_quote"] = from_quote.to_s if !from_quote.nil?
-      form_params["header"] = header.to_s if !header.nil?
-      form_params["invoice_settings"] = invoice_settings.to_s if !invoice_settings.nil?
-      form_params["line_items"] = @api_client.build_collection_param(line_items, "csv") if !line_items.nil? && !line_items.empty?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["subscription_data"] = subscription_data.to_s if !subscription_data.nil?
-      form_params["test_clock"] = test_clock.to_s if !test_clock.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_quotes_request, content_type: header_params["Content-Type"]?) if !post_quotes_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -948,91 +747,27 @@ module Stripe
 
     # <p>A quote models prices and services for a customer.</p>
     # @required @param quote [String?]
-    # @optional @param application_fee_amount [Stripe::PostQuotesRequestApplicationFeeAmount?]
-    # @optional @param application_fee_percent [Stripe::PostQuotesRequestApplicationFeePercent?]
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-    # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?] A description that will be displayed on the quote PDF.
-    # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
-    # @optional @param footer [String?] A footer that will be displayed on the quote PDF.
-    # @optional @param header [String?] A header that will be displayed on the quote PDF.
-    # @optional @param invoice_settings [Stripe::QuoteParam?]
-    # @optional @param line_items [Array(Stripe::LineItemUpdateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
-    # @optional @param subscription_data [Stripe::SubscriptionDataUpdateParams?]
-    # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
+    # @optional @param post_quotes_quote_request [Stripe::PostQuotesQuoteRequest?]
     # @return [Stripe::Quote]
     def post_quotes_quote(
       *,
       quote : String? = nil,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemUpdateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil
+      post_quotes_quote_request : Stripe::PostQuotesQuoteRequest? = nil
     ) : Stripe::Quote
-      data, _status_code, _headers = post_quotes_quote_with_http_info(quote: quote, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, transfer_data: transfer_data)
+      data, _status_code, _headers = post_quotes_quote_with_http_info(quote: quote, post_quotes_quote_request: post_quotes_quote_request)
       data
     end
 
     # &lt;p&gt;A quote models prices and services for a customer.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param application_fee_amount [Stripe::PostQuotesRequestApplicationFeeAmount?]
-    # @optional @param application_fee_percent [Stripe::PostQuotesRequestApplicationFeePercent?]
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-    # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?] A description that will be displayed on the quote PDF.
-    # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
-    # @optional @param footer [String?] A footer that will be displayed on the quote PDF.
-    # @optional @param header [String?] A header that will be displayed on the quote PDF.
-    # @optional @param invoice_settings [Stripe::QuoteParam?]
-    # @optional @param line_items [Array(Stripe::LineItemUpdateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
-    # @optional @param subscription_data [Stripe::SubscriptionDataUpdateParams?]
-    # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
+    # @optional @param post_quotes_quote_request [Stripe::PostQuotesQuoteRequest?]
     # @return [Tuple(Stripe::Quote, Integer, Hash)] Stripe::Quote, response status code and response headers
     def post_quotes_quote_with_http_info(
       *,
       quote : String? = nil,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemUpdateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil
+      post_quotes_quote_request : Stripe::PostQuotesQuoteRequest? = nil
     ) : Tuple(Stripe::Quote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_quotes_quote(quote: quote, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, transfer_data: transfer_data)
+      request = build_api_request_for_post_quotes_quote(quote: quote, post_quotes_quote_request: post_quotes_quote_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1045,77 +780,24 @@ module Stripe
 
     # &lt;p&gt;A quote models prices and services for a customer.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param application_fee_amount [Stripe::PostQuotesRequestApplicationFeeAmount?]
-    # @optional @param application_fee_percent [Stripe::PostQuotesRequestApplicationFeePercent?]
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
-    # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
-    # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?] A description that will be displayed on the quote PDF.
-    # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
-    # @optional @param footer [String?] A footer that will be displayed on the quote PDF.
-    # @optional @param header [String?] A header that will be displayed on the quote PDF.
-    # @optional @param invoice_settings [Stripe::QuoteParam?]
-    # @optional @param line_items [Array(Stripe::LineItemUpdateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
-    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
-    # @optional @param subscription_data [Stripe::SubscriptionDataUpdateParams?]
-    # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
+    # @optional @param post_quotes_quote_request [Stripe::PostQuotesQuoteRequest?]
     # @return nil
     def post_quotes_quote(
       *,
       quote : String? = nil,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemUpdateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil,
+      post_quotes_quote_request : Stripe::PostQuotesQuoteRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_quotes_quote(quote: quote, application_fee_amount: application_fee_amount, application_fee_percent: application_fee_percent, automatic_tax: automatic_tax, collection_method: collection_method, customer: customer, default_tax_rates: default_tax_rates, description: description, discounts: discounts, expand: expand, expires_at: expires_at, footer: footer, header: header, invoice_settings: invoice_settings, line_items: line_items, on_behalf_of: on_behalf_of, subscription_data: subscription_data, transfer_data: transfer_data).execute(&block)
+      build_api_request_for_post_quotes_quote(quote: quote, post_quotes_quote_request: post_quotes_quote_request).execute(&block)
     end
 
-    POST_QUOTES_QUOTE_MAX_LENGTH_FOR_QUOTE               = 5000
-    POST_QUOTES_QUOTE_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
-    POST_QUOTES_QUOTE_MAX_LENGTH_FOR_CUSTOMER            = 5000
-    POST_QUOTES_QUOTE_MAX_LENGTH_FOR_DESCRIPTION         =  500
-    POST_QUOTES_QUOTE_MAX_LENGTH_FOR_FOOTER              =  500
-    POST_QUOTES_QUOTE_MAX_LENGTH_FOR_HEADER              =   50
+    POST_QUOTES_QUOTE_MAX_LENGTH_FOR_QUOTE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_quotes_quote(
       *,
       quote : String? = nil,
-      application_fee_amount : Stripe::PostQuotesRequestApplicationFeeAmount? = nil,
-      application_fee_percent : Stripe::PostQuotesRequestApplicationFeePercent? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      customer : String? = nil,
-      default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostQuotesRequestDiscounts? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
-      invoice_settings : Stripe::QuoteParam? = nil,
-      line_items : Array(Stripe::LineItemUpdateParams)? = nil,
-      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
-      subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
-      transfer_data : Stripe::PostQuotesRequestTransferData? = nil
+      post_quotes_quote_request : Stripe::PostQuotesQuoteRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: QuotesApi.post_quotes_quote ..." }
@@ -1126,92 +808,32 @@ module Stripe
         unless (_quote = quote).nil?
           OpenApi::PrimitiveValidator.validate_max_length("quote", quote.to_s.size, POST_QUOTES_QUOTE_MAX_LENGTH_FOR_QUOTE)
         end
-        unless (_application_fee_amount = application_fee_amount).nil?
-          _application_fee_amount.validate if _application_fee_amount.is_a?(OpenApi::Validatable)
-        end
-        unless (_application_fee_percent = application_fee_percent).nil?
-          _application_fee_percent.validate if _application_fee_percent.is_a?(OpenApi::Validatable)
-        end
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_collection_method = collection_method).nil?
-          OpenApi::EnumValidator.validate("collection_method", _collection_method, POST_QUOTES_QUOTE_VALID_VALUES_FOR_COLLECTION_METHOD)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_QUOTES_QUOTE_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_default_tax_rates = default_tax_rates).nil?
-          _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_QUOTES_QUOTE_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_footer = footer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("footer", footer.to_s.size, POST_QUOTES_QUOTE_MAX_LENGTH_FOR_FOOTER)
-        end
-        unless (_header = header).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("header", header.to_s.size, POST_QUOTES_QUOTE_MAX_LENGTH_FOR_HEADER)
-        end
-        unless (_invoice_settings = invoice_settings).nil?
-          _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_line_items = line_items).nil?
-          OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
-        end
-        unless (_on_behalf_of = on_behalf_of).nil?
-          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
-        end
-        unless (_subscription_data = subscription_data).nil?
-          _subscription_data.validate if _subscription_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_quotes_quote_request = post_quotes_quote_request).nil?
+          _post_quotes_quote_request.validate if _post_quotes_quote_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/quotes/{quote}".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["application_fee_percent"] = application_fee_percent.to_s if !application_fee_percent.nil?
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["collection_method"] = collection_method.to_s if !collection_method.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["default_tax_rates"] = default_tax_rates.to_s if !default_tax_rates.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
-      form_params["footer"] = footer.to_s if !footer.nil?
-      form_params["header"] = header.to_s if !header.nil?
-      form_params["invoice_settings"] = invoice_settings.to_s if !invoice_settings.nil?
-      form_params["line_items"] = @api_client.build_collection_param(line_items, "csv") if !line_items.nil? && !line_items.empty?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["subscription_data"] = subscription_data.to_s if !subscription_data.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_quotes_quote_request, content_type: header_params["Content-Type"]?) if !post_quotes_quote_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1231,27 +853,27 @@ module Stripe
 
     # <p>Accepts the specified quote.</p>
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Quote]
     def post_quotes_quote_accept(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Quote
-      data, _status_code, _headers = post_quotes_quote_accept_with_http_info(quote: quote, expand: expand)
+      data, _status_code, _headers = post_quotes_quote_accept_with_http_info(quote: quote, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Accepts the specified quote.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Quote, Integer, Hash)] Stripe::Quote, response status code and response headers
     def post_quotes_quote_accept_with_http_info(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Quote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_quotes_quote_accept(quote: quote, expand: expand)
+      request = build_api_request_for_post_quotes_quote_accept(quote: quote, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1264,15 +886,15 @@ module Stripe
 
     # &lt;p&gt;Accepts the specified quote.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_quotes_quote_accept(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_quotes_quote_accept(quote: quote, expand: expand).execute(&block)
+      build_api_request_for_post_quotes_quote_accept(quote: quote, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_QUOTES_QUOTE_ACCEPT_MAX_LENGTH_FOR_QUOTE = 5000
@@ -1281,7 +903,7 @@ module Stripe
     def build_api_request_for_post_quotes_quote_accept(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: QuotesApi.post_quotes_quote_accept ..." }
@@ -1292,30 +914,32 @@ module Stripe
         unless (_quote = quote).nil?
           OpenApi::PrimitiveValidator.validate_max_length("quote", quote.to_s.size, POST_QUOTES_QUOTE_ACCEPT_MAX_LENGTH_FOR_QUOTE)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/quotes/{quote}/accept".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1335,27 +959,27 @@ module Stripe
 
     # <p>Cancels the quote.</p>
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Quote]
     def post_quotes_quote_cancel(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Quote
-      data, _status_code, _headers = post_quotes_quote_cancel_with_http_info(quote: quote, expand: expand)
+      data, _status_code, _headers = post_quotes_quote_cancel_with_http_info(quote: quote, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Cancels the quote.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Quote, Integer, Hash)] Stripe::Quote, response status code and response headers
     def post_quotes_quote_cancel_with_http_info(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Quote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_quotes_quote_cancel(quote: quote, expand: expand)
+      request = build_api_request_for_post_quotes_quote_cancel(quote: quote, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1368,15 +992,15 @@ module Stripe
 
     # &lt;p&gt;Cancels the quote.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_quotes_quote_cancel(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_quotes_quote_cancel(quote: quote, expand: expand).execute(&block)
+      build_api_request_for_post_quotes_quote_cancel(quote: quote, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_QUOTES_QUOTE_CANCEL_MAX_LENGTH_FOR_QUOTE = 5000
@@ -1385,7 +1009,7 @@ module Stripe
     def build_api_request_for_post_quotes_quote_cancel(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: QuotesApi.post_quotes_quote_cancel ..." }
@@ -1396,30 +1020,32 @@ module Stripe
         unless (_quote = quote).nil?
           OpenApi::PrimitiveValidator.validate_max_length("quote", quote.to_s.size, POST_QUOTES_QUOTE_CANCEL_MAX_LENGTH_FOR_QUOTE)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/quotes/{quote}/cancel".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1439,31 +1065,27 @@ module Stripe
 
     # <p>Finalizes the quote.</p>
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
+    # @optional @param post_quotes_quote_finalize_request [Stripe::PostQuotesQuoteFinalizeRequest?]
     # @return [Stripe::Quote]
     def post_quotes_quote_finalize(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil
+      post_quotes_quote_finalize_request : Stripe::PostQuotesQuoteFinalizeRequest? = nil
     ) : Stripe::Quote
-      data, _status_code, _headers = post_quotes_quote_finalize_with_http_info(quote: quote, expand: expand, expires_at: expires_at)
+      data, _status_code, _headers = post_quotes_quote_finalize_with_http_info(quote: quote, post_quotes_quote_finalize_request: post_quotes_quote_finalize_request)
       data
     end
 
     # &lt;p&gt;Finalizes the quote.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
+    # @optional @param post_quotes_quote_finalize_request [Stripe::PostQuotesQuoteFinalizeRequest?]
     # @return [Tuple(Stripe::Quote, Integer, Hash)] Stripe::Quote, response status code and response headers
     def post_quotes_quote_finalize_with_http_info(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil
+      post_quotes_quote_finalize_request : Stripe::PostQuotesQuoteFinalizeRequest? = nil
     ) : Tuple(Stripe::Quote, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_quotes_quote_finalize(quote: quote, expand: expand, expires_at: expires_at)
+      request = build_api_request_for_post_quotes_quote_finalize(quote: quote, post_quotes_quote_finalize_request: post_quotes_quote_finalize_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1476,17 +1098,15 @@ module Stripe
 
     # &lt;p&gt;Finalizes the quote.&lt;/p&gt;
     # @required @param quote [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
+    # @optional @param post_quotes_quote_finalize_request [Stripe::PostQuotesQuoteFinalizeRequest?]
     # @return nil
     def post_quotes_quote_finalize(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
+      post_quotes_quote_finalize_request : Stripe::PostQuotesQuoteFinalizeRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_quotes_quote_finalize(quote: quote, expand: expand, expires_at: expires_at).execute(&block)
+      build_api_request_for_post_quotes_quote_finalize(quote: quote, post_quotes_quote_finalize_request: post_quotes_quote_finalize_request).execute(&block)
     end
 
     POST_QUOTES_QUOTE_FINALIZE_MAX_LENGTH_FOR_QUOTE = 5000
@@ -1495,8 +1115,7 @@ module Stripe
     def build_api_request_for_post_quotes_quote_finalize(
       *,
       quote : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil
+      post_quotes_quote_finalize_request : Stripe::PostQuotesQuoteFinalizeRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: QuotesApi.post_quotes_quote_finalize ..." }
@@ -1507,31 +1126,32 @@ module Stripe
         unless (_quote = quote).nil?
           OpenApi::PrimitiveValidator.validate_max_length("quote", quote.to_s.size, POST_QUOTES_QUOTE_FINALIZE_MAX_LENGTH_FOR_QUOTE)
         end
+        unless (_post_quotes_quote_finalize_request = post_quotes_quote_finalize_request).nil?
+          _post_quotes_quote_finalize_request.validate if _post_quotes_quote_finalize_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/quotes/{quote}/finalize".sub("{" + "quote" + "}", URI.encode_path(quote.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_quotes_quote_finalize_request, content_type: header_params["Content-Type"]?) if !post_quotes_quote_finalize_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

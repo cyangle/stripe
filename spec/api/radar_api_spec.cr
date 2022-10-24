@@ -130,10 +130,8 @@ describe "RadarApi" do
 
   # unit tests for post_radar_value_list_items
   # &lt;p&gt;Creates a new &lt;code&gt;ValueListItem&lt;/code&gt; object, which is added to the specified parent value list.&lt;/p&gt;
-  # @param value The value of the item (whose type must match the type of the parent value list).
-  # @param value_list The identifier of the value list which the created item will be added to.
+  # @param post_radar_value_list_items_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [RadarValueListItem]
   describe "post_radar_value_list_items test" do
     it "should work" do
@@ -143,11 +141,8 @@ describe "RadarApi" do
 
   # unit tests for post_radar_value_lists
   # &lt;p&gt;Creates a new &lt;code&gt;ValueList&lt;/code&gt; object, which can then be referenced in rules.&lt;/p&gt;
-  # @param _alias The name of the value list for use in rules.
-  # @param name The human-readable name of the value list.
+  # @param post_radar_value_lists_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :item_type Type of the items in the value list. One of &#x60;card_fingerprint&#x60;, &#x60;card_bin&#x60;, &#x60;email&#x60;, &#x60;ip_address&#x60;, &#x60;country&#x60;, &#x60;string&#x60;, &#x60;case_sensitive_string&#x60;, or &#x60;customer_id&#x60;. Use &#x60;string&#x60; if the item type is unknown or mixed.
   # @return [RadarValueList]
   describe "post_radar_value_lists test" do
     it "should work" do
@@ -159,9 +154,7 @@ describe "RadarApi" do
   # &lt;p&gt;Updates a &lt;code&gt;ValueList&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Note that &lt;code&gt;item_type&lt;/code&gt; is immutable.&lt;/p&gt;
   # @param value_list
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :_alias The name of the value list for use in rules.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :name The human-readable name of the value list.
+  # @option opts [PostRadarValueListsValueListRequest] :post_radar_value_lists_value_list_request
   # @return [RadarValueList]
   describe "post_radar_value_lists_value_list test" do
     it "should work" do

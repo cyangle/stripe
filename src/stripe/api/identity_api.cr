@@ -139,8 +139,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/identity/verification_reports"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -149,19 +157,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -247,23 +247,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/identity/verification_reports/{report}".sub("{" + "report" + "}", URI.encode_path(report.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -389,8 +389,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/identity/verification_sessions"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -398,19 +406,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -496,23 +496,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/identity/verification_sessions/{session}".sub("{" + "session" + "}", URI.encode_path(session.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -531,36 +531,24 @@ module Stripe
     end
 
     # <p>Creates a VerificationSession object.</p>  <p>After the VerificationSession is created, display a verification modal using the session <code>client_secret</code> or send your users to the session’s <code>url</code>.</p>  <p>If your API key is in test mode, verification checks won’t actually process, though everything else will occur as if in live mode.</p>  <p>Related guide: <a href=\"/docs/identity/verify-identity-documents\">Verify your users’ identity documents</a>.</p>
-    # @required @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param options [Stripe::SessionOptionsParam?]
-    # @optional @param return_url [String?] The URL that the user will be redirected to upon completing the verification flow.
+    # @required @param post_identity_verification_sessions_request [Stripe::PostIdentityVerificationSessionsRequest?]
     # @return [Stripe::IdentityVerificationSession]
     def post_identity_verification_sessions(
       *,
-      _type : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      return_url : String? = nil
+      post_identity_verification_sessions_request : Stripe::PostIdentityVerificationSessionsRequest? = nil
     ) : Stripe::IdentityVerificationSession
-      data, _status_code, _headers = post_identity_verification_sessions_with_http_info(_type: _type, expand: expand, options: options, return_url: return_url)
+      data, _status_code, _headers = post_identity_verification_sessions_with_http_info(post_identity_verification_sessions_request: post_identity_verification_sessions_request)
       data
     end
 
     # &lt;p&gt;Creates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;After the VerificationSession is created, display a verification modal using the session &lt;code&gt;client_secret&lt;/code&gt; or send your users to the session’s &lt;code&gt;url&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;If your API key is in test mode, verification checks won’t actually process, though everything else will occur as if in live mode.&lt;/p&gt;  &lt;p&gt;Related guide: &lt;a href&#x3D;\&quot;/docs/identity/verify-identity-documents\&quot;&gt;Verify your users’ identity documents&lt;/a&gt;.&lt;/p&gt;
-    # @required @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param options [Stripe::SessionOptionsParam?]
-    # @optional @param return_url [String?] The URL that the user will be redirected to upon completing the verification flow.
+    # @required @param post_identity_verification_sessions_request [Stripe::PostIdentityVerificationSessionsRequest?]
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
     def post_identity_verification_sessions_with_http_info(
       *,
-      _type : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      return_url : String? = nil
+      post_identity_verification_sessions_request : Stripe::PostIdentityVerificationSessionsRequest? = nil
     ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_identity_verification_sessions(_type: _type, expand: expand, options: options, return_url: return_url)
+      request = build_api_request_for_post_identity_verification_sessions(post_identity_verification_sessions_request: post_identity_verification_sessions_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -572,72 +560,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;After the VerificationSession is created, display a verification modal using the session &lt;code&gt;client_secret&lt;/code&gt; or send your users to the session’s &lt;code&gt;url&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;If your API key is in test mode, verification checks won’t actually process, though everything else will occur as if in live mode.&lt;/p&gt;  &lt;p&gt;Related guide: &lt;a href&#x3D;\&quot;/docs/identity/verify-identity-documents\&quot;&gt;Verify your users’ identity documents&lt;/a&gt;.&lt;/p&gt;
-    # @required @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param options [Stripe::SessionOptionsParam?]
-    # @optional @param return_url [String?] The URL that the user will be redirected to upon completing the verification flow.
+    # @required @param post_identity_verification_sessions_request [Stripe::PostIdentityVerificationSessionsRequest?]
     # @return nil
     def post_identity_verification_sessions(
       *,
-      _type : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      return_url : String? = nil,
+      post_identity_verification_sessions_request : Stripe::PostIdentityVerificationSessionsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_identity_verification_sessions(_type: _type, expand: expand, options: options, return_url: return_url).execute(&block)
+      build_api_request_for_post_identity_verification_sessions(post_identity_verification_sessions_request: post_identity_verification_sessions_request).execute(&block)
     end
-
-    POST_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR__TYPE = String.static_array("document", "id_number")
 
     # @return Crest::Request
     def build_api_request_for_post_identity_verification_sessions(
       *,
-      _type : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      return_url : String? = nil
+      post_identity_verification_sessions_request : Stripe::PostIdentityVerificationSessionsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"_type\" is required and cannot be null") if _type.nil?
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_IDENTITY_VERIFICATION_SESSIONS_VALID_VALUES_FOR__TYPE)
-        end
-
-        unless (_options = options).nil?
-          _options.validate if _options.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_identity_verification_sessions_request\" is required and cannot be null") if post_identity_verification_sessions_request.nil?
+        unless (_post_identity_verification_sessions_request = post_identity_verification_sessions_request).nil?
+          _post_identity_verification_sessions_request.validate if _post_identity_verification_sessions_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/identity/verification_sessions"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["options"] = options.to_s if !options.nil?
-      form_params["return_url"] = return_url.to_s if !return_url.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_identity_verification_sessions_request, content_type: header_params["Content-Type"]?) if !post_identity_verification_sessions_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -657,35 +626,27 @@ module Stripe
 
     # <p>Updates a VerificationSession object.</p>  <p>When the session status is <code>requires_input</code>, you can use this method to update the verification check and options.</p>
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param options [Stripe::SessionOptionsParam?]
-    # @optional @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
+    # @optional @param post_identity_verification_sessions_session_request [Stripe::PostIdentityVerificationSessionsSessionRequest?]
     # @return [Stripe::IdentityVerificationSession]
     def post_identity_verification_sessions_session(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      _type : String? = nil
+      post_identity_verification_sessions_session_request : Stripe::PostIdentityVerificationSessionsSessionRequest? = nil
     ) : Stripe::IdentityVerificationSession
-      data, _status_code, _headers = post_identity_verification_sessions_session_with_http_info(session: session, expand: expand, options: options, _type: _type)
+      data, _status_code, _headers = post_identity_verification_sessions_session_with_http_info(session: session, post_identity_verification_sessions_session_request: post_identity_verification_sessions_session_request)
       data
     end
 
     # &lt;p&gt;Updates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;When the session status is &lt;code&gt;requires_input&lt;/code&gt;, you can use this method to update the verification check and options.&lt;/p&gt;
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param options [Stripe::SessionOptionsParam?]
-    # @optional @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
+    # @optional @param post_identity_verification_sessions_session_request [Stripe::PostIdentityVerificationSessionsSessionRequest?]
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
     def post_identity_verification_sessions_session_with_http_info(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      _type : String? = nil
+      post_identity_verification_sessions_session_request : Stripe::PostIdentityVerificationSessionsSessionRequest? = nil
     ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_identity_verification_sessions_session(session: session, expand: expand, options: options, _type: _type)
+      request = build_api_request_for_post_identity_verification_sessions_session(session: session, post_identity_verification_sessions_session_request: post_identity_verification_sessions_session_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -698,31 +659,24 @@ module Stripe
 
     # &lt;p&gt;Updates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;When the session status is &lt;code&gt;requires_input&lt;/code&gt;, you can use this method to update the verification check and options.&lt;/p&gt;
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param options [Stripe::SessionOptionsParam?]
-    # @optional @param _type [String?] The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
+    # @optional @param post_identity_verification_sessions_session_request [Stripe::PostIdentityVerificationSessionsSessionRequest?]
     # @return nil
     def post_identity_verification_sessions_session(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      _type : String? = nil,
+      post_identity_verification_sessions_session_request : Stripe::PostIdentityVerificationSessionsSessionRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_identity_verification_sessions_session(session: session, expand: expand, options: options, _type: _type).execute(&block)
+      build_api_request_for_post_identity_verification_sessions_session(session: session, post_identity_verification_sessions_session_request: post_identity_verification_sessions_session_request).execute(&block)
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_MAX_LENGTH_FOR_SESSION = 5000
-    POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_VALID_VALUES_FOR__TYPE = String.static_array("document", "id_number")
 
     # @return Crest::Request
     def build_api_request_for_post_identity_verification_sessions_session(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil,
-      options : Stripe::SessionOptionsParam? = nil,
-      _type : String? = nil
+      post_identity_verification_sessions_session_request : Stripe::PostIdentityVerificationSessionsSessionRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions_session ..." }
@@ -733,39 +687,32 @@ module Stripe
         unless (_session = session).nil?
           OpenApi::PrimitiveValidator.validate_max_length("session", session.to_s.size, POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_MAX_LENGTH_FOR_SESSION)
         end
-
-        unless (_options = options).nil?
-          _options.validate if _options.is_a?(OpenApi::Validatable)
-        end
-        unless (__type = _type).nil?
-          OpenApi::EnumValidator.validate("_type", __type, POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_VALID_VALUES_FOR__TYPE)
+        unless (_post_identity_verification_sessions_session_request = post_identity_verification_sessions_session_request).nil?
+          _post_identity_verification_sessions_session_request.validate if _post_identity_verification_sessions_session_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/identity/verification_sessions/{session}".sub("{" + "session" + "}", URI.encode_path(session.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["options"] = options.to_s if !options.nil?
-      form_params["type"] = _type.to_s if !_type.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_identity_verification_sessions_session_request, content_type: header_params["Content-Type"]?) if !post_identity_verification_sessions_session_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -785,27 +732,27 @@ module Stripe
 
     # <p>A VerificationSession object can be canceled when it is in <code>requires_input</code> <a href=\"/docs/identity/how-sessions-work\">status</a>.</p>  <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a href=\"/docs/identity/verification-sessions#cancel\">Learn more</a>.</p>
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::IdentityVerificationSession]
     def post_identity_verification_sessions_session_cancel(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::IdentityVerificationSession
-      data, _status_code, _headers = post_identity_verification_sessions_session_cancel_with_http_info(session: session, expand: expand)
+      data, _status_code, _headers = post_identity_verification_sessions_session_cancel_with_http_info(session: session, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;A VerificationSession object can be canceled when it is in &lt;code&gt;requires_input&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;Once canceled, future submission attempts are disabled. This cannot be undone. &lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#cancel\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
     def post_identity_verification_sessions_session_cancel_with_http_info(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_identity_verification_sessions_session_cancel(session: session, expand: expand)
+      request = build_api_request_for_post_identity_verification_sessions_session_cancel(session: session, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -818,15 +765,15 @@ module Stripe
 
     # &lt;p&gt;A VerificationSession object can be canceled when it is in &lt;code&gt;requires_input&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;Once canceled, future submission attempts are disabled. This cannot be undone. &lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#cancel\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_identity_verification_sessions_session_cancel(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_identity_verification_sessions_session_cancel(session: session, expand: expand).execute(&block)
+      build_api_request_for_post_identity_verification_sessions_session_cancel(session: session, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_CANCEL_MAX_LENGTH_FOR_SESSION = 5000
@@ -835,7 +782,7 @@ module Stripe
     def build_api_request_for_post_identity_verification_sessions_session_cancel(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions_session_cancel ..." }
@@ -846,30 +793,32 @@ module Stripe
         unless (_session = session).nil?
           OpenApi::PrimitiveValidator.validate_max_length("session", session.to_s.size, POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_CANCEL_MAX_LENGTH_FOR_SESSION)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/identity/verification_sessions/{session}/cancel".sub("{" + "session" + "}", URI.encode_path(session.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -889,27 +838,27 @@ module Stripe
 
     # <p>Redact a VerificationSession to remove all collected information from Stripe. This will redact the VerificationSession and all objects related to it, including VerificationReports, Events, request logs, etc.</p>  <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or <code>verified</code> <a href=\"/docs/identity/how-sessions-work\">status</a>. Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel it.</p>  <p>The redaction process may take up to four days. When the redaction process is in progress, the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing</code>; when the process is finished, it will change to <code>redacted</code> and an <code>identity.verification_session.redacted</code> event will be emitted.</p>  <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all the fields that contain personal data will be replaced by the string <code>[redacted]</code> or a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects cannot be updated or used for any purpose.</p>  <p><a href=\"/docs/identity/verification-sessions#redact\">Learn more</a>.</p>
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::IdentityVerificationSession]
     def post_identity_verification_sessions_session_redact(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::IdentityVerificationSession
-      data, _status_code, _headers = post_identity_verification_sessions_session_redact_with_http_info(session: session, expand: expand)
+      data, _status_code, _headers = post_identity_verification_sessions_session_redact_with_http_info(session: session, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Redact a VerificationSession to remove all collected information from Stripe. This will redact the VerificationSession and all objects related to it, including VerificationReports, Events, request logs, etc.&lt;/p&gt;  &lt;p&gt;A VerificationSession object can be redacted when it is in &lt;code&gt;requires_input&lt;/code&gt; or &lt;code&gt;verified&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;. Redacting a VerificationSession in &lt;code&gt;requires_action&lt;/code&gt; state will automatically cancel it.&lt;/p&gt;  &lt;p&gt;The redaction process may take up to four days. When the redaction process is in progress, the VerificationSession’s &lt;code&gt;redaction.status&lt;/code&gt; field will be set to &lt;code&gt;processing&lt;/code&gt;; when the process is finished, it will change to &lt;code&gt;redacted&lt;/code&gt; and an &lt;code&gt;identity.verification_session.redacted&lt;/code&gt; event will be emitted.&lt;/p&gt;  &lt;p&gt;Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all the fields that contain personal data will be replaced by the string &lt;code&gt;[redacted]&lt;/code&gt; or a similar placeholder. The &lt;code&gt;metadata&lt;/code&gt; field will also be erased. Redacted objects cannot be updated or used for any purpose.&lt;/p&gt;  &lt;p&gt;&lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#redact\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::IdentityVerificationSession, Integer, Hash)] Stripe::IdentityVerificationSession, response status code and response headers
     def post_identity_verification_sessions_session_redact_with_http_info(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::IdentityVerificationSession, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_identity_verification_sessions_session_redact(session: session, expand: expand)
+      request = build_api_request_for_post_identity_verification_sessions_session_redact(session: session, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -922,15 +871,15 @@ module Stripe
 
     # &lt;p&gt;Redact a VerificationSession to remove all collected information from Stripe. This will redact the VerificationSession and all objects related to it, including VerificationReports, Events, request logs, etc.&lt;/p&gt;  &lt;p&gt;A VerificationSession object can be redacted when it is in &lt;code&gt;requires_input&lt;/code&gt; or &lt;code&gt;verified&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;. Redacting a VerificationSession in &lt;code&gt;requires_action&lt;/code&gt; state will automatically cancel it.&lt;/p&gt;  &lt;p&gt;The redaction process may take up to four days. When the redaction process is in progress, the VerificationSession’s &lt;code&gt;redaction.status&lt;/code&gt; field will be set to &lt;code&gt;processing&lt;/code&gt;; when the process is finished, it will change to &lt;code&gt;redacted&lt;/code&gt; and an &lt;code&gt;identity.verification_session.redacted&lt;/code&gt; event will be emitted.&lt;/p&gt;  &lt;p&gt;Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all the fields that contain personal data will be replaced by the string &lt;code&gt;[redacted]&lt;/code&gt; or a similar placeholder. The &lt;code&gt;metadata&lt;/code&gt; field will also be erased. Redacted objects cannot be updated or used for any purpose.&lt;/p&gt;  &lt;p&gt;&lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#redact\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
     # @required @param session [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_identity_verification_sessions_session_redact(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_identity_verification_sessions_session_redact(session: session, expand: expand).execute(&block)
+      build_api_request_for_post_identity_verification_sessions_session_redact(session: session, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_REDACT_MAX_LENGTH_FOR_SESSION = 5000
@@ -939,7 +888,7 @@ module Stripe
     def build_api_request_for_post_identity_verification_sessions_session_redact(
       *,
       session : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: IdentityApi.post_identity_verification_sessions_session_redact ..." }
@@ -950,30 +899,32 @@ module Stripe
         unless (_session = session).nil?
           OpenApi::PrimitiveValidator.validate_max_length("session", session.to_s.size, POST_IDENTITY_VERIFICATION_SESSIONS_SESSION_REDACT_MAX_LENGTH_FOR_SESSION)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/identity/verification_sessions/{session}/redact".sub("{" + "session" + "}", URI.encode_path(session.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

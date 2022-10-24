@@ -141,8 +141,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/charges"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -152,19 +160,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -250,23 +250,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/charges/{charge}".sub("{" + "charge" + "}", URI.encode_path(charge.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -370,26 +370,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/charges/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -408,100 +408,24 @@ module Stripe
     end
 
     # <p>To charge a credit card or other payment source, you create a <code>Charge</code> object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).</p>
-    # @optional @param amount [Int32?] Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @optional @param application_fee [Int32?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the charge and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
-    # @optional @param capture [Bool?] Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues an authorization (or pre-authorization), and will need to be [captured](https://stripe.com/docs/api#capture_charge) later. Uncaptured charges expire after a set number of days (7 by default). For more information, see the [authorizing charges and settling later](https://stripe.com/docs/charges/placing-a-hold) documentation.
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] The ID of an existing customer that will be charged in this request.
-    # @optional @param description [String?] An arbitrary string which you can attach to a `Charge` object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
-    # @optional @param destination [Stripe::PostChargesRequestDestination?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [String?] The Stripe account ID for which these funds are intended. Automatically set if you use the `destination` parameter. For details, see [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [String?] The email address to which this charge's [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will override the customer's email address. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param source [String?] A payment source to be charged. This can be the ID of a [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank account](https://stripe.com/docs/api#bank_accounts), a [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens), or a [connected account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank accounts](https://stripe.com/docs/api#bank_accounts), and attached [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated customer.
-    # @optional @param statement_descriptor [String?] For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
+    # @optional @param post_charges_request [Stripe::PostChargesRequest?]
     # @return [Stripe::Charge]
     def post_charges(
       *,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      capture : Bool? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination : Stripe::PostChargesRequestDestination? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil
+      post_charges_request : Stripe::PostChargesRequest? = nil
     ) : Stripe::Charge
-      data, _status_code, _headers = post_charges_with_http_info(amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, capture: capture, card: card, currency: currency, customer: customer, description: description, destination: destination, expand: expand, metadata: metadata, on_behalf_of: on_behalf_of, radar_options: radar_options, receipt_email: receipt_email, shipping: shipping, source: source, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
+      data, _status_code, _headers = post_charges_with_http_info(post_charges_request: post_charges_request)
       data
     end
 
     # &lt;p&gt;To charge a credit card or other payment source, you create a &lt;code&gt;Charge&lt;/code&gt; object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).&lt;/p&gt;
-    # @optional @param amount [Int32?] Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @optional @param application_fee [Int32?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the charge and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
-    # @optional @param capture [Bool?] Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues an authorization (or pre-authorization), and will need to be [captured](https://stripe.com/docs/api#capture_charge) later. Uncaptured charges expire after a set number of days (7 by default). For more information, see the [authorizing charges and settling later](https://stripe.com/docs/charges/placing-a-hold) documentation.
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] The ID of an existing customer that will be charged in this request.
-    # @optional @param description [String?] An arbitrary string which you can attach to a `Charge` object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
-    # @optional @param destination [Stripe::PostChargesRequestDestination?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [String?] The Stripe account ID for which these funds are intended. Automatically set if you use the `destination` parameter. For details, see [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [String?] The email address to which this charge's [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will override the customer's email address. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param source [String?] A payment source to be charged. This can be the ID of a [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank account](https://stripe.com/docs/api#bank_accounts), a [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens), or a [connected account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank accounts](https://stripe.com/docs/api#bank_accounts), and attached [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated customer.
-    # @optional @param statement_descriptor [String?] For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
+    # @optional @param post_charges_request [Stripe::PostChargesRequest?]
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
     def post_charges_with_http_info(
       *,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      capture : Bool? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination : Stripe::PostChargesRequestDestination? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil
+      post_charges_request : Stripe::PostChargesRequest? = nil
     ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_charges(amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, capture: capture, card: card, currency: currency, customer: customer, description: description, destination: destination, expand: expand, metadata: metadata, on_behalf_of: on_behalf_of, radar_options: radar_options, receipt_email: receipt_email, shipping: shipping, source: source, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
+      request = build_api_request_for_post_charges(post_charges_request: post_charges_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -513,172 +437,52 @@ module Stripe
     end
 
     # &lt;p&gt;To charge a credit card or other payment source, you create a &lt;code&gt;Charge&lt;/code&gt; object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).&lt;/p&gt;
-    # @optional @param amount [Int32?] Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @optional @param application_fee [Int32?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the charge and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
-    # @optional @param capture [Bool?] Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues an authorization (or pre-authorization), and will need to be [captured](https://stripe.com/docs/api#capture_charge) later. Uncaptured charges expire after a set number of days (7 by default). For more information, see the [authorizing charges and settling later](https://stripe.com/docs/charges/placing-a-hold) documentation.
-    # @optional @param card [Stripe::PostChargesRequestCard?]
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] The ID of an existing customer that will be charged in this request.
-    # @optional @param description [String?] An arbitrary string which you can attach to a `Charge` object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
-    # @optional @param destination [Stripe::PostChargesRequestDestination?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [String?] The Stripe account ID for which these funds are intended. Automatically set if you use the `destination` parameter. For details, see [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [String?] The email address to which this charge's [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will override the customer's email address. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param source [String?] A payment source to be charged. This can be the ID of a [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank account](https://stripe.com/docs/api#bank_accounts), a [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens), or a [connected account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank accounts](https://stripe.com/docs/api#bank_accounts), and attached [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated customer.
-    # @optional @param statement_descriptor [String?] For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#transfer-options).
+    # @optional @param post_charges_request [Stripe::PostChargesRequest?]
     # @return nil
     def post_charges(
       *,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      capture : Bool? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination : Stripe::PostChargesRequestDestination? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil,
+      post_charges_request : Stripe::PostChargesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_charges(amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, capture: capture, card: card, currency: currency, customer: customer, description: description, destination: destination, expand: expand, metadata: metadata, on_behalf_of: on_behalf_of, radar_options: radar_options, receipt_email: receipt_email, shipping: shipping, source: source, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group).execute(&block)
+      build_api_request_for_post_charges(post_charges_request: post_charges_request).execute(&block)
     end
-
-    POST_CHARGES_MAX_LENGTH_FOR_CUSTOMER                    =   500
-    POST_CHARGES_MAX_LENGTH_FOR_DESCRIPTION                 = 40000
-    POST_CHARGES_MAX_LENGTH_FOR_ON_BEHALF_OF                =  5000
-    POST_CHARGES_MAX_LENGTH_FOR_SOURCE                      =  5000
-    POST_CHARGES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        =    22
-    POST_CHARGES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX =    22
 
     # @return Crest::Request
     def build_api_request_for_post_charges(
       *,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      capture : Bool? = nil,
-      card : Stripe::PostChargesRequestCard? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      destination : Stripe::PostChargesRequestDestination? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil
+      post_charges_request : Stripe::PostChargesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.post_charges ..." }
       end
 
       if client_side_validation
-        unless (_card = card).nil?
-          _card.validate if _card.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CHARGES_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_CHARGES_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_destination = destination).nil?
-          _destination.validate if _destination.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_on_behalf_of = on_behalf_of).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("on_behalf_of", on_behalf_of.to_s.size, POST_CHARGES_MAX_LENGTH_FOR_ON_BEHALF_OF)
-        end
-        unless (_radar_options = radar_options).nil?
-          _radar_options.validate if _radar_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_source = source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_CHARGES_MAX_LENGTH_FOR_SOURCE)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_CHARGES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_statement_descriptor_suffix = statement_descriptor_suffix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", statement_descriptor_suffix.to_s.size, POST_CHARGES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_charges_request = post_charges_request).nil?
+          _post_charges_request.validate if _post_charges_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/charges"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["application_fee"] = application_fee.to_s if !application_fee.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["capture"] = capture.to_s if !capture.nil?
-      form_params["card"] = card.to_s if !card.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["destination"] = destination.to_s if !destination.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["radar_options"] = radar_options.to_s if !radar_options.nil?
-      form_params["receipt_email"] = receipt_email.to_s if !receipt_email.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["source"] = source.to_s if !source.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["statement_descriptor_suffix"] = statement_descriptor_suffix.to_s if !statement_descriptor_suffix.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_charges_request, content_type: header_params["Content-Type"]?) if !post_charges_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -698,55 +502,27 @@ module Stripe
 
     # <p>Updates the specified charge by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param charge [String?]
-    # @optional @param customer [String?] The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
-    # @optional @param description [String?] An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fraud_details [Stripe::FraudDetails?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param receipt_email [String?] This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @optional @param post_charges_charge_request [Stripe::PostChargesChargeRequest?]
     # @return [Stripe::Charge]
     def post_charges_charge(
       *,
       charge : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      fraud_details : Stripe::FraudDetails? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      transfer_group : String? = nil
+      post_charges_charge_request : Stripe::PostChargesChargeRequest? = nil
     ) : Stripe::Charge
-      data, _status_code, _headers = post_charges_charge_with_http_info(charge: charge, customer: customer, description: description, expand: expand, fraud_details: fraud_details, metadata: metadata, receipt_email: receipt_email, shipping: shipping, transfer_group: transfer_group)
+      data, _status_code, _headers = post_charges_charge_with_http_info(charge: charge, post_charges_charge_request: post_charges_charge_request)
       data
     end
 
     # &lt;p&gt;Updates the specified charge by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param charge [String?]
-    # @optional @param customer [String?] The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
-    # @optional @param description [String?] An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fraud_details [Stripe::FraudDetails?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param receipt_email [String?] This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @optional @param post_charges_charge_request [Stripe::PostChargesChargeRequest?]
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
     def post_charges_charge_with_http_info(
       *,
       charge : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      fraud_details : Stripe::FraudDetails? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      transfer_group : String? = nil
+      post_charges_charge_request : Stripe::PostChargesChargeRequest? = nil
     ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_charges_charge(charge: charge, customer: customer, description: description, expand: expand, fraud_details: fraud_details, metadata: metadata, receipt_email: receipt_email, shipping: shipping, transfer_group: transfer_group)
+      request = build_api_request_for_post_charges_charge(charge: charge, post_charges_charge_request: post_charges_charge_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -759,48 +535,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specified charge by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param charge [String?]
-    # @optional @param customer [String?] The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
-    # @optional @param description [String?] An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param fraud_details [Stripe::FraudDetails?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param receipt_email [String?] This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @optional @param post_charges_charge_request [Stripe::PostChargesChargeRequest?]
     # @return nil
     def post_charges_charge(
       *,
       charge : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      fraud_details : Stripe::FraudDetails? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      transfer_group : String? = nil,
+      post_charges_charge_request : Stripe::PostChargesChargeRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_charges_charge(charge: charge, customer: customer, description: description, expand: expand, fraud_details: fraud_details, metadata: metadata, receipt_email: receipt_email, shipping: shipping, transfer_group: transfer_group).execute(&block)
+      build_api_request_for_post_charges_charge(charge: charge, post_charges_charge_request: post_charges_charge_request).execute(&block)
     end
 
-    POST_CHARGES_CHARGE_MAX_LENGTH_FOR_CHARGE        =  5000
-    POST_CHARGES_CHARGE_MAX_LENGTH_FOR_CUSTOMER      =  5000
-    POST_CHARGES_CHARGE_MAX_LENGTH_FOR_DESCRIPTION   = 40000
-    POST_CHARGES_CHARGE_MAX_LENGTH_FOR_RECEIPT_EMAIL =  5000
+    POST_CHARGES_CHARGE_MAX_LENGTH_FOR_CHARGE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_charges_charge(
       *,
       charge : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      fraud_details : Stripe::FraudDetails? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      receipt_email : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      transfer_group : String? = nil
+      post_charges_charge_request : Stripe::PostChargesChargeRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.post_charges_charge ..." }
@@ -811,56 +563,32 @@ module Stripe
         unless (_charge = charge).nil?
           OpenApi::PrimitiveValidator.validate_max_length("charge", charge.to_s.size, POST_CHARGES_CHARGE_MAX_LENGTH_FOR_CHARGE)
         end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_CHARGES_CHARGE_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_CHARGES_CHARGE_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_fraud_details = fraud_details).nil?
-          _fraud_details.validate if _fraud_details.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_receipt_email = receipt_email).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("receipt_email", receipt_email.to_s.size, POST_CHARGES_CHARGE_MAX_LENGTH_FOR_RECEIPT_EMAIL)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
+        unless (_post_charges_charge_request = post_charges_charge_request).nil?
+          _post_charges_charge_request.validate if _post_charges_charge_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/charges/{charge}".sub("{" + "charge" + "}", URI.encode_path(charge.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["fraud_details"] = fraud_details.to_s if !fraud_details.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["receipt_email"] = receipt_email.to_s if !receipt_email.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_charges_charge_request, content_type: header_params["Content-Type"]?) if !post_charges_charge_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -880,59 +608,27 @@ module Stripe
 
     # <p>Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you <a href=\"#create_charge\">created a charge</a> with the capture option set to false.</p>  <p>Uncaptured payments expire a set number of days after they are created (<a href=\"/docs/charges/placing-a-hold\">7 by default</a>). If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.</p>
     # @required @param charge [String?]
-    # @optional @param amount [Int32?] The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
-    # @optional @param application_fee [Int32?] An application fee to add on to this charge.
-    # @optional @param application_fee_amount [Int32?] An application fee amount to add on to this charge, which must be less than or equal to the original amount.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param receipt_email [String?] The email address to send this charge's receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
-    # @optional @param statement_descriptor [String?] For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @optional @param post_charges_charge_capture_request [Stripe::PostChargesChargeCaptureRequest?]
     # @return [Stripe::Charge]
     def post_charges_charge_capture(
       *,
       charge : String? = nil,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      receipt_email : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil
+      post_charges_charge_capture_request : Stripe::PostChargesChargeCaptureRequest? = nil
     ) : Stripe::Charge
-      data, _status_code, _headers = post_charges_charge_capture_with_http_info(charge: charge, amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, expand: expand, receipt_email: receipt_email, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
+      data, _status_code, _headers = post_charges_charge_capture_with_http_info(charge: charge, post_charges_charge_capture_request: post_charges_charge_capture_request)
       data
     end
 
     # &lt;p&gt;Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you &lt;a href&#x3D;\&quot;#create_charge\&quot;&gt;created a charge&lt;/a&gt; with the capture option set to false.&lt;/p&gt;  &lt;p&gt;Uncaptured payments expire a set number of days after they are created (&lt;a href&#x3D;\&quot;/docs/charges/placing-a-hold\&quot;&gt;7 by default&lt;/a&gt;). If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.&lt;/p&gt;
     # @required @param charge [String?]
-    # @optional @param amount [Int32?] The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
-    # @optional @param application_fee [Int32?] An application fee to add on to this charge.
-    # @optional @param application_fee_amount [Int32?] An application fee amount to add on to this charge, which must be less than or equal to the original amount.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param receipt_email [String?] The email address to send this charge's receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
-    # @optional @param statement_descriptor [String?] For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @optional @param post_charges_charge_capture_request [Stripe::PostChargesChargeCaptureRequest?]
     # @return [Tuple(Stripe::Charge, Integer, Hash)] Stripe::Charge, response status code and response headers
     def post_charges_charge_capture_with_http_info(
       *,
       charge : String? = nil,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      receipt_email : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil
+      post_charges_charge_capture_request : Stripe::PostChargesChargeCaptureRequest? = nil
     ) : Tuple(Stripe::Charge, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_charges_charge_capture(charge: charge, amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, expand: expand, receipt_email: receipt_email, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
+      request = build_api_request_for_post_charges_charge_capture(charge: charge, post_charges_charge_capture_request: post_charges_charge_capture_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -945,50 +641,24 @@ module Stripe
 
     # &lt;p&gt;Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you &lt;a href&#x3D;\&quot;#create_charge\&quot;&gt;created a charge&lt;/a&gt; with the capture option set to false.&lt;/p&gt;  &lt;p&gt;Uncaptured payments expire a set number of days after they are created (&lt;a href&#x3D;\&quot;/docs/charges/placing-a-hold\&quot;&gt;7 by default&lt;/a&gt;). If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.&lt;/p&gt;
     # @required @param charge [String?]
-    # @optional @param amount [Int32?] The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
-    # @optional @param application_fee [Int32?] An application fee to add on to this charge.
-    # @optional @param application_fee_amount [Int32?] An application fee amount to add on to this charge, which must be less than or equal to the original amount.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param receipt_email [String?] The email address to send this charge's receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
-    # @optional @param statement_descriptor [String?] For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
-    # @optional @param transfer_group [String?] A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    # @optional @param post_charges_charge_capture_request [Stripe::PostChargesChargeCaptureRequest?]
     # @return nil
     def post_charges_charge_capture(
       *,
       charge : String? = nil,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      receipt_email : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil,
+      post_charges_charge_capture_request : Stripe::PostChargesChargeCaptureRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_charges_charge_capture(charge: charge, amount: amount, application_fee: application_fee, application_fee_amount: application_fee_amount, expand: expand, receipt_email: receipt_email, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group).execute(&block)
+      build_api_request_for_post_charges_charge_capture(charge: charge, post_charges_charge_capture_request: post_charges_charge_capture_request).execute(&block)
     end
 
-    POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_CHARGE                      = 5000
-    POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        =   22
-    POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX =   22
+    POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_CHARGE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_charges_charge_capture(
       *,
       charge : String? = nil,
-      amount : Int64? = nil,
-      application_fee : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      receipt_email : String? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
-      transfer_group : String? = nil
+      post_charges_charge_capture_request : Stripe::PostChargesChargeCaptureRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ChargesApi.post_charges_charge_capture ..." }
@@ -999,48 +669,32 @@ module Stripe
         unless (_charge = charge).nil?
           OpenApi::PrimitiveValidator.validate_max_length("charge", charge.to_s.size, POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_CHARGE)
         end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_statement_descriptor_suffix = statement_descriptor_suffix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", statement_descriptor_suffix.to_s.size, POST_CHARGES_CHARGE_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_charges_charge_capture_request = post_charges_charge_capture_request).nil?
+          _post_charges_charge_capture_request.validate if _post_charges_charge_capture_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/charges/{charge}/capture".sub("{" + "charge" + "}", URI.encode_path(charge.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["application_fee"] = application_fee.to_s if !application_fee.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["receipt_email"] = receipt_email.to_s if !receipt_email.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["statement_descriptor_suffix"] = statement_descriptor_suffix.to_s if !statement_descriptor_suffix.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_charges_charge_capture_request, content_type: header_params["Content-Type"]?) if !post_charges_charge_capture_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

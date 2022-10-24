@@ -67,8 +67,8 @@ module Stripe
     getter description : String? = nil
     MAX_LENGTH_FOR_DESCRIPTION = 500
 
-    @[JSON::Field(key: "end_date", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter end_date : Int64? = nil
+    @[JSON::Field(key: "end_date", type: Stripe::PhaseConfigurationParamsEndDate?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter end_date : Stripe::PhaseConfigurationParamsEndDate? = nil
 
     @[JSON::Field(key: "invoice_settings", type: Stripe::SubscriptionSchedulesParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_settings : Stripe::SubscriptionSchedulesParam? = nil
@@ -84,14 +84,17 @@ module Stripe
     ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
     VALID_VALUES_FOR_PRORATION_BEHAVIOR  = String.static_array("always_invoice", "create_prorations", "none")
 
+    @[JSON::Field(key: "start_date", type: Stripe::PhaseConfigurationParamsStartDate?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter start_date : Stripe::PhaseConfigurationParamsStartDate? = nil
+
     @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfer_data : Stripe::TransferDataSpecs? = nil
 
     @[JSON::Field(key: "trial", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter trial : Bool? = nil
 
-    @[JSON::Field(key: "trial_end", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter trial_end : Int64? = nil
+    @[JSON::Field(key: "trial_end", type: Stripe::PhaseConfigurationParamsEndDate?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter trial_end : Stripe::PhaseConfigurationParamsEndDate? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -111,14 +114,15 @@ module Stripe
       @default_payment_method : String? = nil,
       @default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter? = nil,
       @description : String? = nil,
-      @end_date : Int64? = nil,
+      @end_date : Stripe::PhaseConfigurationParamsEndDate? = nil,
       @invoice_settings : Stripe::SubscriptionSchedulesParam? = nil,
       @iterations : Int64? = nil,
       @metadata : Hash(String, String)? = nil,
       @proration_behavior : String? = nil,
+      @start_date : Stripe::PhaseConfigurationParamsStartDate? = nil,
       @transfer_data : Stripe::TransferDataSpecs? = nil,
       @trial : Bool? = nil,
-      @trial_end : Int64? = nil
+      @trial_end : Stripe::PhaseConfigurationParamsEndDate? = nil
     )
     end
 
@@ -167,7 +171,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
+      unless (_end_date = @end_date).nil?
+        invalid_properties.concat(_end_date.list_invalid_properties_for("end_date")) if _end_date.is_a?(OpenApi::Validatable)
+      end
       unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
@@ -175,10 +181,16 @@ module Stripe
       unless (_proration_behavior = @proration_behavior).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
+      unless (_start_date = @start_date).nil?
+        invalid_properties.concat(_start_date.list_invalid_properties_for("start_date")) if _start_date.is_a?(OpenApi::Validatable)
+      end
       unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
+      unless (_trial_end = @trial_end).nil?
+        invalid_properties.concat(_trial_end.list_invalid_properties_for("trial_end")) if _trial_end.is_a?(OpenApi::Validatable)
+      end
       invalid_properties
     end
 
@@ -226,6 +238,10 @@ module Stripe
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
+      unless (_end_date = @end_date).nil?
+        return false if _end_date.is_a?(OpenApi::Validatable) && !_end_date.valid?
+      end
+
       unless (_invoice_settings = @invoice_settings).nil?
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
@@ -234,8 +250,16 @@ module Stripe
         return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
 
+      unless (_start_date = @start_date).nil?
+        return false if _start_date.is_a?(OpenApi::Validatable) && !_start_date.valid?
+      end
+
       unless (_transfer_data = @transfer_data).nil?
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
+      end
+
+      unless (_trial_end = @trial_end).nil?
+        return false if _trial_end.is_a?(OpenApi::Validatable) && !_trial_end.valid?
       end
 
       true
@@ -373,11 +397,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_date Object to be assigned
-    def end_date=(end_date : Int64?)
+    def end_date=(end_date : Stripe::PhaseConfigurationParamsEndDate?)
       if end_date.nil?
         return @end_date = nil
       end
       _end_date = end_date.not_nil!
+      _end_date.validate if _end_date.is_a?(OpenApi::Validatable)
       @end_date = _end_date
     end
 
@@ -424,6 +449,17 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] start_date Object to be assigned
+    def start_date=(start_date : Stripe::PhaseConfigurationParamsStartDate?)
+      if start_date.nil?
+        return @start_date = nil
+      end
+      _start_date = start_date.not_nil!
+      _start_date.validate if _start_date.is_a?(OpenApi::Validatable)
+      @start_date = _start_date
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
     def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
       if transfer_data.nil?
@@ -446,11 +482,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_end Object to be assigned
-    def trial_end=(trial_end : Int64?)
+    def trial_end=(trial_end : Stripe::PhaseConfigurationParamsEndDate?)
       if trial_end.nil?
         return @trial_end = nil
       end
       _trial_end = trial_end.not_nil!
+      _trial_end.validate if _trial_end.is_a?(OpenApi::Validatable)
       @trial_end = _trial_end
     end
 
@@ -458,6 +495,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@items, @add_invoice_items, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @coupon, @currency, @default_payment_method, @default_tax_rates, @description, @end_date, @invoice_settings, @iterations, @metadata, @proration_behavior, @transfer_data, @trial, @trial_end)
+    def_equals_and_hash(@items, @add_invoice_items, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @coupon, @currency, @default_payment_method, @default_tax_rates, @description, @end_date, @invoice_settings, @iterations, @metadata, @proration_behavior, @start_date, @transfer_data, @trial, @trial_end)
   end
 end

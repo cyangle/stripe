@@ -52,8 +52,8 @@ module Stripe
     getter tax_code : String? = nil
     MAX_LENGTH_FOR_TAX_CODE = 5000
 
-    @[JSON::Field(key: "url", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter url : Stripe::BbposWisePoseSplashscreen? = nil
+    @[JSON::Field(key: "url", type: Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter url : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -69,7 +69,7 @@ module Stripe
       @package_dimensions : Stripe::ProductUpsertDataPackageDimensions? = nil,
       @shippable : Bool? = nil,
       @tax_code : String? = nil,
-      @url : Stripe::BbposWisePoseSplashscreen? = nil
+      @url : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl? = nil
     )
     end
 
@@ -247,7 +247,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] url Object to be assigned
-    def url=(url : Stripe::BbposWisePoseSplashscreen?)
+    def url=(url : Stripe::PostOrdersIdRequestPaymentSettingsReturnUrl?)
       if url.nil?
         return @url = nil
       end

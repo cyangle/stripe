@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/webhook_endpoints/{webhook_endpoint}".sub("{" + "webhook_endpoint" + "}", URI.encode_path(webhook_endpoint.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -199,26 +199,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/webhook_endpoints"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -304,23 +304,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/webhook_endpoints/{webhook_endpoint}".sub("{" + "webhook_endpoint" + "}", URI.encode_path(webhook_endpoint.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -339,48 +339,24 @@ module Stripe
     end
 
     # <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href=\"https://dashboard.stripe.com/account/webhooks\">webhooks settings</a> section of the Dashboard.</p>
-    # @required @param enabled_events [Array(String)?] The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
-    # @required @param url [String?] The URL of the webhook endpoint.
-    # @optional @param api_version [String?] Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
-    # @optional @param connect [Bool?] Whether this endpoint should receive events from connected accounts (`true`), or from your account (`false`). Defaults to `false`.
-    # @optional @param description [String?] An optional description of what the webhook is used for.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_webhook_endpoints_request [Stripe::PostWebhookEndpointsRequest?]
     # @return [Stripe::WebhookEndpoint]
     def post_webhook_endpoints(
       *,
-      enabled_events : Array(String)? = nil,
-      url : String? = nil,
-      api_version : String? = nil,
-      connect : Bool? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_webhook_endpoints_request : Stripe::PostWebhookEndpointsRequest? = nil
     ) : Stripe::WebhookEndpoint
-      data, _status_code, _headers = post_webhook_endpoints_with_http_info(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_webhook_endpoints_with_http_info(post_webhook_endpoints_request: post_webhook_endpoints_request)
       data
     end
 
     # &lt;p&gt;A webhook endpoint must have a &lt;code&gt;url&lt;/code&gt; and a list of &lt;code&gt;enabled_events&lt;/code&gt;. You may optionally specify the Boolean &lt;code&gt;connect&lt;/code&gt; parameter. If set to true, then a Connect webhook endpoint that notifies the specified &lt;code&gt;url&lt;/code&gt; about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified &lt;code&gt;url&lt;/code&gt; only about events from your account is created. You can also create webhook endpoints in the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/webhooks\&quot;&gt;webhooks settings&lt;/a&gt; section of the Dashboard.&lt;/p&gt;
-    # @required @param enabled_events [Array(String)?] The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
-    # @required @param url [String?] The URL of the webhook endpoint.
-    # @optional @param api_version [String?] Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
-    # @optional @param connect [Bool?] Whether this endpoint should receive events from connected accounts (`true`), or from your account (`false`). Defaults to `false`.
-    # @optional @param description [String?] An optional description of what the webhook is used for.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_webhook_endpoints_request [Stripe::PostWebhookEndpointsRequest?]
     # @return [Tuple(Stripe::WebhookEndpoint, Integer, Hash)] Stripe::WebhookEndpoint, response status code and response headers
     def post_webhook_endpoints_with_http_info(
       *,
-      enabled_events : Array(String)? = nil,
-      url : String? = nil,
-      api_version : String? = nil,
-      connect : Bool? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_webhook_endpoints_request : Stripe::PostWebhookEndpointsRequest? = nil
     ) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_webhook_endpoints(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_webhook_endpoints(post_webhook_endpoints_request: post_webhook_endpoints_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -392,96 +368,53 @@ module Stripe
     end
 
     # &lt;p&gt;A webhook endpoint must have a &lt;code&gt;url&lt;/code&gt; and a list of &lt;code&gt;enabled_events&lt;/code&gt;. You may optionally specify the Boolean &lt;code&gt;connect&lt;/code&gt; parameter. If set to true, then a Connect webhook endpoint that notifies the specified &lt;code&gt;url&lt;/code&gt; about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified &lt;code&gt;url&lt;/code&gt; only about events from your account is created. You can also create webhook endpoints in the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/webhooks\&quot;&gt;webhooks settings&lt;/a&gt; section of the Dashboard.&lt;/p&gt;
-    # @required @param enabled_events [Array(String)?] The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
-    # @required @param url [String?] The URL of the webhook endpoint.
-    # @optional @param api_version [String?] Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
-    # @optional @param connect [Bool?] Whether this endpoint should receive events from connected accounts (`true`), or from your account (`false`). Defaults to `false`.
-    # @optional @param description [String?] An optional description of what the webhook is used for.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @required @param post_webhook_endpoints_request [Stripe::PostWebhookEndpointsRequest?]
     # @return nil
     def post_webhook_endpoints(
       *,
-      enabled_events : Array(String)? = nil,
-      url : String? = nil,
-      api_version : String? = nil,
-      connect : Bool? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_webhook_endpoints_request : Stripe::PostWebhookEndpointsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_webhook_endpoints(enabled_events: enabled_events, url: url, api_version: api_version, connect: connect, description: description, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_webhook_endpoints(post_webhook_endpoints_request: post_webhook_endpoints_request).execute(&block)
     end
-
-    POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_ENABLED_EVENTS = String.static_array("*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created")
-    POST_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_API_VERSION      = 5000
-    POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_API_VERSION    = String.static_array("2011-01-01", "2011-06-21", "2011-06-28", "2011-08-01", "2011-09-15", "2011-11-17", "2012-02-23", "2012-03-25", "2012-06-18", "2012-06-28", "2012-07-09", "2012-09-24", "2012-10-26", "2012-11-07", "2013-02-11", "2013-02-13", "2013-07-05", "2013-08-12", "2013-08-13", "2013-10-29", "2013-12-03", "2014-01-31", "2014-03-13", "2014-03-28", "2014-05-19", "2014-06-13", "2014-06-17", "2014-07-22", "2014-07-26", "2014-08-04", "2014-08-20", "2014-09-08", "2014-10-07", "2014-11-05", "2014-11-20", "2014-12-08", "2014-12-17", "2014-12-22", "2015-01-11", "2015-01-26", "2015-02-10", "2015-02-16", "2015-02-18", "2015-03-24", "2015-04-07", "2015-06-15", "2015-07-07", "2015-07-13", "2015-07-28", "2015-08-07", "2015-08-19", "2015-09-03", "2015-09-08", "2015-09-23", "2015-10-01", "2015-10-12", "2015-10-16", "2016-02-03", "2016-02-19", "2016-02-22", "2016-02-23", "2016-02-29", "2016-03-07", "2016-06-15", "2016-07-06", "2016-10-19", "2017-01-27", "2017-02-14", "2017-04-06", "2017-05-25", "2017-06-05", "2017-08-15", "2017-12-14", "2018-01-23", "2018-02-05", "2018-02-06", "2018-02-28", "2018-05-21", "2018-07-27", "2018-08-23", "2018-09-06", "2018-09-24", "2018-10-31", "2018-11-08", "2019-02-11", "2019-02-19", "2019-03-14", "2019-05-16", "2019-08-14", "2019-09-09", "2019-10-08", "2019-10-17", "2019-11-05", "2019-12-03", "2020-03-02", "2020-08-27", "2022-08-01")
-    POST_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_DESCRIPTION      = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_webhook_endpoints(
       *,
-      enabled_events : Array(String)? = nil,
-      url : String? = nil,
-      api_version : String? = nil,
-      connect : Bool? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_webhook_endpoints_request : Stripe::PostWebhookEndpointsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.post_webhook_endpoints ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"enabled_events\" is required and cannot be null") if enabled_events.nil?
-        unless (_enabled_events = enabled_events).nil?
-          OpenApi::EnumValidator.validate("enabled_events", _enabled_events, POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_ENABLED_EVENTS)
-        end
-        raise ArgumentError.new("\"url\" is required and cannot be null") if url.nil?
-
-        unless (_api_version = api_version).nil?
-          OpenApi::EnumValidator.validate("api_version", _api_version, POST_WEBHOOK_ENDPOINTS_VALID_VALUES_FOR_API_VERSION)
-        end
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_WEBHOOK_ENDPOINTS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_webhook_endpoints_request\" is required and cannot be null") if post_webhook_endpoints_request.nil?
+        unless (_post_webhook_endpoints_request = post_webhook_endpoints_request).nil?
+          _post_webhook_endpoints_request.validate if _post_webhook_endpoints_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/webhook_endpoints"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["api_version"] = api_version.to_s if !api_version.nil?
-      form_params["connect"] = connect.to_s if !connect.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["enabled_events"] = @api_client.build_collection_param(enabled_events, "csv") if !enabled_events.nil? && !enabled_events.empty?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["url"] = url.to_s if !url.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_webhook_endpoints_request, content_type: header_params["Content-Type"]?) if !post_webhook_endpoints_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -501,47 +434,27 @@ module Stripe
 
     # <p>Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>enabled_events</code>, and the status of your endpoint.</p>
     # @required @param webhook_endpoint [String?]
-    # @optional @param description [String?] An optional description of what the webhook is used for.
-    # @optional @param disabled [Bool?] Disable the webhook endpoint if set to true.
-    # @optional @param enabled_events [Array(String)?] The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param url [String?] The URL of the webhook endpoint.
+    # @optional @param post_webhook_endpoints_webhook_endpoint_request [Stripe::PostWebhookEndpointsWebhookEndpointRequest?]
     # @return [Stripe::WebhookEndpoint]
     def post_webhook_endpoints_webhook_endpoint(
       *,
       webhook_endpoint : String? = nil,
-      description : String? = nil,
-      disabled : Bool? = nil,
-      enabled_events : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      url : String? = nil
+      post_webhook_endpoints_webhook_endpoint_request : Stripe::PostWebhookEndpointsWebhookEndpointRequest? = nil
     ) : Stripe::WebhookEndpoint
-      data, _status_code, _headers = post_webhook_endpoints_webhook_endpoint_with_http_info(webhook_endpoint: webhook_endpoint, description: description, disabled: disabled, enabled_events: enabled_events, expand: expand, metadata: metadata, url: url)
+      data, _status_code, _headers = post_webhook_endpoints_webhook_endpoint_with_http_info(webhook_endpoint: webhook_endpoint, post_webhook_endpoints_webhook_endpoint_request: post_webhook_endpoints_webhook_endpoint_request)
       data
     end
 
     # &lt;p&gt;Updates the webhook endpoint. You may edit the &lt;code&gt;url&lt;/code&gt;, the list of &lt;code&gt;enabled_events&lt;/code&gt;, and the status of your endpoint.&lt;/p&gt;
     # @required @param webhook_endpoint [String?]
-    # @optional @param description [String?] An optional description of what the webhook is used for.
-    # @optional @param disabled [Bool?] Disable the webhook endpoint if set to true.
-    # @optional @param enabled_events [Array(String)?] The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param url [String?] The URL of the webhook endpoint.
+    # @optional @param post_webhook_endpoints_webhook_endpoint_request [Stripe::PostWebhookEndpointsWebhookEndpointRequest?]
     # @return [Tuple(Stripe::WebhookEndpoint, Integer, Hash)] Stripe::WebhookEndpoint, response status code and response headers
     def post_webhook_endpoints_webhook_endpoint_with_http_info(
       *,
       webhook_endpoint : String? = nil,
-      description : String? = nil,
-      disabled : Bool? = nil,
-      enabled_events : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      url : String? = nil
+      post_webhook_endpoints_webhook_endpoint_request : Stripe::PostWebhookEndpointsWebhookEndpointRequest? = nil
     ) : Tuple(Stripe::WebhookEndpoint, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, description: description, disabled: disabled, enabled_events: enabled_events, expand: expand, metadata: metadata, url: url)
+      request = build_api_request_for_post_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, post_webhook_endpoints_webhook_endpoint_request: post_webhook_endpoints_webhook_endpoint_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -554,41 +467,24 @@ module Stripe
 
     # &lt;p&gt;Updates the webhook endpoint. You may edit the &lt;code&gt;url&lt;/code&gt;, the list of &lt;code&gt;enabled_events&lt;/code&gt;, and the status of your endpoint.&lt;/p&gt;
     # @required @param webhook_endpoint [String?]
-    # @optional @param description [String?] An optional description of what the webhook is used for.
-    # @optional @param disabled [Bool?] Disable the webhook endpoint if set to true.
-    # @optional @param enabled_events [Array(String)?] The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param url [String?] The URL of the webhook endpoint.
+    # @optional @param post_webhook_endpoints_webhook_endpoint_request [Stripe::PostWebhookEndpointsWebhookEndpointRequest?]
     # @return nil
     def post_webhook_endpoints_webhook_endpoint(
       *,
       webhook_endpoint : String? = nil,
-      description : String? = nil,
-      disabled : Bool? = nil,
-      enabled_events : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      url : String? = nil,
+      post_webhook_endpoints_webhook_endpoint_request : Stripe::PostWebhookEndpointsWebhookEndpointRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, description: description, disabled: disabled, enabled_events: enabled_events, expand: expand, metadata: metadata, url: url).execute(&block)
+      build_api_request_for_post_webhook_endpoints_webhook_endpoint(webhook_endpoint: webhook_endpoint, post_webhook_endpoints_webhook_endpoint_request: post_webhook_endpoints_webhook_endpoint_request).execute(&block)
     end
 
     POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_WEBHOOK_ENDPOINT = 5000
-    POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_DESCRIPTION      = 5000
-    POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_VALID_VALUES_FOR_ENABLED_EVENTS = String.static_array("*", "account.application.authorized", "account.application.deauthorized", "account.external_account.created", "account.external_account.deleted", "account.external_account.updated", "account.updated", "application_fee.created", "application_fee.refund.updated", "application_fee.refunded", "balance.available", "billing_portal.configuration.created", "billing_portal.configuration.updated", "billing_portal.session.created", "capability.updated", "cash_balance.funds_available", "charge.captured", "charge.dispute.closed", "charge.dispute.created", "charge.dispute.funds_reinstated", "charge.dispute.funds_withdrawn", "charge.dispute.updated", "charge.expired", "charge.failed", "charge.pending", "charge.refund.updated", "charge.refunded", "charge.succeeded", "charge.updated", "checkout.session.async_payment_failed", "checkout.session.async_payment_succeeded", "checkout.session.completed", "checkout.session.expired", "coupon.created", "coupon.deleted", "coupon.updated", "credit_note.created", "credit_note.updated", "credit_note.voided", "customer.created", "customer.deleted", "customer.discount.created", "customer.discount.deleted", "customer.discount.updated", "customer.source.created", "customer.source.deleted", "customer.source.expiring", "customer.source.updated", "customer.subscription.created", "customer.subscription.deleted", "customer.subscription.pending_update_applied", "customer.subscription.pending_update_expired", "customer.subscription.trial_will_end", "customer.subscription.updated", "customer.tax_id.created", "customer.tax_id.deleted", "customer.tax_id.updated", "customer.updated", "customer_cash_balance_transaction.created", "file.created", "financial_connections.account.created", "financial_connections.account.deactivated", "financial_connections.account.disconnected", "financial_connections.account.reactivated", "financial_connections.account.refreshed_balance", "identity.verification_session.canceled", "identity.verification_session.created", "identity.verification_session.processing", "identity.verification_session.redacted", "identity.verification_session.requires_input", "identity.verification_session.verified", "invoice.created", "invoice.deleted", "invoice.finalization_failed", "invoice.finalized", "invoice.marked_uncollectible", "invoice.paid", "invoice.payment_action_required", "invoice.payment_failed", "invoice.payment_succeeded", "invoice.sent", "invoice.upcoming", "invoice.updated", "invoice.voided", "invoiceitem.created", "invoiceitem.deleted", "invoiceitem.updated", "issuing_authorization.created", "issuing_authorization.request", "issuing_authorization.updated", "issuing_card.created", "issuing_card.updated", "issuing_cardholder.created", "issuing_cardholder.updated", "issuing_dispute.closed", "issuing_dispute.created", "issuing_dispute.funds_reinstated", "issuing_dispute.submitted", "issuing_dispute.updated", "issuing_transaction.created", "issuing_transaction.updated", "mandate.updated", "order.created", "payment_intent.amount_capturable_updated", "payment_intent.canceled", "payment_intent.created", "payment_intent.partially_funded", "payment_intent.payment_failed", "payment_intent.processing", "payment_intent.requires_action", "payment_intent.succeeded", "payment_link.created", "payment_link.updated", "payment_method.attached", "payment_method.automatically_updated", "payment_method.detached", "payment_method.updated", "payout.canceled", "payout.created", "payout.failed", "payout.paid", "payout.updated", "person.created", "person.deleted", "person.updated", "plan.created", "plan.deleted", "plan.updated", "price.created", "price.deleted", "price.updated", "product.created", "product.deleted", "product.updated", "promotion_code.created", "promotion_code.updated", "quote.accepted", "quote.canceled", "quote.created", "quote.finalized", "radar.early_fraud_warning.created", "radar.early_fraud_warning.updated", "recipient.created", "recipient.deleted", "recipient.updated", "reporting.report_run.failed", "reporting.report_run.succeeded", "reporting.report_type.updated", "review.closed", "review.opened", "setup_intent.canceled", "setup_intent.created", "setup_intent.requires_action", "setup_intent.setup_failed", "setup_intent.succeeded", "sigma.scheduled_query_run.created", "sku.created", "sku.deleted", "sku.updated", "source.canceled", "source.chargeable", "source.failed", "source.mandate_notification", "source.refund_attributes_required", "source.transaction.created", "source.transaction.updated", "subscription_schedule.aborted", "subscription_schedule.canceled", "subscription_schedule.completed", "subscription_schedule.created", "subscription_schedule.expiring", "subscription_schedule.released", "subscription_schedule.updated", "tax_rate.created", "tax_rate.updated", "terminal.reader.action_failed", "terminal.reader.action_succeeded", "test_helpers.test_clock.advancing", "test_helpers.test_clock.created", "test_helpers.test_clock.deleted", "test_helpers.test_clock.internal_failure", "test_helpers.test_clock.ready", "topup.canceled", "topup.created", "topup.failed", "topup.reversed", "topup.succeeded", "transfer.created", "transfer.reversed", "transfer.updated", "treasury.credit_reversal.created", "treasury.credit_reversal.posted", "treasury.debit_reversal.completed", "treasury.debit_reversal.created", "treasury.debit_reversal.initial_credit_granted", "treasury.financial_account.closed", "treasury.financial_account.created", "treasury.financial_account.features_status_updated", "treasury.inbound_transfer.canceled", "treasury.inbound_transfer.created", "treasury.inbound_transfer.failed", "treasury.inbound_transfer.succeeded", "treasury.outbound_payment.canceled", "treasury.outbound_payment.created", "treasury.outbound_payment.expected_arrival_date_updated", "treasury.outbound_payment.failed", "treasury.outbound_payment.posted", "treasury.outbound_payment.returned", "treasury.outbound_transfer.canceled", "treasury.outbound_transfer.created", "treasury.outbound_transfer.expected_arrival_date_updated", "treasury.outbound_transfer.failed", "treasury.outbound_transfer.posted", "treasury.outbound_transfer.returned", "treasury.received_credit.created", "treasury.received_credit.failed", "treasury.received_credit.succeeded", "treasury.received_debit.created")
 
     # @return Crest::Request
     def build_api_request_for_post_webhook_endpoints_webhook_endpoint(
       *,
       webhook_endpoint : String? = nil,
-      description : String? = nil,
-      disabled : Bool? = nil,
-      enabled_events : Array(String)? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      url : String? = nil
+      post_webhook_endpoints_webhook_endpoint_request : Stripe::PostWebhookEndpointsWebhookEndpointRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: WebhookEndpointsApi.post_webhook_endpoints_webhook_endpoint ..." }
@@ -599,46 +495,32 @@ module Stripe
         unless (_webhook_endpoint = webhook_endpoint).nil?
           OpenApi::PrimitiveValidator.validate_max_length("webhook_endpoint", webhook_endpoint.to_s.size, POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_WEBHOOK_ENDPOINT)
         end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_enabled_events = enabled_events).nil?
-          OpenApi::EnumValidator.validate("enabled_events", _enabled_events, POST_WEBHOOK_ENDPOINTS_WEBHOOK_ENDPOINT_VALID_VALUES_FOR_ENABLED_EVENTS)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_webhook_endpoints_webhook_endpoint_request = post_webhook_endpoints_webhook_endpoint_request).nil?
+          _post_webhook_endpoints_webhook_endpoint_request.validate if _post_webhook_endpoints_webhook_endpoint_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/webhook_endpoints/{webhook_endpoint}".sub("{" + "webhook_endpoint" + "}", URI.encode_path(webhook_endpoint.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["disabled"] = disabled.to_s if !disabled.nil?
-      form_params["enabled_events"] = @api_client.build_collection_param(enabled_events, "csv") if !enabled_events.nil? && !enabled_events.empty?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["url"] = url.to_s if !url.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_webhook_endpoints_webhook_endpoint_request, content_type: header_params["Content-Type"]?) if !post_webhook_endpoints_webhook_endpoint_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

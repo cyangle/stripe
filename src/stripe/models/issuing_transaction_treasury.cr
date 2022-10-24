@@ -21,7 +21,7 @@ module Stripe
 
     # Optional Properties
 
-    # The Treasury [ReceivedCredit](https://stripe.com/docs/api/treasury/received_debits) representing this Issuing transaction if it is a refund
+    # The Treasury [ReceivedCredit](https://stripe.com/docs/api/treasury/received_credits) representing this Issuing transaction if it is a refund
     @[JSON::Field(key: "received_credit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_credit.nil? && !received_credit_present?)]
     getter received_credit : String? = nil
     MAX_LENGTH_FOR_RECEIVED_CREDIT = 5000
@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? received_credit_present : Bool = false
 
-    # The Treasury [ReceivedDebit](https://stripe.com/docs/api/treasury/received_credits) representing this Issuing transaction if it is a capture
+    # The Treasury [ReceivedDebit](https://stripe.com/docs/api/treasury/received_debits) representing this Issuing transaction if it is a capture
     @[JSON::Field(key: "received_debit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_debit.nil? && !received_debit_present?)]
     getter received_debit : String? = nil
     MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000

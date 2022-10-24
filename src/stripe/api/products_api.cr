@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/products/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -243,8 +243,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/products"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -255,19 +263,11 @@ module Stripe
       query_params["url"] = url.to_s if !url.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -353,23 +353,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/products/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -473,26 +473,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/products/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -511,72 +511,24 @@ module Stripe
     end
 
     # <p>Creates a new product object.</p>
-    # @required @param name [String?] The product's name, meant to be displayable to the customer.
-    # @optional @param active [Bool?] Whether the product is currently available for purchase. Defaults to `true`.
-    # @optional @param default_price_data [Stripe::PriceDataWithoutProduct?]
-    # @optional @param description [String?] The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param id [String?] An identifier will be randomly generated by Stripe. You can optionally override this ID, but the ID must be unique across all products in your Stripe account.
-    # @optional @param images [Array(String)?] A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
-    # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter.
-    # @optional @param tax_code [String?] A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
-    # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
-    # @optional @param url [String?] A URL of a publicly-accessible webpage for this product.
+    # @required @param post_products_request [Stripe::PostProductsRequest?]
     # @return [Stripe::Product]
     def post_products(
       *,
-      name : String? = nil,
-      active : Bool? = nil,
-      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      images : Array(String)? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil
+      post_products_request : Stripe::PostProductsRequest? = nil
     ) : Stripe::Product
-      data, _status_code, _headers = post_products_with_http_info(name: name, active: active, default_price_data: default_price_data, description: description, expand: expand, id: id, images: images, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
+      data, _status_code, _headers = post_products_with_http_info(post_products_request: post_products_request)
       data
     end
 
     # &lt;p&gt;Creates a new product object.&lt;/p&gt;
-    # @required @param name [String?] The product's name, meant to be displayable to the customer.
-    # @optional @param active [Bool?] Whether the product is currently available for purchase. Defaults to `true`.
-    # @optional @param default_price_data [Stripe::PriceDataWithoutProduct?]
-    # @optional @param description [String?] The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param id [String?] An identifier will be randomly generated by Stripe. You can optionally override this ID, but the ID must be unique across all products in your Stripe account.
-    # @optional @param images [Array(String)?] A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
-    # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter.
-    # @optional @param tax_code [String?] A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
-    # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
-    # @optional @param url [String?] A URL of a publicly-accessible webpage for this product.
+    # @required @param post_products_request [Stripe::PostProductsRequest?]
     # @return [Tuple(Stripe::Product, Integer, Hash)] Stripe::Product, response status code and response headers
     def post_products_with_http_info(
       *,
-      name : String? = nil,
-      active : Bool? = nil,
-      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      images : Array(String)? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil
+      post_products_request : Stripe::PostProductsRequest? = nil
     ) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_products(name: name, active: active, default_price_data: default_price_data, description: description, expand: expand, id: id, images: images, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
+      request = build_api_request_for_post_products(post_products_request: post_products_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -588,135 +540,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new product object.&lt;/p&gt;
-    # @required @param name [String?] The product's name, meant to be displayable to the customer.
-    # @optional @param active [Bool?] Whether the product is currently available for purchase. Defaults to `true`.
-    # @optional @param default_price_data [Stripe::PriceDataWithoutProduct?]
-    # @optional @param description [String?] The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param id [String?] An identifier will be randomly generated by Stripe. You can optionally override this ID, but the ID must be unique across all products in your Stripe account.
-    # @optional @param images [Array(String)?] A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PackageDimensionsSpecs?]
-    # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter.
-    # @optional @param tax_code [String?] A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
-    # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
-    # @optional @param url [String?] A URL of a publicly-accessible webpage for this product.
+    # @required @param post_products_request [Stripe::PostProductsRequest?]
     # @return nil
     def post_products(
       *,
-      name : String? = nil,
-      active : Bool? = nil,
-      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      images : Array(String)? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil,
+      post_products_request : Stripe::PostProductsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_products(name: name, active: active, default_price_data: default_price_data, description: description, expand: expand, id: id, images: images, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url).execute(&block)
+      build_api_request_for_post_products(post_products_request: post_products_request).execute(&block)
     end
-
-    POST_PRODUCTS_MAX_LENGTH_FOR_NAME                 =  5000
-    POST_PRODUCTS_MAX_LENGTH_FOR_DESCRIPTION          = 40000
-    POST_PRODUCTS_MAX_LENGTH_FOR_ID                   =  5000
-    POST_PRODUCTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR =    22
-    POST_PRODUCTS_MAX_LENGTH_FOR_UNIT_LABEL           =    12
-    POST_PRODUCTS_MAX_LENGTH_FOR_URL                  =  5000
 
     # @return Crest::Request
     def build_api_request_for_post_products(
       *,
-      name : String? = nil,
-      active : Bool? = nil,
-      default_price_data : Stripe::PriceDataWithoutProduct? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      id : String? = nil,
-      images : Array(String)? = nil,
-      package_dimensions : Stripe::PackageDimensionsSpecs? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil
+      post_products_request : Stripe::PostProductsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.post_products ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"name\" is required and cannot be null") if name.nil?
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_PRODUCTS_MAX_LENGTH_FOR_NAME)
-        end
-
-        unless (_default_price_data = default_price_data).nil?
-          _default_price_data.validate if _default_price_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_PRODUCTS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_id = id).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_PRODUCTS_MAX_LENGTH_FOR_ID)
-        end
-
-        unless (_package_dimensions = package_dimensions).nil?
-          _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PRODUCTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-
-        unless (_unit_label = unit_label).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("unit_label", unit_label.to_s.size, POST_PRODUCTS_MAX_LENGTH_FOR_UNIT_LABEL)
-        end
-        unless (_url = url).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("url", url.to_s.size, POST_PRODUCTS_MAX_LENGTH_FOR_URL)
+        raise ArgumentError.new("\"post_products_request\" is required and cannot be null") if post_products_request.nil?
+        unless (_post_products_request = post_products_request).nil?
+          _post_products_request.validate if _post_products_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/products"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["default_price_data"] = default_price_data.to_s if !default_price_data.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["id"] = id.to_s if !id.nil?
-      form_params["images"] = @api_client.build_collection_param(images, "csv") if !images.nil? && !images.empty?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["package_dimensions"] = package_dimensions.to_s if !package_dimensions.nil?
-      form_params["shippable"] = shippable.to_s if !shippable.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["tax_code"] = tax_code.to_s if !tax_code.nil?
-      form_params["unit_label"] = unit_label.to_s if !unit_label.nil?
-      form_params["url"] = url.to_s if !url.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_products_request, content_type: header_params["Content-Type"]?) if !post_products_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -736,75 +606,27 @@ module Stripe
 
     # <p>Updates the specific product by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param id [String?]
-    # @optional @param active [Bool?] Whether the product is available for purchase.
-    # @optional @param default_price [String?] The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-    # @optional @param description [String?] The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param images [Stripe::PostProductsIdRequestImages?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The product's name, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PostProductsIdRequestPackageDimensions?]
-    # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`.
-    # @optional @param tax_code [Stripe::PostProductsIdRequestTaxCode?]
-    # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
-    # @optional @param url [Stripe::PostProductsIdRequestUrl?]
+    # @optional @param post_products_id_request [Stripe::PostProductsIdRequest?]
     # @return [Stripe::Product]
     def post_products_id(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      default_price : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      images : Stripe::PostProductsIdRequestImages? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
-      unit_label : String? = nil,
-      url : Stripe::PostProductsIdRequestUrl? = nil
+      post_products_id_request : Stripe::PostProductsIdRequest? = nil
     ) : Stripe::Product
-      data, _status_code, _headers = post_products_id_with_http_info(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
+      data, _status_code, _headers = post_products_id_with_http_info(id: id, post_products_id_request: post_products_id_request)
       data
     end
 
     # &lt;p&gt;Updates the specific product by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param active [Bool?] Whether the product is available for purchase.
-    # @optional @param default_price [String?] The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-    # @optional @param description [String?] The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param images [Stripe::PostProductsIdRequestImages?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The product's name, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PostProductsIdRequestPackageDimensions?]
-    # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`.
-    # @optional @param tax_code [Stripe::PostProductsIdRequestTaxCode?]
-    # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
-    # @optional @param url [Stripe::PostProductsIdRequestUrl?]
+    # @optional @param post_products_id_request [Stripe::PostProductsIdRequest?]
     # @return [Tuple(Stripe::Product, Integer, Hash)] Stripe::Product, response status code and response headers
     def post_products_id_with_http_info(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      default_price : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      images : Stripe::PostProductsIdRequestImages? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
-      unit_label : String? = nil,
-      url : Stripe::PostProductsIdRequestUrl? = nil
+      post_products_id_request : Stripe::PostProductsIdRequest? = nil
     ) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_products_id(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
+      request = build_api_request_for_post_products_id(id: id, post_products_id_request: post_products_id_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -817,65 +639,24 @@ module Stripe
 
     # &lt;p&gt;Updates the specific product by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param id [String?]
-    # @optional @param active [Bool?] Whether the product is available for purchase.
-    # @optional @param default_price [String?] The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-    # @optional @param description [String?] The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param images [Stripe::PostProductsIdRequestImages?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param name [String?] The product's name, meant to be displayable to the customer.
-    # @optional @param package_dimensions [Stripe::PostProductsIdRequestPackageDimensions?]
-    # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
-    # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`.
-    # @optional @param tax_code [Stripe::PostProductsIdRequestTaxCode?]
-    # @optional @param unit_label [String?] A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
-    # @optional @param url [Stripe::PostProductsIdRequestUrl?]
+    # @optional @param post_products_id_request [Stripe::PostProductsIdRequest?]
     # @return nil
     def post_products_id(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      default_price : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      images : Stripe::PostProductsIdRequestImages? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
-      unit_label : String? = nil,
-      url : Stripe::PostProductsIdRequestUrl? = nil,
+      post_products_id_request : Stripe::PostProductsIdRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_products_id(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url).execute(&block)
+      build_api_request_for_post_products_id(id: id, post_products_id_request: post_products_id_request).execute(&block)
     end
 
-    POST_PRODUCTS_ID_MAX_LENGTH_FOR_ID                   =  5000
-    POST_PRODUCTS_ID_MAX_LENGTH_FOR_DEFAULT_PRICE        =  5000
-    POST_PRODUCTS_ID_MAX_LENGTH_FOR_DESCRIPTION          = 40000
-    POST_PRODUCTS_ID_MAX_LENGTH_FOR_NAME                 =  5000
-    POST_PRODUCTS_ID_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR =    22
-    POST_PRODUCTS_ID_MAX_LENGTH_FOR_UNIT_LABEL           =    12
+    POST_PRODUCTS_ID_MAX_LENGTH_FOR_ID = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_products_id(
       *,
       id : String? = nil,
-      active : Bool? = nil,
-      default_price : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      images : Stripe::PostProductsIdRequestImages? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      name : String? = nil,
-      package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
-      shippable : Bool? = nil,
-      statement_descriptor : String? = nil,
-      tax_code : Stripe::PostProductsIdRequestTaxCode? = nil,
-      unit_label : String? = nil,
-      url : Stripe::PostProductsIdRequestUrl? = nil
+      post_products_id_request : Stripe::PostProductsIdRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: ProductsApi.post_products_id ..." }
@@ -886,75 +667,32 @@ module Stripe
         unless (_id = id).nil?
           OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_ID)
         end
-
-        unless (_default_price = default_price).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_price", default_price.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_DEFAULT_PRICE)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_images = images).nil?
-          _images.validate if _images.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_NAME)
-        end
-        unless (_package_dimensions = package_dimensions).nil?
-          _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_tax_code = tax_code).nil?
-          _tax_code.validate if _tax_code.is_a?(OpenApi::Validatable)
-        end
-        unless (_unit_label = unit_label).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("unit_label", unit_label.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_UNIT_LABEL)
-        end
-        unless (_url = url).nil?
-          _url.validate if _url.is_a?(OpenApi::Validatable)
+        unless (_post_products_id_request = post_products_id_request).nil?
+          _post_products_id_request.validate if _post_products_id_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/products/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["default_price"] = default_price.to_s if !default_price.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["images"] = images.to_s if !images.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["package_dimensions"] = package_dimensions.to_s if !package_dimensions.nil?
-      form_params["shippable"] = shippable.to_s if !shippable.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["tax_code"] = tax_code.to_s if !tax_code.nil?
-      form_params["unit_label"] = unit_label.to_s if !unit_label.nil?
-      form_params["url"] = url.to_s if !url.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_products_id_request, content_type: header_params["Content-Type"]?) if !post_products_id_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

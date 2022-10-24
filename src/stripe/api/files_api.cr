@@ -128,8 +128,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/files"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -137,19 +145,11 @@ module Stripe
       query_params["purpose"] = purpose.to_s if !purpose.nil?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -235,23 +235,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/files/{file}".sub("{" + "file" + "}", URI.encode_path(file.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -270,36 +270,24 @@ module Stripe
     end
 
     # <p>To upload a file to Stripe, you’ll need to send a request of type <code>multipart/form-data</code>. The request should contain the file you would like to upload, as well as the parameters for creating a file.</p>  <p>All of Stripe’s officially supported Client libraries should have support for sending <code>multipart/form-data</code>.</p>
-    # @required @param file [String?] A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the `multipart/form-data` protocol).
-    # @required @param purpose [String?] The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param file_link_data [Stripe::FileLinkCreationParams?]
+    # @required @param post_files_request [Stripe::PostFilesRequest?]
     # @return [Stripe::File]
     def post_files(
       *,
-      file : String? = nil,
-      purpose : String? = nil,
-      expand : Array(String)? = nil,
-      file_link_data : Stripe::FileLinkCreationParams? = nil
+      post_files_request : Stripe::PostFilesRequest? = nil
     ) : Stripe::File
-      data, _status_code, _headers = post_files_with_http_info(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data)
+      data, _status_code, _headers = post_files_with_http_info(post_files_request: post_files_request)
       data
     end
 
     # &lt;p&gt;To upload a file to Stripe, you’ll need to send a request of type &lt;code&gt;multipart/form-data&lt;/code&gt;. The request should contain the file you would like to upload, as well as the parameters for creating a file.&lt;/p&gt;  &lt;p&gt;All of Stripe’s officially supported Client libraries should have support for sending &lt;code&gt;multipart/form-data&lt;/code&gt;.&lt;/p&gt;
-    # @required @param file [String?] A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the `multipart/form-data` protocol).
-    # @required @param purpose [String?] The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param file_link_data [Stripe::FileLinkCreationParams?]
+    # @required @param post_files_request [Stripe::PostFilesRequest?]
     # @return [Tuple(Stripe::File, Integer, Hash)] Stripe::File, response status code and response headers
     def post_files_with_http_info(
       *,
-      file : String? = nil,
-      purpose : String? = nil,
-      expand : Array(String)? = nil,
-      file_link_data : Stripe::FileLinkCreationParams? = nil
+      post_files_request : Stripe::PostFilesRequest? = nil
     ) : Tuple(Stripe::File, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_files(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data)
+      request = build_api_request_for_post_files(post_files_request: post_files_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -311,74 +299,53 @@ module Stripe
     end
 
     # &lt;p&gt;To upload a file to Stripe, you’ll need to send a request of type &lt;code&gt;multipart/form-data&lt;/code&gt;. The request should contain the file you would like to upload, as well as the parameters for creating a file.&lt;/p&gt;  &lt;p&gt;All of Stripe’s officially supported Client libraries should have support for sending &lt;code&gt;multipart/form-data&lt;/code&gt;.&lt;/p&gt;
-    # @required @param file [String?] A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the `multipart/form-data` protocol).
-    # @required @param purpose [String?] The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param file_link_data [Stripe::FileLinkCreationParams?]
+    # @required @param post_files_request [Stripe::PostFilesRequest?]
     # @return nil
     def post_files(
       *,
-      file : String? = nil,
-      purpose : String? = nil,
-      expand : Array(String)? = nil,
-      file_link_data : Stripe::FileLinkCreationParams? = nil,
+      post_files_request : Stripe::PostFilesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_files(file: file, purpose: purpose, expand: expand, file_link_data: file_link_data).execute(&block)
+      build_api_request_for_post_files(post_files_request: post_files_request).execute(&block)
     end
-
-    POST_FILES_VALID_VALUES_FOR_PURPOSE = String.static_array("account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen")
 
     # @return Crest::Request
     def build_api_request_for_post_files(
       *,
-      file : String? = nil,
-      purpose : String? = nil,
-      expand : Array(String)? = nil,
-      file_link_data : Stripe::FileLinkCreationParams? = nil
+      post_files_request : Stripe::PostFilesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FilesApi.post_files ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"file\" is required and cannot be null") if file.nil?
-
-        raise ArgumentError.new("\"purpose\" is required and cannot be null") if purpose.nil?
-        unless (_purpose = purpose).nil?
-          OpenApi::EnumValidator.validate("purpose", _purpose, POST_FILES_VALID_VALUES_FOR_PURPOSE)
-        end
-
-        unless (_file_link_data = file_link_data).nil?
-          _file_link_data.validate if _file_link_data.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_files_request\" is required and cannot be null") if post_files_request.nil?
+        unless (_post_files_request = post_files_request).nil?
+          _post_files_request.validate if _post_files_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/files"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["file"] = file.to_s if !file.nil?
-      form_params["file_link_data"] = file_link_data.to_s if !file_link_data.nil?
-      form_params["purpose"] = purpose.to_s if !purpose.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_files_request, content_type: header_params["Content-Type"]?) if !post_files_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

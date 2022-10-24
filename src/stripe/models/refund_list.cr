@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # A list of refunds that have been applied to the charge.
   class RefundList
     include JSON::Serializable
     include JSON::Serializable::Unmapped

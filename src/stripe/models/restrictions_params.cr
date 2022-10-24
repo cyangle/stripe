@@ -20,8 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PromotionCodeCurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter currency_options : Hash(String, Stripe::PromotionCodeCurrencyOption)? = nil
+    @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::CurrencyOption)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter currency_options : Hash(String, Stripe::CurrencyOption)? = nil
 
     @[JSON::Field(key: "first_time_transaction", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter first_time_transaction : Bool? = nil
@@ -37,7 +37,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @currency_options : Hash(String, Stripe::PromotionCodeCurrencyOption)? = nil,
+      @currency_options : Hash(String, Stripe::CurrencyOption)? = nil,
       @first_time_transaction : Bool? = nil,
       @minimum_amount : Int64? = nil,
       @minimum_amount_currency : String? = nil
@@ -68,7 +68,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::PromotionCodeCurrencyOption)?)
+    def currency_options=(currency_options : Hash(String, Stripe::CurrencyOption)?)
       if currency_options.nil?
         return @currency_options = nil
       end

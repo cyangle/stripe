@@ -51,15 +51,8 @@ describe "TopupsApi" do
 
   # unit tests for post_topups
   # &lt;p&gt;Top up the balance of an account&lt;/p&gt;
-  # @param amount A positive integer representing how much to transfer.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  # @param post_topups_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :source The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
-  # @option opts [String] :statement_descriptor Extra information about a top-up for the source&#39;s bank statement. Limited to 15 ASCII characters.
-  # @option opts [String] :transfer_group A string that identifies this top-up as part of a group.
   # @return [Topup]
   describe "post_topups test" do
     it "should work" do
@@ -71,9 +64,7 @@ describe "TopupsApi" do
   # &lt;p&gt;Updates the metadata of a top-up. Other top-up details are not editable by design.&lt;/p&gt;
   # @param topup
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostTopupsTopupRequest] :post_topups_topup_request
   # @return [Topup]
   describe "post_topups_topup test" do
     it "should work" do
@@ -85,7 +76,7 @@ describe "TopupsApi" do
   # &lt;p&gt;Cancels a top-up. Only pending top-ups can be canceled.&lt;/p&gt;
   # @param topup
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Topup]
   describe "post_topups_topup_cancel test" do
     it "should work" do

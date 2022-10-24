@@ -81,8 +81,7 @@ describe "ApplicationFeesApi" do
   # @param fee
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostApplicationFeesFeeRefundsIdRequest] :post_application_fees_fee_refunds_id_request
   # @return [FeeRefund]
   describe "post_application_fees_fee_refunds_id test" do
     it "should work" do
@@ -94,9 +93,7 @@ describe "ApplicationFeesApi" do
   #
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount
-  # @option opts [String] :directive
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostApplicationFeesIdRefundRequest] :post_application_fees_id_refund_request
   # @return [ApplicationFee]
   describe "post_application_fees_id_refund test" do
     it "should work" do
@@ -108,8 +105,7 @@ describe "ApplicationFeesApi" do
   # &lt;p&gt;Refunds an application fee that has previously been collected but not yet refunded. Funds will be refunded to the Stripe account from which the fee was originally collected.&lt;/p&gt;  &lt;p&gt;You can optionally refund only part of an application fee. You can do so multiple times, until the entire fee has been refunded.&lt;/p&gt;  &lt;p&gt;Once entirely refunded, an application fee can’t be refunded again. This method will raise an error when called on an already-refunded application fee, or when trying to refund more money than is left on an application fee.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostApplicationFeesIdRefundsRequest] :post_application_fees_id_refunds_request
   # @return [FeeRefund]
   describe "post_application_fees_id_refunds test" do
     it "should work" do

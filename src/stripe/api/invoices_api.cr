@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices/{invoice}".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -266,8 +266,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -279,19 +287,11 @@ module Stripe
       query_params["created"] = created.to_s if !created.nil?
       query_params["due_date"] = due_date.to_s if !due_date.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -377,23 +377,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices/{invoice}".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -508,26 +508,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices/{invoice}/lines".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -631,26 +631,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -910,8 +910,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices/upcoming"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["subscription_items"] = @api_client.build_collection_param(subscription_items, "csv") if !subscription_items.nil? && !subscription_items.empty?
       query_params["subscription_cancel_at_period_end"] = subscription_cancel_at_period_end.to_s if !subscription_cancel_at_period_end.nil?
       query_params["subscription_start_date"] = subscription_start_date.to_s if !subscription_start_date.nil?
@@ -934,19 +942,11 @@ module Stripe
       query_params["subscription_cancel_now"] = subscription_cancel_now.to_s if !subscription_cancel_now.nil?
       query_params["subscription_cancel_at"] = subscription_cancel_at.to_s if !subscription_cancel_at.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1236,8 +1236,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/invoices/upcoming/lines"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -1263,19 +1271,11 @@ module Stripe
       query_params["subscription_cancel_now"] = subscription_cancel_now.to_s if !subscription_cancel_now.nil?
       query_params["subscription_cancel_at"] = subscription_cancel_at.to_s if !subscription_cancel_at.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1294,124 +1294,24 @@ module Stripe
     end
 
     # <p>This endpoint creates a draft invoice for a given customer. The invoice remains a draft until you <a href=\"#finalize_invoice\">finalize</a> the invoice, which allows you to <a href=\"#pay_invoice\">pay</a> or <a href=\"#send_invoice\">send</a> the invoice to your customers.</p>
-    # @optional @param account_tax_ids [Stripe::PostInvoicesRequestAccountTaxIds?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to `charge_automatically`.
-    # @optional @param currency [String?] The currency to create this invoice in. Defaults to that of `customer` if not specified.
-    # @optional @param custom_fields [Stripe::PostInvoicesRequestCustomFields?]
-    # @optional @param customer [String?] The ID of the customer who will be billed.
-    # @optional @param days_until_due [Int32?] The number of days from when the invoice is created until it is due. Valid only for invoices where `collection_method=send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?] ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
-    # @optional @param default_tax_rates [Array(String)?] The tax rates that will apply to any line item that does not have `tax_rates` set.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    # @optional @param discounts [Stripe::PostInvoicesRequestDiscounts?]
-    # @optional @param due_date [Int32?] The date on which payment for this invoice is due. Valid only for invoices where `collection_method=send_invoice`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param footer [String?] Footer to be displayed on the invoice.
-    # @optional @param from_invoice [Stripe::FromInvoice?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
-    # @optional @param payment_settings [Stripe::PaymentSettings?]
-    # @optional @param pending_invoice_items_behavior [String?] How to handle pending invoice items on invoice creation. One of `include` or `exclude`. `include` will include any pending invoice items, and will create an empty draft invoice if no pending invoice items exist. `exclude` will always create an empty invoice draft regardless if there are pending invoice items or not. Defaults to `exclude` if the parameter is omitted.
-    # @optional @param rendering_options [Stripe::PostInvoicesRequestRenderingOptions?]
-    # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
-    # @optional @param subscription [String?] The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if `pending_invoice_items_behavior` is `include`. The subscription's billing cycle and regular subscription events won't be affected.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
+    # @optional @param post_invoices_request [Stripe::PostInvoicesRequest?]
     # @return [Stripe::Invoice]
     def post_invoices(
       *,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      currency : String? = nil,
-      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
-      customer : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Array(String)? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      from_invoice : Stripe::FromInvoice? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      pending_invoice_items_behavior : String? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      subscription : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil
+      post_invoices_request : Stripe::PostInvoicesRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_with_http_info(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data)
+      data, _status_code, _headers = post_invoices_with_http_info(post_invoices_request: post_invoices_request)
       data
     end
 
     # &lt;p&gt;This endpoint creates a draft invoice for a given customer. The invoice remains a draft until you &lt;a href&#x3D;\&quot;#finalize_invoice\&quot;&gt;finalize&lt;/a&gt; the invoice, which allows you to &lt;a href&#x3D;\&quot;#pay_invoice\&quot;&gt;pay&lt;/a&gt; or &lt;a href&#x3D;\&quot;#send_invoice\&quot;&gt;send&lt;/a&gt; the invoice to your customers.&lt;/p&gt;
-    # @optional @param account_tax_ids [Stripe::PostInvoicesRequestAccountTaxIds?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to `charge_automatically`.
-    # @optional @param currency [String?] The currency to create this invoice in. Defaults to that of `customer` if not specified.
-    # @optional @param custom_fields [Stripe::PostInvoicesRequestCustomFields?]
-    # @optional @param customer [String?] The ID of the customer who will be billed.
-    # @optional @param days_until_due [Int32?] The number of days from when the invoice is created until it is due. Valid only for invoices where `collection_method=send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?] ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
-    # @optional @param default_tax_rates [Array(String)?] The tax rates that will apply to any line item that does not have `tax_rates` set.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    # @optional @param discounts [Stripe::PostInvoicesRequestDiscounts?]
-    # @optional @param due_date [Int32?] The date on which payment for this invoice is due. Valid only for invoices where `collection_method=send_invoice`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param footer [String?] Footer to be displayed on the invoice.
-    # @optional @param from_invoice [Stripe::FromInvoice?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
-    # @optional @param payment_settings [Stripe::PaymentSettings?]
-    # @optional @param pending_invoice_items_behavior [String?] How to handle pending invoice items on invoice creation. One of `include` or `exclude`. `include` will include any pending invoice items, and will create an empty draft invoice if no pending invoice items exist. `exclude` will always create an empty invoice draft regardless if there are pending invoice items or not. Defaults to `exclude` if the parameter is omitted.
-    # @optional @param rendering_options [Stripe::PostInvoicesRequestRenderingOptions?]
-    # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
-    # @optional @param subscription [String?] The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if `pending_invoice_items_behavior` is `include`. The subscription's billing cycle and regular subscription events won't be affected.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
+    # @optional @param post_invoices_request [Stripe::PostInvoicesRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_with_http_info(
       *,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      currency : String? = nil,
-      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
-      customer : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Array(String)? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      from_invoice : Stripe::FromInvoice? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      pending_invoice_items_behavior : String? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      subscription : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil
+      post_invoices_request : Stripe::PostInvoicesRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data)
+      request = build_api_request_for_post_invoices(post_invoices_request: post_invoices_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1423,220 +1323,52 @@ module Stripe
     end
 
     # &lt;p&gt;This endpoint creates a draft invoice for a given customer. The invoice remains a draft until you &lt;a href&#x3D;\&quot;#finalize_invoice\&quot;&gt;finalize&lt;/a&gt; the invoice, which allows you to &lt;a href&#x3D;\&quot;#pay_invoice\&quot;&gt;pay&lt;/a&gt; or &lt;a href&#x3D;\&quot;#send_invoice\&quot;&gt;send&lt;/a&gt; the invoice to your customers.&lt;/p&gt;
-    # @optional @param account_tax_ids [Stripe::PostInvoicesRequestAccountTaxIds?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to `charge_automatically`.
-    # @optional @param currency [String?] The currency to create this invoice in. Defaults to that of `customer` if not specified.
-    # @optional @param custom_fields [Stripe::PostInvoicesRequestCustomFields?]
-    # @optional @param customer [String?] The ID of the customer who will be billed.
-    # @optional @param days_until_due [Int32?] The number of days from when the invoice is created until it is due. Valid only for invoices where `collection_method=send_invoice`.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?] ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
-    # @optional @param default_tax_rates [Array(String)?] The tax rates that will apply to any line item that does not have `tax_rates` set.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    # @optional @param discounts [Stripe::PostInvoicesRequestDiscounts?]
-    # @optional @param due_date [Int32?] The date on which payment for this invoice is due. Valid only for invoices where `collection_method=send_invoice`.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param footer [String?] Footer to be displayed on the invoice.
-    # @optional @param from_invoice [Stripe::FromInvoice?]
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
-    # @optional @param payment_settings [Stripe::PaymentSettings?]
-    # @optional @param pending_invoice_items_behavior [String?] How to handle pending invoice items on invoice creation. One of `include` or `exclude`. `include` will include any pending invoice items, and will create an empty draft invoice if no pending invoice items exist. `exclude` will always create an empty invoice draft regardless if there are pending invoice items or not. Defaults to `exclude` if the parameter is omitted.
-    # @optional @param rendering_options [Stripe::PostInvoicesRequestRenderingOptions?]
-    # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
-    # @optional @param subscription [String?] The ID of the subscription to invoice, if any. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription if `pending_invoice_items_behavior` is `include`. The subscription's billing cycle and regular subscription events won't be affected.
-    # @optional @param transfer_data [Stripe::TransferDataSpecs?]
+    # @optional @param post_invoices_request [Stripe::PostInvoicesRequest?]
     # @return nil
     def post_invoices(
       *,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      currency : String? = nil,
-      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
-      customer : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Array(String)? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      from_invoice : Stripe::FromInvoice? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      pending_invoice_items_behavior : String? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      subscription : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil,
+      post_invoices_request : Stripe::PostInvoicesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices(account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, currency: currency, custom_fields: custom_fields, customer: customer, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, from_invoice: from_invoice, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, pending_invoice_items_behavior: pending_invoice_items_behavior, rendering_options: rendering_options, statement_descriptor: statement_descriptor, subscription: subscription, transfer_data: transfer_data).execute(&block)
+      build_api_request_for_post_invoices(post_invoices_request: post_invoices_request).execute(&block)
     end
-
-    POST_INVOICES_VALID_VALUES_FOR_COLLECTION_METHOD              = String.static_array("charge_automatically", "send_invoice")
-    POST_INVOICES_MAX_LENGTH_FOR_CUSTOMER                         = 5000
-    POST_INVOICES_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD           = 5000
-    POST_INVOICES_MAX_LENGTH_FOR_DEFAULT_SOURCE                   = 5000
-    POST_INVOICES_MAX_LENGTH_FOR_DESCRIPTION                      = 1500
-    POST_INVOICES_MAX_LENGTH_FOR_FOOTER                           = 5000
-    POST_INVOICES_VALID_VALUES_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR = String.static_array("exclude", "include", "include_and_require")
-    POST_INVOICES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR             =   22
-    POST_INVOICES_MAX_LENGTH_FOR_SUBSCRIPTION                     = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_invoices(
       *,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      currency : String? = nil,
-      custom_fields : Stripe::PostInvoicesRequestCustomFields? = nil,
-      customer : String? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Array(String)? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      from_invoice : Stripe::FromInvoice? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : String? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      pending_invoice_items_behavior : String? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      subscription : String? = nil,
-      transfer_data : Stripe::TransferDataSpecs? = nil
+      post_invoices_request : Stripe::PostInvoicesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices ..." }
       end
 
       if client_side_validation
-        unless (_account_tax_ids = account_tax_ids).nil?
-          _account_tax_ids.validate if _account_tax_ids.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_collection_method = collection_method).nil?
-          OpenApi::EnumValidator.validate("collection_method", _collection_method, POST_INVOICES_VALID_VALUES_FOR_COLLECTION_METHOD)
-        end
-
-        unless (_custom_fields = custom_fields).nil?
-          _custom_fields.validate if _custom_fields.is_a?(OpenApi::Validatable)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_CUSTOMER)
-        end
-
-        unless (_default_payment_method = default_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", default_payment_method.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
-        end
-        unless (_default_source = default_source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_source", default_source.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_DEFAULT_SOURCE)
-        end
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_footer = footer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("footer", footer.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_FOOTER)
-        end
-        unless (_from_invoice = from_invoice).nil?
-          _from_invoice.validate if _from_invoice.is_a?(OpenApi::Validatable)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_payment_settings = payment_settings).nil?
-          _payment_settings.validate if _payment_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_pending_invoice_items_behavior = pending_invoice_items_behavior).nil?
-          OpenApi::EnumValidator.validate("pending_invoice_items_behavior", _pending_invoice_items_behavior, POST_INVOICES_VALID_VALUES_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR)
-        end
-        unless (_rendering_options = rendering_options).nil?
-          _rendering_options.validate if _rendering_options.is_a?(OpenApi::Validatable)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_subscription = subscription).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("subscription", subscription.to_s.size, POST_INVOICES_MAX_LENGTH_FOR_SUBSCRIPTION)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_invoices_request = post_invoices_request).nil?
+          _post_invoices_request.validate if _post_invoices_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/invoices"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_tax_ids"] = account_tax_ids.to_s if !account_tax_ids.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["auto_advance"] = auto_advance.to_s if !auto_advance.nil?
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["collection_method"] = collection_method.to_s if !collection_method.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["custom_fields"] = custom_fields.to_s if !custom_fields.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["days_until_due"] = days_until_due.to_s if !days_until_due.nil?
-      form_params["default_payment_method"] = default_payment_method.to_s if !default_payment_method.nil?
-      form_params["default_source"] = default_source.to_s if !default_source.nil?
-      form_params["default_tax_rates"] = @api_client.build_collection_param(default_tax_rates, "csv") if !default_tax_rates.nil? && !default_tax_rates.empty?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["due_date"] = due_date.to_s if !due_date.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["footer"] = footer.to_s if !footer.nil?
-      form_params["from_invoice"] = from_invoice.to_s if !from_invoice.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["payment_settings"] = payment_settings.to_s if !payment_settings.nil?
-      form_params["pending_invoice_items_behavior"] = pending_invoice_items_behavior.to_s if !pending_invoice_items_behavior.nil?
-      form_params["rendering_options"] = rendering_options.to_s if !rendering_options.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["subscription"] = subscription.to_s if !subscription.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_invoices_request, content_type: header_params["Content-Type"]?) if !post_invoices_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1656,107 +1388,27 @@ module Stripe
 
     # <p>Draft invoices are fully editable. Once an invoice is <a href=\"/docs/billing/invoices/workflow#finalized\">finalized</a>, monetary values, as well as <code>collection_method</code>, become uneditable.</p>  <p>If you would like to stop the Stripe Billing engine from automatically finalizing, reattempting payments on, sending reminders for, or <a href=\"/docs/billing/invoices/reconciliation\">automatically reconciling</a> invoices, pass <code>auto_advance=false</code>.</p>
     # @required @param invoice [String?]
-    # @optional @param account_tax_ids [Stripe::PostInvoicesRequestAccountTaxIds?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft` invoices.
-    # @optional @param custom_fields [Stripe::PostInvoicesInvoiceRequestCustomFields?]
-    # @optional @param days_until_due [Int32?] The number of days from which the invoice is created until it is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?] ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
-    # @optional @param default_tax_rates [Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    # @optional @param discounts [Stripe::PostInvoicesInvoiceRequestDiscounts?]
-    # @optional @param due_date [Int32?] The date on which payment for this invoice is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param footer [String?] Footer to be displayed on the invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [Stripe::PostInvoicesInvoiceRequestOnBehalfOf?]
-    # @optional @param payment_settings [Stripe::PaymentSettings?]
-    # @optional @param rendering_options [Stripe::PostInvoicesRequestRenderingOptions?]
-    # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
-    # @optional @param transfer_data [Stripe::PostInvoicesInvoiceRequestTransferData?]
+    # @optional @param post_invoices_invoice_request [Stripe::PostInvoicesInvoiceRequest?]
     # @return [Stripe::Invoice]
     def post_invoices_invoice(
       *,
       invoice : String? = nil,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
+      post_invoices_invoice_request : Stripe::PostInvoicesInvoiceRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_invoice_with_http_info(invoice: invoice, account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, custom_fields: custom_fields, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, rendering_options: rendering_options, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
+      data, _status_code, _headers = post_invoices_invoice_with_http_info(invoice: invoice, post_invoices_invoice_request: post_invoices_invoice_request)
       data
     end
 
     # &lt;p&gt;Draft invoices are fully editable. Once an invoice is &lt;a href&#x3D;\&quot;/docs/billing/invoices/workflow#finalized\&quot;&gt;finalized&lt;/a&gt;, monetary values, as well as &lt;code&gt;collection_method&lt;/code&gt;, become uneditable.&lt;/p&gt;  &lt;p&gt;If you would like to stop the Stripe Billing engine from automatically finalizing, reattempting payments on, sending reminders for, or &lt;a href&#x3D;\&quot;/docs/billing/invoices/reconciliation\&quot;&gt;automatically reconciling&lt;/a&gt; invoices, pass &lt;code&gt;auto_advance&#x3D;false&lt;/code&gt;.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param account_tax_ids [Stripe::PostInvoicesRequestAccountTaxIds?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft` invoices.
-    # @optional @param custom_fields [Stripe::PostInvoicesInvoiceRequestCustomFields?]
-    # @optional @param days_until_due [Int32?] The number of days from which the invoice is created until it is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?] ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
-    # @optional @param default_tax_rates [Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    # @optional @param discounts [Stripe::PostInvoicesInvoiceRequestDiscounts?]
-    # @optional @param due_date [Int32?] The date on which payment for this invoice is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param footer [String?] Footer to be displayed on the invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [Stripe::PostInvoicesInvoiceRequestOnBehalfOf?]
-    # @optional @param payment_settings [Stripe::PaymentSettings?]
-    # @optional @param rendering_options [Stripe::PostInvoicesRequestRenderingOptions?]
-    # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
-    # @optional @param transfer_data [Stripe::PostInvoicesInvoiceRequestTransferData?]
+    # @optional @param post_invoices_invoice_request [Stripe::PostInvoicesInvoiceRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_invoice_with_http_info(
       *,
       invoice : String? = nil,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
+      post_invoices_invoice_request : Stripe::PostInvoicesInvoiceRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices_invoice(invoice: invoice, account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, custom_fields: custom_fields, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, rendering_options: rendering_options, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
+      request = build_api_request_for_post_invoices_invoice(invoice: invoice, post_invoices_invoice_request: post_invoices_invoice_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1769,90 +1421,24 @@ module Stripe
 
     # &lt;p&gt;Draft invoices are fully editable. Once an invoice is &lt;a href&#x3D;\&quot;/docs/billing/invoices/workflow#finalized\&quot;&gt;finalized&lt;/a&gt;, monetary values, as well as &lt;code&gt;collection_method&lt;/code&gt;, become uneditable.&lt;/p&gt;  &lt;p&gt;If you would like to stop the Stripe Billing engine from automatically finalizing, reattempting payments on, sending reminders for, or &lt;a href&#x3D;\&quot;/docs/billing/invoices/reconciliation\&quot;&gt;automatically reconciling&lt;/a&gt; invoices, pass &lt;code&gt;auto_advance&#x3D;false&lt;/code&gt;.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param account_tax_ids [Stripe::PostInvoicesRequestAccountTaxIds?]
-    # @optional @param application_fee_amount [Int32?] A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-    # @optional @param automatic_tax [Stripe::AutomaticTaxParam?]
-    # @optional @param collection_method [String?] Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft` invoices.
-    # @optional @param custom_fields [Stripe::PostInvoicesInvoiceRequestCustomFields?]
-    # @optional @param days_until_due [Int32?] The number of days from which the invoice is created until it is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
-    # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?] ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
-    # @optional @param default_tax_rates [Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    # @optional @param discounts [Stripe::PostInvoicesInvoiceRequestDiscounts?]
-    # @optional @param due_date [Int32?] The date on which payment for this invoice is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param footer [String?] Footer to be displayed on the invoice.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param on_behalf_of [Stripe::PostInvoicesInvoiceRequestOnBehalfOf?]
-    # @optional @param payment_settings [Stripe::PaymentSettings?]
-    # @optional @param rendering_options [Stripe::PostInvoicesRequestRenderingOptions?]
-    # @optional @param statement_descriptor [String?] Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
-    # @optional @param transfer_data [Stripe::PostInvoicesInvoiceRequestTransferData?]
+    # @optional @param post_invoices_invoice_request [Stripe::PostInvoicesInvoiceRequest?]
     # @return nil
     def post_invoices_invoice(
       *,
       invoice : String? = nil,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil,
+      post_invoices_invoice_request : Stripe::PostInvoicesInvoiceRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices_invoice(invoice: invoice, account_tax_ids: account_tax_ids, application_fee_amount: application_fee_amount, auto_advance: auto_advance, automatic_tax: automatic_tax, collection_method: collection_method, custom_fields: custom_fields, days_until_due: days_until_due, default_payment_method: default_payment_method, default_source: default_source, default_tax_rates: default_tax_rates, description: description, discounts: discounts, due_date: due_date, expand: expand, footer: footer, metadata: metadata, on_behalf_of: on_behalf_of, payment_settings: payment_settings, rendering_options: rendering_options, statement_descriptor: statement_descriptor, transfer_data: transfer_data).execute(&block)
+      build_api_request_for_post_invoices_invoice(invoice: invoice, post_invoices_invoice_request: post_invoices_invoice_request).execute(&block)
     end
 
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE                = 5000
-    POST_INVOICES_INVOICE_VALID_VALUES_FOR_COLLECTION_METHOD    = String.static_array("charge_automatically", "send_invoice")
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_SOURCE         = 5000
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DESCRIPTION            = 1500
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_FOOTER                 = 5000
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR   =   22
+    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_invoices_invoice(
       *,
       invoice : String? = nil,
-      account_tax_ids : Stripe::PostInvoicesRequestAccountTaxIds? = nil,
-      application_fee_amount : Int64? = nil,
-      auto_advance : Bool? = nil,
-      automatic_tax : Stripe::AutomaticTaxParam? = nil,
-      collection_method : String? = nil,
-      custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
-      days_until_due : Int64? = nil,
-      default_payment_method : String? = nil,
-      default_source : String? = nil,
-      default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
-      description : String? = nil,
-      discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
-      due_date : Int64? = nil,
-      expand : Array(String)? = nil,
-      footer : String? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
-      payment_settings : Stripe::PaymentSettings? = nil,
-      rendering_options : Stripe::PostInvoicesRequestRenderingOptions? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
+      post_invoices_invoice_request : Stripe::PostInvoicesInvoiceRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice ..." }
@@ -1863,101 +1449,32 @@ module Stripe
         unless (_invoice = invoice).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE)
         end
-        unless (_account_tax_ids = account_tax_ids).nil?
-          _account_tax_ids.validate if _account_tax_ids.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_automatic_tax = automatic_tax).nil?
-          _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-        end
-        unless (_collection_method = collection_method).nil?
-          OpenApi::EnumValidator.validate("collection_method", _collection_method, POST_INVOICES_INVOICE_VALID_VALUES_FOR_COLLECTION_METHOD)
-        end
-        unless (_custom_fields = custom_fields).nil?
-          _custom_fields.validate if _custom_fields.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_default_payment_method = default_payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", default_payment_method.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
-        end
-        unless (_default_source = default_source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("default_source", default_source.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_SOURCE)
-        end
-        unless (_default_tax_rates = default_tax_rates).nil?
-          _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-        unless (_discounts = discounts).nil?
-          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_footer = footer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("footer", footer.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_FOOTER)
-        end
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_on_behalf_of = on_behalf_of).nil?
-          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_settings = payment_settings).nil?
-          _payment_settings.validate if _payment_settings.is_a?(OpenApi::Validatable)
-        end
-        unless (_rendering_options = rendering_options).nil?
-          _rendering_options.validate if _rendering_options.is_a?(OpenApi::Validatable)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_invoices_invoice_request = post_invoices_invoice_request).nil?
+          _post_invoices_invoice_request.validate if _post_invoices_invoice_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/invoices/{invoice}".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["account_tax_ids"] = account_tax_ids.to_s if !account_tax_ids.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["auto_advance"] = auto_advance.to_s if !auto_advance.nil?
-      form_params["automatic_tax"] = automatic_tax.to_s if !automatic_tax.nil?
-      form_params["collection_method"] = collection_method.to_s if !collection_method.nil?
-      form_params["custom_fields"] = custom_fields.to_s if !custom_fields.nil?
-      form_params["days_until_due"] = days_until_due.to_s if !days_until_due.nil?
-      form_params["default_payment_method"] = default_payment_method.to_s if !default_payment_method.nil?
-      form_params["default_source"] = default_source.to_s if !default_source.nil?
-      form_params["default_tax_rates"] = default_tax_rates.to_s if !default_tax_rates.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["discounts"] = discounts.to_s if !discounts.nil?
-      form_params["due_date"] = due_date.to_s if !due_date.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["footer"] = footer.to_s if !footer.nil?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["payment_settings"] = payment_settings.to_s if !payment_settings.nil?
-      form_params["rendering_options"] = rendering_options.to_s if !rendering_options.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_invoices_invoice_request, content_type: header_params["Content-Type"]?) if !post_invoices_invoice_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1977,31 +1494,27 @@ module Stripe
 
     # <p>Stripe automatically finalizes drafts before sending and attempting payment on invoices. However, if you’d like to finalize a draft invoice manually, you can do so using this method.</p>
     # @required @param invoice [String?]
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_invoices_invoice_finalize_request [Stripe::PostInvoicesInvoiceFinalizeRequest?]
     # @return [Stripe::Invoice]
     def post_invoices_invoice_finalize(
       *,
       invoice : String? = nil,
-      auto_advance : Bool? = nil,
-      expand : Array(String)? = nil
+      post_invoices_invoice_finalize_request : Stripe::PostInvoicesInvoiceFinalizeRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_invoice_finalize_with_http_info(invoice: invoice, auto_advance: auto_advance, expand: expand)
+      data, _status_code, _headers = post_invoices_invoice_finalize_with_http_info(invoice: invoice, post_invoices_invoice_finalize_request: post_invoices_invoice_finalize_request)
       data
     end
 
     # &lt;p&gt;Stripe automatically finalizes drafts before sending and attempting payment on invoices. However, if you’d like to finalize a draft invoice manually, you can do so using this method.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_invoices_invoice_finalize_request [Stripe::PostInvoicesInvoiceFinalizeRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_invoice_finalize_with_http_info(
       *,
       invoice : String? = nil,
-      auto_advance : Bool? = nil,
-      expand : Array(String)? = nil
+      post_invoices_invoice_finalize_request : Stripe::PostInvoicesInvoiceFinalizeRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices_invoice_finalize(invoice: invoice, auto_advance: auto_advance, expand: expand)
+      request = build_api_request_for_post_invoices_invoice_finalize(invoice: invoice, post_invoices_invoice_finalize_request: post_invoices_invoice_finalize_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2014,17 +1527,15 @@ module Stripe
 
     # &lt;p&gt;Stripe automatically finalizes drafts before sending and attempting payment on invoices. However, if you’d like to finalize a draft invoice manually, you can do so using this method.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param auto_advance [Bool?] Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_invoices_invoice_finalize_request [Stripe::PostInvoicesInvoiceFinalizeRequest?]
     # @return nil
     def post_invoices_invoice_finalize(
       *,
       invoice : String? = nil,
-      auto_advance : Bool? = nil,
-      expand : Array(String)? = nil,
+      post_invoices_invoice_finalize_request : Stripe::PostInvoicesInvoiceFinalizeRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices_invoice_finalize(invoice: invoice, auto_advance: auto_advance, expand: expand).execute(&block)
+      build_api_request_for_post_invoices_invoice_finalize(invoice: invoice, post_invoices_invoice_finalize_request: post_invoices_invoice_finalize_request).execute(&block)
     end
 
     POST_INVOICES_INVOICE_FINALIZE_MAX_LENGTH_FOR_INVOICE = 5000
@@ -2033,8 +1544,7 @@ module Stripe
     def build_api_request_for_post_invoices_invoice_finalize(
       *,
       invoice : String? = nil,
-      auto_advance : Bool? = nil,
-      expand : Array(String)? = nil
+      post_invoices_invoice_finalize_request : Stripe::PostInvoicesInvoiceFinalizeRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_finalize ..." }
@@ -2045,31 +1555,32 @@ module Stripe
         unless (_invoice = invoice).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_FINALIZE_MAX_LENGTH_FOR_INVOICE)
         end
+        unless (_post_invoices_invoice_finalize_request = post_invoices_invoice_finalize_request).nil?
+          _post_invoices_invoice_finalize_request.validate if _post_invoices_invoice_finalize_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/invoices/{invoice}/finalize".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["auto_advance"] = auto_advance.to_s if !auto_advance.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_invoices_invoice_finalize_request, content_type: header_params["Content-Type"]?) if !post_invoices_invoice_finalize_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2089,27 +1600,27 @@ module Stripe
 
     # <p>Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.</p>
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Invoice]
     def post_invoices_invoice_mark_uncollectible(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_invoice_mark_uncollectible_with_http_info(invoice: invoice, expand: expand)
+      data, _status_code, _headers = post_invoices_invoice_mark_uncollectible_with_http_info(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_invoice_mark_uncollectible_with_http_info(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices_invoice_mark_uncollectible(invoice: invoice, expand: expand)
+      request = build_api_request_for_post_invoices_invoice_mark_uncollectible(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2122,15 +1633,15 @@ module Stripe
 
     # &lt;p&gt;Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_invoices_invoice_mark_uncollectible(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices_invoice_mark_uncollectible(invoice: invoice, expand: expand).execute(&block)
+      build_api_request_for_post_invoices_invoice_mark_uncollectible(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_INVOICES_INVOICE_MARK_UNCOLLECTIBLE_MAX_LENGTH_FOR_INVOICE = 5000
@@ -2139,7 +1650,7 @@ module Stripe
     def build_api_request_for_post_invoices_invoice_mark_uncollectible(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_mark_uncollectible ..." }
@@ -2150,30 +1661,32 @@ module Stripe
         unless (_invoice = invoice).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_MARK_UNCOLLECTIBLE_MAX_LENGTH_FOR_INVOICE)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/invoices/{invoice}/mark_uncollectible".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2193,51 +1706,27 @@ module Stripe
 
     # <p>Stripe automatically creates and then attempts to collect payment on invoices for customers on subscriptions according to your <a href=\"https://dashboard.stripe.com/account/billing/automatic\">subscriptions settings</a>. However, if you’d like to attempt payment on an invoice out of the normal collection schedule or for some other reason, you can do so.</p>
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param forgive [Bool?] In cases where the source used to pay the invoice has insufficient funds, passing `forgive=true` controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing `forgive=false` will fail the charge if the source hasn't been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to `false`.
-    # @optional @param mandate [String?] ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the payment_method param or the invoice's default_payment_method or default_source, if set.
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
-    # @optional @param paid_out_of_band [Bool?] Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to `false`.
-    # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
-    # @optional @param source [String?] A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
+    # @optional @param post_invoices_invoice_pay_request [Stripe::PostInvoicesInvoicePayRequest?]
     # @return [Stripe::Invoice]
     def post_invoices_invoice_pay(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
-      forgive : Bool? = nil,
-      mandate : String? = nil,
-      off_session : Bool? = nil,
-      paid_out_of_band : Bool? = nil,
-      payment_method : String? = nil,
-      source : String? = nil
+      post_invoices_invoice_pay_request : Stripe::PostInvoicesInvoicePayRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_invoice_pay_with_http_info(invoice: invoice, expand: expand, forgive: forgive, mandate: mandate, off_session: off_session, paid_out_of_band: paid_out_of_band, payment_method: payment_method, source: source)
+      data, _status_code, _headers = post_invoices_invoice_pay_with_http_info(invoice: invoice, post_invoices_invoice_pay_request: post_invoices_invoice_pay_request)
       data
     end
 
     # &lt;p&gt;Stripe automatically creates and then attempts to collect payment on invoices for customers on subscriptions according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to attempt payment on an invoice out of the normal collection schedule or for some other reason, you can do so.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param forgive [Bool?] In cases where the source used to pay the invoice has insufficient funds, passing `forgive=true` controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing `forgive=false` will fail the charge if the source hasn't been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to `false`.
-    # @optional @param mandate [String?] ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the payment_method param or the invoice's default_payment_method or default_source, if set.
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
-    # @optional @param paid_out_of_band [Bool?] Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to `false`.
-    # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
-    # @optional @param source [String?] A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
+    # @optional @param post_invoices_invoice_pay_request [Stripe::PostInvoicesInvoicePayRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_invoice_pay_with_http_info(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
-      forgive : Bool? = nil,
-      mandate : String? = nil,
-      off_session : Bool? = nil,
-      paid_out_of_band : Bool? = nil,
-      payment_method : String? = nil,
-      source : String? = nil
+      post_invoices_invoice_pay_request : Stripe::PostInvoicesInvoicePayRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices_invoice_pay(invoice: invoice, expand: expand, forgive: forgive, mandate: mandate, off_session: off_session, paid_out_of_band: paid_out_of_band, payment_method: payment_method, source: source)
+      request = build_api_request_for_post_invoices_invoice_pay(invoice: invoice, post_invoices_invoice_pay_request: post_invoices_invoice_pay_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2250,45 +1739,24 @@ module Stripe
 
     # &lt;p&gt;Stripe automatically creates and then attempts to collect payment on invoices for customers on subscriptions according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to attempt payment on an invoice out of the normal collection schedule or for some other reason, you can do so.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param forgive [Bool?] In cases where the source used to pay the invoice has insufficient funds, passing `forgive=true` controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing `forgive=false` will fail the charge if the source hasn't been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to `false`.
-    # @optional @param mandate [String?] ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the payment_method param or the invoice's default_payment_method or default_source, if set.
-    # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
-    # @optional @param paid_out_of_band [Bool?] Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to `false`.
-    # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
-    # @optional @param source [String?] A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
+    # @optional @param post_invoices_invoice_pay_request [Stripe::PostInvoicesInvoicePayRequest?]
     # @return nil
     def post_invoices_invoice_pay(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
-      forgive : Bool? = nil,
-      mandate : String? = nil,
-      off_session : Bool? = nil,
-      paid_out_of_band : Bool? = nil,
-      payment_method : String? = nil,
-      source : String? = nil,
+      post_invoices_invoice_pay_request : Stripe::PostInvoicesInvoicePayRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices_invoice_pay(invoice: invoice, expand: expand, forgive: forgive, mandate: mandate, off_session: off_session, paid_out_of_band: paid_out_of_band, payment_method: payment_method, source: source).execute(&block)
+      build_api_request_for_post_invoices_invoice_pay(invoice: invoice, post_invoices_invoice_pay_request: post_invoices_invoice_pay_request).execute(&block)
     end
 
-    POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_INVOICE        = 5000
-    POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_MANDATE        = 5000
-    POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
-    POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_SOURCE         = 5000
+    POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_INVOICE = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_invoices_invoice_pay(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
-      forgive : Bool? = nil,
-      mandate : String? = nil,
-      off_session : Bool? = nil,
-      paid_out_of_band : Bool? = nil,
-      payment_method : String? = nil,
-      source : String? = nil
+      post_invoices_invoice_pay_request : Stripe::PostInvoicesInvoicePayRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_pay ..." }
@@ -2299,47 +1767,32 @@ module Stripe
         unless (_invoice = invoice).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_INVOICE)
         end
-
-        unless (_mandate = mandate).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("mandate", mandate.to_s.size, POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_MANDATE)
-        end
-
-        unless (_payment_method = payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payment_method", payment_method.to_s.size, POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_PAYMENT_METHOD)
-        end
-        unless (_source = source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_SOURCE)
+        unless (_post_invoices_invoice_pay_request = post_invoices_invoice_pay_request).nil?
+          _post_invoices_invoice_pay_request.validate if _post_invoices_invoice_pay_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/invoices/{invoice}/pay".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["forgive"] = forgive.to_s if !forgive.nil?
-      form_params["mandate"] = mandate.to_s if !mandate.nil?
-      form_params["off_session"] = off_session.to_s if !off_session.nil?
-      form_params["paid_out_of_band"] = paid_out_of_band.to_s if !paid_out_of_band.nil?
-      form_params["payment_method"] = payment_method.to_s if !payment_method.nil?
-      form_params["source"] = source.to_s if !source.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_invoices_invoice_pay_request, content_type: header_params["Content-Type"]?) if !post_invoices_invoice_pay_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2359,27 +1812,27 @@ module Stripe
 
     # <p>Stripe will automatically send invoices to customers according to your <a href=\"https://dashboard.stripe.com/account/billing/automatic\">subscriptions settings</a>. However, if you’d like to manually send an invoice to your customer out of the normal schedule, you can do so. When sending invoices that have already been paid, there will be no reference to the payment in the email.</p>  <p>Requests made in test-mode result in no emails being sent, despite sending an <code>invoice.sent</code> event.</p>
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Invoice]
     def post_invoices_invoice_send(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_invoice_send_with_http_info(invoice: invoice, expand: expand)
+      data, _status_code, _headers = post_invoices_invoice_send_with_http_info(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Stripe will automatically send invoices to customers according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to manually send an invoice to your customer out of the normal schedule, you can do so. When sending invoices that have already been paid, there will be no reference to the payment in the email.&lt;/p&gt;  &lt;p&gt;Requests made in test-mode result in no emails being sent, despite sending an &lt;code&gt;invoice.sent&lt;/code&gt; event.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_invoice_send_with_http_info(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices_invoice_send(invoice: invoice, expand: expand)
+      request = build_api_request_for_post_invoices_invoice_send(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2392,15 +1845,15 @@ module Stripe
 
     # &lt;p&gt;Stripe will automatically send invoices to customers according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to manually send an invoice to your customer out of the normal schedule, you can do so. When sending invoices that have already been paid, there will be no reference to the payment in the email.&lt;/p&gt;  &lt;p&gt;Requests made in test-mode result in no emails being sent, despite sending an &lt;code&gt;invoice.sent&lt;/code&gt; event.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_invoices_invoice_send(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices_invoice_send(invoice: invoice, expand: expand).execute(&block)
+      build_api_request_for_post_invoices_invoice_send(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_INVOICES_INVOICE_SEND_MAX_LENGTH_FOR_INVOICE = 5000
@@ -2409,7 +1862,7 @@ module Stripe
     def build_api_request_for_post_invoices_invoice_send(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_send ..." }
@@ -2420,30 +1873,32 @@ module Stripe
         unless (_invoice = invoice).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_SEND_MAX_LENGTH_FOR_INVOICE)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/invoices/{invoice}/send".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -2463,27 +1918,27 @@ module Stripe
 
     # <p>Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a href=\"#delete_invoice\">deletion</a>, however it only applies to finalized invoices and maintains a papertrail where the invoice can still be found.</p>
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Invoice]
     def post_invoices_invoice_void(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Invoice
-      data, _status_code, _headers = post_invoices_invoice_void_with_http_info(invoice: invoice, expand: expand)
+      data, _status_code, _headers = post_invoices_invoice_void_with_http_info(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to &lt;a href&#x3D;\&quot;#delete_invoice\&quot;&gt;deletion&lt;/a&gt;, however it only applies to finalized invoices and maintains a papertrail where the invoice can still be found.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Invoice, Integer, Hash)] Stripe::Invoice, response status code and response headers
     def post_invoices_invoice_void_with_http_info(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Invoice, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_invoices_invoice_void(invoice: invoice, expand: expand)
+      request = build_api_request_for_post_invoices_invoice_void(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2496,15 +1951,15 @@ module Stripe
 
     # &lt;p&gt;Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to &lt;a href&#x3D;\&quot;#delete_invoice\&quot;&gt;deletion&lt;/a&gt;, however it only applies to finalized invoices and maintains a papertrail where the invoice can still be found.&lt;/p&gt;
     # @required @param invoice [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_invoices_invoice_void(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_invoices_invoice_void(invoice: invoice, expand: expand).execute(&block)
+      build_api_request_for_post_invoices_invoice_void(invoice: invoice, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_INVOICES_INVOICE_VOID_MAX_LENGTH_FOR_INVOICE = 5000
@@ -2513,7 +1968,7 @@ module Stripe
     def build_api_request_for_post_invoices_invoice_void(
       *,
       invoice : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_void ..." }
@@ -2524,30 +1979,32 @@ module Stripe
         unless (_invoice = invoice).nil?
           OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_VOID_MAX_LENGTH_FOR_INVOICE)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/invoices/{invoice}/void".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

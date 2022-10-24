@@ -76,7 +76,6 @@ module Stripe
     @[JSON::Field(key: "line_items", type: Array(Stripe::LineItemUpdateParams)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter line_items : Array(Stripe::LineItemUpdateParams)? = nil
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 

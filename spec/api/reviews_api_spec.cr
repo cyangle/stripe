@@ -51,7 +51,7 @@ describe "ReviewsApi" do
   # &lt;p&gt;Approves a &lt;code&gt;Review&lt;/code&gt; object, closing it and removing it from the list of reviews.&lt;/p&gt;
   # @param review
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [Review]
   describe "post_reviews_review_approve test" do
     it "should work" do

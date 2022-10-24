@@ -65,36 +65,8 @@ describe "PaymentIntentsApi" do
 
   # unit tests for post_payment_intents
   # &lt;p&gt;Creates a PaymentIntent object.&lt;/p&gt;  &lt;p&gt;After the PaymentIntent is created, attach a payment method and &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm&lt;/a&gt; to continue the payment. You can read more about the different payment flows available via the Payment Intents API &lt;a href&#x3D;\&quot;/docs/payments/payment-intents\&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;When &lt;code&gt;confirm&#x3D;true&lt;/code&gt; is used during creation, it is equivalent to creating and confirming the PaymentIntent in the same call. You may use any parameters available in the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; when &lt;code&gt;confirm&#x3D;true&lt;/code&gt; is supplied.&lt;/p&gt;
-  # @param amount Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  # @param post_payment_intents_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-  # @option opts [AutomaticPaymentMethodsParam] :automatic_payment_methods
-  # @option opts [String] :capture_method Controls when the funds will be captured from the customer&#39;s account.
-  # @option opts [Bool] :confirm Set to &#x60;true&#x60; to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to &#x60;false&#x60;. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
-  # @option opts [String] :confirmation_method
-  # @option opts [String] :customer ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent&#39;s payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Bool] :error_on_requires_action Set to &#x60;true&#x60; to fail the payment attempt if the PaymentIntent transitions into &#x60;requires_action&#x60;. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication). This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :mandate ID of the mandate to be used for this payment. This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-  # @option opts [SecretKeyParam] :mandate_data
-  # @option opts [PostPaymentIntentsRequestOffSession] :off_session
-  # @option opts [String] :on_behalf_of The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.  If this parameter is omitted with &#x60;confirm&#x3D;true&#x60;, &#x60;customer.default_source&#x60; will be attached as this PaymentIntent&#39;s payment instrument to improve the migration experience for users of the Charges API. We recommend that you explicitly provide the &#x60;payment_method&#x60; going forward.
-  # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this is not provided, defaults to [\\\&quot;card\\\&quot;]. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-  # @option opts [RadarOptions] :radar_options
-  # @option opts [String] :receipt_email Email address that the receipt for the resulting payment will be sent to. If &#x60;receipt_email&#x60; is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-  # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-  # @option opts [String] :setup_future_usage Indicates that you intend to make future payments with this PaymentIntent&#39;s payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent&#39;s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses &#x60;setup_future_usage&#x60; to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
-  # @option opts [OptionalFieldsShipping] :shipping
-  # @option opts [String] :statement_descriptor For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-  # @option opts [String] :statement_descriptor_suffix Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-  # @option opts [TransferDataCreationParams] :transfer_data
-  # @option opts [String] :transfer_group A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
-  # @option opts [Bool] :use_stripe_sdk Set to &#x60;true&#x60; only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
   # @return [PaymentIntent]
   describe "post_payment_intents test" do
     it "should work" do
@@ -106,25 +78,7 @@ describe "PaymentIntentsApi" do
   # &lt;p&gt;Updates properties on a PaymentIntent object without confirming.&lt;/p&gt;  &lt;p&gt;Depending on which properties you update, you may need to confirm the PaymentIntent again. For example, updating the &lt;code&gt;payment_method&lt;/code&gt; will always require you to confirm the PaymentIntent again. If you prefer to update and confirm at the same time, we recommend updating properties via the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; instead.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-  # @option opts [PostPaymentIntentsIntentRequestApplicationFeeAmount] :application_fee_amount
-  # @option opts [String] :capture_method Controls when the funds will be captured from the customer&#39;s account.
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [String] :customer ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent&#39;s payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-  # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-  # @option opts [PostPaymentIntentsIntentRequestReceiptEmail] :receipt_email
-  # @option opts [String] :setup_future_usage Indicates that you intend to make future payments with this PaymentIntent&#39;s payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent&#39;s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses &#x60;setup_future_usage&#x60; to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If &#x60;setup_future_usage&#x60; is already set and you are performing a request using a publishable key, you may only update the value from &#x60;on_session&#x60; to &#x60;off_session&#x60;.
-  # @option opts [PostPaymentIntentsIntentRequestShipping] :shipping
-  # @option opts [String] :statement_descriptor For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-  # @option opts [String] :statement_descriptor_suffix Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-  # @option opts [TransferDataUpdateParams] :transfer_data
-  # @option opts [String] :transfer_group A string that identifies the resulting payment as part of a group. &#x60;transfer_group&#x60; may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+  # @option opts [PostPaymentIntentsIntentRequest] :post_payment_intents_intent_request
   # @return [PaymentIntent]
   describe "post_payment_intents_intent test" do
     it "should work" do
@@ -136,9 +90,7 @@ describe "PaymentIntentsApi" do
   # &lt;p&gt;Manually reconcile the remaining amount for a customer_balance PaymentIntent.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostPaymentIntentsIntentApplyCustomerBalanceRequest] :post_payment_intents_intent_apply_customer_balance_request
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_apply_customer_balance test" do
     it "should work" do
@@ -150,8 +102,7 @@ describe "PaymentIntentsApi" do
   # &lt;p&gt;A PaymentIntent object can be canceled when it is in one of these statuses: &lt;code&gt;requires_payment_method&lt;/code&gt;, &lt;code&gt;requires_capture&lt;/code&gt;, &lt;code&gt;requires_confirmation&lt;/code&gt;, &lt;code&gt;requires_action&lt;/code&gt;, or &lt;code&gt;processing&lt;/code&gt;. &lt;/p&gt;  &lt;p&gt;Once canceled, no additional charges will be made by the PaymentIntent and any operations on the PaymentIntent will fail with an error. For PaymentIntents with &lt;code&gt;status&#x3D;’requires_capture’&lt;/code&gt;, the remaining &lt;code&gt;amount_capturable&lt;/code&gt; will automatically be refunded. &lt;/p&gt;  &lt;p&gt;You cannot cancel the PaymentIntent for a Checkout Session. &lt;a href&#x3D;\&quot;/docs/api/checkout/sessions/expire\&quot;&gt;Expire the Checkout Session&lt;/a&gt; instead&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :cancellation_reason Reason for canceling this PaymentIntent. Possible values are &#x60;duplicate&#x60;, &#x60;fraudulent&#x60;, &#x60;requested_by_customer&#x60;, or &#x60;abandoned&#x60;
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostPaymentIntentsIntentCancelRequest] :post_payment_intents_intent_cancel_request
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_cancel test" do
     it "should work" do
@@ -163,12 +114,7 @@ describe "PaymentIntentsApi" do
   # &lt;p&gt;Capture the funds of an existing uncaptured PaymentIntent when its status is &lt;code&gt;requires_capture&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by default).&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/payments/capture-later\&quot;&gt;separate authorization and capture&lt;/a&gt;.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :amount_to_capture The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full &#x60;amount_capturable&#x60; if not provided.
-  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :statement_descriptor For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-  # @option opts [String] :statement_descriptor_suffix Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-  # @option opts [TransferDataUpdateParams] :transfer_data
+  # @option opts [PostPaymentIntentsIntentCaptureRequest] :post_payment_intents_intent_capture_request
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_capture test" do
     it "should work" do
@@ -177,26 +123,10 @@ describe "PaymentIntentsApi" do
   end
 
   # unit tests for post_payment_intents_intent_confirm
-  # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment.&lt;/p&gt;  &lt;p&gt;If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;).&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment.&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
+  # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :capture_method Controls when the funds will be captured from the customer&#39;s account.
-  # @option opts [String] :client_secret The client secret of the PaymentIntent.
-  # @option opts [Bool] :error_on_requires_action Set to &#x60;true&#x60; to fail the payment attempt if the PaymentIntent transitions into &#x60;requires_action&#x60;. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :mandate ID of the mandate to be used for this payment.
-  # @option opts [PostPaymentIntentsIntentConfirmRequestMandateData] :mandate_data
-  # @option opts [PostPaymentIntentsIntentConfirmRequestOffSession] :off_session
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-  # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-  # @option opts [RadarOptions] :radar_options
-  # @option opts [PostPaymentIntentsIntentRequestReceiptEmail] :receipt_email
-  # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
-  # @option opts [String] :setup_future_usage Indicates that you intend to make future payments with this PaymentIntent&#39;s payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent&#39;s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses &#x60;setup_future_usage&#x60; to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If &#x60;setup_future_usage&#x60; is already set and you are performing a request using a publishable key, you may only update the value from &#x60;on_session&#x60; to &#x60;off_session&#x60;.
-  # @option opts [PostPaymentIntentsIntentRequestShipping] :shipping
-  # @option opts [Bool] :use_stripe_sdk Set to &#x60;true&#x60; only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+  # @option opts [PostPaymentIntentsIntentConfirmRequest] :post_payment_intents_intent_confirm_request
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_confirm test" do
     it "should work" do
@@ -207,13 +137,8 @@ describe "PaymentIntentsApi" do
   # unit tests for post_payment_intents_intent_increment_authorization
   # &lt;p&gt;Perform an incremental authorization on an eligible &lt;a href&#x3D;\&quot;/docs/api/payment_intents/object\&quot;&gt;PaymentIntent&lt;/a&gt;. To be eligible, the PaymentIntent’s status must be &lt;code&gt;requires_capture&lt;/code&gt; and &lt;a href&#x3D;\&quot;/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported\&quot;&gt;incremental_authorization_supported&lt;/a&gt; must be &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Incremental authorizations attempt to increase the authorized amount on your customer’s card to the new, higher &lt;code&gt;amount&lt;/code&gt; provided. As with the initial authorization, incremental authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to further increase the authorized amount.&lt;/p&gt;  &lt;p&gt;If the incremental authorization succeeds, the PaymentIntent object is returned with the updated &lt;a href&#x3D;\&quot;/docs/api/payment_intents/object#payment_intent_object-amount\&quot;&gt;amount&lt;/a&gt;. If the incremental authorization fails, a &lt;a href&#x3D;\&quot;/docs/error-codes#card-declined\&quot;&gt;card_declined&lt;/a&gt; error is returned, and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains capturable for the previously authorized amount.&lt;/p&gt;  &lt;p&gt;Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including declines. Once captured, a PaymentIntent can no longer be incremented.&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/terminal/features/incremental-authorizations\&quot;&gt;incremental authorizations&lt;/a&gt;.&lt;/p&gt;
   # @param intent
-  # @param amount The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
+  # @param post_payment_intents_intent_increment_authorization_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :statement_descriptor For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-  # @option opts [TransferDataUpdateParams] :transfer_data
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_increment_authorization test" do
     it "should work" do
@@ -225,10 +150,7 @@ describe "PaymentIntentsApi" do
   # &lt;p&gt;Verifies microdeposits on a PaymentIntent object.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-  # @option opts [String] :client_secret The client secret of the PaymentIntent.
-  # @option opts [String] :descriptor_code A six-character code starting with SM present in the microdeposit sent to the bank account.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostPaymentIntentsIntentVerifyMicrodepositsRequest] :post_payment_intents_intent_verify_microdeposits_request
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_verify_microdeposits test" do
     it "should work" do

@@ -83,6 +83,13 @@ describe Stripe::ApiErrors do
     end
   end
 
+  describe "test attribute 'request_log_url'" do
+    it "should work" do
+      # instance = Stripe::ApiErrors.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'setup_intent'" do
     it "should work" do
       # instance = Stripe::ApiErrors.new

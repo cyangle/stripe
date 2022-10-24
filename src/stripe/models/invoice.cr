@@ -314,7 +314,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? hosted_invoice_url_present : Bool = false
 
-    # Unique identifier for the object.
+    # Unique identifier for the object. This property is always present unless the invoice is an upcoming invoice. See [Retrieve an upcoming invoice](https://stripe.com/docs/api/invoices/upcoming) for more details.
     @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : String? = nil
     MAX_LENGTH_FOR_ID = 5000
@@ -339,7 +339,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? latest_revision_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     getter metadata : Hash(String, String)? = nil
 

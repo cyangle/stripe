@@ -81,22 +81,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/value_list_items/{item}".sub("{" + "item" + "}", URI.encode_path(item.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -175,22 +175,22 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/value_lists/{value_list}".sub("{" + "value_list" + "}", URI.encode_path(value_list.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -312,8 +312,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/early_fraud_warnings"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -321,19 +329,11 @@ module Stripe
       query_params["charge"] = charge.to_s if !charge.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -419,23 +419,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/early_fraud_warnings/{early_fraud_warning}".sub("{" + "early_fraud_warning" + "}", URI.encode_path(early_fraud_warning.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -573,8 +573,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/value_list_items"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -583,19 +591,11 @@ module Stripe
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -681,23 +681,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/value_list_items/{item}".sub("{" + "item" + "}", URI.encode_path(item.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -834,8 +834,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/value_lists"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
@@ -844,19 +852,11 @@ module Stripe
       query_params["alias"] = _alias.to_s if !_alias.nil?
       query_params["created"] = created.to_s if !created.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -942,23 +942,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/radar/value_lists/{value_list}".sub("{" + "value_list" + "}", URI.encode_path(value_list.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -977,32 +977,24 @@ module Stripe
     end
 
     # <p>Creates a new <code>ValueListItem</code> object, which is added to the specified parent value list.</p>
-    # @required @param value [String?] The value of the item (whose type must match the type of the parent value list).
-    # @required @param value_list [String?] The identifier of the value list which the created item will be added to.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_radar_value_list_items_request [Stripe::PostRadarValueListItemsRequest?]
     # @return [Stripe::RadarValueListItem]
     def post_radar_value_list_items(
       *,
-      value : String? = nil,
-      value_list : String? = nil,
-      expand : Array(String)? = nil
+      post_radar_value_list_items_request : Stripe::PostRadarValueListItemsRequest? = nil
     ) : Stripe::RadarValueListItem
-      data, _status_code, _headers = post_radar_value_list_items_with_http_info(value: value, value_list: value_list, expand: expand)
+      data, _status_code, _headers = post_radar_value_list_items_with_http_info(post_radar_value_list_items_request: post_radar_value_list_items_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;ValueListItem&lt;/code&gt; object, which is added to the specified parent value list.&lt;/p&gt;
-    # @required @param value [String?] The value of the item (whose type must match the type of the parent value list).
-    # @required @param value_list [String?] The identifier of the value list which the created item will be added to.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_radar_value_list_items_request [Stripe::PostRadarValueListItemsRequest?]
     # @return [Tuple(Stripe::RadarValueListItem, Integer, Hash)] Stripe::RadarValueListItem, response status code and response headers
     def post_radar_value_list_items_with_http_info(
       *,
-      value : String? = nil,
-      value_list : String? = nil,
-      expand : Array(String)? = nil
+      post_radar_value_list_items_request : Stripe::PostRadarValueListItemsRequest? = nil
     ) : Tuple(Stripe::RadarValueListItem, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_radar_value_list_items(value: value, value_list: value_list, expand: expand)
+      request = build_api_request_for_post_radar_value_list_items(post_radar_value_list_items_request: post_radar_value_list_items_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1014,69 +1006,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;ValueListItem&lt;/code&gt; object, which is added to the specified parent value list.&lt;/p&gt;
-    # @required @param value [String?] The value of the item (whose type must match the type of the parent value list).
-    # @required @param value_list [String?] The identifier of the value list which the created item will be added to.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_radar_value_list_items_request [Stripe::PostRadarValueListItemsRequest?]
     # @return nil
     def post_radar_value_list_items(
       *,
-      value : String? = nil,
-      value_list : String? = nil,
-      expand : Array(String)? = nil,
+      post_radar_value_list_items_request : Stripe::PostRadarValueListItemsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_radar_value_list_items(value: value, value_list: value_list, expand: expand).execute(&block)
+      build_api_request_for_post_radar_value_list_items(post_radar_value_list_items_request: post_radar_value_list_items_request).execute(&block)
     end
-
-    POST_RADAR_VALUE_LIST_ITEMS_MAX_LENGTH_FOR_VALUE      =  800
-    POST_RADAR_VALUE_LIST_ITEMS_MAX_LENGTH_FOR_VALUE_LIST = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_radar_value_list_items(
       *,
-      value : String? = nil,
-      value_list : String? = nil,
-      expand : Array(String)? = nil
+      post_radar_value_list_items_request : Stripe::PostRadarValueListItemsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RadarApi.post_radar_value_list_items ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"value\" is required and cannot be null") if value.nil?
-        unless (_value = value).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("value", value.to_s.size, POST_RADAR_VALUE_LIST_ITEMS_MAX_LENGTH_FOR_VALUE)
-        end
-        raise ArgumentError.new("\"value_list\" is required and cannot be null") if value_list.nil?
-        unless (_value_list = value_list).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("value_list", value_list.to_s.size, POST_RADAR_VALUE_LIST_ITEMS_MAX_LENGTH_FOR_VALUE_LIST)
+        raise ArgumentError.new("\"post_radar_value_list_items_request\" is required and cannot be null") if post_radar_value_list_items_request.nil?
+        unless (_post_radar_value_list_items_request = post_radar_value_list_items_request).nil?
+          _post_radar_value_list_items_request.validate if _post_radar_value_list_items_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/radar/value_list_items"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["value"] = value.to_s if !value.nil?
-      form_params["value_list"] = value_list.to_s if !value_list.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_radar_value_list_items_request, content_type: header_params["Content-Type"]?) if !post_radar_value_list_items_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1095,36 +1071,24 @@ module Stripe
     end
 
     # <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
-    # @required @param _alias [String?] The name of the value list for use in rules.
-    # @required @param name [String?] The human-readable name of the value list.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param item_type [String?] Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, or `customer_id`. Use `string` if the item type is unknown or mixed.
+    # @required @param post_radar_value_lists_request [Stripe::PostRadarValueListsRequest?]
     # @return [Stripe::RadarValueList]
     def post_radar_value_lists(
       *,
-      _alias : String? = nil,
-      name : String? = nil,
-      expand : Array(String)? = nil,
-      item_type : String? = nil
+      post_radar_value_lists_request : Stripe::PostRadarValueListsRequest? = nil
     ) : Stripe::RadarValueList
-      data, _status_code, _headers = post_radar_value_lists_with_http_info(_alias: _alias, name: name, expand: expand, item_type: item_type)
+      data, _status_code, _headers = post_radar_value_lists_with_http_info(post_radar_value_lists_request: post_radar_value_lists_request)
       data
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;ValueList&lt;/code&gt; object, which can then be referenced in rules.&lt;/p&gt;
-    # @required @param _alias [String?] The name of the value list for use in rules.
-    # @required @param name [String?] The human-readable name of the value list.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param item_type [String?] Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, or `customer_id`. Use `string` if the item type is unknown or mixed.
+    # @required @param post_radar_value_lists_request [Stripe::PostRadarValueListsRequest?]
     # @return [Tuple(Stripe::RadarValueList, Integer, Hash)] Stripe::RadarValueList, response status code and response headers
     def post_radar_value_lists_with_http_info(
       *,
-      _alias : String? = nil,
-      name : String? = nil,
-      expand : Array(String)? = nil,
-      item_type : String? = nil
+      post_radar_value_lists_request : Stripe::PostRadarValueListsRequest? = nil
     ) : Tuple(Stripe::RadarValueList, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_radar_value_lists(_alias: _alias, name: name, expand: expand, item_type: item_type)
+      request = build_api_request_for_post_radar_value_lists(post_radar_value_lists_request: post_radar_value_lists_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1136,79 +1100,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a new &lt;code&gt;ValueList&lt;/code&gt; object, which can then be referenced in rules.&lt;/p&gt;
-    # @required @param _alias [String?] The name of the value list for use in rules.
-    # @required @param name [String?] The human-readable name of the value list.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param item_type [String?] Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, or `customer_id`. Use `string` if the item type is unknown or mixed.
+    # @required @param post_radar_value_lists_request [Stripe::PostRadarValueListsRequest?]
     # @return nil
     def post_radar_value_lists(
       *,
-      _alias : String? = nil,
-      name : String? = nil,
-      expand : Array(String)? = nil,
-      item_type : String? = nil,
+      post_radar_value_lists_request : Stripe::PostRadarValueListsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_radar_value_lists(_alias: _alias, name: name, expand: expand, item_type: item_type).execute(&block)
+      build_api_request_for_post_radar_value_lists(post_radar_value_lists_request: post_radar_value_lists_request).execute(&block)
     end
-
-    POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR__ALIAS      =  100
-    POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR_NAME        =  100
-    POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR_ITEM_TYPE   = 5000
-    POST_RADAR_VALUE_LISTS_VALID_VALUES_FOR_ITEM_TYPE = String.static_array("card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string")
 
     # @return Crest::Request
     def build_api_request_for_post_radar_value_lists(
       *,
-      _alias : String? = nil,
-      name : String? = nil,
-      expand : Array(String)? = nil,
-      item_type : String? = nil
+      post_radar_value_lists_request : Stripe::PostRadarValueListsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RadarApi.post_radar_value_lists ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"_alias\" is required and cannot be null") if _alias.nil?
-        unless (__alias = _alias).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("_alias", _alias.to_s.size, POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR__ALIAS)
-        end
-        raise ArgumentError.new("\"name\" is required and cannot be null") if name.nil?
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_RADAR_VALUE_LISTS_MAX_LENGTH_FOR_NAME)
-        end
-
-        unless (_item_type = item_type).nil?
-          OpenApi::EnumValidator.validate("item_type", _item_type, POST_RADAR_VALUE_LISTS_VALID_VALUES_FOR_ITEM_TYPE)
+        raise ArgumentError.new("\"post_radar_value_lists_request\" is required and cannot be null") if post_radar_value_lists_request.nil?
+        unless (_post_radar_value_lists_request = post_radar_value_lists_request).nil?
+          _post_radar_value_lists_request.validate if _post_radar_value_lists_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/radar/value_lists"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["alias"] = _alias.to_s if !_alias.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["item_type"] = item_type.to_s if !item_type.nil?
-      form_params["name"] = name.to_s if !name.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_radar_value_lists_request, content_type: header_params["Content-Type"]?) if !post_radar_value_lists_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1228,35 +1166,27 @@ module Stripe
 
     # <p>Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.</p>
     # @required @param value_list [String?]
-    # @optional @param _alias [String?] The name of the value list for use in rules.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param name [String?] The human-readable name of the value list.
+    # @optional @param post_radar_value_lists_value_list_request [Stripe::PostRadarValueListsValueListRequest?]
     # @return [Stripe::RadarValueList]
     def post_radar_value_lists_value_list(
       *,
       value_list : String? = nil,
-      _alias : String? = nil,
-      expand : Array(String)? = nil,
-      name : String? = nil
+      post_radar_value_lists_value_list_request : Stripe::PostRadarValueListsValueListRequest? = nil
     ) : Stripe::RadarValueList
-      data, _status_code, _headers = post_radar_value_lists_value_list_with_http_info(value_list: value_list, _alias: _alias, expand: expand, name: name)
+      data, _status_code, _headers = post_radar_value_lists_value_list_with_http_info(value_list: value_list, post_radar_value_lists_value_list_request: post_radar_value_lists_value_list_request)
       data
     end
 
     # &lt;p&gt;Updates a &lt;code&gt;ValueList&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Note that &lt;code&gt;item_type&lt;/code&gt; is immutable.&lt;/p&gt;
     # @required @param value_list [String?]
-    # @optional @param _alias [String?] The name of the value list for use in rules.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param name [String?] The human-readable name of the value list.
+    # @optional @param post_radar_value_lists_value_list_request [Stripe::PostRadarValueListsValueListRequest?]
     # @return [Tuple(Stripe::RadarValueList, Integer, Hash)] Stripe::RadarValueList, response status code and response headers
     def post_radar_value_lists_value_list_with_http_info(
       *,
       value_list : String? = nil,
-      _alias : String? = nil,
-      expand : Array(String)? = nil,
-      name : String? = nil
+      post_radar_value_lists_value_list_request : Stripe::PostRadarValueListsValueListRequest? = nil
     ) : Tuple(Stripe::RadarValueList, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_radar_value_lists_value_list(value_list: value_list, _alias: _alias, expand: expand, name: name)
+      request = build_api_request_for_post_radar_value_lists_value_list(value_list: value_list, post_radar_value_lists_value_list_request: post_radar_value_lists_value_list_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1269,32 +1199,24 @@ module Stripe
 
     # &lt;p&gt;Updates a &lt;code&gt;ValueList&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Note that &lt;code&gt;item_type&lt;/code&gt; is immutable.&lt;/p&gt;
     # @required @param value_list [String?]
-    # @optional @param _alias [String?] The name of the value list for use in rules.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param name [String?] The human-readable name of the value list.
+    # @optional @param post_radar_value_lists_value_list_request [Stripe::PostRadarValueListsValueListRequest?]
     # @return nil
     def post_radar_value_lists_value_list(
       *,
       value_list : String? = nil,
-      _alias : String? = nil,
-      expand : Array(String)? = nil,
-      name : String? = nil,
+      post_radar_value_lists_value_list_request : Stripe::PostRadarValueListsValueListRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_radar_value_lists_value_list(value_list: value_list, _alias: _alias, expand: expand, name: name).execute(&block)
+      build_api_request_for_post_radar_value_lists_value_list(value_list: value_list, post_radar_value_lists_value_list_request: post_radar_value_lists_value_list_request).execute(&block)
     end
 
     POST_RADAR_VALUE_LISTS_VALUE_LIST_MAX_LENGTH_FOR_VALUE_LIST = 5000
-    POST_RADAR_VALUE_LISTS_VALUE_LIST_MAX_LENGTH_FOR__ALIAS     =  100
-    POST_RADAR_VALUE_LISTS_VALUE_LIST_MAX_LENGTH_FOR_NAME       =  100
 
     # @return Crest::Request
     def build_api_request_for_post_radar_value_lists_value_list(
       *,
       value_list : String? = nil,
-      _alias : String? = nil,
-      expand : Array(String)? = nil,
-      name : String? = nil
+      post_radar_value_lists_value_list_request : Stripe::PostRadarValueListsValueListRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: RadarApi.post_radar_value_lists_value_list ..." }
@@ -1305,39 +1227,32 @@ module Stripe
         unless (_value_list = value_list).nil?
           OpenApi::PrimitiveValidator.validate_max_length("value_list", value_list.to_s.size, POST_RADAR_VALUE_LISTS_VALUE_LIST_MAX_LENGTH_FOR_VALUE_LIST)
         end
-        unless (__alias = _alias).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("_alias", _alias.to_s.size, POST_RADAR_VALUE_LISTS_VALUE_LIST_MAX_LENGTH_FOR__ALIAS)
-        end
-
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_RADAR_VALUE_LISTS_VALUE_LIST_MAX_LENGTH_FOR_NAME)
+        unless (_post_radar_value_lists_value_list_request = post_radar_value_lists_value_list_request).nil?
+          _post_radar_value_lists_value_list_request.validate if _post_radar_value_lists_value_list_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/radar/value_lists/{value_list}".sub("{" + "value_list" + "}", URI.encode_path(value_list.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["alias"] = _alias.to_s if !_alias.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["name"] = name.to_s if !name.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_radar_value_lists_value_list_request, content_type: header_params["Content-Type"]?) if !post_radar_value_lists_value_list_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

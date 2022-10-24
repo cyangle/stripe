@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
-    # List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase.
+    # List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the `end_date` of one phase will always equal the `start_date` of the next phase. Note that past phases can be omitted.
     @[JSON::Field(key: "phases", type: Array(Stripe::PhaseConfigurationParams)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phases : Array(Stripe::PhaseConfigurationParams)? = nil
 

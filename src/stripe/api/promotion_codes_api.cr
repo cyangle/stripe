@@ -156,8 +156,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/promotion_codes"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["created"] = created.to_s if !created.nil?
@@ -168,19 +176,11 @@ module Stripe
       query_params["code"] = code.to_s if !code.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -266,23 +266,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/promotion_codes/{promotion_code}".sub("{" + "promotion_code" + "}", URI.encode_path(promotion_code.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -301,52 +301,24 @@ module Stripe
     end
 
     # <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
-    # @required @param coupon [String?] The coupon for this promotion code.
-    # @optional @param active [Bool?] Whether the promotion code is currently active.
-    # @optional @param code [String?] The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
-    # @optional @param customer [String?] The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon's `redeems_by`.
-    # @optional @param max_redemptions [Int32?] A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
-    # @optional @param restrictions [Stripe::RestrictionsParams?]
+    # @required @param post_promotion_codes_request [Stripe::PostPromotionCodesRequest?]
     # @return [Stripe::PromotionCode]
     def post_promotion_codes(
       *,
-      coupon : String? = nil,
-      active : Bool? = nil,
-      code : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      max_redemptions : Int64? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil
+      post_promotion_codes_request : Stripe::PostPromotionCodesRequest? = nil
     ) : Stripe::PromotionCode
-      data, _status_code, _headers = post_promotion_codes_with_http_info(coupon: coupon, active: active, code: code, customer: customer, expand: expand, expires_at: expires_at, max_redemptions: max_redemptions, restrictions: restrictions)
+      data, _status_code, _headers = post_promotion_codes_with_http_info(post_promotion_codes_request: post_promotion_codes_request)
       data
     end
 
     # &lt;p&gt;A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.&lt;/p&gt;
-    # @required @param coupon [String?] The coupon for this promotion code.
-    # @optional @param active [Bool?] Whether the promotion code is currently active.
-    # @optional @param code [String?] The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
-    # @optional @param customer [String?] The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon's `redeems_by`.
-    # @optional @param max_redemptions [Int32?] A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
-    # @optional @param restrictions [Stripe::RestrictionsParams?]
+    # @required @param post_promotion_codes_request [Stripe::PostPromotionCodesRequest?]
     # @return [Tuple(Stripe::PromotionCode, Integer, Hash)] Stripe::PromotionCode, response status code and response headers
     def post_promotion_codes_with_http_info(
       *,
-      coupon : String? = nil,
-      active : Bool? = nil,
-      code : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      max_redemptions : Int64? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil
+      post_promotion_codes_request : Stripe::PostPromotionCodesRequest? = nil
     ) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_promotion_codes(coupon: coupon, active: active, code: code, customer: customer, expand: expand, expires_at: expires_at, max_redemptions: max_redemptions, restrictions: restrictions)
+      request = build_api_request_for_post_promotion_codes(post_promotion_codes_request: post_promotion_codes_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -358,97 +330,53 @@ module Stripe
     end
 
     # &lt;p&gt;A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.&lt;/p&gt;
-    # @required @param coupon [String?] The coupon for this promotion code.
-    # @optional @param active [Bool?] Whether the promotion code is currently active.
-    # @optional @param code [String?] The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
-    # @optional @param customer [String?] The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon's `redeems_by`.
-    # @optional @param max_redemptions [Int32?] A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
-    # @optional @param restrictions [Stripe::RestrictionsParams?]
+    # @required @param post_promotion_codes_request [Stripe::PostPromotionCodesRequest?]
     # @return nil
     def post_promotion_codes(
       *,
-      coupon : String? = nil,
-      active : Bool? = nil,
-      code : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      max_redemptions : Int64? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil,
+      post_promotion_codes_request : Stripe::PostPromotionCodesRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_promotion_codes(coupon: coupon, active: active, code: code, customer: customer, expand: expand, expires_at: expires_at, max_redemptions: max_redemptions, restrictions: restrictions).execute(&block)
+      build_api_request_for_post_promotion_codes(post_promotion_codes_request: post_promotion_codes_request).execute(&block)
     end
-
-    POST_PROMOTION_CODES_MAX_LENGTH_FOR_COUPON   = 5000
-    POST_PROMOTION_CODES_MAX_LENGTH_FOR_CODE     =  500
-    POST_PROMOTION_CODES_MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_promotion_codes(
       *,
-      coupon : String? = nil,
-      active : Bool? = nil,
-      code : String? = nil,
-      customer : String? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
-      max_redemptions : Int64? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil
+      post_promotion_codes_request : Stripe::PostPromotionCodesRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PromotionCodesApi.post_promotion_codes ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"coupon\" is required and cannot be null") if coupon.nil?
-        unless (_coupon = coupon).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, POST_PROMOTION_CODES_MAX_LENGTH_FOR_COUPON)
-        end
-
-        unless (_code = code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("code", code.to_s.size, POST_PROMOTION_CODES_MAX_LENGTH_FOR_CODE)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_PROMOTION_CODES_MAX_LENGTH_FOR_CUSTOMER)
-        end
-
-        unless (_restrictions = restrictions).nil?
-          _restrictions.validate if _restrictions.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_promotion_codes_request\" is required and cannot be null") if post_promotion_codes_request.nil?
+        unless (_post_promotion_codes_request = post_promotion_codes_request).nil?
+          _post_promotion_codes_request.validate if _post_promotion_codes_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/promotion_codes"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["code"] = code.to_s if !code.nil?
-      form_params["coupon"] = coupon.to_s if !coupon.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
-      form_params["max_redemptions"] = max_redemptions.to_s if !max_redemptions.nil?
-      form_params["restrictions"] = restrictions.to_s if !restrictions.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_promotion_codes_request, content_type: header_params["Content-Type"]?) if !post_promotion_codes_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -468,39 +396,27 @@ module Stripe
 
     # <p>Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.</p>
     # @required @param promotion_code [String?]
-    # @optional @param active [Bool?] Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param restrictions [Stripe::RestrictionsParams?]
+    # @optional @param post_promotion_codes_promotion_code_request [Stripe::PostPromotionCodesPromotionCodeRequest?]
     # @return [Stripe::PromotionCode]
     def post_promotion_codes_promotion_code(
       *,
       promotion_code : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil
+      post_promotion_codes_promotion_code_request : Stripe::PostPromotionCodesPromotionCodeRequest? = nil
     ) : Stripe::PromotionCode
-      data, _status_code, _headers = post_promotion_codes_promotion_code_with_http_info(promotion_code: promotion_code, active: active, expand: expand, metadata: metadata, restrictions: restrictions)
+      data, _status_code, _headers = post_promotion_codes_promotion_code_with_http_info(promotion_code: promotion_code, post_promotion_codes_promotion_code_request: post_promotion_codes_promotion_code_request)
       data
     end
 
     # &lt;p&gt;Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.&lt;/p&gt;
     # @required @param promotion_code [String?]
-    # @optional @param active [Bool?] Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param restrictions [Stripe::RestrictionsParams?]
+    # @optional @param post_promotion_codes_promotion_code_request [Stripe::PostPromotionCodesPromotionCodeRequest?]
     # @return [Tuple(Stripe::PromotionCode, Integer, Hash)] Stripe::PromotionCode, response status code and response headers
     def post_promotion_codes_promotion_code_with_http_info(
       *,
       promotion_code : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil
+      post_promotion_codes_promotion_code_request : Stripe::PostPromotionCodesPromotionCodeRequest? = nil
     ) : Tuple(Stripe::PromotionCode, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_promotion_codes_promotion_code(promotion_code: promotion_code, active: active, expand: expand, metadata: metadata, restrictions: restrictions)
+      request = build_api_request_for_post_promotion_codes_promotion_code(promotion_code: promotion_code, post_promotion_codes_promotion_code_request: post_promotion_codes_promotion_code_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -513,21 +429,15 @@ module Stripe
 
     # &lt;p&gt;Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.&lt;/p&gt;
     # @required @param promotion_code [String?]
-    # @optional @param active [Bool?] Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param restrictions [Stripe::RestrictionsParams?]
+    # @optional @param post_promotion_codes_promotion_code_request [Stripe::PostPromotionCodesPromotionCodeRequest?]
     # @return nil
     def post_promotion_codes_promotion_code(
       *,
       promotion_code : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil,
+      post_promotion_codes_promotion_code_request : Stripe::PostPromotionCodesPromotionCodeRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_promotion_codes_promotion_code(promotion_code: promotion_code, active: active, expand: expand, metadata: metadata, restrictions: restrictions).execute(&block)
+      build_api_request_for_post_promotion_codes_promotion_code(promotion_code: promotion_code, post_promotion_codes_promotion_code_request: post_promotion_codes_promotion_code_request).execute(&block)
     end
 
     POST_PROMOTION_CODES_PROMOTION_CODE_MAX_LENGTH_FOR_PROMOTION_CODE = 5000
@@ -536,10 +446,7 @@ module Stripe
     def build_api_request_for_post_promotion_codes_promotion_code(
       *,
       promotion_code : String? = nil,
-      active : Bool? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      restrictions : Stripe::RestrictionsParams? = nil
+      post_promotion_codes_promotion_code_request : Stripe::PostPromotionCodesPromotionCodeRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PromotionCodesApi.post_promotion_codes_promotion_code ..." }
@@ -550,40 +457,32 @@ module Stripe
         unless (_promotion_code = promotion_code).nil?
           OpenApi::PrimitiveValidator.validate_max_length("promotion_code", promotion_code.to_s.size, POST_PROMOTION_CODES_PROMOTION_CODE_MAX_LENGTH_FOR_PROMOTION_CODE)
         end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_restrictions = restrictions).nil?
-          _restrictions.validate if _restrictions.is_a?(OpenApi::Validatable)
+        unless (_post_promotion_codes_promotion_code_request = post_promotion_codes_promotion_code_request).nil?
+          _post_promotion_codes_promotion_code_request.validate if _post_promotion_codes_promotion_code_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/promotion_codes/{promotion_code}".sub("{" + "promotion_code" + "}", URI.encode_path(promotion_code.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["active"] = active.to_s if !active.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["restrictions"] = restrictions.to_s if !restrictions.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_promotion_codes_promotion_code_request, content_type: header_params["Content-Type"]?) if !post_promotion_codes_promotion_code_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

@@ -50,12 +50,8 @@ describe "BillingPortalApi" do
 
   # unit tests for post_billing_portal_configurations
   # &lt;p&gt;Creates a configuration that describes the functionality and behavior of a PortalSession&lt;/p&gt;
-  # @param business_profile
-  # @param features
+  # @param post_billing_portal_configurations_request
   # @param [Hash] opts the optional parameters
-  # @option opts [PostBillingPortalConfigurationsRequestDefaultReturnUrl] :default_return_url
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [LoginPageCreateParam] :login_page
   # @return [BillingPortalConfiguration]
   describe "post_billing_portal_configurations test" do
     it "should work" do
@@ -67,13 +63,7 @@ describe "BillingPortalApi" do
   # &lt;p&gt;Updates a configuration that describes the functionality of the customer portal.&lt;/p&gt;
   # @param configuration
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the configuration is active and can be used to create portal sessions.
-  # @option opts [BusinessProfileUpdateParam] :business_profile
-  # @option opts [PostBillingPortalConfigurationsRequestDefaultReturnUrl] :default_return_url
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [FeaturesUpdatingParam] :features
-  # @option opts [LoginPageUpdateParam] :login_page
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostBillingPortalConfigurationsConfigurationRequest] :post_billing_portal_configurations_configuration_request
   # @return [BillingPortalConfiguration]
   describe "post_billing_portal_configurations_configuration test" do
     it "should work" do
@@ -83,13 +73,8 @@ describe "BillingPortalApi" do
 
   # unit tests for post_billing_portal_sessions
   # &lt;p&gt;Creates a session of the customer portal.&lt;/p&gt;
-  # @param customer The ID of an existing customer.
+  # @param post_billing_portal_sessions_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :configuration The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :locale The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s &#x60;preferred_locales&#x60; or browser’s locale is used.
-  # @option opts [String] :on_behalf_of The &#x60;on_behalf_of&#x60; account to use for this session. When specified, only subscriptions and invoices with this &#x60;on_behalf_of&#x60; account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the &#x60;on_behalf_of&#x60; account&#39;s branding settings, which the portal displays.
-  # @option opts [String] :return_url The default URL to redirect customers to when they click on the portal&#39;s link to return to your website.
   # @return [BillingPortalSession]
   describe "post_billing_portal_sessions test" do
     it "should work" do

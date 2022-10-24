@@ -64,16 +64,8 @@ describe "SkusApi" do
 
   # unit tests for post_skus
   # &lt;p&gt;Creates a new SKU associated with a product.&lt;/p&gt;
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param inventory
-  # @param price The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-  # @param product The ID of the product this SKU is associated with. Must be a product with type &#x60;good&#x60;.
+  # @param post_skus_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether the SKU is available for purchase. Default to &#x60;true&#x60;.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :id The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly generated.
-  # @option opts [String] :image The URL of an image for this SKU, meant to be displayable to the customer.
-  # @option opts [PackageDimensionsSpecs] :package_dimensions
   # @return [Sku]
   describe "post_skus test" do
     it "should work" do
@@ -85,15 +77,7 @@ describe "SkusApi" do
   # &lt;p&gt;Updates the specific SKU by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;Note that a SKU’s &lt;code&gt;attributes&lt;/code&gt; are not editable. Instead, you would need to deactivate the existing SKU and create a new one with the new attribute values.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Bool] :active Whether this SKU is available for purchase.
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :image The URL of an image for this SKU, meant to be displayable to the customer.
-  # @option opts [InventoryUpdateSpecs] :inventory
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [PostSkusIdRequestPackageDimensions] :package_dimensions
-  # @option opts [Int32] :price The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
-  # @option opts [String] :product The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU&#39;s current product, and be of type &#x60;good&#x60;.
+  # @option opts [PostSkusIdRequest] :post_skus_id_request
   # @return [Sku]
   describe "post_skus_id test" do
     it "should work" do

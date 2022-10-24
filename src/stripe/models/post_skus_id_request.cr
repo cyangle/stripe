@@ -24,7 +24,6 @@ module Stripe
     @[JSON::Field(key: "active", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter active : Bool? = nil
 
-    # A dictionary of attributes and values for the attributes defined by the product. When specified, `attributes` will partially update the existing attributes dictionary on the product, with the postcondition that a value must be present for each attribute key on the product.
     @[JSON::Field(key: "attributes", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter attributes : Hash(String, String)? = nil
 

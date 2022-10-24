@@ -116,27 +116,27 @@ module Stripe
       # resource path
       local_var_path = "/v1/apps/secrets"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["scope"] = scope.to_s if !scope.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -233,25 +233,25 @@ module Stripe
       # resource path
       local_var_path = "/v1/apps/secrets/find"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["name"] = name.to_s if !name.nil?
-      query_params["scope"] = scope.to_s if !scope.nil?
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["name"] = name.to_s if !name.nil?
+      query_params["scope"] = scope.to_s if !scope.nil?
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -270,40 +270,24 @@ module Stripe
     end
 
     # <p>Create or replace a secret in the secret store.</p>
-    # @required @param name [String?] A name for the secret that's unique within the scope.
-    # @required @param payload [String?] The plaintext secret value to be stored.
-    # @required @param scope [Stripe::ScopeParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] The Unix timestamp for the expiry time of the secret, after which the secret deletes.
+    # @required @param post_apps_secrets_request [Stripe::PostAppsSecretsRequest?]
     # @return [Stripe::AppsSecret]
     def post_apps_secrets(
       *,
-      name : String? = nil,
-      payload : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil
+      post_apps_secrets_request : Stripe::PostAppsSecretsRequest? = nil
     ) : Stripe::AppsSecret
-      data, _status_code, _headers = post_apps_secrets_with_http_info(name: name, payload: payload, scope: scope, expand: expand, expires_at: expires_at)
+      data, _status_code, _headers = post_apps_secrets_with_http_info(post_apps_secrets_request: post_apps_secrets_request)
       data
     end
 
     # &lt;p&gt;Create or replace a secret in the secret store.&lt;/p&gt;
-    # @required @param name [String?] A name for the secret that's unique within the scope.
-    # @required @param payload [String?] The plaintext secret value to be stored.
-    # @required @param scope [Stripe::ScopeParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] The Unix timestamp for the expiry time of the secret, after which the secret deletes.
+    # @required @param post_apps_secrets_request [Stripe::PostAppsSecretsRequest?]
     # @return [Tuple(Stripe::AppsSecret, Integer, Hash)] Stripe::AppsSecret, response status code and response headers
     def post_apps_secrets_with_http_info(
       *,
-      name : String? = nil,
-      payload : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil
+      post_apps_secrets_request : Stripe::PostAppsSecretsRequest? = nil
     ) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_apps_secrets(name: name, payload: payload, scope: scope, expand: expand, expires_at: expires_at)
+      request = build_api_request_for_post_apps_secrets(post_apps_secrets_request: post_apps_secrets_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -315,81 +299,53 @@ module Stripe
     end
 
     # &lt;p&gt;Create or replace a secret in the secret store.&lt;/p&gt;
-    # @required @param name [String?] A name for the secret that's unique within the scope.
-    # @required @param payload [String?] The plaintext secret value to be stored.
-    # @required @param scope [Stripe::ScopeParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param expires_at [Int32?] The Unix timestamp for the expiry time of the secret, after which the secret deletes.
+    # @required @param post_apps_secrets_request [Stripe::PostAppsSecretsRequest?]
     # @return nil
     def post_apps_secrets(
       *,
-      name : String? = nil,
-      payload : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil,
+      post_apps_secrets_request : Stripe::PostAppsSecretsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_apps_secrets(name: name, payload: payload, scope: scope, expand: expand, expires_at: expires_at).execute(&block)
+      build_api_request_for_post_apps_secrets(post_apps_secrets_request: post_apps_secrets_request).execute(&block)
     end
-
-    POST_APPS_SECRETS_MAX_LENGTH_FOR_NAME    = 5000
-    POST_APPS_SECRETS_MAX_LENGTH_FOR_PAYLOAD = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_apps_secrets(
       *,
-      name : String? = nil,
-      payload : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil,
-      expires_at : Int64? = nil
+      post_apps_secrets_request : Stripe::PostAppsSecretsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AppsApi.post_apps_secrets ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"name\" is required and cannot be null") if name.nil?
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_APPS_SECRETS_MAX_LENGTH_FOR_NAME)
-        end
-        raise ArgumentError.new("\"payload\" is required and cannot be null") if payload.nil?
-        unless (_payload = payload).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payload", payload.to_s.size, POST_APPS_SECRETS_MAX_LENGTH_FOR_PAYLOAD)
-        end
-        raise ArgumentError.new("\"scope\" is required and cannot be null") if scope.nil?
-        unless (_scope = scope).nil?
-          _scope.validate if _scope.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_apps_secrets_request\" is required and cannot be null") if post_apps_secrets_request.nil?
+        unless (_post_apps_secrets_request = post_apps_secrets_request).nil?
+          _post_apps_secrets_request.validate if _post_apps_secrets_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/apps/secrets"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["expires_at"] = expires_at.to_s if !expires_at.nil?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["payload"] = payload.to_s if !payload.nil?
-      form_params["scope"] = scope.to_s if !scope.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_apps_secrets_request, content_type: header_params["Content-Type"]?) if !post_apps_secrets_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -408,32 +364,24 @@ module Stripe
     end
 
     # <p>Deletes a secret from the secret store by name and scope.</p>
-    # @required @param name [String?] A name for the secret that's unique within the scope.
-    # @required @param scope [Stripe::ScopeParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_apps_secrets_delete_request [Stripe::PostAppsSecretsDeleteRequest?]
     # @return [Stripe::AppsSecret]
     def post_apps_secrets_delete(
       *,
-      name : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil
+      post_apps_secrets_delete_request : Stripe::PostAppsSecretsDeleteRequest? = nil
     ) : Stripe::AppsSecret
-      data, _status_code, _headers = post_apps_secrets_delete_with_http_info(name: name, scope: scope, expand: expand)
+      data, _status_code, _headers = post_apps_secrets_delete_with_http_info(post_apps_secrets_delete_request: post_apps_secrets_delete_request)
       data
     end
 
     # &lt;p&gt;Deletes a secret from the secret store by name and scope.&lt;/p&gt;
-    # @required @param name [String?] A name for the secret that's unique within the scope.
-    # @required @param scope [Stripe::ScopeParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_apps_secrets_delete_request [Stripe::PostAppsSecretsDeleteRequest?]
     # @return [Tuple(Stripe::AppsSecret, Integer, Hash)] Stripe::AppsSecret, response status code and response headers
     def post_apps_secrets_delete_with_http_info(
       *,
-      name : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil
+      post_apps_secrets_delete_request : Stripe::PostAppsSecretsDeleteRequest? = nil
     ) : Tuple(Stripe::AppsSecret, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_apps_secrets_delete(name: name, scope: scope, expand: expand)
+      request = build_api_request_for_post_apps_secrets_delete(post_apps_secrets_delete_request: post_apps_secrets_delete_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -445,68 +393,53 @@ module Stripe
     end
 
     # &lt;p&gt;Deletes a secret from the secret store by name and scope.&lt;/p&gt;
-    # @required @param name [String?] A name for the secret that's unique within the scope.
-    # @required @param scope [Stripe::ScopeParam?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @required @param post_apps_secrets_delete_request [Stripe::PostAppsSecretsDeleteRequest?]
     # @return nil
     def post_apps_secrets_delete(
       *,
-      name : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil,
+      post_apps_secrets_delete_request : Stripe::PostAppsSecretsDeleteRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_apps_secrets_delete(name: name, scope: scope, expand: expand).execute(&block)
+      build_api_request_for_post_apps_secrets_delete(post_apps_secrets_delete_request: post_apps_secrets_delete_request).execute(&block)
     end
-
-    POST_APPS_SECRETS_DELETE_MAX_LENGTH_FOR_NAME = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_apps_secrets_delete(
       *,
-      name : String? = nil,
-      scope : Stripe::ScopeParam? = nil,
-      expand : Array(String)? = nil
+      post_apps_secrets_delete_request : Stripe::PostAppsSecretsDeleteRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AppsApi.post_apps_secrets_delete ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"name\" is required and cannot be null") if name.nil?
-        unless (_name = name).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_APPS_SECRETS_DELETE_MAX_LENGTH_FOR_NAME)
-        end
-        raise ArgumentError.new("\"scope\" is required and cannot be null") if scope.nil?
-        unless (_scope = scope).nil?
-          _scope.validate if _scope.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_apps_secrets_delete_request\" is required and cannot be null") if post_apps_secrets_delete_request.nil?
+        unless (_post_apps_secrets_delete_request = post_apps_secrets_delete_request).nil?
+          _post_apps_secrets_delete_request.validate if _post_apps_secrets_delete_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/apps/secrets/delete"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["scope"] = scope.to_s if !scope.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_apps_secrets_delete_request, content_type: header_params["Content-Type"]?) if !post_apps_secrets_delete_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

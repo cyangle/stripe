@@ -49,21 +49,8 @@ describe "OrdersApi" do
 
   # unit tests for post_orders
   # &lt;p&gt;Creates a new &lt;code&gt;open&lt;/code&gt; order object.&lt;/p&gt;
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @param line_items A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
+  # @param post_orders_request
   # @param [Hash] opts the optional parameters
-  # @option opts [AutomaticTax] :automatic_tax
-  # @option opts [PostOrdersRequestBillingDetails] :billing_details
-  # @option opts [ClientPermissions] :client_permissions
-  # @option opts [String] :customer The customer associated with this order.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [PostOrdersRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :ip_address The IP address of the purchaser for this order.
-  # @option opts [CreateParams] :payment
-  # @option opts [PostOrdersRequestShippingCost] :shipping_cost
-  # @option opts [PostOrdersRequestShippingDetails] :shipping_details
-  # @option opts [TaxDetails] :tax_details
   # @return [Order]
   describe "post_orders test" do
     it "should work" do
@@ -75,21 +62,7 @@ describe "OrdersApi" do
   # &lt;p&gt;Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [AutomaticTax] :automatic_tax
-  # @option opts [PostOrdersRequestBillingDetails] :billing_details
-  # @option opts [ClientPermissions] :client_permissions
-  # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [String] :customer The customer associated with this order.
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [PostOrdersIdRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :ip_address The IP address of the purchaser for this order.
-  # @option opts [Array(PostOrdersIdRequestLineItemsInner)] :line_items A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [UpdateParams] :payment
-  # @option opts [PostOrdersRequestShippingCost] :shipping_cost
-  # @option opts [PostOrdersRequestShippingDetails] :shipping_details
-  # @option opts [TaxDetails] :tax_details
+  # @option opts [PostOrdersIdRequest] :post_orders_id_request
   # @return [Order]
   describe "post_orders_id test" do
     it "should work" do

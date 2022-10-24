@@ -47,7 +47,7 @@ describe "CustomersApi" do
   # @param customer
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountsAccountLoginLinksRequest] :post_accounts_account_login_links_request
   # @return [DeleteCustomersCustomerSourcesId200Response]
   describe "delete_customers_customer_sources_id test" do
     it "should work" do
@@ -251,28 +251,7 @@ describe "CustomersApi" do
   # unit tests for post_customers
   # &lt;p&gt;Creates a new customer object.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [PostCustomersRequestAddress] :address
-  # @option opts [Int32] :balance An integer amount in cents (or local equivalent) that represents the customer&#39;s current balance, which affect the customer&#39;s future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-  # @option opts [CashBalanceParam] :cash_balance
-  # @option opts [String] :coupon
-  # @option opts [String] :description An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-  # @option opts [String] :email Customer&#39;s email address. It&#39;s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :invoice_prefix The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-  # @option opts [CustomerParam] :invoice_settings
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :name The customer&#39;s full name or business name.
-  # @option opts [Int32] :next_invoice_sequence The sequence to be used on the customer&#39;s next invoice. Defaults to 1.
-  # @option opts [String] :payment_method
-  # @option opts [String] :phone The customer&#39;s phone number.
-  # @option opts [Array(String)] :preferred_locales Customer&#39;s preferred languages, ordered by preference.
-  # @option opts [String] :promotion_code The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-  # @option opts [PostCustomersRequestShipping] :shipping
-  # @option opts [String] :source
-  # @option opts [TaxParam] :tax
-  # @option opts [String] :tax_exempt The customer&#39;s tax exemption. One of &#x60;none&#x60;, &#x60;exempt&#x60;, or &#x60;reverse&#x60;.
-  # @option opts [Array(DataParams)] :tax_id_data The customer&#39;s tax IDs.
-  # @option opts [String] :test_clock ID of the test clock to attach to the customer.
+  # @option opts [PostCustomersRequest] :post_customers_request
   # @return [Customer]
   describe "post_customers test" do
     it "should work" do
@@ -284,31 +263,7 @@ describe "CustomersApi" do
   # &lt;p&gt;Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the &lt;strong&gt;source&lt;/strong&gt; parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid card source by passing the &lt;strong&gt;source&lt;/strong&gt; parameter: for each of the customer’s current subscriptions, if the subscription bills automatically and is in the &lt;code&gt;past_due&lt;/code&gt; state, then the latest open invoice for the subscription with automatic collection enabled will be retried. This retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice. Changing the &lt;strong&gt;default_source&lt;/strong&gt; for a customer will not trigger this behavior.&lt;/p&gt;  &lt;p&gt;This request accepts mostly the same arguments as the customer creation call.&lt;/p&gt;
   # @param customer
   # @param [Hash] opts the optional parameters
-  # @option opts [PostCustomersRequestAddress] :address
-  # @option opts [Int32] :balance An integer amount in cents (or local equivalent) that represents the customer&#39;s current balance, which affect the customer&#39;s future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
-  # @option opts [PostCustomersCustomerRequestBankAccount] :bank_account
-  # @option opts [PostChargesRequestCard] :card
-  # @option opts [CashBalanceParam] :cash_balance
-  # @option opts [String] :coupon
-  # @option opts [String] :default_alipay_account ID of Alipay account to make the customer&#39;s new default for invoice payments.
-  # @option opts [String] :default_bank_account ID of bank account to make the customer&#39;s new default for invoice payments.
-  # @option opts [String] :default_card ID of card to make the customer&#39;s new default for invoice payments.
-  # @option opts [String] :default_source If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) parameter.  Provide the ID of a payment source already attached to this customer to make it this customer&#39;s default payment source.  If you want to add a new payment source and make it the default, see the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
-  # @option opts [String] :description An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
-  # @option opts [String] :email Customer&#39;s email address. It&#39;s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :invoice_prefix The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
-  # @option opts [CustomerParam] :invoice_settings
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :name The customer&#39;s full name or business name.
-  # @option opts [Int32] :next_invoice_sequence The sequence to be used on the customer&#39;s next invoice. Defaults to 1.
-  # @option opts [String] :phone The customer&#39;s phone number.
-  # @option opts [Array(String)] :preferred_locales Customer&#39;s preferred languages, ordered by preference.
-  # @option opts [String] :promotion_code The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
-  # @option opts [PostCustomersRequestShipping] :shipping
-  # @option opts [String] :source
-  # @option opts [TaxParam] :tax
-  # @option opts [String] :tax_exempt The customer&#39;s tax exemption. One of &#x60;none&#x60;, &#x60;exempt&#x60;, or &#x60;reverse&#x60;.
+  # @option opts [PostCustomersCustomerRequest] :post_customers_customer_request
   # @return [Customer]
   describe "post_customers_customer test" do
     it "should work" do
@@ -319,12 +274,8 @@ describe "CustomersApi" do
   # unit tests for post_customers_customer_balance_transactions
   # &lt;p&gt;Creates an immutable transaction that updates the customer’s credit &lt;a href&#x3D;\&quot;/docs/billing/customer/balance\&quot;&gt;balance&lt;/a&gt;.&lt;/p&gt;
   # @param customer
-  # @param amount The integer amount in **cents (or local equivalent)** to apply to the customer&#39;s credit balance.
-  # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the customer&#39;s [&#x60;currency&#x60;](https://stripe.com/docs/api/customers/object#customer_object-currency) is set, this value must match it. If the customer&#39;s &#x60;currency&#x60; is not set, it will be updated to this value.
+  # @param post_customers_customer_balance_transactions_request
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
   # @return [CustomerBalanceTransaction]
   describe "post_customers_customer_balance_transactions test" do
     it "should work" do
@@ -337,9 +288,7 @@ describe "CustomersApi" do
   # @param customer
   # @param transaction
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
+  # @option opts [PostCustomersCustomerBalanceTransactionsTransactionRequest] :post_customers_customer_balance_transactions_transaction_request
   # @return [CustomerBalanceTransaction]
   describe "post_customers_customer_balance_transactions_transaction test" do
     it "should work" do
@@ -351,8 +300,7 @@ describe "CustomersApi" do
   # &lt;p&gt;Changes the settings on a customer’s cash balance.&lt;/p&gt;
   # @param customer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [BalanceSettingsParam] :settings
+  # @option opts [PostCustomersCustomerCashBalanceRequest] :post_customers_customer_cash_balance_request
   # @return [CashBalance]
   describe "post_customers_customer_cash_balance test" do
     it "should work" do
@@ -364,11 +312,7 @@ describe "CustomersApi" do
   # &lt;p&gt;When you create a new credit card, you must specify a customer or recipient on which to create it.&lt;/p&gt;  &lt;p&gt;If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should &lt;a href&#x3D;\&quot;/docs/api#update_customer\&quot;&gt;update the customer&lt;/a&gt; to have a new &lt;code&gt;default_source&lt;/code&gt;.&lt;/p&gt;
   # @param customer
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :alipay_account A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
-  # @option opts [PostCustomersCustomerRequestBankAccount] :bank_account
-  # @option opts [PostChargesRequestCard] :card
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :source Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @option opts [PostCustomersCustomerSourcesRequest] :post_customers_customer_sources_request
   # @return [PaymentSource]
   describe "post_customers_customer_sources test" do
     it "should work" do
@@ -381,20 +325,7 @@ describe "CustomersApi" do
   # @param customer
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
-  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
-  # @option opts [String] :address_city City/District/Suburb/Town/Village.
-  # @option opts [String] :address_country Billing address country, if provided when creating card.
-  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
-  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
-  # @option opts [String] :address_state State/County/Province/Region.
-  # @option opts [String] :address_zip ZIP or postal code.
-  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
-  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :name Cardholder name.
-  # @option opts [Owner] :owner
+  # @option opts [PostCustomersCustomerSourcesIdRequest] :post_customers_customer_sources_id_request
   # @return [PostCustomersCustomerSourcesId200Response]
   describe "post_customers_customer_sources_id test" do
     it "should work" do
@@ -407,8 +338,7 @@ describe "CustomersApi" do
   # @param customer
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostCustomersCustomerSourcesIdVerifyRequest] :post_customers_customer_sources_id_verify_request
   # @return [BankAccount]
   describe "post_customers_customer_sources_id_verify test" do
     it "should work" do
@@ -419,10 +349,8 @@ describe "CustomersApi" do
   # unit tests for post_customers_customer_tax_ids
   # &lt;p&gt;Creates a new &lt;code&gt;TaxID&lt;/code&gt; object for a customer.&lt;/p&gt;
   # @param customer
-  # @param _type Type of the tax ID, one of &#x60;ae_trn&#x60;, &#x60;au_abn&#x60;, &#x60;au_arn&#x60;, &#x60;bg_uic&#x60;, &#x60;br_cnpj&#x60;, &#x60;br_cpf&#x60;, &#x60;ca_bn&#x60;, &#x60;ca_gst_hst&#x60;, &#x60;ca_pst_bc&#x60;, &#x60;ca_pst_mb&#x60;, &#x60;ca_pst_sk&#x60;, &#x60;ca_qst&#x60;, &#x60;ch_vat&#x60;, &#x60;cl_tin&#x60;, &#x60;es_cif&#x60;, &#x60;eu_oss_vat&#x60;, &#x60;eu_vat&#x60;, &#x60;gb_vat&#x60;, &#x60;ge_vat&#x60;, &#x60;hk_br&#x60;, &#x60;hu_tin&#x60;, &#x60;id_npwp&#x60;, &#x60;il_vat&#x60;, &#x60;in_gst&#x60;, &#x60;is_vat&#x60;, &#x60;jp_cn&#x60;, &#x60;jp_rn&#x60;, &#x60;kr_brn&#x60;, &#x60;li_uid&#x60;, &#x60;mx_rfc&#x60;, &#x60;my_frp&#x60;, &#x60;my_itn&#x60;, &#x60;my_sst&#x60;, &#x60;no_vat&#x60;, &#x60;nz_gst&#x60;, &#x60;ru_inn&#x60;, &#x60;ru_kpp&#x60;, &#x60;sa_vat&#x60;, &#x60;sg_gst&#x60;, &#x60;sg_uen&#x60;, &#x60;si_tin&#x60;, &#x60;th_vat&#x60;, &#x60;tw_vat&#x60;, &#x60;ua_vat&#x60;, &#x60;us_ein&#x60;, or &#x60;za_vat&#x60;
-  # @param value Value of the tax ID.
+  # @param post_customers_customer_tax_ids_request
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TaxId]
   describe "post_customers_customer_tax_ids test" do
     it "should work" do

@@ -43,7 +43,6 @@ module Stripe
 
     # Optional Properties
 
-    # A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are represented in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "available", type: Hash(String, Int32)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available.nil? && !available_present?)]
     getter available : Hash(String, Int32)? = nil
 

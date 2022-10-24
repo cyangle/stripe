@@ -127,8 +127,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/payment_intents"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["created"] = created.to_s if !created.nil?
@@ -136,19 +144,11 @@ module Stripe
       query_params["customer"] = customer.to_s if !customer.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -246,24 +246,24 @@ module Stripe
       # resource path
       local_var_path = "/v1/payment_intents/{intent}".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      query_params["client_secret"] = client_secret.to_s if !client_secret.nil?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      query_params["client_secret"] = client_secret.to_s if !client_secret.nil?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -367,26 +367,26 @@ module Stripe
       # resource path
       local_var_path = "/v1/payment_intents/search"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["page"] = page.to_s if !page.nil?
       query_params["limit"] = limit.to_s if !limit.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
       query_params["query"] = query.to_s if !query.nil?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -405,136 +405,24 @@ module Stripe
     end
 
     # <p>Creates a PaymentIntent object.</p>  <p>After the PaymentIntent is created, attach a payment method and <a href=\"/docs/api/payment_intents/confirm\">confirm</a> to continue the payment. You can read more about the different payment flows available via the Payment Intents API <a href=\"/docs/payments/payment-intents\">here</a>.</p>  <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and confirming the PaymentIntent in the same call. You may use any parameters available in the <a href=\"/docs/api/payment_intents/confirm\">confirm API</a> when <code>confirm=true</code> is supplied.</p>
-    # @required @param amount [Int32?] Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param automatic_payment_methods [Stripe::AutomaticPaymentMethodsParam?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param confirm [Bool?] Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
-    # @optional @param confirmation_method [String?]
-    # @optional @param customer [String?] ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param error_on_requires_action [Bool?] Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication). This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [String?] ID of the mandate to be used for this payment. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param mandate_data [Stripe::SecretKeyParam?]
-    # @optional @param off_session [Stripe::PostPaymentIntentsRequestOffSession?]
-    # @optional @param on_behalf_of [String?] The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.  If this parameter is omitted with `confirm=true`, `customer.default_source` will be attached as this PaymentIntent's payment instrument to improve the migration experience for users of the Charges API. We recommend that you explicitly provide the `payment_method` going forward.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this is not provided, defaults to [\\\"card\\\"]. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [String?] Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-    # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataCreationParams?]
-    # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
-    # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+    # @required @param post_payment_intents_request [Stripe::PostPaymentIntentsRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      application_fee_amount : Int64? = nil,
-      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
-      capture_method : String? = nil,
-      confirm : Bool? = nil,
-      confirmation_method : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::SecretKeyParam? = nil,
-      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
-      on_behalf_of : String? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataCreationParams? = nil,
-      transfer_group : String? = nil,
-      use_stripe_sdk : Bool? = nil
+      post_payment_intents_request : Stripe::PostPaymentIntentsRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_with_http_info(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk)
+      data, _status_code, _headers = post_payment_intents_with_http_info(post_payment_intents_request: post_payment_intents_request)
       data
     end
 
     # &lt;p&gt;Creates a PaymentIntent object.&lt;/p&gt;  &lt;p&gt;After the PaymentIntent is created, attach a payment method and &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm&lt;/a&gt; to continue the payment. You can read more about the different payment flows available via the Payment Intents API &lt;a href&#x3D;\&quot;/docs/payments/payment-intents\&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;When &lt;code&gt;confirm&#x3D;true&lt;/code&gt; is used during creation, it is equivalent to creating and confirming the PaymentIntent in the same call. You may use any parameters available in the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; when &lt;code&gt;confirm&#x3D;true&lt;/code&gt; is supplied.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param automatic_payment_methods [Stripe::AutomaticPaymentMethodsParam?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param confirm [Bool?] Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
-    # @optional @param confirmation_method [String?]
-    # @optional @param customer [String?] ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param error_on_requires_action [Bool?] Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication). This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [String?] ID of the mandate to be used for this payment. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param mandate_data [Stripe::SecretKeyParam?]
-    # @optional @param off_session [Stripe::PostPaymentIntentsRequestOffSession?]
-    # @optional @param on_behalf_of [String?] The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.  If this parameter is omitted with `confirm=true`, `customer.default_source` will be attached as this PaymentIntent's payment instrument to improve the migration experience for users of the Charges API. We recommend that you explicitly provide the `payment_method` going forward.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this is not provided, defaults to [\\\"card\\\"]. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [String?] Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-    # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataCreationParams?]
-    # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
-    # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+    # @required @param post_payment_intents_request [Stripe::PostPaymentIntentsRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      application_fee_amount : Int64? = nil,
-      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
-      capture_method : String? = nil,
-      confirm : Bool? = nil,
-      confirmation_method : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::SecretKeyParam? = nil,
-      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
-      on_behalf_of : String? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataCreationParams? = nil,
-      transfer_group : String? = nil,
-      use_stripe_sdk : Bool? = nil
+      post_payment_intents_request : Stripe::PostPaymentIntentsRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk)
+      request = build_api_request_for_post_payment_intents(post_payment_intents_request: post_payment_intents_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -546,232 +434,53 @@ module Stripe
     end
 
     # &lt;p&gt;Creates a PaymentIntent object.&lt;/p&gt;  &lt;p&gt;After the PaymentIntent is created, attach a payment method and &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm&lt;/a&gt; to continue the payment. You can read more about the different payment flows available via the Payment Intents API &lt;a href&#x3D;\&quot;/docs/payments/payment-intents\&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;When &lt;code&gt;confirm&#x3D;true&lt;/code&gt; is used during creation, it is equivalent to creating and confirming the PaymentIntent in the same call. You may use any parameters available in the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; when &lt;code&gt;confirm&#x3D;true&lt;/code&gt; is supplied.&lt;/p&gt;
-    # @required @param amount [Int32?] Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param automatic_payment_methods [Stripe::AutomaticPaymentMethodsParam?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param confirm [Bool?] Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
-    # @optional @param confirmation_method [String?]
-    # @optional @param customer [String?] ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param error_on_requires_action [Bool?] Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication). This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [String?] ID of the mandate to be used for this payment. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param mandate_data [Stripe::SecretKeyParam?]
-    # @optional @param off_session [Stripe::PostPaymentIntentsRequestOffSession?]
-    # @optional @param on_behalf_of [String?] The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.  If this parameter is omitted with `confirm=true`, `customer.default_source` will be attached as this PaymentIntent's payment instrument to improve the migration experience for users of the Charges API. We recommend that you explicitly provide the `payment_method` going forward.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this is not provided, defaults to [\\\"card\\\"]. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [String?] Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-    # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
-    # @optional @param shipping [Stripe::OptionalFieldsShipping?]
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataCreationParams?]
-    # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
-    # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+    # @required @param post_payment_intents_request [Stripe::PostPaymentIntentsRequest?]
     # @return nil
     def post_payment_intents(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      application_fee_amount : Int64? = nil,
-      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
-      capture_method : String? = nil,
-      confirm : Bool? = nil,
-      confirmation_method : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::SecretKeyParam? = nil,
-      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
-      on_behalf_of : String? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataCreationParams? = nil,
-      transfer_group : String? = nil,
-      use_stripe_sdk : Bool? = nil,
+      post_payment_intents_request : Stripe::PostPaymentIntentsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents(amount: amount, currency: currency, application_fee_amount: application_fee_amount, automatic_payment_methods: automatic_payment_methods, capture_method: capture_method, confirm: confirm, confirmation_method: confirmation_method, customer: customer, description: description, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, on_behalf_of: on_behalf_of, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group, use_stripe_sdk: use_stripe_sdk).execute(&block)
+      build_api_request_for_post_payment_intents(post_payment_intents_request: post_payment_intents_request).execute(&block)
     end
-
-    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CAPTURE_METHOD            = String.static_array("automatic", "manual")
-    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CONFIRMATION_METHOD       = String.static_array("automatic", "manual")
-    POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_CUSTOMER                    = 5000
-    POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_DESCRIPTION                 = 1000
-    POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_MANDATE                     = 5000
-    POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_PAYMENT_METHOD              = 5000
-    POST_PAYMENT_INTENTS_VALID_VALUES_FOR_SETUP_FUTURE_USAGE        = String.static_array("off_session", "on_session")
-    POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        = 22
-    POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      application_fee_amount : Int64? = nil,
-      automatic_payment_methods : Stripe::AutomaticPaymentMethodsParam? = nil,
-      capture_method : String? = nil,
-      confirm : Bool? = nil,
-      confirmation_method : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::SecretKeyParam? = nil,
-      off_session : Stripe::PostPaymentIntentsRequestOffSession? = nil,
-      on_behalf_of : String? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : String? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::OptionalFieldsShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataCreationParams? = nil,
-      transfer_group : String? = nil,
-      use_stripe_sdk : Bool? = nil
+      post_payment_intents_request : Stripe::PostPaymentIntentsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        unless (_automatic_payment_methods = automatic_payment_methods).nil?
-          _automatic_payment_methods.validate if _automatic_payment_methods.is_a?(OpenApi::Validatable)
-        end
-        unless (_capture_method = capture_method).nil?
-          OpenApi::EnumValidator.validate("capture_method", _capture_method, POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CAPTURE_METHOD)
-        end
-
-        unless (_confirmation_method = confirmation_method).nil?
-          OpenApi::EnumValidator.validate("confirmation_method", _confirmation_method, POST_PAYMENT_INTENTS_VALID_VALUES_FOR_CONFIRMATION_METHOD)
-        end
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_mandate = mandate).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("mandate", mandate.to_s.size, POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_MANDATE)
-        end
-        unless (_mandate_data = mandate_data).nil?
-          _mandate_data.validate if _mandate_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_off_session = off_session).nil?
-          _off_session.validate if _off_session.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_payment_method = payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payment_method", payment_method.to_s.size, POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_PAYMENT_METHOD)
-        end
-        unless (_payment_method_data = payment_method_data).nil?
-          _payment_method_data.validate if _payment_method_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_method_options = payment_method_options).nil?
-          _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_radar_options = radar_options).nil?
-          _radar_options.validate if _radar_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_setup_future_usage = setup_future_usage).nil?
-          OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, POST_PAYMENT_INTENTS_VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_statement_descriptor_suffix = statement_descriptor_suffix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", statement_descriptor_suffix.to_s.size, POST_PAYMENT_INTENTS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_payment_intents_request\" is required and cannot be null") if post_payment_intents_request.nil?
+        unless (_post_payment_intents_request = post_payment_intents_request).nil?
+          _post_payment_intents_request.validate if _post_payment_intents_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["automatic_payment_methods"] = automatic_payment_methods.to_s if !automatic_payment_methods.nil?
-      form_params["capture_method"] = capture_method.to_s if !capture_method.nil?
-      form_params["confirm"] = confirm.to_s if !confirm.nil?
-      form_params["confirmation_method"] = confirmation_method.to_s if !confirmation_method.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["error_on_requires_action"] = error_on_requires_action.to_s if !error_on_requires_action.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["mandate"] = mandate.to_s if !mandate.nil?
-      form_params["mandate_data"] = mandate_data.to_s if !mandate_data.nil?
-      form_params["off_session"] = off_session.to_s if !off_session.nil?
-      form_params["on_behalf_of"] = on_behalf_of.to_s if !on_behalf_of.nil?
-      form_params["payment_method"] = payment_method.to_s if !payment_method.nil?
-      form_params["payment_method_data"] = payment_method_data.to_s if !payment_method_data.nil?
-      form_params["payment_method_options"] = payment_method_options.to_s if !payment_method_options.nil?
-      form_params["payment_method_types"] = @api_client.build_collection_param(payment_method_types, "csv") if !payment_method_types.nil? && !payment_method_types.empty?
-      form_params["radar_options"] = radar_options.to_s if !radar_options.nil?
-      form_params["receipt_email"] = receipt_email.to_s if !receipt_email.nil?
-      form_params["return_url"] = return_url.to_s if !return_url.nil?
-      form_params["setup_future_usage"] = setup_future_usage.to_s if !setup_future_usage.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["statement_descriptor_suffix"] = statement_descriptor_suffix.to_s if !statement_descriptor_suffix.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
-      form_params["use_stripe_sdk"] = use_stripe_sdk.to_s if !use_stripe_sdk.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -791,99 +500,27 @@ module Stripe
 
     # <p>Updates properties on a PaymentIntent object without confirming.</p>  <p>Depending on which properties you update, you may need to confirm the PaymentIntent again. For example, updating the <code>payment_method</code> will always require you to confirm the PaymentIntent again. If you prefer to update and confirm at the same time, we recommend updating properties via the <a href=\"/docs/api/payment_intents/confirm\">confirm API</a> instead.</p>
     # @required @param intent [String?]
-    # @optional @param amount [Int32?] Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @optional @param application_fee_amount [Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
-    # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+    # @optional @param post_payment_intents_intent_request [Stripe::PostPaymentIntentsIntentRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
-      capture_method : String? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil,
-      transfer_group : String? = nil
+      post_payment_intents_intent_request : Stripe::PostPaymentIntentsIntentRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_with_http_info(intent: intent, amount: amount, application_fee_amount: application_fee_amount, capture_method: capture_method, currency: currency, customer: customer, description: description, expand: expand, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, receipt_email: receipt_email, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
+      data, _status_code, _headers = post_payment_intents_intent_with_http_info(intent: intent, post_payment_intents_intent_request: post_payment_intents_intent_request)
       data
     end
 
     # &lt;p&gt;Updates properties on a PaymentIntent object without confirming.&lt;/p&gt;  &lt;p&gt;Depending on which properties you update, you may need to confirm the PaymentIntent again. For example, updating the &lt;code&gt;payment_method&lt;/code&gt; will always require you to confirm the PaymentIntent again. If you prefer to update and confirm at the same time, we recommend updating properties via the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; instead.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amount [Int32?] Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @optional @param application_fee_amount [Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
-    # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+    # @optional @param post_payment_intents_intent_request [Stripe::PostPaymentIntentsIntentRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_with_http_info(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
-      capture_method : String? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil,
-      transfer_group : String? = nil
+      post_payment_intents_intent_request : Stripe::PostPaymentIntentsIntentRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent(intent: intent, amount: amount, application_fee_amount: application_fee_amount, capture_method: capture_method, currency: currency, customer: customer, description: description, expand: expand, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, receipt_email: receipt_email, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group)
+      request = build_api_request_for_post_payment_intents_intent(intent: intent, post_payment_intents_intent_request: post_payment_intents_intent_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -896,85 +533,24 @@ module Stripe
 
     # &lt;p&gt;Updates properties on a PaymentIntent object without confirming.&lt;/p&gt;  &lt;p&gt;Depending on which properties you update, you may need to confirm the PaymentIntent again. For example, updating the &lt;code&gt;payment_method&lt;/code&gt; will always require you to confirm the PaymentIntent again. If you prefer to update and confirm at the same time, we recommend updating properties via the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; instead.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amount [Int32?] Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-    # @optional @param application_fee_amount [Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param customer [String?] ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
-    # @optional @param transfer_group [String?] A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+    # @optional @param post_payment_intents_intent_request [Stripe::PostPaymentIntentsIntentRequest?]
     # @return nil
     def post_payment_intents_intent(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
-      capture_method : String? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil,
-      transfer_group : String? = nil,
+      post_payment_intents_intent_request : Stripe::PostPaymentIntentsIntentRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent(intent: intent, amount: amount, application_fee_amount: application_fee_amount, capture_method: capture_method, currency: currency, customer: customer, description: description, expand: expand, metadata: metadata, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, receipt_email: receipt_email, setup_future_usage: setup_future_usage, shipping: shipping, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data, transfer_group: transfer_group).execute(&block)
+      build_api_request_for_post_payment_intents_intent(intent: intent, post_payment_intents_intent_request: post_payment_intents_intent_request).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_INTENT                      = 5000
-    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_CAPTURE_METHOD            = String.static_array("automatic", "manual")
-    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_CUSTOMER                    = 5000
-    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_DESCRIPTION                 = 1000
-    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD              = 5000
-    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_SETUP_FUTURE_USAGE        = String.static_array("", "off_session", "on_session")
-    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        = 22
-    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 22
+    POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
-      capture_method : String? = nil,
-      currency : String? = nil,
-      customer : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil,
-      transfer_group : String? = nil
+      post_payment_intents_intent_request : Stripe::PostPaymentIntentsIntentRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent ..." }
@@ -985,94 +561,32 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_INTENT)
         end
-
-        unless (_application_fee_amount = application_fee_amount).nil?
-          _application_fee_amount.validate if _application_fee_amount.is_a?(OpenApi::Validatable)
-        end
-        unless (_capture_method = capture_method).nil?
-          OpenApi::EnumValidator.validate("capture_method", _capture_method, POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_CAPTURE_METHOD)
-        end
-
-        unless (_customer = customer).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_CUSTOMER)
-        end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_method = payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payment_method", payment_method.to_s.size, POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD)
-        end
-        unless (_payment_method_data = payment_method_data).nil?
-          _payment_method_data.validate if _payment_method_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_method_options = payment_method_options).nil?
-          _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_receipt_email = receipt_email).nil?
-          _receipt_email.validate if _receipt_email.is_a?(OpenApi::Validatable)
-        end
-        unless (_setup_future_usage = setup_future_usage).nil?
-          OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_statement_descriptor_suffix = statement_descriptor_suffix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", statement_descriptor_suffix.to_s.size, POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_payment_intents_intent_request = post_payment_intents_intent_request).nil?
+          _post_payment_intents_intent_request.validate if _post_payment_intents_intent_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["capture_method"] = capture_method.to_s if !capture_method.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["customer"] = customer.to_s if !customer.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["payment_method"] = payment_method.to_s if !payment_method.nil?
-      form_params["payment_method_data"] = payment_method_data.to_s if !payment_method_data.nil?
-      form_params["payment_method_options"] = payment_method_options.to_s if !payment_method_options.nil?
-      form_params["payment_method_types"] = @api_client.build_collection_param(payment_method_types, "csv") if !payment_method_types.nil? && !payment_method_types.empty?
-      form_params["receipt_email"] = receipt_email.to_s if !receipt_email.nil?
-      form_params["setup_future_usage"] = setup_future_usage.to_s if !setup_future_usage.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["statement_descriptor_suffix"] = statement_descriptor_suffix.to_s if !statement_descriptor_suffix.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1092,35 +606,27 @@ module Stripe
 
     # <p>Manually reconcile the remaining amount for a customer_balance PaymentIntent.</p>
     # @required @param intent [String?]
-    # @optional @param amount [Int32?] Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_apply_customer_balance_request [Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent_apply_customer_balance(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_apply_customer_balance_request : Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_apply_customer_balance_with_http_info(intent: intent, amount: amount, currency: currency, expand: expand)
+      data, _status_code, _headers = post_payment_intents_intent_apply_customer_balance_with_http_info(intent: intent, post_payment_intents_intent_apply_customer_balance_request: post_payment_intents_intent_apply_customer_balance_request)
       data
     end
 
     # &lt;p&gt;Manually reconcile the remaining amount for a customer_balance PaymentIntent.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amount [Int32?] Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_apply_customer_balance_request [Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_apply_customer_balance_with_http_info(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_apply_customer_balance_request : Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent_apply_customer_balance(intent: intent, amount: amount, currency: currency, expand: expand)
+      request = build_api_request_for_post_payment_intents_intent_apply_customer_balance(intent: intent, post_payment_intents_intent_apply_customer_balance_request: post_payment_intents_intent_apply_customer_balance_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1133,19 +639,15 @@ module Stripe
 
     # &lt;p&gt;Manually reconcile the remaining amount for a customer_balance PaymentIntent.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amount [Int32?] Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
-    # @optional @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_apply_customer_balance_request [Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest?]
     # @return nil
     def post_payment_intents_intent_apply_customer_balance(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil,
+      post_payment_intents_intent_apply_customer_balance_request : Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent_apply_customer_balance(intent: intent, amount: amount, currency: currency, expand: expand).execute(&block)
+      build_api_request_for_post_payment_intents_intent_apply_customer_balance(intent: intent, post_payment_intents_intent_apply_customer_balance_request: post_payment_intents_intent_apply_customer_balance_request).execute(&block)
     end
 
     POST_PAYMENT_INTENTS_INTENT_APPLY_CUSTOMER_BALANCE_MAX_LENGTH_FOR_INTENT = 5000
@@ -1154,9 +656,7 @@ module Stripe
     def build_api_request_for_post_payment_intents_intent_apply_customer_balance(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_apply_customer_balance_request : Stripe::PostPaymentIntentsIntentApplyCustomerBalanceRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_apply_customer_balance ..." }
@@ -1167,32 +667,32 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_APPLY_CUSTOMER_BALANCE_MAX_LENGTH_FOR_INTENT)
         end
+        unless (_post_payment_intents_intent_apply_customer_balance_request = post_payment_intents_intent_apply_customer_balance_request).nil?
+          _post_payment_intents_intent_apply_customer_balance_request.validate if _post_payment_intents_intent_apply_customer_balance_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}/apply_customer_balance".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_apply_customer_balance_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_apply_customer_balance_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1212,31 +712,27 @@ module Stripe
 
     # <p>A PaymentIntent object can be canceled when it is in one of these statuses: <code>requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation</code>, <code>requires_action</code>, or <code>processing</code>. </p>  <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on the PaymentIntent will fail with an error. For PaymentIntents with <code>status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will automatically be refunded. </p>  <p>You cannot cancel the PaymentIntent for a Checkout Session. <a href=\"/docs/api/checkout/sessions/expire\">Expire the Checkout Session</a> instead</p>
     # @required @param intent [String?]
-    # @optional @param cancellation_reason [String?] Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_cancel_request [Stripe::PostPaymentIntentsIntentCancelRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent_cancel(
       *,
       intent : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_cancel_request : Stripe::PostPaymentIntentsIntentCancelRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_cancel_with_http_info(intent: intent, cancellation_reason: cancellation_reason, expand: expand)
+      data, _status_code, _headers = post_payment_intents_intent_cancel_with_http_info(intent: intent, post_payment_intents_intent_cancel_request: post_payment_intents_intent_cancel_request)
       data
     end
 
     # &lt;p&gt;A PaymentIntent object can be canceled when it is in one of these statuses: &lt;code&gt;requires_payment_method&lt;/code&gt;, &lt;code&gt;requires_capture&lt;/code&gt;, &lt;code&gt;requires_confirmation&lt;/code&gt;, &lt;code&gt;requires_action&lt;/code&gt;, or &lt;code&gt;processing&lt;/code&gt;. &lt;/p&gt;  &lt;p&gt;Once canceled, no additional charges will be made by the PaymentIntent and any operations on the PaymentIntent will fail with an error. For PaymentIntents with &lt;code&gt;status&#x3D;’requires_capture’&lt;/code&gt;, the remaining &lt;code&gt;amount_capturable&lt;/code&gt; will automatically be refunded. &lt;/p&gt;  &lt;p&gt;You cannot cancel the PaymentIntent for a Checkout Session. &lt;a href&#x3D;\&quot;/docs/api/checkout/sessions/expire\&quot;&gt;Expire the Checkout Session&lt;/a&gt; instead&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param cancellation_reason [String?] Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_cancel_request [Stripe::PostPaymentIntentsIntentCancelRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_cancel_with_http_info(
       *,
       intent : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_cancel_request : Stripe::PostPaymentIntentsIntentCancelRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent_cancel(intent: intent, cancellation_reason: cancellation_reason, expand: expand)
+      request = build_api_request_for_post_payment_intents_intent_cancel(intent: intent, post_payment_intents_intent_cancel_request: post_payment_intents_intent_cancel_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1249,29 +745,24 @@ module Stripe
 
     # &lt;p&gt;A PaymentIntent object can be canceled when it is in one of these statuses: &lt;code&gt;requires_payment_method&lt;/code&gt;, &lt;code&gt;requires_capture&lt;/code&gt;, &lt;code&gt;requires_confirmation&lt;/code&gt;, &lt;code&gt;requires_action&lt;/code&gt;, or &lt;code&gt;processing&lt;/code&gt;. &lt;/p&gt;  &lt;p&gt;Once canceled, no additional charges will be made by the PaymentIntent and any operations on the PaymentIntent will fail with an error. For PaymentIntents with &lt;code&gt;status&#x3D;’requires_capture’&lt;/code&gt;, the remaining &lt;code&gt;amount_capturable&lt;/code&gt; will automatically be refunded. &lt;/p&gt;  &lt;p&gt;You cannot cancel the PaymentIntent for a Checkout Session. &lt;a href&#x3D;\&quot;/docs/api/checkout/sessions/expire\&quot;&gt;Expire the Checkout Session&lt;/a&gt; instead&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param cancellation_reason [String?] Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_cancel_request [Stripe::PostPaymentIntentsIntentCancelRequest?]
     # @return nil
     def post_payment_intents_intent_cancel(
       *,
       intent : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil,
+      post_payment_intents_intent_cancel_request : Stripe::PostPaymentIntentsIntentCancelRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent_cancel(intent: intent, cancellation_reason: cancellation_reason, expand: expand).execute(&block)
+      build_api_request_for_post_payment_intents_intent_cancel(intent: intent, post_payment_intents_intent_cancel_request: post_payment_intents_intent_cancel_request).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_INTENT                = 5000
-    POST_PAYMENT_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_CANCELLATION_REASON   = 5000
-    POST_PAYMENT_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON = String.static_array("abandoned", "duplicate", "fraudulent", "requested_by_customer")
+    POST_PAYMENT_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_cancel(
       *,
       intent : String? = nil,
-      cancellation_reason : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_cancel_request : Stripe::PostPaymentIntentsIntentCancelRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_cancel ..." }
@@ -1282,34 +773,32 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_CANCEL_MAX_LENGTH_FOR_INTENT)
         end
-        unless (_cancellation_reason = cancellation_reason).nil?
-          OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, POST_PAYMENT_INTENTS_INTENT_CANCEL_VALID_VALUES_FOR_CANCELLATION_REASON)
+        unless (_post_payment_intents_intent_cancel_request = post_payment_intents_intent_cancel_request).nil?
+          _post_payment_intents_intent_cancel_request.validate if _post_payment_intents_intent_cancel_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}/cancel".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["cancellation_reason"] = cancellation_reason.to_s if !cancellation_reason.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_cancel_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_cancel_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1329,47 +818,27 @@ module Stripe
 
     # <p>Capture the funds of an existing uncaptured PaymentIntent when its status is <code>requires_capture</code>.</p>  <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by default).</p>  <p>Learn more about <a href=\"/docs/payments/capture-later\">separate authorization and capture</a>.</p>
     # @required @param intent [String?]
-    # @optional @param amount_to_capture [Int32?] The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
+    # @optional @param post_payment_intents_intent_capture_request [Stripe::PostPaymentIntentsIntentCaptureRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent_capture(
       *,
       intent : String? = nil,
-      amount_to_capture : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil
+      post_payment_intents_intent_capture_request : Stripe::PostPaymentIntentsIntentCaptureRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_capture_with_http_info(intent: intent, amount_to_capture: amount_to_capture, application_fee_amount: application_fee_amount, expand: expand, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data)
+      data, _status_code, _headers = post_payment_intents_intent_capture_with_http_info(intent: intent, post_payment_intents_intent_capture_request: post_payment_intents_intent_capture_request)
       data
     end
 
     # &lt;p&gt;Capture the funds of an existing uncaptured PaymentIntent when its status is &lt;code&gt;requires_capture&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by default).&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/payments/capture-later\&quot;&gt;separate authorization and capture&lt;/a&gt;.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amount_to_capture [Int32?] The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
+    # @optional @param post_payment_intents_intent_capture_request [Stripe::PostPaymentIntentsIntentCaptureRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_capture_with_http_info(
       *,
       intent : String? = nil,
-      amount_to_capture : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil
+      post_payment_intents_intent_capture_request : Stripe::PostPaymentIntentsIntentCaptureRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent_capture(intent: intent, amount_to_capture: amount_to_capture, application_fee_amount: application_fee_amount, expand: expand, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data)
+      request = build_api_request_for_post_payment_intents_intent_capture(intent: intent, post_payment_intents_intent_capture_request: post_payment_intents_intent_capture_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1382,41 +851,24 @@ module Stripe
 
     # &lt;p&gt;Capture the funds of an existing uncaptured PaymentIntent when its status is &lt;code&gt;requires_capture&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by default).&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/payments/capture-later\&quot;&gt;separate authorization and capture&lt;/a&gt;.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amount_to_capture [Int32?] The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param statement_descriptor_suffix [String?] Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
+    # @optional @param post_payment_intents_intent_capture_request [Stripe::PostPaymentIntentsIntentCaptureRequest?]
     # @return nil
     def post_payment_intents_intent_capture(
       *,
       intent : String? = nil,
-      amount_to_capture : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      post_payment_intents_intent_capture_request : Stripe::PostPaymentIntentsIntentCaptureRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent_capture(intent: intent, amount_to_capture: amount_to_capture, application_fee_amount: application_fee_amount, expand: expand, statement_descriptor: statement_descriptor, statement_descriptor_suffix: statement_descriptor_suffix, transfer_data: transfer_data).execute(&block)
+      build_api_request_for_post_payment_intents_intent_capture(intent: intent, post_payment_intents_intent_capture_request: post_payment_intents_intent_capture_request).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_INTENT                      = 5000
-    POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR        =   22
-    POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX =   22
+    POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_capture(
       *,
       intent : String? = nil,
-      amount_to_capture : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      statement_descriptor_suffix : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil
+      post_payment_intents_intent_capture_request : Stripe::PostPaymentIntentsIntentCaptureRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_capture ..." }
@@ -1427,45 +879,32 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_INTENT)
         end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_statement_descriptor_suffix = statement_descriptor_suffix).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", statement_descriptor_suffix.to_s.size, POST_PAYMENT_INTENTS_INTENT_CAPTURE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        unless (_post_payment_intents_intent_capture_request = post_payment_intents_intent_capture_request).nil?
+          _post_payment_intents_intent_capture_request.validate if _post_payment_intents_intent_capture_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}/capture".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount_to_capture"] = amount_to_capture.to_s if !amount_to_capture.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["statement_descriptor_suffix"] = statement_descriptor_suffix.to_s if !statement_descriptor_suffix.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_capture_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_capture_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1483,93 +922,29 @@ module Stripe
       )
     end
 
-    # <p>Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment.</p>  <p>If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the <code>requires_action</code> status and suggest additional actions via <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to <code>manual</code>).</p>  <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted using our <a href=\"/docs/stripe-js/reference#stripe-handle-card-payment\">client SDKs</a> and the PaymentIntent’s <a href=\"#payment_intent_object-client_secret\">client_secret</a>. After <code>next_action</code>s are handled by the client, no additional confirmation is required to complete the payment.</p>  <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the <a href=\"/docs/payments/payment-intents/web-manual\">expanded documentation</a> to learn more about manual confirmation.</p>
+    # <p>Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the <code>requires_action</code> status and suggest additional actions via <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted using our <a href=\"/docs/stripe-js/reference#stripe-handle-card-payment\">client SDKs</a> and the PaymentIntent’s <a href=\"#payment_intent_object-client_secret\">client_secret</a>. After <code>next_action</code>s are handled by the client, no additional confirmation is required to complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the <a href=\"/docs/payments/payment-intents/web-manual\">expanded documentation</a> to learn more about manual confirmation.</p>
     # @required @param intent [String?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param client_secret [String?] The client secret of the PaymentIntent.
-    # @optional @param error_on_requires_action [Bool?] Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [String?] ID of the mandate to be used for this payment.
-    # @optional @param mandate_data [Stripe::PostPaymentIntentsIntentConfirmRequestMandateData?]
-    # @optional @param off_session [Stripe::PostPaymentIntentsIntentConfirmRequestOffSession?]
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
-    # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
-    # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+    # @optional @param post_payment_intents_intent_confirm_request [Stripe::PostPaymentIntentsIntentConfirmRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent_confirm(
       *,
       intent : String? = nil,
-      capture_method : String? = nil,
-      client_secret : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
-      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      use_stripe_sdk : Bool? = nil
+      post_payment_intents_intent_confirm_request : Stripe::PostPaymentIntentsIntentConfirmRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_confirm_with_http_info(intent: intent, capture_method: capture_method, client_secret: client_secret, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, use_stripe_sdk: use_stripe_sdk)
+      data, _status_code, _headers = post_payment_intents_intent_confirm_with_http_info(intent: intent, post_payment_intents_intent_confirm_request: post_payment_intents_intent_confirm_request)
       data
     end
 
-    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment.&lt;/p&gt;  &lt;p&gt;If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;).&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment.&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
+    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param client_secret [String?] The client secret of the PaymentIntent.
-    # @optional @param error_on_requires_action [Bool?] Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [String?] ID of the mandate to be used for this payment.
-    # @optional @param mandate_data [Stripe::PostPaymentIntentsIntentConfirmRequestMandateData?]
-    # @optional @param off_session [Stripe::PostPaymentIntentsIntentConfirmRequestOffSession?]
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
-    # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
-    # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+    # @optional @param post_payment_intents_intent_confirm_request [Stripe::PostPaymentIntentsIntentConfirmRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_confirm_with_http_info(
       *,
       intent : String? = nil,
-      capture_method : String? = nil,
-      client_secret : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
-      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      use_stripe_sdk : Bool? = nil
+      post_payment_intents_intent_confirm_request : Stripe::PostPaymentIntentsIntentConfirmRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent_confirm(intent: intent, capture_method: capture_method, client_secret: client_secret, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, use_stripe_sdk: use_stripe_sdk)
+      request = build_api_request_for_post_payment_intents_intent_confirm(intent: intent, post_payment_intents_intent_confirm_request: post_payment_intents_intent_confirm_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1580,79 +955,26 @@ module Stripe
       Tuple.new(Stripe::PaymentIntent.from_json(body), status_code, headers)
     end
 
-    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment.&lt;/p&gt;  &lt;p&gt;If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;).&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment.&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
+    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
-    # @optional @param client_secret [String?] The client secret of the PaymentIntent.
-    # @optional @param error_on_requires_action [Bool?] Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param mandate [String?] ID of the mandate to be used for this payment.
-    # @optional @param mandate_data [Stripe::PostPaymentIntentsIntentConfirmRequestMandateData?]
-    # @optional @param off_session [Stripe::PostPaymentIntentsIntentConfirmRequestOffSession?]
-    # @optional @param payment_method [String?] ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
-    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
-    # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
-    # @optional @param payment_method_types [Array(String)?] The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param radar_options [Stripe::RadarOptions?]
-    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
-    # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
-    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
-    # @optional @param use_stripe_sdk [Bool?] Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle additional authentication steps.
+    # @optional @param post_payment_intents_intent_confirm_request [Stripe::PostPaymentIntentsIntentConfirmRequest?]
     # @return nil
     def post_payment_intents_intent_confirm(
       *,
       intent : String? = nil,
-      capture_method : String? = nil,
-      client_secret : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
-      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      use_stripe_sdk : Bool? = nil,
+      post_payment_intents_intent_confirm_request : Stripe::PostPaymentIntentsIntentConfirmRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent_confirm(intent: intent, capture_method: capture_method, client_secret: client_secret, error_on_requires_action: error_on_requires_action, expand: expand, mandate: mandate, mandate_data: mandate_data, off_session: off_session, payment_method: payment_method, payment_method_data: payment_method_data, payment_method_options: payment_method_options, payment_method_types: payment_method_types, radar_options: radar_options, receipt_email: receipt_email, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping, use_stripe_sdk: use_stripe_sdk).execute(&block)
+      build_api_request_for_post_payment_intents_intent_confirm(intent: intent, post_payment_intents_intent_confirm_request: post_payment_intents_intent_confirm_request).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_INTENT               = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_CAPTURE_METHOD     = String.static_array("automatic", "manual")
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_CLIENT_SECRET        = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_MANDATE              = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_PAYMENT_METHOD       = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_SETUP_FUTURE_USAGE = String.static_array("", "off_session", "on_session")
+    POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_confirm(
       *,
       intent : String? = nil,
-      capture_method : String? = nil,
-      client_secret : String? = nil,
-      error_on_requires_action : Bool? = nil,
-      expand : Array(String)? = nil,
-      mandate : String? = nil,
-      mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
-      off_session : Stripe::PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
-      payment_method : String? = nil,
-      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
-      payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
-      payment_method_types : Array(String)? = nil,
-      radar_options : Stripe::RadarOptions? = nil,
-      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      return_url : String? = nil,
-      setup_future_usage : String? = nil,
-      shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
-      use_stripe_sdk : Bool? = nil
+      post_payment_intents_intent_confirm_request : Stripe::PostPaymentIntentsIntentConfirmRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_confirm ..." }
@@ -1663,85 +985,32 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_INTENT)
         end
-        unless (_capture_method = capture_method).nil?
-          OpenApi::EnumValidator.validate("capture_method", _capture_method, POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_CAPTURE_METHOD)
-        end
-        unless (_client_secret = client_secret).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("client_secret", client_secret.to_s.size, POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_CLIENT_SECRET)
-        end
-
-        unless (_mandate = mandate).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("mandate", mandate.to_s.size, POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_MANDATE)
-        end
-        unless (_mandate_data = mandate_data).nil?
-          _mandate_data.validate if _mandate_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_off_session = off_session).nil?
-          _off_session.validate if _off_session.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_method = payment_method).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("payment_method", payment_method.to_s.size, POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_PAYMENT_METHOD)
-        end
-        unless (_payment_method_data = payment_method_data).nil?
-          _payment_method_data.validate if _payment_method_data.is_a?(OpenApi::Validatable)
-        end
-        unless (_payment_method_options = payment_method_options).nil?
-          _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_radar_options = radar_options).nil?
-          _radar_options.validate if _radar_options.is_a?(OpenApi::Validatable)
-        end
-        unless (_receipt_email = receipt_email).nil?
-          _receipt_email.validate if _receipt_email.is_a?(OpenApi::Validatable)
-        end
-
-        unless (_setup_future_usage = setup_future_usage).nil?
-          OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-        end
-        unless (_shipping = shipping).nil?
-          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
+        unless (_post_payment_intents_intent_confirm_request = post_payment_intents_intent_confirm_request).nil?
+          _post_payment_intents_intent_confirm_request.validate if _post_payment_intents_intent_confirm_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}/confirm".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["capture_method"] = capture_method.to_s if !capture_method.nil?
-      form_params["client_secret"] = client_secret.to_s if !client_secret.nil?
-      form_params["error_on_requires_action"] = error_on_requires_action.to_s if !error_on_requires_action.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["mandate"] = mandate.to_s if !mandate.nil?
-      form_params["mandate_data"] = mandate_data.to_s if !mandate_data.nil?
-      form_params["off_session"] = off_session.to_s if !off_session.nil?
-      form_params["payment_method"] = payment_method.to_s if !payment_method.nil?
-      form_params["payment_method_data"] = payment_method_data.to_s if !payment_method_data.nil?
-      form_params["payment_method_options"] = payment_method_options.to_s if !payment_method_options.nil?
-      form_params["payment_method_types"] = @api_client.build_collection_param(payment_method_types, "csv") if !payment_method_types.nil? && !payment_method_types.empty?
-      form_params["radar_options"] = radar_options.to_s if !radar_options.nil?
-      form_params["receipt_email"] = receipt_email.to_s if !receipt_email.nil?
-      form_params["return_url"] = return_url.to_s if !return_url.nil?
-      form_params["setup_future_usage"] = setup_future_usage.to_s if !setup_future_usage.nil?
-      form_params["shipping"] = shipping.to_s if !shipping.nil?
-      form_params["use_stripe_sdk"] = use_stripe_sdk.to_s if !use_stripe_sdk.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_confirm_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_confirm_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1761,47 +1030,27 @@ module Stripe
 
     # <p>Perform an incremental authorization on an eligible <a href=\"/docs/api/payment_intents/object\">PaymentIntent</a>. To be eligible, the PaymentIntent’s status must be <code>requires_capture</code> and <a href=\"/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported\">incremental_authorization_supported</a> must be <code>true</code>.</p>  <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card to the new, higher <code>amount</code> provided. As with the initial authorization, incremental authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to further increase the authorized amount.</p>  <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the updated <a href=\"/docs/api/payment_intents/object#payment_intent_object-amount\">amount</a>. If the incremental authorization fails, a <a href=\"/docs/error-codes#card-declined\">card_declined</a> error is returned, and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains capturable for the previously authorized amount.</p>  <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including declines. Once captured, a PaymentIntent can no longer be incremented.</p>  <p>Learn more about <a href=\"/docs/terminal/features/incremental-authorizations\">incremental authorizations</a>.</p>
     # @required @param intent [String?]
-    # @required @param amount [Int32?] The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
+    # @required @param post_payment_intents_intent_increment_authorization_request [Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent_increment_authorization(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil
+      post_payment_intents_intent_increment_authorization_request : Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_increment_authorization_with_http_info(intent: intent, amount: amount, application_fee_amount: application_fee_amount, description: description, expand: expand, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
+      data, _status_code, _headers = post_payment_intents_intent_increment_authorization_with_http_info(intent: intent, post_payment_intents_intent_increment_authorization_request: post_payment_intents_intent_increment_authorization_request)
       data
     end
 
     # &lt;p&gt;Perform an incremental authorization on an eligible &lt;a href&#x3D;\&quot;/docs/api/payment_intents/object\&quot;&gt;PaymentIntent&lt;/a&gt;. To be eligible, the PaymentIntent’s status must be &lt;code&gt;requires_capture&lt;/code&gt; and &lt;a href&#x3D;\&quot;/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported\&quot;&gt;incremental_authorization_supported&lt;/a&gt; must be &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Incremental authorizations attempt to increase the authorized amount on your customer’s card to the new, higher &lt;code&gt;amount&lt;/code&gt; provided. As with the initial authorization, incremental authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to further increase the authorized amount.&lt;/p&gt;  &lt;p&gt;If the incremental authorization succeeds, the PaymentIntent object is returned with the updated &lt;a href&#x3D;\&quot;/docs/api/payment_intents/object#payment_intent_object-amount\&quot;&gt;amount&lt;/a&gt;. If the incremental authorization fails, a &lt;a href&#x3D;\&quot;/docs/error-codes#card-declined\&quot;&gt;card_declined&lt;/a&gt; error is returned, and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains capturable for the previously authorized amount.&lt;/p&gt;  &lt;p&gt;Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including declines. Once captured, a PaymentIntent can no longer be incremented.&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/terminal/features/incremental-authorizations\&quot;&gt;incremental authorizations&lt;/a&gt;.&lt;/p&gt;
     # @required @param intent [String?]
-    # @required @param amount [Int32?] The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
+    # @required @param post_payment_intents_intent_increment_authorization_request [Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_increment_authorization_with_http_info(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil
+      post_payment_intents_intent_increment_authorization_request : Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent_increment_authorization(intent: intent, amount: amount, application_fee_amount: application_fee_amount, description: description, expand: expand, statement_descriptor: statement_descriptor, transfer_data: transfer_data)
+      request = build_api_request_for_post_payment_intents_intent_increment_authorization(intent: intent, post_payment_intents_intent_increment_authorization_request: post_payment_intents_intent_increment_authorization_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1814,41 +1063,24 @@ module Stripe
 
     # &lt;p&gt;Perform an incremental authorization on an eligible &lt;a href&#x3D;\&quot;/docs/api/payment_intents/object\&quot;&gt;PaymentIntent&lt;/a&gt;. To be eligible, the PaymentIntent’s status must be &lt;code&gt;requires_capture&lt;/code&gt; and &lt;a href&#x3D;\&quot;/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported\&quot;&gt;incremental_authorization_supported&lt;/a&gt; must be &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Incremental authorizations attempt to increase the authorized amount on your customer’s card to the new, higher &lt;code&gt;amount&lt;/code&gt; provided. As with the initial authorization, incremental authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to further increase the authorized amount.&lt;/p&gt;  &lt;p&gt;If the incremental authorization succeeds, the PaymentIntent object is returned with the updated &lt;a href&#x3D;\&quot;/docs/api/payment_intents/object#payment_intent_object-amount\&quot;&gt;amount&lt;/a&gt;. If the incremental authorization fails, a &lt;a href&#x3D;\&quot;/docs/error-codes#card-declined\&quot;&gt;card_declined&lt;/a&gt; error is returned, and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains capturable for the previously authorized amount.&lt;/p&gt;  &lt;p&gt;Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including declines. Once captured, a PaymentIntent can no longer be incremented.&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/terminal/features/incremental-authorizations\&quot;&gt;incremental authorizations&lt;/a&gt;.&lt;/p&gt;
     # @required @param intent [String?]
-    # @required @param amount [Int32?] The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
-    # @optional @param application_fee_amount [Int32?] The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param statement_descriptor [String?] For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
-    # @optional @param transfer_data [Stripe::TransferDataUpdateParams?]
+    # @required @param post_payment_intents_intent_increment_authorization_request [Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest?]
     # @return nil
     def post_payment_intents_intent_increment_authorization(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil,
+      post_payment_intents_intent_increment_authorization_request : Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent_increment_authorization(intent: intent, amount: amount, application_fee_amount: application_fee_amount, description: description, expand: expand, statement_descriptor: statement_descriptor, transfer_data: transfer_data).execute(&block)
+      build_api_request_for_post_payment_intents_intent_increment_authorization(intent: intent, post_payment_intents_intent_increment_authorization_request: post_payment_intents_intent_increment_authorization_request).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_INTENT               = 5000
-    POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_DESCRIPTION          = 1000
-    POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR =   22
+    POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_increment_authorization(
       *,
       intent : String? = nil,
-      amount : Int64? = nil,
-      application_fee_amount : Int64? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      statement_descriptor : String? = nil,
-      transfer_data : Stripe::TransferDataUpdateParams? = nil
+      post_payment_intents_intent_increment_authorization_request : Stripe::PostPaymentIntentsIntentIncrementAuthorizationRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_increment_authorization ..." }
@@ -1859,47 +1091,33 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_INTENT)
         end
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PAYMENT_INTENTS_INTENT_INCREMENT_AUTHORIZATION_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-        end
-        unless (_transfer_data = transfer_data).nil?
-          _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
+        raise ArgumentError.new("\"post_payment_intents_intent_increment_authorization_request\" is required and cannot be null") if post_payment_intents_intent_increment_authorization_request.nil?
+        unless (_post_payment_intents_intent_increment_authorization_request = post_payment_intents_intent_increment_authorization_request).nil?
+          _post_payment_intents_intent_increment_authorization_request.validate if _post_payment_intents_intent_increment_authorization_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}/increment_authorization".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["application_fee_amount"] = application_fee_amount.to_s if !application_fee_amount.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["transfer_data"] = transfer_data.to_s if !transfer_data.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_increment_authorization_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_increment_authorization_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -1919,39 +1137,27 @@ module Stripe
 
     # <p>Verifies microdeposits on a PaymentIntent object.</p>
     # @required @param intent [String?]
-    # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    # @optional @param client_secret [String?] The client secret of the PaymentIntent.
-    # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_verify_microdeposits_request [Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest?]
     # @return [Stripe::PaymentIntent]
     def post_payment_intents_intent_verify_microdeposits(
       *,
       intent : String? = nil,
-      amounts : Array(Int32)? = nil,
-      client_secret : String? = nil,
-      descriptor_code : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_verify_microdeposits_request : Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest? = nil
     ) : Stripe::PaymentIntent
-      data, _status_code, _headers = post_payment_intents_intent_verify_microdeposits_with_http_info(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand)
+      data, _status_code, _headers = post_payment_intents_intent_verify_microdeposits_with_http_info(intent: intent, post_payment_intents_intent_verify_microdeposits_request: post_payment_intents_intent_verify_microdeposits_request)
       data
     end
 
     # &lt;p&gt;Verifies microdeposits on a PaymentIntent object.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    # @optional @param client_secret [String?] The client secret of the PaymentIntent.
-    # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_verify_microdeposits_request [Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest?]
     # @return [Tuple(Stripe::PaymentIntent, Integer, Hash)] Stripe::PaymentIntent, response status code and response headers
     def post_payment_intents_intent_verify_microdeposits_with_http_info(
       *,
       intent : String? = nil,
-      amounts : Array(Int32)? = nil,
-      client_secret : String? = nil,
-      descriptor_code : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_verify_microdeposits_request : Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest? = nil
     ) : Tuple(Stripe::PaymentIntent, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_payment_intents_intent_verify_microdeposits(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand)
+      request = build_api_request_for_post_payment_intents_intent_verify_microdeposits(intent: intent, post_payment_intents_intent_verify_microdeposits_request: post_payment_intents_intent_verify_microdeposits_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -1964,35 +1170,24 @@ module Stripe
 
     # &lt;p&gt;Verifies microdeposits on a PaymentIntent object.&lt;/p&gt;
     # @required @param intent [String?]
-    # @optional @param amounts [Array(Int32)?] Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-    # @optional @param client_secret [String?] The client secret of the PaymentIntent.
-    # @optional @param descriptor_code [String?] A six-character code starting with SM present in the microdeposit sent to the bank account.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_payment_intents_intent_verify_microdeposits_request [Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest?]
     # @return nil
     def post_payment_intents_intent_verify_microdeposits(
       *,
       intent : String? = nil,
-      amounts : Array(Int32)? = nil,
-      client_secret : String? = nil,
-      descriptor_code : String? = nil,
-      expand : Array(String)? = nil,
+      post_payment_intents_intent_verify_microdeposits_request : Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_payment_intents_intent_verify_microdeposits(intent: intent, amounts: amounts, client_secret: client_secret, descriptor_code: descriptor_code, expand: expand).execute(&block)
+      build_api_request_for_post_payment_intents_intent_verify_microdeposits(intent: intent, post_payment_intents_intent_verify_microdeposits_request: post_payment_intents_intent_verify_microdeposits_request).execute(&block)
     end
 
-    POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_INTENT          = 5000
-    POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_CLIENT_SECRET   = 5000
-    POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_DESCRIPTOR_CODE = 5000
+    POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_INTENT = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_payment_intents_intent_verify_microdeposits(
       *,
       intent : String? = nil,
-      amounts : Array(Int32)? = nil,
-      client_secret : String? = nil,
-      descriptor_code : String? = nil,
-      expand : Array(String)? = nil
+      post_payment_intents_intent_verify_microdeposits_request : Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PaymentIntentsApi.post_payment_intents_intent_verify_microdeposits ..." }
@@ -2003,40 +1198,32 @@ module Stripe
         unless (_intent = intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("intent", intent.to_s.size, POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_INTENT)
         end
-
-        unless (_client_secret = client_secret).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("client_secret", client_secret.to_s.size, POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_CLIENT_SECRET)
-        end
-        unless (_descriptor_code = descriptor_code).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("descriptor_code", descriptor_code.to_s.size, POST_PAYMENT_INTENTS_INTENT_VERIFY_MICRODEPOSITS_MAX_LENGTH_FOR_DESCRIPTOR_CODE)
+        unless (_post_payment_intents_intent_verify_microdeposits_request = post_payment_intents_intent_verify_microdeposits_request).nil?
+          _post_payment_intents_intent_verify_microdeposits_request.validate if _post_payment_intents_intent_verify_microdeposits_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/payment_intents/{intent}/verify_microdeposits".sub("{" + "intent" + "}", URI.encode_path(intent.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amounts"] = @api_client.build_collection_param(amounts, "csv") if !amounts.nil? && !amounts.empty?
-      form_params["client_secret"] = client_secret.to_s if !client_secret.nil?
-      form_params["descriptor_code"] = descriptor_code.to_s if !descriptor_code.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_payment_intents_intent_verify_microdeposits_request, content_type: header_params["Content-Type"]?) if !post_payment_intents_intent_verify_microdeposits_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

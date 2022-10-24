@@ -138,8 +138,16 @@ module Stripe
       # resource path
       local_var_path = "/v1/topups"
 
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
       # query parameters
-      query_params = Hash(String, (String | Array(String))).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
       query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
       query_params["created"] = created.to_s if !created.nil?
@@ -148,19 +156,11 @@ module Stripe
       query_params["status"] = status.to_s if !status.nil?
       query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
-      # header parameters
-      header_params = Hash(String, String).new
-      # HTTP header "Accept" (if needed)
-      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-
-      # cookie parameters
-      cookie_params = Hash(String, String).new
-
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -246,23 +246,23 @@ module Stripe
       # resource path
       local_var_path = "/v1/topups/{topup}".sub("{" + "topup" + "}", URI.encode_path(topup.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -281,52 +281,24 @@ module Stripe
     end
 
     # <p>Top up the balance of an account</p>
-    # @required @param amount [Int32?] A positive integer representing how much to transfer.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param source [String?] The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
-    # @optional @param statement_descriptor [String?] Extra information about a top-up for the source's bank statement. Limited to 15 ASCII characters.
-    # @optional @param transfer_group [String?] A string that identifies this top-up as part of a group.
+    # @required @param post_topups_request [Stripe::PostTopupsRequest?]
     # @return [Stripe::Topup]
     def post_topups(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      transfer_group : String? = nil
+      post_topups_request : Stripe::PostTopupsRequest? = nil
     ) : Stripe::Topup
-      data, _status_code, _headers = post_topups_with_http_info(amount: amount, currency: currency, description: description, expand: expand, metadata: metadata, source: source, statement_descriptor: statement_descriptor, transfer_group: transfer_group)
+      data, _status_code, _headers = post_topups_with_http_info(post_topups_request: post_topups_request)
       data
     end
 
     # &lt;p&gt;Top up the balance of an account&lt;/p&gt;
-    # @required @param amount [Int32?] A positive integer representing how much to transfer.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param source [String?] The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
-    # @optional @param statement_descriptor [String?] Extra information about a top-up for the source's bank statement. Limited to 15 ASCII characters.
-    # @optional @param transfer_group [String?] A string that identifies this top-up as part of a group.
+    # @required @param post_topups_request [Stripe::PostTopupsRequest?]
     # @return [Tuple(Stripe::Topup, Integer, Hash)] Stripe::Topup, response status code and response headers
     def post_topups_with_http_info(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      transfer_group : String? = nil
+      post_topups_request : Stripe::PostTopupsRequest? = nil
     ) : Tuple(Stripe::Topup, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_topups(amount: amount, currency: currency, description: description, expand: expand, metadata: metadata, source: source, statement_descriptor: statement_descriptor, transfer_group: transfer_group)
+      request = build_api_request_for_post_topups(post_topups_request: post_topups_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -338,99 +310,53 @@ module Stripe
     end
 
     # &lt;p&gt;Top up the balance of an account&lt;/p&gt;
-    # @required @param amount [Int32?] A positive integer representing how much to transfer.
-    # @required @param currency [String?] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param source [String?] The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
-    # @optional @param statement_descriptor [String?] Extra information about a top-up for the source's bank statement. Limited to 15 ASCII characters.
-    # @optional @param transfer_group [String?] A string that identifies this top-up as part of a group.
+    # @required @param post_topups_request [Stripe::PostTopupsRequest?]
     # @return nil
     def post_topups(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      transfer_group : String? = nil,
+      post_topups_request : Stripe::PostTopupsRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_topups(amount: amount, currency: currency, description: description, expand: expand, metadata: metadata, source: source, statement_descriptor: statement_descriptor, transfer_group: transfer_group).execute(&block)
+      build_api_request_for_post_topups(post_topups_request: post_topups_request).execute(&block)
     end
-
-    POST_TOPUPS_MAX_LENGTH_FOR_DESCRIPTION          = 5000
-    POST_TOPUPS_MAX_LENGTH_FOR_SOURCE               = 5000
-    POST_TOPUPS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR =   15
 
     # @return Crest::Request
     def build_api_request_for_post_topups(
       *,
-      amount : Int64? = nil,
-      currency : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      source : String? = nil,
-      statement_descriptor : String? = nil,
-      transfer_group : String? = nil
+      post_topups_request : Stripe::PostTopupsRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TopupsApi.post_topups ..." }
       end
 
       if client_side_validation
-        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
-
-        raise ArgumentError.new("\"currency\" is required and cannot be null") if currency.nil?
-
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TOPUPS_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-        end
-        unless (_source = source).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("source", source.to_s.size, POST_TOPUPS_MAX_LENGTH_FOR_SOURCE)
-        end
-        unless (_statement_descriptor = statement_descriptor).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_TOPUPS_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
+        raise ArgumentError.new("\"post_topups_request\" is required and cannot be null") if post_topups_request.nil?
+        unless (_post_topups_request = post_topups_request).nil?
+          _post_topups_request.validate if _post_topups_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/topups"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["amount"] = amount.to_s if !amount.nil?
-      form_params["currency"] = currency.to_s if !currency.nil?
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
-      form_params["source"] = source.to_s if !source.nil?
-      form_params["statement_descriptor"] = statement_descriptor.to_s if !statement_descriptor.nil?
-      form_params["transfer_group"] = transfer_group.to_s if !transfer_group.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_topups_request, content_type: header_params["Content-Type"]?) if !post_topups_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -450,35 +376,27 @@ module Stripe
 
     # <p>Updates the metadata of a top-up. Other top-up details are not editable by design.</p>
     # @required @param topup [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_topups_topup_request [Stripe::PostTopupsTopupRequest?]
     # @return [Stripe::Topup]
     def post_topups_topup(
       *,
       topup : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil
     ) : Stripe::Topup
-      data, _status_code, _headers = post_topups_topup_with_http_info(topup: topup, description: description, expand: expand, metadata: metadata)
+      data, _status_code, _headers = post_topups_topup_with_http_info(topup: topup, post_topups_topup_request: post_topups_topup_request)
       data
     end
 
     # &lt;p&gt;Updates the metadata of a top-up. Other top-up details are not editable by design.&lt;/p&gt;
     # @required @param topup [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_topups_topup_request [Stripe::PostTopupsTopupRequest?]
     # @return [Tuple(Stripe::Topup, Integer, Hash)] Stripe::Topup, response status code and response headers
     def post_topups_topup_with_http_info(
       *,
       topup : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil
     ) : Tuple(Stripe::Topup, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_topups_topup(topup: topup, description: description, expand: expand, metadata: metadata)
+      request = build_api_request_for_post_topups_topup(topup: topup, post_topups_topup_request: post_topups_topup_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -491,31 +409,24 @@ module Stripe
 
     # &lt;p&gt;Updates the metadata of a top-up. Other top-up details are not editable by design.&lt;/p&gt;
     # @required @param topup [String?]
-    # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users.
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
+    # @optional @param post_topups_topup_request [Stripe::PostTopupsTopupRequest?]
     # @return nil
     def post_topups_topup(
       *,
       topup : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil,
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_topups_topup(topup: topup, description: description, expand: expand, metadata: metadata).execute(&block)
+      build_api_request_for_post_topups_topup(topup: topup, post_topups_topup_request: post_topups_topup_request).execute(&block)
     end
 
-    POST_TOPUPS_TOPUP_MAX_LENGTH_FOR_TOPUP       = 5000
-    POST_TOPUPS_TOPUP_MAX_LENGTH_FOR_DESCRIPTION = 5000
+    POST_TOPUPS_TOPUP_MAX_LENGTH_FOR_TOPUP = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_topups_topup(
       *,
       topup : String? = nil,
-      description : String? = nil,
-      expand : Array(String)? = nil,
-      metadata : Stripe::PostAccountsRequestMetadata? = nil
+      post_topups_topup_request : Stripe::PostTopupsTopupRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TopupsApi.post_topups_topup ..." }
@@ -526,39 +437,32 @@ module Stripe
         unless (_topup = topup).nil?
           OpenApi::PrimitiveValidator.validate_max_length("topup", topup.to_s.size, POST_TOPUPS_TOPUP_MAX_LENGTH_FOR_TOPUP)
         end
-        unless (_description = description).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_TOPUPS_TOPUP_MAX_LENGTH_FOR_DESCRIPTION)
-        end
-
-        unless (_metadata = metadata).nil?
-          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        unless (_post_topups_topup_request = post_topups_topup_request).nil?
+          _post_topups_topup_request.validate if _post_topups_topup_request.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
       local_var_path = "/v1/topups/{topup}".sub("{" + "topup" + "}", URI.encode_path(topup.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["description"] = description.to_s if !description.nil?
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
-      form_params["metadata"] = metadata.to_s if !metadata.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_topups_topup_request, content_type: header_params["Content-Type"]?) if !post_topups_topup_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]
@@ -578,27 +482,27 @@ module Stripe
 
     # <p>Cancels a top-up. Only pending top-ups can be canceled.</p>
     # @required @param topup [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Stripe::Topup]
     def post_topups_topup_cancel(
       *,
       topup : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Stripe::Topup
-      data, _status_code, _headers = post_topups_topup_cancel_with_http_info(topup: topup, expand: expand)
+      data, _status_code, _headers = post_topups_topup_cancel_with_http_info(topup: topup, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
       data
     end
 
     # &lt;p&gt;Cancels a top-up. Only pending top-ups can be canceled.&lt;/p&gt;
     # @required @param topup [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return [Tuple(Stripe::Topup, Integer, Hash)] Stripe::Topup, response status code and response headers
     def post_topups_topup_cancel_with_http_info(
       *,
       topup : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Tuple(Stripe::Topup, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_topups_topup_cancel(topup: topup, expand: expand)
+      request = build_api_request_for_post_topups_topup_cancel(topup: topup, post_accounts_account_login_links_request: post_accounts_account_login_links_request)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -611,15 +515,15 @@ module Stripe
 
     # &lt;p&gt;Cancels a top-up. Only pending top-ups can be canceled.&lt;/p&gt;
     # @required @param topup [String?]
-    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param post_accounts_account_login_links_request [Stripe::PostAccountsAccountLoginLinksRequest?]
     # @return nil
     def post_topups_topup_cancel(
       *,
       topup : String? = nil,
-      expand : Array(String)? = nil,
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_topups_topup_cancel(topup: topup, expand: expand).execute(&block)
+      build_api_request_for_post_topups_topup_cancel(topup: topup, post_accounts_account_login_links_request: post_accounts_account_login_links_request).execute(&block)
     end
 
     POST_TOPUPS_TOPUP_CANCEL_MAX_LENGTH_FOR_TOPUP = 5000
@@ -628,7 +532,7 @@ module Stripe
     def build_api_request_for_post_topups_topup_cancel(
       *,
       topup : String? = nil,
-      expand : Array(String)? = nil
+      post_accounts_account_login_links_request : Stripe::PostAccountsAccountLoginLinksRequest? = nil
     ) : Crest::Request
       if debugging
         Log.debug { "Calling API: TopupsApi.post_topups_topup_cancel ..." }
@@ -639,30 +543,32 @@ module Stripe
         unless (_topup = topup).nil?
           OpenApi::PrimitiveValidator.validate_max_length("topup", topup.to_s.size, POST_TOPUPS_TOPUP_CANCEL_MAX_LENGTH_FOR_TOPUP)
         end
+        unless (_post_accounts_account_login_links_request = post_accounts_account_login_links_request).nil?
+          _post_accounts_account_login_links_request.validate if _post_accounts_account_login_links_request.is_a?(OpenApi::Validatable)
+        end
       end
 
       # resource path
       local_var_path = "/v1/topups/{topup}/cancel".sub("{" + "topup" + "}", URI.encode_path(topup.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
-      form_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = @api_client.encode(body: post_accounts_account_login_links_request, content_type: header_params["Content-Type"]?) if !post_accounts_account_login_links_request.nil?
 
       # auth_names
       auth_names = ["basicAuth", "bearerAuth"]

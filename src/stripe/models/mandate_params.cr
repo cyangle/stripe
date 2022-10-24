@@ -23,8 +23,8 @@ module Stripe
     @[JSON::Field(key: "acceptance", type: Stripe::MandateAcceptanceParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acceptance : Stripe::MandateAcceptanceParams? = nil
 
-    @[JSON::Field(key: "amount", type: Stripe::MandateParamsAmount?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter amount : Stripe::MandateParamsAmount? = nil
+    @[JSON::Field(key: "amount", type: Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter amount : Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount? = nil
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -47,7 +47,7 @@ module Stripe
       *,
       # Optional properties
       @acceptance : Stripe::MandateAcceptanceParams? = nil,
-      @amount : Stripe::MandateParamsAmount? = nil,
+      @amount : Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount? = nil,
       @currency : String? = nil,
       @interval : String? = nil,
       @notification_method : String? = nil
@@ -110,7 +110,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Stripe::MandateParamsAmount?)
+    def amount=(amount : Stripe::PostOrdersIdRequestPaymentSettingsApplicationFeeAmount?)
       if amount.nil?
         return @amount = nil
       end
