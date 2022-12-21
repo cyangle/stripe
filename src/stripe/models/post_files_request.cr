@@ -21,8 +21,8 @@ module Stripe
     # Required Properties
 
     # A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the `multipart/form-data` protocol).
-    @[JSON::Field(key: "file", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter file : String? = nil
+    @[JSON::Field(key: "file", type: ::File?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter file : ::File? = nil
 
     # The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,7 +46,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @file : String? = nil,
+      @file : ::File? = nil,
       @purpose : String? = nil,
       # Optional properties
       @expand : Array(String)? = nil,
@@ -92,7 +92,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file Object to be assigned
-    def file=(file : String?)
+    def file=(file : ::File?)
       if file.nil?
         raise ArgumentError.new("\"file\" is required and cannot be null")
       end
