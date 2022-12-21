@@ -1,6 +1,5 @@
 git_push.sh
 shard.yml
-spec/models/post_files_request_spec.cr
 spec/spec_helper.cr
 spec/support/ext.cr
 spec/support/helpers.cr
