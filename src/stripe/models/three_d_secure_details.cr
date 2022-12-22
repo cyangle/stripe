@@ -83,9 +83,6 @@ module Stripe
       unless (_result_reason = @result_reason).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RESULT_REASON) unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
       end
-      unless (_version = @version).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_VERSION) unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
-      end
       invalid_properties
     end
 
@@ -102,10 +99,6 @@ module Stripe
 
       unless (_result_reason = @result_reason).nil?
         return false unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
-      end
-
-      unless (_version = @version).nil?
-        return false unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
       end
 
       true
@@ -147,12 +140,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] version Object to be assigned
     def version=(version : String?)
-      if version.nil?
-        return @version = nil
-      end
-      _version = version.not_nil!
-      OpenApi::EnumValidator.validate("version", _version, VALID_VALUES_FOR_VERSION)
-      @version = _version
+      @version = version
     end
 
     # Generates #hash and #== methods from all fields

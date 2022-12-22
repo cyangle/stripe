@@ -153,11 +153,6 @@ module Stripe
 
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
-      invalid_properties.push("\"duration\" is required and cannot be null") if @duration.nil?
-
-      unless (_duration = @duration).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DURATION) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
-      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       unless (_id = @id).nil?
@@ -197,11 +192,6 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @created.nil?
-
-      return false if @duration.nil?
-      unless (_duration = @duration).nil?
-        return false unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
-      end
 
       return false if @id.nil?
       unless (_id = @id).nil?
@@ -247,12 +237,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] duration Object to be assigned
     def duration=(duration : String?)
-      if duration.nil?
-        raise ArgumentError.new("\"duration\" is required and cannot be null")
-      end
-      _duration = duration.not_nil!
-      OpenApi::EnumValidator.validate("duration", _duration, VALID_VALUES_FOR_DURATION)
-      @duration = _duration
+      @duration = duration
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -85,10 +85,6 @@ module Stripe
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
-      unless (_api_version = @api_version).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_API_VERSION) unless OpenApi::EnumValidator.valid?(_api_version, VALID_VALUES_FOR_API_VERSION)
-      end
-
       unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
@@ -110,10 +106,6 @@ module Stripe
       end
 
       return false if @url.nil?
-
-      unless (_api_version = @api_version).nil?
-        return false unless OpenApi::EnumValidator.valid?(_api_version, VALID_VALUES_FOR_API_VERSION)
-      end
 
       unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
@@ -150,12 +142,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] api_version Object to be assigned
     def api_version=(api_version : String?)
-      if api_version.nil?
-        return @api_version = nil
-      end
-      _api_version = api_version.not_nil!
-      OpenApi::EnumValidator.validate("api_version", _api_version, VALID_VALUES_FOR_API_VERSION)
-      @api_version = _api_version
+      @api_version = api_version
     end
 
     # Custom attribute writer method checking allowed values (enum).

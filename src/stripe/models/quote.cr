@@ -304,11 +304,6 @@ module Stripe
       unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
-
-      unless (_status = @status).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
       invalid_properties.push("\"status_transitions\" is required and cannot be null") if @status_transitions.nil?
 
       unless (_status_transitions = @status_transitions).nil?
@@ -432,11 +427,6 @@ module Stripe
       return false if @object.nil?
       unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
-      end
-
-      return false if @status.nil?
-      unless (_status = @status).nil?
-        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       return false if @status_transitions.nil?
@@ -654,12 +644,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
-      end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).

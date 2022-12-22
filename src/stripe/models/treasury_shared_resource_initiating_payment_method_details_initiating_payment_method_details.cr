@@ -76,11 +76,6 @@ module Stripe
       unless (_billing_details = @billing_details).nil?
         invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
-      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
-
-      unless (__type = @_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
       unless (_balance = @balance).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_BALANCE) unless OpenApi::EnumValidator.valid?(_balance, VALID_VALUES_FOR_BALANCE)
       end
@@ -104,11 +99,6 @@ module Stripe
       return false if @billing_details.nil?
       unless (_billing_details = @billing_details).nil?
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
-      end
-
-      return false if @_type.nil?
-      unless (__type = @_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       unless (_balance = @balance).nil?
@@ -144,12 +134,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
-      end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).

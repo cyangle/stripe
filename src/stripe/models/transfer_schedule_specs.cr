@@ -58,9 +58,6 @@ module Stripe
       unless (_delay_days = @delay_days).nil?
         invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days")) if _delay_days.is_a?(OpenApi::Validatable)
       end
-      unless (_interval = @interval).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
-      end
 
       unless (_weekly_anchor = @weekly_anchor).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_WEEKLY_ANCHOR) unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
@@ -73,10 +70,6 @@ module Stripe
     def valid? : Bool
       unless (_delay_days = @delay_days).nil?
         return false if _delay_days.is_a?(OpenApi::Validatable) && !_delay_days.valid?
-      end
-
-      unless (_interval = @interval).nil?
-        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       unless (_weekly_anchor = @weekly_anchor).nil?
@@ -100,12 +93,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
     def interval=(interval : String?)
-      if interval.nil?
-        return @interval = nil
-      end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+      @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -69,11 +69,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
-
-      unless (__type = @_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
       unless (_iban = @iban).nil?
         invalid_properties.concat(_iban.list_invalid_properties_for("iban")) if _iban.is_a?(OpenApi::Validatable)
       end
@@ -95,11 +90,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @_type.nil?
-      unless (__type = @_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
-
       unless (_iban = @iban).nil?
         return false if _iban.is_a?(OpenApi::Validatable) && !_iban.valid?
       end
@@ -126,12 +116,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
-      end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).

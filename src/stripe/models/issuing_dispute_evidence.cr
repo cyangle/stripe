@@ -74,11 +74,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
-
-      unless (_reason = @reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
-      end
       unless (_canceled = @canceled).nil?
         invalid_properties.concat(_canceled.list_invalid_properties_for("canceled")) if _canceled.is_a?(OpenApi::Validatable)
       end
@@ -106,11 +101,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @reason.nil?
-      unless (_reason = @reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
-      end
-
       unless (_canceled = @canceled).nil?
         return false if _canceled.is_a?(OpenApi::Validatable) && !_canceled.valid?
       end
@@ -145,12 +135,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason : String?)
-      if reason.nil?
-        raise ArgumentError.new("\"reason\" is required and cannot be null")
-      end
-      _reason = reason.not_nil!
-      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
-      @reason = _reason
+      @reason = reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

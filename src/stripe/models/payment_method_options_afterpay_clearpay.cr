@@ -65,9 +65,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      unless (_setup_future_usage = @setup_future_usage).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      end
       invalid_properties
     end
 
@@ -80,10 +77,6 @@ module Stripe
 
       unless (_reference = @reference).nil?
         return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
-      end
-
-      unless (_setup_future_usage = @setup_future_usage).nil?
-        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
 
       true
@@ -114,12 +107,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
     def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
-      end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+      @setup_future_usage = setup_future_usage
     end
 
     # Generates #hash and #== methods from all fields

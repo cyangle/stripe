@@ -64,10 +64,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_cancellation_reason = @cancellation_reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      end
-
       unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
@@ -77,19 +73,12 @@ module Stripe
       unless (_spending_controls = @spending_controls).nil?
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
-      unless (_status = @status).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_cancellation_reason = @cancellation_reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      end
-
       unless (_metadata = @metadata).nil?
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
@@ -102,22 +91,13 @@ module Stripe
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
 
-      unless (_status = @status).nil?
-        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
-
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
     def cancellation_reason=(cancellation_reason : String?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
-      end
-      _cancellation_reason = cancellation_reason.not_nil!
-      OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      @cancellation_reason = _cancellation_reason
+      @cancellation_reason = cancellation_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -166,12 +146,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
-      if status.nil?
-        return @status = nil
-      end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+      @status = status
     end
 
     # Generates #hash and #== methods from all fields

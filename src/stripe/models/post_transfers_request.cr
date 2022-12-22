@@ -96,10 +96,6 @@ module Stripe
         end
       end
 
-      unless (_source_type = @source_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_TYPE) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
-      end
-
       invalid_properties
     end
 
@@ -112,10 +108,6 @@ module Stripe
 
       unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
-      end
-
-      unless (_source_type = @source_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
 
       true
@@ -195,12 +187,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_type Object to be assigned
     def source_type=(source_type : String?)
-      if source_type.nil?
-        return @source_type = nil
-      end
-      _source_type = source_type.not_nil!
-      OpenApi::EnumValidator.validate("source_type", _source_type, VALID_VALUES_FOR_SOURCE_TYPE)
-      @source_type = _source_type
+      @source_type = source_type
     end
 
     # Custom attribute writer method checking allowed values (enum).

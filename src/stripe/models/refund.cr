@@ -212,9 +212,6 @@ module Stripe
       unless (_payment_intent = @payment_intent).nil?
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
-      unless (_reason = @reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
-      end
       unless (_receipt_number = @receipt_number).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_number", _receipt_number.to_s.size, MAX_LENGTH_FOR_RECEIPT_NUMBER)
           invalid_properties.push(max_length_error)
@@ -283,10 +280,6 @@ module Stripe
 
       unless (_payment_intent = @payment_intent).nil?
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
-      end
-
-      unless (_reason = @reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
       unless (_receipt_number = @receipt_number).nil?
@@ -461,12 +454,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason : String?)
-      if reason.nil?
-        return @reason = nil
-      end
-      _reason = reason.not_nil!
-      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
-      @reason = _reason
+      @reason = reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

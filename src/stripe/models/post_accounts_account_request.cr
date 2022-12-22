@@ -107,9 +107,6 @@ module Stripe
       unless (_business_profile = @business_profile).nil?
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
-      unless (_business_type = @business_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
-      end
       unless (_capabilities = @capabilities).nil?
         invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
       end
@@ -121,11 +118,6 @@ module Stripe
         invalid_properties.concat(_documents.list_invalid_properties_for("documents")) if _documents.is_a?(OpenApi::Validatable)
       end
 
-      unless (_external_account = @external_account).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
-          invalid_properties.push(max_length_error)
-        end
-      end
       unless (_individual = @individual).nil?
         invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
@@ -152,10 +144,6 @@ module Stripe
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
 
-      unless (_business_type = @business_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
-      end
-
       unless (_capabilities = @capabilities).nil?
         return false if _capabilities.is_a?(OpenApi::Validatable) && !_capabilities.valid?
       end
@@ -166,10 +154,6 @@ module Stripe
 
       unless (_documents = @documents).nil?
         return false if _documents.is_a?(OpenApi::Validatable) && !_documents.valid?
-      end
-
-      unless (_external_account = @external_account).nil?
-        return false if _external_account.to_s.size > MAX_LENGTH_FOR_EXTERNAL_ACCOUNT
       end
 
       unless (_individual = @individual).nil?
@@ -216,12 +200,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_type Object to be assigned
     def business_type=(business_type : String?)
-      if business_type.nil?
-        return @business_type = nil
-      end
-      _business_type = business_type.not_nil!
-      OpenApi::EnumValidator.validate("business_type", _business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
-      @business_type = _business_type
+      @business_type = business_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,12 +269,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] external_account Object to be assigned
     def external_account=(external_account : String?)
-      if external_account.nil?
-        return @external_account = nil
-      end
-      _external_account = external_account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
-      @external_account = _external_account
+      @external_account = external_account
     end
 
     # Custom attribute writer method checking allowed values (enum).

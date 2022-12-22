@@ -48,9 +48,6 @@ module Stripe
       unless (_mandate_options = @mandate_options).nil?
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
-      unless (_verification_method = @verification_method).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_VERIFICATION_METHOD) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
-      end
       invalid_properties
     end
 
@@ -59,10 +56,6 @@ module Stripe
     def valid? : Bool
       unless (_mandate_options = @mandate_options).nil?
         return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
-      end
-
-      unless (_verification_method = @verification_method).nil?
-        return false unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
       end
 
       true
@@ -82,12 +75,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
     def verification_method=(verification_method : String?)
-      if verification_method.nil?
-        return @verification_method = nil
-      end
-      _verification_method = verification_method.not_nil!
-      OpenApi::EnumValidator.validate("verification_method", _verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
-      @verification_method = _verification_method
+      @verification_method = verification_method
     end
 
     # Generates #hash and #== methods from all fields

@@ -55,8 +55,8 @@ module Stripe
     # The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number, address]."
-    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number", "address")
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
+    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number")
 
     # End of Required Properties
 
@@ -158,11 +158,6 @@ module Stripe
       unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
-      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
-
-      unless (__type = @_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
       unless (_client_secret = @client_secret).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
@@ -215,11 +210,6 @@ module Stripe
       return false if @status.nil?
       unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
-
-      return false if @_type.nil?
-      unless (__type = @_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       unless (_client_secret = @client_secret).nil?
@@ -326,12 +316,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
-      end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).

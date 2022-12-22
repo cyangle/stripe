@@ -155,9 +155,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      unless (_structure = @structure).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STRUCTURE) unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
-      end
       unless (_tax_id = @tax_id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id", _tax_id.to_s.size, MAX_LENGTH_FOR_TAX_ID)
           invalid_properties.push(max_length_error)
@@ -216,10 +213,6 @@ module Stripe
 
       unless (_registration_number = @registration_number).nil?
         return false if _registration_number.to_s.size > MAX_LENGTH_FOR_REGISTRATION_NUMBER
-      end
-
-      unless (_structure = @structure).nil?
-        return false unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
       end
 
       unless (_tax_id = @tax_id).nil?
@@ -383,12 +376,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] structure Object to be assigned
     def structure=(structure : String?)
-      if structure.nil?
-        return @structure = nil
-      end
-      _structure = structure.not_nil!
-      OpenApi::EnumValidator.validate("structure", _structure, VALID_VALUES_FOR_STRUCTURE)
-      @structure = _structure
+      @structure = structure
     end
 
     # Custom attribute writer method checking allowed values (enum).

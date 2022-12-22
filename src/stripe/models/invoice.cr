@@ -692,9 +692,6 @@ module Stripe
       unless (_default_payment_method = @default_payment_method).nil?
         invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method")) if _default_payment_method.is_a?(OpenApi::Validatable)
       end
-      unless (_default_source = @default_source).nil?
-        invalid_properties.concat(_default_source.list_invalid_properties_for("default_source")) if _default_source.is_a?(OpenApi::Validatable)
-      end
       unless (_description = @description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
@@ -927,10 +924,6 @@ module Stripe
 
       unless (_default_payment_method = @default_payment_method).nil?
         return false if _default_payment_method.is_a?(OpenApi::Validatable) && !_default_payment_method.valid?
-      end
-
-      unless (_default_source = @default_source).nil?
-        return false if _default_source.is_a?(OpenApi::Validatable) && !_default_source.valid?
       end
 
       unless (_description = @description).nil?
@@ -1485,12 +1478,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_source Object to be assigned
     def default_source=(default_source : Stripe::InvoiceDefaultSource?)
-      if default_source.nil?
-        return @default_source = nil
-      end
-      _default_source = default_source.not_nil!
-      _default_source.validate if _default_source.is_a?(OpenApi::Validatable)
-      @default_source = _default_source
+      @default_source = default_source
     end
 
     # Custom attribute writer method checking allowed values (enum).

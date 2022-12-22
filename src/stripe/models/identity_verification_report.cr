@@ -46,8 +46,8 @@ module Stripe
     # Type of report.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number, address]."
-    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number", "address")
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
+    VALID_VALUES_FOR__TYPE  = String.static_array("document", "id_number")
 
     # End of Required Properties
 
@@ -115,11 +115,6 @@ module Stripe
       unless (_options = @options).nil?
         invalid_properties.concat(_options.list_invalid_properties_for("options")) if _options.is_a?(OpenApi::Validatable)
       end
-      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
-
-      unless (__type = @_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
       unless (_document = @document).nil?
         invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
@@ -157,11 +152,6 @@ module Stripe
       return false if @options.nil?
       unless (_options = @options).nil?
         return false if _options.is_a?(OpenApi::Validatable) && !_options.valid?
-      end
-
-      return false if @_type.nil?
-      unless (__type = @_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       unless (_document = @document).nil?
@@ -239,12 +229,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
-      end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -61,12 +61,6 @@ module Stripe
         invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
 
-      unless (_external_account = @external_account).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
-          invalid_properties.push(max_length_error)
-        end
-      end
-
       invalid_properties
     end
 
@@ -75,10 +69,6 @@ module Stripe
     def valid? : Bool
       unless (_bank_account = @bank_account).nil?
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
-      end
-
-      unless (_external_account = @external_account).nil?
-        return false if _external_account.to_s.size > MAX_LENGTH_FOR_EXTERNAL_ACCOUNT
       end
 
       true
@@ -118,12 +108,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] external_account Object to be assigned
     def external_account=(external_account : String?)
-      if external_account.nil?
-        return @external_account = nil
-      end
-      _external_account = external_account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
-      @external_account = _external_account
+      @external_account = external_account
     end
 
     # Custom attribute writer method checking allowed values (enum).

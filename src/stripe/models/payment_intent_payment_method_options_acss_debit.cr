@@ -58,9 +58,6 @@ module Stripe
       unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      unless (_verification_method = @verification_method).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_VERIFICATION_METHOD) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
-      end
       invalid_properties
     end
 
@@ -73,10 +70,6 @@ module Stripe
 
       unless (_setup_future_usage = @setup_future_usage).nil?
         return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      end
-
-      unless (_verification_method = @verification_method).nil?
-        return false unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
       end
 
       true
@@ -107,12 +100,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
     def verification_method=(verification_method : String?)
-      if verification_method.nil?
-        return @verification_method = nil
-      end
-      _verification_method = verification_method.not_nil!
-      OpenApi::EnumValidator.validate("verification_method", _verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
-      @verification_method = _verification_method
+      @verification_method = verification_method
     end
 
     # Generates #hash and #== methods from all fields

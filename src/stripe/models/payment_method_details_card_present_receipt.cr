@@ -113,9 +113,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_account_type = @account_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
-      end
       unless (_application_cryptogram = @application_cryptogram).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("application_cryptogram", _application_cryptogram.to_s.size, MAX_LENGTH_FOR_APPLICATION_CRYPTOGRAM)
           invalid_properties.push(max_length_error)
@@ -162,10 +159,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_account_type = @account_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
-      end
-
       unless (_application_cryptogram = @application_cryptogram).nil?
         return false if _application_cryptogram.to_s.size > MAX_LENGTH_FOR_APPLICATION_CRYPTOGRAM
       end
@@ -204,12 +197,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_type Object to be assigned
     def account_type=(account_type : String?)
-      if account_type.nil?
-        return @account_type = nil
-      end
-      _account_type = account_type.not_nil!
-      OpenApi::EnumValidator.validate("account_type", _account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
-      @account_type = _account_type
+      @account_type = account_type
     end
 
     # Custom attribute writer method checking allowed values (enum).

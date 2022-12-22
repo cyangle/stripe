@@ -115,9 +115,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      unless (_replacement_reason = @replacement_reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REPLACEMENT_REASON) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
-      end
       unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
@@ -146,10 +143,6 @@ module Stripe
 
       unless (_replacement_for = @replacement_for).nil?
         return false if _replacement_for.to_s.size > MAX_LENGTH_FOR_REPLACEMENT_FOR
-      end
-
-      unless (_replacement_reason = @replacement_reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
 
       unless (_shipping = @shipping).nil?
@@ -243,12 +236,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] replacement_reason Object to be assigned
     def replacement_reason=(replacement_reason : String?)
-      if replacement_reason.nil?
-        return @replacement_reason = nil
-      end
-      _replacement_reason = replacement_reason.not_nil!
-      OpenApi::EnumValidator.validate("replacement_reason", _replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
-      @replacement_reason = _replacement_reason
+      @replacement_reason = replacement_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

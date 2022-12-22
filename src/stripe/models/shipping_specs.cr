@@ -87,9 +87,6 @@ module Stripe
         invalid_properties.concat(_customs.list_invalid_properties_for("customs")) if _customs.is_a?(OpenApi::Validatable)
       end
 
-      unless (_service = @service).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SERVICE) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
-      end
       unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
@@ -111,10 +108,6 @@ module Stripe
 
       unless (_customs = @customs).nil?
         return false if _customs.is_a?(OpenApi::Validatable) && !_customs.valid?
-      end
-
-      unless (_service = @service).nil?
-        return false unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
 
       unless (__type = @_type).nil?
@@ -180,12 +173,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service Object to be assigned
     def service=(service : String?)
-      if service.nil?
-        return @service = nil
-      end
-      _service = service.not_nil!
-      OpenApi::EnumValidator.validate("service", _service, VALID_VALUES_FOR_SERVICE)
-      @service = _service
+      @service = service
     end
 
     # Custom attribute writer method checking allowed values (enum).

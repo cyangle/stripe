@@ -54,9 +54,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_disabled_reason = @disabled_reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DISABLED_REASON) unless OpenApi::EnumValidator.valid?(_disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
-      end
       unless (_past_due = @past_due).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PAST_DUE) unless OpenApi::EnumValidator.valid?(_past_due, VALID_VALUES_FOR_PAST_DUE)
       end
@@ -66,10 +63,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_disabled_reason = @disabled_reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
-      end
-
       unless (_past_due = @past_due).nil?
         return false unless OpenApi::EnumValidator.valid?(_past_due, VALID_VALUES_FOR_PAST_DUE)
       end
@@ -80,12 +73,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] disabled_reason Object to be assigned
     def disabled_reason=(disabled_reason : String?)
-      if disabled_reason.nil?
-        return @disabled_reason = nil
-      end
-      _disabled_reason = disabled_reason.not_nil!
-      OpenApi::EnumValidator.validate("disabled_reason", _disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
-      @disabled_reason = _disabled_reason
+      @disabled_reason = disabled_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

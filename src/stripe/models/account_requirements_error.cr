@@ -55,11 +55,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
-
-      unless (_code = @code).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
-      end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
       unless (_reason = @reason).nil?
@@ -80,11 +75,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @code.nil?
-      unless (_code = @code).nil?
-        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
-      end
-
       return false if @reason.nil?
       unless (_reason = @reason).nil?
         return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
@@ -101,12 +91,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code : String?)
-      if code.nil?
-        raise ArgumentError.new("\"code\" is required and cannot be null")
-      end
-      _code = code.not_nil!
-      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
-      @code = _code
+      @code = code
     end
 
     # Custom attribute writer method checking allowed values (enum).

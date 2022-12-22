@@ -145,11 +145,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      invalid_properties.push("\"service\" is required and cannot be null") if @service.nil?
-
-      unless (_service = @service).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SERVICE) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
-      end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       unless (__type = @_type).nil?
@@ -195,11 +190,6 @@ module Stripe
       return false if @name.nil?
       unless (_name = @name).nil?
         return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
-      end
-
-      return false if @service.nil?
-      unless (_service = @service).nil?
-        return false unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
 
       return false if @_type.nil?
@@ -259,12 +249,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service Object to be assigned
     def service=(service : String?)
-      if service.nil?
-        raise ArgumentError.new("\"service\" is required and cannot be null")
-      end
-      _service = service.not_nil!
-      OpenApi::EnumValidator.validate("service", _service, VALID_VALUES_FOR_SERVICE)
-      @service = _service
+      @service = service
     end
 
     # Custom attribute writer method checking allowed values (enum).

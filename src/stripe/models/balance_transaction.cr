@@ -184,9 +184,6 @@ module Stripe
         end
       end
 
-      unless (_source = @source).nil?
-        invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
-      end
       invalid_properties
     end
 
@@ -237,10 +234,6 @@ module Stripe
 
       unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
-      end
-
-      unless (_source = @source).nil?
-        return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
 
       true
@@ -396,12 +389,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
     def source=(source : Stripe::BalanceTransactionSource?)
-      if source.nil?
-        return @source = nil
-      end
-      _source = source.not_nil!
-      _source.validate if _source.is_a?(OpenApi::Validatable)
-      @source = _source
+      @source = source
     end
 
     # Generates #hash and #== methods from all fields

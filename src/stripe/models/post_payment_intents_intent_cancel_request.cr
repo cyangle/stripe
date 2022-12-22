@@ -46,32 +46,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_cancellation_reason = @cancellation_reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_cancellation_reason = @cancellation_reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      end
-
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
     def cancellation_reason=(cancellation_reason : String?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
-      end
-      _cancellation_reason = cancellation_reason.not_nil!
-      OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      @cancellation_reason = _cancellation_reason
+      @cancellation_reason = cancellation_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

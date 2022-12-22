@@ -135,11 +135,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
-
-      unless (_status = @status).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
       unless (_address = @address).nil?
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -185,11 +180,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @status.nil?
-      unless (_status = @status).nil?
-        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
-
       unless (_address = @address).nil?
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
@@ -236,12 +226,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
-      end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).

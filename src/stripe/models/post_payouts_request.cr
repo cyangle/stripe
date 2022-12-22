@@ -100,17 +100,6 @@ module Stripe
         end
       end
 
-      unless (_method = @method).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_METHOD) unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
-      end
-      unless (_source_type = @source_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_TYPE) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
-      end
-      unless (_statement_descriptor = @statement_descriptor).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-          invalid_properties.push(max_length_error)
-        end
-      end
       invalid_properties
     end
 
@@ -123,18 +112,6 @@ module Stripe
 
       unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
-      end
-
-      unless (_method = @method).nil?
-        return false unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
-      end
-
-      unless (_source_type = @source_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
-      end
-
-      unless (_statement_descriptor = @statement_descriptor).nil?
-        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       true
@@ -204,34 +181,19 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] method Object to be assigned
     def method=(method : String?)
-      if method.nil?
-        return @method = nil
-      end
-      _method = method.not_nil!
-      OpenApi::EnumValidator.validate("method", _method, VALID_VALUES_FOR_METHOD)
-      @method = _method
+      @method = method
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_type Object to be assigned
     def source_type=(source_type : String?)
-      if source_type.nil?
-        return @source_type = nil
-      end
-      _source_type = source_type.not_nil!
-      OpenApi::EnumValidator.validate("source_type", _source_type, VALID_VALUES_FOR_SOURCE_TYPE)
-      @source_type = _source_type
+      @source_type = source_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
     def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
-      end
-      _statement_descriptor = statement_descriptor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-      @statement_descriptor = _statement_descriptor
+      @statement_descriptor = statement_descriptor
     end
 
     # Generates #hash and #== methods from all fields

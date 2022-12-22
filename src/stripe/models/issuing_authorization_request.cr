@@ -116,11 +116,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
-
-      unless (_reason = @reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
-      end
       unless (_amount_details = @amount_details).nil?
         invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
@@ -151,11 +146,6 @@ module Stripe
       return false if @merchant_currency.nil?
       unless (_merchant_currency = @merchant_currency).nil?
         return false if _merchant_currency.to_s.size > MAX_LENGTH_FOR_MERCHANT_CURRENCY
-      end
-
-      return false if @reason.nil?
-      unless (_reason = @reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
       unless (_amount_details = @amount_details).nil?
@@ -234,12 +224,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason : String?)
-      if reason.nil?
-        raise ArgumentError.new("\"reason\" is required and cannot be null")
-      end
-      _reason = reason.not_nil!
-      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
-      @reason = _reason
+      @reason = reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

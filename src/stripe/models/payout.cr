@@ -230,11 +230,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
-
-      unless (__type = @_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
       unless (_balance_transaction = @balance_transaction).nil?
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
@@ -242,9 +237,6 @@ module Stripe
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
-      end
-      unless (_destination = @destination).nil?
-        invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
       end
       unless (_failure_balance_transaction = @failure_balance_transaction).nil?
         invalid_properties.concat(_failure_balance_transaction.list_invalid_properties_for("failure_balance_transaction")) if _failure_balance_transaction.is_a?(OpenApi::Validatable)
@@ -314,21 +306,12 @@ module Stripe
         return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
-      return false if @_type.nil?
-      unless (__type = @_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
-
       unless (_balance_transaction = @balance_transaction).nil?
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
       unless (_description = @description).nil?
         return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
-      end
-
-      unless (_destination = @destination).nil?
-        return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
 
       unless (_failure_balance_transaction = @failure_balance_transaction).nil?
@@ -476,12 +459,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
-      end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -509,12 +487,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination Object to be assigned
     def destination=(destination : Stripe::PayoutDestination?)
-      if destination.nil?
-        return @destination = nil
-      end
-      _destination = destination.not_nil!
-      _destination.validate if _destination.is_a?(OpenApi::Validatable)
-      @destination = _destination
+      @destination = destination
     end
 
     # Custom attribute writer method checking allowed values (enum).

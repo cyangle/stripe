@@ -61,12 +61,6 @@ module Stripe
 
       invalid_properties.push("\"file\" is required and cannot be null") if @file.nil?
 
-      invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
-
-      unless (_purpose = @purpose).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_PURPOSE) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
-      end
-
       unless (_file_link_data = @file_link_data).nil?
         invalid_properties.concat(_file_link_data.list_invalid_properties_for("file_link_data")) if _file_link_data.is_a?(OpenApi::Validatable)
       end
@@ -77,11 +71,6 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       return false if @file.nil?
-
-      return false if @purpose.nil?
-      unless (_purpose = @purpose).nil?
-        return false unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
-      end
 
       unless (_file_link_data = @file_link_data).nil?
         return false if _file_link_data.is_a?(OpenApi::Validatable) && !_file_link_data.valid?
@@ -103,12 +92,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] purpose Object to be assigned
     def purpose=(purpose : String?)
-      if purpose.nil?
-        raise ArgumentError.new("\"purpose\" is required and cannot be null")
-      end
-      _purpose = purpose.not_nil!
-      OpenApi::EnumValidator.validate("purpose", _purpose, VALID_VALUES_FOR_PURPOSE)
-      @purpose = _purpose
+      @purpose = purpose
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -174,23 +174,10 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
-
-      unless (_network = @network).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
-      end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
-      end
-      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
-
-      unless (_status = @status).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
-      unless (_failure_code = @failure_code).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_FAILURE_CODE) unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
       end
       unless (_financial_account = @financial_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
@@ -242,23 +229,9 @@ module Stripe
 
       return false if @livemode.nil?
 
-      return false if @network.nil?
-      unless (_network = @network).nil?
-        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
-      end
-
       return false if @object.nil?
       unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
-      end
-
-      return false if @status.nil?
-      unless (_status = @status).nil?
-        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
-
-      unless (_failure_code = @failure_code).nil?
-        return false unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
       end
 
       unless (_financial_account = @financial_account).nil?
@@ -367,12 +340,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
     def network=(network : String?)
-      if network.nil?
-        raise ArgumentError.new("\"network\" is required and cannot be null")
-      end
-      _network = network.not_nil!
-      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
-      @network = _network
+      @network = network
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -389,23 +357,13 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
-      end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] failure_code Object to be assigned
     def failure_code=(failure_code : String?)
-      if failure_code.nil?
-        return @failure_code = nil
-      end
-      _failure_code = failure_code.not_nil!
-      OpenApi::EnumValidator.validate("failure_code", _failure_code, VALID_VALUES_FOR_FAILURE_CODE)
-      @failure_code = _failure_code
+      @failure_code = failure_code
     end
 
     # Custom attribute writer method checking allowed values (enum).

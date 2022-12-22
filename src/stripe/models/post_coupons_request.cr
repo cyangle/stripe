@@ -106,9 +106,6 @@ module Stripe
       unless (_currency_options = @currency_options).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
-      unless (_duration = @duration).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DURATION) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
-      end
 
       unless (_id = @id).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
@@ -137,10 +134,6 @@ module Stripe
 
       unless (_currency_options = @currency_options).nil?
         return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
-      end
-
-      unless (_duration = @duration).nil?
-        return false unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
 
       unless (_id = @id).nil?
@@ -203,12 +196,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] duration Object to be assigned
     def duration=(duration : String?)
-      if duration.nil?
-        return @duration = nil
-      end
-      _duration = duration.not_nil!
-      OpenApi::EnumValidator.validate("duration", _duration, VALID_VALUES_FOR_DURATION)
-      @duration = _duration
+      @duration = duration
     end
 
     # Custom attribute writer method checking allowed values (enum).

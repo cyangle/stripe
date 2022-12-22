@@ -65,9 +65,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-      unless (_client = @client).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CLIENT) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
-      end
       unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
@@ -79,10 +76,6 @@ module Stripe
     def valid? : Bool
       unless (_app_id = @app_id).nil?
         return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
-      end
-
-      unless (_client = @client).nil?
-        return false unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
 
       unless (_setup_future_usage = @setup_future_usage).nil?
@@ -106,12 +99,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] client Object to be assigned
     def client=(client : String?)
-      if client.nil?
-        return @client = nil
-      end
-      _client = client.not_nil!
-      OpenApi::EnumValidator.validate("client", _client, VALID_VALUES_FOR_CLIENT)
-      @client = _client
+      @client = client
     end
 
     # Custom attribute writer method checking allowed values (enum).

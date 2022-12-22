@@ -70,15 +70,7 @@ module Stripe
       unless (_bank_account = @bank_account).nil?
         invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
-      unless (_card = @card).nil?
-        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
-      end
 
-      unless (_source = @source).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
-          invalid_properties.push(max_length_error)
-        end
-      end
       invalid_properties
     end
 
@@ -91,14 +83,6 @@ module Stripe
 
       unless (_bank_account = @bank_account).nil?
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
-      end
-
-      unless (_card = @card).nil?
-        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
-      end
-
-      unless (_source = @source).nil?
-        return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
       true
@@ -129,12 +113,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
     def card=(card : Stripe::PostChargesRequestCard?)
-      if card.nil?
-        return @card = nil
-      end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+      @card = card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,12 +139,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
     def source=(source : String?)
-      if source.nil?
-        return @source = nil
-      end
-      _source = source.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
-      @source = _source
+      @source = source
     end
 
     # Generates #hash and #== methods from all fields

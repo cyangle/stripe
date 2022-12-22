@@ -205,11 +205,6 @@ module Stripe
       unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
-      unless (_source = @source).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
-          invalid_properties.push(max_length_error)
-        end
-      end
       unless (_tax = @tax).nil?
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
@@ -280,10 +275,6 @@ module Stripe
 
       unless (_shipping = @shipping).nil?
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
-      end
-
-      unless (_source = @source).nil?
-        return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
       unless (_tax = @tax).nil?
@@ -491,12 +482,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
     def source=(source : String?)
-      if source.nil?
-        return @source = nil
-      end
-      _source = source.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
-      @source = _source
+      @source = source
     end
 
     # Custom attribute writer method checking allowed values (enum).

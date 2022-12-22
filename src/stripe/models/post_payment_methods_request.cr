@@ -219,9 +219,6 @@ module Stripe
       unless (_boleto = @boleto).nil?
         invalid_properties.concat(_boleto.list_invalid_properties_for("boleto")) if _boleto.is_a?(OpenApi::Validatable)
       end
-      unless (_card = @card).nil?
-        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
-      end
       unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
@@ -262,9 +259,6 @@ module Stripe
       unless (_sofort = @sofort).nil?
         invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
-      unless (__type = @_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
       unless (_us_bank_account = @us_bank_account).nil?
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
@@ -293,10 +287,6 @@ module Stripe
 
       unless (_boleto = @boleto).nil?
         return false if _boleto.is_a?(OpenApi::Validatable) && !_boleto.valid?
-      end
-
-      unless (_card = @card).nil?
-        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
       unless (_customer = @customer).nil?
@@ -337,10 +327,6 @@ module Stripe
 
       unless (_sofort = @sofort).nil?
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
-      end
-
-      unless (__type = @_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       unless (_us_bank_account = @us_bank_account).nil?
@@ -458,12 +444,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
     def card=(card : Stripe::PostPaymentMethodsRequestCard?)
-      if card.nil?
-        return @card = nil
-      end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+      @card = card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -699,12 +680,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
-      end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).

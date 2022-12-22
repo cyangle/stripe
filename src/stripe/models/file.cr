@@ -134,11 +134,6 @@ module Stripe
       unless (_object = @object).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
-      invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
-
-      unless (_purpose = @purpose).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_PURPOSE) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
-      end
       invalid_properties.push("\"size\" is required and cannot be null") if @size.nil?
 
       unless (_filename = @filename).nil?
@@ -180,11 +175,6 @@ module Stripe
       return false if @object.nil?
       unless (_object = @object).nil?
         return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
-      end
-
-      return false if @purpose.nil?
-      unless (_purpose = @purpose).nil?
-        return false unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
 
       return false if @size.nil?
@@ -247,12 +237,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] purpose Object to be assigned
     def purpose=(purpose : String?)
-      if purpose.nil?
-        raise ArgumentError.new("\"purpose\" is required and cannot be null")
-      end
-      _purpose = purpose.not_nil!
-      OpenApi::EnumValidator.validate("purpose", _purpose, VALID_VALUES_FOR_PURPOSE)
-      @purpose = _purpose
+      @purpose = purpose
     end
 
     # Custom attribute writer method checking allowed values (enum).

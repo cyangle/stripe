@@ -232,18 +232,10 @@ module Stripe
       unless (_spending_controls = @spending_controls).nil?
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
-      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
-
-      unless (_status = @status).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       unless (__type = @_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
-      unless (_cancellation_reason = @cancellation_reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
       unless (_cvc = @cvc).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
@@ -265,9 +257,6 @@ module Stripe
       end
       unless (_replacement_for = @replacement_for).nil?
         invalid_properties.concat(_replacement_for.list_invalid_properties_for("replacement_for")) if _replacement_for.is_a?(OpenApi::Validatable)
-      end
-      unless (_replacement_reason = @replacement_reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REPLACEMENT_REASON) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
       unless (_shipping = @shipping).nil?
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
@@ -323,18 +312,9 @@ module Stripe
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
 
-      return false if @status.nil?
-      unless (_status = @status).nil?
-        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
-      end
-
       return false if @_type.nil?
       unless (__type = @_type).nil?
         return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
-      end
-
-      unless (_cancellation_reason = @cancellation_reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
       unless (_cvc = @cvc).nil?
@@ -355,10 +335,6 @@ module Stripe
 
       unless (_replacement_for = @replacement_for).nil?
         return false if _replacement_for.is_a?(OpenApi::Validatable) && !_replacement_for.valid?
-      end
-
-      unless (_replacement_reason = @replacement_reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
 
       unless (_shipping = @shipping).nil?
@@ -501,12 +477,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
-      end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -523,12 +494,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
     def cancellation_reason=(cancellation_reason : String?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
-      end
-      _cancellation_reason = cancellation_reason.not_nil!
-      OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      @cancellation_reason = _cancellation_reason
+      @cancellation_reason = cancellation_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -589,12 +555,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] replacement_reason Object to be assigned
     def replacement_reason=(replacement_reason : String?)
-      if replacement_reason.nil?
-        return @replacement_reason = nil
-      end
-      _replacement_reason = replacement_reason.not_nil!
-      OpenApi::EnumValidator.validate("replacement_reason", _replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
-      @replacement_reason = _replacement_reason
+      @replacement_reason = replacement_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

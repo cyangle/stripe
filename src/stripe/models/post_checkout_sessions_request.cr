@@ -265,9 +265,6 @@ module Stripe
       unless (_line_items = @line_items).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
-      unless (_locale = @locale).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_LOCALE) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
-      end
 
       unless (_mode = @mode).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_MODE) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
@@ -367,10 +364,6 @@ module Stripe
 
       unless (_line_items = @line_items).nil?
         return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
-      end
-
-      unless (_locale = @locale).nil?
-        return false unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
       unless (_mode = @mode).nil?
@@ -631,12 +624,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] locale Object to be assigned
     def locale=(locale : String?)
-      if locale.nil?
-        return @locale = nil
-      end
-      _locale = locale.not_nil!
-      OpenApi::EnumValidator.validate("locale", _locale, VALID_VALUES_FOR_LOCALE)
-      @locale = _locale
+      @locale = locale
     end
 
     # Custom attribute writer method checking allowed values (enum).

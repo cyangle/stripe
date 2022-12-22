@@ -57,9 +57,6 @@ module Stripe
       unless (_promotions = @promotions).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_PROMOTIONS) unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
       end
-      unless (_terms_of_service = @terms_of_service).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_TERMS_OF_SERVICE) unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
-      end
       invalid_properties
     end
 
@@ -68,10 +65,6 @@ module Stripe
     def valid? : Bool
       unless (_promotions = @promotions).nil?
         return false unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
-      end
-
-      unless (_terms_of_service = @terms_of_service).nil?
-        return false unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
       end
 
       true
@@ -91,12 +84,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terms_of_service Object to be assigned
     def terms_of_service=(terms_of_service : String?)
-      if terms_of_service.nil?
-        return @terms_of_service = nil
-      end
-      _terms_of_service = terms_of_service.not_nil!
-      OpenApi::EnumValidator.validate("terms_of_service", _terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
-      @terms_of_service = _terms_of_service
+      @terms_of_service = terms_of_service
     end
 
     # Generates #hash and #== methods from all fields

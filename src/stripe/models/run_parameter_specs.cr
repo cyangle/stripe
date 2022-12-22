@@ -71,9 +71,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_reporting_category = @reporting_category).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REPORTING_CATEGORY) unless OpenApi::EnumValidator.valid?(_reporting_category, VALID_VALUES_FOR_REPORTING_CATEGORY)
-      end
       unless (_timezone = @timezone).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_TIMEZONE) unless OpenApi::EnumValidator.valid?(_timezone, VALID_VALUES_FOR_TIMEZONE)
       end
@@ -83,10 +80,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_reporting_category = @reporting_category).nil?
-        return false unless OpenApi::EnumValidator.valid?(_reporting_category, VALID_VALUES_FOR_REPORTING_CATEGORY)
-      end
-
       unless (_timezone = @timezone).nil?
         return false unless OpenApi::EnumValidator.valid?(_timezone, VALID_VALUES_FOR_TIMEZONE)
       end
@@ -157,12 +150,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reporting_category Object to be assigned
     def reporting_category=(reporting_category : String?)
-      if reporting_category.nil?
-        return @reporting_category = nil
-      end
-      _reporting_category = reporting_category.not_nil!
-      OpenApi::EnumValidator.validate("reporting_category", _reporting_category, VALID_VALUES_FOR_REPORTING_CATEGORY)
-      @reporting_category = _reporting_category
+      @reporting_category = reporting_category
     end
 
     # Custom attribute writer method checking allowed values (enum).

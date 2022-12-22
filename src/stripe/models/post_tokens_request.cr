@@ -71,12 +71,6 @@ module Stripe
       unless (_account = @account).nil?
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
-      unless (_bank_account = @bank_account).nil?
-        invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
-      end
-      unless (_card = @card).nil?
-        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
-      end
       unless (_customer = @customer).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
@@ -100,14 +94,6 @@ module Stripe
     def valid? : Bool
       unless (_account = @account).nil?
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
-      end
-
-      unless (_bank_account = @bank_account).nil?
-        return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
-      end
-
-      unless (_card = @card).nil?
-        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
 
       unless (_customer = @customer).nil?
@@ -143,23 +129,13 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account Object to be assigned
     def bank_account=(bank_account : Stripe::TokenCreateBankAccount?)
-      if bank_account.nil?
-        return @bank_account = nil
-      end
-      _bank_account = bank_account.not_nil!
-      _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-      @bank_account = _bank_account
+      @bank_account = bank_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
     def card=(card : Stripe::PostTokensRequestCard?)
-      if card.nil?
-        return @card = nil
-      end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+      @card = card
     end
 
     # Custom attribute writer method checking allowed values (enum).

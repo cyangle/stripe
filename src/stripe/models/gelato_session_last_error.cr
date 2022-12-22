@@ -24,8 +24,8 @@ module Stripe
     # A short machine-readable string giving the reason for the verification or user-session failure.
     @[JSON::Field(key: "code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: code.nil? && !code_present?)]
     getter code : String? = nil
-    ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [abandoned, address_unverified_other, consent_declined, country_not_supported, device_not_supported, document_expired, document_type_not_supported, document_unverified_other, id_number_insufficient_document_data, id_number_mismatch, id_number_unverified_other, selfie_document_missing_photo, selfie_face_mismatch, selfie_manipulated, selfie_unverified_other, under_supported_age]."
-    VALID_VALUES_FOR_CODE  = String.static_array("abandoned", "address_unverified_other", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age")
+    ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [abandoned, consent_declined, country_not_supported, device_not_supported, document_expired, document_type_not_supported, document_unverified_other, id_number_insufficient_document_data, id_number_mismatch, id_number_unverified_other, selfie_document_missing_photo, selfie_face_mismatch, selfie_manipulated, selfie_unverified_other, under_supported_age]."
+    VALID_VALUES_FOR_CODE  = String.static_array("abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age")
 
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false
@@ -53,9 +53,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_code = @code).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
-      end
       unless (_reason = @reason).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
@@ -67,10 +64,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_code = @code).nil?
-        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
-      end
-
       unless (_reason = @reason).nil?
         return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
@@ -81,12 +74,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code : String?)
-      if code.nil?
-        return @code = nil
-      end
-      _code = code.not_nil!
-      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
-      @code = _code
+      @code = code
     end
 
     # Custom attribute writer method checking allowed values (enum).

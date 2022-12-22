@@ -85,9 +85,6 @@ module Stripe
       unless (_other = @other).nil?
         invalid_properties.concat(_other.list_invalid_properties_for("other")) if _other.is_a?(OpenApi::Validatable)
       end
-      unless (_reason = @reason).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
-      end
       unless (_service_not_as_described = @service_not_as_described).nil?
         invalid_properties.concat(_service_not_as_described.list_invalid_properties_for("service_not_as_described")) if _service_not_as_described.is_a?(OpenApi::Validatable)
       end
@@ -119,10 +116,6 @@ module Stripe
 
       unless (_other = @other).nil?
         return false if _other.is_a?(OpenApi::Validatable) && !_other.valid?
-      end
-
-      unless (_reason = @reason).nil?
-        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
       unless (_service_not_as_described = @service_not_as_described).nil?
@@ -201,12 +194,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason : String?)
-      if reason.nil?
-        return @reason = nil
-      end
-      _reason = reason.not_nil!
-      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
-      @reason = _reason
+      @reason = reason
     end
 
     # Custom attribute writer method checking allowed values (enum).

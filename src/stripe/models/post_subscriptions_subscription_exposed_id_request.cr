@@ -188,9 +188,6 @@ module Stripe
       unless (_automatic_tax = @automatic_tax).nil?
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-      unless (_billing_cycle_anchor = @billing_cycle_anchor).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
-      end
       unless (_billing_thresholds = @billing_thresholds).nil?
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
@@ -276,10 +273,6 @@ module Stripe
 
       unless (_automatic_tax = @automatic_tax).nil?
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
-      end
-
-      unless (_billing_cycle_anchor = @billing_cycle_anchor).nil?
-        return false unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
 
       unless (_billing_thresholds = @billing_thresholds).nil?
@@ -396,12 +389,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
     def billing_cycle_anchor=(billing_cycle_anchor : String?)
-      if billing_cycle_anchor.nil?
-        return @billing_cycle_anchor = nil
-      end
-      _billing_cycle_anchor = billing_cycle_anchor.not_nil!
-      OpenApi::EnumValidator.validate("billing_cycle_anchor", _billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
-      @billing_cycle_anchor = _billing_cycle_anchor
+      @billing_cycle_anchor = billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).

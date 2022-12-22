@@ -423,11 +423,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
     def billing_cycle_anchor=(billing_cycle_anchor : Int64?)
-      if billing_cycle_anchor.nil?
-        return @billing_cycle_anchor = nil
-      end
-      _billing_cycle_anchor = billing_cycle_anchor.not_nil!
-      @billing_cycle_anchor = _billing_cycle_anchor
+      @billing_cycle_anchor = billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).

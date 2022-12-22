@@ -51,67 +51,31 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      unless (_address = @address).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_ADDRESS) unless OpenApi::EnumValidator.valid?(_address, VALID_VALUES_FOR_ADDRESS)
-      end
-      unless (_name = @name).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_NAME) unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
-      end
-      unless (_shipping = @shipping).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SHIPPING) unless OpenApi::EnumValidator.valid?(_shipping, VALID_VALUES_FOR_SHIPPING)
-      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      unless (_address = @address).nil?
-        return false unless OpenApi::EnumValidator.valid?(_address, VALID_VALUES_FOR_ADDRESS)
-      end
-
-      unless (_name = @name).nil?
-        return false unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
-      end
-
-      unless (_shipping = @shipping).nil?
-        return false unless OpenApi::EnumValidator.valid?(_shipping, VALID_VALUES_FOR_SHIPPING)
-      end
-
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
     def address=(address : String?)
-      if address.nil?
-        return @address = nil
-      end
-      _address = address.not_nil!
-      OpenApi::EnumValidator.validate("address", _address, VALID_VALUES_FOR_ADDRESS)
-      @address = _address
+      @address = address
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
     def name=(name : String?)
-      if name.nil?
-        return @name = nil
-      end
-      _name = name.not_nil!
-      OpenApi::EnumValidator.validate("name", _name, VALID_VALUES_FOR_NAME)
-      @name = _name
+      @name = name
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
     def shipping=(shipping : String?)
-      if shipping.nil?
-        return @shipping = nil
-      end
-      _shipping = shipping.not_nil!
-      OpenApi::EnumValidator.validate("shipping", _shipping, VALID_VALUES_FOR_SHIPPING)
-      @shipping = _shipping
+      @shipping = shipping
     end
 
     # Generates #hash and #== methods from all fields

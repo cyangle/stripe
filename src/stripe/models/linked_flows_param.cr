@@ -41,34 +41,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"source_flow_type\" is required and cannot be null") if @source_flow_type.nil?
-
-      unless (_source_flow_type = @source_flow_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_FLOW_TYPE) unless OpenApi::EnumValidator.valid?(_source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
-      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @source_flow_type.nil?
-      unless (_source_flow_type = @source_flow_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(_source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
-      end
-
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow_type Object to be assigned
     def source_flow_type=(source_flow_type : String?)
-      if source_flow_type.nil?
-        raise ArgumentError.new("\"source_flow_type\" is required and cannot be null")
-      end
-      _source_flow_type = source_flow_type.not_nil!
-      OpenApi::EnumValidator.validate("source_flow_type", _source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
-      @source_flow_type = _source_flow_type
+      @source_flow_type = source_flow_type
     end
 
     # Generates #hash and #== methods from all fields

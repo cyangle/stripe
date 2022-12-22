@@ -63,14 +63,6 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
-
-      unless (_code = @code).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
-      end
-      unless (_resolution = @resolution).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_RESOLUTION) unless OpenApi::EnumValidator.valid?(_resolution, VALID_VALUES_FOR_RESOLUTION)
-      end
       unless (_restriction = @restriction).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RESTRICTION) unless OpenApi::EnumValidator.valid?(_restriction, VALID_VALUES_FOR_RESTRICTION)
       end
@@ -80,15 +72,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @code.nil?
-      unless (_code = @code).nil?
-        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
-      end
-
-      unless (_resolution = @resolution).nil?
-        return false unless OpenApi::EnumValidator.valid?(_resolution, VALID_VALUES_FOR_RESOLUTION)
-      end
-
       unless (_restriction = @restriction).nil?
         return false unless OpenApi::EnumValidator.valid?(_restriction, VALID_VALUES_FOR_RESTRICTION)
       end
@@ -99,23 +82,13 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code : String?)
-      if code.nil?
-        raise ArgumentError.new("\"code\" is required and cannot be null")
-      end
-      _code = code.not_nil!
-      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
-      @code = _code
+      @code = code
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resolution Object to be assigned
     def resolution=(resolution : String?)
-      if resolution.nil?
-        return @resolution = nil
-      end
-      _resolution = resolution.not_nil!
-      OpenApi::EnumValidator.validate("resolution", _resolution, VALID_VALUES_FOR_RESOLUTION)
-      @resolution = _resolution
+      @resolution = resolution
     end
 
     # Custom attribute writer method checking allowed values (enum).

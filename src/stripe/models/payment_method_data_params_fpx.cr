@@ -42,34 +42,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push("\"bank\" is required and cannot be null") if @bank.nil?
-
-      unless (_bank = @bank).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_BANK) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
-      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @bank.nil?
-      unless (_bank = @bank).nil?
-        return false unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
-      end
-
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
     def bank=(bank : String?)
-      if bank.nil?
-        raise ArgumentError.new("\"bank\" is required and cannot be null")
-      end
-      _bank = bank.not_nil!
-      OpenApi::EnumValidator.validate("bank", _bank, VALID_VALUES_FOR_BANK)
-      @bank = _bank
+      @bank = bank
     end
 
     # Generates #hash and #== methods from all fields

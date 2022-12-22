@@ -54,12 +54,6 @@ module Stripe
       unless (_mandate_options = @mandate_options).nil?
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
-      unless (_network = @network).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
-      end
-      unless (_request_three_d_secure = @request_three_d_secure).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
-      end
       invalid_properties
     end
 
@@ -68,14 +62,6 @@ module Stripe
     def valid? : Bool
       unless (_mandate_options = @mandate_options).nil?
         return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
-      end
-
-      unless (_network = @network).nil?
-        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
-      end
-
-      unless (_request_three_d_secure = @request_three_d_secure).nil?
-        return false unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
 
       true
@@ -95,23 +81,13 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
     def network=(network : String?)
-      if network.nil?
-        return @network = nil
-      end
-      _network = network.not_nil!
-      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
-      @network = _network
+      @network = network
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
     def request_three_d_secure=(request_three_d_secure : String?)
-      if request_three_d_secure.nil?
-        return @request_three_d_secure = nil
-      end
-      _request_three_d_secure = request_three_d_secure.not_nil!
-      OpenApi::EnumValidator.validate("request_three_d_secure", _request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
-      @request_three_d_secure = _request_three_d_secure
+      @request_three_d_secure = request_three_d_secure
     end
 
     # Generates #hash and #== methods from all fields

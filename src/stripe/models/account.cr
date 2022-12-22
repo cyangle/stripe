@@ -175,9 +175,6 @@ module Stripe
       unless (_business_profile = @business_profile).nil?
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
-      unless (_business_type = @business_type).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
-      end
       unless (_capabilities = @capabilities).nil?
         invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
       end
@@ -245,10 +242,6 @@ module Stripe
 
       unless (_business_profile = @business_profile).nil?
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
-      end
-
-      unless (_business_type = @business_type).nil?
-        return false unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
 
       unless (_capabilities = @capabilities).nil?
@@ -342,12 +335,7 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_type Object to be assigned
     def business_type=(business_type : String?)
-      if business_type.nil?
-        return @business_type = nil
-      end
-      _business_type = business_type.not_nil!
-      OpenApi::EnumValidator.validate("business_type", _business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
-      @business_type = _business_type
+      @business_type = business_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
