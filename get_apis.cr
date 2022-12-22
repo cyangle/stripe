@@ -9,7 +9,7 @@ Stripe.configure do |config|
   config.access_token = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 end
 
-Stripe::ApiClient.default.default_headers["Stripe-Version"] = "2022-08-01"
+Stripe::ApiClient.default.default_headers["Stripe-Version"] = "2022-11-15"
 
 get_accounts = Stripe::AccountsApi.new.get_accounts(expand: nil)
 File.write("local/gets/get_accounts.json", get_accounts.to_json)
@@ -353,8 +353,8 @@ File.write("local/gets/get_shipping_rates.json", get_shipping_rates.to_json)
 # File.write("local/gets/get_sigma_scheduled_query_runs.json", get_sigma_scheduled_query_runs.to_json)
 # get_sigma_scheduled_query_runs_scheduled_query_run = api.get_sigma_scheduled_query_runs_scheduled_query_run(scheduled_query_run: nil)
 # File.write("local/gets/get_sigma_scheduled_query_runs_scheduled_query_run.json", get_sigma_scheduled_query_runs_scheduled_query_run.to_json)
-get_skus = Stripe::SkusApi.new.get_skus(active: nil, attributes: nil, ending_before: nil, expand: nil, ids: nil, in_stock: nil, limit: nil, product: nil, starting_after: nil)
-File.write("local/gets/get_skus.json", get_skus.to_json)
+# get_skus = Stripe::SkusApi.new.get_skus(active: nil, attributes: nil, ending_before: nil, expand: nil, ids: nil, in_stock: nil, limit: nil, product: nil, starting_after: nil)
+# File.write("local/gets/get_skus.json", get_skus.to_json)
 # get_skus_id = api.get_skus_id(id: nil)
 # File.write("local/gets/get_skus_id.json", get_skus_id.to_json)
 # get_sources_source = api.get_sources_source(source: nil, expand: nil)
