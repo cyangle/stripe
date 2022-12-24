@@ -116,95 +116,68 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_fee Object to be assigned
-    def application_fee=(application_fee : Int64?)
-      if application_fee.nil?
-        return @application_fee = nil
-      end
-      _application_fee = application_fee.not_nil!
-      @application_fee = _application_fee
+    def application_fee=(new_value : Int64?)
+      @application_fee = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_fee_amount Object to be assigned
-    def application_fee_amount=(application_fee_amount : Int64?)
-      if application_fee_amount.nil?
-        return @application_fee_amount = nil
-      end
-      _application_fee_amount = application_fee_amount.not_nil!
-      @application_fee_amount = _application_fee_amount
+    def application_fee_amount=(new_value : Int64?)
+      @application_fee_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] receipt_email Object to be assigned
-    def receipt_email=(receipt_email : String?)
-      if receipt_email.nil?
-        return @receipt_email = nil
-      end
-      _receipt_email = receipt_email.not_nil!
-      @receipt_email = _receipt_email
+    def receipt_email=(new_value : String?)
+      @receipt_email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
+    def statement_descriptor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       end
-      _statement_descriptor = statement_descriptor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-      @statement_descriptor = _statement_descriptor
+
+      @statement_descriptor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix Object to be assigned
-    def statement_descriptor_suffix=(statement_descriptor_suffix : String?)
-      if statement_descriptor_suffix.nil?
-        return @statement_descriptor_suffix = nil
+    def statement_descriptor_suffix=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
       end
-      _statement_descriptor_suffix = statement_descriptor_suffix.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
-      @statement_descriptor_suffix = _statement_descriptor_suffix
+
+      @statement_descriptor_suffix = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
-      if transfer_data.nil?
-        return @transfer_data = nil
+    def transfer_data=(new_value : Stripe::TransferDataSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _transfer_data = transfer_data.not_nil!
-      _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
-      @transfer_data = _transfer_data
+
+      @transfer_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_group Object to be assigned
-    def transfer_group=(transfer_group : String?)
-      if transfer_group.nil?
-        return @transfer_group = nil
-      end
-      _transfer_group = transfer_group.not_nil!
-      @transfer_group = _transfer_group
+    def transfer_group=(new_value : String?)
+      @transfer_group = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -77,42 +77,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] finalized_at Object to be assigned
-    def finalized_at=(finalized_at : Int64?)
-      if finalized_at.nil?
-        return @finalized_at = nil
-      end
-      _finalized_at = finalized_at.not_nil!
-      @finalized_at = _finalized_at
+    def finalized_at=(new_value : Int64?)
+      @finalized_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] marked_uncollectible_at Object to be assigned
-    def marked_uncollectible_at=(marked_uncollectible_at : Int64?)
-      if marked_uncollectible_at.nil?
-        return @marked_uncollectible_at = nil
-      end
-      _marked_uncollectible_at = marked_uncollectible_at.not_nil!
-      @marked_uncollectible_at = _marked_uncollectible_at
+    def marked_uncollectible_at=(new_value : Int64?)
+      @marked_uncollectible_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paid_at Object to be assigned
-    def paid_at=(paid_at : Int64?)
-      if paid_at.nil?
-        return @paid_at = nil
-      end
-      _paid_at = paid_at.not_nil!
-      @paid_at = _paid_at
+    def paid_at=(new_value : Int64?)
+      @paid_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] voided_at Object to be assigned
-    def voided_at=(voided_at : Int64?)
-      if voided_at.nil?
-        return @voided_at = nil
-      end
-      _voided_at = voided_at.not_nil!
-      @voided_at = _voided_at
+    def voided_at=(new_value : Int64?)
+      @voided_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

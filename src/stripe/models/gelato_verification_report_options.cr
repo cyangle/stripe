@@ -62,23 +62,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] document Object to be assigned
-    def document=(document : Stripe::GelatoReportDocumentOptions?)
-      if document.nil?
-        return @document = nil
+    def document=(new_value : Stripe::GelatoReportDocumentOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _document = document.not_nil!
-      _document.validate if _document.is_a?(OpenApi::Validatable)
-      @document = _document
+
+      @document = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id_number Object to be assigned
-    def id_number=(id_number : JSON::Any?)
-      if id_number.nil?
-        return @id_number = nil
-      end
-      _id_number = id_number.not_nil!
-      @id_number = _id_number
+    def id_number=(new_value : JSON::Any?)
+      @id_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -106,55 +106,45 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(price : Stripe::SubscriptionScheduleConfigurationItemPrice?)
-      if price.nil?
-        raise ArgumentError.new("\"price\" is required and cannot be null")
+    def price=(new_value : Stripe::SubscriptionScheduleConfigurationItemPrice?)
+      raise ArgumentError.new("\"price\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _price = price.not_nil!
-      _price.validate if _price.is_a?(OpenApi::Validatable)
-      @price = _price
+
+      @price = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(billing_thresholds : Stripe::SubscriptionItemBillingThresholds1?)
-      if billing_thresholds.nil?
-        return @billing_thresholds = nil
+    def billing_thresholds=(new_value : Stripe::SubscriptionItemBillingThresholds1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _billing_thresholds = billing_thresholds.not_nil!
-      _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
-      @billing_thresholds = _billing_thresholds
+
+      @billing_thresholds = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(tax_rates : Array(Stripe::TaxRate)?)
-      if tax_rates.nil?
-        return @tax_rates = nil
+    def tax_rates=(new_value : Array(Stripe::TaxRate)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _tax_rates = tax_rates.not_nil!
-      OpenApi::ContainerValidator.validate(container: _tax_rates) if _tax_rates.is_a?(Array)
-      @tax_rates = _tax_rates
+
+      @tax_rates = new_value
     end
 
     # Generates #hash and #== methods from all fields

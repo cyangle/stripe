@@ -81,24 +81,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] display_name Object to be assigned
-    def display_name=(display_name : String?)
-      if display_name.nil?
-        return @display_name = nil
+    def display_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("display_name", new_value.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       end
-      _display_name = display_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
-      @display_name = _display_name
+
+      @display_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] timezone Object to be assigned
-    def timezone=(timezone : String?)
-      if timezone.nil?
-        return @timezone = nil
+    def timezone=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("timezone", new_value.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
       end
-      _timezone = timezone.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
-      @timezone = _timezone
+
+      @timezone = new_value
     end
 
     # Generates #hash and #== methods from all fields

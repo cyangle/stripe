@@ -77,42 +77,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] canceled_at Object to be assigned
-    def canceled_at=(canceled_at : Int64?)
-      if canceled_at.nil?
-        return @canceled_at = nil
-      end
-      _canceled_at = canceled_at.not_nil!
-      @canceled_at = _canceled_at
+    def canceled_at=(new_value : Int64?)
+      @canceled_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] failed_at Object to be assigned
-    def failed_at=(failed_at : Int64?)
-      if failed_at.nil?
-        return @failed_at = nil
-      end
-      _failed_at = failed_at.not_nil!
-      @failed_at = _failed_at
+    def failed_at=(new_value : Int64?)
+      @failed_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] posted_at Object to be assigned
-    def posted_at=(posted_at : Int64?)
-      if posted_at.nil?
-        return @posted_at = nil
-      end
-      _posted_at = posted_at.not_nil!
-      @posted_at = _posted_at
+    def posted_at=(new_value : Int64?)
+      @posted_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] returned_at Object to be assigned
-    def returned_at=(returned_at : Int64?)
-      if returned_at.nil?
-        return @returned_at = nil
-      end
-      _returned_at = returned_at.not_nil!
-      @returned_at = _returned_at
+    def returned_at=(new_value : Int64?)
+      @returned_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

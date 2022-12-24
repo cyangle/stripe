@@ -156,95 +156,81 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data_available_end Object to be assigned
-    def data_available_end=(data_available_end : Int64?)
-      if data_available_end.nil?
-        raise ArgumentError.new("\"data_available_end\" is required and cannot be null")
-      end
-      _data_available_end = data_available_end.not_nil!
-      @data_available_end = _data_available_end
+    def data_available_end=(new_value : Int64?)
+      raise ArgumentError.new("\"data_available_end\" is required and cannot be null") if new_value.nil?
+
+      @data_available_end = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data_available_start Object to be assigned
-    def data_available_start=(data_available_start : Int64?)
-      if data_available_start.nil?
-        raise ArgumentError.new("\"data_available_start\" is required and cannot be null")
-      end
-      _data_available_start = data_available_start.not_nil!
-      @data_available_start = _data_available_start
+    def data_available_start=(new_value : Int64?)
+      raise ArgumentError.new("\"data_available_start\" is required and cannot be null") if new_value.nil?
+
+      @data_available_start = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] updated Object to be assigned
-    def updated=(updated : Int64?)
-      if updated.nil?
-        raise ArgumentError.new("\"updated\" is required and cannot be null")
-      end
-      _updated = updated.not_nil!
-      @updated = _updated
+    def updated=(new_value : Int64?)
+      raise ArgumentError.new("\"updated\" is required and cannot be null") if new_value.nil?
+
+      @updated = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] version Object to be assigned
-    def version=(version : Int64?)
-      if version.nil?
-        raise ArgumentError.new("\"version\" is required and cannot be null")
-      end
-      _version = version.not_nil!
-      @version = _version
+    def version=(new_value : Int64?)
+      raise ArgumentError.new("\"version\" is required and cannot be null") if new_value.nil?
+
+      @version = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_columns Object to be assigned
-    def default_columns=(default_columns : Array(String)?)
-      if default_columns.nil?
-        return @default_columns = nil
-      end
-      _default_columns = default_columns.not_nil!
-      @default_columns = _default_columns
+    def default_columns=(new_value : Array(String)?)
+      @default_columns = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -80,35 +80,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_mandate Object to be assigned
-    def default_mandate=(default_mandate : String?)
-      if default_mandate.nil?
-        return @default_mandate = nil
+    def default_mandate=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("default_mandate", new_value.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
       end
-      _default_mandate = default_mandate.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
-      @default_mandate = _default_mandate
+
+      @default_mandate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::PaymentMethodOptions?)
-      if payment_method_options.nil?
-        return @payment_method_options = nil
+    def payment_method_options=(new_value : Stripe::PaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_method_options = payment_method_options.not_nil!
-      _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
-      @payment_method_options = _payment_method_options
+
+      @payment_method_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes?)
-      if payment_method_types.nil?
-        return @payment_method_types = nil
+    def payment_method_types=(new_value : Stripe::PaymentSettingsPaymentMethodTypes?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_method_types = payment_method_types.not_nil!
-      _payment_method_types.validate if _payment_method_types.is_a?(OpenApi::Validatable)
-      @payment_method_types = _payment_method_types
+
+      @payment_method_types = new_value
     end
 
     # Generates #hash and #== methods from all fields

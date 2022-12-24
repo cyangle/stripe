@@ -61,13 +61,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(error : Stripe::ApiErrors?)
-      if error.nil?
-        raise ArgumentError.new("\"error\" is required and cannot be null")
+    def error=(new_value : Stripe::ApiErrors?)
+      raise ArgumentError.new("\"error\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _error = error.not_nil!
-      _error.validate if _error.is_a?(OpenApi::Validatable)
-      @error = _error
+
+      @error = new_value
     end
 
     # Generates #hash and #== methods from all fields

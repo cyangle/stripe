@@ -52,12 +52,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available Object to be assigned
-    def available=(available : Hash(String, Int32)?)
-      if available.nil?
-        return @available = nil
-      end
-      _available = available.not_nil!
-      @available = _available
+    def available=(new_value : Hash(String, Int32)?)
+      @available = new_value
     end
 
     # Generates #hash and #== methods from all fields

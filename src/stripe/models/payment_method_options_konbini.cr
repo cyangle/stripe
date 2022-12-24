@@ -112,55 +112,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] confirmation_number Object to be assigned
-    def confirmation_number=(confirmation_number : String?)
-      if confirmation_number.nil?
-        return @confirmation_number = nil
+    def confirmation_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("confirmation_number", new_value.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
       end
-      _confirmation_number = confirmation_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
-      @confirmation_number = _confirmation_number
+
+      @confirmation_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_after_days Object to be assigned
-    def expires_after_days=(expires_after_days : Int64?)
-      if expires_after_days.nil?
-        return @expires_after_days = nil
-      end
-      _expires_after_days = expires_after_days.not_nil!
-      @expires_after_days = _expires_after_days
+    def expires_after_days=(new_value : Int64?)
+      @expires_after_days = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product_description Object to be assigned
-    def product_description=(product_description : String?)
-      if product_description.nil?
-        return @product_description = nil
+    def product_description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("product_description", new_value.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       end
-      _product_description = product_description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
-      @product_description = _product_description
+
+      @product_description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

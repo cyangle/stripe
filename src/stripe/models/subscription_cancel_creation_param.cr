@@ -94,45 +94,40 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason : Stripe::SubscriptionCancellationReasonCreationParam?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
+    def cancellation_reason=(new_value : Stripe::SubscriptionCancellationReasonCreationParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cancellation_reason = cancellation_reason.not_nil!
-      _cancellation_reason.validate if _cancellation_reason.is_a?(OpenApi::Validatable)
-      @cancellation_reason = _cancellation_reason
+
+      @cancellation_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mode Object to be assigned
-    def mode=(mode : String?)
-      if mode.nil?
-        return @mode = nil
+    def mode=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("mode", new_value, VALID_VALUES_FOR_MODE)
       end
-      _mode = mode.not_nil!
-      OpenApi::EnumValidator.validate("mode", _mode, VALID_VALUES_FOR_MODE)
-      @mode = _mode
+
+      @mode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior : String?)
-      if proration_behavior.nil?
-        return @proration_behavior = nil
+    def proration_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("proration_behavior", new_value, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
-      _proration_behavior = proration_behavior.not_nil!
-      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-      @proration_behavior = _proration_behavior
+
+      @proration_behavior = new_value
     end
 
     # Generates #hash and #== methods from all fields

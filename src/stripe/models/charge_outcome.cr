@@ -154,78 +154,69 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("_type", new_value.to_s.size, MAX_LENGTH_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_status Object to be assigned
-    def network_status=(network_status : String?)
-      if network_status.nil?
-        return @network_status = nil
+    def network_status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("network_status", new_value.to_s.size, MAX_LENGTH_FOR_NETWORK_STATUS)
       end
-      _network_status = network_status.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("network_status", _network_status.to_s.size, MAX_LENGTH_FOR_NETWORK_STATUS)
-      @network_status = _network_status
+
+      @network_status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      if reason.nil?
-        return @reason = nil
+    def reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reason", new_value.to_s.size, MAX_LENGTH_FOR_REASON)
       end
-      _reason = reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
-      @reason = _reason
+
+      @reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] risk_level Object to be assigned
-    def risk_level=(risk_level : String?)
-      if risk_level.nil?
-        return @risk_level = nil
+    def risk_level=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("risk_level", new_value.to_s.size, MAX_LENGTH_FOR_RISK_LEVEL)
       end
-      _risk_level = risk_level.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("risk_level", _risk_level.to_s.size, MAX_LENGTH_FOR_RISK_LEVEL)
-      @risk_level = _risk_level
+
+      @risk_level = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] risk_score Object to be assigned
-    def risk_score=(risk_score : Int64?)
-      if risk_score.nil?
-        return @risk_score = nil
-      end
-      _risk_score = risk_score.not_nil!
-      @risk_score = _risk_score
+    def risk_score=(new_value : Int64?)
+      @risk_score = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] rule Object to be assigned
-    def rule=(rule : Stripe::ChargeOutcomeRule?)
-      if rule.nil?
-        return @rule = nil
+    def rule=(new_value : Stripe::ChargeOutcomeRule?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _rule = rule.not_nil!
-      _rule.validate if _rule.is_a?(OpenApi::Validatable)
-      @rule = _rule
+
+      @rule = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] seller_message Object to be assigned
-    def seller_message=(seller_message : String?)
-      if seller_message.nil?
-        return @seller_message = nil
+    def seller_message=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("seller_message", new_value.to_s.size, MAX_LENGTH_FOR_SELLER_MESSAGE)
       end
-      _seller_message = seller_message.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("seller_message", _seller_message.to_s.size, MAX_LENGTH_FOR_SELLER_MESSAGE)
-      @seller_message = _seller_message
+
+      @seller_message = new_value
     end
 
     # Generates #hash and #== methods from all fields

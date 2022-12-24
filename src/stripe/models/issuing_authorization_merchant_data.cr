@@ -194,90 +194,85 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] category Object to be assigned
-    def category=(category : String?)
-      if category.nil?
-        raise ArgumentError.new("\"category\" is required and cannot be null")
+    def category=(new_value : String?)
+      raise ArgumentError.new("\"category\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("category", new_value.to_s.size, MAX_LENGTH_FOR_CATEGORY)
       end
-      _category = category.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("category", _category.to_s.size, MAX_LENGTH_FOR_CATEGORY)
-      @category = _category
+
+      @category = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] category_code Object to be assigned
-    def category_code=(category_code : String?)
-      if category_code.nil?
-        raise ArgumentError.new("\"category_code\" is required and cannot be null")
+    def category_code=(new_value : String?)
+      raise ArgumentError.new("\"category_code\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("category_code", new_value.to_s.size, MAX_LENGTH_FOR_CATEGORY_CODE)
       end
-      _category_code = category_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("category_code", _category_code.to_s.size, MAX_LENGTH_FOR_CATEGORY_CODE)
-      @category_code = _category_code
+
+      @category_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_id Object to be assigned
-    def network_id=(network_id : String?)
-      if network_id.nil?
-        raise ArgumentError.new("\"network_id\" is required and cannot be null")
+    def network_id=(new_value : String?)
+      raise ArgumentError.new("\"network_id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("network_id", new_value.to_s.size, MAX_LENGTH_FOR_NETWORK_ID)
       end
-      _network_id = network_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("network_id", _network_id.to_s.size, MAX_LENGTH_FOR_NETWORK_ID)
-      @network_id = _network_id
+
+      @network_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] city Object to be assigned
-    def city=(city : String?)
-      if city.nil?
-        return @city = nil
+    def city=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("city", new_value.to_s.size, MAX_LENGTH_FOR_CITY)
       end
-      _city = city.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
-      @city = _city
+
+      @city = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
+    def country=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("country", new_value.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       end
-      _country = country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-      @country = _country
+
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
+    def name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] postal_code Object to be assigned
-    def postal_code=(postal_code : String?)
-      if postal_code.nil?
-        return @postal_code = nil
+    def postal_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("postal_code", new_value.to_s.size, MAX_LENGTH_FOR_POSTAL_CODE)
       end
-      _postal_code = postal_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("postal_code", _postal_code.to_s.size, MAX_LENGTH_FOR_POSTAL_CODE)
-      @postal_code = _postal_code
+
+      @postal_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
-    def state=(state : String?)
-      if state.nil?
-        return @state = nil
+    def state=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("state", new_value.to_s.size, MAX_LENGTH_FOR_STATE)
       end
-      _state = state.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
-      @state = _state
+
+      @state = new_value
     end
 
     # Generates #hash and #== methods from all fields

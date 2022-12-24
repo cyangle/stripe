@@ -175,141 +175,116 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        return @active = nil
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] after_completion Object to be assigned
-    def after_completion=(after_completion : Stripe::AfterCompletionParams?)
-      if after_completion.nil?
-        return @after_completion = nil
+    def after_completion=(new_value : Stripe::AfterCompletionParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _after_completion = after_completion.not_nil!
-      _after_completion.validate if _after_completion.is_a?(OpenApi::Validatable)
-      @after_completion = _after_completion
+
+      @after_completion = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allow_promotion_codes Object to be assigned
-    def allow_promotion_codes=(allow_promotion_codes : Bool?)
-      if allow_promotion_codes.nil?
-        return @allow_promotion_codes = nil
-      end
-      _allow_promotion_codes = allow_promotion_codes.not_nil!
-      @allow_promotion_codes = _allow_promotion_codes
+    def allow_promotion_codes=(new_value : Bool?)
+      @allow_promotion_codes = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxParams?)
-      if automatic_tax.nil?
-        return @automatic_tax = nil
+    def automatic_tax=(new_value : Stripe::AutomaticTaxParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _automatic_tax = automatic_tax.not_nil!
-      _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-      @automatic_tax = _automatic_tax
+
+      @automatic_tax = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection : String?)
-      if billing_address_collection.nil?
-        return @billing_address_collection = nil
+    def billing_address_collection=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("billing_address_collection", new_value, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
-      _billing_address_collection = billing_address_collection.not_nil!
-      OpenApi::EnumValidator.validate("billing_address_collection", _billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
-      @billing_address_collection = _billing_address_collection
+
+      @billing_address_collection = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_text Object to be assigned
-    def custom_text=(custom_text : Stripe::CustomTextParam?)
-      if custom_text.nil?
-        return @custom_text = nil
+    def custom_text=(new_value : Stripe::CustomTextParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _custom_text = custom_text.not_nil!
-      _custom_text.validate if _custom_text.is_a?(OpenApi::Validatable)
-      @custom_text = _custom_text
+
+      @custom_text = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_creation Object to be assigned
-    def customer_creation=(customer_creation : String?)
-      if customer_creation.nil?
-        return @customer_creation = nil
+    def customer_creation=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("customer_creation", new_value, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
-      _customer_creation = customer_creation.not_nil!
-      OpenApi::EnumValidator.validate("customer_creation", _customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
-      @customer_creation = _customer_creation
+
+      @customer_creation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Array(Stripe::LineItemsUpdateParams)?)
-      if line_items.nil?
-        return @line_items = nil
+    def line_items=(new_value : Array(Stripe::LineItemsUpdateParams)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _line_items = line_items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
-      @line_items = _line_items
+
+      @line_items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_collection Object to be assigned
-    def payment_method_collection=(payment_method_collection : String?)
-      if payment_method_collection.nil?
-        return @payment_method_collection = nil
+    def payment_method_collection=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("payment_method_collection", new_value, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
-      _payment_method_collection = payment_method_collection.not_nil!
-      OpenApi::EnumValidator.validate("payment_method_collection", _payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
-      @payment_method_collection = _payment_method_collection
+
+      @payment_method_collection = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?)
-      if payment_method_types.nil?
-        return @payment_method_types = nil
+    def payment_method_types=(new_value : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_method_types = payment_method_types.not_nil!
-      _payment_method_types.validate if _payment_method_types.is_a?(OpenApi::Validatable)
-      @payment_method_types = _payment_method_types
+
+      @payment_method_types = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address_collection Object to be assigned
-    def shipping_address_collection=(shipping_address_collection : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection?)
-      if shipping_address_collection.nil?
-        return @shipping_address_collection = nil
+    def shipping_address_collection=(new_value : Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping_address_collection = shipping_address_collection.not_nil!
-      _shipping_address_collection.validate if _shipping_address_collection.is_a?(OpenApi::Validatable)
-      @shipping_address_collection = _shipping_address_collection
+
+      @shipping_address_collection = new_value
     end
 
     # Generates #hash and #== methods from all fields

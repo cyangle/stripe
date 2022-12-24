@@ -62,13 +62,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_countries Object to be assigned
-    def allowed_countries=(allowed_countries : Array(String)?)
-      if allowed_countries.nil?
-        raise ArgumentError.new("\"allowed_countries\" is required and cannot be null")
+    def allowed_countries=(new_value : Array(String)?)
+      raise ArgumentError.new("\"allowed_countries\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("allowed_countries", new_value, VALID_VALUES_FOR_ALLOWED_COUNTRIES)
       end
-      _allowed_countries = allowed_countries.not_nil!
-      OpenApi::EnumValidator.validate("allowed_countries", _allowed_countries, VALID_VALUES_FOR_ALLOWED_COUNTRIES)
-      @allowed_countries = _allowed_countries
+
+      @allowed_countries = new_value
     end
 
     # Generates #hash and #== methods from all fields

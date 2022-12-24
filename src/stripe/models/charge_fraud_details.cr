@@ -75,24 +75,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] stripe_report Object to be assigned
-    def stripe_report=(stripe_report : String?)
-      if stripe_report.nil?
-        return @stripe_report = nil
+    def stripe_report=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("stripe_report", new_value.to_s.size, MAX_LENGTH_FOR_STRIPE_REPORT)
       end
-      _stripe_report = stripe_report.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("stripe_report", _stripe_report.to_s.size, MAX_LENGTH_FOR_STRIPE_REPORT)
-      @stripe_report = _stripe_report
+
+      @stripe_report = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_report Object to be assigned
-    def user_report=(user_report : String?)
-      if user_report.nil?
-        return @user_report = nil
+    def user_report=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("user_report", new_value.to_s.size, MAX_LENGTH_FOR_USER_REPORT)
       end
-      _user_report = user_report.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("user_report", _user_report.to_s.size, MAX_LENGTH_FOR_USER_REPORT)
-      @user_report = _user_report
+
+      @user_report = new_value
     end
 
     # Generates #hash and #== methods from all fields

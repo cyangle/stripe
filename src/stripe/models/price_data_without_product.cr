@@ -101,65 +101,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::CurrencyOption)?)
-      if currency_options.nil?
-        return @currency_options = nil
+    def currency_options=(new_value : Hash(String, Stripe::CurrencyOption)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _currency_options = currency_options.not_nil!
-      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
-      @currency_options = _currency_options
+
+      @currency_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recurring Object to be assigned
-    def recurring=(recurring : Stripe::RecurringAdhoc?)
-      if recurring.nil?
-        return @recurring = nil
+    def recurring=(new_value : Stripe::RecurringAdhoc?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _recurring = recurring.not_nil!
-      _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
-      @recurring = _recurring
+
+      @recurring = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior : String?)
-      if tax_behavior.nil?
-        return @tax_behavior = nil
+    def tax_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      _tax_behavior = tax_behavior.not_nil!
-      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
-      @tax_behavior = _tax_behavior
+
+      @tax_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount Object to be assigned
-    def unit_amount=(unit_amount : Int64?)
-      if unit_amount.nil?
-        return @unit_amount = nil
-      end
-      _unit_amount = unit_amount.not_nil!
-      @unit_amount = _unit_amount
+    def unit_amount=(new_value : Int64?)
+      @unit_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_decimal Object to be assigned
-    def unit_amount_decimal=(unit_amount_decimal : BigDecimal?)
-      if unit_amount_decimal.nil?
-        return @unit_amount_decimal = nil
-      end
-      _unit_amount_decimal = unit_amount_decimal.not_nil!
-      @unit_amount_decimal = _unit_amount_decimal
+    def unit_amount_decimal=(new_value : BigDecimal?)
+      @unit_amount_decimal = new_value
     end
 
     # Generates #hash and #== methods from all fields

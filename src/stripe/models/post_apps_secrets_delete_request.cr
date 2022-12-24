@@ -87,34 +87,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] scope Object to be assigned
-    def scope=(scope : Stripe::ScopeParam?)
-      if scope.nil?
-        raise ArgumentError.new("\"scope\" is required and cannot be null")
+    def scope=(new_value : Stripe::ScopeParam?)
+      raise ArgumentError.new("\"scope\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _scope = scope.not_nil!
-      _scope.validate if _scope.is_a?(OpenApi::Validatable)
-      @scope = _scope
+
+      @scope = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

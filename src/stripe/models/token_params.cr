@@ -63,13 +63,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] token Object to be assigned
-    def token=(token : String?)
-      if token.nil?
-        raise ArgumentError.new("\"token\" is required and cannot be null")
+    def token=(new_value : String?)
+      raise ArgumentError.new("\"token\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("token", new_value.to_s.size, MAX_LENGTH_FOR_TOKEN)
       end
-      _token = token.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("token", _token.to_s.size, MAX_LENGTH_FOR_TOKEN)
-      @token = _token
+
+      @token = new_value
     end
 
     # Generates #hash and #== methods from all fields

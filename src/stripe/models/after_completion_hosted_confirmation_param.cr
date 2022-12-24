@@ -58,13 +58,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_message Object to be assigned
-    def custom_message=(custom_message : String?)
-      if custom_message.nil?
-        return @custom_message = nil
+    def custom_message=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("custom_message", new_value.to_s.size, MAX_LENGTH_FOR_CUSTOM_MESSAGE)
       end
-      _custom_message = custom_message.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("custom_message", _custom_message.to_s.size, MAX_LENGTH_FOR_CUSTOM_MESSAGE)
-      @custom_message = _custom_message
+
+      @custom_message = new_value
     end
 
     # Generates #hash and #== methods from all fields

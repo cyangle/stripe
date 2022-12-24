@@ -93,35 +93,33 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account Object to be assigned
-    def account=(account : String?)
-      if account.nil?
-        return @account = nil
+    def account=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       end
-      _account = account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
-      @account = _account
+
+      @account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer Object to be assigned
-    def customer=(customer : String?)
-      if customer.nil?
-        return @customer = nil
+    def customer=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("customer", new_value.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       end
-      _customer = customer.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
-      @customer = _customer
+
+      @customer = new_value
     end
 
     # Generates #hash and #== methods from all fields

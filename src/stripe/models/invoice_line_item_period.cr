@@ -65,22 +65,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _end Object to be assigned
-    def _end=(_end : Int64?)
-      if _end.nil?
-        raise ArgumentError.new("\"_end\" is required and cannot be null")
-      end
-      __end = _end.not_nil!
-      @_end = __end
+    def _end=(new_value : Int64?)
+      raise ArgumentError.new("\"_end\" is required and cannot be null") if new_value.nil?
+
+      @_end = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] start Object to be assigned
-    def start=(start : Int64?)
-      if start.nil?
-        raise ArgumentError.new("\"start\" is required and cannot be null")
-      end
-      _start = start.not_nil!
-      @start = _start
+    def start=(new_value : Int64?)
+      raise ArgumentError.new("\"start\" is required and cannot be null") if new_value.nil?
+
+      @start = new_value
     end
 
     # Generates #hash and #== methods from all fields

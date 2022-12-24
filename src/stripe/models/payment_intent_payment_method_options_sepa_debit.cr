@@ -64,23 +64,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : JSON::Any?)
-      if mandate_options.nil?
-        return @mandate_options = nil
-      end
-      _mandate_options = mandate_options.not_nil!
-      @mandate_options = _mandate_options
+    def mandate_options=(new_value : JSON::Any?)
+      @mandate_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -66,24 +66,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] items Object to be assigned
-    def items=(items : Array(Stripe::OrderItemSpecs)?)
-      if items.nil?
-        return @items = nil
+    def items=(new_value : Array(Stripe::OrderItemSpecs)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _items = items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
-      @items = _items
+
+      @items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping : Stripe::OrderShipping?)
-      if shipping.nil?
-        return @shipping = nil
+    def shipping=(new_value : Stripe::OrderShipping?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping = shipping.not_nil!
-      _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-      @shipping = _shipping
+
+      @shipping = new_value
     end
 
     # Generates #hash and #== methods from all fields

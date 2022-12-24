@@ -81,24 +81,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_credit Object to be assigned
-    def received_credit=(received_credit : String?)
-      if received_credit.nil?
-        return @received_credit = nil
+    def received_credit=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("received_credit", new_value.to_s.size, MAX_LENGTH_FOR_RECEIVED_CREDIT)
       end
-      _received_credit = received_credit.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("received_credit", _received_credit.to_s.size, MAX_LENGTH_FOR_RECEIVED_CREDIT)
-      @received_credit = _received_credit
+
+      @received_credit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_debit Object to be assigned
-    def received_debit=(received_debit : String?)
-      if received_debit.nil?
-        return @received_debit = nil
+    def received_debit=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("received_debit", new_value.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
       end
-      _received_debit = received_debit.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
-      @received_debit = _received_debit
+
+      @received_debit = new_value
     end
 
     # Generates #hash and #== methods from all fields

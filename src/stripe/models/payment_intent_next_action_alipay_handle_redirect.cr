@@ -117,46 +117,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] native_data Object to be assigned
-    def native_data=(native_data : String?)
-      if native_data.nil?
-        return @native_data = nil
+    def native_data=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("native_data", new_value.to_s.size, MAX_LENGTH_FOR_NATIVE_DATA)
       end
-      _native_data = native_data.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("native_data", _native_data.to_s.size, MAX_LENGTH_FOR_NATIVE_DATA)
-      @native_data = _native_data
+
+      @native_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] native_url Object to be assigned
-    def native_url=(native_url : String?)
-      if native_url.nil?
-        return @native_url = nil
+    def native_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("native_url", new_value.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
       end
-      _native_url = native_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
-      @native_url = _native_url
+
+      @native_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        return @return_url = nil
+    def return_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("return_url", new_value.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       end
-      _return_url = return_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
-      @return_url = _return_url
+
+      @return_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] url Object to be assigned
-    def url=(url : String?)
-      if url.nil?
-        return @url = nil
+    def url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("url", new_value.to_s.size, MAX_LENGTH_FOR_URL)
       end
-      _url = url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
-      @url = _url
+
+      @url = new_value
     end
 
     # Generates #hash and #== methods from all fields

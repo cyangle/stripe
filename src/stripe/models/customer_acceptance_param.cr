@@ -89,44 +89,36 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] online Object to be assigned
-    def online=(online : Stripe::OnlineParam?)
-      if online.nil?
-        raise ArgumentError.new("\"online\" is required and cannot be null")
+    def online=(new_value : Stripe::OnlineParam?)
+      raise ArgumentError.new("\"online\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _online = online.not_nil!
-      _online.validate if _online.is_a?(OpenApi::Validatable)
-      @online = _online
+
+      @online = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] accepted_at Object to be assigned
-    def accepted_at=(accepted_at : Int64?)
-      if accepted_at.nil?
-        return @accepted_at = nil
-      end
-      _accepted_at = accepted_at.not_nil!
-      @accepted_at = _accepted_at
+    def accepted_at=(new_value : Int64?)
+      @accepted_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] offline Object to be assigned
-    def offline=(offline : JSON::Any?)
-      if offline.nil?
-        return @offline = nil
-      end
-      _offline = offline.not_nil!
-      @offline = _offline
+    def offline=(new_value : JSON::Any?)
+      @offline = new_value
     end
 
     # Generates #hash and #== methods from all fields

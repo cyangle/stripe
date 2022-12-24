@@ -115,63 +115,58 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban Object to be assigned
-    def iban=(iban : Stripe::FundingInstructionsBankTransferIbanRecord?)
-      if iban.nil?
-        return @iban = nil
+    def iban=(new_value : Stripe::FundingInstructionsBankTransferIbanRecord?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _iban = iban.not_nil!
-      _iban.validate if _iban.is_a?(OpenApi::Validatable)
-      @iban = _iban
+
+      @iban = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sort_code Object to be assigned
-    def sort_code=(sort_code : Stripe::FundingInstructionsBankTransferSortCodeRecord?)
-      if sort_code.nil?
-        return @sort_code = nil
+    def sort_code=(new_value : Stripe::FundingInstructionsBankTransferSortCodeRecord?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sort_code = sort_code.not_nil!
-      _sort_code.validate if _sort_code.is_a?(OpenApi::Validatable)
-      @sort_code = _sort_code
+
+      @sort_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] spei Object to be assigned
-    def spei=(spei : Stripe::FundingInstructionsBankTransferSpeiRecord?)
-      if spei.nil?
-        return @spei = nil
+    def spei=(new_value : Stripe::FundingInstructionsBankTransferSpeiRecord?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _spei = spei.not_nil!
-      _spei.validate if _spei.is_a?(OpenApi::Validatable)
-      @spei = _spei
+
+      @spei = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_networks Object to be assigned
-    def supported_networks=(supported_networks : Array(String)?)
-      if supported_networks.nil?
-        return @supported_networks = nil
+    def supported_networks=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("supported_networks", new_value, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
       end
-      _supported_networks = supported_networks.not_nil!
-      OpenApi::EnumValidator.validate("supported_networks", _supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
-      @supported_networks = _supported_networks
+
+      @supported_networks = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] zengin Object to be assigned
-    def zengin=(zengin : Stripe::FundingInstructionsBankTransferZenginRecord?)
-      if zengin.nil?
-        return @zengin = nil
+    def zengin=(new_value : Stripe::FundingInstructionsBankTransferZenginRecord?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _zengin = zengin.not_nil!
-      _zengin.validate if _zengin.is_a?(OpenApi::Validatable)
-      @zengin = _zengin
+
+      @zengin = new_value
     end
 
     # Generates #hash and #== methods from all fields

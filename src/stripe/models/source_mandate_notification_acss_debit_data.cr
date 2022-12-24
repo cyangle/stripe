@@ -60,13 +60,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
+    def statement_descriptor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       end
-      _statement_descriptor = statement_descriptor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-      @statement_descriptor = _statement_descriptor
+
+      @statement_descriptor = new_value
     end
 
     # Generates #hash and #== methods from all fields

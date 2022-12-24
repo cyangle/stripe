@@ -99,35 +99,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_line1_check Object to be assigned
-    def address_line1_check=(address_line1_check : String?)
-      if address_line1_check.nil?
-        return @address_line1_check = nil
+    def address_line1_check=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_line1_check", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
       end
-      _address_line1_check = address_line1_check.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
-      @address_line1_check = _address_line1_check
+
+      @address_line1_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_postal_code_check Object to be assigned
-    def address_postal_code_check=(address_postal_code_check : String?)
-      if address_postal_code_check.nil?
-        return @address_postal_code_check = nil
+    def address_postal_code_check=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_postal_code_check", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK)
       end
-      _address_postal_code_check = address_postal_code_check.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_postal_code_check", _address_postal_code_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK)
-      @address_postal_code_check = _address_postal_code_check
+
+      @address_postal_code_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_check Object to be assigned
-    def cvc_check=(cvc_check : String?)
-      if cvc_check.nil?
-        return @cvc_check = nil
+    def cvc_check=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cvc_check", new_value.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
       end
-      _cvc_check = cvc_check.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
-      @cvc_check = _cvc_check
+
+      @cvc_check = new_value
     end
 
     # Generates #hash and #== methods from all fields

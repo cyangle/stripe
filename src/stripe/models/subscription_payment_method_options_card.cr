@@ -90,35 +90,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::InvoiceMandateOptionsCard?)
-      if mandate_options.nil?
-        return @mandate_options = nil
+    def mandate_options=(new_value : Stripe::InvoiceMandateOptionsCard?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _mandate_options = mandate_options.not_nil!
-      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
-      @mandate_options = _mandate_options
+
+      @mandate_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network : String?)
-      if network.nil?
-        return @network = nil
+    def network=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("network", new_value, VALID_VALUES_FOR_NETWORK)
       end
-      _network = network.not_nil!
-      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
-      @network = _network
+
+      @network = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
-    def request_three_d_secure=(request_three_d_secure : String?)
-      if request_three_d_secure.nil?
-        return @request_three_d_secure = nil
+    def request_three_d_secure=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("request_three_d_secure", new_value, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
-      _request_three_d_secure = request_three_d_secure.not_nil!
-      OpenApi::EnumValidator.validate("request_three_d_secure", _request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
-      @request_three_d_secure = _request_three_d_secure
+
+      @request_three_d_secure = new_value
     end
 
     # Generates #hash and #== methods from all fields

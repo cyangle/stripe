@@ -110,77 +110,64 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        return @active = nil
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_profile Object to be assigned
-    def business_profile=(business_profile : Stripe::BusinessProfileUpdateParam?)
-      if business_profile.nil?
-        return @business_profile = nil
+    def business_profile=(new_value : Stripe::BusinessProfileUpdateParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _business_profile = business_profile.not_nil!
-      _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
-      @business_profile = _business_profile
+
+      @business_profile = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_return_url Object to be assigned
-    def default_return_url=(default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?)
-      if default_return_url.nil?
-        return @default_return_url = nil
+    def default_return_url=(new_value : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _default_return_url = default_return_url.not_nil!
-      _default_return_url.validate if _default_return_url.is_a?(OpenApi::Validatable)
-      @default_return_url = _default_return_url
+
+      @default_return_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] features Object to be assigned
-    def features=(features : Stripe::FeaturesUpdatingParam?)
-      if features.nil?
-        return @features = nil
+    def features=(new_value : Stripe::FeaturesUpdatingParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _features = features.not_nil!
-      _features.validate if _features.is_a?(OpenApi::Validatable)
-      @features = _features
+
+      @features = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] login_page Object to be assigned
-    def login_page=(login_page : Stripe::LoginPageUpdateParam?)
-      if login_page.nil?
-        return @login_page = nil
+    def login_page=(new_value : Stripe::LoginPageUpdateParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _login_page = login_page.not_nil!
-      _login_page.validate if _login_page.is_a?(OpenApi::Validatable)
-      @login_page = _login_page
+
+      @login_page = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

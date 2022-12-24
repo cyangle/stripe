@@ -83,33 +83,29 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        raise ArgumentError.new("\"description\" is required and cannot be null")
+    def description=(new_value : String?)
+      raise ArgumentError.new("\"description\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        raise ArgumentError.new("\"quantity\" is required and cannot be null")
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      raise ArgumentError.new("\"quantity\" is required and cannot be null") if new_value.nil?
+
+      @quantity = new_value
     end
 
     # Generates #hash and #== methods from all fields

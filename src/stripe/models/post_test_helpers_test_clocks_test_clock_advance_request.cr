@@ -63,22 +63,16 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] frozen_time Object to be assigned
-    def frozen_time=(frozen_time : Int64?)
-      if frozen_time.nil?
-        raise ArgumentError.new("\"frozen_time\" is required and cannot be null")
-      end
-      _frozen_time = frozen_time.not_nil!
-      @frozen_time = _frozen_time
+    def frozen_time=(new_value : Int64?)
+      raise ArgumentError.new("\"frozen_time\" is required and cannot be null") if new_value.nil?
+
+      @frozen_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

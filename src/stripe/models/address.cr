@@ -153,68 +153,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] city Object to be assigned
-    def city=(city : String?)
-      if city.nil?
-        return @city = nil
+    def city=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("city", new_value.to_s.size, MAX_LENGTH_FOR_CITY)
       end
-      _city = city.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
-      @city = _city
+
+      @city = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
+    def country=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("country", new_value.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       end
-      _country = country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-      @country = _country
+
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line1 Object to be assigned
-    def line1=(line1 : String?)
-      if line1.nil?
-        return @line1 = nil
+    def line1=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("line1", new_value.to_s.size, MAX_LENGTH_FOR_LINE1)
       end
-      _line1 = line1.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("line1", _line1.to_s.size, MAX_LENGTH_FOR_LINE1)
-      @line1 = _line1
+
+      @line1 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line2 Object to be assigned
-    def line2=(line2 : String?)
-      if line2.nil?
-        return @line2 = nil
+    def line2=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("line2", new_value.to_s.size, MAX_LENGTH_FOR_LINE2)
       end
-      _line2 = line2.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("line2", _line2.to_s.size, MAX_LENGTH_FOR_LINE2)
-      @line2 = _line2
+
+      @line2 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] postal_code Object to be assigned
-    def postal_code=(postal_code : String?)
-      if postal_code.nil?
-        return @postal_code = nil
+    def postal_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("postal_code", new_value.to_s.size, MAX_LENGTH_FOR_POSTAL_CODE)
       end
-      _postal_code = postal_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("postal_code", _postal_code.to_s.size, MAX_LENGTH_FOR_POSTAL_CODE)
-      @postal_code = _postal_code
+
+      @postal_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
-    def state=(state : String?)
-      if state.nil?
-        return @state = nil
+    def state=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("state", new_value.to_s.size, MAX_LENGTH_FOR_STATE)
       end
-      _state = state.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
-      @state = _state
+
+      @state = new_value
     end
 
     # Generates #hash and #== methods from all fields

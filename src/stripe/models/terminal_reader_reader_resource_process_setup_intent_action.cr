@@ -79,24 +79,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_intent Object to be assigned
-    def setup_intent=(setup_intent : Stripe::TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent?)
-      if setup_intent.nil?
-        raise ArgumentError.new("\"setup_intent\" is required and cannot be null")
+    def setup_intent=(new_value : Stripe::TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent?)
+      raise ArgumentError.new("\"setup_intent\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _setup_intent = setup_intent.not_nil!
-      _setup_intent.validate if _setup_intent.is_a?(OpenApi::Validatable)
-      @setup_intent = _setup_intent
+
+      @setup_intent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_card Object to be assigned
-    def generated_card=(generated_card : String?)
-      if generated_card.nil?
-        return @generated_card = nil
+    def generated_card=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("generated_card", new_value.to_s.size, MAX_LENGTH_FOR_GENERATED_CARD)
       end
-      _generated_card = generated_card.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("generated_card", _generated_card.to_s.size, MAX_LENGTH_FOR_GENERATED_CARD)
-      @generated_card = _generated_card
+
+      @generated_card = new_value
     end
 
     # Generates #hash and #== methods from all fields

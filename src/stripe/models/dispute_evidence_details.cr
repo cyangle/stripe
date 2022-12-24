@@ -85,42 +85,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_evidence Object to be assigned
-    def has_evidence=(has_evidence : Bool?)
-      if has_evidence.nil?
-        raise ArgumentError.new("\"has_evidence\" is required and cannot be null")
-      end
-      _has_evidence = has_evidence.not_nil!
-      @has_evidence = _has_evidence
+    def has_evidence=(new_value : Bool?)
+      raise ArgumentError.new("\"has_evidence\" is required and cannot be null") if new_value.nil?
+
+      @has_evidence = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] past_due Object to be assigned
-    def past_due=(past_due : Bool?)
-      if past_due.nil?
-        raise ArgumentError.new("\"past_due\" is required and cannot be null")
-      end
-      _past_due = past_due.not_nil!
-      @past_due = _past_due
+    def past_due=(new_value : Bool?)
+      raise ArgumentError.new("\"past_due\" is required and cannot be null") if new_value.nil?
+
+      @past_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submission_count Object to be assigned
-    def submission_count=(submission_count : Int64?)
-      if submission_count.nil?
-        raise ArgumentError.new("\"submission_count\" is required and cannot be null")
-      end
-      _submission_count = submission_count.not_nil!
-      @submission_count = _submission_count
+    def submission_count=(new_value : Int64?)
+      raise ArgumentError.new("\"submission_count\" is required and cannot be null") if new_value.nil?
+
+      @submission_count = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] due_by Object to be assigned
-    def due_by=(due_by : Int64?)
-      if due_by.nil?
-        return @due_by = nil
-      end
-      _due_by = due_by.not_nil!
-      @due_by = _due_by
+    def due_by=(new_value : Int64?)
+      @due_by = new_value
     end
 
     # Generates #hash and #== methods from all fields

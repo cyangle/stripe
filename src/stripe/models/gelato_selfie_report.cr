@@ -107,41 +107,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      @status = status
+    def status=(new_value : String?)
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] document Object to be assigned
-    def document=(document : String?)
-      if document.nil?
-        return @document = nil
+    def document=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("document", new_value.to_s.size, MAX_LENGTH_FOR_DOCUMENT)
       end
-      _document = document.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("document", _document.to_s.size, MAX_LENGTH_FOR_DOCUMENT)
-      @document = _document
+
+      @document = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(error : Stripe::GelatoSelfieReportError1?)
-      if error.nil?
-        return @error = nil
+    def error=(new_value : Stripe::GelatoSelfieReportError1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _error = error.not_nil!
-      _error.validate if _error.is_a?(OpenApi::Validatable)
-      @error = _error
+
+      @error = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] selfie Object to be assigned
-    def selfie=(selfie : String?)
-      if selfie.nil?
-        return @selfie = nil
+    def selfie=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("selfie", new_value.to_s.size, MAX_LENGTH_FOR_SELFIE)
       end
-      _selfie = selfie.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("selfie", _selfie.to_s.size, MAX_LENGTH_FOR_SELFIE)
-      @selfie = _selfie
+
+      @selfie = new_value
     end
 
     # Generates #hash and #== methods from all fields

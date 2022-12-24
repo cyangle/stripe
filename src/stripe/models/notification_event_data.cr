@@ -64,22 +64,16 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : JSON::Any?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
-      end
-      _object = object.not_nil!
-      @object = _object
+    def object=(new_value : JSON::Any?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] previous_attributes Object to be assigned
-    def previous_attributes=(previous_attributes : JSON::Any?)
-      if previous_attributes.nil?
-        return @previous_attributes = nil
-      end
-      _previous_attributes = previous_attributes.not_nil!
-      @previous_attributes = _previous_attributes
+    def previous_attributes=(new_value : JSON::Any?)
+      @previous_attributes = new_value
     end
 
     # Generates #hash and #== methods from all fields

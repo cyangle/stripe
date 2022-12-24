@@ -205,138 +205,117 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        raise ArgumentError.new("\"active\" is required and cannot be null")
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      raise ArgumentError.new("\"active\" is required and cannot be null") if new_value.nil?
+
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String?)
-      if code.nil?
-        raise ArgumentError.new("\"code\" is required and cannot be null")
+    def code=(new_value : String?)
+      raise ArgumentError.new("\"code\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("code", new_value.to_s.size, MAX_LENGTH_FOR_CODE)
       end
-      _code = code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
-      @code = _code
+
+      @code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] coupon Object to be assigned
-    def coupon=(coupon : Stripe::Coupon?)
-      if coupon.nil?
-        raise ArgumentError.new("\"coupon\" is required and cannot be null")
+    def coupon=(new_value : Stripe::Coupon?)
+      raise ArgumentError.new("\"coupon\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _coupon = coupon.not_nil!
-      _coupon.validate if _coupon.is_a?(OpenApi::Validatable)
-      @coupon = _coupon
+
+      @coupon = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created Object to be assigned
-    def created=(created : Int64?)
-      if created.nil?
-        raise ArgumentError.new("\"created\" is required and cannot be null")
-      end
-      _created = created.not_nil!
-      @created = _created
+    def created=(new_value : Int64?)
+      raise ArgumentError.new("\"created\" is required and cannot be null") if new_value.nil?
+
+      @created = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restrictions Object to be assigned
-    def restrictions=(restrictions : Stripe::PromotionCodesResourceRestrictions?)
-      if restrictions.nil?
-        raise ArgumentError.new("\"restrictions\" is required and cannot be null")
+    def restrictions=(new_value : Stripe::PromotionCodesResourceRestrictions?)
+      raise ArgumentError.new("\"restrictions\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _restrictions = restrictions.not_nil!
-      _restrictions.validate if _restrictions.is_a?(OpenApi::Validatable)
-      @restrictions = _restrictions
+
+      @restrictions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] times_redeemed Object to be assigned
-    def times_redeemed=(times_redeemed : Int64?)
-      if times_redeemed.nil?
-        raise ArgumentError.new("\"times_redeemed\" is required and cannot be null")
-      end
-      _times_redeemed = times_redeemed.not_nil!
-      @times_redeemed = _times_redeemed
+    def times_redeemed=(new_value : Int64?)
+      raise ArgumentError.new("\"times_redeemed\" is required and cannot be null") if new_value.nil?
+
+      @times_redeemed = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer Object to be assigned
-    def customer=(customer : Stripe::PromotionCodeCustomer?)
-      if customer.nil?
-        return @customer = nil
+    def customer=(new_value : Stripe::PromotionCodeCustomer?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customer = customer.not_nil!
-      _customer.validate if _customer.is_a?(OpenApi::Validatable)
-      @customer = _customer
+
+      @customer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] max_redemptions Object to be assigned
-    def max_redemptions=(max_redemptions : Int64?)
-      if max_redemptions.nil?
-        return @max_redemptions = nil
-      end
-      _max_redemptions = max_redemptions.not_nil!
-      @max_redemptions = _max_redemptions
+    def max_redemptions=(new_value : Int64?)
+      @max_redemptions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

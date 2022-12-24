@@ -63,13 +63,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_tax_display Object to be assigned
-    def amount_tax_display=(amount_tax_display : String?)
-      if amount_tax_display.nil?
-        return @amount_tax_display = nil
+    def amount_tax_display=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("amount_tax_display", new_value.to_s.size, MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY)
       end
-      _amount_tax_display = amount_tax_display.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("amount_tax_display", _amount_tax_display.to_s.size, MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY)
-      @amount_tax_display = _amount_tax_display
+
+      @amount_tax_display = new_value
     end
 
     # Generates #hash and #== methods from all fields

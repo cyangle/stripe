@@ -56,12 +56,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum_amount Object to be assigned
-    def minimum_amount=(minimum_amount : Int64?)
-      if minimum_amount.nil?
-        raise ArgumentError.new("\"minimum_amount\" is required and cannot be null")
-      end
-      _minimum_amount = minimum_amount.not_nil!
-      @minimum_amount = _minimum_amount
+    def minimum_amount=(new_value : Int64?)
+      raise ArgumentError.new("\"minimum_amount\" is required and cannot be null") if new_value.nil?
+
+      @minimum_amount = new_value
     end
 
     # Generates #hash and #== methods from all fields

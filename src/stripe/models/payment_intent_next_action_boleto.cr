@@ -107,45 +107,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_voucher_url Object to be assigned
-    def hosted_voucher_url=(hosted_voucher_url : String?)
-      if hosted_voucher_url.nil?
-        return @hosted_voucher_url = nil
+    def hosted_voucher_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("hosted_voucher_url", new_value.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
       end
-      _hosted_voucher_url = hosted_voucher_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("hosted_voucher_url", _hosted_voucher_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
-      @hosted_voucher_url = _hosted_voucher_url
+
+      @hosted_voucher_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] number Object to be assigned
-    def number=(number : String?)
-      if number.nil?
-        return @number = nil
+    def number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("number", new_value.to_s.size, MAX_LENGTH_FOR_NUMBER)
       end
-      _number = number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
-      @number = _number
+
+      @number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pdf Object to be assigned
-    def pdf=(pdf : String?)
-      if pdf.nil?
-        return @pdf = nil
+    def pdf=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("pdf", new_value.to_s.size, MAX_LENGTH_FOR_PDF)
       end
-      _pdf = pdf.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("pdf", _pdf.to_s.size, MAX_LENGTH_FOR_PDF)
-      @pdf = _pdf
+
+      @pdf = new_value
     end
 
     # Generates #hash and #== methods from all fields

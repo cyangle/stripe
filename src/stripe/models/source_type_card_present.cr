@@ -175,232 +175,140 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_cryptogram Object to be assigned
-    def application_cryptogram=(application_cryptogram : String?)
-      if application_cryptogram.nil?
-        return @application_cryptogram = nil
-      end
-      _application_cryptogram = application_cryptogram.not_nil!
-      @application_cryptogram = _application_cryptogram
+    def application_cryptogram=(new_value : String?)
+      @application_cryptogram = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_preferred_name Object to be assigned
-    def application_preferred_name=(application_preferred_name : String?)
-      if application_preferred_name.nil?
-        return @application_preferred_name = nil
-      end
-      _application_preferred_name = application_preferred_name.not_nil!
-      @application_preferred_name = _application_preferred_name
+    def application_preferred_name=(new_value : String?)
+      @application_preferred_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authorization_code Object to be assigned
-    def authorization_code=(authorization_code : String?)
-      if authorization_code.nil?
-        return @authorization_code = nil
-      end
-      _authorization_code = authorization_code.not_nil!
-      @authorization_code = _authorization_code
+    def authorization_code=(new_value : String?)
+      @authorization_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authorization_response_code Object to be assigned
-    def authorization_response_code=(authorization_response_code : String?)
-      if authorization_response_code.nil?
-        return @authorization_response_code = nil
-      end
-      _authorization_response_code = authorization_response_code.not_nil!
-      @authorization_response_code = _authorization_response_code
+    def authorization_response_code=(new_value : String?)
+      @authorization_response_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] brand Object to be assigned
-    def brand=(brand : String?)
-      if brand.nil?
-        return @brand = nil
-      end
-      _brand = brand.not_nil!
-      @brand = _brand
+    def brand=(new_value : String?)
+      @brand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
-      end
-      _country = country.not_nil!
-      @country = _country
+    def country=(new_value : String?)
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvm_type Object to be assigned
-    def cvm_type=(cvm_type : String?)
-      if cvm_type.nil?
-        return @cvm_type = nil
-      end
-      _cvm_type = cvm_type.not_nil!
-      @cvm_type = _cvm_type
+    def cvm_type=(new_value : String?)
+      @cvm_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data_type Object to be assigned
-    def data_type=(data_type : String?)
-      if data_type.nil?
-        return @data_type = nil
-      end
-      _data_type = data_type.not_nil!
-      @data_type = _data_type
+    def data_type=(new_value : String?)
+      @data_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dedicated_file_name Object to be assigned
-    def dedicated_file_name=(dedicated_file_name : String?)
-      if dedicated_file_name.nil?
-        return @dedicated_file_name = nil
-      end
-      _dedicated_file_name = dedicated_file_name.not_nil!
-      @dedicated_file_name = _dedicated_file_name
+    def dedicated_file_name=(new_value : String?)
+      @dedicated_file_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] emv_auth_data Object to be assigned
-    def emv_auth_data=(emv_auth_data : String?)
-      if emv_auth_data.nil?
-        return @emv_auth_data = nil
-      end
-      _emv_auth_data = emv_auth_data.not_nil!
-      @emv_auth_data = _emv_auth_data
+    def emv_auth_data=(new_value : String?)
+      @emv_auth_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] evidence_customer_signature Object to be assigned
-    def evidence_customer_signature=(evidence_customer_signature : String?)
-      if evidence_customer_signature.nil?
-        return @evidence_customer_signature = nil
-      end
-      _evidence_customer_signature = evidence_customer_signature.not_nil!
-      @evidence_customer_signature = _evidence_customer_signature
+    def evidence_customer_signature=(new_value : String?)
+      @evidence_customer_signature = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] evidence_transaction_certificate Object to be assigned
-    def evidence_transaction_certificate=(evidence_transaction_certificate : String?)
-      if evidence_transaction_certificate.nil?
-        return @evidence_transaction_certificate = nil
-      end
-      _evidence_transaction_certificate = evidence_transaction_certificate.not_nil!
-      @evidence_transaction_certificate = _evidence_transaction_certificate
+    def evidence_transaction_certificate=(new_value : String?)
+      @evidence_transaction_certificate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_month Object to be assigned
-    def exp_month=(exp_month : Int64?)
-      if exp_month.nil?
-        return @exp_month = nil
-      end
-      _exp_month = exp_month.not_nil!
-      @exp_month = _exp_month
+    def exp_month=(new_value : Int64?)
+      @exp_month = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_year Object to be assigned
-    def exp_year=(exp_year : Int64?)
-      if exp_year.nil?
-        return @exp_year = nil
-      end
-      _exp_year = exp_year.not_nil!
-      @exp_year = _exp_year
+    def exp_year=(new_value : Int64?)
+      @exp_year = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
-      end
-      _fingerprint = fingerprint.not_nil!
-      @fingerprint = _fingerprint
+    def fingerprint=(new_value : String?)
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding Object to be assigned
-    def funding=(funding : String?)
-      if funding.nil?
-        return @funding = nil
-      end
-      _funding = funding.not_nil!
-      @funding = _funding
+    def funding=(new_value : String?)
+      @funding = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
-      end
-      _last4 = last4.not_nil!
-      @last4 = _last4
+    def last4=(new_value : String?)
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pos_device_id Object to be assigned
-    def pos_device_id=(pos_device_id : String?)
-      if pos_device_id.nil?
-        return @pos_device_id = nil
-      end
-      _pos_device_id = pos_device_id.not_nil!
-      @pos_device_id = _pos_device_id
+    def pos_device_id=(new_value : String?)
+      @pos_device_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pos_entry_mode Object to be assigned
-    def pos_entry_mode=(pos_entry_mode : String?)
-      if pos_entry_mode.nil?
-        return @pos_entry_mode = nil
-      end
-      _pos_entry_mode = pos_entry_mode.not_nil!
-      @pos_entry_mode = _pos_entry_mode
+    def pos_entry_mode=(new_value : String?)
+      @pos_entry_mode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] read_method Object to be assigned
-    def read_method=(read_method : String?)
-      if read_method.nil?
-        return @read_method = nil
-      end
-      _read_method = read_method.not_nil!
-      @read_method = _read_method
+    def read_method=(new_value : String?)
+      @read_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reader Object to be assigned
-    def reader=(reader : String?)
-      if reader.nil?
-        return @reader = nil
-      end
-      _reader = reader.not_nil!
-      @reader = _reader
+    def reader=(new_value : String?)
+      @reader = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terminal_verification_results Object to be assigned
-    def terminal_verification_results=(terminal_verification_results : String?)
-      if terminal_verification_results.nil?
-        return @terminal_verification_results = nil
-      end
-      _terminal_verification_results = terminal_verification_results.not_nil!
-      @terminal_verification_results = _terminal_verification_results
+    def terminal_verification_results=(new_value : String?)
+      @terminal_verification_results = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_status_information Object to be assigned
-    def transaction_status_information=(transaction_status_information : String?)
-      if transaction_status_information.nil?
-        return @transaction_status_information = nil
-      end
-      _transaction_status_information = transaction_status_information.not_nil!
-      @transaction_status_information = _transaction_status_information
+    def transaction_status_information=(new_value : String?)
+      @transaction_status_information = new_value
     end
 
     # Generates #hash and #== methods from all fields

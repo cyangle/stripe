@@ -271,238 +271,199 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] items Object to be assigned
-    def items=(items : Array(Stripe::ConfigurationItemParams)?)
-      if items.nil?
-        raise ArgumentError.new("\"items\" is required and cannot be null")
+    def items=(new_value : Array(Stripe::ConfigurationItemParams)?)
+      raise ArgumentError.new("\"items\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _items = items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
-      @items = _items
+
+      @items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] add_invoice_items Object to be assigned
-    def add_invoice_items=(add_invoice_items : Array(Stripe::AddInvoiceItemEntry)?)
-      if add_invoice_items.nil?
-        return @add_invoice_items = nil
+    def add_invoice_items=(new_value : Array(Stripe::AddInvoiceItemEntry)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _add_invoice_items = add_invoice_items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _add_invoice_items) if _add_invoice_items.is_a?(Array)
-      @add_invoice_items = _add_invoice_items
+
+      @add_invoice_items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_fee_percent Object to be assigned
-    def application_fee_percent=(application_fee_percent : Float64?)
-      if application_fee_percent.nil?
-        return @application_fee_percent = nil
-      end
-      _application_fee_percent = application_fee_percent.not_nil!
-      @application_fee_percent = _application_fee_percent
+    def application_fee_percent=(new_value : Float64?)
+      @application_fee_percent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : Stripe::AutomaticTaxConfig?)
-      if automatic_tax.nil?
-        return @automatic_tax = nil
+    def automatic_tax=(new_value : Stripe::AutomaticTaxConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _automatic_tax = automatic_tax.not_nil!
-      _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
-      @automatic_tax = _automatic_tax
+
+      @automatic_tax = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
-    def billing_cycle_anchor=(billing_cycle_anchor : String?)
-      if billing_cycle_anchor.nil?
-        return @billing_cycle_anchor = nil
+    def billing_cycle_anchor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("billing_cycle_anchor", new_value, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
-      _billing_cycle_anchor = billing_cycle_anchor.not_nil!
-      OpenApi::EnumValidator.validate("billing_cycle_anchor", _billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
-      @billing_cycle_anchor = _billing_cycle_anchor
+
+      @billing_cycle_anchor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds?)
-      if billing_thresholds.nil?
-        return @billing_thresholds = nil
+    def billing_thresholds=(new_value : Stripe::DefaultSettingsParamsBillingThresholds?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _billing_thresholds = billing_thresholds.not_nil!
-      _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
-      @billing_thresholds = _billing_thresholds
+
+      @billing_thresholds = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method : String?)
-      if collection_method.nil?
-        return @collection_method = nil
+    def collection_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("collection_method", new_value, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
-      _collection_method = collection_method.not_nil!
-      OpenApi::EnumValidator.validate("collection_method", _collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
-      @collection_method = _collection_method
+
+      @collection_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] coupon Object to be assigned
-    def coupon=(coupon : String?)
-      if coupon.nil?
-        return @coupon = nil
+    def coupon=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("coupon", new_value.to_s.size, MAX_LENGTH_FOR_COUPON)
       end
-      _coupon = coupon.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
-      @coupon = _coupon
+
+      @coupon = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        return @currency = nil
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_payment_method Object to be assigned
-    def default_payment_method=(default_payment_method : String?)
-      if default_payment_method.nil?
-        return @default_payment_method = nil
+    def default_payment_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", new_value.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
       end
-      _default_payment_method = default_payment_method.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
-      @default_payment_method = _default_payment_method
+
+      @default_payment_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_tax_rates Object to be assigned
-    def default_tax_rates=(default_tax_rates : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?)
-      if default_tax_rates.nil?
-        return @default_tax_rates = nil
+    def default_tax_rates=(new_value : Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _default_tax_rates = default_tax_rates.not_nil!
-      _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
-      @default_tax_rates = _default_tax_rates
+
+      @default_tax_rates = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_date Object to be assigned
-    def end_date=(end_date : Stripe::PhaseConfigurationParamsEndDate?)
-      if end_date.nil?
-        return @end_date = nil
+    def end_date=(new_value : Stripe::PhaseConfigurationParamsEndDate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _end_date = end_date.not_nil!
-      _end_date.validate if _end_date.is_a?(OpenApi::Validatable)
-      @end_date = _end_date
+
+      @end_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_settings Object to be assigned
-    def invoice_settings=(invoice_settings : Stripe::SubscriptionSchedulesParam?)
-      if invoice_settings.nil?
-        return @invoice_settings = nil
+    def invoice_settings=(new_value : Stripe::SubscriptionSchedulesParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _invoice_settings = invoice_settings.not_nil!
-      _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
-      @invoice_settings = _invoice_settings
+
+      @invoice_settings = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iterations Object to be assigned
-    def iterations=(iterations : Int64?)
-      if iterations.nil?
-        return @iterations = nil
-      end
-      _iterations = iterations.not_nil!
-      @iterations = _iterations
+    def iterations=(new_value : Int64?)
+      @iterations = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] on_behalf_of Object to be assigned
-    def on_behalf_of=(on_behalf_of : String?)
-      if on_behalf_of.nil?
-        return @on_behalf_of = nil
-      end
-      _on_behalf_of = on_behalf_of.not_nil!
-      @on_behalf_of = _on_behalf_of
+    def on_behalf_of=(new_value : String?)
+      @on_behalf_of = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior : String?)
-      if proration_behavior.nil?
-        return @proration_behavior = nil
+    def proration_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("proration_behavior", new_value, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
-      _proration_behavior = proration_behavior.not_nil!
-      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-      @proration_behavior = _proration_behavior
+
+      @proration_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] start_date Object to be assigned
-    def start_date=(start_date : Stripe::PhaseConfigurationParamsStartDate?)
-      if start_date.nil?
-        return @start_date = nil
+    def start_date=(new_value : Stripe::PhaseConfigurationParamsStartDate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _start_date = start_date.not_nil!
-      _start_date.validate if _start_date.is_a?(OpenApi::Validatable)
-      @start_date = _start_date
+
+      @start_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(transfer_data : Stripe::TransferDataSpecs?)
-      if transfer_data.nil?
-        return @transfer_data = nil
+    def transfer_data=(new_value : Stripe::TransferDataSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _transfer_data = transfer_data.not_nil!
-      _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
-      @transfer_data = _transfer_data
+
+      @transfer_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial Object to be assigned
-    def trial=(trial : Bool?)
-      if trial.nil?
-        return @trial = nil
-      end
-      _trial = trial.not_nil!
-      @trial = _trial
+    def trial=(new_value : Bool?)
+      @trial = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_end Object to be assigned
-    def trial_end=(trial_end : Stripe::PhaseConfigurationParamsEndDate?)
-      if trial_end.nil?
-        return @trial_end = nil
+    def trial_end=(new_value : Stripe::PhaseConfigurationParamsEndDate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _trial_end = trial_end.not_nil!
-      _trial_end.validate if _trial_end.is_a?(OpenApi::Validatable)
-      @trial_end = _trial_end
+
+      @trial_end = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -109,55 +109,48 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
+    def email=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("email", new_value.to_s.size, MAX_LENGTH_FOR_EMAIL)
       end
-      _email = email.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
-      @email = _email
+
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] items Object to be assigned
-    def items=(items : Array(Stripe::SourceOrderItem)?)
-      if items.nil?
-        return @items = nil
+    def items=(new_value : Array(Stripe::SourceOrderItem)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _items = items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
-      @items = _items
+
+      @items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping : Stripe::Shipping?)
-      if shipping.nil?
-        return @shipping = nil
+    def shipping=(new_value : Stripe::Shipping?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping = shipping.not_nil!
-      _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-      @shipping = _shipping
+
+      @shipping = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -82,24 +82,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network : String?)
-      if network.nil?
-        raise ArgumentError.new("\"network\" is required and cannot be null")
+    def network=(new_value : String?)
+      raise ArgumentError.new("\"network\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("network", new_value, VALID_VALUES_FOR_NETWORK)
       end
-      _network = network.not_nil!
-      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
-      @network = _network
+
+      @network = new_value
     end
 
     # Generates #hash and #== methods from all fields

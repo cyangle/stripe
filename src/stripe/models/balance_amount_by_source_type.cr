@@ -60,32 +60,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account Object to be assigned
-    def bank_account=(bank_account : Int64?)
-      if bank_account.nil?
-        return @bank_account = nil
-      end
-      _bank_account = bank_account.not_nil!
-      @bank_account = _bank_account
+    def bank_account=(new_value : Int64?)
+      @bank_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Int64?)
-      if card.nil?
-        return @card = nil
-      end
-      _card = card.not_nil!
-      @card = _card
+    def card=(new_value : Int64?)
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fpx Object to be assigned
-    def fpx=(fpx : Int64?)
-      if fpx.nil?
-        return @fpx = nil
-      end
-      _fpx = fpx.not_nil!
-      @fpx = _fpx
+    def fpx=(new_value : Int64?)
+      @fpx = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -113,55 +113,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::IssuingDisputeCanceledEvidenceAdditionalDocumentation?)
-      if additional_documentation.nil?
-        return @additional_documentation = nil
+    def additional_documentation=(new_value : Stripe::IssuingDisputeCanceledEvidenceAdditionalDocumentation?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _additional_documentation = additional_documentation.not_nil!
-      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
-      @additional_documentation = _additional_documentation
+
+      @additional_documentation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] canceled_at Object to be assigned
-    def canceled_at=(canceled_at : Int64?)
-      if canceled_at.nil?
-        return @canceled_at = nil
-      end
-      _canceled_at = canceled_at.not_nil!
-      @canceled_at = _canceled_at
+    def canceled_at=(new_value : Int64?)
+      @canceled_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason : String?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
+    def cancellation_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cancellation_reason", new_value.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
       end
-      _cancellation_reason = cancellation_reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cancellation_reason", _cancellation_reason.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
-      @cancellation_reason = _cancellation_reason
+
+      @cancellation_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(explanation : String?)
-      if explanation.nil?
-        return @explanation = nil
+    def explanation=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("explanation", new_value.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       end
-      _explanation = explanation.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
-      @explanation = _explanation
+
+      @explanation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_at Object to be assigned
-    def received_at=(received_at : Int64?)
-      if received_at.nil?
-        return @received_at = nil
-      end
-      _received_at = received_at.not_nil!
-      @received_at = _received_at
+    def received_at=(new_value : Int64?)
+      @received_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

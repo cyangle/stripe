@@ -72,24 +72,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] coupon Object to be assigned
-    def coupon=(coupon : String?)
-      if coupon.nil?
-        return @coupon = nil
+    def coupon=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("coupon", new_value.to_s.size, MAX_LENGTH_FOR_COUPON)
       end
-      _coupon = coupon.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
-      @coupon = _coupon
+
+      @coupon = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discount Object to be assigned
-    def discount=(discount : String?)
-      if discount.nil?
-        return @discount = nil
+    def discount=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("discount", new_value.to_s.size, MAX_LENGTH_FOR_DISCOUNT)
       end
-      _discount = discount.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("discount", _discount.to_s.size, MAX_LENGTH_FOR_DISCOUNT)
-      @discount = _discount
+
+      @discount = new_value
     end
 
     # Generates #hash and #== methods from all fields

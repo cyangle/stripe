@@ -96,57 +96,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason : String?)
-      @cancellation_reason = cancellation_reason
+    def cancellation_reason=(new_value : String?)
+      @cancellation_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pin Object to be assigned
-    def pin=(pin : Stripe::EncryptedPinParam?)
-      if pin.nil?
-        return @pin = nil
+    def pin=(new_value : Stripe::EncryptedPinParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _pin = pin.not_nil!
-      _pin.validate if _pin.is_a?(OpenApi::Validatable)
-      @pin = _pin
+
+      @pin = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] spending_controls Object to be assigned
-    def spending_controls=(spending_controls : Stripe::AuthorizationControlsParam?)
-      if spending_controls.nil?
-        return @spending_controls = nil
+    def spending_controls=(new_value : Stripe::AuthorizationControlsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _spending_controls = spending_controls.not_nil!
-      _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
-      @spending_controls = _spending_controls
+
+      @spending_controls = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      @status = status
+    def status=(new_value : String?)
+      @status = new_value
     end
 
     # Generates #hash and #== methods from all fields

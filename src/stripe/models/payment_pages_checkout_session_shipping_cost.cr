@@ -103,54 +103,46 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_subtotal Object to be assigned
-    def amount_subtotal=(amount_subtotal : Int64?)
-      if amount_subtotal.nil?
-        raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null")
-      end
-      _amount_subtotal = amount_subtotal.not_nil!
-      @amount_subtotal = _amount_subtotal
+    def amount_subtotal=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null") if new_value.nil?
+
+      @amount_subtotal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_tax Object to be assigned
-    def amount_tax=(amount_tax : Int64?)
-      if amount_tax.nil?
-        raise ArgumentError.new("\"amount_tax\" is required and cannot be null")
-      end
-      _amount_tax = amount_tax.not_nil!
-      @amount_tax = _amount_tax
+    def amount_tax=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_tax\" is required and cannot be null") if new_value.nil?
+
+      @amount_tax = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_total Object to be assigned
-    def amount_total=(amount_total : Int64?)
-      if amount_total.nil?
-        raise ArgumentError.new("\"amount_total\" is required and cannot be null")
-      end
-      _amount_total = amount_total.not_nil!
-      @amount_total = _amount_total
+    def amount_total=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_total\" is required and cannot be null") if new_value.nil?
+
+      @amount_total = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_rate Object to be assigned
-    def shipping_rate=(shipping_rate : Stripe::PaymentPagesCheckoutSessionShippingCostShippingRate?)
-      if shipping_rate.nil?
-        return @shipping_rate = nil
+    def shipping_rate=(new_value : Stripe::PaymentPagesCheckoutSessionShippingCostShippingRate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping_rate = shipping_rate.not_nil!
-      _shipping_rate.validate if _shipping_rate.is_a?(OpenApi::Validatable)
-      @shipping_rate = _shipping_rate
+
+      @shipping_rate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] taxes Object to be assigned
-    def taxes=(taxes : Array(Stripe::LineItemsTaxAmount)?)
-      if taxes.nil?
-        return @taxes = nil
+    def taxes=(new_value : Array(Stripe::LineItemsTaxAmount)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _taxes = taxes.not_nil!
-      OpenApi::ContainerValidator.validate(container: _taxes) if _taxes.is_a?(Array)
-      @taxes = _taxes
+
+      @taxes = new_value
     end
 
     # Generates #hash and #== methods from all fields

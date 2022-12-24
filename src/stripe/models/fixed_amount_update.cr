@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::CurrencyOptionUpdate)?)
-      if currency_options.nil?
-        return @currency_options = nil
+    def currency_options=(new_value : Hash(String, Stripe::CurrencyOptionUpdate)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _currency_options = currency_options.not_nil!
-      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
-      @currency_options = _currency_options
+
+      @currency_options = new_value
     end
 
     # Generates #hash and #== methods from all fields

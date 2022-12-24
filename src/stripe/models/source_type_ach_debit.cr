@@ -86,62 +86,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
-      end
-      _bank_name = bank_name.not_nil!
-      @bank_name = _bank_name
+    def bank_name=(new_value : String?)
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
-      end
-      _country = country.not_nil!
-      @country = _country
+    def country=(new_value : String?)
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
-      end
-      _fingerprint = fingerprint.not_nil!
-      @fingerprint = _fingerprint
+    def fingerprint=(new_value : String?)
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
-      end
-      _last4 = last4.not_nil!
-      @last4 = _last4
+    def last4=(new_value : String?)
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] routing_number Object to be assigned
-    def routing_number=(routing_number : String?)
-      if routing_number.nil?
-        return @routing_number = nil
-      end
-      _routing_number = routing_number.not_nil!
-      @routing_number = _routing_number
+    def routing_number=(new_value : String?)
+      @routing_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
-      end
-      __type = _type.not_nil!
-      @_type = __type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

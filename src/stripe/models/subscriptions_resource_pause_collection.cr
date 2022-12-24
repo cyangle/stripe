@@ -76,23 +76,19 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] behavior Object to be assigned
-    def behavior=(behavior : String?)
-      if behavior.nil?
-        raise ArgumentError.new("\"behavior\" is required and cannot be null")
+    def behavior=(new_value : String?)
+      raise ArgumentError.new("\"behavior\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("behavior", new_value, VALID_VALUES_FOR_BEHAVIOR)
       end
-      _behavior = behavior.not_nil!
-      OpenApi::EnumValidator.validate("behavior", _behavior, VALID_VALUES_FOR_BEHAVIOR)
-      @behavior = _behavior
+
+      @behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resumes_at Object to be assigned
-    def resumes_at=(resumes_at : Int64?)
-      if resumes_at.nil?
-        return @resumes_at = nil
-      end
-      _resumes_at = resumes_at.not_nil!
-      @resumes_at = _resumes_at
+    def resumes_at=(new_value : Int64?)
+      @resumes_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

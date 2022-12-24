@@ -53,12 +53,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_gte Object to be assigned
-    def usage_gte=(usage_gte : Int64?)
-      if usage_gte.nil?
-        return @usage_gte = nil
-      end
-      _usage_gte = usage_gte.not_nil!
-      @usage_gte = _usage_gte
+    def usage_gte=(new_value : Int64?)
+      @usage_gte = new_value
     end
 
     # Generates #hash and #== methods from all fields

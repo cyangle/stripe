@@ -81,24 +81,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(ip_address : String?)
-      if ip_address.nil?
-        return @ip_address = nil
+    def ip_address=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("ip_address", new_value.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       end
-      _ip_address = ip_address.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
-      @ip_address = _ip_address
+
+      @ip_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_agent Object to be assigned
-    def user_agent=(user_agent : String?)
-      if user_agent.nil?
-        return @user_agent = nil
+    def user_agent=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("user_agent", new_value.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
       end
-      _user_agent = user_agent.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
-      @user_agent = _user_agent
+
+      @user_agent = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -135,57 +135,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
+    def statement_descriptor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       end
-      _statement_descriptor = statement_descriptor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-      @statement_descriptor = _statement_descriptor
+
+      @statement_descriptor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_kana Object to be assigned
-    def statement_descriptor_kana=(statement_descriptor_kana : String?)
-      if statement_descriptor_kana.nil?
-        return @statement_descriptor_kana = nil
+    def statement_descriptor_kana=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_kana", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA)
       end
-      _statement_descriptor_kana = statement_descriptor_kana.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA)
-      @statement_descriptor_kana = _statement_descriptor_kana
+
+      @statement_descriptor_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_kanji Object to be assigned
-    def statement_descriptor_kanji=(statement_descriptor_kanji : String?)
-      if statement_descriptor_kanji.nil?
-        return @statement_descriptor_kanji = nil
+    def statement_descriptor_kanji=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_kanji", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI)
       end
-      _statement_descriptor_kanji = statement_descriptor_kanji.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI)
-      @statement_descriptor_kanji = _statement_descriptor_kanji
+
+      @statement_descriptor_kanji = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix_kana Object to be assigned
-    def statement_descriptor_prefix_kana=(statement_descriptor_prefix_kana : String?)
-      if statement_descriptor_prefix_kana.nil?
-        return @statement_descriptor_prefix_kana = nil
+    def statement_descriptor_prefix_kana=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix_kana", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
       end
-      _statement_descriptor_prefix_kana = statement_descriptor_prefix_kana.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
-      @statement_descriptor_prefix_kana = _statement_descriptor_prefix_kana
+
+      @statement_descriptor_prefix_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix_kanji Object to be assigned
-    def statement_descriptor_prefix_kanji=(statement_descriptor_prefix_kanji : String?)
-      if statement_descriptor_prefix_kanji.nil?
-        return @statement_descriptor_prefix_kanji = nil
+    def statement_descriptor_prefix_kanji=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix_kanji", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
       end
-      _statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
-      @statement_descriptor_prefix_kanji = _statement_descriptor_prefix_kanji
+
+      @statement_descriptor_prefix_kanji = new_value
     end
 
     # Generates #hash and #== methods from all fields

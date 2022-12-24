@@ -100,46 +100,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] icon Object to be assigned
-    def icon=(icon : String?)
-      if icon.nil?
-        return @icon = nil
+    def icon=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("icon", new_value.to_s.size, MAX_LENGTH_FOR_ICON)
       end
-      _icon = icon.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("icon", _icon.to_s.size, MAX_LENGTH_FOR_ICON)
-      @icon = _icon
+
+      @icon = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] logo Object to be assigned
-    def logo=(logo : String?)
-      if logo.nil?
-        return @logo = nil
+    def logo=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("logo", new_value.to_s.size, MAX_LENGTH_FOR_LOGO)
       end
-      _logo = logo.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("logo", _logo.to_s.size, MAX_LENGTH_FOR_LOGO)
-      @logo = _logo
+
+      @logo = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] primary_color Object to be assigned
-    def primary_color=(primary_color : String?)
-      if primary_color.nil?
-        return @primary_color = nil
+    def primary_color=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("primary_color", new_value.to_s.size, MAX_LENGTH_FOR_PRIMARY_COLOR)
       end
-      _primary_color = primary_color.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("primary_color", _primary_color.to_s.size, MAX_LENGTH_FOR_PRIMARY_COLOR)
-      @primary_color = _primary_color
+
+      @primary_color = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] secondary_color Object to be assigned
-    def secondary_color=(secondary_color : String?)
-      if secondary_color.nil?
-        return @secondary_color = nil
+    def secondary_color=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("secondary_color", new_value.to_s.size, MAX_LENGTH_FOR_SECONDARY_COLOR)
       end
-      _secondary_color = secondary_color.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("secondary_color", _secondary_color.to_s.size, MAX_LENGTH_FOR_SECONDARY_COLOR)
-      @secondary_color = _secondary_color
+
+      @secondary_color = new_value
     end
 
     # Generates #hash and #== methods from all fields

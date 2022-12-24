@@ -117,46 +117,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_number Object to be assigned
-    def account_number=(account_number : String?)
-      if account_number.nil?
-        return @account_number = nil
+    def account_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_number", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       end
-      _account_number = account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
-      @account_number = _account_number
+
+      @account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
+    def bank_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_name", new_value.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       end
-      _bank_name = bank_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
-      @bank_name = _bank_name
+
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] routing_number Object to be assigned
-    def routing_number=(routing_number : String?)
-      if routing_number.nil?
-        return @routing_number = nil
+    def routing_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("routing_number", new_value.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
       end
-      _routing_number = routing_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
-      @routing_number = _routing_number
+
+      @routing_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] swift_code Object to be assigned
-    def swift_code=(swift_code : String?)
-      if swift_code.nil?
-        return @swift_code = nil
+    def swift_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("swift_code", new_value.to_s.size, MAX_LENGTH_FOR_SWIFT_CODE)
       end
-      _swift_code = swift_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("swift_code", _swift_code.to_s.size, MAX_LENGTH_FOR_SWIFT_CODE)
-      @swift_code = _swift_code
+
+      @swift_code = new_value
     end
 
     # Generates #hash and #== methods from all fields

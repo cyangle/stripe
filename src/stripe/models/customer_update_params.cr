@@ -62,20 +62,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : String?)
-      @address = address
+    def address=(new_value : String?)
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      @name = name
+    def name=(new_value : String?)
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping : String?)
-      @shipping = shipping
+    def shipping=(new_value : String?)
+      @shipping = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -74,23 +74,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email_sent_at Object to be assigned
-    def email_sent_at=(email_sent_at : Int64?)
-      if email_sent_at.nil?
-        raise ArgumentError.new("\"email_sent_at\" is required and cannot be null")
-      end
-      _email_sent_at = email_sent_at.not_nil!
-      @email_sent_at = _email_sent_at
+    def email_sent_at=(new_value : Int64?)
+      raise ArgumentError.new("\"email_sent_at\" is required and cannot be null") if new_value.nil?
+
+      @email_sent_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email_sent_to Object to be assigned
-    def email_sent_to=(email_sent_to : String?)
-      if email_sent_to.nil?
-        raise ArgumentError.new("\"email_sent_to\" is required and cannot be null")
+    def email_sent_to=(new_value : String?)
+      raise ArgumentError.new("\"email_sent_to\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("email_sent_to", new_value.to_s.size, MAX_LENGTH_FOR_EMAIL_SENT_TO)
       end
-      _email_sent_to = email_sent_to.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("email_sent_to", _email_sent_to.to_s.size, MAX_LENGTH_FOR_EMAIL_SENT_TO)
-      @email_sent_to = _email_sent_to
+
+      @email_sent_to = new_value
     end
 
     # Generates #hash and #== methods from all fields

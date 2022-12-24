@@ -57,13 +57,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder_type Object to be assigned
-    def account_holder_type=(account_holder_type : String?)
-      if account_holder_type.nil?
-        return @account_holder_type = nil
+    def account_holder_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("account_holder_type", new_value, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
-      _account_holder_type = account_holder_type.not_nil!
-      OpenApi::EnumValidator.validate("account_holder_type", _account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
-      @account_holder_type = _account_holder_type
+
+      @account_holder_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -72,19 +72,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] disabled_reason Object to be assigned
-    def disabled_reason=(disabled_reason : String?)
-      @disabled_reason = disabled_reason
+    def disabled_reason=(new_value : String?)
+      @disabled_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] past_due Object to be assigned
-    def past_due=(past_due : Array(String)?)
-      if past_due.nil?
-        return @past_due = nil
+    def past_due=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("past_due", new_value, VALID_VALUES_FOR_PAST_DUE)
       end
-      _past_due = past_due.not_nil!
-      OpenApi::EnumValidator.validate("past_due", _past_due, VALID_VALUES_FOR_PAST_DUE)
-      @past_due = _past_due
+
+      @past_due = new_value
     end
 
     # Generates #hash and #== methods from all fields

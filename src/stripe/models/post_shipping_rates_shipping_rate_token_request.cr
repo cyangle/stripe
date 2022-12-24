@@ -90,55 +90,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        return @active = nil
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fixed_amount Object to be assigned
-    def fixed_amount=(fixed_amount : Stripe::FixedAmountUpdate?)
-      if fixed_amount.nil?
-        return @fixed_amount = nil
+    def fixed_amount=(new_value : Stripe::FixedAmountUpdate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _fixed_amount = fixed_amount.not_nil!
-      _fixed_amount.validate if _fixed_amount.is_a?(OpenApi::Validatable)
-      @fixed_amount = _fixed_amount
+
+      @fixed_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior : String?)
-      if tax_behavior.nil?
-        return @tax_behavior = nil
+    def tax_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      _tax_behavior = tax_behavior.not_nil!
-      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
-      @tax_behavior = _tax_behavior
+
+      @tax_behavior = new_value
     end
 
     # Generates #hash and #== methods from all fields

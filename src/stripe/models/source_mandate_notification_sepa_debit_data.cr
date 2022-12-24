@@ -90,35 +90,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] creditor_identifier Object to be assigned
-    def creditor_identifier=(creditor_identifier : String?)
-      if creditor_identifier.nil?
-        return @creditor_identifier = nil
+    def creditor_identifier=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("creditor_identifier", new_value.to_s.size, MAX_LENGTH_FOR_CREDITOR_IDENTIFIER)
       end
-      _creditor_identifier = creditor_identifier.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("creditor_identifier", _creditor_identifier.to_s.size, MAX_LENGTH_FOR_CREDITOR_IDENTIFIER)
-      @creditor_identifier = _creditor_identifier
+
+      @creditor_identifier = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
+    def last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last4", new_value.to_s.size, MAX_LENGTH_FOR_LAST4)
       end
-      _last4 = last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
-      @last4 = _last4
+
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_reference Object to be assigned
-    def mandate_reference=(mandate_reference : String?)
-      if mandate_reference.nil?
-        return @mandate_reference = nil
+    def mandate_reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("mandate_reference", new_value.to_s.size, MAX_LENGTH_FOR_MANDATE_REFERENCE)
       end
-      _mandate_reference = mandate_reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("mandate_reference", _mandate_reference.to_s.size, MAX_LENGTH_FOR_MANDATE_REFERENCE)
-      @mandate_reference = _mandate_reference
+
+      @mandate_reference = new_value
     end
 
     # Generates #hash and #== methods from all fields

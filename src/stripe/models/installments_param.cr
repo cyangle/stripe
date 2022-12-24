@@ -59,23 +59,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        return @enabled = nil
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] plan Object to be assigned
-    def plan=(plan : Stripe::InstallmentsParamPlan?)
-      if plan.nil?
-        return @plan = nil
+    def plan=(new_value : Stripe::InstallmentsParamPlan?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _plan = plan.not_nil!
-      _plan.validate if _plan.is_a?(OpenApi::Validatable)
-      @plan = _plan
+
+      @plan = new_value
     end
 
     # Generates #hash and #== methods from all fields

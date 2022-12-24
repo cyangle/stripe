@@ -76,44 +76,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] features Object to be assigned
-    def features=(features : Stripe::FeatureAccess?)
-      if features.nil?
-        return @features = nil
+    def features=(new_value : Stripe::FeatureAccess?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _features = features.not_nil!
-      _features.validate if _features.is_a?(OpenApi::Validatable)
-      @features = _features
+
+      @features = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform_restrictions Object to be assigned
-    def platform_restrictions=(platform_restrictions : Stripe::PlatformRestrictions?)
-      if platform_restrictions.nil?
-        return @platform_restrictions = nil
+    def platform_restrictions=(new_value : Stripe::PlatformRestrictions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _platform_restrictions = platform_restrictions.not_nil!
-      _platform_restrictions.validate if _platform_restrictions.is_a?(OpenApi::Validatable)
-      @platform_restrictions = _platform_restrictions
+
+      @platform_restrictions = new_value
     end
 
     # Generates #hash and #== methods from all fields

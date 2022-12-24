@@ -99,65 +99,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        return @currency = nil
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] parent Object to be assigned
-    def parent=(parent : String?)
-      if parent.nil?
-        return @parent = nil
+    def parent=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("parent", new_value.to_s.size, MAX_LENGTH_FOR_PARENT)
       end
-      _parent = parent.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("parent", _parent.to_s.size, MAX_LENGTH_FOR_PARENT)
-      @parent = _parent
+
+      @parent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
+    def _type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

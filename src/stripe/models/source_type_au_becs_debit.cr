@@ -65,32 +65,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bsb_number Object to be assigned
-    def bsb_number=(bsb_number : String?)
-      if bsb_number.nil?
-        return @bsb_number = nil
-      end
-      _bsb_number = bsb_number.not_nil!
-      @bsb_number = _bsb_number
+    def bsb_number=(new_value : String?)
+      @bsb_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
-      end
-      _fingerprint = fingerprint.not_nil!
-      @fingerprint = _fingerprint
+    def fingerprint=(new_value : String?)
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
-      end
-      _last4 = last4.not_nil!
-      @last4 = _last4
+    def last4=(new_value : String?)
+      @last4 = new_value
     end
 
     # Generates #hash and #== methods from all fields

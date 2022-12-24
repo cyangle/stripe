@@ -71,23 +71,19 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account Object to be assigned
-    def account=(account : String?)
-      if account.nil?
-        raise ArgumentError.new("\"account\" is required and cannot be null")
+    def account=(new_value : String?)
+      raise ArgumentError.new("\"account\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       end
-      _account = account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
-      @account = _account
+
+      @account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -145,116 +145,85 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice Object to be assigned
-    def invoice=(invoice : String?)
-      if invoice.nil?
-        raise ArgumentError.new("\"invoice\" is required and cannot be null")
+    def invoice=(new_value : String?)
+      raise ArgumentError.new("\"invoice\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("invoice", new_value.to_s.size, MAX_LENGTH_FOR_INVOICE)
       end
-      _invoice = invoice.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
-      @invoice = _invoice
+
+      @invoice = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credit_amount Object to be assigned
-    def credit_amount=(credit_amount : Int64?)
-      if credit_amount.nil?
-        return @credit_amount = nil
-      end
-      _credit_amount = credit_amount.not_nil!
-      @credit_amount = _credit_amount
+    def credit_amount=(new_value : Int64?)
+      @credit_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lines Object to be assigned
-    def lines=(lines : Array(Stripe::CreditNoteLineItemParams)?)
-      if lines.nil?
-        return @lines = nil
+    def lines=(new_value : Array(Stripe::CreditNoteLineItemParams)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _lines = lines.not_nil!
-      OpenApi::ContainerValidator.validate(container: _lines) if _lines.is_a?(Array)
-      @lines = _lines
+
+      @lines = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] memo Object to be assigned
-    def memo=(memo : String?)
-      if memo.nil?
-        return @memo = nil
+    def memo=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("memo", new_value.to_s.size, MAX_LENGTH_FOR_MEMO)
       end
-      _memo = memo.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("memo", _memo.to_s.size, MAX_LENGTH_FOR_MEMO)
-      @memo = _memo
+
+      @memo = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] out_of_band_amount Object to be assigned
-    def out_of_band_amount=(out_of_band_amount : Int64?)
-      if out_of_band_amount.nil?
-        return @out_of_band_amount = nil
-      end
-      _out_of_band_amount = out_of_band_amount.not_nil!
-      @out_of_band_amount = _out_of_band_amount
+    def out_of_band_amount=(new_value : Int64?)
+      @out_of_band_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      if reason.nil?
-        return @reason = nil
+    def reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("reason", new_value, VALID_VALUES_FOR_REASON)
       end
-      _reason = reason.not_nil!
-      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
-      @reason = _reason
+
+      @reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund Object to be assigned
-    def refund=(refund : String?)
-      if refund.nil?
-        return @refund = nil
-      end
-      _refund = refund.not_nil!
-      @refund = _refund
+    def refund=(new_value : String?)
+      @refund = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_amount Object to be assigned
-    def refund_amount=(refund_amount : Int64?)
-      if refund_amount.nil?
-        return @refund_amount = nil
-      end
-      _refund_amount = refund_amount.not_nil!
-      @refund_amount = _refund_amount
+    def refund_amount=(new_value : Int64?)
+      @refund_amount = new_value
     end
 
     # Generates #hash and #== methods from all fields

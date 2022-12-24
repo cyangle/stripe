@@ -60,23 +60,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] failure_details Object to be assigned
-    def failure_details=(failure_details : Stripe::FailureDetailsParams?)
-      if failure_details.nil?
-        return @failure_details = nil
+    def failure_details=(new_value : Stripe::FailureDetailsParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _failure_details = failure_details.not_nil!
-      _failure_details.validate if _failure_details.is_a?(OpenApi::Validatable)
-      @failure_details = _failure_details
+
+      @failure_details = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -180,90 +180,82 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_code Object to be assigned
-    def bank_code=(bank_code : String?)
-      if bank_code.nil?
-        return @bank_code = nil
+    def bank_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_code", new_value.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       end
-      _bank_code = bank_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
-      @bank_code = _bank_code
+
+      @bank_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
+    def bank_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_name", new_value.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       end
-      _bank_name = bank_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
-      @bank_name = _bank_name
+
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        return @bic = nil
+    def bic=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bic", new_value.to_s.size, MAX_LENGTH_FOR_BIC)
       end
-      _bic = bic.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
-      @bic = _bic
+
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_sepa_debit Object to be assigned
-    def generated_sepa_debit=(generated_sepa_debit : Stripe::PaymentMethodDetailsBancontactGeneratedSepaDebit?)
-      if generated_sepa_debit.nil?
-        return @generated_sepa_debit = nil
+    def generated_sepa_debit=(new_value : Stripe::PaymentMethodDetailsBancontactGeneratedSepaDebit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _generated_sepa_debit = generated_sepa_debit.not_nil!
-      _generated_sepa_debit.validate if _generated_sepa_debit.is_a?(OpenApi::Validatable)
-      @generated_sepa_debit = _generated_sepa_debit
+
+      @generated_sepa_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_sepa_debit_mandate Object to be assigned
-    def generated_sepa_debit_mandate=(generated_sepa_debit_mandate : Stripe::PaymentMethodDetailsBancontactGeneratedSepaDebitMandate?)
-      if generated_sepa_debit_mandate.nil?
-        return @generated_sepa_debit_mandate = nil
+    def generated_sepa_debit_mandate=(new_value : Stripe::PaymentMethodDetailsBancontactGeneratedSepaDebitMandate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _generated_sepa_debit_mandate = generated_sepa_debit_mandate.not_nil!
-      _generated_sepa_debit_mandate.validate if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
-      @generated_sepa_debit_mandate = _generated_sepa_debit_mandate
+
+      @generated_sepa_debit_mandate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban_last4 Object to be assigned
-    def iban_last4=(iban_last4 : String?)
-      if iban_last4.nil?
-        return @iban_last4 = nil
+    def iban_last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("iban_last4", new_value.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
       end
-      _iban_last4 = iban_last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
-      @iban_last4 = _iban_last4
+
+      @iban_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_language Object to be assigned
-    def preferred_language=(preferred_language : String?)
-      if preferred_language.nil?
-        return @preferred_language = nil
+    def preferred_language=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("preferred_language", new_value, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
-      _preferred_language = preferred_language.not_nil!
-      OpenApi::EnumValidator.validate("preferred_language", _preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
-      @preferred_language = _preferred_language
+
+      @preferred_language = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_name Object to be assigned
-    def verified_name=(verified_name : String?)
-      if verified_name.nil?
-        return @verified_name = nil
+    def verified_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_name", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       end
-      _verified_name = verified_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
-      @verified_name = _verified_name
+
+      @verified_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -60,42 +60,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] gt Object to be assigned
-    def gt=(gt : Int64?)
-      if gt.nil?
-        return @gt = nil
-      end
-      _gt = gt.not_nil!
-      @gt = _gt
+    def gt=(new_value : Int64?)
+      @gt = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] gte Object to be assigned
-    def gte=(gte : Int64?)
-      if gte.nil?
-        return @gte = nil
-      end
-      _gte = gte.not_nil!
-      @gte = _gte
+    def gte=(new_value : Int64?)
+      @gte = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lt Object to be assigned
-    def lt=(lt : Int64?)
-      if lt.nil?
-        return @lt = nil
-      end
-      _lt = lt.not_nil!
-      @lt = _lt
+    def lt=(new_value : Int64?)
+      @lt = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lte Object to be assigned
-    def lte=(lte : Int64?)
-      if lte.nil?
-        return @lte = nil
-      end
-      _lte = lte.not_nil!
-      @lte = _lte
+    def lte=(new_value : Int64?)
+      @lte = new_value
     end
 
     # Generates #hash and #== methods from all fields

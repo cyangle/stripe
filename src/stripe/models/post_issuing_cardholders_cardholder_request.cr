@@ -123,97 +123,76 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing Object to be assigned
-    def billing=(billing : Stripe::BillingSpecs?)
-      if billing.nil?
-        return @billing = nil
+    def billing=(new_value : Stripe::BillingSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _billing = billing.not_nil!
-      _billing.validate if _billing.is_a?(OpenApi::Validatable)
-      @billing = _billing
+
+      @billing = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company Object to be assigned
-    def company=(company : Stripe::CompanyParam?)
-      if company.nil?
-        return @company = nil
+    def company=(new_value : Stripe::CompanyParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company = company.not_nil!
-      _company.validate if _company.is_a?(OpenApi::Validatable)
-      @company = _company
+
+      @company = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
-      end
-      _email = email.not_nil!
-      @email = _email
+    def email=(new_value : String?)
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] individual Object to be assigned
-    def individual=(individual : Stripe::IndividualParam?)
-      if individual.nil?
-        return @individual = nil
+    def individual=(new_value : Stripe::IndividualParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _individual = individual.not_nil!
-      _individual.validate if _individual.is_a?(OpenApi::Validatable)
-      @individual = _individual
+
+      @individual = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone_number Object to be assigned
-    def phone_number=(phone_number : String?)
-      if phone_number.nil?
-        return @phone_number = nil
-      end
-      _phone_number = phone_number.not_nil!
-      @phone_number = _phone_number
+    def phone_number=(new_value : String?)
+      @phone_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] spending_controls Object to be assigned
-    def spending_controls=(spending_controls : Stripe::AuthorizationControlsParamV2?)
-      if spending_controls.nil?
-        return @spending_controls = nil
+    def spending_controls=(new_value : Stripe::AuthorizationControlsParamV2?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _spending_controls = spending_controls.not_nil!
-      _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
-      @spending_controls = _spending_controls
+
+      @spending_controls = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        return @status = nil
+    def status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -124,76 +124,61 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer Object to be assigned
-    def customer=(customer : String?)
-      if customer.nil?
-        raise ArgumentError.new("\"customer\" is required and cannot be null")
+    def customer=(new_value : String?)
+      raise ArgumentError.new("\"customer\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("customer", new_value.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       end
-      _customer = customer.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
-      @customer = _customer
+
+      @customer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] configuration Object to be assigned
-    def configuration=(configuration : String?)
-      if configuration.nil?
-        return @configuration = nil
+    def configuration=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("configuration", new_value.to_s.size, MAX_LENGTH_FOR_CONFIGURATION)
       end
-      _configuration = configuration.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("configuration", _configuration.to_s.size, MAX_LENGTH_FOR_CONFIGURATION)
-      @configuration = _configuration
+
+      @configuration = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flow_data Object to be assigned
-    def flow_data=(flow_data : Stripe::FlowDataParam?)
-      if flow_data.nil?
-        return @flow_data = nil
+    def flow_data=(new_value : Stripe::FlowDataParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _flow_data = flow_data.not_nil!
-      _flow_data.validate if _flow_data.is_a?(OpenApi::Validatable)
-      @flow_data = _flow_data
+
+      @flow_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] locale Object to be assigned
-    def locale=(locale : String?)
-      if locale.nil?
-        return @locale = nil
+    def locale=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("locale", new_value, VALID_VALUES_FOR_LOCALE)
       end
-      _locale = locale.not_nil!
-      OpenApi::EnumValidator.validate("locale", _locale, VALID_VALUES_FOR_LOCALE)
-      @locale = _locale
+
+      @locale = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] on_behalf_of Object to be assigned
-    def on_behalf_of=(on_behalf_of : String?)
-      if on_behalf_of.nil?
-        return @on_behalf_of = nil
-      end
-      _on_behalf_of = on_behalf_of.not_nil!
-      @on_behalf_of = _on_behalf_of
+    def on_behalf_of=(new_value : String?)
+      @on_behalf_of = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        return @return_url = nil
-      end
-      _return_url = return_url.not_nil!
-      @return_url = _return_url
+    def return_url=(new_value : String?)
+      @return_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

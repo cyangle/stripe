@@ -65,32 +65,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data_string Object to be assigned
-    def data_string=(data_string : String?)
-      if data_string.nil?
-        return @data_string = nil
-      end
-      _data_string = data_string.not_nil!
-      @data_string = _data_string
+    def data_string=(new_value : String?)
+      @data_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] native_url Object to be assigned
-    def native_url=(native_url : String?)
-      if native_url.nil?
-        return @native_url = nil
-      end
-      _native_url = native_url.not_nil!
-      @native_url = _native_url
+    def native_url=(new_value : String?)
+      @native_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
-      end
-      _statement_descriptor = statement_descriptor.not_nil!
-      @statement_descriptor = _statement_descriptor
+    def statement_descriptor=(new_value : String?)
+      @statement_descriptor = new_value
     end
 
     # Generates #hash and #== methods from all fields

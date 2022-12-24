@@ -237,132 +237,123 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] device_type Object to be assigned
-    def device_type=(device_type : String?)
-      if device_type.nil?
-        raise ArgumentError.new("\"device_type\" is required and cannot be null")
+    def device_type=(new_value : String?)
+      raise ArgumentError.new("\"device_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("device_type", new_value, VALID_VALUES_FOR_DEVICE_TYPE)
       end
-      _device_type = device_type.not_nil!
-      OpenApi::EnumValidator.validate("device_type", _device_type, VALID_VALUES_FOR_DEVICE_TYPE)
-      @device_type = _device_type
+
+      @device_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] label Object to be assigned
-    def label=(label : String?)
-      if label.nil?
-        raise ArgumentError.new("\"label\" is required and cannot be null")
+    def label=(new_value : String?)
+      raise ArgumentError.new("\"label\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("label", new_value.to_s.size, MAX_LENGTH_FOR_LABEL)
       end
-      _label = label.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
-      @label = _label
+
+      @label = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        raise ArgumentError.new("\"metadata\" is required and cannot be null")
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      raise ArgumentError.new("\"metadata\" is required and cannot be null") if new_value.nil?
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] serial_number Object to be assigned
-    def serial_number=(serial_number : String?)
-      if serial_number.nil?
-        raise ArgumentError.new("\"serial_number\" is required and cannot be null")
+    def serial_number=(new_value : String?)
+      raise ArgumentError.new("\"serial_number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("serial_number", new_value.to_s.size, MAX_LENGTH_FOR_SERIAL_NUMBER)
       end
-      _serial_number = serial_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("serial_number", _serial_number.to_s.size, MAX_LENGTH_FOR_SERIAL_NUMBER)
-      @serial_number = _serial_number
+
+      @serial_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action Object to be assigned
-    def action=(action : Stripe::TerminalReaderAction?)
-      if action.nil?
-        return @action = nil
+    def action=(new_value : Stripe::TerminalReaderAction?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _action = action.not_nil!
-      _action.validate if _action.is_a?(OpenApi::Validatable)
-      @action = _action
+
+      @action = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] device_sw_version Object to be assigned
-    def device_sw_version=(device_sw_version : String?)
-      if device_sw_version.nil?
-        return @device_sw_version = nil
+    def device_sw_version=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("device_sw_version", new_value.to_s.size, MAX_LENGTH_FOR_DEVICE_SW_VERSION)
       end
-      _device_sw_version = device_sw_version.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("device_sw_version", _device_sw_version.to_s.size, MAX_LENGTH_FOR_DEVICE_SW_VERSION)
-      @device_sw_version = _device_sw_version
+
+      @device_sw_version = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(ip_address : String?)
-      if ip_address.nil?
-        return @ip_address = nil
+    def ip_address=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("ip_address", new_value.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       end
-      _ip_address = ip_address.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
-      @ip_address = _ip_address
+
+      @ip_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(location : Stripe::TerminalReaderLocation?)
-      if location.nil?
-        return @location = nil
+    def location=(new_value : Stripe::TerminalReaderLocation?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _location = location.not_nil!
-      _location.validate if _location.is_a?(OpenApi::Validatable)
-      @location = _location
+
+      @location = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        return @status = nil
+    def status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("status", new_value.to_s.size, MAX_LENGTH_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Generates #hash and #== methods from all fields

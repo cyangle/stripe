@@ -198,150 +198,119 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        return @active = nil
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_price_data Object to be assigned
-    def default_price_data=(default_price_data : Stripe::PriceDataWithoutProduct?)
-      if default_price_data.nil?
-        return @default_price_data = nil
+    def default_price_data=(new_value : Stripe::PriceDataWithoutProduct?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _default_price_data = default_price_data.not_nil!
-      _default_price_data.validate if _default_price_data.is_a?(OpenApi::Validatable)
-      @default_price_data = _default_price_data
+
+      @default_price_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
+    def id=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] images Object to be assigned
-    def images=(images : Array(String)?)
-      if images.nil?
-        return @images = nil
-      end
-      _images = images.not_nil!
-      @images = _images
+    def images=(new_value : Array(String)?)
+      @images = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] package_dimensions Object to be assigned
-    def package_dimensions=(package_dimensions : Stripe::PackageDimensionsSpecs?)
-      if package_dimensions.nil?
-        return @package_dimensions = nil
+    def package_dimensions=(new_value : Stripe::PackageDimensionsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _package_dimensions = package_dimensions.not_nil!
-      _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
-      @package_dimensions = _package_dimensions
+
+      @package_dimensions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shippable Object to be assigned
-    def shippable=(shippable : Bool?)
-      if shippable.nil?
-        return @shippable = nil
-      end
-      _shippable = shippable.not_nil!
-      @shippable = _shippable
+    def shippable=(new_value : Bool?)
+      @shippable = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
+    def statement_descriptor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       end
-      _statement_descriptor = statement_descriptor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-      @statement_descriptor = _statement_descriptor
+
+      @statement_descriptor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_code Object to be assigned
-    def tax_code=(tax_code : String?)
-      if tax_code.nil?
-        return @tax_code = nil
-      end
-      _tax_code = tax_code.not_nil!
-      @tax_code = _tax_code
+    def tax_code=(new_value : String?)
+      @tax_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_label Object to be assigned
-    def unit_label=(unit_label : String?)
-      if unit_label.nil?
-        return @unit_label = nil
+    def unit_label=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("unit_label", new_value.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
       end
-      _unit_label = unit_label.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("unit_label", _unit_label.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
-      @unit_label = _unit_label
+
+      @unit_label = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] url Object to be assigned
-    def url=(url : String?)
-      if url.nil?
-        return @url = nil
+    def url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("url", new_value.to_s.size, MAX_LENGTH_FOR_URL)
       end
-      _url = url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
-      @url = _url
+
+      @url = new_value
     end
 
     # Generates #hash and #== methods from all fields

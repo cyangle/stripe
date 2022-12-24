@@ -101,35 +101,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_code Object to be assigned
-    def bank_code=(bank_code : String?)
-      if bank_code.nil?
-        raise ArgumentError.new("\"bank_code\" is required and cannot be null")
+    def bank_code=(new_value : String?)
+      raise ArgumentError.new("\"bank_code\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_code", new_value.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       end
-      _bank_code = bank_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
-      @bank_code = _bank_code
+
+      @bank_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        raise ArgumentError.new("\"bank_name\" is required and cannot be null")
+    def bank_name=(new_value : String?)
+      raise ArgumentError.new("\"bank_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_name", new_value.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       end
-      _bank_name = bank_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
-      @bank_name = _bank_name
+
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] clabe Object to be assigned
-    def clabe=(clabe : String?)
-      if clabe.nil?
-        raise ArgumentError.new("\"clabe\" is required and cannot be null")
+    def clabe=(new_value : String?)
+      raise ArgumentError.new("\"clabe\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("clabe", new_value.to_s.size, MAX_LENGTH_FOR_CLABE)
       end
-      _clabe = clabe.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("clabe", _clabe.to_s.size, MAX_LENGTH_FOR_CLABE)
-      @clabe = _clabe
+
+      @clabe = new_value
     end
 
     # Generates #hash and #== methods from all fields

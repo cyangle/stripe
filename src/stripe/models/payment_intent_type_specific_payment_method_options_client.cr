@@ -91,41 +91,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capture_method Object to be assigned
-    def capture_method=(capture_method : String?)
-      if capture_method.nil?
-        return @capture_method = nil
+    def capture_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("capture_method", new_value, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
-      _capture_method = capture_method.not_nil!
-      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
-      @capture_method = _capture_method
+
+      @capture_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(installments : Stripe::PaymentFlowsInstallmentOptions?)
-      if installments.nil?
-        return @installments = nil
+    def installments=(new_value : Stripe::PaymentFlowsInstallmentOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _installments = installments.not_nil!
-      _installments.validate if _installments.is_a?(OpenApi::Validatable)
-      @installments = _installments
+
+      @installments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method : String?)
-      @verification_method = verification_method
+    def verification_method=(new_value : String?)
+      @verification_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -95,35 +95,33 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_confirmation Object to be assigned
-    def hosted_confirmation=(hosted_confirmation : Stripe::PortalFlowsFlowAfterCompletionHostedConfirmation?)
-      if hosted_confirmation.nil?
-        return @hosted_confirmation = nil
+    def hosted_confirmation=(new_value : Stripe::PortalFlowsFlowAfterCompletionHostedConfirmation?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _hosted_confirmation = hosted_confirmation.not_nil!
-      _hosted_confirmation.validate if _hosted_confirmation.is_a?(OpenApi::Validatable)
-      @hosted_confirmation = _hosted_confirmation
+
+      @hosted_confirmation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] redirect Object to be assigned
-    def redirect=(redirect : Stripe::PortalFlowsFlowAfterCompletionRedirect?)
-      if redirect.nil?
-        return @redirect = nil
+    def redirect=(new_value : Stripe::PortalFlowsFlowAfterCompletionRedirect?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _redirect = redirect.not_nil!
-      _redirect.validate if _redirect.is_a?(OpenApi::Validatable)
-      @redirect = _redirect
+
+      @redirect = new_value
     end
 
     # Generates #hash and #== methods from all fields

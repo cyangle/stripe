@@ -111,56 +111,48 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data Object to be assigned
-    def data=(data : String?)
-      if data.nil?
-        return @data = nil
+    def data=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("data", new_value.to_s.size, MAX_LENGTH_FOR_DATA)
       end
-      _data = data.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("data", _data.to_s.size, MAX_LENGTH_FOR_DATA)
-      @data = _data
+
+      @data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_instructions_url Object to be assigned
-    def hosted_instructions_url=(hosted_instructions_url : String?)
-      if hosted_instructions_url.nil?
-        return @hosted_instructions_url = nil
+    def hosted_instructions_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("hosted_instructions_url", new_value.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
       end
-      _hosted_instructions_url = hosted_instructions_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("hosted_instructions_url", _hosted_instructions_url.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
-      @hosted_instructions_url = _hosted_instructions_url
+
+      @hosted_instructions_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] image_url_png Object to be assigned
-    def image_url_png=(image_url_png : String?)
-      if image_url_png.nil?
-        return @image_url_png = nil
+    def image_url_png=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("image_url_png", new_value.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_PNG)
       end
-      _image_url_png = image_url_png.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("image_url_png", _image_url_png.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_PNG)
-      @image_url_png = _image_url_png
+
+      @image_url_png = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] image_url_svg Object to be assigned
-    def image_url_svg=(image_url_svg : String?)
-      if image_url_svg.nil?
-        return @image_url_svg = nil
+    def image_url_svg=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("image_url_svg", new_value.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_SVG)
       end
-      _image_url_svg = image_url_svg.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("image_url_svg", _image_url_svg.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_SVG)
-      @image_url_svg = _image_url_svg
+
+      @image_url_svg = new_value
     end
 
     # Generates #hash and #== methods from all fields

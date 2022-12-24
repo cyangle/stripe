@@ -72,42 +72,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank : String?)
-      if bank.nil?
-        return @bank = nil
-      end
-      _bank = bank.not_nil!
-      @bank = _bank
+    def bank=(new_value : String?)
+      @bank = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        return @bic = nil
-      end
-      _bic = bic.not_nil!
-      @bic = _bic
+    def bic=(new_value : String?)
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban_last4 Object to be assigned
-    def iban_last4=(iban_last4 : String?)
-      if iban_last4.nil?
-        return @iban_last4 = nil
-      end
-      _iban_last4 = iban_last4.not_nil!
-      @iban_last4 = _iban_last4
+    def iban_last4=(new_value : String?)
+      @iban_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
-      end
-      _statement_descriptor = statement_descriptor.not_nil!
-      @statement_descriptor = _statement_descriptor
+    def statement_descriptor=(new_value : String?)
+      @statement_descriptor = new_value
     end
 
     # Generates #hash and #== methods from all fields

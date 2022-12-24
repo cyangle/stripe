@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] three_d_secure Object to be assigned
-    def three_d_secure=(three_d_secure : Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure?)
-      if three_d_secure.nil?
-        return @three_d_secure = nil
+    def three_d_secure=(new_value : Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _three_d_secure = three_d_secure.not_nil!
-      _three_d_secure.validate if _three_d_secure.is_a?(OpenApi::Validatable)
-      @three_d_secure = _three_d_secure
+
+      @three_d_secure = new_value
     end
 
     # Generates #hash and #== methods from all fields

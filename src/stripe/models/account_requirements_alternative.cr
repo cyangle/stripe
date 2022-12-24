@@ -65,22 +65,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alternative_fields_due Object to be assigned
-    def alternative_fields_due=(alternative_fields_due : Array(String)?)
-      if alternative_fields_due.nil?
-        raise ArgumentError.new("\"alternative_fields_due\" is required and cannot be null")
-      end
-      _alternative_fields_due = alternative_fields_due.not_nil!
-      @alternative_fields_due = _alternative_fields_due
+    def alternative_fields_due=(new_value : Array(String)?)
+      raise ArgumentError.new("\"alternative_fields_due\" is required and cannot be null") if new_value.nil?
+
+      @alternative_fields_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] original_fields_due Object to be assigned
-    def original_fields_due=(original_fields_due : Array(String)?)
-      if original_fields_due.nil?
-        raise ArgumentError.new("\"original_fields_due\" is required and cannot be null")
-      end
-      _original_fields_due = original_fields_due.not_nil!
-      @original_fields_due = _original_fields_due
+    def original_fields_due=(new_value : Array(String)?)
+      raise ArgumentError.new("\"original_fields_due\" is required and cannot be null") if new_value.nil?
+
+      @original_fields_due = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -60,23 +60,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] settings Object to be assigned
-    def settings=(settings : Stripe::BalanceSettingsParam?)
-      if settings.nil?
-        return @settings = nil
+    def settings=(new_value : Stripe::BalanceSettingsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _settings = settings.not_nil!
-      _settings.validate if _settings.is_a?(OpenApi::Validatable)
-      @settings = _settings
+
+      @settings = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -111,68 +111,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acss_debit Object to be assigned
-    def acss_debit=(acss_debit : Stripe::SetupIntentPaymentMethodOptionsAcssDebit1?)
-      if acss_debit.nil?
-        return @acss_debit = nil
+    def acss_debit=(new_value : Stripe::SetupIntentPaymentMethodOptionsAcssDebit1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _acss_debit = acss_debit.not_nil!
-      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
-      @acss_debit = _acss_debit
+
+      @acss_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] blik Object to be assigned
-    def blik=(blik : Stripe::SetupIntentPaymentMethodOptionsBlik1?)
-      if blik.nil?
-        return @blik = nil
+    def blik=(new_value : Stripe::SetupIntentPaymentMethodOptionsBlik1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _blik = blik.not_nil!
-      _blik.validate if _blik.is_a?(OpenApi::Validatable)
-      @blik = _blik
+
+      @blik = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::SetupIntentPaymentMethodOptionsCard?)
-      if card.nil?
-        return @card = nil
+    def card=(new_value : Stripe::SetupIntentPaymentMethodOptionsCard?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] link Object to be assigned
-    def link=(link : Stripe::SetupIntentPaymentMethodOptionsLink1?)
-      if link.nil?
-        return @link = nil
+    def link=(new_value : Stripe::SetupIntentPaymentMethodOptionsLink1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _link = link.not_nil!
-      _link.validate if _link.is_a?(OpenApi::Validatable)
-      @link = _link
+
+      @link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sepa_debit Object to be assigned
-    def sepa_debit=(sepa_debit : Stripe::SetupIntentPaymentMethodOptionsSepaDebit1?)
-      if sepa_debit.nil?
-        return @sepa_debit = nil
+    def sepa_debit=(new_value : Stripe::SetupIntentPaymentMethodOptionsSepaDebit1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sepa_debit = sepa_debit.not_nil!
-      _sepa_debit.validate if _sepa_debit.is_a?(OpenApi::Validatable)
-      @sepa_debit = _sepa_debit
+
+      @sepa_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::SetupIntentPaymentMethodOptionsUsBankAccount1?)
-      if us_bank_account.nil?
-        return @us_bank_account = nil
+    def us_bank_account=(new_value : Stripe::SetupIntentPaymentMethodOptionsUsBankAccount1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _us_bank_account = us_bank_account.not_nil!
-      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
-      @us_bank_account = _us_bank_account
+
+      @us_bank_account = new_value
     end
 
     # Generates #hash and #== methods from all fields

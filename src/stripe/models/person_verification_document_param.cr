@@ -72,24 +72,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] back Object to be assigned
-    def back=(back : String?)
-      if back.nil?
-        return @back = nil
+    def back=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("back", new_value.to_s.size, MAX_LENGTH_FOR_BACK)
       end
-      _back = back.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("back", _back.to_s.size, MAX_LENGTH_FOR_BACK)
-      @back = _back
+
+      @back = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] front Object to be assigned
-    def front=(front : String?)
-      if front.nil?
-        return @front = nil
+    def front=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("front", new_value.to_s.size, MAX_LENGTH_FOR_FRONT)
       end
-      _front = front.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("front", _front.to_s.size, MAX_LENGTH_FOR_FRONT)
-      @front = _front
+
+      @front = new_value
     end
 
     # Generates #hash and #== methods from all fields

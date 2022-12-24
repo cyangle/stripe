@@ -101,57 +101,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::CustomerDetailsParamAddress?)
-      if address.nil?
-        return @address = nil
+    def address=(new_value : Stripe::CustomerDetailsParamAddress?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address = address.not_nil!
-      _address.validate if _address.is_a?(OpenApi::Validatable)
-      @address = _address
+
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping : Stripe::CustomerDetailsParamShipping?)
-      if shipping.nil?
-        return @shipping = nil
+    def shipping=(new_value : Stripe::CustomerDetailsParamShipping?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping = shipping.not_nil!
-      _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
-      @shipping = _shipping
+
+      @shipping = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax Object to be assigned
-    def tax=(tax : Stripe::TaxParam?)
-      if tax.nil?
-        return @tax = nil
+    def tax=(new_value : Stripe::TaxParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tax = tax.not_nil!
-      _tax.validate if _tax.is_a?(OpenApi::Validatable)
-      @tax = _tax
+
+      @tax = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_exempt Object to be assigned
-    def tax_exempt=(tax_exempt : String?)
-      if tax_exempt.nil?
-        return @tax_exempt = nil
+    def tax_exempt=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_exempt", new_value, VALID_VALUES_FOR_TAX_EXEMPT)
       end
-      _tax_exempt = tax_exempt.not_nil!
-      OpenApi::EnumValidator.validate("tax_exempt", _tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
-      @tax_exempt = _tax_exempt
+
+      @tax_exempt = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_ids Object to be assigned
-    def tax_ids=(tax_ids : Array(Stripe::DataParams)?)
-      if tax_ids.nil?
-        return @tax_ids = nil
+    def tax_ids=(new_value : Array(Stripe::DataParams)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _tax_ids = tax_ids.not_nil!
-      OpenApi::ContainerValidator.validate(container: _tax_ids) if _tax_ids.is_a?(Array)
-      @tax_ids = _tax_ids
+
+      @tax_ids = new_value
     end
 
     # Generates #hash and #== methods from all fields

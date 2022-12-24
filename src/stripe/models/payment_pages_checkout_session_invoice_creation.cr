@@ -70,23 +70,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_data Object to be assigned
-    def invoice_data=(invoice_data : Stripe::PaymentPagesCheckoutSessionInvoiceSettings?)
-      if invoice_data.nil?
-        raise ArgumentError.new("\"invoice_data\" is required and cannot be null")
+    def invoice_data=(new_value : Stripe::PaymentPagesCheckoutSessionInvoiceSettings?)
+      raise ArgumentError.new("\"invoice_data\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _invoice_data = invoice_data.not_nil!
-      _invoice_data.validate if _invoice_data.is_a?(OpenApi::Validatable)
-      @invoice_data = _invoice_data
+
+      @invoice_data = new_value
     end
 
     # Generates #hash and #== methods from all fields

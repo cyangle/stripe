@@ -86,62 +86,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_code Object to be assigned
-    def bank_code=(bank_code : String?)
-      if bank_code.nil?
-        return @bank_code = nil
-      end
-      _bank_code = bank_code.not_nil!
-      @bank_code = _bank_code
+    def bank_code=(new_value : String?)
+      @bank_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
-      end
-      _bank_name = bank_name.not_nil!
-      @bank_name = _bank_name
+    def bank_name=(new_value : String?)
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        return @bic = nil
-      end
-      _bic = bic.not_nil!
-      @bic = _bic
+    def bic=(new_value : String?)
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban_last4 Object to be assigned
-    def iban_last4=(iban_last4 : String?)
-      if iban_last4.nil?
-        return @iban_last4 = nil
-      end
-      _iban_last4 = iban_last4.not_nil!
-      @iban_last4 = _iban_last4
+    def iban_last4=(new_value : String?)
+      @iban_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_language Object to be assigned
-    def preferred_language=(preferred_language : String?)
-      if preferred_language.nil?
-        return @preferred_language = nil
-      end
-      _preferred_language = preferred_language.not_nil!
-      @preferred_language = _preferred_language
+    def preferred_language=(new_value : String?)
+      @preferred_language = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
-      end
-      _statement_descriptor = statement_descriptor.not_nil!
-      @statement_descriptor = _statement_descriptor
+    def statement_descriptor=(new_value : String?)
+      @statement_descriptor = new_value
     end
 
     # Generates #hash and #== methods from all fields

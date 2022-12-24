@@ -97,44 +97,36 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_time_transaction Object to be assigned
-    def first_time_transaction=(first_time_transaction : Bool?)
-      if first_time_transaction.nil?
-        raise ArgumentError.new("\"first_time_transaction\" is required and cannot be null")
-      end
-      _first_time_transaction = first_time_transaction.not_nil!
-      @first_time_transaction = _first_time_transaction
+    def first_time_transaction=(new_value : Bool?)
+      raise ArgumentError.new("\"first_time_transaction\" is required and cannot be null") if new_value.nil?
+
+      @first_time_transaction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::PromotionCodeCurrencyOption)?)
-      if currency_options.nil?
-        return @currency_options = nil
+    def currency_options=(new_value : Hash(String, Stripe::PromotionCodeCurrencyOption)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _currency_options = currency_options.not_nil!
-      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
-      @currency_options = _currency_options
+
+      @currency_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum_amount Object to be assigned
-    def minimum_amount=(minimum_amount : Int64?)
-      if minimum_amount.nil?
-        return @minimum_amount = nil
-      end
-      _minimum_amount = minimum_amount.not_nil!
-      @minimum_amount = _minimum_amount
+    def minimum_amount=(new_value : Int64?)
+      @minimum_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum_amount_currency Object to be assigned
-    def minimum_amount_currency=(minimum_amount_currency : String?)
-      if minimum_amount_currency.nil?
-        return @minimum_amount_currency = nil
+    def minimum_amount_currency=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("minimum_amount_currency", new_value.to_s.size, MAX_LENGTH_FOR_MINIMUM_AMOUNT_CURRENCY)
       end
-      _minimum_amount_currency = minimum_amount_currency.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("minimum_amount_currency", _minimum_amount_currency.to_s.size, MAX_LENGTH_FOR_MINIMUM_AMOUNT_CURRENCY)
-      @minimum_amount_currency = _minimum_amount_currency
+
+      @minimum_amount_currency = new_value
     end
 
     # Generates #hash and #== methods from all fields

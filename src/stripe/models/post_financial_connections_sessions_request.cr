@@ -112,56 +112,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder Object to be assigned
-    def account_holder=(account_holder : Stripe::AccountholderParams?)
-      if account_holder.nil?
-        raise ArgumentError.new("\"account_holder\" is required and cannot be null")
+    def account_holder=(new_value : Stripe::AccountholderParams?)
+      raise ArgumentError.new("\"account_holder\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _account_holder = account_holder.not_nil!
-      _account_holder.validate if _account_holder.is_a?(OpenApi::Validatable)
-      @account_holder = _account_holder
+
+      @account_holder = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permissions Object to be assigned
-    def permissions=(permissions : Array(String)?)
-      if permissions.nil?
-        raise ArgumentError.new("\"permissions\" is required and cannot be null")
+    def permissions=(new_value : Array(String)?)
+      raise ArgumentError.new("\"permissions\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("permissions", new_value, VALID_VALUES_FOR_PERMISSIONS)
       end
-      _permissions = permissions.not_nil!
-      OpenApi::EnumValidator.validate("permissions", _permissions, VALID_VALUES_FOR_PERMISSIONS)
-      @permissions = _permissions
+
+      @permissions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] filters Object to be assigned
-    def filters=(filters : Stripe::FiltersParams?)
-      if filters.nil?
-        return @filters = nil
+    def filters=(new_value : Stripe::FiltersParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _filters = filters.not_nil!
-      _filters.validate if _filters.is_a?(OpenApi::Validatable)
-      @filters = _filters
+
+      @filters = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        return @return_url = nil
+    def return_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("return_url", new_value.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       end
-      _return_url = return_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
-      @return_url = _return_url
+
+      @return_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

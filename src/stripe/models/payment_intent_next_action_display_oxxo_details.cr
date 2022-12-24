@@ -89,34 +89,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_after Object to be assigned
-    def expires_after=(expires_after : Int64?)
-      if expires_after.nil?
-        return @expires_after = nil
-      end
-      _expires_after = expires_after.not_nil!
-      @expires_after = _expires_after
+    def expires_after=(new_value : Int64?)
+      @expires_after = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_voucher_url Object to be assigned
-    def hosted_voucher_url=(hosted_voucher_url : String?)
-      if hosted_voucher_url.nil?
-        return @hosted_voucher_url = nil
+    def hosted_voucher_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("hosted_voucher_url", new_value.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
       end
-      _hosted_voucher_url = hosted_voucher_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("hosted_voucher_url", _hosted_voucher_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
-      @hosted_voucher_url = _hosted_voucher_url
+
+      @hosted_voucher_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] number Object to be assigned
-    def number=(number : String?)
-      if number.nil?
-        return @number = nil
+    def number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("number", new_value.to_s.size, MAX_LENGTH_FOR_NUMBER)
       end
-      _number = number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
-      @number = _number
+
+      @number = new_value
     end
 
     # Generates #hash and #== methods from all fields

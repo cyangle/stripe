@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] closed Object to be assigned
-    def closed=(closed : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed?)
-      if closed.nil?
-        return @closed = nil
+    def closed=(new_value : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _closed = closed.not_nil!
-      _closed.validate if _closed.is_a?(OpenApi::Validatable)
-      @closed = _closed
+
+      @closed = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -84,30 +84,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capture_method Object to be assigned
-    def capture_method=(capture_method : String?)
-      if capture_method.nil?
-        return @capture_method = nil
+    def capture_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("capture_method", new_value, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
-      _capture_method = capture_method.not_nil!
-      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
-      @capture_method = _capture_method
+
+      @capture_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      @setup_future_usage = setup_future_usage
+    def setup_future_usage=(new_value : String?)
+      @setup_future_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

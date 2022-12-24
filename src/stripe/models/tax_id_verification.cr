@@ -103,35 +103,33 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
+    def status=(new_value : String?)
+      raise ArgumentError.new("\"status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_address Object to be assigned
-    def verified_address=(verified_address : String?)
-      if verified_address.nil?
-        return @verified_address = nil
+    def verified_address=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_address", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_ADDRESS)
       end
-      _verified_address = verified_address.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_address", _verified_address.to_s.size, MAX_LENGTH_FOR_VERIFIED_ADDRESS)
-      @verified_address = _verified_address
+
+      @verified_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_name Object to be assigned
-    def verified_name=(verified_name : String?)
-      if verified_name.nil?
-        return @verified_name = nil
+    def verified_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_name", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       end
-      _verified_name = verified_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
-      @verified_name = _verified_name
+
+      @verified_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -74,23 +74,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prices Object to be assigned
-    def prices=(prices : Array(String)?)
-      if prices.nil?
-        raise ArgumentError.new("\"prices\" is required and cannot be null")
-      end
-      _prices = prices.not_nil!
-      @prices = _prices
+    def prices=(new_value : Array(String)?)
+      raise ArgumentError.new("\"prices\" is required and cannot be null") if new_value.nil?
+
+      @prices = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product Object to be assigned
-    def product=(product : String?)
-      if product.nil?
-        raise ArgumentError.new("\"product\" is required and cannot be null")
+    def product=(new_value : String?)
+      raise ArgumentError.new("\"product\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("product", new_value.to_s.size, MAX_LENGTH_FOR_PRODUCT)
       end
-      _product = product.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
-      @product = _product
+
+      @product = new_value
     end
 
     # Generates #hash and #== methods from all fields

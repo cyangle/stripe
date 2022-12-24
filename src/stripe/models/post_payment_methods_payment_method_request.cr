@@ -99,66 +99,54 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_details Object to be assigned
-    def billing_details=(billing_details : Stripe::BillingDetailsInnerParams?)
-      if billing_details.nil?
-        return @billing_details = nil
+    def billing_details=(new_value : Stripe::BillingDetailsInnerParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _billing_details = billing_details.not_nil!
-      _billing_details.validate if _billing_details.is_a?(OpenApi::Validatable)
-      @billing_details = _billing_details
+
+      @billing_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::UpdateApiParam?)
-      if card.nil?
-        return @card = nil
+    def card=(new_value : Stripe::UpdateApiParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] link Object to be assigned
-    def link=(link : JSON::Any?)
-      if link.nil?
-        return @link = nil
-      end
-      _link = link.not_nil!
-      @link = _link
+    def link=(new_value : JSON::Any?)
+      @link = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::UpdateParam?)
-      if us_bank_account.nil?
-        return @us_bank_account = nil
+    def us_bank_account=(new_value : Stripe::UpdateParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _us_bank_account = us_bank_account.not_nil!
-      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
-      @us_bank_account = _us_bank_account
+
+      @us_bank_account = new_value
     end
 
     # Generates #hash and #== methods from all fields

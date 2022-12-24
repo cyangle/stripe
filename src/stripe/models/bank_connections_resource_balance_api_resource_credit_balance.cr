@@ -52,12 +52,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] used Object to be assigned
-    def used=(used : Hash(String, Int32)?)
-      if used.nil?
-        return @used = nil
-      end
-      _used = used.not_nil!
-      @used = _used
+    def used=(new_value : Hash(String, Int32)?)
+      @used = new_value
     end
 
     # Generates #hash and #== methods from all fields

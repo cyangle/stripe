@@ -165,90 +165,82 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capture_method Object to be assigned
-    def capture_method=(capture_method : String?)
-      if capture_method.nil?
-        return @capture_method = nil
+    def capture_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("capture_method", new_value, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
-      _capture_method = capture_method.not_nil!
-      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
-      @capture_method = _capture_method
+
+      @capture_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(installments : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments?)
-      if installments.nil?
-        return @installments = nil
+    def installments=(new_value : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _installments = installments.not_nil!
-      _installments.validate if _installments.is_a?(OpenApi::Validatable)
-      @installments = _installments
+
+      @installments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::PaymentIntentPaymentMethodOptionsCardMandateOptions?)
-      if mandate_options.nil?
-        return @mandate_options = nil
+    def mandate_options=(new_value : Stripe::PaymentIntentPaymentMethodOptionsCardMandateOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _mandate_options = mandate_options.not_nil!
-      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
-      @mandate_options = _mandate_options
+
+      @mandate_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network : String?)
-      if network.nil?
-        return @network = nil
+    def network=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("network", new_value, VALID_VALUES_FOR_NETWORK)
       end
-      _network = network.not_nil!
-      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
-      @network = _network
+
+      @network = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
-    def request_three_d_secure=(request_three_d_secure : String?)
-      if request_three_d_secure.nil?
-        return @request_three_d_secure = nil
+    def request_three_d_secure=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("request_three_d_secure", new_value, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
-      _request_three_d_secure = request_three_d_secure.not_nil!
-      OpenApi::EnumValidator.validate("request_three_d_secure", _request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
-      @request_three_d_secure = _request_three_d_secure
+
+      @request_three_d_secure = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix_kana Object to be assigned
-    def statement_descriptor_suffix_kana=(statement_descriptor_suffix_kana : String?)
-      if statement_descriptor_suffix_kana.nil?
-        return @statement_descriptor_suffix_kana = nil
+    def statement_descriptor_suffix_kana=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kana", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
       end
-      _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
-      @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
+
+      @statement_descriptor_suffix_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix_kanji Object to be assigned
-    def statement_descriptor_suffix_kanji=(statement_descriptor_suffix_kanji : String?)
-      if statement_descriptor_suffix_kanji.nil?
-        return @statement_descriptor_suffix_kanji = nil
+    def statement_descriptor_suffix_kanji=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kanji", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
       end
-      _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
-      @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji
+
+      @statement_descriptor_suffix_kanji = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -56,12 +56,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Generates #hash and #== methods from all fields

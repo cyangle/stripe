@@ -62,13 +62,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_type Object to be assigned
-    def transaction_type=(transaction_type : String?)
-      if transaction_type.nil?
-        return @transaction_type = nil
+    def transaction_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("transaction_type", new_value, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
-      _transaction_type = transaction_type.not_nil!
-      OpenApi::EnumValidator.validate("transaction_type", _transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
-      @transaction_type = _transaction_type
+
+      @transaction_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

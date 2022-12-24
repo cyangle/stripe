@@ -78,24 +78,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
+    def email=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("email", new_value.to_s.size, MAX_LENGTH_FOR_EMAIL)
       end
-      _email = email.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
-      @email = _email
+
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] persistent_token Object to be assigned
-    def persistent_token=(persistent_token : String?)
-      if persistent_token.nil?
-        return @persistent_token = nil
+    def persistent_token=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("persistent_token", new_value.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
       end
-      _persistent_token = persistent_token.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
-      @persistent_token = _persistent_token
+
+      @persistent_token = new_value
     end
 
     # Generates #hash and #== methods from all fields

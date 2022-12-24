@@ -100,46 +100,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(installments : Stripe::CheckoutCardInstallmentsOptions?)
-      if installments.nil?
-        return @installments = nil
+    def installments=(new_value : Stripe::CheckoutCardInstallmentsOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _installments = installments.not_nil!
-      _installments.validate if _installments.is_a?(OpenApi::Validatable)
-      @installments = _installments
+
+      @installments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix_kana Object to be assigned
-    def statement_descriptor_suffix_kana=(statement_descriptor_suffix_kana : String?)
-      if statement_descriptor_suffix_kana.nil?
-        return @statement_descriptor_suffix_kana = nil
+    def statement_descriptor_suffix_kana=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kana", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
       end
-      _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
-      @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
+
+      @statement_descriptor_suffix_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix_kanji Object to be assigned
-    def statement_descriptor_suffix_kanji=(statement_descriptor_suffix_kanji : String?)
-      if statement_descriptor_suffix_kanji.nil?
-        return @statement_descriptor_suffix_kanji = nil
+    def statement_descriptor_suffix_kanji=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kanji", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
       end
-      _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
-      @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji
+
+      @statement_descriptor_suffix_kanji = new_value
     end
 
     # Generates #hash and #== methods from all fields

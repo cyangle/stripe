@@ -54,12 +54,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] countries Object to be assigned
-    def countries=(countries : Array(String)?)
-      if countries.nil?
-        raise ArgumentError.new("\"countries\" is required and cannot be null")
-      end
-      _countries = countries.not_nil!
-      @countries = _countries
+    def countries=(new_value : Array(String)?)
+      raise ArgumentError.new("\"countries\" is required and cannot be null") if new_value.nil?
+
+      @countries = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -54,12 +54,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_gte Object to be assigned
-    def usage_gte=(usage_gte : Int64?)
-      if usage_gte.nil?
-        raise ArgumentError.new("\"usage_gte\" is required and cannot be null")
-      end
-      _usage_gte = usage_gte.not_nil!
-      @usage_gte = _usage_gte
+    def usage_gte=(new_value : Int64?)
+      raise ArgumentError.new("\"usage_gte\" is required and cannot be null") if new_value.nil?
+
+      @usage_gte = new_value
     end
 
     # Generates #hash and #== methods from all fields

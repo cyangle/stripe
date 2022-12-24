@@ -66,32 +66,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fixed_amounts Object to be assigned
-    def fixed_amounts=(fixed_amounts : Array(Int32)?)
-      if fixed_amounts.nil?
-        return @fixed_amounts = nil
-      end
-      _fixed_amounts = fixed_amounts.not_nil!
-      @fixed_amounts = _fixed_amounts
+    def fixed_amounts=(new_value : Array(Int32)?)
+      @fixed_amounts = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] percentages Object to be assigned
-    def percentages=(percentages : Array(Int32)?)
-      if percentages.nil?
-        return @percentages = nil
-      end
-      _percentages = percentages.not_nil!
-      @percentages = _percentages
+    def percentages=(new_value : Array(Int32)?)
+      @percentages = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] smart_tip_threshold Object to be assigned
-    def smart_tip_threshold=(smart_tip_threshold : Int64?)
-      if smart_tip_threshold.nil?
-        return @smart_tip_threshold = nil
-      end
-      _smart_tip_threshold = smart_tip_threshold.not_nil!
-      @smart_tip_threshold = _smart_tip_threshold
+    def smart_tip_threshold=(new_value : Int64?)
+      @smart_tip_threshold = new_value
     end
 
     # Generates #hash and #== methods from all fields

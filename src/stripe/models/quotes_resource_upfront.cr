@@ -93,44 +93,39 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_subtotal Object to be assigned
-    def amount_subtotal=(amount_subtotal : Int64?)
-      if amount_subtotal.nil?
-        raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null")
-      end
-      _amount_subtotal = amount_subtotal.not_nil!
-      @amount_subtotal = _amount_subtotal
+    def amount_subtotal=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null") if new_value.nil?
+
+      @amount_subtotal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_total Object to be assigned
-    def amount_total=(amount_total : Int64?)
-      if amount_total.nil?
-        raise ArgumentError.new("\"amount_total\" is required and cannot be null")
-      end
-      _amount_total = amount_total.not_nil!
-      @amount_total = _amount_total
+    def amount_total=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_total\" is required and cannot be null") if new_value.nil?
+
+      @amount_total = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] total_details Object to be assigned
-    def total_details=(total_details : Stripe::QuotesResourceTotalDetails?)
-      if total_details.nil?
-        raise ArgumentError.new("\"total_details\" is required and cannot be null")
+    def total_details=(new_value : Stripe::QuotesResourceTotalDetails?)
+      raise ArgumentError.new("\"total_details\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _total_details = total_details.not_nil!
-      _total_details.validate if _total_details.is_a?(OpenApi::Validatable)
-      @total_details = _total_details
+
+      @total_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Stripe::QuotesResourceListLineItems?)
-      if line_items.nil?
-        return @line_items = nil
+    def line_items=(new_value : Stripe::QuotesResourceListLineItems?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _line_items = line_items.not_nil!
-      _line_items.validate if _line_items.is_a?(OpenApi::Validatable)
-      @line_items = _line_items
+
+      @line_items = new_value
     end
 
     # Generates #hash and #== methods from all fields

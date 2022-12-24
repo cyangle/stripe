@@ -81,25 +81,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String?)
-      @code = code
+    def code=(new_value : String?)
+      @code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resolution Object to be assigned
-    def resolution=(resolution : String?)
-      @resolution = resolution
+    def resolution=(new_value : String?)
+      @resolution = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restriction Object to be assigned
-    def restriction=(restriction : String?)
-      if restriction.nil?
-        return @restriction = nil
+    def restriction=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("restriction", new_value, VALID_VALUES_FOR_RESTRICTION)
       end
-      _restriction = restriction.not_nil!
-      OpenApi::EnumValidator.validate("restriction", _restriction, VALID_VALUES_FOR_RESTRICTION)
-      @restriction = _restriction
+
+      @restriction = new_value
     end
 
     # Generates #hash and #== methods from all fields

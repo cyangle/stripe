@@ -54,12 +54,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        raise ArgumentError.new("\"return_url\" is required and cannot be null")
-      end
-      _return_url = return_url.not_nil!
-      @return_url = _return_url
+    def return_url=(new_value : String?)
+      raise ArgumentError.new("\"return_url\" is required and cannot be null") if new_value.nil?
+
+      @return_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

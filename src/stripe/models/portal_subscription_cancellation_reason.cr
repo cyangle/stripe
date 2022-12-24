@@ -73,23 +73,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] options Object to be assigned
-    def options=(options : Array(String)?)
-      if options.nil?
-        raise ArgumentError.new("\"options\" is required and cannot be null")
+    def options=(new_value : Array(String)?)
+      raise ArgumentError.new("\"options\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("options", new_value, VALID_VALUES_FOR_OPTIONS)
       end
-      _options = options.not_nil!
-      OpenApi::EnumValidator.validate("options", _options, VALID_VALUES_FOR_OPTIONS)
-      @options = _options
+
+      @options = new_value
     end
 
     # Generates #hash and #== methods from all fields

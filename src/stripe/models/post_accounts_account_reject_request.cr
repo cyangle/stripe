@@ -73,23 +73,19 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      if reason.nil?
-        raise ArgumentError.new("\"reason\" is required and cannot be null")
+    def reason=(new_value : String?)
+      raise ArgumentError.new("\"reason\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reason", new_value.to_s.size, MAX_LENGTH_FOR_REASON)
       end
-      _reason = reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
-      @reason = _reason
+
+      @reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

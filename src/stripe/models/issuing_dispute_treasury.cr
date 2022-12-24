@@ -86,24 +86,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_debit Object to be assigned
-    def received_debit=(received_debit : String?)
-      if received_debit.nil?
-        raise ArgumentError.new("\"received_debit\" is required and cannot be null")
+    def received_debit=(new_value : String?)
+      raise ArgumentError.new("\"received_debit\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("received_debit", new_value.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
       end
-      _received_debit = received_debit.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
-      @received_debit = _received_debit
+
+      @received_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] debit_reversal Object to be assigned
-    def debit_reversal=(debit_reversal : String?)
-      if debit_reversal.nil?
-        return @debit_reversal = nil
+    def debit_reversal=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("debit_reversal", new_value.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
       end
-      _debit_reversal = debit_reversal.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("debit_reversal", _debit_reversal.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
-      @debit_reversal = _debit_reversal
+
+      @debit_reversal = new_value
     end
 
     # Generates #hash and #== methods from all fields

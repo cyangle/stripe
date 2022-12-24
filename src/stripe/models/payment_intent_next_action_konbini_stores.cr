@@ -101,46 +101,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] familymart Object to be assigned
-    def familymart=(familymart : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart?)
-      if familymart.nil?
-        return @familymart = nil
+    def familymart=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _familymart = familymart.not_nil!
-      _familymart.validate if _familymart.is_a?(OpenApi::Validatable)
-      @familymart = _familymart
+
+      @familymart = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lawson Object to be assigned
-    def lawson=(lawson : Stripe::PaymentIntentNextActionKonbiniStoresLawson?)
-      if lawson.nil?
-        return @lawson = nil
+    def lawson=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresLawson?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _lawson = lawson.not_nil!
-      _lawson.validate if _lawson.is_a?(OpenApi::Validatable)
-      @lawson = _lawson
+
+      @lawson = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ministop Object to be assigned
-    def ministop=(ministop : Stripe::PaymentIntentNextActionKonbiniStoresMinistop?)
-      if ministop.nil?
-        return @ministop = nil
+    def ministop=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresMinistop?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _ministop = ministop.not_nil!
-      _ministop.validate if _ministop.is_a?(OpenApi::Validatable)
-      @ministop = _ministop
+
+      @ministop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] seicomart Object to be assigned
-    def seicomart=(seicomart : Stripe::PaymentIntentNextActionKonbiniStoresSeicomart?)
-      if seicomart.nil?
-        return @seicomart = nil
+    def seicomart=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresSeicomart?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _seicomart = seicomart.not_nil!
-      _seicomart.validate if _seicomart.is_a?(OpenApi::Validatable)
-      @seicomart = _seicomart
+
+      @seicomart = new_value
     end
 
     # Generates #hash and #== methods from all fields

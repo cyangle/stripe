@@ -81,40 +81,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] delay_days Object to be assigned
-    def delay_days=(delay_days : Stripe::TransferScheduleSpecsDelayDays?)
-      if delay_days.nil?
-        return @delay_days = nil
+    def delay_days=(new_value : Stripe::TransferScheduleSpecsDelayDays?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _delay_days = delay_days.not_nil!
-      _delay_days.validate if _delay_days.is_a?(OpenApi::Validatable)
-      @delay_days = _delay_days
+
+      @delay_days = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      @interval = interval
+    def interval=(new_value : String?)
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] monthly_anchor Object to be assigned
-    def monthly_anchor=(monthly_anchor : Int64?)
-      if monthly_anchor.nil?
-        return @monthly_anchor = nil
-      end
-      _monthly_anchor = monthly_anchor.not_nil!
-      @monthly_anchor = _monthly_anchor
+    def monthly_anchor=(new_value : Int64?)
+      @monthly_anchor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] weekly_anchor Object to be assigned
-    def weekly_anchor=(weekly_anchor : String?)
-      if weekly_anchor.nil?
-        return @weekly_anchor = nil
+    def weekly_anchor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("weekly_anchor", new_value, VALID_VALUES_FOR_WEEKLY_ANCHOR)
       end
-      _weekly_anchor = weekly_anchor.not_nil!
-      OpenApi::EnumValidator.validate("weekly_anchor", _weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
-      @weekly_anchor = _weekly_anchor
+
+      @weekly_anchor = new_value
     end
 
     # Generates #hash and #== methods from all fields

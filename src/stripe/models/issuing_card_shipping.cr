@@ -226,127 +226,113 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::Address?)
-      if address.nil?
-        raise ArgumentError.new("\"address\" is required and cannot be null")
+    def address=(new_value : Stripe::Address?)
+      raise ArgumentError.new("\"address\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address = address.not_nil!
-      _address.validate if _address.is_a?(OpenApi::Validatable)
-      @address = _address
+
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service Object to be assigned
-    def service=(service : String?)
-      @service = service
+    def service=(new_value : String?)
+      @service = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] carrier Object to be assigned
-    def carrier=(carrier : String?)
-      if carrier.nil?
-        return @carrier = nil
+    def carrier=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("carrier", new_value, VALID_VALUES_FOR_CARRIER)
       end
-      _carrier = carrier.not_nil!
-      OpenApi::EnumValidator.validate("carrier", _carrier, VALID_VALUES_FOR_CARRIER)
-      @carrier = _carrier
+
+      @carrier = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customs Object to be assigned
-    def customs=(customs : Stripe::IssuingCardShippingCustoms1?)
-      if customs.nil?
-        return @customs = nil
+    def customs=(new_value : Stripe::IssuingCardShippingCustoms1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customs = customs.not_nil!
-      _customs.validate if _customs.is_a?(OpenApi::Validatable)
-      @customs = _customs
+
+      @customs = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eta Object to be assigned
-    def eta=(eta : Int64?)
-      if eta.nil?
-        return @eta = nil
-      end
-      _eta = eta.not_nil!
-      @eta = _eta
+    def eta=(new_value : Int64?)
+      @eta = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone_number Object to be assigned
-    def phone_number=(phone_number : String?)
-      if phone_number.nil?
-        return @phone_number = nil
+    def phone_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("phone_number", new_value.to_s.size, MAX_LENGTH_FOR_PHONE_NUMBER)
       end
-      _phone_number = phone_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("phone_number", _phone_number.to_s.size, MAX_LENGTH_FOR_PHONE_NUMBER)
-      @phone_number = _phone_number
+
+      @phone_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] require_signature Object to be assigned
-    def require_signature=(require_signature : Bool?)
-      if require_signature.nil?
-        return @require_signature = nil
-      end
-      _require_signature = require_signature.not_nil!
-      @require_signature = _require_signature
+    def require_signature=(new_value : Bool?)
+      @require_signature = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        return @status = nil
+    def status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tracking_number Object to be assigned
-    def tracking_number=(tracking_number : String?)
-      if tracking_number.nil?
-        return @tracking_number = nil
+    def tracking_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("tracking_number", new_value.to_s.size, MAX_LENGTH_FOR_TRACKING_NUMBER)
       end
-      _tracking_number = tracking_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("tracking_number", _tracking_number.to_s.size, MAX_LENGTH_FOR_TRACKING_NUMBER)
-      @tracking_number = _tracking_number
+
+      @tracking_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tracking_url Object to be assigned
-    def tracking_url=(tracking_url : String?)
-      if tracking_url.nil?
-        return @tracking_url = nil
+    def tracking_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("tracking_url", new_value.to_s.size, MAX_LENGTH_FOR_TRACKING_URL)
       end
-      _tracking_url = tracking_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("tracking_url", _tracking_url.to_s.size, MAX_LENGTH_FOR_TRACKING_URL)
-      @tracking_url = _tracking_url
+
+      @tracking_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

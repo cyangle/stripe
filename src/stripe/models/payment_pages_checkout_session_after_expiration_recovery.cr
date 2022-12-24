@@ -94,43 +94,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allow_promotion_codes Object to be assigned
-    def allow_promotion_codes=(allow_promotion_codes : Bool?)
-      if allow_promotion_codes.nil?
-        raise ArgumentError.new("\"allow_promotion_codes\" is required and cannot be null")
-      end
-      _allow_promotion_codes = allow_promotion_codes.not_nil!
-      @allow_promotion_codes = _allow_promotion_codes
+    def allow_promotion_codes=(new_value : Bool?)
+      raise ArgumentError.new("\"allow_promotion_codes\" is required and cannot be null") if new_value.nil?
+
+      @allow_promotion_codes = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] url Object to be assigned
-    def url=(url : String?)
-      if url.nil?
-        return @url = nil
+    def url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("url", new_value.to_s.size, MAX_LENGTH_FOR_URL)
       end
-      _url = url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
-      @url = _url
+
+      @url = new_value
     end
 
     # Generates #hash and #== methods from all fields

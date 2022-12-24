@@ -71,32 +71,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash Object to be assigned
-    def cash=(cash : Hash(String, Int32)?)
-      if cash.nil?
-        raise ArgumentError.new("\"cash\" is required and cannot be null")
-      end
-      _cash = cash.not_nil!
-      @cash = _cash
+    def cash=(new_value : Hash(String, Int32)?)
+      raise ArgumentError.new("\"cash\" is required and cannot be null") if new_value.nil?
+
+      @cash = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_pending Object to be assigned
-    def inbound_pending=(inbound_pending : Hash(String, Int32)?)
-      if inbound_pending.nil?
-        raise ArgumentError.new("\"inbound_pending\" is required and cannot be null")
-      end
-      _inbound_pending = inbound_pending.not_nil!
-      @inbound_pending = _inbound_pending
+    def inbound_pending=(new_value : Hash(String, Int32)?)
+      raise ArgumentError.new("\"inbound_pending\" is required and cannot be null") if new_value.nil?
+
+      @inbound_pending = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_pending Object to be assigned
-    def outbound_pending=(outbound_pending : Hash(String, Int32)?)
-      if outbound_pending.nil?
-        raise ArgumentError.new("\"outbound_pending\" is required and cannot be null")
-      end
-      _outbound_pending = outbound_pending.not_nil!
-      @outbound_pending = _outbound_pending
+    def outbound_pending=(new_value : Hash(String, Int32)?)
+      raise ArgumentError.new("\"outbound_pending\" is required and cannot be null") if new_value.nil?
+
+      @outbound_pending = new_value
     end
 
     # Generates #hash and #== methods from all fields

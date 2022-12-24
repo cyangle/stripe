@@ -107,57 +107,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::BbposWisePoseSplashscreen?)
-      if additional_documentation.nil?
-        return @additional_documentation = nil
+    def additional_documentation=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _additional_documentation = additional_documentation.not_nil!
-      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
-      @additional_documentation = _additional_documentation
+
+      @additional_documentation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expected_at Object to be assigned
-    def expected_at=(expected_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
-      if expected_at.nil?
-        return @expected_at = nil
+    def expected_at=(new_value : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _expected_at = expected_at.not_nil!
-      _expected_at.validate if _expected_at.is_a?(OpenApi::Validatable)
-      @expected_at = _expected_at
+
+      @expected_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(explanation : String?)
-      if explanation.nil?
-        return @explanation = nil
+    def explanation=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("explanation", new_value.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       end
-      _explanation = explanation.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
-      @explanation = _explanation
+
+      @explanation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product_description Object to be assigned
-    def product_description=(product_description : String?)
-      if product_description.nil?
-        return @product_description = nil
+    def product_description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("product_description", new_value.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       end
-      _product_description = product_description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
-      @product_description = _product_description
+
+      @product_description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product_type Object to be assigned
-    def product_type=(product_type : String?)
-      if product_type.nil?
-        return @product_type = nil
+    def product_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("product_type", new_value, VALID_VALUES_FOR_PRODUCT_TYPE)
       end
-      _product_type = product_type.not_nil!
-      OpenApi::EnumValidator.validate("product_type", _product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
-      @product_type = _product_type
+
+      @product_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

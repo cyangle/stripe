@@ -110,68 +110,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_update Object to be assigned
-    def customer_update=(customer_update : Stripe::CustomerUpdateUpdatingParam?)
-      if customer_update.nil?
-        return @customer_update = nil
+    def customer_update=(new_value : Stripe::CustomerUpdateUpdatingParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customer_update = customer_update.not_nil!
-      _customer_update.validate if _customer_update.is_a?(OpenApi::Validatable)
-      @customer_update = _customer_update
+
+      @customer_update = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_history Object to be assigned
-    def invoice_history=(invoice_history : Stripe::InvoiceListParam?)
-      if invoice_history.nil?
-        return @invoice_history = nil
+    def invoice_history=(new_value : Stripe::InvoiceListParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _invoice_history = invoice_history.not_nil!
-      _invoice_history.validate if _invoice_history.is_a?(OpenApi::Validatable)
-      @invoice_history = _invoice_history
+
+      @invoice_history = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_update Object to be assigned
-    def payment_method_update=(payment_method_update : Stripe::PaymentMethodUpdateParam?)
-      if payment_method_update.nil?
-        return @payment_method_update = nil
+    def payment_method_update=(new_value : Stripe::PaymentMethodUpdateParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_method_update = payment_method_update.not_nil!
-      _payment_method_update.validate if _payment_method_update.is_a?(OpenApi::Validatable)
-      @payment_method_update = _payment_method_update
+
+      @payment_method_update = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_cancel Object to be assigned
-    def subscription_cancel=(subscription_cancel : Stripe::SubscriptionCancelUpdatingParam?)
-      if subscription_cancel.nil?
-        return @subscription_cancel = nil
+    def subscription_cancel=(new_value : Stripe::SubscriptionCancelUpdatingParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _subscription_cancel = subscription_cancel.not_nil!
-      _subscription_cancel.validate if _subscription_cancel.is_a?(OpenApi::Validatable)
-      @subscription_cancel = _subscription_cancel
+
+      @subscription_cancel = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_pause Object to be assigned
-    def subscription_pause=(subscription_pause : Stripe::SubscriptionPauseParam?)
-      if subscription_pause.nil?
-        return @subscription_pause = nil
+    def subscription_pause=(new_value : Stripe::SubscriptionPauseParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _subscription_pause = subscription_pause.not_nil!
-      _subscription_pause.validate if _subscription_pause.is_a?(OpenApi::Validatable)
-      @subscription_pause = _subscription_pause
+
+      @subscription_pause = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_update Object to be assigned
-    def subscription_update=(subscription_update : Stripe::SubscriptionUpdateUpdatingParam?)
-      if subscription_update.nil?
-        return @subscription_update = nil
+    def subscription_update=(new_value : Stripe::SubscriptionUpdateUpdatingParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _subscription_update = subscription_update.not_nil!
-      _subscription_update.validate if _subscription_update.is_a?(OpenApi::Validatable)
-      @subscription_update = _subscription_update
+
+      @subscription_update = new_value
     end
 
     # Generates #hash and #== methods from all fields

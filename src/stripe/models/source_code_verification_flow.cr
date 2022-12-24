@@ -74,23 +74,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] attempts_remaining Object to be assigned
-    def attempts_remaining=(attempts_remaining : Int64?)
-      if attempts_remaining.nil?
-        raise ArgumentError.new("\"attempts_remaining\" is required and cannot be null")
-      end
-      _attempts_remaining = attempts_remaining.not_nil!
-      @attempts_remaining = _attempts_remaining
+    def attempts_remaining=(new_value : Int64?)
+      raise ArgumentError.new("\"attempts_remaining\" is required and cannot be null") if new_value.nil?
+
+      @attempts_remaining = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
+    def status=(new_value : String?)
+      raise ArgumentError.new("\"status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("status", new_value.to_s.size, MAX_LENGTH_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -56,13 +56,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tip Object to be assigned
-    def tip=(tip : Stripe::PaymentFlowsAmountDetailsResourceTip?)
-      if tip.nil?
-        return @tip = nil
+    def tip=(new_value : Stripe::PaymentFlowsAmountDetailsResourceTip?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tip = tip.not_nil!
-      _tip.validate if _tip.is_a?(OpenApi::Validatable)
-      @tip = _tip
+
+      @tip = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -87,35 +87,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_transfer Object to be assigned
-    def bank_transfer=(bank_transfer : Stripe::PaymentMethodOptionsCustomerBalanceBankTransfer?)
-      if bank_transfer.nil?
-        return @bank_transfer = nil
+    def bank_transfer=(new_value : Stripe::PaymentMethodOptionsCustomerBalanceBankTransfer?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bank_transfer = bank_transfer.not_nil!
-      _bank_transfer.validate if _bank_transfer.is_a?(OpenApi::Validatable)
-      @bank_transfer = _bank_transfer
+
+      @bank_transfer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding_type Object to be assigned
-    def funding_type=(funding_type : String?)
-      if funding_type.nil?
-        return @funding_type = nil
+    def funding_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("funding_type", new_value, VALID_VALUES_FOR_FUNDING_TYPE)
       end
-      _funding_type = funding_type.not_nil!
-      OpenApi::EnumValidator.validate("funding_type", _funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
-      @funding_type = _funding_type
+
+      @funding_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

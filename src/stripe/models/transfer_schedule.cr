@@ -98,44 +98,37 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] delay_days Object to be assigned
-    def delay_days=(delay_days : Int64?)
-      if delay_days.nil?
-        raise ArgumentError.new("\"delay_days\" is required and cannot be null")
-      end
-      _delay_days = delay_days.not_nil!
-      @delay_days = _delay_days
+    def delay_days=(new_value : Int64?)
+      raise ArgumentError.new("\"delay_days\" is required and cannot be null") if new_value.nil?
+
+      @delay_days = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        raise ArgumentError.new("\"interval\" is required and cannot be null")
+    def interval=(new_value : String?)
+      raise ArgumentError.new("\"interval\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("interval", new_value.to_s.size, MAX_LENGTH_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("interval", _interval.to_s.size, MAX_LENGTH_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] monthly_anchor Object to be assigned
-    def monthly_anchor=(monthly_anchor : Int64?)
-      if monthly_anchor.nil?
-        return @monthly_anchor = nil
-      end
-      _monthly_anchor = monthly_anchor.not_nil!
-      @monthly_anchor = _monthly_anchor
+    def monthly_anchor=(new_value : Int64?)
+      @monthly_anchor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] weekly_anchor Object to be assigned
-    def weekly_anchor=(weekly_anchor : String?)
-      if weekly_anchor.nil?
-        return @weekly_anchor = nil
+    def weekly_anchor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("weekly_anchor", new_value.to_s.size, MAX_LENGTH_FOR_WEEKLY_ANCHOR)
       end
-      _weekly_anchor = weekly_anchor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("weekly_anchor", _weekly_anchor.to_s.size, MAX_LENGTH_FOR_WEEKLY_ANCHOR)
-      @weekly_anchor = _weekly_anchor
+
+      @weekly_anchor = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -79,24 +79,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("_type", new_value.to_s.size, MAX_LENGTH_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_present Object to be assigned
-    def card_present=(card_present : Stripe::PaymentMethodDetailsCardPresent?)
-      if card_present.nil?
-        return @card_present2 = nil
+    def card_present=(new_value : Stripe::PaymentMethodDetailsCardPresent?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card_present = card_present.not_nil!
-      _card_present.validate if _card_present.is_a?(OpenApi::Validatable)
-      @card_present2 = _card_present
+
+      @card_present2 = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -60,42 +60,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] director Object to be assigned
-    def director=(director : Bool?)
-      if director.nil?
-        return @director = nil
-      end
-      _director = director.not_nil!
-      @director = _director
+    def director=(new_value : Bool?)
+      @director = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] executive Object to be assigned
-    def executive=(executive : Bool?)
-      if executive.nil?
-        return @executive = nil
-      end
-      _executive = executive.not_nil!
-      @executive = _executive
+    def executive=(new_value : Bool?)
+      @executive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owner Object to be assigned
-    def owner=(owner : Bool?)
-      if owner.nil?
-        return @owner = nil
-      end
-      _owner = owner.not_nil!
-      @owner = _owner
+    def owner=(new_value : Bool?)
+      @owner = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] representative Object to be assigned
-    def representative=(representative : Bool?)
-      if representative.nil?
-        return @representative = nil
-      end
-      _representative = representative.not_nil!
-      @representative = _representative
+    def representative=(new_value : Bool?)
+      @representative = new_value
     end
 
     # Generates #hash and #== methods from all fields

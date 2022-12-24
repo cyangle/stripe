@@ -115,46 +115,46 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_line1_check Object to be assigned
-    def address_line1_check=(address_line1_check : String?)
-      if address_line1_check.nil?
-        raise ArgumentError.new("\"address_line1_check\" is required and cannot be null")
+    def address_line1_check=(new_value : String?)
+      raise ArgumentError.new("\"address_line1_check\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("address_line1_check", new_value, VALID_VALUES_FOR_ADDRESS_LINE1_CHECK)
       end
-      _address_line1_check = address_line1_check.not_nil!
-      OpenApi::EnumValidator.validate("address_line1_check", _address_line1_check, VALID_VALUES_FOR_ADDRESS_LINE1_CHECK)
-      @address_line1_check = _address_line1_check
+
+      @address_line1_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_postal_code_check Object to be assigned
-    def address_postal_code_check=(address_postal_code_check : String?)
-      if address_postal_code_check.nil?
-        raise ArgumentError.new("\"address_postal_code_check\" is required and cannot be null")
+    def address_postal_code_check=(new_value : String?)
+      raise ArgumentError.new("\"address_postal_code_check\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("address_postal_code_check", new_value, VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK)
       end
-      _address_postal_code_check = address_postal_code_check.not_nil!
-      OpenApi::EnumValidator.validate("address_postal_code_check", _address_postal_code_check, VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK)
-      @address_postal_code_check = _address_postal_code_check
+
+      @address_postal_code_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_check Object to be assigned
-    def cvc_check=(cvc_check : String?)
-      if cvc_check.nil?
-        raise ArgumentError.new("\"cvc_check\" is required and cannot be null")
+    def cvc_check=(new_value : String?)
+      raise ArgumentError.new("\"cvc_check\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("cvc_check", new_value, VALID_VALUES_FOR_CVC_CHECK)
       end
-      _cvc_check = cvc_check.not_nil!
-      OpenApi::EnumValidator.validate("cvc_check", _cvc_check, VALID_VALUES_FOR_CVC_CHECK)
-      @cvc_check = _cvc_check
+
+      @cvc_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expiry_check Object to be assigned
-    def expiry_check=(expiry_check : String?)
-      if expiry_check.nil?
-        raise ArgumentError.new("\"expiry_check\" is required and cannot be null")
+    def expiry_check=(new_value : String?)
+      raise ArgumentError.new("\"expiry_check\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("expiry_check", new_value, VALID_VALUES_FOR_EXPIRY_CHECK)
       end
-      _expiry_check = expiry_check.not_nil!
-      OpenApi::EnumValidator.validate("expiry_check", _expiry_check, VALID_VALUES_FOR_EXPIRY_CHECK)
-      @expiry_check = _expiry_check
+
+      @expiry_check = new_value
     end
 
     # Generates #hash and #== methods from all fields

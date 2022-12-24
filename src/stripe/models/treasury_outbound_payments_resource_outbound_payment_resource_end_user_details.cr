@@ -77,23 +77,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] present Object to be assigned
-    def present=(present : Bool?)
-      if present.nil?
-        raise ArgumentError.new("\"present\" is required and cannot be null")
-      end
-      _present = present.not_nil!
-      @present = _present
+    def present=(new_value : Bool?)
+      raise ArgumentError.new("\"present\" is required and cannot be null") if new_value.nil?
+
+      @present = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(ip_address : String?)
-      if ip_address.nil?
-        return @ip_address = nil
+    def ip_address=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("ip_address", new_value.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       end
-      _ip_address = ip_address.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
-      @ip_address = _ip_address
+
+      @ip_address = new_value
     end
 
     # Generates #hash and #== methods from all fields

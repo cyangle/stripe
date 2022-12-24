@@ -141,78 +141,73 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available Object to be assigned
-    def available=(available : Array(Stripe::BalanceAmount)?)
-      if available.nil?
-        raise ArgumentError.new("\"available\" is required and cannot be null")
+    def available=(new_value : Array(Stripe::BalanceAmount)?)
+      raise ArgumentError.new("\"available\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _available = available.not_nil!
-      OpenApi::ContainerValidator.validate(container: _available) if _available.is_a?(Array)
-      @available = _available
+
+      @available = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending Object to be assigned
-    def pending=(pending : Array(Stripe::BalanceAmount)?)
-      if pending.nil?
-        raise ArgumentError.new("\"pending\" is required and cannot be null")
+    def pending=(new_value : Array(Stripe::BalanceAmount)?)
+      raise ArgumentError.new("\"pending\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _pending = pending.not_nil!
-      OpenApi::ContainerValidator.validate(container: _pending) if _pending.is_a?(Array)
-      @pending = _pending
+
+      @pending = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] connect_reserved Object to be assigned
-    def connect_reserved=(connect_reserved : Array(Stripe::BalanceAmount)?)
-      if connect_reserved.nil?
-        return @connect_reserved = nil
+    def connect_reserved=(new_value : Array(Stripe::BalanceAmount)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _connect_reserved = connect_reserved.not_nil!
-      OpenApi::ContainerValidator.validate(container: _connect_reserved) if _connect_reserved.is_a?(Array)
-      @connect_reserved = _connect_reserved
+
+      @connect_reserved = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] instant_available Object to be assigned
-    def instant_available=(instant_available : Array(Stripe::BalanceAmount)?)
-      if instant_available.nil?
-        return @instant_available = nil
+    def instant_available=(new_value : Array(Stripe::BalanceAmount)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _instant_available = instant_available.not_nil!
-      OpenApi::ContainerValidator.validate(container: _instant_available) if _instant_available.is_a?(Array)
-      @instant_available = _instant_available
+
+      @instant_available = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing Object to be assigned
-    def issuing=(issuing : Stripe::BalanceDetail?)
-      if issuing.nil?
-        return @issuing = nil
+    def issuing=(new_value : Stripe::BalanceDetail?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _issuing = issuing.not_nil!
-      _issuing.validate if _issuing.is_a?(OpenApi::Validatable)
-      @issuing = _issuing
+
+      @issuing = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -60,23 +60,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_updates Object to be assigned
-    def allowed_updates=(allowed_updates : Stripe::CustomerUpdateCreationParamAllowedUpdates?)
-      if allowed_updates.nil?
-        return @allowed_updates = nil
+    def allowed_updates=(new_value : Stripe::CustomerUpdateCreationParamAllowedUpdates?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _allowed_updates = allowed_updates.not_nil!
-      _allowed_updates.validate if _allowed_updates.is_a?(OpenApi::Validatable)
-      @allowed_updates = _allowed_updates
+
+      @allowed_updates = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        return @enabled = nil
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      @enabled = new_value
     end
 
     # Generates #hash and #== methods from all fields

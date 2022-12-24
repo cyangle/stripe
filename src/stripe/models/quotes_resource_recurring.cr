@@ -105,54 +105,48 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_subtotal Object to be assigned
-    def amount_subtotal=(amount_subtotal : Int64?)
-      if amount_subtotal.nil?
-        raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null")
-      end
-      _amount_subtotal = amount_subtotal.not_nil!
-      @amount_subtotal = _amount_subtotal
+    def amount_subtotal=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null") if new_value.nil?
+
+      @amount_subtotal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_total Object to be assigned
-    def amount_total=(amount_total : Int64?)
-      if amount_total.nil?
-        raise ArgumentError.new("\"amount_total\" is required and cannot be null")
-      end
-      _amount_total = amount_total.not_nil!
-      @amount_total = _amount_total
+    def amount_total=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_total\" is required and cannot be null") if new_value.nil?
+
+      @amount_total = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        raise ArgumentError.new("\"interval\" is required and cannot be null")
+    def interval=(new_value : String?)
+      raise ArgumentError.new("\"interval\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("interval", new_value, VALID_VALUES_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval_count Object to be assigned
-    def interval_count=(interval_count : Int64?)
-      if interval_count.nil?
-        raise ArgumentError.new("\"interval_count\" is required and cannot be null")
-      end
-      _interval_count = interval_count.not_nil!
-      @interval_count = _interval_count
+    def interval_count=(new_value : Int64?)
+      raise ArgumentError.new("\"interval_count\" is required and cannot be null") if new_value.nil?
+
+      @interval_count = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] total_details Object to be assigned
-    def total_details=(total_details : Stripe::QuotesResourceTotalDetails?)
-      if total_details.nil?
-        raise ArgumentError.new("\"total_details\" is required and cannot be null")
+    def total_details=(new_value : Stripe::QuotesResourceTotalDetails?)
+      raise ArgumentError.new("\"total_details\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _total_details = total_details.not_nil!
-      _total_details.validate if _total_details.is_a?(OpenApi::Validatable)
-      @total_details = _total_details
+
+      @total_details = new_value
     end
 
     # Generates #hash and #== methods from all fields

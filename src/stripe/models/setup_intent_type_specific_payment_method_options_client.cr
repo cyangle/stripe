@@ -52,8 +52,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method : String?)
-      @verification_method = verification_method
+    def verification_method=(new_value : String?)
+      @verification_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

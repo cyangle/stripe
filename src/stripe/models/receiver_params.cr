@@ -58,13 +58,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_attributes_method Object to be assigned
-    def refund_attributes_method=(refund_attributes_method : String?)
-      if refund_attributes_method.nil?
-        return @refund_attributes_method = nil
+    def refund_attributes_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("refund_attributes_method", new_value, VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)
       end
-      _refund_attributes_method = refund_attributes_method.not_nil!
-      OpenApi::EnumValidator.validate("refund_attributes_method", _refund_attributes_method, VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)
-      @refund_attributes_method = _refund_attributes_method
+
+      @refund_attributes_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

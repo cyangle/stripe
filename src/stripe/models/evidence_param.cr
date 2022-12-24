@@ -127,85 +127,78 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] canceled Object to be assigned
-    def canceled=(canceled : Stripe::EvidenceParamCanceled?)
-      if canceled.nil?
-        return @canceled = nil
+    def canceled=(new_value : Stripe::EvidenceParamCanceled?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _canceled = canceled.not_nil!
-      _canceled.validate if _canceled.is_a?(OpenApi::Validatable)
-      @canceled = _canceled
+
+      @canceled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] duplicate Object to be assigned
-    def duplicate=(duplicate : Stripe::EvidenceParamDuplicate?)
-      if duplicate.nil?
-        return @duplicate = nil
+    def duplicate=(new_value : Stripe::EvidenceParamDuplicate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _duplicate = duplicate.not_nil!
-      _duplicate.validate if _duplicate.is_a?(OpenApi::Validatable)
-      @duplicate = _duplicate
+
+      @duplicate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fraudulent Object to be assigned
-    def fraudulent=(fraudulent : Stripe::EvidenceParamFraudulent?)
-      if fraudulent.nil?
-        return @fraudulent = nil
+    def fraudulent=(new_value : Stripe::EvidenceParamFraudulent?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _fraudulent = fraudulent.not_nil!
-      _fraudulent.validate if _fraudulent.is_a?(OpenApi::Validatable)
-      @fraudulent = _fraudulent
+
+      @fraudulent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] merchandise_not_as_described Object to be assigned
-    def merchandise_not_as_described=(merchandise_not_as_described : Stripe::EvidenceParamMerchandiseNotAsDescribed?)
-      if merchandise_not_as_described.nil?
-        return @merchandise_not_as_described = nil
+    def merchandise_not_as_described=(new_value : Stripe::EvidenceParamMerchandiseNotAsDescribed?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _merchandise_not_as_described = merchandise_not_as_described.not_nil!
-      _merchandise_not_as_described.validate if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
-      @merchandise_not_as_described = _merchandise_not_as_described
+
+      @merchandise_not_as_described = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] not_received Object to be assigned
-    def not_received=(not_received : Stripe::EvidenceParamNotReceived?)
-      if not_received.nil?
-        return @not_received = nil
+    def not_received=(new_value : Stripe::EvidenceParamNotReceived?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _not_received = not_received.not_nil!
-      _not_received.validate if _not_received.is_a?(OpenApi::Validatable)
-      @not_received = _not_received
+
+      @not_received = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] other Object to be assigned
-    def other=(other : Stripe::EvidenceParamOther?)
-      if other.nil?
-        return @other = nil
+    def other=(new_value : Stripe::EvidenceParamOther?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _other = other.not_nil!
-      _other.validate if _other.is_a?(OpenApi::Validatable)
-      @other = _other
+
+      @other = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      @reason = reason
+    def reason=(new_value : String?)
+      @reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service_not_as_described Object to be assigned
-    def service_not_as_described=(service_not_as_described : Stripe::EvidenceParamServiceNotAsDescribed?)
-      if service_not_as_described.nil?
-        return @service_not_as_described = nil
+    def service_not_as_described=(new_value : Stripe::EvidenceParamServiceNotAsDescribed?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _service_not_as_described = service_not_as_described.not_nil!
-      _service_not_as_described.validate if _service_not_as_described.is_a?(OpenApi::Validatable)
-      @service_not_as_described = _service_not_as_described
+
+      @service_not_as_described = new_value
     end
 
     # Generates #hash and #== methods from all fields

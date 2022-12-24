@@ -88,34 +88,29 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(price : Stripe::SubscriptionScheduleAddInvoiceItemPrice?)
-      if price.nil?
-        raise ArgumentError.new("\"price\" is required and cannot be null")
+    def price=(new_value : Stripe::SubscriptionScheduleAddInvoiceItemPrice?)
+      raise ArgumentError.new("\"price\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _price = price.not_nil!
-      _price.validate if _price.is_a?(OpenApi::Validatable)
-      @price = _price
+
+      @price = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(tax_rates : Array(Stripe::TaxRate)?)
-      if tax_rates.nil?
-        return @tax_rates = nil
+    def tax_rates=(new_value : Array(Stripe::TaxRate)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _tax_rates = tax_rates.not_nil!
-      OpenApi::ContainerValidator.validate(container: _tax_rates) if _tax_rates.is_a?(Array)
-      @tax_rates = _tax_rates
+
+      @tax_rates = new_value
     end
 
     # Generates #hash and #== methods from all fields

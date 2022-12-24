@@ -80,35 +80,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] headline Object to be assigned
-    def headline=(headline : String?)
-      if headline.nil?
-        return @headline = nil
+    def headline=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("headline", new_value.to_s.size, MAX_LENGTH_FOR_HEADLINE)
       end
-      _headline = headline.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("headline", _headline.to_s.size, MAX_LENGTH_FOR_HEADLINE)
-      @headline = _headline
+
+      @headline = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] privacy_policy_url Object to be assigned
-    def privacy_policy_url=(privacy_policy_url : Stripe::BbposWisePoseSplashscreen?)
-      if privacy_policy_url.nil?
-        return @privacy_policy_url = nil
+    def privacy_policy_url=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _privacy_policy_url = privacy_policy_url.not_nil!
-      _privacy_policy_url.validate if _privacy_policy_url.is_a?(OpenApi::Validatable)
-      @privacy_policy_url = _privacy_policy_url
+
+      @privacy_policy_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terms_of_service_url Object to be assigned
-    def terms_of_service_url=(terms_of_service_url : Stripe::BbposWisePoseSplashscreen?)
-      if terms_of_service_url.nil?
-        return @terms_of_service_url = nil
+    def terms_of_service_url=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _terms_of_service_url = terms_of_service_url.not_nil!
-      _terms_of_service_url.validate if _terms_of_service_url.is_a?(OpenApi::Validatable)
-      @terms_of_service_url = _terms_of_service_url
+
+      @terms_of_service_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -149,68 +149,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credit_reversal Object to be assigned
-    def credit_reversal=(credit_reversal : String?)
-      if credit_reversal.nil?
-        return @credit_reversal = nil
+    def credit_reversal=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("credit_reversal", new_value.to_s.size, MAX_LENGTH_FOR_CREDIT_REVERSAL)
       end
-      _credit_reversal = credit_reversal.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("credit_reversal", _credit_reversal.to_s.size, MAX_LENGTH_FOR_CREDIT_REVERSAL)
-      @credit_reversal = _credit_reversal
+
+      @credit_reversal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing_authorization Object to be assigned
-    def issuing_authorization=(issuing_authorization : String?)
-      if issuing_authorization.nil?
-        return @issuing_authorization = nil
+    def issuing_authorization=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("issuing_authorization", new_value.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
       end
-      _issuing_authorization = issuing_authorization.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("issuing_authorization", _issuing_authorization.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
-      @issuing_authorization = _issuing_authorization
+
+      @issuing_authorization = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing_transaction Object to be assigned
-    def issuing_transaction=(issuing_transaction : String?)
-      if issuing_transaction.nil?
-        return @issuing_transaction = nil
+    def issuing_transaction=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("issuing_transaction", new_value.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
       end
-      _issuing_transaction = issuing_transaction.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("issuing_transaction", _issuing_transaction.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
-      @issuing_transaction = _issuing_transaction
+
+      @issuing_transaction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow Object to be assigned
-    def source_flow=(source_flow : String?)
-      if source_flow.nil?
-        return @source_flow = nil
+    def source_flow=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("source_flow", new_value.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW)
       end
-      _source_flow = source_flow.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("source_flow", _source_flow.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW)
-      @source_flow = _source_flow
+
+      @source_flow = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow_details Object to be assigned
-    def source_flow_details=(source_flow_details : Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails?)
-      if source_flow_details.nil?
-        return @source_flow_details = nil
+    def source_flow_details=(new_value : Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _source_flow_details = source_flow_details.not_nil!
-      _source_flow_details.validate if _source_flow_details.is_a?(OpenApi::Validatable)
-      @source_flow_details = _source_flow_details
+
+      @source_flow_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow_type Object to be assigned
-    def source_flow_type=(source_flow_type : String?)
-      if source_flow_type.nil?
-        return @source_flow_type = nil
+    def source_flow_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("source_flow_type", new_value.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW_TYPE)
       end
-      _source_flow_type = source_flow_type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("source_flow_type", _source_flow_type.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW_TYPE)
-      @source_flow_type = _source_flow_type
+
+      @source_flow_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

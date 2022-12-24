@@ -93,72 +93,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_code Object to be assigned
-    def bank_code=(bank_code : String?)
-      if bank_code.nil?
-        return @bank_code = nil
-      end
-      _bank_code = bank_code.not_nil!
-      @bank_code = _bank_code
+    def bank_code=(new_value : String?)
+      @bank_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] branch_code Object to be assigned
-    def branch_code=(branch_code : String?)
-      if branch_code.nil?
-        return @branch_code = nil
-      end
-      _branch_code = branch_code.not_nil!
-      @branch_code = _branch_code
+    def branch_code=(new_value : String?)
+      @branch_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
-      end
-      _country = country.not_nil!
-      @country = _country
+    def country=(new_value : String?)
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
-      end
-      _fingerprint = fingerprint.not_nil!
-      @fingerprint = _fingerprint
+    def fingerprint=(new_value : String?)
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
-      end
-      _last4 = last4.not_nil!
-      @last4 = _last4
+    def last4=(new_value : String?)
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_reference Object to be assigned
-    def mandate_reference=(mandate_reference : String?)
-      if mandate_reference.nil?
-        return @mandate_reference = nil
-      end
-      _mandate_reference = mandate_reference.not_nil!
-      @mandate_reference = _mandate_reference
+    def mandate_reference=(new_value : String?)
+      @mandate_reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_url Object to be assigned
-    def mandate_url=(mandate_url : String?)
-      if mandate_url.nil?
-        return @mandate_url = nil
-      end
-      _mandate_url = mandate_url.not_nil!
-      @mandate_url = _mandate_url
+    def mandate_url=(new_value : String?)
+      @mandate_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

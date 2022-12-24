@@ -70,23 +70,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_amount Object to be assigned
-    def shipping_amount=(shipping_amount : Int64?)
-      if shipping_amount.nil?
-        raise ArgumentError.new("\"shipping_amount\" is required and cannot be null")
-      end
-      _shipping_amount = shipping_amount.not_nil!
-      @shipping_amount = _shipping_amount
+    def shipping_amount=(new_value : Int64?)
+      raise ArgumentError.new("\"shipping_amount\" is required and cannot be null") if new_value.nil?
+
+      @shipping_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_rate Object to be assigned
-    def shipping_rate=(shipping_rate : Stripe::PaymentPagesCheckoutSessionShippingOptionShippingRate?)
-      if shipping_rate.nil?
-        raise ArgumentError.new("\"shipping_rate\" is required and cannot be null")
+    def shipping_rate=(new_value : Stripe::PaymentPagesCheckoutSessionShippingOptionShippingRate?)
+      raise ArgumentError.new("\"shipping_rate\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping_rate = shipping_rate.not_nil!
-      _shipping_rate.validate if _shipping_rate.is_a?(OpenApi::Validatable)
-      @shipping_rate = _shipping_rate
+
+      @shipping_rate = new_value
     end
 
     # Generates #hash and #== methods from all fields

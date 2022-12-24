@@ -82,30 +82,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aba Object to be assigned
-    def aba=(aba : Stripe::TreasuryFinancialAccountsResourceAbaRecord?)
-      if aba.nil?
-        return @aba = nil
+    def aba=(new_value : Stripe::TreasuryFinancialAccountsResourceAbaRecord?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _aba = aba.not_nil!
-      _aba.validate if _aba.is_a?(OpenApi::Validatable)
-      @aba = _aba
+
+      @aba = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_networks Object to be assigned
-    def supported_networks=(supported_networks : Array(String)?)
-      if supported_networks.nil?
-        return @supported_networks = nil
+    def supported_networks=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("supported_networks", new_value, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
       end
-      _supported_networks = supported_networks.not_nil!
-      OpenApi::EnumValidator.validate("supported_networks", _supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
-      @supported_networks = _supported_networks
+
+      @supported_networks = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -59,32 +59,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prepay_id Object to be assigned
-    def prepay_id=(prepay_id : String?)
-      if prepay_id.nil?
-        return @prepay_id = nil
-      end
-      _prepay_id = prepay_id.not_nil!
-      @prepay_id = _prepay_id
+    def prepay_id=(new_value : String?)
+      @prepay_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] qr_code_url Object to be assigned
-    def qr_code_url=(qr_code_url : String?)
-      if qr_code_url.nil?
-        return @qr_code_url = nil
-      end
-      _qr_code_url = qr_code_url.not_nil!
-      @qr_code_url = _qr_code_url
+    def qr_code_url=(new_value : String?)
+      @qr_code_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
-      end
-      _statement_descriptor = statement_descriptor.not_nil!
-      @statement_descriptor = _statement_descriptor
+    def statement_descriptor=(new_value : String?)
+      @statement_descriptor = new_value
     end
 
     # Generates #hash and #== methods from all fields

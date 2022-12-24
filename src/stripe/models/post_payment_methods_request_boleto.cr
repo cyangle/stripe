@@ -64,13 +64,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_id Object to be assigned
-    def tax_id=(tax_id : String?)
-      if tax_id.nil?
-        raise ArgumentError.new("\"tax_id\" is required and cannot be null")
+    def tax_id=(new_value : String?)
+      raise ArgumentError.new("\"tax_id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("tax_id", new_value.to_s.size, MAX_LENGTH_FOR_TAX_ID)
       end
-      _tax_id = tax_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("tax_id", _tax_id.to_s.size, MAX_LENGTH_FOR_TAX_ID)
-      @tax_id = _tax_id
+
+      @tax_id = new_value
     end
 
     # Generates #hash and #== methods from all fields

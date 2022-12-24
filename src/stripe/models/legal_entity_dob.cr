@@ -69,32 +69,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] day Object to be assigned
-    def day=(day : Int64?)
-      if day.nil?
-        return @day = nil
-      end
-      _day = day.not_nil!
-      @day = _day
+    def day=(new_value : Int64?)
+      @day = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] month Object to be assigned
-    def month=(month : Int64?)
-      if month.nil?
-        return @month = nil
-      end
-      _month = month.not_nil!
-      @month = _month
+    def month=(new_value : Int64?)
+      @month = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] year Object to be assigned
-    def year=(year : Int64?)
-      if year.nil?
-        return @year = nil
-      end
-      _year = year.not_nil!
-      @year = _year
+    def year=(new_value : Int64?)
+      @year = new_value
     end
 
     # Generates #hash and #== methods from all fields

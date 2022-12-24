@@ -69,25 +69,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::SetupIntentMandateOptionsParam?)
-      if mandate_options.nil?
-        return @mandate_options = nil
+    def mandate_options=(new_value : Stripe::SetupIntentMandateOptionsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _mandate_options = mandate_options.not_nil!
-      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
-      @mandate_options = _mandate_options
+
+      @mandate_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network : String?)
-      @network = network
+    def network=(new_value : String?)
+      @network = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
-    def request_three_d_secure=(request_three_d_secure : String?)
-      @request_three_d_secure = request_three_d_secure
+    def request_three_d_secure=(new_value : String?)
+      @request_three_d_secure = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -96,44 +96,39 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_month Object to be assigned
-    def exp_month=(exp_month : Int64?)
-      if exp_month.nil?
-        raise ArgumentError.new("\"exp_month\" is required and cannot be null")
-      end
-      _exp_month = exp_month.not_nil!
-      @exp_month = _exp_month
+    def exp_month=(new_value : Int64?)
+      raise ArgumentError.new("\"exp_month\" is required and cannot be null") if new_value.nil?
+
+      @exp_month = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_year Object to be assigned
-    def exp_year=(exp_year : Int64?)
-      if exp_year.nil?
-        raise ArgumentError.new("\"exp_year\" is required and cannot be null")
-      end
-      _exp_year = exp_year.not_nil!
-      @exp_year = _exp_year
+    def exp_year=(new_value : Int64?)
+      raise ArgumentError.new("\"exp_year\" is required and cannot be null") if new_value.nil?
+
+      @exp_year = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] number Object to be assigned
-    def number=(number : String?)
-      if number.nil?
-        raise ArgumentError.new("\"number\" is required and cannot be null")
+    def number=(new_value : String?)
+      raise ArgumentError.new("\"number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("number", new_value.to_s.size, MAX_LENGTH_FOR_NUMBER)
       end
-      _number = number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
-      @number = _number
+
+      @number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc Object to be assigned
-    def cvc=(cvc : String?)
-      if cvc.nil?
-        return @cvc = nil
+    def cvc=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cvc", new_value.to_s.size, MAX_LENGTH_FOR_CVC)
       end
-      _cvc = cvc.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
-      @cvc = _cvc
+
+      @cvc = new_value
     end
 
     # Generates #hash and #== methods from all fields

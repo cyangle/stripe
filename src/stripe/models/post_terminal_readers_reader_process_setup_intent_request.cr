@@ -82,33 +82,27 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_consent_collected Object to be assigned
-    def customer_consent_collected=(customer_consent_collected : Bool?)
-      if customer_consent_collected.nil?
-        raise ArgumentError.new("\"customer_consent_collected\" is required and cannot be null")
-      end
-      _customer_consent_collected = customer_consent_collected.not_nil!
-      @customer_consent_collected = _customer_consent_collected
+    def customer_consent_collected=(new_value : Bool?)
+      raise ArgumentError.new("\"customer_consent_collected\" is required and cannot be null") if new_value.nil?
+
+      @customer_consent_collected = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_intent Object to be assigned
-    def setup_intent=(setup_intent : String?)
-      if setup_intent.nil?
-        raise ArgumentError.new("\"setup_intent\" is required and cannot be null")
+    def setup_intent=(new_value : String?)
+      raise ArgumentError.new("\"setup_intent\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("setup_intent", new_value.to_s.size, MAX_LENGTH_FOR_SETUP_INTENT)
       end
-      _setup_intent = setup_intent.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("setup_intent", _setup_intent.to_s.size, MAX_LENGTH_FOR_SETUP_INTENT)
-      @setup_intent = _setup_intent
+
+      @setup_intent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

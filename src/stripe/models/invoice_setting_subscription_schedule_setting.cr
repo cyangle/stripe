@@ -53,12 +53,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] days_until_due Object to be assigned
-    def days_until_due=(days_until_due : Int64?)
-      if days_until_due.nil?
-        return @days_until_due = nil
-      end
-      _days_until_due = days_until_due.not_nil!
-      @days_until_due = _days_until_due
+    def days_until_due=(new_value : Int64?)
+      @days_until_due = new_value
     end
 
     # Generates #hash and #== methods from all fields

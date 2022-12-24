@@ -56,12 +56,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_off Object to be assigned
-    def amount_off=(amount_off : Int64?)
-      if amount_off.nil?
-        raise ArgumentError.new("\"amount_off\" is required and cannot be null")
-      end
-      _amount_off = amount_off.not_nil!
-      @amount_off = _amount_off
+    def amount_off=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_off\" is required and cannot be null") if new_value.nil?
+
+      @amount_off = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -64,13 +64,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reasons Object to be assigned
-    def reasons=(reasons : Array(String)?)
-      if reasons.nil?
-        raise ArgumentError.new("\"reasons\" is required and cannot be null")
+    def reasons=(new_value : Array(String)?)
+      raise ArgumentError.new("\"reasons\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("reasons", new_value, VALID_VALUES_FOR_REASONS)
       end
-      _reasons = reasons.not_nil!
-      OpenApi::EnumValidator.validate("reasons", _reasons, VALID_VALUES_FOR_REASONS)
-      @reasons = _reasons
+
+      @reasons = new_value
     end
 
     # Generates #hash and #== methods from all fields

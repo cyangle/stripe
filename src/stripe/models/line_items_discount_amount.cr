@@ -70,23 +70,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discount Object to be assigned
-    def discount=(discount : Stripe::Discount?)
-      if discount.nil?
-        raise ArgumentError.new("\"discount\" is required and cannot be null")
+    def discount=(new_value : Stripe::Discount?)
+      raise ArgumentError.new("\"discount\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _discount = discount.not_nil!
-      _discount.validate if _discount.is_a?(OpenApi::Validatable)
-      @discount = _discount
+
+      @discount = new_value
     end
 
     # Generates #hash and #== methods from all fields

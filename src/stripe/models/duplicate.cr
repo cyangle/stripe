@@ -116,68 +116,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::BbposWisePoseSplashscreen?)
-      if additional_documentation.nil?
-        return @additional_documentation = nil
+    def additional_documentation=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _additional_documentation = additional_documentation.not_nil!
-      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
-      @additional_documentation = _additional_documentation
+
+      @additional_documentation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_statement Object to be assigned
-    def card_statement=(card_statement : Stripe::BbposWisePoseSplashscreen?)
-      if card_statement.nil?
-        return @card_statement = nil
+    def card_statement=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card_statement = card_statement.not_nil!
-      _card_statement.validate if _card_statement.is_a?(OpenApi::Validatable)
-      @card_statement = _card_statement
+
+      @card_statement = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash_receipt Object to be assigned
-    def cash_receipt=(cash_receipt : Stripe::BbposWisePoseSplashscreen?)
-      if cash_receipt.nil?
-        return @cash_receipt = nil
+    def cash_receipt=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cash_receipt = cash_receipt.not_nil!
-      _cash_receipt.validate if _cash_receipt.is_a?(OpenApi::Validatable)
-      @cash_receipt = _cash_receipt
+
+      @cash_receipt = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] check_image Object to be assigned
-    def check_image=(check_image : Stripe::BbposWisePoseSplashscreen?)
-      if check_image.nil?
-        return @check_image = nil
+    def check_image=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _check_image = check_image.not_nil!
-      _check_image.validate if _check_image.is_a?(OpenApi::Validatable)
-      @check_image = _check_image
+
+      @check_image = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(explanation : String?)
-      if explanation.nil?
-        return @explanation = nil
+    def explanation=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("explanation", new_value.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       end
-      _explanation = explanation.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
-      @explanation = _explanation
+
+      @explanation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] original_transaction Object to be assigned
-    def original_transaction=(original_transaction : String?)
-      if original_transaction.nil?
-        return @original_transaction = nil
+    def original_transaction=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("original_transaction", new_value.to_s.size, MAX_LENGTH_FOR_ORIGINAL_TRANSACTION)
       end
-      _original_transaction = original_transaction.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("original_transaction", _original_transaction.to_s.size, MAX_LENGTH_FOR_ORIGINAL_TRANSACTION)
-      @original_transaction = _original_transaction
+
+      @original_transaction = new_value
     end
 
     # Generates #hash and #== methods from all fields

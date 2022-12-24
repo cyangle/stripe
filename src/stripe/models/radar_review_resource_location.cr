@@ -116,55 +116,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] city Object to be assigned
-    def city=(city : String?)
-      if city.nil?
-        return @city = nil
+    def city=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("city", new_value.to_s.size, MAX_LENGTH_FOR_CITY)
       end
-      _city = city.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
-      @city = _city
+
+      @city = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
+    def country=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("country", new_value.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       end
-      _country = country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-      @country = _country
+
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] latitude Object to be assigned
-    def latitude=(latitude : Float64?)
-      if latitude.nil?
-        return @latitude = nil
-      end
-      _latitude = latitude.not_nil!
-      @latitude = _latitude
+    def latitude=(new_value : Float64?)
+      @latitude = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] longitude Object to be assigned
-    def longitude=(longitude : Float64?)
-      if longitude.nil?
-        return @longitude = nil
-      end
-      _longitude = longitude.not_nil!
-      @longitude = _longitude
+    def longitude=(new_value : Float64?)
+      @longitude = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] region Object to be assigned
-    def region=(region : String?)
-      if region.nil?
-        return @region = nil
+    def region=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("region", new_value.to_s.size, MAX_LENGTH_FOR_REGION)
       end
-      _region = region.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("region", _region.to_s.size, MAX_LENGTH_FOR_REGION)
-      @region = _region
+
+      @region = new_value
     end
 
     # Generates #hash and #== methods from all fields

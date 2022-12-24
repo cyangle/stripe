@@ -72,33 +72,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] create Object to be assigned
-    def create=(create : Bool?)
-      if create.nil?
-        raise ArgumentError.new("\"create\" is required and cannot be null")
-      end
-      _create = create.not_nil!
-      @create = _create
+    def create=(new_value : Bool?)
+      raise ArgumentError.new("\"create\" is required and cannot be null") if new_value.nil?
+
+      @create = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::FileLinkCreationParamsMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

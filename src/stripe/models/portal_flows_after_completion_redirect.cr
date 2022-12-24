@@ -65,13 +65,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        raise ArgumentError.new("\"return_url\" is required and cannot be null")
+    def return_url=(new_value : String?)
+      raise ArgumentError.new("\"return_url\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("return_url", new_value.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       end
-      _return_url = return_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
-      @return_url = _return_url
+
+      @return_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

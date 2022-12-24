@@ -68,33 +68,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] directive Object to be assigned
-    def directive=(directive : String?)
-      if directive.nil?
-        return @directive = nil
+    def directive=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("directive", new_value.to_s.size, MAX_LENGTH_FOR_DIRECTIVE)
       end
-      _directive = directive.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("directive", _directive.to_s.size, MAX_LENGTH_FOR_DIRECTIVE)
-      @directive = _directive
+
+      @directive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

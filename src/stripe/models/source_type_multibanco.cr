@@ -114,102 +114,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity Object to be assigned
-    def entity=(entity : String?)
-      if entity.nil?
-        return @entity = nil
-      end
-      _entity = entity.not_nil!
-      @entity = _entity
+    def entity=(new_value : String?)
+      @entity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
-      end
-      _reference = reference.not_nil!
-      @reference = _reference
+    def reference=(new_value : String?)
+      @reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_address_city Object to be assigned
-    def refund_account_holder_address_city=(refund_account_holder_address_city : String?)
-      if refund_account_holder_address_city.nil?
-        return @refund_account_holder_address_city = nil
-      end
-      _refund_account_holder_address_city = refund_account_holder_address_city.not_nil!
-      @refund_account_holder_address_city = _refund_account_holder_address_city
+    def refund_account_holder_address_city=(new_value : String?)
+      @refund_account_holder_address_city = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_address_country Object to be assigned
-    def refund_account_holder_address_country=(refund_account_holder_address_country : String?)
-      if refund_account_holder_address_country.nil?
-        return @refund_account_holder_address_country = nil
-      end
-      _refund_account_holder_address_country = refund_account_holder_address_country.not_nil!
-      @refund_account_holder_address_country = _refund_account_holder_address_country
+    def refund_account_holder_address_country=(new_value : String?)
+      @refund_account_holder_address_country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_address_line1 Object to be assigned
-    def refund_account_holder_address_line1=(refund_account_holder_address_line1 : String?)
-      if refund_account_holder_address_line1.nil?
-        return @refund_account_holder_address_line1 = nil
-      end
-      _refund_account_holder_address_line1 = refund_account_holder_address_line1.not_nil!
-      @refund_account_holder_address_line1 = _refund_account_holder_address_line1
+    def refund_account_holder_address_line1=(new_value : String?)
+      @refund_account_holder_address_line1 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_address_line2 Object to be assigned
-    def refund_account_holder_address_line2=(refund_account_holder_address_line2 : String?)
-      if refund_account_holder_address_line2.nil?
-        return @refund_account_holder_address_line2 = nil
-      end
-      _refund_account_holder_address_line2 = refund_account_holder_address_line2.not_nil!
-      @refund_account_holder_address_line2 = _refund_account_holder_address_line2
+    def refund_account_holder_address_line2=(new_value : String?)
+      @refund_account_holder_address_line2 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_address_postal_code Object to be assigned
-    def refund_account_holder_address_postal_code=(refund_account_holder_address_postal_code : String?)
-      if refund_account_holder_address_postal_code.nil?
-        return @refund_account_holder_address_postal_code = nil
-      end
-      _refund_account_holder_address_postal_code = refund_account_holder_address_postal_code.not_nil!
-      @refund_account_holder_address_postal_code = _refund_account_holder_address_postal_code
+    def refund_account_holder_address_postal_code=(new_value : String?)
+      @refund_account_holder_address_postal_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_address_state Object to be assigned
-    def refund_account_holder_address_state=(refund_account_holder_address_state : String?)
-      if refund_account_holder_address_state.nil?
-        return @refund_account_holder_address_state = nil
-      end
-      _refund_account_holder_address_state = refund_account_holder_address_state.not_nil!
-      @refund_account_holder_address_state = _refund_account_holder_address_state
+    def refund_account_holder_address_state=(new_value : String?)
+      @refund_account_holder_address_state = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_name Object to be assigned
-    def refund_account_holder_name=(refund_account_holder_name : String?)
-      if refund_account_holder_name.nil?
-        return @refund_account_holder_name = nil
-      end
-      _refund_account_holder_name = refund_account_holder_name.not_nil!
-      @refund_account_holder_name = _refund_account_holder_name
+    def refund_account_holder_name=(new_value : String?)
+      @refund_account_holder_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_iban Object to be assigned
-    def refund_iban=(refund_iban : String?)
-      if refund_iban.nil?
-        return @refund_iban = nil
-      end
-      _refund_iban = refund_iban.not_nil!
-      @refund_iban = _refund_iban
+    def refund_iban=(new_value : String?)
+      @refund_iban = new_value
     end
 
     # Generates #hash and #== methods from all fields

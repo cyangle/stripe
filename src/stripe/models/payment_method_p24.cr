@@ -55,8 +55,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank : String?)
-      @bank = bank
+    def bank=(new_value : String?)
+      @bank = new_value
     end
 
     # Generates #hash and #== methods from all fields

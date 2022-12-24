@@ -63,13 +63,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing_dispute Object to be assigned
-    def issuing_dispute=(issuing_dispute : String?)
-      if issuing_dispute.nil?
-        return @issuing_dispute = nil
+    def issuing_dispute=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("issuing_dispute", new_value.to_s.size, MAX_LENGTH_FOR_ISSUING_DISPUTE)
       end
-      _issuing_dispute = issuing_dispute.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("issuing_dispute", _issuing_dispute.to_s.size, MAX_LENGTH_FOR_ISSUING_DISPUTE)
-      @issuing_dispute = _issuing_dispute
+
+      @issuing_dispute = new_value
     end
 
     # Generates #hash and #== methods from all fields

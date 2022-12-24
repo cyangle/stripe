@@ -56,12 +56,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported Object to be assigned
-    def supported=(supported : Bool?)
-      if supported.nil?
-        raise ArgumentError.new("\"supported\" is required and cannot be null")
-      end
-      _supported = supported.not_nil!
-      @supported = _supported
+    def supported=(new_value : Bool?)
+      raise ArgumentError.new("\"supported\" is required and cannot be null") if new_value.nil?
+
+      @supported = new_value
     end
 
     # Generates #hash and #== methods from all fields

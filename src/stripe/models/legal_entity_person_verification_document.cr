@@ -109,46 +109,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] back Object to be assigned
-    def back=(back : Stripe::LegalEntityPersonVerificationDocumentBack?)
-      if back.nil?
-        return @back = nil
+    def back=(new_value : Stripe::LegalEntityPersonVerificationDocumentBack?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _back = back.not_nil!
-      _back.validate if _back.is_a?(OpenApi::Validatable)
-      @back = _back
+
+      @back = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] details Object to be assigned
-    def details=(details : String?)
-      if details.nil?
-        return @details = nil
+    def details=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("details", new_value.to_s.size, MAX_LENGTH_FOR_DETAILS)
       end
-      _details = details.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("details", _details.to_s.size, MAX_LENGTH_FOR_DETAILS)
-      @details = _details
+
+      @details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] details_code Object to be assigned
-    def details_code=(details_code : String?)
-      if details_code.nil?
-        return @details_code = nil
+    def details_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("details_code", new_value.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
       end
-      _details_code = details_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("details_code", _details_code.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
-      @details_code = _details_code
+
+      @details_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] front Object to be assigned
-    def front=(front : Stripe::LegalEntityPersonVerificationDocumentFront?)
-      if front.nil?
-        return @front = nil
+    def front=(new_value : Stripe::LegalEntityPersonVerificationDocumentFront?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _front = front.not_nil!
-      _front.validate if _front.is_a?(OpenApi::Validatable)
-      @front = _front
+
+      @front = new_value
     end
 
     # Generates #hash and #== methods from all fields

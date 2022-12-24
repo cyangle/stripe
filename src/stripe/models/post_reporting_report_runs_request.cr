@@ -74,33 +74,26 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] report_type Object to be assigned
-    def report_type=(report_type : String?)
-      if report_type.nil?
-        raise ArgumentError.new("\"report_type\" is required and cannot be null")
-      end
-      _report_type = report_type.not_nil!
-      @report_type = _report_type
+    def report_type=(new_value : String?)
+      raise ArgumentError.new("\"report_type\" is required and cannot be null") if new_value.nil?
+
+      @report_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] parameters Object to be assigned
-    def parameters=(parameters : Stripe::RunParameterSpecs?)
-      if parameters.nil?
-        return @parameters = nil
+    def parameters=(new_value : Stripe::RunParameterSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _parameters = parameters.not_nil!
-      _parameters.validate if _parameters.is_a?(OpenApi::Validatable)
-      @parameters = _parameters
+
+      @parameters = new_value
     end
 
     # Generates #hash and #== methods from all fields

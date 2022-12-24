@@ -75,33 +75,25 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination Object to be assigned
-    def destination=(destination : String?)
-      if destination.nil?
-        raise ArgumentError.new("\"destination\" is required and cannot be null")
+    def destination=(new_value : String?)
+      raise ArgumentError.new("\"destination\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("destination", new_value.to_s.size, MAX_LENGTH_FOR_DESTINATION)
       end
-      _destination = destination.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("destination", _destination.to_s.size, MAX_LENGTH_FOR_DESTINATION)
-      @destination = _destination
+
+      @destination = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_percent Object to be assigned
-    def amount_percent=(amount_percent : Float64?)
-      if amount_percent.nil?
-        return @amount_percent = nil
-      end
-      _amount_percent = amount_percent.not_nil!
-      @amount_percent = _amount_percent
+    def amount_percent=(new_value : Float64?)
+      @amount_percent = new_value
     end
 
     # Generates #hash and #== methods from all fields

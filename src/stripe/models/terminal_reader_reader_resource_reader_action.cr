@@ -143,74 +143,69 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
+    def status=(new_value : String?)
+      raise ArgumentError.new("\"status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] failure_code Object to be assigned
-    def failure_code=(failure_code : String?)
-      if failure_code.nil?
-        return @failure_code = nil
+    def failure_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("failure_code", new_value.to_s.size, MAX_LENGTH_FOR_FAILURE_CODE)
       end
-      _failure_code = failure_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("failure_code", _failure_code.to_s.size, MAX_LENGTH_FOR_FAILURE_CODE)
-      @failure_code = _failure_code
+
+      @failure_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] failure_message Object to be assigned
-    def failure_message=(failure_message : String?)
-      if failure_message.nil?
-        return @failure_message = nil
+    def failure_message=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("failure_message", new_value.to_s.size, MAX_LENGTH_FOR_FAILURE_MESSAGE)
       end
-      _failure_message = failure_message.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("failure_message", _failure_message.to_s.size, MAX_LENGTH_FOR_FAILURE_MESSAGE)
-      @failure_message = _failure_message
+
+      @failure_message = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] process_payment_intent Object to be assigned
-    def process_payment_intent=(process_payment_intent : Stripe::TerminalReaderReaderResourceProcessPaymentIntentAction?)
-      if process_payment_intent.nil?
-        return @process_payment_intent = nil
+    def process_payment_intent=(new_value : Stripe::TerminalReaderReaderResourceProcessPaymentIntentAction?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _process_payment_intent = process_payment_intent.not_nil!
-      _process_payment_intent.validate if _process_payment_intent.is_a?(OpenApi::Validatable)
-      @process_payment_intent = _process_payment_intent
+
+      @process_payment_intent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] process_setup_intent Object to be assigned
-    def process_setup_intent=(process_setup_intent : Stripe::TerminalReaderReaderResourceProcessSetupIntentAction?)
-      if process_setup_intent.nil?
-        return @process_setup_intent = nil
+    def process_setup_intent=(new_value : Stripe::TerminalReaderReaderResourceProcessSetupIntentAction?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _process_setup_intent = process_setup_intent.not_nil!
-      _process_setup_intent.validate if _process_setup_intent.is_a?(OpenApi::Validatable)
-      @process_setup_intent = _process_setup_intent
+
+      @process_setup_intent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] set_reader_display Object to be assigned
-    def set_reader_display=(set_reader_display : Stripe::TerminalReaderReaderResourceSetReaderDisplayAction?)
-      if set_reader_display.nil?
-        return @set_reader_display = nil
+    def set_reader_display=(new_value : Stripe::TerminalReaderReaderResourceSetReaderDisplayAction?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _set_reader_display = set_reader_display.not_nil!
-      _set_reader_display.validate if _set_reader_display.is_a?(OpenApi::Validatable)
-      @set_reader_display = _set_reader_display
+
+      @set_reader_display = new_value
     end
 
     # Generates #hash and #== methods from all fields

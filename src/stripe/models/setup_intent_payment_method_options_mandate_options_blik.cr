@@ -81,34 +81,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_after Object to be assigned
-    def expires_after=(expires_after : Int64?)
-      if expires_after.nil?
-        return @expires_after = nil
-      end
-      _expires_after = expires_after.not_nil!
-      @expires_after = _expires_after
+    def expires_after=(new_value : Int64?)
+      @expires_after = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] off_session Object to be assigned
-    def off_session=(off_session : Stripe::MandateOptionsOffSessionDetailsBlik?)
-      if off_session.nil?
-        return @off_session = nil
+    def off_session=(new_value : Stripe::MandateOptionsOffSessionDetailsBlik?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _off_session = off_session.not_nil!
-      _off_session.validate if _off_session.is_a?(OpenApi::Validatable)
-      @off_session = _off_session
+
+      @off_session = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
+    def _type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

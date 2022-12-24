@@ -61,22 +61,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] approval_requested Object to be assigned
-    def approval_requested=(approval_requested : Bool?)
-      if approval_requested.nil?
-        return @approval_requested = nil
-      end
-      _approval_requested = approval_requested.not_nil!
-      @approval_requested = _approval_requested
+    def approval_requested=(new_value : Bool?)
+      @approval_requested = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] completes_at Object to be assigned
-    def completes_at=(completes_at : Int64?)
-      if completes_at.nil?
-        return @completes_at = nil
-      end
-      _completes_at = completes_at.not_nil!
-      @completes_at = _completes_at
+    def completes_at=(new_value : Int64?)
+      @completes_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

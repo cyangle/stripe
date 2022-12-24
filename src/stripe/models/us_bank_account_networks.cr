@@ -85,24 +85,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported Object to be assigned
-    def supported=(supported : Array(String)?)
-      if supported.nil?
-        raise ArgumentError.new("\"supported\" is required and cannot be null")
+    def supported=(new_value : Array(String)?)
+      raise ArgumentError.new("\"supported\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("supported", new_value, VALID_VALUES_FOR_SUPPORTED)
       end
-      _supported = supported.not_nil!
-      OpenApi::EnumValidator.validate("supported", _supported, VALID_VALUES_FOR_SUPPORTED)
-      @supported = _supported
+
+      @supported = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred Object to be assigned
-    def preferred=(preferred : String?)
-      if preferred.nil?
-        return @preferred = nil
+    def preferred=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("preferred", new_value.to_s.size, MAX_LENGTH_FOR_PREFERRED)
       end
-      _preferred = preferred.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
-      @preferred = _preferred
+
+      @preferred = new_value
     end
 
     # Generates #hash and #== methods from all fields

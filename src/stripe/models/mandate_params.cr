@@ -99,56 +99,48 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acceptance Object to be assigned
-    def acceptance=(acceptance : Stripe::MandateAcceptanceParams?)
-      if acceptance.nil?
-        return @acceptance = nil
+    def acceptance=(new_value : Stripe::MandateAcceptanceParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _acceptance = acceptance.not_nil!
-      _acceptance.validate if _acceptance.is_a?(OpenApi::Validatable)
-      @acceptance = _acceptance
+
+      @acceptance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Stripe::MandateParamsAmount?)
-      if amount.nil?
-        return @amount = nil
+    def amount=(new_value : Stripe::MandateParamsAmount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _amount = amount.not_nil!
-      _amount.validate if _amount.is_a?(OpenApi::Validatable)
-      @amount = _amount
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        return @currency = nil
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        return @interval = nil
+    def interval=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("interval", new_value, VALID_VALUES_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] notification_method Object to be assigned
-    def notification_method=(notification_method : String?)
-      if notification_method.nil?
-        return @notification_method = nil
+    def notification_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("notification_method", new_value, VALID_VALUES_FOR_NOTIFICATION_METHOD)
       end
-      _notification_method = notification_method.not_nil!
-      OpenApi::EnumValidator.validate("notification_method", _notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
-      @notification_method = _notification_method
+
+      @notification_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

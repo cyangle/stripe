@@ -73,24 +73,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address Object to be assigned
-    def shipping_address=(shipping_address : Stripe::PaymentLinksResourceCustomTextShippingAddress?)
-      if shipping_address.nil?
-        return @shipping_address = nil
+    def shipping_address=(new_value : Stripe::PaymentLinksResourceCustomTextShippingAddress?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping_address = shipping_address.not_nil!
-      _shipping_address.validate if _shipping_address.is_a?(OpenApi::Validatable)
-      @shipping_address = _shipping_address
+
+      @shipping_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit Object to be assigned
-    def submit=(submit : Stripe::PaymentLinksResourceCustomTextSubmit?)
-      if submit.nil?
-        return @submit = nil
+    def submit=(new_value : Stripe::PaymentLinksResourceCustomTextSubmit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _submit = submit.not_nil!
-      _submit.validate if _submit.is_a?(OpenApi::Validatable)
-      @submit = _submit
+
+      @submit = new_value
     end
 
     # Generates #hash and #== methods from all fields

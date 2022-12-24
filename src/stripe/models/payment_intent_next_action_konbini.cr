@@ -91,34 +91,31 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        raise ArgumentError.new("\"expires_at\" is required and cannot be null")
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      raise ArgumentError.new("\"expires_at\" is required and cannot be null") if new_value.nil?
+
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] stores Object to be assigned
-    def stores=(stores : Stripe::PaymentIntentNextActionKonbiniStores?)
-      if stores.nil?
-        raise ArgumentError.new("\"stores\" is required and cannot be null")
+    def stores=(new_value : Stripe::PaymentIntentNextActionKonbiniStores?)
+      raise ArgumentError.new("\"stores\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _stores = stores.not_nil!
-      _stores.validate if _stores.is_a?(OpenApi::Validatable)
-      @stores = _stores
+
+      @stores = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_voucher_url Object to be assigned
-    def hosted_voucher_url=(hosted_voucher_url : String?)
-      if hosted_voucher_url.nil?
-        return @hosted_voucher_url = nil
+    def hosted_voucher_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("hosted_voucher_url", new_value.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
       end
-      _hosted_voucher_url = hosted_voucher_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("hosted_voucher_url", _hosted_voucher_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VOUCHER_URL)
-      @hosted_voucher_url = _hosted_voucher_url
+
+      @hosted_voucher_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -50,12 +50,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_eligible Object to be assigned
-    def amount_eligible=(amount_eligible : Int64?)
-      if amount_eligible.nil?
-        return @amount_eligible = nil
-      end
-      _amount_eligible = amount_eligible.not_nil!
-      @amount_eligible = _amount_eligible
+    def amount_eligible=(new_value : Int64?)
+      @amount_eligible = new_value
     end
 
     # Generates #hash and #== methods from all fields

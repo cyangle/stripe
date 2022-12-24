@@ -73,24 +73,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] back Object to be assigned
-    def back=(back : Stripe::IssuingCardholderIdDocumentBack?)
-      if back.nil?
-        return @back = nil
+    def back=(new_value : Stripe::IssuingCardholderIdDocumentBack?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _back = back.not_nil!
-      _back.validate if _back.is_a?(OpenApi::Validatable)
-      @back = _back
+
+      @back = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] front Object to be assigned
-    def front=(front : Stripe::IssuingCardholderIdDocumentFront?)
-      if front.nil?
-        return @front = nil
+    def front=(new_value : Stripe::IssuingCardholderIdDocumentFront?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _front = front.not_nil!
-      _front.validate if _front.is_a?(OpenApi::Validatable)
-      @front = _front
+
+      @front = new_value
     end
 
     # Generates #hash and #== methods from all fields

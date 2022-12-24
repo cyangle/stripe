@@ -196,96 +196,88 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_type Object to be assigned
-    def account_type=(account_type : String?)
-      @account_type = account_type
+    def account_type=(new_value : String?)
+      @account_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_cryptogram Object to be assigned
-    def application_cryptogram=(application_cryptogram : String?)
-      if application_cryptogram.nil?
-        return @application_cryptogram = nil
+    def application_cryptogram=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("application_cryptogram", new_value.to_s.size, MAX_LENGTH_FOR_APPLICATION_CRYPTOGRAM)
       end
-      _application_cryptogram = application_cryptogram.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("application_cryptogram", _application_cryptogram.to_s.size, MAX_LENGTH_FOR_APPLICATION_CRYPTOGRAM)
-      @application_cryptogram = _application_cryptogram
+
+      @application_cryptogram = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application_preferred_name Object to be assigned
-    def application_preferred_name=(application_preferred_name : String?)
-      if application_preferred_name.nil?
-        return @application_preferred_name = nil
+    def application_preferred_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("application_preferred_name", new_value.to_s.size, MAX_LENGTH_FOR_APPLICATION_PREFERRED_NAME)
       end
-      _application_preferred_name = application_preferred_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("application_preferred_name", _application_preferred_name.to_s.size, MAX_LENGTH_FOR_APPLICATION_PREFERRED_NAME)
-      @application_preferred_name = _application_preferred_name
+
+      @application_preferred_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authorization_code Object to be assigned
-    def authorization_code=(authorization_code : String?)
-      if authorization_code.nil?
-        return @authorization_code = nil
+    def authorization_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("authorization_code", new_value.to_s.size, MAX_LENGTH_FOR_AUTHORIZATION_CODE)
       end
-      _authorization_code = authorization_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("authorization_code", _authorization_code.to_s.size, MAX_LENGTH_FOR_AUTHORIZATION_CODE)
-      @authorization_code = _authorization_code
+
+      @authorization_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authorization_response_code Object to be assigned
-    def authorization_response_code=(authorization_response_code : String?)
-      if authorization_response_code.nil?
-        return @authorization_response_code = nil
+    def authorization_response_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("authorization_response_code", new_value.to_s.size, MAX_LENGTH_FOR_AUTHORIZATION_RESPONSE_CODE)
       end
-      _authorization_response_code = authorization_response_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("authorization_response_code", _authorization_response_code.to_s.size, MAX_LENGTH_FOR_AUTHORIZATION_RESPONSE_CODE)
-      @authorization_response_code = _authorization_response_code
+
+      @authorization_response_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cardholder_verification_method Object to be assigned
-    def cardholder_verification_method=(cardholder_verification_method : String?)
-      if cardholder_verification_method.nil?
-        return @cardholder_verification_method = nil
+    def cardholder_verification_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cardholder_verification_method", new_value.to_s.size, MAX_LENGTH_FOR_CARDHOLDER_VERIFICATION_METHOD)
       end
-      _cardholder_verification_method = cardholder_verification_method.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cardholder_verification_method", _cardholder_verification_method.to_s.size, MAX_LENGTH_FOR_CARDHOLDER_VERIFICATION_METHOD)
-      @cardholder_verification_method = _cardholder_verification_method
+
+      @cardholder_verification_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dedicated_file_name Object to be assigned
-    def dedicated_file_name=(dedicated_file_name : String?)
-      if dedicated_file_name.nil?
-        return @dedicated_file_name = nil
+    def dedicated_file_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("dedicated_file_name", new_value.to_s.size, MAX_LENGTH_FOR_DEDICATED_FILE_NAME)
       end
-      _dedicated_file_name = dedicated_file_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("dedicated_file_name", _dedicated_file_name.to_s.size, MAX_LENGTH_FOR_DEDICATED_FILE_NAME)
-      @dedicated_file_name = _dedicated_file_name
+
+      @dedicated_file_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terminal_verification_results Object to be assigned
-    def terminal_verification_results=(terminal_verification_results : String?)
-      if terminal_verification_results.nil?
-        return @terminal_verification_results = nil
+    def terminal_verification_results=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("terminal_verification_results", new_value.to_s.size, MAX_LENGTH_FOR_TERMINAL_VERIFICATION_RESULTS)
       end
-      _terminal_verification_results = terminal_verification_results.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("terminal_verification_results", _terminal_verification_results.to_s.size, MAX_LENGTH_FOR_TERMINAL_VERIFICATION_RESULTS)
-      @terminal_verification_results = _terminal_verification_results
+
+      @terminal_verification_results = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_status_information Object to be assigned
-    def transaction_status_information=(transaction_status_information : String?)
-      if transaction_status_information.nil?
-        return @transaction_status_information = nil
+    def transaction_status_information=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("transaction_status_information", new_value.to_s.size, MAX_LENGTH_FOR_TRANSACTION_STATUS_INFORMATION)
       end
-      _transaction_status_information = transaction_status_information.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("transaction_status_information", _transaction_status_information.to_s.size, MAX_LENGTH_FOR_TRANSACTION_STATUS_INFORMATION)
-      @transaction_status_information = _transaction_status_information
+
+      @transaction_status_information = new_value
     end
 
     # Generates #hash and #== methods from all fields

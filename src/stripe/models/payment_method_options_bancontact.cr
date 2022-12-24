@@ -81,24 +81,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_language Object to be assigned
-    def preferred_language=(preferred_language : String?)
-      if preferred_language.nil?
-        raise ArgumentError.new("\"preferred_language\" is required and cannot be null")
+    def preferred_language=(new_value : String?)
+      raise ArgumentError.new("\"preferred_language\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("preferred_language", new_value, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
-      _preferred_language = preferred_language.not_nil!
-      OpenApi::EnumValidator.validate("preferred_language", _preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
-      @preferred_language = _preferred_language
+
+      @preferred_language = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

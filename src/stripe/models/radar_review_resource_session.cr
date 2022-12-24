@@ -117,46 +117,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] browser Object to be assigned
-    def browser=(browser : String?)
-      if browser.nil?
-        return @browser = nil
+    def browser=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("browser", new_value.to_s.size, MAX_LENGTH_FOR_BROWSER)
       end
-      _browser = browser.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("browser", _browser.to_s.size, MAX_LENGTH_FOR_BROWSER)
-      @browser = _browser
+
+      @browser = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] device Object to be assigned
-    def device=(device : String?)
-      if device.nil?
-        return @device = nil
+    def device=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("device", new_value.to_s.size, MAX_LENGTH_FOR_DEVICE)
       end
-      _device = device.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("device", _device.to_s.size, MAX_LENGTH_FOR_DEVICE)
-      @device = _device
+
+      @device = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
-    def platform=(platform : String?)
-      if platform.nil?
-        return @platform = nil
+    def platform=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("platform", new_value.to_s.size, MAX_LENGTH_FOR_PLATFORM)
       end
-      _platform = platform.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("platform", _platform.to_s.size, MAX_LENGTH_FOR_PLATFORM)
-      @platform = _platform
+
+      @platform = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] version Object to be assigned
-    def version=(version : String?)
-      if version.nil?
-        return @version = nil
+    def version=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("version", new_value.to_s.size, MAX_LENGTH_FOR_VERSION)
       end
-      _version = version.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("version", _version.to_s.size, MAX_LENGTH_FOR_VERSION)
-      @version = _version
+
+      @version = new_value
     end
 
     # Generates #hash and #== methods from all fields

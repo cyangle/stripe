@@ -77,30 +77,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit?)
-      if mandate_options.nil?
-        return @mandate_options = nil
+    def mandate_options=(new_value : Stripe::PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _mandate_options = mandate_options.not_nil!
-      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
-      @mandate_options = _mandate_options
+
+      @mandate_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method : String?)
-      @verification_method = verification_method
+    def verification_method=(new_value : String?)
+      @verification_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

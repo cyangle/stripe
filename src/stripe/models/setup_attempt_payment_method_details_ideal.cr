@@ -143,68 +143,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank : String?)
-      if bank.nil?
-        return @bank = nil
+    def bank=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("bank", new_value, VALID_VALUES_FOR_BANK)
       end
-      _bank = bank.not_nil!
-      OpenApi::EnumValidator.validate("bank", _bank, VALID_VALUES_FOR_BANK)
-      @bank = _bank
+
+      @bank = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        return @bic = nil
+    def bic=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("bic", new_value, VALID_VALUES_FOR_BIC)
       end
-      _bic = bic.not_nil!
-      OpenApi::EnumValidator.validate("bic", _bic, VALID_VALUES_FOR_BIC)
-      @bic = _bic
+
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_sepa_debit Object to be assigned
-    def generated_sepa_debit=(generated_sepa_debit : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit?)
-      if generated_sepa_debit.nil?
-        return @generated_sepa_debit = nil
+    def generated_sepa_debit=(new_value : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _generated_sepa_debit = generated_sepa_debit.not_nil!
-      _generated_sepa_debit.validate if _generated_sepa_debit.is_a?(OpenApi::Validatable)
-      @generated_sepa_debit = _generated_sepa_debit
+
+      @generated_sepa_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_sepa_debit_mandate Object to be assigned
-    def generated_sepa_debit_mandate=(generated_sepa_debit_mandate : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebitMandate?)
-      if generated_sepa_debit_mandate.nil?
-        return @generated_sepa_debit_mandate = nil
+    def generated_sepa_debit_mandate=(new_value : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebitMandate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _generated_sepa_debit_mandate = generated_sepa_debit_mandate.not_nil!
-      _generated_sepa_debit_mandate.validate if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
-      @generated_sepa_debit_mandate = _generated_sepa_debit_mandate
+
+      @generated_sepa_debit_mandate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban_last4 Object to be assigned
-    def iban_last4=(iban_last4 : String?)
-      if iban_last4.nil?
-        return @iban_last4 = nil
+    def iban_last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("iban_last4", new_value.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
       end
-      _iban_last4 = iban_last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
-      @iban_last4 = _iban_last4
+
+      @iban_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_name Object to be assigned
-    def verified_name=(verified_name : String?)
-      if verified_name.nil?
-        return @verified_name = nil
+    def verified_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_name", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       end
-      _verified_name = verified_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
-      @verified_name = _verified_name
+
+      @verified_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -83,45 +83,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bbpos_wisepos_e Object to be assigned
-    def bbpos_wisepos_e=(bbpos_wisepos_e : Stripe::BbposWisePose?)
-      if bbpos_wisepos_e.nil?
-        return @bbpos_wisepos_e = nil
+    def bbpos_wisepos_e=(new_value : Stripe::BbposWisePose?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bbpos_wisepos_e = bbpos_wisepos_e.not_nil!
-      _bbpos_wisepos_e.validate if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-      @bbpos_wisepos_e = _bbpos_wisepos_e
+
+      @bbpos_wisepos_e = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tipping Object to be assigned
-    def tipping=(tipping : Stripe::PostTerminalConfigurationsRequestTipping?)
-      if tipping.nil?
-        return @tipping = nil
+    def tipping=(new_value : Stripe::PostTerminalConfigurationsRequestTipping?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tipping = tipping.not_nil!
-      _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
-      @tipping = _tipping
+
+      @tipping = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verifone_p400 Object to be assigned
-    def verifone_p400=(verifone_p400 : Stripe::VerifoneP400?)
-      if verifone_p400.nil?
-        return @verifone_p400 = nil
+    def verifone_p400=(new_value : Stripe::VerifoneP400?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verifone_p400 = verifone_p400.not_nil!
-      _verifone_p400.validate if _verifone_p400.is_a?(OpenApi::Validatable)
-      @verifone_p400 = _verifone_p400
+
+      @verifone_p400 = new_value
     end
 
     # Generates #hash and #== methods from all fields

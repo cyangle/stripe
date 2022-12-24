@@ -130,66 +130,54 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::IssuingDisputeCanceledEvidenceAdditionalDocumentation?)
-      if additional_documentation.nil?
-        return @additional_documentation = nil
+    def additional_documentation=(new_value : Stripe::IssuingDisputeCanceledEvidenceAdditionalDocumentation?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _additional_documentation = additional_documentation.not_nil!
-      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
-      @additional_documentation = _additional_documentation
+
+      @additional_documentation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(explanation : String?)
-      if explanation.nil?
-        return @explanation = nil
+    def explanation=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("explanation", new_value.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       end
-      _explanation = explanation.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
-      @explanation = _explanation
+
+      @explanation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_at Object to be assigned
-    def received_at=(received_at : Int64?)
-      if received_at.nil?
-        return @received_at = nil
-      end
-      _received_at = received_at.not_nil!
-      @received_at = _received_at
+    def received_at=(new_value : Int64?)
+      @received_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_description Object to be assigned
-    def return_description=(return_description : String?)
-      if return_description.nil?
-        return @return_description = nil
+    def return_description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("return_description", new_value.to_s.size, MAX_LENGTH_FOR_RETURN_DESCRIPTION)
       end
-      _return_description = return_description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("return_description", _return_description.to_s.size, MAX_LENGTH_FOR_RETURN_DESCRIPTION)
-      @return_description = _return_description
+
+      @return_description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_status Object to be assigned
-    def return_status=(return_status : String?)
-      if return_status.nil?
-        return @return_status = nil
+    def return_status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("return_status", new_value, VALID_VALUES_FOR_RETURN_STATUS)
       end
-      _return_status = return_status.not_nil!
-      OpenApi::EnumValidator.validate("return_status", _return_status, VALID_VALUES_FOR_RETURN_STATUS)
-      @return_status = _return_status
+
+      @return_status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] returned_at Object to be assigned
-    def returned_at=(returned_at : Int64?)
-      if returned_at.nil?
-        return @returned_at = nil
-      end
-      _returned_at = returned_at.not_nil!
-      @returned_at = _returned_at
+    def returned_at=(new_value : Int64?)
+      @returned_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -63,19 +63,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : Stripe::InvoicePaymentMethodOptionsAcssDebitMandateOptions?)
-      if mandate_options.nil?
-        return @mandate_options = nil
+    def mandate_options=(new_value : Stripe::InvoicePaymentMethodOptionsAcssDebitMandateOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _mandate_options = mandate_options.not_nil!
-      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
-      @mandate_options = _mandate_options
+
+      @mandate_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method : String?)
-      @verification_method = verification_method
+    def verification_method=(new_value : String?)
+      @verification_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

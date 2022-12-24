@@ -80,24 +80,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action Object to be assigned
-    def action=(action : String?)
-      if action.nil?
-        raise ArgumentError.new("\"action\" is required and cannot be null")
+    def action=(new_value : String?)
+      raise ArgumentError.new("\"action\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("action", new_value, VALID_VALUES_FOR_ACTION)
       end
-      _action = action.not_nil!
-      OpenApi::EnumValidator.validate("action", _action, VALID_VALUES_FOR_ACTION)
-      @action = _action
+
+      @action = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice Object to be assigned
-    def invoice=(invoice : String?)
-      if invoice.nil?
-        raise ArgumentError.new("\"invoice\" is required and cannot be null")
+    def invoice=(new_value : String?)
+      raise ArgumentError.new("\"invoice\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("invoice", new_value.to_s.size, MAX_LENGTH_FOR_INVOICE)
       end
-      _invoice = invoice.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
-      @invoice = _invoice
+
+      @invoice = new_value
     end
 
     # Generates #hash and #== methods from all fields

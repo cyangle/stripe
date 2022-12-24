@@ -108,45 +108,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_allowed_updates Object to be assigned
-    def default_allowed_updates=(default_allowed_updates : Array(String)?)
-      if default_allowed_updates.nil?
-        raise ArgumentError.new("\"default_allowed_updates\" is required and cannot be null")
+    def default_allowed_updates=(new_value : Array(String)?)
+      raise ArgumentError.new("\"default_allowed_updates\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("default_allowed_updates", new_value, VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES)
       end
-      _default_allowed_updates = default_allowed_updates.not_nil!
-      OpenApi::EnumValidator.validate("default_allowed_updates", _default_allowed_updates, VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES)
-      @default_allowed_updates = _default_allowed_updates
+
+      @default_allowed_updates = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior : String?)
-      if proration_behavior.nil?
-        raise ArgumentError.new("\"proration_behavior\" is required and cannot be null")
+    def proration_behavior=(new_value : String?)
+      raise ArgumentError.new("\"proration_behavior\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("proration_behavior", new_value, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
-      _proration_behavior = proration_behavior.not_nil!
-      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-      @proration_behavior = _proration_behavior
+
+      @proration_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] products Object to be assigned
-    def products=(products : Array(Stripe::PortalSubscriptionUpdateProduct)?)
-      if products.nil?
-        return @products = nil
+    def products=(new_value : Array(Stripe::PortalSubscriptionUpdateProduct)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _products = products.not_nil!
-      OpenApi::ContainerValidator.validate(container: _products) if _products.is_a?(Array)
-      @products = _products
+
+      @products = new_value
     end
 
     # Generates #hash and #== methods from all fields

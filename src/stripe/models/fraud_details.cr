@@ -63,13 +63,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_report Object to be assigned
-    def user_report=(user_report : String?)
-      if user_report.nil?
-        raise ArgumentError.new("\"user_report\" is required and cannot be null")
+    def user_report=(new_value : String?)
+      raise ArgumentError.new("\"user_report\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("user_report", new_value, VALID_VALUES_FOR_USER_REPORT)
       end
-      _user_report = user_report.not_nil!
-      OpenApi::EnumValidator.validate("user_report", _user_report, VALID_VALUES_FOR_USER_REPORT)
-      @user_report = _user_report
+
+      @user_report = new_value
     end
 
     # Generates #hash and #== methods from all fields

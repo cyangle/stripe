@@ -70,43 +70,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_types Object to be assigned
-    def allowed_types=(allowed_types : Array(String)?)
-      if allowed_types.nil?
-        return @allowed_types = nil
+    def allowed_types=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("allowed_types", new_value, VALID_VALUES_FOR_ALLOWED_TYPES)
       end
-      _allowed_types = allowed_types.not_nil!
-      OpenApi::EnumValidator.validate("allowed_types", _allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
-      @allowed_types = _allowed_types
+
+      @allowed_types = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] require_id_number Object to be assigned
-    def require_id_number=(require_id_number : Bool?)
-      if require_id_number.nil?
-        return @require_id_number = nil
-      end
-      _require_id_number = require_id_number.not_nil!
-      @require_id_number = _require_id_number
+    def require_id_number=(new_value : Bool?)
+      @require_id_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] require_live_capture Object to be assigned
-    def require_live_capture=(require_live_capture : Bool?)
-      if require_live_capture.nil?
-        return @require_live_capture = nil
-      end
-      _require_live_capture = require_live_capture.not_nil!
-      @require_live_capture = _require_live_capture
+    def require_live_capture=(new_value : Bool?)
+      @require_live_capture = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] require_matching_selfie Object to be assigned
-    def require_matching_selfie=(require_matching_selfie : Bool?)
-      if require_matching_selfie.nil?
-        return @require_matching_selfie = nil
-      end
-      _require_matching_selfie = require_matching_selfie.not_nil!
-      @require_matching_selfie = _require_matching_selfie
+    def require_matching_selfie=(new_value : Bool?)
+      @require_matching_selfie = new_value
     end
 
     # Generates #hash and #== methods from all fields

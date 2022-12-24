@@ -119,46 +119,46 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder_name Object to be assigned
-    def account_holder_name=(account_holder_name : String?)
-      if account_holder_name.nil?
-        raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
+    def account_holder_name=(new_value : String?)
+      raise ArgumentError.new("\"account_holder_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
       end
-      _account_holder_name = account_holder_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
-      @account_holder_name = _account_holder_name
+
+      @account_holder_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        raise ArgumentError.new("\"bic\" is required and cannot be null")
+    def bic=(new_value : String?)
+      raise ArgumentError.new("\"bic\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bic", new_value.to_s.size, MAX_LENGTH_FOR_BIC)
       end
-      _bic = bic.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
-      @bic = _bic
+
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        raise ArgumentError.new("\"country\" is required and cannot be null")
+    def country=(new_value : String?)
+      raise ArgumentError.new("\"country\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("country", new_value.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       end
-      _country = country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-      @country = _country
+
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban Object to be assigned
-    def iban=(iban : String?)
-      if iban.nil?
-        raise ArgumentError.new("\"iban\" is required and cannot be null")
+    def iban=(new_value : String?)
+      raise ArgumentError.new("\"iban\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("iban", new_value.to_s.size, MAX_LENGTH_FOR_IBAN)
       end
-      _iban = iban.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("iban", _iban.to_s.size, MAX_LENGTH_FOR_IBAN)
-      @iban = _iban
+
+      @iban = new_value
     end
 
     # Generates #hash and #== methods from all fields

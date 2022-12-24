@@ -96,45 +96,39 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("_type", new_value.to_s.size, MAX_LENGTH_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] redirect_to_url Object to be assigned
-    def redirect_to_url=(redirect_to_url : Stripe::SetupIntentNextActionRedirectToUrl?)
-      if redirect_to_url.nil?
-        return @redirect_to_url = nil
+    def redirect_to_url=(new_value : Stripe::SetupIntentNextActionRedirectToUrl?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _redirect_to_url = redirect_to_url.not_nil!
-      _redirect_to_url.validate if _redirect_to_url.is_a?(OpenApi::Validatable)
-      @redirect_to_url = _redirect_to_url
+
+      @redirect_to_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] use_stripe_sdk Object to be assigned
-    def use_stripe_sdk=(use_stripe_sdk : JSON::Any?)
-      if use_stripe_sdk.nil?
-        return @use_stripe_sdk = nil
-      end
-      _use_stripe_sdk = use_stripe_sdk.not_nil!
-      @use_stripe_sdk = _use_stripe_sdk
+    def use_stripe_sdk=(new_value : JSON::Any?)
+      @use_stripe_sdk = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verify_with_microdeposits Object to be assigned
-    def verify_with_microdeposits=(verify_with_microdeposits : Stripe::SetupIntentNextActionVerifyWithMicrodeposits?)
-      if verify_with_microdeposits.nil?
-        return @verify_with_microdeposits = nil
+    def verify_with_microdeposits=(new_value : Stripe::SetupIntentNextActionVerifyWithMicrodeposits?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verify_with_microdeposits = verify_with_microdeposits.not_nil!
-      _verify_with_microdeposits.validate if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-      @verify_with_microdeposits = _verify_with_microdeposits
+
+      @verify_with_microdeposits = new_value
     end
 
     # Generates #hash and #== methods from all fields

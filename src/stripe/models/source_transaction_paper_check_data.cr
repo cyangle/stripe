@@ -75,24 +75,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available_at Object to be assigned
-    def available_at=(available_at : String?)
-      if available_at.nil?
-        return @available_at = nil
+    def available_at=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("available_at", new_value.to_s.size, MAX_LENGTH_FOR_AVAILABLE_AT)
       end
-      _available_at = available_at.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("available_at", _available_at.to_s.size, MAX_LENGTH_FOR_AVAILABLE_AT)
-      @available_at = _available_at
+
+      @available_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoices Object to be assigned
-    def invoices=(invoices : String?)
-      if invoices.nil?
-        return @invoices = nil
+    def invoices=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("invoices", new_value.to_s.size, MAX_LENGTH_FOR_INVOICES)
       end
-      _invoices = invoices.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("invoices", _invoices.to_s.size, MAX_LENGTH_FOR_INVOICES)
-      @invoices = _invoices
+
+      @invoices = new_value
     end
 
     # Generates #hash and #== methods from all fields

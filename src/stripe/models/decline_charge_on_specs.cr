@@ -52,22 +52,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] avs_failure Object to be assigned
-    def avs_failure=(avs_failure : Bool?)
-      if avs_failure.nil?
-        return @avs_failure = nil
-      end
-      _avs_failure = avs_failure.not_nil!
-      @avs_failure = _avs_failure
+    def avs_failure=(new_value : Bool?)
+      @avs_failure = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_failure Object to be assigned
-    def cvc_failure=(cvc_failure : Bool?)
-      if cvc_failure.nil?
-        return @cvc_failure = nil
-      end
-      _cvc_failure = cvc_failure.not_nil!
-      @cvc_failure = _cvc_failure
+    def cvc_failure=(new_value : Bool?)
+      @cvc_failure = new_value
     end
 
     # Generates #hash and #== methods from all fields

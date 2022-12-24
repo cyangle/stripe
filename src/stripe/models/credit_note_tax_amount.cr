@@ -79,33 +79,29 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inclusive Object to be assigned
-    def inclusive=(inclusive : Bool?)
-      if inclusive.nil?
-        raise ArgumentError.new("\"inclusive\" is required and cannot be null")
-      end
-      _inclusive = inclusive.not_nil!
-      @inclusive = _inclusive
+    def inclusive=(new_value : Bool?)
+      raise ArgumentError.new("\"inclusive\" is required and cannot be null") if new_value.nil?
+
+      @inclusive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rate Object to be assigned
-    def tax_rate=(tax_rate : Stripe::CreditNoteTaxAmountTaxRate?)
-      if tax_rate.nil?
-        raise ArgumentError.new("\"tax_rate\" is required and cannot be null")
+    def tax_rate=(new_value : Stripe::CreditNoteTaxAmountTaxRate?)
+      raise ArgumentError.new("\"tax_rate\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tax_rate = tax_rate.not_nil!
-      _tax_rate.validate if _tax_rate.is_a?(OpenApi::Validatable)
-      @tax_rate = _tax_rate
+
+      @tax_rate = new_value
     end
 
     # Generates #hash and #== methods from all fields

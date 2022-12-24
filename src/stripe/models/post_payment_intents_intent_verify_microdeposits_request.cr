@@ -85,44 +85,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amounts Object to be assigned
-    def amounts=(amounts : Array(Int32)?)
-      if amounts.nil?
-        return @amounts = nil
-      end
-      _amounts = amounts.not_nil!
-      @amounts = _amounts
+    def amounts=(new_value : Array(Int32)?)
+      @amounts = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] client_secret Object to be assigned
-    def client_secret=(client_secret : String?)
-      if client_secret.nil?
-        return @client_secret = nil
+    def client_secret=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("client_secret", new_value.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       end
-      _client_secret = client_secret.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
-      @client_secret = _client_secret
+
+      @client_secret = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] descriptor_code Object to be assigned
-    def descriptor_code=(descriptor_code : String?)
-      if descriptor_code.nil?
-        return @descriptor_code = nil
+    def descriptor_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("descriptor_code", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTOR_CODE)
       end
-      _descriptor_code = descriptor_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("descriptor_code", _descriptor_code.to_s.size, MAX_LENGTH_FOR_DESCRIPTOR_CODE)
-      @descriptor_code = _descriptor_code
+
+      @descriptor_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -521,376 +521,342 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acss_debit_payments Object to be assigned
-    def acss_debit_payments=(acss_debit_payments : String?)
-      if acss_debit_payments.nil?
-        return @acss_debit_payments = nil
+    def acss_debit_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("acss_debit_payments", new_value, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
       end
-      _acss_debit_payments = acss_debit_payments.not_nil!
-      OpenApi::EnumValidator.validate("acss_debit_payments", _acss_debit_payments, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
-      @acss_debit_payments = _acss_debit_payments
+
+      @acss_debit_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] affirm_payments Object to be assigned
-    def affirm_payments=(affirm_payments : String?)
-      if affirm_payments.nil?
-        return @affirm_payments = nil
+    def affirm_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("affirm_payments", new_value, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
       end
-      _affirm_payments = affirm_payments.not_nil!
-      OpenApi::EnumValidator.validate("affirm_payments", _affirm_payments, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
-      @affirm_payments = _affirm_payments
+
+      @affirm_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] afterpay_clearpay_payments Object to be assigned
-    def afterpay_clearpay_payments=(afterpay_clearpay_payments : String?)
-      if afterpay_clearpay_payments.nil?
-        return @afterpay_clearpay_payments = nil
+    def afterpay_clearpay_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("afterpay_clearpay_payments", new_value, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
       end
-      _afterpay_clearpay_payments = afterpay_clearpay_payments.not_nil!
-      OpenApi::EnumValidator.validate("afterpay_clearpay_payments", _afterpay_clearpay_payments, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
-      @afterpay_clearpay_payments = _afterpay_clearpay_payments
+
+      @afterpay_clearpay_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] au_becs_debit_payments Object to be assigned
-    def au_becs_debit_payments=(au_becs_debit_payments : String?)
-      if au_becs_debit_payments.nil?
-        return @au_becs_debit_payments = nil
+    def au_becs_debit_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("au_becs_debit_payments", new_value, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
       end
-      _au_becs_debit_payments = au_becs_debit_payments.not_nil!
-      OpenApi::EnumValidator.validate("au_becs_debit_payments", _au_becs_debit_payments, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
-      @au_becs_debit_payments = _au_becs_debit_payments
+
+      @au_becs_debit_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bacs_debit_payments Object to be assigned
-    def bacs_debit_payments=(bacs_debit_payments : String?)
-      if bacs_debit_payments.nil?
-        return @bacs_debit_payments = nil
+    def bacs_debit_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("bacs_debit_payments", new_value, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
       end
-      _bacs_debit_payments = bacs_debit_payments.not_nil!
-      OpenApi::EnumValidator.validate("bacs_debit_payments", _bacs_debit_payments, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
-      @bacs_debit_payments = _bacs_debit_payments
+
+      @bacs_debit_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bancontact_payments Object to be assigned
-    def bancontact_payments=(bancontact_payments : String?)
-      if bancontact_payments.nil?
-        return @bancontact_payments = nil
+    def bancontact_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("bancontact_payments", new_value, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
       end
-      _bancontact_payments = bancontact_payments.not_nil!
-      OpenApi::EnumValidator.validate("bancontact_payments", _bancontact_payments, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
-      @bancontact_payments = _bancontact_payments
+
+      @bancontact_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_transfer_payments Object to be assigned
-    def bank_transfer_payments=(bank_transfer_payments : String?)
-      if bank_transfer_payments.nil?
-        return @bank_transfer_payments = nil
+    def bank_transfer_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("bank_transfer_payments", new_value, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
       end
-      _bank_transfer_payments = bank_transfer_payments.not_nil!
-      OpenApi::EnumValidator.validate("bank_transfer_payments", _bank_transfer_payments, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
-      @bank_transfer_payments = _bank_transfer_payments
+
+      @bank_transfer_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] blik_payments Object to be assigned
-    def blik_payments=(blik_payments : String?)
-      if blik_payments.nil?
-        return @blik_payments = nil
+    def blik_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("blik_payments", new_value, VALID_VALUES_FOR_BLIK_PAYMENTS)
       end
-      _blik_payments = blik_payments.not_nil!
-      OpenApi::EnumValidator.validate("blik_payments", _blik_payments, VALID_VALUES_FOR_BLIK_PAYMENTS)
-      @blik_payments = _blik_payments
+
+      @blik_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] boleto_payments Object to be assigned
-    def boleto_payments=(boleto_payments : String?)
-      if boleto_payments.nil?
-        return @boleto_payments = nil
+    def boleto_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("boleto_payments", new_value, VALID_VALUES_FOR_BOLETO_PAYMENTS)
       end
-      _boleto_payments = boleto_payments.not_nil!
-      OpenApi::EnumValidator.validate("boleto_payments", _boleto_payments, VALID_VALUES_FOR_BOLETO_PAYMENTS)
-      @boleto_payments = _boleto_payments
+
+      @boleto_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_issuing Object to be assigned
-    def card_issuing=(card_issuing : String?)
-      if card_issuing.nil?
-        return @card_issuing = nil
+    def card_issuing=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("card_issuing", new_value, VALID_VALUES_FOR_CARD_ISSUING)
       end
-      _card_issuing = card_issuing.not_nil!
-      OpenApi::EnumValidator.validate("card_issuing", _card_issuing, VALID_VALUES_FOR_CARD_ISSUING)
-      @card_issuing = _card_issuing
+
+      @card_issuing = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_payments Object to be assigned
-    def card_payments=(card_payments : String?)
-      if card_payments.nil?
-        return @card_payments = nil
+    def card_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("card_payments", new_value, VALID_VALUES_FOR_CARD_PAYMENTS)
       end
-      _card_payments = card_payments.not_nil!
-      OpenApi::EnumValidator.validate("card_payments", _card_payments, VALID_VALUES_FOR_CARD_PAYMENTS)
-      @card_payments = _card_payments
+
+      @card_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cartes_bancaires_payments Object to be assigned
-    def cartes_bancaires_payments=(cartes_bancaires_payments : String?)
-      if cartes_bancaires_payments.nil?
-        return @cartes_bancaires_payments = nil
+    def cartes_bancaires_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("cartes_bancaires_payments", new_value, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
       end
-      _cartes_bancaires_payments = cartes_bancaires_payments.not_nil!
-      OpenApi::EnumValidator.validate("cartes_bancaires_payments", _cartes_bancaires_payments, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
-      @cartes_bancaires_payments = _cartes_bancaires_payments
+
+      @cartes_bancaires_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eps_payments Object to be assigned
-    def eps_payments=(eps_payments : String?)
-      if eps_payments.nil?
-        return @eps_payments = nil
+    def eps_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("eps_payments", new_value, VALID_VALUES_FOR_EPS_PAYMENTS)
       end
-      _eps_payments = eps_payments.not_nil!
-      OpenApi::EnumValidator.validate("eps_payments", _eps_payments, VALID_VALUES_FOR_EPS_PAYMENTS)
-      @eps_payments = _eps_payments
+
+      @eps_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fpx_payments Object to be assigned
-    def fpx_payments=(fpx_payments : String?)
-      if fpx_payments.nil?
-        return @fpx_payments = nil
+    def fpx_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("fpx_payments", new_value, VALID_VALUES_FOR_FPX_PAYMENTS)
       end
-      _fpx_payments = fpx_payments.not_nil!
-      OpenApi::EnumValidator.validate("fpx_payments", _fpx_payments, VALID_VALUES_FOR_FPX_PAYMENTS)
-      @fpx_payments = _fpx_payments
+
+      @fpx_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] giropay_payments Object to be assigned
-    def giropay_payments=(giropay_payments : String?)
-      if giropay_payments.nil?
-        return @giropay_payments = nil
+    def giropay_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("giropay_payments", new_value, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
       end
-      _giropay_payments = giropay_payments.not_nil!
-      OpenApi::EnumValidator.validate("giropay_payments", _giropay_payments, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
-      @giropay_payments = _giropay_payments
+
+      @giropay_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] grabpay_payments Object to be assigned
-    def grabpay_payments=(grabpay_payments : String?)
-      if grabpay_payments.nil?
-        return @grabpay_payments = nil
+    def grabpay_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("grabpay_payments", new_value, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
       end
-      _grabpay_payments = grabpay_payments.not_nil!
-      OpenApi::EnumValidator.validate("grabpay_payments", _grabpay_payments, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
-      @grabpay_payments = _grabpay_payments
+
+      @grabpay_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ideal_payments Object to be assigned
-    def ideal_payments=(ideal_payments : String?)
-      if ideal_payments.nil?
-        return @ideal_payments = nil
+    def ideal_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("ideal_payments", new_value, VALID_VALUES_FOR_IDEAL_PAYMENTS)
       end
-      _ideal_payments = ideal_payments.not_nil!
-      OpenApi::EnumValidator.validate("ideal_payments", _ideal_payments, VALID_VALUES_FOR_IDEAL_PAYMENTS)
-      @ideal_payments = _ideal_payments
+
+      @ideal_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] india_international_payments Object to be assigned
-    def india_international_payments=(india_international_payments : String?)
-      if india_international_payments.nil?
-        return @india_international_payments = nil
+    def india_international_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("india_international_payments", new_value, VALID_VALUES_FOR_INDIA_INTERNATIONAL_PAYMENTS)
       end
-      _india_international_payments = india_international_payments.not_nil!
-      OpenApi::EnumValidator.validate("india_international_payments", _india_international_payments, VALID_VALUES_FOR_INDIA_INTERNATIONAL_PAYMENTS)
-      @india_international_payments = _india_international_payments
+
+      @india_international_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] jcb_payments Object to be assigned
-    def jcb_payments=(jcb_payments : String?)
-      if jcb_payments.nil?
-        return @jcb_payments = nil
+    def jcb_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("jcb_payments", new_value, VALID_VALUES_FOR_JCB_PAYMENTS)
       end
-      _jcb_payments = jcb_payments.not_nil!
-      OpenApi::EnumValidator.validate("jcb_payments", _jcb_payments, VALID_VALUES_FOR_JCB_PAYMENTS)
-      @jcb_payments = _jcb_payments
+
+      @jcb_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] klarna_payments Object to be assigned
-    def klarna_payments=(klarna_payments : String?)
-      if klarna_payments.nil?
-        return @klarna_payments = nil
+    def klarna_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("klarna_payments", new_value, VALID_VALUES_FOR_KLARNA_PAYMENTS)
       end
-      _klarna_payments = klarna_payments.not_nil!
-      OpenApi::EnumValidator.validate("klarna_payments", _klarna_payments, VALID_VALUES_FOR_KLARNA_PAYMENTS)
-      @klarna_payments = _klarna_payments
+
+      @klarna_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] konbini_payments Object to be assigned
-    def konbini_payments=(konbini_payments : String?)
-      if konbini_payments.nil?
-        return @konbini_payments = nil
+    def konbini_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("konbini_payments", new_value, VALID_VALUES_FOR_KONBINI_PAYMENTS)
       end
-      _konbini_payments = konbini_payments.not_nil!
-      OpenApi::EnumValidator.validate("konbini_payments", _konbini_payments, VALID_VALUES_FOR_KONBINI_PAYMENTS)
-      @konbini_payments = _konbini_payments
+
+      @konbini_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] legacy_payments Object to be assigned
-    def legacy_payments=(legacy_payments : String?)
-      if legacy_payments.nil?
-        return @legacy_payments = nil
+    def legacy_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("legacy_payments", new_value, VALID_VALUES_FOR_LEGACY_PAYMENTS)
       end
-      _legacy_payments = legacy_payments.not_nil!
-      OpenApi::EnumValidator.validate("legacy_payments", _legacy_payments, VALID_VALUES_FOR_LEGACY_PAYMENTS)
-      @legacy_payments = _legacy_payments
+
+      @legacy_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] link_payments Object to be assigned
-    def link_payments=(link_payments : String?)
-      if link_payments.nil?
-        return @link_payments = nil
+    def link_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("link_payments", new_value, VALID_VALUES_FOR_LINK_PAYMENTS)
       end
-      _link_payments = link_payments.not_nil!
-      OpenApi::EnumValidator.validate("link_payments", _link_payments, VALID_VALUES_FOR_LINK_PAYMENTS)
-      @link_payments = _link_payments
+
+      @link_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] oxxo_payments Object to be assigned
-    def oxxo_payments=(oxxo_payments : String?)
-      if oxxo_payments.nil?
-        return @oxxo_payments = nil
+    def oxxo_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("oxxo_payments", new_value, VALID_VALUES_FOR_OXXO_PAYMENTS)
       end
-      _oxxo_payments = oxxo_payments.not_nil!
-      OpenApi::EnumValidator.validate("oxxo_payments", _oxxo_payments, VALID_VALUES_FOR_OXXO_PAYMENTS)
-      @oxxo_payments = _oxxo_payments
+
+      @oxxo_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] p24_payments Object to be assigned
-    def p24_payments=(p24_payments : String?)
-      if p24_payments.nil?
-        return @p24_payments = nil
+    def p24_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("p24_payments", new_value, VALID_VALUES_FOR_P24_PAYMENTS)
       end
-      _p24_payments = p24_payments.not_nil!
-      OpenApi::EnumValidator.validate("p24_payments", _p24_payments, VALID_VALUES_FOR_P24_PAYMENTS)
-      @p24_payments = _p24_payments
+
+      @p24_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paynow_payments Object to be assigned
-    def paynow_payments=(paynow_payments : String?)
-      if paynow_payments.nil?
-        return @paynow_payments = nil
+    def paynow_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("paynow_payments", new_value, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
       end
-      _paynow_payments = paynow_payments.not_nil!
-      OpenApi::EnumValidator.validate("paynow_payments", _paynow_payments, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
-      @paynow_payments = _paynow_payments
+
+      @paynow_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] promptpay_payments Object to be assigned
-    def promptpay_payments=(promptpay_payments : String?)
-      if promptpay_payments.nil?
-        return @promptpay_payments = nil
+    def promptpay_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("promptpay_payments", new_value, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
       end
-      _promptpay_payments = promptpay_payments.not_nil!
-      OpenApi::EnumValidator.validate("promptpay_payments", _promptpay_payments, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
-      @promptpay_payments = _promptpay_payments
+
+      @promptpay_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sepa_debit_payments Object to be assigned
-    def sepa_debit_payments=(sepa_debit_payments : String?)
-      if sepa_debit_payments.nil?
-        return @sepa_debit_payments = nil
+    def sepa_debit_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("sepa_debit_payments", new_value, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
       end
-      _sepa_debit_payments = sepa_debit_payments.not_nil!
-      OpenApi::EnumValidator.validate("sepa_debit_payments", _sepa_debit_payments, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
-      @sepa_debit_payments = _sepa_debit_payments
+
+      @sepa_debit_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sofort_payments Object to be assigned
-    def sofort_payments=(sofort_payments : String?)
-      if sofort_payments.nil?
-        return @sofort_payments = nil
+    def sofort_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("sofort_payments", new_value, VALID_VALUES_FOR_SOFORT_PAYMENTS)
       end
-      _sofort_payments = sofort_payments.not_nil!
-      OpenApi::EnumValidator.validate("sofort_payments", _sofort_payments, VALID_VALUES_FOR_SOFORT_PAYMENTS)
-      @sofort_payments = _sofort_payments
+
+      @sofort_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_reporting_us_1099_k Object to be assigned
-    def tax_reporting_us_1099_k=(tax_reporting_us_1099_k : String?)
-      if tax_reporting_us_1099_k.nil?
-        return @tax_reporting_us_1099_k = nil
+    def tax_reporting_us_1099_k=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_reporting_us_1099_k", new_value, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
       end
-      _tax_reporting_us_1099_k = tax_reporting_us_1099_k.not_nil!
-      OpenApi::EnumValidator.validate("tax_reporting_us_1099_k", _tax_reporting_us_1099_k, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
-      @tax_reporting_us_1099_k = _tax_reporting_us_1099_k
+
+      @tax_reporting_us_1099_k = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_reporting_us_1099_misc Object to be assigned
-    def tax_reporting_us_1099_misc=(tax_reporting_us_1099_misc : String?)
-      if tax_reporting_us_1099_misc.nil?
-        return @tax_reporting_us_1099_misc = nil
+    def tax_reporting_us_1099_misc=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_reporting_us_1099_misc", new_value, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
       end
-      _tax_reporting_us_1099_misc = tax_reporting_us_1099_misc.not_nil!
-      OpenApi::EnumValidator.validate("tax_reporting_us_1099_misc", _tax_reporting_us_1099_misc, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
-      @tax_reporting_us_1099_misc = _tax_reporting_us_1099_misc
+
+      @tax_reporting_us_1099_misc = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfers Object to be assigned
-    def transfers=(transfers : String?)
-      if transfers.nil?
-        return @transfers = nil
+    def transfers=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("transfers", new_value, VALID_VALUES_FOR_TRANSFERS)
       end
-      _transfers = transfers.not_nil!
-      OpenApi::EnumValidator.validate("transfers", _transfers, VALID_VALUES_FOR_TRANSFERS)
-      @transfers = _transfers
+
+      @transfers = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(treasury : String?)
-      if treasury.nil?
-        return @treasury = nil
+    def treasury=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("treasury", new_value, VALID_VALUES_FOR_TREASURY)
       end
-      _treasury = treasury.not_nil!
-      OpenApi::EnumValidator.validate("treasury", _treasury, VALID_VALUES_FOR_TREASURY)
-      @treasury = _treasury
+
+      @treasury = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account_ach_payments Object to be assigned
-    def us_bank_account_ach_payments=(us_bank_account_ach_payments : String?)
-      if us_bank_account_ach_payments.nil?
-        return @us_bank_account_ach_payments = nil
+    def us_bank_account_ach_payments=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("us_bank_account_ach_payments", new_value, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
       end
-      _us_bank_account_ach_payments = us_bank_account_ach_payments.not_nil!
-      OpenApi::EnumValidator.validate("us_bank_account_ach_payments", _us_bank_account_ach_payments, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
-      @us_bank_account_ach_payments = _us_bank_account_ach_payments
+
+      @us_bank_account_ach_payments = new_value
     end
 
     # Generates #hash and #== methods from all fields

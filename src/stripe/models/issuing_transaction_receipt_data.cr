@@ -88,43 +88,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Float64?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Float64?)
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] total Object to be assigned
-    def total=(total : Int64?)
-      if total.nil?
-        return @total = nil
-      end
-      _total = total.not_nil!
-      @total = _total
+    def total=(new_value : Int64?)
+      @total = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_cost Object to be assigned
-    def unit_cost=(unit_cost : Int64?)
-      if unit_cost.nil?
-        return @unit_cost = nil
-      end
-      _unit_cost = unit_cost.not_nil!
-      @unit_cost = _unit_cost
+    def unit_cost=(new_value : Int64?)
+      @unit_cost = new_value
     end
 
     # Generates #hash and #== methods from all fields

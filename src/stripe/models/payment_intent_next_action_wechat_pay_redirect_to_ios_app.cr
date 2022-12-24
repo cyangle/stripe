@@ -65,13 +65,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] native_url Object to be assigned
-    def native_url=(native_url : String?)
-      if native_url.nil?
-        raise ArgumentError.new("\"native_url\" is required and cannot be null")
+    def native_url=(new_value : String?)
+      raise ArgumentError.new("\"native_url\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("native_url", new_value.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
       end
-      _native_url = native_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
-      @native_url = _native_url
+
+      @native_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

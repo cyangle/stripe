@@ -91,43 +91,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] line_items Object to be assigned
-    def line_items=(line_items : Array(Stripe::TerminalReaderReaderResourceLineItem)?)
-      if line_items.nil?
-        raise ArgumentError.new("\"line_items\" is required and cannot be null")
+    def line_items=(new_value : Array(Stripe::TerminalReaderReaderResourceLineItem)?)
+      raise ArgumentError.new("\"line_items\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _line_items = line_items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
-      @line_items = _line_items
+
+      @line_items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] total Object to be assigned
-    def total=(total : Int64?)
-      if total.nil?
-        raise ArgumentError.new("\"total\" is required and cannot be null")
-      end
-      _total = total.not_nil!
-      @total = _total
+    def total=(new_value : Int64?)
+      raise ArgumentError.new("\"total\" is required and cannot be null") if new_value.nil?
+
+      @total = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax Object to be assigned
-    def tax=(tax : Int64?)
-      if tax.nil?
-        return @tax = nil
-      end
-      _tax = tax.not_nil!
-      @tax = _tax
+    def tax=(new_value : Int64?)
+      @tax = new_value
     end
 
     # Generates #hash and #== methods from all fields

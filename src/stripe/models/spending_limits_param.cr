@@ -86,34 +86,31 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        raise ArgumentError.new("\"interval\" is required and cannot be null")
+    def interval=(new_value : String?)
+      raise ArgumentError.new("\"interval\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("interval", new_value, VALID_VALUES_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] categories Object to be assigned
-    def categories=(categories : Array(String)?)
-      if categories.nil?
-        return @categories = nil
+    def categories=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("categories", new_value, VALID_VALUES_FOR_CATEGORIES)
       end
-      _categories = categories.not_nil!
-      OpenApi::EnumValidator.validate("categories", _categories, VALID_VALUES_FOR_CATEGORIES)
-      @categories = _categories
+
+      @categories = new_value
     end
 
     # Generates #hash and #== methods from all fields

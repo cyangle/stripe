@@ -61,22 +61,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_extended_authorization Object to be assigned
-    def request_extended_authorization=(request_extended_authorization : Bool?)
-      if request_extended_authorization.nil?
-        return @request_extended_authorization = nil
-      end
-      _request_extended_authorization = request_extended_authorization.not_nil!
-      @request_extended_authorization = _request_extended_authorization
+    def request_extended_authorization=(new_value : Bool?)
+      @request_extended_authorization = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_incremental_authorization_support Object to be assigned
-    def request_incremental_authorization_support=(request_incremental_authorization_support : Bool?)
-      if request_incremental_authorization_support.nil?
-        return @request_incremental_authorization_support = nil
-      end
-      _request_incremental_authorization_support = request_incremental_authorization_support.not_nil!
-      @request_incremental_authorization_support = _request_incremental_authorization_support
+    def request_incremental_authorization_support=(new_value : Bool?)
+      @request_incremental_authorization_support = new_value
     end
 
     # Generates #hash and #== methods from all fields

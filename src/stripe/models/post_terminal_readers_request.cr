@@ -114,56 +114,49 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] registration_code Object to be assigned
-    def registration_code=(registration_code : String?)
-      if registration_code.nil?
-        raise ArgumentError.new("\"registration_code\" is required and cannot be null")
+    def registration_code=(new_value : String?)
+      raise ArgumentError.new("\"registration_code\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("registration_code", new_value.to_s.size, MAX_LENGTH_FOR_REGISTRATION_CODE)
       end
-      _registration_code = registration_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("registration_code", _registration_code.to_s.size, MAX_LENGTH_FOR_REGISTRATION_CODE)
-      @registration_code = _registration_code
+
+      @registration_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] label Object to be assigned
-    def label=(label : String?)
-      if label.nil?
-        return @label = nil
+    def label=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("label", new_value.to_s.size, MAX_LENGTH_FOR_LABEL)
       end
-      _label = label.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
-      @label = _label
+
+      @label = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(location : String?)
-      if location.nil?
-        return @location = nil
+    def location=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("location", new_value.to_s.size, MAX_LENGTH_FOR_LOCATION)
       end
-      _location = location.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
-      @location = _location
+
+      @location = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

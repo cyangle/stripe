@@ -54,22 +54,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amounts Object to be assigned
-    def amounts=(amounts : Array(Int32)?)
-      if amounts.nil?
-        return @amounts = nil
-      end
-      _amounts = amounts.not_nil!
-      @amounts = _amounts
+    def amounts=(new_value : Array(Int32)?)
+      @amounts = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

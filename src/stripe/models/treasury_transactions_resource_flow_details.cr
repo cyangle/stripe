@@ -155,101 +155,93 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credit_reversal Object to be assigned
-    def credit_reversal=(credit_reversal : Stripe::TreasuryCreditReversal?)
-      if credit_reversal.nil?
-        return @credit_reversal = nil
+    def credit_reversal=(new_value : Stripe::TreasuryCreditReversal?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _credit_reversal = credit_reversal.not_nil!
-      _credit_reversal.validate if _credit_reversal.is_a?(OpenApi::Validatable)
-      @credit_reversal = _credit_reversal
+
+      @credit_reversal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] debit_reversal Object to be assigned
-    def debit_reversal=(debit_reversal : Stripe::TreasuryDebitReversal?)
-      if debit_reversal.nil?
-        return @debit_reversal = nil
+    def debit_reversal=(new_value : Stripe::TreasuryDebitReversal?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _debit_reversal = debit_reversal.not_nil!
-      _debit_reversal.validate if _debit_reversal.is_a?(OpenApi::Validatable)
-      @debit_reversal = _debit_reversal
+
+      @debit_reversal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_transfer Object to be assigned
-    def inbound_transfer=(inbound_transfer : Stripe::TreasuryInboundTransfer?)
-      if inbound_transfer.nil?
-        return @inbound_transfer = nil
+    def inbound_transfer=(new_value : Stripe::TreasuryInboundTransfer?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _inbound_transfer = inbound_transfer.not_nil!
-      _inbound_transfer.validate if _inbound_transfer.is_a?(OpenApi::Validatable)
-      @inbound_transfer = _inbound_transfer
+
+      @inbound_transfer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing_authorization Object to be assigned
-    def issuing_authorization=(issuing_authorization : Stripe::IssuingAuthorization?)
-      if issuing_authorization.nil?
-        return @issuing_authorization = nil
+    def issuing_authorization=(new_value : Stripe::IssuingAuthorization?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _issuing_authorization = issuing_authorization.not_nil!
-      _issuing_authorization.validate if _issuing_authorization.is_a?(OpenApi::Validatable)
-      @issuing_authorization = _issuing_authorization
+
+      @issuing_authorization = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_payment Object to be assigned
-    def outbound_payment=(outbound_payment : Stripe::TreasuryOutboundPayment?)
-      if outbound_payment.nil?
-        return @outbound_payment = nil
+    def outbound_payment=(new_value : Stripe::TreasuryOutboundPayment?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _outbound_payment = outbound_payment.not_nil!
-      _outbound_payment.validate if _outbound_payment.is_a?(OpenApi::Validatable)
-      @outbound_payment = _outbound_payment
+
+      @outbound_payment = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_transfer Object to be assigned
-    def outbound_transfer=(outbound_transfer : Stripe::TreasuryOutboundTransfer?)
-      if outbound_transfer.nil?
-        return @outbound_transfer = nil
+    def outbound_transfer=(new_value : Stripe::TreasuryOutboundTransfer?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _outbound_transfer = outbound_transfer.not_nil!
-      _outbound_transfer.validate if _outbound_transfer.is_a?(OpenApi::Validatable)
-      @outbound_transfer = _outbound_transfer
+
+      @outbound_transfer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_credit Object to be assigned
-    def received_credit=(received_credit : Stripe::TreasuryReceivedCredit?)
-      if received_credit.nil?
-        return @received_credit = nil
+    def received_credit=(new_value : Stripe::TreasuryReceivedCredit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _received_credit = received_credit.not_nil!
-      _received_credit.validate if _received_credit.is_a?(OpenApi::Validatable)
-      @received_credit = _received_credit
+
+      @received_credit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_debit Object to be assigned
-    def received_debit=(received_debit : Stripe::TreasuryReceivedDebit?)
-      if received_debit.nil?
-        return @received_debit = nil
+    def received_debit=(new_value : Stripe::TreasuryReceivedDebit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _received_debit = received_debit.not_nil!
-      _received_debit.validate if _received_debit.is_a?(OpenApi::Validatable)
-      @received_debit = _received_debit
+
+      @received_debit = new_value
     end
 
     # Generates #hash and #== methods from all fields

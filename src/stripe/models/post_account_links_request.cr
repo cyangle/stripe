@@ -104,60 +104,47 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account Object to be assigned
-    def account=(account : String?)
-      if account.nil?
-        raise ArgumentError.new("\"account\" is required and cannot be null")
+    def account=(new_value : String?)
+      raise ArgumentError.new("\"account\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       end
-      _account = account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
-      @account = _account
+
+      @account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collect Object to be assigned
-    def collect=(collect : String?)
-      if collect.nil?
-        return @collect = nil
+    def collect=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("collect", new_value, VALID_VALUES_FOR_COLLECT)
       end
-      _collect = collect.not_nil!
-      OpenApi::EnumValidator.validate("collect", _collect, VALID_VALUES_FOR_COLLECT)
-      @collect = _collect
+
+      @collect = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refresh_url Object to be assigned
-    def refresh_url=(refresh_url : String?)
-      if refresh_url.nil?
-        return @refresh_url = nil
-      end
-      _refresh_url = refresh_url.not_nil!
-      @refresh_url = _refresh_url
+    def refresh_url=(new_value : String?)
+      @refresh_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        return @return_url = nil
-      end
-      _return_url = return_url.not_nil!
-      @return_url = _return_url
+    def return_url=(new_value : String?)
+      @return_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

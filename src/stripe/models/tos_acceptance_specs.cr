@@ -80,44 +80,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date Object to be assigned
-    def date=(date : Int64?)
-      if date.nil?
-        return @date = nil
-      end
-      _date = date.not_nil!
-      @date = _date
+    def date=(new_value : Int64?)
+      @date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip Object to be assigned
-    def ip=(ip : String?)
-      if ip.nil?
-        return @ip = nil
-      end
-      _ip = ip.not_nil!
-      @ip = _ip
+    def ip=(new_value : String?)
+      @ip = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service_agreement Object to be assigned
-    def service_agreement=(service_agreement : String?)
-      if service_agreement.nil?
-        return @service_agreement = nil
+    def service_agreement=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("service_agreement", new_value.to_s.size, MAX_LENGTH_FOR_SERVICE_AGREEMENT)
       end
-      _service_agreement = service_agreement.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("service_agreement", _service_agreement.to_s.size, MAX_LENGTH_FOR_SERVICE_AGREEMENT)
-      @service_agreement = _service_agreement
+
+      @service_agreement = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_agent Object to be assigned
-    def user_agent=(user_agent : String?)
-      if user_agent.nil?
-        return @user_agent = nil
+    def user_agent=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("user_agent", new_value.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
       end
-      _user_agent = user_agent.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
-      @user_agent = _user_agent
+
+      @user_agent = new_value
     end
 
     # Generates #hash and #== methods from all fields

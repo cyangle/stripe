@@ -112,67 +112,58 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_settings Object to be assigned
-    def default_settings=(default_settings : Stripe::DefaultSettingsParams?)
-      if default_settings.nil?
-        return @default_settings = nil
+    def default_settings=(new_value : Stripe::DefaultSettingsParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _default_settings = default_settings.not_nil!
-      _default_settings.validate if _default_settings.is_a?(OpenApi::Validatable)
-      @default_settings = _default_settings
+
+      @default_settings = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_behavior Object to be assigned
-    def end_behavior=(end_behavior : String?)
-      if end_behavior.nil?
-        return @end_behavior = nil
+    def end_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("end_behavior", new_value, VALID_VALUES_FOR_END_BEHAVIOR)
       end
-      _end_behavior = end_behavior.not_nil!
-      OpenApi::EnumValidator.validate("end_behavior", _end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
-      @end_behavior = _end_behavior
+
+      @end_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phases Object to be assigned
-    def phases=(phases : Array(Stripe::PhaseConfigurationParams)?)
-      if phases.nil?
-        return @phases = nil
+    def phases=(new_value : Array(Stripe::PhaseConfigurationParams)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _phases = phases.not_nil!
-      OpenApi::ContainerValidator.validate(container: _phases) if _phases.is_a?(Array)
-      @phases = _phases
+
+      @phases = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior : String?)
-      if proration_behavior.nil?
-        return @proration_behavior = nil
+    def proration_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("proration_behavior", new_value, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
-      _proration_behavior = proration_behavior.not_nil!
-      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-      @proration_behavior = _proration_behavior
+
+      @proration_behavior = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -119,72 +119,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::RequiredAddress?)
-      if address.nil?
-        raise ArgumentError.new("\"address\" is required and cannot be null")
+    def address=(new_value : Stripe::RequiredAddress?)
+      raise ArgumentError.new("\"address\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address = address.not_nil!
-      _address.validate if _address.is_a?(OpenApi::Validatable)
-      @address = _address
+
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customs Object to be assigned
-    def customs=(customs : Stripe::CustomsParam?)
-      if customs.nil?
-        return @customs = nil
+    def customs=(new_value : Stripe::CustomsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customs = customs.not_nil!
-      _customs.validate if _customs.is_a?(OpenApi::Validatable)
-      @customs = _customs
+
+      @customs = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone_number Object to be assigned
-    def phone_number=(phone_number : String?)
-      if phone_number.nil?
-        return @phone_number = nil
-      end
-      _phone_number = phone_number.not_nil!
-      @phone_number = _phone_number
+    def phone_number=(new_value : String?)
+      @phone_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] require_signature Object to be assigned
-    def require_signature=(require_signature : Bool?)
-      if require_signature.nil?
-        return @require_signature = nil
-      end
-      _require_signature = require_signature.not_nil!
-      @require_signature = _require_signature
+    def require_signature=(new_value : Bool?)
+      @require_signature = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service Object to be assigned
-    def service=(service : String?)
-      @service = service
+    def service=(new_value : String?)
+      @service = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
+    def _type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

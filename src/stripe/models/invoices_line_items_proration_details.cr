@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credited_items Object to be assigned
-    def credited_items=(credited_items : Stripe::InvoicesLineItemsProrationDetailsCreditedItems?)
-      if credited_items.nil?
-        return @credited_items = nil
+    def credited_items=(new_value : Stripe::InvoicesLineItemsProrationDetailsCreditedItems?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _credited_items = credited_items.not_nil!
-      _credited_items.validate if _credited_items.is_a?(OpenApi::Validatable)
-      @credited_items = _credited_items
+
+      @credited_items = new_value
     end
 
     # Generates #hash and #== methods from all fields

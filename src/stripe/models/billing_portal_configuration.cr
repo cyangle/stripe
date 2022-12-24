@@ -212,139 +212,123 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        raise ArgumentError.new("\"active\" is required and cannot be null")
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      raise ArgumentError.new("\"active\" is required and cannot be null") if new_value.nil?
+
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_profile Object to be assigned
-    def business_profile=(business_profile : Stripe::PortalBusinessProfile?)
-      if business_profile.nil?
-        raise ArgumentError.new("\"business_profile\" is required and cannot be null")
+    def business_profile=(new_value : Stripe::PortalBusinessProfile?)
+      raise ArgumentError.new("\"business_profile\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _business_profile = business_profile.not_nil!
-      _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
-      @business_profile = _business_profile
+
+      @business_profile = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created Object to be assigned
-    def created=(created : Int64?)
-      if created.nil?
-        raise ArgumentError.new("\"created\" is required and cannot be null")
-      end
-      _created = created.not_nil!
-      @created = _created
+    def created=(new_value : Int64?)
+      raise ArgumentError.new("\"created\" is required and cannot be null") if new_value.nil?
+
+      @created = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] features Object to be assigned
-    def features=(features : Stripe::PortalFeatures?)
-      if features.nil?
-        raise ArgumentError.new("\"features\" is required and cannot be null")
+    def features=(new_value : Stripe::PortalFeatures?)
+      raise ArgumentError.new("\"features\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _features = features.not_nil!
-      _features.validate if _features.is_a?(OpenApi::Validatable)
-      @features = _features
+
+      @features = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] is_default Object to be assigned
-    def is_default=(is_default : Bool?)
-      if is_default.nil?
-        raise ArgumentError.new("\"is_default\" is required and cannot be null")
-      end
-      _is_default = is_default.not_nil!
-      @is_default = _is_default
+    def is_default=(new_value : Bool?)
+      raise ArgumentError.new("\"is_default\" is required and cannot be null") if new_value.nil?
+
+      @is_default = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] login_page Object to be assigned
-    def login_page=(login_page : Stripe::PortalLoginPage?)
-      if login_page.nil?
-        raise ArgumentError.new("\"login_page\" is required and cannot be null")
+    def login_page=(new_value : Stripe::PortalLoginPage?)
+      raise ArgumentError.new("\"login_page\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _login_page = login_page.not_nil!
-      _login_page.validate if _login_page.is_a?(OpenApi::Validatable)
-      @login_page = _login_page
+
+      @login_page = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] updated Object to be assigned
-    def updated=(updated : Int64?)
-      if updated.nil?
-        raise ArgumentError.new("\"updated\" is required and cannot be null")
-      end
-      _updated = updated.not_nil!
-      @updated = _updated
+    def updated=(new_value : Int64?)
+      raise ArgumentError.new("\"updated\" is required and cannot be null") if new_value.nil?
+
+      @updated = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] application Object to be assigned
-    def application=(application : Stripe::BillingPortalConfigurationApplication?)
-      if application.nil?
-        return @application = nil
+    def application=(new_value : Stripe::BillingPortalConfigurationApplication?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _application = application.not_nil!
-      _application.validate if _application.is_a?(OpenApi::Validatable)
-      @application = _application
+
+      @application = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_return_url Object to be assigned
-    def default_return_url=(default_return_url : String?)
-      if default_return_url.nil?
-        return @default_return_url = nil
+    def default_return_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("default_return_url", new_value.to_s.size, MAX_LENGTH_FOR_DEFAULT_RETURN_URL)
       end
-      _default_return_url = default_return_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("default_return_url", _default_return_url.to_s.size, MAX_LENGTH_FOR_DEFAULT_RETURN_URL)
-      @default_return_url = _default_return_url
+
+      @default_return_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -48,12 +48,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requested Object to be assigned
-    def requested=(requested : Bool?)
-      if requested.nil?
-        return @requested = nil
-      end
-      _requested = requested.not_nil!
-      @requested = _requested
+    def requested=(new_value : Bool?)
+      @requested = new_value
     end
 
     # Generates #hash and #== methods from all fields

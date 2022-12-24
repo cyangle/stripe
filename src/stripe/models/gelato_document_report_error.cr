@@ -80,24 +80,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String?)
-      if code.nil?
-        return @code = nil
+    def code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("code", new_value, VALID_VALUES_FOR_CODE)
       end
-      _code = code.not_nil!
-      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
-      @code = _code
+
+      @code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      if reason.nil?
-        return @reason = nil
+    def reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reason", new_value.to_s.size, MAX_LENGTH_FOR_REASON)
       end
-      _reason = reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
-      @reason = _reason
+
+      @reason = new_value
     end
 
     # Generates #hash and #== methods from all fields

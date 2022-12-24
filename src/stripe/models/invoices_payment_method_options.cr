@@ -129,68 +129,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acss_debit Object to be assigned
-    def acss_debit=(acss_debit : Stripe::InvoicesPaymentMethodOptionsAcssDebit?)
-      if acss_debit.nil?
-        return @acss_debit = nil
+    def acss_debit=(new_value : Stripe::InvoicesPaymentMethodOptionsAcssDebit?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _acss_debit = acss_debit.not_nil!
-      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
-      @acss_debit = _acss_debit
+
+      @acss_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bancontact Object to be assigned
-    def bancontact=(bancontact : Stripe::InvoicesPaymentMethodOptionsBancontact?)
-      if bancontact.nil?
-        return @bancontact = nil
+    def bancontact=(new_value : Stripe::InvoicesPaymentMethodOptionsBancontact?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bancontact = bancontact.not_nil!
-      _bancontact.validate if _bancontact.is_a?(OpenApi::Validatable)
-      @bancontact = _bancontact
+
+      @bancontact = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::InvoicesPaymentMethodOptionsCard?)
-      if card.nil?
-        return @card = nil
+    def card=(new_value : Stripe::InvoicesPaymentMethodOptionsCard?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_balance Object to be assigned
-    def customer_balance=(customer_balance : Stripe::InvoicesPaymentMethodOptionsCustomerBalance?)
-      if customer_balance.nil?
-        return @customer_balance = nil
+    def customer_balance=(new_value : Stripe::InvoicesPaymentMethodOptionsCustomerBalance?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customer_balance = customer_balance.not_nil!
-      _customer_balance.validate if _customer_balance.is_a?(OpenApi::Validatable)
-      @customer_balance = _customer_balance
+
+      @customer_balance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] konbini Object to be assigned
-    def konbini=(konbini : Stripe::InvoicesPaymentMethodOptionsKonbini?)
-      if konbini.nil?
-        return @konbini = nil
+    def konbini=(new_value : Stripe::InvoicesPaymentMethodOptionsKonbini?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _konbini = konbini.not_nil!
-      _konbini.validate if _konbini.is_a?(OpenApi::Validatable)
-      @konbini = _konbini
+
+      @konbini = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::InvoicesPaymentMethodOptionsUsBankAccount?)
-      if us_bank_account.nil?
-        return @us_bank_account = nil
+    def us_bank_account=(new_value : Stripe::InvoicesPaymentMethodOptionsUsBankAccount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _us_bank_account = us_bank_account.not_nil!
-      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
-      @us_bank_account = _us_bank_account
+
+      @us_bank_account = new_value
     end
 
     # Generates #hash and #== methods from all fields

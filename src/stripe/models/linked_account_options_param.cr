@@ -71,24 +71,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permissions Object to be assigned
-    def permissions=(permissions : Array(String)?)
-      if permissions.nil?
-        return @permissions = nil
+    def permissions=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("permissions", new_value, VALID_VALUES_FOR_PERMISSIONS)
       end
-      _permissions = permissions.not_nil!
-      OpenApi::EnumValidator.validate("permissions", _permissions, VALID_VALUES_FOR_PERMISSIONS)
-      @permissions = _permissions
+
+      @permissions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_url Object to be assigned
-    def return_url=(return_url : String?)
-      if return_url.nil?
-        return @return_url = nil
+    def return_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("return_url", new_value.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       end
-      _return_url = return_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
-      @return_url = _return_url
+
+      @return_url = new_value
     end
 
     # Generates #hash and #== methods from all fields

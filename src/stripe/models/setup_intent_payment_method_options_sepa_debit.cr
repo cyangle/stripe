@@ -50,12 +50,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(mandate_options : JSON::Any?)
-      if mandate_options.nil?
-        return @mandate_options = nil
-      end
-      _mandate_options = mandate_options.not_nil!
-      @mandate_options = _mandate_options
+    def mandate_options=(new_value : JSON::Any?)
+      @mandate_options = new_value
     end
 
     # Generates #hash and #== methods from all fields

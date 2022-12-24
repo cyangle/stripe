@@ -87,44 +87,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name Object to be assigned
-    def first_name=(first_name : String?)
-      if first_name.nil?
-        raise ArgumentError.new("\"first_name\" is required and cannot be null")
-      end
-      _first_name = first_name.not_nil!
-      @first_name = _first_name
+    def first_name=(new_value : String?)
+      raise ArgumentError.new("\"first_name\" is required and cannot be null") if new_value.nil?
+
+      @first_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name Object to be assigned
-    def last_name=(last_name : String?)
-      if last_name.nil?
-        raise ArgumentError.new("\"last_name\" is required and cannot be null")
-      end
-      _last_name = last_name.not_nil!
-      @last_name = _last_name
+    def last_name=(new_value : String?)
+      raise ArgumentError.new("\"last_name\" is required and cannot be null") if new_value.nil?
+
+      @last_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(dob : Stripe::DateOfBirthSpecs?)
-      if dob.nil?
-        return @dob = nil
+    def dob=(new_value : Stripe::DateOfBirthSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dob = dob.not_nil!
-      _dob.validate if _dob.is_a?(OpenApi::Validatable)
-      @dob = _dob
+
+      @dob = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification Object to be assigned
-    def verification=(verification : Stripe::PersonVerificationParam?)
-      if verification.nil?
-        return @verification = nil
+    def verification=(new_value : Stripe::PersonVerificationParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verification = verification.not_nil!
-      _verification.validate if _verification.is_a?(OpenApi::Validatable)
-      @verification = _verification
+
+      @verification = new_value
     end
 
     # Generates #hash and #== methods from all fields

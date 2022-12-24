@@ -77,23 +77,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available Object to be assigned
-    def available=(available : Array(String)?)
-      if available.nil?
-        raise ArgumentError.new("\"available\" is required and cannot be null")
-      end
-      _available = available.not_nil!
-      @available = _available
+    def available=(new_value : Array(String)?)
+      raise ArgumentError.new("\"available\" is required and cannot be null") if new_value.nil?
+
+      @available = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred Object to be assigned
-    def preferred=(preferred : String?)
-      if preferred.nil?
-        return @preferred = nil
+    def preferred=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("preferred", new_value.to_s.size, MAX_LENGTH_FOR_PREFERRED)
       end
-      _preferred = preferred.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
-      @preferred = _preferred
+
+      @preferred = new_value
     end
 
     # Generates #hash and #== methods from all fields

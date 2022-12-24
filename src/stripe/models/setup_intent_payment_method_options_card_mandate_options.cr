@@ -181,107 +181,91 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_type Object to be assigned
-    def amount_type=(amount_type : String?)
-      if amount_type.nil?
-        raise ArgumentError.new("\"amount_type\" is required and cannot be null")
+    def amount_type=(new_value : String?)
+      raise ArgumentError.new("\"amount_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("amount_type", new_value, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
-      _amount_type = amount_type.not_nil!
-      OpenApi::EnumValidator.validate("amount_type", _amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
-      @amount_type = _amount_type
+
+      @amount_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        raise ArgumentError.new("\"interval\" is required and cannot be null")
+    def interval=(new_value : String?)
+      raise ArgumentError.new("\"interval\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("interval", new_value, VALID_VALUES_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        raise ArgumentError.new("\"reference\" is required and cannot be null")
+    def reference=(new_value : String?)
+      raise ArgumentError.new("\"reference\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] start_date Object to be assigned
-    def start_date=(start_date : Int64?)
-      if start_date.nil?
-        raise ArgumentError.new("\"start_date\" is required and cannot be null")
-      end
-      _start_date = start_date.not_nil!
-      @start_date = _start_date
+    def start_date=(new_value : Int64?)
+      raise ArgumentError.new("\"start_date\" is required and cannot be null") if new_value.nil?
+
+      @start_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_date Object to be assigned
-    def end_date=(end_date : Int64?)
-      if end_date.nil?
-        return @end_date = nil
-      end
-      _end_date = end_date.not_nil!
-      @end_date = _end_date
+    def end_date=(new_value : Int64?)
+      @end_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval_count Object to be assigned
-    def interval_count=(interval_count : Int64?)
-      if interval_count.nil?
-        return @interval_count = nil
-      end
-      _interval_count = interval_count.not_nil!
-      @interval_count = _interval_count
+    def interval_count=(new_value : Int64?)
+      @interval_count = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_types Object to be assigned
-    def supported_types=(supported_types : Array(String)?)
-      if supported_types.nil?
-        return @supported_types = nil
+    def supported_types=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("supported_types", new_value, VALID_VALUES_FOR_SUPPORTED_TYPES)
       end
-      _supported_types = supported_types.not_nil!
-      OpenApi::EnumValidator.validate("supported_types", _supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
-      @supported_types = _supported_types
+
+      @supported_types = new_value
     end
 
     # Generates #hash and #== methods from all fields

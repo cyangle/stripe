@@ -101,35 +101,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder_name Object to be assigned
-    def account_holder_name=(account_holder_name : String?)
-      if account_holder_name.nil?
-        raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
+    def account_holder_name=(new_value : String?)
+      raise ArgumentError.new("\"account_holder_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
       end
-      _account_holder_name = account_holder_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
-      @account_holder_name = _account_holder_name
+
+      @account_holder_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_number Object to be assigned
-    def account_number=(account_number : String?)
-      if account_number.nil?
-        raise ArgumentError.new("\"account_number\" is required and cannot be null")
+    def account_number=(new_value : String?)
+      raise ArgumentError.new("\"account_number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_number", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       end
-      _account_number = account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
-      @account_number = _account_number
+
+      @account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sort_code Object to be assigned
-    def sort_code=(sort_code : String?)
-      if sort_code.nil?
-        raise ArgumentError.new("\"sort_code\" is required and cannot be null")
+    def sort_code=(new_value : String?)
+      raise ArgumentError.new("\"sort_code\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sort_code", new_value.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
       end
-      _sort_code = sort_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
-      @sort_code = _sort_code
+
+      @sort_code = new_value
     end
 
     # Generates #hash and #== methods from all fields

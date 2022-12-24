@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] store Object to be assigned
-    def store=(store : Stripe::PaymentMethodDetailsKonbiniStore1?)
-      if store.nil?
-        return @store = nil
+    def store=(new_value : Stripe::PaymentMethodDetailsKonbiniStore1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _store = store.not_nil!
-      _store.validate if _store.is_a?(OpenApi::Validatable)
-      @store = _store
+
+      @store = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -48,12 +48,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] files Object to be assigned
-    def files=(files : Array(String)?)
-      if files.nil?
-        return @files = nil
-      end
-      _files = files.not_nil!
-      @files = _files
+    def files=(new_value : Array(String)?)
+      @files = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -135,57 +135,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
+    def bank_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_name", new_value.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       end
-      _bank_name = bank_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
-      @bank_name = _bank_name
+
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
+    def fingerprint=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("fingerprint", new_value.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       end
-      _fingerprint = fingerprint.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
-      @fingerprint = _fingerprint
+
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] institution_number Object to be assigned
-    def institution_number=(institution_number : String?)
-      if institution_number.nil?
-        return @institution_number = nil
+    def institution_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("institution_number", new_value.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
       end
-      _institution_number = institution_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
-      @institution_number = _institution_number
+
+      @institution_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
+    def last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last4", new_value.to_s.size, MAX_LENGTH_FOR_LAST4)
       end
-      _last4 = last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
-      @last4 = _last4
+
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transit_number Object to be assigned
-    def transit_number=(transit_number : String?)
-      if transit_number.nil?
-        return @transit_number = nil
+    def transit_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("transit_number", new_value.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
       end
-      _transit_number = transit_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
-      @transit_number = _transit_number
+
+      @transit_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

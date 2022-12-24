@@ -106,55 +106,49 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] as_of Object to be assigned
-    def as_of=(as_of : Int64?)
-      if as_of.nil?
-        raise ArgumentError.new("\"as_of\" is required and cannot be null")
-      end
-      _as_of = as_of.not_nil!
-      @as_of = _as_of
+    def as_of=(new_value : Int64?)
+      raise ArgumentError.new("\"as_of\" is required and cannot be null") if new_value.nil?
+
+      @as_of = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] current Object to be assigned
-    def current=(current : Hash(String, Int32)?)
-      if current.nil?
-        raise ArgumentError.new("\"current\" is required and cannot be null")
-      end
-      _current = current.not_nil!
-      @current = _current
+    def current=(new_value : Hash(String, Int32)?)
+      raise ArgumentError.new("\"current\" is required and cannot be null") if new_value.nil?
+
+      @current = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash Object to be assigned
-    def cash=(cash : Stripe::BankConnectionsResourceBalanceApiResourceCashBalance?)
-      if cash.nil?
-        return @cash = nil
+    def cash=(new_value : Stripe::BankConnectionsResourceBalanceApiResourceCashBalance?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cash = cash.not_nil!
-      _cash.validate if _cash.is_a?(OpenApi::Validatable)
-      @cash = _cash
+
+      @cash = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credit Object to be assigned
-    def credit=(credit : Stripe::BankConnectionsResourceBalanceApiResourceCreditBalance?)
-      if credit.nil?
-        return @credit = nil
+    def credit=(new_value : Stripe::BankConnectionsResourceBalanceApiResourceCreditBalance?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _credit = credit.not_nil!
-      _credit.validate if _credit.is_a?(OpenApi::Validatable)
-      @credit = _credit
+
+      @credit = new_value
     end
 
     # Generates #hash and #== methods from all fields

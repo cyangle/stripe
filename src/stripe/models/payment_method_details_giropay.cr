@@ -117,46 +117,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_code Object to be assigned
-    def bank_code=(bank_code : String?)
-      if bank_code.nil?
-        return @bank_code = nil
+    def bank_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_code", new_value.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       end
-      _bank_code = bank_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
-      @bank_code = _bank_code
+
+      @bank_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
+    def bank_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_name", new_value.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       end
-      _bank_name = bank_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
-      @bank_name = _bank_name
+
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        return @bic = nil
+    def bic=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bic", new_value.to_s.size, MAX_LENGTH_FOR_BIC)
       end
-      _bic = bic.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
-      @bic = _bic
+
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_name Object to be assigned
-    def verified_name=(verified_name : String?)
-      if verified_name.nil?
-        return @verified_name = nil
+    def verified_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_name", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       end
-      _verified_name = verified_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
-      @verified_name = _verified_name
+
+      @verified_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

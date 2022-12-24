@@ -70,24 +70,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        return @interval = nil
+    def interval=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("interval", new_value, VALID_VALUES_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_type Object to be assigned
-    def usage_type=(usage_type : String?)
-      if usage_type.nil?
-        return @usage_type = nil
+    def usage_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("usage_type", new_value, VALID_VALUES_FOR_USAGE_TYPE)
       end
-      _usage_type = usage_type.not_nil!
-      OpenApi::EnumValidator.validate("usage_type", _usage_type, VALID_VALUES_FOR_USAGE_TYPE)
-      @usage_type = _usage_type
+
+      @usage_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

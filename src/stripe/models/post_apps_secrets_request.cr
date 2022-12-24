@@ -110,55 +110,47 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payload Object to be assigned
-    def payload=(payload : String?)
-      if payload.nil?
-        raise ArgumentError.new("\"payload\" is required and cannot be null")
+    def payload=(new_value : String?)
+      raise ArgumentError.new("\"payload\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("payload", new_value.to_s.size, MAX_LENGTH_FOR_PAYLOAD)
       end
-      _payload = payload.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("payload", _payload.to_s.size, MAX_LENGTH_FOR_PAYLOAD)
-      @payload = _payload
+
+      @payload = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] scope Object to be assigned
-    def scope=(scope : Stripe::ScopeParam?)
-      if scope.nil?
-        raise ArgumentError.new("\"scope\" is required and cannot be null")
+    def scope=(new_value : Stripe::ScopeParam?)
+      raise ArgumentError.new("\"scope\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _scope = scope.not_nil!
-      _scope.validate if _scope.is_a?(OpenApi::Validatable)
-      @scope = _scope
+
+      @scope = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        return @expires_at = nil
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      @expires_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

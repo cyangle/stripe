@@ -167,112 +167,102 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(additional_documentation : Stripe::BbposWisePoseSplashscreen?)
-      if additional_documentation.nil?
-        return @additional_documentation = nil
+    def additional_documentation=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _additional_documentation = additional_documentation.not_nil!
-      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
-      @additional_documentation = _additional_documentation
+
+      @additional_documentation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] canceled_at Object to be assigned
-    def canceled_at=(canceled_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
-      if canceled_at.nil?
-        return @canceled_at = nil
+    def canceled_at=(new_value : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _canceled_at = canceled_at.not_nil!
-      _canceled_at.validate if _canceled_at.is_a?(OpenApi::Validatable)
-      @canceled_at = _canceled_at
+
+      @canceled_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_policy_provided Object to be assigned
-    def cancellation_policy_provided=(cancellation_policy_provided : Stripe::CanceledCancellationPolicyProvided?)
-      if cancellation_policy_provided.nil?
-        return @cancellation_policy_provided = nil
+    def cancellation_policy_provided=(new_value : Stripe::CanceledCancellationPolicyProvided?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cancellation_policy_provided = cancellation_policy_provided.not_nil!
-      _cancellation_policy_provided.validate if _cancellation_policy_provided.is_a?(OpenApi::Validatable)
-      @cancellation_policy_provided = _cancellation_policy_provided
+
+      @cancellation_policy_provided = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason : String?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
+    def cancellation_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cancellation_reason", new_value.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
       end
-      _cancellation_reason = cancellation_reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cancellation_reason", _cancellation_reason.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
-      @cancellation_reason = _cancellation_reason
+
+      @cancellation_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expected_at Object to be assigned
-    def expected_at=(expected_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
-      if expected_at.nil?
-        return @expected_at = nil
+    def expected_at=(new_value : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _expected_at = expected_at.not_nil!
-      _expected_at.validate if _expected_at.is_a?(OpenApi::Validatable)
-      @expected_at = _expected_at
+
+      @expected_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(explanation : String?)
-      if explanation.nil?
-        return @explanation = nil
+    def explanation=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("explanation", new_value.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       end
-      _explanation = explanation.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
-      @explanation = _explanation
+
+      @explanation = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product_description Object to be assigned
-    def product_description=(product_description : String?)
-      if product_description.nil?
-        return @product_description = nil
+    def product_description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("product_description", new_value.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       end
-      _product_description = product_description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
-      @product_description = _product_description
+
+      @product_description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] product_type Object to be assigned
-    def product_type=(product_type : String?)
-      if product_type.nil?
-        return @product_type = nil
+    def product_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("product_type", new_value, VALID_VALUES_FOR_PRODUCT_TYPE)
       end
-      _product_type = product_type.not_nil!
-      OpenApi::EnumValidator.validate("product_type", _product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
-      @product_type = _product_type
+
+      @product_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_status Object to be assigned
-    def return_status=(return_status : String?)
-      if return_status.nil?
-        return @return_status = nil
+    def return_status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("return_status", new_value, VALID_VALUES_FOR_RETURN_STATUS)
       end
-      _return_status = return_status.not_nil!
-      OpenApi::EnumValidator.validate("return_status", _return_status, VALID_VALUES_FOR_RETURN_STATUS)
-      @return_status = _return_status
+
+      @return_status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] returned_at Object to be assigned
-    def returned_at=(returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
-      if returned_at.nil?
-        return @returned_at = nil
+    def returned_at=(new_value : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _returned_at = returned_at.not_nil!
-      _returned_at.validate if _returned_at.is_a?(OpenApi::Validatable)
-      @returned_at = _returned_at
+
+      @returned_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

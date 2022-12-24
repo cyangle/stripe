@@ -118,55 +118,51 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] period_end Object to be assigned
-    def period_end=(period_end : Int64?)
-      if period_end.nil?
-        raise ArgumentError.new("\"period_end\" is required and cannot be null")
-      end
-      _period_end = period_end.not_nil!
-      @period_end = _period_end
+    def period_end=(new_value : Int64?)
+      raise ArgumentError.new("\"period_end\" is required and cannot be null") if new_value.nil?
+
+      @period_end = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] period_start Object to be assigned
-    def period_start=(period_start : Int64?)
-      if period_start.nil?
-        raise ArgumentError.new("\"period_start\" is required and cannot be null")
-      end
-      _period_start = period_start.not_nil!
-      @period_start = _period_start
+    def period_start=(new_value : Int64?)
+      raise ArgumentError.new("\"period_start\" is required and cannot be null") if new_value.nil?
+
+      @period_start = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_deduction_account_number Object to be assigned
-    def tax_deduction_account_number=(tax_deduction_account_number : String?)
-      if tax_deduction_account_number.nil?
-        raise ArgumentError.new("\"tax_deduction_account_number\" is required and cannot be null")
+    def tax_deduction_account_number=(new_value : String?)
+      raise ArgumentError.new("\"tax_deduction_account_number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("tax_deduction_account_number", new_value.to_s.size, MAX_LENGTH_FOR_TAX_DEDUCTION_ACCOUNT_NUMBER)
       end
-      _tax_deduction_account_number = tax_deduction_account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("tax_deduction_account_number", _tax_deduction_account_number.to_s.size, MAX_LENGTH_FOR_TAX_DEDUCTION_ACCOUNT_NUMBER)
-      @tax_deduction_account_number = _tax_deduction_account_number
+
+      @tax_deduction_account_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

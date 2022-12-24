@@ -61,23 +61,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] skip_tipping Object to be assigned
-    def skip_tipping=(skip_tipping : Bool?)
-      if skip_tipping.nil?
-        return @skip_tipping = nil
-      end
-      _skip_tipping = skip_tipping.not_nil!
-      @skip_tipping = _skip_tipping
+    def skip_tipping=(new_value : Bool?)
+      @skip_tipping = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tipping Object to be assigned
-    def tipping=(tipping : Stripe::TerminalReaderReaderResourceTippingConfig?)
-      if tipping.nil?
-        return @tipping = nil
+    def tipping=(new_value : Stripe::TerminalReaderReaderResourceTippingConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tipping = tipping.not_nil!
-      _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
-      @tipping = _tipping
+
+      @tipping = new_value
     end
 
     # Generates #hash and #== methods from all fields

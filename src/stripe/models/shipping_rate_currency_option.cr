@@ -73,23 +73,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior : String?)
-      if tax_behavior.nil?
-        raise ArgumentError.new("\"tax_behavior\" is required and cannot be null")
+    def tax_behavior=(new_value : String?)
+      raise ArgumentError.new("\"tax_behavior\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      _tax_behavior = tax_behavior.not_nil!
-      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
-      @tax_behavior = _tax_behavior
+
+      @tax_behavior = new_value
     end
 
     # Generates #hash and #== methods from all fields

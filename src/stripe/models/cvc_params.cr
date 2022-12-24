@@ -63,13 +63,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc Object to be assigned
-    def cvc=(cvc : String?)
-      if cvc.nil?
-        raise ArgumentError.new("\"cvc\" is required and cannot be null")
+    def cvc=(new_value : String?)
+      raise ArgumentError.new("\"cvc\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cvc", new_value.to_s.size, MAX_LENGTH_FOR_CVC)
       end
-      _cvc = cvc.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
-      @cvc = _cvc
+
+      @cvc = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -61,13 +61,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::Address?)
-      if address.nil?
-        raise ArgumentError.new("\"address\" is required and cannot be null")
+    def address=(new_value : Stripe::Address?)
+      raise ArgumentError.new("\"address\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address = address.not_nil!
-      _address.validate if _address.is_a?(OpenApi::Validatable)
-      @address = _address
+
+      @address = new_value
     end
 
     # Generates #hash and #== methods from all fields

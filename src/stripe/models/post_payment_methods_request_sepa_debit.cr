@@ -64,13 +64,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban Object to be assigned
-    def iban=(iban : String?)
-      if iban.nil?
-        raise ArgumentError.new("\"iban\" is required and cannot be null")
+    def iban=(new_value : String?)
+      raise ArgumentError.new("\"iban\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("iban", new_value.to_s.size, MAX_LENGTH_FOR_IBAN)
       end
-      _iban = iban.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("iban", _iban.to_s.size, MAX_LENGTH_FOR_IBAN)
-      @iban = _iban
+
+      @iban = new_value
     end
 
     # Generates #hash and #== methods from all fields

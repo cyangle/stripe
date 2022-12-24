@@ -65,22 +65,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] avs_failure Object to be assigned
-    def avs_failure=(avs_failure : Bool?)
-      if avs_failure.nil?
-        raise ArgumentError.new("\"avs_failure\" is required and cannot be null")
-      end
-      _avs_failure = avs_failure.not_nil!
-      @avs_failure = _avs_failure
+    def avs_failure=(new_value : Bool?)
+      raise ArgumentError.new("\"avs_failure\" is required and cannot be null") if new_value.nil?
+
+      @avs_failure = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_failure Object to be assigned
-    def cvc_failure=(cvc_failure : Bool?)
-      if cvc_failure.nil?
-        raise ArgumentError.new("\"cvc_failure\" is required and cannot be null")
-      end
-      _cvc_failure = cvc_failure.not_nil!
-      @cvc_failure = _cvc_failure
+    def cvc_failure=(new_value : Bool?)
+      raise ArgumentError.new("\"cvc_failure\" is required and cannot be null") if new_value.nil?
+
+      @cvc_failure = new_value
     end
 
     # Generates #hash and #== methods from all fields

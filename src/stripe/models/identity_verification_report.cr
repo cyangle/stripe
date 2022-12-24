@@ -175,105 +175,97 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created Object to be assigned
-    def created=(created : Int64?)
-      if created.nil?
-        raise ArgumentError.new("\"created\" is required and cannot be null")
-      end
-      _created = created.not_nil!
-      @created = _created
+    def created=(new_value : Int64?)
+      raise ArgumentError.new("\"created\" is required and cannot be null") if new_value.nil?
+
+      @created = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] options Object to be assigned
-    def options=(options : Stripe::GelatoVerificationReportOptions?)
-      if options.nil?
-        raise ArgumentError.new("\"options\" is required and cannot be null")
+    def options=(new_value : Stripe::GelatoVerificationReportOptions?)
+      raise ArgumentError.new("\"options\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _options = options.not_nil!
-      _options.validate if _options.is_a?(OpenApi::Validatable)
-      @options = _options
+
+      @options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] document Object to be assigned
-    def document=(document : Stripe::GelatoDocumentReport?)
-      if document.nil?
-        return @document = nil
+    def document=(new_value : Stripe::GelatoDocumentReport?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _document = document.not_nil!
-      _document.validate if _document.is_a?(OpenApi::Validatable)
-      @document = _document
+
+      @document = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id_number Object to be assigned
-    def id_number=(id_number : Stripe::GelatoIdNumberReport?)
-      if id_number.nil?
-        return @id_number = nil
+    def id_number=(new_value : Stripe::GelatoIdNumberReport?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _id_number = id_number.not_nil!
-      _id_number.validate if _id_number.is_a?(OpenApi::Validatable)
-      @id_number = _id_number
+
+      @id_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] selfie Object to be assigned
-    def selfie=(selfie : Stripe::GelatoSelfieReport?)
-      if selfie.nil?
-        return @selfie = nil
+    def selfie=(new_value : Stripe::GelatoSelfieReport?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _selfie = selfie.not_nil!
-      _selfie.validate if _selfie.is_a?(OpenApi::Validatable)
-      @selfie = _selfie
+
+      @selfie = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_session Object to be assigned
-    def verification_session=(verification_session : String?)
-      if verification_session.nil?
-        return @verification_session = nil
+    def verification_session=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verification_session", new_value.to_s.size, MAX_LENGTH_FOR_VERIFICATION_SESSION)
       end
-      _verification_session = verification_session.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verification_session", _verification_session.to_s.size, MAX_LENGTH_FOR_VERIFICATION_SESSION)
-      @verification_session = _verification_session
+
+      @verification_session = new_value
     end
 
     # Generates #hash and #== methods from all fields

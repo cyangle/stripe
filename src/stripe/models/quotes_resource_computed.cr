@@ -78,24 +78,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] upfront Object to be assigned
-    def upfront=(upfront : Stripe::QuotesResourceUpfront?)
-      if upfront.nil?
-        raise ArgumentError.new("\"upfront\" is required and cannot be null")
+    def upfront=(new_value : Stripe::QuotesResourceUpfront?)
+      raise ArgumentError.new("\"upfront\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _upfront = upfront.not_nil!
-      _upfront.validate if _upfront.is_a?(OpenApi::Validatable)
-      @upfront = _upfront
+
+      @upfront = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recurring Object to be assigned
-    def recurring=(recurring : Stripe::QuotesResourceComputedRecurring?)
-      if recurring.nil?
-        return @recurring = nil
+    def recurring=(new_value : Stripe::QuotesResourceComputedRecurring?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _recurring = recurring.not_nil!
-      _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
-      @recurring = _recurring
+
+      @recurring = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -87,30 +87,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        raise ArgumentError.new("\"country\" is required and cannot be null")
+    def country=(new_value : String?)
+      raise ArgumentError.new("\"country\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("country", new_value.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       end
-      _country = country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-      @country = _country
+
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] financial_addresses Object to be assigned
-    def financial_addresses=(financial_addresses : Array(Stripe::FundingInstructionsBankTransferFinancialAddress)?)
-      if financial_addresses.nil?
-        raise ArgumentError.new("\"financial_addresses\" is required and cannot be null")
+    def financial_addresses=(new_value : Array(Stripe::FundingInstructionsBankTransferFinancialAddress)?)
+      raise ArgumentError.new("\"financial_addresses\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _financial_addresses = financial_addresses.not_nil!
-      OpenApi::ContainerValidator.validate(container: _financial_addresses) if _financial_addresses.is_a?(Array)
-      @financial_addresses = _financial_addresses
+
+      @financial_addresses = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

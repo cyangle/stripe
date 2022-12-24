@@ -54,22 +54,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preserve_cancel_date Object to be assigned
-    def preserve_cancel_date=(preserve_cancel_date : Bool?)
-      if preserve_cancel_date.nil?
-        return @preserve_cancel_date = nil
-      end
-      _preserve_cancel_date = preserve_cancel_date.not_nil!
-      @preserve_cancel_date = _preserve_cancel_date
+    def preserve_cancel_date=(new_value : Bool?)
+      @preserve_cancel_date = new_value
     end
 
     # Generates #hash and #== methods from all fields

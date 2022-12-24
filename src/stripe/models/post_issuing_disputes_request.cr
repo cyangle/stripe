@@ -96,65 +96,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] evidence Object to be assigned
-    def evidence=(evidence : Stripe::EvidenceParam?)
-      if evidence.nil?
-        return @evidence = nil
+    def evidence=(new_value : Stripe::EvidenceParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _evidence = evidence.not_nil!
-      _evidence.validate if _evidence.is_a?(OpenApi::Validatable)
-      @evidence = _evidence
+
+      @evidence = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction Object to be assigned
-    def transaction=(transaction : String?)
-      if transaction.nil?
-        return @transaction = nil
+    def transaction=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("transaction", new_value.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
       end
-      _transaction = transaction.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("transaction", _transaction.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
-      @transaction = _transaction
+
+      @transaction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(treasury : Stripe::TreasuryParam?)
-      if treasury.nil?
-        return @treasury = nil
+    def treasury=(new_value : Stripe::TreasuryParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _treasury = treasury.not_nil!
-      _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
-      @treasury = _treasury
+
+      @treasury = new_value
     end
 
     # Generates #hash and #== methods from all fields

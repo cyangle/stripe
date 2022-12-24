@@ -126,57 +126,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_mandate_url Object to be assigned
-    def custom_mandate_url=(custom_mandate_url : String?)
-      if custom_mandate_url.nil?
-        return @custom_mandate_url = nil
+    def custom_mandate_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("custom_mandate_url", new_value.to_s.size, MAX_LENGTH_FOR_CUSTOM_MANDATE_URL)
       end
-      _custom_mandate_url = custom_mandate_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("custom_mandate_url", _custom_mandate_url.to_s.size, MAX_LENGTH_FOR_CUSTOM_MANDATE_URL)
-      @custom_mandate_url = _custom_mandate_url
+
+      @custom_mandate_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_for Object to be assigned
-    def default_for=(default_for : Array(String)?)
-      if default_for.nil?
-        return @default_for = nil
+    def default_for=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("default_for", new_value, VALID_VALUES_FOR_DEFAULT_FOR)
       end
-      _default_for = default_for.not_nil!
-      OpenApi::EnumValidator.validate("default_for", _default_for, VALID_VALUES_FOR_DEFAULT_FOR)
-      @default_for = _default_for
+
+      @default_for = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval_description Object to be assigned
-    def interval_description=(interval_description : String?)
-      if interval_description.nil?
-        return @interval_description = nil
+    def interval_description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("interval_description", new_value.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
       end
-      _interval_description = interval_description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
-      @interval_description = _interval_description
+
+      @interval_description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_schedule Object to be assigned
-    def payment_schedule=(payment_schedule : String?)
-      if payment_schedule.nil?
-        return @payment_schedule = nil
+    def payment_schedule=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("payment_schedule", new_value, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
-      _payment_schedule = payment_schedule.not_nil!
-      OpenApi::EnumValidator.validate("payment_schedule", _payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
-      @payment_schedule = _payment_schedule
+
+      @payment_schedule = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_type Object to be assigned
-    def transaction_type=(transaction_type : String?)
-      if transaction_type.nil?
-        return @transaction_type = nil
+    def transaction_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("transaction_type", new_value, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
-      _transaction_type = transaction_type.not_nil!
-      OpenApi::EnumValidator.validate("transaction_type", _transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
-      @transaction_type = _transaction_type
+
+      @transaction_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

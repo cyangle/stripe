@@ -297,210 +297,188 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        raise ArgumentError.new("\"amount\" is required and cannot be null")
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount\" is required and cannot be null") if new_value.nil?
+
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::IssuingTransactionCard?)
-      if card.nil?
-        raise ArgumentError.new("\"card\" is required and cannot be null")
+    def card=(new_value : Stripe::IssuingTransactionCard?)
+      raise ArgumentError.new("\"card\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created Object to be assigned
-    def created=(created : Int64?)
-      if created.nil?
-        raise ArgumentError.new("\"created\" is required and cannot be null")
-      end
-      _created = created.not_nil!
-      @created = _created
+    def created=(new_value : Int64?)
+      raise ArgumentError.new("\"created\" is required and cannot be null") if new_value.nil?
+
+      @created = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] merchant_amount Object to be assigned
-    def merchant_amount=(merchant_amount : Int64?)
-      if merchant_amount.nil?
-        raise ArgumentError.new("\"merchant_amount\" is required and cannot be null")
-      end
-      _merchant_amount = merchant_amount.not_nil!
-      @merchant_amount = _merchant_amount
+    def merchant_amount=(new_value : Int64?)
+      raise ArgumentError.new("\"merchant_amount\" is required and cannot be null") if new_value.nil?
+
+      @merchant_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] merchant_currency Object to be assigned
-    def merchant_currency=(merchant_currency : String?)
-      if merchant_currency.nil?
-        raise ArgumentError.new("\"merchant_currency\" is required and cannot be null")
-      end
-      _merchant_currency = merchant_currency.not_nil!
-      @merchant_currency = _merchant_currency
+    def merchant_currency=(new_value : String?)
+      raise ArgumentError.new("\"merchant_currency\" is required and cannot be null") if new_value.nil?
+
+      @merchant_currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] merchant_data Object to be assigned
-    def merchant_data=(merchant_data : Stripe::IssuingAuthorizationMerchantData?)
-      if merchant_data.nil?
-        raise ArgumentError.new("\"merchant_data\" is required and cannot be null")
+    def merchant_data=(new_value : Stripe::IssuingAuthorizationMerchantData?)
+      raise ArgumentError.new("\"merchant_data\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _merchant_data = merchant_data.not_nil!
-      _merchant_data.validate if _merchant_data.is_a?(OpenApi::Validatable)
-      @merchant_data = _merchant_data
+
+      @merchant_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        raise ArgumentError.new("\"metadata\" is required and cannot be null")
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      raise ArgumentError.new("\"metadata\" is required and cannot be null") if new_value.nil?
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_details Object to be assigned
-    def amount_details=(amount_details : Stripe::IssuingTransactionAmountDetails1?)
-      if amount_details.nil?
-        return @amount_details = nil
+    def amount_details=(new_value : Stripe::IssuingTransactionAmountDetails1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _amount_details = amount_details.not_nil!
-      _amount_details.validate if _amount_details.is_a?(OpenApi::Validatable)
-      @amount_details = _amount_details
+
+      @amount_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authorization Object to be assigned
-    def authorization=(authorization : Stripe::IssuingTransactionAuthorization?)
-      if authorization.nil?
-        return @authorization = nil
+    def authorization=(new_value : Stripe::IssuingTransactionAuthorization?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _authorization = authorization.not_nil!
-      _authorization.validate if _authorization.is_a?(OpenApi::Validatable)
-      @authorization = _authorization
+
+      @authorization = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] balance_transaction Object to be assigned
-    def balance_transaction=(balance_transaction : Stripe::IssuingTransactionBalanceTransaction?)
-      if balance_transaction.nil?
-        return @balance_transaction = nil
+    def balance_transaction=(new_value : Stripe::IssuingTransactionBalanceTransaction?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _balance_transaction = balance_transaction.not_nil!
-      _balance_transaction.validate if _balance_transaction.is_a?(OpenApi::Validatable)
-      @balance_transaction = _balance_transaction
+
+      @balance_transaction = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cardholder Object to be assigned
-    def cardholder=(cardholder : Stripe::IssuingTransactionCardholder?)
-      if cardholder.nil?
-        return @cardholder = nil
+    def cardholder=(new_value : Stripe::IssuingTransactionCardholder?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cardholder = cardholder.not_nil!
-      _cardholder.validate if _cardholder.is_a?(OpenApi::Validatable)
-      @cardholder = _cardholder
+
+      @cardholder = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dispute Object to be assigned
-    def dispute=(dispute : Stripe::IssuingTransactionDispute?)
-      if dispute.nil?
-        return @dispute = nil
+    def dispute=(new_value : Stripe::IssuingTransactionDispute?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dispute = dispute.not_nil!
-      _dispute.validate if _dispute.is_a?(OpenApi::Validatable)
-      @dispute = _dispute
+
+      @dispute = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] purchase_details Object to be assigned
-    def purchase_details=(purchase_details : Stripe::IssuingTransactionPurchaseDetails1?)
-      if purchase_details.nil?
-        return @purchase_details = nil
+    def purchase_details=(new_value : Stripe::IssuingTransactionPurchaseDetails1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _purchase_details = purchase_details.not_nil!
-      _purchase_details.validate if _purchase_details.is_a?(OpenApi::Validatable)
-      @purchase_details = _purchase_details
+
+      @purchase_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(treasury : Stripe::IssuingTransactionTreasury1?)
-      if treasury.nil?
-        return @treasury = nil
+    def treasury=(new_value : Stripe::IssuingTransactionTreasury1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _treasury = treasury.not_nil!
-      _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
-      @treasury = _treasury
+
+      @treasury = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wallet Object to be assigned
-    def wallet=(wallet : String?)
-      if wallet.nil?
-        return @wallet = nil
+    def wallet=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("wallet", new_value, VALID_VALUES_FOR_WALLET)
       end
-      _wallet = wallet.not_nil!
-      OpenApi::EnumValidator.validate("wallet", _wallet, VALID_VALUES_FOR_WALLET)
-      @wallet = _wallet
+
+      @wallet = new_value
     end
 
     # Generates #hash and #== methods from all fields

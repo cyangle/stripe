@@ -60,13 +60,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_acceptance Object to be assigned
-    def customer_acceptance=(customer_acceptance : Stripe::CustomerAcceptanceParam?)
-      if customer_acceptance.nil?
-        raise ArgumentError.new("\"customer_acceptance\" is required and cannot be null")
+    def customer_acceptance=(new_value : Stripe::CustomerAcceptanceParam?)
+      raise ArgumentError.new("\"customer_acceptance\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customer_acceptance = customer_acceptance.not_nil!
-      _customer_acceptance.validate if _customer_acceptance.is_a?(OpenApi::Validatable)
-      @customer_acceptance = _customer_acceptance
+
+      @customer_acceptance = new_value
     end
 
     # Generates #hash and #== methods from all fields

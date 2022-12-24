@@ -82,34 +82,29 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] adjustable_quantity Object to be assigned
-    def adjustable_quantity=(adjustable_quantity : Stripe::AdjustableQuantityParams?)
-      if adjustable_quantity.nil?
-        return @adjustable_quantity = nil
+    def adjustable_quantity=(new_value : Stripe::AdjustableQuantityParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _adjustable_quantity = adjustable_quantity.not_nil!
-      _adjustable_quantity.validate if _adjustable_quantity.is_a?(OpenApi::Validatable)
-      @adjustable_quantity = _adjustable_quantity
+
+      @adjustable_quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      @quantity = new_value
     end
 
     # Generates #hash and #== methods from all fields

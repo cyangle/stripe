@@ -127,87 +127,70 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active Object to be assigned
-    def active=(active : Bool?)
-      if active.nil?
-        return @active = nil
-      end
-      _active = active.not_nil!
-      @active = _active
+    def active=(new_value : Bool?)
+      @active = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Stripe::PostPricesPriceRequestCurrencyOptions?)
-      if currency_options.nil?
-        return @currency_options = nil
+    def currency_options=(new_value : Stripe::PostPricesPriceRequestCurrencyOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _currency_options = currency_options.not_nil!
-      _currency_options.validate if _currency_options.is_a?(OpenApi::Validatable)
-      @currency_options = _currency_options
+
+      @currency_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lookup_key Object to be assigned
-    def lookup_key=(lookup_key : String?)
-      if lookup_key.nil?
-        return @lookup_key = nil
+    def lookup_key=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("lookup_key", new_value.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
       end
-      _lookup_key = lookup_key.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("lookup_key", _lookup_key.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
-      @lookup_key = _lookup_key
+
+      @lookup_key = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] nickname Object to be assigned
-    def nickname=(nickname : String?)
-      if nickname.nil?
-        return @nickname = nil
+    def nickname=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("nickname", new_value.to_s.size, MAX_LENGTH_FOR_NICKNAME)
       end
-      _nickname = nickname.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
-      @nickname = _nickname
+
+      @nickname = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior : String?)
-      if tax_behavior.nil?
-        return @tax_behavior = nil
+    def tax_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      _tax_behavior = tax_behavior.not_nil!
-      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
-      @tax_behavior = _tax_behavior
+
+      @tax_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_lookup_key Object to be assigned
-    def transfer_lookup_key=(transfer_lookup_key : Bool?)
-      if transfer_lookup_key.nil?
-        return @transfer_lookup_key = nil
-      end
-      _transfer_lookup_key = transfer_lookup_key.not_nil!
-      @transfer_lookup_key = _transfer_lookup_key
+    def transfer_lookup_key=(new_value : Bool?)
+      @transfer_lookup_key = new_value
     end
 
     # Generates #hash and #== methods from all fields

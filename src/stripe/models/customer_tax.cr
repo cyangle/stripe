@@ -99,35 +99,33 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax : String?)
-      if automatic_tax.nil?
-        raise ArgumentError.new("\"automatic_tax\" is required and cannot be null")
+    def automatic_tax=(new_value : String?)
+      raise ArgumentError.new("\"automatic_tax\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("automatic_tax", new_value, VALID_VALUES_FOR_AUTOMATIC_TAX)
       end
-      _automatic_tax = automatic_tax.not_nil!
-      OpenApi::EnumValidator.validate("automatic_tax", _automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
-      @automatic_tax = _automatic_tax
+
+      @automatic_tax = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(ip_address : String?)
-      if ip_address.nil?
-        return @ip_address = nil
+    def ip_address=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("ip_address", new_value.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       end
-      _ip_address = ip_address.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
-      @ip_address = _ip_address
+
+      @ip_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(location : Stripe::CustomerTaxLocation1?)
-      if location.nil?
-        return @location = nil
+    def location=(new_value : Stripe::CustomerTaxLocation1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _location = location.not_nil!
-      _location.validate if _location.is_a?(OpenApi::Validatable)
-      @location = _location
+
+      @location = new_value
     end
 
     # Generates #hash and #== methods from all fields

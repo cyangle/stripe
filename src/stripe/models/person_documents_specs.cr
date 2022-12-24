@@ -77,35 +77,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company_authorization Object to be assigned
-    def company_authorization=(company_authorization : Stripe::DocumentsParam?)
-      if company_authorization.nil?
-        return @company_authorization = nil
+    def company_authorization=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company_authorization = company_authorization.not_nil!
-      _company_authorization.validate if _company_authorization.is_a?(OpenApi::Validatable)
-      @company_authorization = _company_authorization
+
+      @company_authorization = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] passport Object to be assigned
-    def passport=(passport : Stripe::DocumentsParam?)
-      if passport.nil?
-        return @passport = nil
+    def passport=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _passport = passport.not_nil!
-      _passport.validate if _passport.is_a?(OpenApi::Validatable)
-      @passport = _passport
+
+      @passport = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] visa Object to be assigned
-    def visa=(visa : Stripe::DocumentsParam?)
-      if visa.nil?
-        return @visa = nil
+    def visa=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _visa = visa.not_nil!
-      _visa.validate if _visa.is_a?(OpenApi::Validatable)
-      @visa = _visa
+
+      @visa = new_value
     end
 
     # Generates #hash and #== methods from all fields

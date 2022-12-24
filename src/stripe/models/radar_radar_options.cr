@@ -60,13 +60,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] session Object to be assigned
-    def session=(session : String?)
-      if session.nil?
-        return @session = nil
+    def session=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("session", new_value.to_s.size, MAX_LENGTH_FOR_SESSION)
       end
-      _session = session.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("session", _session.to_s.size, MAX_LENGTH_FOR_SESSION)
-      @session = _session
+
+      @session = new_value
     end
 
     # Generates #hash and #== methods from all fields

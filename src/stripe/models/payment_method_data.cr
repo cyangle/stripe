@@ -96,55 +96,45 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_details Object to be assigned
-    def billing_details=(billing_details : Stripe::BillingDetailsInnerParams?)
-      if billing_details.nil?
-        return @billing_details = nil
+    def billing_details=(new_value : Stripe::BillingDetailsInnerParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _billing_details = billing_details.not_nil!
-      _billing_details.validate if _billing_details.is_a?(OpenApi::Validatable)
-      @billing_details = _billing_details
+
+      @billing_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] financial_account Object to be assigned
-    def financial_account=(financial_account : String?)
-      if financial_account.nil?
-        return @financial_account = nil
-      end
-      _financial_account = financial_account.not_nil!
-      @financial_account = _financial_account
+    def financial_account=(new_value : String?)
+      @financial_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::PaymentMethodDataUsBankAccount?)
-      if us_bank_account.nil?
-        return @us_bank_account = nil
+    def us_bank_account=(new_value : Stripe::PaymentMethodDataUsBankAccount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _us_bank_account = us_bank_account.not_nil!
-      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
-      @us_bank_account = _us_bank_account
+
+      @us_bank_account = new_value
     end
 
     # Generates #hash and #== methods from all fields

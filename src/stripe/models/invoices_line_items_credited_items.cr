@@ -74,23 +74,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice Object to be assigned
-    def invoice=(invoice : String?)
-      if invoice.nil?
-        raise ArgumentError.new("\"invoice\" is required and cannot be null")
+    def invoice=(new_value : String?)
+      raise ArgumentError.new("\"invoice\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("invoice", new_value.to_s.size, MAX_LENGTH_FOR_INVOICE)
       end
-      _invoice = invoice.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
-      @invoice = _invoice
+
+      @invoice = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_line_items Object to be assigned
-    def invoice_line_items=(invoice_line_items : Array(String)?)
-      if invoice_line_items.nil?
-        raise ArgumentError.new("\"invoice_line_items\" is required and cannot be null")
-      end
-      _invoice_line_items = invoice_line_items.not_nil!
-      @invoice_line_items = _invoice_line_items
+    def invoice_line_items=(new_value : Array(String)?)
+      raise ArgumentError.new("\"invoice_line_items\" is required and cannot be null") if new_value.nil?
+
+      @invoice_line_items = new_value
     end
 
     # Generates #hash and #== methods from all fields

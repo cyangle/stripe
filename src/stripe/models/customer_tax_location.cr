@@ -103,35 +103,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        raise ArgumentError.new("\"country\" is required and cannot be null")
+    def country=(new_value : String?)
+      raise ArgumentError.new("\"country\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("country", new_value.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       end
-      _country = country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
-      @country = _country
+
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
-    def source=(source : String?)
-      if source.nil?
-        raise ArgumentError.new("\"source\" is required and cannot be null")
+    def source=(new_value : String?)
+      raise ArgumentError.new("\"source\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("source", new_value, VALID_VALUES_FOR_SOURCE)
       end
-      _source = source.not_nil!
-      OpenApi::EnumValidator.validate("source", _source, VALID_VALUES_FOR_SOURCE)
-      @source = _source
+
+      @source = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
-    def state=(state : String?)
-      if state.nil?
-        return @state = nil
+    def state=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("state", new_value.to_s.size, MAX_LENGTH_FOR_STATE)
       end
-      _state = state.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
-      @state = _state
+
+      @state = new_value
     end
 
     # Generates #hash and #== methods from all fields

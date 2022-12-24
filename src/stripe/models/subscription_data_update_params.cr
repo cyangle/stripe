@@ -80,35 +80,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] effective_date Object to be assigned
-    def effective_date=(effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate?)
-      if effective_date.nil?
-        return @effective_date = nil
+    def effective_date=(new_value : Stripe::SubscriptionDataCreateParamsEffectiveDate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _effective_date = effective_date.not_nil!
-      _effective_date.validate if _effective_date.is_a?(OpenApi::Validatable)
-      @effective_date = _effective_date
+
+      @effective_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_period_days Object to be assigned
-    def trial_period_days=(trial_period_days : Stripe::MandateParamsAmount?)
-      if trial_period_days.nil?
-        return @trial_period_days = nil
+    def trial_period_days=(new_value : Stripe::MandateParamsAmount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _trial_period_days = trial_period_days.not_nil!
-      _trial_period_days.validate if _trial_period_days.is_a?(OpenApi::Validatable)
-      @trial_period_days = _trial_period_days
+
+      @trial_period_days = new_value
     end
 
     # Generates #hash and #== methods from all fields

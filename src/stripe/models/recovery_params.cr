@@ -61,22 +61,16 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allow_promotion_codes Object to be assigned
-    def allow_promotion_codes=(allow_promotion_codes : Bool?)
-      if allow_promotion_codes.nil?
-        return @allow_promotion_codes = nil
-      end
-      _allow_promotion_codes = allow_promotion_codes.not_nil!
-      @allow_promotion_codes = _allow_promotion_codes
+    def allow_promotion_codes=(new_value : Bool?)
+      @allow_promotion_codes = new_value
     end
 
     # Generates #hash and #== methods from all fields

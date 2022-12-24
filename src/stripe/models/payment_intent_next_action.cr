@@ -228,177 +228,159 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("_type", new_value.to_s.size, MAX_LENGTH_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alipay_handle_redirect Object to be assigned
-    def alipay_handle_redirect=(alipay_handle_redirect : Stripe::PaymentIntentNextActionAlipayHandleRedirect?)
-      if alipay_handle_redirect.nil?
-        return @alipay_handle_redirect = nil
+    def alipay_handle_redirect=(new_value : Stripe::PaymentIntentNextActionAlipayHandleRedirect?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _alipay_handle_redirect = alipay_handle_redirect.not_nil!
-      _alipay_handle_redirect.validate if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
-      @alipay_handle_redirect = _alipay_handle_redirect
+
+      @alipay_handle_redirect = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] boleto_display_details Object to be assigned
-    def boleto_display_details=(boleto_display_details : Stripe::PaymentIntentNextActionBoleto?)
-      if boleto_display_details.nil?
-        return @boleto_display_details = nil
+    def boleto_display_details=(new_value : Stripe::PaymentIntentNextActionBoleto?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _boleto_display_details = boleto_display_details.not_nil!
-      _boleto_display_details.validate if _boleto_display_details.is_a?(OpenApi::Validatable)
-      @boleto_display_details = _boleto_display_details
+
+      @boleto_display_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_await_notification Object to be assigned
-    def card_await_notification=(card_await_notification : Stripe::PaymentIntentNextActionCardAwaitNotification?)
-      if card_await_notification.nil?
-        return @card_await_notification = nil
+    def card_await_notification=(new_value : Stripe::PaymentIntentNextActionCardAwaitNotification?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card_await_notification = card_await_notification.not_nil!
-      _card_await_notification.validate if _card_await_notification.is_a?(OpenApi::Validatable)
-      @card_await_notification = _card_await_notification
+
+      @card_await_notification = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] display_bank_transfer_instructions Object to be assigned
-    def display_bank_transfer_instructions=(display_bank_transfer_instructions : Stripe::PaymentIntentNextActionDisplayBankTransferInstructions?)
-      if display_bank_transfer_instructions.nil?
-        return @display_bank_transfer_instructions = nil
+    def display_bank_transfer_instructions=(new_value : Stripe::PaymentIntentNextActionDisplayBankTransferInstructions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _display_bank_transfer_instructions = display_bank_transfer_instructions.not_nil!
-      _display_bank_transfer_instructions.validate if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
-      @display_bank_transfer_instructions = _display_bank_transfer_instructions
+
+      @display_bank_transfer_instructions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] konbini_display_details Object to be assigned
-    def konbini_display_details=(konbini_display_details : Stripe::PaymentIntentNextActionKonbini?)
-      if konbini_display_details.nil?
-        return @konbini_display_details = nil
+    def konbini_display_details=(new_value : Stripe::PaymentIntentNextActionKonbini?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _konbini_display_details = konbini_display_details.not_nil!
-      _konbini_display_details.validate if _konbini_display_details.is_a?(OpenApi::Validatable)
-      @konbini_display_details = _konbini_display_details
+
+      @konbini_display_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] oxxo_display_details Object to be assigned
-    def oxxo_display_details=(oxxo_display_details : Stripe::PaymentIntentNextActionDisplayOxxoDetails?)
-      if oxxo_display_details.nil?
-        return @oxxo_display_details = nil
+    def oxxo_display_details=(new_value : Stripe::PaymentIntentNextActionDisplayOxxoDetails?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _oxxo_display_details = oxxo_display_details.not_nil!
-      _oxxo_display_details.validate if _oxxo_display_details.is_a?(OpenApi::Validatable)
-      @oxxo_display_details = _oxxo_display_details
+
+      @oxxo_display_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paynow_display_qr_code Object to be assigned
-    def paynow_display_qr_code=(paynow_display_qr_code : Stripe::PaymentIntentNextActionPaynowDisplayQrCode?)
-      if paynow_display_qr_code.nil?
-        return @paynow_display_qr_code = nil
+    def paynow_display_qr_code=(new_value : Stripe::PaymentIntentNextActionPaynowDisplayQrCode?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _paynow_display_qr_code = paynow_display_qr_code.not_nil!
-      _paynow_display_qr_code.validate if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
-      @paynow_display_qr_code = _paynow_display_qr_code
+
+      @paynow_display_qr_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pix_display_qr_code Object to be assigned
-    def pix_display_qr_code=(pix_display_qr_code : Stripe::PaymentIntentNextActionPixDisplayQrCode?)
-      if pix_display_qr_code.nil?
-        return @pix_display_qr_code = nil
+    def pix_display_qr_code=(new_value : Stripe::PaymentIntentNextActionPixDisplayQrCode?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _pix_display_qr_code = pix_display_qr_code.not_nil!
-      _pix_display_qr_code.validate if _pix_display_qr_code.is_a?(OpenApi::Validatable)
-      @pix_display_qr_code = _pix_display_qr_code
+
+      @pix_display_qr_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] promptpay_display_qr_code Object to be assigned
-    def promptpay_display_qr_code=(promptpay_display_qr_code : Stripe::PaymentIntentNextActionPromptpayDisplayQrCode?)
-      if promptpay_display_qr_code.nil?
-        return @promptpay_display_qr_code = nil
+    def promptpay_display_qr_code=(new_value : Stripe::PaymentIntentNextActionPromptpayDisplayQrCode?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _promptpay_display_qr_code = promptpay_display_qr_code.not_nil!
-      _promptpay_display_qr_code.validate if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
-      @promptpay_display_qr_code = _promptpay_display_qr_code
+
+      @promptpay_display_qr_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] redirect_to_url Object to be assigned
-    def redirect_to_url=(redirect_to_url : Stripe::PaymentIntentNextActionRedirectToUrl?)
-      if redirect_to_url.nil?
-        return @redirect_to_url = nil
+    def redirect_to_url=(new_value : Stripe::PaymentIntentNextActionRedirectToUrl?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _redirect_to_url = redirect_to_url.not_nil!
-      _redirect_to_url.validate if _redirect_to_url.is_a?(OpenApi::Validatable)
-      @redirect_to_url = _redirect_to_url
+
+      @redirect_to_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] use_stripe_sdk Object to be assigned
-    def use_stripe_sdk=(use_stripe_sdk : JSON::Any?)
-      if use_stripe_sdk.nil?
-        return @use_stripe_sdk = nil
-      end
-      _use_stripe_sdk = use_stripe_sdk.not_nil!
-      @use_stripe_sdk = _use_stripe_sdk
+    def use_stripe_sdk=(new_value : JSON::Any?)
+      @use_stripe_sdk = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verify_with_microdeposits Object to be assigned
-    def verify_with_microdeposits=(verify_with_microdeposits : Stripe::PaymentIntentNextActionVerifyWithMicrodeposits?)
-      if verify_with_microdeposits.nil?
-        return @verify_with_microdeposits = nil
+    def verify_with_microdeposits=(new_value : Stripe::PaymentIntentNextActionVerifyWithMicrodeposits?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verify_with_microdeposits = verify_with_microdeposits.not_nil!
-      _verify_with_microdeposits.validate if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-      @verify_with_microdeposits = _verify_with_microdeposits
+
+      @verify_with_microdeposits = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wechat_pay_display_qr_code Object to be assigned
-    def wechat_pay_display_qr_code=(wechat_pay_display_qr_code : Stripe::PaymentIntentNextActionWechatPayDisplayQrCode?)
-      if wechat_pay_display_qr_code.nil?
-        return @wechat_pay_display_qr_code = nil
+    def wechat_pay_display_qr_code=(new_value : Stripe::PaymentIntentNextActionWechatPayDisplayQrCode?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _wechat_pay_display_qr_code = wechat_pay_display_qr_code.not_nil!
-      _wechat_pay_display_qr_code.validate if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
-      @wechat_pay_display_qr_code = _wechat_pay_display_qr_code
+
+      @wechat_pay_display_qr_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wechat_pay_redirect_to_android_app Object to be assigned
-    def wechat_pay_redirect_to_android_app=(wechat_pay_redirect_to_android_app : Stripe::PaymentIntentNextActionWechatPayRedirectToAndroidApp?)
-      if wechat_pay_redirect_to_android_app.nil?
-        return @wechat_pay_redirect_to_android_app = nil
+    def wechat_pay_redirect_to_android_app=(new_value : Stripe::PaymentIntentNextActionWechatPayRedirectToAndroidApp?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _wechat_pay_redirect_to_android_app = wechat_pay_redirect_to_android_app.not_nil!
-      _wechat_pay_redirect_to_android_app.validate if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
-      @wechat_pay_redirect_to_android_app = _wechat_pay_redirect_to_android_app
+
+      @wechat_pay_redirect_to_android_app = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wechat_pay_redirect_to_ios_app Object to be assigned
-    def wechat_pay_redirect_to_ios_app=(wechat_pay_redirect_to_ios_app : Stripe::PaymentIntentNextActionWechatPayRedirectToIosApp?)
-      if wechat_pay_redirect_to_ios_app.nil?
-        return @wechat_pay_redirect_to_ios_app = nil
+    def wechat_pay_redirect_to_ios_app=(new_value : Stripe::PaymentIntentNextActionWechatPayRedirectToIosApp?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _wechat_pay_redirect_to_ios_app = wechat_pay_redirect_to_ios_app.not_nil!
-      _wechat_pay_redirect_to_ios_app.validate if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
-      @wechat_pay_redirect_to_ios_app = _wechat_pay_redirect_to_ios_app
+
+      @wechat_pay_redirect_to_ios_app = new_value
     end
 
     # Generates #hash and #== methods from all fields

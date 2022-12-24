@@ -110,75 +110,56 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] forgive Object to be assigned
-    def forgive=(forgive : Bool?)
-      if forgive.nil?
-        return @forgive = nil
-      end
-      _forgive = forgive.not_nil!
-      @forgive = _forgive
+    def forgive=(new_value : Bool?)
+      @forgive = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate Object to be assigned
-    def mandate=(mandate : String?)
-      if mandate.nil?
-        return @mandate = nil
+    def mandate=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("mandate", new_value.to_s.size, MAX_LENGTH_FOR_MANDATE)
       end
-      _mandate = mandate.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
-      @mandate = _mandate
+
+      @mandate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] off_session Object to be assigned
-    def off_session=(off_session : Bool?)
-      if off_session.nil?
-        return @off_session = nil
-      end
-      _off_session = off_session.not_nil!
-      @off_session = _off_session
+    def off_session=(new_value : Bool?)
+      @off_session = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paid_out_of_band Object to be assigned
-    def paid_out_of_band=(paid_out_of_band : Bool?)
-      if paid_out_of_band.nil?
-        return @paid_out_of_band = nil
-      end
-      _paid_out_of_band = paid_out_of_band.not_nil!
-      @paid_out_of_band = _paid_out_of_band
+    def paid_out_of_band=(new_value : Bool?)
+      @paid_out_of_band = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method Object to be assigned
-    def payment_method=(payment_method : String?)
-      if payment_method.nil?
-        return @payment_method = nil
+    def payment_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("payment_method", new_value.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
       end
-      _payment_method = payment_method.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
-      @payment_method = _payment_method
+
+      @payment_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
-    def source=(source : String?)
-      if source.nil?
-        return @source = nil
+    def source=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("source", new_value.to_s.size, MAX_LENGTH_FOR_SOURCE)
       end
-      _source = source.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
-      @source = _source
+
+      @source = new_value
     end
 
     # Generates #hash and #== methods from all fields

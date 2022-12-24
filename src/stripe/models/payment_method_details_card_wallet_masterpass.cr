@@ -109,46 +109,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address Object to be assigned
-    def billing_address=(billing_address : Stripe::PaymentMethodCardWalletMasterpassBillingAddress?)
-      if billing_address.nil?
-        return @billing_address = nil
+    def billing_address=(new_value : Stripe::PaymentMethodCardWalletMasterpassBillingAddress?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _billing_address = billing_address.not_nil!
-      _billing_address.validate if _billing_address.is_a?(OpenApi::Validatable)
-      @billing_address = _billing_address
+
+      @billing_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
+    def email=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("email", new_value.to_s.size, MAX_LENGTH_FOR_EMAIL)
       end
-      _email = email.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
-      @email = _email
+
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
+    def name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address Object to be assigned
-    def shipping_address=(shipping_address : Stripe::PaymentMethodCardWalletMasterpassShippingAddress?)
-      if shipping_address.nil?
-        return @shipping_address = nil
+    def shipping_address=(new_value : Stripe::PaymentMethodCardWalletMasterpassShippingAddress?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping_address = shipping_address.not_nil!
-      _shipping_address.validate if _shipping_address.is_a?(OpenApi::Validatable)
-      @shipping_address = _shipping_address
+
+      @shipping_address = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -83,42 +83,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] height Object to be assigned
-    def height=(height : Float64?)
-      if height.nil?
-        raise ArgumentError.new("\"height\" is required and cannot be null")
-      end
-      _height = height.not_nil!
-      @height = _height
+    def height=(new_value : Float64?)
+      raise ArgumentError.new("\"height\" is required and cannot be null") if new_value.nil?
+
+      @height = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] length Object to be assigned
-    def length=(length : Float64?)
-      if length.nil?
-        raise ArgumentError.new("\"length\" is required and cannot be null")
-      end
-      _length = length.not_nil!
-      @length = _length
+    def length=(new_value : Float64?)
+      raise ArgumentError.new("\"length\" is required and cannot be null") if new_value.nil?
+
+      @length = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] weight Object to be assigned
-    def weight=(weight : Float64?)
-      if weight.nil?
-        raise ArgumentError.new("\"weight\" is required and cannot be null")
-      end
-      _weight = weight.not_nil!
-      @weight = _weight
+    def weight=(new_value : Float64?)
+      raise ArgumentError.new("\"weight\" is required and cannot be null") if new_value.nil?
+
+      @weight = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] width Object to be assigned
-    def width=(width : Float64?)
-      if width.nil?
-        raise ArgumentError.new("\"width\" is required and cannot be null")
-      end
-      _width = width.not_nil!
-      @width = _width
+    def width=(new_value : Float64?)
+      raise ArgumentError.new("\"width\" is required and cannot be null") if new_value.nil?
+
+      @width = new_value
     end
 
     # Generates #hash and #== methods from all fields

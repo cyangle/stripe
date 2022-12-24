@@ -110,45 +110,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval : String?)
-      if interval.nil?
-        raise ArgumentError.new("\"interval\" is required and cannot be null")
+    def interval=(new_value : String?)
+      raise ArgumentError.new("\"interval\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("interval", new_value, VALID_VALUES_FOR_INTERVAL)
       end
-      _interval = interval.not_nil!
-      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
-      @interval = _interval
+
+      @interval = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval_count Object to be assigned
-    def interval_count=(interval_count : Int64?)
-      if interval_count.nil?
-        raise ArgumentError.new("\"interval_count\" is required and cannot be null")
-      end
-      _interval_count = interval_count.not_nil!
-      @interval_count = _interval_count
+    def interval_count=(new_value : Int64?)
+      raise ArgumentError.new("\"interval_count\" is required and cannot be null") if new_value.nil?
+
+      @interval_count = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_type Object to be assigned
-    def usage_type=(usage_type : String?)
-      if usage_type.nil?
-        raise ArgumentError.new("\"usage_type\" is required and cannot be null")
+    def usage_type=(new_value : String?)
+      raise ArgumentError.new("\"usage_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("usage_type", new_value, VALID_VALUES_FOR_USAGE_TYPE)
       end
-      _usage_type = usage_type.not_nil!
-      OpenApi::EnumValidator.validate("usage_type", _usage_type, VALID_VALUES_FOR_USAGE_TYPE)
-      @usage_type = _usage_type
+
+      @usage_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aggregate_usage Object to be assigned
-    def aggregate_usage=(aggregate_usage : String?)
-      if aggregate_usage.nil?
-        return @aggregate_usage = nil
+    def aggregate_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("aggregate_usage", new_value, VALID_VALUES_FOR_AGGREGATE_USAGE)
       end
-      _aggregate_usage = aggregate_usage.not_nil!
-      OpenApi::EnumValidator.validate("aggregate_usage", _aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
-      @aggregate_usage = _aggregate_usage
+
+      @aggregate_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

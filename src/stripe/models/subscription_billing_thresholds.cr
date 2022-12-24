@@ -61,22 +61,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_gte Object to be assigned
-    def amount_gte=(amount_gte : Int64?)
-      if amount_gte.nil?
-        return @amount_gte = nil
-      end
-      _amount_gte = amount_gte.not_nil!
-      @amount_gte = _amount_gte
+    def amount_gte=(new_value : Int64?)
+      @amount_gte = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reset_billing_cycle_anchor Object to be assigned
-    def reset_billing_cycle_anchor=(reset_billing_cycle_anchor : Bool?)
-      if reset_billing_cycle_anchor.nil?
-        return @reset_billing_cycle_anchor = nil
-      end
-      _reset_billing_cycle_anchor = reset_billing_cycle_anchor.not_nil!
-      @reset_billing_cycle_anchor = _reset_billing_cycle_anchor
+    def reset_billing_cycle_anchor=(new_value : Bool?)
+      @reset_billing_cycle_anchor = new_value
     end
 
     # Generates #hash and #== methods from all fields

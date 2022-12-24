@@ -117,46 +117,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] debit_reversal Object to be assigned
-    def debit_reversal=(debit_reversal : String?)
-      if debit_reversal.nil?
-        return @debit_reversal = nil
+    def debit_reversal=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("debit_reversal", new_value.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
       end
-      _debit_reversal = debit_reversal.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("debit_reversal", _debit_reversal.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
-      @debit_reversal = _debit_reversal
+
+      @debit_reversal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_transfer Object to be assigned
-    def inbound_transfer=(inbound_transfer : String?)
-      if inbound_transfer.nil?
-        return @inbound_transfer = nil
+    def inbound_transfer=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("inbound_transfer", new_value.to_s.size, MAX_LENGTH_FOR_INBOUND_TRANSFER)
       end
-      _inbound_transfer = inbound_transfer.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("inbound_transfer", _inbound_transfer.to_s.size, MAX_LENGTH_FOR_INBOUND_TRANSFER)
-      @inbound_transfer = _inbound_transfer
+
+      @inbound_transfer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing_authorization Object to be assigned
-    def issuing_authorization=(issuing_authorization : String?)
-      if issuing_authorization.nil?
-        return @issuing_authorization = nil
+    def issuing_authorization=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("issuing_authorization", new_value.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
       end
-      _issuing_authorization = issuing_authorization.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("issuing_authorization", _issuing_authorization.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
-      @issuing_authorization = _issuing_authorization
+
+      @issuing_authorization = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuing_transaction Object to be assigned
-    def issuing_transaction=(issuing_transaction : String?)
-      if issuing_transaction.nil?
-        return @issuing_transaction = nil
+    def issuing_transaction=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("issuing_transaction", new_value.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
       end
-      _issuing_transaction = issuing_transaction.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("issuing_transaction", _issuing_transaction.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
-      @issuing_transaction = _issuing_transaction
+
+      @issuing_transaction = new_value
     end
 
     # Generates #hash and #== methods from all fields

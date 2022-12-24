@@ -117,79 +117,70 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account Object to be assigned
-    def account=(account : Stripe::ConnectJsAccountTokenSpecs?)
-      if account.nil?
-        return @account = nil
+    def account=(new_value : Stripe::ConnectJsAccountTokenSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _account = account.not_nil!
-      _account.validate if _account.is_a?(OpenApi::Validatable)
-      @account = _account
+
+      @account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account Object to be assigned
-    def bank_account=(bank_account : Stripe::TokenCreateBankAccount?)
-      @bank_account = bank_account
+    def bank_account=(new_value : Stripe::TokenCreateBankAccount?)
+      @bank_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::PostTokensRequestCard?)
-      @card = card
+    def card=(new_value : Stripe::PostTokensRequestCard?)
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer Object to be assigned
-    def customer=(customer : String?)
-      if customer.nil?
-        return @customer = nil
+    def customer=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("customer", new_value.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       end
-      _customer = customer.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
-      @customer = _customer
+
+      @customer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_update Object to be assigned
-    def cvc_update=(cvc_update : Stripe::CvcParams?)
-      if cvc_update.nil?
-        return @cvc_update = nil
+    def cvc_update=(new_value : Stripe::CvcParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cvc_update = cvc_update.not_nil!
-      _cvc_update.validate if _cvc_update.is_a?(OpenApi::Validatable)
-      @cvc_update = _cvc_update
+
+      @cvc_update = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] person Object to be assigned
-    def person=(person : Stripe::PersonTokenSpecs?)
-      if person.nil?
-        return @person = nil
+    def person=(new_value : Stripe::PersonTokenSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _person = person.not_nil!
-      _person.validate if _person.is_a?(OpenApi::Validatable)
-      @person = _person
+
+      @person = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pii Object to be assigned
-    def pii=(pii : Stripe::PiiTokenSpecs?)
-      if pii.nil?
-        return @pii = nil
+    def pii=(new_value : Stripe::PiiTokenSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _pii = pii.not_nil!
-      _pii.validate if _pii.is_a?(OpenApi::Validatable)
-      @pii = _pii
+
+      @pii = new_value
     end
 
     # Generates #hash and #== methods from all fields

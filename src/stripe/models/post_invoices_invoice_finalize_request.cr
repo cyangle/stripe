@@ -54,22 +54,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] auto_advance Object to be assigned
-    def auto_advance=(auto_advance : Bool?)
-      if auto_advance.nil?
-        return @auto_advance = nil
-      end
-      _auto_advance = auto_advance.not_nil!
-      @auto_advance = _auto_advance
+    def auto_advance=(new_value : Bool?)
+      @auto_advance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

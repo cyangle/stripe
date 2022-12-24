@@ -33,18 +33,15 @@ module Stripe
     end
 
     def self.new(pull : JSON::PullParser)
-      new(String.new(pull))
+      new(String.new(pull), false)
     end
 
     def self.from_json_object_key?(key : String)
       String.from_json_object_key?(key)
     end
 
-    def self.new!(data : String)
-      new(data).tap(&.validate)
-    end
-
-    def initialize(@data : String)
+    def initialize(@data : String, strict : Bool = true)
+      validate if strict
     end
 
     def error_message : String

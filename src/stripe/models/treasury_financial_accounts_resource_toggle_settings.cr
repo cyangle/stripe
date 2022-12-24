@@ -88,34 +88,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requested Object to be assigned
-    def requested=(requested : Bool?)
-      if requested.nil?
-        raise ArgumentError.new("\"requested\" is required and cannot be null")
-      end
-      _requested = requested.not_nil!
-      @requested = _requested
+    def requested=(new_value : Bool?)
+      raise ArgumentError.new("\"requested\" is required and cannot be null") if new_value.nil?
+
+      @requested = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
+    def status=(new_value : String?)
+      raise ArgumentError.new("\"status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status_details Object to be assigned
-    def status_details=(status_details : Array(Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails)?)
-      if status_details.nil?
-        raise ArgumentError.new("\"status_details\" is required and cannot be null")
+    def status_details=(new_value : Array(Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails)?)
+      raise ArgumentError.new("\"status_details\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _status_details = status_details.not_nil!
-      OpenApi::ContainerValidator.validate(container: _status_details) if _status_details.is_a?(Array)
-      @status_details = _status_details
+
+      @status_details = new_value
     end
 
     # Generates #hash and #== methods from all fields

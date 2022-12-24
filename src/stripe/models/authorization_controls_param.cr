@@ -81,35 +81,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_categories Object to be assigned
-    def allowed_categories=(allowed_categories : Array(String)?)
-      if allowed_categories.nil?
-        return @allowed_categories = nil
+    def allowed_categories=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("allowed_categories", new_value, VALID_VALUES_FOR_ALLOWED_CATEGORIES)
       end
-      _allowed_categories = allowed_categories.not_nil!
-      OpenApi::EnumValidator.validate("allowed_categories", _allowed_categories, VALID_VALUES_FOR_ALLOWED_CATEGORIES)
-      @allowed_categories = _allowed_categories
+
+      @allowed_categories = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] blocked_categories Object to be assigned
-    def blocked_categories=(blocked_categories : Array(String)?)
-      if blocked_categories.nil?
-        return @blocked_categories = nil
+    def blocked_categories=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("blocked_categories", new_value, VALID_VALUES_FOR_BLOCKED_CATEGORIES)
       end
-      _blocked_categories = blocked_categories.not_nil!
-      OpenApi::EnumValidator.validate("blocked_categories", _blocked_categories, VALID_VALUES_FOR_BLOCKED_CATEGORIES)
-      @blocked_categories = _blocked_categories
+
+      @blocked_categories = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] spending_limits Object to be assigned
-    def spending_limits=(spending_limits : Array(Stripe::SpendingLimitsParam)?)
-      if spending_limits.nil?
-        return @spending_limits = nil
+    def spending_limits=(new_value : Array(Stripe::SpendingLimitsParam)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _spending_limits = spending_limits.not_nil!
-      OpenApi::ContainerValidator.validate(container: _spending_limits) if _spending_limits.is_a?(Array)
-      @spending_limits = _spending_limits
+
+      @spending_limits = new_value
     end
 
     # Generates #hash and #== methods from all fields

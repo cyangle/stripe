@@ -99,35 +99,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic : String?)
-      if bic.nil?
-        return @bic = nil
+    def bic=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bic", new_value.to_s.size, MAX_LENGTH_FOR_BIC)
       end
-      _bic = bic.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
-      @bic = _bic
+
+      @bic = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] iban_last4 Object to be assigned
-    def iban_last4=(iban_last4 : String?)
-      if iban_last4.nil?
-        return @iban_last4 = nil
+    def iban_last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("iban_last4", new_value.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
       end
-      _iban_last4 = iban_last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
-      @iban_last4 = _iban_last4
+
+      @iban_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sender_name Object to be assigned
-    def sender_name=(sender_name : String?)
-      if sender_name.nil?
-        return @sender_name = nil
+    def sender_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sender_name", new_value.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
       end
-      _sender_name = sender_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
-      @sender_name = _sender_name
+
+      @sender_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

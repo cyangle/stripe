@@ -100,35 +100,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] secret Object to be assigned
-    def secret=(secret : String?)
-      if secret.nil?
-        raise ArgumentError.new("\"secret\" is required and cannot be null")
+    def secret=(new_value : String?)
+      raise ArgumentError.new("\"secret\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("secret", new_value.to_s.size, MAX_LENGTH_FOR_SECRET)
       end
-      _secret = secret.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("secret", _secret.to_s.size, MAX_LENGTH_FOR_SECRET)
-      @secret = _secret
+
+      @secret = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(location : String?)
-      if location.nil?
-        return @location = nil
+    def location=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("location", new_value.to_s.size, MAX_LENGTH_FOR_LOCATION)
       end
-      _location = location.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
-      @location = _location
+
+      @location = new_value
     end
 
     # Generates #hash and #== methods from all fields

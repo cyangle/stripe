@@ -130,86 +130,67 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amex_express_checkout Object to be assigned
-    def amex_express_checkout=(amex_express_checkout : JSON::Any?)
-      if amex_express_checkout.nil?
-        return @amex_express_checkout = nil
-      end
-      _amex_express_checkout = amex_express_checkout.not_nil!
-      @amex_express_checkout = _amex_express_checkout
+    def amex_express_checkout=(new_value : JSON::Any?)
+      @amex_express_checkout = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] apple_pay Object to be assigned
-    def apple_pay=(apple_pay : JSON::Any?)
-      if apple_pay.nil?
-        return @apple_pay = nil
-      end
-      _apple_pay = apple_pay.not_nil!
-      @apple_pay = _apple_pay
+    def apple_pay=(new_value : JSON::Any?)
+      @apple_pay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dynamic_last4 Object to be assigned
-    def dynamic_last4=(dynamic_last4 : String?)
-      if dynamic_last4.nil?
-        return @dynamic_last4 = nil
+    def dynamic_last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("dynamic_last4", new_value.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
       end
-      _dynamic_last4 = dynamic_last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("dynamic_last4", _dynamic_last4.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
-      @dynamic_last4 = _dynamic_last4
+
+      @dynamic_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] google_pay Object to be assigned
-    def google_pay=(google_pay : JSON::Any?)
-      if google_pay.nil?
-        return @google_pay = nil
-      end
-      _google_pay = google_pay.not_nil!
-      @google_pay = _google_pay
+    def google_pay=(new_value : JSON::Any?)
+      @google_pay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] masterpass Object to be assigned
-    def masterpass=(masterpass : Stripe::PaymentMethodDetailsCardWalletMasterpass?)
-      if masterpass.nil?
-        return @masterpass = nil
+    def masterpass=(new_value : Stripe::PaymentMethodDetailsCardWalletMasterpass?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _masterpass = masterpass.not_nil!
-      _masterpass.validate if _masterpass.is_a?(OpenApi::Validatable)
-      @masterpass = _masterpass
+
+      @masterpass = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] samsung_pay Object to be assigned
-    def samsung_pay=(samsung_pay : JSON::Any?)
-      if samsung_pay.nil?
-        return @samsung_pay = nil
-      end
-      _samsung_pay = samsung_pay.not_nil!
-      @samsung_pay = _samsung_pay
+    def samsung_pay=(new_value : JSON::Any?)
+      @samsung_pay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] visa_checkout Object to be assigned
-    def visa_checkout=(visa_checkout : Stripe::PaymentMethodDetailsCardWalletVisaCheckout?)
-      if visa_checkout.nil?
-        return @visa_checkout = nil
+    def visa_checkout=(new_value : Stripe::PaymentMethodDetailsCardWalletVisaCheckout?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _visa_checkout = visa_checkout.not_nil!
-      _visa_checkout.validate if _visa_checkout.is_a?(OpenApi::Validatable)
-      @visa_checkout = _visa_checkout
+
+      @visa_checkout = new_value
     end
 
     # Generates #hash and #== methods from all fields

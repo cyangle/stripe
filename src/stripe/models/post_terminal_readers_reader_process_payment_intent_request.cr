@@ -84,34 +84,29 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_intent Object to be assigned
-    def payment_intent=(payment_intent : String?)
-      if payment_intent.nil?
-        raise ArgumentError.new("\"payment_intent\" is required and cannot be null")
+    def payment_intent=(new_value : String?)
+      raise ArgumentError.new("\"payment_intent\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("payment_intent", new_value.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
       end
-      _payment_intent = payment_intent.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
-      @payment_intent = _payment_intent
+
+      @payment_intent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] process_config Object to be assigned
-    def process_config=(process_config : Stripe::ProcessConfig?)
-      if process_config.nil?
-        return @process_config = nil
+    def process_config=(new_value : Stripe::ProcessConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _process_config = process_config.not_nil!
-      _process_config.validate if _process_config.is_a?(OpenApi::Validatable)
-      @process_config = _process_config
+
+      @process_config = new_value
     end
 
     # Generates #hash and #== methods from all fields

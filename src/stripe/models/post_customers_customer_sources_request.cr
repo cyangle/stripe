@@ -90,56 +90,46 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alipay_account Object to be assigned
-    def alipay_account=(alipay_account : String?)
-      if alipay_account.nil?
-        return @alipay_account = nil
+    def alipay_account=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("alipay_account", new_value.to_s.size, MAX_LENGTH_FOR_ALIPAY_ACCOUNT)
       end
-      _alipay_account = alipay_account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("alipay_account", _alipay_account.to_s.size, MAX_LENGTH_FOR_ALIPAY_ACCOUNT)
-      @alipay_account = _alipay_account
+
+      @alipay_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account Object to be assigned
-    def bank_account=(bank_account : Stripe::PostCustomersCustomerRequestBankAccount?)
-      if bank_account.nil?
-        return @bank_account = nil
+    def bank_account=(new_value : Stripe::PostCustomersCustomerRequestBankAccount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bank_account = bank_account.not_nil!
-      _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-      @bank_account = _bank_account
+
+      @bank_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::PostChargesRequestCard?)
-      @card = card
+    def card=(new_value : Stripe::PostChargesRequestCard?)
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
-    def source=(source : String?)
-      @source = source
+    def source=(new_value : String?)
+      @source = new_value
     end
 
     # Generates #hash and #== methods from all fields

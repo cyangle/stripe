@@ -98,35 +98,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank : String?)
-      if bank.nil?
-        return @bank = nil
+    def bank=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("bank", new_value, VALID_VALUES_FOR_BANK)
       end
-      _bank = bank.not_nil!
-      OpenApi::EnumValidator.validate("bank", _bank, VALID_VALUES_FOR_BANK)
-      @bank = _bank
+
+      @bank = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_name Object to be assigned
-    def verified_name=(verified_name : String?)
-      if verified_name.nil?
-        return @verified_name = nil
+    def verified_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_name", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       end
-      _verified_name = verified_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
-      @verified_name = _verified_name
+
+      @verified_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

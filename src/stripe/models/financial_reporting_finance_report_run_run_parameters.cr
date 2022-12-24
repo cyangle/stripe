@@ -126,86 +126,66 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] columns Object to be assigned
-    def columns=(columns : Array(String)?)
-      if columns.nil?
-        return @columns = nil
-      end
-      _columns = columns.not_nil!
-      @columns = _columns
+    def columns=(new_value : Array(String)?)
+      @columns = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] connected_account Object to be assigned
-    def connected_account=(connected_account : String?)
-      if connected_account.nil?
-        return @connected_account = nil
+    def connected_account=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("connected_account", new_value.to_s.size, MAX_LENGTH_FOR_CONNECTED_ACCOUNT)
       end
-      _connected_account = connected_account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("connected_account", _connected_account.to_s.size, MAX_LENGTH_FOR_CONNECTED_ACCOUNT)
-      @connected_account = _connected_account
+
+      @connected_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        return @currency = nil
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval_end Object to be assigned
-    def interval_end=(interval_end : Int64?)
-      if interval_end.nil?
-        return @interval_end = nil
-      end
-      _interval_end = interval_end.not_nil!
-      @interval_end = _interval_end
+    def interval_end=(new_value : Int64?)
+      @interval_end = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval_start Object to be assigned
-    def interval_start=(interval_start : Int64?)
-      if interval_start.nil?
-        return @interval_start = nil
-      end
-      _interval_start = interval_start.not_nil!
-      @interval_start = _interval_start
+    def interval_start=(new_value : Int64?)
+      @interval_start = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payout Object to be assigned
-    def payout=(payout : String?)
-      if payout.nil?
-        return @payout = nil
+    def payout=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("payout", new_value.to_s.size, MAX_LENGTH_FOR_PAYOUT)
       end
-      _payout = payout.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("payout", _payout.to_s.size, MAX_LENGTH_FOR_PAYOUT)
-      @payout = _payout
+
+      @payout = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reporting_category Object to be assigned
-    def reporting_category=(reporting_category : String?)
-      if reporting_category.nil?
-        return @reporting_category = nil
+    def reporting_category=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reporting_category", new_value.to_s.size, MAX_LENGTH_FOR_REPORTING_CATEGORY)
       end
-      _reporting_category = reporting_category.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reporting_category", _reporting_category.to_s.size, MAX_LENGTH_FOR_REPORTING_CATEGORY)
-      @reporting_category = _reporting_category
+
+      @reporting_category = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] timezone Object to be assigned
-    def timezone=(timezone : String?)
-      if timezone.nil?
-        return @timezone = nil
+    def timezone=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("timezone", new_value.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
       end
-      _timezone = timezone.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
-      @timezone = _timezone
+
+      @timezone = new_value
     end
 
     # Generates #hash and #== methods from all fields

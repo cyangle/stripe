@@ -78,44 +78,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] evidence Object to be assigned
-    def evidence=(evidence : Stripe::DisputeEvidenceParams?)
-      if evidence.nil?
-        return @evidence = nil
+    def evidence=(new_value : Stripe::DisputeEvidenceParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _evidence = evidence.not_nil!
-      _evidence.validate if _evidence.is_a?(OpenApi::Validatable)
-      @evidence = _evidence
+
+      @evidence = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit Object to be assigned
-    def submit=(submit : Bool?)
-      if submit.nil?
-        return @submit = nil
-      end
-      _submit = submit.not_nil!
-      @submit = _submit
+    def submit=(new_value : Bool?)
+      @submit = new_value
     end
 
     # Generates #hash and #== methods from all fields

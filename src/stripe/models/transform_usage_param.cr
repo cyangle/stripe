@@ -70,23 +70,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] divide_by Object to be assigned
-    def divide_by=(divide_by : Int64?)
-      if divide_by.nil?
-        raise ArgumentError.new("\"divide_by\" is required and cannot be null")
-      end
-      _divide_by = divide_by.not_nil!
-      @divide_by = _divide_by
+    def divide_by=(new_value : Int64?)
+      raise ArgumentError.new("\"divide_by\" is required and cannot be null") if new_value.nil?
+
+      @divide_by = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] round Object to be assigned
-    def round=(round : String?)
-      if round.nil?
-        raise ArgumentError.new("\"round\" is required and cannot be null")
+    def round=(new_value : String?)
+      raise ArgumentError.new("\"round\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("round", new_value, VALID_VALUES_FOR_ROUND)
       end
-      _round = round.not_nil!
-      OpenApi::EnumValidator.validate("round", _round, VALID_VALUES_FOR_ROUND)
-      @round = _round
+
+      @round = new_value
     end
 
     # Generates #hash and #== methods from all fields

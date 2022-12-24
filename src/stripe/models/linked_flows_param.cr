@@ -52,8 +52,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow_type Object to be assigned
-    def source_flow_type=(source_flow_type : String?)
-      @source_flow_type = source_flow_type
+    def source_flow_type=(new_value : String?)
+      @source_flow_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

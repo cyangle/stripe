@@ -65,22 +65,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional Object to be assigned
-    def additional=(additional : Array(String)?)
-      if additional.nil?
-        raise ArgumentError.new("\"additional\" is required and cannot be null")
-      end
-      _additional = additional.not_nil!
-      @additional = _additional
+    def additional=(new_value : Array(String)?)
+      raise ArgumentError.new("\"additional\" is required and cannot be null") if new_value.nil?
+
+      @additional = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum Object to be assigned
-    def minimum=(minimum : Array(String)?)
-      if minimum.nil?
-        raise ArgumentError.new("\"minimum\" is required and cannot be null")
-      end
-      _minimum = minimum.not_nil!
-      @minimum = _minimum
+    def minimum=(new_value : Array(String)?)
+      raise ArgumentError.new("\"minimum\" is required and cannot be null") if new_value.nil?
+
+      @minimum = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -64,13 +64,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reconciliation_mode Object to be assigned
-    def reconciliation_mode=(reconciliation_mode : String?)
-      if reconciliation_mode.nil?
-        raise ArgumentError.new("\"reconciliation_mode\" is required and cannot be null")
+    def reconciliation_mode=(new_value : String?)
+      raise ArgumentError.new("\"reconciliation_mode\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("reconciliation_mode", new_value, VALID_VALUES_FOR_RECONCILIATION_MODE)
       end
-      _reconciliation_mode = reconciliation_mode.not_nil!
-      OpenApi::EnumValidator.validate("reconciliation_mode", _reconciliation_mode, VALID_VALUES_FOR_RECONCILIATION_MODE)
-      @reconciliation_mode = _reconciliation_mode
+
+      @reconciliation_mode = new_value
     end
 
     # Generates #hash and #== methods from all fields

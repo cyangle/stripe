@@ -69,24 +69,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_rate Object to be assigned
-    def shipping_rate=(shipping_rate : String?)
-      if shipping_rate.nil?
-        return @shipping_rate = nil
+    def shipping_rate=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("shipping_rate", new_value.to_s.size, MAX_LENGTH_FOR_SHIPPING_RATE)
       end
-      _shipping_rate = shipping_rate.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("shipping_rate", _shipping_rate.to_s.size, MAX_LENGTH_FOR_SHIPPING_RATE)
-      @shipping_rate = _shipping_rate
+
+      @shipping_rate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_rate_data Object to be assigned
-    def shipping_rate_data=(shipping_rate_data : Stripe::MethodParams?)
-      if shipping_rate_data.nil?
-        return @shipping_rate_data = nil
+    def shipping_rate_data=(new_value : Stripe::MethodParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _shipping_rate_data = shipping_rate_data.not_nil!
-      _shipping_rate_data.validate if _shipping_rate_data.is_a?(OpenApi::Validatable)
-      @shipping_rate_data = _shipping_rate_data
+
+      @shipping_rate_data = new_value
     end
 
     # Generates #hash and #== methods from all fields

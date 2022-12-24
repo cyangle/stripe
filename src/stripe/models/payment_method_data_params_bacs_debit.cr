@@ -72,24 +72,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_number Object to be assigned
-    def account_number=(account_number : String?)
-      if account_number.nil?
-        return @account_number = nil
+    def account_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_number", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       end
-      _account_number = account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
-      @account_number = _account_number
+
+      @account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sort_code Object to be assigned
-    def sort_code=(sort_code : String?)
-      if sort_code.nil?
-        return @sort_code = nil
+    def sort_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sort_code", new_value.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
       end
-      _sort_code = sort_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
-      @sort_code = _sort_code
+
+      @sort_code = new_value
     end
 
     # Generates #hash and #== methods from all fields

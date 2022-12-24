@@ -61,22 +61,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] charge_attempt_at Object to be assigned
-    def charge_attempt_at=(charge_attempt_at : Int64?)
-      if charge_attempt_at.nil?
-        return @charge_attempt_at = nil
-      end
-      _charge_attempt_at = charge_attempt_at.not_nil!
-      @charge_attempt_at = _charge_attempt_at
+    def charge_attempt_at=(new_value : Int64?)
+      @charge_attempt_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_approval_required Object to be assigned
-    def customer_approval_required=(customer_approval_required : Bool?)
-      if customer_approval_required.nil?
-        return @customer_approval_required = nil
-      end
-      _customer_approval_required = customer_approval_required.not_nil!
-      @customer_approval_required = _customer_approval_required
+    def customer_approval_required=(new_value : Bool?)
+      @customer_approval_required = new_value
     end
 
     # Generates #hash and #== methods from all fields

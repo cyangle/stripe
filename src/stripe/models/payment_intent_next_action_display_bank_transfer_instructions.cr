@@ -121,61 +121,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_remaining Object to be assigned
-    def amount_remaining=(amount_remaining : Int64?)
-      if amount_remaining.nil?
-        return @amount_remaining = nil
-      end
-      _amount_remaining = amount_remaining.not_nil!
-      @amount_remaining = _amount_remaining
+    def amount_remaining=(new_value : Int64?)
+      @amount_remaining = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        return @currency = nil
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] financial_addresses Object to be assigned
-    def financial_addresses=(financial_addresses : Array(Stripe::FundingInstructionsBankTransferFinancialAddress)?)
-      if financial_addresses.nil?
-        return @financial_addresses = nil
+    def financial_addresses=(new_value : Array(Stripe::FundingInstructionsBankTransferFinancialAddress)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _financial_addresses = financial_addresses.not_nil!
-      OpenApi::ContainerValidator.validate(container: _financial_addresses) if _financial_addresses.is_a?(Array)
-      @financial_addresses = _financial_addresses
+
+      @financial_addresses = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_instructions_url Object to be assigned
-    def hosted_instructions_url=(hosted_instructions_url : String?)
-      if hosted_instructions_url.nil?
-        return @hosted_instructions_url = nil
+    def hosted_instructions_url=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("hosted_instructions_url", new_value.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
       end
-      _hosted_instructions_url = hosted_instructions_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("hosted_instructions_url", _hosted_instructions_url.to_s.size, MAX_LENGTH_FOR_HOSTED_INSTRUCTIONS_URL)
-      @hosted_instructions_url = _hosted_instructions_url
+
+      @hosted_instructions_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Generates #hash and #== methods from all fields

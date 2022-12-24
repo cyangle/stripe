@@ -71,28 +71,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value Object to be assigned
-    def value=(value : String?)
-      if value.nil?
-        raise ArgumentError.new("\"value\" is required and cannot be null")
-      end
-      _value = value.not_nil!
-      @value = _value
+    def value=(new_value : String?)
+      raise ArgumentError.new("\"value\" is required and cannot be null") if new_value.nil?
+
+      @value = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

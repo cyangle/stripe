@@ -73,34 +73,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] debit_negative_balances Object to be assigned
-    def debit_negative_balances=(debit_negative_balances : Bool?)
-      if debit_negative_balances.nil?
-        return @debit_negative_balances = nil
-      end
-      _debit_negative_balances = debit_negative_balances.not_nil!
-      @debit_negative_balances = _debit_negative_balances
+    def debit_negative_balances=(new_value : Bool?)
+      @debit_negative_balances = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] schedule Object to be assigned
-    def schedule=(schedule : Stripe::TransferScheduleSpecs?)
-      if schedule.nil?
-        return @schedule = nil
+    def schedule=(new_value : Stripe::TransferScheduleSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _schedule = schedule.not_nil!
-      _schedule.validate if _schedule.is_a?(OpenApi::Validatable)
-      @schedule = _schedule
+
+      @schedule = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(statement_descriptor : String?)
-      if statement_descriptor.nil?
-        return @statement_descriptor = nil
+    def statement_descriptor=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       end
-      _statement_descriptor = statement_descriptor.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
-      @statement_descriptor = _statement_descriptor
+
+      @statement_descriptor = new_value
     end
 
     # Generates #hash and #== methods from all fields

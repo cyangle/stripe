@@ -97,35 +97,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_number Object to be assigned
-    def account_number=(account_number : String?)
-      if account_number.nil?
-        raise ArgumentError.new("\"account_number\" is required and cannot be null")
+    def account_number=(new_value : String?)
+      raise ArgumentError.new("\"account_number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_number", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       end
-      _account_number = account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
-      @account_number = _account_number
+
+      @account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] institution_number Object to be assigned
-    def institution_number=(institution_number : String?)
-      if institution_number.nil?
-        raise ArgumentError.new("\"institution_number\" is required and cannot be null")
+    def institution_number=(new_value : String?)
+      raise ArgumentError.new("\"institution_number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("institution_number", new_value.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
       end
-      _institution_number = institution_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
-      @institution_number = _institution_number
+
+      @institution_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transit_number Object to be assigned
-    def transit_number=(transit_number : String?)
-      if transit_number.nil?
-        raise ArgumentError.new("\"transit_number\" is required and cannot be null")
+    def transit_number=(new_value : String?)
+      raise ArgumentError.new("\"transit_number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("transit_number", new_value.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
       end
-      _transit_number = transit_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
-      @transit_number = _transit_number
+
+      @transit_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

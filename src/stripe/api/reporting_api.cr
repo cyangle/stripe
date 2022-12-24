@@ -305,9 +305,6 @@ module Stripe
         Log.debug { "Calling API: ReportingApi.get_reporting_report_types ..." }
       end
 
-      if client_side_validation
-      end
-
       # resource path
       local_var_path = "/v1/reporting/report_types"
 

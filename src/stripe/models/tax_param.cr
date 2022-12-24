@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(ip_address : Stripe::BbposWisePoseSplashscreen?)
-      if ip_address.nil?
-        return @ip_address = nil
+    def ip_address=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _ip_address = ip_address.not_nil!
-      _ip_address.validate if _ip_address.is_a?(OpenApi::Validatable)
-      @ip_address = _ip_address
+
+      @ip_address = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recovery Object to be assigned
-    def recovery=(recovery : Stripe::RecoveryParams?)
-      if recovery.nil?
-        return @recovery = nil
+    def recovery=(new_value : Stripe::RecoveryParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _recovery = recovery.not_nil!
-      _recovery.validate if _recovery.is_a?(OpenApi::Validatable)
-      @recovery = _recovery
+
+      @recovery = new_value
     end
 
     # Generates #hash and #== methods from all fields

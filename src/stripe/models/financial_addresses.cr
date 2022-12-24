@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aba Object to be assigned
-    def aba=(aba : Stripe::Access?)
-      if aba.nil?
-        return @aba = nil
+    def aba=(new_value : Stripe::Access?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _aba = aba.not_nil!
-      _aba.validate if _aba.is_a?(OpenApi::Validatable)
-      @aba = _aba
+
+      @aba = new_value
     end
 
     # Generates #hash and #== methods from all fields

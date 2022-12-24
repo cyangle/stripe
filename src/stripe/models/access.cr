@@ -54,12 +54,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requested Object to be assigned
-    def requested=(requested : Bool?)
-      if requested.nil?
-        raise ArgumentError.new("\"requested\" is required and cannot be null")
-      end
-      _requested = requested.not_nil!
-      @requested = _requested
+    def requested=(new_value : Bool?)
+      raise ArgumentError.new("\"requested\" is required and cannot be null") if new_value.nil?
+
+      @requested = new_value
     end
 
     # Generates #hash and #== methods from all fields

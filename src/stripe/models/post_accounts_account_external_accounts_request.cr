@@ -76,49 +76,36 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account Object to be assigned
-    def bank_account=(bank_account : Stripe::PostAccountsRequestBankAccount?)
-      if bank_account.nil?
-        return @bank_account = nil
+    def bank_account=(new_value : Stripe::PostAccountsRequestBankAccount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bank_account = bank_account.not_nil!
-      _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
-      @bank_account = _bank_account
+
+      @bank_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_for_currency Object to be assigned
-    def default_for_currency=(default_for_currency : Bool?)
-      if default_for_currency.nil?
-        return @default_for_currency = nil
-      end
-      _default_for_currency = default_for_currency.not_nil!
-      @default_for_currency = _default_for_currency
+    def default_for_currency=(new_value : Bool?)
+      @default_for_currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] external_account Object to be assigned
-    def external_account=(external_account : String?)
-      @external_account = external_account
+    def external_account=(new_value : String?)
+      @external_account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

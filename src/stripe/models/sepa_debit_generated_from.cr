@@ -73,24 +73,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] charge Object to be assigned
-    def charge=(charge : Stripe::SepaDebitGeneratedFromCharge?)
-      if charge.nil?
-        return @charge = nil
+    def charge=(new_value : Stripe::SepaDebitGeneratedFromCharge?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _charge = charge.not_nil!
-      _charge.validate if _charge.is_a?(OpenApi::Validatable)
-      @charge = _charge
+
+      @charge = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_attempt Object to be assigned
-    def setup_attempt=(setup_attempt : Stripe::PaymentMethodCardGeneratedCardSetupAttempt?)
-      if setup_attempt.nil?
-        return @setup_attempt = nil
+    def setup_attempt=(new_value : Stripe::PaymentMethodCardGeneratedCardSetupAttempt?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _setup_attempt = setup_attempt.not_nil!
-      _setup_attempt.validate if _setup_attempt.is_a?(OpenApi::Validatable)
-      @setup_attempt = _setup_attempt
+
+      @setup_attempt = new_value
     end
 
     # Generates #hash and #== methods from all fields

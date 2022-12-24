@@ -150,79 +150,72 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
+    def fingerprint=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("fingerprint", new_value.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       end
-      _fingerprint = fingerprint.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
-      @fingerprint = _fingerprint
+
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding_method Object to be assigned
-    def funding_method=(funding_method : String?)
-      if funding_method.nil?
-        return @funding_method = nil
+    def funding_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("funding_method", new_value.to_s.size, MAX_LENGTH_FOR_FUNDING_METHOD)
       end
-      _funding_method = funding_method.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("funding_method", _funding_method.to_s.size, MAX_LENGTH_FOR_FUNDING_METHOD)
-      @funding_method = _funding_method
+
+      @funding_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
+    def last4=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last4", new_value.to_s.size, MAX_LENGTH_FOR_LAST4)
       end
-      _last4 = last4.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
-      @last4 = _last4
+
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sender_account_number Object to be assigned
-    def sender_account_number=(sender_account_number : String?)
-      if sender_account_number.nil?
-        return @sender_account_number = nil
+    def sender_account_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sender_account_number", new_value.to_s.size, MAX_LENGTH_FOR_SENDER_ACCOUNT_NUMBER)
       end
-      _sender_account_number = sender_account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sender_account_number", _sender_account_number.to_s.size, MAX_LENGTH_FOR_SENDER_ACCOUNT_NUMBER)
-      @sender_account_number = _sender_account_number
+
+      @sender_account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sender_name Object to be assigned
-    def sender_name=(sender_name : String?)
-      if sender_name.nil?
-        return @sender_name = nil
+    def sender_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sender_name", new_value.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
       end
-      _sender_name = sender_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
-      @sender_name = _sender_name
+
+      @sender_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sender_sort_code Object to be assigned
-    def sender_sort_code=(sender_sort_code : String?)
-      if sender_sort_code.nil?
-        return @sender_sort_code = nil
+    def sender_sort_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sender_sort_code", new_value.to_s.size, MAX_LENGTH_FOR_SENDER_SORT_CODE)
       end
-      _sender_sort_code = sender_sort_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sender_sort_code", _sender_sort_code.to_s.size, MAX_LENGTH_FOR_SENDER_SORT_CODE)
-      @sender_sort_code = _sender_sort_code
+
+      @sender_sort_code = new_value
     end
 
     # Generates #hash and #== methods from all fields

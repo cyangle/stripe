@@ -120,57 +120,52 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flight Object to be assigned
-    def flight=(flight : Stripe::IssuingTransactionPurchaseDetailsFlight?)
-      if flight.nil?
-        return @flight = nil
+    def flight=(new_value : Stripe::IssuingTransactionPurchaseDetailsFlight?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _flight = flight.not_nil!
-      _flight.validate if _flight.is_a?(OpenApi::Validatable)
-      @flight = _flight
+
+      @flight = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fuel Object to be assigned
-    def fuel=(fuel : Stripe::IssuingTransactionPurchaseDetailsFuel?)
-      if fuel.nil?
-        return @fuel = nil
+    def fuel=(new_value : Stripe::IssuingTransactionPurchaseDetailsFuel?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _fuel = fuel.not_nil!
-      _fuel.validate if _fuel.is_a?(OpenApi::Validatable)
-      @fuel = _fuel
+
+      @fuel = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lodging Object to be assigned
-    def lodging=(lodging : Stripe::IssuingTransactionPurchaseDetailsLodging?)
-      if lodging.nil?
-        return @lodging = nil
+    def lodging=(new_value : Stripe::IssuingTransactionPurchaseDetailsLodging?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _lodging = lodging.not_nil!
-      _lodging.validate if _lodging.is_a?(OpenApi::Validatable)
-      @lodging = _lodging
+
+      @lodging = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] receipt Object to be assigned
-    def receipt=(receipt : Array(Stripe::IssuingTransactionReceiptData)?)
-      if receipt.nil?
-        return @receipt = nil
+    def receipt=(new_value : Array(Stripe::IssuingTransactionReceiptData)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _receipt = receipt.not_nil!
-      OpenApi::ContainerValidator.validate(container: _receipt) if _receipt.is_a?(Array)
-      @receipt = _receipt
+
+      @receipt = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Generates #hash and #== methods from all fields

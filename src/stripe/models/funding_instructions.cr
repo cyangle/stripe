@@ -122,56 +122,54 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_transfer Object to be assigned
-    def bank_transfer=(bank_transfer : Stripe::FundingInstructionsBankTransfer?)
-      if bank_transfer.nil?
-        raise ArgumentError.new("\"bank_transfer\" is required and cannot be null")
+    def bank_transfer=(new_value : Stripe::FundingInstructionsBankTransfer?)
+      raise ArgumentError.new("\"bank_transfer\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bank_transfer = bank_transfer.not_nil!
-      _bank_transfer.validate if _bank_transfer.is_a?(OpenApi::Validatable)
-      @bank_transfer = _bank_transfer
+
+      @bank_transfer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("currency", new_value.to_s.size, MAX_LENGTH_FOR_CURRENCY)
       end
-      _currency = currency.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
-      @currency = _currency
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding_type Object to be assigned
-    def funding_type=(funding_type : String?)
-      if funding_type.nil?
-        raise ArgumentError.new("\"funding_type\" is required and cannot be null")
+    def funding_type=(new_value : String?)
+      raise ArgumentError.new("\"funding_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("funding_type", new_value, VALID_VALUES_FOR_FUNDING_TYPE)
       end
-      _funding_type = funding_type.not_nil!
-      OpenApi::EnumValidator.validate("funding_type", _funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
-      @funding_type = _funding_type
+
+      @funding_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Generates #hash and #== methods from all fields

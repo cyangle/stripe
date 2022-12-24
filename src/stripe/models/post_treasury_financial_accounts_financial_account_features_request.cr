@@ -127,89 +127,78 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_issuing Object to be assigned
-    def card_issuing=(card_issuing : Stripe::Access?)
-      if card_issuing.nil?
-        return @card_issuing = nil
+    def card_issuing=(new_value : Stripe::Access?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card_issuing = card_issuing.not_nil!
-      _card_issuing.validate if _card_issuing.is_a?(OpenApi::Validatable)
-      @card_issuing = _card_issuing
+
+      @card_issuing = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] deposit_insurance Object to be assigned
-    def deposit_insurance=(deposit_insurance : Stripe::Access?)
-      if deposit_insurance.nil?
-        return @deposit_insurance = nil
+    def deposit_insurance=(new_value : Stripe::Access?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _deposit_insurance = deposit_insurance.not_nil!
-      _deposit_insurance.validate if _deposit_insurance.is_a?(OpenApi::Validatable)
-      @deposit_insurance = _deposit_insurance
+
+      @deposit_insurance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] financial_addresses Object to be assigned
-    def financial_addresses=(financial_addresses : Stripe::FinancialAddresses?)
-      if financial_addresses.nil?
-        return @financial_addresses = nil
+    def financial_addresses=(new_value : Stripe::FinancialAddresses?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _financial_addresses = financial_addresses.not_nil!
-      _financial_addresses.validate if _financial_addresses.is_a?(OpenApi::Validatable)
-      @financial_addresses = _financial_addresses
+
+      @financial_addresses = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_transfers Object to be assigned
-    def inbound_transfers=(inbound_transfers : Stripe::InboundTransfers?)
-      if inbound_transfers.nil?
-        return @inbound_transfers = nil
+    def inbound_transfers=(new_value : Stripe::InboundTransfers?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _inbound_transfers = inbound_transfers.not_nil!
-      _inbound_transfers.validate if _inbound_transfers.is_a?(OpenApi::Validatable)
-      @inbound_transfers = _inbound_transfers
+
+      @inbound_transfers = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] intra_stripe_flows Object to be assigned
-    def intra_stripe_flows=(intra_stripe_flows : Stripe::Access?)
-      if intra_stripe_flows.nil?
-        return @intra_stripe_flows = nil
+    def intra_stripe_flows=(new_value : Stripe::Access?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _intra_stripe_flows = intra_stripe_flows.not_nil!
-      _intra_stripe_flows.validate if _intra_stripe_flows.is_a?(OpenApi::Validatable)
-      @intra_stripe_flows = _intra_stripe_flows
+
+      @intra_stripe_flows = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_payments Object to be assigned
-    def outbound_payments=(outbound_payments : Stripe::OutboundPayments?)
-      if outbound_payments.nil?
-        return @outbound_payments = nil
+    def outbound_payments=(new_value : Stripe::OutboundPayments?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _outbound_payments = outbound_payments.not_nil!
-      _outbound_payments.validate if _outbound_payments.is_a?(OpenApi::Validatable)
-      @outbound_payments = _outbound_payments
+
+      @outbound_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_transfers Object to be assigned
-    def outbound_transfers=(outbound_transfers : Stripe::OutboundTransfers?)
-      if outbound_transfers.nil?
-        return @outbound_transfers = nil
+    def outbound_transfers=(new_value : Stripe::OutboundTransfers?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _outbound_transfers = outbound_transfers.not_nil!
-      _outbound_transfers.validate if _outbound_transfers.is_a?(OpenApi::Validatable)
-      @outbound_transfers = _outbound_transfers
+
+      @outbound_transfers = new_value
     end
 
     # Generates #hash and #== methods from all fields

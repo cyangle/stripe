@@ -135,85 +135,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alternatives Object to be assigned
-    def alternatives=(alternatives : Array(Stripe::AccountRequirementsAlternative)?)
-      if alternatives.nil?
-        return @alternatives = nil
+    def alternatives=(new_value : Array(Stripe::AccountRequirementsAlternative)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _alternatives = alternatives.not_nil!
-      OpenApi::ContainerValidator.validate(container: _alternatives) if _alternatives.is_a?(Array)
-      @alternatives = _alternatives
+
+      @alternatives = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] current_deadline Object to be assigned
-    def current_deadline=(current_deadline : Int64?)
-      if current_deadline.nil?
-        return @current_deadline = nil
-      end
-      _current_deadline = current_deadline.not_nil!
-      @current_deadline = _current_deadline
+    def current_deadline=(new_value : Int64?)
+      @current_deadline = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currently_due Object to be assigned
-    def currently_due=(currently_due : Array(String)?)
-      if currently_due.nil?
-        return @currently_due = nil
-      end
-      _currently_due = currently_due.not_nil!
-      @currently_due = _currently_due
+    def currently_due=(new_value : Array(String)?)
+      @currently_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] disabled_reason Object to be assigned
-    def disabled_reason=(disabled_reason : String?)
-      if disabled_reason.nil?
-        return @disabled_reason = nil
+    def disabled_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("disabled_reason", new_value.to_s.size, MAX_LENGTH_FOR_DISABLED_REASON)
       end
-      _disabled_reason = disabled_reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("disabled_reason", _disabled_reason.to_s.size, MAX_LENGTH_FOR_DISABLED_REASON)
-      @disabled_reason = _disabled_reason
+
+      @disabled_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] errors Object to be assigned
-    def errors=(errors : Array(Stripe::AccountRequirementsError)?)
-      if errors.nil?
-        return @errors = nil
+    def errors=(new_value : Array(Stripe::AccountRequirementsError)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _errors = errors.not_nil!
-      OpenApi::ContainerValidator.validate(container: _errors) if _errors.is_a?(Array)
-      @errors = _errors
+
+      @errors = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eventually_due Object to be assigned
-    def eventually_due=(eventually_due : Array(String)?)
-      if eventually_due.nil?
-        return @eventually_due = nil
-      end
-      _eventually_due = eventually_due.not_nil!
-      @eventually_due = _eventually_due
+    def eventually_due=(new_value : Array(String)?)
+      @eventually_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] past_due Object to be assigned
-    def past_due=(past_due : Array(String)?)
-      if past_due.nil?
-        return @past_due = nil
-      end
-      _past_due = past_due.not_nil!
-      @past_due = _past_due
+    def past_due=(new_value : Array(String)?)
+      @past_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_verification Object to be assigned
-    def pending_verification=(pending_verification : Array(String)?)
-      if pending_verification.nil?
-        return @pending_verification = nil
-      end
-      _pending_verification = pending_verification.not_nil!
-      @pending_verification = _pending_verification
+    def pending_verification=(new_value : Array(String)?)
+      @pending_verification = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -56,13 +56,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tos_acceptance Object to be assigned
-    def tos_acceptance=(tos_acceptance : Stripe::AccountTermsOfService?)
-      if tos_acceptance.nil?
-        return @tos_acceptance = nil
+    def tos_acceptance=(new_value : Stripe::AccountTermsOfService?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tos_acceptance = tos_acceptance.not_nil!
-      _tos_acceptance.validate if _tos_acceptance.is_a?(OpenApi::Validatable)
-      @tos_acceptance = _tos_acceptance
+
+      @tos_acceptance = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -173,79 +173,79 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] app_id Object to be assigned
-    def app_id=(app_id : String?)
-      if app_id.nil?
-        raise ArgumentError.new("\"app_id\" is required and cannot be null")
+    def app_id=(new_value : String?)
+      raise ArgumentError.new("\"app_id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("app_id", new_value.to_s.size, MAX_LENGTH_FOR_APP_ID)
       end
-      _app_id = app_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
-      @app_id = _app_id
+
+      @app_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] nonce_str Object to be assigned
-    def nonce_str=(nonce_str : String?)
-      if nonce_str.nil?
-        raise ArgumentError.new("\"nonce_str\" is required and cannot be null")
+    def nonce_str=(new_value : String?)
+      raise ArgumentError.new("\"nonce_str\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("nonce_str", new_value.to_s.size, MAX_LENGTH_FOR_NONCE_STR)
       end
-      _nonce_str = nonce_str.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("nonce_str", _nonce_str.to_s.size, MAX_LENGTH_FOR_NONCE_STR)
-      @nonce_str = _nonce_str
+
+      @nonce_str = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] package Object to be assigned
-    def package=(package : String?)
-      if package.nil?
-        raise ArgumentError.new("\"package\" is required and cannot be null")
+    def package=(new_value : String?)
+      raise ArgumentError.new("\"package\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("package", new_value.to_s.size, MAX_LENGTH_FOR_PACKAGE)
       end
-      _package = package.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("package", _package.to_s.size, MAX_LENGTH_FOR_PACKAGE)
-      @package = _package
+
+      @package = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] partner_id Object to be assigned
-    def partner_id=(partner_id : String?)
-      if partner_id.nil?
-        raise ArgumentError.new("\"partner_id\" is required and cannot be null")
+    def partner_id=(new_value : String?)
+      raise ArgumentError.new("\"partner_id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("partner_id", new_value.to_s.size, MAX_LENGTH_FOR_PARTNER_ID)
       end
-      _partner_id = partner_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("partner_id", _partner_id.to_s.size, MAX_LENGTH_FOR_PARTNER_ID)
-      @partner_id = _partner_id
+
+      @partner_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prepay_id Object to be assigned
-    def prepay_id=(prepay_id : String?)
-      if prepay_id.nil?
-        raise ArgumentError.new("\"prepay_id\" is required and cannot be null")
+    def prepay_id=(new_value : String?)
+      raise ArgumentError.new("\"prepay_id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("prepay_id", new_value.to_s.size, MAX_LENGTH_FOR_PREPAY_ID)
       end
-      _prepay_id = prepay_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("prepay_id", _prepay_id.to_s.size, MAX_LENGTH_FOR_PREPAY_ID)
-      @prepay_id = _prepay_id
+
+      @prepay_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sign Object to be assigned
-    def sign=(sign : String?)
-      if sign.nil?
-        raise ArgumentError.new("\"sign\" is required and cannot be null")
+    def sign=(new_value : String?)
+      raise ArgumentError.new("\"sign\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sign", new_value.to_s.size, MAX_LENGTH_FOR_SIGN)
       end
-      _sign = sign.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sign", _sign.to_s.size, MAX_LENGTH_FOR_SIGN)
-      @sign = _sign
+
+      @sign = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] timestamp Object to be assigned
-    def timestamp=(timestamp : String?)
-      if timestamp.nil?
-        raise ArgumentError.new("\"timestamp\" is required and cannot be null")
+    def timestamp=(new_value : String?)
+      raise ArgumentError.new("\"timestamp\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("timestamp", new_value.to_s.size, MAX_LENGTH_FOR_TIMESTAMP)
       end
-      _timestamp = timestamp.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("timestamp", _timestamp.to_s.size, MAX_LENGTH_FOR_TIMESTAMP)
-      @timestamp = _timestamp
+
+      @timestamp = new_value
     end
 
     # Generates #hash and #== methods from all fields

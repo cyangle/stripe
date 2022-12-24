@@ -56,12 +56,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_id_provided Object to be assigned
-    def tax_id_provided=(tax_id_provided : Bool?)
-      if tax_id_provided.nil?
-        raise ArgumentError.new("\"tax_id_provided\" is required and cannot be null")
-      end
-      _tax_id_provided = tax_id_provided.not_nil!
-      @tax_id_provided = _tax_id_provided
+    def tax_id_provided=(new_value : Bool?)
+      raise ArgumentError.new("\"tax_id_provided\" is required and cannot be null") if new_value.nil?
+
+      @tax_id_provided = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -61,13 +61,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund Object to be assigned
-    def refund=(refund : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceRefundedFromPaymentTransactionRefund?)
-      if refund.nil?
-        raise ArgumentError.new("\"refund\" is required and cannot be null")
+    def refund=(new_value : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceRefundedFromPaymentTransactionRefund?)
+      raise ArgumentError.new("\"refund\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _refund = refund.not_nil!
-      _refund.validate if _refund.is_a?(OpenApi::Validatable)
-      @refund = _refund
+
+      @refund = new_value
     end
 
     # Generates #hash and #== methods from all fields

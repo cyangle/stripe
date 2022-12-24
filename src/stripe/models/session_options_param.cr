@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] document Object to be assigned
-    def document=(document : Stripe::SessionOptionsParamDocument?)
-      if document.nil?
-        return @document = nil
+    def document=(new_value : Stripe::SessionOptionsParamDocument?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _document = document.not_nil!
-      _document.validate if _document.is_a?(OpenApi::Validatable)
-      @document = _document
+
+      @document = new_value
     end
 
     # Generates #hash and #== methods from all fields

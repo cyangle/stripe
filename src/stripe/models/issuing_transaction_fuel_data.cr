@@ -103,44 +103,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        raise ArgumentError.new("\"_type\" is required and cannot be null")
+    def _type=(new_value : String?)
+      raise ArgumentError.new("\"_type\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("_type", new_value.to_s.size, MAX_LENGTH_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit Object to be assigned
-    def unit=(unit : String?)
-      if unit.nil?
-        raise ArgumentError.new("\"unit\" is required and cannot be null")
+    def unit=(new_value : String?)
+      raise ArgumentError.new("\"unit\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("unit", new_value.to_s.size, MAX_LENGTH_FOR_UNIT)
       end
-      _unit = unit.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("unit", _unit.to_s.size, MAX_LENGTH_FOR_UNIT)
-      @unit = _unit
+
+      @unit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_cost_decimal Object to be assigned
-    def unit_cost_decimal=(unit_cost_decimal : BigDecimal?)
-      if unit_cost_decimal.nil?
-        raise ArgumentError.new("\"unit_cost_decimal\" is required and cannot be null")
-      end
-      _unit_cost_decimal = unit_cost_decimal.not_nil!
-      @unit_cost_decimal = _unit_cost_decimal
+    def unit_cost_decimal=(new_value : BigDecimal?)
+      raise ArgumentError.new("\"unit_cost_decimal\" is required and cannot be null") if new_value.nil?
+
+      @unit_cost_decimal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] volume_decimal Object to be assigned
-    def volume_decimal=(volume_decimal : BigDecimal?)
-      if volume_decimal.nil?
-        return @volume_decimal = nil
-      end
-      _volume_decimal = volume_decimal.not_nil!
-      @volume_decimal = _volume_decimal
+    def volume_decimal=(new_value : BigDecimal?)
+      @volume_decimal = new_value
     end
 
     # Generates #hash and #== methods from all fields

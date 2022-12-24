@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] splashscreen Object to be assigned
-    def splashscreen=(splashscreen : Stripe::BbposWisePoseSplashscreen?)
-      if splashscreen.nil?
-        return @splashscreen = nil
+    def splashscreen=(new_value : Stripe::BbposWisePoseSplashscreen?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _splashscreen = splashscreen.not_nil!
-      _splashscreen.validate if _splashscreen.is_a?(OpenApi::Validatable)
-      @splashscreen = _splashscreen
+
+      @splashscreen = new_value
     end
 
     # Generates #hash and #== methods from all fields

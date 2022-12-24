@@ -242,168 +242,148 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bin Object to be assigned
-    def bin=(bin : String?)
-      if bin.nil?
-        raise ArgumentError.new("\"bin\" is required and cannot be null")
+    def bin=(new_value : String?)
+      raise ArgumentError.new("\"bin\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bin", new_value.to_s.size, MAX_LENGTH_FOR_BIN)
       end
-      _bin = bin.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bin", _bin.to_s.size, MAX_LENGTH_FOR_BIN)
-      @bin = _bin
+
+      @bin = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] clearing_date Object to be assigned
-    def clearing_date=(clearing_date : Int64?)
-      if clearing_date.nil?
-        raise ArgumentError.new("\"clearing_date\" is required and cannot be null")
-      end
-      _clearing_date = clearing_date.not_nil!
-      @clearing_date = _clearing_date
+    def clearing_date=(new_value : Int64?)
+      raise ArgumentError.new("\"clearing_date\" is required and cannot be null") if new_value.nil?
+
+      @clearing_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created Object to be assigned
-    def created=(created : Int64?)
-      if created.nil?
-        raise ArgumentError.new("\"created\" is required and cannot be null")
-      end
-      _created = created.not_nil!
-      @created = _created
+    def created=(new_value : Int64?)
+      raise ArgumentError.new("\"created\" is required and cannot be null") if new_value.nil?
+
+      @created = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        raise ArgumentError.new("\"currency\" is required and cannot be null")
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      raise ArgumentError.new("\"currency\" is required and cannot be null") if new_value.nil?
+
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interchange_fees Object to be assigned
-    def interchange_fees=(interchange_fees : Int64?)
-      if interchange_fees.nil?
-        raise ArgumentError.new("\"interchange_fees\" is required and cannot be null")
-      end
-      _interchange_fees = interchange_fees.not_nil!
-      @interchange_fees = _interchange_fees
+    def interchange_fees=(new_value : Int64?)
+      raise ArgumentError.new("\"interchange_fees\" is required and cannot be null") if new_value.nil?
+
+      @interchange_fees = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        raise ArgumentError.new("\"metadata\" is required and cannot be null")
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      raise ArgumentError.new("\"metadata\" is required and cannot be null") if new_value.nil?
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] net_total Object to be assigned
-    def net_total=(net_total : Int64?)
-      if net_total.nil?
-        raise ArgumentError.new("\"net_total\" is required and cannot be null")
-      end
-      _net_total = net_total.not_nil!
-      @net_total = _net_total
+    def net_total=(new_value : Int64?)
+      raise ArgumentError.new("\"net_total\" is required and cannot be null") if new_value.nil?
+
+      @net_total = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network : String?)
-      if network.nil?
-        raise ArgumentError.new("\"network\" is required and cannot be null")
+    def network=(new_value : String?)
+      raise ArgumentError.new("\"network\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("network", new_value, VALID_VALUES_FOR_NETWORK)
       end
-      _network = network.not_nil!
-      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
-      @network = _network
+
+      @network = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_fees Object to be assigned
-    def network_fees=(network_fees : Int64?)
-      if network_fees.nil?
-        raise ArgumentError.new("\"network_fees\" is required and cannot be null")
-      end
-      _network_fees = network_fees.not_nil!
-      @network_fees = _network_fees
+    def network_fees=(new_value : Int64?)
+      raise ArgumentError.new("\"network_fees\" is required and cannot be null") if new_value.nil?
+
+      @network_fees = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_settlement_identifier Object to be assigned
-    def network_settlement_identifier=(network_settlement_identifier : String?)
-      if network_settlement_identifier.nil?
-        raise ArgumentError.new("\"network_settlement_identifier\" is required and cannot be null")
+    def network_settlement_identifier=(new_value : String?)
+      raise ArgumentError.new("\"network_settlement_identifier\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("network_settlement_identifier", new_value.to_s.size, MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER)
       end
-      _network_settlement_identifier = network_settlement_identifier.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("network_settlement_identifier", _network_settlement_identifier.to_s.size, MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER)
-      @network_settlement_identifier = _network_settlement_identifier
+
+      @network_settlement_identifier = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] settlement_service Object to be assigned
-    def settlement_service=(settlement_service : String?)
-      if settlement_service.nil?
-        raise ArgumentError.new("\"settlement_service\" is required and cannot be null")
+    def settlement_service=(new_value : String?)
+      raise ArgumentError.new("\"settlement_service\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("settlement_service", new_value.to_s.size, MAX_LENGTH_FOR_SETTLEMENT_SERVICE)
       end
-      _settlement_service = settlement_service.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("settlement_service", _settlement_service.to_s.size, MAX_LENGTH_FOR_SETTLEMENT_SERVICE)
-      @settlement_service = _settlement_service
+
+      @settlement_service = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_count Object to be assigned
-    def transaction_count=(transaction_count : Int64?)
-      if transaction_count.nil?
-        raise ArgumentError.new("\"transaction_count\" is required and cannot be null")
-      end
-      _transaction_count = transaction_count.not_nil!
-      @transaction_count = _transaction_count
+    def transaction_count=(new_value : Int64?)
+      raise ArgumentError.new("\"transaction_count\" is required and cannot be null") if new_value.nil?
+
+      @transaction_count = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_volume Object to be assigned
-    def transaction_volume=(transaction_volume : Int64?)
-      if transaction_volume.nil?
-        raise ArgumentError.new("\"transaction_volume\" is required and cannot be null")
-      end
-      _transaction_volume = transaction_volume.not_nil!
-      @transaction_volume = _transaction_volume
+    def transaction_volume=(new_value : Int64?)
+      raise ArgumentError.new("\"transaction_volume\" is required and cannot be null") if new_value.nil?
+
+      @transaction_volume = new_value
     end
 
     # Generates #hash and #== methods from all fields

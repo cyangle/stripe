@@ -69,32 +69,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] maximum Object to be assigned
-    def maximum=(maximum : Int64?)
-      if maximum.nil?
-        return @maximum = nil
-      end
-      _maximum = maximum.not_nil!
-      @maximum = _maximum
+    def maximum=(new_value : Int64?)
+      @maximum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum Object to be assigned
-    def minimum=(minimum : Int64?)
-      if minimum.nil?
-        return @minimum = nil
-      end
-      _minimum = minimum.not_nil!
-      @minimum = _minimum
+    def minimum=(new_value : Int64?)
+      @minimum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preset Object to be assigned
-    def preset=(preset : Int64?)
-      if preset.nil?
-        return @preset = nil
-      end
-      _preset = preset.not_nil!
-      @preset = _preset
+    def preset=(new_value : Int64?)
+      @preset = new_value
     end
 
     # Generates #hash and #== methods from all fields

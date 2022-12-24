@@ -70,24 +70,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] promotions Object to be assigned
-    def promotions=(promotions : String?)
-      if promotions.nil?
-        return @promotions = nil
+    def promotions=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("promotions", new_value, VALID_VALUES_FOR_PROMOTIONS)
       end
-      _promotions = promotions.not_nil!
-      OpenApi::EnumValidator.validate("promotions", _promotions, VALID_VALUES_FOR_PROMOTIONS)
-      @promotions = _promotions
+
+      @promotions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terms_of_service Object to be assigned
-    def terms_of_service=(terms_of_service : String?)
-      if terms_of_service.nil?
-        return @terms_of_service = nil
+    def terms_of_service=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("terms_of_service", new_value, VALID_VALUES_FOR_TERMS_OF_SERVICE)
       end
-      _terms_of_service = terms_of_service.not_nil!
-      OpenApi::EnumValidator.validate("terms_of_service", _terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
-      @terms_of_service = _terms_of_service
+
+      @terms_of_service = new_value
     end
 
     # Generates #hash and #== methods from all fields

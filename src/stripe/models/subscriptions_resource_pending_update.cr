@@ -99,53 +99,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        raise ArgumentError.new("\"expires_at\" is required and cannot be null")
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      raise ArgumentError.new("\"expires_at\" is required and cannot be null") if new_value.nil?
+
+      @expires_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
-    def billing_cycle_anchor=(billing_cycle_anchor : Int64?)
-      if billing_cycle_anchor.nil?
-        return @billing_cycle_anchor = nil
-      end
-      _billing_cycle_anchor = billing_cycle_anchor.not_nil!
-      @billing_cycle_anchor = _billing_cycle_anchor
+    def billing_cycle_anchor=(new_value : Int64?)
+      @billing_cycle_anchor = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_items Object to be assigned
-    def subscription_items=(subscription_items : Array(Stripe::SubscriptionItem)?)
-      if subscription_items.nil?
-        return @subscription_items = nil
+    def subscription_items=(new_value : Array(Stripe::SubscriptionItem)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _subscription_items = subscription_items.not_nil!
-      OpenApi::ContainerValidator.validate(container: _subscription_items) if _subscription_items.is_a?(Array)
-      @subscription_items = _subscription_items
+
+      @subscription_items = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_end Object to be assigned
-    def trial_end=(trial_end : Int64?)
-      if trial_end.nil?
-        return @trial_end = nil
-      end
-      _trial_end = trial_end.not_nil!
-      @trial_end = _trial_end
+    def trial_end=(new_value : Int64?)
+      @trial_end = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_from_plan Object to be assigned
-    def trial_from_plan=(trial_from_plan : Bool?)
-      if trial_from_plan.nil?
-        return @trial_from_plan = nil
-      end
-      _trial_from_plan = trial_from_plan.not_nil!
-      @trial_from_plan = _trial_from_plan
+    def trial_from_plan=(new_value : Bool?)
+      @trial_from_plan = new_value
     end
 
     # Generates #hash and #== methods from all fields

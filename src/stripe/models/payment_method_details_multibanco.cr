@@ -81,24 +81,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity Object to be assigned
-    def entity=(entity : String?)
-      if entity.nil?
-        return @entity = nil
+    def entity=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("entity", new_value.to_s.size, MAX_LENGTH_FOR_ENTITY)
       end
-      _entity = entity.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("entity", _entity.to_s.size, MAX_LENGTH_FOR_ENTITY)
-      @entity = _entity
+
+      @entity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Generates #hash and #== methods from all fields

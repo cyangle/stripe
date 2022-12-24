@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(dob : Stripe::PaymentMethodKlarnaDob?)
-      if dob.nil?
-        return @dob = nil
+    def dob=(new_value : Stripe::PaymentMethodKlarnaDob?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dob = dob.not_nil!
-      _dob.validate if _dob.is_a?(OpenApi::Validatable)
-      @dob = _dob
+
+      @dob = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -181,90 +181,82 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::SourceOwnerAddress?)
-      if address.nil?
-        return @address = nil
+    def address=(new_value : Stripe::SourceOwnerAddress?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address = address.not_nil!
-      _address.validate if _address.is_a?(OpenApi::Validatable)
-      @address = _address
+
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
+    def email=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("email", new_value.to_s.size, MAX_LENGTH_FOR_EMAIL)
       end
-      _email = email.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
-      @email = _email
+
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
+    def name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone Object to be assigned
-    def phone=(phone : String?)
-      if phone.nil?
-        return @phone = nil
+    def phone=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("phone", new_value.to_s.size, MAX_LENGTH_FOR_PHONE)
       end
-      _phone = phone.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
-      @phone = _phone
+
+      @phone = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_address Object to be assigned
-    def verified_address=(verified_address : Stripe::SourceOwnerVerifiedAddress?)
-      if verified_address.nil?
-        return @verified_address = nil
+    def verified_address=(new_value : Stripe::SourceOwnerVerifiedAddress?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verified_address = verified_address.not_nil!
-      _verified_address.validate if _verified_address.is_a?(OpenApi::Validatable)
-      @verified_address = _verified_address
+
+      @verified_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_email Object to be assigned
-    def verified_email=(verified_email : String?)
-      if verified_email.nil?
-        return @verified_email = nil
+    def verified_email=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_email", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_EMAIL)
       end
-      _verified_email = verified_email.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_email", _verified_email.to_s.size, MAX_LENGTH_FOR_VERIFIED_EMAIL)
-      @verified_email = _verified_email
+
+      @verified_email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_name Object to be assigned
-    def verified_name=(verified_name : String?)
-      if verified_name.nil?
-        return @verified_name = nil
+    def verified_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_name", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       end
-      _verified_name = verified_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
-      @verified_name = _verified_name
+
+      @verified_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_phone Object to be assigned
-    def verified_phone=(verified_phone : String?)
-      if verified_phone.nil?
-        return @verified_phone = nil
+    def verified_phone=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("verified_phone", new_value.to_s.size, MAX_LENGTH_FOR_VERIFIED_PHONE)
       end
-      _verified_phone = verified_phone.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("verified_phone", _verified_phone.to_s.size, MAX_LENGTH_FOR_VERIFIED_PHONE)
-      @verified_phone = _verified_phone
+
+      @verified_phone = new_value
     end
 
     # Generates #hash and #== methods from all fields

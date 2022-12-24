@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permissions Object to be assigned
-    def permissions=(permissions : Array(String)?)
-      if permissions.nil?
-        return @permissions = nil
+    def permissions=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("permissions", new_value, VALID_VALUES_FOR_PERMISSIONS)
       end
-      _permissions = permissions.not_nil!
-      OpenApi::EnumValidator.validate("permissions", _permissions, VALID_VALUES_FOR_PERMISSIONS)
-      @permissions = _permissions
+
+      @permissions = new_value
     end
 
     # Generates #hash and #== methods from all fields

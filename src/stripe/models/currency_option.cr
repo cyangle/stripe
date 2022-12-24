@@ -105,55 +105,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_unit_amount Object to be assigned
-    def custom_unit_amount=(custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount?)
-      if custom_unit_amount.nil?
-        return @custom_unit_amount = nil
+    def custom_unit_amount=(new_value : Stripe::CurrencyOptionCustomUnitAmount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _custom_unit_amount = custom_unit_amount.not_nil!
-      _custom_unit_amount.validate if _custom_unit_amount.is_a?(OpenApi::Validatable)
-      @custom_unit_amount = _custom_unit_amount
+
+      @custom_unit_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior : String?)
-      if tax_behavior.nil?
-        return @tax_behavior = nil
+    def tax_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      _tax_behavior = tax_behavior.not_nil!
-      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
-      @tax_behavior = _tax_behavior
+
+      @tax_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tiers Object to be assigned
-    def tiers=(tiers : Array(Stripe::PriceTier)?)
-      if tiers.nil?
-        return @tiers = nil
+    def tiers=(new_value : Array(Stripe::PriceTier)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _tiers = tiers.not_nil!
-      OpenApi::ContainerValidator.validate(container: _tiers) if _tiers.is_a?(Array)
-      @tiers = _tiers
+
+      @tiers = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount Object to be assigned
-    def unit_amount=(unit_amount : Int64?)
-      if unit_amount.nil?
-        return @unit_amount = nil
-      end
-      _unit_amount = unit_amount.not_nil!
-      @unit_amount = _unit_amount
+    def unit_amount=(new_value : Int64?)
+      @unit_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_decimal Object to be assigned
-    def unit_amount_decimal=(unit_amount_decimal : BigDecimal?)
-      if unit_amount_decimal.nil?
-        return @unit_amount_decimal = nil
-      end
-      _unit_amount_decimal = unit_amount_decimal.not_nil!
-      @unit_amount_decimal = _unit_amount_decimal
+    def unit_amount_decimal=(new_value : BigDecimal?)
+      @unit_amount_decimal = new_value
     end
 
     # Generates #hash and #== methods from all fields

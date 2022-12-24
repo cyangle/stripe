@@ -83,24 +83,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_code Object to be assigned
-    def payment_code=(payment_code : String?)
-      if payment_code.nil?
-        raise ArgumentError.new("\"payment_code\" is required and cannot be null")
+    def payment_code=(new_value : String?)
+      raise ArgumentError.new("\"payment_code\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("payment_code", new_value.to_s.size, MAX_LENGTH_FOR_PAYMENT_CODE)
       end
-      _payment_code = payment_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("payment_code", _payment_code.to_s.size, MAX_LENGTH_FOR_PAYMENT_CODE)
-      @payment_code = _payment_code
+
+      @payment_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] confirmation_number Object to be assigned
-    def confirmation_number=(confirmation_number : String?)
-      if confirmation_number.nil?
-        return @confirmation_number = nil
+    def confirmation_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("confirmation_number", new_value.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
       end
-      _confirmation_number = confirmation_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
-      @confirmation_number = _confirmation_number
+
+      @confirmation_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

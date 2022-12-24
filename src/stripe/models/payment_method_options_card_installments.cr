@@ -88,34 +88,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled Object to be assigned
-    def enabled=(enabled : Bool?)
-      if enabled.nil?
-        raise ArgumentError.new("\"enabled\" is required and cannot be null")
-      end
-      _enabled = enabled.not_nil!
-      @enabled = _enabled
+    def enabled=(new_value : Bool?)
+      raise ArgumentError.new("\"enabled\" is required and cannot be null") if new_value.nil?
+
+      @enabled = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available_plans Object to be assigned
-    def available_plans=(available_plans : Array(Stripe::PaymentMethodDetailsCardInstallmentsPlan)?)
-      if available_plans.nil?
-        return @available_plans = nil
+    def available_plans=(new_value : Array(Stripe::PaymentMethodDetailsCardInstallmentsPlan)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _available_plans = available_plans.not_nil!
-      OpenApi::ContainerValidator.validate(container: _available_plans) if _available_plans.is_a?(Array)
-      @available_plans = _available_plans
+
+      @available_plans = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] plan Object to be assigned
-    def plan=(plan : Stripe::PaymentMethodOptionsCardInstallmentsPlan?)
-      if plan.nil?
-        return @plan = nil
+    def plan=(new_value : Stripe::PaymentMethodOptionsCardInstallmentsPlan?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _plan = plan.not_nil!
-      _plan.validate if _plan.is_a?(OpenApi::Validatable)
-      @plan = _plan
+
+      @plan = new_value
     end
 
     # Generates #hash and #== methods from all fields

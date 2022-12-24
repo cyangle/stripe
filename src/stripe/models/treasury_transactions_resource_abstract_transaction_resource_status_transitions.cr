@@ -61,22 +61,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] posted_at Object to be assigned
-    def posted_at=(posted_at : Int64?)
-      if posted_at.nil?
-        return @posted_at = nil
-      end
-      _posted_at = posted_at.not_nil!
-      @posted_at = _posted_at
+    def posted_at=(new_value : Int64?)
+      @posted_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] void_at Object to be assigned
-    def void_at=(void_at : Int64?)
-      if void_at.nil?
-        return @void_at = nil
-      end
-      _void_at = void_at.not_nil!
-      @void_at = _void_at
+    def void_at=(new_value : Int64?)
+      @void_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

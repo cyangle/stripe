@@ -75,24 +75,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company Object to be assigned
-    def company=(company : Stripe::CountrySpecVerificationFieldDetails?)
-      if company.nil?
-        raise ArgumentError.new("\"company\" is required and cannot be null")
+    def company=(new_value : Stripe::CountrySpecVerificationFieldDetails?)
+      raise ArgumentError.new("\"company\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company = company.not_nil!
-      _company.validate if _company.is_a?(OpenApi::Validatable)
-      @company = _company
+
+      @company = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] individual Object to be assigned
-    def individual=(individual : Stripe::CountrySpecVerificationFieldDetails?)
-      if individual.nil?
-        raise ArgumentError.new("\"individual\" is required and cannot be null")
+    def individual=(new_value : Stripe::CountrySpecVerificationFieldDetails?)
+      raise ArgumentError.new("\"individual\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _individual = individual.not_nil!
-      _individual.validate if _individual.is_a?(OpenApi::Validatable)
-      @individual = _individual
+
+      @individual = new_value
     end
 
     # Generates #hash and #== methods from all fields

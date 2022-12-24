@@ -91,34 +91,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value Object to be assigned
-    def value=(value : String?)
-      if value.nil?
-        raise ArgumentError.new("\"value\" is required and cannot be null")
+    def value=(new_value : String?)
+      raise ArgumentError.new("\"value\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("value", new_value.to_s.size, MAX_LENGTH_FOR_VALUE)
       end
-      _value = value.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
-      @value = _value
+
+      @value = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value_list Object to be assigned
-    def value_list=(value_list : String?)
-      if value_list.nil?
-        raise ArgumentError.new("\"value_list\" is required and cannot be null")
+    def value_list=(new_value : String?)
+      raise ArgumentError.new("\"value_list\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("value_list", new_value.to_s.size, MAX_LENGTH_FOR_VALUE_LIST)
       end
-      _value_list = value_list.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("value_list", _value_list.to_s.size, MAX_LENGTH_FOR_VALUE_LIST)
-      @value_list = _value_list
+
+      @value_list = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

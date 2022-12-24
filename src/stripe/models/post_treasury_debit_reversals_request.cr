@@ -77,33 +77,25 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_debit Object to be assigned
-    def received_debit=(received_debit : String?)
-      if received_debit.nil?
-        raise ArgumentError.new("\"received_debit\" is required and cannot be null")
+    def received_debit=(new_value : String?)
+      raise ArgumentError.new("\"received_debit\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("received_debit", new_value.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
       end
-      _received_debit = received_debit.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
-      @received_debit = _received_debit
+
+      @received_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

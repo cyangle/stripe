@@ -56,13 +56,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ach Object to be assigned
-    def ach=(ach : Stripe::TreasuryFinancialAccountsResourceAchToggleSettings?)
-      if ach.nil?
-        return @ach = nil
+    def ach=(new_value : Stripe::TreasuryFinancialAccountsResourceAchToggleSettings?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _ach = ach.not_nil!
-      _ach.validate if _ach.is_a?(OpenApi::Validatable)
-      @ach = _ach
+
+      @ach = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -125,77 +125,65 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
+    def status=(new_value : String?)
+      raise ArgumentError.new("\"status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date Object to be assigned
-    def date=(date : Int64?)
-      if date.nil?
-        return @date = nil
-      end
-      _date = date.not_nil!
-      @date = _date
+    def date=(new_value : Int64?)
+      @date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip Object to be assigned
-    def ip=(ip : String?)
-      if ip.nil?
-        return @ip = nil
-      end
-      _ip = ip.not_nil!
-      @ip = _ip
+    def ip=(new_value : String?)
+      @ip = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] offline Object to be assigned
-    def offline=(offline : Stripe::MandateOfflineAcceptanceParams?)
-      if offline.nil?
-        return @offline = nil
+    def offline=(new_value : Stripe::MandateOfflineAcceptanceParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _offline = offline.not_nil!
-      _offline.validate if _offline.is_a?(OpenApi::Validatable)
-      @offline = _offline
+
+      @offline = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] online Object to be assigned
-    def online=(online : Stripe::MandateOnlineAcceptanceParams?)
-      if online.nil?
-        return @online = nil
+    def online=(new_value : Stripe::MandateOnlineAcceptanceParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _online = online.not_nil!
-      _online.validate if _online.is_a?(OpenApi::Validatable)
-      @online = _online
+
+      @online = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
+    def _type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_agent Object to be assigned
-    def user_agent=(user_agent : String?)
-      if user_agent.nil?
-        return @user_agent = nil
+    def user_agent=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("user_agent", new_value.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
       end
-      _user_agent = user_agent.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
-      @user_agent = _user_agent
+
+      @user_agent = new_value
     end
 
     # Generates #hash and #== methods from all fields

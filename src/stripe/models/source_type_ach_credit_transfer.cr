@@ -100,82 +100,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_number Object to be assigned
-    def account_number=(account_number : String?)
-      if account_number.nil?
-        return @account_number = nil
-      end
-      _account_number = account_number.not_nil!
-      @account_number = _account_number
+    def account_number=(new_value : String?)
+      @account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
-      end
-      _bank_name = bank_name.not_nil!
-      @bank_name = _bank_name
+    def bank_name=(new_value : String?)
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
-      end
-      _fingerprint = fingerprint.not_nil!
-      @fingerprint = _fingerprint
+    def fingerprint=(new_value : String?)
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_name Object to be assigned
-    def refund_account_holder_name=(refund_account_holder_name : String?)
-      if refund_account_holder_name.nil?
-        return @refund_account_holder_name = nil
-      end
-      _refund_account_holder_name = refund_account_holder_name.not_nil!
-      @refund_account_holder_name = _refund_account_holder_name
+    def refund_account_holder_name=(new_value : String?)
+      @refund_account_holder_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_account_holder_type Object to be assigned
-    def refund_account_holder_type=(refund_account_holder_type : String?)
-      if refund_account_holder_type.nil?
-        return @refund_account_holder_type = nil
-      end
-      _refund_account_holder_type = refund_account_holder_type.not_nil!
-      @refund_account_holder_type = _refund_account_holder_type
+    def refund_account_holder_type=(new_value : String?)
+      @refund_account_holder_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_routing_number Object to be assigned
-    def refund_routing_number=(refund_routing_number : String?)
-      if refund_routing_number.nil?
-        return @refund_routing_number = nil
-      end
-      _refund_routing_number = refund_routing_number.not_nil!
-      @refund_routing_number = _refund_routing_number
+    def refund_routing_number=(new_value : String?)
+      @refund_routing_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] routing_number Object to be assigned
-    def routing_number=(routing_number : String?)
-      if routing_number.nil?
-        return @routing_number = nil
-      end
-      _routing_number = routing_number.not_nil!
-      @routing_number = _routing_number
+    def routing_number=(new_value : String?)
+      @routing_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] swift_code Object to be assigned
-    def swift_code=(swift_code : String?)
-      if swift_code.nil?
-        return @swift_code = nil
-      end
-      _swift_code = swift_code.not_nil!
-      @swift_code = _swift_code
+    def swift_code=(new_value : String?)
+      @swift_code = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -116,64 +116,55 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currently_due Object to be assigned
-    def currently_due=(currently_due : Array(String)?)
-      if currently_due.nil?
-        raise ArgumentError.new("\"currently_due\" is required and cannot be null")
-      end
-      _currently_due = currently_due.not_nil!
-      @currently_due = _currently_due
+    def currently_due=(new_value : Array(String)?)
+      raise ArgumentError.new("\"currently_due\" is required and cannot be null") if new_value.nil?
+
+      @currently_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] errors Object to be assigned
-    def errors=(errors : Array(Stripe::AccountRequirementsError)?)
-      if errors.nil?
-        raise ArgumentError.new("\"errors\" is required and cannot be null")
+    def errors=(new_value : Array(Stripe::AccountRequirementsError)?)
+      raise ArgumentError.new("\"errors\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _errors = errors.not_nil!
-      OpenApi::ContainerValidator.validate(container: _errors) if _errors.is_a?(Array)
-      @errors = _errors
+
+      @errors = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eventually_due Object to be assigned
-    def eventually_due=(eventually_due : Array(String)?)
-      if eventually_due.nil?
-        raise ArgumentError.new("\"eventually_due\" is required and cannot be null")
-      end
-      _eventually_due = eventually_due.not_nil!
-      @eventually_due = _eventually_due
+    def eventually_due=(new_value : Array(String)?)
+      raise ArgumentError.new("\"eventually_due\" is required and cannot be null") if new_value.nil?
+
+      @eventually_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] past_due Object to be assigned
-    def past_due=(past_due : Array(String)?)
-      if past_due.nil?
-        raise ArgumentError.new("\"past_due\" is required and cannot be null")
-      end
-      _past_due = past_due.not_nil!
-      @past_due = _past_due
+    def past_due=(new_value : Array(String)?)
+      raise ArgumentError.new("\"past_due\" is required and cannot be null") if new_value.nil?
+
+      @past_due = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_verification Object to be assigned
-    def pending_verification=(pending_verification : Array(String)?)
-      if pending_verification.nil?
-        raise ArgumentError.new("\"pending_verification\" is required and cannot be null")
-      end
-      _pending_verification = pending_verification.not_nil!
-      @pending_verification = _pending_verification
+    def pending_verification=(new_value : Array(String)?)
+      raise ArgumentError.new("\"pending_verification\" is required and cannot be null") if new_value.nil?
+
+      @pending_verification = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alternatives Object to be assigned
-    def alternatives=(alternatives : Array(Stripe::AccountRequirementsAlternative)?)
-      if alternatives.nil?
-        return @alternatives = nil
+    def alternatives=(new_value : Array(Stripe::AccountRequirementsAlternative)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _alternatives = alternatives.not_nil!
-      OpenApi::ContainerValidator.validate(container: _alternatives) if _alternatives.is_a?(Array)
-      @alternatives = _alternatives
+
+      @alternatives = new_value
     end
 
     # Generates #hash and #== methods from all fields

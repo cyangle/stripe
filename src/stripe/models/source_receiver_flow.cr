@@ -131,65 +131,58 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_charged Object to be assigned
-    def amount_charged=(amount_charged : Int64?)
-      if amount_charged.nil?
-        raise ArgumentError.new("\"amount_charged\" is required and cannot be null")
-      end
-      _amount_charged = amount_charged.not_nil!
-      @amount_charged = _amount_charged
+    def amount_charged=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_charged\" is required and cannot be null") if new_value.nil?
+
+      @amount_charged = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_received Object to be assigned
-    def amount_received=(amount_received : Int64?)
-      if amount_received.nil?
-        raise ArgumentError.new("\"amount_received\" is required and cannot be null")
-      end
-      _amount_received = amount_received.not_nil!
-      @amount_received = _amount_received
+    def amount_received=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_received\" is required and cannot be null") if new_value.nil?
+
+      @amount_received = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_returned Object to be assigned
-    def amount_returned=(amount_returned : Int64?)
-      if amount_returned.nil?
-        raise ArgumentError.new("\"amount_returned\" is required and cannot be null")
-      end
-      _amount_returned = amount_returned.not_nil!
-      @amount_returned = _amount_returned
+    def amount_returned=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_returned\" is required and cannot be null") if new_value.nil?
+
+      @amount_returned = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_attributes_method Object to be assigned
-    def refund_attributes_method=(refund_attributes_method : String?)
-      if refund_attributes_method.nil?
-        raise ArgumentError.new("\"refund_attributes_method\" is required and cannot be null")
+    def refund_attributes_method=(new_value : String?)
+      raise ArgumentError.new("\"refund_attributes_method\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("refund_attributes_method", new_value.to_s.size, MAX_LENGTH_FOR_REFUND_ATTRIBUTES_METHOD)
       end
-      _refund_attributes_method = refund_attributes_method.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("refund_attributes_method", _refund_attributes_method.to_s.size, MAX_LENGTH_FOR_REFUND_ATTRIBUTES_METHOD)
-      @refund_attributes_method = _refund_attributes_method
+
+      @refund_attributes_method = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_attributes_status Object to be assigned
-    def refund_attributes_status=(refund_attributes_status : String?)
-      if refund_attributes_status.nil?
-        raise ArgumentError.new("\"refund_attributes_status\" is required and cannot be null")
+    def refund_attributes_status=(new_value : String?)
+      raise ArgumentError.new("\"refund_attributes_status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("refund_attributes_status", new_value.to_s.size, MAX_LENGTH_FOR_REFUND_ATTRIBUTES_STATUS)
       end
-      _refund_attributes_status = refund_attributes_status.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("refund_attributes_status", _refund_attributes_status.to_s.size, MAX_LENGTH_FOR_REFUND_ATTRIBUTES_STATUS)
-      @refund_attributes_status = _refund_attributes_status
+
+      @refund_attributes_status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : String?)
-      if address.nil?
-        return @address = nil
+    def address=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS)
       end
-      _address = address.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address", _address.to_s.size, MAX_LENGTH_FOR_ADDRESS)
-      @address = _address
+
+      @address = new_value
     end
 
     # Generates #hash and #== methods from all fields

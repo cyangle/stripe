@@ -149,86 +149,78 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_currency Object to be assigned
-    def default_currency=(default_currency : String?)
-      if default_currency.nil?
-        raise ArgumentError.new("\"default_currency\" is required and cannot be null")
+    def default_currency=(new_value : String?)
+      raise ArgumentError.new("\"default_currency\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("default_currency", new_value.to_s.size, MAX_LENGTH_FOR_DEFAULT_CURRENCY)
       end
-      _default_currency = default_currency.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("default_currency", _default_currency.to_s.size, MAX_LENGTH_FOR_DEFAULT_CURRENCY)
-      @default_currency = _default_currency
+
+      @default_currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_bank_account_currencies Object to be assigned
-    def supported_bank_account_currencies=(supported_bank_account_currencies : Hash(String, Array(String))?)
-      if supported_bank_account_currencies.nil?
-        raise ArgumentError.new("\"supported_bank_account_currencies\" is required and cannot be null")
-      end
-      _supported_bank_account_currencies = supported_bank_account_currencies.not_nil!
-      @supported_bank_account_currencies = _supported_bank_account_currencies
+    def supported_bank_account_currencies=(new_value : Hash(String, Array(String))?)
+      raise ArgumentError.new("\"supported_bank_account_currencies\" is required and cannot be null") if new_value.nil?
+
+      @supported_bank_account_currencies = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_payment_currencies Object to be assigned
-    def supported_payment_currencies=(supported_payment_currencies : Array(String)?)
-      if supported_payment_currencies.nil?
-        raise ArgumentError.new("\"supported_payment_currencies\" is required and cannot be null")
-      end
-      _supported_payment_currencies = supported_payment_currencies.not_nil!
-      @supported_payment_currencies = _supported_payment_currencies
+    def supported_payment_currencies=(new_value : Array(String)?)
+      raise ArgumentError.new("\"supported_payment_currencies\" is required and cannot be null") if new_value.nil?
+
+      @supported_payment_currencies = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_payment_methods Object to be assigned
-    def supported_payment_methods=(supported_payment_methods : Array(String)?)
-      if supported_payment_methods.nil?
-        raise ArgumentError.new("\"supported_payment_methods\" is required and cannot be null")
-      end
-      _supported_payment_methods = supported_payment_methods.not_nil!
-      @supported_payment_methods = _supported_payment_methods
+    def supported_payment_methods=(new_value : Array(String)?)
+      raise ArgumentError.new("\"supported_payment_methods\" is required and cannot be null") if new_value.nil?
+
+      @supported_payment_methods = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_transfer_countries Object to be assigned
-    def supported_transfer_countries=(supported_transfer_countries : Array(String)?)
-      if supported_transfer_countries.nil?
-        raise ArgumentError.new("\"supported_transfer_countries\" is required and cannot be null")
-      end
-      _supported_transfer_countries = supported_transfer_countries.not_nil!
-      @supported_transfer_countries = _supported_transfer_countries
+    def supported_transfer_countries=(new_value : Array(String)?)
+      raise ArgumentError.new("\"supported_transfer_countries\" is required and cannot be null") if new_value.nil?
+
+      @supported_transfer_countries = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_fields Object to be assigned
-    def verification_fields=(verification_fields : Stripe::CountrySpecVerificationFields?)
-      if verification_fields.nil?
-        raise ArgumentError.new("\"verification_fields\" is required and cannot be null")
+    def verification_fields=(new_value : Stripe::CountrySpecVerificationFields?)
+      raise ArgumentError.new("\"verification_fields\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verification_fields = verification_fields.not_nil!
-      _verification_fields.validate if _verification_fields.is_a?(OpenApi::Validatable)
-      @verification_fields = _verification_fields
+
+      @verification_fields = new_value
     end
 
     # Generates #hash and #== methods from all fields

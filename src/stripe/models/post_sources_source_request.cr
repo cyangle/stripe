@@ -98,66 +98,54 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate Object to be assigned
-    def mandate=(mandate : Stripe::MandateParams?)
-      if mandate.nil?
-        return @mandate = nil
+    def mandate=(new_value : Stripe::MandateParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _mandate = mandate.not_nil!
-      _mandate.validate if _mandate.is_a?(OpenApi::Validatable)
-      @mandate = _mandate
+
+      @mandate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owner Object to be assigned
-    def owner=(owner : Stripe::Owner?)
-      if owner.nil?
-        return @owner = nil
+    def owner=(new_value : Stripe::Owner?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _owner = owner.not_nil!
-      _owner.validate if _owner.is_a?(OpenApi::Validatable)
-      @owner = _owner
+
+      @owner = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_order Object to be assigned
-    def source_order=(source_order : Stripe::OrderParams?)
-      if source_order.nil?
-        return @source_order = nil
+    def source_order=(new_value : Stripe::OrderParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _source_order = source_order.not_nil!
-      _source_order.validate if _source_order.is_a?(OpenApi::Validatable)
-      @source_order = _source_order
+
+      @source_order = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -113,55 +113,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] departure_at Object to be assigned
-    def departure_at=(departure_at : Int64?)
-      if departure_at.nil?
-        return @departure_at = nil
-      end
-      _departure_at = departure_at.not_nil!
-      @departure_at = _departure_at
+    def departure_at=(new_value : Int64?)
+      @departure_at = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] passenger_name Object to be assigned
-    def passenger_name=(passenger_name : String?)
-      if passenger_name.nil?
-        return @passenger_name = nil
+    def passenger_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("passenger_name", new_value.to_s.size, MAX_LENGTH_FOR_PASSENGER_NAME)
       end
-      _passenger_name = passenger_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("passenger_name", _passenger_name.to_s.size, MAX_LENGTH_FOR_PASSENGER_NAME)
-      @passenger_name = _passenger_name
+
+      @passenger_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refundable Object to be assigned
-    def refundable=(refundable : Bool?)
-      if refundable.nil?
-        return @refundable = nil
-      end
-      _refundable = refundable.not_nil!
-      @refundable = _refundable
+    def refundable=(new_value : Bool?)
+      @refundable = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] segments Object to be assigned
-    def segments=(segments : Array(Stripe::IssuingTransactionFlightDataLeg)?)
-      if segments.nil?
-        return @segments = nil
+    def segments=(new_value : Array(Stripe::IssuingTransactionFlightDataLeg)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _segments = segments.not_nil!
-      OpenApi::ContainerValidator.validate(container: _segments) if _segments.is_a?(Array)
-      @segments = _segments
+
+      @segments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] travel_agency Object to be assigned
-    def travel_agency=(travel_agency : String?)
-      if travel_agency.nil?
-        return @travel_agency = nil
+    def travel_agency=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("travel_agency", new_value.to_s.size, MAX_LENGTH_FOR_TRAVEL_AGENCY)
       end
-      _travel_agency = travel_agency.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("travel_agency", _travel_agency.to_s.size, MAX_LENGTH_FOR_TRAVEL_AGENCY)
-      @travel_agency = _travel_agency
+
+      @travel_agency = new_value
     end
 
     # Generates #hash and #== methods from all fields

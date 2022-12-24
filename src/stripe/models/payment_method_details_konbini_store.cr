@@ -62,13 +62,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] chain Object to be assigned
-    def chain=(chain : String?)
-      if chain.nil?
-        return @chain = nil
+    def chain=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("chain", new_value, VALID_VALUES_FOR_CHAIN)
       end
-      _chain = chain.not_nil!
-      OpenApi::EnumValidator.validate("chain", _chain, VALID_VALUES_FOR_CHAIN)
-      @chain = _chain
+
+      @chain = new_value
     end
 
     # Generates #hash and #== methods from all fields

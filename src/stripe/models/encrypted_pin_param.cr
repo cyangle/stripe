@@ -58,13 +58,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] encrypted_number Object to be assigned
-    def encrypted_number=(encrypted_number : String?)
-      if encrypted_number.nil?
-        return @encrypted_number = nil
+    def encrypted_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("encrypted_number", new_value.to_s.size, MAX_LENGTH_FOR_ENCRYPTED_NUMBER)
       end
-      _encrypted_number = encrypted_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("encrypted_number", _encrypted_number.to_s.size, MAX_LENGTH_FOR_ENCRYPTED_NUMBER)
-      @encrypted_number = _encrypted_number
+
+      @encrypted_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

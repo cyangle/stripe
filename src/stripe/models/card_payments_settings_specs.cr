@@ -91,46 +91,42 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] decline_on Object to be assigned
-    def decline_on=(decline_on : Stripe::DeclineChargeOnSpecs?)
-      if decline_on.nil?
-        return @decline_on = nil
+    def decline_on=(new_value : Stripe::DeclineChargeOnSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _decline_on = decline_on.not_nil!
-      _decline_on.validate if _decline_on.is_a?(OpenApi::Validatable)
-      @decline_on = _decline_on
+
+      @decline_on = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix Object to be assigned
-    def statement_descriptor_prefix=(statement_descriptor_prefix : String?)
-      if statement_descriptor_prefix.nil?
-        return @statement_descriptor_prefix = nil
+    def statement_descriptor_prefix=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix", new_value.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX)
       end
-      _statement_descriptor_prefix = statement_descriptor_prefix.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix", _statement_descriptor_prefix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX)
-      @statement_descriptor_prefix = _statement_descriptor_prefix
+
+      @statement_descriptor_prefix = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix_kana Object to be assigned
-    def statement_descriptor_prefix_kana=(statement_descriptor_prefix_kana : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?)
-      if statement_descriptor_prefix_kana.nil?
-        return @statement_descriptor_prefix_kana = nil
+    def statement_descriptor_prefix_kana=(new_value : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _statement_descriptor_prefix_kana = statement_descriptor_prefix_kana.not_nil!
-      _statement_descriptor_prefix_kana.validate if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable)
-      @statement_descriptor_prefix_kana = _statement_descriptor_prefix_kana
+
+      @statement_descriptor_prefix_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix_kanji Object to be assigned
-    def statement_descriptor_prefix_kanji=(statement_descriptor_prefix_kanji : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?)
-      if statement_descriptor_prefix_kanji.nil?
-        return @statement_descriptor_prefix_kanji = nil
+    def statement_descriptor_prefix_kanji=(new_value : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji.not_nil!
-      _statement_descriptor_prefix_kanji.validate if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
-      @statement_descriptor_prefix_kanji = _statement_descriptor_prefix_kanji
+
+      @statement_descriptor_prefix_kanji = new_value
     end
 
     # Generates #hash and #== methods from all fields

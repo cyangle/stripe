@@ -66,24 +66,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ach Object to be assigned
-    def ach=(ach : Stripe::AccessWithAchDetails?)
-      if ach.nil?
-        return @ach = nil
+    def ach=(new_value : Stripe::AccessWithAchDetails?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _ach = ach.not_nil!
-      _ach.validate if _ach.is_a?(OpenApi::Validatable)
-      @ach = _ach
+
+      @ach = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_domestic_wire Object to be assigned
-    def us_domestic_wire=(us_domestic_wire : Stripe::Access?)
-      if us_domestic_wire.nil?
-        return @us_domestic_wire = nil
+    def us_domestic_wire=(new_value : Stripe::Access?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _us_domestic_wire = us_domestic_wire.not_nil!
-      _us_domestic_wire.validate if _us_domestic_wire.is_a?(OpenApi::Validatable)
-      @us_domestic_wire = _us_domestic_wire
+
+      @us_domestic_wire = new_value
     end
 
     # Generates #hash and #== methods from all fields

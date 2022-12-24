@@ -73,23 +73,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit Object to be assigned
-    def unit=(unit : String?)
-      if unit.nil?
-        raise ArgumentError.new("\"unit\" is required and cannot be null")
+    def unit=(new_value : String?)
+      raise ArgumentError.new("\"unit\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("unit", new_value, VALID_VALUES_FOR_UNIT)
       end
-      _unit = unit.not_nil!
-      OpenApi::EnumValidator.validate("unit", _unit, VALID_VALUES_FOR_UNIT)
-      @unit = _unit
+
+      @unit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value Object to be assigned
-    def value=(value : Int64?)
-      if value.nil?
-        raise ArgumentError.new("\"value\" is required and cannot be null")
-      end
-      _value = value.not_nil!
-      @value = _value
+    def value=(new_value : Int64?)
+      raise ArgumentError.new("\"value\" is required and cannot be null") if new_value.nil?
+
+      @value = new_value
     end
 
     # Generates #hash and #== methods from all fields

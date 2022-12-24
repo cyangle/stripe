@@ -51,12 +51,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
-      end
-      _reference = reference.not_nil!
-      @reference = _reference
+    def reference=(new_value : String?)
+      @reference = new_value
     end
 
     # Generates #hash and #== methods from all fields

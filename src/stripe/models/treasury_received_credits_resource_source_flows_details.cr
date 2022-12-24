@@ -90,41 +90,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credit_reversal Object to be assigned
-    def credit_reversal=(credit_reversal : Stripe::TreasuryCreditReversal?)
-      if credit_reversal.nil?
-        return @credit_reversal = nil
+    def credit_reversal=(new_value : Stripe::TreasuryCreditReversal?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _credit_reversal = credit_reversal.not_nil!
-      _credit_reversal.validate if _credit_reversal.is_a?(OpenApi::Validatable)
-      @credit_reversal = _credit_reversal
+
+      @credit_reversal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_payment Object to be assigned
-    def outbound_payment=(outbound_payment : Stripe::TreasuryOutboundPayment?)
-      if outbound_payment.nil?
-        return @outbound_payment = nil
+    def outbound_payment=(new_value : Stripe::TreasuryOutboundPayment?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _outbound_payment = outbound_payment.not_nil!
-      _outbound_payment.validate if _outbound_payment.is_a?(OpenApi::Validatable)
-      @outbound_payment = _outbound_payment
+
+      @outbound_payment = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payout Object to be assigned
-    def payout=(payout : Stripe::Payout?)
-      if payout.nil?
-        return @payout = nil
+    def payout=(new_value : Stripe::Payout?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payout = payout.not_nil!
-      _payout.validate if _payout.is_a?(OpenApi::Validatable)
-      @payout = _payout
+
+      @payout = new_value
     end
 
     # Generates #hash and #== methods from all fields

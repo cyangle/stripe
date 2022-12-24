@@ -129,57 +129,53 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        raise ArgumentError.new("\"status\" is required and cannot be null")
+    def status=(new_value : String?)
+      raise ArgumentError.new("\"status\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("status", new_value.to_s.size, MAX_LENGTH_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_document Object to be assigned
-    def additional_document=(additional_document : Stripe::LegalEntityPersonVerificationAdditionalDocument?)
-      if additional_document.nil?
-        return @additional_document = nil
+    def additional_document=(new_value : Stripe::LegalEntityPersonVerificationAdditionalDocument?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _additional_document = additional_document.not_nil!
-      _additional_document.validate if _additional_document.is_a?(OpenApi::Validatable)
-      @additional_document = _additional_document
+
+      @additional_document = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] details Object to be assigned
-    def details=(details : String?)
-      if details.nil?
-        return @details = nil
+    def details=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("details", new_value.to_s.size, MAX_LENGTH_FOR_DETAILS)
       end
-      _details = details.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("details", _details.to_s.size, MAX_LENGTH_FOR_DETAILS)
-      @details = _details
+
+      @details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] details_code Object to be assigned
-    def details_code=(details_code : String?)
-      if details_code.nil?
-        return @details_code = nil
+    def details_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("details_code", new_value.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
       end
-      _details_code = details_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("details_code", _details_code.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
-      @details_code = _details_code
+
+      @details_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] document Object to be assigned
-    def document=(document : Stripe::LegalEntityPersonVerificationDocument?)
-      if document.nil?
-        return @document = nil
+    def document=(new_value : Stripe::LegalEntityPersonVerificationDocument?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _document = document.not_nil!
-      _document.validate if _document.is_a?(OpenApi::Validatable)
-      @document = _document
+
+      @document = new_value
     end
 
     # Generates #hash and #== methods from all fields

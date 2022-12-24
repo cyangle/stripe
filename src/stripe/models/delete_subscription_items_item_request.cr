@@ -69,33 +69,24 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] clear_usage Object to be assigned
-    def clear_usage=(clear_usage : Bool?)
-      if clear_usage.nil?
-        return @clear_usage = nil
-      end
-      _clear_usage = clear_usage.not_nil!
-      @clear_usage = _clear_usage
+    def clear_usage=(new_value : Bool?)
+      @clear_usage = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior : String?)
-      if proration_behavior.nil?
-        return @proration_behavior = nil
+    def proration_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("proration_behavior", new_value, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
-      _proration_behavior = proration_behavior.not_nil!
-      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
-      @proration_behavior = _proration_behavior
+
+      @proration_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_date Object to be assigned
-    def proration_date=(proration_date : Int64?)
-      if proration_date.nil?
-        return @proration_date = nil
-      end
-      _proration_date = proration_date.not_nil!
-      @proration_date = _proration_date
+    def proration_date=(new_value : Int64?)
+      @proration_date = new_value
     end
 
     # Generates #hash and #== methods from all fields

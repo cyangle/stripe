@@ -86,33 +86,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_credits Object to be assigned
-    def received_credits=(received_credits : Array(String)?)
-      if received_credits.nil?
-        raise ArgumentError.new("\"received_credits\" is required and cannot be null")
-      end
-      _received_credits = received_credits.not_nil!
-      @received_credits = _received_credits
+    def received_credits=(new_value : Array(String)?)
+      raise ArgumentError.new("\"received_credits\" is required and cannot be null") if new_value.nil?
+
+      @received_credits = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] received_debits Object to be assigned
-    def received_debits=(received_debits : Array(String)?)
-      if received_debits.nil?
-        raise ArgumentError.new("\"received_debits\" is required and cannot be null")
-      end
-      _received_debits = received_debits.not_nil!
-      @received_debits = _received_debits
+    def received_debits=(new_value : Array(String)?)
+      raise ArgumentError.new("\"received_debits\" is required and cannot be null") if new_value.nil?
+
+      @received_debits = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction Object to be assigned
-    def transaction=(transaction : String?)
-      if transaction.nil?
-        return @transaction = nil
+    def transaction=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("transaction", new_value.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
       end
-      _transaction = transaction.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("transaction", _transaction.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
-      @transaction = _transaction
+
+      @transaction = new_value
     end
 
     # Generates #hash and #== methods from all fields

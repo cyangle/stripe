@@ -81,39 +81,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file Object to be assigned
-    def file=(file : ::File?)
-      if file.nil?
-        raise ArgumentError.new("\"file\" is required and cannot be null")
-      end
-      _file = file.not_nil!
-      @file = _file
+    def file=(new_value : ::File?)
+      raise ArgumentError.new("\"file\" is required and cannot be null") if new_value.nil?
+
+      @file = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] purpose Object to be assigned
-    def purpose=(purpose : String?)
-      @purpose = purpose
+    def purpose=(new_value : String?)
+      @purpose = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file_link_data Object to be assigned
-    def file_link_data=(file_link_data : Stripe::FileLinkCreationParams?)
-      if file_link_data.nil?
-        return @file_link_data = nil
+    def file_link_data=(new_value : Stripe::FileLinkCreationParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _file_link_data = file_link_data.not_nil!
-      _file_link_data.validate if _file_link_data.is_a?(OpenApi::Validatable)
-      @file_link_data = _file_link_data
+
+      @file_link_data = new_value
     end
 
     # Generates #hash and #== methods from all fields

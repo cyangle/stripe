@@ -55,13 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] posted_at Object to be assigned
-    def posted_at=(posted_at : Stripe::GetAccountsCreatedParameter?)
-      if posted_at.nil?
-        return @posted_at = nil
+    def posted_at=(new_value : Stripe::GetAccountsCreatedParameter?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _posted_at = posted_at.not_nil!
-      _posted_at.validate if _posted_at.is_a?(OpenApi::Validatable)
-      @posted_at = _posted_at
+
+      @posted_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

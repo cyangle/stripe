@@ -65,22 +65,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_date Object to be assigned
-    def end_date=(end_date : Int64?)
-      if end_date.nil?
-        raise ArgumentError.new("\"end_date\" is required and cannot be null")
-      end
-      _end_date = end_date.not_nil!
-      @end_date = _end_date
+    def end_date=(new_value : Int64?)
+      raise ArgumentError.new("\"end_date\" is required and cannot be null") if new_value.nil?
+
+      @end_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] start_date Object to be assigned
-    def start_date=(start_date : Int64?)
-      if start_date.nil?
-        raise ArgumentError.new("\"start_date\" is required and cannot be null")
-      end
-      _start_date = start_date.not_nil!
-      @start_date = _start_date
+    def start_date=(new_value : Int64?)
+      raise ArgumentError.new("\"start_date\" is required and cannot be null") if new_value.nil?
+
+      @start_date = new_value
     end
 
     # Generates #hash and #== methods from all fields

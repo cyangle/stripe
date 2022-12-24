@@ -110,68 +110,62 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] branding Object to be assigned
-    def branding=(branding : Stripe::BrandingSettingsSpecs?)
-      if branding.nil?
-        return @branding = nil
+    def branding=(new_value : Stripe::BrandingSettingsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _branding = branding.not_nil!
-      _branding.validate if _branding.is_a?(OpenApi::Validatable)
-      @branding = _branding
+
+      @branding = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_issuing Object to be assigned
-    def card_issuing=(card_issuing : Stripe::CardIssuingSettingsSpecs?)
-      if card_issuing.nil?
-        return @card_issuing = nil
+    def card_issuing=(new_value : Stripe::CardIssuingSettingsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card_issuing = card_issuing.not_nil!
-      _card_issuing.validate if _card_issuing.is_a?(OpenApi::Validatable)
-      @card_issuing = _card_issuing
+
+      @card_issuing = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_payments Object to be assigned
-    def card_payments=(card_payments : Stripe::CardPaymentsSettingsSpecs?)
-      if card_payments.nil?
-        return @card_payments = nil
+    def card_payments=(new_value : Stripe::CardPaymentsSettingsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card_payments = card_payments.not_nil!
-      _card_payments.validate if _card_payments.is_a?(OpenApi::Validatable)
-      @card_payments = _card_payments
+
+      @card_payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payments Object to be assigned
-    def payments=(payments : Stripe::PaymentsSettingsSpecs?)
-      if payments.nil?
-        return @payments = nil
+    def payments=(new_value : Stripe::PaymentsSettingsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payments = payments.not_nil!
-      _payments.validate if _payments.is_a?(OpenApi::Validatable)
-      @payments = _payments
+
+      @payments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payouts Object to be assigned
-    def payouts=(payouts : Stripe::PayoutSettingsSpecs?)
-      if payouts.nil?
-        return @payouts = nil
+    def payouts=(new_value : Stripe::PayoutSettingsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payouts = payouts.not_nil!
-      _payouts.validate if _payouts.is_a?(OpenApi::Validatable)
-      @payouts = _payouts
+
+      @payouts = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(treasury : Stripe::TreasurySettingsSpecs?)
-      if treasury.nil?
-        return @treasury = nil
+    def treasury=(new_value : Stripe::TreasurySettingsSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _treasury = treasury.not_nil!
-      _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
-      @treasury = _treasury
+
+      @treasury = new_value
     end
 
     # Generates #hash and #== methods from all fields

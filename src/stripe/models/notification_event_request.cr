@@ -81,24 +81,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
+    def id=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] idempotency_key Object to be assigned
-    def idempotency_key=(idempotency_key : String?)
-      if idempotency_key.nil?
-        return @idempotency_key = nil
+    def idempotency_key=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("idempotency_key", new_value.to_s.size, MAX_LENGTH_FOR_IDEMPOTENCY_KEY)
       end
-      _idempotency_key = idempotency_key.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("idempotency_key", _idempotency_key.to_s.size, MAX_LENGTH_FOR_IDEMPOTENCY_KEY)
-      @idempotency_key = _idempotency_key
+
+      @idempotency_key = new_value
     end
 
     # Generates #hash and #== methods from all fields

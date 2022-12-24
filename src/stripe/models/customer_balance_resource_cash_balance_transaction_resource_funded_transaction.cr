@@ -61,13 +61,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_transfer Object to be assigned
-    def bank_transfer=(bank_transfer : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer?)
-      if bank_transfer.nil?
-        raise ArgumentError.new("\"bank_transfer\" is required and cannot be null")
+    def bank_transfer=(new_value : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer?)
+      raise ArgumentError.new("\"bank_transfer\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bank_transfer = bank_transfer.not_nil!
-      _bank_transfer.validate if _bank_transfer.is_a?(OpenApi::Validatable)
-      @bank_transfer = _bank_transfer
+
+      @bank_transfer = new_value
     end
 
     # Generates #hash and #== methods from all fields

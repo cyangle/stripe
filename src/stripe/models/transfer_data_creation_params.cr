@@ -61,22 +61,16 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination Object to be assigned
-    def destination=(destination : String?)
-      if destination.nil?
-        raise ArgumentError.new("\"destination\" is required and cannot be null")
-      end
-      _destination = destination.not_nil!
-      @destination = _destination
+    def destination=(new_value : String?)
+      raise ArgumentError.new("\"destination\" is required and cannot be null") if new_value.nil?
+
+      @destination = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Generates #hash and #== methods from all fields

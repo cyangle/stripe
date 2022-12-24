@@ -91,35 +91,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] charge Object to be assigned
-    def charge=(charge : String?)
-      if charge.nil?
-        return @charge = nil
+    def charge=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("charge", new_value.to_s.size, MAX_LENGTH_FOR_CHARGE)
       end
-      _charge = charge.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
-      @charge = _charge
+
+      @charge = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_details Object to be assigned
-    def payment_method_details=(payment_method_details : Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails?)
-      if payment_method_details.nil?
-        return @payment_method_details = nil
+    def payment_method_details=(new_value : Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_method_details = payment_method_details.not_nil!
-      _payment_method_details.validate if _payment_method_details.is_a?(OpenApi::Validatable)
-      @payment_method_details = _payment_method_details
+
+      @payment_method_details = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_attempt Object to be assigned
-    def setup_attempt=(setup_attempt : Stripe::PaymentMethodCardGeneratedCardSetupAttempt?)
-      if setup_attempt.nil?
-        return @setup_attempt = nil
+    def setup_attempt=(new_value : Stripe::PaymentMethodCardGeneratedCardSetupAttempt?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _setup_attempt = setup_attempt.not_nil!
-      _setup_attempt.validate if _setup_attempt.is_a?(OpenApi::Validatable)
-      @setup_attempt = _setup_attempt
+
+      @setup_attempt = new_value
     end
 
     # Generates #hash and #== methods from all fields

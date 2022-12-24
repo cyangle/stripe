@@ -57,13 +57,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requested Object to be assigned
-    def requested=(requested : Array(String)?)
-      if requested.nil?
-        return @requested = nil
+    def requested=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("requested", new_value, VALID_VALUES_FOR_REQUESTED)
       end
-      _requested = requested.not_nil!
-      OpenApi::EnumValidator.validate("requested", _requested, VALID_VALUES_FOR_REQUESTED)
-      @requested = _requested
+
+      @requested = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -62,13 +62,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available Object to be assigned
-    def available=(available : Array(Stripe::BalanceAmount)?)
-      if available.nil?
-        raise ArgumentError.new("\"available\" is required and cannot be null")
+    def available=(new_value : Array(Stripe::BalanceAmount)?)
+      raise ArgumentError.new("\"available\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _available = available.not_nil!
-      OpenApi::ContainerValidator.validate(container: _available) if _available.is_a?(Array)
-      @available = _available
+
+      @available = new_value
     end
 
     # Generates #hash and #== methods from all fields

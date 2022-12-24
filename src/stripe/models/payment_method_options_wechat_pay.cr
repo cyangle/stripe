@@ -87,30 +87,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] app_id Object to be assigned
-    def app_id=(app_id : String?)
-      if app_id.nil?
-        return @app_id = nil
+    def app_id=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("app_id", new_value.to_s.size, MAX_LENGTH_FOR_APP_ID)
       end
-      _app_id = app_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
-      @app_id = _app_id
+
+      @app_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] client Object to be assigned
-    def client=(client : String?)
-      @client = client
+    def client=(new_value : String?)
+      @client = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage : String?)
-      if setup_future_usage.nil?
-        return @setup_future_usage = nil
+    def setup_future_usage=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("setup_future_usage", new_value, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
-      _setup_future_usage = setup_future_usage.not_nil!
-      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
-      @setup_future_usage = _setup_future_usage
+
+      @setup_future_usage = new_value
     end
 
     # Generates #hash and #== methods from all fields

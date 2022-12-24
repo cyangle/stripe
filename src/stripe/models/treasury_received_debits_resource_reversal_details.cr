@@ -70,23 +70,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] deadline Object to be assigned
-    def deadline=(deadline : Int64?)
-      if deadline.nil?
-        return @deadline = nil
-      end
-      _deadline = deadline.not_nil!
-      @deadline = _deadline
+    def deadline=(new_value : Int64?)
+      @deadline = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restricted_reason Object to be assigned
-    def restricted_reason=(restricted_reason : String?)
-      if restricted_reason.nil?
-        return @restricted_reason = nil
+    def restricted_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("restricted_reason", new_value, VALID_VALUES_FOR_RESTRICTED_REASON)
       end
-      _restricted_reason = restricted_reason.not_nil!
-      OpenApi::EnumValidator.validate("restricted_reason", _restricted_reason, VALID_VALUES_FOR_RESTRICTED_REASON)
-      @restricted_reason = _restricted_reason
+
+      @restricted_reason = new_value
     end
 
     # Generates #hash and #== methods from all fields

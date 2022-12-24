@@ -94,65 +94,50 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] adjustable_quantity Object to be assigned
-    def adjustable_quantity=(adjustable_quantity : Stripe::AdjustableQuantityParams?)
-      if adjustable_quantity.nil?
-        return @adjustable_quantity = nil
+    def adjustable_quantity=(new_value : Stripe::AdjustableQuantityParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _adjustable_quantity = adjustable_quantity.not_nil!
-      _adjustable_quantity.validate if _adjustable_quantity.is_a?(OpenApi::Validatable)
-      @adjustable_quantity = _adjustable_quantity
+
+      @adjustable_quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dynamic_tax_rates Object to be assigned
-    def dynamic_tax_rates=(dynamic_tax_rates : Array(String)?)
-      if dynamic_tax_rates.nil?
-        return @dynamic_tax_rates = nil
-      end
-      _dynamic_tax_rates = dynamic_tax_rates.not_nil!
-      @dynamic_tax_rates = _dynamic_tax_rates
+    def dynamic_tax_rates=(new_value : Array(String)?)
+      @dynamic_tax_rates = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(price : String?)
-      if price.nil?
-        return @price = nil
+    def price=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("price", new_value.to_s.size, MAX_LENGTH_FOR_PRICE)
       end
-      _price = price.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
-      @price = _price
+
+      @price = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price_data Object to be assigned
-    def price_data=(price_data : Stripe::PriceDataWithProductData?)
-      if price_data.nil?
-        return @price_data = nil
+    def price_data=(new_value : Stripe::PriceDataWithProductData?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _price_data = price_data.not_nil!
-      _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
-      @price_data = _price_data
+
+      @price_data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(tax_rates : Array(String)?)
-      if tax_rates.nil?
-        return @tax_rates = nil
-      end
-      _tax_rates = tax_rates.not_nil!
-      @tax_rates = _tax_rates
+    def tax_rates=(new_value : Array(String)?)
+      @tax_rates = new_value
     end
 
     # Generates #hash and #== methods from all fields

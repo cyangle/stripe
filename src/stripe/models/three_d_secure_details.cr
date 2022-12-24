@@ -106,41 +106,38 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authentication_flow Object to be assigned
-    def authentication_flow=(authentication_flow : String?)
-      if authentication_flow.nil?
-        return @authentication_flow = nil
+    def authentication_flow=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("authentication_flow", new_value, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
       end
-      _authentication_flow = authentication_flow.not_nil!
-      OpenApi::EnumValidator.validate("authentication_flow", _authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
-      @authentication_flow = _authentication_flow
+
+      @authentication_flow = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] result Object to be assigned
-    def result=(result : String?)
-      if result.nil?
-        return @result = nil
+    def result=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("result", new_value, VALID_VALUES_FOR_RESULT)
       end
-      _result = result.not_nil!
-      OpenApi::EnumValidator.validate("result", _result, VALID_VALUES_FOR_RESULT)
-      @result = _result
+
+      @result = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] result_reason Object to be assigned
-    def result_reason=(result_reason : String?)
-      if result_reason.nil?
-        return @result_reason = nil
+    def result_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("result_reason", new_value, VALID_VALUES_FOR_RESULT_REASON)
       end
-      _result_reason = result_reason.not_nil!
-      OpenApi::EnumValidator.validate("result_reason", _result_reason, VALID_VALUES_FOR_RESULT_REASON)
-      @result_reason = _result_reason
+
+      @result_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] version Object to be assigned
-    def version=(version : String?)
-      @version = version
+    def version=(new_value : String?)
+      @version = new_value
     end
 
     # Generates #hash and #== methods from all fields

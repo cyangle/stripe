@@ -101,35 +101,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action Object to be assigned
-    def action=(action : String?)
-      if action.nil?
-        raise ArgumentError.new("\"action\" is required and cannot be null")
+    def action=(new_value : String?)
+      raise ArgumentError.new("\"action\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("action", new_value.to_s.size, MAX_LENGTH_FOR_ACTION)
       end
-      _action = action.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("action", _action.to_s.size, MAX_LENGTH_FOR_ACTION)
-      @action = _action
+
+      @action = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] predicate Object to be assigned
-    def predicate=(predicate : String?)
-      if predicate.nil?
-        raise ArgumentError.new("\"predicate\" is required and cannot be null")
+    def predicate=(new_value : String?)
+      raise ArgumentError.new("\"predicate\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("predicate", new_value.to_s.size, MAX_LENGTH_FOR_PREDICATE)
       end
-      _predicate = predicate.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("predicate", _predicate.to_s.size, MAX_LENGTH_FOR_PREDICATE)
-      @predicate = _predicate
+
+      @predicate = new_value
     end
 
     # Generates #hash and #== methods from all fields

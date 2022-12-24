@@ -76,23 +76,20 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eligible Object to be assigned
-    def eligible=(eligible : Bool?)
-      if eligible.nil?
-        raise ArgumentError.new("\"eligible\" is required and cannot be null")
-      end
-      _eligible = eligible.not_nil!
-      @eligible = _eligible
+    def eligible=(new_value : Bool?)
+      raise ArgumentError.new("\"eligible\" is required and cannot be null") if new_value.nil?
+
+      @eligible = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ineligible_reason Object to be assigned
-    def ineligible_reason=(ineligible_reason : String?)
-      if ineligible_reason.nil?
-        return @ineligible_reason = nil
+    def ineligible_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("ineligible_reason", new_value, VALID_VALUES_FOR_INELIGIBLE_REASON)
       end
-      _ineligible_reason = ineligible_reason.not_nil!
-      OpenApi::EnumValidator.validate("ineligible_reason", _ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
-      @ineligible_reason = _ineligible_reason
+
+      @ineligible_reason = new_value
     end
 
     # Generates #hash and #== methods from all fields

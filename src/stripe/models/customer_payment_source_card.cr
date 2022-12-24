@@ -213,142 +213,125 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_month Object to be assigned
-    def exp_month=(exp_month : Int64?)
-      if exp_month.nil?
-        raise ArgumentError.new("\"exp_month\" is required and cannot be null")
-      end
-      _exp_month = exp_month.not_nil!
-      @exp_month = _exp_month
+    def exp_month=(new_value : Int64?)
+      raise ArgumentError.new("\"exp_month\" is required and cannot be null") if new_value.nil?
+
+      @exp_month = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_year Object to be assigned
-    def exp_year=(exp_year : Int64?)
-      if exp_year.nil?
-        raise ArgumentError.new("\"exp_year\" is required and cannot be null")
-      end
-      _exp_year = exp_year.not_nil!
-      @exp_year = _exp_year
+    def exp_year=(new_value : Int64?)
+      raise ArgumentError.new("\"exp_year\" is required and cannot be null") if new_value.nil?
+
+      @exp_year = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] number Object to be assigned
-    def number=(number : String?)
-      if number.nil?
-        raise ArgumentError.new("\"number\" is required and cannot be null")
+    def number=(new_value : String?)
+      raise ArgumentError.new("\"number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("number", new_value.to_s.size, MAX_LENGTH_FOR_NUMBER)
       end
-      _number = number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
-      @number = _number
+
+      @number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_city Object to be assigned
-    def address_city=(address_city : String?)
-      if address_city.nil?
-        return @address_city = nil
+    def address_city=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_city", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
       end
-      _address_city = address_city.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_city", _address_city.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
-      @address_city = _address_city
+
+      @address_city = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_country Object to be assigned
-    def address_country=(address_country : String?)
-      if address_country.nil?
-        return @address_country = nil
+    def address_country=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_country", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
       end
-      _address_country = address_country.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_country", _address_country.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
-      @address_country = _address_country
+
+      @address_country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_line1 Object to be assigned
-    def address_line1=(address_line1 : String?)
-      if address_line1.nil?
-        return @address_line1 = nil
+    def address_line1=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_line1", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
       end
-      _address_line1 = address_line1.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_line1", _address_line1.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
-      @address_line1 = _address_line1
+
+      @address_line1 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_line2 Object to be assigned
-    def address_line2=(address_line2 : String?)
-      if address_line2.nil?
-        return @address_line2 = nil
+    def address_line2=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_line2", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
       end
-      _address_line2 = address_line2.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_line2", _address_line2.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
-      @address_line2 = _address_line2
+
+      @address_line2 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_state Object to be assigned
-    def address_state=(address_state : String?)
-      if address_state.nil?
-        return @address_state = nil
+    def address_state=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_state", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
       end
-      _address_state = address_state.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_state", _address_state.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
-      @address_state = _address_state
+
+      @address_state = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_zip Object to be assigned
-    def address_zip=(address_zip : String?)
-      if address_zip.nil?
-        return @address_zip = nil
+    def address_zip=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("address_zip", new_value.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
       end
-      _address_zip = address_zip.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("address_zip", _address_zip.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
-      @address_zip = _address_zip
+
+      @address_zip = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc Object to be assigned
-    def cvc=(cvc : String?)
-      if cvc.nil?
-        return @cvc = nil
+    def cvc=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("cvc", new_value.to_s.size, MAX_LENGTH_FOR_CVC)
       end
-      _cvc = cvc.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
-      @cvc = _cvc
+
+      @cvc = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
+    def name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        return @object = nil
+    def object=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Generates #hash and #== methods from all fields

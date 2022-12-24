@@ -73,24 +73,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(installments : Stripe::InvoiceInstallmentsCard?)
-      if installments.nil?
-        return @installments = nil
+    def installments=(new_value : Stripe::InvoiceInstallmentsCard?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _installments = installments.not_nil!
-      _installments.validate if _installments.is_a?(OpenApi::Validatable)
-      @installments = _installments
+
+      @installments = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
-    def request_three_d_secure=(request_three_d_secure : String?)
-      if request_three_d_secure.nil?
-        return @request_three_d_secure = nil
+    def request_three_d_secure=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("request_three_d_secure", new_value, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
-      _request_three_d_secure = request_three_d_secure.not_nil!
-      OpenApi::EnumValidator.validate("request_three_d_secure", _request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
-      @request_three_d_secure = _request_three_d_secure
+
+      @request_three_d_secure = new_value
     end
 
     # Generates #hash and #== methods from all fields

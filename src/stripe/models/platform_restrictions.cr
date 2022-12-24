@@ -70,24 +70,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_flows Object to be assigned
-    def inbound_flows=(inbound_flows : String?)
-      if inbound_flows.nil?
-        return @inbound_flows = nil
+    def inbound_flows=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("inbound_flows", new_value, VALID_VALUES_FOR_INBOUND_FLOWS)
       end
-      _inbound_flows = inbound_flows.not_nil!
-      OpenApi::EnumValidator.validate("inbound_flows", _inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
-      @inbound_flows = _inbound_flows
+
+      @inbound_flows = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_flows Object to be assigned
-    def outbound_flows=(outbound_flows : String?)
-      if outbound_flows.nil?
-        return @outbound_flows = nil
+    def outbound_flows=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("outbound_flows", new_value, VALID_VALUES_FOR_OUTBOUND_FLOWS)
       end
-      _outbound_flows = outbound_flows.not_nil!
-      OpenApi::EnumValidator.validate("outbound_flows", _outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
-      @outbound_flows = _outbound_flows
+
+      @outbound_flows = new_value
     end
 
     # Generates #hash and #== methods from all fields

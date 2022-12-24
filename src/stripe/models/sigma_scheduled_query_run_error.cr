@@ -65,13 +65,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] message Object to be assigned
-    def message=(message : String?)
-      if message.nil?
-        raise ArgumentError.new("\"message\" is required and cannot be null")
+    def message=(new_value : String?)
+      raise ArgumentError.new("\"message\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("message", new_value.to_s.size, MAX_LENGTH_FOR_MESSAGE)
       end
-      _message = message.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
-      @message = _message
+
+      @message = new_value
     end
 
     # Generates #hash and #== methods from all fields

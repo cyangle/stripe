@@ -85,30 +85,29 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] after_completion Object to be assigned
-    def after_completion=(after_completion : Stripe::PortalFlowsFlowAfterCompletion?)
-      if after_completion.nil?
-        raise ArgumentError.new("\"after_completion\" is required and cannot be null")
+    def after_completion=(new_value : Stripe::PortalFlowsFlowAfterCompletion?)
+      raise ArgumentError.new("\"after_completion\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _after_completion = after_completion.not_nil!
-      _after_completion.validate if _after_completion.is_a?(OpenApi::Validatable)
-      @after_completion = _after_completion
+
+      @after_completion = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      @_type = _type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_cancel Object to be assigned
-    def subscription_cancel=(subscription_cancel : Stripe::PortalFlowsFlowSubscriptionCancel1?)
-      if subscription_cancel.nil?
-        return @subscription_cancel = nil
+    def subscription_cancel=(new_value : Stripe::PortalFlowsFlowSubscriptionCancel1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _subscription_cancel = subscription_cancel.not_nil!
-      _subscription_cancel.validate if _subscription_cancel.is_a?(OpenApi::Validatable)
-      @subscription_cancel = _subscription_cancel
+
+      @subscription_cancel = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -93,35 +93,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(payment_method_options : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions?)
-      if payment_method_options.nil?
-        return @payment_method_options = nil
+    def payment_method_options=(new_value : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_method_options = payment_method_options.not_nil!
-      _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
-      @payment_method_options = _payment_method_options
+
+      @payment_method_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types : Array(String)?)
-      if payment_method_types.nil?
-        return @payment_method_types = nil
+    def payment_method_types=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("payment_method_types", new_value, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
-      _payment_method_types = payment_method_types.not_nil!
-      OpenApi::EnumValidator.validate("payment_method_types", _payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
-      @payment_method_types = _payment_method_types
+
+      @payment_method_types = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] save_default_payment_method Object to be assigned
-    def save_default_payment_method=(save_default_payment_method : String?)
-      if save_default_payment_method.nil?
-        return @save_default_payment_method = nil
+    def save_default_payment_method=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("save_default_payment_method", new_value, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
       end
-      _save_default_payment_method = save_default_payment_method.not_nil!
-      OpenApi::EnumValidator.validate("save_default_payment_method", _save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
-      @save_default_payment_method = _save_default_payment_method
+
+      @save_default_payment_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

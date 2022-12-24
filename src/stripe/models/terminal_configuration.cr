@@ -136,77 +136,68 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] livemode Object to be assigned
-    def livemode=(livemode : Bool?)
-      if livemode.nil?
-        raise ArgumentError.new("\"livemode\" is required and cannot be null")
-      end
-      _livemode = livemode.not_nil!
-      @livemode = _livemode
+    def livemode=(new_value : Bool?)
+      raise ArgumentError.new("\"livemode\" is required and cannot be null") if new_value.nil?
+
+      @livemode = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bbpos_wisepos_e Object to be assigned
-    def bbpos_wisepos_e=(bbpos_wisepos_e : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?)
-      if bbpos_wisepos_e.nil?
-        return @bbpos_wisepos_e = nil
+    def bbpos_wisepos_e=(new_value : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bbpos_wisepos_e = bbpos_wisepos_e.not_nil!
-      _bbpos_wisepos_e.validate if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-      @bbpos_wisepos_e = _bbpos_wisepos_e
+
+      @bbpos_wisepos_e = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] is_account_default Object to be assigned
-    def is_account_default=(is_account_default : Bool?)
-      if is_account_default.nil?
-        return @is_account_default = nil
-      end
-      _is_account_default = is_account_default.not_nil!
-      @is_account_default = _is_account_default
+    def is_account_default=(new_value : Bool?)
+      @is_account_default = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tipping Object to be assigned
-    def tipping=(tipping : Stripe::TerminalConfigurationConfigurationResourceTipping?)
-      if tipping.nil?
-        return @tipping = nil
+    def tipping=(new_value : Stripe::TerminalConfigurationConfigurationResourceTipping?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _tipping = tipping.not_nil!
-      _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
-      @tipping = _tipping
+
+      @tipping = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verifone_p400 Object to be assigned
-    def verifone_p400=(verifone_p400 : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?)
-      if verifone_p400.nil?
-        return @verifone_p400 = nil
+    def verifone_p400=(new_value : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verifone_p400 = verifone_p400.not_nil!
-      _verifone_p400.validate if _verifone_p400.is_a?(OpenApi::Validatable)
-      @verifone_p400 = _verifone_p400
+
+      @verifone_p400 = new_value
     end
 
     # Generates #hash and #== methods from all fields

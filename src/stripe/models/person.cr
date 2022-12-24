@@ -453,325 +453,279 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account Object to be assigned
-    def account=(account : String?)
-      if account.nil?
-        raise ArgumentError.new("\"account\" is required and cannot be null")
+    def account=(new_value : String?)
+      raise ArgumentError.new("\"account\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       end
-      _account = account.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
-      @account = _account
+
+      @account = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created Object to be assigned
-    def created=(created : Int64?)
-      if created.nil?
-        raise ArgumentError.new("\"created\" is required and cannot be null")
-      end
-      _created = created.not_nil!
-      @created = _created
+    def created=(new_value : Int64?)
+      raise ArgumentError.new("\"created\" is required and cannot be null") if new_value.nil?
+
+      @created = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        raise ArgumentError.new("\"id\" is required and cannot be null")
+    def id=(new_value : String?)
+      raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address : Stripe::Address?)
-      if address.nil?
-        return @address = nil
+    def address=(new_value : Stripe::Address?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address = address.not_nil!
-      _address.validate if _address.is_a?(OpenApi::Validatable)
-      @address = _address
+
+      @address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_kana Object to be assigned
-    def address_kana=(address_kana : Stripe::PersonAddressKana?)
-      if address_kana.nil?
-        return @address_kana = nil
+    def address_kana=(new_value : Stripe::PersonAddressKana?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address_kana = address_kana.not_nil!
-      _address_kana.validate if _address_kana.is_a?(OpenApi::Validatable)
-      @address_kana = _address_kana
+
+      @address_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_kanji Object to be assigned
-    def address_kanji=(address_kanji : Stripe::PersonAddressKana?)
-      if address_kanji.nil?
-        return @address_kanji = nil
+    def address_kanji=(new_value : Stripe::PersonAddressKana?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _address_kanji = address_kanji.not_nil!
-      _address_kanji.validate if _address_kanji.is_a?(OpenApi::Validatable)
-      @address_kanji = _address_kanji
+
+      @address_kanji = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(dob : Stripe::LegalEntityDob?)
-      if dob.nil?
-        return @dob = nil
+    def dob=(new_value : Stripe::LegalEntityDob?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dob = dob.not_nil!
-      _dob.validate if _dob.is_a?(OpenApi::Validatable)
-      @dob = _dob
+
+      @dob = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
+    def email=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("email", new_value.to_s.size, MAX_LENGTH_FOR_EMAIL)
       end
-      _email = email.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
-      @email = _email
+
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name Object to be assigned
-    def first_name=(first_name : String?)
-      if first_name.nil?
-        return @first_name = nil
+    def first_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("first_name", new_value.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
       end
-      _first_name = first_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
-      @first_name = _first_name
+
+      @first_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name_kana Object to be assigned
-    def first_name_kana=(first_name_kana : String?)
-      if first_name_kana.nil?
-        return @first_name_kana = nil
+    def first_name_kana=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("first_name_kana", new_value.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANA)
       end
-      _first_name_kana = first_name_kana.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("first_name_kana", _first_name_kana.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANA)
-      @first_name_kana = _first_name_kana
+
+      @first_name_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name_kanji Object to be assigned
-    def first_name_kanji=(first_name_kanji : String?)
-      if first_name_kanji.nil?
-        return @first_name_kanji = nil
+    def first_name_kanji=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("first_name_kanji", new_value.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANJI)
       end
-      _first_name_kanji = first_name_kanji.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("first_name_kanji", _first_name_kanji.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANJI)
-      @first_name_kanji = _first_name_kanji
+
+      @first_name_kanji = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] full_name_aliases Object to be assigned
-    def full_name_aliases=(full_name_aliases : Array(String)?)
-      if full_name_aliases.nil?
-        return @full_name_aliases = nil
-      end
-      _full_name_aliases = full_name_aliases.not_nil!
-      @full_name_aliases = _full_name_aliases
+    def full_name_aliases=(new_value : Array(String)?)
+      @full_name_aliases = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] future_requirements Object to be assigned
-    def future_requirements=(future_requirements : Stripe::PersonFutureRequirements1?)
-      if future_requirements.nil?
-        return @future_requirements = nil
+    def future_requirements=(new_value : Stripe::PersonFutureRequirements1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _future_requirements = future_requirements.not_nil!
-      _future_requirements.validate if _future_requirements.is_a?(OpenApi::Validatable)
-      @future_requirements = _future_requirements
+
+      @future_requirements = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] gender Object to be assigned
-    def gender=(gender : String?)
-      if gender.nil?
-        return @gender = nil
-      end
-      _gender = gender.not_nil!
-      @gender = _gender
+    def gender=(new_value : String?)
+      @gender = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id_number_provided Object to be assigned
-    def id_number_provided=(id_number_provided : Bool?)
-      if id_number_provided.nil?
-        return @id_number_provided = nil
-      end
-      _id_number_provided = id_number_provided.not_nil!
-      @id_number_provided = _id_number_provided
+    def id_number_provided=(new_value : Bool?)
+      @id_number_provided = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id_number_secondary_provided Object to be assigned
-    def id_number_secondary_provided=(id_number_secondary_provided : Bool?)
-      if id_number_secondary_provided.nil?
-        return @id_number_secondary_provided = nil
-      end
-      _id_number_secondary_provided = id_number_secondary_provided.not_nil!
-      @id_number_secondary_provided = _id_number_secondary_provided
+    def id_number_secondary_provided=(new_value : Bool?)
+      @id_number_secondary_provided = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name Object to be assigned
-    def last_name=(last_name : String?)
-      if last_name.nil?
-        return @last_name = nil
+    def last_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last_name", new_value.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
       end
-      _last_name = last_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
-      @last_name = _last_name
+
+      @last_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name_kana Object to be assigned
-    def last_name_kana=(last_name_kana : String?)
-      if last_name_kana.nil?
-        return @last_name_kana = nil
+    def last_name_kana=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last_name_kana", new_value.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANA)
       end
-      _last_name_kana = last_name_kana.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last_name_kana", _last_name_kana.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANA)
-      @last_name_kana = _last_name_kana
+
+      @last_name_kana = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name_kanji Object to be assigned
-    def last_name_kanji=(last_name_kanji : String?)
-      if last_name_kanji.nil?
-        return @last_name_kanji = nil
+    def last_name_kanji=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last_name_kanji", new_value.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANJI)
       end
-      _last_name_kanji = last_name_kanji.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last_name_kanji", _last_name_kanji.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANJI)
-      @last_name_kanji = _last_name_kanji
+
+      @last_name_kanji = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] maiden_name Object to be assigned
-    def maiden_name=(maiden_name : String?)
-      if maiden_name.nil?
-        return @maiden_name = nil
+    def maiden_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("maiden_name", new_value.to_s.size, MAX_LENGTH_FOR_MAIDEN_NAME)
       end
-      _maiden_name = maiden_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("maiden_name", _maiden_name.to_s.size, MAX_LENGTH_FOR_MAIDEN_NAME)
-      @maiden_name = _maiden_name
+
+      @maiden_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] nationality Object to be assigned
-    def nationality=(nationality : String?)
-      if nationality.nil?
-        return @nationality = nil
+    def nationality=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("nationality", new_value.to_s.size, MAX_LENGTH_FOR_NATIONALITY)
       end
-      _nationality = nationality.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("nationality", _nationality.to_s.size, MAX_LENGTH_FOR_NATIONALITY)
-      @nationality = _nationality
+
+      @nationality = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone Object to be assigned
-    def phone=(phone : String?)
-      if phone.nil?
-        return @phone = nil
+    def phone=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("phone", new_value.to_s.size, MAX_LENGTH_FOR_PHONE)
       end
-      _phone = phone.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
-      @phone = _phone
+
+      @phone = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] political_exposure Object to be assigned
-    def political_exposure=(political_exposure : String?)
-      if political_exposure.nil?
-        return @political_exposure = nil
+    def political_exposure=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("political_exposure", new_value, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
       end
-      _political_exposure = political_exposure.not_nil!
-      OpenApi::EnumValidator.validate("political_exposure", _political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
-      @political_exposure = _political_exposure
+
+      @political_exposure = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] registered_address Object to be assigned
-    def registered_address=(registered_address : Stripe::Address?)
-      if registered_address.nil?
-        return @registered_address = nil
+    def registered_address=(new_value : Stripe::Address?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _registered_address = registered_address.not_nil!
-      _registered_address.validate if _registered_address.is_a?(OpenApi::Validatable)
-      @registered_address = _registered_address
+
+      @registered_address = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] relationship Object to be assigned
-    def relationship=(relationship : Stripe::PersonRelationship?)
-      if relationship.nil?
-        return @relationship = nil
+    def relationship=(new_value : Stripe::PersonRelationship?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _relationship = relationship.not_nil!
-      _relationship.validate if _relationship.is_a?(OpenApi::Validatable)
-      @relationship = _relationship
+
+      @relationship = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requirements Object to be assigned
-    def requirements=(requirements : Stripe::PersonRequirements1?)
-      if requirements.nil?
-        return @requirements = nil
+    def requirements=(new_value : Stripe::PersonRequirements1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _requirements = requirements.not_nil!
-      _requirements.validate if _requirements.is_a?(OpenApi::Validatable)
-      @requirements = _requirements
+
+      @requirements = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ssn_last_4_provided Object to be assigned
-    def ssn_last_4_provided=(ssn_last_4_provided : Bool?)
-      if ssn_last_4_provided.nil?
-        return @ssn_last_4_provided = nil
-      end
-      _ssn_last_4_provided = ssn_last_4_provided.not_nil!
-      @ssn_last_4_provided = _ssn_last_4_provided
+    def ssn_last_4_provided=(new_value : Bool?)
+      @ssn_last_4_provided = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification Object to be assigned
-    def verification=(verification : Stripe::LegalEntityPersonVerification?)
-      if verification.nil?
-        return @verification = nil
+    def verification=(new_value : Stripe::LegalEntityPersonVerification?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verification = verification.not_nil!
-      _verification.validate if _verification.is_a?(OpenApi::Validatable)
-      @verification = _verification
+
+      @verification = new_value
     end
 
     # Generates #hash and #== methods from all fields

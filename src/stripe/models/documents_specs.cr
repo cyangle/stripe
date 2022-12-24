@@ -121,79 +121,72 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_account_ownership_verification Object to be assigned
-    def bank_account_ownership_verification=(bank_account_ownership_verification : Stripe::DocumentsParam?)
-      if bank_account_ownership_verification.nil?
-        return @bank_account_ownership_verification = nil
+    def bank_account_ownership_verification=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bank_account_ownership_verification = bank_account_ownership_verification.not_nil!
-      _bank_account_ownership_verification.validate if _bank_account_ownership_verification.is_a?(OpenApi::Validatable)
-      @bank_account_ownership_verification = _bank_account_ownership_verification
+
+      @bank_account_ownership_verification = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company_license Object to be assigned
-    def company_license=(company_license : Stripe::DocumentsParam?)
-      if company_license.nil?
-        return @company_license = nil
+    def company_license=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company_license = company_license.not_nil!
-      _company_license.validate if _company_license.is_a?(OpenApi::Validatable)
-      @company_license = _company_license
+
+      @company_license = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company_memorandum_of_association Object to be assigned
-    def company_memorandum_of_association=(company_memorandum_of_association : Stripe::DocumentsParam?)
-      if company_memorandum_of_association.nil?
-        return @company_memorandum_of_association = nil
+    def company_memorandum_of_association=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company_memorandum_of_association = company_memorandum_of_association.not_nil!
-      _company_memorandum_of_association.validate if _company_memorandum_of_association.is_a?(OpenApi::Validatable)
-      @company_memorandum_of_association = _company_memorandum_of_association
+
+      @company_memorandum_of_association = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company_ministerial_decree Object to be assigned
-    def company_ministerial_decree=(company_ministerial_decree : Stripe::DocumentsParam?)
-      if company_ministerial_decree.nil?
-        return @company_ministerial_decree = nil
+    def company_ministerial_decree=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company_ministerial_decree = company_ministerial_decree.not_nil!
-      _company_ministerial_decree.validate if _company_ministerial_decree.is_a?(OpenApi::Validatable)
-      @company_ministerial_decree = _company_ministerial_decree
+
+      @company_ministerial_decree = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company_registration_verification Object to be assigned
-    def company_registration_verification=(company_registration_verification : Stripe::DocumentsParam?)
-      if company_registration_verification.nil?
-        return @company_registration_verification = nil
+    def company_registration_verification=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company_registration_verification = company_registration_verification.not_nil!
-      _company_registration_verification.validate if _company_registration_verification.is_a?(OpenApi::Validatable)
-      @company_registration_verification = _company_registration_verification
+
+      @company_registration_verification = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company_tax_id_verification Object to be assigned
-    def company_tax_id_verification=(company_tax_id_verification : Stripe::DocumentsParam?)
-      if company_tax_id_verification.nil?
-        return @company_tax_id_verification = nil
+    def company_tax_id_verification=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company_tax_id_verification = company_tax_id_verification.not_nil!
-      _company_tax_id_verification.validate if _company_tax_id_verification.is_a?(OpenApi::Validatable)
-      @company_tax_id_verification = _company_tax_id_verification
+
+      @company_tax_id_verification = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proof_of_registration Object to be assigned
-    def proof_of_registration=(proof_of_registration : Stripe::DocumentsParam?)
-      if proof_of_registration.nil?
-        return @proof_of_registration = nil
+    def proof_of_registration=(new_value : Stripe::DocumentsParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _proof_of_registration = proof_of_registration.not_nil!
-      _proof_of_registration.validate if _proof_of_registration.is_a?(OpenApi::Validatable)
-      @proof_of_registration = _proof_of_registration
+
+      @proof_of_registration = new_value
     end
 
     # Generates #hash and #== methods from all fields

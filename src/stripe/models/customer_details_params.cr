@@ -54,12 +54,10 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        raise ArgumentError.new("\"email\" is required and cannot be null")
-      end
-      _email = email.not_nil!
-      @email = _email
+    def email=(new_value : String?)
+      raise ArgumentError.new("\"email\" is required and cannot be null") if new_value.nil?
+
+      @email = new_value
     end
 
     # Generates #hash and #== methods from all fields

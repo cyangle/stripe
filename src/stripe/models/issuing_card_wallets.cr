@@ -96,35 +96,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] apple_pay Object to be assigned
-    def apple_pay=(apple_pay : Stripe::IssuingCardApplePay?)
-      if apple_pay.nil?
-        raise ArgumentError.new("\"apple_pay\" is required and cannot be null")
+    def apple_pay=(new_value : Stripe::IssuingCardApplePay?)
+      raise ArgumentError.new("\"apple_pay\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _apple_pay = apple_pay.not_nil!
-      _apple_pay.validate if _apple_pay.is_a?(OpenApi::Validatable)
-      @apple_pay = _apple_pay
+
+      @apple_pay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] google_pay Object to be assigned
-    def google_pay=(google_pay : Stripe::IssuingCardGooglePay?)
-      if google_pay.nil?
-        raise ArgumentError.new("\"google_pay\" is required and cannot be null")
+    def google_pay=(new_value : Stripe::IssuingCardGooglePay?)
+      raise ArgumentError.new("\"google_pay\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _google_pay = google_pay.not_nil!
-      _google_pay.validate if _google_pay.is_a?(OpenApi::Validatable)
-      @google_pay = _google_pay
+
+      @google_pay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] primary_account_identifier Object to be assigned
-    def primary_account_identifier=(primary_account_identifier : String?)
-      if primary_account_identifier.nil?
-        return @primary_account_identifier = nil
+    def primary_account_identifier=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("primary_account_identifier", new_value.to_s.size, MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER)
       end
-      _primary_account_identifier = primary_account_identifier.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("primary_account_identifier", _primary_account_identifier.to_s.size, MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER)
-      @primary_account_identifier = _primary_account_identifier
+
+      @primary_account_identifier = new_value
     end
 
     # Generates #hash and #== methods from all fields

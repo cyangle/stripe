@@ -63,13 +63,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acquiring_institution_id Object to be assigned
-    def acquiring_institution_id=(acquiring_institution_id : String?)
-      if acquiring_institution_id.nil?
-        return @acquiring_institution_id = nil
+    def acquiring_institution_id=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("acquiring_institution_id", new_value.to_s.size, MAX_LENGTH_FOR_ACQUIRING_INSTITUTION_ID)
       end
-      _acquiring_institution_id = acquiring_institution_id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("acquiring_institution_id", _acquiring_institution_id.to_s.size, MAX_LENGTH_FOR_ACQUIRING_INSTITUTION_ID)
-      @acquiring_institution_id = _acquiring_institution_id
+
+      @acquiring_institution_id = new_value
     end
 
     # Generates #hash and #== methods from all fields

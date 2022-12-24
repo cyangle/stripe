@@ -69,9 +69,6 @@ module Stripe
         Log.debug { "Calling API: BalanceApi.get_balance ..." }
       end
 
-      if client_side_validation
-      end
-
       # resource path
       local_var_path = "/v1/balance"
 

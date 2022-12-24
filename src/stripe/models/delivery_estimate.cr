@@ -66,24 +66,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] maximum Object to be assigned
-    def maximum=(maximum : Stripe::DeliveryEstimateBound?)
-      if maximum.nil?
-        return @maximum = nil
+    def maximum=(new_value : Stripe::DeliveryEstimateBound?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _maximum = maximum.not_nil!
-      _maximum.validate if _maximum.is_a?(OpenApi::Validatable)
-      @maximum = _maximum
+
+      @maximum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum Object to be assigned
-    def minimum=(minimum : Stripe::DeliveryEstimateBound?)
-      if minimum.nil?
-        return @minimum = nil
+    def minimum=(new_value : Stripe::DeliveryEstimateBound?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _minimum = minimum.not_nil!
-      _minimum.validate if _minimum.is_a?(OpenApi::Validatable)
-      @minimum = _minimum
+
+      @minimum = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -70,23 +70,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email_sent Object to be assigned
-    def email_sent=(email_sent : Stripe::EmailSent?)
-      if email_sent.nil?
-        raise ArgumentError.new("\"email_sent\" is required and cannot be null")
+    def email_sent=(new_value : Stripe::EmailSent?)
+      raise ArgumentError.new("\"email_sent\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _email_sent = email_sent.not_nil!
-      _email_sent.validate if _email_sent.is_a?(OpenApi::Validatable)
-      @email_sent = _email_sent
+
+      @email_sent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_at Object to be assigned
-    def expires_at=(expires_at : Int64?)
-      if expires_at.nil?
-        raise ArgumentError.new("\"expires_at\" is required and cannot be null")
-      end
-      _expires_at = expires_at.not_nil!
-      @expires_at = _expires_at
+    def expires_at=(new_value : Int64?)
+      raise ArgumentError.new("\"expires_at\" is required and cannot be null") if new_value.nil?
+
+      @expires_at = new_value
     end
 
     # Generates #hash and #== methods from all fields

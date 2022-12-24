@@ -88,34 +88,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount Object to be assigned
-    def amount=(amount : Int64?)
-      if amount.nil?
-        return @amount = nil
-      end
-      _amount = amount.not_nil!
-      @amount = _amount
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_type Object to be assigned
-    def amount_type=(amount_type : String?)
-      if amount_type.nil?
-        return @amount_type = nil
+    def amount_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("amount_type", new_value, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
-      _amount_type = amount_type.not_nil!
-      OpenApi::EnumValidator.validate("amount_type", _amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
-      @amount_type = _amount_type
+
+      @amount_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(description : String?)
-      if description.nil?
-        return @description = nil
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       end
-      _description = description.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      @description = _description
+
+      @description = new_value
     end
 
     # Generates #hash and #== methods from all fields

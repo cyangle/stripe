@@ -90,30 +90,30 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String?)
-      @code = code
+    def code=(new_value : String?)
+      @code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason : String?)
-      if reason.nil?
-        raise ArgumentError.new("\"reason\" is required and cannot be null")
+    def reason=(new_value : String?)
+      raise ArgumentError.new("\"reason\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reason", new_value.to_s.size, MAX_LENGTH_FOR_REASON)
       end
-      _reason = reason.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
-      @reason = _reason
+
+      @reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requirement Object to be assigned
-    def requirement=(requirement : String?)
-      if requirement.nil?
-        raise ArgumentError.new("\"requirement\" is required and cannot be null")
+    def requirement=(new_value : String?)
+      raise ArgumentError.new("\"requirement\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("requirement", new_value.to_s.size, MAX_LENGTH_FOR_REQUIREMENT)
       end
-      _requirement = requirement.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("requirement", _requirement.to_s.size, MAX_LENGTH_FOR_REQUIREMENT)
-      @requirement = _requirement
+
+      @requirement = new_value
     end
 
     # Generates #hash and #== methods from all fields

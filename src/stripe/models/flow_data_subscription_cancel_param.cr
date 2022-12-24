@@ -63,13 +63,13 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription Object to be assigned
-    def subscription=(subscription : String?)
-      if subscription.nil?
-        raise ArgumentError.new("\"subscription\" is required and cannot be null")
+    def subscription=(new_value : String?)
+      raise ArgumentError.new("\"subscription\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("subscription", new_value.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
       end
-      _subscription = subscription.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
-      @subscription = _subscription
+
+      @subscription = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -198,156 +198,142 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aud Object to be assigned
-    def aud=(aud : Stripe::CurrencySpecificConfig?)
-      if aud.nil?
-        return @aud = nil
+    def aud=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _aud = aud.not_nil!
-      _aud.validate if _aud.is_a?(OpenApi::Validatable)
-      @aud = _aud
+
+      @aud = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cad Object to be assigned
-    def cad=(cad : Stripe::CurrencySpecificConfig?)
-      if cad.nil?
-        return @cad = nil
+    def cad=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _cad = cad.not_nil!
-      _cad.validate if _cad.is_a?(OpenApi::Validatable)
-      @cad = _cad
+
+      @cad = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] chf Object to be assigned
-    def chf=(chf : Stripe::CurrencySpecificConfig?)
-      if chf.nil?
-        return @chf = nil
+    def chf=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _chf = chf.not_nil!
-      _chf.validate if _chf.is_a?(OpenApi::Validatable)
-      @chf = _chf
+
+      @chf = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] czk Object to be assigned
-    def czk=(czk : Stripe::CurrencySpecificConfig?)
-      if czk.nil?
-        return @czk = nil
+    def czk=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _czk = czk.not_nil!
-      _czk.validate if _czk.is_a?(OpenApi::Validatable)
-      @czk = _czk
+
+      @czk = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dkk Object to be assigned
-    def dkk=(dkk : Stripe::CurrencySpecificConfig?)
-      if dkk.nil?
-        return @dkk = nil
+    def dkk=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dkk = dkk.not_nil!
-      _dkk.validate if _dkk.is_a?(OpenApi::Validatable)
-      @dkk = _dkk
+
+      @dkk = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eur Object to be assigned
-    def eur=(eur : Stripe::CurrencySpecificConfig?)
-      if eur.nil?
-        return @eur = nil
+    def eur=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _eur = eur.not_nil!
-      _eur.validate if _eur.is_a?(OpenApi::Validatable)
-      @eur = _eur
+
+      @eur = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] gbp Object to be assigned
-    def gbp=(gbp : Stripe::CurrencySpecificConfig?)
-      if gbp.nil?
-        return @gbp = nil
+    def gbp=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _gbp = gbp.not_nil!
-      _gbp.validate if _gbp.is_a?(OpenApi::Validatable)
-      @gbp = _gbp
+
+      @gbp = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hkd Object to be assigned
-    def hkd=(hkd : Stripe::CurrencySpecificConfig?)
-      if hkd.nil?
-        return @hkd = nil
+    def hkd=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _hkd = hkd.not_nil!
-      _hkd.validate if _hkd.is_a?(OpenApi::Validatable)
-      @hkd = _hkd
+
+      @hkd = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] myr Object to be assigned
-    def myr=(myr : Stripe::CurrencySpecificConfig?)
-      if myr.nil?
-        return @myr = nil
+    def myr=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _myr = myr.not_nil!
-      _myr.validate if _myr.is_a?(OpenApi::Validatable)
-      @myr = _myr
+
+      @myr = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] nok Object to be assigned
-    def nok=(nok : Stripe::CurrencySpecificConfig?)
-      if nok.nil?
-        return @nok = nil
+    def nok=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _nok = nok.not_nil!
-      _nok.validate if _nok.is_a?(OpenApi::Validatable)
-      @nok = _nok
+
+      @nok = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] nzd Object to be assigned
-    def nzd=(nzd : Stripe::CurrencySpecificConfig?)
-      if nzd.nil?
-        return @nzd = nil
+    def nzd=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _nzd = nzd.not_nil!
-      _nzd.validate if _nzd.is_a?(OpenApi::Validatable)
-      @nzd = _nzd
+
+      @nzd = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sek Object to be assigned
-    def sek=(sek : Stripe::CurrencySpecificConfig?)
-      if sek.nil?
-        return @sek = nil
+    def sek=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sek = sek.not_nil!
-      _sek.validate if _sek.is_a?(OpenApi::Validatable)
-      @sek = _sek
+
+      @sek = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sgd Object to be assigned
-    def sgd=(sgd : Stripe::CurrencySpecificConfig?)
-      if sgd.nil?
-        return @sgd = nil
+    def sgd=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sgd = sgd.not_nil!
-      _sgd.validate if _sgd.is_a?(OpenApi::Validatable)
-      @sgd = _sgd
+
+      @sgd = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usd Object to be assigned
-    def usd=(usd : Stripe::CurrencySpecificConfig?)
-      if usd.nil?
-        return @usd = nil
+    def usd=(new_value : Stripe::CurrencySpecificConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _usd = usd.not_nil!
-      _usd.validate if _usd.is_a?(OpenApi::Validatable)
-      @usd = _usd
+
+      @usd = new_value
     end
 
     # Generates #hash and #== methods from all fields

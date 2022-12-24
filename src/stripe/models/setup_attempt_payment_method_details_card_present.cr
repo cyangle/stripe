@@ -59,13 +59,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_card Object to be assigned
-    def generated_card=(generated_card : Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard?)
-      if generated_card.nil?
-        return @generated_card = nil
+    def generated_card=(new_value : Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _generated_card = generated_card.not_nil!
-      _generated_card.validate if _generated_card.is_a?(OpenApi::Validatable)
-      @generated_card = _generated_card
+
+      @generated_card = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -171,79 +171,72 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder_name Object to be assigned
-    def account_holder_name=(account_holder_name : String?)
-      if account_holder_name.nil?
-        return @account_holder_name = nil
+    def account_holder_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
       end
-      _account_holder_name = account_holder_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
-      @account_holder_name = _account_holder_name
+
+      @account_holder_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_number Object to be assigned
-    def account_number=(account_number : String?)
-      if account_number.nil?
-        return @account_number = nil
+    def account_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_number", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       end
-      _account_number = account_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
-      @account_number = _account_number
+
+      @account_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_type Object to be assigned
-    def account_type=(account_type : String?)
-      if account_type.nil?
-        return @account_type = nil
+    def account_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("account_type", new_value.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TYPE)
       end
-      _account_type = account_type.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("account_type", _account_type.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TYPE)
-      @account_type = _account_type
+
+      @account_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_code Object to be assigned
-    def bank_code=(bank_code : String?)
-      if bank_code.nil?
-        return @bank_code = nil
+    def bank_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_code", new_value.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       end
-      _bank_code = bank_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
-      @bank_code = _bank_code
+
+      @bank_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_name Object to be assigned
-    def bank_name=(bank_name : String?)
-      if bank_name.nil?
-        return @bank_name = nil
+    def bank_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("bank_name", new_value.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       end
-      _bank_name = bank_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
-      @bank_name = _bank_name
+
+      @bank_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] branch_code Object to be assigned
-    def branch_code=(branch_code : String?)
-      if branch_code.nil?
-        return @branch_code = nil
+    def branch_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("branch_code", new_value.to_s.size, MAX_LENGTH_FOR_BRANCH_CODE)
       end
-      _branch_code = branch_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("branch_code", _branch_code.to_s.size, MAX_LENGTH_FOR_BRANCH_CODE)
-      @branch_code = _branch_code
+
+      @branch_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] branch_name Object to be assigned
-    def branch_name=(branch_name : String?)
-      if branch_name.nil?
-        return @branch_name = nil
+    def branch_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("branch_name", new_value.to_s.size, MAX_LENGTH_FOR_BRANCH_NAME)
       end
-      _branch_name = branch_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("branch_name", _branch_name.to_s.size, MAX_LENGTH_FOR_BRANCH_NAME)
-      @branch_name = _branch_name
+
+      @branch_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

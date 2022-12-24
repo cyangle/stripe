@@ -56,13 +56,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_notification Object to be assigned
-    def customer_notification=(customer_notification : Stripe::PaymentIntentProcessingCustomerNotification?)
-      if customer_notification.nil?
-        return @customer_notification = nil
+    def customer_notification=(new_value : Stripe::PaymentIntentProcessingCustomerNotification?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customer_notification = customer_notification.not_nil!
-      _customer_notification.validate if _customer_notification.is_a?(OpenApi::Validatable)
-      @customer_notification = _customer_notification
+
+      @customer_notification = new_value
     end
 
     # Generates #hash and #== methods from all fields

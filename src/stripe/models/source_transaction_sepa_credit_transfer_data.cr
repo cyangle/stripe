@@ -90,35 +90,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(reference : String?)
-      if reference.nil?
-        return @reference = nil
+    def reference=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("reference", new_value.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       end
-      _reference = reference.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
-      @reference = _reference
+
+      @reference = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sender_iban Object to be assigned
-    def sender_iban=(sender_iban : String?)
-      if sender_iban.nil?
-        return @sender_iban = nil
+    def sender_iban=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sender_iban", new_value.to_s.size, MAX_LENGTH_FOR_SENDER_IBAN)
       end
-      _sender_iban = sender_iban.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sender_iban", _sender_iban.to_s.size, MAX_LENGTH_FOR_SENDER_IBAN)
-      @sender_iban = _sender_iban
+
+      @sender_iban = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sender_name Object to be assigned
-    def sender_name=(sender_name : String?)
-      if sender_name.nil?
-        return @sender_name = nil
+    def sender_name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("sender_name", new_value.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
       end
-      _sender_name = sender_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
-      @sender_name = _sender_name
+
+      @sender_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

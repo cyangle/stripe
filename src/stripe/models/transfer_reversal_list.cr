@@ -105,45 +105,43 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] data Object to be assigned
-    def data=(data : Array(Stripe::TransferReversal)?)
-      if data.nil?
-        raise ArgumentError.new("\"data\" is required and cannot be null")
+    def data=(new_value : Array(Stripe::TransferReversal)?)
+      raise ArgumentError.new("\"data\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _data = data.not_nil!
-      OpenApi::ContainerValidator.validate(container: _data) if _data.is_a?(Array)
-      @data = _data
+
+      @data = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_more Object to be assigned
-    def has_more=(has_more : Bool?)
-      if has_more.nil?
-        raise ArgumentError.new("\"has_more\" is required and cannot be null")
-      end
-      _has_more = has_more.not_nil!
-      @has_more = _has_more
+    def has_more=(new_value : Bool?)
+      raise ArgumentError.new("\"has_more\" is required and cannot be null") if new_value.nil?
+
+      @has_more = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String?)
-      if object.nil?
-        raise ArgumentError.new("\"object\" is required and cannot be null")
+    def object=(new_value : String?)
+      raise ArgumentError.new("\"object\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("object", new_value, VALID_VALUES_FOR_OBJECT)
       end
-      _object = object.not_nil!
-      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
-      @object = _object
+
+      @object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] url Object to be assigned
-    def url=(url : String?)
-      if url.nil?
-        raise ArgumentError.new("\"url\" is required and cannot be null")
+    def url=(new_value : String?)
+      raise ArgumentError.new("\"url\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("url", new_value.to_s.size, MAX_LENGTH_FOR_URL)
       end
-      _url = url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
-      @url = _url
+
+      @url = new_value
     end
 
     # Generates #hash and #== methods from all fields

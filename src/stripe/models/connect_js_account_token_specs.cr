@@ -77,40 +77,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_type Object to be assigned
-    def business_type=(business_type : String?)
-      @business_type = business_type
+    def business_type=(new_value : String?)
+      @business_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company Object to be assigned
-    def company=(company : Stripe::ConnectJsAccountTokenCompanySpecs?)
-      if company.nil?
-        return @company = nil
+    def company=(new_value : Stripe::ConnectJsAccountTokenCompanySpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _company = company.not_nil!
-      _company.validate if _company.is_a?(OpenApi::Validatable)
-      @company = _company
+
+      @company = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] individual Object to be assigned
-    def individual=(individual : Stripe::IndividualSpecs?)
-      if individual.nil?
-        return @individual = nil
+    def individual=(new_value : Stripe::IndividualSpecs?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _individual = individual.not_nil!
-      _individual.validate if _individual.is_a?(OpenApi::Validatable)
-      @individual = _individual
+
+      @individual = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tos_shown_and_accepted Object to be assigned
-    def tos_shown_and_accepted=(tos_shown_and_accepted : Bool?)
-      if tos_shown_and_accepted.nil?
-        return @tos_shown_and_accepted = nil
-      end
-      _tos_shown_and_accepted = tos_shown_and_accepted.not_nil!
-      @tos_shown_and_accepted = _tos_shown_and_accepted
+    def tos_shown_and_accepted=(new_value : Bool?)
+      @tos_shown_and_accepted = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -71,23 +71,19 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quote Object to be assigned
-    def quote=(quote : String?)
-      if quote.nil?
-        raise ArgumentError.new("\"quote\" is required and cannot be null")
+    def quote=(new_value : String?)
+      raise ArgumentError.new("\"quote\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("quote", new_value.to_s.size, MAX_LENGTH_FOR_QUOTE)
       end
-      _quote = quote.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("quote", _quote.to_s.size, MAX_LENGTH_FOR_QUOTE)
-      @quote = _quote
+
+      @quote = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] is_revision Object to be assigned
-    def is_revision=(is_revision : Bool?)
-      if is_revision.nil?
-        return @is_revision = nil
-      end
-      _is_revision = is_revision.not_nil!
-      @is_revision = _is_revision
+    def is_revision=(new_value : Bool?)
+      @is_revision = new_value
     end
 
     # Generates #hash and #== methods from all fields

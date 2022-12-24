@@ -74,23 +74,19 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] item_reasons Object to be assigned
-    def item_reasons=(item_reasons : Array(Stripe::InvoiceItemThresholdReason)?)
-      if item_reasons.nil?
-        raise ArgumentError.new("\"item_reasons\" is required and cannot be null")
+    def item_reasons=(new_value : Array(Stripe::InvoiceItemThresholdReason)?)
+      raise ArgumentError.new("\"item_reasons\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _item_reasons = item_reasons.not_nil!
-      OpenApi::ContainerValidator.validate(container: _item_reasons) if _item_reasons.is_a?(Array)
-      @item_reasons = _item_reasons
+
+      @item_reasons = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_gte Object to be assigned
-    def amount_gte=(amount_gte : Int64?)
-      if amount_gte.nil?
-        return @amount_gte = nil
-      end
-      _amount_gte = amount_gte.not_nil!
-      @amount_gte = _amount_gte
+    def amount_gte=(new_value : Int64?)
+      @amount_gte = new_value
     end
 
     # Generates #hash and #== methods from all fields

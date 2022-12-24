@@ -53,12 +53,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expires_after_seconds Object to be assigned
-    def expires_after_seconds=(expires_after_seconds : Int64?)
-      if expires_after_seconds.nil?
-        return @expires_after_seconds = nil
-      end
-      _expires_after_seconds = expires_after_seconds.not_nil!
-      @expires_after_seconds = _expires_after_seconds
+    def expires_after_seconds=(new_value : Int64?)
+      @expires_after_seconds = new_value
     end
 
     # Generates #hash and #== methods from all fields

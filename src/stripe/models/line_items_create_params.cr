@@ -85,34 +85,31 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(price : String?)
-      if price.nil?
-        raise ArgumentError.new("\"price\" is required and cannot be null")
+    def price=(new_value : String?)
+      raise ArgumentError.new("\"price\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("price", new_value.to_s.size, MAX_LENGTH_FOR_PRICE)
       end
-      _price = price.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
-      @price = _price
+
+      @price = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int64?)
-      if quantity.nil?
-        raise ArgumentError.new("\"quantity\" is required and cannot be null")
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int64?)
+      raise ArgumentError.new("\"quantity\" is required and cannot be null") if new_value.nil?
+
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] adjustable_quantity Object to be assigned
-    def adjustable_quantity=(adjustable_quantity : Stripe::AdjustableQuantityParams?)
-      if adjustable_quantity.nil?
-        return @adjustable_quantity = nil
+    def adjustable_quantity=(new_value : Stripe::AdjustableQuantityParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _adjustable_quantity = adjustable_quantity.not_nil!
-      _adjustable_quantity.validate if _adjustable_quantity.is_a?(OpenApi::Validatable)
-      @adjustable_quantity = _adjustable_quantity
+
+      @adjustable_quantity = new_value
     end
 
     # Generates #hash and #== methods from all fields

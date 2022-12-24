@@ -65,23 +65,18 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason : String?)
-      if cancellation_reason.nil?
-        return @cancellation_reason = nil
+    def cancellation_reason=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("cancellation_reason", new_value, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
-      _cancellation_reason = cancellation_reason.not_nil!
-      OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
-      @cancellation_reason = _cancellation_reason
+
+      @cancellation_reason = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Generates #hash and #== methods from all fields

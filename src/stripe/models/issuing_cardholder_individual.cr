@@ -114,46 +114,44 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name Object to be assigned
-    def first_name=(first_name : String?)
-      if first_name.nil?
-        raise ArgumentError.new("\"first_name\" is required and cannot be null")
+    def first_name=(new_value : String?)
+      raise ArgumentError.new("\"first_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("first_name", new_value.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
       end
-      _first_name = first_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
-      @first_name = _first_name
+
+      @first_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name Object to be assigned
-    def last_name=(last_name : String?)
-      if last_name.nil?
-        raise ArgumentError.new("\"last_name\" is required and cannot be null")
+    def last_name=(new_value : String?)
+      raise ArgumentError.new("\"last_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("last_name", new_value.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
       end
-      _last_name = last_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
-      @last_name = _last_name
+
+      @last_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(dob : Stripe::IssuingCardholderIndividualDob1?)
-      if dob.nil?
-        return @dob = nil
+    def dob=(new_value : Stripe::IssuingCardholderIndividualDob1?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dob = dob.not_nil!
-      _dob.validate if _dob.is_a?(OpenApi::Validatable)
-      @dob = _dob
+
+      @dob = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification Object to be assigned
-    def verification=(verification : Stripe::IssuingCardholderIndividualVerification?)
-      if verification.nil?
-        return @verification = nil
+    def verification=(new_value : Stripe::IssuingCardholderIndividualVerification?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _verification = verification.not_nil!
-      _verification.validate if _verification.is_a?(OpenApi::Validatable)
-      @verification = _verification
+
+      @verification = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -94,34 +94,31 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arrival_date Object to be assigned
-    def arrival_date=(arrival_date : Int64?)
-      if arrival_date.nil?
-        raise ArgumentError.new("\"arrival_date\" is required and cannot be null")
-      end
-      _arrival_date = arrival_date.not_nil!
-      @arrival_date = _arrival_date
+    def arrival_date=(new_value : Int64?)
+      raise ArgumentError.new("\"arrival_date\" is required and cannot be null") if new_value.nil?
+
+      @arrival_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_verification_url Object to be assigned
-    def hosted_verification_url=(hosted_verification_url : String?)
-      if hosted_verification_url.nil?
-        raise ArgumentError.new("\"hosted_verification_url\" is required and cannot be null")
+    def hosted_verification_url=(new_value : String?)
+      raise ArgumentError.new("\"hosted_verification_url\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("hosted_verification_url", new_value.to_s.size, MAX_LENGTH_FOR_HOSTED_VERIFICATION_URL)
       end
-      _hosted_verification_url = hosted_verification_url.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("hosted_verification_url", _hosted_verification_url.to_s.size, MAX_LENGTH_FOR_HOSTED_VERIFICATION_URL)
-      @hosted_verification_url = _hosted_verification_url
+
+      @hosted_verification_url = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] microdeposit_type Object to be assigned
-    def microdeposit_type=(microdeposit_type : String?)
-      if microdeposit_type.nil?
-        return @microdeposit_type = nil
+    def microdeposit_type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("microdeposit_type", new_value, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
       end
-      _microdeposit_type = microdeposit_type.not_nil!
-      OpenApi::EnumValidator.validate("microdeposit_type", _microdeposit_type, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
-      @microdeposit_type = _microdeposit_type
+
+      @microdeposit_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

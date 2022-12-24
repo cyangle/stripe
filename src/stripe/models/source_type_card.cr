@@ -136,142 +136,86 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_line1_check Object to be assigned
-    def address_line1_check=(address_line1_check : String?)
-      if address_line1_check.nil?
-        return @address_line1_check = nil
-      end
-      _address_line1_check = address_line1_check.not_nil!
-      @address_line1_check = _address_line1_check
+    def address_line1_check=(new_value : String?)
+      @address_line1_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_zip_check Object to be assigned
-    def address_zip_check=(address_zip_check : String?)
-      if address_zip_check.nil?
-        return @address_zip_check = nil
-      end
-      _address_zip_check = address_zip_check.not_nil!
-      @address_zip_check = _address_zip_check
+    def address_zip_check=(new_value : String?)
+      @address_zip_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] brand Object to be assigned
-    def brand=(brand : String?)
-      if brand.nil?
-        return @brand = nil
-      end
-      _brand = brand.not_nil!
-      @brand = _brand
+    def brand=(new_value : String?)
+      @brand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country : String?)
-      if country.nil?
-        return @country = nil
-      end
-      _country = country.not_nil!
-      @country = _country
+    def country=(new_value : String?)
+      @country = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_check Object to be assigned
-    def cvc_check=(cvc_check : String?)
-      if cvc_check.nil?
-        return @cvc_check = nil
-      end
-      _cvc_check = cvc_check.not_nil!
-      @cvc_check = _cvc_check
+    def cvc_check=(new_value : String?)
+      @cvc_check = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dynamic_last4 Object to be assigned
-    def dynamic_last4=(dynamic_last4 : String?)
-      if dynamic_last4.nil?
-        return @dynamic_last4 = nil
-      end
-      _dynamic_last4 = dynamic_last4.not_nil!
-      @dynamic_last4 = _dynamic_last4
+    def dynamic_last4=(new_value : String?)
+      @dynamic_last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_month Object to be assigned
-    def exp_month=(exp_month : Int64?)
-      if exp_month.nil?
-        return @exp_month = nil
-      end
-      _exp_month = exp_month.not_nil!
-      @exp_month = _exp_month
+    def exp_month=(new_value : Int64?)
+      @exp_month = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] exp_year Object to be assigned
-    def exp_year=(exp_year : Int64?)
-      if exp_year.nil?
-        return @exp_year = nil
-      end
-      _exp_year = exp_year.not_nil!
-      @exp_year = _exp_year
+    def exp_year=(new_value : Int64?)
+      @exp_year = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fingerprint Object to be assigned
-    def fingerprint=(fingerprint : String?)
-      if fingerprint.nil?
-        return @fingerprint = nil
-      end
-      _fingerprint = fingerprint.not_nil!
-      @fingerprint = _fingerprint
+    def fingerprint=(new_value : String?)
+      @fingerprint = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding Object to be assigned
-    def funding=(funding : String?)
-      if funding.nil?
-        return @funding = nil
-      end
-      _funding = funding.not_nil!
-      @funding = _funding
+    def funding=(new_value : String?)
+      @funding = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last4 Object to be assigned
-    def last4=(last4 : String?)
-      if last4.nil?
-        return @last4 = nil
-      end
-      _last4 = last4.not_nil!
-      @last4 = _last4
+    def last4=(new_value : String?)
+      @last4 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
-      end
-      _name = name.not_nil!
-      @name = _name
+    def name=(new_value : String?)
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] three_d_secure Object to be assigned
-    def three_d_secure=(three_d_secure : String?)
-      if three_d_secure.nil?
-        return @three_d_secure = nil
-      end
-      _three_d_secure = three_d_secure.not_nil!
-      @three_d_secure = _three_d_secure
+    def three_d_secure=(new_value : String?)
+      @three_d_secure = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tokenization_method Object to be assigned
-    def tokenization_method=(tokenization_method : String?)
-      if tokenization_method.nil?
-        return @tokenization_method = nil
-      end
-      _tokenization_method = tokenization_method.not_nil!
-      @tokenization_method = _tokenization_method
+    def tokenization_method=(new_value : String?)
+      @tokenization_method = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -85,52 +85,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flat_amount Object to be assigned
-    def flat_amount=(flat_amount : Int64?)
-      if flat_amount.nil?
-        return @flat_amount = nil
-      end
-      _flat_amount = flat_amount.not_nil!
-      @flat_amount = _flat_amount
+    def flat_amount=(new_value : Int64?)
+      @flat_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flat_amount_decimal Object to be assigned
-    def flat_amount_decimal=(flat_amount_decimal : BigDecimal?)
-      if flat_amount_decimal.nil?
-        return @flat_amount_decimal = nil
-      end
-      _flat_amount_decimal = flat_amount_decimal.not_nil!
-      @flat_amount_decimal = _flat_amount_decimal
+    def flat_amount_decimal=(new_value : BigDecimal?)
+      @flat_amount_decimal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount Object to be assigned
-    def unit_amount=(unit_amount : Int64?)
-      if unit_amount.nil?
-        return @unit_amount = nil
-      end
-      _unit_amount = unit_amount.not_nil!
-      @unit_amount = _unit_amount
+    def unit_amount=(new_value : Int64?)
+      @unit_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit_amount_decimal Object to be assigned
-    def unit_amount_decimal=(unit_amount_decimal : BigDecimal?)
-      if unit_amount_decimal.nil?
-        return @unit_amount_decimal = nil
-      end
-      _unit_amount_decimal = unit_amount_decimal.not_nil!
-      @unit_amount_decimal = _unit_amount_decimal
+    def unit_amount_decimal=(new_value : BigDecimal?)
+      @unit_amount_decimal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] up_to Object to be assigned
-    def up_to=(up_to : Int64?)
-      if up_to.nil?
-        return @up_to = nil
-      end
-      _up_to = up_to.not_nil!
-      @up_to = _up_to
+    def up_to=(new_value : Int64?)
+      @up_to = new_value
     end
 
     # Generates #hash and #== methods from all fields

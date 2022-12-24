@@ -75,24 +75,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_intent Object to be assigned
-    def payment_intent=(payment_intent : Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIntent?)
-      if payment_intent.nil?
-        raise ArgumentError.new("\"payment_intent\" is required and cannot be null")
+    def payment_intent=(new_value : Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIntent?)
+      raise ArgumentError.new("\"payment_intent\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _payment_intent = payment_intent.not_nil!
-      _payment_intent.validate if _payment_intent.is_a?(OpenApi::Validatable)
-      @payment_intent = _payment_intent
+
+      @payment_intent = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] process_config Object to be assigned
-    def process_config=(process_config : Stripe::TerminalReaderReaderResourceProcessConfig?)
-      if process_config.nil?
-        return @process_config = nil
+    def process_config=(new_value : Stripe::TerminalReaderReaderResourceProcessConfig?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _process_config = process_config.not_nil!
-      _process_config.validate if _process_config.is_a?(OpenApi::Validatable)
-      @process_config = _process_config
+
+      @process_config = new_value
     end
 
     # Generates #hash and #== methods from all fields

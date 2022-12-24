@@ -144,67 +144,58 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arrival_airport_code Object to be assigned
-    def arrival_airport_code=(arrival_airport_code : String?)
-      if arrival_airport_code.nil?
-        return @arrival_airport_code = nil
+    def arrival_airport_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("arrival_airport_code", new_value.to_s.size, MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE)
       end
-      _arrival_airport_code = arrival_airport_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("arrival_airport_code", _arrival_airport_code.to_s.size, MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE)
-      @arrival_airport_code = _arrival_airport_code
+
+      @arrival_airport_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] carrier Object to be assigned
-    def carrier=(carrier : String?)
-      if carrier.nil?
-        return @carrier = nil
+    def carrier=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("carrier", new_value.to_s.size, MAX_LENGTH_FOR_CARRIER)
       end
-      _carrier = carrier.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
-      @carrier = _carrier
+
+      @carrier = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] departure_airport_code Object to be assigned
-    def departure_airport_code=(departure_airport_code : String?)
-      if departure_airport_code.nil?
-        return @departure_airport_code = nil
+    def departure_airport_code=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("departure_airport_code", new_value.to_s.size, MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE)
       end
-      _departure_airport_code = departure_airport_code.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("departure_airport_code", _departure_airport_code.to_s.size, MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE)
-      @departure_airport_code = _departure_airport_code
+
+      @departure_airport_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flight_number Object to be assigned
-    def flight_number=(flight_number : String?)
-      if flight_number.nil?
-        return @flight_number = nil
+    def flight_number=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("flight_number", new_value.to_s.size, MAX_LENGTH_FOR_FLIGHT_NUMBER)
       end
-      _flight_number = flight_number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("flight_number", _flight_number.to_s.size, MAX_LENGTH_FOR_FLIGHT_NUMBER)
-      @flight_number = _flight_number
+
+      @flight_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] service_class Object to be assigned
-    def service_class=(service_class : String?)
-      if service_class.nil?
-        return @service_class = nil
+    def service_class=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("service_class", new_value.to_s.size, MAX_LENGTH_FOR_SERVICE_CLASS)
       end
-      _service_class = service_class.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("service_class", _service_class.to_s.size, MAX_LENGTH_FOR_SERVICE_CLASS)
-      @service_class = _service_class
+
+      @service_class = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] stopover_allowed Object to be assigned
-    def stopover_allowed=(stopover_allowed : Bool?)
-      if stopover_allowed.nil?
-        return @stopover_allowed = nil
-      end
-      _stopover_allowed = stopover_allowed.not_nil!
-      @stopover_allowed = _stopover_allowed
+    def stopover_allowed=(new_value : Bool?)
+      @stopover_allowed = new_value
     end
 
     # Generates #hash and #== methods from all fields

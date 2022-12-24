@@ -124,77 +124,65 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] display_name Object to be assigned
-    def display_name=(display_name : String?)
-      if display_name.nil?
-        raise ArgumentError.new("\"display_name\" is required and cannot be null")
+    def display_name=(new_value : String?)
+      raise ArgumentError.new("\"display_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("display_name", new_value.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       end
-      _display_name = display_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
-      @display_name = _display_name
+
+      @display_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] delivery_estimate Object to be assigned
-    def delivery_estimate=(delivery_estimate : Stripe::DeliveryEstimate?)
-      if delivery_estimate.nil?
-        return @delivery_estimate = nil
+    def delivery_estimate=(new_value : Stripe::DeliveryEstimate?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _delivery_estimate = delivery_estimate.not_nil!
-      _delivery_estimate.validate if _delivery_estimate.is_a?(OpenApi::Validatable)
-      @delivery_estimate = _delivery_estimate
+
+      @delivery_estimate = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fixed_amount Object to be assigned
-    def fixed_amount=(fixed_amount : Stripe::FixedAmount?)
-      if fixed_amount.nil?
-        return @fixed_amount = nil
+    def fixed_amount=(new_value : Stripe::FixedAmount?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _fixed_amount = fixed_amount.not_nil!
-      _fixed_amount.validate if _fixed_amount.is_a?(OpenApi::Validatable)
-      @fixed_amount = _fixed_amount
+
+      @fixed_amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Hash(String, String)?)
-      if metadata.nil?
-        return @metadata = nil
-      end
-      _metadata = metadata.not_nil!
-      @metadata = _metadata
+    def metadata=(new_value : Hash(String, String)?)
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior : String?)
-      if tax_behavior.nil?
-        return @tax_behavior = nil
+    def tax_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
-      _tax_behavior = tax_behavior.not_nil!
-      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
-      @tax_behavior = _tax_behavior
+
+      @tax_behavior = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_code Object to be assigned
-    def tax_code=(tax_code : String?)
-      if tax_code.nil?
-        return @tax_code = nil
-      end
-      _tax_code = tax_code.not_nil!
-      @tax_code = _tax_code
+    def tax_code=(new_value : String?)
+      @tax_code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
+    def _type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

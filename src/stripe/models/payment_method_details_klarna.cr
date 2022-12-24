@@ -81,24 +81,22 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_category Object to be assigned
-    def payment_method_category=(payment_method_category : String?)
-      if payment_method_category.nil?
-        return @payment_method_category = nil
+    def payment_method_category=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("payment_method_category", new_value.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY)
       end
-      _payment_method_category = payment_method_category.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("payment_method_category", _payment_method_category.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY)
-      @payment_method_category = _payment_method_category
+
+      @payment_method_category = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_locale Object to be assigned
-    def preferred_locale=(preferred_locale : String?)
-      if preferred_locale.nil?
-        return @preferred_locale = nil
+    def preferred_locale=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("preferred_locale", new_value.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
       end
-      _preferred_locale = preferred_locale.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
-      @preferred_locale = _preferred_locale
+
+      @preferred_locale = new_value
     end
 
     # Generates #hash and #== methods from all fields

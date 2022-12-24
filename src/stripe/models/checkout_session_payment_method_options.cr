@@ -309,266 +309,242 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acss_debit Object to be assigned
-    def acss_debit=(acss_debit : Stripe::CheckoutAcssDebitPaymentMethodOptions?)
-      if acss_debit.nil?
-        return @acss_debit = nil
+    def acss_debit=(new_value : Stripe::CheckoutAcssDebitPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _acss_debit = acss_debit.not_nil!
-      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
-      @acss_debit = _acss_debit
+
+      @acss_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] affirm Object to be assigned
-    def affirm=(affirm : Stripe::CheckoutAffirmPaymentMethodOptions?)
-      if affirm.nil?
-        return @affirm = nil
+    def affirm=(new_value : Stripe::CheckoutAffirmPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _affirm = affirm.not_nil!
-      _affirm.validate if _affirm.is_a?(OpenApi::Validatable)
-      @affirm = _affirm
+
+      @affirm = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] afterpay_clearpay Object to be assigned
-    def afterpay_clearpay=(afterpay_clearpay : Stripe::CheckoutAfterpayClearpayPaymentMethodOptions?)
-      if afterpay_clearpay.nil?
-        return @afterpay_clearpay = nil
+    def afterpay_clearpay=(new_value : Stripe::CheckoutAfterpayClearpayPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _afterpay_clearpay = afterpay_clearpay.not_nil!
-      _afterpay_clearpay.validate if _afterpay_clearpay.is_a?(OpenApi::Validatable)
-      @afterpay_clearpay = _afterpay_clearpay
+
+      @afterpay_clearpay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] alipay Object to be assigned
-    def alipay=(alipay : Stripe::CheckoutAlipayPaymentMethodOptions?)
-      if alipay.nil?
-        return @alipay = nil
+    def alipay=(new_value : Stripe::CheckoutAlipayPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _alipay = alipay.not_nil!
-      _alipay.validate if _alipay.is_a?(OpenApi::Validatable)
-      @alipay = _alipay
+
+      @alipay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] au_becs_debit Object to be assigned
-    def au_becs_debit=(au_becs_debit : Stripe::CheckoutAuBecsDebitPaymentMethodOptions?)
-      if au_becs_debit.nil?
-        return @au_becs_debit = nil
+    def au_becs_debit=(new_value : Stripe::CheckoutAuBecsDebitPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _au_becs_debit = au_becs_debit.not_nil!
-      _au_becs_debit.validate if _au_becs_debit.is_a?(OpenApi::Validatable)
-      @au_becs_debit = _au_becs_debit
+
+      @au_becs_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bacs_debit Object to be assigned
-    def bacs_debit=(bacs_debit : Stripe::CheckoutBacsDebitPaymentMethodOptions?)
-      if bacs_debit.nil?
-        return @bacs_debit = nil
+    def bacs_debit=(new_value : Stripe::CheckoutBacsDebitPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bacs_debit = bacs_debit.not_nil!
-      _bacs_debit.validate if _bacs_debit.is_a?(OpenApi::Validatable)
-      @bacs_debit = _bacs_debit
+
+      @bacs_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bancontact Object to be assigned
-    def bancontact=(bancontact : Stripe::CheckoutBancontactPaymentMethodOptions?)
-      if bancontact.nil?
-        return @bancontact = nil
+    def bancontact=(new_value : Stripe::CheckoutBancontactPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _bancontact = bancontact.not_nil!
-      _bancontact.validate if _bancontact.is_a?(OpenApi::Validatable)
-      @bancontact = _bancontact
+
+      @bancontact = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] boleto Object to be assigned
-    def boleto=(boleto : Stripe::CheckoutBoletoPaymentMethodOptions?)
-      if boleto.nil?
-        return @boleto = nil
+    def boleto=(new_value : Stripe::CheckoutBoletoPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _boleto = boleto.not_nil!
-      _boleto.validate if _boleto.is_a?(OpenApi::Validatable)
-      @boleto = _boleto
+
+      @boleto = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(card : Stripe::CheckoutCardPaymentMethodOptions?)
-      if card.nil?
-        return @card = nil
+    def card=(new_value : Stripe::CheckoutCardPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _card = card.not_nil!
-      _card.validate if _card.is_a?(OpenApi::Validatable)
-      @card = _card
+
+      @card = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_balance Object to be assigned
-    def customer_balance=(customer_balance : Stripe::CheckoutCustomerBalancePaymentMethodOptions?)
-      if customer_balance.nil?
-        return @customer_balance = nil
+    def customer_balance=(new_value : Stripe::CheckoutCustomerBalancePaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _customer_balance = customer_balance.not_nil!
-      _customer_balance.validate if _customer_balance.is_a?(OpenApi::Validatable)
-      @customer_balance = _customer_balance
+
+      @customer_balance = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eps Object to be assigned
-    def eps=(eps : Stripe::CheckoutEpsPaymentMethodOptions?)
-      if eps.nil?
-        return @eps = nil
+    def eps=(new_value : Stripe::CheckoutEpsPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _eps = eps.not_nil!
-      _eps.validate if _eps.is_a?(OpenApi::Validatable)
-      @eps = _eps
+
+      @eps = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fpx Object to be assigned
-    def fpx=(fpx : Stripe::CheckoutFpxPaymentMethodOptions?)
-      if fpx.nil?
-        return @fpx = nil
+    def fpx=(new_value : Stripe::CheckoutFpxPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _fpx = fpx.not_nil!
-      _fpx.validate if _fpx.is_a?(OpenApi::Validatable)
-      @fpx = _fpx
+
+      @fpx = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] giropay Object to be assigned
-    def giropay=(giropay : Stripe::CheckoutGiropayPaymentMethodOptions?)
-      if giropay.nil?
-        return @giropay = nil
+    def giropay=(new_value : Stripe::CheckoutGiropayPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _giropay = giropay.not_nil!
-      _giropay.validate if _giropay.is_a?(OpenApi::Validatable)
-      @giropay = _giropay
+
+      @giropay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] grabpay Object to be assigned
-    def grabpay=(grabpay : Stripe::CheckoutGrabPayPaymentMethodOptions?)
-      if grabpay.nil?
-        return @grabpay = nil
+    def grabpay=(new_value : Stripe::CheckoutGrabPayPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _grabpay = grabpay.not_nil!
-      _grabpay.validate if _grabpay.is_a?(OpenApi::Validatable)
-      @grabpay = _grabpay
+
+      @grabpay = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ideal Object to be assigned
-    def ideal=(ideal : Stripe::CheckoutIdealPaymentMethodOptions?)
-      if ideal.nil?
-        return @ideal = nil
+    def ideal=(new_value : Stripe::CheckoutIdealPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _ideal = ideal.not_nil!
-      _ideal.validate if _ideal.is_a?(OpenApi::Validatable)
-      @ideal = _ideal
+
+      @ideal = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] klarna Object to be assigned
-    def klarna=(klarna : Stripe::CheckoutKlarnaPaymentMethodOptions?)
-      if klarna.nil?
-        return @klarna = nil
+    def klarna=(new_value : Stripe::CheckoutKlarnaPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _klarna = klarna.not_nil!
-      _klarna.validate if _klarna.is_a?(OpenApi::Validatable)
-      @klarna = _klarna
+
+      @klarna = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] konbini Object to be assigned
-    def konbini=(konbini : Stripe::CheckoutKonbiniPaymentMethodOptions?)
-      if konbini.nil?
-        return @konbini = nil
+    def konbini=(new_value : Stripe::CheckoutKonbiniPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _konbini = konbini.not_nil!
-      _konbini.validate if _konbini.is_a?(OpenApi::Validatable)
-      @konbini = _konbini
+
+      @konbini = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] oxxo Object to be assigned
-    def oxxo=(oxxo : Stripe::CheckoutOxxoPaymentMethodOptions?)
-      if oxxo.nil?
-        return @oxxo = nil
+    def oxxo=(new_value : Stripe::CheckoutOxxoPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _oxxo = oxxo.not_nil!
-      _oxxo.validate if _oxxo.is_a?(OpenApi::Validatable)
-      @oxxo = _oxxo
+
+      @oxxo = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] p24 Object to be assigned
-    def p24=(p24 : Stripe::CheckoutP24PaymentMethodOptions?)
-      if p24.nil?
-        return @p24 = nil
+    def p24=(new_value : Stripe::CheckoutP24PaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _p24 = p24.not_nil!
-      _p24.validate if _p24.is_a?(OpenApi::Validatable)
-      @p24 = _p24
+
+      @p24 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paynow Object to be assigned
-    def paynow=(paynow : Stripe::CheckoutPaynowPaymentMethodOptions?)
-      if paynow.nil?
-        return @paynow = nil
+    def paynow=(new_value : Stripe::CheckoutPaynowPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _paynow = paynow.not_nil!
-      _paynow.validate if _paynow.is_a?(OpenApi::Validatable)
-      @paynow = _paynow
+
+      @paynow = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pix Object to be assigned
-    def pix=(pix : Stripe::CheckoutPixPaymentMethodOptions?)
-      if pix.nil?
-        return @pix = nil
+    def pix=(new_value : Stripe::CheckoutPixPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _pix = pix.not_nil!
-      _pix.validate if _pix.is_a?(OpenApi::Validatable)
-      @pix = _pix
+
+      @pix = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sepa_debit Object to be assigned
-    def sepa_debit=(sepa_debit : Stripe::CheckoutSepaDebitPaymentMethodOptions?)
-      if sepa_debit.nil?
-        return @sepa_debit = nil
+    def sepa_debit=(new_value : Stripe::CheckoutSepaDebitPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sepa_debit = sepa_debit.not_nil!
-      _sepa_debit.validate if _sepa_debit.is_a?(OpenApi::Validatable)
-      @sepa_debit = _sepa_debit
+
+      @sepa_debit = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sofort Object to be assigned
-    def sofort=(sofort : Stripe::CheckoutSofortPaymentMethodOptions?)
-      if sofort.nil?
-        return @sofort = nil
+    def sofort=(new_value : Stripe::CheckoutSofortPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _sofort = sofort.not_nil!
-      _sofort.validate if _sofort.is_a?(OpenApi::Validatable)
-      @sofort = _sofort
+
+      @sofort = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account Object to be assigned
-    def us_bank_account=(us_bank_account : Stripe::CheckoutUsBankAccountPaymentMethodOptions?)
-      if us_bank_account.nil?
-        return @us_bank_account = nil
+    def us_bank_account=(new_value : Stripe::CheckoutUsBankAccountPaymentMethodOptions?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _us_bank_account = us_bank_account.not_nil!
-      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
-      @us_bank_account = _us_bank_account
+
+      @us_bank_account = new_value
     end
 
     # Generates #hash and #== methods from all fields

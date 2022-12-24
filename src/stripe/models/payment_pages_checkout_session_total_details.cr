@@ -87,43 +87,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_discount Object to be assigned
-    def amount_discount=(amount_discount : Int64?)
-      if amount_discount.nil?
-        raise ArgumentError.new("\"amount_discount\" is required and cannot be null")
-      end
-      _amount_discount = amount_discount.not_nil!
-      @amount_discount = _amount_discount
+    def amount_discount=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_discount\" is required and cannot be null") if new_value.nil?
+
+      @amount_discount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_tax Object to be assigned
-    def amount_tax=(amount_tax : Int64?)
-      if amount_tax.nil?
-        raise ArgumentError.new("\"amount_tax\" is required and cannot be null")
-      end
-      _amount_tax = amount_tax.not_nil!
-      @amount_tax = _amount_tax
+    def amount_tax=(new_value : Int64?)
+      raise ArgumentError.new("\"amount_tax\" is required and cannot be null") if new_value.nil?
+
+      @amount_tax = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_shipping Object to be assigned
-    def amount_shipping=(amount_shipping : Int64?)
-      if amount_shipping.nil?
-        return @amount_shipping = nil
-      end
-      _amount_shipping = amount_shipping.not_nil!
-      @amount_shipping = _amount_shipping
+    def amount_shipping=(new_value : Int64?)
+      @amount_shipping = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] breakdown Object to be assigned
-    def breakdown=(breakdown : Stripe::PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown?)
-      if breakdown.nil?
-        return @breakdown = nil
+    def breakdown=(new_value : Stripe::PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _breakdown = breakdown.not_nil!
-      _breakdown.validate if _breakdown.is_a?(OpenApi::Validatable)
-      @breakdown = _breakdown
+
+      @breakdown = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -153,133 +153,100 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_off Object to be assigned
-    def amount_off=(amount_off : Int64?)
-      if amount_off.nil?
-        return @amount_off = nil
-      end
-      _amount_off = amount_off.not_nil!
-      @amount_off = _amount_off
+    def amount_off=(new_value : Int64?)
+      @amount_off = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] applies_to Object to be assigned
-    def applies_to=(applies_to : Stripe::AppliesToParams?)
-      if applies_to.nil?
-        return @applies_to = nil
+    def applies_to=(new_value : Stripe::AppliesToParams?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _applies_to = applies_to.not_nil!
-      _applies_to.validate if _applies_to.is_a?(OpenApi::Validatable)
-      @applies_to = _applies_to
+
+      @applies_to = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency : String?)
-      if currency.nil?
-        return @currency = nil
-      end
-      _currency = currency.not_nil!
-      @currency = _currency
+    def currency=(new_value : String?)
+      @currency = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_options Object to be assigned
-    def currency_options=(currency_options : Hash(String, Stripe::CouponCurrencyOption)?)
-      if currency_options.nil?
-        return @currency_options = nil
+    def currency_options=(new_value : Hash(String, Stripe::CouponCurrencyOption)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _currency_options = currency_options.not_nil!
-      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
-      @currency_options = _currency_options
+
+      @currency_options = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] duration Object to be assigned
-    def duration=(duration : String?)
-      @duration = duration
+    def duration=(new_value : String?)
+      @duration = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] duration_in_months Object to be assigned
-    def duration_in_months=(duration_in_months : Int64?)
-      if duration_in_months.nil?
-        return @duration_in_months = nil
-      end
-      _duration_in_months = duration_in_months.not_nil!
-      @duration_in_months = _duration_in_months
+    def duration_in_months=(new_value : Int64?)
+      @duration_in_months = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expand Object to be assigned
-    def expand=(expand : Array(String)?)
-      if expand.nil?
-        return @expand = nil
-      end
-      _expand = expand.not_nil!
-      @expand = _expand
+    def expand=(new_value : Array(String)?)
+      @expand = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : String?)
-      if id.nil?
-        return @id = nil
+    def id=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("id", new_value.to_s.size, MAX_LENGTH_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] max_redemptions Object to be assigned
-    def max_redemptions=(max_redemptions : Int64?)
-      if max_redemptions.nil?
-        return @max_redemptions = nil
-      end
-      _max_redemptions = max_redemptions.not_nil!
-      @max_redemptions = _max_redemptions
+    def max_redemptions=(new_value : Int64?)
+      @max_redemptions = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(metadata : Stripe::PostAccountsRequestMetadata?)
-      if metadata.nil?
-        return @metadata = nil
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _metadata = metadata.not_nil!
-      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
-      @metadata = _metadata
+
+      @metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        return @name = nil
+    def name=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] percent_off Object to be assigned
-    def percent_off=(percent_off : Float64?)
-      if percent_off.nil?
-        return @percent_off = nil
-      end
-      _percent_off = percent_off.not_nil!
-      @percent_off = _percent_off
+    def percent_off=(new_value : Float64?)
+      @percent_off = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] redeem_by Object to be assigned
-    def redeem_by=(redeem_by : Int64?)
-      if redeem_by.nil?
-        return @redeem_by = nil
-      end
-      _redeem_by = redeem_by.not_nil!
-      @redeem_by = _redeem_by
+    def redeem_by=(new_value : Int64?)
+      @redeem_by = new_value
     end
 
     # Generates #hash and #== methods from all fields
