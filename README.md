@@ -55,7 +55,7 @@ end
 
 You can try stripe APIs with their test API key: `sk_test_4eC39HqLyjWDarjtT1zdp7dc`
 
-### Create an instance of Stripe::DefaultApi
+### Create an instance of Stripe::BalanceApi
 
 ```crystal
 api = Stripe::BalanceApi.new
