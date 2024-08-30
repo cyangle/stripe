@@ -1,8 +1,9 @@
 Excluded:
-  - src/stripe/api/default_api.cr
   - bin
   - lib
   - local
+Documentation/DocumentationAdmonition:
+  Enabled: false
 Lint/NotNil:
   Enabled: false
 Metrics/CyclomaticComplexity:
