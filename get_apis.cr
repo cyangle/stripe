@@ -9,7 +9,7 @@ Stripe.configure do |config|
   config.access_token = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 end
 
-Stripe::ApiClient.default.default_headers["Stripe-Version"] = "2022-11-15"
+Stripe::ApiClient.default.default_headers["Stripe-Version"] = "2024-06-20"
 
 get_accounts = Stripe::AccountsApi.new.get_accounts(expand: nil)
 File.write("local/gets/get_accounts.json", get_accounts.to_json)
