@@ -14,17 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_terminal_configurations_request_offline"
 
 describe Stripe::PostTerminalConfigurationsRequestOffline do
-  describe "test an instance of PostTerminalConfigurationsRequestOffline" do
-    it "should create an instance of PostTerminalConfigurationsRequestOffline" do
-      # instance = Stripe::PostTerminalConfigurationsRequestOffline.new
-      # (instance).should be_a(Stripe::PostTerminalConfigurationsRequestOffline)
-    end
-  end
-
-  describe "test attribute 'enabled'" do
-    it "should work" do
-      # instance = Stripe::PostTerminalConfigurationsRequestOffline.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

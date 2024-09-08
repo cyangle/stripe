@@ -17,6 +17,8 @@ require "../models/cash_balance_param"
 require "../models/customer"
 require "../models/customer_balance_transaction"
 require "../models/customer_balance_transaction_list"
+require "../models/customer_cash_balance_transaction"
+require "../models/customer_cash_balance_transaction_list"
 require "../models/customer_param"
 require "../models/customer_payment_method_resource_list"
 require "../models/customer_resource_customer_list"
@@ -1050,6 +1052,250 @@ module Stripe
         http_method: :"GET",
         path: local_var_path,
         operation: "CustomersApi.get_customers_customer_cash_balance",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Returns a list of transactions that modified the customer’s <a href=\"/docs/payments/customer-balance\">cash balance</a>.</p>
+    # @required @param customer [String?]
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::CustomerCashBalanceTransactionList]
+    def get_customers_customer_cash_balance_transactions(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CustomerCashBalanceTransactionList
+      data, _status_code, _headers = get_customers_customer_cash_balance_transactions_with_http_info(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Returns a list of transactions that modified the customer’s &lt;a href&#x3D;\&quot;/docs/payments/customer-balance\&quot;&gt;cash balance&lt;/a&gt;.&lt;/p&gt;
+    # @required @param customer [String?]
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::CustomerCashBalanceTransactionList, Integer, Hash)] Stripe::CustomerCashBalanceTransactionList, response status code and response headers
+    def get_customers_customer_cash_balance_transactions_with_http_info(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CustomerCashBalanceTransactionList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_customers_customer_cash_balance_transactions(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: CustomersApi#get_customers_customer_cash_balance_transactions\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::CustomerCashBalanceTransactionList.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Returns a list of transactions that modified the customer’s &lt;a href&#x3D;\&quot;/docs/payments/customer-balance\&quot;&gt;cash balance&lt;/a&gt;.&lt;/p&gt;
+    # @required @param customer [String?]
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_customers_customer_cash_balance_transactions(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_customers_customer_cash_balance_transactions(customer: customer, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
+    end
+
+    GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_CUSTOMER       = 5000
+    GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
+    GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_customers_customer_cash_balance_transactions(
+      *,
+      customer : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: CustomersApi.get_customers_customer_cash_balance_transactions ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"customer\" is required and cannot be null") if customer.nil?
+        unless (_customer = customer).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_CUSTOMER)
+        end
+        unless (_ending_before = ending_before).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("ending_before", ending_before.to_s.size, GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_ENDING_BEFORE)
+        end
+        unless (_starting_after = starting_after).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("starting_after", starting_after.to_s.size, GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/customers/{customer}/cash_balance_transactions".sub("{" + "customer" + "}", URI.encode_path(customer.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
+      query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
+      query_params["limit"] = limit.to_s if !limit.nil?
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "CustomersApi.get_customers_customer_cash_balance_transactions",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieves a specific cash balance transaction, which updated the customer’s <a href=\"/docs/payments/customer-balance\">cash balance</a>.</p>
+    # @required @param customer [String?]
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::CustomerCashBalanceTransaction]
+    def get_customers_customer_cash_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::CustomerCashBalanceTransaction
+      data, _status_code, _headers = get_customers_customer_cash_balance_transactions_transaction_with_http_info(customer: customer, transaction: transaction, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieves a specific cash balance transaction, which updated the customer’s &lt;a href&#x3D;\&quot;/docs/payments/customer-balance\&quot;&gt;cash balance&lt;/a&gt;.&lt;/p&gt;
+    # @required @param customer [String?]
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::CustomerCashBalanceTransaction, Integer, Hash)] Stripe::CustomerCashBalanceTransaction, response status code and response headers
+    def get_customers_customer_cash_balance_transactions_transaction_with_http_info(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::CustomerCashBalanceTransaction, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_customers_customer_cash_balance_transactions_transaction(customer: customer, transaction: transaction, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: CustomersApi#get_customers_customer_cash_balance_transactions_transaction\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::CustomerCashBalanceTransaction.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieves a specific cash balance transaction, which updated the customer’s &lt;a href&#x3D;\&quot;/docs/payments/customer-balance\&quot;&gt;cash balance&lt;/a&gt;.&lt;/p&gt;
+    # @required @param customer [String?]
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_customers_customer_cash_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_customers_customer_cash_balance_transactions_transaction(customer: customer, transaction: transaction, expand: expand).execute(&block)
+    end
+
+    GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_CUSTOMER = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_customers_customer_cash_balance_transactions_transaction(
+      *,
+      customer : String? = nil,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: CustomersApi.get_customers_customer_cash_balance_transactions_transaction ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"customer\" is required and cannot be null") if customer.nil?
+        unless (_customer = customer).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("customer", customer.to_s.size, GET_CUSTOMERS_CUSTOMER_CASH_BALANCE_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_CUSTOMER)
+        end
+        raise ArgumentError.new("\"transaction\" is required and cannot be null") if transaction.nil?
+      end
+
+      # resource path
+      local_var_path = "/v1/customers/{customer}/cash_balance_transactions/{transaction}".sub("{" + "customer" + "}", URI.encode_path(customer.to_s)).sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "CustomersApi.get_customers_customer_cash_balance_transactions_transaction",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,

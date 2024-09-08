@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./issuing_authorization_amount_details"
+require "./issuing_authorization_amount_details1"
 
 module Stripe
   #
@@ -25,8 +25,8 @@ module Stripe
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
-    @[JSON::Field(key: "amount_details", type: Stripe::IssuingAuthorizationAmountDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter amount_details : Stripe::IssuingAuthorizationAmountDetails? = nil
+    @[JSON::Field(key: "amount_details", type: Stripe::IssuingAuthorizationAmountDetails1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -56,7 +56,7 @@ module Stripe
       *,
       # Required properties
       @amount : Int64? = nil,
-      @amount_details : Stripe::IssuingAuthorizationAmountDetails? = nil,
+      @amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil,
       @currency : String? = nil,
       @is_amount_controllable : Bool? = nil,
       @merchant_amount : Int64? = nil,
@@ -116,7 +116,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_details Object to be assigned
-    def amount_details=(new_value : Stripe::IssuingAuthorizationAmountDetails?)
+    def amount_details=(new_value : Stripe::IssuingAuthorizationAmountDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

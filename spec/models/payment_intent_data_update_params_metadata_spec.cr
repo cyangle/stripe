@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/payment_intent_data_update_params_metadata"
 
 describe Stripe::PaymentIntentDataUpdateParamsMetadata do
-  describe "test an instance of PaymentIntentDataUpdateParamsMetadata" do
-    it "should create an instance of PaymentIntentDataUpdateParamsMetadata" do
-      # instance = Stripe::PaymentIntentDataUpdateParamsMetadata.new
-      # (instance).should be_a(Stripe::PaymentIntentDataUpdateParamsMetadata)
-    end
-  end
 end

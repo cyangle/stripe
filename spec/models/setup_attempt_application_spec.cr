@@ -14,35 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/setup_attempt_application"
 
 describe Stripe::SetupAttemptApplication do
-  describe "test an instance of SetupAttemptApplication" do
-    it "should create an instance of SetupAttemptApplication" do
-      # instance = Stripe::SetupAttemptApplication.new
-      # (instance).should be_a(Stripe::SetupAttemptApplication)
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::SetupAttemptApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::SetupAttemptApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'object'" do
-    it "should work" do
-      # instance = Stripe::SetupAttemptApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::SetupAttemptApplication::ENUM_VALIDATOR_FOR_OBJECT
-      # validator.allowable_values.each do |value|
-      #   instance.object = value.as(String)
-      # end
-    end
-  end
 end

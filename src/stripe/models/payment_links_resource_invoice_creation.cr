@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_links_resource_invoice_settings"
+require "./payment_links_resource_invoice_creation_invoice_data"
 
 module Stripe
   #
@@ -25,8 +25,8 @@ module Stripe
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    @[JSON::Field(key: "invoice_data", type: Stripe::PaymentLinksResourceInvoiceSettings?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter invoice_data : Stripe::PaymentLinksResourceInvoiceSettings? = nil
+    @[JSON::Field(key: "invoice_data", type: Stripe::PaymentLinksResourceInvoiceCreationInvoiceData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter invoice_data : Stripe::PaymentLinksResourceInvoiceCreationInvoiceData? = nil
 
     # End of Required Properties
 
@@ -36,7 +36,7 @@ module Stripe
       *,
       # Required properties
       @enabled : Bool? = nil,
-      @invoice_data : Stripe::PaymentLinksResourceInvoiceSettings? = nil
+      @invoice_data : Stripe::PaymentLinksResourceInvoiceCreationInvoiceData? = nil
     )
     end
 
@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_data Object to be assigned
-    def invoice_data=(new_value : Stripe::PaymentLinksResourceInvoiceSettings?)
+    def invoice_data=(new_value : Stripe::PaymentLinksResourceInvoiceCreationInvoiceData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./custom_unit_amount"
+require "./currency_option_custom_unit_amount"
 require "./price_tier"
 
 module Stripe
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CustomUnitAmount?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter custom_unit_amount : Stripe::CustomUnitAmount? = nil
+    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CurrencyOptionCustomUnitAmount?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil
 
     # Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -52,7 +52,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @custom_unit_amount : Stripe::CustomUnitAmount? = nil,
+      @custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil,
       @tax_behavior : String? = nil,
       @unit_amount : Int64? = nil,
       @unit_amount_decimal : BigDecimal? = nil,
@@ -99,7 +99,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_unit_amount Object to be assigned
-    def custom_unit_amount=(new_value : Stripe::CustomUnitAmount?)
+    def custom_unit_amount=(new_value : Stripe::CurrencyOptionCustomUnitAmount?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

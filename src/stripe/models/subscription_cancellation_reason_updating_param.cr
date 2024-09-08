@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./subscription_cancellation_reason_updating_param_options"
+require "./subscription_cancellation_reason_creation_param_options"
 
 module Stripe
   class SubscriptionCancellationReasonUpdatingParam
@@ -28,8 +28,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "options", type: Stripe::SubscriptionCancellationReasonUpdatingParamOptions?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter options : Stripe::SubscriptionCancellationReasonUpdatingParamOptions? = nil
+    @[JSON::Field(key: "options", type: Stripe::SubscriptionCancellationReasonCreationParamOptions?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter options : Stripe::SubscriptionCancellationReasonCreationParamOptions? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -38,7 +38,7 @@ module Stripe
       # Required properties
       @enabled : Bool? = nil,
       # Optional properties
-      @options : Stripe::SubscriptionCancellationReasonUpdatingParamOptions? = nil
+      @options : Stripe::SubscriptionCancellationReasonCreationParamOptions? = nil
     )
     end
 
@@ -77,7 +77,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] options Object to be assigned
-    def options=(new_value : Stripe::SubscriptionCancellationReasonUpdatingParamOptions?)
+    def options=(new_value : Stripe::SubscriptionCancellationReasonCreationParamOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_invoices_request_account_tax_ids"
 
 describe Stripe::PostInvoicesRequestAccountTaxIds do
-  describe "test an instance of PostInvoicesRequestAccountTaxIds" do
-    it "should create an instance of PostInvoicesRequestAccountTaxIds" do
-      # instance = Stripe::PostInvoicesRequestAccountTaxIds.new
-      # (instance).should be_a(Stripe::PostInvoicesRequestAccountTaxIds)
-    end
-  end
 end

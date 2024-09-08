@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./treasury_credit_reversal_transaction"
+require "./treasury_received_debit_reversal_details"
 require "./treasury_received_debits_resource_linked_flows"
-require "./treasury_received_debits_resource_reversal_details"
 require "./treasury_shared_resource_initiating_payment_method_details_initiating_payment_method_details"
 
 module Stripe
@@ -81,8 +81,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.received_debit]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.received_debit")
 
-    @[JSON::Field(key: "reversal_details", type: Stripe::TreasuryReceivedDebitsResourceReversalDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter reversal_details : Stripe::TreasuryReceivedDebitsResourceReversalDetails? = nil
+    @[JSON::Field(key: "reversal_details", type: Stripe::TreasuryReceivedDebitReversalDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter reversal_details : Stripe::TreasuryReceivedDebitReversalDetails? = nil
 
     # Status of the ReceivedDebit. ReceivedDebits are created with a status of either `succeeded` (approved) or `failed` (declined). The failure reason can be found under the `failure_code`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -117,7 +117,7 @@ module Stripe
       @livemode : Bool? = nil,
       @network : String? = nil,
       @object : String? = nil,
-      @reversal_details : Stripe::TreasuryReceivedDebitsResourceReversalDetails? = nil,
+      @reversal_details : Stripe::TreasuryReceivedDebitReversalDetails? = nil,
       @status : String? = nil,
       @transaction : Stripe::TreasuryCreditReversalTransaction? = nil,
       # Optional properties
@@ -384,7 +384,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reversal_details Object to be assigned
-    def reversal_details=(new_value : Stripe::TreasuryReceivedDebitsResourceReversalDetails?)
+    def reversal_details=(new_value : Stripe::TreasuryReceivedDebitReversalDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

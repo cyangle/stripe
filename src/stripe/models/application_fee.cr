@@ -13,9 +13,9 @@ require "./application_fee_account"
 require "./application_fee_application"
 require "./application_fee_balance_transaction"
 require "./application_fee_charge"
+require "./application_fee_fee_source"
 require "./application_fee_originating_transaction"
 require "./fee_refund_list"
-require "./platform_earning_fee_source"
 
 module Stripe
   #
@@ -55,8 +55,8 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    @[JSON::Field(key: "fee_source", type: Stripe::PlatformEarningFeeSource?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fee_source : Stripe::PlatformEarningFeeSource? = nil
+    @[JSON::Field(key: "fee_source", type: Stripe::ApplicationFeeFeeSource?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fee_source : Stripe::ApplicationFeeFeeSource? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -98,7 +98,7 @@ module Stripe
       @charge : Stripe::ApplicationFeeCharge? = nil,
       @created : Int64? = nil,
       @currency : String? = nil,
-      @fee_source : Stripe::PlatformEarningFeeSource? = nil,
+      @fee_source : Stripe::ApplicationFeeFeeSource? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
@@ -306,7 +306,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fee_source Object to be assigned
-    def fee_source=(new_value : Stripe::PlatformEarningFeeSource?)
+    def fee_source=(new_value : Stripe::ApplicationFeeFeeSource?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,42 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/deleted_payment_source"
 
 describe Stripe::DeletedPaymentSource do
-  describe "test an instance of DeletedPaymentSource" do
-    it "should create an instance of DeletedPaymentSource" do
-      # instance = Stripe::DeletedPaymentSource.new
-      # (instance).should be_a(Stripe::DeletedPaymentSource)
-    end
-  end
-
-  describe "test attribute 'currency'" do
-    it "should work" do
-      # instance = Stripe::DeletedPaymentSource.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'deleted'" do
-    it "should work" do
-      # instance = Stripe::DeletedPaymentSource.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::DeletedPaymentSource.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'object'" do
-    it "should work" do
-      # instance = Stripe::DeletedPaymentSource.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::DeletedPaymentSource::ENUM_VALIDATOR_FOR_OBJECT
-      # validator.allowable_values.each do |value|
-      #   instance.object = value.as(String)
-      # end
-    end
-  end
 end

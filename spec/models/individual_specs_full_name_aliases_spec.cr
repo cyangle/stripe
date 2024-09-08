@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/individual_specs_full_name_aliases"
 
 describe Stripe::IndividualSpecsFullNameAliases do
-  describe "test an instance of IndividualSpecsFullNameAliases" do
-    it "should create an instance of IndividualSpecsFullNameAliases" do
-      # instance = Stripe::IndividualSpecsFullNameAliases.new
-      # (instance).should be_a(Stripe::IndividualSpecsFullNameAliases)
-    end
-  end
 end

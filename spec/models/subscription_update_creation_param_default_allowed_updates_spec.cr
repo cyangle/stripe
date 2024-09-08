@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_update_creation_param_default_allowed_updates"
 
 describe Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates do
-  describe "test an instance of SubscriptionUpdateCreationParamDefaultAllowedUpdates" do
-    it "should create an instance of SubscriptionUpdateCreationParamDefaultAllowedUpdates" do
-      # instance = Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates.new
-      # (instance).should be_a(Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates)
-    end
-  end
 end

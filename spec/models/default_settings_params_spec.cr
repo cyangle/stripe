@@ -75,10 +75,6 @@ describe Stripe::DefaultSettingsParams do
     it "should work" do
       # instance = Stripe::DefaultSettingsParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::DefaultSettingsParams::ENUM_VALIDATOR_FOR_DESCRIPTION
-      # validator.allowable_values.each do |value|
-      #   instance.description = value.as(String)
-      # end
     end
   end
 
@@ -93,10 +89,6 @@ describe Stripe::DefaultSettingsParams do
     it "should work" do
       # instance = Stripe::DefaultSettingsParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::DefaultSettingsParams::ENUM_VALIDATOR_FOR_ON_BEHALF_OF
-      # validator.allowable_values.each do |value|
-      #   instance.on_behalf_of = value.as(String)
-      # end
     end
   end
 

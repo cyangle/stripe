@@ -14,38 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/status_transition_timestamp_specs_posted_at"
 
 describe Stripe::StatusTransitionTimestampSpecsPostedAt do
-  describe "test an instance of StatusTransitionTimestampSpecsPostedAt" do
-    it "should create an instance of StatusTransitionTimestampSpecsPostedAt" do
-      # instance = Stripe::StatusTransitionTimestampSpecsPostedAt.new
-      # (instance).should be_a(Stripe::StatusTransitionTimestampSpecsPostedAt)
-    end
-  end
-
-  describe "test attribute 'gt'" do
-    it "should work" do
-      # instance = Stripe::StatusTransitionTimestampSpecsPostedAt.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'gte'" do
-    it "should work" do
-      # instance = Stripe::StatusTransitionTimestampSpecsPostedAt.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'lt'" do
-    it "should work" do
-      # instance = Stripe::StatusTransitionTimestampSpecsPostedAt.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'lte'" do
-    it "should work" do
-      # instance = Stripe::StatusTransitionTimestampSpecsPostedAt.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

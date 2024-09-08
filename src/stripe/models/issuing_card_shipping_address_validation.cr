@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./address"
+require "./issuing_card_shipping_address_validation_normalized_address"
 
 module Stripe
   #
@@ -27,8 +27,8 @@ module Stripe
     ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [disabled, normalization_only, validation_and_normalization]."
     VALID_VALUES_FOR_MODE  = String.static_array("disabled", "normalization_only", "validation_and_normalization")
 
-    @[JSON::Field(key: "normalized_address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter normalized_address : Stripe::Address? = nil
+    @[JSON::Field(key: "normalized_address", type: Stripe::IssuingCardShippingAddressValidationNormalizedAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter normalized_address : Stripe::IssuingCardShippingAddressValidationNormalizedAddress? = nil
 
     # The validation result for the shipping address.
     @[JSON::Field(key: "result", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -44,7 +44,7 @@ module Stripe
       *,
       # Required properties
       @mode : String? = nil,
-      @normalized_address : Stripe::Address? = nil,
+      @normalized_address : Stripe::IssuingCardShippingAddressValidationNormalizedAddress? = nil,
       @result : String? = nil
     )
     end
@@ -100,7 +100,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] normalized_address Object to be assigned
-    def normalized_address=(new_value : Stripe::Address?)
+    def normalized_address=(new_value : Stripe::IssuingCardShippingAddressValidationNormalizedAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

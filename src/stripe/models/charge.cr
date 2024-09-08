@@ -15,21 +15,21 @@ require "./charge_application_fee"
 require "./charge_balance_transaction"
 require "./charge_customer"
 require "./charge_failure_balance_transaction"
-require "./charge_fraud_details"
+require "./charge_fraud_details1"
 require "./charge_invoice"
 require "./charge_on_behalf_of"
-require "./charge_outcome"
+require "./charge_outcome1"
 require "./charge_payment_intent"
+require "./charge_payment_method_details"
 require "./charge_review"
+require "./charge_shipping"
+require "./charge_source"
 require "./charge_source_transfer"
 require "./charge_transfer"
-require "./charge_transfer_data"
+require "./charge_transfer_data1"
 require "./level3"
-require "./payment_method_details"
-require "./payment_source"
 require "./radar_radar_options"
 require "./refund_list"
-require "./shipping"
 
 module Stripe
   # The `Charge` object represents a single attempt to move money into your Stripe account. PaymentIntent confirmation is the most common way to create Charges, but transferring money to a different Stripe account through Connect also creates Charges. Some legacy payment flows create Charges directly, which is not recommended for new integrations.
@@ -111,8 +111,8 @@ module Stripe
     getter failure_message : String? = nil
     MAX_LENGTH_FOR_FAILURE_MESSAGE = 5000
 
-    @[JSON::Field(key: "fraud_details", type: Stripe::ChargeFraudDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fraud_details : Stripe::ChargeFraudDetails? = nil
+    @[JSON::Field(key: "fraud_details", type: Stripe::ChargeFraudDetails1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fraud_details : Stripe::ChargeFraudDetails1? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -138,8 +138,8 @@ module Stripe
     @[JSON::Field(key: "on_behalf_of", type: Stripe::ChargeOnBehalfOf?, default: nil, required: true, nullable: true, emit_null: true)]
     getter on_behalf_of : Stripe::ChargeOnBehalfOf? = nil
 
-    @[JSON::Field(key: "outcome", type: Stripe::ChargeOutcome?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter outcome : Stripe::ChargeOutcome? = nil
+    @[JSON::Field(key: "outcome", type: Stripe::ChargeOutcome1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter outcome : Stripe::ChargeOutcome1? = nil
 
     # `true` if the charge succeeded, or was successfully authorized for later capture.
     @[JSON::Field(key: "paid", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -153,8 +153,8 @@ module Stripe
     getter payment_method : String? = nil
     MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "payment_method_details", type: Stripe::PaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_details : Stripe::PaymentMethodDetails? = nil
+    @[JSON::Field(key: "payment_method_details", type: Stripe::ChargePaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_details : Stripe::ChargePaymentMethodDetails? = nil
 
     # This is the email address that the receipt for this charge was sent to.
     @[JSON::Field(key: "receipt_email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -178,11 +178,11 @@ module Stripe
     @[JSON::Field(key: "review", type: Stripe::ChargeReview?, default: nil, required: true, nullable: true, emit_null: true)]
     getter review : Stripe::ChargeReview? = nil
 
-    @[JSON::Field(key: "shipping", type: Stripe::Shipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping : Stripe::Shipping? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::ChargeShipping?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping : Stripe::ChargeShipping? = nil
 
-    @[JSON::Field(key: "source", type: Stripe::PaymentSource?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter source : Stripe::PaymentSource? = nil
+    @[JSON::Field(key: "source", type: Stripe::ChargeSource?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter source : Stripe::ChargeSource? = nil
 
     @[JSON::Field(key: "source_transfer", type: Stripe::ChargeSourceTransfer?, default: nil, required: true, nullable: true, emit_null: true)]
     getter source_transfer : Stripe::ChargeSourceTransfer? = nil
@@ -203,8 +203,8 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, pending, succeeded]."
     VALID_VALUES_FOR_STATUS  = String.static_array("failed", "pending", "succeeded")
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::ChargeTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::ChargeTransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::ChargeTransferData1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::ChargeTransferData1? = nil
 
     # A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options) for details.
     @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -258,30 +258,30 @@ module Stripe
       @failure_balance_transaction : Stripe::ChargeFailureBalanceTransaction? = nil,
       @failure_code : String? = nil,
       @failure_message : String? = nil,
-      @fraud_details : Stripe::ChargeFraudDetails? = nil,
+      @fraud_details : Stripe::ChargeFraudDetails1? = nil,
       @id : String? = nil,
       @invoice : Stripe::ChargeInvoice? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
       @on_behalf_of : Stripe::ChargeOnBehalfOf? = nil,
-      @outcome : Stripe::ChargeOutcome? = nil,
+      @outcome : Stripe::ChargeOutcome1? = nil,
       @paid : Bool? = nil,
       @payment_intent : Stripe::ChargePaymentIntent? = nil,
       @payment_method : String? = nil,
-      @payment_method_details : Stripe::PaymentMethodDetails? = nil,
+      @payment_method_details : Stripe::ChargePaymentMethodDetails? = nil,
       @receipt_email : String? = nil,
       @receipt_number : String? = nil,
       @receipt_url : String? = nil,
       @refunded : Bool? = nil,
       @review : Stripe::ChargeReview? = nil,
-      @shipping : Stripe::Shipping? = nil,
-      @source : Stripe::PaymentSource? = nil,
+      @shipping : Stripe::ChargeShipping? = nil,
+      @source : Stripe::ChargeSource? = nil,
       @source_transfer : Stripe::ChargeSourceTransfer? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
       @status : String? = nil,
-      @transfer_data : Stripe::ChargeTransferData? = nil,
+      @transfer_data : Stripe::ChargeTransferData1? = nil,
       @transfer_group : String? = nil,
       # Optional properties
       @authorization_code : String? = nil,
@@ -806,7 +806,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fraud_details Object to be assigned
-    def fraud_details=(new_value : Stripe::ChargeFraudDetails?)
+    def fraud_details=(new_value : Stripe::ChargeFraudDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -874,7 +874,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outcome Object to be assigned
-    def outcome=(new_value : Stripe::ChargeOutcome?)
+    def outcome=(new_value : Stripe::ChargeOutcome1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -912,7 +912,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_details Object to be assigned
-    def payment_method_details=(new_value : Stripe::PaymentMethodDetails?)
+    def payment_method_details=(new_value : Stripe::ChargePaymentMethodDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -970,7 +970,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(new_value : Stripe::Shipping?)
+    def shipping=(new_value : Stripe::ChargeShipping?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -980,7 +980,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
-    def source=(new_value : Stripe::PaymentSource?)
+    def source=(new_value : Stripe::ChargeSource?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1031,7 +1031,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::ChargeTransferData?)
+    def transfer_data=(new_value : Stripe::ChargeTransferData1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

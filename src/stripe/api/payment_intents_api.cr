@@ -22,6 +22,7 @@ require "../models/post_accounts_request_metadata"
 require "../models/post_payment_intents_intent_confirm_request_mandate_data"
 require "../models/post_payment_intents_intent_confirm_request_off_session"
 require "../models/post_payment_intents_intent_request_application_fee_amount"
+require "../models/post_payment_intents_intent_request_receipt_email"
 require "../models/post_payment_intents_intent_request_shipping"
 require "../models/post_payment_intents_request_mandate_data"
 require "../models/post_payment_intents_request_off_session"
@@ -857,7 +858,7 @@ module Stripe
     # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (for example, card) that this PaymentIntent can use. Use `automatic_payment_methods` to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param receipt_email [String?]
+    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
     # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
     # @optional @param statement_descriptor [String?] Text that appears on the customer's statement as the statement descriptor for a non-card charge. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).  Setting this value for a card charge returns an error. For card charges, set the [statement_descriptor_suffix](https://docs.stripe.com/get-started/account/statement-descriptors#dynamic) instead.
@@ -881,7 +882,7 @@ module Stripe
       payment_method_data : Stripe::PaymentMethodDataParams? = nil,
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
       statement_descriptor : String? = nil,
@@ -908,7 +909,7 @@ module Stripe
     # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (for example, card) that this PaymentIntent can use. Use `automatic_payment_methods` to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param receipt_email [String?]
+    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
     # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
     # @optional @param statement_descriptor [String?] Text that appears on the customer's statement as the statement descriptor for a non-card charge. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).  Setting this value for a card charge returns an error. For card charges, set the [statement_descriptor_suffix](https://docs.stripe.com/get-started/account/statement-descriptors#dynamic) instead.
@@ -932,7 +933,7 @@ module Stripe
       payment_method_data : Stripe::PaymentMethodDataParams? = nil,
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
       statement_descriptor : String? = nil,
@@ -966,7 +967,7 @@ module Stripe
     # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (for example, card) that this PaymentIntent can use. Use `automatic_payment_methods` to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
-    # @optional @param receipt_email [String?]
+    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
     # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
     # @optional @param statement_descriptor [String?] Text that appears on the customer's statement as the statement descriptor for a non-card charge. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).  Setting this value for a card charge returns an error. For card charges, set the [statement_descriptor_suffix](https://docs.stripe.com/get-started/account/statement-descriptors#dynamic) instead.
@@ -990,7 +991,7 @@ module Stripe
       payment_method_data : Stripe::PaymentMethodDataParams? = nil,
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
       statement_descriptor : String? = nil,
@@ -1008,7 +1009,6 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_DESCRIPTION                  = 1000
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD               = 5000
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_PAYMENT_METHOD_CONFIGURATION =  100
-    POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_RECEIPT_EMAIL              = String.static_array("")
     POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_SETUP_FUTURE_USAGE         = String.static_array("", "off_session", "on_session")
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR         = 22
     POST_PAYMENT_INTENTS_INTENT_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX  = 22
@@ -1030,7 +1030,7 @@ module Stripe
       payment_method_data : Stripe::PaymentMethodDataParams? = nil,
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
       statement_descriptor : String? = nil,
@@ -1079,7 +1079,7 @@ module Stripe
         end
 
         unless (_receipt_email = receipt_email).nil?
-          OpenApi::EnumValidator.validate("receipt_email", _receipt_email, POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_RECEIPT_EMAIL)
+          _receipt_email.validate if _receipt_email.is_a?(OpenApi::Validatable)
         end
         unless (_setup_future_usage = setup_future_usage).nil?
           OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, POST_PAYMENT_INTENTS_INTENT_VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
@@ -1129,7 +1129,7 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_method_data.to_json), "payment_method_data")) if !payment_method_data.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_method_options.to_json), "payment_method_options")) if !payment_method_options.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_method_types.to_json), "payment_method_types")) if !payment_method_types.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("receipt_email", receipt_email.to_s) if !receipt_email.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(receipt_email.to_json), "receipt_email")) if !receipt_email.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("setup_future_usage", setup_future_usage.to_s) if !setup_future_usage.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(shipping.to_json), "shipping")) if !shipping.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("statement_descriptor", statement_descriptor.to_s) if !statement_descriptor.nil?
@@ -1568,7 +1568,7 @@ module Stripe
       )
     end
 
-    # <p>Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the <code>requires_action</code> status and suggest additional actions via <code>next_action</code>. If payment fails, the PaymentIntent transitions to the <code>requires_payment_method</code> status or the <code>canceled</code> status if the confirmation limit is reached. If payment succeeds, the PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted using our <a href=\"/docs/stripe-js/reference#stripe-handle-card-payment\">client SDKs</a> and the PaymentIntent’s <a href=\"#payment_intent_object-client_secret\">client_secret</a>. After <code>next_action</code>s are handled by the client, no additional confirmation is required to complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt.</p>
+    # <p>Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the <code>requires_action</code> status and suggest additional actions via <code>next_action</code>. If payment fails, the PaymentIntent transitions to the <code>requires_payment_method</code> status or the <code>canceled</code> status if the confirmation limit is reached. If payment succeeds, the PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted using our <a href=\"/docs/stripe-js/reference#stripe-handle-card-payment\">client SDKs</a> and the PaymentIntent’s <a href=\"#payment_intent_object-client_secret\">client_secret</a>. After <code>next_action</code>s are handled by the client, no additional confirmation is required to complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be confirmed. After this limit is reached, any further calls to this endpoint will transition the PaymentIntent to the <code>canceled</code> state.</p>
     # @required @param intent [String?]
     # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
     # @optional @param confirmation_token [String?] ID of the ConfirmationToken used to confirm this PaymentIntent.  If the provided ConfirmationToken contains properties that are also being provided in this request, such as `payment_method`, then the values in this request will take precedence.
@@ -1582,7 +1582,7 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (for example, a card) that this PaymentIntent can use. Use `automatic_payment_methods` to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     # @optional @param radar_options [Stripe::RadarOptionsWithHiddenOptions?]
-    # @optional @param receipt_email [String?]
+    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
     # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
@@ -1603,7 +1603,7 @@ module Stripe
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
       radar_options : Stripe::RadarOptionsWithHiddenOptions? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       return_url : String? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
@@ -1613,7 +1613,7 @@ module Stripe
       data
     end
 
-    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent transitions to the &lt;code&gt;requires_payment_method&lt;/code&gt; status or the &lt;code&gt;canceled&lt;/code&gt; status if the confirmation limit is reached. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt.&lt;/p&gt;
+    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent transitions to the &lt;code&gt;requires_payment_method&lt;/code&gt; status or the &lt;code&gt;canceled&lt;/code&gt; status if the confirmation limit is reached. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be confirmed. After this limit is reached, any further calls to this endpoint will transition the PaymentIntent to the &lt;code&gt;canceled&lt;/code&gt; state.&lt;/p&gt;
     # @required @param intent [String?]
     # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
     # @optional @param confirmation_token [String?] ID of the ConfirmationToken used to confirm this PaymentIntent.  If the provided ConfirmationToken contains properties that are also being provided in this request, such as `payment_method`, then the values in this request will take precedence.
@@ -1627,7 +1627,7 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (for example, a card) that this PaymentIntent can use. Use `automatic_payment_methods` to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     # @optional @param radar_options [Stripe::RadarOptionsWithHiddenOptions?]
-    # @optional @param receipt_email [String?]
+    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
     # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
@@ -1648,7 +1648,7 @@ module Stripe
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
       radar_options : Stripe::RadarOptionsWithHiddenOptions? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       return_url : String? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
@@ -1665,7 +1665,7 @@ module Stripe
       Tuple.new(Stripe::PaymentIntent.from_json(body), status_code, headers)
     end
 
-    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent transitions to the &lt;code&gt;requires_payment_method&lt;/code&gt; status or the &lt;code&gt;canceled&lt;/code&gt; status if the confirmation limit is reached. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt.&lt;/p&gt;
+    # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent transitions to the &lt;code&gt;requires_payment_method&lt;/code&gt; status or the &lt;code&gt;canceled&lt;/code&gt; status if the confirmation limit is reached. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;). If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment. If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be confirmed. After this limit is reached, any further calls to this endpoint will transition the PaymentIntent to the &lt;code&gt;canceled&lt;/code&gt; state.&lt;/p&gt;
     # @required @param intent [String?]
     # @optional @param capture_method [String?] Controls when the funds will be captured from the customer's account.
     # @optional @param confirmation_token [String?] ID of the ConfirmationToken used to confirm this PaymentIntent.  If the provided ConfirmationToken contains properties that are also being provided in this request, such as `payment_method`, then the values in this request will take precedence.
@@ -1679,7 +1679,7 @@ module Stripe
     # @optional @param payment_method_options [Stripe::PaymentMethodOptionsParam?]
     # @optional @param payment_method_types [Array(String)?] The list of payment method types (for example, a card) that this PaymentIntent can use. Use `automatic_payment_methods` to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     # @optional @param radar_options [Stripe::RadarOptionsWithHiddenOptions?]
-    # @optional @param receipt_email [String?]
+    # @optional @param receipt_email [Stripe::PostPaymentIntentsIntentRequestReceiptEmail?]
     # @optional @param return_url [String?] The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
     # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     # @optional @param shipping [Stripe::PostPaymentIntentsIntentRequestShipping?]
@@ -1700,7 +1700,7 @@ module Stripe
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
       radar_options : Stripe::RadarOptionsWithHiddenOptions? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       return_url : String? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
@@ -1715,7 +1715,6 @@ module Stripe
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_CONFIRMATION_TOKEN   = 5000
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_MANDATE              = 5000
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_MAX_LENGTH_FOR_PAYMENT_METHOD       = 5000
-    POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_RECEIPT_EMAIL      = String.static_array("")
     POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_SETUP_FUTURE_USAGE = String.static_array("", "off_session", "on_session")
 
     # @return Crest::Request
@@ -1734,7 +1733,7 @@ module Stripe
       payment_method_options : Stripe::PaymentMethodOptionsParam? = nil,
       payment_method_types : Array(String)? = nil,
       radar_options : Stripe::RadarOptionsWithHiddenOptions? = nil,
-      receipt_email : String? = nil,
+      receipt_email : Stripe::PostPaymentIntentsIntentRequestReceiptEmail? = nil,
       return_url : String? = nil,
       setup_future_usage : String? = nil,
       shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil,
@@ -1779,7 +1778,7 @@ module Stripe
           _radar_options.validate if _radar_options.is_a?(OpenApi::Validatable)
         end
         unless (_receipt_email = receipt_email).nil?
-          OpenApi::EnumValidator.validate("receipt_email", _receipt_email, POST_PAYMENT_INTENTS_INTENT_CONFIRM_VALID_VALUES_FOR_RECEIPT_EMAIL)
+          _receipt_email.validate if _receipt_email.is_a?(OpenApi::Validatable)
         end
 
         unless (_setup_future_usage = setup_future_usage).nil?
@@ -1820,7 +1819,7 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_method_options.to_json), "payment_method_options")) if !payment_method_options.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_method_types.to_json), "payment_method_types")) if !payment_method_types.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(radar_options.to_json), "radar_options")) if !radar_options.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("receipt_email", receipt_email.to_s) if !receipt_email.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(receipt_email.to_json), "receipt_email")) if !receipt_email.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("return_url", return_url.to_s) if !return_url.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("setup_future_usage", setup_future_usage.to_s) if !setup_future_usage.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(shipping.to_json), "shipping")) if !shipping.nil?

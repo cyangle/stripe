@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./treasury_received_credits_resource_source_flows_details"
+require "./treasury_received_credits_resource_linked_flows_source_flow_details"
 
 module Stripe
   #
@@ -50,8 +50,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "source_flow_details", type: Stripe::TreasuryReceivedCreditsResourceSourceFlowsDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow_details.nil? && !source_flow_details_present?)]
-    getter source_flow_details : Stripe::TreasuryReceivedCreditsResourceSourceFlowsDetails? = nil
+    @[JSON::Field(key: "source_flow_details", type: Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow_details.nil? && !source_flow_details_present?)]
+    getter source_flow_details : Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails? = nil
 
     @[JSON::Field(ignore: true)]
     property? source_flow_details_present : Bool = false
@@ -67,7 +67,7 @@ module Stripe
       @source_flow : String? = nil,
       @source_flow_type : String? = nil,
       # Optional properties
-      @source_flow_details : Stripe::TreasuryReceivedCreditsResourceSourceFlowsDetails? = nil
+      @source_flow_details : Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails? = nil
     )
     end
 
@@ -189,7 +189,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow_details Object to be assigned
-    def source_flow_details=(new_value : Stripe::TreasuryReceivedCreditsResourceSourceFlowsDetails?)
+    def source_flow_details=(new_value : Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

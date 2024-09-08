@@ -9,10 +9,10 @@
 
 require "../../core"
 
-require "./configuration_item_params_billing_thresholds"
-require "./configuration_item_params_discounts"
-require "./configuration_item_params_tax_rates"
-require "./file_link_creation_params_metadata"
+require "./post_accounts_request_metadata"
+require "./post_subscription_items_request_billing_thresholds"
+require "./post_subscription_items_request_discounts"
+require "./post_subscription_items_request_tax_rates"
 require "./recurring_price_data"
 
 module Stripe
@@ -24,8 +24,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::ConfigurationItemParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::PostSubscriptionItemsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil
 
     # Delete all usage for a given subscription item. Allowed only when `deleted` is set to `true` and the current plan's `usage_type` is `metered`.
     @[JSON::Field(key: "clear_usage", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -35,16 +35,16 @@ module Stripe
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter deleted : Bool? = nil
 
-    @[JSON::Field(key: "discounts", type: Stripe::ConfigurationItemParamsDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter discounts : Stripe::ConfigurationItemParamsDiscounts? = nil
+    @[JSON::Field(key: "discounts", type: Stripe::PostSubscriptionItemsRequestDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter discounts : Stripe::PostSubscriptionItemsRequestDiscounts? = nil
 
     # Subscription item to update.
     @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : String? = nil
     MAX_LENGTH_FOR_ID = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Plan ID for this item, as a string.
     @[JSON::Field(key: "plan", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,25 +63,25 @@ module Stripe
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
 
-    @[JSON::Field(key: "tax_rates", type: Stripe::ConfigurationItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_rates : Stripe::ConfigurationItemParamsTaxRates? = nil
+    @[JSON::Field(key: "tax_rates", type: Stripe::PostSubscriptionItemsRequestTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds? = nil,
+      @billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
       @clear_usage : Bool? = nil,
       @deleted : Bool? = nil,
-      @discounts : Stripe::ConfigurationItemParamsDiscounts? = nil,
+      @discounts : Stripe::PostSubscriptionItemsRequestDiscounts? = nil,
       @id : String? = nil,
-      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @plan : String? = nil,
       @price : String? = nil,
       @price_data : Stripe::RecurringPriceData? = nil,
       @quantity : Int64? = nil,
-      @tax_rates : Stripe::ConfigurationItemParamsTaxRates? = nil
+      @tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
     )
     end
 
@@ -165,7 +165,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::ConfigurationItemParamsBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::PostSubscriptionItemsRequestBillingThresholds?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -187,7 +187,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discounts Object to be assigned
-    def discounts=(new_value : Stripe::ConfigurationItemParamsDiscounts?)
+    def discounts=(new_value : Stripe::PostSubscriptionItemsRequestDiscounts?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -207,7 +207,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -253,7 +253,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(new_value : Stripe::ConfigurationItemParamsTaxRates?)
+    def tax_rates=(new_value : Stripe::PostSubscriptionItemsRequestTaxRates?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

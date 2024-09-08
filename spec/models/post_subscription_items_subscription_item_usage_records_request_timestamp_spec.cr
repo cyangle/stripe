@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscription_items_subscription_item_usage_records_request_timestamp"
 
 describe Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp do
-  describe "test an instance of PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp" do
-    it "should create an instance of PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp" do
-      # instance = Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp.new
-      # (instance).should be_a(Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp)
-    end
-  end
 end

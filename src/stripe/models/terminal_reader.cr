@@ -9,8 +9,8 @@
 
 require "../../core"
 
+require "./terminal_reader_action"
 require "./terminal_reader_location"
-require "./terminal_reader_reader_resource_reader_action"
 
 module Stripe
   # A Reader represents a physical device for accepting payment details.  Related guide: [Connecting to a reader](https://stripe.com/docs/terminal/payments/connect-reader)
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "action", type: Stripe::TerminalReaderReaderResourceReaderAction?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter action : Stripe::TerminalReaderReaderResourceReaderAction? = nil
+    @[JSON::Field(key: "action", type: Stripe::TerminalReaderAction?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter action : Stripe::TerminalReaderAction? = nil
 
     # The current software version of the reader.
     @[JSON::Field(key: "device_sw_version", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -85,7 +85,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @action : Stripe::TerminalReaderReaderResourceReaderAction? = nil,
+      @action : Stripe::TerminalReaderAction? = nil,
       @device_sw_version : String? = nil,
       @device_type : String? = nil,
       @id : String? = nil,
@@ -219,7 +219,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action Object to be assigned
-    def action=(new_value : Stripe::TerminalReaderReaderResourceReaderAction?)
+    def action=(new_value : Stripe::TerminalReaderAction?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

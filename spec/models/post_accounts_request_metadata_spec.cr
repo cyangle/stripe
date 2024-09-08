@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_accounts_request_metadata"
 
 describe Stripe::PostAccountsRequestMetadata do
-  describe "test an instance of PostAccountsRequestMetadata" do
-    it "should create an instance of PostAccountsRequestMetadata" do
-      # instance = Stripe::PostAccountsRequestMetadata.new
-      # (instance).should be_a(Stripe::PostAccountsRequestMetadata)
-    end
-  end
 end

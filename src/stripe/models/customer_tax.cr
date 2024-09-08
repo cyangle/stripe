@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./customer_tax_location"
+require "./customer_tax_location1"
 
 module Stripe
   #
@@ -32,8 +32,8 @@ module Stripe
     getter ip_address : String? = nil
     MAX_LENGTH_FOR_IP_ADDRESS = 5000
 
-    @[JSON::Field(key: "location", type: Stripe::CustomerTaxLocation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter location : Stripe::CustomerTaxLocation? = nil
+    @[JSON::Field(key: "location", type: Stripe::CustomerTaxLocation1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter location : Stripe::CustomerTaxLocation1? = nil
 
     # End of Required Properties
 
@@ -44,7 +44,7 @@ module Stripe
       # Required properties
       @automatic_tax : String? = nil,
       @ip_address : String? = nil,
-      @location : Stripe::CustomerTaxLocation? = nil
+      @location : Stripe::CustomerTaxLocation1? = nil
     )
     end
 
@@ -111,7 +111,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(new_value : Stripe::CustomerTaxLocation?)
+    def location=(new_value : Stripe::CustomerTaxLocation1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

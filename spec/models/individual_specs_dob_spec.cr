@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/individual_specs_dob"
 
 describe Stripe::IndividualSpecsDob do
-  describe "test an instance of IndividualSpecsDob" do
-    it "should create an instance of IndividualSpecsDob" do
-      # instance = Stripe::IndividualSpecsDob.new
-      # (instance).should be_a(Stripe::IndividualSpecsDob)
-    end
-  end
-
-  describe "test attribute 'day'" do
-    it "should work" do
-      # instance = Stripe::IndividualSpecsDob.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'month'" do
-    it "should work" do
-      # instance = Stripe::IndividualSpecsDob.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'year'" do
-    it "should work" do
-      # instance = Stripe::IndividualSpecsDob.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

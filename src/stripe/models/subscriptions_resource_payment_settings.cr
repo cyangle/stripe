@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./subscriptions_resource_payment_method_options"
+require "./subscriptions_resource_payment_settings_payment_method_options"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::SubscriptionsResourcePaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_options : Stripe::SubscriptionsResourcePaymentMethodOptions? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_options : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions? = nil
 
     # The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -43,7 +43,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @payment_method_options : Stripe::SubscriptionsResourcePaymentMethodOptions? = nil,
+      @payment_method_options : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions? = nil,
       @payment_method_types : Array(String)? = nil,
       @save_default_payment_method : String? = nil
     )
@@ -86,7 +86,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(new_value : Stripe::SubscriptionsResourcePaymentMethodOptions?)
+    def payment_method_options=(new_value : Stripe::SubscriptionsResourcePaymentSettingsPaymentMethodOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

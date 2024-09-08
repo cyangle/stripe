@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./subscription_schedule_application"
-require "./subscription_schedule_current_phase"
+require "./subscription_schedule_current_phase1"
 require "./subscription_schedule_customer"
 require "./subscription_schedule_phase_configuration"
 require "./subscription_schedule_subscription"
@@ -42,8 +42,8 @@ module Stripe
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter created : Int64? = nil
 
-    @[JSON::Field(key: "current_phase", type: Stripe::SubscriptionScheduleCurrentPhase?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter current_phase : Stripe::SubscriptionScheduleCurrentPhase? = nil
+    @[JSON::Field(key: "current_phase", type: Stripe::SubscriptionScheduleCurrentPhase1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter current_phase : Stripe::SubscriptionScheduleCurrentPhase1? = nil
 
     @[JSON::Field(key: "customer", type: Stripe::SubscriptionScheduleCustomer?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : Stripe::SubscriptionScheduleCustomer? = nil
@@ -111,7 +111,7 @@ module Stripe
       @canceled_at : Int64? = nil,
       @completed_at : Int64? = nil,
       @created : Int64? = nil,
-      @current_phase : Stripe::SubscriptionScheduleCurrentPhase? = nil,
+      @current_phase : Stripe::SubscriptionScheduleCurrentPhase1? = nil,
       @customer : Stripe::SubscriptionScheduleCustomer? = nil,
       @default_settings : Stripe::SubscriptionSchedulesResourceDefaultSettings? = nil,
       @end_behavior : String? = nil,
@@ -293,7 +293,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] current_phase Object to be assigned
-    def current_phase=(new_value : Stripe::SubscriptionScheduleCurrentPhase?)
+    def current_phase=(new_value : Stripe::SubscriptionScheduleCurrentPhase1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

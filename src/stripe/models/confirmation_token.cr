@@ -9,10 +9,10 @@
 
 require "../../core"
 
-require "./confirmation_tokens_resource_mandate_data"
-require "./confirmation_tokens_resource_payment_method_options"
-require "./confirmation_tokens_resource_payment_method_preview"
-require "./confirmation_tokens_resource_shipping"
+require "./confirmation_token_mandate_data"
+require "./confirmation_token_payment_method_options"
+require "./confirmation_token_payment_method_preview"
+require "./confirmation_token_shipping"
 
 module Stripe
   # ConfirmationTokens help transport client side data collected by Stripe JS over to your server for confirming a PaymentIntent or SetupIntent. If the confirmation is successful, values present on the ConfirmationToken are written onto the Intent.  To learn more about how to use ConfirmationToken, visit the related guides: - [Finalize payments on the server](https://stripe.com/docs/payments/finalize-payments-on-the-server) - [Build two-step confirmation](https://stripe.com/docs/payments/build-a-two-step-confirmation).
@@ -52,11 +52,11 @@ module Stripe
     getter payment_intent : String? = nil
     MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::ConfirmationTokensResourcePaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_options : Stripe::ConfirmationTokensResourcePaymentMethodOptions? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::ConfirmationTokenPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_options : Stripe::ConfirmationTokenPaymentMethodOptions? = nil
 
-    @[JSON::Field(key: "payment_method_preview", type: Stripe::ConfirmationTokensResourcePaymentMethodPreview?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_preview : Stripe::ConfirmationTokensResourcePaymentMethodPreview? = nil
+    @[JSON::Field(key: "payment_method_preview", type: Stripe::ConfirmationTokenPaymentMethodPreview?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_preview : Stripe::ConfirmationTokenPaymentMethodPreview? = nil
 
     # Return URL used to confirm the Intent.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -74,8 +74,8 @@ module Stripe
     getter setup_intent : String? = nil
     MAX_LENGTH_FOR_SETUP_INTENT = 5000
 
-    @[JSON::Field(key: "shipping", type: Stripe::ConfirmationTokensResourceShipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping : Stripe::ConfirmationTokensResourceShipping? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::ConfirmationTokenShipping?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping : Stripe::ConfirmationTokenShipping? = nil
 
     # Indicates whether the Stripe SDK is used to handle confirmation flow. Defaults to `true` on ConfirmationToken.
     @[JSON::Field(key: "use_stripe_sdk", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -85,8 +85,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "mandate_data", type: Stripe::ConfirmationTokensResourceMandateData?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: mandate_data.nil? && !mandate_data_present?)]
-    getter mandate_data : Stripe::ConfirmationTokensResourceMandateData? = nil
+    @[JSON::Field(key: "mandate_data", type: Stripe::ConfirmationTokenMandateData?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: mandate_data.nil? && !mandate_data_present?)]
+    getter mandate_data : Stripe::ConfirmationTokenMandateData? = nil
 
     @[JSON::Field(ignore: true)]
     property? mandate_data_present : Bool = false
@@ -102,15 +102,15 @@ module Stripe
       @livemode : Bool? = nil,
       @object : String? = nil,
       @payment_intent : String? = nil,
-      @payment_method_options : Stripe::ConfirmationTokensResourcePaymentMethodOptions? = nil,
-      @payment_method_preview : Stripe::ConfirmationTokensResourcePaymentMethodPreview? = nil,
+      @payment_method_options : Stripe::ConfirmationTokenPaymentMethodOptions? = nil,
+      @payment_method_preview : Stripe::ConfirmationTokenPaymentMethodPreview? = nil,
       @return_url : String? = nil,
       @setup_future_usage : String? = nil,
       @setup_intent : String? = nil,
-      @shipping : Stripe::ConfirmationTokensResourceShipping? = nil,
+      @shipping : Stripe::ConfirmationTokenShipping? = nil,
       @use_stripe_sdk : Bool? = nil,
       # Optional properties
-      @mandate_data : Stripe::ConfirmationTokensResourceMandateData? = nil
+      @mandate_data : Stripe::ConfirmationTokenMandateData? = nil
     )
     end
 
@@ -280,7 +280,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(new_value : Stripe::ConfirmationTokensResourcePaymentMethodOptions?)
+    def payment_method_options=(new_value : Stripe::ConfirmationTokenPaymentMethodOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -290,7 +290,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_preview Object to be assigned
-    def payment_method_preview=(new_value : Stripe::ConfirmationTokensResourcePaymentMethodPreview?)
+    def payment_method_preview=(new_value : Stripe::ConfirmationTokenPaymentMethodPreview?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -330,7 +330,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(new_value : Stripe::ConfirmationTokensResourceShipping?)
+    def shipping=(new_value : Stripe::ConfirmationTokenShipping?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -348,7 +348,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_data Object to be assigned
-    def mandate_data=(new_value : Stripe::ConfirmationTokensResourceMandateData?)
+    def mandate_data=(new_value : Stripe::ConfirmationTokenMandateData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

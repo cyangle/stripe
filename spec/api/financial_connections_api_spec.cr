@@ -61,6 +61,35 @@ describe "FinancialConnectionsApi" do
     end
   end
 
+  # unit tests for get_financial_connections_transactions
+  # &lt;p&gt;Returns a list of Financial Connections &lt;code&gt;Transaction&lt;/code&gt; objects.&lt;/p&gt;
+  # @param account The ID of the Stripe account whose transactions will be retrieved.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @option opts [GetAccountsCreatedParameter] :transacted_at A filter on the list based on the object &#x60;transacted_at&#x60; field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
+  # @option opts [TransactionRefreshParams] :transaction_refresh A filter on the list based on the object &#x60;transaction_refresh&#x60; field. The value can be a dictionary with the following options:
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [BankConnectionsResourceTransactionList]
+  describe "get_financial_connections_transactions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_financial_connections_transactions_transaction
+  # &lt;p&gt;Retrieves the details of a Financial Connections &lt;code&gt;Transaction&lt;/code&gt;&lt;/p&gt;
+  # @param transaction
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsTransaction]
+  describe "get_financial_connections_transactions_transaction test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for post_financial_connections_accounts_account_disconnect
   # &lt;p&gt;Disables your access to a Financial Connections &lt;code&gt;Account&lt;/code&gt;. You will no longer be able to access data associated with the account (e.g. balances, transactions).&lt;/p&gt;
   # @param account
@@ -81,6 +110,32 @@ describe "FinancialConnectionsApi" do
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [FinancialConnectionsAccount]
   describe "post_financial_connections_accounts_account_refresh test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_financial_connections_accounts_account_subscribe
+  # &lt;p&gt;Subscribes to periodic refreshes of data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+  # @param account
+  # @param features The list of account features to which you would like to subscribe.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsAccount]
+  describe "post_financial_connections_accounts_account_subscribe test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_financial_connections_accounts_account_unsubscribe
+  # &lt;p&gt;Unsubscribes from periodic refreshes of data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+  # @param account
+  # @param features The list of account features from which you would like to unsubscribe.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsAccount]
+  describe "post_financial_connections_accounts_account_unsubscribe test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

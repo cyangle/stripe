@@ -9,10 +9,10 @@
 
 require "../../core"
 
-require "./issuing_transaction_fleet_data"
-require "./issuing_transaction_flight_data"
-require "./issuing_transaction_fuel_data"
-require "./issuing_transaction_lodging_data"
+require "./issuing_transaction_purchase_details_fleet"
+require "./issuing_transaction_purchase_details_flight"
+require "./issuing_transaction_purchase_details_fuel"
+require "./issuing_transaction_purchase_details_lodging"
 require "./issuing_transaction_receipt_data"
 
 module Stripe
@@ -25,17 +25,17 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "fleet", type: Stripe::IssuingTransactionFleetData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fleet : Stripe::IssuingTransactionFleetData? = nil
+    @[JSON::Field(key: "fleet", type: Stripe::IssuingTransactionPurchaseDetailsFleet?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fleet : Stripe::IssuingTransactionPurchaseDetailsFleet? = nil
 
-    @[JSON::Field(key: "flight", type: Stripe::IssuingTransactionFlightData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter flight : Stripe::IssuingTransactionFlightData? = nil
+    @[JSON::Field(key: "flight", type: Stripe::IssuingTransactionPurchaseDetailsFlight?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter flight : Stripe::IssuingTransactionPurchaseDetailsFlight? = nil
 
-    @[JSON::Field(key: "fuel", type: Stripe::IssuingTransactionFuelData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fuel : Stripe::IssuingTransactionFuelData? = nil
+    @[JSON::Field(key: "fuel", type: Stripe::IssuingTransactionPurchaseDetailsFuel?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fuel : Stripe::IssuingTransactionPurchaseDetailsFuel? = nil
 
-    @[JSON::Field(key: "lodging", type: Stripe::IssuingTransactionLodgingData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter lodging : Stripe::IssuingTransactionLodgingData? = nil
+    @[JSON::Field(key: "lodging", type: Stripe::IssuingTransactionPurchaseDetailsLodging?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter lodging : Stripe::IssuingTransactionPurchaseDetailsLodging? = nil
 
     # The line items in the purchase.
     @[JSON::Field(key: "receipt", type: Array(Stripe::IssuingTransactionReceiptData)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -53,10 +53,10 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @fleet : Stripe::IssuingTransactionFleetData? = nil,
-      @flight : Stripe::IssuingTransactionFlightData? = nil,
-      @fuel : Stripe::IssuingTransactionFuelData? = nil,
-      @lodging : Stripe::IssuingTransactionLodgingData? = nil,
+      @fleet : Stripe::IssuingTransactionPurchaseDetailsFleet? = nil,
+      @flight : Stripe::IssuingTransactionPurchaseDetailsFlight? = nil,
+      @fuel : Stripe::IssuingTransactionPurchaseDetailsFuel? = nil,
+      @lodging : Stripe::IssuingTransactionPurchaseDetailsLodging? = nil,
       @receipt : Array(Stripe::IssuingTransactionReceiptData)? = nil,
       @reference : String? = nil
     )
@@ -122,7 +122,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fleet Object to be assigned
-    def fleet=(new_value : Stripe::IssuingTransactionFleetData?)
+    def fleet=(new_value : Stripe::IssuingTransactionPurchaseDetailsFleet?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -132,7 +132,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flight Object to be assigned
-    def flight=(new_value : Stripe::IssuingTransactionFlightData?)
+    def flight=(new_value : Stripe::IssuingTransactionPurchaseDetailsFlight?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -142,7 +142,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fuel Object to be assigned
-    def fuel=(new_value : Stripe::IssuingTransactionFuelData?)
+    def fuel=(new_value : Stripe::IssuingTransactionPurchaseDetailsFuel?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -152,7 +152,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lodging Object to be assigned
-    def lodging=(new_value : Stripe::IssuingTransactionLodgingData?)
+    def lodging=(new_value : Stripe::IssuingTransactionPurchaseDetailsLodging?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

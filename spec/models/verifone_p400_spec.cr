@@ -25,10 +25,6 @@ describe Stripe::VerifoneP400 do
     it "should work" do
       # instance = Stripe::VerifoneP400.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::VerifoneP400::ENUM_VALIDATOR_FOR_SPLASHSCREEN
-      # validator.allowable_values.each do |value|
-      #   instance.splashscreen = value.as(String)
-      # end
     end
   end
 end

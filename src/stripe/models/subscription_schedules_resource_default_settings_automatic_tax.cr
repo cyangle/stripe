@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./connect_account_reference"
+require "./automatic_tax_liability"
 
 module Stripe
   #
@@ -25,8 +25,8 @@ module Stripe
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    @[JSON::Field(key: "liability", type: Stripe::ConnectAccountReference?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter liability : Stripe::ConnectAccountReference? = nil
+    @[JSON::Field(key: "liability", type: Stripe::AutomaticTaxLiability?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter liability : Stripe::AutomaticTaxLiability? = nil
 
     # End of Required Properties
 
@@ -36,7 +36,7 @@ module Stripe
       *,
       # Required properties
       @enabled : Bool? = nil,
-      @liability : Stripe::ConnectAccountReference? = nil
+      @liability : Stripe::AutomaticTaxLiability? = nil
     )
     end
 
@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] liability Object to be assigned
-    def liability=(new_value : Stripe::ConnectAccountReference?)
+    def liability=(new_value : Stripe::AutomaticTaxLiability?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

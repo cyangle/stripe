@@ -12,6 +12,7 @@ require "../../core"
 require "../models/authorization_controls_param"
 require "../models/authorization_controls_param_v2"
 require "../models/billing_specs"
+require "../models/carrier_text_param"
 require "../models/company_param"
 require "../models/encrypted_pin_param"
 require "../models/error"
@@ -27,9 +28,21 @@ require "../models/issuing_cardholder"
 require "../models/issuing_cardholder_list"
 require "../models/issuing_dispute"
 require "../models/issuing_dispute_list"
+require "../models/issuing_network_token_list"
+require "../models/issuing_personalization_design"
+require "../models/issuing_personalization_design_list"
+require "../models/issuing_physical_bundle"
+require "../models/issuing_token"
 require "../models/issuing_transaction"
 require "../models/issuing_transaction_list"
 require "../models/post_accounts_request_metadata"
+require "../models/post_issuing_cards_request_second_line"
+require "../models/post_issuing_personalization_designs_personalization_design_request_card_logo"
+require "../models/post_issuing_personalization_designs_personalization_design_request_carrier_text"
+require "../models/post_issuing_personalization_designs_personalization_design_request_lookup_key"
+require "../models/post_issuing_personalization_designs_personalization_design_request_name"
+require "../models/preferences_list_param"
+require "../models/preferences_param"
 require "../models/shipping_specs"
 require "../models/treasury_param"
 
@@ -1165,6 +1178,625 @@ module Stripe
       )
     end
 
+    # <p>Returns a list of personalization design objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param lookup_keys [Array(Array(String))?] Only return personalization designs with the given lookup keys.
+    # @optional @param preferences [Stripe::PreferencesListParam?] Only return personalization designs with the given preferences.
+    # @optional @param status [String?] Only return personalization designs with the given status.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingPersonalizationDesignList]
+    def get_issuing_personalization_designs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      lookup_keys : Array(Array(String))? = nil,
+      preferences : Stripe::PreferencesListParam? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IssuingPersonalizationDesignList
+      data, _status_code, _headers = get_issuing_personalization_designs_with_http_info(ending_before: ending_before, starting_after: starting_after, limit: limit, lookup_keys: lookup_keys, preferences: preferences, status: status, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Returns a list of personalization design objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.&lt;/p&gt;
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param lookup_keys [Array(Array(String))?] Only return personalization designs with the given lookup keys.
+    # @optional @param preferences [Stripe::PreferencesListParam?] Only return personalization designs with the given preferences.
+    # @optional @param status [String?] Only return personalization designs with the given status.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesignList, Integer, Hash)] Stripe::IssuingPersonalizationDesignList, response status code and response headers
+    def get_issuing_personalization_designs_with_http_info(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      lookup_keys : Array(Array(String))? = nil,
+      preferences : Stripe::PreferencesListParam? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesignList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_issuing_personalization_designs(ending_before: ending_before, starting_after: starting_after, limit: limit, lookup_keys: lookup_keys, preferences: preferences, status: status, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#get_issuing_personalization_designs\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesignList.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Returns a list of personalization design objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.&lt;/p&gt;
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param lookup_keys [Array(Array(String))?] Only return personalization designs with the given lookup keys.
+    # @optional @param preferences [Stripe::PreferencesListParam?] Only return personalization designs with the given preferences.
+    # @optional @param status [String?] Only return personalization designs with the given status.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_issuing_personalization_designs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      lookup_keys : Array(Array(String))? = nil,
+      preferences : Stripe::PreferencesListParam? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_issuing_personalization_designs(ending_before: ending_before, starting_after: starting_after, limit: limit, lookup_keys: lookup_keys, preferences: preferences, status: status, expand: expand).execute(&block)
+    end
+
+    GET_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
+    GET_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
+    GET_ISSUING_PERSONALIZATION_DESIGNS_VALID_VALUES_FOR_STATUS       = String.static_array("active", "inactive", "rejected", "review")
+
+    # @return Crest::Request
+    def build_api_request_for_get_issuing_personalization_designs(
+      *,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      lookup_keys : Array(Array(String))? = nil,
+      preferences : Stripe::PreferencesListParam? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.get_issuing_personalization_designs ..." }
+      end
+
+      if client_side_validation?
+        unless (_ending_before = ending_before).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("ending_before", ending_before.to_s.size, GET_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_ENDING_BEFORE)
+        end
+        unless (_starting_after = starting_after).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("starting_after", starting_after.to_s.size, GET_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_STARTING_AFTER)
+        end
+
+        unless (_preferences = preferences).nil?
+          _preferences.validate if _preferences.is_a?(OpenApi::Validatable)
+        end
+        unless (_status = status).nil?
+          OpenApi::EnumValidator.validate("status", _status, GET_ISSUING_PERSONALIZATION_DESIGNS_VALID_VALUES_FOR_STATUS)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/personalization_designs"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
+      query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
+      query_params["limit"] = limit.to_s if !limit.nil?
+      query_params["lookup_keys"] = @api_client.build_collection_param(lookup_keys, "csv") if !lookup_keys.nil? && !lookup_keys.empty?
+      query_params["preferences"] = preferences.to_s if !preferences.nil?
+      query_params["status"] = status.to_s if !status.nil?
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "IssuingApi.get_issuing_personalization_designs",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieves a personalization design object.</p>
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingPersonalizationDesign]
+    def get_issuing_personalization_designs_personalization_design(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IssuingPersonalizationDesign
+      data, _status_code, _headers = get_issuing_personalization_designs_personalization_design_with_http_info(personalization_design: personalization_design, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieves a personalization design object.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesign, Integer, Hash)] Stripe::IssuingPersonalizationDesign, response status code and response headers
+    def get_issuing_personalization_designs_personalization_design_with_http_info(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesign, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_issuing_personalization_designs_personalization_design(personalization_design: personalization_design, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#get_issuing_personalization_designs_personalization_design\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesign.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieves a personalization design object.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_issuing_personalization_designs_personalization_design(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_issuing_personalization_designs_personalization_design(personalization_design: personalization_design, expand: expand).execute(&block)
+    end
+
+    GET_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_issuing_personalization_designs_personalization_design(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.get_issuing_personalization_designs_personalization_design ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"personalization_design\" is required and cannot be null") if personalization_design.nil?
+        unless (_personalization_design = personalization_design).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("personalization_design", personalization_design.to_s.size, GET_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/personalization_designs/{personalization_design}".sub("{" + "personalization_design" + "}", URI.encode_path(personalization_design.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "IssuingApi.get_issuing_personalization_designs_personalization_design",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieves a physical bundle object.</p>
+    # @required @param physical_bundle [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingPhysicalBundle]
+    def get_issuing_physical_bundles_physical_bundle(
+      *,
+      physical_bundle : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IssuingPhysicalBundle
+      data, _status_code, _headers = get_issuing_physical_bundles_physical_bundle_with_http_info(physical_bundle: physical_bundle, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieves a physical bundle object.&lt;/p&gt;
+    # @required @param physical_bundle [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingPhysicalBundle, Integer, Hash)] Stripe::IssuingPhysicalBundle, response status code and response headers
+    def get_issuing_physical_bundles_physical_bundle_with_http_info(
+      *,
+      physical_bundle : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IssuingPhysicalBundle, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_issuing_physical_bundles_physical_bundle(physical_bundle: physical_bundle, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#get_issuing_physical_bundles_physical_bundle\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPhysicalBundle.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieves a physical bundle object.&lt;/p&gt;
+    # @required @param physical_bundle [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_issuing_physical_bundles_physical_bundle(
+      *,
+      physical_bundle : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_issuing_physical_bundles_physical_bundle(physical_bundle: physical_bundle, expand: expand).execute(&block)
+    end
+
+    GET_ISSUING_PHYSICAL_BUNDLES_PHYSICAL_BUNDLE_MAX_LENGTH_FOR_PHYSICAL_BUNDLE = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_issuing_physical_bundles_physical_bundle(
+      *,
+      physical_bundle : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.get_issuing_physical_bundles_physical_bundle ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"physical_bundle\" is required and cannot be null") if physical_bundle.nil?
+        unless (_physical_bundle = physical_bundle).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("physical_bundle", physical_bundle.to_s.size, GET_ISSUING_PHYSICAL_BUNDLES_PHYSICAL_BUNDLE_MAX_LENGTH_FOR_PHYSICAL_BUNDLE)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/physical_bundles/{physical_bundle}".sub("{" + "physical_bundle" + "}", URI.encode_path(physical_bundle.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "IssuingApi.get_issuing_physical_bundles_physical_bundle",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Lists all Issuing <code>Token</code> objects for a given card.</p>
+    # @required @param card [String?] The Issuing card identifier to list tokens for.
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param created [Stripe::GetAccountsCreatedParameter?] Only return Issuing tokens that were created during the given date interval.
+    # @optional @param status [String?] Select Issuing tokens with the given status.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingNetworkTokenList]
+    def get_issuing_tokens(
+      *,
+      card : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IssuingNetworkTokenList
+      data, _status_code, _headers = get_issuing_tokens_with_http_info(card: card, ending_before: ending_before, starting_after: starting_after, limit: limit, created: created, status: status, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Lists all Issuing &lt;code&gt;Token&lt;/code&gt; objects for a given card.&lt;/p&gt;
+    # @required @param card [String?] The Issuing card identifier to list tokens for.
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param created [Stripe::GetAccountsCreatedParameter?] Only return Issuing tokens that were created during the given date interval.
+    # @optional @param status [String?] Select Issuing tokens with the given status.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingNetworkTokenList, Integer, Hash)] Stripe::IssuingNetworkTokenList, response status code and response headers
+    def get_issuing_tokens_with_http_info(
+      *,
+      card : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IssuingNetworkTokenList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_issuing_tokens(card: card, ending_before: ending_before, starting_after: starting_after, limit: limit, created: created, status: status, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#get_issuing_tokens\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingNetworkTokenList.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Lists all Issuing &lt;code&gt;Token&lt;/code&gt; objects for a given card.&lt;/p&gt;
+    # @required @param card [String?] The Issuing card identifier to list tokens for.
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param created [Stripe::GetAccountsCreatedParameter?] Only return Issuing tokens that were created during the given date interval.
+    # @optional @param status [String?] Select Issuing tokens with the given status.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_issuing_tokens(
+      *,
+      card : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_issuing_tokens(card: card, ending_before: ending_before, starting_after: starting_after, limit: limit, created: created, status: status, expand: expand).execute(&block)
+    end
+
+    GET_ISSUING_TOKENS_MAX_LENGTH_FOR_CARD           = 5000
+    GET_ISSUING_TOKENS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
+    GET_ISSUING_TOKENS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
+    GET_ISSUING_TOKENS_VALID_VALUES_FOR_STATUS       = String.static_array("active", "deleted", "requested", "suspended")
+
+    # @return Crest::Request
+    def build_api_request_for_get_issuing_tokens(
+      *,
+      card : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      created : Stripe::GetAccountsCreatedParameter? = nil,
+      status : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.get_issuing_tokens ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"card\" is required and cannot be null") if card.nil?
+        unless (_card = card).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("card", card.to_s.size, GET_ISSUING_TOKENS_MAX_LENGTH_FOR_CARD)
+        end
+        unless (_ending_before = ending_before).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("ending_before", ending_before.to_s.size, GET_ISSUING_TOKENS_MAX_LENGTH_FOR_ENDING_BEFORE)
+        end
+        unless (_starting_after = starting_after).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("starting_after", starting_after.to_s.size, GET_ISSUING_TOKENS_MAX_LENGTH_FOR_STARTING_AFTER)
+        end
+
+        unless (_created = created).nil?
+          _created.validate if _created.is_a?(OpenApi::Validatable)
+        end
+        unless (_status = status).nil?
+          OpenApi::EnumValidator.validate("status", _status, GET_ISSUING_TOKENS_VALID_VALUES_FOR_STATUS)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/tokens"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
+      query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
+      query_params["limit"] = limit.to_s if !limit.nil?
+      query_params["created"] = created.to_s if !created.nil?
+      query_params["status"] = status.to_s if !status.nil?
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      query_params["card"] = card.to_s if !card.nil?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "IssuingApi.get_issuing_tokens",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieves an Issuing <code>Token</code> object.</p>
+    # @required @param token [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingToken]
+    def get_issuing_tokens_token(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::IssuingToken
+      data, _status_code, _headers = get_issuing_tokens_token_with_http_info(token: token, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieves an Issuing &lt;code&gt;Token&lt;/code&gt; object.&lt;/p&gt;
+    # @required @param token [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingToken, Integer, Hash)] Stripe::IssuingToken, response status code and response headers
+    def get_issuing_tokens_token_with_http_info(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::IssuingToken, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_issuing_tokens_token(token: token, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#get_issuing_tokens_token\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingToken.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieves an Issuing &lt;code&gt;Token&lt;/code&gt; object.&lt;/p&gt;
+    # @required @param token [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_issuing_tokens_token(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_issuing_tokens_token(token: token, expand: expand).execute(&block)
+    end
+
+    GET_ISSUING_TOKENS_TOKEN_MAX_LENGTH_FOR_TOKEN = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_issuing_tokens_token(
+      *,
+      token : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.get_issuing_tokens_token ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"token\" is required and cannot be null") if token.nil?
+        unless (_token = token).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("token", token.to_s.size, GET_ISSUING_TOKENS_TOKEN_MAX_LENGTH_FOR_TOKEN)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/tokens/{token}".sub("{" + "token" + "}", URI.encode_path(token.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "IssuingApi.get_issuing_tokens_token",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
     # <p>Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
     # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
     # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
@@ -2211,7 +2843,7 @@ module Stripe
     # @optional @param pin [Stripe::EncryptedPinParam?]
     # @optional @param replacement_for [String?] The card this is meant to be a replacement for (if any).
     # @optional @param replacement_reason [String?] If `replacement_for` is specified, this should indicate why that card is being replaced.
-    # @optional @param second_line [String?]
+    # @optional @param second_line [Stripe::PostIssuingCardsRequestSecondLine?]
     # @optional @param shipping [Stripe::ShippingSpecs?]
     # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
     # @optional @param status [String?] Whether authorizations can be approved on this card. May be blocked from activating cards depending on past-due Cardholder requirements. Defaults to `inactive`.
@@ -2228,7 +2860,7 @@ module Stripe
       pin : Stripe::EncryptedPinParam? = nil,
       replacement_for : String? = nil,
       replacement_reason : String? = nil,
-      second_line : String? = nil,
+      second_line : Stripe::PostIssuingCardsRequestSecondLine? = nil,
       shipping : Stripe::ShippingSpecs? = nil,
       spending_controls : Stripe::AuthorizationControlsParam? = nil,
       status : String? = nil
@@ -2248,7 +2880,7 @@ module Stripe
     # @optional @param pin [Stripe::EncryptedPinParam?]
     # @optional @param replacement_for [String?] The card this is meant to be a replacement for (if any).
     # @optional @param replacement_reason [String?] If `replacement_for` is specified, this should indicate why that card is being replaced.
-    # @optional @param second_line [String?]
+    # @optional @param second_line [Stripe::PostIssuingCardsRequestSecondLine?]
     # @optional @param shipping [Stripe::ShippingSpecs?]
     # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
     # @optional @param status [String?] Whether authorizations can be approved on this card. May be blocked from activating cards depending on past-due Cardholder requirements. Defaults to `inactive`.
@@ -2265,7 +2897,7 @@ module Stripe
       pin : Stripe::EncryptedPinParam? = nil,
       replacement_for : String? = nil,
       replacement_reason : String? = nil,
-      second_line : String? = nil,
+      second_line : Stripe::PostIssuingCardsRequestSecondLine? = nil,
       shipping : Stripe::ShippingSpecs? = nil,
       spending_controls : Stripe::AuthorizationControlsParam? = nil,
       status : String? = nil
@@ -2292,7 +2924,7 @@ module Stripe
     # @optional @param pin [Stripe::EncryptedPinParam?]
     # @optional @param replacement_for [String?] The card this is meant to be a replacement for (if any).
     # @optional @param replacement_reason [String?] If `replacement_for` is specified, this should indicate why that card is being replaced.
-    # @optional @param second_line [String?]
+    # @optional @param second_line [Stripe::PostIssuingCardsRequestSecondLine?]
     # @optional @param shipping [Stripe::ShippingSpecs?]
     # @optional @param spending_controls [Stripe::AuthorizationControlsParam?]
     # @optional @param status [String?] Whether authorizations can be approved on this card. May be blocked from activating cards depending on past-due Cardholder requirements. Defaults to `inactive`.
@@ -2309,7 +2941,7 @@ module Stripe
       pin : Stripe::EncryptedPinParam? = nil,
       replacement_for : String? = nil,
       replacement_reason : String? = nil,
-      second_line : String? = nil,
+      second_line : Stripe::PostIssuingCardsRequestSecondLine? = nil,
       shipping : Stripe::ShippingSpecs? = nil,
       spending_controls : Stripe::AuthorizationControlsParam? = nil,
       status : String? = nil,
@@ -2323,7 +2955,6 @@ module Stripe
     POST_ISSUING_CARDS_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN = 5000
     POST_ISSUING_CARDS_MAX_LENGTH_FOR_REPLACEMENT_FOR        = 5000
     POST_ISSUING_CARDS_VALID_VALUES_FOR_REPLACEMENT_REASON   = String.static_array("damaged", "expired", "lost", "stolen")
-    POST_ISSUING_CARDS_VALID_VALUES_FOR_SECOND_LINE          = String.static_array("")
     POST_ISSUING_CARDS_VALID_VALUES_FOR_STATUS               = String.static_array("active", "inactive")
 
     # @return Crest::Request
@@ -2339,7 +2970,7 @@ module Stripe
       pin : Stripe::EncryptedPinParam? = nil,
       replacement_for : String? = nil,
       replacement_reason : String? = nil,
-      second_line : String? = nil,
+      second_line : Stripe::PostIssuingCardsRequestSecondLine? = nil,
       shipping : Stripe::ShippingSpecs? = nil,
       spending_controls : Stripe::AuthorizationControlsParam? = nil,
       status : String? = nil
@@ -2372,7 +3003,7 @@ module Stripe
           OpenApi::EnumValidator.validate("replacement_reason", _replacement_reason, POST_ISSUING_CARDS_VALID_VALUES_FOR_REPLACEMENT_REASON)
         end
         unless (_second_line = second_line).nil?
-          OpenApi::EnumValidator.validate("second_line", _second_line, POST_ISSUING_CARDS_VALID_VALUES_FOR_SECOND_LINE)
+          _second_line.validate if _second_line.is_a?(OpenApi::Validatable)
         end
         unless (_shipping = shipping).nil?
           _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
@@ -2412,7 +3043,7 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(pin.to_json), "pin")) if !pin.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("replacement_for", replacement_for.to_s) if !replacement_for.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("replacement_reason", replacement_reason.to_s) if !replacement_reason.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("second_line", second_line.to_s) if !second_line.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(second_line.to_json), "second_line")) if !second_line.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(shipping.to_json), "shipping")) if !shipping.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(spending_controls.to_json), "spending_controls")) if !spending_controls.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("status", status.to_s) if !status.nil?
@@ -3008,6 +3639,490 @@ module Stripe
         http_method: :"POST",
         path: local_var_path,
         operation: "IssuingApi.post_issuing_disputes_dispute_submit",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Creates a personalization design object.</p>
+    # @required @param physical_bundle [String?] The physical bundle object belonging to this personalization design.
+    # @optional @param card_logo [String?] The file for the card logo, for use with physical bundles that support card logos. Must have a `purpose` value of `issuing_logo`.
+    # @optional @param carrier_text [Stripe::CarrierTextParam?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param lookup_key [String?] A lookup key used to retrieve personalization designs dynamically from a static string. This may be up to 200 characters.
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param name [String?] Friendly display name.
+    # @optional @param preferences [Stripe::PreferencesParam?]
+    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+    # @return [Stripe::IssuingPersonalizationDesign]
+    def post_issuing_personalization_designs(
+      *,
+      physical_bundle : String? = nil,
+      card_logo : String? = nil,
+      carrier_text : Stripe::CarrierTextParam? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : String? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil
+    ) : Stripe::IssuingPersonalizationDesign
+      data, _status_code, _headers = post_issuing_personalization_designs_with_http_info(physical_bundle: physical_bundle, card_logo: card_logo, carrier_text: carrier_text, expand: expand, lookup_key: lookup_key, metadata: metadata, name: name, preferences: preferences, transfer_lookup_key: transfer_lookup_key)
+      data
+    end
+
+    # &lt;p&gt;Creates a personalization design object.&lt;/p&gt;
+    # @required @param physical_bundle [String?] The physical bundle object belonging to this personalization design.
+    # @optional @param card_logo [String?] The file for the card logo, for use with physical bundles that support card logos. Must have a `purpose` value of `issuing_logo`.
+    # @optional @param carrier_text [Stripe::CarrierTextParam?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param lookup_key [String?] A lookup key used to retrieve personalization designs dynamically from a static string. This may be up to 200 characters.
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param name [String?] Friendly display name.
+    # @optional @param preferences [Stripe::PreferencesParam?]
+    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesign, Integer, Hash)] Stripe::IssuingPersonalizationDesign, response status code and response headers
+    def post_issuing_personalization_designs_with_http_info(
+      *,
+      physical_bundle : String? = nil,
+      card_logo : String? = nil,
+      carrier_text : Stripe::CarrierTextParam? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : String? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesign, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_issuing_personalization_designs(physical_bundle: physical_bundle, card_logo: card_logo, carrier_text: carrier_text, expand: expand, lookup_key: lookup_key, metadata: metadata, name: name, preferences: preferences, transfer_lookup_key: transfer_lookup_key)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#post_issuing_personalization_designs\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesign.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Creates a personalization design object.&lt;/p&gt;
+    # @required @param physical_bundle [String?] The physical bundle object belonging to this personalization design.
+    # @optional @param card_logo [String?] The file for the card logo, for use with physical bundles that support card logos. Must have a `purpose` value of `issuing_logo`.
+    # @optional @param carrier_text [Stripe::CarrierTextParam?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param lookup_key [String?] A lookup key used to retrieve personalization designs dynamically from a static string. This may be up to 200 characters.
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param name [String?] Friendly display name.
+    # @optional @param preferences [Stripe::PreferencesParam?]
+    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+    # @return nil
+    def post_issuing_personalization_designs(
+      *,
+      physical_bundle : String? = nil,
+      card_logo : String? = nil,
+      carrier_text : Stripe::CarrierTextParam? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : String? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_issuing_personalization_designs(physical_bundle: physical_bundle, card_logo: card_logo, carrier_text: carrier_text, expand: expand, lookup_key: lookup_key, metadata: metadata, name: name, preferences: preferences, transfer_lookup_key: transfer_lookup_key).execute(&block)
+    end
+
+    POST_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_PHYSICAL_BUNDLE = 5000
+    POST_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_LOOKUP_KEY      =  200
+    POST_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_NAME            =  200
+
+    # @return Crest::Request
+    def build_api_request_for_post_issuing_personalization_designs(
+      *,
+      physical_bundle : String? = nil,
+      card_logo : String? = nil,
+      carrier_text : Stripe::CarrierTextParam? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : String? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.post_issuing_personalization_designs ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"physical_bundle\" is required and cannot be null") if physical_bundle.nil?
+        unless (_physical_bundle = physical_bundle).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("physical_bundle", physical_bundle.to_s.size, POST_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_PHYSICAL_BUNDLE)
+        end
+
+        unless (_carrier_text = carrier_text).nil?
+          _carrier_text.validate if _carrier_text.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_lookup_key = lookup_key).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("lookup_key", lookup_key.to_s.size, POST_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_LOOKUP_KEY)
+        end
+
+        unless (_name = name).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("name", name.to_s.size, POST_ISSUING_PERSONALIZATION_DESIGNS_MAX_LENGTH_FOR_NAME)
+        end
+        unless (_preferences = preferences).nil?
+          _preferences.validate if _preferences.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/personalization_designs"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("card_logo", card_logo.to_s) if !card_logo.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(carrier_text.to_json), "carrier_text")) if !carrier_text.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("lookup_key", lookup_key.to_s) if !lookup_key.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("name", name.to_s) if !name.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("physical_bundle", physical_bundle.to_s) if !physical_bundle.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(preferences.to_json), "preferences")) if !preferences.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("transfer_lookup_key", transfer_lookup_key.to_s) if !transfer_lookup_key.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "IssuingApi.post_issuing_personalization_designs",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Updates a card personalization object.</p>
+    # @required @param personalization_design [String?]
+    # @optional @param card_logo [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo?]
+    # @optional @param carrier_text [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param lookup_key [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey?]
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param name [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName?]
+    # @optional @param physical_bundle [String?] The physical bundle object belonging to this personalization design.
+    # @optional @param preferences [Stripe::PreferencesParam?]
+    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+    # @return [Stripe::IssuingPersonalizationDesign]
+    def post_issuing_personalization_designs_personalization_design(
+      *,
+      personalization_design : String? = nil,
+      card_logo : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo? = nil,
+      carrier_text : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName? = nil,
+      physical_bundle : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil
+    ) : Stripe::IssuingPersonalizationDesign
+      data, _status_code, _headers = post_issuing_personalization_designs_personalization_design_with_http_info(personalization_design: personalization_design, card_logo: card_logo, carrier_text: carrier_text, expand: expand, lookup_key: lookup_key, metadata: metadata, name: name, physical_bundle: physical_bundle, preferences: preferences, transfer_lookup_key: transfer_lookup_key)
+      data
+    end
+
+    # &lt;p&gt;Updates a card personalization object.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param card_logo [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo?]
+    # @optional @param carrier_text [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param lookup_key [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey?]
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param name [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName?]
+    # @optional @param physical_bundle [String?] The physical bundle object belonging to this personalization design.
+    # @optional @param preferences [Stripe::PreferencesParam?]
+    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesign, Integer, Hash)] Stripe::IssuingPersonalizationDesign, response status code and response headers
+    def post_issuing_personalization_designs_personalization_design_with_http_info(
+      *,
+      personalization_design : String? = nil,
+      card_logo : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo? = nil,
+      carrier_text : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName? = nil,
+      physical_bundle : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesign, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_issuing_personalization_designs_personalization_design(personalization_design: personalization_design, card_logo: card_logo, carrier_text: carrier_text, expand: expand, lookup_key: lookup_key, metadata: metadata, name: name, physical_bundle: physical_bundle, preferences: preferences, transfer_lookup_key: transfer_lookup_key)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#post_issuing_personalization_designs_personalization_design\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesign.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Updates a card personalization object.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param card_logo [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo?]
+    # @optional @param carrier_text [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param lookup_key [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey?]
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param name [Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName?]
+    # @optional @param physical_bundle [String?] The physical bundle object belonging to this personalization design.
+    # @optional @param preferences [Stripe::PreferencesParam?]
+    # @optional @param transfer_lookup_key [Bool?] If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+    # @return nil
+    def post_issuing_personalization_designs_personalization_design(
+      *,
+      personalization_design : String? = nil,
+      card_logo : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo? = nil,
+      carrier_text : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName? = nil,
+      physical_bundle : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_issuing_personalization_designs_personalization_design(personalization_design: personalization_design, card_logo: card_logo, carrier_text: carrier_text, expand: expand, lookup_key: lookup_key, metadata: metadata, name: name, physical_bundle: physical_bundle, preferences: preferences, transfer_lookup_key: transfer_lookup_key).execute(&block)
+    end
+
+    POST_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN = 5000
+    POST_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_MAX_LENGTH_FOR_PHYSICAL_BUNDLE        = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_issuing_personalization_designs_personalization_design(
+      *,
+      personalization_design : String? = nil,
+      card_logo : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo? = nil,
+      carrier_text : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText? = nil,
+      expand : Array(String)? = nil,
+      lookup_key : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey? = nil,
+      metadata : Hash(String, String)? = nil,
+      name : Stripe::PostIssuingPersonalizationDesignsPersonalizationDesignRequestName? = nil,
+      physical_bundle : String? = nil,
+      preferences : Stripe::PreferencesParam? = nil,
+      transfer_lookup_key : Bool? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.post_issuing_personalization_designs_personalization_design ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"personalization_design\" is required and cannot be null") if personalization_design.nil?
+        unless (_personalization_design = personalization_design).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("personalization_design", personalization_design.to_s.size, POST_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN)
+        end
+        unless (_card_logo = card_logo).nil?
+          _card_logo.validate if _card_logo.is_a?(OpenApi::Validatable)
+        end
+        unless (_carrier_text = carrier_text).nil?
+          _carrier_text.validate if _carrier_text.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_lookup_key = lookup_key).nil?
+          _lookup_key.validate if _lookup_key.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_name = name).nil?
+          _name.validate if _name.is_a?(OpenApi::Validatable)
+        end
+        unless (_physical_bundle = physical_bundle).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("physical_bundle", physical_bundle.to_s.size, POST_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_MAX_LENGTH_FOR_PHYSICAL_BUNDLE)
+        end
+        unless (_preferences = preferences).nil?
+          _preferences.validate if _preferences.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/personalization_designs/{personalization_design}".sub("{" + "personalization_design" + "}", URI.encode_path(personalization_design.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(card_logo.to_json), "card_logo")) if !card_logo.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(carrier_text.to_json), "carrier_text")) if !carrier_text.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(lookup_key.to_json), "lookup_key")) if !lookup_key.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(name.to_json), "name")) if !name.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("physical_bundle", physical_bundle.to_s) if !physical_bundle.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(preferences.to_json), "preferences")) if !preferences.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("transfer_lookup_key", transfer_lookup_key.to_s) if !transfer_lookup_key.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "IssuingApi.post_issuing_personalization_designs_personalization_design",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Attempts to update the specified Issuing <code>Token</code> object to the status specified.</p>
+    # @required @param token [String?]
+    # @required @param status [String?] Specifies which status the token should be updated to.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingToken]
+    def post_issuing_tokens_token(
+      *,
+      token : String? = nil,
+      status : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingToken
+      data, _status_code, _headers = post_issuing_tokens_token_with_http_info(token: token, status: status, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Attempts to update the specified Issuing &lt;code&gt;Token&lt;/code&gt; object to the status specified.&lt;/p&gt;
+    # @required @param token [String?]
+    # @required @param status [String?] Specifies which status the token should be updated to.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingToken, Integer, Hash)] Stripe::IssuingToken, response status code and response headers
+    def post_issuing_tokens_token_with_http_info(
+      *,
+      token : String? = nil,
+      status : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingToken, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_issuing_tokens_token(token: token, status: status, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: IssuingApi#post_issuing_tokens_token\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingToken.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Attempts to update the specified Issuing &lt;code&gt;Token&lt;/code&gt; object to the status specified.&lt;/p&gt;
+    # @required @param token [String?]
+    # @required @param status [String?] Specifies which status the token should be updated to.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_issuing_tokens_token(
+      *,
+      token : String? = nil,
+      status : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_issuing_tokens_token(token: token, status: status, expand: expand).execute(&block)
+    end
+
+    POST_ISSUING_TOKENS_TOKEN_MAX_LENGTH_FOR_TOKEN    = 5000
+    POST_ISSUING_TOKENS_TOKEN_VALID_VALUES_FOR_STATUS = String.static_array("active", "deleted", "suspended")
+
+    # @return Crest::Request
+    def build_api_request_for_post_issuing_tokens_token(
+      *,
+      token : String? = nil,
+      status : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: IssuingApi.post_issuing_tokens_token ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"token\" is required and cannot be null") if token.nil?
+        unless (_token = token).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("token", token.to_s.size, POST_ISSUING_TOKENS_TOKEN_MAX_LENGTH_FOR_TOKEN)
+        end
+        raise ArgumentError.new("\"status\" is required and cannot be null") if status.nil?
+        unless (_status = status).nil?
+          OpenApi::EnumValidator.validate("status", _status, POST_ISSUING_TOKENS_TOKEN_VALID_VALUES_FOR_STATUS)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/issuing/tokens/{token}".sub("{" + "token" + "}", URI.encode_path(token.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("status", status.to_s) if !status.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "IssuingApi.post_issuing_tokens_token",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,

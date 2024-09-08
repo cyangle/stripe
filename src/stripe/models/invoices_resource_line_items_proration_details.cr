@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./invoices_resource_line_items_credited_items"
+require "./invoices_resource_line_items_proration_details_credited_items"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "credited_items", type: Stripe::InvoicesResourceLineItemsCreditedItems?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter credited_items : Stripe::InvoicesResourceLineItemsCreditedItems? = nil
+    @[JSON::Field(key: "credited_items", type: Stripe::InvoicesResourceLineItemsProrationDetailsCreditedItems?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter credited_items : Stripe::InvoicesResourceLineItemsProrationDetailsCreditedItems? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @credited_items : Stripe::InvoicesResourceLineItemsCreditedItems? = nil
+      @credited_items : Stripe::InvoicesResourceLineItemsProrationDetailsCreditedItems? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] credited_items Object to be assigned
-    def credited_items=(new_value : Stripe::InvoicesResourceLineItemsCreditedItems?)
+    def credited_items=(new_value : Stripe::InvoicesResourceLineItemsProrationDetailsCreditedItems?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

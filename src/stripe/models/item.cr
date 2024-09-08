@@ -9,9 +9,9 @@
 
 require "../../core"
 
+require "./item_price"
 require "./line_items_discount_amount"
 require "./line_items_tax_amount"
-require "./price"
 
 module Stripe
   # A line item.
@@ -43,11 +43,6 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    # An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.
-    @[JSON::Field(key: "description", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    getter description : String? = nil
-    MAX_LENGTH_FOR_DESCRIPTION = 5000
-
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
@@ -59,8 +54,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [item]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("item")
 
-    @[JSON::Field(key: "price", type: Stripe::Price?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter price : Stripe::Price? = nil
+    @[JSON::Field(key: "price", type: Stripe::ItemPrice?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter price : Stripe::ItemPrice? = nil
 
     # The quantity of products being purchased.
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -69,6 +64,11 @@ module Stripe
     # End of Required Properties
 
     # Optional Properties
+
+    # An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.
+    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # The discounts applied to the line item.
     @[JSON::Field(key: "discounts", type: Array(Stripe::LineItemsDiscountAmount)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -88,12 +88,12 @@ module Stripe
       @amount_tax : Int64? = nil,
       @amount_total : Int64? = nil,
       @currency : String? = nil,
-      @description : String? = nil,
       @id : String? = nil,
       @object : String? = nil,
-      @price : Stripe::Price? = nil,
+      @price : Stripe::ItemPrice? = nil,
       @quantity : Int64? = nil,
       # Optional properties
+      @description : String? = nil,
       @discounts : Array(Stripe::LineItemsDiscountAmount)? = nil,
       @taxes : Array(Stripe::LineItemsTaxAmount)? = nil
     )
@@ -114,13 +114,6 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
-
-      unless (_description = @description).nil?
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-          invalid_properties.push(max_length_error)
-        end
-      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       unless (_id = @id).nil?
@@ -137,6 +130,11 @@ module Stripe
         invalid_properties.concat(_price.list_invalid_properties_for("price")) if _price.is_a?(OpenApi::Validatable)
       end
 
+      unless (_description = @description).nil?
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
+          invalid_properties.push(max_length_error)
+        end
+      end
       unless (_discounts = @discounts).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discounts", container: _discounts)) if _discounts.is_a?(Array)
       end
@@ -159,11 +157,6 @@ module Stripe
 
       return false if @currency.nil?
 
-      return false if @description.nil?
-      unless (_description = @description).nil?
-        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
-      end
-
       return false if @id.nil?
       unless (_id = @id).nil?
         return false if _id.to_s.size > MAX_LENGTH_FOR_ID
@@ -176,6 +169,10 @@ module Stripe
 
       unless (_price = @price).nil?
         return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
+      end
+
+      unless (_description = @description).nil?
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       unless (_discounts = @discounts).nil?
@@ -230,17 +227,6 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] description Object to be assigned
-    def description=(new_value : String?)
-      raise ArgumentError.new("\"description\" is required and cannot be null") if new_value.nil?
-      unless new_value.nil?
-        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
-      end
-
-      @description = new_value
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
     def id=(new_value : String?)
       raise ArgumentError.new("\"id\" is required and cannot be null") if new_value.nil?
@@ -264,7 +250,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(new_value : Stripe::Price?)
+    def price=(new_value : Stripe::ItemPrice?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -276,6 +262,16 @@ module Stripe
     # @param [Object] quantity Object to be assigned
     def quantity=(new_value : Int64?)
       @quantity = new_value
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] description Object to be assigned
+    def description=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("description", new_value.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
+      end
+
+      @description = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -302,6 +298,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount_discount, @amount_subtotal, @amount_tax, @amount_total, @currency, @description, @id, @object, @price, @quantity, @discounts, @taxes)
+    def_equals_and_hash(@amount_discount, @amount_subtotal, @amount_tax, @amount_total, @currency, @id, @object, @price, @quantity, @description, @discounts, @taxes)
   end
 end

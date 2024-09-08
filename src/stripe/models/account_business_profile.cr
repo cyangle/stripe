@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./account_annual_revenue"
+require "./account_business_profile_annual_revenue"
+require "./account_business_profile_support_address"
 require "./account_monthly_estimated_revenue"
-require "./address"
 
 module Stripe
   #
@@ -23,8 +23,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "annual_revenue", type: Stripe::AccountAnnualRevenue?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter annual_revenue : Stripe::AccountAnnualRevenue? = nil
+    @[JSON::Field(key: "annual_revenue", type: Stripe::AccountBusinessProfileAnnualRevenue?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter annual_revenue : Stripe::AccountBusinessProfileAnnualRevenue? = nil
 
     # An estimated upper bound of employees, contractors, vendors, etc. currently working for the business.
     @[JSON::Field(key: "estimated_worker_count", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -40,8 +40,8 @@ module Stripe
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    @[JSON::Field(key: "support_address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter support_address : Stripe::Address? = nil
+    @[JSON::Field(key: "support_address", type: Stripe::AccountBusinessProfileSupportAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter support_address : Stripe::AccountBusinessProfileSupportAddress? = nil
 
     # A publicly available email address for sending support issues to.
     @[JSON::Field(key: "support_email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -83,11 +83,11 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @annual_revenue : Stripe::AccountAnnualRevenue? = nil,
+      @annual_revenue : Stripe::AccountBusinessProfileAnnualRevenue? = nil,
       @estimated_worker_count : Int64? = nil,
       @mcc : String? = nil,
       @name : String? = nil,
-      @support_address : Stripe::Address? = nil,
+      @support_address : Stripe::AccountBusinessProfileSupportAddress? = nil,
       @support_email : String? = nil,
       @support_phone : String? = nil,
       @support_url : String? = nil,
@@ -199,7 +199,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] annual_revenue Object to be assigned
-    def annual_revenue=(new_value : Stripe::AccountAnnualRevenue?)
+    def annual_revenue=(new_value : Stripe::AccountBusinessProfileAnnualRevenue?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -235,7 +235,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] support_address Object to be assigned
-    def support_address=(new_value : Stripe::Address?)
+    def support_address=(new_value : Stripe::AccountBusinessProfileSupportAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

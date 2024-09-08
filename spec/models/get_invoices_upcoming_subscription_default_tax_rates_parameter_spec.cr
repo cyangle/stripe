@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/get_invoices_upcoming_subscription_default_tax_rates_parameter"
 
 describe Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter do
-  describe "test an instance of GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter" do
-    it "should create an instance of GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter" do
-      # instance = Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter.new
-      # (instance).should be_a(Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter)
-    end
-  end
 end

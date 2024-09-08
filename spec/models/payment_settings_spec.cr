@@ -25,10 +25,6 @@ describe Stripe::PaymentSettings do
     it "should work" do
       # instance = Stripe::PaymentSettings.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentSettings::ENUM_VALIDATOR_FOR_DEFAULT_MANDATE
-      # validator.allowable_values.each do |value|
-      #   instance.default_mandate = value.as(String)
-      # end
     end
   end
 

@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./bank_connections_resource_accountholder"
 require "./bank_connections_resource_link_account_session_filters"
 require "./bank_connections_resource_linked_account_list"
+require "./financial_connections_session_account_holder"
 
 module Stripe
   # A Financial Connections Session is the secure way to programmatically launch the client-side Stripe.js modal that lets your users link their accounts.
@@ -23,8 +23,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "account_holder", type: Stripe::BankConnectionsResourceAccountholder?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter account_holder : Stripe::BankConnectionsResourceAccountholder? = nil
+    @[JSON::Field(key: "account_holder", type: Stripe::FinancialConnectionsSessionAccountHolder?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter account_holder : Stripe::FinancialConnectionsSessionAccountHolder? = nil
 
     @[JSON::Field(key: "accounts", type: Stripe::BankConnectionsResourceLinkedAccountList?, default: nil, required: true, nullable: false, emit_null: false)]
     getter accounts : Stripe::BankConnectionsResourceLinkedAccountList? = nil
@@ -78,7 +78,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @account_holder : Stripe::BankConnectionsResourceAccountholder? = nil,
+      @account_holder : Stripe::FinancialConnectionsSessionAccountHolder? = nil,
       @accounts : Stripe::BankConnectionsResourceLinkedAccountList? = nil,
       @client_secret : String? = nil,
       @id : String? = nil,
@@ -196,7 +196,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder Object to be assigned
-    def account_holder=(new_value : Stripe::BankConnectionsResourceAccountholder?)
+    def account_holder=(new_value : Stripe::FinancialConnectionsSessionAccountHolder?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

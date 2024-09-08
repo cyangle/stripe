@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_invoices_invoice_request_effective_at"
 
 describe Stripe::PostInvoicesInvoiceRequestEffectiveAt do
-  describe "test an instance of PostInvoicesInvoiceRequestEffectiveAt" do
-    it "should create an instance of PostInvoicesInvoiceRequestEffectiveAt" do
-      # instance = Stripe::PostInvoicesInvoiceRequestEffectiveAt.new
-      # (instance).should be_a(Stripe::PostInvoicesInvoiceRequestEffectiveAt)
-    end
-  end
 end

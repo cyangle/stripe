@@ -9,23 +9,23 @@
 
 require "../../core"
 
-require "./api_errors"
 require "./payment_flows_amount_details"
-require "./payment_flows_automatic_payment_methods_payment_intent"
 require "./payment_intent_application"
+require "./payment_intent_automatic_payment_methods"
 require "./payment_intent_customer"
 require "./payment_intent_invoice"
+require "./payment_intent_last_payment_error"
 require "./payment_intent_latest_charge"
-require "./payment_intent_next_action"
+require "./payment_intent_next_action1"
 require "./payment_intent_on_behalf_of"
 require "./payment_intent_payment_method"
-require "./payment_intent_payment_method_options"
-require "./payment_intent_processing"
+require "./payment_intent_payment_method_configuration_details"
+require "./payment_intent_payment_method_options1"
+require "./payment_intent_processing1"
 require "./payment_intent_review"
+require "./payment_intent_shipping"
 require "./payment_intent_source"
-require "./payment_method_config_biz_payment_method_configuration_details"
-require "./shipping"
-require "./transfer_data"
+require "./payment_intent_transfer_data"
 
 module Stripe
   # A PaymentIntent guides you through the process of collecting a payment from your customer. We recommend that you create exactly one PaymentIntent for each order or customer session in your system. You can reference the PaymentIntent later to see the history of payment attempts for a particular session.  A PaymentIntent transitions through [multiple statuses](https://stripe.com/docs/payments/intents#intent-statuses) throughout its lifetime as it interfaces with Stripe.js to perform authentication flows and ultimately creates at most one successful charge.  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents)
@@ -56,8 +56,8 @@ module Stripe
     @[JSON::Field(key: "application_fee_amount", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
     getter application_fee_amount : Int64? = nil
 
-    @[JSON::Field(key: "automatic_payment_methods", type: Stripe::PaymentFlowsAutomaticPaymentMethodsPaymentIntent?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter automatic_payment_methods : Stripe::PaymentFlowsAutomaticPaymentMethodsPaymentIntent? = nil
+    @[JSON::Field(key: "automatic_payment_methods", type: Stripe::PaymentIntentAutomaticPaymentMethods?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter automatic_payment_methods : Stripe::PaymentIntentAutomaticPaymentMethods? = nil
 
     # Populated when `status` is `canceled`, this is the time at which the PaymentIntent was canceled. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "canceled_at", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -110,8 +110,8 @@ module Stripe
     @[JSON::Field(key: "invoice", type: Stripe::PaymentIntentInvoice?, default: nil, required: true, nullable: true, emit_null: true)]
     getter invoice : Stripe::PaymentIntentInvoice? = nil
 
-    @[JSON::Field(key: "last_payment_error", type: Stripe::ApiErrors?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter last_payment_error : Stripe::ApiErrors? = nil
+    @[JSON::Field(key: "last_payment_error", type: Stripe::PaymentIntentLastPaymentError?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter last_payment_error : Stripe::PaymentIntentLastPaymentError? = nil
 
     @[JSON::Field(key: "latest_charge", type: Stripe::PaymentIntentLatestCharge?, default: nil, required: true, nullable: true, emit_null: true)]
     getter latest_charge : Stripe::PaymentIntentLatestCharge? = nil
@@ -123,8 +123,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "next_action", type: Stripe::PaymentIntentNextAction?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter next_action : Stripe::PaymentIntentNextAction? = nil
+    @[JSON::Field(key: "next_action", type: Stripe::PaymentIntentNextAction1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter next_action : Stripe::PaymentIntentNextAction1? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -138,18 +138,18 @@ module Stripe
     @[JSON::Field(key: "payment_method", type: Stripe::PaymentIntentPaymentMethod?, default: nil, required: true, nullable: true, emit_null: true)]
     getter payment_method : Stripe::PaymentIntentPaymentMethod? = nil
 
-    @[JSON::Field(key: "payment_method_configuration_details", type: Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_configuration_details : Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails? = nil
+    @[JSON::Field(key: "payment_method_configuration_details", type: Stripe::PaymentIntentPaymentMethodConfigurationDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_configuration_details : Stripe::PaymentIntentPaymentMethodConfigurationDetails? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentIntentPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_options : Stripe::PaymentIntentPaymentMethodOptions? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentIntentPaymentMethodOptions1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_options : Stripe::PaymentIntentPaymentMethodOptions1? = nil
 
     # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_method_types : Array(String)? = nil
 
-    @[JSON::Field(key: "processing", type: Stripe::PaymentIntentProcessing?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter processing : Stripe::PaymentIntentProcessing? = nil
+    @[JSON::Field(key: "processing", type: Stripe::PaymentIntentProcessing1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter processing : Stripe::PaymentIntentProcessing1? = nil
 
     # Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
     @[JSON::Field(key: "receipt_email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -165,8 +165,8 @@ module Stripe
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
     VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("off_session", "on_session")
 
-    @[JSON::Field(key: "shipping", type: Stripe::Shipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping : Stripe::Shipping? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::PaymentIntentShipping?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping : Stripe::PaymentIntentShipping? = nil
 
     @[JSON::Field(key: "source", type: Stripe::PaymentIntentSource?, default: nil, required: true, nullable: true, emit_null: true)]
     getter source : Stripe::PaymentIntentSource? = nil
@@ -187,8 +187,8 @@ module Stripe
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, processing, requires_action, requires_capture, requires_confirmation, requires_payment_method, succeeded]."
     VALID_VALUES_FOR_STATUS  = String.static_array("canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded")
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::TransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::TransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::PaymentIntentTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::PaymentIntentTransferData? = nil
 
     # A string that identifies the resulting payment as part of a group. Learn more about the [use case for connected accounts](https://stripe.com/docs/connect/separate-charges-and-transfers).
     @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -212,7 +212,7 @@ module Stripe
       @amount_received : Int64? = nil,
       @application : Stripe::PaymentIntentApplication? = nil,
       @application_fee_amount : Int64? = nil,
-      @automatic_payment_methods : Stripe::PaymentFlowsAutomaticPaymentMethodsPaymentIntent? = nil,
+      @automatic_payment_methods : Stripe::PaymentIntentAutomaticPaymentMethods? = nil,
       @canceled_at : Int64? = nil,
       @cancellation_reason : String? = nil,
       @capture_method : String? = nil,
@@ -224,27 +224,27 @@ module Stripe
       @description : String? = nil,
       @id : String? = nil,
       @invoice : Stripe::PaymentIntentInvoice? = nil,
-      @last_payment_error : Stripe::ApiErrors? = nil,
+      @last_payment_error : Stripe::PaymentIntentLastPaymentError? = nil,
       @latest_charge : Stripe::PaymentIntentLatestCharge? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
-      @next_action : Stripe::PaymentIntentNextAction? = nil,
+      @next_action : Stripe::PaymentIntentNextAction1? = nil,
       @object : String? = nil,
       @on_behalf_of : Stripe::PaymentIntentOnBehalfOf? = nil,
       @payment_method : Stripe::PaymentIntentPaymentMethod? = nil,
-      @payment_method_configuration_details : Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails? = nil,
-      @payment_method_options : Stripe::PaymentIntentPaymentMethodOptions? = nil,
+      @payment_method_configuration_details : Stripe::PaymentIntentPaymentMethodConfigurationDetails? = nil,
+      @payment_method_options : Stripe::PaymentIntentPaymentMethodOptions1? = nil,
       @payment_method_types : Array(String)? = nil,
-      @processing : Stripe::PaymentIntentProcessing? = nil,
+      @processing : Stripe::PaymentIntentProcessing1? = nil,
       @receipt_email : String? = nil,
       @review : Stripe::PaymentIntentReview? = nil,
       @setup_future_usage : String? = nil,
-      @shipping : Stripe::Shipping? = nil,
+      @shipping : Stripe::PaymentIntentShipping? = nil,
       @source : Stripe::PaymentIntentSource? = nil,
       @statement_descriptor : String? = nil,
       @statement_descriptor_suffix : String? = nil,
       @status : String? = nil,
-      @transfer_data : Stripe::TransferData? = nil,
+      @transfer_data : Stripe::PaymentIntentTransferData? = nil,
       @transfer_group : String? = nil,
       # Optional properties
       @amount_details : Stripe::PaymentFlowsAmountDetails? = nil
@@ -580,7 +580,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_payment_methods Object to be assigned
-    def automatic_payment_methods=(new_value : Stripe::PaymentFlowsAutomaticPaymentMethodsPaymentIntent?)
+    def automatic_payment_methods=(new_value : Stripe::PaymentIntentAutomaticPaymentMethods?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -695,7 +695,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_payment_error Object to be assigned
-    def last_payment_error=(new_value : Stripe::ApiErrors?)
+    def last_payment_error=(new_value : Stripe::PaymentIntentLastPaymentError?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -731,7 +731,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] next_action Object to be assigned
-    def next_action=(new_value : Stripe::PaymentIntentNextAction?)
+    def next_action=(new_value : Stripe::PaymentIntentNextAction1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -772,7 +772,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_configuration_details Object to be assigned
-    def payment_method_configuration_details=(new_value : Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails?)
+    def payment_method_configuration_details=(new_value : Stripe::PaymentIntentPaymentMethodConfigurationDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -782,7 +782,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(new_value : Stripe::PaymentIntentPaymentMethodOptions?)
+    def payment_method_options=(new_value : Stripe::PaymentIntentPaymentMethodOptions1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -800,7 +800,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] processing Object to be assigned
-    def processing=(new_value : Stripe::PaymentIntentProcessing?)
+    def processing=(new_value : Stripe::PaymentIntentProcessing1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -840,7 +840,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(new_value : Stripe::Shipping?)
+    def shipping=(new_value : Stripe::PaymentIntentShipping?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -891,7 +891,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::TransferData?)
+    def transfer_data=(new_value : Stripe::PaymentIntentTransferData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

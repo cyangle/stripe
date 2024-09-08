@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_products_id_request_marketing_features"
 
 describe Stripe::PostProductsIdRequestMarketingFeatures do
-  describe "test an instance of PostProductsIdRequestMarketingFeatures" do
-    it "should create an instance of PostProductsIdRequestMarketingFeatures" do
-      # instance = Stripe::PostProductsIdRequestMarketingFeatures.new
-      # (instance).should be_a(Stripe::PostProductsIdRequestMarketingFeatures)
-    end
-  end
 end

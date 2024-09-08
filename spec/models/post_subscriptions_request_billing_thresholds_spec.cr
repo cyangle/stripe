@@ -14,24 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscriptions_request_billing_thresholds"
 
 describe Stripe::PostSubscriptionsRequestBillingThresholds do
-  describe "test an instance of PostSubscriptionsRequestBillingThresholds" do
-    it "should create an instance of PostSubscriptionsRequestBillingThresholds" do
-      # instance = Stripe::PostSubscriptionsRequestBillingThresholds.new
-      # (instance).should be_a(Stripe::PostSubscriptionsRequestBillingThresholds)
-    end
-  end
-
-  describe "test attribute 'amount_gte'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsRequestBillingThresholds.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'reset_billing_cycle_anchor'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsRequestBillingThresholds.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/individual_relationship_specs_percent_ownership"
 
 describe Stripe::IndividualRelationshipSpecsPercentOwnership do
-  describe "test an instance of IndividualRelationshipSpecsPercentOwnership" do
-    it "should create an instance of IndividualRelationshipSpecsPercentOwnership" do
-      # instance = Stripe::IndividualRelationshipSpecsPercentOwnership.new
-      # (instance).should be_a(Stripe::IndividualRelationshipSpecsPercentOwnership)
-    end
-  end
 end

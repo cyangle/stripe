@@ -103,10 +103,6 @@ describe Stripe::PhaseConfigurationParams do
     it "should work" do
       # instance = Stripe::PhaseConfigurationParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PhaseConfigurationParams::ENUM_VALIDATOR_FOR_DESCRIPTION
-      # validator.allowable_values.each do |value|
-      #   instance.description = value.as(String)
-      # end
     end
   end
 

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_details_params_trial_end"
 
 describe Stripe::SubscriptionDetailsParamsTrialEnd do
-  describe "test an instance of SubscriptionDetailsParamsTrialEnd" do
-    it "should create an instance of SubscriptionDetailsParamsTrialEnd" do
-      # instance = Stripe::SubscriptionDetailsParamsTrialEnd.new
-      # (instance).should be_a(Stripe::SubscriptionDetailsParamsTrialEnd)
-    end
-  end
 end

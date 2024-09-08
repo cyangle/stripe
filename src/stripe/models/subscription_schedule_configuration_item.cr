@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./discounts_resource_stackable_discount"
-require "./subscription_item_billing_thresholds"
+require "./subscription_item_billing_thresholds1"
 require "./subscription_schedule_configuration_item_plan"
 require "./subscription_schedule_configuration_item_price"
 require "./tax_rate"
@@ -25,8 +25,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemBillingThresholds?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter billing_thresholds : Stripe::SubscriptionItemBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemBillingThresholds1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter billing_thresholds : Stripe::SubscriptionItemBillingThresholds1? = nil
 
     # The discounts applied to the subscription item. Subscription item discounts are applied before subscription discounts. Use `expand[]=discounts` to expand each discount.
     @[JSON::Field(key: "discounts", type: Array(Stripe::DiscountsResourceStackableDiscount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,7 +61,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @billing_thresholds : Stripe::SubscriptionItemBillingThresholds? = nil,
+      @billing_thresholds : Stripe::SubscriptionItemBillingThresholds1? = nil,
       @discounts : Array(Stripe::DiscountsResourceStackableDiscount)? = nil,
       @metadata : Hash(String, String)? = nil,
       @plan : Stripe::SubscriptionScheduleConfigurationItemPlan? = nil,
@@ -134,7 +134,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::SubscriptionItemBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::SubscriptionItemBillingThresholds1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

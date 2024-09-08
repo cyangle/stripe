@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_method_details_konbini_store"
+require "./payment_method_details_konbini_store1"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "store", type: Stripe::PaymentMethodDetailsKonbiniStore?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter store : Stripe::PaymentMethodDetailsKonbiniStore? = nil
+    @[JSON::Field(key: "store", type: Stripe::PaymentMethodDetailsKonbiniStore1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter store : Stripe::PaymentMethodDetailsKonbiniStore1? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @store : Stripe::PaymentMethodDetailsKonbiniStore? = nil
+      @store : Stripe::PaymentMethodDetailsKonbiniStore1? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] store Object to be assigned
-    def store=(new_value : Stripe::PaymentMethodDetailsKonbiniStore?)
+    def store=(new_value : Stripe::PaymentMethodDetailsKonbiniStore1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

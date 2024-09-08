@@ -9,7 +9,8 @@
 
 require "../../core"
 
-require "./shipping_rate_delivery_estimate_bound"
+require "./shipping_rate_delivery_estimate_maximum"
+require "./shipping_rate_delivery_estimate_minimum"
 
 module Stripe
   #
@@ -21,11 +22,11 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "maximum", type: Stripe::ShippingRateDeliveryEstimateBound?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter maximum : Stripe::ShippingRateDeliveryEstimateBound? = nil
+    @[JSON::Field(key: "maximum", type: Stripe::ShippingRateDeliveryEstimateMaximum?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter maximum : Stripe::ShippingRateDeliveryEstimateMaximum? = nil
 
-    @[JSON::Field(key: "minimum", type: Stripe::ShippingRateDeliveryEstimateBound?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter minimum : Stripe::ShippingRateDeliveryEstimateBound? = nil
+    @[JSON::Field(key: "minimum", type: Stripe::ShippingRateDeliveryEstimateMinimum?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter minimum : Stripe::ShippingRateDeliveryEstimateMinimum? = nil
 
     # End of Required Properties
 
@@ -34,8 +35,8 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @maximum : Stripe::ShippingRateDeliveryEstimateBound? = nil,
-      @minimum : Stripe::ShippingRateDeliveryEstimateBound? = nil
+      @maximum : Stripe::ShippingRateDeliveryEstimateMaximum? = nil,
+      @minimum : Stripe::ShippingRateDeliveryEstimateMinimum? = nil
     )
     end
 
@@ -69,7 +70,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] maximum Object to be assigned
-    def maximum=(new_value : Stripe::ShippingRateDeliveryEstimateBound?)
+    def maximum=(new_value : Stripe::ShippingRateDeliveryEstimateMaximum?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -79,7 +80,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] minimum Object to be assigned
-    def minimum=(new_value : Stripe::ShippingRateDeliveryEstimateBound?)
+    def minimum=(new_value : Stripe::ShippingRateDeliveryEstimateMinimum?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

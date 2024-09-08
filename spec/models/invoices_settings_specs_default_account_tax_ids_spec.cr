@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/invoices_settings_specs_default_account_tax_ids"
 
 describe Stripe::InvoicesSettingsSpecsDefaultAccountTaxIds do
-  describe "test an instance of InvoicesSettingsSpecsDefaultAccountTaxIds" do
-    it "should create an instance of InvoicesSettingsSpecsDefaultAccountTaxIds" do
-      # instance = Stripe::InvoicesSettingsSpecsDefaultAccountTaxIds.new
-      # (instance).should be_a(Stripe::InvoicesSettingsSpecsDefaultAccountTaxIds)
-    end
-  end
 end

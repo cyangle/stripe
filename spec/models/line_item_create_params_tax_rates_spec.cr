@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/line_item_create_params_tax_rates"
 
 describe Stripe::LineItemCreateParamsTaxRates do
-  describe "test an instance of LineItemCreateParamsTaxRates" do
-    it "should create an instance of LineItemCreateParamsTaxRates" do
-      # instance = Stripe::LineItemCreateParamsTaxRates.new
-      # (instance).should be_a(Stripe::LineItemCreateParamsTaxRates)
-    end
-  end
 end

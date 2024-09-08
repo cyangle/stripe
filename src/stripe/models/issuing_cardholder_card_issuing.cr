@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./issuing_cardholder_user_terms_acceptance"
+require "./issuing_cardholder_card_issuing_user_terms_acceptance"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "user_terms_acceptance", type: Stripe::IssuingCardholderUserTermsAcceptance?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter user_terms_acceptance : Stripe::IssuingCardholderUserTermsAcceptance? = nil
+    @[JSON::Field(key: "user_terms_acceptance", type: Stripe::IssuingCardholderCardIssuingUserTermsAcceptance?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter user_terms_acceptance : Stripe::IssuingCardholderCardIssuingUserTermsAcceptance? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @user_terms_acceptance : Stripe::IssuingCardholderUserTermsAcceptance? = nil
+      @user_terms_acceptance : Stripe::IssuingCardholderCardIssuingUserTermsAcceptance? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_terms_acceptance Object to be assigned
-    def user_terms_acceptance=(new_value : Stripe::IssuingCardholderUserTermsAcceptance?)
+    def user_terms_acceptance=(new_value : Stripe::IssuingCardholderCardIssuingUserTermsAcceptance?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

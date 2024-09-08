@@ -9,12 +9,12 @@
 
 require "../../core"
 
-require "./outbound_payments_payment_method_details"
+require "./treasury_outbound_payment_destination_payment_method_details"
+require "./treasury_outbound_payment_end_user_details"
+require "./treasury_outbound_payment_returned_details"
+require "./treasury_outbound_payment_tracking_details"
 require "./treasury_outbound_payment_transaction"
-require "./treasury_outbound_payments_resource_outbound_payment_resource_end_user_details"
 require "./treasury_outbound_payments_resource_outbound_payment_resource_status_transitions"
-require "./treasury_outbound_payments_resource_outbound_payment_resource_tracking_details"
-require "./treasury_outbound_payments_resource_returned_status"
 
 module Stripe
   # Use [OutboundPayments](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments) to send funds to another party's external bank account or [FinancialAccount](https://stripe.com/docs/api#financial_accounts). To send money to an account belonging to the same user, use an [OutboundTransfer](https://stripe.com/docs/api#outbound_transfers).  Simulate OutboundPayment state changes with the `/v1/test_helpers/treasury/outbound_payments` endpoints. These methods can only be called on test mode objects.  Related guide: [Moving money with Treasury using OutboundPayment objects](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments)
@@ -57,11 +57,11 @@ module Stripe
     getter destination_payment_method : String? = nil
     MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "destination_payment_method_details", type: Stripe::OutboundPaymentsPaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter destination_payment_method_details : Stripe::OutboundPaymentsPaymentMethodDetails? = nil
+    @[JSON::Field(key: "destination_payment_method_details", type: Stripe::TreasuryOutboundPaymentDestinationPaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter destination_payment_method_details : Stripe::TreasuryOutboundPaymentDestinationPaymentMethodDetails? = nil
 
-    @[JSON::Field(key: "end_user_details", type: Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter end_user_details : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDetails? = nil
+    @[JSON::Field(key: "end_user_details", type: Stripe::TreasuryOutboundPaymentEndUserDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter end_user_details : Stripe::TreasuryOutboundPaymentEndUserDetails? = nil
 
     # The date when funds are expected to arrive in the destination account.
     @[JSON::Field(key: "expected_arrival_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -95,8 +95,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.outbound_payment]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.outbound_payment")
 
-    @[JSON::Field(key: "returned_details", type: Stripe::TreasuryOutboundPaymentsResourceReturnedStatus?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter returned_details : Stripe::TreasuryOutboundPaymentsResourceReturnedStatus? = nil
+    @[JSON::Field(key: "returned_details", type: Stripe::TreasuryOutboundPaymentReturnedDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter returned_details : Stripe::TreasuryOutboundPaymentReturnedDetails? = nil
 
     # The description that appears on the receiving end for an OutboundPayment (for example, bank statement for external bank transfer).
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -112,8 +112,8 @@ module Stripe
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions? = nil
 
-    @[JSON::Field(key: "tracking_details", type: Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter tracking_details : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetails? = nil
+    @[JSON::Field(key: "tracking_details", type: Stripe::TreasuryOutboundPaymentTrackingDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter tracking_details : Stripe::TreasuryOutboundPaymentTrackingDetails? = nil
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
@@ -132,8 +132,8 @@ module Stripe
       @customer : String? = nil,
       @description : String? = nil,
       @destination_payment_method : String? = nil,
-      @destination_payment_method_details : Stripe::OutboundPaymentsPaymentMethodDetails? = nil,
-      @end_user_details : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDetails? = nil,
+      @destination_payment_method_details : Stripe::TreasuryOutboundPaymentDestinationPaymentMethodDetails? = nil,
+      @end_user_details : Stripe::TreasuryOutboundPaymentEndUserDetails? = nil,
       @expected_arrival_date : Int64? = nil,
       @financial_account : String? = nil,
       @hosted_regulatory_receipt_url : String? = nil,
@@ -141,11 +141,11 @@ module Stripe
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
-      @returned_details : Stripe::TreasuryOutboundPaymentsResourceReturnedStatus? = nil,
+      @returned_details : Stripe::TreasuryOutboundPaymentReturnedDetails? = nil,
       @statement_descriptor : String? = nil,
       @status : String? = nil,
       @status_transitions : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions? = nil,
-      @tracking_details : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetails? = nil,
+      @tracking_details : Stripe::TreasuryOutboundPaymentTrackingDetails? = nil,
       @transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
     )
     end
@@ -396,7 +396,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination_payment_method_details Object to be assigned
-    def destination_payment_method_details=(new_value : Stripe::OutboundPaymentsPaymentMethodDetails?)
+    def destination_payment_method_details=(new_value : Stripe::TreasuryOutboundPaymentDestinationPaymentMethodDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -406,7 +406,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_user_details Object to be assigned
-    def end_user_details=(new_value : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDetails?)
+    def end_user_details=(new_value : Stripe::TreasuryOutboundPaymentEndUserDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -483,7 +483,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] returned_details Object to be assigned
-    def returned_details=(new_value : Stripe::TreasuryOutboundPaymentsResourceReturnedStatus?)
+    def returned_details=(new_value : Stripe::TreasuryOutboundPaymentReturnedDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -526,7 +526,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tracking_details Object to be assigned
-    def tracking_details=(new_value : Stripe::TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetails?)
+    def tracking_details=(new_value : Stripe::TreasuryOutboundPaymentTrackingDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

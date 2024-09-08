@@ -9,6 +9,12 @@
 
 require "../../core"
 
+require "./canceled_additional_documentation"
+require "./canceled_explanation"
+require "./duplicate_card_statement"
+require "./duplicate_cash_receipt"
+require "./duplicate_check_image"
+
 module Stripe
   class Duplicate
     include JSON::Serializable
@@ -18,30 +24,20 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_documentation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter additional_documentation : String? = nil
-    ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION = "invalid value for \"additional_documentation\", must be one of []."
-    VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION  = String.static_array("")
+    @[JSON::Field(key: "additional_documentation", type: Stripe::CanceledAdditionalDocumentation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter additional_documentation : Stripe::CanceledAdditionalDocumentation? = nil
 
-    @[JSON::Field(key: "card_statement", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter card_statement : String? = nil
-    ERROR_MESSAGE_FOR_CARD_STATEMENT = "invalid value for \"card_statement\", must be one of []."
-    VALID_VALUES_FOR_CARD_STATEMENT  = String.static_array("")
+    @[JSON::Field(key: "card_statement", type: Stripe::DuplicateCardStatement?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card_statement : Stripe::DuplicateCardStatement? = nil
 
-    @[JSON::Field(key: "cash_receipt", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter cash_receipt : String? = nil
-    ERROR_MESSAGE_FOR_CASH_RECEIPT = "invalid value for \"cash_receipt\", must be one of []."
-    VALID_VALUES_FOR_CASH_RECEIPT  = String.static_array("")
+    @[JSON::Field(key: "cash_receipt", type: Stripe::DuplicateCashReceipt?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter cash_receipt : Stripe::DuplicateCashReceipt? = nil
 
-    @[JSON::Field(key: "check_image", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter check_image : String? = nil
-    ERROR_MESSAGE_FOR_CHECK_IMAGE = "invalid value for \"check_image\", must be one of []."
-    VALID_VALUES_FOR_CHECK_IMAGE  = String.static_array("")
+    @[JSON::Field(key: "check_image", type: Stripe::DuplicateCheckImage?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter check_image : Stripe::DuplicateCheckImage? = nil
 
-    @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter explanation : String? = nil
-    ERROR_MESSAGE_FOR_EXPLANATION = "invalid value for \"explanation\", must be one of []."
-    VALID_VALUES_FOR_EXPLANATION  = String.static_array("")
+    @[JSON::Field(key: "explanation", type: Stripe::CanceledExplanation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter explanation : Stripe::CanceledExplanation? = nil
 
     # Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.
     @[JSON::Field(key: "original_transaction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -53,11 +49,11 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @additional_documentation : String? = nil,
-      @card_statement : String? = nil,
-      @cash_receipt : String? = nil,
-      @check_image : String? = nil,
-      @explanation : String? = nil,
+      @additional_documentation : Stripe::CanceledAdditionalDocumentation? = nil,
+      @card_statement : Stripe::DuplicateCardStatement? = nil,
+      @cash_receipt : Stripe::DuplicateCashReceipt? = nil,
+      @check_image : Stripe::DuplicateCheckImage? = nil,
+      @explanation : Stripe::CanceledExplanation? = nil,
       @original_transaction : String? = nil
     )
     end
@@ -68,19 +64,19 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_additional_documentation = @additional_documentation).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION) unless OpenApi::EnumValidator.valid?(_additional_documentation, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       unless (_card_statement = @card_statement).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CARD_STATEMENT) unless OpenApi::EnumValidator.valid?(_card_statement, VALID_VALUES_FOR_CARD_STATEMENT)
+        invalid_properties.concat(_card_statement.list_invalid_properties_for("card_statement")) if _card_statement.is_a?(OpenApi::Validatable)
       end
       unless (_cash_receipt = @cash_receipt).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CASH_RECEIPT) unless OpenApi::EnumValidator.valid?(_cash_receipt, VALID_VALUES_FOR_CASH_RECEIPT)
+        invalid_properties.concat(_cash_receipt.list_invalid_properties_for("cash_receipt")) if _cash_receipt.is_a?(OpenApi::Validatable)
       end
       unless (_check_image = @check_image).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CHECK_IMAGE) unless OpenApi::EnumValidator.valid?(_check_image, VALID_VALUES_FOR_CHECK_IMAGE)
+        invalid_properties.concat(_check_image.list_invalid_properties_for("check_image")) if _check_image.is_a?(OpenApi::Validatable)
       end
       unless (_explanation = @explanation).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_EXPLANATION) unless OpenApi::EnumValidator.valid?(_explanation, VALID_VALUES_FOR_EXPLANATION)
+        invalid_properties.concat(_explanation.list_invalid_properties_for("explanation")) if _explanation.is_a?(OpenApi::Validatable)
       end
       unless (_original_transaction = @original_transaction).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, MAX_LENGTH_FOR_ORIGINAL_TRANSACTION)
@@ -94,23 +90,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_additional_documentation = @additional_documentation).nil?
-        return false unless OpenApi::EnumValidator.valid?(_additional_documentation, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
       unless (_card_statement = @card_statement).nil?
-        return false unless OpenApi::EnumValidator.valid?(_card_statement, VALID_VALUES_FOR_CARD_STATEMENT)
+        return false if _card_statement.is_a?(OpenApi::Validatable) && !_card_statement.valid?
       end
 
       unless (_cash_receipt = @cash_receipt).nil?
-        return false unless OpenApi::EnumValidator.valid?(_cash_receipt, VALID_VALUES_FOR_CASH_RECEIPT)
+        return false if _cash_receipt.is_a?(OpenApi::Validatable) && !_cash_receipt.valid?
       end
 
       unless (_check_image = @check_image).nil?
-        return false unless OpenApi::EnumValidator.valid?(_check_image, VALID_VALUES_FOR_CHECK_IMAGE)
+        return false if _check_image.is_a?(OpenApi::Validatable) && !_check_image.valid?
       end
 
       unless (_explanation = @explanation).nil?
-        return false unless OpenApi::EnumValidator.valid?(_explanation, VALID_VALUES_FOR_EXPLANATION)
+        return false if _explanation.is_a?(OpenApi::Validatable) && !_explanation.valid?
       end
 
       unless (_original_transaction = @original_transaction).nil?
@@ -122,9 +118,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(new_value : String?)
+    def additional_documentation=(new_value : Stripe::CanceledAdditionalDocumentation?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("additional_documentation", new_value, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @additional_documentation = new_value
@@ -132,9 +128,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_statement Object to be assigned
-    def card_statement=(new_value : String?)
+    def card_statement=(new_value : Stripe::DuplicateCardStatement?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("card_statement", new_value, VALID_VALUES_FOR_CARD_STATEMENT)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @card_statement = new_value
@@ -142,9 +138,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash_receipt Object to be assigned
-    def cash_receipt=(new_value : String?)
+    def cash_receipt=(new_value : Stripe::DuplicateCashReceipt?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("cash_receipt", new_value, VALID_VALUES_FOR_CASH_RECEIPT)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @cash_receipt = new_value
@@ -152,9 +148,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] check_image Object to be assigned
-    def check_image=(new_value : String?)
+    def check_image=(new_value : Stripe::DuplicateCheckImage?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("check_image", new_value, VALID_VALUES_FOR_CHECK_IMAGE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @check_image = new_value
@@ -162,9 +158,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(new_value : String?)
+    def explanation=(new_value : Stripe::CanceledExplanation?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("explanation", new_value, VALID_VALUES_FOR_EXPLANATION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @explanation = new_value

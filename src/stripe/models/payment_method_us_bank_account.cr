@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./payment_method_us_bank_account_status_details"
-require "./us_bank_account_networks"
+require "./payment_method_us_bank_account_networks"
+require "./payment_method_us_bank_account_status_details1"
 
 module Stripe
   #
@@ -54,16 +54,16 @@ module Stripe
     getter last4 : String? = nil
     MAX_LENGTH_FOR_LAST4 = 5000
 
-    @[JSON::Field(key: "networks", type: Stripe::UsBankAccountNetworks?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter networks : Stripe::UsBankAccountNetworks? = nil
+    @[JSON::Field(key: "networks", type: Stripe::PaymentMethodUsBankAccountNetworks?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter networks : Stripe::PaymentMethodUsBankAccountNetworks? = nil
 
     # Routing number of the bank account.
     @[JSON::Field(key: "routing_number", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
     getter routing_number : String? = nil
     MAX_LENGTH_FOR_ROUTING_NUMBER = 5000
 
-    @[JSON::Field(key: "status_details", type: Stripe::PaymentMethodUsBankAccountStatusDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter status_details : Stripe::PaymentMethodUsBankAccountStatusDetails? = nil
+    @[JSON::Field(key: "status_details", type: Stripe::PaymentMethodUsBankAccountStatusDetails1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter status_details : Stripe::PaymentMethodUsBankAccountStatusDetails1? = nil
 
     # End of Required Properties
 
@@ -78,9 +78,9 @@ module Stripe
       @financial_connections_account : String? = nil,
       @fingerprint : String? = nil,
       @last4 : String? = nil,
-      @networks : Stripe::UsBankAccountNetworks? = nil,
+      @networks : Stripe::PaymentMethodUsBankAccountNetworks? = nil,
       @routing_number : String? = nil,
-      @status_details : Stripe::PaymentMethodUsBankAccountStatusDetails? = nil
+      @status_details : Stripe::PaymentMethodUsBankAccountStatusDetails1? = nil
     )
     end
 
@@ -233,7 +233,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] networks Object to be assigned
-    def networks=(new_value : Stripe::UsBankAccountNetworks?)
+    def networks=(new_value : Stripe::PaymentMethodUsBankAccountNetworks?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -253,7 +253,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status_details Object to be assigned
-    def status_details=(new_value : Stripe::PaymentMethodUsBankAccountStatusDetails?)
+    def status_details=(new_value : Stripe::PaymentMethodUsBankAccountStatusDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

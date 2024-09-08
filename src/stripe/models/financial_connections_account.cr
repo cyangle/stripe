@@ -9,12 +9,12 @@
 
 require "../../core"
 
-require "./bank_connections_resource_accountholder"
-require "./bank_connections_resource_balance"
-require "./bank_connections_resource_balance_refresh"
-require "./bank_connections_resource_ownership_refresh"
-require "./bank_connections_resource_transaction_refresh"
-require "./financial_connections_account_ownership"
+require "./financial_connections_account_account_holder"
+require "./financial_connections_account_balance"
+require "./financial_connections_account_balance_refresh"
+require "./financial_connections_account_ownership1"
+require "./financial_connections_account_ownership_refresh"
+require "./financial_connections_account_transaction_refresh"
 
 module Stripe
   # A Financial Connections Account represents an account that exists outside of Stripe, to which you have been granted some degree of access.
@@ -26,14 +26,14 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "account_holder", type: Stripe::BankConnectionsResourceAccountholder?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter account_holder : Stripe::BankConnectionsResourceAccountholder? = nil
+    @[JSON::Field(key: "account_holder", type: Stripe::FinancialConnectionsAccountAccountHolder?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter account_holder : Stripe::FinancialConnectionsAccountAccountHolder? = nil
 
-    @[JSON::Field(key: "balance", type: Stripe::BankConnectionsResourceBalance?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter balance : Stripe::BankConnectionsResourceBalance? = nil
+    @[JSON::Field(key: "balance", type: Stripe::FinancialConnectionsAccountBalance?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter balance : Stripe::FinancialConnectionsAccountBalance? = nil
 
-    @[JSON::Field(key: "balance_refresh", type: Stripe::BankConnectionsResourceBalanceRefresh?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter balance_refresh : Stripe::BankConnectionsResourceBalanceRefresh? = nil
+    @[JSON::Field(key: "balance_refresh", type: Stripe::FinancialConnectionsAccountBalanceRefresh?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter balance_refresh : Stripe::FinancialConnectionsAccountBalanceRefresh? = nil
 
     # The type of the account. Account category is further divided in `subcategory`.
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -75,11 +75,11 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.account]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("financial_connections.account")
 
-    @[JSON::Field(key: "ownership", type: Stripe::FinancialConnectionsAccountOwnership?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter ownership : Stripe::FinancialConnectionsAccountOwnership? = nil
+    @[JSON::Field(key: "ownership", type: Stripe::FinancialConnectionsAccountOwnership1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter ownership : Stripe::FinancialConnectionsAccountOwnership1? = nil
 
-    @[JSON::Field(key: "ownership_refresh", type: Stripe::BankConnectionsResourceOwnershipRefresh?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter ownership_refresh : Stripe::BankConnectionsResourceOwnershipRefresh? = nil
+    @[JSON::Field(key: "ownership_refresh", type: Stripe::FinancialConnectionsAccountOwnershipRefresh?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter ownership_refresh : Stripe::FinancialConnectionsAccountOwnershipRefresh? = nil
 
     # The list of permissions granted by this account.
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -111,8 +111,8 @@ module Stripe
     ERROR_MESSAGE_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = "invalid value for \"supported_payment_method_types\", must be one of [link, us_bank_account]."
     VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES  = String.static_array("link", "us_bank_account")
 
-    @[JSON::Field(key: "transaction_refresh", type: Stripe::BankConnectionsResourceTransactionRefresh?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transaction_refresh : Stripe::BankConnectionsResourceTransactionRefresh? = nil
+    @[JSON::Field(key: "transaction_refresh", type: Stripe::FinancialConnectionsAccountTransactionRefresh?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transaction_refresh : Stripe::FinancialConnectionsAccountTransactionRefresh? = nil
 
     # End of Required Properties
 
@@ -121,9 +121,9 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @account_holder : Stripe::BankConnectionsResourceAccountholder? = nil,
-      @balance : Stripe::BankConnectionsResourceBalance? = nil,
-      @balance_refresh : Stripe::BankConnectionsResourceBalanceRefresh? = nil,
+      @account_holder : Stripe::FinancialConnectionsAccountAccountHolder? = nil,
+      @balance : Stripe::FinancialConnectionsAccountBalance? = nil,
+      @balance_refresh : Stripe::FinancialConnectionsAccountBalanceRefresh? = nil,
       @category : String? = nil,
       @created : Int64? = nil,
       @display_name : String? = nil,
@@ -132,14 +132,14 @@ module Stripe
       @last4 : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
-      @ownership : Stripe::FinancialConnectionsAccountOwnership? = nil,
-      @ownership_refresh : Stripe::BankConnectionsResourceOwnershipRefresh? = nil,
+      @ownership : Stripe::FinancialConnectionsAccountOwnership1? = nil,
+      @ownership_refresh : Stripe::FinancialConnectionsAccountOwnershipRefresh? = nil,
       @permissions : Array(String)? = nil,
       @status : String? = nil,
       @subcategory : String? = nil,
       @subscriptions : Array(String)? = nil,
       @supported_payment_method_types : Array(String)? = nil,
-      @transaction_refresh : Stripe::BankConnectionsResourceTransactionRefresh? = nil
+      @transaction_refresh : Stripe::FinancialConnectionsAccountTransactionRefresh? = nil
     )
     end
 
@@ -315,7 +315,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder Object to be assigned
-    def account_holder=(new_value : Stripe::BankConnectionsResourceAccountholder?)
+    def account_holder=(new_value : Stripe::FinancialConnectionsAccountAccountHolder?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -325,7 +325,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] balance Object to be assigned
-    def balance=(new_value : Stripe::BankConnectionsResourceBalance?)
+    def balance=(new_value : Stripe::FinancialConnectionsAccountBalance?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -335,7 +335,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] balance_refresh Object to be assigned
-    def balance_refresh=(new_value : Stripe::BankConnectionsResourceBalanceRefresh?)
+    def balance_refresh=(new_value : Stripe::FinancialConnectionsAccountBalanceRefresh?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -425,7 +425,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ownership Object to be assigned
-    def ownership=(new_value : Stripe::FinancialConnectionsAccountOwnership?)
+    def ownership=(new_value : Stripe::FinancialConnectionsAccountOwnership1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -435,7 +435,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ownership_refresh Object to be assigned
-    def ownership_refresh=(new_value : Stripe::BankConnectionsResourceOwnershipRefresh?)
+    def ownership_refresh=(new_value : Stripe::FinancialConnectionsAccountOwnershipRefresh?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -498,7 +498,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_refresh Object to be assigned
-    def transaction_refresh=(new_value : Stripe::BankConnectionsResourceTransactionRefresh?)
+    def transaction_refresh=(new_value : Stripe::FinancialConnectionsAccountTransactionRefresh?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

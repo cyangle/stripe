@@ -9,7 +9,8 @@
 
 require "../../core"
 
-require "./address"
+require "./payment_method_card_wallet_masterpass_billing_address"
+require "./payment_method_card_wallet_masterpass_shipping_address"
 
 module Stripe
   #
@@ -21,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "billing_address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter billing_address : Stripe::Address? = nil
+    @[JSON::Field(key: "billing_address", type: Stripe::PaymentMethodCardWalletMasterpassBillingAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter billing_address : Stripe::PaymentMethodCardWalletMasterpassBillingAddress? = nil
 
     # Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -34,8 +35,8 @@ module Stripe
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 5000
 
-    @[JSON::Field(key: "shipping_address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_address : Stripe::Address? = nil
+    @[JSON::Field(key: "shipping_address", type: Stripe::PaymentMethodCardWalletMasterpassShippingAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_address : Stripe::PaymentMethodCardWalletMasterpassShippingAddress? = nil
 
     # End of Required Properties
 
@@ -44,10 +45,10 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @billing_address : Stripe::Address? = nil,
+      @billing_address : Stripe::PaymentMethodCardWalletMasterpassBillingAddress? = nil,
       @email : String? = nil,
       @name : String? = nil,
-      @shipping_address : Stripe::Address? = nil
+      @shipping_address : Stripe::PaymentMethodCardWalletMasterpassShippingAddress? = nil
     )
     end
 
@@ -99,7 +100,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address Object to be assigned
-    def billing_address=(new_value : Stripe::Address?)
+    def billing_address=(new_value : Stripe::PaymentMethodCardWalletMasterpassBillingAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -129,7 +130,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address Object to be assigned
-    def shipping_address=(new_value : Stripe::Address?)
+    def shipping_address=(new_value : Stripe::PaymentMethodCardWalletMasterpassShippingAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/merchandise_not_as_described_received_at"
 
 describe Stripe::MerchandiseNotAsDescribedReceivedAt do
-  describe "test an instance of MerchandiseNotAsDescribedReceivedAt" do
-    it "should create an instance of MerchandiseNotAsDescribedReceivedAt" do
-      # instance = Stripe::MerchandiseNotAsDescribedReceivedAt.new
-      # (instance).should be_a(Stripe::MerchandiseNotAsDescribedReceivedAt)
-    end
-  end
 end

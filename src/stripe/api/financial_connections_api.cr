@@ -11,10 +11,15 @@ require "../../core"
 
 require "../models/accountholder_params"
 require "../models/bank_connections_resource_linked_account_list"
+require "../models/bank_connections_resource_transaction_list"
 require "../models/error"
 require "../models/filters_params"
 require "../models/financial_connections_account"
 require "../models/financial_connections_session"
+require "../models/financial_connections_transaction"
+require "../models/get_accounts_created_parameter"
+
+require "../models/transaction_refresh_params"
 
 module Stripe
   class FinancialConnectionsApi
@@ -376,6 +381,265 @@ module Stripe
       )
     end
 
+    # <p>Returns a list of Financial Connections <code>Transaction</code> objects.</p>
+    # @required @param account [String?] The ID of the Stripe account whose transactions will be retrieved.
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param transacted_at [Stripe::GetAccountsCreatedParameter?] A filter on the list based on the object `transacted_at` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
+    # @optional @param transaction_refresh [Stripe::TransactionRefreshParams?] A filter on the list based on the object `transaction_refresh` field. The value can be a dictionary with the following options:
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::BankConnectionsResourceTransactionList]
+    def get_financial_connections_transactions(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      transacted_at : Stripe::GetAccountsCreatedParameter? = nil,
+      transaction_refresh : Stripe::TransactionRefreshParams? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::BankConnectionsResourceTransactionList
+      data, _status_code, _headers = get_financial_connections_transactions_with_http_info(account: account, ending_before: ending_before, starting_after: starting_after, transacted_at: transacted_at, transaction_refresh: transaction_refresh, limit: limit, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Returns a list of Financial Connections &lt;code&gt;Transaction&lt;/code&gt; objects.&lt;/p&gt;
+    # @required @param account [String?] The ID of the Stripe account whose transactions will be retrieved.
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param transacted_at [Stripe::GetAccountsCreatedParameter?] A filter on the list based on the object `transacted_at` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
+    # @optional @param transaction_refresh [Stripe::TransactionRefreshParams?] A filter on the list based on the object `transaction_refresh` field. The value can be a dictionary with the following options:
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::BankConnectionsResourceTransactionList, Integer, Hash)] Stripe::BankConnectionsResourceTransactionList, response status code and response headers
+    def get_financial_connections_transactions_with_http_info(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      transacted_at : Stripe::GetAccountsCreatedParameter? = nil,
+      transaction_refresh : Stripe::TransactionRefreshParams? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::BankConnectionsResourceTransactionList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_financial_connections_transactions(account: account, ending_before: ending_before, starting_after: starting_after, transacted_at: transacted_at, transaction_refresh: transaction_refresh, limit: limit, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: FinancialConnectionsApi#get_financial_connections_transactions\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::BankConnectionsResourceTransactionList.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Returns a list of Financial Connections &lt;code&gt;Transaction&lt;/code&gt; objects.&lt;/p&gt;
+    # @required @param account [String?] The ID of the Stripe account whose transactions will be retrieved.
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param transacted_at [Stripe::GetAccountsCreatedParameter?] A filter on the list based on the object `transacted_at` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
+    # @optional @param transaction_refresh [Stripe::TransactionRefreshParams?] A filter on the list based on the object `transaction_refresh` field. The value can be a dictionary with the following options:
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_financial_connections_transactions(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      transacted_at : Stripe::GetAccountsCreatedParameter? = nil,
+      transaction_refresh : Stripe::TransactionRefreshParams? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_financial_connections_transactions(account: account, ending_before: ending_before, starting_after: starting_after, transacted_at: transacted_at, transaction_refresh: transaction_refresh, limit: limit, expand: expand).execute(&block)
+    end
+
+    GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_MAX_LENGTH_FOR_ACCOUNT        = 5000
+    GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
+    GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_financial_connections_transactions(
+      *,
+      account : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      transacted_at : Stripe::GetAccountsCreatedParameter? = nil,
+      transaction_refresh : Stripe::TransactionRefreshParams? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: FinancialConnectionsApi.get_financial_connections_transactions ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"account\" is required and cannot be null") if account.nil?
+        unless (_account = account).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_MAX_LENGTH_FOR_ACCOUNT)
+        end
+        unless (_ending_before = ending_before).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("ending_before", ending_before.to_s.size, GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_MAX_LENGTH_FOR_ENDING_BEFORE)
+        end
+        unless (_starting_after = starting_after).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("starting_after", starting_after.to_s.size, GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_MAX_LENGTH_FOR_STARTING_AFTER)
+        end
+        unless (_transacted_at = transacted_at).nil?
+          _transacted_at.validate if _transacted_at.is_a?(OpenApi::Validatable)
+        end
+        unless (_transaction_refresh = transaction_refresh).nil?
+          _transaction_refresh.validate if _transaction_refresh.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/financial_connections/transactions"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
+      query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
+      query_params["transacted_at"] = transacted_at.to_s if !transacted_at.nil?
+      query_params["transaction_refresh"] = transaction_refresh.to_s if !transaction_refresh.nil?
+      query_params["limit"] = limit.to_s if !limit.nil?
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+      query_params["account"] = account.to_s if !account.nil?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FinancialConnectionsApi.get_financial_connections_transactions",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieves the details of a Financial Connections <code>Transaction</code></p>
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::FinancialConnectionsTransaction]
+    def get_financial_connections_transactions_transaction(
+      *,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::FinancialConnectionsTransaction
+      data, _status_code, _headers = get_financial_connections_transactions_transaction_with_http_info(transaction: transaction, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieves the details of a Financial Connections &lt;code&gt;Transaction&lt;/code&gt;&lt;/p&gt;
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::FinancialConnectionsTransaction, Integer, Hash)] Stripe::FinancialConnectionsTransaction, response status code and response headers
+    def get_financial_connections_transactions_transaction_with_http_info(
+      *,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::FinancialConnectionsTransaction, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_financial_connections_transactions_transaction(transaction: transaction, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: FinancialConnectionsApi#get_financial_connections_transactions_transaction\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::FinancialConnectionsTransaction.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieves the details of a Financial Connections &lt;code&gt;Transaction&lt;/code&gt;&lt;/p&gt;
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_financial_connections_transactions_transaction(
+      *,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_financial_connections_transactions_transaction(transaction: transaction, expand: expand).execute(&block)
+    end
+
+    GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_TRANSACTION = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_financial_connections_transactions_transaction(
+      *,
+      transaction : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: FinancialConnectionsApi.get_financial_connections_transactions_transaction ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"transaction\" is required and cannot be null") if transaction.nil?
+        unless (_transaction = transaction).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("transaction", transaction.to_s.size, GET_FINANCIAL_CONNECTIONS_TRANSACTIONS_TRANSACTION_MAX_LENGTH_FOR_TRANSACTION)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/financial_connections/transactions/{transaction}".sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FinancialConnectionsApi.get_financial_connections_transactions_transaction",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
     # <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
     # @required @param account [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
@@ -588,6 +852,240 @@ module Stripe
         http_method: :"POST",
         path: local_var_path,
         operation: "FinancialConnectionsApi.post_financial_connections_accounts_account_refresh",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Subscribes to periodic refreshes of data associated with a Financial Connections <code>Account</code>.</p>
+    # @required @param account [String?]
+    # @required @param features [Array(String)?] The list of account features to which you would like to subscribe.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::FinancialConnectionsAccount]
+    def post_financial_connections_accounts_account_subscribe(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::FinancialConnectionsAccount
+      data, _status_code, _headers = post_financial_connections_accounts_account_subscribe_with_http_info(account: account, features: features, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Subscribes to periodic refreshes of data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+    # @required @param account [String?]
+    # @required @param features [Array(String)?] The list of account features to which you would like to subscribe.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
+    def post_financial_connections_accounts_account_subscribe_with_http_info(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_financial_connections_accounts_account_subscribe(account: account, features: features, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: FinancialConnectionsApi#post_financial_connections_accounts_account_subscribe\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::FinancialConnectionsAccount.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Subscribes to periodic refreshes of data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+    # @required @param account [String?]
+    # @required @param features [Array(String)?] The list of account features to which you would like to subscribe.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_financial_connections_accounts_account_subscribe(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_financial_connections_accounts_account_subscribe(account: account, features: features, expand: expand).execute(&block)
+    end
+
+    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_SUBSCRIBE_MAX_LENGTH_FOR_ACCOUNT    = 5000
+    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_SUBSCRIBE_VALID_VALUES_FOR_FEATURES = String.static_array("transactions")
+
+    # @return Crest::Request
+    def build_api_request_for_post_financial_connections_accounts_account_subscribe(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_accounts_account_subscribe ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"account\" is required and cannot be null") if account.nil?
+        unless (_account = account).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_SUBSCRIBE_MAX_LENGTH_FOR_ACCOUNT)
+        end
+        raise ArgumentError.new("\"features\" is required and cannot be null") if features.nil?
+        unless (_features = features).nil?
+          OpenApi::EnumValidator.validate("features", _features, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_SUBSCRIBE_VALID_VALUES_FOR_FEATURES)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/financial_connections/accounts/{account}/subscribe".sub("{" + "account" + "}", URI.encode_path(account.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(features.to_json), "features")) if !features.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FinancialConnectionsApi.post_financial_connections_accounts_account_subscribe",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Unsubscribes from periodic refreshes of data associated with a Financial Connections <code>Account</code>.</p>
+    # @required @param account [String?]
+    # @required @param features [Array(String)?] The list of account features from which you would like to unsubscribe.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::FinancialConnectionsAccount]
+    def post_financial_connections_accounts_account_unsubscribe(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::FinancialConnectionsAccount
+      data, _status_code, _headers = post_financial_connections_accounts_account_unsubscribe_with_http_info(account: account, features: features, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Unsubscribes from periodic refreshes of data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+    # @required @param account [String?]
+    # @required @param features [Array(String)?] The list of account features from which you would like to unsubscribe.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::FinancialConnectionsAccount, Integer, Hash)] Stripe::FinancialConnectionsAccount, response status code and response headers
+    def post_financial_connections_accounts_account_unsubscribe_with_http_info(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::FinancialConnectionsAccount, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_financial_connections_accounts_account_unsubscribe(account: account, features: features, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: FinancialConnectionsApi#post_financial_connections_accounts_account_unsubscribe\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::FinancialConnectionsAccount.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Unsubscribes from periodic refreshes of data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+    # @required @param account [String?]
+    # @required @param features [Array(String)?] The list of account features from which you would like to unsubscribe.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_financial_connections_accounts_account_unsubscribe(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_financial_connections_accounts_account_unsubscribe(account: account, features: features, expand: expand).execute(&block)
+    end
+
+    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_UNSUBSCRIBE_MAX_LENGTH_FOR_ACCOUNT    = 5000
+    POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_UNSUBSCRIBE_VALID_VALUES_FOR_FEATURES = String.static_array("transactions")
+
+    # @return Crest::Request
+    def build_api_request_for_post_financial_connections_accounts_account_unsubscribe(
+      *,
+      account : String? = nil,
+      features : Array(String)? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: FinancialConnectionsApi.post_financial_connections_accounts_account_unsubscribe ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"account\" is required and cannot be null") if account.nil?
+        unless (_account = account).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("account", account.to_s.size, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_UNSUBSCRIBE_MAX_LENGTH_FOR_ACCOUNT)
+        end
+        raise ArgumentError.new("\"features\" is required and cannot be null") if features.nil?
+        unless (_features = features).nil?
+          OpenApi::EnumValidator.validate("features", _features, POST_FINANCIAL_CONNECTIONS_ACCOUNTS_ACCOUNT_UNSUBSCRIBE_VALID_VALUES_FOR_FEATURES)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/financial_connections/accounts/{account}/unsubscribe".sub("{" + "account" + "}", URI.encode_path(account.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(features.to_json), "features")) if !features.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "FinancialConnectionsApi.post_financial_connections_accounts_account_unsubscribe",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,

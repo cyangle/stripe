@@ -28,9 +28,12 @@ require "../models/post_terminal_configurations_configuration_request_stripe_s70
 require "../models/post_terminal_configurations_configuration_request_verifone_p400"
 require "../models/post_terminal_configurations_request_offline"
 require "../models/post_terminal_configurations_request_tipping"
+require "../models/post_terminal_locations_location_request_configuration_overrides"
+require "../models/post_terminal_readers_reader_request_label"
 require "../models/process_config"
 require "../models/process_setup_config"
 require "../models/reboot_window"
+require "../models/refund_payment_config"
 require "../models/stripe_s700"
 require "../models/terminal_configuration"
 require "../models/terminal_configuration_configuration_list"
@@ -1664,7 +1667,7 @@ module Stripe
     # <p>Updates a <code>Location</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param location [String?]
     # @optional @param address [Stripe::OptionalFieldsAddress?]
-    # @optional @param configuration_overrides [String?]
+    # @optional @param configuration_overrides [Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides?]
     # @optional @param display_name [String?] A name for the location.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
@@ -1673,7 +1676,7 @@ module Stripe
       *,
       location : String? = nil,
       address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
+      configuration_overrides : Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides? = nil,
       display_name : String? = nil,
       expand : Array(String)? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil
@@ -1685,7 +1688,7 @@ module Stripe
     # &lt;p&gt;Updates a &lt;code&gt;Location&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param location [String?]
     # @optional @param address [Stripe::OptionalFieldsAddress?]
-    # @optional @param configuration_overrides [String?]
+    # @optional @param configuration_overrides [Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides?]
     # @optional @param display_name [String?] A name for the location.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
@@ -1694,7 +1697,7 @@ module Stripe
       *,
       location : String? = nil,
       address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
+      configuration_overrides : Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides? = nil,
       display_name : String? = nil,
       expand : Array(String)? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil
@@ -1713,7 +1716,7 @@ module Stripe
     # &lt;p&gt;Updates a &lt;code&gt;Location&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param location [String?]
     # @optional @param address [Stripe::OptionalFieldsAddress?]
-    # @optional @param configuration_overrides [String?]
+    # @optional @param configuration_overrides [Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides?]
     # @optional @param display_name [String?] A name for the location.
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
@@ -1722,7 +1725,7 @@ module Stripe
       *,
       location : String? = nil,
       address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
+      configuration_overrides : Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides? = nil,
       display_name : String? = nil,
       expand : Array(String)? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil,
@@ -1731,16 +1734,15 @@ module Stripe
       build_api_request_for_post_terminal_locations_location(location: location, address: address, configuration_overrides: configuration_overrides, display_name: display_name, expand: expand, metadata: metadata).execute(&block)
     end
 
-    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_LOCATION                  = 5000
-    POST_TERMINAL_LOCATIONS_LOCATION_VALID_VALUES_FOR_CONFIGURATION_OVERRIDES = String.static_array("")
-    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_DISPLAY_NAME              = 1000
+    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_LOCATION     = 5000
+    POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_DISPLAY_NAME = 1000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_locations_location(
       *,
       location : String? = nil,
       address : Stripe::OptionalFieldsAddress? = nil,
-      configuration_overrides : String? = nil,
+      configuration_overrides : Stripe::PostTerminalLocationsLocationRequestConfigurationOverrides? = nil,
       display_name : String? = nil,
       expand : Array(String)? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil
@@ -1758,7 +1760,7 @@ module Stripe
           _address.validate if _address.is_a?(OpenApi::Validatable)
         end
         unless (_configuration_overrides = configuration_overrides).nil?
-          OpenApi::EnumValidator.validate("configuration_overrides", _configuration_overrides, POST_TERMINAL_LOCATIONS_LOCATION_VALID_VALUES_FOR_CONFIGURATION_OVERRIDES)
+          _configuration_overrides.validate if _configuration_overrides.is_a?(OpenApi::Validatable)
         end
         unless (_display_name = display_name).nil?
           OpenApi::PrimitiveValidator.validate_max_length("display_name", display_name.to_s.size, POST_TERMINAL_LOCATIONS_LOCATION_MAX_LENGTH_FOR_DISPLAY_NAME)
@@ -1788,7 +1790,7 @@ module Stripe
       # form parameters
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(address.to_json), "address")) if !address.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("configuration_overrides", configuration_overrides.to_s) if !configuration_overrides.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(configuration_overrides.to_json), "configuration_overrides")) if !configuration_overrides.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("display_name", display_name.to_s) if !display_name.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
@@ -1956,14 +1958,14 @@ module Stripe
     # <p>Updates a <code>Reader</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
     # @required @param reader [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?]
+    # @optional @param label [Stripe::PostTerminalReadersReaderRequestLabel?]
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Stripe::GetTerminalReadersReader200Response]
     def post_terminal_readers_reader(
       *,
       reader : String? = nil,
       expand : Array(String)? = nil,
-      label : String? = nil,
+      label : Stripe::PostTerminalReadersReaderRequestLabel? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil
     ) : Stripe::GetTerminalReadersReader200Response
       data, _status_code, _headers = post_terminal_readers_reader_with_http_info(reader: reader, expand: expand, label: label, metadata: metadata)
@@ -1973,14 +1975,14 @@ module Stripe
     # &lt;p&gt;Updates a &lt;code&gt;Reader&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param reader [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?]
+    # @optional @param label [Stripe::PostTerminalReadersReaderRequestLabel?]
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return [Tuple(Stripe::GetTerminalReadersReader200Response, Integer, Hash)] Stripe::GetTerminalReadersReader200Response, response status code and response headers
     def post_terminal_readers_reader_with_http_info(
       *,
       reader : String? = nil,
       expand : Array(String)? = nil,
-      label : String? = nil,
+      label : Stripe::PostTerminalReadersReaderRequestLabel? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil
     ) : Tuple(Stripe::GetTerminalReadersReader200Response, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_terminal_readers_reader(reader: reader, expand: expand, label: label, metadata: metadata)
@@ -1997,29 +1999,28 @@ module Stripe
     # &lt;p&gt;Updates a &lt;code&gt;Reader&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
     # @required @param reader [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param label [String?]
+    # @optional @param label [Stripe::PostTerminalReadersReaderRequestLabel?]
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
     # @return nil
     def post_terminal_readers_reader(
       *,
       reader : String? = nil,
       expand : Array(String)? = nil,
-      label : String? = nil,
+      label : Stripe::PostTerminalReadersReaderRequestLabel? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil,
       &block : Crest::Response ->
     ) : Nil
       build_api_request_for_post_terminal_readers_reader(reader: reader, expand: expand, label: label, metadata: metadata).execute(&block)
     end
 
-    POST_TERMINAL_READERS_READER_MAX_LENGTH_FOR_READER  = 5000
-    POST_TERMINAL_READERS_READER_VALID_VALUES_FOR_LABEL = String.static_array("")
+    POST_TERMINAL_READERS_READER_MAX_LENGTH_FOR_READER = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_terminal_readers_reader(
       *,
       reader : String? = nil,
       expand : Array(String)? = nil,
-      label : String? = nil,
+      label : Stripe::PostTerminalReadersReaderRequestLabel? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil
     ) : Crest::Request
       if debugging?
@@ -2033,7 +2034,7 @@ module Stripe
         end
 
         unless (_label = label).nil?
-          OpenApi::EnumValidator.validate("label", _label, POST_TERMINAL_READERS_READER_VALID_VALUES_FOR_LABEL)
+          _label.validate if _label.is_a?(OpenApi::Validatable)
         end
         unless (_metadata = metadata).nil?
           _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
@@ -2059,7 +2060,7 @@ module Stripe
       # form parameters
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("label", label.to_s) if !label.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(label.to_json), "label")) if !label.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
 
       # http body (model)
@@ -2316,39 +2317,39 @@ module Stripe
 
     # <p>Initiates a setup intent flow on a Reader.</p>
     # @required @param reader [String?]
-    # @required @param customer_consent_collected [Bool?] Customer Consent Collected
     # @required @param setup_intent [String?] SetupIntent ID
+    # @optional @param customer_consent_collected [Bool?] Customer Consent Collected
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param process_config [Stripe::ProcessSetupConfig?]
     # @return [Stripe::TerminalReader]
     def post_terminal_readers_reader_process_setup_intent(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
       setup_intent : String? = nil,
+      customer_consent_collected : Bool? = nil,
       expand : Array(String)? = nil,
       process_config : Stripe::ProcessSetupConfig? = nil
     ) : Stripe::TerminalReader
-      data, _status_code, _headers = post_terminal_readers_reader_process_setup_intent_with_http_info(reader: reader, customer_consent_collected: customer_consent_collected, setup_intent: setup_intent, expand: expand, process_config: process_config)
+      data, _status_code, _headers = post_terminal_readers_reader_process_setup_intent_with_http_info(reader: reader, setup_intent: setup_intent, customer_consent_collected: customer_consent_collected, expand: expand, process_config: process_config)
       data
     end
 
     # &lt;p&gt;Initiates a setup intent flow on a Reader.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param customer_consent_collected [Bool?] Customer Consent Collected
     # @required @param setup_intent [String?] SetupIntent ID
+    # @optional @param customer_consent_collected [Bool?] Customer Consent Collected
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param process_config [Stripe::ProcessSetupConfig?]
     # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
     def post_terminal_readers_reader_process_setup_intent_with_http_info(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
       setup_intent : String? = nil,
+      customer_consent_collected : Bool? = nil,
       expand : Array(String)? = nil,
       process_config : Stripe::ProcessSetupConfig? = nil
     ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, customer_consent_collected: customer_consent_collected, setup_intent: setup_intent, expand: expand, process_config: process_config)
+      request = build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, setup_intent: setup_intent, customer_consent_collected: customer_consent_collected, expand: expand, process_config: process_config)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -2361,21 +2362,21 @@ module Stripe
 
     # &lt;p&gt;Initiates a setup intent flow on a Reader.&lt;/p&gt;
     # @required @param reader [String?]
-    # @required @param customer_consent_collected [Bool?] Customer Consent Collected
     # @required @param setup_intent [String?] SetupIntent ID
+    # @optional @param customer_consent_collected [Bool?] Customer Consent Collected
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param process_config [Stripe::ProcessSetupConfig?]
     # @return nil
     def post_terminal_readers_reader_process_setup_intent(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
       setup_intent : String? = nil,
+      customer_consent_collected : Bool? = nil,
       expand : Array(String)? = nil,
       process_config : Stripe::ProcessSetupConfig? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, customer_consent_collected: customer_consent_collected, setup_intent: setup_intent, expand: expand, process_config: process_config).execute(&block)
+      build_api_request_for_post_terminal_readers_reader_process_setup_intent(reader: reader, setup_intent: setup_intent, customer_consent_collected: customer_consent_collected, expand: expand, process_config: process_config).execute(&block)
     end
 
     POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_READER       = 5000
@@ -2385,8 +2386,8 @@ module Stripe
     def build_api_request_for_post_terminal_readers_reader_process_setup_intent(
       *,
       reader : String? = nil,
-      customer_consent_collected : Bool? = nil,
       setup_intent : String? = nil,
+      customer_consent_collected : Bool? = nil,
       expand : Array(String)? = nil,
       process_config : Stripe::ProcessSetupConfig? = nil
     ) : Crest::Request
@@ -2399,8 +2400,6 @@ module Stripe
         unless (_reader = reader).nil?
           OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_READER)
         end
-        raise ArgumentError.new("\"customer_consent_collected\" is required and cannot be null") if customer_consent_collected.nil?
-
         raise ArgumentError.new("\"setup_intent\" is required and cannot be null") if setup_intent.nil?
         unless (_setup_intent = setup_intent).nil?
           OpenApi::PrimitiveValidator.validate_max_length("setup_intent", setup_intent.to_s.size, POST_TERMINAL_READERS_READER_PROCESS_SETUP_INTENT_MAX_LENGTH_FOR_SETUP_INTENT)
@@ -2444,6 +2443,180 @@ module Stripe
         http_method: :"POST",
         path: local_var_path,
         operation: "TerminalApi.post_terminal_readers_reader_process_setup_intent",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Initiates a refund on a Reader</p>
+    # @required @param reader [String?]
+    # @optional @param amount [Int32?] A positive integer in __cents__ representing how much of this charge to refund.
+    # @optional @param charge [String?] ID of the Charge to refund.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param payment_intent [String?] ID of the PaymentIntent to refund.
+    # @optional @param refund_application_fee [Bool?] Boolean indicating whether the application fee should be refunded when refunding this charge. If a full charge refund is given, the full application fee will be refunded. Otherwise, the application fee will be refunded in an amount proportional to the amount of the charge refunded. An application fee can be refunded only by the application that created the charge.
+    # @optional @param refund_payment_config [Stripe::RefundPaymentConfig?]
+    # @optional @param reverse_transfer [Bool?] Boolean indicating whether the transfer should be reversed when refunding this charge. The transfer will be reversed proportionally to the amount being refunded (either the entire or partial amount). A transfer can be reversed only by the application that created the charge.
+    # @return [Stripe::TerminalReader]
+    def post_terminal_readers_reader_refund_payment(
+      *,
+      reader : String? = nil,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Hash(String, String)? = nil,
+      payment_intent : String? = nil,
+      refund_application_fee : Bool? = nil,
+      refund_payment_config : Stripe::RefundPaymentConfig? = nil,
+      reverse_transfer : Bool? = nil
+    ) : Stripe::TerminalReader
+      data, _status_code, _headers = post_terminal_readers_reader_refund_payment_with_http_info(reader: reader, amount: amount, charge: charge, expand: expand, metadata: metadata, payment_intent: payment_intent, refund_application_fee: refund_application_fee, refund_payment_config: refund_payment_config, reverse_transfer: reverse_transfer)
+      data
+    end
+
+    # &lt;p&gt;Initiates a refund on a Reader&lt;/p&gt;
+    # @required @param reader [String?]
+    # @optional @param amount [Int32?] A positive integer in __cents__ representing how much of this charge to refund.
+    # @optional @param charge [String?] ID of the Charge to refund.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param payment_intent [String?] ID of the PaymentIntent to refund.
+    # @optional @param refund_application_fee [Bool?] Boolean indicating whether the application fee should be refunded when refunding this charge. If a full charge refund is given, the full application fee will be refunded. Otherwise, the application fee will be refunded in an amount proportional to the amount of the charge refunded. An application fee can be refunded only by the application that created the charge.
+    # @optional @param refund_payment_config [Stripe::RefundPaymentConfig?]
+    # @optional @param reverse_transfer [Bool?] Boolean indicating whether the transfer should be reversed when refunding this charge. The transfer will be reversed proportionally to the amount being refunded (either the entire or partial amount). A transfer can be reversed only by the application that created the charge.
+    # @return [Tuple(Stripe::TerminalReader, Integer, Hash)] Stripe::TerminalReader, response status code and response headers
+    def post_terminal_readers_reader_refund_payment_with_http_info(
+      *,
+      reader : String? = nil,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Hash(String, String)? = nil,
+      payment_intent : String? = nil,
+      refund_application_fee : Bool? = nil,
+      refund_payment_config : Stripe::RefundPaymentConfig? = nil,
+      reverse_transfer : Bool? = nil
+    ) : Tuple(Stripe::TerminalReader, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_terminal_readers_reader_refund_payment(reader: reader, amount: amount, charge: charge, expand: expand, metadata: metadata, payment_intent: payment_intent, refund_application_fee: refund_application_fee, refund_payment_config: refund_payment_config, reverse_transfer: reverse_transfer)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TerminalApi#post_terminal_readers_reader_refund_payment\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::TerminalReader.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Initiates a refund on a Reader&lt;/p&gt;
+    # @required @param reader [String?]
+    # @optional @param amount [Int32?] A positive integer in __cents__ representing how much of this charge to refund.
+    # @optional @param charge [String?] ID of the Charge to refund.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param metadata [Hash(String, String)?]
+    # @optional @param payment_intent [String?] ID of the PaymentIntent to refund.
+    # @optional @param refund_application_fee [Bool?] Boolean indicating whether the application fee should be refunded when refunding this charge. If a full charge refund is given, the full application fee will be refunded. Otherwise, the application fee will be refunded in an amount proportional to the amount of the charge refunded. An application fee can be refunded only by the application that created the charge.
+    # @optional @param refund_payment_config [Stripe::RefundPaymentConfig?]
+    # @optional @param reverse_transfer [Bool?] Boolean indicating whether the transfer should be reversed when refunding this charge. The transfer will be reversed proportionally to the amount being refunded (either the entire or partial amount). A transfer can be reversed only by the application that created the charge.
+    # @return nil
+    def post_terminal_readers_reader_refund_payment(
+      *,
+      reader : String? = nil,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Hash(String, String)? = nil,
+      payment_intent : String? = nil,
+      refund_application_fee : Bool? = nil,
+      refund_payment_config : Stripe::RefundPaymentConfig? = nil,
+      reverse_transfer : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_terminal_readers_reader_refund_payment(reader: reader, amount: amount, charge: charge, expand: expand, metadata: metadata, payment_intent: payment_intent, refund_application_fee: refund_application_fee, refund_payment_config: refund_payment_config, reverse_transfer: reverse_transfer).execute(&block)
+    end
+
+    POST_TERMINAL_READERS_READER_REFUND_PAYMENT_MAX_LENGTH_FOR_READER         = 5000
+    POST_TERMINAL_READERS_READER_REFUND_PAYMENT_MAX_LENGTH_FOR_CHARGE         = 5000
+    POST_TERMINAL_READERS_READER_REFUND_PAYMENT_MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_terminal_readers_reader_refund_payment(
+      *,
+      reader : String? = nil,
+      amount : Int64? = nil,
+      charge : String? = nil,
+      expand : Array(String)? = nil,
+      metadata : Hash(String, String)? = nil,
+      payment_intent : String? = nil,
+      refund_application_fee : Bool? = nil,
+      refund_payment_config : Stripe::RefundPaymentConfig? = nil,
+      reverse_transfer : Bool? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TerminalApi.post_terminal_readers_reader_refund_payment ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"reader\" is required and cannot be null") if reader.nil?
+        unless (_reader = reader).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("reader", reader.to_s.size, POST_TERMINAL_READERS_READER_REFUND_PAYMENT_MAX_LENGTH_FOR_READER)
+        end
+
+        unless (_charge = charge).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("charge", charge.to_s.size, POST_TERMINAL_READERS_READER_REFUND_PAYMENT_MAX_LENGTH_FOR_CHARGE)
+        end
+
+        unless (_payment_intent = payment_intent).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("payment_intent", payment_intent.to_s.size, POST_TERMINAL_READERS_READER_REFUND_PAYMENT_MAX_LENGTH_FOR_PAYMENT_INTENT)
+        end
+
+        unless (_refund_payment_config = refund_payment_config).nil?
+          _refund_payment_config.validate if _refund_payment_config.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/terminal/readers/{reader}/refund_payment".sub("{" + "reader" + "}", URI.encode_path(reader.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("amount", amount.to_s) if !amount.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("charge", charge.to_s) if !charge.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("payment_intent", payment_intent.to_s) if !payment_intent.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("refund_application_fee", refund_application_fee.to_s) if !refund_application_fee.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(refund_payment_config.to_json), "refund_payment_config")) if !refund_payment_config.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("reverse_transfer", reverse_transfer.to_s) if !reverse_transfer.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TerminalApi.post_terminal_readers_reader_refund_payment",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,

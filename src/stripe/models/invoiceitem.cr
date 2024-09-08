@@ -13,10 +13,10 @@ require "./invoice_line_item_period"
 require "./invoiceitem_customer"
 require "./invoiceitem_discounts_inner"
 require "./invoiceitem_invoice"
+require "./invoiceitem_plan"
+require "./invoiceitem_price"
 require "./invoiceitem_subscription"
 require "./invoiceitem_test_clock"
-require "./plan"
-require "./price"
 require "./tax_rate"
 
 module Stripe
@@ -81,11 +81,11 @@ module Stripe
     @[JSON::Field(key: "period", type: Stripe::InvoiceLineItemPeriod?, default: nil, required: true, nullable: false, emit_null: false)]
     getter period : Stripe::InvoiceLineItemPeriod? = nil
 
-    @[JSON::Field(key: "plan", type: Stripe::Plan?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter plan : Stripe::Plan? = nil
+    @[JSON::Field(key: "plan", type: Stripe::InvoiceitemPlan?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter plan : Stripe::InvoiceitemPlan? = nil
 
-    @[JSON::Field(key: "price", type: Stripe::Price?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter price : Stripe::Price? = nil
+    @[JSON::Field(key: "price", type: Stripe::InvoiceitemPrice?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter price : Stripe::InvoiceitemPrice? = nil
 
     # Whether the invoice item was created automatically as a proration adjustment when the customer switched plans.
     @[JSON::Field(key: "proration", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -140,8 +140,8 @@ module Stripe
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
       @period : Stripe::InvoiceLineItemPeriod? = nil,
-      @plan : Stripe::Plan? = nil,
-      @price : Stripe::Price? = nil,
+      @plan : Stripe::InvoiceitemPlan? = nil,
+      @price : Stripe::InvoiceitemPrice? = nil,
       @proration : Bool? = nil,
       @quantity : Int64? = nil,
       @subscription : Stripe::InvoiceitemSubscription? = nil,
@@ -428,7 +428,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] plan Object to be assigned
-    def plan=(new_value : Stripe::Plan?)
+    def plan=(new_value : Stripe::InvoiceitemPlan?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -438,7 +438,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(new_value : Stripe::Price?)
+    def price=(new_value : Stripe::InvoiceitemPrice?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -114,7 +114,7 @@ describe "PaymentLinksApi" do
   # @option opts [CustomTextParam] :custom_text
   # @option opts [String] :customer_creation Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :inactive_message
+  # @option opts [PostPaymentLinksPaymentLinkRequestInactiveMessage] :inactive_message
   # @option opts [InvoiceCreationUpdateParams] :invoice_creation
   # @option opts [Array(LineItemsUpdateParams)] :line_items The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
   # @option opts [Hash(String, String)] :metadata

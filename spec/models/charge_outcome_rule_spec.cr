@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/charge_outcome_rule"
 
 describe Stripe::ChargeOutcomeRule do
-  describe "test an instance of ChargeOutcomeRule" do
-    it "should create an instance of ChargeOutcomeRule" do
-      # instance = Stripe::ChargeOutcomeRule.new
-      # (instance).should be_a(Stripe::ChargeOutcomeRule)
-    end
-  end
-
-  describe "test attribute 'action'" do
-    it "should work" do
-      # instance = Stripe::ChargeOutcomeRule.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::ChargeOutcomeRule.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'predicate'" do
-    it "should work" do
-      # instance = Stripe::ChargeOutcomeRule.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

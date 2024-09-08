@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./payment_flows_private_payment_methods_card_present_common_wallet"
-require "./payment_method_details_card_present_offline"
-require "./payment_method_details_card_present_receipt"
+require "./payment_method_details_card_present_offline1"
+require "./payment_method_details_card_present_receipt1"
 
 module Stripe
   #
@@ -94,8 +94,8 @@ module Stripe
     getter network_transaction_id : String? = nil
     MAX_LENGTH_FOR_NETWORK_TRANSACTION_ID = 5000
 
-    @[JSON::Field(key: "offline", type: Stripe::PaymentMethodDetailsCardPresentOffline?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter offline : Stripe::PaymentMethodDetailsCardPresentOffline? = nil
+    @[JSON::Field(key: "offline", type: Stripe::PaymentMethodDetailsCardPresentOffline1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter offline : Stripe::PaymentMethodDetailsCardPresentOffline1? = nil
 
     # Defines whether the authorized amount can be over-captured or not
     @[JSON::Field(key: "overcapture_supported", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -111,8 +111,8 @@ module Stripe
     ERROR_MESSAGE_FOR_READ_METHOD = "invalid value for \"read_method\", must be one of [contact_emv, contactless_emv, contactless_magstripe_mode, magnetic_stripe_fallback, magnetic_stripe_track2]."
     VALID_VALUES_FOR_READ_METHOD  = String.static_array("contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2")
 
-    @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsCardPresentReceipt?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter receipt : Stripe::PaymentMethodDetailsCardPresentReceipt? = nil
+    @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsCardPresentReceipt1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter receipt : Stripe::PaymentMethodDetailsCardPresentReceipt1? = nil
 
     # End of Required Properties
 
@@ -169,11 +169,11 @@ module Stripe
       @last4 : String? = nil,
       @network : String? = nil,
       @network_transaction_id : String? = nil,
-      @offline : Stripe::PaymentMethodDetailsCardPresentOffline? = nil,
+      @offline : Stripe::PaymentMethodDetailsCardPresentOffline1? = nil,
       @overcapture_supported : Bool? = nil,
       @preferred_locales : Array(String)? = nil,
       @read_method : String? = nil,
-      @receipt : Stripe::PaymentMethodDetailsCardPresentReceipt? = nil,
+      @receipt : Stripe::PaymentMethodDetailsCardPresentReceipt1? = nil,
       # Optional properties
       @capture_before : Int64? = nil,
       @description : String? = nil,
@@ -510,7 +510,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] offline Object to be assigned
-    def offline=(new_value : Stripe::PaymentMethodDetailsCardPresentOffline?)
+    def offline=(new_value : Stripe::PaymentMethodDetailsCardPresentOffline1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -544,7 +544,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] receipt Object to be assigned
-    def receipt=(new_value : Stripe::PaymentMethodDetailsCardPresentReceipt?)
+    def receipt=(new_value : Stripe::PaymentMethodDetailsCardPresentReceipt1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

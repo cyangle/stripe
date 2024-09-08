@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_pages_checkout_session_payment_method_reuse_agreement"
+require "./payment_pages_checkout_session_consent_collection_payment_method_reuse_agreement"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "payment_method_reuse_agreement", type: Stripe::PaymentPagesCheckoutSessionPaymentMethodReuseAgreement?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_reuse_agreement : Stripe::PaymentPagesCheckoutSessionPaymentMethodReuseAgreement? = nil
+    @[JSON::Field(key: "payment_method_reuse_agreement", type: Stripe::PaymentPagesCheckoutSessionConsentCollectionPaymentMethodReuseAgreement?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_reuse_agreement : Stripe::PaymentPagesCheckoutSessionConsentCollectionPaymentMethodReuseAgreement? = nil
 
     # If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout Session will determine whether to display an option to opt into promotional communication from the merchant depending on the customer's locale. Only available to US merchants.
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -43,7 +43,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @payment_method_reuse_agreement : Stripe::PaymentPagesCheckoutSessionPaymentMethodReuseAgreement? = nil,
+      @payment_method_reuse_agreement : Stripe::PaymentPagesCheckoutSessionConsentCollectionPaymentMethodReuseAgreement? = nil,
       @promotions : String? = nil,
       @terms_of_service : String? = nil
     )
@@ -86,7 +86,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_reuse_agreement Object to be assigned
-    def payment_method_reuse_agreement=(new_value : Stripe::PaymentPagesCheckoutSessionPaymentMethodReuseAgreement?)
+    def payment_method_reuse_agreement=(new_value : Stripe::PaymentPagesCheckoutSessionConsentCollectionPaymentMethodReuseAgreement?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

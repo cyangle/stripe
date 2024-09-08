@@ -65,7 +65,7 @@ describe "WebhookEndpointsApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :api_version Events sent to this endpoint will be generated with this Stripe Version instead of your account&#39;s default Stripe Version.
   # @option opts [Bool] :connect Whether this endpoint should receive events from connected accounts (&#x60;true&#x60;), or from your account (&#x60;false&#x60;). Defaults to &#x60;false&#x60;.
-  # @option opts [String] :description
+  # @option opts [PostWebhookEndpointsRequestDescription] :description
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostAccountsRequestMetadata] :metadata
   # @return [WebhookEndpoint]
@@ -79,7 +79,7 @@ describe "WebhookEndpointsApi" do
   # &lt;p&gt;Updates the webhook endpoint. You may edit the &lt;code&gt;url&lt;/code&gt;, the list of &lt;code&gt;enabled_events&lt;/code&gt;, and the status of your endpoint.&lt;/p&gt;
   # @param webhook_endpoint
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :description
+  # @option opts [PostWebhookEndpointsRequestDescription] :description
   # @option opts [Bool] :disabled Disable the webhook endpoint if set to true.
   # @option opts [Array(String)] :enabled_events The list of events to enable for this endpoint. You may specify &#x60;[&#39;*&#39;]&#x60; to enable all events, except those that require explicit selection.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.

@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/default_settings_params_transfer_data"
 
 describe Stripe::DefaultSettingsParamsTransferData do
-  describe "test an instance of DefaultSettingsParamsTransferData" do
-    it "should create an instance of DefaultSettingsParamsTransferData" do
-      # instance = Stripe::DefaultSettingsParamsTransferData.new
-      # (instance).should be_a(Stripe::DefaultSettingsParamsTransferData)
-    end
-  end
-
-  describe "test attribute 'amount'" do
-    it "should work" do
-      # instance = Stripe::DefaultSettingsParamsTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'amount_percent'" do
-    it "should work" do
-      # instance = Stripe::DefaultSettingsParamsTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'destination'" do
-    it "should work" do
-      # instance = Stripe::DefaultSettingsParamsTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

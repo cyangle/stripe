@@ -11,8 +11,8 @@ require "../../core"
 
 require "./outbound_transfers_payment_method_details"
 require "./treasury_outbound_payment_transaction"
-require "./treasury_outbound_transfers_resource_outbound_transfer_resource_tracking_details"
-require "./treasury_outbound_transfers_resource_returned_details"
+require "./treasury_outbound_transfer_returned_details"
+require "./treasury_outbound_transfer_tracking_details"
 require "./treasury_outbound_transfers_resource_status_transitions"
 
 module Stripe
@@ -86,8 +86,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.outbound_transfer]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("treasury.outbound_transfer")
 
-    @[JSON::Field(key: "returned_details", type: Stripe::TreasuryOutboundTransfersResourceReturnedDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter returned_details : Stripe::TreasuryOutboundTransfersResourceReturnedDetails? = nil
+    @[JSON::Field(key: "returned_details", type: Stripe::TreasuryOutboundTransferReturnedDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter returned_details : Stripe::TreasuryOutboundTransferReturnedDetails? = nil
 
     # Information about the OutboundTransfer to be sent to the recipient account.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -103,8 +103,8 @@ module Stripe
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryOutboundTransfersResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryOutboundTransfersResourceStatusTransitions? = nil
 
-    @[JSON::Field(key: "tracking_details", type: Stripe::TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter tracking_details : Stripe::TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingDetails? = nil
+    @[JSON::Field(key: "tracking_details", type: Stripe::TreasuryOutboundTransferTrackingDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter tracking_details : Stripe::TreasuryOutboundTransferTrackingDetails? = nil
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
@@ -130,11 +130,11 @@ module Stripe
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
-      @returned_details : Stripe::TreasuryOutboundTransfersResourceReturnedDetails? = nil,
+      @returned_details : Stripe::TreasuryOutboundTransferReturnedDetails? = nil,
       @statement_descriptor : String? = nil,
       @status : String? = nil,
       @status_transitions : Stripe::TreasuryOutboundTransfersResourceStatusTransitions? = nil,
-      @tracking_details : Stripe::TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingDetails? = nil,
+      @tracking_details : Stripe::TreasuryOutboundTransferTrackingDetails? = nil,
       @transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
     )
     end
@@ -440,7 +440,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] returned_details Object to be assigned
-    def returned_details=(new_value : Stripe::TreasuryOutboundTransfersResourceReturnedDetails?)
+    def returned_details=(new_value : Stripe::TreasuryOutboundTransferReturnedDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -483,7 +483,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tracking_details Object to be assigned
-    def tracking_details=(new_value : Stripe::TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingDetails?)
+    def tracking_details=(new_value : Stripe::TreasuryOutboundTransferTrackingDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_method_details_card_installments_plan"
+require "./payment_method_details_card_installments_plan1"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "plan", type: Stripe::PaymentMethodDetailsCardInstallmentsPlan?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan? = nil
+    @[JSON::Field(key: "plan", type: Stripe::PaymentMethodDetailsCardInstallmentsPlan1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan1? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan? = nil
+      @plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan1? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] plan Object to be assigned
-    def plan=(new_value : Stripe::PaymentMethodDetailsCardInstallmentsPlan?)
+    def plan=(new_value : Stripe::PaymentMethodDetailsCardInstallmentsPlan1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

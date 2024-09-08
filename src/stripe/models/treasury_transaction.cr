@@ -9,9 +9,9 @@
 
 require "../../core"
 
+require "./treasury_transaction_flow_details"
 require "./treasury_transactions_resource_abstract_transaction_resource_status_transitions"
 require "./treasury_transactions_resource_balance_impact"
-require "./treasury_transactions_resource_flow_details"
 require "./treasury_transactions_resource_transaction_entry_list"
 
 module Stripe
@@ -94,8 +94,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? entries_present : Bool = false
 
-    @[JSON::Field(key: "flow_details", type: Stripe::TreasuryTransactionsResourceFlowDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_details.nil? && !flow_details_present?)]
-    getter flow_details : Stripe::TreasuryTransactionsResourceFlowDetails? = nil
+    @[JSON::Field(key: "flow_details", type: Stripe::TreasuryTransactionFlowDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_details.nil? && !flow_details_present?)]
+    getter flow_details : Stripe::TreasuryTransactionFlowDetails? = nil
 
     @[JSON::Field(ignore: true)]
     property? flow_details_present : Bool = false
@@ -120,7 +120,7 @@ module Stripe
       @status_transitions : Stripe::TreasuryTransactionsResourceAbstractTransactionResourceStatusTransitions? = nil,
       # Optional properties
       @entries : Stripe::TreasuryTransactionsResourceTransactionEntryList? = nil,
-      @flow_details : Stripe::TreasuryTransactionsResourceFlowDetails? = nil
+      @flow_details : Stripe::TreasuryTransactionFlowDetails? = nil
     )
     end
 
@@ -405,7 +405,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flow_details Object to be assigned
-    def flow_details=(new_value : Stripe::TreasuryTransactionsResourceFlowDetails?)
+    def flow_details=(new_value : Stripe::TreasuryTransactionFlowDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

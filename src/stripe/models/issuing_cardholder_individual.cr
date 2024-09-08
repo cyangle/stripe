@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./issuing_cardholder_card_issuing"
-require "./issuing_cardholder_individual_dob"
-require "./issuing_cardholder_verification"
+require "./issuing_cardholder_individual_card_issuing"
+require "./issuing_cardholder_individual_dob1"
+require "./issuing_cardholder_individual_verification"
 
 module Stripe
   #
@@ -23,8 +23,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "dob", type: Stripe::IssuingCardholderIndividualDob?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter dob : Stripe::IssuingCardholderIndividualDob? = nil
+    @[JSON::Field(key: "dob", type: Stripe::IssuingCardholderIndividualDob1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter dob : Stripe::IssuingCardholderIndividualDob1? = nil
 
     # The first name of this cardholder. Required before activating Cards. This field cannot contain any numbers, special characters (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -36,15 +36,15 @@ module Stripe
     getter last_name : String? = nil
     MAX_LENGTH_FOR_LAST_NAME = 5000
 
-    @[JSON::Field(key: "verification", type: Stripe::IssuingCardholderVerification?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter verification : Stripe::IssuingCardholderVerification? = nil
+    @[JSON::Field(key: "verification", type: Stripe::IssuingCardholderIndividualVerification?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter verification : Stripe::IssuingCardholderIndividualVerification? = nil
 
     # End of Required Properties
 
     # Optional Properties
 
-    @[JSON::Field(key: "card_issuing", type: Stripe::IssuingCardholderCardIssuing?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
-    getter card_issuing : Stripe::IssuingCardholderCardIssuing? = nil
+    @[JSON::Field(key: "card_issuing", type: Stripe::IssuingCardholderIndividualCardIssuing?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
+    getter card_issuing : Stripe::IssuingCardholderIndividualCardIssuing? = nil
 
     @[JSON::Field(ignore: true)]
     property? card_issuing_present : Bool = false
@@ -54,12 +54,12 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @dob : Stripe::IssuingCardholderIndividualDob? = nil,
+      @dob : Stripe::IssuingCardholderIndividualDob1? = nil,
       @first_name : String? = nil,
       @last_name : String? = nil,
-      @verification : Stripe::IssuingCardholderVerification? = nil,
+      @verification : Stripe::IssuingCardholderIndividualVerification? = nil,
       # Optional properties
-      @card_issuing : Stripe::IssuingCardholderCardIssuing? = nil
+      @card_issuing : Stripe::IssuingCardholderIndividualCardIssuing? = nil
     )
     end
 
@@ -118,7 +118,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(new_value : Stripe::IssuingCardholderIndividualDob?)
+    def dob=(new_value : Stripe::IssuingCardholderIndividualDob1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -148,7 +148,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification Object to be assigned
-    def verification=(new_value : Stripe::IssuingCardholderVerification?)
+    def verification=(new_value : Stripe::IssuingCardholderIndividualVerification?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -158,7 +158,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_issuing Object to be assigned
-    def card_issuing=(new_value : Stripe::IssuingCardholderCardIssuing?)
+    def card_issuing=(new_value : Stripe::IssuingCardholderIndividualCardIssuing?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

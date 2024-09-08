@@ -145,6 +145,76 @@ describe "IssuingApi" do
     end
   end
 
+  # unit tests for get_issuing_personalization_designs
+  # &lt;p&gt;Returns a list of personalization design objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Array(String)] :lookup_keys Only return personalization designs with the given lookup keys.
+  # @option opts [PreferencesListParam] :preferences Only return personalization designs with the given preferences.
+  # @option opts [String] :status Only return personalization designs with the given status.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingPersonalizationDesignList]
+  describe "get_issuing_personalization_designs test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_issuing_personalization_designs_personalization_design
+  # &lt;p&gt;Retrieves a personalization design object.&lt;/p&gt;
+  # @param personalization_design
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingPersonalizationDesign]
+  describe "get_issuing_personalization_designs_personalization_design test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_issuing_physical_bundles_physical_bundle
+  # &lt;p&gt;Retrieves a physical bundle object.&lt;/p&gt;
+  # @param physical_bundle
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingPhysicalBundle]
+  describe "get_issuing_physical_bundles_physical_bundle test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_issuing_tokens
+  # &lt;p&gt;Lists all Issuing &lt;code&gt;Token&lt;/code&gt; objects for a given card.&lt;/p&gt;
+  # @param card The Issuing card identifier to list tokens for.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [GetAccountsCreatedParameter] :created Only return Issuing tokens that were created during the given date interval.
+  # @option opts [String] :status Select Issuing tokens with the given status.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingNetworkTokenList]
+  describe "get_issuing_tokens test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_issuing_tokens_token
+  # &lt;p&gt;Retrieves an Issuing &lt;code&gt;Token&lt;/code&gt; object.&lt;/p&gt;
+  # @param token
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingToken]
+  describe "get_issuing_tokens_token test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_issuing_transactions
   # &lt;p&gt;Returns a list of Issuing &lt;code&gt;Transaction&lt;/code&gt; objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
@@ -271,7 +341,7 @@ describe "IssuingApi" do
   # @option opts [EncryptedPinParam] :pin
   # @option opts [String] :replacement_for The card this is meant to be a replacement for (if any).
   # @option opts [String] :replacement_reason If &#x60;replacement_for&#x60; is specified, this should indicate why that card is being replaced.
-  # @option opts [String] :second_line
+  # @option opts [PostIssuingCardsRequestSecondLine] :second_line
   # @option opts [ShippingSpecs] :shipping
   # @option opts [AuthorizationControlsParam] :spending_controls
   # @option opts [String] :status Whether authorizations can be approved on this card. May be blocked from activating cards depending on past-due Cardholder requirements. Defaults to &#x60;inactive&#x60;.
@@ -340,6 +410,58 @@ describe "IssuingApi" do
   # @option opts [PostAccountsRequestMetadata] :metadata
   # @return [IssuingDispute]
   describe "post_issuing_disputes_dispute_submit test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_issuing_personalization_designs
+  # &lt;p&gt;Creates a personalization design object.&lt;/p&gt;
+  # @param physical_bundle The physical bundle object belonging to this personalization design.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :card_logo The file for the card logo, for use with physical bundles that support card logos. Must have a &#x60;purpose&#x60; value of &#x60;issuing_logo&#x60;.
+  # @option opts [CarrierTextParam] :carrier_text
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :lookup_key A lookup key used to retrieve personalization designs dynamically from a static string. This may be up to 200 characters.
+  # @option opts [Hash(String, String)] :metadata
+  # @option opts [String] :name Friendly display name.
+  # @option opts [PreferencesParam] :preferences
+  # @option opts [Bool] :transfer_lookup_key If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+  # @return [IssuingPersonalizationDesign]
+  describe "post_issuing_personalization_designs test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_issuing_personalization_designs_personalization_design
+  # &lt;p&gt;Updates a card personalization object.&lt;/p&gt;
+  # @param personalization_design
+  # @param [Hash] opts the optional parameters
+  # @option opts [PostIssuingPersonalizationDesignsPersonalizationDesignRequestCardLogo] :card_logo
+  # @option opts [PostIssuingPersonalizationDesignsPersonalizationDesignRequestCarrierText] :carrier_text
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostIssuingPersonalizationDesignsPersonalizationDesignRequestLookupKey] :lookup_key
+  # @option opts [Hash(String, String)] :metadata
+  # @option opts [PostIssuingPersonalizationDesignsPersonalizationDesignRequestName] :name
+  # @option opts [String] :physical_bundle The physical bundle object belonging to this personalization design.
+  # @option opts [PreferencesParam] :preferences
+  # @option opts [Bool] :transfer_lookup_key If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this personalization design.
+  # @return [IssuingPersonalizationDesign]
+  describe "post_issuing_personalization_designs_personalization_design test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_issuing_tokens_token
+  # &lt;p&gt;Attempts to update the specified Issuing &lt;code&gt;Token&lt;/code&gt; object to the status specified.&lt;/p&gt;
+  # @param token
+  # @param status Specifies which status the token should be updated to.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingToken]
+  describe "post_issuing_tokens_token test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

@@ -14,17 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_intents_request_mandate_data"
 
 describe Stripe::PostPaymentIntentsRequestMandateData do
-  describe "test an instance of PostPaymentIntentsRequestMandateData" do
-    it "should create an instance of PostPaymentIntentsRequestMandateData" do
-      # instance = Stripe::PostPaymentIntentsRequestMandateData.new
-      # (instance).should be_a(Stripe::PostPaymentIntentsRequestMandateData)
-    end
-  end
-
-  describe "test attribute 'customer_acceptance'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentIntentsRequestMandateData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

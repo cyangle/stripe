@@ -25,10 +25,6 @@ describe Stripe::BusinessProfileCreateParam do
     it "should work" do
       # instance = Stripe::BusinessProfileCreateParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BusinessProfileCreateParam::ENUM_VALIDATOR_FOR_HEADLINE
-      # validator.allowable_values.each do |value|
-      #   instance.headline = value.as(String)
-      # end
     end
   end
 

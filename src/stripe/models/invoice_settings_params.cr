@@ -10,10 +10,10 @@
 require "../../core"
 
 require "./connect_account_reference"
-require "./file_link_creation_params_metadata"
 require "./invoice_data_params_account_tax_ids"
 require "./invoice_data_params_custom_fields"
 require "./invoice_data_params_rendering_options"
+require "./post_accounts_request_metadata"
 
 module Stripe
   class InvoiceSettingsParams
@@ -43,8 +43,8 @@ module Stripe
     @[JSON::Field(key: "issuer", type: Stripe::ConnectAccountReference?, default: nil, required: false, nullable: false, emit_null: false)]
     getter issuer : Stripe::ConnectAccountReference? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     @[JSON::Field(key: "rendering_options", type: Stripe::InvoiceDataParamsRenderingOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter rendering_options : Stripe::InvoiceDataParamsRenderingOptions? = nil
@@ -59,7 +59,7 @@ module Stripe
       @description : String? = nil,
       @footer : String? = nil,
       @issuer : Stripe::ConnectAccountReference? = nil,
-      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @rendering_options : Stripe::InvoiceDataParamsRenderingOptions? = nil
     )
     end
@@ -183,7 +183,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

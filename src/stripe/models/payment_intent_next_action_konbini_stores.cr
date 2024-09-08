@@ -9,10 +9,10 @@
 
 require "../../core"
 
-require "./payment_intent_next_action_konbini_familymart"
-require "./payment_intent_next_action_konbini_lawson"
-require "./payment_intent_next_action_konbini_ministop"
-require "./payment_intent_next_action_konbini_seicomart"
+require "./payment_intent_next_action_konbini_stores_familymart"
+require "./payment_intent_next_action_konbini_stores_lawson"
+require "./payment_intent_next_action_konbini_stores_ministop"
+require "./payment_intent_next_action_konbini_stores_seicomart"
 
 module Stripe
   #
@@ -24,17 +24,17 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "familymart", type: Stripe::PaymentIntentNextActionKonbiniFamilymart?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter familymart : Stripe::PaymentIntentNextActionKonbiniFamilymart? = nil
+    @[JSON::Field(key: "familymart", type: Stripe::PaymentIntentNextActionKonbiniStoresFamilymart?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter familymart : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart? = nil
 
-    @[JSON::Field(key: "lawson", type: Stripe::PaymentIntentNextActionKonbiniLawson?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter lawson : Stripe::PaymentIntentNextActionKonbiniLawson? = nil
+    @[JSON::Field(key: "lawson", type: Stripe::PaymentIntentNextActionKonbiniStoresLawson?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter lawson : Stripe::PaymentIntentNextActionKonbiniStoresLawson? = nil
 
-    @[JSON::Field(key: "ministop", type: Stripe::PaymentIntentNextActionKonbiniMinistop?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter ministop : Stripe::PaymentIntentNextActionKonbiniMinistop? = nil
+    @[JSON::Field(key: "ministop", type: Stripe::PaymentIntentNextActionKonbiniStoresMinistop?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter ministop : Stripe::PaymentIntentNextActionKonbiniStoresMinistop? = nil
 
-    @[JSON::Field(key: "seicomart", type: Stripe::PaymentIntentNextActionKonbiniSeicomart?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter seicomart : Stripe::PaymentIntentNextActionKonbiniSeicomart? = nil
+    @[JSON::Field(key: "seicomart", type: Stripe::PaymentIntentNextActionKonbiniStoresSeicomart?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter seicomart : Stripe::PaymentIntentNextActionKonbiniStoresSeicomart? = nil
 
     # End of Required Properties
 
@@ -43,10 +43,10 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @familymart : Stripe::PaymentIntentNextActionKonbiniFamilymart? = nil,
-      @lawson : Stripe::PaymentIntentNextActionKonbiniLawson? = nil,
-      @ministop : Stripe::PaymentIntentNextActionKonbiniMinistop? = nil,
-      @seicomart : Stripe::PaymentIntentNextActionKonbiniSeicomart? = nil
+      @familymart : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart? = nil,
+      @lawson : Stripe::PaymentIntentNextActionKonbiniStoresLawson? = nil,
+      @ministop : Stripe::PaymentIntentNextActionKonbiniStoresMinistop? = nil,
+      @seicomart : Stripe::PaymentIntentNextActionKonbiniStoresSeicomart? = nil
     )
     end
 
@@ -94,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] familymart Object to be assigned
-    def familymart=(new_value : Stripe::PaymentIntentNextActionKonbiniFamilymart?)
+    def familymart=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -104,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] lawson Object to be assigned
-    def lawson=(new_value : Stripe::PaymentIntentNextActionKonbiniLawson?)
+    def lawson=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresLawson?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -114,7 +114,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ministop Object to be assigned
-    def ministop=(new_value : Stripe::PaymentIntentNextActionKonbiniMinistop?)
+    def ministop=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresMinistop?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -124,7 +124,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] seicomart Object to be assigned
-    def seicomart=(new_value : Stripe::PaymentIntentNextActionKonbiniSeicomart?)
+    def seicomart=(new_value : Stripe::PaymentIntentNextActionKonbiniStoresSeicomart?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

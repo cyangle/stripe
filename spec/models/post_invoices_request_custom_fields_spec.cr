@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_invoices_request_custom_fields"
 
 describe Stripe::PostInvoicesRequestCustomFields do
-  describe "test an instance of PostInvoicesRequestCustomFields" do
-    it "should create an instance of PostInvoicesRequestCustomFields" do
-      # instance = Stripe::PostInvoicesRequestCustomFields.new
-      # (instance).should be_a(Stripe::PostInvoicesRequestCustomFields)
-    end
-  end
 end

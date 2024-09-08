@@ -10,10 +10,10 @@
 require "../../core"
 
 require "./issuing_cardholder_address"
-require "./issuing_cardholder_authorization_controls"
-require "./issuing_cardholder_company"
-require "./issuing_cardholder_individual"
+require "./issuing_cardholder_company1"
+require "./issuing_cardholder_individual1"
 require "./issuing_cardholder_requirements"
+require "./issuing_cardholder_spending_controls"
 
 module Stripe
   # An Issuing `Cardholder` object represents an individual or business entity who is [issued](https://stripe.com/docs/issuing) cards.  Related guide: [How to create a cardholder](https://stripe.com/docs/issuing/cards#create-cardholder)
@@ -28,8 +28,8 @@ module Stripe
     @[JSON::Field(key: "billing", type: Stripe::IssuingCardholderAddress?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing : Stripe::IssuingCardholderAddress? = nil
 
-    @[JSON::Field(key: "company", type: Stripe::IssuingCardholderCompany?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter company : Stripe::IssuingCardholderCompany? = nil
+    @[JSON::Field(key: "company", type: Stripe::IssuingCardholderCompany1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter company : Stripe::IssuingCardholderCompany1? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -45,8 +45,8 @@ module Stripe
     getter id : String? = nil
     MAX_LENGTH_FOR_ID = 5000
 
-    @[JSON::Field(key: "individual", type: Stripe::IssuingCardholderIndividual?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter individual : Stripe::IssuingCardholderIndividual? = nil
+    @[JSON::Field(key: "individual", type: Stripe::IssuingCardholderIndividual1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter individual : Stripe::IssuingCardholderIndividual1? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -80,8 +80,8 @@ module Stripe
     @[JSON::Field(key: "requirements", type: Stripe::IssuingCardholderRequirements?, default: nil, required: true, nullable: false, emit_null: false)]
     getter requirements : Stripe::IssuingCardholderRequirements? = nil
 
-    @[JSON::Field(key: "spending_controls", type: Stripe::IssuingCardholderAuthorizationControls?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter spending_controls : Stripe::IssuingCardholderAuthorizationControls? = nil
+    @[JSON::Field(key: "spending_controls", type: Stripe::IssuingCardholderSpendingControls?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter spending_controls : Stripe::IssuingCardholderSpendingControls? = nil
 
     # Specifies whether to permit authorizations on this cardholder's cards.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -103,11 +103,11 @@ module Stripe
       *,
       # Required properties
       @billing : Stripe::IssuingCardholderAddress? = nil,
-      @company : Stripe::IssuingCardholderCompany? = nil,
+      @company : Stripe::IssuingCardholderCompany1? = nil,
       @created : Int64? = nil,
       @email : String? = nil,
       @id : String? = nil,
-      @individual : Stripe::IssuingCardholderIndividual? = nil,
+      @individual : Stripe::IssuingCardholderIndividual1? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @name : String? = nil,
@@ -115,7 +115,7 @@ module Stripe
       @phone_number : String? = nil,
       @preferred_locales : Array(String)? = nil,
       @requirements : Stripe::IssuingCardholderRequirements? = nil,
-      @spending_controls : Stripe::IssuingCardholderAuthorizationControls? = nil,
+      @spending_controls : Stripe::IssuingCardholderSpendingControls? = nil,
       @status : String? = nil,
       @_type : String? = nil
     )
@@ -280,7 +280,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] company Object to be assigned
-    def company=(new_value : Stripe::IssuingCardholderCompany?)
+    def company=(new_value : Stripe::IssuingCardholderCompany1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -319,7 +319,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] individual Object to be assigned
-    def individual=(new_value : Stripe::IssuingCardholderIndividual?)
+    def individual=(new_value : Stripe::IssuingCardholderIndividual1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -398,7 +398,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] spending_controls Object to be assigned
-    def spending_controls=(new_value : Stripe::IssuingCardholderAuthorizationControls?)
+    def spending_controls=(new_value : Stripe::IssuingCardholderSpendingControls?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -25,10 +25,6 @@ describe Stripe::SubscriptionDataUpdateParams do
     it "should work" do
       # instance = Stripe::SubscriptionDataUpdateParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::SubscriptionDataUpdateParams::ENUM_VALIDATOR_FOR_DESCRIPTION
-      # validator.allowable_values.each do |value|
-      #   instance.description = value.as(String)
-      # end
     end
   end
 

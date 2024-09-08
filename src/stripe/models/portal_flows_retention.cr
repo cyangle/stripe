@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./portal_flows_coupon_offer"
+require "./portal_flows_retention_coupon_offer"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "coupon_offer", type: Stripe::PortalFlowsCouponOffer?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter coupon_offer : Stripe::PortalFlowsCouponOffer? = nil
+    @[JSON::Field(key: "coupon_offer", type: Stripe::PortalFlowsRetentionCouponOffer?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter coupon_offer : Stripe::PortalFlowsRetentionCouponOffer? = nil
 
     # Type of retention strategy that will be used.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -37,7 +37,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @coupon_offer : Stripe::PortalFlowsCouponOffer? = nil,
+      @coupon_offer : Stripe::PortalFlowsRetentionCouponOffer? = nil,
       @_type : String? = nil
     )
     end
@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] coupon_offer Object to be assigned
-    def coupon_offer=(new_value : Stripe::PortalFlowsCouponOffer?)
+    def coupon_offer=(new_value : Stripe::PortalFlowsRetentionCouponOffer?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_flows_private_payment_methods_klarna_dob"
+require "./payment_method_klarna_dob"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "dob", type: Stripe::PaymentFlowsPrivatePaymentMethodsKlarnaDob?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
-    getter dob : Stripe::PaymentFlowsPrivatePaymentMethodsKlarnaDob? = nil
+    @[JSON::Field(key: "dob", type: Stripe::PaymentMethodKlarnaDob?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
+    getter dob : Stripe::PaymentMethodKlarnaDob? = nil
 
     @[JSON::Field(ignore: true)]
     property? dob_present : Bool = false
@@ -32,7 +32,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @dob : Stripe::PaymentFlowsPrivatePaymentMethodsKlarnaDob? = nil
+      @dob : Stripe::PaymentMethodKlarnaDob? = nil
     )
     end
 
@@ -59,7 +59,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(new_value : Stripe::PaymentFlowsPrivatePaymentMethodsKlarnaDob?)
+    def dob=(new_value : Stripe::PaymentMethodKlarnaDob?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

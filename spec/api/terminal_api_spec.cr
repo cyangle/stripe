@@ -206,7 +206,7 @@ describe "TerminalApi" do
   # @param location
   # @param [Hash] opts the optional parameters
   # @option opts [OptionalFieldsAddress] :address
-  # @option opts [String] :configuration_overrides
+  # @option opts [PostTerminalLocationsLocationRequestConfigurationOverrides] :configuration_overrides
   # @option opts [String] :display_name A name for the location.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostAccountsRequestMetadata] :metadata
@@ -237,7 +237,7 @@ describe "TerminalApi" do
   # @param reader
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [String] :label
+  # @option opts [PostTerminalReadersReaderRequestLabel] :label
   # @option opts [PostAccountsRequestMetadata] :metadata
   # @return [GetTerminalReadersReader200Response]
   describe "post_terminal_readers_reader test" do
@@ -275,13 +275,32 @@ describe "TerminalApi" do
   # unit tests for post_terminal_readers_reader_process_setup_intent
   # &lt;p&gt;Initiates a setup intent flow on a Reader.&lt;/p&gt;
   # @param reader
-  # @param customer_consent_collected Customer Consent Collected
   # @param setup_intent SetupIntent ID
   # @param [Hash] opts the optional parameters
+  # @option opts [Bool] :customer_consent_collected Customer Consent Collected
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [ProcessSetupConfig] :process_config
   # @return [TerminalReader]
   describe "post_terminal_readers_reader_process_setup_intent test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_terminal_readers_reader_refund_payment
+  # &lt;p&gt;Initiates a refund on a Reader&lt;/p&gt;
+  # @param reader
+  # @param [Hash] opts the optional parameters
+  # @option opts [Int32] :amount A positive integer in __cents__ representing how much of this charge to refund.
+  # @option opts [String] :charge ID of the Charge to refund.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Hash(String, String)] :metadata
+  # @option opts [String] :payment_intent ID of the PaymentIntent to refund.
+  # @option opts [Bool] :refund_application_fee Boolean indicating whether the application fee should be refunded when refunding this charge. If a full charge refund is given, the full application fee will be refunded. Otherwise, the application fee will be refunded in an amount proportional to the amount of the charge refunded. An application fee can be refunded only by the application that created the charge.
+  # @option opts [RefundPaymentConfig] :refund_payment_config
+  # @option opts [Bool] :reverse_transfer Boolean indicating whether the transfer should be reversed when refunding this charge. The transfer will be reversed proportionally to the amount being refunded (either the entire or partial amount). A transfer can be reversed only by the application that created the charge.
+  # @return [TerminalReader]
+  describe "post_terminal_readers_reader_refund_payment test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

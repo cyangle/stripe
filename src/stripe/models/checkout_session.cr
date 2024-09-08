@@ -9,32 +9,32 @@
 
 require "../../core"
 
+require "./checkout_session_after_expiration"
+require "./checkout_session_consent"
+require "./checkout_session_consent_collection"
+require "./checkout_session_currency_conversion"
 require "./checkout_session_customer"
+require "./checkout_session_customer_details"
 require "./checkout_session_invoice"
+require "./checkout_session_invoice_creation"
 require "./checkout_session_payment_intent"
 require "./checkout_session_payment_link"
-require "./checkout_session_payment_method_options"
+require "./checkout_session_payment_method_configuration_details"
+require "./checkout_session_payment_method_options1"
+require "./checkout_session_saved_payment_method_options"
 require "./checkout_session_setup_intent"
+require "./checkout_session_shipping_address_collection"
+require "./checkout_session_shipping_cost"
+require "./checkout_session_shipping_details"
 require "./checkout_session_subscription"
-require "./payment_method_config_biz_payment_method_configuration_details"
-require "./payment_pages_checkout_session_after_expiration"
+require "./checkout_session_total_details"
 require "./payment_pages_checkout_session_automatic_tax"
-require "./payment_pages_checkout_session_consent"
-require "./payment_pages_checkout_session_consent_collection"
-require "./payment_pages_checkout_session_currency_conversion"
 require "./payment_pages_checkout_session_custom_fields"
 require "./payment_pages_checkout_session_custom_text"
-require "./payment_pages_checkout_session_customer_details"
-require "./payment_pages_checkout_session_invoice_creation"
 require "./payment_pages_checkout_session_list_line_items"
 require "./payment_pages_checkout_session_phone_number_collection"
-require "./payment_pages_checkout_session_saved_payment_method_options"
-require "./payment_pages_checkout_session_shipping_address_collection"
-require "./payment_pages_checkout_session_shipping_cost"
 require "./payment_pages_checkout_session_shipping_option"
 require "./payment_pages_checkout_session_tax_id_collection"
-require "./payment_pages_checkout_session_total_details"
-require "./shipping"
 
 module Stripe
   # A Checkout Session represents your customer's session as they pay for one-time purchases or subscriptions through [Checkout](https://stripe.com/docs/payments/checkout) or [Payment Links](https://stripe.com/docs/payments/payment-links). We recommend creating a new Session each time your customer attempts to pay.  Once payment is successful, the Checkout Session will contain a reference to the [Customer](https://stripe.com/docs/api/customers), and either the successful [PaymentIntent](https://stripe.com/docs/api/payment_intents) or an active [Subscription](https://stripe.com/docs/api/subscriptions).  You can create a Checkout Session on your server and redirect to its URL to begin Checkout.  Related guide: [Checkout quickstart](https://stripe.com/docs/checkout/quickstart)
@@ -46,8 +46,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "after_expiration", type: Stripe::PaymentPagesCheckoutSessionAfterExpiration?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter after_expiration : Stripe::PaymentPagesCheckoutSessionAfterExpiration? = nil
+    @[JSON::Field(key: "after_expiration", type: Stripe::CheckoutSessionAfterExpiration?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter after_expiration : Stripe::CheckoutSessionAfterExpiration? = nil
 
     # Enables user redeemable promotion codes.
     @[JSON::Field(key: "allow_promotion_codes", type: Bool?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -85,11 +85,11 @@ module Stripe
     getter client_secret : String? = nil
     MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
-    @[JSON::Field(key: "consent", type: Stripe::PaymentPagesCheckoutSessionConsent?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter consent : Stripe::PaymentPagesCheckoutSessionConsent? = nil
+    @[JSON::Field(key: "consent", type: Stripe::CheckoutSessionConsent?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter consent : Stripe::CheckoutSessionConsent? = nil
 
-    @[JSON::Field(key: "consent_collection", type: Stripe::PaymentPagesCheckoutSessionConsentCollection?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter consent_collection : Stripe::PaymentPagesCheckoutSessionConsentCollection? = nil
+    @[JSON::Field(key: "consent_collection", type: Stripe::CheckoutSessionConsentCollection?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter consent_collection : Stripe::CheckoutSessionConsentCollection? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -99,8 +99,8 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
     getter currency : String? = nil
 
-    @[JSON::Field(key: "currency_conversion", type: Stripe::PaymentPagesCheckoutSessionCurrencyConversion?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter currency_conversion : Stripe::PaymentPagesCheckoutSessionCurrencyConversion? = nil
+    @[JSON::Field(key: "currency_conversion", type: Stripe::CheckoutSessionCurrencyConversion?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter currency_conversion : Stripe::CheckoutSessionCurrencyConversion? = nil
 
     # Collect additional information from your customer using custom fields. Up to 3 fields are supported.
     @[JSON::Field(key: "custom_fields", type: Array(Stripe::PaymentPagesCheckoutSessionCustomFields)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -118,8 +118,8 @@ module Stripe
     ERROR_MESSAGE_FOR_CUSTOMER_CREATION = "invalid value for \"customer_creation\", must be one of [always, if_required]."
     VALID_VALUES_FOR_CUSTOMER_CREATION  = String.static_array("always", "if_required")
 
-    @[JSON::Field(key: "customer_details", type: Stripe::PaymentPagesCheckoutSessionCustomerDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter customer_details : Stripe::PaymentPagesCheckoutSessionCustomerDetails? = nil
+    @[JSON::Field(key: "customer_details", type: Stripe::CheckoutSessionCustomerDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter customer_details : Stripe::CheckoutSessionCustomerDetails? = nil
 
     # If provided, this value will be used when the Customer object is created. If not provided, customers will be asked to enter their email address. Use this parameter to prefill customer data if you already have an email on file. To access information about the customer once the payment flow is complete, use the `customer` attribute.
     @[JSON::Field(key: "customer_email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -138,8 +138,8 @@ module Stripe
     @[JSON::Field(key: "invoice", type: Stripe::CheckoutSessionInvoice?, default: nil, required: true, nullable: true, emit_null: true)]
     getter invoice : Stripe::CheckoutSessionInvoice? = nil
 
-    @[JSON::Field(key: "invoice_creation", type: Stripe::PaymentPagesCheckoutSessionInvoiceCreation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter invoice_creation : Stripe::PaymentPagesCheckoutSessionInvoiceCreation? = nil
+    @[JSON::Field(key: "invoice_creation", type: Stripe::CheckoutSessionInvoiceCreation?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter invoice_creation : Stripe::CheckoutSessionInvoiceCreation? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -178,11 +178,11 @@ module Stripe
     ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION = "invalid value for \"payment_method_collection\", must be one of [always, if_required]."
     VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
-    @[JSON::Field(key: "payment_method_configuration_details", type: Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_configuration_details : Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails? = nil
+    @[JSON::Field(key: "payment_method_configuration_details", type: Stripe::CheckoutSessionPaymentMethodConfigurationDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_configuration_details : Stripe::CheckoutSessionPaymentMethodConfigurationDetails? = nil
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::CheckoutSessionPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_options : Stripe::CheckoutSessionPaymentMethodOptions? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::CheckoutSessionPaymentMethodOptions1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_options : Stripe::CheckoutSessionPaymentMethodOptions1? = nil
 
     # A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -199,20 +199,20 @@ module Stripe
     getter recovered_from : String? = nil
     MAX_LENGTH_FOR_RECOVERED_FROM = 5000
 
-    @[JSON::Field(key: "saved_payment_method_options", type: Stripe::PaymentPagesCheckoutSessionSavedPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter saved_payment_method_options : Stripe::PaymentPagesCheckoutSessionSavedPaymentMethodOptions? = nil
+    @[JSON::Field(key: "saved_payment_method_options", type: Stripe::CheckoutSessionSavedPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter saved_payment_method_options : Stripe::CheckoutSessionSavedPaymentMethodOptions? = nil
 
     @[JSON::Field(key: "setup_intent", type: Stripe::CheckoutSessionSetupIntent?, default: nil, required: true, nullable: true, emit_null: true)]
     getter setup_intent : Stripe::CheckoutSessionSetupIntent? = nil
 
-    @[JSON::Field(key: "shipping_address_collection", type: Stripe::PaymentPagesCheckoutSessionShippingAddressCollection?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_address_collection : Stripe::PaymentPagesCheckoutSessionShippingAddressCollection? = nil
+    @[JSON::Field(key: "shipping_address_collection", type: Stripe::CheckoutSessionShippingAddressCollection?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_address_collection : Stripe::CheckoutSessionShippingAddressCollection? = nil
 
-    @[JSON::Field(key: "shipping_cost", type: Stripe::PaymentPagesCheckoutSessionShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_cost : Stripe::PaymentPagesCheckoutSessionShippingCost? = nil
+    @[JSON::Field(key: "shipping_cost", type: Stripe::CheckoutSessionShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_cost : Stripe::CheckoutSessionShippingCost? = nil
 
-    @[JSON::Field(key: "shipping_details", type: Stripe::Shipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_details : Stripe::Shipping? = nil
+    @[JSON::Field(key: "shipping_details", type: Stripe::CheckoutSessionShippingDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_details : Stripe::CheckoutSessionShippingDetails? = nil
 
     # The shipping rate options applied to this Session.
     @[JSON::Field(key: "shipping_options", type: Array(Stripe::PaymentPagesCheckoutSessionShippingOption)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -238,8 +238,8 @@ module Stripe
     getter success_url : String? = nil
     MAX_LENGTH_FOR_SUCCESS_URL = 5000
 
-    @[JSON::Field(key: "total_details", type: Stripe::PaymentPagesCheckoutSessionTotalDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter total_details : Stripe::PaymentPagesCheckoutSessionTotalDetails? = nil
+    @[JSON::Field(key: "total_details", type: Stripe::CheckoutSessionTotalDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter total_details : Stripe::CheckoutSessionTotalDetails? = nil
 
     # The UI mode of the Session. Defaults to `hosted`.
     @[JSON::Field(key: "ui_mode", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -262,7 +262,7 @@ module Stripe
     @[JSON::Field(key: "phone_number_collection", type: Stripe::PaymentPagesCheckoutSessionPhoneNumberCollection?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone_number_collection : Stripe::PaymentPagesCheckoutSessionPhoneNumberCollection? = nil
 
-    # This parameter applies to `ui_mode: embedded`. Learn more about the [redirect behavior](https://stripe.com/docs/payments/checkout/custom-redirect-behavior) of embedded sessions. Defaults to `always`.
+    # This parameter applies to `ui_mode: embedded`. Learn more about the [redirect behavior](https://stripe.com/docs/payments/checkout/custom-success-page?payment-ui=embedded-form) of embedded sessions. Defaults to `always`.
     @[JSON::Field(key: "redirect_on_completion", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter redirect_on_completion : String? = nil
     ERROR_MESSAGE_FOR_REDIRECT_ON_COMPLETION = "invalid value for \"redirect_on_completion\", must be one of [always, if_required, never]."
@@ -281,7 +281,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @after_expiration : Stripe::PaymentPagesCheckoutSessionAfterExpiration? = nil,
+      @after_expiration : Stripe::CheckoutSessionAfterExpiration? = nil,
       @allow_promotion_codes : Bool? = nil,
       @amount_subtotal : Int64? = nil,
       @amount_total : Int64? = nil,
@@ -290,21 +290,21 @@ module Stripe
       @cancel_url : String? = nil,
       @client_reference_id : String? = nil,
       @client_secret : String? = nil,
-      @consent : Stripe::PaymentPagesCheckoutSessionConsent? = nil,
-      @consent_collection : Stripe::PaymentPagesCheckoutSessionConsentCollection? = nil,
+      @consent : Stripe::CheckoutSessionConsent? = nil,
+      @consent_collection : Stripe::CheckoutSessionConsentCollection? = nil,
       @created : Int64? = nil,
       @currency : String? = nil,
-      @currency_conversion : Stripe::PaymentPagesCheckoutSessionCurrencyConversion? = nil,
+      @currency_conversion : Stripe::CheckoutSessionCurrencyConversion? = nil,
       @custom_fields : Array(Stripe::PaymentPagesCheckoutSessionCustomFields)? = nil,
       @custom_text : Stripe::PaymentPagesCheckoutSessionCustomText? = nil,
       @customer : Stripe::CheckoutSessionCustomer? = nil,
       @customer_creation : String? = nil,
-      @customer_details : Stripe::PaymentPagesCheckoutSessionCustomerDetails? = nil,
+      @customer_details : Stripe::CheckoutSessionCustomerDetails? = nil,
       @customer_email : String? = nil,
       @expires_at : Int64? = nil,
       @id : String? = nil,
       @invoice : Stripe::CheckoutSessionInvoice? = nil,
-      @invoice_creation : Stripe::PaymentPagesCheckoutSessionInvoiceCreation? = nil,
+      @invoice_creation : Stripe::CheckoutSessionInvoiceCreation? = nil,
       @livemode : Bool? = nil,
       @locale : String? = nil,
       @metadata : Hash(String, String)? = nil,
@@ -313,22 +313,22 @@ module Stripe
       @payment_intent : Stripe::CheckoutSessionPaymentIntent? = nil,
       @payment_link : Stripe::CheckoutSessionPaymentLink? = nil,
       @payment_method_collection : String? = nil,
-      @payment_method_configuration_details : Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails? = nil,
-      @payment_method_options : Stripe::CheckoutSessionPaymentMethodOptions? = nil,
+      @payment_method_configuration_details : Stripe::CheckoutSessionPaymentMethodConfigurationDetails? = nil,
+      @payment_method_options : Stripe::CheckoutSessionPaymentMethodOptions1? = nil,
       @payment_method_types : Array(String)? = nil,
       @payment_status : String? = nil,
       @recovered_from : String? = nil,
-      @saved_payment_method_options : Stripe::PaymentPagesCheckoutSessionSavedPaymentMethodOptions? = nil,
+      @saved_payment_method_options : Stripe::CheckoutSessionSavedPaymentMethodOptions? = nil,
       @setup_intent : Stripe::CheckoutSessionSetupIntent? = nil,
-      @shipping_address_collection : Stripe::PaymentPagesCheckoutSessionShippingAddressCollection? = nil,
-      @shipping_cost : Stripe::PaymentPagesCheckoutSessionShippingCost? = nil,
-      @shipping_details : Stripe::Shipping? = nil,
+      @shipping_address_collection : Stripe::CheckoutSessionShippingAddressCollection? = nil,
+      @shipping_cost : Stripe::CheckoutSessionShippingCost? = nil,
+      @shipping_details : Stripe::CheckoutSessionShippingDetails? = nil,
       @shipping_options : Array(Stripe::PaymentPagesCheckoutSessionShippingOption)? = nil,
       @status : String? = nil,
       @submit_type : String? = nil,
       @subscription : Stripe::CheckoutSessionSubscription? = nil,
       @success_url : String? = nil,
-      @total_details : Stripe::PaymentPagesCheckoutSessionTotalDetails? = nil,
+      @total_details : Stripe::CheckoutSessionTotalDetails? = nil,
       @ui_mode : String? = nil,
       @url : String? = nil,
       # Optional properties
@@ -738,7 +738,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] after_expiration Object to be assigned
-    def after_expiration=(new_value : Stripe::PaymentPagesCheckoutSessionAfterExpiration?)
+    def after_expiration=(new_value : Stripe::CheckoutSessionAfterExpiration?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -817,7 +817,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] consent Object to be assigned
-    def consent=(new_value : Stripe::PaymentPagesCheckoutSessionConsent?)
+    def consent=(new_value : Stripe::CheckoutSessionConsent?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -827,7 +827,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] consent_collection Object to be assigned
-    def consent_collection=(new_value : Stripe::PaymentPagesCheckoutSessionConsentCollection?)
+    def consent_collection=(new_value : Stripe::CheckoutSessionConsentCollection?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -851,7 +851,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency_conversion Object to be assigned
-    def currency_conversion=(new_value : Stripe::PaymentPagesCheckoutSessionCurrencyConversion?)
+    def currency_conversion=(new_value : Stripe::CheckoutSessionCurrencyConversion?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -903,7 +903,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_details Object to be assigned
-    def customer_details=(new_value : Stripe::PaymentPagesCheckoutSessionCustomerDetails?)
+    def customer_details=(new_value : Stripe::CheckoutSessionCustomerDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -952,7 +952,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_creation Object to be assigned
-    def invoice_creation=(new_value : Stripe::PaymentPagesCheckoutSessionInvoiceCreation?)
+    def invoice_creation=(new_value : Stripe::CheckoutSessionInvoiceCreation?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1038,7 +1038,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_configuration_details Object to be assigned
-    def payment_method_configuration_details=(new_value : Stripe::PaymentMethodConfigBizPaymentMethodConfigurationDetails?)
+    def payment_method_configuration_details=(new_value : Stripe::CheckoutSessionPaymentMethodConfigurationDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1048,7 +1048,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(new_value : Stripe::CheckoutSessionPaymentMethodOptions?)
+    def payment_method_options=(new_value : Stripe::CheckoutSessionPaymentMethodOptions1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1087,7 +1087,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] saved_payment_method_options Object to be assigned
-    def saved_payment_method_options=(new_value : Stripe::PaymentPagesCheckoutSessionSavedPaymentMethodOptions?)
+    def saved_payment_method_options=(new_value : Stripe::CheckoutSessionSavedPaymentMethodOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1107,7 +1107,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address_collection Object to be assigned
-    def shipping_address_collection=(new_value : Stripe::PaymentPagesCheckoutSessionShippingAddressCollection?)
+    def shipping_address_collection=(new_value : Stripe::CheckoutSessionShippingAddressCollection?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1117,7 +1117,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_cost Object to be assigned
-    def shipping_cost=(new_value : Stripe::PaymentPagesCheckoutSessionShippingCost?)
+    def shipping_cost=(new_value : Stripe::CheckoutSessionShippingCost?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1127,7 +1127,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_details Object to be assigned
-    def shipping_details=(new_value : Stripe::Shipping?)
+    def shipping_details=(new_value : Stripe::CheckoutSessionShippingDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1188,7 +1188,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] total_details Object to be assigned
-    def total_details=(new_value : Stripe::PaymentPagesCheckoutSessionTotalDetails?)
+    def total_details=(new_value : Stripe::CheckoutSessionTotalDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

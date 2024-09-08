@@ -100,10 +100,6 @@ describe Stripe::PaymentIntentPaymentMethodOptionsParam do
     it "should work" do
       # instance = Stripe::PaymentIntentPaymentMethodOptionsParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentPaymentMethodOptionsParam::ENUM_VALIDATOR_FOR_REFERENCE
-      # validator.allowable_values.each do |value|
-      #   instance.reference = value.as(String)
-      # end
     end
   end
 

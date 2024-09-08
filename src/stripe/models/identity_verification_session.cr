@@ -9,12 +9,12 @@
 
 require "../../core"
 
-require "./gelato_provided_details"
-require "./gelato_session_last_error"
-require "./gelato_verification_session_options"
-require "./gelato_verified_outputs"
+require "./identity_verification_session_last_error"
 require "./identity_verification_session_last_verification_report"
-require "./verification_session_redaction"
+require "./identity_verification_session_options"
+require "./identity_verification_session_provided_details"
+require "./identity_verification_session_redaction"
+require "./identity_verification_session_verified_outputs"
 
 module Stripe
   # A VerificationSession guides you through the process of collecting and verifying the identities of your users. It contains details about the type of verification, such as what [verification check](/docs/identity/verification-checks) to perform. Only create one VerificationSession for each verification in your system.  A VerificationSession transitions through [multiple statuses](/docs/identity/how-sessions-work) throughout its lifetime as it progresses through the verification flow. The VerificationSession contains the user's verified data after verification checks are complete.  Related guide: [The Verification Sessions API](https://stripe.com/docs/identity/verification-sessions)
@@ -45,8 +45,8 @@ module Stripe
     getter id : String? = nil
     MAX_LENGTH_FOR_ID = 5000
 
-    @[JSON::Field(key: "last_error", type: Stripe::GelatoSessionLastError?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter last_error : Stripe::GelatoSessionLastError? = nil
+    @[JSON::Field(key: "last_error", type: Stripe::IdentityVerificationSessionLastError?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter last_error : Stripe::IdentityVerificationSessionLastError? = nil
 
     @[JSON::Field(key: "last_verification_report", type: Stripe::IdentityVerificationSessionLastVerificationReport?, default: nil, required: true, nullable: true, emit_null: true)]
     getter last_verification_report : Stripe::IdentityVerificationSessionLastVerificationReport? = nil
@@ -64,11 +64,11 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [identity.verification_session]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("identity.verification_session")
 
-    @[JSON::Field(key: "options", type: Stripe::GelatoVerificationSessionOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter options : Stripe::GelatoVerificationSessionOptions? = nil
+    @[JSON::Field(key: "options", type: Stripe::IdentityVerificationSessionOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter options : Stripe::IdentityVerificationSessionOptions? = nil
 
-    @[JSON::Field(key: "redaction", type: Stripe::VerificationSessionRedaction?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter redaction : Stripe::VerificationSessionRedaction? = nil
+    @[JSON::Field(key: "redaction", type: Stripe::IdentityVerificationSessionRedaction?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter redaction : Stripe::IdentityVerificationSessionRedaction? = nil
 
     # Token referencing a Customer resource.
     @[JSON::Field(key: "related_customer", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -96,8 +96,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "provided_details", type: Stripe::GelatoProvidedDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: provided_details.nil? && !provided_details_present?)]
-    getter provided_details : Stripe::GelatoProvidedDetails? = nil
+    @[JSON::Field(key: "provided_details", type: Stripe::IdentityVerificationSessionProvidedDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: provided_details.nil? && !provided_details_present?)]
+    getter provided_details : Stripe::IdentityVerificationSessionProvidedDetails? = nil
 
     @[JSON::Field(ignore: true)]
     property? provided_details_present : Bool = false
@@ -107,8 +107,8 @@ module Stripe
     getter verification_flow : String? = nil
     MAX_LENGTH_FOR_VERIFICATION_FLOW = 5000
 
-    @[JSON::Field(key: "verified_outputs", type: Stripe::GelatoVerifiedOutputs?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_outputs.nil? && !verified_outputs_present?)]
-    getter verified_outputs : Stripe::GelatoVerifiedOutputs? = nil
+    @[JSON::Field(key: "verified_outputs", type: Stripe::IdentityVerificationSessionVerifiedOutputs?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_outputs.nil? && !verified_outputs_present?)]
+    getter verified_outputs : Stripe::IdentityVerificationSessionVerifiedOutputs? = nil
 
     @[JSON::Field(ignore: true)]
     property? verified_outputs_present : Bool = false
@@ -122,21 +122,21 @@ module Stripe
       @client_secret : String? = nil,
       @created : Int64? = nil,
       @id : String? = nil,
-      @last_error : Stripe::GelatoSessionLastError? = nil,
+      @last_error : Stripe::IdentityVerificationSessionLastError? = nil,
       @last_verification_report : Stripe::IdentityVerificationSessionLastVerificationReport? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
-      @options : Stripe::GelatoVerificationSessionOptions? = nil,
-      @redaction : Stripe::VerificationSessionRedaction? = nil,
+      @options : Stripe::IdentityVerificationSessionOptions? = nil,
+      @redaction : Stripe::IdentityVerificationSessionRedaction? = nil,
       @related_customer : String? = nil,
       @status : String? = nil,
       @_type : String? = nil,
       @url : String? = nil,
       # Optional properties
-      @provided_details : Stripe::GelatoProvidedDetails? = nil,
+      @provided_details : Stripe::IdentityVerificationSessionProvidedDetails? = nil,
       @verification_flow : String? = nil,
-      @verified_outputs : Stripe::GelatoVerifiedOutputs? = nil
+      @verified_outputs : Stripe::IdentityVerificationSessionVerifiedOutputs? = nil
     )
     end
 
@@ -336,7 +336,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_error Object to be assigned
-    def last_error=(new_value : Stripe::GelatoSessionLastError?)
+    def last_error=(new_value : Stripe::IdentityVerificationSessionLastError?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -383,7 +383,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] options Object to be assigned
-    def options=(new_value : Stripe::GelatoVerificationSessionOptions?)
+    def options=(new_value : Stripe::IdentityVerificationSessionOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -393,7 +393,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] redaction Object to be assigned
-    def redaction=(new_value : Stripe::VerificationSessionRedaction?)
+    def redaction=(new_value : Stripe::IdentityVerificationSessionRedaction?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -445,7 +445,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] provided_details Object to be assigned
-    def provided_details=(new_value : Stripe::GelatoProvidedDetails?)
+    def provided_details=(new_value : Stripe::IdentityVerificationSessionProvidedDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -465,7 +465,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_outputs Object to be assigned
-    def verified_outputs=(new_value : Stripe::GelatoVerifiedOutputs?)
+    def verified_outputs=(new_value : Stripe::IdentityVerificationSessionVerifiedOutputs?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

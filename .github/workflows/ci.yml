@@ -46,5 +46,4 @@ jobs:
     - name: Install dependencies
       run: shards install
     - name: Run tests
-      # Test with release build due to: https://github.com/crystal-lang/crystal/issues/13193
-      run: crystal spec --release
+      run: crystal spec

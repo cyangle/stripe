@@ -11,6 +11,7 @@ require "../../core"
 
 require "./address_specs"
 require "./annual_revenue_specs"
+require "./business_profile_specs_support_url"
 require "./monthly_estimated_revenue_specs"
 
 module Stripe
@@ -59,10 +60,8 @@ module Stripe
     getter support_phone : String? = nil
     MAX_LENGTH_FOR_SUPPORT_PHONE = 5000
 
-    @[JSON::Field(key: "support_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter support_url : String? = nil
-    ERROR_MESSAGE_FOR_SUPPORT_URL = "invalid value for \"support_url\", must be one of []."
-    VALID_VALUES_FOR_SUPPORT_URL  = String.static_array("")
+    @[JSON::Field(key: "support_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter support_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
 
     # The business's publicly available website.
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -82,7 +81,7 @@ module Stripe
       @support_address : Stripe::AddressSpecs? = nil,
       @support_email : String? = nil,
       @support_phone : String? = nil,
-      @support_url : String? = nil,
+      @support_url : Stripe::BusinessProfileSpecsSupportUrl? = nil,
       @url : String? = nil
     )
     end
@@ -124,7 +123,7 @@ module Stripe
         end
       end
       unless (_support_url = @support_url).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORT_URL) unless OpenApi::EnumValidator.valid?(_support_url, VALID_VALUES_FOR_SUPPORT_URL)
+        invalid_properties.concat(_support_url.list_invalid_properties_for("support_url")) if _support_url.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -162,7 +161,7 @@ module Stripe
       end
 
       unless (_support_url = @support_url).nil?
-        return false unless OpenApi::EnumValidator.valid?(_support_url, VALID_VALUES_FOR_SUPPORT_URL)
+        return false if _support_url.is_a?(OpenApi::Validatable) && !_support_url.valid?
       end
 
       true
@@ -252,9 +251,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] support_url Object to be assigned
-    def support_url=(new_value : String?)
+    def support_url=(new_value : Stripe::BusinessProfileSpecsSupportUrl?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("support_url", new_value, VALID_VALUES_FOR_SUPPORT_URL)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @support_url = new_value

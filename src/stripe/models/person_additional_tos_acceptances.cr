@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./person_additional_tos_acceptance"
+require "./person_additional_tos_acceptances_account"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "account", type: Stripe::PersonAdditionalTosAcceptance?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter account : Stripe::PersonAdditionalTosAcceptance? = nil
+    @[JSON::Field(key: "account", type: Stripe::PersonAdditionalTosAcceptancesAccount?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter account : Stripe::PersonAdditionalTosAcceptancesAccount? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @account : Stripe::PersonAdditionalTosAcceptance? = nil
+      @account : Stripe::PersonAdditionalTosAcceptancesAccount? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account Object to be assigned
-    def account=(new_value : Stripe::PersonAdditionalTosAcceptance?)
+    def account=(new_value : Stripe::PersonAdditionalTosAcceptancesAccount?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

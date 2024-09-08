@@ -9,151 +9,16 @@
 
 require "../../core"
 
-require "./api_errors"
 require "./setup_attempt"
 require "./setup_attempt_application"
 require "./setup_attempt_customer"
 require "./setup_attempt_on_behalf_of"
 require "./setup_attempt_payment_method"
 require "./setup_attempt_payment_method_details"
+require "./setup_attempt_setup_error"
 require "./setup_attempt_setup_intent"
 
 module Stripe
   # The most recent SetupAttempt for this SetupIntent.
-  class SetupIntentLatestAttempt
-    include JSON::Serializable
-    include JSON::Serializable::Unmapped
-    include OpenApi::Validatable
-    include OpenApi::Json
-
-    # Required Properties
-
-    @[JSON::Field(key: "application", type: Stripe::SetupAttemptApplication?, default: nil, required: true, nullable: true, emit_null: true)]
-    property application : Stripe::SetupAttemptApplication? = nil
-
-    # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
-    property created : Int64? = nil
-
-    @[JSON::Field(key: "customer", type: Stripe::SetupAttemptCustomer?, default: nil, required: true, nullable: true, emit_null: true)]
-    property customer : Stripe::SetupAttemptCustomer? = nil
-
-    # Indicates the directions of money movement for which this payment method is intended to be used.  Include `inbound` if you intend to use the payment method as the origin to pull funds from. Include `outbound` if you intend to use the payment method as the destination to send funds to. You can include both if you intend to use the payment method for both purposes.
-    @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
-    property flow_directions : Array(String)? = nil
-    ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
-    VALID_VALUES_FOR_FLOW_DIRECTIONS  = String.static_array("inbound", "outbound")
-
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    property id : String? = nil
-    MAX_LENGTH_FOR_ID = 5000
-
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
-    property livemode : Bool? = nil
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    property object : String? = nil
-    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [setup_attempt]."
-    VALID_VALUES_FOR_OBJECT  = String.static_array("setup_attempt")
-
-    @[JSON::Field(key: "on_behalf_of", type: Stripe::SetupAttemptOnBehalfOf?, default: nil, required: true, nullable: true, emit_null: true)]
-    property on_behalf_of : Stripe::SetupAttemptOnBehalfOf? = nil
-
-    @[JSON::Field(key: "payment_method", type: Stripe::SetupAttemptPaymentMethod?, default: nil, required: true, nullable: false, emit_null: false)]
-    property payment_method : Stripe::SetupAttemptPaymentMethod? = nil
-
-    @[JSON::Field(key: "payment_method_details", type: Stripe::SetupAttemptPaymentMethodDetails?, default: nil, required: true, nullable: false, emit_null: false)]
-    property payment_method_details : Stripe::SetupAttemptPaymentMethodDetails? = nil
-
-    @[JSON::Field(key: "setup_error", type: Stripe::ApiErrors?, default: nil, required: true, nullable: false, emit_null: false)]
-    property setup_error : Stripe::ApiErrors? = nil
-
-    @[JSON::Field(key: "setup_intent", type: Stripe::SetupAttemptSetupIntent?, default: nil, required: true, nullable: false, emit_null: false)]
-    property setup_intent : Stripe::SetupAttemptSetupIntent? = nil
-
-    # Status of this SetupAttempt, one of `requires_confirmation`, `requires_action`, `processing`, `succeeded`, `failed`, or `abandoned`.
-    @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    property status : String? = nil
-    MAX_LENGTH_FOR_STATUS = 5000
-
-    # The value of [usage](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-usage) on the SetupIntent at the time of this confirmation, one of `off_session` or `on_session`.
-    @[JSON::Field(key: "usage", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
-    property usage : String? = nil
-    MAX_LENGTH_FOR_USAGE = 5000
-
-    # End of Required Properties
-
-    # Optional Properties
-
-    # If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.  It can only be used for this Stripe Account’s own money movement flows like InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a Customer.
-    @[JSON::Field(key: "attach_to_self", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
-    property attach_to_self : Bool? = nil
-
-    # List of class defined in anyOf (OpenAPI v3)
-    def self.openapi_any_of
-      [
-        Stripe::SetupAttempt,
-        String,
-      ]
-    end
-
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(
-      *,
-      # Required properties
-      @application : Stripe::SetupAttemptApplication? = nil,
-      @created : Int64? = nil,
-      @customer : Stripe::SetupAttemptCustomer? = nil,
-      @flow_directions : Array(String)? = nil,
-      @id : String? = nil,
-      @livemode : Bool? = nil,
-      @object : String? = nil,
-      @on_behalf_of : Stripe::SetupAttemptOnBehalfOf? = nil,
-      @payment_method : Stripe::SetupAttemptPaymentMethod? = nil,
-      @payment_method_details : Stripe::SetupAttemptPaymentMethodDetails? = nil,
-      @setup_error : Stripe::ApiErrors? = nil,
-      @setup_intent : Stripe::SetupAttemptSetupIntent? = nil,
-      @status : String? = nil,
-      @usage : String? = nil,
-      # Optional properties
-      @attach_to_self : Bool? = nil
-    )
-    end
-
-    # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properties with the reasons
-    def list_invalid_properties : Array(String)
-      invalid_properties = Array(String).new
-      invalid_properties
-    end
-
-    # Check to see if the all the properties in the model are valid
-    # @return true if the model is valid
-    def valid? : Bool
-      _any_of_found = false
-      json_string : String = self.to_json
-      _any_of_found = self.class.openapi_any_of.any? do |_class|
-        _any_of = begin
-          _class.from_json(json_string)
-        rescue
-          nil
-        end
-
-        !_any_of.nil? && _any_of.not_nil!.valid?
-      end
-      return false if !_any_of_found
-
-      true
-    end
-
-    # Generates #hash and #== methods from all fields
-    # #== @return [Bool]
-    # #hash calculates hash code according to all attributes.
-    # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@application, @created, @customer, @flow_directions, @id, @livemode, @object, @on_behalf_of, @payment_method, @payment_method_details, @setup_error, @setup_intent, @status, @usage, @attach_to_self)
-  end
+  alias SetupIntentLatestAttempt = SetupAttempt | String
 end

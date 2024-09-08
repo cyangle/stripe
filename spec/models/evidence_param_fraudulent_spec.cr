@@ -14,32 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/evidence_param_fraudulent"
 
 describe Stripe::EvidenceParamFraudulent do
-  describe "test an instance of EvidenceParamFraudulent" do
-    it "should create an instance of EvidenceParamFraudulent" do
-      # instance = Stripe::EvidenceParamFraudulent.new
-      # (instance).should be_a(Stripe::EvidenceParamFraudulent)
-    end
-  end
-
-  describe "test attribute 'additional_documentation'" do
-    it "should work" do
-      # instance = Stripe::EvidenceParamFraudulent.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::EvidenceParamFraudulent::ENUM_VALIDATOR_FOR_ADDITIONAL_DOCUMENTATION
-      # validator.allowable_values.each do |value|
-      #   instance.additional_documentation = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute 'explanation'" do
-    it "should work" do
-      # instance = Stripe::EvidenceParamFraudulent.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::EvidenceParamFraudulent::ENUM_VALIDATOR_FOR_EXPLANATION
-      # validator.allowable_values.each do |value|
-      #   instance.explanation = value.as(String)
-      # end
-    end
-  end
 end

@@ -14,28 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscriptions_request_pending_invoice_item_interval"
 
 describe Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval do
-  describe "test an instance of PostSubscriptionsRequestPendingInvoiceItemInterval" do
-    it "should create an instance of PostSubscriptionsRequestPendingInvoiceItemInterval" do
-      # instance = Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval.new
-      # (instance).should be_a(Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval)
-    end
-  end
-
-  describe "test attribute 'interval'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval::ENUM_VALIDATOR_FOR_INTERVAL
-      # validator.allowable_values.each do |value|
-      #   instance.interval = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute 'interval_count'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsRequestPendingInvoiceItemInterval.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

@@ -9,8 +9,8 @@
 
 require "../../core"
 
+require "./post_subscriptions_subscription_exposed_id_request_cancel_at"
 require "./subscription_details_params_billing_cycle_anchor"
-require "./subscription_details_params_cancel_at"
 require "./subscription_details_params_default_tax_rates"
 require "./subscription_details_params_trial_end"
 require "./subscription_item_update_params"
@@ -27,8 +27,8 @@ module Stripe
     @[JSON::Field(key: "billing_cycle_anchor", type: Stripe::SubscriptionDetailsParamsBillingCycleAnchor?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : Stripe::SubscriptionDetailsParamsBillingCycleAnchor? = nil
 
-    @[JSON::Field(key: "cancel_at", type: Stripe::SubscriptionDetailsParamsCancelAt?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter cancel_at : Stripe::SubscriptionDetailsParamsCancelAt? = nil
+    @[JSON::Field(key: "cancel_at", type: Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil
 
     # Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`.
     @[JSON::Field(key: "cancel_at_period_end", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -75,7 +75,7 @@ module Stripe
       *,
       # Optional properties
       @billing_cycle_anchor : Stripe::SubscriptionDetailsParamsBillingCycleAnchor? = nil,
-      @cancel_at : Stripe::SubscriptionDetailsParamsCancelAt? = nil,
+      @cancel_at : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
       @cancel_at_period_end : Bool? = nil,
       @cancel_now : Bool? = nil,
       @default_tax_rates : Stripe::SubscriptionDetailsParamsDefaultTaxRates? = nil,
@@ -166,7 +166,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancel_at Object to be assigned
-    def cancel_at=(new_value : Stripe::SubscriptionDetailsParamsCancelAt?)
+    def cancel_at=(new_value : Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

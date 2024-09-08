@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/phase_configuration_params_end_date"
 
 describe Stripe::PhaseConfigurationParamsEndDate do
-  describe "test an instance of PhaseConfigurationParamsEndDate" do
-    it "should create an instance of PhaseConfigurationParamsEndDate" do
-      # instance = Stripe::PhaseConfigurationParamsEndDate.new
-      # (instance).should be_a(Stripe::PhaseConfigurationParamsEndDate)
-    end
-  end
 end

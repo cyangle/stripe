@@ -25,10 +25,6 @@ describe Stripe::Fraudulent do
     it "should work" do
       # instance = Stripe::Fraudulent.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Fraudulent::ENUM_VALIDATOR_FOR_ADDITIONAL_DOCUMENTATION
-      # validator.allowable_values.each do |value|
-      #   instance.additional_documentation = value.as(String)
-      # end
     end
   end
 
@@ -36,10 +32,6 @@ describe Stripe::Fraudulent do
     it "should work" do
       # instance = Stripe::Fraudulent.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Fraudulent::ENUM_VALIDATOR_FOR_EXPLANATION
-      # validator.allowable_values.each do |value|
-      #   instance.explanation = value.as(String)
-      # end
     end
   end
 end

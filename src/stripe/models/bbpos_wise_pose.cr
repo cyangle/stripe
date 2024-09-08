@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./bbpos_wise_pose_splashscreen"
+
 module Stripe
   class BbposWisePose
     include JSON::Serializable
@@ -18,17 +20,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "splashscreen", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter splashscreen : String? = nil
-    ERROR_MESSAGE_FOR_SPLASHSCREEN = "invalid value for \"splashscreen\", must be one of []."
-    VALID_VALUES_FOR_SPLASHSCREEN  = String.static_array("")
+    @[JSON::Field(key: "splashscreen", type: Stripe::BbposWisePoseSplashscreen?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter splashscreen : Stripe::BbposWisePoseSplashscreen? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @splashscreen : String? = nil
+      @splashscreen : Stripe::BbposWisePoseSplashscreen? = nil
     )
     end
 
@@ -38,7 +38,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_splashscreen = @splashscreen).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_SPLASHSCREEN) unless OpenApi::EnumValidator.valid?(_splashscreen, VALID_VALUES_FOR_SPLASHSCREEN)
+        invalid_properties.concat(_splashscreen.list_invalid_properties_for("splashscreen")) if _splashscreen.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -47,7 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_splashscreen = @splashscreen).nil?
-        return false unless OpenApi::EnumValidator.valid?(_splashscreen, VALID_VALUES_FOR_SPLASHSCREEN)
+        return false if _splashscreen.is_a?(OpenApi::Validatable) && !_splashscreen.valid?
       end
 
       true
@@ -55,9 +55,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] splashscreen Object to be assigned
-    def splashscreen=(new_value : String?)
+    def splashscreen=(new_value : Stripe::BbposWisePoseSplashscreen?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("splashscreen", new_value, VALID_VALUES_FOR_SPLASHSCREEN)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @splashscreen = new_value

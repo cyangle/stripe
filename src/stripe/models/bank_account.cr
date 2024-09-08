@@ -11,7 +11,8 @@ require "../../core"
 
 require "./bank_account_account"
 require "./bank_account_customer"
-require "./external_account_requirements"
+require "./bank_account_future_requirements"
+require "./bank_account_requirements"
 
 module Stripe
   # These bank accounts are payment methods on `Customer` objects.  On the other hand [External Accounts](/api#external_accounts) are transfer destinations on `Account` objects for connected accounts. They can be bank accounts or debit cards as well, and are documented in the links above.  Related guide: [Bank debits and transfers](/payments/bank-debits-transfers)
@@ -115,8 +116,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_for_currency_present : Bool = false
 
-    @[JSON::Field(key: "future_requirements", type: Stripe::ExternalAccountRequirements?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: future_requirements.nil? && !future_requirements_present?)]
-    getter future_requirements : Stripe::ExternalAccountRequirements? = nil
+    @[JSON::Field(key: "future_requirements", type: Stripe::BankAccountFutureRequirements?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: future_requirements.nil? && !future_requirements_present?)]
+    getter future_requirements : Stripe::BankAccountFutureRequirements? = nil
 
     @[JSON::Field(ignore: true)]
     property? future_requirements_present : Bool = false
@@ -127,8 +128,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    @[JSON::Field(key: "requirements", type: Stripe::ExternalAccountRequirements?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: requirements.nil? && !requirements_present?)]
-    getter requirements : Stripe::ExternalAccountRequirements? = nil
+    @[JSON::Field(key: "requirements", type: Stripe::BankAccountRequirements?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: requirements.nil? && !requirements_present?)]
+    getter requirements : Stripe::BankAccountRequirements? = nil
 
     @[JSON::Field(ignore: true)]
     property? requirements_present : Bool = false
@@ -155,9 +156,9 @@ module Stripe
       @available_payout_methods : Array(String)? = nil,
       @customer : Stripe::BankAccountCustomer? = nil,
       @default_for_currency : Bool? = nil,
-      @future_requirements : Stripe::ExternalAccountRequirements? = nil,
+      @future_requirements : Stripe::BankAccountFutureRequirements? = nil,
       @metadata : Hash(String, String)? = nil,
-      @requirements : Stripe::ExternalAccountRequirements? = nil
+      @requirements : Stripe::BankAccountRequirements? = nil
     )
     end
 
@@ -489,7 +490,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] future_requirements Object to be assigned
-    def future_requirements=(new_value : Stripe::ExternalAccountRequirements?)
+    def future_requirements=(new_value : Stripe::BankAccountFutureRequirements?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -505,7 +506,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requirements Object to be assigned
-    def requirements=(new_value : Stripe::ExternalAccountRequirements?)
+    def requirements=(new_value : Stripe::BankAccountRequirements?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

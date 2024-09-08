@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./address"
-require "./gelato_data_verified_outputs_date"
+require "./gelato_verified_outputs_address"
+require "./gelato_verified_outputs_dob"
 
 module Stripe
   #
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address : Stripe::Address? = nil
+    @[JSON::Field(key: "address", type: Stripe::GelatoVerifiedOutputsAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address : Stripe::GelatoVerifiedOutputsAddress? = nil
 
     # The user's verified email address
     @[JSON::Field(key: "email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -55,8 +55,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "dob", type: Stripe::GelatoDataVerifiedOutputsDate?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
-    getter dob : Stripe::GelatoDataVerifiedOutputsDate? = nil
+    @[JSON::Field(key: "dob", type: Stripe::GelatoVerifiedOutputsDob?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
+    getter dob : Stripe::GelatoVerifiedOutputsDob? = nil
 
     @[JSON::Field(ignore: true)]
     property? dob_present : Bool = false
@@ -74,14 +74,14 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::Address? = nil,
+      @address : Stripe::GelatoVerifiedOutputsAddress? = nil,
       @email : String? = nil,
       @first_name : String? = nil,
       @id_number_type : String? = nil,
       @last_name : String? = nil,
       @phone : String? = nil,
       # Optional properties
-      @dob : Stripe::GelatoDataVerifiedOutputsDate? = nil,
+      @dob : Stripe::GelatoVerifiedOutputsDob? = nil,
       @id_number : String? = nil
     )
     end
@@ -168,7 +168,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::Address?)
+    def address=(new_value : Stripe::GelatoVerifiedOutputsAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -228,7 +228,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(new_value : Stripe::GelatoDataVerifiedOutputsDate?)
+    def dob=(new_value : Stripe::GelatoVerifiedOutputsDob?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

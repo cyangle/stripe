@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./issuing_cardholder_id_document"
+require "./issuing_cardholder_verification_document"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "document", type: Stripe::IssuingCardholderIdDocument?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter document : Stripe::IssuingCardholderIdDocument? = nil
+    @[JSON::Field(key: "document", type: Stripe::IssuingCardholderVerificationDocument?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter document : Stripe::IssuingCardholderVerificationDocument? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @document : Stripe::IssuingCardholderIdDocument? = nil
+      @document : Stripe::IssuingCardholderVerificationDocument? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] document Object to be assigned
-    def document=(new_value : Stripe::IssuingCardholderIdDocument?)
+    def document=(new_value : Stripe::IssuingCardholderVerificationDocument?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

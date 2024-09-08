@@ -9,7 +9,10 @@
 
 require "../../core"
 
-require "./payment_links_resource_custom_text_position"
+require "./payment_links_resource_custom_text_after_submit"
+require "./payment_links_resource_custom_text_shipping_address"
+require "./payment_links_resource_custom_text_submit"
+require "./payment_links_resource_custom_text_terms_of_service_acceptance"
 
 module Stripe
   #
@@ -21,17 +24,17 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "after_submit", type: Stripe::PaymentLinksResourceCustomTextPosition?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter after_submit : Stripe::PaymentLinksResourceCustomTextPosition? = nil
+    @[JSON::Field(key: "after_submit", type: Stripe::PaymentLinksResourceCustomTextAfterSubmit?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter after_submit : Stripe::PaymentLinksResourceCustomTextAfterSubmit? = nil
 
-    @[JSON::Field(key: "shipping_address", type: Stripe::PaymentLinksResourceCustomTextPosition?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_address : Stripe::PaymentLinksResourceCustomTextPosition? = nil
+    @[JSON::Field(key: "shipping_address", type: Stripe::PaymentLinksResourceCustomTextShippingAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_address : Stripe::PaymentLinksResourceCustomTextShippingAddress? = nil
 
-    @[JSON::Field(key: "submit", type: Stripe::PaymentLinksResourceCustomTextPosition?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter submit : Stripe::PaymentLinksResourceCustomTextPosition? = nil
+    @[JSON::Field(key: "submit", type: Stripe::PaymentLinksResourceCustomTextSubmit?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter submit : Stripe::PaymentLinksResourceCustomTextSubmit? = nil
 
-    @[JSON::Field(key: "terms_of_service_acceptance", type: Stripe::PaymentLinksResourceCustomTextPosition?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter terms_of_service_acceptance : Stripe::PaymentLinksResourceCustomTextPosition? = nil
+    @[JSON::Field(key: "terms_of_service_acceptance", type: Stripe::PaymentLinksResourceCustomTextTermsOfServiceAcceptance?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter terms_of_service_acceptance : Stripe::PaymentLinksResourceCustomTextTermsOfServiceAcceptance? = nil
 
     # End of Required Properties
 
@@ -40,10 +43,10 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @after_submit : Stripe::PaymentLinksResourceCustomTextPosition? = nil,
-      @shipping_address : Stripe::PaymentLinksResourceCustomTextPosition? = nil,
-      @submit : Stripe::PaymentLinksResourceCustomTextPosition? = nil,
-      @terms_of_service_acceptance : Stripe::PaymentLinksResourceCustomTextPosition? = nil
+      @after_submit : Stripe::PaymentLinksResourceCustomTextAfterSubmit? = nil,
+      @shipping_address : Stripe::PaymentLinksResourceCustomTextShippingAddress? = nil,
+      @submit : Stripe::PaymentLinksResourceCustomTextSubmit? = nil,
+      @terms_of_service_acceptance : Stripe::PaymentLinksResourceCustomTextTermsOfServiceAcceptance? = nil
     )
     end
 
@@ -91,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] after_submit Object to be assigned
-    def after_submit=(new_value : Stripe::PaymentLinksResourceCustomTextPosition?)
+    def after_submit=(new_value : Stripe::PaymentLinksResourceCustomTextAfterSubmit?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -101,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address Object to be assigned
-    def shipping_address=(new_value : Stripe::PaymentLinksResourceCustomTextPosition?)
+    def shipping_address=(new_value : Stripe::PaymentLinksResourceCustomTextShippingAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -111,7 +114,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit Object to be assigned
-    def submit=(new_value : Stripe::PaymentLinksResourceCustomTextPosition?)
+    def submit=(new_value : Stripe::PaymentLinksResourceCustomTextSubmit?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -121,7 +124,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terms_of_service_acceptance Object to be assigned
-    def terms_of_service_acceptance=(new_value : Stripe::PaymentLinksResourceCustomTextPosition?)
+    def terms_of_service_acceptance=(new_value : Stripe::PaymentLinksResourceCustomTextTermsOfServiceAcceptance?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

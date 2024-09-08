@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./shipping_rate_delivery_estimate"
+require "./shipping_rate_delivery_estimate1"
 require "./shipping_rate_fixed_amount"
 require "./shipping_rate_tax_code"
 
@@ -31,8 +31,8 @@ module Stripe
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter created : Int64? = nil
 
-    @[JSON::Field(key: "delivery_estimate", type: Stripe::ShippingRateDeliveryEstimate?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter delivery_estimate : Stripe::ShippingRateDeliveryEstimate? = nil
+    @[JSON::Field(key: "delivery_estimate", type: Stripe::ShippingRateDeliveryEstimate1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter delivery_estimate : Stripe::ShippingRateDeliveryEstimate1? = nil
 
     # The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -86,7 +86,7 @@ module Stripe
       # Required properties
       @active : Bool? = nil,
       @created : Int64? = nil,
-      @delivery_estimate : Stripe::ShippingRateDeliveryEstimate? = nil,
+      @delivery_estimate : Stripe::ShippingRateDeliveryEstimate1? = nil,
       @display_name : String? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
@@ -217,7 +217,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] delivery_estimate Object to be assigned
-    def delivery_estimate=(new_value : Stripe::ShippingRateDeliveryEstimate?)
+    def delivery_estimate=(new_value : Stripe::ShippingRateDeliveryEstimate1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

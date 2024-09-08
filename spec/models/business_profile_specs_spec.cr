@@ -88,10 +88,6 @@ describe Stripe::BusinessProfileSpecs do
     it "should work" do
       # instance = Stripe::BusinessProfileSpecs.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BusinessProfileSpecs::ENUM_VALIDATOR_FOR_SUPPORT_URL
-      # validator.allowable_values.each do |value|
-      #   instance.support_url = value.as(String)
-      # end
     end
   end
 

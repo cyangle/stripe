@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_quotes_request_default_tax_rates"
 
 describe Stripe::PostQuotesRequestDefaultTaxRates do
-  describe "test an instance of PostQuotesRequestDefaultTaxRates" do
-    it "should create an instance of PostQuotesRequestDefaultTaxRates" do
-      # instance = Stripe::PostQuotesRequestDefaultTaxRates.new
-      # (instance).should be_a(Stripe::PostQuotesRequestDefaultTaxRates)
-    end
-  end
 end

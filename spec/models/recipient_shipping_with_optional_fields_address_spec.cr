@@ -39,10 +39,6 @@ describe Stripe::RecipientShippingWithOptionalFieldsAddress do
     it "should work" do
       # instance = Stripe::RecipientShippingWithOptionalFieldsAddress.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::RecipientShippingWithOptionalFieldsAddress::ENUM_VALIDATOR_FOR_PHONE
-      # validator.allowable_values.each do |value|
-      #   instance.phone = value.as(String)
-      # end
     end
   end
 end

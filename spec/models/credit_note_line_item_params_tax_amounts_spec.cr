@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/credit_note_line_item_params_tax_amounts"
 
 describe Stripe::CreditNoteLineItemParamsTaxAmounts do
-  describe "test an instance of CreditNoteLineItemParamsTaxAmounts" do
-    it "should create an instance of CreditNoteLineItemParamsTaxAmounts" do
-      # instance = Stripe::CreditNoteLineItemParamsTaxAmounts.new
-      # (instance).should be_a(Stripe::CreditNoteLineItemParamsTaxAmounts)
-    end
-  end
 end

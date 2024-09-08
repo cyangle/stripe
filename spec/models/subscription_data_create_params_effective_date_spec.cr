@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_data_create_params_effective_date"
 
 describe Stripe::SubscriptionDataCreateParamsEffectiveDate do
-  describe "test an instance of SubscriptionDataCreateParamsEffectiveDate" do
-    it "should create an instance of SubscriptionDataCreateParamsEffectiveDate" do
-      # instance = Stripe::SubscriptionDataCreateParamsEffectiveDate.new
-      # (instance).should be_a(Stripe::SubscriptionDataCreateParamsEffectiveDate)
-    end
-  end
 end

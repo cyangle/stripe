@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./invoices_payment_method_options"
+require "./invoices_payment_settings_payment_method_options"
 
 module Stripe
   #
@@ -26,8 +26,8 @@ module Stripe
     getter default_mandate : String? = nil
     MAX_LENGTH_FOR_DEFAULT_MANDATE = 5000
 
-    @[JSON::Field(key: "payment_method_options", type: Stripe::InvoicesPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_options : Stripe::InvoicesPaymentMethodOptions? = nil
+    @[JSON::Field(key: "payment_method_options", type: Stripe::InvoicesPaymentSettingsPaymentMethodOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_options : Stripe::InvoicesPaymentSettingsPaymentMethodOptions? = nil
 
     # The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -43,7 +43,7 @@ module Stripe
       *,
       # Required properties
       @default_mandate : String? = nil,
-      @payment_method_options : Stripe::InvoicesPaymentMethodOptions? = nil,
+      @payment_method_options : Stripe::InvoicesPaymentSettingsPaymentMethodOptions? = nil,
       @payment_method_types : Array(String)? = nil
     )
     end
@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_options Object to be assigned
-    def payment_method_options=(new_value : Stripe::InvoicesPaymentMethodOptions?)
+    def payment_method_options=(new_value : Stripe::InvoicesPaymentSettingsPaymentMethodOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

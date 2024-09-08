@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/canceled_cancellation_policy_provided"
 
 describe Stripe::CanceledCancellationPolicyProvided do
-  describe "test an instance of CanceledCancellationPolicyProvided" do
-    it "should create an instance of CanceledCancellationPolicyProvided" do
-      # instance = Stripe::CanceledCancellationPolicyProvided.new
-      # (instance).should be_a(Stripe::CanceledCancellationPolicyProvided)
-    end
-  end
 end

@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_accounts_account_persons_request_dob"
 
 describe Stripe::PostAccountsAccountPersonsRequestDob do
-  describe "test an instance of PostAccountsAccountPersonsRequestDob" do
-    it "should create an instance of PostAccountsAccountPersonsRequestDob" do
-      # instance = Stripe::PostAccountsAccountPersonsRequestDob.new
-      # (instance).should be_a(Stripe::PostAccountsAccountPersonsRequestDob)
-    end
-  end
-
-  describe "test attribute 'day'" do
-    it "should work" do
-      # instance = Stripe::PostAccountsAccountPersonsRequestDob.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'month'" do
-    it "should work" do
-      # instance = Stripe::PostAccountsAccountPersonsRequestDob.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'year'" do
-    it "should work" do
-      # instance = Stripe::PostAccountsAccountPersonsRequestDob.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

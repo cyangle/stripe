@@ -14,38 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_products_id_request_package_dimensions"
 
 describe Stripe::PostProductsIdRequestPackageDimensions do
-  describe "test an instance of PostProductsIdRequestPackageDimensions" do
-    it "should create an instance of PostProductsIdRequestPackageDimensions" do
-      # instance = Stripe::PostProductsIdRequestPackageDimensions.new
-      # (instance).should be_a(Stripe::PostProductsIdRequestPackageDimensions)
-    end
-  end
-
-  describe "test attribute 'height'" do
-    it "should work" do
-      # instance = Stripe::PostProductsIdRequestPackageDimensions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'length'" do
-    it "should work" do
-      # instance = Stripe::PostProductsIdRequestPackageDimensions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'weight'" do
-    it "should work" do
-      # instance = Stripe::PostProductsIdRequestPackageDimensions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'width'" do
-    it "should work" do
-      # instance = Stripe::PostProductsIdRequestPackageDimensions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

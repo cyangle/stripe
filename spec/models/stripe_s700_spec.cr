@@ -25,10 +25,6 @@ describe Stripe::StripeS700 do
     it "should work" do
       # instance = Stripe::StripeS700.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::StripeS700::ENUM_VALIDATOR_FOR_SPLASHSCREEN
-      # validator.allowable_values.each do |value|
-      #   instance.splashscreen = value.as(String)
-      # end
     end
   end
 end

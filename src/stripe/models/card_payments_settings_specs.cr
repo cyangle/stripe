@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./card_payments_settings_specs_statement_descriptor_prefix_kana"
+require "./card_payments_settings_specs_statement_descriptor_prefix_kanji"
 require "./decline_charge_on_specs"
 
 module Stripe
@@ -28,15 +30,11 @@ module Stripe
     getter statement_descriptor_prefix : String? = nil
     MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX = 10
 
-    @[JSON::Field(key: "statement_descriptor_prefix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter statement_descriptor_prefix_kana : String? = nil
-    ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA = "invalid value for \"statement_descriptor_prefix_kana\", must be one of []."
-    VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA  = String.static_array("")
+    @[JSON::Field(key: "statement_descriptor_prefix_kana", type: Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter statement_descriptor_prefix_kana : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana? = nil
 
-    @[JSON::Field(key: "statement_descriptor_prefix_kanji", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter statement_descriptor_prefix_kanji : String? = nil
-    ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI = "invalid value for \"statement_descriptor_prefix_kanji\", must be one of []."
-    VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI  = String.static_array("")
+    @[JSON::Field(key: "statement_descriptor_prefix_kanji", type: Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKanji?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter statement_descriptor_prefix_kanji : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKanji? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,8 +43,8 @@ module Stripe
       # Optional properties
       @decline_on : Stripe::DeclineChargeOnSpecs? = nil,
       @statement_descriptor_prefix : String? = nil,
-      @statement_descriptor_prefix_kana : String? = nil,
-      @statement_descriptor_prefix_kanji : String? = nil
+      @statement_descriptor_prefix_kana : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana? = nil,
+      @statement_descriptor_prefix_kanji : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKanji? = nil
     )
     end
 
@@ -64,10 +62,10 @@ module Stripe
         end
       end
       unless (_statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA) unless OpenApi::EnumValidator.valid?(_statement_descriptor_prefix_kana, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
+        invalid_properties.concat(_statement_descriptor_prefix_kana.list_invalid_properties_for("statement_descriptor_prefix_kana")) if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable)
       end
       unless (_statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI) unless OpenApi::EnumValidator.valid?(_statement_descriptor_prefix_kanji, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
+        invalid_properties.concat(_statement_descriptor_prefix_kanji.list_invalid_properties_for("statement_descriptor_prefix_kanji")) if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -84,11 +82,11 @@ module Stripe
       end
 
       unless (_statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana).nil?
-        return false unless OpenApi::EnumValidator.valid?(_statement_descriptor_prefix_kana, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
+        return false if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable) && !_statement_descriptor_prefix_kana.valid?
       end
 
       unless (_statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji).nil?
-        return false unless OpenApi::EnumValidator.valid?(_statement_descriptor_prefix_kanji, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
+        return false if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable) && !_statement_descriptor_prefix_kanji.valid?
       end
 
       true
@@ -116,9 +114,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix_kana Object to be assigned
-    def statement_descriptor_prefix_kana=(new_value : String?)
+    def statement_descriptor_prefix_kana=(new_value : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("statement_descriptor_prefix_kana", new_value, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @statement_descriptor_prefix_kana = new_value
@@ -126,9 +124,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_prefix_kanji Object to be assigned
-    def statement_descriptor_prefix_kanji=(new_value : String?)
+    def statement_descriptor_prefix_kanji=(new_value : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKanji?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("statement_descriptor_prefix_kanji", new_value, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @statement_descriptor_prefix_kanji = new_value

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/get_invoices_upcoming_discounts_parameter"
 
 describe Stripe::GetInvoicesUpcomingDiscountsParameter do
-  describe "test an instance of GetInvoicesUpcomingDiscountsParameter" do
-    it "should create an instance of GetInvoicesUpcomingDiscountsParameter" do
-      # instance = Stripe::GetInvoicesUpcomingDiscountsParameter.new
-      # (instance).should be_a(Stripe::GetInvoicesUpcomingDiscountsParameter)
-    end
-  end
 end

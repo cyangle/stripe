@@ -21,6 +21,13 @@ describe Stripe::ShippingCost do
     end
   end
 
+  describe "test attribute 'amount'" do
+    it "should work" do
+      # instance = Stripe::ShippingCost.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'shipping_rate'" do
     it "should work" do
       # instance = Stripe::ShippingCost.new
@@ -29,6 +36,24 @@ describe Stripe::ShippingCost do
   end
 
   describe "test attribute 'shipping_rate_data'" do
+    it "should work" do
+      # instance = Stripe::ShippingCost.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'tax_behavior'" do
+    it "should work" do
+      # instance = Stripe::ShippingCost.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = Stripe::ShippingCost::ENUM_VALIDATOR_FOR_TAX_BEHAVIOR
+      # validator.allowable_values.each do |value|
+      #   instance.tax_behavior = value.as(String)
+      # end
+    end
+  end
+
+  describe "test attribute 'tax_code'" do
     it "should work" do
       # instance = Stripe::ShippingCost.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

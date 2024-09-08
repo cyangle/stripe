@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./gelato_email_report_error"
+require "./gelato_email_report_error1"
 
 module Stripe
   # Result from a email check
@@ -26,8 +26,8 @@ module Stripe
     getter email : String? = nil
     MAX_LENGTH_FOR_EMAIL = 5000
 
-    @[JSON::Field(key: "error", type: Stripe::GelatoEmailReportError?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter error : Stripe::GelatoEmailReportError? = nil
+    @[JSON::Field(key: "error", type: Stripe::GelatoEmailReportError1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter error : Stripe::GelatoEmailReportError1? = nil
 
     # Status of this `email` check.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
       *,
       # Required properties
       @email : String? = nil,
-      @error : Stripe::GelatoEmailReportError? = nil,
+      @error : Stripe::GelatoEmailReportError1? = nil,
       @status : String? = nil
     )
     end
@@ -100,7 +100,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(new_value : Stripe::GelatoEmailReportError?)
+    def error=(new_value : Stripe::GelatoEmailReportError1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

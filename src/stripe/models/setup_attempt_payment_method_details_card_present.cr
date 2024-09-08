@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_method_details_card_present_offline"
+require "./payment_method_details_card_present_offline1"
 require "./setup_attempt_payment_method_details_card_present_generated_card"
 
 module Stripe
@@ -25,8 +25,8 @@ module Stripe
     @[JSON::Field(key: "generated_card", type: Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard?, default: nil, required: true, nullable: true, emit_null: true)]
     getter generated_card : Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard? = nil
 
-    @[JSON::Field(key: "offline", type: Stripe::PaymentMethodDetailsCardPresentOffline?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter offline : Stripe::PaymentMethodDetailsCardPresentOffline? = nil
+    @[JSON::Field(key: "offline", type: Stripe::PaymentMethodDetailsCardPresentOffline1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter offline : Stripe::PaymentMethodDetailsCardPresentOffline1? = nil
 
     # End of Required Properties
 
@@ -36,7 +36,7 @@ module Stripe
       *,
       # Required properties
       @generated_card : Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard? = nil,
-      @offline : Stripe::PaymentMethodDetailsCardPresentOffline? = nil
+      @offline : Stripe::PaymentMethodDetailsCardPresentOffline1? = nil
     )
     end
 
@@ -80,7 +80,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] offline Object to be assigned
-    def offline=(new_value : Stripe::PaymentMethodDetailsCardPresentOffline?)
+    def offline=(new_value : Stripe::PaymentMethodDetailsCardPresentOffline1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

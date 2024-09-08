@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_cancellation_reason_creation_param_options"
 
 describe Stripe::SubscriptionCancellationReasonCreationParamOptions do
-  describe "test an instance of SubscriptionCancellationReasonCreationParamOptions" do
-    it "should create an instance of SubscriptionCancellationReasonCreationParamOptions" do
-      # instance = Stripe::SubscriptionCancellationReasonCreationParamOptions.new
-      # (instance).should be_a(Stripe::SubscriptionCancellationReasonCreationParamOptions)
-    end
-  end
 end

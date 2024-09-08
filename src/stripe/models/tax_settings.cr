@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./tax_product_resource_tax_settings_defaults"
-require "./tax_product_resource_tax_settings_head_office"
 require "./tax_product_resource_tax_settings_status_details"
+require "./tax_settings_head_office"
 
 module Stripe
   # You can use Tax `Settings` to manage configurations used by Stripe Tax calculations.  Related guide: [Using the Settings API](https://stripe.com/docs/tax/settings-api)
@@ -26,8 +26,8 @@ module Stripe
     @[JSON::Field(key: "defaults", type: Stripe::TaxProductResourceTaxSettingsDefaults?, default: nil, required: true, nullable: false, emit_null: false)]
     getter defaults : Stripe::TaxProductResourceTaxSettingsDefaults? = nil
 
-    @[JSON::Field(key: "head_office", type: Stripe::TaxProductResourceTaxSettingsHeadOffice?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter head_office : Stripe::TaxProductResourceTaxSettingsHeadOffice? = nil
+    @[JSON::Field(key: "head_office", type: Stripe::TaxSettingsHeadOffice?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter head_office : Stripe::TaxSettingsHeadOffice? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -56,7 +56,7 @@ module Stripe
       *,
       # Required properties
       @defaults : Stripe::TaxProductResourceTaxSettingsDefaults? = nil,
-      @head_office : Stripe::TaxProductResourceTaxSettingsHeadOffice? = nil,
+      @head_office : Stripe::TaxSettingsHeadOffice? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
       @status : String? = nil,
@@ -142,7 +142,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] head_office Object to be assigned
-    def head_office=(new_value : Stripe::TaxProductResourceTaxSettingsHeadOffice?)
+    def head_office=(new_value : Stripe::TaxSettingsHeadOffice?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

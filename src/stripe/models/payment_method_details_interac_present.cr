@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_method_details_interac_present_receipt"
+require "./payment_method_details_interac_present_receipt1"
 
 module Stripe
   #
@@ -89,8 +89,8 @@ module Stripe
     ERROR_MESSAGE_FOR_READ_METHOD = "invalid value for \"read_method\", must be one of [contact_emv, contactless_emv, contactless_magstripe_mode, magnetic_stripe_fallback, magnetic_stripe_track2]."
     VALID_VALUES_FOR_READ_METHOD  = String.static_array("contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2")
 
-    @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsInteracPresentReceipt?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt? = nil
+    @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsInteracPresentReceipt1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt1? = nil
 
     # End of Required Properties
 
@@ -139,7 +139,7 @@ module Stripe
       @network_transaction_id : String? = nil,
       @preferred_locales : Array(String)? = nil,
       @read_method : String? = nil,
-      @receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt? = nil,
+      @receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt1? = nil,
       # Optional properties
       @description : String? = nil,
       @iin : String? = nil,
@@ -435,7 +435,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] receipt Object to be assigned
-    def receipt=(new_value : Stripe::PaymentMethodDetailsInteracPresentReceipt?)
+    def receipt=(new_value : Stripe::PaymentMethodDetailsInteracPresentReceipt1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

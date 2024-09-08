@@ -9,15 +9,15 @@
 
 require "../../core"
 
-require "./address"
 require "./apms_sources_source_list"
-require "./cash_balance"
+require "./customer_address"
+require "./customer_cash_balance"
 require "./customer_default_source"
+require "./customer_discount"
+require "./customer_shipping1"
 require "./customer_tax"
 require "./customer_test_clock"
-require "./discount"
 require "./invoice_setting_customer_setting"
-require "./shipping"
 require "./subscription_list"
 require "./tax_ids_list"
 
@@ -63,15 +63,15 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [customer]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("customer")
 
-    @[JSON::Field(key: "shipping", type: Stripe::Shipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping : Stripe::Shipping? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::CustomerShipping1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping : Stripe::CustomerShipping1? = nil
 
     # End of Required Properties
 
     # Optional Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    getter address : Stripe::Address? = nil
+    @[JSON::Field(key: "address", type: Stripe::CustomerAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    getter address : Stripe::CustomerAddress? = nil
 
     @[JSON::Field(ignore: true)]
     property? address_present : Bool = false
@@ -80,8 +80,8 @@ module Stripe
     @[JSON::Field(key: "balance", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter balance : Int64? = nil
 
-    @[JSON::Field(key: "cash_balance", type: Stripe::CashBalance?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cash_balance.nil? && !cash_balance_present?)]
-    getter cash_balance : Stripe::CashBalance? = nil
+    @[JSON::Field(key: "cash_balance", type: Stripe::CustomerCashBalance?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cash_balance.nil? && !cash_balance_present?)]
+    getter cash_balance : Stripe::CustomerCashBalance? = nil
 
     @[JSON::Field(ignore: true)]
     property? cash_balance_present : Bool = false
@@ -101,8 +101,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? delinquent_present : Bool = false
 
-    @[JSON::Field(key: "discount", type: Stripe::Discount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: discount.nil? && !discount_present?)]
-    getter discount : Stripe::Discount? = nil
+    @[JSON::Field(key: "discount", type: Stripe::CustomerDiscount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: discount.nil? && !discount_present?)]
+    getter discount : Stripe::CustomerDiscount? = nil
 
     @[JSON::Field(ignore: true)]
     property? discount_present : Bool = false
@@ -190,14 +190,14 @@ module Stripe
       @id : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
-      @shipping : Stripe::Shipping? = nil,
+      @shipping : Stripe::CustomerShipping1? = nil,
       # Optional properties
-      @address : Stripe::Address? = nil,
+      @address : Stripe::CustomerAddress? = nil,
       @balance : Int64? = nil,
-      @cash_balance : Stripe::CashBalance? = nil,
+      @cash_balance : Stripe::CustomerCashBalance? = nil,
       @currency : String? = nil,
       @delinquent : Bool? = nil,
-      @discount : Stripe::Discount? = nil,
+      @discount : Stripe::CustomerDiscount? = nil,
       @invoice_credit_balance : Hash(String, Int32)? = nil,
       @invoice_prefix : String? = nil,
       @invoice_settings : Stripe::InvoiceSettingCustomerSetting? = nil,
@@ -473,7 +473,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(new_value : Stripe::Shipping?)
+    def shipping=(new_value : Stripe::CustomerShipping1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -483,7 +483,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::Address?)
+    def address=(new_value : Stripe::CustomerAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -499,7 +499,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cash_balance Object to be assigned
-    def cash_balance=(new_value : Stripe::CashBalance?)
+    def cash_balance=(new_value : Stripe::CustomerCashBalance?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -525,7 +525,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discount Object to be assigned
-    def discount=(new_value : Stripe::Discount?)
+    def discount=(new_value : Stripe::CustomerDiscount?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

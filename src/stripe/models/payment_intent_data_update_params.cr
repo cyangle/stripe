@@ -9,7 +9,11 @@
 
 require "../../core"
 
+require "./payment_intent_data_update_params_description"
 require "./payment_intent_data_update_params_metadata"
+require "./payment_intent_data_update_params_statement_descriptor"
+require "./payment_intent_data_update_params_statement_descriptor_suffix"
+require "./payment_intent_data_update_params_transfer_group"
 
 module Stripe
   class PaymentIntentDataUpdateParams
@@ -20,39 +24,31 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter description : String? = nil
-    ERROR_MESSAGE_FOR_DESCRIPTION = "invalid value for \"description\", must be one of []."
-    VALID_VALUES_FOR_DESCRIPTION  = String.static_array("")
+    @[JSON::Field(key: "description", type: Stripe::PaymentIntentDataUpdateParamsDescription?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : Stripe::PaymentIntentDataUpdateParamsDescription? = nil
 
     @[JSON::Field(key: "metadata", type: Stripe::PaymentIntentDataUpdateParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PaymentIntentDataUpdateParamsMetadata? = nil
 
-    @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter statement_descriptor : String? = nil
-    ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR = "invalid value for \"statement_descriptor\", must be one of []."
-    VALID_VALUES_FOR_STATEMENT_DESCRIPTOR  = String.static_array("")
+    @[JSON::Field(key: "statement_descriptor", type: Stripe::PaymentIntentDataUpdateParamsStatementDescriptor?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter statement_descriptor : Stripe::PaymentIntentDataUpdateParamsStatementDescriptor? = nil
 
-    @[JSON::Field(key: "statement_descriptor_suffix", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter statement_descriptor_suffix : String? = nil
-    ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_SUFFIX = "invalid value for \"statement_descriptor_suffix\", must be one of []."
-    VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX  = String.static_array("")
+    @[JSON::Field(key: "statement_descriptor_suffix", type: Stripe::PaymentIntentDataUpdateParamsStatementDescriptorSuffix?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter statement_descriptor_suffix : Stripe::PaymentIntentDataUpdateParamsStatementDescriptorSuffix? = nil
 
-    @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter transfer_group : String? = nil
-    ERROR_MESSAGE_FOR_TRANSFER_GROUP = "invalid value for \"transfer_group\", must be one of []."
-    VALID_VALUES_FOR_TRANSFER_GROUP  = String.static_array("")
+    @[JSON::Field(key: "transfer_group", type: Stripe::PaymentIntentDataUpdateParamsTransferGroup?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter transfer_group : Stripe::PaymentIntentDataUpdateParamsTransferGroup? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @description : String? = nil,
+      @description : Stripe::PaymentIntentDataUpdateParamsDescription? = nil,
       @metadata : Stripe::PaymentIntentDataUpdateParamsMetadata? = nil,
-      @statement_descriptor : String? = nil,
-      @statement_descriptor_suffix : String? = nil,
-      @transfer_group : String? = nil
+      @statement_descriptor : Stripe::PaymentIntentDataUpdateParamsStatementDescriptor? = nil,
+      @statement_descriptor_suffix : Stripe::PaymentIntentDataUpdateParamsStatementDescriptorSuffix? = nil,
+      @transfer_group : Stripe::PaymentIntentDataUpdateParamsTransferGroup? = nil
     )
     end
 
@@ -62,19 +58,19 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_description = @description).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DESCRIPTION) unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        invalid_properties.concat(_description.list_invalid_properties_for("description")) if _description.is_a?(OpenApi::Validatable)
       end
       unless (_metadata = @metadata).nil?
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       unless (_statement_descriptor = @statement_descriptor).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR) unless OpenApi::EnumValidator.valid?(_statement_descriptor, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR)
+        invalid_properties.concat(_statement_descriptor.list_invalid_properties_for("statement_descriptor")) if _statement_descriptor.is_a?(OpenApi::Validatable)
       end
       unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_SUFFIX) unless OpenApi::EnumValidator.valid?(_statement_descriptor_suffix, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
+        invalid_properties.concat(_statement_descriptor_suffix.list_invalid_properties_for("statement_descriptor_suffix")) if _statement_descriptor_suffix.is_a?(OpenApi::Validatable)
       end
       unless (_transfer_group = @transfer_group).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_TRANSFER_GROUP) unless OpenApi::EnumValidator.valid?(_transfer_group, VALID_VALUES_FOR_TRANSFER_GROUP)
+        invalid_properties.concat(_transfer_group.list_invalid_properties_for("transfer_group")) if _transfer_group.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -83,7 +79,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_description = @description).nil?
-        return false unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        return false if _description.is_a?(OpenApi::Validatable) && !_description.valid?
       end
 
       unless (_metadata = @metadata).nil?
@@ -91,15 +87,15 @@ module Stripe
       end
 
       unless (_statement_descriptor = @statement_descriptor).nil?
-        return false unless OpenApi::EnumValidator.valid?(_statement_descriptor, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR)
+        return false if _statement_descriptor.is_a?(OpenApi::Validatable) && !_statement_descriptor.valid?
       end
 
       unless (_statement_descriptor_suffix = @statement_descriptor_suffix).nil?
-        return false unless OpenApi::EnumValidator.valid?(_statement_descriptor_suffix, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
+        return false if _statement_descriptor_suffix.is_a?(OpenApi::Validatable) && !_statement_descriptor_suffix.valid?
       end
 
       unless (_transfer_group = @transfer_group).nil?
-        return false unless OpenApi::EnumValidator.valid?(_transfer_group, VALID_VALUES_FOR_TRANSFER_GROUP)
+        return false if _transfer_group.is_a?(OpenApi::Validatable) && !_transfer_group.valid?
       end
 
       true
@@ -107,9 +103,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(new_value : String?)
+    def description=(new_value : Stripe::PaymentIntentDataUpdateParamsDescription?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("description", new_value, VALID_VALUES_FOR_DESCRIPTION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @description = new_value
@@ -127,9 +123,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor Object to be assigned
-    def statement_descriptor=(new_value : String?)
+    def statement_descriptor=(new_value : Stripe::PaymentIntentDataUpdateParamsStatementDescriptor?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("statement_descriptor", new_value, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @statement_descriptor = new_value
@@ -137,9 +133,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix Object to be assigned
-    def statement_descriptor_suffix=(new_value : String?)
+    def statement_descriptor_suffix=(new_value : Stripe::PaymentIntentDataUpdateParamsStatementDescriptorSuffix?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("statement_descriptor_suffix", new_value, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @statement_descriptor_suffix = new_value
@@ -147,9 +143,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_group Object to be assigned
-    def transfer_group=(new_value : String?)
+    def transfer_group=(new_value : Stripe::PaymentIntentDataUpdateParamsTransferGroup?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("transfer_group", new_value, VALID_VALUES_FOR_TRANSFER_GROUP)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @transfer_group = new_value

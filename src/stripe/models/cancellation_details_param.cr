@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./cancellation_details_param_comment"
+
 module Stripe
   class CancellationDetailsParam
     include JSON::Serializable
@@ -18,10 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "comment", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter comment : String? = nil
-    ERROR_MESSAGE_FOR_COMMENT = "invalid value for \"comment\", must be one of []."
-    VALID_VALUES_FOR_COMMENT  = String.static_array("")
+    @[JSON::Field(key: "comment", type: Stripe::CancellationDetailsParamComment?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter comment : Stripe::CancellationDetailsParamComment? = nil
 
     # The customer submitted reason for why they canceled, if the subscription was canceled explicitly by the user.
     @[JSON::Field(key: "feedback", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -34,7 +34,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @comment : String? = nil,
+      @comment : Stripe::CancellationDetailsParamComment? = nil,
       @feedback : String? = nil
     )
     end
@@ -45,7 +45,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_comment = @comment).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_COMMENT) unless OpenApi::EnumValidator.valid?(_comment, VALID_VALUES_FOR_COMMENT)
+        invalid_properties.concat(_comment.list_invalid_properties_for("comment")) if _comment.is_a?(OpenApi::Validatable)
       end
       unless (_feedback = @feedback).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FEEDBACK) unless OpenApi::EnumValidator.valid?(_feedback, VALID_VALUES_FOR_FEEDBACK)
@@ -57,7 +57,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_comment = @comment).nil?
-        return false unless OpenApi::EnumValidator.valid?(_comment, VALID_VALUES_FOR_COMMENT)
+        return false if _comment.is_a?(OpenApi::Validatable) && !_comment.valid?
       end
 
       unless (_feedback = @feedback).nil?
@@ -69,9 +69,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] comment Object to be assigned
-    def comment=(new_value : String?)
+    def comment=(new_value : Stripe::CancellationDetailsParamComment?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("comment", new_value, VALID_VALUES_FOR_COMMENT)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @comment = new_value

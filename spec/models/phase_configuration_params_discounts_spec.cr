@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/phase_configuration_params_discounts"
 
 describe Stripe::PhaseConfigurationParamsDiscounts do
-  describe "test an instance of PhaseConfigurationParamsDiscounts" do
-    it "should create an instance of PhaseConfigurationParamsDiscounts" do
-      # instance = Stripe::PhaseConfigurationParamsDiscounts.new
-      # (instance).should be_a(Stripe::PhaseConfigurationParamsDiscounts)
-    end
-  end
 end

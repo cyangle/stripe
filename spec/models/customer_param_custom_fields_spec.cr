@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/customer_param_custom_fields"
 
 describe Stripe::CustomerParamCustomFields do
-  describe "test an instance of CustomerParamCustomFields" do
-    it "should create an instance of CustomerParamCustomFields" do
-      # instance = Stripe::CustomerParamCustomFields.new
-      # (instance).should be_a(Stripe::CustomerParamCustomFields)
-    end
-  end
 end

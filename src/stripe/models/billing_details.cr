@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./address"
+require "./billing_details_address1"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address : Stripe::Address? = nil
+    @[JSON::Field(key: "address", type: Stripe::BillingDetailsAddress1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address : Stripe::BillingDetailsAddress1? = nil
 
     # Email address.
     @[JSON::Field(key: "email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -46,7 +46,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::Address? = nil,
+      @address : Stripe::BillingDetailsAddress1? = nil,
       @email : String? = nil,
       @name : String? = nil,
       @phone : String? = nil
@@ -103,7 +103,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::Address?)
+    def address=(new_value : Stripe::BillingDetailsAddress1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

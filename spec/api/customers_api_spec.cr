@@ -137,6 +137,34 @@ describe "CustomersApi" do
     end
   end
 
+  # unit tests for get_customers_customer_cash_balance_transactions
+  # &lt;p&gt;Returns a list of transactions that modified the customer’s &lt;a href&#x3D;\&quot;/docs/payments/customer-balance\&quot;&gt;cash balance&lt;/a&gt;.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [CustomerCashBalanceTransactionList]
+  describe "get_customers_customer_cash_balance_transactions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_customers_customer_cash_balance_transactions_transaction
+  # &lt;p&gt;Retrieves a specific cash balance transaction, which updated the customer’s &lt;a href&#x3D;\&quot;/docs/payments/customer-balance\&quot;&gt;cash balance&lt;/a&gt;.&lt;/p&gt;
+  # @param customer
+  # @param transaction
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [CustomerCashBalanceTransaction]
+  describe "get_customers_customer_cash_balance_transactions_transaction test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_customers_customer_payment_methods
   # &lt;p&gt;Returns a list of PaymentMethods for a given Customer&lt;/p&gt;
   # @param customer

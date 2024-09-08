@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/line_item_create_params_discounts"
 
 describe Stripe::LineItemCreateParamsDiscounts do
-  describe "test an instance of LineItemCreateParamsDiscounts" do
-    it "should create an instance of LineItemCreateParamsDiscounts" do
-      # instance = Stripe::LineItemCreateParamsDiscounts.new
-      # (instance).should be_a(Stripe::LineItemCreateParamsDiscounts)
-    end
-  end
 end

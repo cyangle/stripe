@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./inbound_transfers"
 require "./treasury_credit_reversal_transaction"
-require "./treasury_inbound_transfers_resource_failure_details"
+require "./treasury_inbound_transfer_failure_details"
+require "./treasury_inbound_transfer_origin_payment_method_details"
 require "./treasury_inbound_transfers_resource_inbound_transfer_resource_linked_flows"
 require "./treasury_inbound_transfers_resource_inbound_transfer_resource_status_transitions"
 
@@ -46,8 +46,8 @@ module Stripe
     getter description : String? = nil
     MAX_LENGTH_FOR_DESCRIPTION = 5000
 
-    @[JSON::Field(key: "failure_details", type: Stripe::TreasuryInboundTransfersResourceFailureDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter failure_details : Stripe::TreasuryInboundTransfersResourceFailureDetails? = nil
+    @[JSON::Field(key: "failure_details", type: Stripe::TreasuryInboundTransferFailureDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter failure_details : Stripe::TreasuryInboundTransferFailureDetails? = nil
 
     # The FinancialAccount that received the funds.
     @[JSON::Field(key: "financial_account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -85,8 +85,8 @@ module Stripe
     getter origin_payment_method : String? = nil
     MAX_LENGTH_FOR_ORIGIN_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "origin_payment_method_details", type: Stripe::InboundTransfers?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter origin_payment_method_details : Stripe::InboundTransfers? = nil
+    @[JSON::Field(key: "origin_payment_method_details", type: Stripe::TreasuryInboundTransferOriginPaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter origin_payment_method_details : Stripe::TreasuryInboundTransferOriginPaymentMethodDetails? = nil
 
     # Returns `true` if the funds for an InboundTransfer were returned after the InboundTransfer went to the `succeeded` state.
     @[JSON::Field(key: "returned", type: Bool?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -121,7 +121,7 @@ module Stripe
       @created : Int64? = nil,
       @currency : String? = nil,
       @description : String? = nil,
-      @failure_details : Stripe::TreasuryInboundTransfersResourceFailureDetails? = nil,
+      @failure_details : Stripe::TreasuryInboundTransferFailureDetails? = nil,
       @financial_account : String? = nil,
       @hosted_regulatory_receipt_url : String? = nil,
       @id : String? = nil,
@@ -130,7 +130,7 @@ module Stripe
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
       @origin_payment_method : String? = nil,
-      @origin_payment_method_details : Stripe::InboundTransfers? = nil,
+      @origin_payment_method_details : Stripe::TreasuryInboundTransferOriginPaymentMethodDetails? = nil,
       @returned : Bool? = nil,
       @statement_descriptor : String? = nil,
       @status : String? = nil,
@@ -349,7 +349,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] failure_details Object to be assigned
-    def failure_details=(new_value : Stripe::TreasuryInboundTransfersResourceFailureDetails?)
+    def failure_details=(new_value : Stripe::TreasuryInboundTransferFailureDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -440,7 +440,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] origin_payment_method_details Object to be assigned
-    def origin_payment_method_details=(new_value : Stripe::InboundTransfers?)
+    def origin_payment_method_details=(new_value : Stripe::TreasuryInboundTransferOriginPaymentMethodDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

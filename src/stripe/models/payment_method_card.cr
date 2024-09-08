@@ -9,11 +9,11 @@
 
 require "../../core"
 
-require "./networks"
-require "./payment_method_card_checks"
-require "./payment_method_card_generated_card"
-require "./payment_method_card_wallet"
-require "./three_d_secure_usage"
+require "./payment_method_card_checks1"
+require "./payment_method_card_generated_from"
+require "./payment_method_card_networks"
+require "./payment_method_card_three_d_secure_usage"
+require "./payment_method_card_wallet1"
 
 module Stripe
   #
@@ -30,8 +30,8 @@ module Stripe
     getter brand : String? = nil
     MAX_LENGTH_FOR_BRAND = 5000
 
-    @[JSON::Field(key: "checks", type: Stripe::PaymentMethodCardChecks?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter checks : Stripe::PaymentMethodCardChecks? = nil
+    @[JSON::Field(key: "checks", type: Stripe::PaymentMethodCardChecks1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter checks : Stripe::PaymentMethodCardChecks1? = nil
 
     # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -56,22 +56,22 @@ module Stripe
     getter funding : String? = nil
     MAX_LENGTH_FOR_FUNDING = 5000
 
-    @[JSON::Field(key: "generated_from", type: Stripe::PaymentMethodCardGeneratedCard?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter generated_from : Stripe::PaymentMethodCardGeneratedCard? = nil
+    @[JSON::Field(key: "generated_from", type: Stripe::PaymentMethodCardGeneratedFrom?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter generated_from : Stripe::PaymentMethodCardGeneratedFrom? = nil
 
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter last4 : String? = nil
     MAX_LENGTH_FOR_LAST4 = 5000
 
-    @[JSON::Field(key: "networks", type: Stripe::Networks?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter networks : Stripe::Networks? = nil
+    @[JSON::Field(key: "networks", type: Stripe::PaymentMethodCardNetworks?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter networks : Stripe::PaymentMethodCardNetworks? = nil
 
-    @[JSON::Field(key: "three_d_secure_usage", type: Stripe::ThreeDSecureUsage?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter three_d_secure_usage : Stripe::ThreeDSecureUsage? = nil
+    @[JSON::Field(key: "three_d_secure_usage", type: Stripe::PaymentMethodCardThreeDSecureUsage?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter three_d_secure_usage : Stripe::PaymentMethodCardThreeDSecureUsage? = nil
 
-    @[JSON::Field(key: "wallet", type: Stripe::PaymentMethodCardWallet?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter wallet : Stripe::PaymentMethodCardWallet? = nil
+    @[JSON::Field(key: "wallet", type: Stripe::PaymentMethodCardWallet1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter wallet : Stripe::PaymentMethodCardWallet1? = nil
 
     # End of Required Properties
 
@@ -115,17 +115,17 @@ module Stripe
       *,
       # Required properties
       @brand : String? = nil,
-      @checks : Stripe::PaymentMethodCardChecks? = nil,
+      @checks : Stripe::PaymentMethodCardChecks1? = nil,
       @country : String? = nil,
       @display_brand : String? = nil,
       @exp_month : Int64? = nil,
       @exp_year : Int64? = nil,
       @funding : String? = nil,
-      @generated_from : Stripe::PaymentMethodCardGeneratedCard? = nil,
+      @generated_from : Stripe::PaymentMethodCardGeneratedFrom? = nil,
       @last4 : String? = nil,
-      @networks : Stripe::Networks? = nil,
-      @three_d_secure_usage : Stripe::ThreeDSecureUsage? = nil,
-      @wallet : Stripe::PaymentMethodCardWallet? = nil,
+      @networks : Stripe::PaymentMethodCardNetworks? = nil,
+      @three_d_secure_usage : Stripe::PaymentMethodCardThreeDSecureUsage? = nil,
+      @wallet : Stripe::PaymentMethodCardWallet1? = nil,
       # Optional properties
       @description : String? = nil,
       @fingerprint : String? = nil,
@@ -294,7 +294,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] checks Object to be assigned
-    def checks=(new_value : Stripe::PaymentMethodCardChecks?)
+    def checks=(new_value : Stripe::PaymentMethodCardChecks1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -351,7 +351,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_from Object to be assigned
-    def generated_from=(new_value : Stripe::PaymentMethodCardGeneratedCard?)
+    def generated_from=(new_value : Stripe::PaymentMethodCardGeneratedFrom?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -372,7 +372,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] networks Object to be assigned
-    def networks=(new_value : Stripe::Networks?)
+    def networks=(new_value : Stripe::PaymentMethodCardNetworks?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -382,7 +382,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] three_d_secure_usage Object to be assigned
-    def three_d_secure_usage=(new_value : Stripe::ThreeDSecureUsage?)
+    def three_d_secure_usage=(new_value : Stripe::PaymentMethodCardThreeDSecureUsage?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -392,7 +392,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wallet Object to be assigned
-    def wallet=(new_value : Stripe::PaymentMethodCardWallet?)
+    def wallet=(new_value : Stripe::PaymentMethodCardWallet1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

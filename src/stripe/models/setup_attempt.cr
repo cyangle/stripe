@@ -9,12 +9,12 @@
 
 require "../../core"
 
-require "./api_errors"
 require "./setup_attempt_application"
 require "./setup_attempt_customer"
 require "./setup_attempt_on_behalf_of"
 require "./setup_attempt_payment_method"
 require "./setup_attempt_payment_method_details"
+require "./setup_attempt_setup_error"
 require "./setup_attempt_setup_intent"
 
 module Stripe
@@ -67,8 +67,8 @@ module Stripe
     @[JSON::Field(key: "payment_method_details", type: Stripe::SetupAttemptPaymentMethodDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_method_details : Stripe::SetupAttemptPaymentMethodDetails? = nil
 
-    @[JSON::Field(key: "setup_error", type: Stripe::ApiErrors?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter setup_error : Stripe::ApiErrors? = nil
+    @[JSON::Field(key: "setup_error", type: Stripe::SetupAttemptSetupError?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter setup_error : Stripe::SetupAttemptSetupError? = nil
 
     @[JSON::Field(key: "setup_intent", type: Stripe::SetupAttemptSetupIntent?, default: nil, required: true, nullable: false, emit_null: false)]
     getter setup_intent : Stripe::SetupAttemptSetupIntent? = nil
@@ -106,7 +106,7 @@ module Stripe
       @on_behalf_of : Stripe::SetupAttemptOnBehalfOf? = nil,
       @payment_method : Stripe::SetupAttemptPaymentMethod? = nil,
       @payment_method_details : Stripe::SetupAttemptPaymentMethodDetails? = nil,
-      @setup_error : Stripe::ApiErrors? = nil,
+      @setup_error : Stripe::SetupAttemptSetupError? = nil,
       @setup_intent : Stripe::SetupAttemptSetupIntent? = nil,
       @status : String? = nil,
       @usage : String? = nil,
@@ -351,7 +351,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_error Object to be assigned
-    def setup_error=(new_value : Stripe::ApiErrors?)
+    def setup_error=(new_value : Stripe::SetupAttemptSetupError?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

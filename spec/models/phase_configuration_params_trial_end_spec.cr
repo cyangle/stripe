@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/phase_configuration_params_trial_end"
 
 describe Stripe::PhaseConfigurationParamsTrialEnd do
-  describe "test an instance of PhaseConfigurationParamsTrialEnd" do
-    it "should create an instance of PhaseConfigurationParamsTrialEnd" do
-      # instance = Stripe::PhaseConfigurationParamsTrialEnd.new
-      # (instance).should be_a(Stripe::PhaseConfigurationParamsTrialEnd)
-    end
-  end
 end

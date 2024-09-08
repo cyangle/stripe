@@ -25,10 +25,6 @@ describe Stripe::BusinessProfileUpdateParam do
     it "should work" do
       # instance = Stripe::BusinessProfileUpdateParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BusinessProfileUpdateParam::ENUM_VALIDATOR_FOR_HEADLINE
-      # validator.allowable_values.each do |value|
-      #   instance.headline = value.as(String)
-      # end
     end
   end
 
@@ -36,10 +32,6 @@ describe Stripe::BusinessProfileUpdateParam do
     it "should work" do
       # instance = Stripe::BusinessProfileUpdateParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BusinessProfileUpdateParam::ENUM_VALIDATOR_FOR_PRIVACY_POLICY_URL
-      # validator.allowable_values.each do |value|
-      #   instance.privacy_policy_url = value.as(String)
-      # end
     end
   end
 
@@ -47,10 +39,6 @@ describe Stripe::BusinessProfileUpdateParam do
     it "should work" do
       # instance = Stripe::BusinessProfileUpdateParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BusinessProfileUpdateParam::ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE_URL
-      # validator.allowable_values.each do |value|
-      #   instance.terms_of_service_url = value.as(String)
-      # end
     end
   end
 end

@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./gelato_data_id_number_report_date"
-require "./gelato_id_number_report_error"
+require "./gelato_id_number_report_dob"
+require "./gelato_id_number_report_error1"
 
 module Stripe
   # Result from an id_number check
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "error", type: Stripe::GelatoIdNumberReportError?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter error : Stripe::GelatoIdNumberReportError? = nil
+    @[JSON::Field(key: "error", type: Stripe::GelatoIdNumberReportError1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter error : Stripe::GelatoIdNumberReportError1? = nil
 
     # First name.
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -51,8 +51,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "dob", type: Stripe::GelatoDataIdNumberReportDate?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
-    getter dob : Stripe::GelatoDataIdNumberReportDate? = nil
+    @[JSON::Field(key: "dob", type: Stripe::GelatoIdNumberReportDob?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
+    getter dob : Stripe::GelatoIdNumberReportDob? = nil
 
     @[JSON::Field(ignore: true)]
     property? dob_present : Bool = false
@@ -70,13 +70,13 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @error : Stripe::GelatoIdNumberReportError? = nil,
+      @error : Stripe::GelatoIdNumberReportError1? = nil,
       @first_name : String? = nil,
       @id_number_type : String? = nil,
       @last_name : String? = nil,
       @status : String? = nil,
       # Optional properties
-      @dob : Stripe::GelatoDataIdNumberReportDate? = nil,
+      @dob : Stripe::GelatoIdNumberReportDob? = nil,
       @id_number : String? = nil
     )
     end
@@ -155,7 +155,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(new_value : Stripe::GelatoIdNumberReportError?)
+    def error=(new_value : Stripe::GelatoIdNumberReportError1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -206,7 +206,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(new_value : Stripe::GelatoDataIdNumberReportDate?)
+    def dob=(new_value : Stripe::GelatoIdNumberReportDob?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

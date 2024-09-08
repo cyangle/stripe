@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./address"
-require "./issuing_card_shipping_address_validation"
-require "./issuing_card_shipping_customs"
+require "./issuing_card_shipping_address_validation1"
+require "./issuing_card_shipping_customs1"
 
 module Stripe
   #
@@ -26,8 +26,8 @@ module Stripe
     @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
 
-    @[JSON::Field(key: "address_validation", type: Stripe::IssuingCardShippingAddressValidation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address_validation : Stripe::IssuingCardShippingAddressValidation? = nil
+    @[JSON::Field(key: "address_validation", type: Stripe::IssuingCardShippingAddressValidation1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address_validation : Stripe::IssuingCardShippingAddressValidation1? = nil
 
     # The delivery company that shipped a card.
     @[JSON::Field(key: "carrier", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -35,8 +35,8 @@ module Stripe
     ERROR_MESSAGE_FOR_CARRIER = "invalid value for \"carrier\", must be one of [dhl, fedex, royal_mail, usps]."
     VALID_VALUES_FOR_CARRIER  = String.static_array("dhl", "fedex", "royal_mail", "usps")
 
-    @[JSON::Field(key: "customs", type: Stripe::IssuingCardShippingCustoms?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter customs : Stripe::IssuingCardShippingCustoms? = nil
+    @[JSON::Field(key: "customs", type: Stripe::IssuingCardShippingCustoms1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter customs : Stripe::IssuingCardShippingCustoms1? = nil
 
     # A unix timestamp representing a best estimate of when the card will be delivered.
     @[JSON::Field(key: "eta", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -92,9 +92,9 @@ module Stripe
       *,
       # Required properties
       @address : Stripe::Address? = nil,
-      @address_validation : Stripe::IssuingCardShippingAddressValidation? = nil,
+      @address_validation : Stripe::IssuingCardShippingAddressValidation1? = nil,
       @carrier : String? = nil,
-      @customs : Stripe::IssuingCardShippingCustoms? = nil,
+      @customs : Stripe::IssuingCardShippingCustoms1? = nil,
       @eta : Int64? = nil,
       @name : String? = nil,
       @phone_number : String? = nil,
@@ -233,7 +233,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_validation Object to be assigned
-    def address_validation=(new_value : Stripe::IssuingCardShippingAddressValidation?)
+    def address_validation=(new_value : Stripe::IssuingCardShippingAddressValidation1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -253,7 +253,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customs Object to be assigned
-    def customs=(new_value : Stripe::IssuingCardShippingCustoms?)
+    def customs=(new_value : Stripe::IssuingCardShippingCustoms1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./customer_session_resource_components_resource_payment_element_resource_features"
+require "./customer_session_resource_components_resource_payment_element_features"
 
 module Stripe
   # This hash contains whether the Payment Element is enabled and the features it supports.
@@ -25,8 +25,8 @@ module Stripe
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    @[JSON::Field(key: "features", type: Stripe::CustomerSessionResourceComponentsResourcePaymentElementResourceFeatures?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter features : Stripe::CustomerSessionResourceComponentsResourcePaymentElementResourceFeatures? = nil
+    @[JSON::Field(key: "features", type: Stripe::CustomerSessionResourceComponentsResourcePaymentElementFeatures?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter features : Stripe::CustomerSessionResourceComponentsResourcePaymentElementFeatures? = nil
 
     # End of Required Properties
 
@@ -36,7 +36,7 @@ module Stripe
       *,
       # Required properties
       @enabled : Bool? = nil,
-      @features : Stripe::CustomerSessionResourceComponentsResourcePaymentElementResourceFeatures? = nil
+      @features : Stripe::CustomerSessionResourceComponentsResourcePaymentElementFeatures? = nil
     )
     end
 
@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] features Object to be assigned
-    def features=(new_value : Stripe::CustomerSessionResourceComponentsResourcePaymentElementResourceFeatures?)
+    def features=(new_value : Stripe::CustomerSessionResourceComponentsResourcePaymentElementFeatures?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

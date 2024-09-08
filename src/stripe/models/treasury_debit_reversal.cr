@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./treasury_credit_reversal_transaction"
-require "./treasury_received_debits_resource_debit_reversal_linked_flows"
+require "./treasury_debit_reversal_linked_flows"
 require "./treasury_received_debits_resource_status_transitions"
 
 module Stripe
@@ -50,8 +50,8 @@ module Stripe
     getter id : String? = nil
     MAX_LENGTH_FOR_ID = 5000
 
-    @[JSON::Field(key: "linked_flows", type: Stripe::TreasuryReceivedDebitsResourceDebitReversalLinkedFlows?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter linked_flows : Stripe::TreasuryReceivedDebitsResourceDebitReversalLinkedFlows? = nil
+    @[JSON::Field(key: "linked_flows", type: Stripe::TreasuryDebitReversalLinkedFlows?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter linked_flows : Stripe::TreasuryDebitReversalLinkedFlows? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -102,7 +102,7 @@ module Stripe
       @financial_account : String? = nil,
       @hosted_regulatory_receipt_url : String? = nil,
       @id : String? = nil,
-      @linked_flows : Stripe::TreasuryReceivedDebitsResourceDebitReversalLinkedFlows? = nil,
+      @linked_flows : Stripe::TreasuryDebitReversalLinkedFlows? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @network : String? = nil,
@@ -301,7 +301,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] linked_flows Object to be assigned
-    def linked_flows=(new_value : Stripe::TreasuryReceivedDebitsResourceDebitReversalLinkedFlows?)
+    def linked_flows=(new_value : Stripe::TreasuryDebitReversalLinkedFlows?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

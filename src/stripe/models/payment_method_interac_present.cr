@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_method_card_present_networks"
+require "./payment_method_card_present_networks1"
 
 module Stripe
   #
@@ -59,8 +59,8 @@ module Stripe
     getter last4 : String? = nil
     MAX_LENGTH_FOR_LAST4 = 5000
 
-    @[JSON::Field(key: "networks", type: Stripe::PaymentMethodCardPresentNetworks?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter networks : Stripe::PaymentMethodCardPresentNetworks? = nil
+    @[JSON::Field(key: "networks", type: Stripe::PaymentMethodCardPresentNetworks1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter networks : Stripe::PaymentMethodCardPresentNetworks1? = nil
 
     # EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.
     @[JSON::Field(key: "preferred_locales", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -113,7 +113,7 @@ module Stripe
       @fingerprint : String? = nil,
       @funding : String? = nil,
       @last4 : String? = nil,
-      @networks : Stripe::PaymentMethodCardPresentNetworks? = nil,
+      @networks : Stripe::PaymentMethodCardPresentNetworks1? = nil,
       @preferred_locales : Array(String)? = nil,
       @read_method : String? = nil,
       # Optional properties
@@ -319,7 +319,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] networks Object to be assigned
-    def networks=(new_value : Stripe::PaymentMethodCardPresentNetworks?)
+    def networks=(new_value : Stripe::PaymentMethodCardPresentNetworks1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

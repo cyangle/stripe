@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./portal_flows_retention"
+require "./portal_flows_flow_subscription_cancel_retention"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "retention", type: Stripe::PortalFlowsRetention?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter retention : Stripe::PortalFlowsRetention? = nil
+    @[JSON::Field(key: "retention", type: Stripe::PortalFlowsFlowSubscriptionCancelRetention?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter retention : Stripe::PortalFlowsFlowSubscriptionCancelRetention? = nil
 
     # The ID of the subscription to be canceled.
     @[JSON::Field(key: "subscription", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @retention : Stripe::PortalFlowsRetention? = nil,
+      @retention : Stripe::PortalFlowsFlowSubscriptionCancelRetention? = nil,
       @subscription : String? = nil
     )
     end
@@ -76,7 +76,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] retention Object to be assigned
-    def retention=(new_value : Stripe::PortalFlowsRetention?)
+    def retention=(new_value : Stripe::PortalFlowsFlowSubscriptionCancelRetention?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/get_invoices_upcoming_subscription_cancel_at_parameter"
 
 describe Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter do
-  describe "test an instance of GetInvoicesUpcomingSubscriptionCancelAtParameter" do
-    it "should create an instance of GetInvoicesUpcomingSubscriptionCancelAtParameter" do
-      # instance = Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter.new
-      # (instance).should be_a(Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter)
-    end
-  end
 end

@@ -14,17 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/custom_text_param_shipping_address"
 
 describe Stripe::CustomTextParamShippingAddress do
-  describe "test an instance of CustomTextParamShippingAddress" do
-    it "should create an instance of CustomTextParamShippingAddress" do
-      # instance = Stripe::CustomTextParamShippingAddress.new
-      # (instance).should be_a(Stripe::CustomTextParamShippingAddress)
-    end
-  end
-
-  describe "test attribute 'message'" do
-    it "should work" do
-      # instance = Stripe::CustomTextParamShippingAddress.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

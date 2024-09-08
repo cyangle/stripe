@@ -10,11 +10,11 @@
 require "../../core"
 
 require "./currency_option"
-require "./custom_unit_amount"
+require "./currency_option_custom_unit_amount"
 require "./price_product"
+require "./price_recurring"
 require "./price_tier"
-require "./recurring"
-require "./transform_quantity"
+require "./price_transform_quantity"
 
 module Stripe
   # Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products. [Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.  For example, you might have a single \"gold\" product that has prices for $10/month, $100/year, and €9 once.  Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).
@@ -44,8 +44,8 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CustomUnitAmount?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter custom_unit_amount : Stripe::CustomUnitAmount? = nil
+    @[JSON::Field(key: "custom_unit_amount", type: Stripe::CurrencyOptionCustomUnitAmount?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -78,8 +78,8 @@ module Stripe
     @[JSON::Field(key: "product", type: Stripe::PriceProduct?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : Stripe::PriceProduct? = nil
 
-    @[JSON::Field(key: "recurring", type: Stripe::Recurring?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter recurring : Stripe::Recurring? = nil
+    @[JSON::Field(key: "recurring", type: Stripe::PriceRecurring?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter recurring : Stripe::PriceRecurring? = nil
 
     # Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -93,8 +93,8 @@ module Stripe
     ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
     VALID_VALUES_FOR_TIERS_MODE  = String.static_array("graduated", "volume")
 
-    @[JSON::Field(key: "transform_quantity", type: Stripe::TransformQuantity?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transform_quantity : Stripe::TransformQuantity? = nil
+    @[JSON::Field(key: "transform_quantity", type: Stripe::PriceTransformQuantity?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transform_quantity : Stripe::PriceTransformQuantity? = nil
 
     # One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -130,7 +130,7 @@ module Stripe
       @billing_scheme : String? = nil,
       @created : Int64? = nil,
       @currency : String? = nil,
-      @custom_unit_amount : Stripe::CustomUnitAmount? = nil,
+      @custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
       @lookup_key : String? = nil,
@@ -138,10 +138,10 @@ module Stripe
       @nickname : String? = nil,
       @object : String? = nil,
       @product : Stripe::PriceProduct? = nil,
-      @recurring : Stripe::Recurring? = nil,
+      @recurring : Stripe::PriceRecurring? = nil,
       @tax_behavior : String? = nil,
       @tiers_mode : String? = nil,
-      @transform_quantity : Stripe::TransformQuantity? = nil,
+      @transform_quantity : Stripe::PriceTransformQuantity? = nil,
       @_type : String? = nil,
       @unit_amount : Int64? = nil,
       @unit_amount_decimal : BigDecimal? = nil,
@@ -342,7 +342,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_unit_amount Object to be assigned
-    def custom_unit_amount=(new_value : Stripe::CustomUnitAmount?)
+    def custom_unit_amount=(new_value : Stripe::CurrencyOptionCustomUnitAmount?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -421,7 +421,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recurring Object to be assigned
-    def recurring=(new_value : Stripe::Recurring?)
+    def recurring=(new_value : Stripe::PriceRecurring?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -451,7 +451,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transform_quantity Object to be assigned
-    def transform_quantity=(new_value : Stripe::TransformQuantity?)
+    def transform_quantity=(new_value : Stripe::PriceTransformQuantity?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

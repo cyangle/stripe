@@ -11,12 +11,13 @@ require "../../core"
 
 require "./address"
 require "./legal_entity_dob"
-require "./legal_entity_japan_address"
 require "./legal_entity_person_verification"
 require "./person_additional_tos_acceptances"
-require "./person_future_requirements"
+require "./person_address_kana"
+require "./person_address_kanji"
+require "./person_future_requirements1"
 require "./person_relationship"
-require "./person_requirements"
+require "./person_requirements1"
 
 module Stripe
   # This is an object representing a person associated with a Stripe account.  A platform cannot access a person for an account where [account.controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`, which includes Standard and Express accounts, after creating an Account Link or Account Session to start Connect onboarding.  See the [Standard onboarding](/connect/standard-accounts) or [Express onboarding](/connect/express-accounts) documentation for information about prefilling information and account onboarding steps. Learn more about [handling identity verification with the API](/connect/handling-api-verification#person-information).
@@ -58,14 +59,14 @@ module Stripe
     @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
 
-    @[JSON::Field(key: "address_kana", type: Stripe::LegalEntityJapanAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kana.nil? && !address_kana_present?)]
-    getter address_kana : Stripe::LegalEntityJapanAddress? = nil
+    @[JSON::Field(key: "address_kana", type: Stripe::PersonAddressKana?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kana.nil? && !address_kana_present?)]
+    getter address_kana : Stripe::PersonAddressKana? = nil
 
     @[JSON::Field(ignore: true)]
     property? address_kana_present : Bool = false
 
-    @[JSON::Field(key: "address_kanji", type: Stripe::LegalEntityJapanAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
-    getter address_kanji : Stripe::LegalEntityJapanAddress? = nil
+    @[JSON::Field(key: "address_kanji", type: Stripe::PersonAddressKanji?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
+    getter address_kanji : Stripe::PersonAddressKanji? = nil
 
     @[JSON::Field(ignore: true)]
     property? address_kanji_present : Bool = false
@@ -109,8 +110,8 @@ module Stripe
     @[JSON::Field(key: "full_name_aliases", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter full_name_aliases : Array(String)? = nil
 
-    @[JSON::Field(key: "future_requirements", type: Stripe::PersonFutureRequirements?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: future_requirements.nil? && !future_requirements_present?)]
-    getter future_requirements : Stripe::PersonFutureRequirements? = nil
+    @[JSON::Field(key: "future_requirements", type: Stripe::PersonFutureRequirements1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: future_requirements.nil? && !future_requirements_present?)]
+    getter future_requirements : Stripe::PersonFutureRequirements1? = nil
 
     @[JSON::Field(ignore: true)]
     property? future_requirements_present : Bool = false
@@ -193,8 +194,8 @@ module Stripe
     @[JSON::Field(key: "relationship", type: Stripe::PersonRelationship?, default: nil, required: false, nullable: false, emit_null: false)]
     getter relationship : Stripe::PersonRelationship? = nil
 
-    @[JSON::Field(key: "requirements", type: Stripe::PersonRequirements?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: requirements.nil? && !requirements_present?)]
-    getter requirements : Stripe::PersonRequirements? = nil
+    @[JSON::Field(key: "requirements", type: Stripe::PersonRequirements1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: requirements.nil? && !requirements_present?)]
+    getter requirements : Stripe::PersonRequirements1? = nil
 
     @[JSON::Field(ignore: true)]
     property? requirements_present : Bool = false
@@ -218,15 +219,15 @@ module Stripe
       @account : String? = nil,
       @additional_tos_acceptances : Stripe::PersonAdditionalTosAcceptances? = nil,
       @address : Stripe::Address? = nil,
-      @address_kana : Stripe::LegalEntityJapanAddress? = nil,
-      @address_kanji : Stripe::LegalEntityJapanAddress? = nil,
+      @address_kana : Stripe::PersonAddressKana? = nil,
+      @address_kanji : Stripe::PersonAddressKanji? = nil,
       @dob : Stripe::LegalEntityDob? = nil,
       @email : String? = nil,
       @first_name : String? = nil,
       @first_name_kana : String? = nil,
       @first_name_kanji : String? = nil,
       @full_name_aliases : Array(String)? = nil,
-      @future_requirements : Stripe::PersonFutureRequirements? = nil,
+      @future_requirements : Stripe::PersonFutureRequirements1? = nil,
       @gender : String? = nil,
       @id_number_provided : Bool? = nil,
       @id_number_secondary_provided : Bool? = nil,
@@ -240,7 +241,7 @@ module Stripe
       @political_exposure : String? = nil,
       @registered_address : Stripe::Address? = nil,
       @relationship : Stripe::PersonRelationship? = nil,
-      @requirements : Stripe::PersonRequirements? = nil,
+      @requirements : Stripe::PersonRequirements1? = nil,
       @ssn_last_4_provided : Bool? = nil,
       @verification : Stripe::LegalEntityPersonVerification? = nil
     )
@@ -528,7 +529,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_kana Object to be assigned
-    def address_kana=(new_value : Stripe::LegalEntityJapanAddress?)
+    def address_kana=(new_value : Stripe::PersonAddressKana?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -538,7 +539,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_kanji Object to be assigned
-    def address_kanji=(new_value : Stripe::LegalEntityJapanAddress?)
+    def address_kanji=(new_value : Stripe::PersonAddressKanji?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -604,7 +605,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] future_requirements Object to be assigned
-    def future_requirements=(new_value : Stripe::PersonFutureRequirements?)
+    def future_requirements=(new_value : Stripe::PersonFutureRequirements1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -728,7 +729,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] requirements Object to be assigned
-    def requirements=(new_value : Stripe::PersonRequirements?)
+    def requirements=(new_value : Stripe::PersonRequirements1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

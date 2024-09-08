@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./billing_clocks_resource_status_details_status_details"
+
 module Stripe
   # A test clock enables deterministic control over objects in testmode. With a test clock, you can create objects at a frozen time in the past or future, and advance to a specific future time to observe webhooks and state changes. After the clock advances, you can either validate the current state of your scenario (and test your assumptions), change the current state of your scenario (and test more complex scenarios), or keep advancing forward in time.
   class TestHelpersTestClock
@@ -59,6 +61,11 @@ module Stripe
 
     # End of Required Properties
 
+    # Optional Properties
+
+    @[JSON::Field(key: "status_details", type: Stripe::BillingClocksResourceStatusDetailsStatusDetails?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter status_details : Stripe::BillingClocksResourceStatusDetailsStatusDetails? = nil
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -71,7 +78,9 @@ module Stripe
       @livemode : Bool? = nil,
       @name : String? = nil,
       @object : String? = nil,
-      @status : String? = nil
+      @status : String? = nil,
+      # Optional properties
+      @status_details : Stripe::BillingClocksResourceStatusDetailsStatusDetails? = nil
     )
     end
 
@@ -110,6 +119,9 @@ module Stripe
       unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
+      unless (_status_details = @status_details).nil?
+        invalid_properties.concat(_status_details.list_invalid_properties_for("status_details")) if _status_details.is_a?(OpenApi::Validatable)
+      end
       invalid_properties
     end
 
@@ -141,6 +153,10 @@ module Stripe
       return false if @status.nil?
       unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
+      unless (_status_details = @status_details).nil?
+        return false if _status_details.is_a?(OpenApi::Validatable) && !_status_details.valid?
       end
 
       true
@@ -221,10 +237,20 @@ module Stripe
       @status = new_value
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status_details Object to be assigned
+    def status_details=(new_value : Stripe::BillingClocksResourceStatusDetailsStatusDetails?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
+      end
+
+      @status_details = new_value
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@created, @deletes_after, @frozen_time, @id, @livemode, @name, @object, @status)
+    def_equals_and_hash(@created, @deletes_after, @frozen_time, @id, @livemode, @name, @object, @status, @status_details)
   end
 end

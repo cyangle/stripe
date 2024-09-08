@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./card_generated_from_payment_method_details"
+require "./payment_method_card_generated_card_payment_method_details"
 require "./payment_method_card_generated_card_setup_attempt"
 
 module Stripe
@@ -27,8 +27,8 @@ module Stripe
     getter charge : String? = nil
     MAX_LENGTH_FOR_CHARGE = 5000
 
-    @[JSON::Field(key: "payment_method_details", type: Stripe::CardGeneratedFromPaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_details : Stripe::CardGeneratedFromPaymentMethodDetails? = nil
+    @[JSON::Field(key: "payment_method_details", type: Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_details : Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails? = nil
 
     @[JSON::Field(key: "setup_attempt", type: Stripe::PaymentMethodCardGeneratedCardSetupAttempt?, default: nil, required: true, nullable: true, emit_null: true)]
     getter setup_attempt : Stripe::PaymentMethodCardGeneratedCardSetupAttempt? = nil
@@ -41,7 +41,7 @@ module Stripe
       *,
       # Required properties
       @charge : String? = nil,
-      @payment_method_details : Stripe::CardGeneratedFromPaymentMethodDetails? = nil,
+      @payment_method_details : Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails? = nil,
       @setup_attempt : Stripe::PaymentMethodCardGeneratedCardSetupAttempt? = nil
     )
     end
@@ -95,7 +95,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_details Object to be assigned
-    def payment_method_details=(new_value : Stripe::CardGeneratedFromPaymentMethodDetails?)
+    def payment_method_details=(new_value : Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

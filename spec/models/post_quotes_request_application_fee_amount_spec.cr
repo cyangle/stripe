@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_quotes_request_application_fee_amount"
 
 describe Stripe::PostQuotesRequestApplicationFeeAmount do
-  describe "test an instance of PostQuotesRequestApplicationFeeAmount" do
-    it "should create an instance of PostQuotesRequestApplicationFeeAmount" do
-      # instance = Stripe::PostQuotesRequestApplicationFeeAmount.new
-      # (instance).should be_a(Stripe::PostQuotesRequestApplicationFeeAmount)
-    end
-  end
 end

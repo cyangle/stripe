@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./forwarded_request_context"
-require "./forwarded_request_details"
-require "./forwarded_response_details"
+require "./forwarding_request_request_context"
+require "./forwarding_request_request_details"
+require "./forwarding_request_response_details"
 
 module Stripe
   # Instructs Stripe to make a request on your behalf using the destination URL. The destination URL is activated by Stripe at the time of onboarding. Stripe verifies requests with your credentials provided during onboarding, and injects card details from the payment_method into the request.  Stripe redacts all sensitive fields and headers, including authentication credentials and card numbers, before storing the request and response data in the forwarding Request object, which are subject to a 30-day retention period.  You can provide a Stripe idempotency key to make sure that requests with the same key result in only one outbound request. The Stripe idempotency key provided should be unique and different from any idempotency keys provided on the underlying third-party request.  Forwarding Requests are synchronous requests that return a response or time out according to Stripe’s limits.  Related guide: [Forward card details to third-party API endpoints](https://docs.stripe.com/payments/forwarding).
@@ -53,14 +53,14 @@ module Stripe
     ERROR_MESSAGE_FOR_REPLACEMENTS = "invalid value for \"replacements\", must be one of [card_cvc, card_expiry, card_number, cardholder_name]."
     VALID_VALUES_FOR_REPLACEMENTS  = String.static_array("card_cvc", "card_expiry", "card_number", "cardholder_name")
 
-    @[JSON::Field(key: "request_context", type: Stripe::ForwardedRequestContext?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter request_context : Stripe::ForwardedRequestContext? = nil
+    @[JSON::Field(key: "request_context", type: Stripe::ForwardingRequestRequestContext?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter request_context : Stripe::ForwardingRequestRequestContext? = nil
 
-    @[JSON::Field(key: "request_details", type: Stripe::ForwardedRequestDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter request_details : Stripe::ForwardedRequestDetails? = nil
+    @[JSON::Field(key: "request_details", type: Stripe::ForwardingRequestRequestDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter request_details : Stripe::ForwardingRequestRequestDetails? = nil
 
-    @[JSON::Field(key: "response_details", type: Stripe::ForwardedResponseDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter response_details : Stripe::ForwardedResponseDetails? = nil
+    @[JSON::Field(key: "response_details", type: Stripe::ForwardingRequestResponseDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter response_details : Stripe::ForwardingRequestResponseDetails? = nil
 
     # The destination URL for the forwarded request. Must be supported by the config.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -80,9 +80,9 @@ module Stripe
       @object : String? = nil,
       @payment_method : String? = nil,
       @replacements : Array(String)? = nil,
-      @request_context : Stripe::ForwardedRequestContext? = nil,
-      @request_details : Stripe::ForwardedRequestDetails? = nil,
-      @response_details : Stripe::ForwardedResponseDetails? = nil,
+      @request_context : Stripe::ForwardingRequestRequestContext? = nil,
+      @request_details : Stripe::ForwardingRequestRequestDetails? = nil,
+      @response_details : Stripe::ForwardingRequestResponseDetails? = nil,
       @url : String? = nil
     )
     end
@@ -245,7 +245,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_context Object to be assigned
-    def request_context=(new_value : Stripe::ForwardedRequestContext?)
+    def request_context=(new_value : Stripe::ForwardingRequestRequestContext?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -255,7 +255,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_details Object to be assigned
-    def request_details=(new_value : Stripe::ForwardedRequestDetails?)
+    def request_details=(new_value : Stripe::ForwardingRequestRequestDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -265,7 +265,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] response_details Object to be assigned
-    def response_details=(new_value : Stripe::ForwardedResponseDetails?)
+    def response_details=(new_value : Stripe::ForwardingRequestResponseDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

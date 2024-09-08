@@ -14,38 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/get_accounts_created_parameter"
 
 describe Stripe::GetAccountsCreatedParameter do
-  describe "test an instance of GetAccountsCreatedParameter" do
-    it "should create an instance of GetAccountsCreatedParameter" do
-      # instance = Stripe::GetAccountsCreatedParameter.new
-      # (instance).should be_a(Stripe::GetAccountsCreatedParameter)
-    end
-  end
-
-  describe "test attribute 'gt'" do
-    it "should work" do
-      # instance = Stripe::GetAccountsCreatedParameter.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'gte'" do
-    it "should work" do
-      # instance = Stripe::GetAccountsCreatedParameter.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'lt'" do
-    it "should work" do
-      # instance = Stripe::GetAccountsCreatedParameter.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'lte'" do
-    it "should work" do
-      # instance = Stripe::GetAccountsCreatedParameter.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

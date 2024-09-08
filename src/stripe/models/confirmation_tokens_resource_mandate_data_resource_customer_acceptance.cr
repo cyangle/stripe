@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./confirmation_tokens_resource_mandate_data_resource_customer_acceptance_resource_online"
+require "./confirmation_tokens_resource_mandate_data_resource_customer_acceptance_online"
 
 module Stripe
   # This hash contains details about the customer acceptance of the Mandate.
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "online", type: Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceResourceOnline?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter online : Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceResourceOnline? = nil
+    @[JSON::Field(key: "online", type: Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceOnline?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter online : Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceOnline? = nil
 
     # The type of customer acceptance information included with the Mandate.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @online : Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceResourceOnline? = nil,
+      @online : Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceOnline? = nil,
       @_type : String? = nil
     )
     end
@@ -76,7 +76,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] online Object to be assigned
-    def online=(new_value : Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceResourceOnline?)
+    def online=(new_value : Stripe::ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceOnline?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

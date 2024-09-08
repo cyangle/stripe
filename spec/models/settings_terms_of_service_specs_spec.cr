@@ -39,10 +39,6 @@ describe Stripe::SettingsTermsOfServiceSpecs do
     it "should work" do
       # instance = Stripe::SettingsTermsOfServiceSpecs.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::SettingsTermsOfServiceSpecs::ENUM_VALIDATOR_FOR_USER_AGENT
-      # validator.allowable_values.each do |value|
-      #   instance.user_agent = value.as(String)
-      # end
     end
   end
 end

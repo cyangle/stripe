@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./payment_flows_private_payment_methods_card_present_common_wallet"
-require "./payment_method_card_present_networks"
-require "./payment_method_details_card_present_offline"
+require "./payment_method_card_present_networks1"
+require "./payment_method_card_present_offline"
 
 module Stripe
   #
@@ -66,11 +66,11 @@ module Stripe
     getter last4 : String? = nil
     MAX_LENGTH_FOR_LAST4 = 5000
 
-    @[JSON::Field(key: "networks", type: Stripe::PaymentMethodCardPresentNetworks?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter networks : Stripe::PaymentMethodCardPresentNetworks? = nil
+    @[JSON::Field(key: "networks", type: Stripe::PaymentMethodCardPresentNetworks1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter networks : Stripe::PaymentMethodCardPresentNetworks1? = nil
 
-    @[JSON::Field(key: "offline", type: Stripe::PaymentMethodDetailsCardPresentOffline?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter offline : Stripe::PaymentMethodDetailsCardPresentOffline? = nil
+    @[JSON::Field(key: "offline", type: Stripe::PaymentMethodCardPresentOffline?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter offline : Stripe::PaymentMethodCardPresentOffline? = nil
 
     # EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.
     @[JSON::Field(key: "preferred_locales", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -127,8 +127,8 @@ module Stripe
       @fingerprint : String? = nil,
       @funding : String? = nil,
       @last4 : String? = nil,
-      @networks : Stripe::PaymentMethodCardPresentNetworks? = nil,
-      @offline : Stripe::PaymentMethodDetailsCardPresentOffline? = nil,
+      @networks : Stripe::PaymentMethodCardPresentNetworks1? = nil,
+      @offline : Stripe::PaymentMethodCardPresentOffline? = nil,
       @preferred_locales : Array(String)? = nil,
       @read_method : String? = nil,
       # Optional properties
@@ -368,7 +368,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] networks Object to be assigned
-    def networks=(new_value : Stripe::PaymentMethodCardPresentNetworks?)
+    def networks=(new_value : Stripe::PaymentMethodCardPresentNetworks1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -378,7 +378,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] offline Object to be assigned
-    def offline=(new_value : Stripe::PaymentMethodDetailsCardPresentOffline?)
+    def offline=(new_value : Stripe::PaymentMethodCardPresentOffline?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

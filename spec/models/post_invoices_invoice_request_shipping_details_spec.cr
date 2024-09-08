@@ -14,35 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_invoices_invoice_request_shipping_details"
 
 describe Stripe::PostInvoicesInvoiceRequestShippingDetails do
-  describe "test an instance of PostInvoicesInvoiceRequestShippingDetails" do
-    it "should create an instance of PostInvoicesInvoiceRequestShippingDetails" do
-      # instance = Stripe::PostInvoicesInvoiceRequestShippingDetails.new
-      # (instance).should be_a(Stripe::PostInvoicesInvoiceRequestShippingDetails)
-    end
-  end
-
-  describe "test attribute 'address'" do
-    it "should work" do
-      # instance = Stripe::PostInvoicesInvoiceRequestShippingDetails.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::PostInvoicesInvoiceRequestShippingDetails.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'phone'" do
-    it "should work" do
-      # instance = Stripe::PostInvoicesInvoiceRequestShippingDetails.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostInvoicesInvoiceRequestShippingDetails::ENUM_VALIDATOR_FOR_PHONE
-      # validator.allowable_values.each do |value|
-      #   instance.phone = value.as(String)
-      # end
-    end
-  end
 end

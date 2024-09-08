@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./thresholds_resource_alert_filter"
-require "./thresholds_resource_usage_threshold_config"
+require "./billing_alert_filter"
+require "./billing_alert_usage_threshold_config"
 
 module Stripe
   # A billing alert is a resource that notifies you when a certain usage threshold on a meter is crossed. For example, you might create a billing alert to notify you when a certain user made 100 API requests.
@@ -28,8 +28,8 @@ module Stripe
     ERROR_MESSAGE_FOR_ALERT_TYPE = "invalid value for \"alert_type\", must be one of [usage_threshold]."
     VALID_VALUES_FOR_ALERT_TYPE  = String.static_array("usage_threshold")
 
-    @[JSON::Field(key: "filter", type: Stripe::ThresholdsResourceAlertFilter?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter filter : Stripe::ThresholdsResourceAlertFilter? = nil
+    @[JSON::Field(key: "filter", type: Stripe::BillingAlertFilter?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter filter : Stripe::BillingAlertFilter? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -57,8 +57,8 @@ module Stripe
     getter title : String? = nil
     MAX_LENGTH_FOR_TITLE = 5000
 
-    @[JSON::Field(key: "usage_threshold_config", type: Stripe::ThresholdsResourceUsageThresholdConfig?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter usage_threshold_config : Stripe::ThresholdsResourceUsageThresholdConfig? = nil
+    @[JSON::Field(key: "usage_threshold_config", type: Stripe::BillingAlertUsageThresholdConfig?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter usage_threshold_config : Stripe::BillingAlertUsageThresholdConfig? = nil
 
     # End of Required Properties
 
@@ -68,13 +68,13 @@ module Stripe
       *,
       # Required properties
       @alert_type : String? = nil,
-      @filter : Stripe::ThresholdsResourceAlertFilter? = nil,
+      @filter : Stripe::BillingAlertFilter? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
       @status : String? = nil,
       @title : String? = nil,
-      @usage_threshold_config : Stripe::ThresholdsResourceUsageThresholdConfig? = nil
+      @usage_threshold_config : Stripe::BillingAlertUsageThresholdConfig? = nil
     )
     end
 
@@ -174,7 +174,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] filter Object to be assigned
-    def filter=(new_value : Stripe::ThresholdsResourceAlertFilter?)
+    def filter=(new_value : Stripe::BillingAlertFilter?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -235,7 +235,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_threshold_config Object to be assigned
-    def usage_threshold_config=(new_value : Stripe::ThresholdsResourceUsageThresholdConfig?)
+    def usage_threshold_config=(new_value : Stripe::BillingAlertUsageThresholdConfig?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

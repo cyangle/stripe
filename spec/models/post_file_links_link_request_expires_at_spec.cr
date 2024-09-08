@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_file_links_link_request_expires_at"
 
 describe Stripe::PostFileLinksLinkRequestExpiresAt do
-  describe "test an instance of PostFileLinksLinkRequestExpiresAt" do
-    it "should create an instance of PostFileLinksLinkRequestExpiresAt" do
-      # instance = Stripe::PostFileLinksLinkRequestExpiresAt.new
-      # (instance).should be_a(Stripe::PostFileLinksLinkRequestExpiresAt)
-    end
-  end
 end

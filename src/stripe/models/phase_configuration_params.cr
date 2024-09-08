@@ -12,13 +12,14 @@ require "../../core"
 require "./add_invoice_item_entry"
 require "./automatic_tax_config"
 require "./configuration_item_params"
-require "./default_settings_params_billing_thresholds"
+require "./default_settings_params_description"
 require "./invoice_settings"
 require "./phase_configuration_params_default_tax_rates"
 require "./phase_configuration_params_discounts"
 require "./phase_configuration_params_end_date"
 require "./phase_configuration_params_start_date"
 require "./phase_configuration_params_trial_end"
+require "./post_subscriptions_request_billing_thresholds"
 require "./transfer_data_specs"
 
 module Stripe
@@ -55,8 +56,8 @@ module Stripe
     ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
     VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("automatic", "phase_start")
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::DefaultSettingsParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::PostSubscriptionsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil
 
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically` on creation.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -81,10 +82,8 @@ module Stripe
     @[JSON::Field(key: "default_tax_rates", type: Stripe::PhaseConfigurationParamsDefaultTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_tax_rates : Stripe::PhaseConfigurationParamsDefaultTaxRates? = nil
 
-    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter description : String? = nil
-    ERROR_MESSAGE_FOR_DESCRIPTION = "invalid value for \"description\", must be one of []."
-    VALID_VALUES_FOR_DESCRIPTION  = String.static_array("")
+    @[JSON::Field(key: "description", type: Stripe::DefaultSettingsParamsDescription?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : Stripe::DefaultSettingsParamsDescription? = nil
 
     @[JSON::Field(key: "discounts", type: Stripe::PhaseConfigurationParamsDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discounts : Stripe::PhaseConfigurationParamsDiscounts? = nil
@@ -136,13 +135,13 @@ module Stripe
       @application_fee_percent : Float64? = nil,
       @automatic_tax : Stripe::AutomaticTaxConfig? = nil,
       @billing_cycle_anchor : String? = nil,
-      @billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil,
+      @billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
       @collection_method : String? = nil,
       @coupon : String? = nil,
       @currency : String? = nil,
       @default_payment_method : String? = nil,
       @default_tax_rates : Stripe::PhaseConfigurationParamsDefaultTaxRates? = nil,
-      @description : String? = nil,
+      @description : Stripe::DefaultSettingsParamsDescription? = nil,
       @discounts : Stripe::PhaseConfigurationParamsDiscounts? = nil,
       @end_date : Stripe::PhaseConfigurationParamsEndDate? = nil,
       @invoice_settings : Stripe::InvoiceSettings? = nil,
@@ -198,7 +197,7 @@ module Stripe
         invalid_properties.concat(_default_tax_rates.list_invalid_properties_for("default_tax_rates")) if _default_tax_rates.is_a?(OpenApi::Validatable)
       end
       unless (_description = @description).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DESCRIPTION) unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        invalid_properties.concat(_description.list_invalid_properties_for("description")) if _description.is_a?(OpenApi::Validatable)
       end
       unless (_discounts = @discounts).nil?
         invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
@@ -267,7 +266,7 @@ module Stripe
       end
 
       unless (_description = @description).nil?
-        return false unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        return false if _description.is_a?(OpenApi::Validatable) && !_description.valid?
       end
 
       unless (_discounts = @discounts).nil?
@@ -350,7 +349,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::DefaultSettingsParamsBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::PostSubscriptionsRequestBillingThresholds?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -406,9 +405,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(new_value : String?)
+    def description=(new_value : Stripe::DefaultSettingsParamsDescription?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("description", new_value, VALID_VALUES_FOR_DESCRIPTION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @description = new_value

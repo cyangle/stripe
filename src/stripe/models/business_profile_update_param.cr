@@ -9,6 +9,10 @@
 
 require "../../core"
 
+require "./business_profile_create_param_headline"
+require "./business_profile_update_param_privacy_policy_url"
+require "./business_profile_update_param_terms_of_service_url"
+
 module Stripe
   class BusinessProfileUpdateParam
     include JSON::Serializable
@@ -18,29 +22,23 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "headline", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter headline : String? = nil
-    ERROR_MESSAGE_FOR_HEADLINE = "invalid value for \"headline\", must be one of []."
-    VALID_VALUES_FOR_HEADLINE  = String.static_array("")
+    @[JSON::Field(key: "headline", type: Stripe::BusinessProfileCreateParamHeadline?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter headline : Stripe::BusinessProfileCreateParamHeadline? = nil
 
-    @[JSON::Field(key: "privacy_policy_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter privacy_policy_url : String? = nil
-    ERROR_MESSAGE_FOR_PRIVACY_POLICY_URL = "invalid value for \"privacy_policy_url\", must be one of []."
-    VALID_VALUES_FOR_PRIVACY_POLICY_URL  = String.static_array("")
+    @[JSON::Field(key: "privacy_policy_url", type: Stripe::BusinessProfileUpdateParamPrivacyPolicyUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter privacy_policy_url : Stripe::BusinessProfileUpdateParamPrivacyPolicyUrl? = nil
 
-    @[JSON::Field(key: "terms_of_service_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter terms_of_service_url : String? = nil
-    ERROR_MESSAGE_FOR_TERMS_OF_SERVICE_URL = "invalid value for \"terms_of_service_url\", must be one of []."
-    VALID_VALUES_FOR_TERMS_OF_SERVICE_URL  = String.static_array("")
+    @[JSON::Field(key: "terms_of_service_url", type: Stripe::BusinessProfileUpdateParamTermsOfServiceUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter terms_of_service_url : Stripe::BusinessProfileUpdateParamTermsOfServiceUrl? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @headline : String? = nil,
-      @privacy_policy_url : String? = nil,
-      @terms_of_service_url : String? = nil
+      @headline : Stripe::BusinessProfileCreateParamHeadline? = nil,
+      @privacy_policy_url : Stripe::BusinessProfileUpdateParamPrivacyPolicyUrl? = nil,
+      @terms_of_service_url : Stripe::BusinessProfileUpdateParamTermsOfServiceUrl? = nil
     )
     end
 
@@ -50,13 +48,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_headline = @headline).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_HEADLINE) unless OpenApi::EnumValidator.valid?(_headline, VALID_VALUES_FOR_HEADLINE)
+        invalid_properties.concat(_headline.list_invalid_properties_for("headline")) if _headline.is_a?(OpenApi::Validatable)
       end
       unless (_privacy_policy_url = @privacy_policy_url).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_PRIVACY_POLICY_URL) unless OpenApi::EnumValidator.valid?(_privacy_policy_url, VALID_VALUES_FOR_PRIVACY_POLICY_URL)
+        invalid_properties.concat(_privacy_policy_url.list_invalid_properties_for("privacy_policy_url")) if _privacy_policy_url.is_a?(OpenApi::Validatable)
       end
       unless (_terms_of_service_url = @terms_of_service_url).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_TERMS_OF_SERVICE_URL) unless OpenApi::EnumValidator.valid?(_terms_of_service_url, VALID_VALUES_FOR_TERMS_OF_SERVICE_URL)
+        invalid_properties.concat(_terms_of_service_url.list_invalid_properties_for("terms_of_service_url")) if _terms_of_service_url.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -65,15 +63,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_headline = @headline).nil?
-        return false unless OpenApi::EnumValidator.valid?(_headline, VALID_VALUES_FOR_HEADLINE)
+        return false if _headline.is_a?(OpenApi::Validatable) && !_headline.valid?
       end
 
       unless (_privacy_policy_url = @privacy_policy_url).nil?
-        return false unless OpenApi::EnumValidator.valid?(_privacy_policy_url, VALID_VALUES_FOR_PRIVACY_POLICY_URL)
+        return false if _privacy_policy_url.is_a?(OpenApi::Validatable) && !_privacy_policy_url.valid?
       end
 
       unless (_terms_of_service_url = @terms_of_service_url).nil?
-        return false unless OpenApi::EnumValidator.valid?(_terms_of_service_url, VALID_VALUES_FOR_TERMS_OF_SERVICE_URL)
+        return false if _terms_of_service_url.is_a?(OpenApi::Validatable) && !_terms_of_service_url.valid?
       end
 
       true
@@ -81,9 +79,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] headline Object to be assigned
-    def headline=(new_value : String?)
+    def headline=(new_value : Stripe::BusinessProfileCreateParamHeadline?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("headline", new_value, VALID_VALUES_FOR_HEADLINE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @headline = new_value
@@ -91,9 +89,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] privacy_policy_url Object to be assigned
-    def privacy_policy_url=(new_value : String?)
+    def privacy_policy_url=(new_value : Stripe::BusinessProfileUpdateParamPrivacyPolicyUrl?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("privacy_policy_url", new_value, VALID_VALUES_FOR_PRIVACY_POLICY_URL)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @privacy_policy_url = new_value
@@ -101,9 +99,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] terms_of_service_url Object to be assigned
-    def terms_of_service_url=(new_value : String?)
+    def terms_of_service_url=(new_value : Stripe::BusinessProfileUpdateParamTermsOfServiceUrl?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("terms_of_service_url", new_value, VALID_VALUES_FOR_TERMS_OF_SERVICE_URL)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @terms_of_service_url = new_value

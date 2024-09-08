@@ -9,11 +9,12 @@
 
 require "../../core"
 
-require "./file_link_creation_params_metadata"
 require "./invoice_item_preview_params_discounts"
 require "./invoice_item_preview_params_tax_rates"
 require "./one_time_price_data"
 require "./period"
+require "./post_accounts_request_metadata"
+require "./post_invoiceitems_request_tax_code"
 
 module Stripe
   class InvoiceItemPreviewParams
@@ -49,8 +50,8 @@ module Stripe
     getter invoiceitem : String? = nil
     MAX_LENGTH_FOR_INVOICEITEM = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     @[JSON::Field(key: "period", type: Stripe::Period?, default: nil, required: false, nullable: false, emit_null: false)]
     getter period : Stripe::Period? = nil
@@ -73,10 +74,8 @@ module Stripe
     ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
     VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive", "unspecified")
 
-    @[JSON::Field(key: "tax_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_code : String? = nil
-    ERROR_MESSAGE_FOR_TAX_CODE = "invalid value for \"tax_code\", must be one of []."
-    VALID_VALUES_FOR_TAX_CODE  = String.static_array("")
+    @[JSON::Field(key: "tax_code", type: Stripe::PostInvoiceitemsRequestTaxCode?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil
 
     @[JSON::Field(key: "tax_rates", type: Stripe::InvoiceItemPreviewParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_rates : Stripe::InvoiceItemPreviewParamsTaxRates? = nil
@@ -100,13 +99,13 @@ module Stripe
       @discountable : Bool? = nil,
       @discounts : Stripe::InvoiceItemPreviewParamsDiscounts? = nil,
       @invoiceitem : String? = nil,
-      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @period : Stripe::Period? = nil,
       @price : String? = nil,
       @price_data : Stripe::OneTimePriceData? = nil,
       @quantity : Int64? = nil,
       @tax_behavior : String? = nil,
-      @tax_code : String? = nil,
+      @tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       @tax_rates : Stripe::InvoiceItemPreviewParamsTaxRates? = nil,
       @unit_amount : Int64? = nil,
       @unit_amount_decimal : BigDecimal? = nil
@@ -151,7 +150,7 @@ module Stripe
         invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
       unless (_tax_code = @tax_code).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_CODE) unless OpenApi::EnumValidator.valid?(_tax_code, VALID_VALUES_FOR_TAX_CODE)
+        invalid_properties.concat(_tax_code.list_invalid_properties_for("tax_code")) if _tax_code.is_a?(OpenApi::Validatable)
       end
       unless (_tax_rates = @tax_rates).nil?
         invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
@@ -196,7 +195,7 @@ module Stripe
       end
 
       unless (_tax_code = @tax_code).nil?
-        return false unless OpenApi::EnumValidator.valid?(_tax_code, VALID_VALUES_FOR_TAX_CODE)
+        return false if _tax_code.is_a?(OpenApi::Validatable) && !_tax_code.valid?
       end
 
       unless (_tax_rates = @tax_rates).nil?
@@ -256,7 +255,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -312,9 +311,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_code Object to be assigned
-    def tax_code=(new_value : String?)
+    def tax_code=(new_value : Stripe::PostInvoiceitemsRequestTaxCode?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("tax_code", new_value, VALID_VALUES_FOR_TAX_CODE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @tax_code = new_value

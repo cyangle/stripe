@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_accounts_account_persons_request_full_name_aliases"
 
 describe Stripe::PostAccountsAccountPersonsRequestFullNameAliases do
-  describe "test an instance of PostAccountsAccountPersonsRequestFullNameAliases" do
-    it "should create an instance of PostAccountsAccountPersonsRequestFullNameAliases" do
-      # instance = Stripe::PostAccountsAccountPersonsRequestFullNameAliases.new
-      # (instance).should be_a(Stripe::PostAccountsAccountPersonsRequestFullNameAliases)
-    end
-  end
 end

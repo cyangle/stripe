@@ -9,7 +9,8 @@
 
 require "../../core"
 
-require "./address"
+require "./source_owner_address"
+require "./source_owner_verified_address"
 
 module Stripe
   #
@@ -21,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address : Stripe::Address? = nil
+    @[JSON::Field(key: "address", type: Stripe::SourceOwnerAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address : Stripe::SourceOwnerAddress? = nil
 
     # Owner's email address.
     @[JSON::Field(key: "email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -39,8 +40,8 @@ module Stripe
     getter phone : String? = nil
     MAX_LENGTH_FOR_PHONE = 5000
 
-    @[JSON::Field(key: "verified_address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter verified_address : Stripe::Address? = nil
+    @[JSON::Field(key: "verified_address", type: Stripe::SourceOwnerVerifiedAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter verified_address : Stripe::SourceOwnerVerifiedAddress? = nil
 
     # Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -64,11 +65,11 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::Address? = nil,
+      @address : Stripe::SourceOwnerAddress? = nil,
       @email : String? = nil,
       @name : String? = nil,
       @phone : String? = nil,
-      @verified_address : Stripe::Address? = nil,
+      @verified_address : Stripe::SourceOwnerVerifiedAddress? = nil,
       @verified_email : String? = nil,
       @verified_name : String? = nil,
       @verified_phone : String? = nil
@@ -159,7 +160,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::Address?)
+    def address=(new_value : Stripe::SourceOwnerAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -199,7 +200,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verified_address Object to be assigned
-    def verified_address=(new_value : Stripe::Address?)
+    def verified_address=(new_value : Stripe::SourceOwnerVerifiedAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

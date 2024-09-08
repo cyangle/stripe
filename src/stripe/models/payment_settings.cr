@@ -10,6 +10,7 @@
 require "../../core"
 
 require "./payment_method_options"
+require "./payment_settings_default_mandate"
 require "./payment_settings_payment_method_types"
 
 module Stripe
@@ -21,10 +22,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "default_mandate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter default_mandate : String? = nil
-    ERROR_MESSAGE_FOR_DEFAULT_MANDATE = "invalid value for \"default_mandate\", must be one of []."
-    VALID_VALUES_FOR_DEFAULT_MANDATE  = String.static_array("")
+    @[JSON::Field(key: "default_mandate", type: Stripe::PaymentSettingsDefaultMandate?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter default_mandate : Stripe::PaymentSettingsDefaultMandate? = nil
 
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptions? = nil
@@ -43,7 +42,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @default_mandate : String? = nil,
+      @default_mandate : Stripe::PaymentSettingsDefaultMandate? = nil,
       @payment_method_options : Stripe::PaymentMethodOptions? = nil,
       @payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes? = nil,
       @save_default_payment_method : String? = nil
@@ -56,7 +55,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_default_mandate = @default_mandate).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_MANDATE) unless OpenApi::EnumValidator.valid?(_default_mandate, VALID_VALUES_FOR_DEFAULT_MANDATE)
+        invalid_properties.concat(_default_mandate.list_invalid_properties_for("default_mandate")) if _default_mandate.is_a?(OpenApi::Validatable)
       end
       unless (_payment_method_options = @payment_method_options).nil?
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
@@ -74,7 +73,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_default_mandate = @default_mandate).nil?
-        return false unless OpenApi::EnumValidator.valid?(_default_mandate, VALID_VALUES_FOR_DEFAULT_MANDATE)
+        return false if _default_mandate.is_a?(OpenApi::Validatable) && !_default_mandate.valid?
       end
 
       unless (_payment_method_options = @payment_method_options).nil?
@@ -94,9 +93,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_mandate Object to be assigned
-    def default_mandate=(new_value : String?)
+    def default_mandate=(new_value : Stripe::PaymentSettingsDefaultMandate?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("default_mandate", new_value, VALID_VALUES_FOR_DEFAULT_MANDATE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @default_mandate = new_value

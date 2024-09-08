@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_details_params_billing_cycle_anchor"
 
 describe Stripe::SubscriptionDetailsParamsBillingCycleAnchor do
-  describe "test an instance of SubscriptionDetailsParamsBillingCycleAnchor" do
-    it "should create an instance of SubscriptionDetailsParamsBillingCycleAnchor" do
-      # instance = Stripe::SubscriptionDetailsParamsBillingCycleAnchor.new
-      # (instance).should be_a(Stripe::SubscriptionDetailsParamsBillingCycleAnchor)
-    end
-  end
 end

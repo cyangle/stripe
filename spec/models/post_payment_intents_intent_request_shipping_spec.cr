@@ -14,45 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_intents_intent_request_shipping"
 
 describe Stripe::PostPaymentIntentsIntentRequestShipping do
-  describe "test an instance of PostPaymentIntentsIntentRequestShipping" do
-    it "should create an instance of PostPaymentIntentsIntentRequestShipping" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestShipping.new
-      # (instance).should be_a(Stripe::PostPaymentIntentsIntentRequestShipping)
-    end
-  end
-
-  describe "test attribute 'address'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'carrier'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'phone'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'tracking_number'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

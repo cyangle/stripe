@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./refund_next_action_display_details"
+require "./refund_next_action_display_details1"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "display_details", type: Stripe::RefundNextActionDisplayDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter display_details : Stripe::RefundNextActionDisplayDetails? = nil
+    @[JSON::Field(key: "display_details", type: Stripe::RefundNextActionDisplayDetails1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter display_details : Stripe::RefundNextActionDisplayDetails1? = nil
 
     # Type of the next action to perform.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,7 +36,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @display_details : Stripe::RefundNextActionDisplayDetails? = nil,
+      @display_details : Stripe::RefundNextActionDisplayDetails1? = nil,
       @_type : String? = nil
     )
     end
@@ -76,7 +76,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] display_details Object to be assigned
-    def display_details=(new_value : Stripe::RefundNextActionDisplayDetails?)
+    def display_details=(new_value : Stripe::RefundNextActionDisplayDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

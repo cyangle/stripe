@@ -14,39 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/installments_param_plan"
 
 describe Stripe::InstallmentsParamPlan do
-  describe "test an instance of InstallmentsParamPlan" do
-    it "should create an instance of InstallmentsParamPlan" do
-      # instance = Stripe::InstallmentsParamPlan.new
-      # (instance).should be_a(Stripe::InstallmentsParamPlan)
-    end
-  end
-
-  describe "test attribute 'count'" do
-    it "should work" do
-      # instance = Stripe::InstallmentsParamPlan.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'interval'" do
-    it "should work" do
-      # instance = Stripe::InstallmentsParamPlan.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::InstallmentsParamPlan::ENUM_VALIDATOR_FOR_INTERVAL
-      # validator.allowable_values.each do |value|
-      #   instance.interval = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute '_type'" do
-    it "should work" do
-      # instance = Stripe::InstallmentsParamPlan.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::InstallmentsParamPlan::ENUM_VALIDATOR_FOR__TYPE
-      # validator.allowable_values.each do |value|
-      #   instance._type = value.as(String)
-      # end
-    end
-  end
 end

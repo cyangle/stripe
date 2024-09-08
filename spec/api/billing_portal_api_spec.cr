@@ -54,7 +54,7 @@ describe "BillingPortalApi" do
   # @param business_profile
   # @param features
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :default_return_url
+  # @option opts [PostBillingPortalConfigurationsRequestDefaultReturnUrl] :default_return_url
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [LoginPageCreateParam] :login_page
   # @option opts [Hash(String, String)] :metadata
@@ -71,7 +71,7 @@ describe "BillingPortalApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the configuration is active and can be used to create portal sessions.
   # @option opts [BusinessProfileUpdateParam] :business_profile
-  # @option opts [String] :default_return_url
+  # @option opts [PostBillingPortalConfigurationsRequestDefaultReturnUrl] :default_return_url
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FeaturesUpdatingParam] :features
   # @option opts [LoginPageUpdateParam] :login_page

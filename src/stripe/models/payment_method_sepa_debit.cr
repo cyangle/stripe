@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./sepa_debit_generated_from"
+require "./payment_method_sepa_debit_generated_from"
 
 module Stripe
   #
@@ -41,8 +41,8 @@ module Stripe
     getter fingerprint : String? = nil
     MAX_LENGTH_FOR_FINGERPRINT = 5000
 
-    @[JSON::Field(key: "generated_from", type: Stripe::SepaDebitGeneratedFrom?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter generated_from : Stripe::SepaDebitGeneratedFrom? = nil
+    @[JSON::Field(key: "generated_from", type: Stripe::PaymentMethodSepaDebitGeneratedFrom?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter generated_from : Stripe::PaymentMethodSepaDebitGeneratedFrom? = nil
 
     # Last four characters of the IBAN.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -60,7 +60,7 @@ module Stripe
       @branch_code : String? = nil,
       @country : String? = nil,
       @fingerprint : String? = nil,
-      @generated_from : Stripe::SepaDebitGeneratedFrom? = nil,
+      @generated_from : Stripe::PaymentMethodSepaDebitGeneratedFrom? = nil,
       @last4 : String? = nil
     )
     end
@@ -173,7 +173,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] generated_from Object to be assigned
-    def generated_from=(new_value : Stripe::SepaDebitGeneratedFrom?)
+    def generated_from=(new_value : Stripe::PaymentMethodSepaDebitGeneratedFrom?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,21 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_terminal_configurations_configuration_request_bbpos_wisepos_e"
 
 describe Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE do
-  describe "test an instance of PostTerminalConfigurationsConfigurationRequestBbposWiseposE" do
-    it "should create an instance of PostTerminalConfigurationsConfigurationRequestBbposWiseposE" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE.new
-      # (instance).should be_a(Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE)
-    end
-  end
-
-  describe "test attribute 'splashscreen'" do
-    it "should work" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE::ENUM_VALIDATOR_FOR_SPLASHSCREEN
-      # validator.allowable_values.each do |value|
-      #   instance.splashscreen = value.as(String)
-      # end
-    end
-  end
 end

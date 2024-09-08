@@ -10,16 +10,16 @@
 require "../../core"
 
 require "./issuing_authorization_merchant_data"
-require "./issuing_transaction_amount_details"
+require "./issuing_transaction_amount_details1"
 require "./issuing_transaction_authorization"
 require "./issuing_transaction_balance_transaction"
 require "./issuing_transaction_card"
 require "./issuing_transaction_cardholder"
 require "./issuing_transaction_dispute"
-require "./issuing_transaction_network_data"
-require "./issuing_transaction_purchase_details"
+require "./issuing_transaction_network_data1"
+require "./issuing_transaction_purchase_details1"
 require "./issuing_transaction_token"
-require "./issuing_transaction_treasury"
+require "./issuing_transaction_treasury1"
 
 module Stripe
   # Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving your Stripe account, such as a completed purchase or refund, is represented by an Issuing `Transaction` object.  Related guide: [Issued card transactions](https://stripe.com/docs/issuing/purchases/transactions)
@@ -35,8 +35,8 @@ module Stripe
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
-    @[JSON::Field(key: "amount_details", type: Stripe::IssuingTransactionAmountDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter amount_details : Stripe::IssuingTransactionAmountDetails? = nil
+    @[JSON::Field(key: "amount_details", type: Stripe::IssuingTransactionAmountDetails1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter amount_details : Stripe::IssuingTransactionAmountDetails1? = nil
 
     @[JSON::Field(key: "authorization", type: Stripe::IssuingTransactionAuthorization?, default: nil, required: true, nullable: true, emit_null: true)]
     getter authorization : Stripe::IssuingTransactionAuthorization? = nil
@@ -84,8 +84,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "network_data", type: Stripe::IssuingTransactionNetworkData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter network_data : Stripe::IssuingTransactionNetworkData? = nil
+    @[JSON::Field(key: "network_data", type: Stripe::IssuingTransactionNetworkData1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter network_data : Stripe::IssuingTransactionNetworkData1? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -109,8 +109,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "purchase_details", type: Stripe::IssuingTransactionPurchaseDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: purchase_details.nil? && !purchase_details_present?)]
-    getter purchase_details : Stripe::IssuingTransactionPurchaseDetails? = nil
+    @[JSON::Field(key: "purchase_details", type: Stripe::IssuingTransactionPurchaseDetails1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: purchase_details.nil? && !purchase_details_present?)]
+    getter purchase_details : Stripe::IssuingTransactionPurchaseDetails1? = nil
 
     @[JSON::Field(ignore: true)]
     property? purchase_details_present : Bool = false
@@ -121,8 +121,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? token_present : Bool = false
 
-    @[JSON::Field(key: "treasury", type: Stripe::IssuingTransactionTreasury?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
-    getter treasury : Stripe::IssuingTransactionTreasury? = nil
+    @[JSON::Field(key: "treasury", type: Stripe::IssuingTransactionTreasury1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
+    getter treasury : Stripe::IssuingTransactionTreasury1? = nil
 
     @[JSON::Field(ignore: true)]
     property? treasury_present : Bool = false
@@ -133,7 +133,7 @@ module Stripe
       *,
       # Required properties
       @amount : Int64? = nil,
-      @amount_details : Stripe::IssuingTransactionAmountDetails? = nil,
+      @amount_details : Stripe::IssuingTransactionAmountDetails1? = nil,
       @authorization : Stripe::IssuingTransactionAuthorization? = nil,
       @balance_transaction : Stripe::IssuingTransactionBalanceTransaction? = nil,
       @card : Stripe::IssuingTransactionCard? = nil,
@@ -147,14 +147,14 @@ module Stripe
       @merchant_currency : String? = nil,
       @merchant_data : Stripe::IssuingAuthorizationMerchantData? = nil,
       @metadata : Hash(String, String)? = nil,
-      @network_data : Stripe::IssuingTransactionNetworkData? = nil,
+      @network_data : Stripe::IssuingTransactionNetworkData1? = nil,
       @object : String? = nil,
       @_type : String? = nil,
       @wallet : String? = nil,
       # Optional properties
-      @purchase_details : Stripe::IssuingTransactionPurchaseDetails? = nil,
+      @purchase_details : Stripe::IssuingTransactionPurchaseDetails1? = nil,
       @token : Stripe::IssuingTransactionToken? = nil,
-      @treasury : Stripe::IssuingTransactionTreasury? = nil
+      @treasury : Stripe::IssuingTransactionTreasury1? = nil
     )
     end
 
@@ -332,7 +332,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_details Object to be assigned
-    def amount_details=(new_value : Stripe::IssuingTransactionAmountDetails?)
+    def amount_details=(new_value : Stripe::IssuingTransactionAmountDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -463,7 +463,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_data Object to be assigned
-    def network_data=(new_value : Stripe::IssuingTransactionNetworkData?)
+    def network_data=(new_value : Stripe::IssuingTransactionNetworkData1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -505,7 +505,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] purchase_details Object to be assigned
-    def purchase_details=(new_value : Stripe::IssuingTransactionPurchaseDetails?)
+    def purchase_details=(new_value : Stripe::IssuingTransactionPurchaseDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -525,7 +525,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(new_value : Stripe::IssuingTransactionTreasury?)
+    def treasury=(new_value : Stripe::IssuingTransactionTreasury1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

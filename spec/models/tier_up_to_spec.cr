@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/tier_up_to"
 
 describe Stripe::TierUpTo do
-  describe "test an instance of TierUpTo" do
-    it "should create an instance of TierUpTo" do
-      # instance = Stripe::TierUpTo.new
-      # (instance).should be_a(Stripe::TierUpTo)
-    end
-  end
 end

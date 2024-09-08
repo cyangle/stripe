@@ -9,8 +9,11 @@
 
 require "../../core"
 
+require "./canceled_additional_documentation"
+require "./canceled_explanation"
 require "./canceled_returned_at"
 require "./merchandise_not_as_described_received_at"
+require "./merchandise_not_as_described_return_description"
 
 module Stripe
   class MerchandiseNotAsDescribed
@@ -21,23 +24,17 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_documentation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter additional_documentation : String? = nil
-    ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION = "invalid value for \"additional_documentation\", must be one of []."
-    VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION  = String.static_array("")
+    @[JSON::Field(key: "additional_documentation", type: Stripe::CanceledAdditionalDocumentation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter additional_documentation : Stripe::CanceledAdditionalDocumentation? = nil
 
-    @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter explanation : String? = nil
-    ERROR_MESSAGE_FOR_EXPLANATION = "invalid value for \"explanation\", must be one of []."
-    VALID_VALUES_FOR_EXPLANATION  = String.static_array("")
+    @[JSON::Field(key: "explanation", type: Stripe::CanceledExplanation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter explanation : Stripe::CanceledExplanation? = nil
 
     @[JSON::Field(key: "received_at", type: Stripe::MerchandiseNotAsDescribedReceivedAt?, default: nil, required: false, nullable: false, emit_null: false)]
     getter received_at : Stripe::MerchandiseNotAsDescribedReceivedAt? = nil
 
-    @[JSON::Field(key: "return_description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter return_description : String? = nil
-    ERROR_MESSAGE_FOR_RETURN_DESCRIPTION = "invalid value for \"return_description\", must be one of []."
-    VALID_VALUES_FOR_RETURN_DESCRIPTION  = String.static_array("")
+    @[JSON::Field(key: "return_description", type: Stripe::MerchandiseNotAsDescribedReturnDescription?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter return_description : Stripe::MerchandiseNotAsDescribedReturnDescription? = nil
 
     # Result of cardholder's attempt to return the product.
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -53,10 +50,10 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @additional_documentation : String? = nil,
-      @explanation : String? = nil,
+      @additional_documentation : Stripe::CanceledAdditionalDocumentation? = nil,
+      @explanation : Stripe::CanceledExplanation? = nil,
       @received_at : Stripe::MerchandiseNotAsDescribedReceivedAt? = nil,
-      @return_description : String? = nil,
+      @return_description : Stripe::MerchandiseNotAsDescribedReturnDescription? = nil,
       @return_status : String? = nil,
       @returned_at : Stripe::CanceledReturnedAt? = nil
     )
@@ -68,16 +65,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_additional_documentation = @additional_documentation).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION) unless OpenApi::EnumValidator.valid?(_additional_documentation, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       unless (_explanation = @explanation).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_EXPLANATION) unless OpenApi::EnumValidator.valid?(_explanation, VALID_VALUES_FOR_EXPLANATION)
+        invalid_properties.concat(_explanation.list_invalid_properties_for("explanation")) if _explanation.is_a?(OpenApi::Validatable)
       end
       unless (_received_at = @received_at).nil?
         invalid_properties.concat(_received_at.list_invalid_properties_for("received_at")) if _received_at.is_a?(OpenApi::Validatable)
       end
       unless (_return_description = @return_description).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_RETURN_DESCRIPTION) unless OpenApi::EnumValidator.valid?(_return_description, VALID_VALUES_FOR_RETURN_DESCRIPTION)
+        invalid_properties.concat(_return_description.list_invalid_properties_for("return_description")) if _return_description.is_a?(OpenApi::Validatable)
       end
       unless (_return_status = @return_status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_RETURN_STATUS) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
@@ -92,11 +89,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_additional_documentation = @additional_documentation).nil?
-        return false unless OpenApi::EnumValidator.valid?(_additional_documentation, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
       unless (_explanation = @explanation).nil?
-        return false unless OpenApi::EnumValidator.valid?(_explanation, VALID_VALUES_FOR_EXPLANATION)
+        return false if _explanation.is_a?(OpenApi::Validatable) && !_explanation.valid?
       end
 
       unless (_received_at = @received_at).nil?
@@ -104,7 +101,7 @@ module Stripe
       end
 
       unless (_return_description = @return_description).nil?
-        return false unless OpenApi::EnumValidator.valid?(_return_description, VALID_VALUES_FOR_RETURN_DESCRIPTION)
+        return false if _return_description.is_a?(OpenApi::Validatable) && !_return_description.valid?
       end
 
       unless (_return_status = @return_status).nil?
@@ -120,9 +117,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(new_value : String?)
+    def additional_documentation=(new_value : Stripe::CanceledAdditionalDocumentation?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("additional_documentation", new_value, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @additional_documentation = new_value
@@ -130,9 +127,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(new_value : String?)
+    def explanation=(new_value : Stripe::CanceledExplanation?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("explanation", new_value, VALID_VALUES_FOR_EXPLANATION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @explanation = new_value
@@ -150,9 +147,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_description Object to be assigned
-    def return_description=(new_value : String?)
+    def return_description=(new_value : Stripe::MerchandiseNotAsDescribedReturnDescription?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("return_description", new_value, VALID_VALUES_FOR_RETURN_DESCRIPTION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @return_description = new_value

@@ -25,10 +25,6 @@ describe Stripe::Duplicate do
     it "should work" do
       # instance = Stripe::Duplicate.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Duplicate::ENUM_VALIDATOR_FOR_ADDITIONAL_DOCUMENTATION
-      # validator.allowable_values.each do |value|
-      #   instance.additional_documentation = value.as(String)
-      # end
     end
   end
 
@@ -36,10 +32,6 @@ describe Stripe::Duplicate do
     it "should work" do
       # instance = Stripe::Duplicate.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Duplicate::ENUM_VALIDATOR_FOR_CARD_STATEMENT
-      # validator.allowable_values.each do |value|
-      #   instance.card_statement = value.as(String)
-      # end
     end
   end
 
@@ -47,10 +39,6 @@ describe Stripe::Duplicate do
     it "should work" do
       # instance = Stripe::Duplicate.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Duplicate::ENUM_VALIDATOR_FOR_CASH_RECEIPT
-      # validator.allowable_values.each do |value|
-      #   instance.cash_receipt = value.as(String)
-      # end
     end
   end
 
@@ -58,10 +46,6 @@ describe Stripe::Duplicate do
     it "should work" do
       # instance = Stripe::Duplicate.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Duplicate::ENUM_VALIDATOR_FOR_CHECK_IMAGE
-      # validator.allowable_values.each do |value|
-      #   instance.check_image = value.as(String)
-      # end
     end
   end
 
@@ -69,10 +53,6 @@ describe Stripe::Duplicate do
     it "should work" do
       # instance = Stripe::Duplicate.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::Duplicate::ENUM_VALIDATOR_FOR_EXPLANATION
-      # validator.allowable_values.each do |value|
-      #   instance.explanation = value.as(String)
-      # end
     end
   end
 

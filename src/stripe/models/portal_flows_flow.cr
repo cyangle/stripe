@@ -10,9 +10,9 @@
 require "../../core"
 
 require "./portal_flows_flow_after_completion"
-require "./portal_flows_flow_subscription_cancel"
-require "./portal_flows_flow_subscription_update"
-require "./portal_flows_flow_subscription_update_confirm"
+require "./portal_flows_flow_subscription_cancel1"
+require "./portal_flows_flow_subscription_update1"
+require "./portal_flows_flow_subscription_update_confirm1"
 
 module Stripe
   #
@@ -27,14 +27,14 @@ module Stripe
     @[JSON::Field(key: "after_completion", type: Stripe::PortalFlowsFlowAfterCompletion?, default: nil, required: true, nullable: false, emit_null: false)]
     getter after_completion : Stripe::PortalFlowsFlowAfterCompletion? = nil
 
-    @[JSON::Field(key: "subscription_cancel", type: Stripe::PortalFlowsFlowSubscriptionCancel?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter subscription_cancel : Stripe::PortalFlowsFlowSubscriptionCancel? = nil
+    @[JSON::Field(key: "subscription_cancel", type: Stripe::PortalFlowsFlowSubscriptionCancel1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter subscription_cancel : Stripe::PortalFlowsFlowSubscriptionCancel1? = nil
 
-    @[JSON::Field(key: "subscription_update", type: Stripe::PortalFlowsFlowSubscriptionUpdate?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter subscription_update : Stripe::PortalFlowsFlowSubscriptionUpdate? = nil
+    @[JSON::Field(key: "subscription_update", type: Stripe::PortalFlowsFlowSubscriptionUpdate1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter subscription_update : Stripe::PortalFlowsFlowSubscriptionUpdate1? = nil
 
-    @[JSON::Field(key: "subscription_update_confirm", type: Stripe::PortalFlowsFlowSubscriptionUpdateConfirm?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter subscription_update_confirm : Stripe::PortalFlowsFlowSubscriptionUpdateConfirm? = nil
+    @[JSON::Field(key: "subscription_update_confirm", type: Stripe::PortalFlowsFlowSubscriptionUpdateConfirm1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter subscription_update_confirm : Stripe::PortalFlowsFlowSubscriptionUpdateConfirm1? = nil
 
     # Type of flow that the customer will go through.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -50,9 +50,9 @@ module Stripe
       *,
       # Required properties
       @after_completion : Stripe::PortalFlowsFlowAfterCompletion? = nil,
-      @subscription_cancel : Stripe::PortalFlowsFlowSubscriptionCancel? = nil,
-      @subscription_update : Stripe::PortalFlowsFlowSubscriptionUpdate? = nil,
-      @subscription_update_confirm : Stripe::PortalFlowsFlowSubscriptionUpdateConfirm? = nil,
+      @subscription_cancel : Stripe::PortalFlowsFlowSubscriptionCancel1? = nil,
+      @subscription_update : Stripe::PortalFlowsFlowSubscriptionUpdate1? = nil,
+      @subscription_update_confirm : Stripe::PortalFlowsFlowSubscriptionUpdateConfirm1? = nil,
       @_type : String? = nil
     )
     end
@@ -125,7 +125,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_cancel Object to be assigned
-    def subscription_cancel=(new_value : Stripe::PortalFlowsFlowSubscriptionCancel?)
+    def subscription_cancel=(new_value : Stripe::PortalFlowsFlowSubscriptionCancel1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -135,7 +135,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_update Object to be assigned
-    def subscription_update=(new_value : Stripe::PortalFlowsFlowSubscriptionUpdate?)
+    def subscription_update=(new_value : Stripe::PortalFlowsFlowSubscriptionUpdate1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -145,7 +145,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_update_confirm Object to be assigned
-    def subscription_update_confirm=(new_value : Stripe::PortalFlowsFlowSubscriptionUpdateConfirm?)
+    def subscription_update_confirm=(new_value : Stripe::PortalFlowsFlowSubscriptionUpdateConfirm1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

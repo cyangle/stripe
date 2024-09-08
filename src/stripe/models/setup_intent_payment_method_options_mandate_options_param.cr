@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./mandate_options_param_custom_mandate_url"
+
 module Stripe
   class SetupIntentPaymentMethodOptionsMandateOptionsParam
     include JSON::Serializable
@@ -18,10 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "custom_mandate_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter custom_mandate_url : String? = nil
-    ERROR_MESSAGE_FOR_CUSTOM_MANDATE_URL = "invalid value for \"custom_mandate_url\", must be one of []."
-    VALID_VALUES_FOR_CUSTOM_MANDATE_URL  = String.static_array("")
+    @[JSON::Field(key: "custom_mandate_url", type: Stripe::MandateOptionsParamCustomMandateUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter custom_mandate_url : Stripe::MandateOptionsParamCustomMandateUrl? = nil
 
     # List of Stripe products where this mandate can be selected automatically.
     @[JSON::Field(key: "default_for", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -51,7 +51,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @custom_mandate_url : String? = nil,
+      @custom_mandate_url : Stripe::MandateOptionsParamCustomMandateUrl? = nil,
       @default_for : Array(String)? = nil,
       @interval_description : String? = nil,
       @payment_schedule : String? = nil,
@@ -65,7 +65,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_custom_mandate_url = @custom_mandate_url).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOM_MANDATE_URL) unless OpenApi::EnumValidator.valid?(_custom_mandate_url, VALID_VALUES_FOR_CUSTOM_MANDATE_URL)
+        invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url")) if _custom_mandate_url.is_a?(OpenApi::Validatable)
       end
       unless (_default_for = @default_for).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_FOR) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
@@ -88,7 +88,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_custom_mandate_url = @custom_mandate_url).nil?
-        return false unless OpenApi::EnumValidator.valid?(_custom_mandate_url, VALID_VALUES_FOR_CUSTOM_MANDATE_URL)
+        return false if _custom_mandate_url.is_a?(OpenApi::Validatable) && !_custom_mandate_url.valid?
       end
 
       unless (_default_for = @default_for).nil?
@@ -112,9 +112,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_mandate_url Object to be assigned
-    def custom_mandate_url=(new_value : String?)
+    def custom_mandate_url=(new_value : Stripe::MandateOptionsParamCustomMandateUrl?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("custom_mandate_url", new_value, VALID_VALUES_FOR_CUSTOM_MANDATE_URL)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @custom_mandate_url = new_value

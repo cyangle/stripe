@@ -25,10 +25,6 @@ describe Stripe::TaxParam do
     it "should work" do
       # instance = Stripe::TaxParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::TaxParam::ENUM_VALIDATOR_FOR_IP_ADDRESS
-      # validator.allowable_values.each do |value|
-      #   instance.ip_address = value.as(String)
-      # end
     end
   end
 

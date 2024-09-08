@@ -14,21 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_links_payment_link_request_shipping_address_collection"
 
 describe Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection do
-  describe "test an instance of PostPaymentLinksPaymentLinkRequestShippingAddressCollection" do
-    it "should create an instance of PostPaymentLinksPaymentLinkRequestShippingAddressCollection" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection.new
-      # (instance).should be_a(Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection)
-    end
-  end
-
-  describe "test attribute 'allowed_countries'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostPaymentLinksPaymentLinkRequestShippingAddressCollection::ENUM_VALIDATOR_FOR_ALLOWED_COUNTRIES
-      # validator.allowable_values.each do |value|
-      #   instance.allowed_countries = value.as(Array(String))
-      # end
-    end
-  end
 end

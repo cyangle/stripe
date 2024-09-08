@@ -9,11 +9,11 @@
 
 require "../../core"
 
+require "./tax_calculation_ship_from_details"
+require "./tax_calculation_shipping_cost"
 require "./tax_product_resource_customer_details"
-require "./tax_product_resource_ship_from_details"
 require "./tax_product_resource_tax_breakdown"
 require "./tax_product_resource_tax_calculation_line_item_list"
-require "./tax_product_resource_tax_calculation_shipping_cost"
 
 module Stripe
   # A Tax Calculation allows you to calculate the tax to collect from your customer.  Related guide: [Calculate tax in your custom payment flow](https://stripe.com/docs/tax/custom)
@@ -61,11 +61,11 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [tax.calculation]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("tax.calculation")
 
-    @[JSON::Field(key: "ship_from_details", type: Stripe::TaxProductResourceShipFromDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter ship_from_details : Stripe::TaxProductResourceShipFromDetails? = nil
+    @[JSON::Field(key: "ship_from_details", type: Stripe::TaxCalculationShipFromDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter ship_from_details : Stripe::TaxCalculationShipFromDetails? = nil
 
-    @[JSON::Field(key: "shipping_cost", type: Stripe::TaxProductResourceTaxCalculationShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_cost : Stripe::TaxProductResourceTaxCalculationShippingCost? = nil
+    @[JSON::Field(key: "shipping_cost", type: Stripe::TaxCalculationShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_cost : Stripe::TaxCalculationShippingCost? = nil
 
     # The amount of tax to be collected on top of the line item prices.
     @[JSON::Field(key: "tax_amount_exclusive", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -106,8 +106,8 @@ module Stripe
       @id : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
-      @ship_from_details : Stripe::TaxProductResourceShipFromDetails? = nil,
-      @shipping_cost : Stripe::TaxProductResourceTaxCalculationShippingCost? = nil,
+      @ship_from_details : Stripe::TaxCalculationShipFromDetails? = nil,
+      @shipping_cost : Stripe::TaxCalculationShippingCost? = nil,
       @tax_amount_exclusive : Int64? = nil,
       @tax_amount_inclusive : Int64? = nil,
       @tax_breakdown : Array(Stripe::TaxProductResourceTaxBreakdown)? = nil,
@@ -310,7 +310,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ship_from_details Object to be assigned
-    def ship_from_details=(new_value : Stripe::TaxProductResourceShipFromDetails?)
+    def ship_from_details=(new_value : Stripe::TaxCalculationShipFromDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -320,7 +320,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_cost Object to be assigned
-    def shipping_cost=(new_value : Stripe::TaxProductResourceTaxCalculationShippingCost?)
+    def shipping_cost=(new_value : Stripe::TaxCalculationShippingCost?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -10,6 +10,7 @@
 require "../../core"
 
 require "./optional_fields_address"
+require "./recipient_shipping_with_optional_fields_address_phone"
 
 module Stripe
   class RecipientShippingWithOptionalFieldsAddress
@@ -32,10 +33,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter phone : String? = nil
-    ERROR_MESSAGE_FOR_PHONE = "invalid value for \"phone\", must be one of []."
-    VALID_VALUES_FOR_PHONE  = String.static_array("")
+    @[JSON::Field(key: "phone", type: Stripe::RecipientShippingWithOptionalFieldsAddressPhone?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter phone : Stripe::RecipientShippingWithOptionalFieldsAddressPhone? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,7 +44,7 @@ module Stripe
       @address : Stripe::OptionalFieldsAddress? = nil,
       @name : String? = nil,
       # Optional properties
-      @phone : String? = nil
+      @phone : Stripe::RecipientShippingWithOptionalFieldsAddressPhone? = nil
     )
     end
 
@@ -67,7 +66,7 @@ module Stripe
         end
       end
       unless (_phone = @phone).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_PHONE) unless OpenApi::EnumValidator.valid?(_phone, VALID_VALUES_FOR_PHONE)
+        invalid_properties.concat(_phone.list_invalid_properties_for("phone")) if _phone.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -86,7 +85,7 @@ module Stripe
       end
 
       unless (_phone = @phone).nil?
-        return false unless OpenApi::EnumValidator.valid?(_phone, VALID_VALUES_FOR_PHONE)
+        return false if _phone.is_a?(OpenApi::Validatable) && !_phone.valid?
       end
 
       true
@@ -116,9 +115,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone Object to be assigned
-    def phone=(new_value : String?)
+    def phone=(new_value : Stripe::RecipientShippingWithOptionalFieldsAddressPhone?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("phone", new_value, VALID_VALUES_FOR_PHONE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @phone = new_value

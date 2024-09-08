@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./issuing_personalization_design_card_logo"
-require "./issuing_personalization_design_carrier_text"
+require "./issuing_personalization_design_carrier_text1"
 require "./issuing_personalization_design_physical_bundle"
 require "./issuing_personalization_design_preferences"
 require "./issuing_personalization_design_rejection_reasons"
@@ -28,8 +28,8 @@ module Stripe
     @[JSON::Field(key: "card_logo", type: Stripe::IssuingPersonalizationDesignCardLogo?, default: nil, required: true, nullable: true, emit_null: true)]
     getter card_logo : Stripe::IssuingPersonalizationDesignCardLogo? = nil
 
-    @[JSON::Field(key: "carrier_text", type: Stripe::IssuingPersonalizationDesignCarrierText?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter carrier_text : Stripe::IssuingPersonalizationDesignCarrierText? = nil
+    @[JSON::Field(key: "carrier_text", type: Stripe::IssuingPersonalizationDesignCarrierText1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter carrier_text : Stripe::IssuingPersonalizationDesignCarrierText1? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -86,7 +86,7 @@ module Stripe
       *,
       # Required properties
       @card_logo : Stripe::IssuingPersonalizationDesignCardLogo? = nil,
-      @carrier_text : Stripe::IssuingPersonalizationDesignCarrierText? = nil,
+      @carrier_text : Stripe::IssuingPersonalizationDesignCarrierText1? = nil,
       @created : Int64? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
@@ -233,7 +233,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] carrier_text Object to be assigned
-    def carrier_text=(new_value : Stripe::IssuingPersonalizationDesignCarrierText?)
+    def carrier_text=(new_value : Stripe::IssuingPersonalizationDesignCarrierText1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,42 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/invoice_application"
 
 describe Stripe::InvoiceApplication do
-  describe "test an instance of InvoiceApplication" do
-    it "should create an instance of InvoiceApplication" do
-      # instance = Stripe::InvoiceApplication.new
-      # (instance).should be_a(Stripe::InvoiceApplication)
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::InvoiceApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::InvoiceApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'object'" do
-    it "should work" do
-      # instance = Stripe::InvoiceApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::InvoiceApplication::ENUM_VALIDATOR_FOR_OBJECT
-      # validator.allowable_values.each do |value|
-      #   instance.object = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute 'deleted'" do
-    it "should work" do
-      # instance = Stripe::InvoiceApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

@@ -109,11 +109,11 @@ describe "InvoicesApi" do
   # @option opts [GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter] :subscription_default_tax_rates If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have &#x60;tax_rates&#x60; set. This field has been deprecated and will be removed in a future API version. Use &#x60;subscription_details.default_tax_rates&#x60; instead.
   # @option opts [Bool] :subscription_cancel_at_period_end Indicate whether this subscription should cancel at the end of the current period (&#x60;current_period_end&#x60;). Defaults to &#x60;false&#x60;. This field has been deprecated and will be removed in a future API version. Use &#x60;subscription_details.cancel_at_period_end&#x60; instead.
   # @option opts [Bool] :subscription_trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;subscription_trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;subscription_trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-  # @option opts [Array(InvoiceItemPreviewParams)] :invoice_items List of invoice items to add or update in the upcoming invoice preview.
+  # @option opts [Array(InvoiceItemPreviewParams)] :invoice_items List of invoice items to add or update in the upcoming invoice preview (up to 250).
   # @option opts [AutomaticTaxParam] :automatic_tax Settings for automatic tax lookup for this invoice preview.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :coupon The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use &#x60;discounts&#x60; instead.
-  # @option opts [String] :on_behalf_of The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+  # @option opts [GetInvoicesUpcomingOnBehalfOfParameter] :on_behalf_of The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
   # @option opts [ConnectAccountReference] :issuer The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
   # @option opts [GetInvoicesUpcomingDiscountsParameter] :discounts The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
   # @option opts [String] :currency The currency to preview this invoice in. Defaults to that of &#x60;customer&#x60; if not specified.
@@ -149,11 +149,11 @@ describe "InvoicesApi" do
   # @option opts [GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter] :subscription_default_tax_rates If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have &#x60;tax_rates&#x60; set. This field has been deprecated and will be removed in a future API version. Use &#x60;subscription_details.default_tax_rates&#x60; instead.
   # @option opts [Bool] :subscription_cancel_at_period_end Indicate whether this subscription should cancel at the end of the current period (&#x60;current_period_end&#x60;). Defaults to &#x60;false&#x60;. This field has been deprecated and will be removed in a future API version. Use &#x60;subscription_details.cancel_at_period_end&#x60; instead.
   # @option opts [Bool] :subscription_trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;subscription_trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;subscription_trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-  # @option opts [Array(InvoiceItemPreviewParams)] :invoice_items List of invoice items to add or update in the upcoming invoice preview.
+  # @option opts [Array(InvoiceItemPreviewParams)] :invoice_items List of invoice items to add or update in the upcoming invoice preview (up to 250).
   # @option opts [AutomaticTaxParam] :automatic_tax Settings for automatic tax lookup for this invoice preview.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :coupon The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use &#x60;discounts&#x60; instead.
-  # @option opts [String] :on_behalf_of The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+  # @option opts [GetInvoicesUpcomingOnBehalfOfParameter] :on_behalf_of The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
   # @option opts [ConnectAccountReference] :issuer The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
   # @option opts [GetInvoicesUpcomingDiscountsParameter] :discounts The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
   # @option opts [String] :currency The currency to preview this invoice in. Defaults to that of &#x60;customer&#x60; if not specified.
@@ -223,7 +223,7 @@ describe "InvoicesApi" do
   # @option opts [PostInvoicesInvoiceRequestCustomFields] :custom_fields
   # @option opts [Int32] :days_until_due The number of days from which the invoice is created until it is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
   # @option opts [String] :default_payment_method ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription&#39;s default payment method, if any, or to the default payment method in the customer&#39;s invoice settings.
-  # @option opts [String] :default_source
+  # @option opts [PostInvoicesInvoiceRequestDefaultSource] :default_source
   # @option opts [PostInvoicesInvoiceRequestDefaultTaxRates] :default_tax_rates
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users. Referenced as &#39;memo&#39; in the Dashboard.
   # @option opts [PostInvoicesInvoiceRequestDiscounts] :discounts
@@ -233,8 +233,8 @@ describe "InvoicesApi" do
   # @option opts [String] :footer Footer to be displayed on the invoice.
   # @option opts [ConnectAccountReference] :issuer
   # @option opts [PostAccountsRequestMetadata] :metadata
-  # @option opts [String] :number
-  # @option opts [String] :on_behalf_of
+  # @option opts [PostInvoicesInvoiceRequestNumber] :number
+  # @option opts [PostInvoicesInvoiceRequestOnBehalfOf] :on_behalf_of
   # @option opts [PaymentSettings] :payment_settings
   # @option opts [RenderingParam] :rendering
   # @option opts [PostInvoicesInvoiceRequestShippingCost] :shipping_cost
@@ -261,6 +261,30 @@ describe "InvoicesApi" do
     end
   end
 
+  # unit tests for post_invoices_invoice_lines_line_item_id
+  # &lt;p&gt;Updates an invoice’s line item. Some fields, such as &lt;code&gt;tax_amounts&lt;/code&gt;, only live on the invoice line item, so they can only be updated through this endpoint. Other fields, such as &lt;code&gt;amount&lt;/code&gt;, live on both the invoice item and the invoice line item, so updates on this endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only possible before the invoice is finalized.&lt;/p&gt;
+  # @param invoice Invoice ID of line item
+  # @param line_item_id Invoice line item ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer&#39;s account, pass a negative amount.
+  # @option opts [String] :description An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
+  # @option opts [Bool] :discountable Controls whether discounts apply to this line item. Defaults to false for prorations or negative line items, and true for all other line items. Cannot be set to true for prorations.
+  # @option opts [PostInvoicesInvoiceLinesLineItemIdRequestDiscounts] :discounts
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostInvoicesInvoiceLinesLineItemIdRequestMetadata] :metadata
+  # @option opts [Period] :period
+  # @option opts [String] :price The ID of the price object. One of &#x60;price&#x60; or &#x60;price_data&#x60; is required.
+  # @option opts [OneTimePriceDataWithProductData] :price_data
+  # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the line item.
+  # @option opts [PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts] :tax_amounts
+  # @option opts [PostInvoicesInvoiceLinesLineItemIdRequestTaxRates] :tax_rates
+  # @return [LineItem]
+  describe "post_invoices_invoice_lines_line_item_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for post_invoices_invoice_mark_uncollectible
   # &lt;p&gt;Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.&lt;/p&gt;
   # @param invoice
@@ -279,7 +303,7 @@ describe "InvoicesApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :forgive In cases where the source used to pay the invoice has insufficient funds, passing &#x60;forgive&#x3D;true&#x60; controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing &#x60;forgive&#x3D;false&#x60; will fail the charge if the source hasn&#39;t been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to &#x60;false&#x60;.
-  # @option opts [String] :mandate
+  # @option opts [PostInvoicesInvoicePayRequestMandate] :mandate
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to &#x60;true&#x60; (off-session).
   # @option opts [Bool] :paid_out_of_band Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to &#x60;false&#x60;.
   # @option opts [String] :payment_method A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.

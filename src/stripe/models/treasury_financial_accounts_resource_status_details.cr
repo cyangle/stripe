@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./treasury_financial_accounts_resource_closed_status_details"
+require "./treasury_financial_accounts_resource_status_details_closed"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "closed", type: Stripe::TreasuryFinancialAccountsResourceClosedStatusDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter closed : Stripe::TreasuryFinancialAccountsResourceClosedStatusDetails? = nil
+    @[JSON::Field(key: "closed", type: Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter closed : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @closed : Stripe::TreasuryFinancialAccountsResourceClosedStatusDetails? = nil
+      @closed : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] closed Object to be assigned
-    def closed=(new_value : Stripe::TreasuryFinancialAccountsResourceClosedStatusDetails?)
+    def closed=(new_value : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

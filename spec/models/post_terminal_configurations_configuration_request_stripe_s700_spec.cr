@@ -14,21 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_terminal_configurations_configuration_request_stripe_s700"
 
 describe Stripe::PostTerminalConfigurationsConfigurationRequestStripeS700 do
-  describe "test an instance of PostTerminalConfigurationsConfigurationRequestStripeS700" do
-    it "should create an instance of PostTerminalConfigurationsConfigurationRequestStripeS700" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestStripeS700.new
-      # (instance).should be_a(Stripe::PostTerminalConfigurationsConfigurationRequestStripeS700)
-    end
-  end
-
-  describe "test attribute 'splashscreen'" do
-    it "should work" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestStripeS700.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostTerminalConfigurationsConfigurationRequestStripeS700::ENUM_VALIDATOR_FOR_SPLASHSCREEN
-      # validator.allowable_values.each do |value|
-      #   instance.splashscreen = value.as(String)
-      # end
-    end
-  end
 end

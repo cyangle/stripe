@@ -14,39 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/payment_method_options_card"
 
 describe Stripe::PaymentMethodOptionsCard do
-  describe "test an instance of PaymentMethodOptionsCard" do
-    it "should create an instance of PaymentMethodOptionsCard" do
-      # instance = Stripe::PaymentMethodOptionsCard.new
-      # (instance).should be_a(Stripe::PaymentMethodOptionsCard)
-    end
-  end
-
-  describe "test attribute 'mandate_options'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsCard.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'network'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsCard.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentMethodOptionsCard::ENUM_VALIDATOR_FOR_NETWORK
-      # validator.allowable_values.each do |value|
-      #   instance.network = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute 'request_three_d_secure'" do
-    it "should work" do
-      # instance = Stripe::PaymentMethodOptionsCard.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentMethodOptionsCard::ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE
-      # validator.allowable_values.each do |value|
-      #   instance.request_three_d_secure = value.as(String)
-      # end
-    end
-  end
 end

@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_invoices_invoice_request_transfer_data"
 
 describe Stripe::PostInvoicesInvoiceRequestTransferData do
-  describe "test an instance of PostInvoicesInvoiceRequestTransferData" do
-    it "should create an instance of PostInvoicesInvoiceRequestTransferData" do
-      # instance = Stripe::PostInvoicesInvoiceRequestTransferData.new
-      # (instance).should be_a(Stripe::PostInvoicesInvoiceRequestTransferData)
-    end
-  end
-
-  describe "test attribute 'amount'" do
-    it "should work" do
-      # instance = Stripe::PostInvoicesInvoiceRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'amount_percent'" do
-    it "should work" do
-      # instance = Stripe::PostInvoicesInvoiceRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'destination'" do
-    it "should work" do
-      # instance = Stripe::PostInvoicesInvoiceRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

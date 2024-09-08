@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/transfer_schedule_specs_delay_days"
 
 describe Stripe::TransferScheduleSpecsDelayDays do
-  describe "test an instance of TransferScheduleSpecsDelayDays" do
-    it "should create an instance of TransferScheduleSpecsDelayDays" do
-      # instance = Stripe::TransferScheduleSpecsDelayDays.new
-      # (instance).should be_a(Stripe::TransferScheduleSpecsDelayDays)
-    end
-  end
 end

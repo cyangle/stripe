@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/get_invoices_upcoming_subscription_trial_end_parameter"
 
 describe Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter do
-  describe "test an instance of GetInvoicesUpcomingSubscriptionTrialEndParameter" do
-    it "should create an instance of GetInvoicesUpcomingSubscriptionTrialEndParameter" do
-      # instance = Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter.new
-      # (instance).should be_a(Stripe::GetInvoicesUpcomingSubscriptionTrialEndParameter)
-    end
-  end
 end

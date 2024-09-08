@@ -9,11 +9,11 @@
 
 require "../../core"
 
+require "./tax_calculation_ship_from_details"
 require "./tax_product_resource_customer_details"
-require "./tax_product_resource_ship_from_details"
 require "./tax_product_resource_tax_transaction_line_item_list"
-require "./tax_product_resource_tax_transaction_resource_reversal"
-require "./tax_product_resource_tax_transaction_shipping_cost"
+require "./tax_transaction_reversal"
+require "./tax_transaction_shipping_cost"
 
 module Stripe
   # A Tax Transaction records the tax collected from or refunded to your customer.  Related guide: [Calculate tax in your custom payment flow](https://stripe.com/docs/tax/custom#tax-transaction)
@@ -69,14 +69,14 @@ module Stripe
     getter reference : String? = nil
     MAX_LENGTH_FOR_REFERENCE = 5000
 
-    @[JSON::Field(key: "reversal", type: Stripe::TaxProductResourceTaxTransactionResourceReversal?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter reversal : Stripe::TaxProductResourceTaxTransactionResourceReversal? = nil
+    @[JSON::Field(key: "reversal", type: Stripe::TaxTransactionReversal?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter reversal : Stripe::TaxTransactionReversal? = nil
 
-    @[JSON::Field(key: "ship_from_details", type: Stripe::TaxProductResourceShipFromDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter ship_from_details : Stripe::TaxProductResourceShipFromDetails? = nil
+    @[JSON::Field(key: "ship_from_details", type: Stripe::TaxCalculationShipFromDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter ship_from_details : Stripe::TaxCalculationShipFromDetails? = nil
 
-    @[JSON::Field(key: "shipping_cost", type: Stripe::TaxProductResourceTaxTransactionShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_cost : Stripe::TaxProductResourceTaxTransactionShippingCost? = nil
+    @[JSON::Field(key: "shipping_cost", type: Stripe::TaxTransactionShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_cost : Stripe::TaxTransactionShippingCost? = nil
 
     # Timestamp of date at which the tax rules and rates in effect applies for the calculation.
     @[JSON::Field(key: "tax_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -113,9 +113,9 @@ module Stripe
       @object : String? = nil,
       @posted_at : Int64? = nil,
       @reference : String? = nil,
-      @reversal : Stripe::TaxProductResourceTaxTransactionResourceReversal? = nil,
-      @ship_from_details : Stripe::TaxProductResourceShipFromDetails? = nil,
-      @shipping_cost : Stripe::TaxProductResourceTaxTransactionShippingCost? = nil,
+      @reversal : Stripe::TaxTransactionReversal? = nil,
+      @ship_from_details : Stripe::TaxCalculationShipFromDetails? = nil,
+      @shipping_cost : Stripe::TaxTransactionShippingCost? = nil,
       @tax_date : Int64? = nil,
       @_type : String? = nil,
       # Optional properties
@@ -353,7 +353,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reversal Object to be assigned
-    def reversal=(new_value : Stripe::TaxProductResourceTaxTransactionResourceReversal?)
+    def reversal=(new_value : Stripe::TaxTransactionReversal?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -363,7 +363,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ship_from_details Object to be assigned
-    def ship_from_details=(new_value : Stripe::TaxProductResourceShipFromDetails?)
+    def ship_from_details=(new_value : Stripe::TaxCalculationShipFromDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -373,7 +373,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_cost Object to be assigned
-    def shipping_cost=(new_value : Stripe::TaxProductResourceTaxTransactionShippingCost?)
+    def shipping_cost=(new_value : Stripe::TaxTransactionShippingCost?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

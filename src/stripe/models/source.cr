@@ -11,7 +11,7 @@ require "../../core"
 
 require "./source_code_verification_flow"
 require "./source_order"
-require "./source_owner"
+require "./source_owner1"
 require "./source_receiver_flow"
 require "./source_redirect_flow"
 require "./source_type_ach_credit_transfer"
@@ -84,8 +84,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [source]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("source")
 
-    @[JSON::Field(key: "owner", type: Stripe::SourceOwner?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter owner : Stripe::SourceOwner? = nil
+    @[JSON::Field(key: "owner", type: Stripe::SourceOwner1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter owner : Stripe::SourceOwner1? = nil
 
     # Extra information about a source. This will appear on your customer's statement every time you charge the source.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -200,7 +200,7 @@ module Stripe
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
-      @owner : Stripe::SourceOwner? = nil,
+      @owner : Stripe::SourceOwner1? = nil,
       @statement_descriptor : String? = nil,
       @status : String? = nil,
       @_type : String? = nil,
@@ -598,7 +598,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] owner Object to be assigned
-    def owner=(new_value : Stripe::SourceOwner?)
+    def owner=(new_value : Stripe::SourceOwner1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

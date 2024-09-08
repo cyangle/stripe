@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./display_preference_param"
+
 module Stripe
   class PaymentMethodParam
     include JSON::Serializable
@@ -49,6 +51,9 @@ module Stripe
     ERROR_MESSAGE_FOR_ACCOUNT_TYPE = "invalid value for \"account_type\", must be one of [checking, savings]."
     VALID_VALUES_FOR_ACCOUNT_TYPE  = String.static_array("checking", "savings")
 
+    @[JSON::Field(key: "display_preference", type: Stripe::DisplayPreferenceParam?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter display_preference : Stripe::DisplayPreferenceParam? = nil
+
     # The ID of a Financial Connections Account to use as a payment method.
     @[JSON::Field(key: "financial_connections_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_connections_account : String? = nil
@@ -70,6 +75,7 @@ module Stripe
       # Optional properties
       @account_holder_type : String? = nil,
       @account_type : String? = nil,
+      @display_preference : Stripe::DisplayPreferenceParam? = nil,
       @financial_connections_account : String? = nil,
       @routing_number : String? = nil
     )
@@ -106,6 +112,9 @@ module Stripe
       end
       unless (_account_type = @account_type).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
+      end
+      unless (_display_preference = @display_preference).nil?
+        invalid_properties.concat(_display_preference.list_invalid_properties_for("display_preference")) if _display_preference.is_a?(OpenApi::Validatable)
       end
       unless (_financial_connections_account = @financial_connections_account).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_connections_account", _financial_connections_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_CONNECTIONS_ACCOUNT)
@@ -144,6 +153,10 @@ module Stripe
 
       unless (_account_type = @account_type).nil?
         return false unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
+      end
+
+      unless (_display_preference = @display_preference).nil?
+        return false if _display_preference.is_a?(OpenApi::Validatable) && !_display_preference.valid?
       end
 
       unless (_financial_connections_account = @financial_connections_account).nil?
@@ -211,6 +224,16 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] display_preference Object to be assigned
+    def display_preference=(new_value : Stripe::DisplayPreferenceParam?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
+      end
+
+      @display_preference = new_value
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] financial_connections_account Object to be assigned
     def financial_connections_account=(new_value : String?)
       unless new_value.nil?
@@ -234,6 +257,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_number, @institution_number, @transit_number, @account_holder_type, @account_type, @financial_connections_account, @routing_number)
+    def_equals_and_hash(@account_number, @institution_number, @transit_number, @account_holder_type, @account_type, @display_preference, @financial_connections_account, @routing_number)
   end
 end

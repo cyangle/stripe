@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./customer_details_param_address"
-require "./customer_details_param_shipping"
 require "./data_params"
+require "./post_customers_request_address"
+require "./post_customers_request_shipping"
 require "./tax_param"
 
 module Stripe
@@ -23,11 +23,11 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "address", type: Stripe::CustomerDetailsParamAddress?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter address : Stripe::CustomerDetailsParamAddress? = nil
+    @[JSON::Field(key: "address", type: Stripe::PostCustomersRequestAddress?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter address : Stripe::PostCustomersRequestAddress? = nil
 
-    @[JSON::Field(key: "shipping", type: Stripe::CustomerDetailsParamShipping?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter shipping : Stripe::CustomerDetailsParamShipping? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::PostCustomersRequestShipping?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter shipping : Stripe::PostCustomersRequestShipping? = nil
 
     @[JSON::Field(key: "tax", type: Stripe::TaxParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax : Stripe::TaxParam? = nil
@@ -47,8 +47,8 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @address : Stripe::CustomerDetailsParamAddress? = nil,
-      @shipping : Stripe::CustomerDetailsParamShipping? = nil,
+      @address : Stripe::PostCustomersRequestAddress? = nil,
+      @shipping : Stripe::PostCustomersRequestShipping? = nil,
       @tax : Stripe::TaxParam? = nil,
       @tax_exempt : String? = nil,
       @tax_ids : Array(Stripe::DataParams)? = nil
@@ -106,7 +106,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::CustomerDetailsParamAddress?)
+    def address=(new_value : Stripe::PostCustomersRequestAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -116,7 +116,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(new_value : Stripe::CustomerDetailsParamShipping?)
+    def shipping=(new_value : Stripe::PostCustomersRequestShipping?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./issuing_authorization_authentication_exemption"
-require "./issuing_authorization_three_d_secure"
+require "./issuing_authorization_verification_data_authentication_exemption"
+require "./issuing_authorization_verification_data_three_d_secure"
 
 module Stripe
   #
@@ -34,8 +34,8 @@ module Stripe
     ERROR_MESSAGE_FOR_ADDRESS_POSTAL_CODE_CHECK = "invalid value for \"address_postal_code_check\", must be one of [match, mismatch, not_provided]."
     VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK  = String.static_array("match", "mismatch", "not_provided")
 
-    @[JSON::Field(key: "authentication_exemption", type: Stripe::IssuingAuthorizationAuthenticationExemption?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter authentication_exemption : Stripe::IssuingAuthorizationAuthenticationExemption? = nil
+    @[JSON::Field(key: "authentication_exemption", type: Stripe::IssuingAuthorizationVerificationDataAuthenticationExemption?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter authentication_exemption : Stripe::IssuingAuthorizationVerificationDataAuthenticationExemption? = nil
 
     # Whether the cardholder provided a CVC and if it matched Stripe’s record.
     @[JSON::Field(key: "cvc_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,8 +54,8 @@ module Stripe
     getter postal_code : String? = nil
     MAX_LENGTH_FOR_POSTAL_CODE = 5000
 
-    @[JSON::Field(key: "three_d_secure", type: Stripe::IssuingAuthorizationThreeDSecure?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter three_d_secure : Stripe::IssuingAuthorizationThreeDSecure? = nil
+    @[JSON::Field(key: "three_d_secure", type: Stripe::IssuingAuthorizationVerificationDataThreeDSecure?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter three_d_secure : Stripe::IssuingAuthorizationVerificationDataThreeDSecure? = nil
 
     # End of Required Properties
 
@@ -66,11 +66,11 @@ module Stripe
       # Required properties
       @address_line1_check : String? = nil,
       @address_postal_code_check : String? = nil,
-      @authentication_exemption : Stripe::IssuingAuthorizationAuthenticationExemption? = nil,
+      @authentication_exemption : Stripe::IssuingAuthorizationVerificationDataAuthenticationExemption? = nil,
       @cvc_check : String? = nil,
       @expiry_check : String? = nil,
       @postal_code : String? = nil,
-      @three_d_secure : Stripe::IssuingAuthorizationThreeDSecure? = nil
+      @three_d_secure : Stripe::IssuingAuthorizationVerificationDataThreeDSecure? = nil
     )
     end
 
@@ -175,7 +175,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authentication_exemption Object to be assigned
-    def authentication_exemption=(new_value : Stripe::IssuingAuthorizationAuthenticationExemption?)
+    def authentication_exemption=(new_value : Stripe::IssuingAuthorizationVerificationDataAuthenticationExemption?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -217,7 +217,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] three_d_secure Object to be assigned
-    def three_d_secure=(new_value : Stripe::IssuingAuthorizationThreeDSecure?)
+    def three_d_secure=(new_value : Stripe::IssuingAuthorizationVerificationDataThreeDSecure?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

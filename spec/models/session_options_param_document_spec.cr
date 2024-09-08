@@ -14,42 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/session_options_param_document"
 
 describe Stripe::SessionOptionsParamDocument do
-  describe "test an instance of SessionOptionsParamDocument" do
-    it "should create an instance of SessionOptionsParamDocument" do
-      # instance = Stripe::SessionOptionsParamDocument.new
-      # (instance).should be_a(Stripe::SessionOptionsParamDocument)
-    end
-  end
-
-  describe "test attribute 'allowed_types'" do
-    it "should work" do
-      # instance = Stripe::SessionOptionsParamDocument.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::SessionOptionsParamDocument::ENUM_VALIDATOR_FOR_ALLOWED_TYPES
-      # validator.allowable_values.each do |value|
-      #   instance.allowed_types = value.as(Array(String))
-      # end
-    end
-  end
-
-  describe "test attribute 'require_id_number'" do
-    it "should work" do
-      # instance = Stripe::SessionOptionsParamDocument.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'require_live_capture'" do
-    it "should work" do
-      # instance = Stripe::SessionOptionsParamDocument.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'require_matching_selfie'" do
-    it "should work" do
-      # instance = Stripe::SessionOptionsParamDocument.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

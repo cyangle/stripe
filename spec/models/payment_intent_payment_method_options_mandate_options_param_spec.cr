@@ -25,10 +25,6 @@ describe Stripe::PaymentIntentPaymentMethodOptionsMandateOptionsParam do
     it "should work" do
       # instance = Stripe::PaymentIntentPaymentMethodOptionsMandateOptionsParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentPaymentMethodOptionsMandateOptionsParam::ENUM_VALIDATOR_FOR_CUSTOM_MANDATE_URL
-      # validator.allowable_values.each do |value|
-      #   instance.custom_mandate_url = value.as(String)
-      # end
     end
   end
 

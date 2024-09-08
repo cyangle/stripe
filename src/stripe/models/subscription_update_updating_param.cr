@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./subscription_update_updating_param_default_allowed_updates"
-require "./subscription_update_updating_param_products"
+require "./subscription_update_creation_param_default_allowed_updates"
+require "./subscription_update_creation_param_products"
 
 module Stripe
   class SubscriptionUpdateUpdatingParam
@@ -21,15 +21,15 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "default_allowed_updates", type: Stripe::SubscriptionUpdateUpdatingParamDefaultAllowedUpdates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter default_allowed_updates : Stripe::SubscriptionUpdateUpdatingParamDefaultAllowedUpdates? = nil
+    @[JSON::Field(key: "default_allowed_updates", type: Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter default_allowed_updates : Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates? = nil
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    @[JSON::Field(key: "products", type: Stripe::SubscriptionUpdateUpdatingParamProducts?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter products : Stripe::SubscriptionUpdateUpdatingParamProducts? = nil
+    @[JSON::Field(key: "products", type: Stripe::SubscriptionUpdateCreationParamProducts?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter products : Stripe::SubscriptionUpdateCreationParamProducts? = nil
 
     # Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -42,9 +42,9 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @default_allowed_updates : Stripe::SubscriptionUpdateUpdatingParamDefaultAllowedUpdates? = nil,
+      @default_allowed_updates : Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates? = nil,
       @enabled : Bool? = nil,
-      @products : Stripe::SubscriptionUpdateUpdatingParamProducts? = nil,
+      @products : Stripe::SubscriptionUpdateCreationParamProducts? = nil,
       @proration_behavior : String? = nil
     )
     end
@@ -87,7 +87,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_allowed_updates Object to be assigned
-    def default_allowed_updates=(new_value : Stripe::SubscriptionUpdateUpdatingParamDefaultAllowedUpdates?)
+    def default_allowed_updates=(new_value : Stripe::SubscriptionUpdateCreationParamDefaultAllowedUpdates?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -103,7 +103,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] products Object to be assigned
-    def products=(new_value : Stripe::SubscriptionUpdateUpdatingParamProducts?)
+    def products=(new_value : Stripe::SubscriptionUpdateCreationParamProducts?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

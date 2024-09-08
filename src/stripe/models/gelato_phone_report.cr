@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./gelato_phone_report_error"
+require "./gelato_phone_report_error1"
 
 module Stripe
   # Result from a phone check
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "error", type: Stripe::GelatoPhoneReportError?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter error : Stripe::GelatoPhoneReportError? = nil
+    @[JSON::Field(key: "error", type: Stripe::GelatoPhoneReportError1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter error : Stripe::GelatoPhoneReportError1? = nil
 
     # Phone to be verified.
     @[JSON::Field(key: "phone", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -42,7 +42,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @error : Stripe::GelatoPhoneReportError? = nil,
+      @error : Stripe::GelatoPhoneReportError1? = nil,
       @phone : String? = nil,
       @status : String? = nil
     )
@@ -90,7 +90,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(new_value : Stripe::GelatoPhoneReportError?)
+    def error=(new_value : Stripe::GelatoPhoneReportError1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

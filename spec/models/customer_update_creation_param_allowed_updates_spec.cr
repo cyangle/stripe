@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/customer_update_creation_param_allowed_updates"
 
 describe Stripe::CustomerUpdateCreationParamAllowedUpdates do
-  describe "test an instance of CustomerUpdateCreationParamAllowedUpdates" do
-    it "should create an instance of CustomerUpdateCreationParamAllowedUpdates" do
-      # instance = Stripe::CustomerUpdateCreationParamAllowedUpdates.new
-      # (instance).should be_a(Stripe::CustomerUpdateCreationParamAllowedUpdates)
-    end
-  end
 end

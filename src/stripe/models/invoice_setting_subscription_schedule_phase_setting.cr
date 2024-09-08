@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./connect_account_reference"
 require "./invoice_account_tax_ids_inner"
+require "./invoice_setting_subscription_schedule_phase_setting_issuer"
 
 module Stripe
   #
@@ -30,8 +30,8 @@ module Stripe
     @[JSON::Field(key: "days_until_due", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
     getter days_until_due : Int64? = nil
 
-    @[JSON::Field(key: "issuer", type: Stripe::ConnectAccountReference?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter issuer : Stripe::ConnectAccountReference? = nil
+    @[JSON::Field(key: "issuer", type: Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter issuer : Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer? = nil
 
     # End of Required Properties
 
@@ -42,7 +42,7 @@ module Stripe
       # Required properties
       @account_tax_ids : Array(Stripe::InvoiceAccountTaxIdsInner)? = nil,
       @days_until_due : Int64? = nil,
-      @issuer : Stripe::ConnectAccountReference? = nil
+      @issuer : Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer? = nil
     )
     end
 
@@ -93,7 +93,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuer Object to be assigned
-    def issuer=(new_value : Stripe::ConnectAccountReference?)
+    def issuer=(new_value : Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

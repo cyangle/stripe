@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./payment_links_resource_subscription_data_invoice_settings"
-require "./subscriptions_trials_resource_trial_settings"
+require "./payment_links_resource_subscription_data_trial_settings"
 
 module Stripe
   #
@@ -37,8 +37,8 @@ module Stripe
     @[JSON::Field(key: "trial_period_days", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
     getter trial_period_days : Int64? = nil
 
-    @[JSON::Field(key: "trial_settings", type: Stripe::SubscriptionsTrialsResourceTrialSettings?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter trial_settings : Stripe::SubscriptionsTrialsResourceTrialSettings? = nil
+    @[JSON::Field(key: "trial_settings", type: Stripe::PaymentLinksResourceSubscriptionDataTrialSettings?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter trial_settings : Stripe::PaymentLinksResourceSubscriptionDataTrialSettings? = nil
 
     # End of Required Properties
 
@@ -51,7 +51,7 @@ module Stripe
       @invoice_settings : Stripe::PaymentLinksResourceSubscriptionDataInvoiceSettings? = nil,
       @metadata : Hash(String, String)? = nil,
       @trial_period_days : Int64? = nil,
-      @trial_settings : Stripe::SubscriptionsTrialsResourceTrialSettings? = nil
+      @trial_settings : Stripe::PaymentLinksResourceSubscriptionDataTrialSettings? = nil
     )
     end
 
@@ -136,7 +136,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_settings Object to be assigned
-    def trial_settings=(new_value : Stripe::SubscriptionsTrialsResourceTrialSettings?)
+    def trial_settings=(new_value : Stripe::PaymentLinksResourceSubscriptionDataTrialSettings?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

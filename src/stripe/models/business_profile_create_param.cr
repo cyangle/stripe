@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./business_profile_create_param_headline"
+
 module Stripe
   class BusinessProfileCreateParam
     include JSON::Serializable
@@ -18,10 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "headline", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter headline : String? = nil
-    ERROR_MESSAGE_FOR_HEADLINE = "invalid value for \"headline\", must be one of []."
-    VALID_VALUES_FOR_HEADLINE  = String.static_array("")
+    @[JSON::Field(key: "headline", type: Stripe::BusinessProfileCreateParamHeadline?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter headline : Stripe::BusinessProfileCreateParamHeadline? = nil
 
     # A link to the business’s publicly available privacy policy.
     @[JSON::Field(key: "privacy_policy_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -36,7 +36,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @headline : String? = nil,
+      @headline : Stripe::BusinessProfileCreateParamHeadline? = nil,
       @privacy_policy_url : String? = nil,
       @terms_of_service_url : String? = nil
     )
@@ -48,7 +48,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_headline = @headline).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_HEADLINE) unless OpenApi::EnumValidator.valid?(_headline, VALID_VALUES_FOR_HEADLINE)
+        invalid_properties.concat(_headline.list_invalid_properties_for("headline")) if _headline.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -58,7 +58,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_headline = @headline).nil?
-        return false unless OpenApi::EnumValidator.valid?(_headline, VALID_VALUES_FOR_HEADLINE)
+        return false if _headline.is_a?(OpenApi::Validatable) && !_headline.valid?
       end
 
       true
@@ -66,9 +66,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] headline Object to be assigned
-    def headline=(new_value : String?)
+    def headline=(new_value : Stripe::BusinessProfileCreateParamHeadline?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("headline", new_value, VALID_VALUES_FOR_HEADLINE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @headline = new_value

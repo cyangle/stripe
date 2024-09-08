@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./internal_card"
+require "./payment_method_details_mobilepay_card"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "card", type: Stripe::InternalCard?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter card : Stripe::InternalCard? = nil
+    @[JSON::Field(key: "card", type: Stripe::PaymentMethodDetailsMobilepayCard?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter card : Stripe::PaymentMethodDetailsMobilepayCard? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @card : Stripe::InternalCard? = nil
+      @card : Stripe::PaymentMethodDetailsMobilepayCard? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(new_value : Stripe::InternalCard?)
+    def card=(new_value : Stripe::PaymentMethodDetailsMobilepayCard?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

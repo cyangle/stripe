@@ -10,16 +10,16 @@
 require "../../core"
 
 require "./balance_transaction"
-require "./issuing_authorization_amount_details"
+require "./issuing_authorization_amount_details1"
 require "./issuing_authorization_cardholder"
-require "./issuing_authorization_fleet_data"
-require "./issuing_authorization_fuel_data"
+require "./issuing_authorization_fleet"
+require "./issuing_authorization_fuel"
 require "./issuing_authorization_merchant_data"
-require "./issuing_authorization_network_data"
-require "./issuing_authorization_pending_request"
+require "./issuing_authorization_network_data1"
+require "./issuing_authorization_pending_request1"
 require "./issuing_authorization_request"
 require "./issuing_authorization_token"
-require "./issuing_authorization_treasury"
+require "./issuing_authorization_treasury1"
 require "./issuing_authorization_verification_data"
 require "./issuing_card"
 require "./issuing_transaction"
@@ -38,8 +38,8 @@ module Stripe
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount : Int64? = nil
 
-    @[JSON::Field(key: "amount_details", type: Stripe::IssuingAuthorizationAmountDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter amount_details : Stripe::IssuingAuthorizationAmountDetails? = nil
+    @[JSON::Field(key: "amount_details", type: Stripe::IssuingAuthorizationAmountDetails1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil
 
     # Whether the authorization has been approved.
     @[JSON::Field(key: "approved", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -69,11 +69,11 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
 
-    @[JSON::Field(key: "fleet", type: Stripe::IssuingAuthorizationFleetData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fleet : Stripe::IssuingAuthorizationFleetData? = nil
+    @[JSON::Field(key: "fleet", type: Stripe::IssuingAuthorizationFleet?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fleet : Stripe::IssuingAuthorizationFleet? = nil
 
-    @[JSON::Field(key: "fuel", type: Stripe::IssuingAuthorizationFuelData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fuel : Stripe::IssuingAuthorizationFuelData? = nil
+    @[JSON::Field(key: "fuel", type: Stripe::IssuingAuthorizationFuel?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fuel : Stripe::IssuingAuthorizationFuel? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -98,8 +98,8 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "network_data", type: Stripe::IssuingAuthorizationNetworkData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter network_data : Stripe::IssuingAuthorizationNetworkData? = nil
+    @[JSON::Field(key: "network_data", type: Stripe::IssuingAuthorizationNetworkData1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter network_data : Stripe::IssuingAuthorizationNetworkData1? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -107,8 +107,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.authorization]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("issuing.authorization")
 
-    @[JSON::Field(key: "pending_request", type: Stripe::IssuingAuthorizationPendingRequest?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter pending_request : Stripe::IssuingAuthorizationPendingRequest? = nil
+    @[JSON::Field(key: "pending_request", type: Stripe::IssuingAuthorizationPendingRequest1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter pending_request : Stripe::IssuingAuthorizationPendingRequest1? = nil
 
     # History of every time a `pending_request` authorization was approved/declined, either by you directly or by Stripe (e.g. based on your spending_controls). If the merchant changes the authorization by performing an incremental authorization, you can look at this field to see the previous requests for the authorization. This field can be helpful in determining why a given authorization was approved/declined.
     @[JSON::Field(key: "request_history", type: Array(Stripe::IssuingAuthorizationRequest)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -142,8 +142,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? token_present : Bool = false
 
-    @[JSON::Field(key: "treasury", type: Stripe::IssuingAuthorizationTreasury?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
-    getter treasury : Stripe::IssuingAuthorizationTreasury? = nil
+    @[JSON::Field(key: "treasury", type: Stripe::IssuingAuthorizationTreasury1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
+    getter treasury : Stripe::IssuingAuthorizationTreasury1? = nil
 
     @[JSON::Field(ignore: true)]
     property? treasury_present : Bool = false
@@ -154,7 +154,7 @@ module Stripe
       *,
       # Required properties
       @amount : Int64? = nil,
-      @amount_details : Stripe::IssuingAuthorizationAmountDetails? = nil,
+      @amount_details : Stripe::IssuingAuthorizationAmountDetails1? = nil,
       @approved : Bool? = nil,
       @authorization_method : String? = nil,
       @balance_transactions : Array(Stripe::BalanceTransaction)? = nil,
@@ -162,17 +162,17 @@ module Stripe
       @cardholder : Stripe::IssuingAuthorizationCardholder? = nil,
       @created : Int64? = nil,
       @currency : String? = nil,
-      @fleet : Stripe::IssuingAuthorizationFleetData? = nil,
-      @fuel : Stripe::IssuingAuthorizationFuelData? = nil,
+      @fleet : Stripe::IssuingAuthorizationFleet? = nil,
+      @fuel : Stripe::IssuingAuthorizationFuel? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
       @merchant_amount : Int64? = nil,
       @merchant_currency : String? = nil,
       @merchant_data : Stripe::IssuingAuthorizationMerchantData? = nil,
       @metadata : Hash(String, String)? = nil,
-      @network_data : Stripe::IssuingAuthorizationNetworkData? = nil,
+      @network_data : Stripe::IssuingAuthorizationNetworkData1? = nil,
       @object : String? = nil,
-      @pending_request : Stripe::IssuingAuthorizationPendingRequest? = nil,
+      @pending_request : Stripe::IssuingAuthorizationPendingRequest1? = nil,
       @request_history : Array(Stripe::IssuingAuthorizationRequest)? = nil,
       @status : String? = nil,
       @transactions : Array(Stripe::IssuingTransaction)? = nil,
@@ -180,7 +180,7 @@ module Stripe
       @wallet : String? = nil,
       # Optional properties
       @token : Stripe::IssuingAuthorizationToken? = nil,
-      @treasury : Stripe::IssuingAuthorizationTreasury? = nil
+      @treasury : Stripe::IssuingAuthorizationTreasury1? = nil
     )
     end
 
@@ -407,7 +407,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_details Object to be assigned
-    def amount_details=(new_value : Stripe::IssuingAuthorizationAmountDetails?)
+    def amount_details=(new_value : Stripe::IssuingAuthorizationAmountDetails1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -484,7 +484,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fleet Object to be assigned
-    def fleet=(new_value : Stripe::IssuingAuthorizationFleetData?)
+    def fleet=(new_value : Stripe::IssuingAuthorizationFleet?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -494,7 +494,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fuel Object to be assigned
-    def fuel=(new_value : Stripe::IssuingAuthorizationFuelData?)
+    def fuel=(new_value : Stripe::IssuingAuthorizationFuel?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -558,7 +558,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_data Object to be assigned
-    def network_data=(new_value : Stripe::IssuingAuthorizationNetworkData?)
+    def network_data=(new_value : Stripe::IssuingAuthorizationNetworkData1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -579,7 +579,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_request Object to be assigned
-    def pending_request=(new_value : Stripe::IssuingAuthorizationPendingRequest?)
+    def pending_request=(new_value : Stripe::IssuingAuthorizationPendingRequest1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -653,7 +653,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(new_value : Stripe::IssuingAuthorizationTreasury?)
+    def treasury=(new_value : Stripe::IssuingAuthorizationTreasury1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

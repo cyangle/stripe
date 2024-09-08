@@ -27,6 +27,7 @@ require "../models/payment_links_resource_list_line_items"
 require "../models/payment_links_resource_payment_link_list"
 require "../models/phone_number_collection_params"
 require "../models/post_payment_links_payment_link_request_custom_fields"
+require "../models/post_payment_links_payment_link_request_inactive_message"
 require "../models/post_payment_links_payment_link_request_payment_method_types"
 require "../models/post_payment_links_payment_link_request_restrictions"
 require "../models/post_payment_links_payment_link_request_shipping_address_collection"
@@ -807,7 +808,7 @@ module Stripe
     # @optional @param custom_text [Stripe::CustomTextParam?]
     # @optional @param customer_creation [String?] Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param inactive_message [String?]
+    # @optional @param inactive_message [Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage?]
     # @optional @param invoice_creation [Stripe::InvoiceCreationUpdateParams?]
     # @optional @param line_items [Array(Stripe::LineItemsUpdateParams)?] The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
     # @optional @param metadata [Hash(String, String)?]
@@ -831,7 +832,7 @@ module Stripe
       custom_text : Stripe::CustomTextParam? = nil,
       customer_creation : String? = nil,
       expand : Array(String)? = nil,
-      inactive_message : String? = nil,
+      inactive_message : Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage? = nil,
       invoice_creation : Stripe::InvoiceCreationUpdateParams? = nil,
       line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
@@ -858,7 +859,7 @@ module Stripe
     # @optional @param custom_text [Stripe::CustomTextParam?]
     # @optional @param customer_creation [String?] Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param inactive_message [String?]
+    # @optional @param inactive_message [Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage?]
     # @optional @param invoice_creation [Stripe::InvoiceCreationUpdateParams?]
     # @optional @param line_items [Array(Stripe::LineItemsUpdateParams)?] The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
     # @optional @param metadata [Hash(String, String)?]
@@ -882,7 +883,7 @@ module Stripe
       custom_text : Stripe::CustomTextParam? = nil,
       customer_creation : String? = nil,
       expand : Array(String)? = nil,
-      inactive_message : String? = nil,
+      inactive_message : Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage? = nil,
       invoice_creation : Stripe::InvoiceCreationUpdateParams? = nil,
       line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
@@ -916,7 +917,7 @@ module Stripe
     # @optional @param custom_text [Stripe::CustomTextParam?]
     # @optional @param customer_creation [String?] Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @optional @param inactive_message [String?]
+    # @optional @param inactive_message [Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage?]
     # @optional @param invoice_creation [Stripe::InvoiceCreationUpdateParams?]
     # @optional @param line_items [Array(Stripe::LineItemsUpdateParams)?] The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
     # @optional @param metadata [Hash(String, String)?]
@@ -940,7 +941,7 @@ module Stripe
       custom_text : Stripe::CustomTextParam? = nil,
       customer_creation : String? = nil,
       expand : Array(String)? = nil,
-      inactive_message : String? = nil,
+      inactive_message : Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage? = nil,
       invoice_creation : Stripe::InvoiceCreationUpdateParams? = nil,
       line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
@@ -959,7 +960,6 @@ module Stripe
     POST_PAYMENT_LINKS_PAYMENT_LINK_MAX_LENGTH_FOR_PAYMENT_LINK                 = 5000
     POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = String.static_array("auto", "required")
     POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_CUSTOMER_CREATION          = String.static_array("always", "if_required")
-    POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_INACTIVE_MESSAGE           = String.static_array("")
     POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = String.static_array("always", "if_required")
 
     # @return Crest::Request
@@ -975,7 +975,7 @@ module Stripe
       custom_text : Stripe::CustomTextParam? = nil,
       customer_creation : String? = nil,
       expand : Array(String)? = nil,
-      inactive_message : String? = nil,
+      inactive_message : Stripe::PostPaymentLinksPaymentLinkRequestInactiveMessage? = nil,
       invoice_creation : Stripe::InvoiceCreationUpdateParams? = nil,
       line_items : Array(Stripe::LineItemsUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
@@ -1018,7 +1018,7 @@ module Stripe
         end
 
         unless (_inactive_message = inactive_message).nil?
-          OpenApi::EnumValidator.validate("inactive_message", _inactive_message, POST_PAYMENT_LINKS_PAYMENT_LINK_VALID_VALUES_FOR_INACTIVE_MESSAGE)
+          _inactive_message.validate if _inactive_message.is_a?(OpenApi::Validatable)
         end
         unless (_invoice_creation = invoice_creation).nil?
           _invoice_creation.validate if _invoice_creation.is_a?(OpenApi::Validatable)
@@ -1077,7 +1077,7 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(custom_text.to_json), "custom_text")) if !custom_text.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("customer_creation", customer_creation.to_s) if !customer_creation.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("inactive_message", inactive_message.to_s) if !inactive_message.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(inactive_message.to_json), "inactive_message")) if !inactive_message.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(invoice_creation.to_json), "invoice_creation")) if !invoice_creation.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(line_items.to_json), "line_items")) if !line_items.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?

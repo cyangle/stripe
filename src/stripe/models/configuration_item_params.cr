@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./configuration_item_params_billing_thresholds"
-require "./configuration_item_params_discounts"
-require "./configuration_item_params_tax_rates"
+require "./post_subscription_items_request_billing_thresholds"
+require "./post_subscription_items_request_discounts"
+require "./post_subscription_items_request_tax_rates"
 require "./recurring_price_data"
 
 module Stripe
@@ -23,11 +23,11 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::ConfigurationItemParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::PostSubscriptionItemsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil
 
-    @[JSON::Field(key: "discounts", type: Stripe::ConfigurationItemParamsDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter discounts : Stripe::ConfigurationItemParamsDiscounts? = nil
+    @[JSON::Field(key: "discounts", type: Stripe::PostSubscriptionItemsRequestDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter discounts : Stripe::PostSubscriptionItemsRequestDiscounts? = nil
 
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Hash(String, String)? = nil
@@ -49,22 +49,22 @@ module Stripe
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
 
-    @[JSON::Field(key: "tax_rates", type: Stripe::ConfigurationItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tax_rates : Stripe::ConfigurationItemParamsTaxRates? = nil
+    @[JSON::Field(key: "tax_rates", type: Stripe::PostSubscriptionItemsRequestTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @billing_thresholds : Stripe::ConfigurationItemParamsBillingThresholds? = nil,
-      @discounts : Stripe::ConfigurationItemParamsDiscounts? = nil,
+      @billing_thresholds : Stripe::PostSubscriptionItemsRequestBillingThresholds? = nil,
+      @discounts : Stripe::PostSubscriptionItemsRequestDiscounts? = nil,
       @metadata : Hash(String, String)? = nil,
       @plan : String? = nil,
       @price : String? = nil,
       @price_data : Stripe::RecurringPriceData? = nil,
       @quantity : Int64? = nil,
-      @tax_rates : Stripe::ConfigurationItemParamsTaxRates? = nil
+      @tax_rates : Stripe::PostSubscriptionItemsRequestTaxRates? = nil
     )
     end
 
@@ -132,7 +132,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::ConfigurationItemParamsBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::PostSubscriptionItemsRequestBillingThresholds?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -142,7 +142,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discounts Object to be assigned
-    def discounts=(new_value : Stripe::ConfigurationItemParamsDiscounts?)
+    def discounts=(new_value : Stripe::PostSubscriptionItemsRequestDiscounts?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -194,7 +194,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rates Object to be assigned
-    def tax_rates=(new_value : Stripe::ConfigurationItemParamsTaxRates?)
+    def tax_rates=(new_value : Stripe::PostSubscriptionItemsRequestTaxRates?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

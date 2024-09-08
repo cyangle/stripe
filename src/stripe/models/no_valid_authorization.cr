@@ -9,6 +9,9 @@
 
 require "../../core"
 
+require "./canceled_additional_documentation"
+require "./canceled_explanation"
+
 module Stripe
   class NoValidAuthorization
     include JSON::Serializable
@@ -18,23 +21,19 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_documentation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter additional_documentation : String? = nil
-    ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION = "invalid value for \"additional_documentation\", must be one of []."
-    VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION  = String.static_array("")
+    @[JSON::Field(key: "additional_documentation", type: Stripe::CanceledAdditionalDocumentation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter additional_documentation : Stripe::CanceledAdditionalDocumentation? = nil
 
-    @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter explanation : String? = nil
-    ERROR_MESSAGE_FOR_EXPLANATION = "invalid value for \"explanation\", must be one of []."
-    VALID_VALUES_FOR_EXPLANATION  = String.static_array("")
+    @[JSON::Field(key: "explanation", type: Stripe::CanceledExplanation?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter explanation : Stripe::CanceledExplanation? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @additional_documentation : String? = nil,
-      @explanation : String? = nil
+      @additional_documentation : Stripe::CanceledAdditionalDocumentation? = nil,
+      @explanation : Stripe::CanceledExplanation? = nil
     )
     end
 
@@ -44,10 +43,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_additional_documentation = @additional_documentation).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION) unless OpenApi::EnumValidator.valid?(_additional_documentation, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       unless (_explanation = @explanation).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_EXPLANATION) unless OpenApi::EnumValidator.valid?(_explanation, VALID_VALUES_FOR_EXPLANATION)
+        invalid_properties.concat(_explanation.list_invalid_properties_for("explanation")) if _explanation.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -56,11 +55,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_additional_documentation = @additional_documentation).nil?
-        return false unless OpenApi::EnumValidator.valid?(_additional_documentation, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
       unless (_explanation = @explanation).nil?
-        return false unless OpenApi::EnumValidator.valid?(_explanation, VALID_VALUES_FOR_EXPLANATION)
+        return false if _explanation.is_a?(OpenApi::Validatable) && !_explanation.valid?
       end
 
       true
@@ -68,9 +67,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_documentation Object to be assigned
-    def additional_documentation=(new_value : String?)
+    def additional_documentation=(new_value : Stripe::CanceledAdditionalDocumentation?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("additional_documentation", new_value, VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @additional_documentation = new_value
@@ -78,9 +77,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] explanation Object to be assigned
-    def explanation=(new_value : String?)
+    def explanation=(new_value : Stripe::CanceledExplanation?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("explanation", new_value, VALID_VALUES_FOR_EXPLANATION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @explanation = new_value

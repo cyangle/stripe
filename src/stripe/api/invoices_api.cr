@@ -17,6 +17,7 @@ require "../models/error"
 require "../models/from_invoice"
 require "../models/get_accounts_created_parameter"
 require "../models/get_invoices_upcoming_discounts_parameter"
+require "../models/get_invoices_upcoming_on_behalf_of_parameter"
 require "../models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter"
 require "../models/get_invoices_upcoming_subscription_cancel_at_parameter"
 require "../models/get_invoices_upcoming_subscription_default_tax_rates_parameter"
@@ -26,12 +27,23 @@ require "../models/invoice"
 require "../models/invoice_item_preview_params"
 require "../models/invoice_lines_list"
 require "../models/invoices_resource_list"
+require "../models/line_item"
+require "../models/one_time_price_data_with_product_data"
 require "../models/payment_settings"
+require "../models/period"
 require "../models/post_accounts_request_metadata"
+require "../models/post_invoices_invoice_lines_line_item_id_request_discounts"
+require "../models/post_invoices_invoice_lines_line_item_id_request_metadata"
+require "../models/post_invoices_invoice_lines_line_item_id_request_tax_amounts"
+require "../models/post_invoices_invoice_lines_line_item_id_request_tax_rates"
+require "../models/post_invoices_invoice_pay_request_mandate"
 require "../models/post_invoices_invoice_request_custom_fields"
+require "../models/post_invoices_invoice_request_default_source"
 require "../models/post_invoices_invoice_request_default_tax_rates"
 require "../models/post_invoices_invoice_request_discounts"
 require "../models/post_invoices_invoice_request_effective_at"
+require "../models/post_invoices_invoice_request_number"
+require "../models/post_invoices_invoice_request_on_behalf_of"
 require "../models/post_invoices_invoice_request_shipping_cost"
 require "../models/post_invoices_invoice_request_shipping_details"
 require "../models/post_invoices_invoice_request_transfer_data"
@@ -718,11 +730,11 @@ module Stripe
     # @optional @param subscription_default_tax_rates [Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?] If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set. This field has been deprecated and will be removed in a future API version. Use `subscription_details.default_tax_rates` instead.
     # @optional @param subscription_cancel_at_period_end [Bool?] Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`. This field has been deprecated and will be removed in a future API version. Use `subscription_details.cancel_at_period_end` instead.
     # @optional @param subscription_trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview.
+    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview (up to 250).
     # @optional @param automatic_tax [Stripe::AutomaticTaxParam?] Settings for automatic tax lookup for this invoice preview.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param coupon [String?] The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use `discounts` instead.
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+    # @optional @param on_behalf_of [Stripe::GetInvoicesUpcomingOnBehalfOfParameter?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     # @optional @param issuer [Stripe::ConnectAccountReference?] The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
     # @optional @param discounts [Stripe::GetInvoicesUpcomingDiscountsParameter?] The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
     # @optional @param currency [String?] The currency to preview this invoice in. Defaults to that of `customer` if not specified.
@@ -752,7 +764,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -781,11 +793,11 @@ module Stripe
     # @optional @param subscription_default_tax_rates [Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?] If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set. This field has been deprecated and will be removed in a future API version. Use `subscription_details.default_tax_rates` instead.
     # @optional @param subscription_cancel_at_period_end [Bool?] Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`. This field has been deprecated and will be removed in a future API version. Use `subscription_details.cancel_at_period_end` instead.
     # @optional @param subscription_trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview.
+    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview (up to 250).
     # @optional @param automatic_tax [Stripe::AutomaticTaxParam?] Settings for automatic tax lookup for this invoice preview.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param coupon [String?] The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use `discounts` instead.
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+    # @optional @param on_behalf_of [Stripe::GetInvoicesUpcomingOnBehalfOfParameter?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     # @optional @param issuer [Stripe::ConnectAccountReference?] The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
     # @optional @param discounts [Stripe::GetInvoicesUpcomingDiscountsParameter?] The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
     # @optional @param currency [String?] The currency to preview this invoice in. Defaults to that of `customer` if not specified.
@@ -815,7 +827,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -851,11 +863,11 @@ module Stripe
     # @optional @param subscription_default_tax_rates [Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?] If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set. This field has been deprecated and will be removed in a future API version. Use `subscription_details.default_tax_rates` instead.
     # @optional @param subscription_cancel_at_period_end [Bool?] Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`. This field has been deprecated and will be removed in a future API version. Use `subscription_details.cancel_at_period_end` instead.
     # @optional @param subscription_trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview.
+    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview (up to 250).
     # @optional @param automatic_tax [Stripe::AutomaticTaxParam?] Settings for automatic tax lookup for this invoice preview.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param coupon [String?] The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use `discounts` instead.
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+    # @optional @param on_behalf_of [Stripe::GetInvoicesUpcomingOnBehalfOfParameter?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     # @optional @param issuer [Stripe::ConnectAccountReference?] The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
     # @optional @param discounts [Stripe::GetInvoicesUpcomingDiscountsParameter?] The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
     # @optional @param currency [String?] The currency to preview this invoice in. Defaults to that of `customer` if not specified.
@@ -885,7 +897,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -905,7 +917,6 @@ module Stripe
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_SUBSCRIPTION_RESUME_AT            = 5000
     GET_INVOICES_UPCOMING_VALID_VALUES_FOR_SUBSCRIPTION_RESUME_AT          = String.static_array("now")
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_COUPON                            = 5000
-    GET_INVOICES_UPCOMING_VALID_VALUES_FOR_ON_BEHALF_OF                    = String.static_array("")
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_CUSTOMER                          = 5000
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_SCHEDULE                          = 5000
     GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_SUBSCRIPTION                      = 5000
@@ -930,7 +941,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -981,7 +992,7 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, GET_INVOICES_UPCOMING_MAX_LENGTH_FOR_COUPON)
         end
         unless (_on_behalf_of = on_behalf_of).nil?
-          OpenApi::EnumValidator.validate("on_behalf_of", _on_behalf_of, GET_INVOICES_UPCOMING_VALID_VALUES_FOR_ON_BEHALF_OF)
+          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
         end
         unless (_issuer = issuer).nil?
           _issuer.validate if _issuer.is_a?(OpenApi::Validatable)
@@ -1087,11 +1098,11 @@ module Stripe
     # @optional @param subscription_default_tax_rates [Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?] If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set. This field has been deprecated and will be removed in a future API version. Use `subscription_details.default_tax_rates` instead.
     # @optional @param subscription_cancel_at_period_end [Bool?] Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`. This field has been deprecated and will be removed in a future API version. Use `subscription_details.cancel_at_period_end` instead.
     # @optional @param subscription_trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview.
+    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview (up to 250).
     # @optional @param automatic_tax [Stripe::AutomaticTaxParam?] Settings for automatic tax lookup for this invoice preview.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param coupon [String?] The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use `discounts` instead.
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+    # @optional @param on_behalf_of [Stripe::GetInvoicesUpcomingOnBehalfOfParameter?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     # @optional @param issuer [Stripe::ConnectAccountReference?] The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
     # @optional @param discounts [Stripe::GetInvoicesUpcomingDiscountsParameter?] The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
     # @optional @param currency [String?] The currency to preview this invoice in. Defaults to that of `customer` if not specified.
@@ -1124,7 +1135,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -1156,11 +1167,11 @@ module Stripe
     # @optional @param subscription_default_tax_rates [Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?] If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set. This field has been deprecated and will be removed in a future API version. Use `subscription_details.default_tax_rates` instead.
     # @optional @param subscription_cancel_at_period_end [Bool?] Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`. This field has been deprecated and will be removed in a future API version. Use `subscription_details.cancel_at_period_end` instead.
     # @optional @param subscription_trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview.
+    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview (up to 250).
     # @optional @param automatic_tax [Stripe::AutomaticTaxParam?] Settings for automatic tax lookup for this invoice preview.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param coupon [String?] The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use `discounts` instead.
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+    # @optional @param on_behalf_of [Stripe::GetInvoicesUpcomingOnBehalfOfParameter?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     # @optional @param issuer [Stripe::ConnectAccountReference?] The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
     # @optional @param discounts [Stripe::GetInvoicesUpcomingDiscountsParameter?] The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
     # @optional @param currency [String?] The currency to preview this invoice in. Defaults to that of `customer` if not specified.
@@ -1193,7 +1204,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -1232,11 +1243,11 @@ module Stripe
     # @optional @param subscription_default_tax_rates [Stripe::GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter?] If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set. This field has been deprecated and will be removed in a future API version. Use `subscription_details.default_tax_rates` instead.
     # @optional @param subscription_cancel_at_period_end [Bool?] Indicate whether this subscription should cancel at the end of the current period (`current_period_end`). Defaults to `false`. This field has been deprecated and will be removed in a future API version. Use `subscription_details.cancel_at_period_end` instead.
     # @optional @param subscription_trial_from_plan [Bool?] Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview.
+    # @optional @param invoice_items [Array(Array(InvoiceItemPreviewParams))?] List of invoice items to add or update in the upcoming invoice preview (up to 250).
     # @optional @param automatic_tax [Stripe::AutomaticTaxParam?] Settings for automatic tax lookup for this invoice preview.
     # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
     # @optional @param coupon [String?] The ID of the coupon to apply to this phase of the subscription schedule. This field has been deprecated and will be removed in a future API version. Use `discounts` instead.
-    # @optional @param on_behalf_of [String?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+    # @optional @param on_behalf_of [Stripe::GetInvoicesUpcomingOnBehalfOfParameter?] The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
     # @optional @param issuer [Stripe::ConnectAccountReference?] The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
     # @optional @param discounts [Stripe::GetInvoicesUpcomingDiscountsParameter?] The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the subscription or customer. This works for both coupons directly applied to an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any discounts.
     # @optional @param currency [String?] The currency to preview this invoice in. Defaults to that of `customer` if not specified.
@@ -1269,7 +1280,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -1291,7 +1302,6 @@ module Stripe
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_SUBSCRIPTION_RESUME_AT            = 5000
     GET_INVOICES_UPCOMING_LINES_VALID_VALUES_FOR_SUBSCRIPTION_RESUME_AT          = String.static_array("now")
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_COUPON                            = 5000
-    GET_INVOICES_UPCOMING_LINES_VALID_VALUES_FOR_ON_BEHALF_OF                    = String.static_array("")
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_CUSTOMER                          = 5000
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_SCHEDULE                          = 5000
     GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_SUBSCRIPTION                      = 5000
@@ -1319,7 +1329,7 @@ module Stripe
       automatic_tax : Stripe::AutomaticTaxParam? = nil,
       expand : Array(Array(String))? = nil,
       coupon : String? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::GetInvoicesUpcomingOnBehalfOfParameter? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil,
       currency : String? = nil,
@@ -1377,7 +1387,7 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("coupon", coupon.to_s.size, GET_INVOICES_UPCOMING_LINES_MAX_LENGTH_FOR_COUPON)
         end
         unless (_on_behalf_of = on_behalf_of).nil?
-          OpenApi::EnumValidator.validate("on_behalf_of", _on_behalf_of, GET_INVOICES_UPCOMING_LINES_VALID_VALUES_FOR_ON_BEHALF_OF)
+          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
         end
         unless (_issuer = issuer).nil?
           _issuer.validate if _issuer.is_a?(OpenApi::Validatable)
@@ -1893,7 +1903,7 @@ module Stripe
     # @optional @param custom_fields [Stripe::PostInvoicesInvoiceRequestCustomFields?]
     # @optional @param days_until_due [Int32?] The number of days from which the invoice is created until it is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
     # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?]
+    # @optional @param default_source [Stripe::PostInvoicesInvoiceRequestDefaultSource?]
     # @optional @param default_tax_rates [Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?]
     # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
     # @optional @param discounts [Stripe::PostInvoicesInvoiceRequestDiscounts?]
@@ -1903,8 +1913,8 @@ module Stripe
     # @optional @param footer [String?] Footer to be displayed on the invoice.
     # @optional @param issuer [Stripe::ConnectAccountReference?]
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param number [String?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param number [Stripe::PostInvoicesInvoiceRequestNumber?]
+    # @optional @param on_behalf_of [Stripe::PostInvoicesInvoiceRequestOnBehalfOf?]
     # @optional @param payment_settings [Stripe::PaymentSettings?]
     # @optional @param rendering [Stripe::RenderingParam?]
     # @optional @param shipping_cost [Stripe::PostInvoicesInvoiceRequestShippingCost?]
@@ -1923,7 +1933,7 @@ module Stripe
       custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
       days_until_due : Int64? = nil,
       default_payment_method : String? = nil,
-      default_source : String? = nil,
+      default_source : Stripe::PostInvoicesInvoiceRequestDefaultSource? = nil,
       default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
       description : String? = nil,
       discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
@@ -1933,8 +1943,8 @@ module Stripe
       footer : String? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      number : String? = nil,
-      on_behalf_of : String? = nil,
+      number : Stripe::PostInvoicesInvoiceRequestNumber? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
       payment_settings : Stripe::PaymentSettings? = nil,
       rendering : Stripe::RenderingParam? = nil,
       shipping_cost : Stripe::PostInvoicesInvoiceRequestShippingCost? = nil,
@@ -1956,7 +1966,7 @@ module Stripe
     # @optional @param custom_fields [Stripe::PostInvoicesInvoiceRequestCustomFields?]
     # @optional @param days_until_due [Int32?] The number of days from which the invoice is created until it is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
     # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?]
+    # @optional @param default_source [Stripe::PostInvoicesInvoiceRequestDefaultSource?]
     # @optional @param default_tax_rates [Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?]
     # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
     # @optional @param discounts [Stripe::PostInvoicesInvoiceRequestDiscounts?]
@@ -1966,8 +1976,8 @@ module Stripe
     # @optional @param footer [String?] Footer to be displayed on the invoice.
     # @optional @param issuer [Stripe::ConnectAccountReference?]
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param number [String?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param number [Stripe::PostInvoicesInvoiceRequestNumber?]
+    # @optional @param on_behalf_of [Stripe::PostInvoicesInvoiceRequestOnBehalfOf?]
     # @optional @param payment_settings [Stripe::PaymentSettings?]
     # @optional @param rendering [Stripe::RenderingParam?]
     # @optional @param shipping_cost [Stripe::PostInvoicesInvoiceRequestShippingCost?]
@@ -1986,7 +1996,7 @@ module Stripe
       custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
       days_until_due : Int64? = nil,
       default_payment_method : String? = nil,
-      default_source : String? = nil,
+      default_source : Stripe::PostInvoicesInvoiceRequestDefaultSource? = nil,
       default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
       description : String? = nil,
       discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
@@ -1996,8 +2006,8 @@ module Stripe
       footer : String? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      number : String? = nil,
-      on_behalf_of : String? = nil,
+      number : Stripe::PostInvoicesInvoiceRequestNumber? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
       payment_settings : Stripe::PaymentSettings? = nil,
       rendering : Stripe::RenderingParam? = nil,
       shipping_cost : Stripe::PostInvoicesInvoiceRequestShippingCost? = nil,
@@ -2026,7 +2036,7 @@ module Stripe
     # @optional @param custom_fields [Stripe::PostInvoicesInvoiceRequestCustomFields?]
     # @optional @param days_until_due [Int32?] The number of days from which the invoice is created until it is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
     # @optional @param default_payment_method [String?] ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
-    # @optional @param default_source [String?]
+    # @optional @param default_source [Stripe::PostInvoicesInvoiceRequestDefaultSource?]
     # @optional @param default_tax_rates [Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?]
     # @optional @param description [String?] An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
     # @optional @param discounts [Stripe::PostInvoicesInvoiceRequestDiscounts?]
@@ -2036,8 +2046,8 @@ module Stripe
     # @optional @param footer [String?] Footer to be displayed on the invoice.
     # @optional @param issuer [Stripe::ConnectAccountReference?]
     # @optional @param metadata [Stripe::PostAccountsRequestMetadata?]
-    # @optional @param number [String?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param number [Stripe::PostInvoicesInvoiceRequestNumber?]
+    # @optional @param on_behalf_of [Stripe::PostInvoicesInvoiceRequestOnBehalfOf?]
     # @optional @param payment_settings [Stripe::PaymentSettings?]
     # @optional @param rendering [Stripe::RenderingParam?]
     # @optional @param shipping_cost [Stripe::PostInvoicesInvoiceRequestShippingCost?]
@@ -2056,7 +2066,7 @@ module Stripe
       custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
       days_until_due : Int64? = nil,
       default_payment_method : String? = nil,
-      default_source : String? = nil,
+      default_source : Stripe::PostInvoicesInvoiceRequestDefaultSource? = nil,
       default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
       description : String? = nil,
       discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
@@ -2066,8 +2076,8 @@ module Stripe
       footer : String? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      number : String? = nil,
-      on_behalf_of : String? = nil,
+      number : Stripe::PostInvoicesInvoiceRequestNumber? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
       payment_settings : Stripe::PaymentSettings? = nil,
       rendering : Stripe::RenderingParam? = nil,
       shipping_cost : Stripe::PostInvoicesInvoiceRequestShippingCost? = nil,
@@ -2082,12 +2092,9 @@ module Stripe
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_INVOICE                = 5000
     POST_INVOICES_INVOICE_VALID_VALUES_FOR_COLLECTION_METHOD    = String.static_array("charge_automatically", "send_invoice")
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
-    POST_INVOICES_INVOICE_VALID_VALUES_FOR_DEFAULT_SOURCE       = String.static_array("")
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DESCRIPTION            = 1500
     POST_INVOICES_INVOICE_MAX_LENGTH_FOR_FOOTER                 = 5000
-    POST_INVOICES_INVOICE_VALID_VALUES_FOR_NUMBER               = String.static_array("")
-    POST_INVOICES_INVOICE_VALID_VALUES_FOR_ON_BEHALF_OF         = String.static_array("")
-    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR   = 22
+    POST_INVOICES_INVOICE_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR   =   22
 
     # @return Crest::Request
     def build_api_request_for_post_invoices_invoice(
@@ -2101,7 +2108,7 @@ module Stripe
       custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil,
       days_until_due : Int64? = nil,
       default_payment_method : String? = nil,
-      default_source : String? = nil,
+      default_source : Stripe::PostInvoicesInvoiceRequestDefaultSource? = nil,
       default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil,
       description : String? = nil,
       discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil,
@@ -2111,8 +2118,8 @@ module Stripe
       footer : String? = nil,
       issuer : Stripe::ConnectAccountReference? = nil,
       metadata : Stripe::PostAccountsRequestMetadata? = nil,
-      number : String? = nil,
-      on_behalf_of : String? = nil,
+      number : Stripe::PostInvoicesInvoiceRequestNumber? = nil,
+      on_behalf_of : Stripe::PostInvoicesInvoiceRequestOnBehalfOf? = nil,
       payment_settings : Stripe::PaymentSettings? = nil,
       rendering : Stripe::RenderingParam? = nil,
       shipping_cost : Stripe::PostInvoicesInvoiceRequestShippingCost? = nil,
@@ -2147,7 +2154,7 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", default_payment_method.to_s.size, POST_INVOICES_INVOICE_MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
         end
         unless (_default_source = default_source).nil?
-          OpenApi::EnumValidator.validate("default_source", _default_source, POST_INVOICES_INVOICE_VALID_VALUES_FOR_DEFAULT_SOURCE)
+          _default_source.validate if _default_source.is_a?(OpenApi::Validatable)
         end
         unless (_default_tax_rates = default_tax_rates).nil?
           _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
@@ -2173,10 +2180,10 @@ module Stripe
           _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
         end
         unless (_number = number).nil?
-          OpenApi::EnumValidator.validate("number", _number, POST_INVOICES_INVOICE_VALID_VALUES_FOR_NUMBER)
+          _number.validate if _number.is_a?(OpenApi::Validatable)
         end
         unless (_on_behalf_of = on_behalf_of).nil?
-          OpenApi::EnumValidator.validate("on_behalf_of", _on_behalf_of, POST_INVOICES_INVOICE_VALID_VALUES_FOR_ON_BEHALF_OF)
+          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
         end
         unless (_payment_settings = payment_settings).nil?
           _payment_settings.validate if _payment_settings.is_a?(OpenApi::Validatable)
@@ -2224,7 +2231,7 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(custom_fields.to_json), "custom_fields")) if !custom_fields.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("days_until_due", days_until_due.to_s) if !days_until_due.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("default_payment_method", default_payment_method.to_s) if !default_payment_method.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("default_source", default_source.to_s) if !default_source.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(default_source.to_json), "default_source")) if !default_source.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(default_tax_rates.to_json), "default_tax_rates")) if !default_tax_rates.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("description", description.to_s) if !description.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(discounts.to_json), "discounts")) if !discounts.nil?
@@ -2234,8 +2241,8 @@ module Stripe
       form_params << Tuple(String, Crest::ParamsValue).new("footer", footer.to_s) if !footer.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(issuer.to_json), "issuer")) if !issuer.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("number", number.to_s) if !number.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("on_behalf_of", on_behalf_of.to_s) if !on_behalf_of.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(number.to_json), "number")) if !number.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(on_behalf_of.to_json), "on_behalf_of")) if !on_behalf_of.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_settings.to_json), "payment_settings")) if !payment_settings.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(rendering.to_json), "rendering")) if !rendering.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(shipping_cost.to_json), "shipping_cost")) if !shipping_cost.nil?
@@ -2374,6 +2381,240 @@ module Stripe
       )
     end
 
+    # <p>Updates an invoice’s line item. Some fields, such as <code>tax_amounts</code>, only live on the invoice line item, so they can only be updated through this endpoint. Other fields, such as <code>amount</code>, live on both the invoice item and the invoice line item, so updates on this endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only possible before the invoice is finalized.</p>
+    # @required @param invoice [String?] Invoice ID of line item
+    # @required @param line_item_id [String?] Invoice line item ID
+    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
+    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
+    # @optional @param discountable [Bool?] Controls whether discounts apply to this line item. Defaults to false for prorations or negative line items, and true for all other line items. Cannot be set to true for prorations.
+    # @optional @param discounts [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param metadata [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata?]
+    # @optional @param period [Stripe::Period?]
+    # @optional @param price [String?] The ID of the price object. One of `price` or `price_data` is required.
+    # @optional @param price_data [Stripe::OneTimePriceDataWithProductData?]
+    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the line item.
+    # @optional @param tax_amounts [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts?]
+    # @optional @param tax_rates [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates?]
+    # @return [Stripe::LineItem]
+    def post_invoices_invoice_lines_line_item_id(
+      *,
+      invoice : String? = nil,
+      line_item_id : String? = nil,
+      amount : Int64? = nil,
+      description : String? = nil,
+      discountable : Bool? = nil,
+      discounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata? = nil,
+      period : Stripe::Period? = nil,
+      price : String? = nil,
+      price_data : Stripe::OneTimePriceDataWithProductData? = nil,
+      quantity : Int64? = nil,
+      tax_amounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts? = nil,
+      tax_rates : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates? = nil
+    ) : Stripe::LineItem
+      data, _status_code, _headers = post_invoices_invoice_lines_line_item_id_with_http_info(invoice: invoice, line_item_id: line_item_id, amount: amount, description: description, discountable: discountable, discounts: discounts, expand: expand, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, tax_amounts: tax_amounts, tax_rates: tax_rates)
+      data
+    end
+
+    # &lt;p&gt;Updates an invoice’s line item. Some fields, such as &lt;code&gt;tax_amounts&lt;/code&gt;, only live on the invoice line item, so they can only be updated through this endpoint. Other fields, such as &lt;code&gt;amount&lt;/code&gt;, live on both the invoice item and the invoice line item, so updates on this endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only possible before the invoice is finalized.&lt;/p&gt;
+    # @required @param invoice [String?] Invoice ID of line item
+    # @required @param line_item_id [String?] Invoice line item ID
+    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
+    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
+    # @optional @param discountable [Bool?] Controls whether discounts apply to this line item. Defaults to false for prorations or negative line items, and true for all other line items. Cannot be set to true for prorations.
+    # @optional @param discounts [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param metadata [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata?]
+    # @optional @param period [Stripe::Period?]
+    # @optional @param price [String?] The ID of the price object. One of `price` or `price_data` is required.
+    # @optional @param price_data [Stripe::OneTimePriceDataWithProductData?]
+    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the line item.
+    # @optional @param tax_amounts [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts?]
+    # @optional @param tax_rates [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates?]
+    # @return [Tuple(Stripe::LineItem, Integer, Hash)] Stripe::LineItem, response status code and response headers
+    def post_invoices_invoice_lines_line_item_id_with_http_info(
+      *,
+      invoice : String? = nil,
+      line_item_id : String? = nil,
+      amount : Int64? = nil,
+      description : String? = nil,
+      discountable : Bool? = nil,
+      discounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata? = nil,
+      period : Stripe::Period? = nil,
+      price : String? = nil,
+      price_data : Stripe::OneTimePriceDataWithProductData? = nil,
+      quantity : Int64? = nil,
+      tax_amounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts? = nil,
+      tax_rates : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates? = nil
+    ) : Tuple(Stripe::LineItem, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_invoices_invoice_lines_line_item_id(invoice: invoice, line_item_id: line_item_id, amount: amount, description: description, discountable: discountable, discounts: discounts, expand: expand, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, tax_amounts: tax_amounts, tax_rates: tax_rates)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: InvoicesApi#post_invoices_invoice_lines_line_item_id\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::LineItem.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Updates an invoice’s line item. Some fields, such as &lt;code&gt;tax_amounts&lt;/code&gt;, only live on the invoice line item, so they can only be updated through this endpoint. Other fields, such as &lt;code&gt;amount&lt;/code&gt;, live on both the invoice item and the invoice line item, so updates on this endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only possible before the invoice is finalized.&lt;/p&gt;
+    # @required @param invoice [String?] Invoice ID of line item
+    # @required @param line_item_id [String?] Invoice line item ID
+    # @optional @param amount [Int32?] The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
+    # @optional @param description [String?] An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
+    # @optional @param discountable [Bool?] Controls whether discounts apply to this line item. Defaults to false for prorations or negative line items, and true for all other line items. Cannot be set to true for prorations.
+    # @optional @param discounts [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param metadata [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata?]
+    # @optional @param period [Stripe::Period?]
+    # @optional @param price [String?] The ID of the price object. One of `price` or `price_data` is required.
+    # @optional @param price_data [Stripe::OneTimePriceDataWithProductData?]
+    # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the line item.
+    # @optional @param tax_amounts [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts?]
+    # @optional @param tax_rates [Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates?]
+    # @return nil
+    def post_invoices_invoice_lines_line_item_id(
+      *,
+      invoice : String? = nil,
+      line_item_id : String? = nil,
+      amount : Int64? = nil,
+      description : String? = nil,
+      discountable : Bool? = nil,
+      discounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata? = nil,
+      period : Stripe::Period? = nil,
+      price : String? = nil,
+      price_data : Stripe::OneTimePriceDataWithProductData? = nil,
+      quantity : Int64? = nil,
+      tax_amounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts? = nil,
+      tax_rates : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_invoices_invoice_lines_line_item_id(invoice: invoice, line_item_id: line_item_id, amount: amount, description: description, discountable: discountable, discounts: discounts, expand: expand, metadata: metadata, period: period, price: price, price_data: price_data, quantity: quantity, tax_amounts: tax_amounts, tax_rates: tax_rates).execute(&block)
+    end
+
+    POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_INVOICE      = 5000
+    POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_LINE_ITEM_ID = 5000
+    POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_DESCRIPTION  = 5000
+    POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_PRICE        = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_invoices_invoice_lines_line_item_id(
+      *,
+      invoice : String? = nil,
+      line_item_id : String? = nil,
+      amount : Int64? = nil,
+      description : String? = nil,
+      discountable : Bool? = nil,
+      discounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestDiscounts? = nil,
+      expand : Array(String)? = nil,
+      metadata : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestMetadata? = nil,
+      period : Stripe::Period? = nil,
+      price : String? = nil,
+      price_data : Stripe::OneTimePriceDataWithProductData? = nil,
+      quantity : Int64? = nil,
+      tax_amounts : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxAmounts? = nil,
+      tax_rates : Stripe::PostInvoicesInvoiceLinesLineItemIdRequestTaxRates? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: InvoicesApi.post_invoices_invoice_lines_line_item_id ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"invoice\" is required and cannot be null") if invoice.nil?
+        unless (_invoice = invoice).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("invoice", invoice.to_s.size, POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_INVOICE)
+        end
+        raise ArgumentError.new("\"line_item_id\" is required and cannot be null") if line_item_id.nil?
+        unless (_line_item_id = line_item_id).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("line_item_id", line_item_id.to_s.size, POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_LINE_ITEM_ID)
+        end
+
+        unless (_description = description).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("description", description.to_s.size, POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_DESCRIPTION)
+        end
+
+        unless (_discounts = discounts).nil?
+          _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_metadata = metadata).nil?
+          _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
+        end
+        unless (_period = period).nil?
+          _period.validate if _period.is_a?(OpenApi::Validatable)
+        end
+        unless (_price = price).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("price", price.to_s.size, POST_INVOICES_INVOICE_LINES_LINE_ITEM_ID_MAX_LENGTH_FOR_PRICE)
+        end
+        unless (_price_data = price_data).nil?
+          _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_tax_amounts = tax_amounts).nil?
+          _tax_amounts.validate if _tax_amounts.is_a?(OpenApi::Validatable)
+        end
+        unless (_tax_rates = tax_rates).nil?
+          _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/invoices/{invoice}/lines/{line_item_id}".sub("{" + "invoice" + "}", URI.encode_path(invoice.to_s)).sub("{" + "line_item_id" + "}", URI.encode_path(line_item_id.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("amount", amount.to_s) if !amount.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("description", description.to_s) if !description.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("discountable", discountable.to_s) if !discountable.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(discounts.to_json), "discounts")) if !discounts.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(period.to_json), "period")) if !period.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("price", price.to_s) if !price.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(price_data.to_json), "price_data")) if !price_data.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("quantity", quantity.to_s) if !quantity.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_amounts.to_json), "tax_amounts")) if !tax_amounts.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_rates.to_json), "tax_rates")) if !tax_rates.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "InvoicesApi.post_invoices_invoice_lines_line_item_id",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
     # <p>Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.</p>
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
@@ -2482,7 +2723,7 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param forgive [Bool?] In cases where the source used to pay the invoice has insufficient funds, passing `forgive=true` controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing `forgive=false` will fail the charge if the source hasn't been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to `false`.
-    # @optional @param mandate [String?]
+    # @optional @param mandate [Stripe::PostInvoicesInvoicePayRequestMandate?]
     # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
     # @optional @param paid_out_of_band [Bool?] Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to `false`.
     # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
@@ -2493,7 +2734,7 @@ module Stripe
       invoice : String? = nil,
       expand : Array(String)? = nil,
       forgive : Bool? = nil,
-      mandate : String? = nil,
+      mandate : Stripe::PostInvoicesInvoicePayRequestMandate? = nil,
       off_session : Bool? = nil,
       paid_out_of_band : Bool? = nil,
       payment_method : String? = nil,
@@ -2507,7 +2748,7 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param forgive [Bool?] In cases where the source used to pay the invoice has insufficient funds, passing `forgive=true` controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing `forgive=false` will fail the charge if the source hasn't been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to `false`.
-    # @optional @param mandate [String?]
+    # @optional @param mandate [Stripe::PostInvoicesInvoicePayRequestMandate?]
     # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
     # @optional @param paid_out_of_band [Bool?] Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to `false`.
     # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
@@ -2518,7 +2759,7 @@ module Stripe
       invoice : String? = nil,
       expand : Array(String)? = nil,
       forgive : Bool? = nil,
-      mandate : String? = nil,
+      mandate : Stripe::PostInvoicesInvoicePayRequestMandate? = nil,
       off_session : Bool? = nil,
       paid_out_of_band : Bool? = nil,
       payment_method : String? = nil,
@@ -2539,7 +2780,7 @@ module Stripe
     # @required @param invoice [String?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param forgive [Bool?] In cases where the source used to pay the invoice has insufficient funds, passing `forgive=true` controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing `forgive=false` will fail the charge if the source hasn't been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to `false`.
-    # @optional @param mandate [String?]
+    # @optional @param mandate [Stripe::PostInvoicesInvoicePayRequestMandate?]
     # @optional @param off_session [Bool?] Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
     # @optional @param paid_out_of_band [Bool?] Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to `false`.
     # @optional @param payment_method [String?] A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
@@ -2550,7 +2791,7 @@ module Stripe
       invoice : String? = nil,
       expand : Array(String)? = nil,
       forgive : Bool? = nil,
-      mandate : String? = nil,
+      mandate : Stripe::PostInvoicesInvoicePayRequestMandate? = nil,
       off_session : Bool? = nil,
       paid_out_of_band : Bool? = nil,
       payment_method : String? = nil,
@@ -2561,7 +2802,6 @@ module Stripe
     end
 
     POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_INVOICE        = 5000
-    POST_INVOICES_INVOICE_PAY_VALID_VALUES_FOR_MANDATE      = String.static_array("")
     POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
     POST_INVOICES_INVOICE_PAY_MAX_LENGTH_FOR_SOURCE         = 5000
 
@@ -2571,7 +2811,7 @@ module Stripe
       invoice : String? = nil,
       expand : Array(String)? = nil,
       forgive : Bool? = nil,
-      mandate : String? = nil,
+      mandate : Stripe::PostInvoicesInvoicePayRequestMandate? = nil,
       off_session : Bool? = nil,
       paid_out_of_band : Bool? = nil,
       payment_method : String? = nil,
@@ -2588,7 +2828,7 @@ module Stripe
         end
 
         unless (_mandate = mandate).nil?
-          OpenApi::EnumValidator.validate("mandate", _mandate, POST_INVOICES_INVOICE_PAY_VALID_VALUES_FOR_MANDATE)
+          _mandate.validate if _mandate.is_a?(OpenApi::Validatable)
         end
 
         unless (_payment_method = payment_method).nil?
@@ -2619,7 +2859,7 @@ module Stripe
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("forgive", forgive.to_s) if !forgive.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("mandate", mandate.to_s) if !mandate.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(mandate.to_json), "mandate")) if !mandate.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("off_session", off_session.to_s) if !off_session.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("paid_out_of_band", paid_out_of_band.to_s) if !paid_out_of_band.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("payment_method", payment_method.to_s) if !payment_method.nil?

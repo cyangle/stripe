@@ -10,9 +10,10 @@
 require "../../core"
 
 require "./address"
-require "./legal_entity_company_verification"
-require "./legal_entity_japan_address"
-require "./legal_entity_ubo_declaration"
+require "./legal_entity_company_address_kana"
+require "./legal_entity_company_address_kanji"
+require "./legal_entity_company_ownership_declaration"
+require "./legal_entity_company_verification1"
 
 module Stripe
   #
@@ -27,14 +28,14 @@ module Stripe
     @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::Address? = nil
 
-    @[JSON::Field(key: "address_kana", type: Stripe::LegalEntityJapanAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kana.nil? && !address_kana_present?)]
-    getter address_kana : Stripe::LegalEntityJapanAddress? = nil
+    @[JSON::Field(key: "address_kana", type: Stripe::LegalEntityCompanyAddressKana?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kana.nil? && !address_kana_present?)]
+    getter address_kana : Stripe::LegalEntityCompanyAddressKana? = nil
 
     @[JSON::Field(ignore: true)]
     property? address_kana_present : Bool = false
 
-    @[JSON::Field(key: "address_kanji", type: Stripe::LegalEntityJapanAddress?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
-    getter address_kanji : Stripe::LegalEntityJapanAddress? = nil
+    @[JSON::Field(key: "address_kanji", type: Stripe::LegalEntityCompanyAddressKanji?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
+    getter address_kanji : Stripe::LegalEntityCompanyAddressKanji? = nil
 
     @[JSON::Field(ignore: true)]
     property? address_kanji_present : Bool = false
@@ -85,8 +86,8 @@ module Stripe
     @[JSON::Field(key: "owners_provided", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter owners_provided : Bool? = nil
 
-    @[JSON::Field(key: "ownership_declaration", type: Stripe::LegalEntityUboDeclaration?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ownership_declaration.nil? && !ownership_declaration_present?)]
-    getter ownership_declaration : Stripe::LegalEntityUboDeclaration? = nil
+    @[JSON::Field(key: "ownership_declaration", type: Stripe::LegalEntityCompanyOwnershipDeclaration?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ownership_declaration.nil? && !ownership_declaration_present?)]
+    getter ownership_declaration : Stripe::LegalEntityCompanyOwnershipDeclaration? = nil
 
     @[JSON::Field(ignore: true)]
     property? ownership_declaration_present : Bool = false
@@ -118,8 +119,8 @@ module Stripe
     @[JSON::Field(key: "vat_id_provided", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter vat_id_provided : Bool? = nil
 
-    @[JSON::Field(key: "verification", type: Stripe::LegalEntityCompanyVerification?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verification.nil? && !verification_present?)]
-    getter verification : Stripe::LegalEntityCompanyVerification? = nil
+    @[JSON::Field(key: "verification", type: Stripe::LegalEntityCompanyVerification1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verification.nil? && !verification_present?)]
+    getter verification : Stripe::LegalEntityCompanyVerification1? = nil
 
     @[JSON::Field(ignore: true)]
     property? verification_present : Bool = false
@@ -130,8 +131,8 @@ module Stripe
       *,
       # Optional properties
       @address : Stripe::Address? = nil,
-      @address_kana : Stripe::LegalEntityJapanAddress? = nil,
-      @address_kanji : Stripe::LegalEntityJapanAddress? = nil,
+      @address_kana : Stripe::LegalEntityCompanyAddressKana? = nil,
+      @address_kanji : Stripe::LegalEntityCompanyAddressKanji? = nil,
       @directors_provided : Bool? = nil,
       @executives_provided : Bool? = nil,
       @export_license_id : String? = nil,
@@ -140,13 +141,13 @@ module Stripe
       @name_kana : String? = nil,
       @name_kanji : String? = nil,
       @owners_provided : Bool? = nil,
-      @ownership_declaration : Stripe::LegalEntityUboDeclaration? = nil,
+      @ownership_declaration : Stripe::LegalEntityCompanyOwnershipDeclaration? = nil,
       @phone : String? = nil,
       @structure : String? = nil,
       @tax_id_provided : Bool? = nil,
       @tax_id_registrar : String? = nil,
       @vat_id_provided : Bool? = nil,
-      @verification : Stripe::LegalEntityCompanyVerification? = nil
+      @verification : Stripe::LegalEntityCompanyVerification1? = nil
     )
     end
 
@@ -285,7 +286,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_kana Object to be assigned
-    def address_kana=(new_value : Stripe::LegalEntityJapanAddress?)
+    def address_kana=(new_value : Stripe::LegalEntityCompanyAddressKana?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -295,7 +296,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_kanji Object to be assigned
-    def address_kanji=(new_value : Stripe::LegalEntityJapanAddress?)
+    def address_kanji=(new_value : Stripe::LegalEntityCompanyAddressKanji?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -373,7 +374,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ownership_declaration Object to be assigned
-    def ownership_declaration=(new_value : Stripe::LegalEntityUboDeclaration?)
+    def ownership_declaration=(new_value : Stripe::LegalEntityCompanyOwnershipDeclaration?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -425,7 +426,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification Object to be assigned
-    def verification=(new_value : Stripe::LegalEntityCompanyVerification?)
+    def verification=(new_value : Stripe::LegalEntityCompanyVerification1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

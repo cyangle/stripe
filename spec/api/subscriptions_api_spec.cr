@@ -57,13 +57,13 @@ describe "SubscriptionsApi" do
   # @option opts [String] :price Filter for subscriptions that contain this recurring price ID.
   # @option opts [AutomaticTaxFilterParams] :automatic_tax Filter subscriptions by their automatic tax settings.
   # @option opts [GetAccountsCreatedParameter] :created Only return subscriptions that were created during the given date interval.
+  # @option opts [GetAccountsCreatedParameter] :current_period_end Only return subscriptions whose current_period_end falls within the given date interval.
+  # @option opts [GetAccountsCreatedParameter] :current_period_start Only return subscriptions whose current_period_start falls within the given date interval.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :customer The ID of the customer whose subscriptions will be retrieved.
   # @option opts [String] :plan The ID of the plan whose subscriptions will be retrieved.
   # @option opts [String] :collection_method The collection method of the subscriptions to retrieve. Either &#x60;charge_automatically&#x60; or &#x60;send_invoice&#x60;.
   # @option opts [String] :status The status of the subscriptions to retrieve. Passing in a value of &#x60;canceled&#x60; will return all canceled subscriptions, including those belonging to deleted customers. Pass &#x60;ended&#x60; to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of &#x60;all&#x60; will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
-  # @option opts [GetAccountsCreatedParameter] :current_period_end
-  # @option opts [GetAccountsCreatedParameter] :current_period_start
   # @return [SubscriptionsSubscriptionList]
   describe "get_subscriptions test" do
     it "should work" do
@@ -124,7 +124,7 @@ describe "SubscriptionsApi" do
   # @option opts [Array(SubscriptionItemCreateParams)] :items A list of up to 20 subscription items, each with an attached price.
   # @option opts [PostAccountsRequestMetadata] :metadata
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to &#x60;false&#x60; (on-session).
-  # @option opts [String] :on_behalf_of
+  # @option opts [PostSubscriptionsRequestOnBehalfOf] :on_behalf_of
   # @option opts [String] :payment_behavior Only applies to subscriptions with &#x60;collection_method&#x3D;charge_automatically&#x60;.  Use &#x60;allow_incomplete&#x60; to create Subscriptions with &#x60;status&#x3D;incomplete&#x60; if the first invoice can&#39;t be paid. Creating Subscriptions with this status allows you to manage scenarios where additional customer actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to create Subscriptions with &#x60;status&#x3D;incomplete&#x60; when the first invoice requires payment, otherwise start as active. Subscriptions transition to &#x60;status&#x3D;active&#x60; when successfully confirming the PaymentIntent on the first invoice. This allows simpler management of scenarios where additional customer actions are needed to pay a subscription’s invoice, such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the PaymentIntent is not confirmed within 23 hours Subscriptions transition to &#x60;status&#x3D;incomplete_expired&#x60;, which is a terminal state.  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s first invoice can&#39;t be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further customer action is needed, this parameter doesn&#39;t create a Subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  &#x60;pending_if_incomplete&#x60; is only used with updates and cannot be passed when creating a Subscription.  Subscriptions with &#x60;collection_method&#x3D;send_invoice&#x60; are automatically activated regardless of the first Invoice status.
   # @option opts [PaymentSettings] :payment_settings
   # @option opts [PostSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
@@ -158,16 +158,16 @@ describe "SubscriptionsApi" do
   # @option opts [String] :coupon The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription. This field has been deprecated and will be removed in a future API version. Use &#x60;discounts&#x60; instead.
   # @option opts [Int32] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
   # @option opts [String] :default_payment_method ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over &#x60;default_source&#x60;. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-  # @option opts [String] :default_source
+  # @option opts [PostSubscriptionsSubscriptionExposedIdRequestDefaultSource] :default_source
   # @option opts [PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates] :default_tax_rates
-  # @option opts [String] :description
+  # @option opts [PostSubscriptionsSubscriptionExposedIdRequestDescription] :description
   # @option opts [PostSubscriptionsRequestDiscounts] :discounts
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [InvoiceSettingsParam] :invoice_settings
   # @option opts [Array(SubscriptionItemUpdateParams)] :items A list of up to 20 subscription items, each with an attached price.
   # @option opts [PostAccountsRequestMetadata] :metadata
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to &#x60;false&#x60; (on-session).
-  # @option opts [String] :on_behalf_of
+  # @option opts [PostSubscriptionsRequestOnBehalfOf] :on_behalf_of
   # @option opts [PostSubscriptionsSubscriptionExposedIdRequestPauseCollection] :pause_collection
   # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
   # @option opts [PaymentSettings] :payment_settings
@@ -181,6 +181,21 @@ describe "SubscriptionsApi" do
   # @option opts [TrialSettingsConfig] :trial_settings
   # @return [Subscription]
   describe "post_subscriptions_subscription_exposed_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_subscriptions_subscription_resume
+  # &lt;p&gt;Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor and creating prorations. If a resumption invoice is generated, it must be paid or marked uncollectible before the subscription will be unpaused. If payment succeeds the subscription will become &lt;code&gt;active&lt;/code&gt;, and if payment fails the subscription will be &lt;code&gt;past_due&lt;/code&gt;. The resumption invoice will void automatically if not paid by the expiration date.&lt;/p&gt;
+  # @param subscription
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :billing_cycle_anchor Either &#x60;now&#x60; or &#x60;unchanged&#x60;. Setting the value to &#x60;now&#x60; resets the subscription&#39;s billing cycle anchor to the current time (in UTC). Setting the value to &#x60;unchanged&#x60; advances the subscription&#39;s billing cycle anchor to the period that surrounds the current time. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/billing/subscriptions/prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. The default value is &#x60;create_prorations&#x60;.
+  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was resumed at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+  # @return [Subscription]
+  describe "post_subscriptions_subscription_resume test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

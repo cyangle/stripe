@@ -25,10 +25,6 @@ describe Stripe::MerchandiseNotAsDescribed do
     it "should work" do
       # instance = Stripe::MerchandiseNotAsDescribed.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::MerchandiseNotAsDescribed::ENUM_VALIDATOR_FOR_ADDITIONAL_DOCUMENTATION
-      # validator.allowable_values.each do |value|
-      #   instance.additional_documentation = value.as(String)
-      # end
     end
   end
 
@@ -36,10 +32,6 @@ describe Stripe::MerchandiseNotAsDescribed do
     it "should work" do
       # instance = Stripe::MerchandiseNotAsDescribed.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::MerchandiseNotAsDescribed::ENUM_VALIDATOR_FOR_EXPLANATION
-      # validator.allowable_values.each do |value|
-      #   instance.explanation = value.as(String)
-      # end
     end
   end
 
@@ -54,10 +46,6 @@ describe Stripe::MerchandiseNotAsDescribed do
     it "should work" do
       # instance = Stripe::MerchandiseNotAsDescribed.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::MerchandiseNotAsDescribed::ENUM_VALIDATOR_FOR_RETURN_DESCRIPTION
-      # validator.allowable_values.each do |value|
-      #   instance.return_description = value.as(String)
-      # end
     end
   end
 

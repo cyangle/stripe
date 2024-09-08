@@ -9,14 +9,27 @@
 
 require "../../core"
 
+require "../models/amount_details_specs"
 require "../models/billing_clocks_resource_billing_clock_list"
 require "../models/card_present"
+require "../models/confirmation_token"
 require "../models/deleted_test_helpers_test_clock"
 require "../models/error"
 require "../models/failure_details_params"
+require "../models/fleet_testmode_authorization_specs"
+require "../models/fuel_specs"
 
 require "../models/interac_present"
+require "../models/issuing_authorization"
 require "../models/issuing_card"
+require "../models/issuing_personalization_design"
+require "../models/issuing_transaction"
+require "../models/merchant_data_specs"
+require "../models/network_data_specs"
+require "../models/payment_method_data_params"
+require "../models/purchase_details_specs"
+require "../models/recipient_shipping_with_optional_fields_address"
+require "../models/rejection_reasons_param"
 require "../models/returned_details_params"
 require "../models/source_params"
 require "../models/terminal_reader"
@@ -26,6 +39,7 @@ require "../models/treasury_outbound_payment"
 require "../models/treasury_outbound_transfer"
 require "../models/treasury_received_credit"
 require "../models/treasury_received_debit"
+require "../models/verification_data_specs"
 
 module Stripe
   class TestHelpersApi
@@ -355,73 +369,575 @@ module Stripe
       )
     end
 
-    # <p>Updates the shipping status of the specified Issuing <code>Card</code> object to <code>delivered</code>.</p>
-    # @required @param card [String?]
+    # <p>Creates a test mode Confirmation Token server side for your integration tests.</p>
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @return [Stripe::IssuingCard]
-    def post_test_helpers_issuing_cards_card_shipping_deliver(
+    # @optional @param payment_method [String?] ID of an existing PaymentMethod.
+    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
+    # @optional @param return_url [String?] Return URL used to confirm the Intent.
+    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this ConfirmationToken's payment method.  The presence of this property will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+    # @optional @param shipping [Stripe::RecipientShippingWithOptionalFieldsAddress?]
+    # @return [Stripe::ConfirmationToken]
+    def post_test_helpers_confirmation_tokens(
       *,
-      card : String? = nil,
-      expand : Array(String)? = nil
-    ) : Stripe::IssuingCard
-      data, _status_code, _headers = post_test_helpers_issuing_cards_card_shipping_deliver_with_http_info(card: card, expand: expand)
+      expand : Array(String)? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::RecipientShippingWithOptionalFieldsAddress? = nil
+    ) : Stripe::ConfirmationToken
+      data, _status_code, _headers = post_test_helpers_confirmation_tokens_with_http_info(expand: expand, payment_method: payment_method, payment_method_data: payment_method_data, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping)
       data
     end
 
-    # &lt;p&gt;Updates the shipping status of the specified Issuing &lt;code&gt;Card&lt;/code&gt; object to &lt;code&gt;delivered&lt;/code&gt;.&lt;/p&gt;
-    # @required @param card [String?]
+    # &lt;p&gt;Creates a test mode Confirmation Token server side for your integration tests.&lt;/p&gt;
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
-    # @return [Tuple(Stripe::IssuingCard, Integer, Hash)] Stripe::IssuingCard, response status code and response headers
-    def post_test_helpers_issuing_cards_card_shipping_deliver_with_http_info(
+    # @optional @param payment_method [String?] ID of an existing PaymentMethod.
+    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
+    # @optional @param return_url [String?] Return URL used to confirm the Intent.
+    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this ConfirmationToken's payment method.  The presence of this property will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+    # @optional @param shipping [Stripe::RecipientShippingWithOptionalFieldsAddress?]
+    # @return [Tuple(Stripe::ConfirmationToken, Integer, Hash)] Stripe::ConfirmationToken, response status code and response headers
+    def post_test_helpers_confirmation_tokens_with_http_info(
       *,
-      card : String? = nil,
-      expand : Array(String)? = nil
-    ) : Tuple(Stripe::IssuingCard, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(card: card, expand: expand)
+      expand : Array(String)? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::RecipientShippingWithOptionalFieldsAddress? = nil
+    ) : Tuple(Stripe::ConfirmationToken, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_confirmation_tokens(expand: expand, payment_method: payment_method, payment_method_data: payment_method_data, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging?
-        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_cards_card_shipping_deliver\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_confirmation_tokens\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      Tuple.new(Stripe::IssuingCard.from_json(body), status_code, headers)
+      Tuple.new(Stripe::ConfirmationToken.from_json(body), status_code, headers)
     end
 
-    # &lt;p&gt;Updates the shipping status of the specified Issuing &lt;code&gt;Card&lt;/code&gt; object to &lt;code&gt;delivered&lt;/code&gt;.&lt;/p&gt;
-    # @required @param card [String?]
+    # &lt;p&gt;Creates a test mode Confirmation Token server side for your integration tests.&lt;/p&gt;
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param payment_method [String?] ID of an existing PaymentMethod.
+    # @optional @param payment_method_data [Stripe::PaymentMethodDataParams?]
+    # @optional @param return_url [String?] Return URL used to confirm the Intent.
+    # @optional @param setup_future_usage [String?] Indicates that you intend to make future payments with this ConfirmationToken's payment method.  The presence of this property will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+    # @optional @param shipping [Stripe::RecipientShippingWithOptionalFieldsAddress?]
     # @return nil
-    def post_test_helpers_issuing_cards_card_shipping_deliver(
+    def post_test_helpers_confirmation_tokens(
       *,
-      card : String? = nil,
       expand : Array(String)? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::RecipientShippingWithOptionalFieldsAddress? = nil,
       &block : Crest::Response ->
     ) : Nil
-      build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(card: card, expand: expand).execute(&block)
+      build_api_request_for_post_test_helpers_confirmation_tokens(expand: expand, payment_method: payment_method, payment_method_data: payment_method_data, return_url: return_url, setup_future_usage: setup_future_usage, shipping: shipping).execute(&block)
     end
 
-    POST_TEST_HELPERS_ISSUING_CARDS_CARD_SHIPPING_DELIVER_MAX_LENGTH_FOR_CARD = 5000
+    POST_TEST_HELPERS_CONFIRMATION_TOKENS_MAX_LENGTH_FOR_PAYMENT_METHOD       = 5000
+    POST_TEST_HELPERS_CONFIRMATION_TOKENS_VALID_VALUES_FOR_SETUP_FUTURE_USAGE = String.static_array("off_session", "on_session")
 
     # @return Crest::Request
-    def build_api_request_for_post_test_helpers_issuing_cards_card_shipping_deliver(
+    def build_api_request_for_post_test_helpers_confirmation_tokens(
       *,
-      card : String? = nil,
-      expand : Array(String)? = nil
+      expand : Array(String)? = nil,
+      payment_method : String? = nil,
+      payment_method_data : Stripe::PaymentMethodDataParams? = nil,
+      return_url : String? = nil,
+      setup_future_usage : String? = nil,
+      shipping : Stripe::RecipientShippingWithOptionalFieldsAddress? = nil
     ) : Crest::Request
       if debugging?
-        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_deliver ..." }
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_confirmation_tokens ..." }
       end
 
       if client_side_validation?
-        raise ArgumentError.new("\"card\" is required and cannot be null") if card.nil?
-        unless (_card = card).nil?
-          OpenApi::PrimitiveValidator.validate_max_length("card", card.to_s.size, POST_TEST_HELPERS_ISSUING_CARDS_CARD_SHIPPING_DELIVER_MAX_LENGTH_FOR_CARD)
+        unless (_payment_method = payment_method).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("payment_method", payment_method.to_s.size, POST_TEST_HELPERS_CONFIRMATION_TOKENS_MAX_LENGTH_FOR_PAYMENT_METHOD)
+        end
+        unless (_payment_method_data = payment_method_data).nil?
+          _payment_method_data.validate if _payment_method_data.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_setup_future_usage = setup_future_usage).nil?
+          OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, POST_TEST_HELPERS_CONFIRMATION_TOKENS_VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        end
+        unless (_shipping = shipping).nil?
+          _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
         end
       end
 
       # resource path
-      local_var_path = "/v1/test_helpers/issuing/cards/{card}/shipping/deliver".sub("{" + "card" + "}", URI.encode_path(card.to_s))
+      local_var_path = "/v1/test_helpers/confirmation_tokens"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("payment_method", payment_method.to_s) if !payment_method.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(payment_method_data.to_json), "payment_method_data")) if !payment_method_data.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("return_url", return_url.to_s) if !return_url.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("setup_future_usage", setup_future_usage.to_s) if !setup_future_usage.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(shipping.to_json), "shipping")) if !shipping.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_confirmation_tokens",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Create a test-mode authorization.</p>
+    # @required @param amount [Int32?] The total amount to attempt to authorize. This amount is in the provided currency, or defaults to the card's currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this authorization.
+    # @optional @param amount_details [Stripe::AmountDetailsSpecs?]
+    # @optional @param authorization_method [String?] How the card details were provided. Defaults to online.
+    # @optional @param currency [String?] The currency of the authorization. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param fleet [Stripe::FleetTestmodeAuthorizationSpecs?]
+    # @optional @param fuel [Stripe::FuelSpecs?]
+    # @optional @param is_amount_controllable [Bool?] If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param network_data [Stripe::NetworkDataSpecs?]
+    # @optional @param verification_data [Stripe::VerificationDataSpecs?]
+    # @optional @param wallet [String?] The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`. Will populate as `null` when no digital wallet was utilized.
+    # @return [Stripe::IssuingAuthorization]
+    def post_test_helpers_issuing_authorizations(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      amount_details : Stripe::AmountDetailsSpecs? = nil,
+      authorization_method : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      fleet : Stripe::FleetTestmodeAuthorizationSpecs? = nil,
+      fuel : Stripe::FuelSpecs? = nil,
+      is_amount_controllable : Bool? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      network_data : Stripe::NetworkDataSpecs? = nil,
+      verification_data : Stripe::VerificationDataSpecs? = nil,
+      wallet : String? = nil
+    ) : Stripe::IssuingAuthorization
+      data, _status_code, _headers = post_test_helpers_issuing_authorizations_with_http_info(amount: amount, card: card, amount_details: amount_details, authorization_method: authorization_method, currency: currency, expand: expand, fleet: fleet, fuel: fuel, is_amount_controllable: is_amount_controllable, merchant_data: merchant_data, network_data: network_data, verification_data: verification_data, wallet: wallet)
+      data
+    end
+
+    # &lt;p&gt;Create a test-mode authorization.&lt;/p&gt;
+    # @required @param amount [Int32?] The total amount to attempt to authorize. This amount is in the provided currency, or defaults to the card's currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this authorization.
+    # @optional @param amount_details [Stripe::AmountDetailsSpecs?]
+    # @optional @param authorization_method [String?] How the card details were provided. Defaults to online.
+    # @optional @param currency [String?] The currency of the authorization. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param fleet [Stripe::FleetTestmodeAuthorizationSpecs?]
+    # @optional @param fuel [Stripe::FuelSpecs?]
+    # @optional @param is_amount_controllable [Bool?] If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param network_data [Stripe::NetworkDataSpecs?]
+    # @optional @param verification_data [Stripe::VerificationDataSpecs?]
+    # @optional @param wallet [String?] The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`. Will populate as `null` when no digital wallet was utilized.
+    # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
+    def post_test_helpers_issuing_authorizations_with_http_info(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      amount_details : Stripe::AmountDetailsSpecs? = nil,
+      authorization_method : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      fleet : Stripe::FleetTestmodeAuthorizationSpecs? = nil,
+      fuel : Stripe::FuelSpecs? = nil,
+      is_amount_controllable : Bool? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      network_data : Stripe::NetworkDataSpecs? = nil,
+      verification_data : Stripe::VerificationDataSpecs? = nil,
+      wallet : String? = nil
+    ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_authorizations(amount: amount, card: card, amount_details: amount_details, authorization_method: authorization_method, currency: currency, expand: expand, fleet: fleet, fuel: fuel, is_amount_controllable: is_amount_controllable, merchant_data: merchant_data, network_data: network_data, verification_data: verification_data, wallet: wallet)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_authorizations\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingAuthorization.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Create a test-mode authorization.&lt;/p&gt;
+    # @required @param amount [Int32?] The total amount to attempt to authorize. This amount is in the provided currency, or defaults to the card's currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this authorization.
+    # @optional @param amount_details [Stripe::AmountDetailsSpecs?]
+    # @optional @param authorization_method [String?] How the card details were provided. Defaults to online.
+    # @optional @param currency [String?] The currency of the authorization. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param fleet [Stripe::FleetTestmodeAuthorizationSpecs?]
+    # @optional @param fuel [Stripe::FuelSpecs?]
+    # @optional @param is_amount_controllable [Bool?] If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param network_data [Stripe::NetworkDataSpecs?]
+    # @optional @param verification_data [Stripe::VerificationDataSpecs?]
+    # @optional @param wallet [String?] The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`. Will populate as `null` when no digital wallet was utilized.
+    # @return nil
+    def post_test_helpers_issuing_authorizations(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      amount_details : Stripe::AmountDetailsSpecs? = nil,
+      authorization_method : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      fleet : Stripe::FleetTestmodeAuthorizationSpecs? = nil,
+      fuel : Stripe::FuelSpecs? = nil,
+      is_amount_controllable : Bool? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      network_data : Stripe::NetworkDataSpecs? = nil,
+      verification_data : Stripe::VerificationDataSpecs? = nil,
+      wallet : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_authorizations(amount: amount, card: card, amount_details: amount_details, authorization_method: authorization_method, currency: currency, expand: expand, fleet: fleet, fuel: fuel, is_amount_controllable: is_amount_controllable, merchant_data: merchant_data, network_data: network_data, verification_data: verification_data, wallet: wallet).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_MAX_LENGTH_FOR_CARD                   = 5000
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_VALID_VALUES_FOR_AUTHORIZATION_METHOD = String.static_array("chip", "contactless", "keyed_in", "online", "swipe")
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_VALID_VALUES_FOR_WALLET               = String.static_array("apple_pay", "google_pay", "samsung_pay")
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_authorizations(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      amount_details : Stripe::AmountDetailsSpecs? = nil,
+      authorization_method : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      fleet : Stripe::FleetTestmodeAuthorizationSpecs? = nil,
+      fuel : Stripe::FuelSpecs? = nil,
+      is_amount_controllable : Bool? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      network_data : Stripe::NetworkDataSpecs? = nil,
+      verification_data : Stripe::VerificationDataSpecs? = nil,
+      wallet : String? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_authorizations ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
+
+        raise ArgumentError.new("\"card\" is required and cannot be null") if card.nil?
+        unless (_card = card).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("card", card.to_s.size, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_MAX_LENGTH_FOR_CARD)
+        end
+        unless (_amount_details = amount_details).nil?
+          _amount_details.validate if _amount_details.is_a?(OpenApi::Validatable)
+        end
+        unless (_authorization_method = authorization_method).nil?
+          OpenApi::EnumValidator.validate("authorization_method", _authorization_method, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_VALID_VALUES_FOR_AUTHORIZATION_METHOD)
+        end
+
+        unless (_fleet = fleet).nil?
+          _fleet.validate if _fleet.is_a?(OpenApi::Validatable)
+        end
+        unless (_fuel = fuel).nil?
+          _fuel.validate if _fuel.is_a?(OpenApi::Validatable)
+        end
+
+        unless (_merchant_data = merchant_data).nil?
+          _merchant_data.validate if _merchant_data.is_a?(OpenApi::Validatable)
+        end
+        unless (_network_data = network_data).nil?
+          _network_data.validate if _network_data.is_a?(OpenApi::Validatable)
+        end
+        unless (_verification_data = verification_data).nil?
+          _verification_data.validate if _verification_data.is_a?(OpenApi::Validatable)
+        end
+        unless (_wallet = wallet).nil?
+          OpenApi::EnumValidator.validate("wallet", _wallet, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_VALID_VALUES_FOR_WALLET)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/authorizations"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("amount", amount.to_s) if !amount.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(amount_details.to_json), "amount_details")) if !amount_details.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("authorization_method", authorization_method.to_s) if !authorization_method.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("card", card.to_s) if !card.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("currency", currency.to_s) if !currency.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(fleet.to_json), "fleet")) if !fleet.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(fuel.to_json), "fuel")) if !fuel.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("is_amount_controllable", is_amount_controllable.to_s) if !is_amount_controllable.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(merchant_data.to_json), "merchant_data")) if !merchant_data.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(network_data.to_json), "network_data")) if !network_data.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(verification_data.to_json), "verification_data")) if !verification_data.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("wallet", wallet.to_s) if !wallet.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_authorizations",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Capture a test-mode authorization.</p>
+    # @required @param authorization [String?]
+    # @optional @param capture_amount [Int32?] The amount to capture from the authorization. If not provided, the full amount of the authorization will be captured. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @optional @param close_authorization [Bool?] Whether to close the authorization after capture. Defaults to true. Set to false to enable multi-capture flows.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return [Stripe::IssuingAuthorization]
+    def post_test_helpers_issuing_authorizations_authorization_capture(
+      *,
+      authorization : String? = nil,
+      capture_amount : Int64? = nil,
+      close_authorization : Bool? = nil,
+      expand : Array(String)? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Stripe::IssuingAuthorization
+      data, _status_code, _headers = post_test_helpers_issuing_authorizations_authorization_capture_with_http_info(authorization: authorization, capture_amount: capture_amount, close_authorization: close_authorization, expand: expand, purchase_details: purchase_details)
+      data
+    end
+
+    # &lt;p&gt;Capture a test-mode authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @optional @param capture_amount [Int32?] The amount to capture from the authorization. If not provided, the full amount of the authorization will be captured. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @optional @param close_authorization [Bool?] Whether to close the authorization after capture. Defaults to true. Set to false to enable multi-capture flows.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
+    def post_test_helpers_issuing_authorizations_authorization_capture_with_http_info(
+      *,
+      authorization : String? = nil,
+      capture_amount : Int64? = nil,
+      close_authorization : Bool? = nil,
+      expand : Array(String)? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_authorizations_authorization_capture(authorization: authorization, capture_amount: capture_amount, close_authorization: close_authorization, expand: expand, purchase_details: purchase_details)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_authorizations_authorization_capture\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingAuthorization.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Capture a test-mode authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @optional @param capture_amount [Int32?] The amount to capture from the authorization. If not provided, the full amount of the authorization will be captured. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @optional @param close_authorization [Bool?] Whether to close the authorization after capture. Defaults to true. Set to false to enable multi-capture flows.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return nil
+    def post_test_helpers_issuing_authorizations_authorization_capture(
+      *,
+      authorization : String? = nil,
+      capture_amount : Int64? = nil,
+      close_authorization : Bool? = nil,
+      expand : Array(String)? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_authorizations_authorization_capture(authorization: authorization, capture_amount: capture_amount, close_authorization: close_authorization, expand: expand, purchase_details: purchase_details).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_CAPTURE_MAX_LENGTH_FOR_AUTHORIZATION = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_authorizations_authorization_capture(
+      *,
+      authorization : String? = nil,
+      capture_amount : Int64? = nil,
+      close_authorization : Bool? = nil,
+      expand : Array(String)? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_capture ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"authorization\" is required and cannot be null") if authorization.nil?
+        unless (_authorization = authorization).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_CAPTURE_MAX_LENGTH_FOR_AUTHORIZATION)
+        end
+
+        unless (_purchase_details = purchase_details).nil?
+          _purchase_details.validate if _purchase_details.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/authorizations/{authorization}/capture".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("capture_amount", capture_amount.to_s) if !capture_amount.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("close_authorization", close_authorization.to_s) if !close_authorization.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(purchase_details.to_json), "purchase_details")) if !purchase_details.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_capture",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Expire a test-mode Authorization.</p>
+    # @required @param authorization [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingAuthorization]
+    def post_test_helpers_issuing_authorizations_authorization_expire(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingAuthorization
+      data, _status_code, _headers = post_test_helpers_issuing_authorizations_authorization_expire_with_http_info(authorization: authorization, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Expire a test-mode Authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
+    def post_test_helpers_issuing_authorizations_authorization_expire_with_http_info(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_authorizations_authorization_expire(authorization: authorization, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_authorizations_authorization_expire\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingAuthorization.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Expire a test-mode Authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_test_helpers_issuing_authorizations_authorization_expire(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_authorizations_authorization_expire(authorization: authorization, expand: expand).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_EXPIRE_MAX_LENGTH_FOR_AUTHORIZATION = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_authorizations_authorization_expire(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_expire ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"authorization\" is required and cannot be null") if authorization.nil?
+        unless (_authorization = authorization).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_EXPIRE_MAX_LENGTH_FOR_AUTHORIZATION)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/authorizations/{authorization}/expire".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
 
       # header parameters
       header_params : Hash(String, String) = Hash(String, String).new
@@ -449,7 +965,240 @@ module Stripe
       @api_client.build_api_request(
         http_method: :"POST",
         path: local_var_path,
-        operation: "TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_deliver",
+        operation: "TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_expire",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Increment a test-mode Authorization.</p>
+    # @required @param authorization [String?]
+    # @required @param increment_amount [Int32?] The amount to increment the authorization by. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param is_amount_controllable [Bool?] If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.
+    # @return [Stripe::IssuingAuthorization]
+    def post_test_helpers_issuing_authorizations_authorization_increment(
+      *,
+      authorization : String? = nil,
+      increment_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      is_amount_controllable : Bool? = nil
+    ) : Stripe::IssuingAuthorization
+      data, _status_code, _headers = post_test_helpers_issuing_authorizations_authorization_increment_with_http_info(authorization: authorization, increment_amount: increment_amount, expand: expand, is_amount_controllable: is_amount_controllable)
+      data
+    end
+
+    # &lt;p&gt;Increment a test-mode Authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @required @param increment_amount [Int32?] The amount to increment the authorization by. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param is_amount_controllable [Bool?] If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.
+    # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
+    def post_test_helpers_issuing_authorizations_authorization_increment_with_http_info(
+      *,
+      authorization : String? = nil,
+      increment_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      is_amount_controllable : Bool? = nil
+    ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_authorizations_authorization_increment(authorization: authorization, increment_amount: increment_amount, expand: expand, is_amount_controllable: is_amount_controllable)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_authorizations_authorization_increment\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingAuthorization.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Increment a test-mode Authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @required @param increment_amount [Int32?] The amount to increment the authorization by. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param is_amount_controllable [Bool?] If set `true`, you may provide [amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount) to control how much to hold for the authorization.
+    # @return nil
+    def post_test_helpers_issuing_authorizations_authorization_increment(
+      *,
+      authorization : String? = nil,
+      increment_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      is_amount_controllable : Bool? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_authorizations_authorization_increment(authorization: authorization, increment_amount: increment_amount, expand: expand, is_amount_controllable: is_amount_controllable).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_INCREMENT_MAX_LENGTH_FOR_AUTHORIZATION = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_authorizations_authorization_increment(
+      *,
+      authorization : String? = nil,
+      increment_amount : Int64? = nil,
+      expand : Array(String)? = nil,
+      is_amount_controllable : Bool? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_increment ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"authorization\" is required and cannot be null") if authorization.nil?
+        unless (_authorization = authorization).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_INCREMENT_MAX_LENGTH_FOR_AUTHORIZATION)
+        end
+        raise ArgumentError.new("\"increment_amount\" is required and cannot be null") if increment_amount.nil?
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/authorizations/{authorization}/increment".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("increment_amount", increment_amount.to_s) if !increment_amount.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("is_amount_controllable", is_amount_controllable.to_s) if !is_amount_controllable.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_increment",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Reverse a test-mode Authorization.</p>
+    # @required @param authorization [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param reverse_amount [Int32?] The amount to reverse from the authorization. If not provided, the full amount of the authorization will be reversed. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @return [Stripe::IssuingAuthorization]
+    def post_test_helpers_issuing_authorizations_authorization_reverse(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil,
+      reverse_amount : Int64? = nil
+    ) : Stripe::IssuingAuthorization
+      data, _status_code, _headers = post_test_helpers_issuing_authorizations_authorization_reverse_with_http_info(authorization: authorization, expand: expand, reverse_amount: reverse_amount)
+      data
+    end
+
+    # &lt;p&gt;Reverse a test-mode Authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param reverse_amount [Int32?] The amount to reverse from the authorization. If not provided, the full amount of the authorization will be reversed. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @return [Tuple(Stripe::IssuingAuthorization, Integer, Hash)] Stripe::IssuingAuthorization, response status code and response headers
+    def post_test_helpers_issuing_authorizations_authorization_reverse_with_http_info(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil,
+      reverse_amount : Int64? = nil
+    ) : Tuple(Stripe::IssuingAuthorization, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_authorizations_authorization_reverse(authorization: authorization, expand: expand, reverse_amount: reverse_amount)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_authorizations_authorization_reverse\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingAuthorization.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Reverse a test-mode Authorization.&lt;/p&gt;
+    # @required @param authorization [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param reverse_amount [Int32?] The amount to reverse from the authorization. If not provided, the full amount of the authorization will be reversed. This amount is in the authorization currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @return nil
+    def post_test_helpers_issuing_authorizations_authorization_reverse(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil,
+      reverse_amount : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_authorizations_authorization_reverse(authorization: authorization, expand: expand, reverse_amount: reverse_amount).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_REVERSE_MAX_LENGTH_FOR_AUTHORIZATION = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_authorizations_authorization_reverse(
+      *,
+      authorization : String? = nil,
+      expand : Array(String)? = nil,
+      reverse_amount : Int64? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_reverse ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"authorization\" is required and cannot be null") if authorization.nil?
+        unless (_authorization = authorization).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("authorization", authorization.to_s.size, POST_TEST_HELPERS_ISSUING_AUTHORIZATIONS_AUTHORIZATION_REVERSE_MAX_LENGTH_FOR_AUTHORIZATION)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/authorizations/{authorization}/reverse".sub("{" + "authorization" + "}", URI.encode_path(authorization.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("reverse_amount", reverse_amount.to_s) if !reverse_amount.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_authorizations_authorization_reverse",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
@@ -762,6 +1511,734 @@ module Stripe
         http_method: :"POST",
         path: local_var_path,
         operation: "TestHelpersApi.post_test_helpers_issuing_cards_card_shipping_ship",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Updates the <code>status</code> of the specified testmode personalization design object to <code>active</code>.</p>
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingPersonalizationDesign]
+    def post_test_helpers_issuing_personalization_designs_personalization_design_activate(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingPersonalizationDesign
+      data, _status_code, _headers = post_test_helpers_issuing_personalization_designs_personalization_design_activate_with_http_info(personalization_design: personalization_design, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Updates the &lt;code&gt;status&lt;/code&gt; of the specified testmode personalization design object to &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesign, Integer, Hash)] Stripe::IssuingPersonalizationDesign, response status code and response headers
+    def post_test_helpers_issuing_personalization_designs_personalization_design_activate_with_http_info(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesign, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_activate(personalization_design: personalization_design, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_personalization_designs_personalization_design_activate\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesign.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Updates the &lt;code&gt;status&lt;/code&gt; of the specified testmode personalization design object to &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_test_helpers_issuing_personalization_designs_personalization_design_activate(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_activate(personalization_design: personalization_design, expand: expand).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_ACTIVATE_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_activate(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_personalization_designs_personalization_design_activate ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"personalization_design\" is required and cannot be null") if personalization_design.nil?
+        unless (_personalization_design = personalization_design).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("personalization_design", personalization_design.to_s.size, POST_TEST_HELPERS_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_ACTIVATE_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/personalization_designs/{personalization_design}/activate".sub("{" + "personalization_design" + "}", URI.encode_path(personalization_design.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_personalization_designs_personalization_design_activate",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Updates the <code>status</code> of the specified testmode personalization design object to <code>inactive</code>.</p>
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingPersonalizationDesign]
+    def post_test_helpers_issuing_personalization_designs_personalization_design_deactivate(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingPersonalizationDesign
+      data, _status_code, _headers = post_test_helpers_issuing_personalization_designs_personalization_design_deactivate_with_http_info(personalization_design: personalization_design, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Updates the &lt;code&gt;status&lt;/code&gt; of the specified testmode personalization design object to &lt;code&gt;inactive&lt;/code&gt;.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesign, Integer, Hash)] Stripe::IssuingPersonalizationDesign, response status code and response headers
+    def post_test_helpers_issuing_personalization_designs_personalization_design_deactivate_with_http_info(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesign, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_deactivate(personalization_design: personalization_design, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_personalization_designs_personalization_design_deactivate\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesign.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Updates the &lt;code&gt;status&lt;/code&gt; of the specified testmode personalization design object to &lt;code&gt;inactive&lt;/code&gt;.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_test_helpers_issuing_personalization_designs_personalization_design_deactivate(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_deactivate(personalization_design: personalization_design, expand: expand).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_DEACTIVATE_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_deactivate(
+      *,
+      personalization_design : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_personalization_designs_personalization_design_deactivate ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"personalization_design\" is required and cannot be null") if personalization_design.nil?
+        unless (_personalization_design = personalization_design).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("personalization_design", personalization_design.to_s.size, POST_TEST_HELPERS_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_DEACTIVATE_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/personalization_designs/{personalization_design}/deactivate".sub("{" + "personalization_design" + "}", URI.encode_path(personalization_design.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_personalization_designs_personalization_design_deactivate",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Updates the <code>status</code> of the specified testmode personalization design object to <code>rejected</code>.</p>
+    # @required @param personalization_design [String?]
+    # @required @param rejection_reasons [Stripe::RejectionReasonsParam?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::IssuingPersonalizationDesign]
+    def post_test_helpers_issuing_personalization_designs_personalization_design_reject(
+      *,
+      personalization_design : String? = nil,
+      rejection_reasons : Stripe::RejectionReasonsParam? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::IssuingPersonalizationDesign
+      data, _status_code, _headers = post_test_helpers_issuing_personalization_designs_personalization_design_reject_with_http_info(personalization_design: personalization_design, rejection_reasons: rejection_reasons, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Updates the &lt;code&gt;status&lt;/code&gt; of the specified testmode personalization design object to &lt;code&gt;rejected&lt;/code&gt;.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @required @param rejection_reasons [Stripe::RejectionReasonsParam?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::IssuingPersonalizationDesign, Integer, Hash)] Stripe::IssuingPersonalizationDesign, response status code and response headers
+    def post_test_helpers_issuing_personalization_designs_personalization_design_reject_with_http_info(
+      *,
+      personalization_design : String? = nil,
+      rejection_reasons : Stripe::RejectionReasonsParam? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::IssuingPersonalizationDesign, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_reject(personalization_design: personalization_design, rejection_reasons: rejection_reasons, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_personalization_designs_personalization_design_reject\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingPersonalizationDesign.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Updates the &lt;code&gt;status&lt;/code&gt; of the specified testmode personalization design object to &lt;code&gt;rejected&lt;/code&gt;.&lt;/p&gt;
+    # @required @param personalization_design [String?]
+    # @required @param rejection_reasons [Stripe::RejectionReasonsParam?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_test_helpers_issuing_personalization_designs_personalization_design_reject(
+      *,
+      personalization_design : String? = nil,
+      rejection_reasons : Stripe::RejectionReasonsParam? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_reject(personalization_design: personalization_design, rejection_reasons: rejection_reasons, expand: expand).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_REJECT_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_personalization_designs_personalization_design_reject(
+      *,
+      personalization_design : String? = nil,
+      rejection_reasons : Stripe::RejectionReasonsParam? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_personalization_designs_personalization_design_reject ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"personalization_design\" is required and cannot be null") if personalization_design.nil?
+        unless (_personalization_design = personalization_design).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("personalization_design", personalization_design.to_s.size, POST_TEST_HELPERS_ISSUING_PERSONALIZATION_DESIGNS_PERSONALIZATION_DESIGN_REJECT_MAX_LENGTH_FOR_PERSONALIZATION_DESIGN)
+        end
+        raise ArgumentError.new("\"rejection_reasons\" is required and cannot be null") if rejection_reasons.nil?
+        unless (_rejection_reasons = rejection_reasons).nil?
+          _rejection_reasons.validate if _rejection_reasons.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/personalization_designs/{personalization_design}/reject".sub("{" + "personalization_design" + "}", URI.encode_path(personalization_design.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(rejection_reasons.to_json), "rejection_reasons")) if !rejection_reasons.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_personalization_designs_personalization_design_reject",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Allows the user to capture an arbitrary amount, also known as a forced capture.</p>
+    # @required @param amount [Int32?] The total amount to attempt to capture. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this transaction.
+    # @optional @param currency [String?] The currency of the capture. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return [Stripe::IssuingTransaction]
+    def post_test_helpers_issuing_transactions_create_force_capture(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Stripe::IssuingTransaction
+      data, _status_code, _headers = post_test_helpers_issuing_transactions_create_force_capture_with_http_info(amount: amount, card: card, currency: currency, expand: expand, merchant_data: merchant_data, purchase_details: purchase_details)
+      data
+    end
+
+    # &lt;p&gt;Allows the user to capture an arbitrary amount, also known as a forced capture.&lt;/p&gt;
+    # @required @param amount [Int32?] The total amount to attempt to capture. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this transaction.
+    # @optional @param currency [String?] The currency of the capture. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return [Tuple(Stripe::IssuingTransaction, Integer, Hash)] Stripe::IssuingTransaction, response status code and response headers
+    def post_test_helpers_issuing_transactions_create_force_capture_with_http_info(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Tuple(Stripe::IssuingTransaction, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_transactions_create_force_capture(amount: amount, card: card, currency: currency, expand: expand, merchant_data: merchant_data, purchase_details: purchase_details)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_transactions_create_force_capture\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingTransaction.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Allows the user to capture an arbitrary amount, also known as a forced capture.&lt;/p&gt;
+    # @required @param amount [Int32?] The total amount to attempt to capture. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this transaction.
+    # @optional @param currency [String?] The currency of the capture. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return nil
+    def post_test_helpers_issuing_transactions_create_force_capture(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_transactions_create_force_capture(amount: amount, card: card, currency: currency, expand: expand, merchant_data: merchant_data, purchase_details: purchase_details).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_TRANSACTIONS_CREATE_FORCE_CAPTURE_MAX_LENGTH_FOR_CARD = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_transactions_create_force_capture(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_transactions_create_force_capture ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
+
+        raise ArgumentError.new("\"card\" is required and cannot be null") if card.nil?
+        unless (_card = card).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("card", card.to_s.size, POST_TEST_HELPERS_ISSUING_TRANSACTIONS_CREATE_FORCE_CAPTURE_MAX_LENGTH_FOR_CARD)
+        end
+
+        unless (_merchant_data = merchant_data).nil?
+          _merchant_data.validate if _merchant_data.is_a?(OpenApi::Validatable)
+        end
+        unless (_purchase_details = purchase_details).nil?
+          _purchase_details.validate if _purchase_details.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/transactions/create_force_capture"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("amount", amount.to_s) if !amount.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("card", card.to_s) if !card.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("currency", currency.to_s) if !currency.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(merchant_data.to_json), "merchant_data")) if !merchant_data.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(purchase_details.to_json), "purchase_details")) if !purchase_details.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_transactions_create_force_capture",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Allows the user to refund an arbitrary amount, also known as a unlinked refund.</p>
+    # @required @param amount [Int32?] The total amount to attempt to refund. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this unlinked refund transaction.
+    # @optional @param currency [String?] The currency of the unlinked refund. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return [Stripe::IssuingTransaction]
+    def post_test_helpers_issuing_transactions_create_unlinked_refund(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Stripe::IssuingTransaction
+      data, _status_code, _headers = post_test_helpers_issuing_transactions_create_unlinked_refund_with_http_info(amount: amount, card: card, currency: currency, expand: expand, merchant_data: merchant_data, purchase_details: purchase_details)
+      data
+    end
+
+    # &lt;p&gt;Allows the user to refund an arbitrary amount, also known as a unlinked refund.&lt;/p&gt;
+    # @required @param amount [Int32?] The total amount to attempt to refund. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this unlinked refund transaction.
+    # @optional @param currency [String?] The currency of the unlinked refund. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return [Tuple(Stripe::IssuingTransaction, Integer, Hash)] Stripe::IssuingTransaction, response status code and response headers
+    def post_test_helpers_issuing_transactions_create_unlinked_refund_with_http_info(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Tuple(Stripe::IssuingTransaction, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_transactions_create_unlinked_refund(amount: amount, card: card, currency: currency, expand: expand, merchant_data: merchant_data, purchase_details: purchase_details)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_transactions_create_unlinked_refund\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingTransaction.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Allows the user to refund an arbitrary amount, also known as a unlinked refund.&lt;/p&gt;
+    # @required @param amount [Int32?] The total amount to attempt to refund. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @required @param card [String?] Card associated with this unlinked refund transaction.
+    # @optional @param currency [String?] The currency of the unlinked refund. If not provided, defaults to the currency of the card. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param merchant_data [Stripe::MerchantDataSpecs?]
+    # @optional @param purchase_details [Stripe::PurchaseDetailsSpecs?]
+    # @return nil
+    def post_test_helpers_issuing_transactions_create_unlinked_refund(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_transactions_create_unlinked_refund(amount: amount, card: card, currency: currency, expand: expand, merchant_data: merchant_data, purchase_details: purchase_details).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_TRANSACTIONS_CREATE_UNLINKED_REFUND_MAX_LENGTH_FOR_CARD = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_transactions_create_unlinked_refund(
+      *,
+      amount : Int64? = nil,
+      card : String? = nil,
+      currency : String? = nil,
+      expand : Array(String)? = nil,
+      merchant_data : Stripe::MerchantDataSpecs? = nil,
+      purchase_details : Stripe::PurchaseDetailsSpecs? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_transactions_create_unlinked_refund ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"amount\" is required and cannot be null") if amount.nil?
+
+        raise ArgumentError.new("\"card\" is required and cannot be null") if card.nil?
+        unless (_card = card).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("card", card.to_s.size, POST_TEST_HELPERS_ISSUING_TRANSACTIONS_CREATE_UNLINKED_REFUND_MAX_LENGTH_FOR_CARD)
+        end
+
+        unless (_merchant_data = merchant_data).nil?
+          _merchant_data.validate if _merchant_data.is_a?(OpenApi::Validatable)
+        end
+        unless (_purchase_details = purchase_details).nil?
+          _purchase_details.validate if _purchase_details.is_a?(OpenApi::Validatable)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund"
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("amount", amount.to_s) if !amount.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("card", card.to_s) if !card.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("currency", currency.to_s) if !currency.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(merchant_data.to_json), "merchant_data")) if !merchant_data.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(purchase_details.to_json), "purchase_details")) if !purchase_details.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_transactions_create_unlinked_refund",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Refund a test-mode Transaction.</p>
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param refund_amount [Int32?] The total amount to attempt to refund. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @return [Stripe::IssuingTransaction]
+    def post_test_helpers_issuing_transactions_transaction_refund(
+      *,
+      transaction : String? = nil,
+      expand : Array(String)? = nil,
+      refund_amount : Int64? = nil
+    ) : Stripe::IssuingTransaction
+      data, _status_code, _headers = post_test_helpers_issuing_transactions_transaction_refund_with_http_info(transaction: transaction, expand: expand, refund_amount: refund_amount)
+      data
+    end
+
+    # &lt;p&gt;Refund a test-mode Transaction.&lt;/p&gt;
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param refund_amount [Int32?] The total amount to attempt to refund. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @return [Tuple(Stripe::IssuingTransaction, Integer, Hash)] Stripe::IssuingTransaction, response status code and response headers
+    def post_test_helpers_issuing_transactions_transaction_refund_with_http_info(
+      *,
+      transaction : String? = nil,
+      expand : Array(String)? = nil,
+      refund_amount : Int64? = nil
+    ) : Tuple(Stripe::IssuingTransaction, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_test_helpers_issuing_transactions_transaction_refund(transaction: transaction, expand: expand, refund_amount: refund_amount)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: TestHelpersApi#post_test_helpers_issuing_transactions_transaction_refund\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::IssuingTransaction.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Refund a test-mode Transaction.&lt;/p&gt;
+    # @required @param transaction [String?]
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @optional @param refund_amount [Int32?] The total amount to attempt to refund. This amount is in the provided currency, or defaults to the cards currency, and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    # @return nil
+    def post_test_helpers_issuing_transactions_transaction_refund(
+      *,
+      transaction : String? = nil,
+      expand : Array(String)? = nil,
+      refund_amount : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_test_helpers_issuing_transactions_transaction_refund(transaction: transaction, expand: expand, refund_amount: refund_amount).execute(&block)
+    end
+
+    POST_TEST_HELPERS_ISSUING_TRANSACTIONS_TRANSACTION_REFUND_MAX_LENGTH_FOR_TRANSACTION = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_test_helpers_issuing_transactions_transaction_refund(
+      *,
+      transaction : String? = nil,
+      expand : Array(String)? = nil,
+      refund_amount : Int64? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: TestHelpersApi.post_test_helpers_issuing_transactions_transaction_refund ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"transaction\" is required and cannot be null") if transaction.nil?
+        unless (_transaction = transaction).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("transaction", transaction.to_s.size, POST_TEST_HELPERS_ISSUING_TRANSACTIONS_TRANSACTION_REFUND_MAX_LENGTH_FOR_TRANSACTION)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/test_helpers/issuing/transactions/{transaction}/refund".sub("{" + "transaction" + "}", URI.encode_path(transaction.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("refund_amount", refund_amount.to_s) if !refund_amount.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "TestHelpersApi.post_test_helpers_issuing_transactions_transaction_refund",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,

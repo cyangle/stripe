@@ -12,7 +12,7 @@ require "../../core"
 require "./invoiceitem_discounts_inner"
 require "./plan"
 require "./price"
-require "./subscription_item_billing_thresholds"
+require "./subscription_item_billing_thresholds1"
 require "./tax_rate"
 
 module Stripe
@@ -25,8 +25,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemBillingThresholds?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter billing_thresholds : Stripe::SubscriptionItemBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionItemBillingThresholds1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter billing_thresholds : Stripe::SubscriptionItemBillingThresholds1? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -78,7 +78,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @billing_thresholds : Stripe::SubscriptionItemBillingThresholds? = nil,
+      @billing_thresholds : Stripe::SubscriptionItemBillingThresholds1? = nil,
       @created : Int64? = nil,
       @discounts : Array(Stripe::InvoiceitemDiscountsInner)? = nil,
       @id : String? = nil,
@@ -196,7 +196,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::SubscriptionItemBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::SubscriptionItemBillingThresholds1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./mandate_options_param_custom_mandate_url"
+
 module Stripe
   class PaymentIntentPaymentMethodOptionsMandateOptionsParam
     include JSON::Serializable
@@ -18,10 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "custom_mandate_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter custom_mandate_url : String? = nil
-    ERROR_MESSAGE_FOR_CUSTOM_MANDATE_URL = "invalid value for \"custom_mandate_url\", must be one of []."
-    VALID_VALUES_FOR_CUSTOM_MANDATE_URL  = String.static_array("")
+    @[JSON::Field(key: "custom_mandate_url", type: Stripe::MandateOptionsParamCustomMandateUrl?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter custom_mandate_url : Stripe::MandateOptionsParamCustomMandateUrl? = nil
 
     # Description of the mandate interval. Only required if 'payment_schedule' parameter is 'interval' or 'combined'.
     @[JSON::Field(key: "interval_description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -45,7 +45,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @custom_mandate_url : String? = nil,
+      @custom_mandate_url : Stripe::MandateOptionsParamCustomMandateUrl? = nil,
       @interval_description : String? = nil,
       @payment_schedule : String? = nil,
       @transaction_type : String? = nil
@@ -58,7 +58,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_custom_mandate_url = @custom_mandate_url).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOM_MANDATE_URL) unless OpenApi::EnumValidator.valid?(_custom_mandate_url, VALID_VALUES_FOR_CUSTOM_MANDATE_URL)
+        invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url")) if _custom_mandate_url.is_a?(OpenApi::Validatable)
       end
       unless (_interval_description = @interval_description).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
@@ -78,7 +78,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_custom_mandate_url = @custom_mandate_url).nil?
-        return false unless OpenApi::EnumValidator.valid?(_custom_mandate_url, VALID_VALUES_FOR_CUSTOM_MANDATE_URL)
+        return false if _custom_mandate_url.is_a?(OpenApi::Validatable) && !_custom_mandate_url.valid?
       end
 
       unless (_interval_description = @interval_description).nil?
@@ -98,9 +98,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] custom_mandate_url Object to be assigned
-    def custom_mandate_url=(new_value : String?)
+    def custom_mandate_url=(new_value : Stripe::MandateOptionsParamCustomMandateUrl?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("custom_mandate_url", new_value, VALID_VALUES_FOR_CUSTOM_MANDATE_URL)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @custom_mandate_url = new_value

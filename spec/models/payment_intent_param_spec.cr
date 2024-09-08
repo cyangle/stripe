@@ -148,10 +148,6 @@ describe Stripe::PaymentIntentParam do
     it "should work" do
       # instance = Stripe::PaymentIntentParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentParam::ENUM_VALIDATOR_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA
-      # validator.allowable_values.each do |value|
-      #   instance.statement_descriptor_suffix_kana = value.as(String)
-      # end
     end
   end
 
@@ -159,10 +155,6 @@ describe Stripe::PaymentIntentParam do
     it "should work" do
       # instance = Stripe::PaymentIntentParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentParam::ENUM_VALIDATOR_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI
-      # validator.allowable_values.each do |value|
-      #   instance.statement_descriptor_suffix_kanji = value.as(String)
-      # end
     end
   end
 

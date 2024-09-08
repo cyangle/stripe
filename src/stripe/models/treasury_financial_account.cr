@@ -10,9 +10,9 @@
 require "../../core"
 
 require "./treasury_financial_account_features"
+require "./treasury_financial_account_platform_restrictions"
 require "./treasury_financial_accounts_resource_balance"
 require "./treasury_financial_accounts_resource_financial_address"
-require "./treasury_financial_accounts_resource_platform_restrictions"
 require "./treasury_financial_accounts_resource_status_details"
 
 module Stripe
@@ -91,8 +91,8 @@ module Stripe
     ERROR_MESSAGE_FOR_PENDING_FEATURES = "invalid value for \"pending_features\", must be one of [card_issuing, deposit_insurance, financial_addresses.aba, financial_addresses.aba.forwarding, inbound_transfers.ach, intra_stripe_flows, outbound_payments.ach, outbound_payments.us_domestic_wire, outbound_transfers.ach, outbound_transfers.us_domestic_wire, remote_deposit_capture]."
     VALID_VALUES_FOR_PENDING_FEATURES  = String.static_array("card_issuing", "deposit_insurance", "financial_addresses.aba", "financial_addresses.aba.forwarding", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture")
 
-    @[JSON::Field(key: "platform_restrictions", type: Stripe::TreasuryFinancialAccountsResourcePlatformRestrictions?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: platform_restrictions.nil? && !platform_restrictions_present?)]
-    getter platform_restrictions : Stripe::TreasuryFinancialAccountsResourcePlatformRestrictions? = nil
+    @[JSON::Field(key: "platform_restrictions", type: Stripe::TreasuryFinancialAccountPlatformRestrictions?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: platform_restrictions.nil? && !platform_restrictions_present?)]
+    getter platform_restrictions : Stripe::TreasuryFinancialAccountPlatformRestrictions? = nil
 
     @[JSON::Field(ignore: true)]
     property? platform_restrictions_present : Bool = false
@@ -123,7 +123,7 @@ module Stripe
       @active_features : Array(String)? = nil,
       @features : Stripe::TreasuryFinancialAccountFeatures? = nil,
       @pending_features : Array(String)? = nil,
-      @platform_restrictions : Stripe::TreasuryFinancialAccountsResourcePlatformRestrictions? = nil,
+      @platform_restrictions : Stripe::TreasuryFinancialAccountPlatformRestrictions? = nil,
       @restricted_features : Array(String)? = nil
     )
     end
@@ -402,7 +402,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform_restrictions Object to be assigned
-    def platform_restrictions=(new_value : Stripe::TreasuryFinancialAccountsResourcePlatformRestrictions?)
+    def platform_restrictions=(new_value : Stripe::TreasuryFinancialAccountPlatformRestrictions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

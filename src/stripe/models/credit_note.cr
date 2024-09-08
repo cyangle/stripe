@@ -14,9 +14,9 @@ require "./credit_note_customer_balance_transaction"
 require "./credit_note_invoice"
 require "./credit_note_lines_list"
 require "./credit_note_refund"
+require "./credit_note_shipping_cost1"
 require "./credit_note_tax_amount"
 require "./discounts_resource_discount_amount"
-require "./invoices_resource_shipping_cost"
 
 module Stripe
   # Issue a credit note to adjust an invoice's amount after the invoice is finalized.  Related guide: [Credit notes](https://stripe.com/docs/billing/invoices/credit-notes)
@@ -114,8 +114,8 @@ module Stripe
     @[JSON::Field(key: "refund", type: Stripe::CreditNoteRefund?, default: nil, required: true, nullable: true, emit_null: true)]
     getter refund : Stripe::CreditNoteRefund? = nil
 
-    @[JSON::Field(key: "shipping_cost", type: Stripe::InvoicesResourceShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_cost : Stripe::InvoicesResourceShippingCost? = nil
+    @[JSON::Field(key: "shipping_cost", type: Stripe::CreditNoteShippingCost1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_cost : Stripe::CreditNoteShippingCost1? = nil
 
     # Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -181,7 +181,7 @@ module Stripe
       @pdf : String? = nil,
       @reason : String? = nil,
       @refund : Stripe::CreditNoteRefund? = nil,
-      @shipping_cost : Stripe::InvoicesResourceShippingCost? = nil,
+      @shipping_cost : Stripe::CreditNoteShippingCost1? = nil,
       @status : String? = nil,
       @subtotal : Int64? = nil,
       @subtotal_excluding_tax : Int64? = nil,
@@ -592,7 +592,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_cost Object to be assigned
-    def shipping_cost=(new_value : Stripe::InvoicesResourceShippingCost?)
+    def shipping_cost=(new_value : Stripe::CreditNoteShippingCost1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

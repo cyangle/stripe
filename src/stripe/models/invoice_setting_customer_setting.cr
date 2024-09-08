@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./invoice_setting_custom_field"
-require "./invoice_setting_customer_rendering_options"
 require "./invoice_setting_customer_setting_default_payment_method"
+require "./invoice_setting_customer_setting_rendering_options"
 
 module Stripe
   #
@@ -35,8 +35,8 @@ module Stripe
     getter footer : String? = nil
     MAX_LENGTH_FOR_FOOTER = 5000
 
-    @[JSON::Field(key: "rendering_options", type: Stripe::InvoiceSettingCustomerRenderingOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter rendering_options : Stripe::InvoiceSettingCustomerRenderingOptions? = nil
+    @[JSON::Field(key: "rendering_options", type: Stripe::InvoiceSettingCustomerSettingRenderingOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter rendering_options : Stripe::InvoiceSettingCustomerSettingRenderingOptions? = nil
 
     # End of Required Properties
 
@@ -48,7 +48,7 @@ module Stripe
       @custom_fields : Array(Stripe::InvoiceSettingCustomField)? = nil,
       @default_payment_method : Stripe::InvoiceSettingCustomerSettingDefaultPaymentMethod? = nil,
       @footer : String? = nil,
-      @rendering_options : Stripe::InvoiceSettingCustomerRenderingOptions? = nil
+      @rendering_options : Stripe::InvoiceSettingCustomerSettingRenderingOptions? = nil
     )
     end
 
@@ -128,7 +128,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] rendering_options Object to be assigned
-    def rendering_options=(new_value : Stripe::InvoiceSettingCustomerRenderingOptions?)
+    def rendering_options=(new_value : Stripe::InvoiceSettingCustomerSettingRenderingOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

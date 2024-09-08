@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./source"
 require "./topup_balance_transaction"
+require "./topup_source"
 
 module Stripe
   # To top up your Stripe balance, you create a top-up object. You can retrieve individual top-ups, as well as list all top-ups. Top-ups are identified by a unique, random ID.  Related guide: [Topping up your platform account](https://stripe.com/docs/connect/top-ups)
@@ -75,8 +75,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [topup]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("topup")
 
-    @[JSON::Field(key: "source", type: Stripe::Source?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter source : Stripe::Source? = nil
+    @[JSON::Field(key: "source", type: Stripe::TopupSource?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter source : Stripe::TopupSource? = nil
 
     # Extra information about a top-up. This will appear on your source's bank statement. It must contain at least one letter.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -113,7 +113,7 @@ module Stripe
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
-      @source : Stripe::Source? = nil,
+      @source : Stripe::TopupSource? = nil,
       @statement_descriptor : String? = nil,
       @status : String? = nil,
       @transfer_group : String? = nil
@@ -367,7 +367,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
-    def source=(new_value : Stripe::Source?)
+    def source=(new_value : Stripe::TopupSource?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

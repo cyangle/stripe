@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscriptions_subscription_exposed_id_request_transfer_data"
 
 describe Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData do
-  describe "test an instance of PostSubscriptionsSubscriptionExposedIdRequestTransferData" do
-    it "should create an instance of PostSubscriptionsSubscriptionExposedIdRequestTransferData" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData.new
-      # (instance).should be_a(Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData)
-    end
-  end
-
-  describe "test attribute 'amount'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'amount_percent'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'destination'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

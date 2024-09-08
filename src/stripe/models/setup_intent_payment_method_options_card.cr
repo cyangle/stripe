@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./setup_intent_payment_method_options_card_mandate_options"
+require "./setup_intent_payment_method_options_card_mandate_options1"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "mandate_options", type: Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter mandate_options : Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions? = nil
+    @[JSON::Field(key: "mandate_options", type: Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter mandate_options : Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions1? = nil
 
     # Selected network to process this SetupIntent on. Depends on the available networks of the card attached to the setup intent. Can be only set confirm-time.
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -43,7 +43,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @mandate_options : Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions? = nil,
+      @mandate_options : Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions1? = nil,
       @network : String? = nil,
       @request_three_d_secure : String? = nil
     )
@@ -86,7 +86,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(new_value : Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions?)
+    def mandate_options=(new_value : Stripe::SetupIntentPaymentMethodOptionsCardMandateOptions1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

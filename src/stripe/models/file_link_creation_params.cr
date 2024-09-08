@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./file_link_creation_params_metadata"
+require "./post_accounts_request_metadata"
 
 module Stripe
   class FileLinkCreationParams
@@ -32,8 +32,8 @@ module Stripe
     @[JSON::Field(key: "expires_at", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expires_at : Int64? = nil
 
-    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +43,7 @@ module Stripe
       @create : Bool? = nil,
       # Optional properties
       @expires_at : Int64? = nil,
-      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil
     )
     end
 
@@ -88,7 +88,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

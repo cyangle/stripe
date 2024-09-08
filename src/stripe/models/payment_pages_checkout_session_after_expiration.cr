@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_pages_checkout_session_after_expiration_recovery"
+require "./payment_pages_checkout_session_after_expiration_recovery1"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "recovery", type: Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter recovery : Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery? = nil
+    @[JSON::Field(key: "recovery", type: Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter recovery : Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery1? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @recovery : Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery? = nil
+      @recovery : Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery1? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recovery Object to be assigned
-    def recovery=(new_value : Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery?)
+    def recovery=(new_value : Stripe::PaymentPagesCheckoutSessionAfterExpirationRecovery1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

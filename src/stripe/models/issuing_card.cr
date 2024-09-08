@@ -13,8 +13,8 @@ require "./issuing_card_authorization_controls"
 require "./issuing_card_personalization_design"
 require "./issuing_card_replaced_by"
 require "./issuing_card_replacement_for"
-require "./issuing_card_shipping"
-require "./issuing_card_wallets"
+require "./issuing_card_shipping1"
+require "./issuing_card_wallets1"
 require "./issuing_cardholder"
 
 module Stripe
@@ -95,8 +95,8 @@ module Stripe
     ERROR_MESSAGE_FOR_REPLACEMENT_REASON = "invalid value for \"replacement_reason\", must be one of [damaged, expired, lost, stolen]."
     VALID_VALUES_FOR_REPLACEMENT_REASON  = String.static_array("damaged", "expired", "lost", "stolen")
 
-    @[JSON::Field(key: "shipping", type: Stripe::IssuingCardShipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping : Stripe::IssuingCardShipping? = nil
+    @[JSON::Field(key: "shipping", type: Stripe::IssuingCardShipping1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping : Stripe::IssuingCardShipping1? = nil
 
     @[JSON::Field(key: "spending_controls", type: Stripe::IssuingCardAuthorizationControls?, default: nil, required: true, nullable: false, emit_null: false)]
     getter spending_controls : Stripe::IssuingCardAuthorizationControls? = nil
@@ -113,8 +113,8 @@ module Stripe
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [physical, virtual]."
     VALID_VALUES_FOR__TYPE  = String.static_array("physical", "virtual")
 
-    @[JSON::Field(key: "wallets", type: Stripe::IssuingCardWallets?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter wallets : Stripe::IssuingCardWallets? = nil
+    @[JSON::Field(key: "wallets", type: Stripe::IssuingCardWallets1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter wallets : Stripe::IssuingCardWallets1? = nil
 
     # End of Required Properties
 
@@ -159,11 +159,11 @@ module Stripe
       @replaced_by : Stripe::IssuingCardReplacedBy? = nil,
       @replacement_for : Stripe::IssuingCardReplacementFor? = nil,
       @replacement_reason : String? = nil,
-      @shipping : Stripe::IssuingCardShipping? = nil,
+      @shipping : Stripe::IssuingCardShipping1? = nil,
       @spending_controls : Stripe::IssuingCardAuthorizationControls? = nil,
       @status : String? = nil,
       @_type : String? = nil,
-      @wallets : Stripe::IssuingCardWallets? = nil,
+      @wallets : Stripe::IssuingCardWallets1? = nil,
       # Optional properties
       @cvc : String? = nil,
       @financial_account : String? = nil,
@@ -526,7 +526,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(new_value : Stripe::IssuingCardShipping?)
+    def shipping=(new_value : Stripe::IssuingCardShipping1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -569,7 +569,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wallets Object to be assigned
-    def wallets=(new_value : Stripe::IssuingCardWallets?)
+    def wallets=(new_value : Stripe::IssuingCardWallets1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

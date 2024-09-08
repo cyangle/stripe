@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./climate_removals_location"
+require "./climate_removals_order_deliveries_location"
 require "./climate_supplier"
 
 module Stripe
@@ -26,8 +26,8 @@ module Stripe
     @[JSON::Field(key: "delivered_at", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter delivered_at : Int64? = nil
 
-    @[JSON::Field(key: "location", type: Stripe::ClimateRemovalsLocation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter location : Stripe::ClimateRemovalsLocation? = nil
+    @[JSON::Field(key: "location", type: Stripe::ClimateRemovalsOrderDeliveriesLocation?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter location : Stripe::ClimateRemovalsOrderDeliveriesLocation? = nil
 
     # Quantity of carbon removal supplied by this delivery.
     @[JSON::Field(key: "metric_tons", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -50,7 +50,7 @@ module Stripe
       *,
       # Required properties
       @delivered_at : Int64? = nil,
-      @location : Stripe::ClimateRemovalsLocation? = nil,
+      @location : Stripe::ClimateRemovalsOrderDeliveriesLocation? = nil,
       @metric_tons : String? = nil,
       @registry_url : String? = nil,
       @supplier : Stripe::ClimateSupplier? = nil
@@ -123,7 +123,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] location Object to be assigned
-    def location=(new_value : Stripe::ClimateRemovalsLocation?)
+    def location=(new_value : Stripe::ClimateRemovalsOrderDeliveriesLocation?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

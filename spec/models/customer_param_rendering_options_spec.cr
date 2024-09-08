@@ -14,21 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/customer_param_rendering_options"
 
 describe Stripe::CustomerParamRenderingOptions do
-  describe "test an instance of CustomerParamRenderingOptions" do
-    it "should create an instance of CustomerParamRenderingOptions" do
-      # instance = Stripe::CustomerParamRenderingOptions.new
-      # (instance).should be_a(Stripe::CustomerParamRenderingOptions)
-    end
-  end
-
-  describe "test attribute 'amount_tax_display'" do
-    it "should work" do
-      # instance = Stripe::CustomerParamRenderingOptions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::CustomerParamRenderingOptions::ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY
-      # validator.allowable_values.each do |value|
-      #   instance.amount_tax_display = value.as(String)
-      # end
-    end
-  end
 end

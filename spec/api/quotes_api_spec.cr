@@ -101,17 +101,17 @@ describe "QuotesApi" do
   # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as &#x60;active&#x60;. Defaults to &#x60;charge_automatically&#x60;.
   # @option opts [String] :customer The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
   # @option opts [PostQuotesRequestDefaultTaxRates] :default_tax_rates
-  # @option opts [String] :description
+  # @option opts [PostQuotesRequestDescription] :description
   # @option opts [PostQuotesRequestDiscounts] :discounts
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-  # @option opts [String] :footer
+  # @option opts [PostQuotesRequestFooter] :footer
   # @option opts [FromQuoteParams] :from_quote
-  # @option opts [String] :header
+  # @option opts [PostQuotesRequestHeader] :header
   # @option opts [QuoteParam] :invoice_settings
   # @option opts [Array(LineItemCreateParams)] :line_items A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
   # @option opts [Hash(String, String)] :metadata
-  # @option opts [String] :on_behalf_of
+  # @option opts [PostQuotesRequestOnBehalfOf] :on_behalf_of
   # @option opts [SubscriptionDataCreateParams] :subscription_data
   # @option opts [String] :test_clock ID of the test clock to attach to the quote.
   # @option opts [PostQuotesRequestTransferData] :transfer_data
@@ -132,16 +132,16 @@ describe "QuotesApi" do
   # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as &#x60;active&#x60;. Defaults to &#x60;charge_automatically&#x60;.
   # @option opts [String] :customer The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
   # @option opts [PostQuotesRequestDefaultTaxRates] :default_tax_rates
-  # @option opts [String] :description
+  # @option opts [PostQuotesQuoteRequestDescription] :description
   # @option opts [PostQuotesRequestDiscounts] :discounts
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
-  # @option opts [String] :footer
-  # @option opts [String] :header
+  # @option opts [PostQuotesQuoteRequestFooter] :footer
+  # @option opts [PostQuotesQuoteRequestHeader] :header
   # @option opts [QuoteParam] :invoice_settings
   # @option opts [Array(LineItemUpdateParams)] :line_items A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
   # @option opts [Hash(String, String)] :metadata
-  # @option opts [String] :on_behalf_of
+  # @option opts [PostQuotesRequestOnBehalfOf] :on_behalf_of
   # @option opts [SubscriptionDataUpdateParams] :subscription_data
   # @option opts [PostQuotesRequestTransferData] :transfer_data
   # @return [Quote]

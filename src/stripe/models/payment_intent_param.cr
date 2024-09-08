@@ -11,6 +11,8 @@ require "../../core"
 
 require "./installments_param"
 require "./mandate_options_param"
+require "./payment_intent_param_statement_descriptor_suffix_kana"
+require "./payment_intent_param_statement_descriptor_suffix_kanji"
 require "./payment_method_options_param"
 
 module Stripe
@@ -90,15 +92,11 @@ module Stripe
     ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [, none, off_session, on_session]."
     VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = String.static_array("", "none", "off_session", "on_session")
 
-    @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter statement_descriptor_suffix_kana : String? = nil
-    ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA = "invalid value for \"statement_descriptor_suffix_kana\", must be one of []."
-    VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA  = String.static_array("")
+    @[JSON::Field(key: "statement_descriptor_suffix_kana", type: Stripe::PaymentIntentParamStatementDescriptorSuffixKana?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter statement_descriptor_suffix_kana : Stripe::PaymentIntentParamStatementDescriptorSuffixKana? = nil
 
-    @[JSON::Field(key: "statement_descriptor_suffix_kanji", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter statement_descriptor_suffix_kanji : String? = nil
-    ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI = "invalid value for \"statement_descriptor_suffix_kanji\", must be one of []."
-    VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI  = String.static_array("")
+    @[JSON::Field(key: "statement_descriptor_suffix_kanji", type: Stripe::PaymentIntentParamStatementDescriptorSuffixKanji?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter statement_descriptor_suffix_kanji : Stripe::PaymentIntentParamStatementDescriptorSuffixKanji? = nil
 
     @[JSON::Field(key: "three_d_secure", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter three_d_secure : Stripe::PaymentMethodOptionsParam? = nil
@@ -121,8 +119,8 @@ module Stripe
       @request_three_d_secure : String? = nil,
       @require_cvc_recollection : Bool? = nil,
       @setup_future_usage : String? = nil,
-      @statement_descriptor_suffix_kana : String? = nil,
-      @statement_descriptor_suffix_kanji : String? = nil,
+      @statement_descriptor_suffix_kana : Stripe::PaymentIntentParamStatementDescriptorSuffixKana? = nil,
+      @statement_descriptor_suffix_kanji : Stripe::PaymentIntentParamStatementDescriptorSuffixKanji? = nil,
       @three_d_secure : Stripe::PaymentMethodOptionsParam? = nil
     )
     end
@@ -170,10 +168,10 @@ module Stripe
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       unless (_statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA) unless OpenApi::EnumValidator.valid?(_statement_descriptor_suffix_kana, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
+        invalid_properties.concat(_statement_descriptor_suffix_kana.list_invalid_properties_for("statement_descriptor_suffix_kana")) if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
       end
       unless (_statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI) unless OpenApi::EnumValidator.valid?(_statement_descriptor_suffix_kanji, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
+        invalid_properties.concat(_statement_descriptor_suffix_kanji.list_invalid_properties_for("statement_descriptor_suffix_kanji")) if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
       end
       unless (_three_d_secure = @three_d_secure).nil?
         invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure")) if _three_d_secure.is_a?(OpenApi::Validatable)
@@ -229,11 +227,11 @@ module Stripe
       end
 
       unless (_statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana).nil?
-        return false unless OpenApi::EnumValidator.valid?(_statement_descriptor_suffix_kana, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
+        return false if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable) && !_statement_descriptor_suffix_kana.valid?
       end
 
       unless (_statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji).nil?
-        return false unless OpenApi::EnumValidator.valid?(_statement_descriptor_suffix_kanji, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
+        return false if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable) && !_statement_descriptor_suffix_kanji.valid?
       end
 
       unless (_three_d_secure = @three_d_secure).nil?
@@ -367,9 +365,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix_kana Object to be assigned
-    def statement_descriptor_suffix_kana=(new_value : String?)
+    def statement_descriptor_suffix_kana=(new_value : Stripe::PaymentIntentParamStatementDescriptorSuffixKana?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("statement_descriptor_suffix_kana", new_value, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @statement_descriptor_suffix_kana = new_value
@@ -377,9 +375,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] statement_descriptor_suffix_kanji Object to be assigned
-    def statement_descriptor_suffix_kanji=(new_value : String?)
+    def statement_descriptor_suffix_kanji=(new_value : Stripe::PaymentIntentParamStatementDescriptorSuffixKanji?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("statement_descriptor_suffix_kanji", new_value, VALID_VALUES_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @statement_descriptor_suffix_kanji = new_value

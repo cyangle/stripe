@@ -9,10 +9,10 @@
 
 require "../../core"
 
-require "./connect_account_reference"
 require "./invoice_account_tax_ids_inner"
 require "./invoice_setting_custom_field"
-require "./invoice_setting_rendering_options"
+require "./invoice_setting_subscription_schedule_phase_setting_issuer"
+require "./payment_links_resource_invoice_settings_rendering_options"
 
 module Stripe
   #
@@ -42,14 +42,14 @@ module Stripe
     getter footer : String? = nil
     MAX_LENGTH_FOR_FOOTER = 5000
 
-    @[JSON::Field(key: "issuer", type: Stripe::ConnectAccountReference?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter issuer : Stripe::ConnectAccountReference? = nil
+    @[JSON::Field(key: "issuer", type: Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter issuer : Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer? = nil
 
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: true, emit_null: true)]
     getter metadata : Hash(String, String)? = nil
 
-    @[JSON::Field(key: "rendering_options", type: Stripe::InvoiceSettingRenderingOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter rendering_options : Stripe::InvoiceSettingRenderingOptions? = nil
+    @[JSON::Field(key: "rendering_options", type: Stripe::PaymentLinksResourceInvoiceSettingsRenderingOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter rendering_options : Stripe::PaymentLinksResourceInvoiceSettingsRenderingOptions? = nil
 
     # End of Required Properties
 
@@ -62,9 +62,9 @@ module Stripe
       @custom_fields : Array(Stripe::InvoiceSettingCustomField)? = nil,
       @description : String? = nil,
       @footer : String? = nil,
-      @issuer : Stripe::ConnectAccountReference? = nil,
+      @issuer : Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer? = nil,
       @metadata : Hash(String, String)? = nil,
-      @rendering_options : Stripe::InvoiceSettingRenderingOptions? = nil
+      @rendering_options : Stripe::PaymentLinksResourceInvoiceSettingsRenderingOptions? = nil
     )
     end
 
@@ -171,7 +171,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issuer Object to be assigned
-    def issuer=(new_value : Stripe::ConnectAccountReference?)
+    def issuer=(new_value : Stripe::InvoiceSettingSubscriptionSchedulePhaseSettingIssuer?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -187,7 +187,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] rendering_options Object to be assigned
-    def rendering_options=(new_value : Stripe::InvoiceSettingRenderingOptions?)
+    def rendering_options=(new_value : Stripe::PaymentLinksResourceInvoiceSettingsRenderingOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

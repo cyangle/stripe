@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscription_schedules_request_start_date"
 
 describe Stripe::PostSubscriptionSchedulesRequestStartDate do
-  describe "test an instance of PostSubscriptionSchedulesRequestStartDate" do
-    it "should create an instance of PostSubscriptionSchedulesRequestStartDate" do
-      # instance = Stripe::PostSubscriptionSchedulesRequestStartDate.new
-      # (instance).should be_a(Stripe::PostSubscriptionSchedulesRequestStartDate)
-    end
-  end
 end

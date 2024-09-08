@@ -10,15 +10,15 @@
 require "../../core"
 
 require "./address_specs"
-require "./file_link_creation_params_metadata"
 require "./japan_address_kana_specs"
 require "./japan_address_kanji_specs"
 require "./legal_entity_and_kyc_address_specs"
 require "./person_additional_tos_acceptances_specs"
 require "./person_documents_specs"
-require "./person_token_specs_dob"
 require "./person_verification_specs"
+require "./post_accounts_account_persons_request_dob"
 require "./post_accounts_account_persons_request_full_name_aliases"
+require "./post_accounts_request_metadata"
 require "./relationship_specs"
 
 module Stripe
@@ -42,8 +42,8 @@ module Stripe
     @[JSON::Field(key: "address_kanji", type: Stripe::JapanAddressKanjiSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address_kanji : Stripe::JapanAddressKanjiSpecs? = nil
 
-    @[JSON::Field(key: "dob", type: Stripe::PersonTokenSpecsDob?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter dob : Stripe::PersonTokenSpecsDob? = nil
+    @[JSON::Field(key: "dob", type: Stripe::PostAccountsAccountPersonsRequestDob?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil
 
     @[JSON::Field(key: "documents", type: Stripe::PersonDocumentsSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter documents : Stripe::PersonDocumentsSpecs? = nil
@@ -104,8 +104,8 @@ module Stripe
     getter maiden_name : String? = nil
     MAX_LENGTH_FOR_MAIDEN_NAME = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \"XX\" if unavailable.
     @[JSON::Field(key: "nationality", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -143,7 +143,7 @@ module Stripe
       @address : Stripe::LegalEntityAndKycAddressSpecs? = nil,
       @address_kana : Stripe::JapanAddressKanaSpecs? = nil,
       @address_kanji : Stripe::JapanAddressKanjiSpecs? = nil,
-      @dob : Stripe::PersonTokenSpecsDob? = nil,
+      @dob : Stripe::PostAccountsAccountPersonsRequestDob? = nil,
       @documents : Stripe::PersonDocumentsSpecs? = nil,
       @email : String? = nil,
       @first_name : String? = nil,
@@ -157,7 +157,7 @@ module Stripe
       @last_name_kana : String? = nil,
       @last_name_kanji : String? = nil,
       @maiden_name : String? = nil,
-      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @nationality : String? = nil,
       @phone : String? = nil,
       @political_exposure : String? = nil,
@@ -404,7 +404,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(new_value : Stripe::PersonTokenSpecsDob?)
+    def dob=(new_value : Stripe::PostAccountsAccountPersonsRequestDob?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -536,7 +536,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

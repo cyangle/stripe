@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscriptions_subscription_exposed_id_request_cancel_at"
 
 describe Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt do
-  describe "test an instance of PostSubscriptionsSubscriptionExposedIdRequestCancelAt" do
-    it "should create an instance of PostSubscriptionsSubscriptionExposedIdRequestCancelAt" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt.new
-      # (instance).should be_a(Stripe::PostSubscriptionsSubscriptionExposedIdRequestCancelAt)
-    end
-  end
 end

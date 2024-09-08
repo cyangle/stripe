@@ -32,6 +32,18 @@ describe "ProductsApi" do
     end
   end
 
+  # unit tests for delete_products_product_features_id
+  # &lt;p&gt;Deletes the feature attachment to a product&lt;/p&gt;
+  # @param id
+  # @param product
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedProductFeature]
+  describe "delete_products_product_features_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_products
   # &lt;p&gt;Returns a list of your products. The products are returned sorted by creation date, with the most recently created products appearing first.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
@@ -59,6 +71,34 @@ describe "ProductsApi" do
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Product]
   describe "get_products_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_products_product_features
+  # &lt;p&gt;Retrieve a list of features for a product&lt;/p&gt;
+  # @param product
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [EntitlementsResourceProductFeatureList]
+  describe "get_products_product_features test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_products_product_features_id
+  # &lt;p&gt;Retrieves a product_feature, which represents a feature attachment to a product&lt;/p&gt;
+  # @param product The ID of the product.
+  # @param id The ID of the product_feature.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ProductFeature]
+  describe "get_products_product_features_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -110,7 +150,7 @@ describe "ProductsApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the product is available for purchase.
   # @option opts [String] :default_price The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-  # @option opts [String] :description
+  # @option opts [PostProductsIdRequestDescription] :description
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostProductsIdRequestImages] :images
   # @option opts [PostProductsIdRequestMarketingFeatures] :marketing_features
@@ -119,11 +159,24 @@ describe "ProductsApi" do
   # @option opts [PostProductsIdRequestPackageDimensions] :package_dimensions
   # @option opts [Bool] :shippable Whether this product is shipped (i.e., physical goods).
   # @option opts [String] :statement_descriptor An arbitrary string to be displayed on your customer&#39;s credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include &#x60;&lt;&#x60;, &#x60;&gt;&#x60;, &#x60;\\\\&#x60;, &#x60;\\\&quot;&#x60;, &#x60;&#39;&#x60; characters, and will appear on your customer&#39;s statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if &#x60;type&#x3D;service&#x60;. Only used for subscription payments.
-  # @option opts [String] :tax_code
-  # @option opts [String] :unit_label
-  # @option opts [String] :url
+  # @option opts [PostInvoiceitemsRequestTaxCode] :tax_code
+  # @option opts [PostProductsIdRequestUnitLabel] :unit_label
+  # @option opts [PostProductsIdRequestUrl] :url
   # @return [Product]
   describe "post_products_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_products_product_features
+  # &lt;p&gt;Creates a product_feature, which represents a feature attachment to a product&lt;/p&gt;
+  # @param product
+  # @param entitlement_feature The ID of the [Feature](https://stripe.com/docs/api/entitlements/feature) object attached to this product.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ProductFeature]
+  describe "post_products_product_features test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

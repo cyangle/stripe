@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_links_payment_link_request_custom_fields"
 
 describe Stripe::PostPaymentLinksPaymentLinkRequestCustomFields do
-  describe "test an instance of PostPaymentLinksPaymentLinkRequestCustomFields" do
-    it "should create an instance of PostPaymentLinksPaymentLinkRequestCustomFields" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestCustomFields.new
-      # (instance).should be_a(Stripe::PostPaymentLinksPaymentLinkRequestCustomFields)
-    end
-  end
 end

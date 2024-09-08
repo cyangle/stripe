@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./billing_meter_resource_billing_meter_event_adjustment_cancel"
+require "./billing_meter_event_adjustment_cancel"
 
 module Stripe
   # A billing meter event adjustment is a resource that allows you to cancel a meter event. For example, you might create a billing meter event adjustment to cancel a meter event that was created in error or attached to the wrong customer.
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "cancel", type: Stripe::BillingMeterResourceBillingMeterEventAdjustmentCancel?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter cancel : Stripe::BillingMeterResourceBillingMeterEventAdjustmentCancel? = nil
+    @[JSON::Field(key: "cancel", type: Stripe::BillingMeterEventAdjustmentCancel?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter cancel : Stripe::BillingMeterEventAdjustmentCancel? = nil
 
     # The name of the meter event. Corresponds with the `event_name` field on a meter.
     @[JSON::Field(key: "event_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -58,7 +58,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @cancel : Stripe::BillingMeterResourceBillingMeterEventAdjustmentCancel? = nil,
+      @cancel : Stripe::BillingMeterEventAdjustmentCancel? = nil,
       @event_name : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
@@ -136,7 +136,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancel Object to be assigned
-    def cancel=(new_value : Stripe::BillingMeterResourceBillingMeterEventAdjustmentCancel?)
+    def cancel=(new_value : Stripe::BillingMeterEventAdjustmentCancel?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

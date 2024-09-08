@@ -14,45 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_links_payment_link_request_restrictions"
 
 describe Stripe::PostPaymentLinksPaymentLinkRequestRestrictions do
-  describe "test an instance of PostPaymentLinksPaymentLinkRequestRestrictions" do
-    it "should create an instance of PostPaymentLinksPaymentLinkRequestRestrictions" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestRestrictions.new
-      # (instance).should be_a(Stripe::PostPaymentLinksPaymentLinkRequestRestrictions)
-    end
-  end
-
-  describe "test attribute 'completed_sessions'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestRestrictions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'currency_options'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestRestrictions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'first_time_transaction'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestRestrictions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'minimum_amount'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestRestrictions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'minimum_amount_currency'" do
-    it "should work" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestRestrictions.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

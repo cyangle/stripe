@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter"
 
 describe Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter do
-  describe "test an instance of GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter" do
-    it "should create an instance of GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter" do
-      # instance = Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter.new
-      # (instance).should be_a(Stripe::GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter)
-    end
-  end
 end

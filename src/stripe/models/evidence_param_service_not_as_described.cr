@@ -9,92 +9,14 @@
 
 require "../../core"
 
+require "./canceled_additional_documentation"
 require "./canceled_canceled_at"
+require "./canceled_cancellation_reason"
+require "./canceled_explanation"
 require "./merchandise_not_as_described_received_at"
 require "./service_not_as_described"
 
 module Stripe
   # Evidence provided when `reason` is 'service_not_as_described'.
-  class EvidenceParamServiceNotAsDescribed
-    include JSON::Serializable
-    include JSON::Serializable::Unmapped
-    include OpenApi::Validatable
-    include OpenApi::Json
-
-    # Optional Properties
-
-    @[JSON::Field(key: "additional_documentation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    property additional_documentation : String? = nil
-    ERROR_MESSAGE_FOR_ADDITIONAL_DOCUMENTATION = "invalid value for \"additional_documentation\", must be one of []."
-    VALID_VALUES_FOR_ADDITIONAL_DOCUMENTATION  = String.static_array("")
-
-    @[JSON::Field(key: "canceled_at", type: Stripe::CanceledCanceledAt?, default: nil, required: false, nullable: false, emit_null: false)]
-    property canceled_at : Stripe::CanceledCanceledAt? = nil
-
-    @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    property cancellation_reason : String? = nil
-    ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of []."
-    VALID_VALUES_FOR_CANCELLATION_REASON  = String.static_array("")
-
-    @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    property explanation : String? = nil
-    ERROR_MESSAGE_FOR_EXPLANATION = "invalid value for \"explanation\", must be one of []."
-    VALID_VALUES_FOR_EXPLANATION  = String.static_array("")
-
-    @[JSON::Field(key: "received_at", type: Stripe::MerchandiseNotAsDescribedReceivedAt?, default: nil, required: false, nullable: false, emit_null: false)]
-    property received_at : Stripe::MerchandiseNotAsDescribedReceivedAt? = nil
-
-    # List of class defined in anyOf (OpenAPI v3)
-    def self.openapi_any_of
-      [
-        Stripe::ServiceNotAsDescribed,
-        String,
-      ]
-    end
-
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(
-      *,
-      # Optional properties
-      @additional_documentation : String? = nil,
-      @canceled_at : Stripe::CanceledCanceledAt? = nil,
-      @cancellation_reason : String? = nil,
-      @explanation : String? = nil,
-      @received_at : Stripe::MerchandiseNotAsDescribedReceivedAt? = nil
-    )
-    end
-
-    # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properties with the reasons
-    def list_invalid_properties : Array(String)
-      invalid_properties = Array(String).new
-      invalid_properties
-    end
-
-    # Check to see if the all the properties in the model are valid
-    # @return true if the model is valid
-    def valid? : Bool
-      _any_of_found = false
-      json_string : String = self.to_json
-      _any_of_found = self.class.openapi_any_of.any? do |_class|
-        _any_of = begin
-          _class.from_json(json_string)
-        rescue
-          nil
-        end
-
-        !_any_of.nil? && _any_of.not_nil!.valid?
-      end
-      return false if !_any_of_found
-
-      true
-    end
-
-    # Generates #hash and #== methods from all fields
-    # #== @return [Bool]
-    # #hash calculates hash code according to all attributes.
-    # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@additional_documentation, @canceled_at, @cancellation_reason, @explanation, @received_at)
-  end
+  alias EvidenceParamServiceNotAsDescribed = ServiceNotAsDescribed | String
 end

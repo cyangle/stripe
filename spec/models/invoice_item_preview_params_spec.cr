@@ -113,10 +113,6 @@ describe Stripe::InvoiceItemPreviewParams do
     it "should work" do
       # instance = Stripe::InvoiceItemPreviewParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::InvoiceItemPreviewParams::ENUM_VALIDATOR_FOR_TAX_CODE
-      # validator.allowable_values.each do |value|
-      #   instance.tax_code = value.as(String)
-      # end
     end
   end
 

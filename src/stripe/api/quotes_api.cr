@@ -15,10 +15,17 @@ require "../models/from_quote_params"
 
 require "../models/line_item_create_params"
 require "../models/line_item_update_params"
+require "../models/post_quotes_quote_request_description"
+require "../models/post_quotes_quote_request_footer"
+require "../models/post_quotes_quote_request_header"
 require "../models/post_quotes_request_application_fee_amount"
 require "../models/post_quotes_request_application_fee_percent"
 require "../models/post_quotes_request_default_tax_rates"
+require "../models/post_quotes_request_description"
 require "../models/post_quotes_request_discounts"
+require "../models/post_quotes_request_footer"
+require "../models/post_quotes_request_header"
+require "../models/post_quotes_request_on_behalf_of"
 require "../models/post_quotes_request_transfer_data"
 require "../models/quote"
 require "../models/quote_param"
@@ -676,17 +683,17 @@ module Stripe
     # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostQuotesRequestDescription?]
     # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param footer [String?]
+    # @optional @param footer [Stripe::PostQuotesRequestFooter?]
     # @optional @param from_quote [Stripe::FromQuoteParams?]
-    # @optional @param header [String?]
+    # @optional @param header [Stripe::PostQuotesRequestHeader?]
     # @optional @param invoice_settings [Stripe::QuoteParam?]
     # @optional @param line_items [Array(Stripe::LineItemCreateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
     # @optional @param metadata [Hash(String, String)?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
     # @optional @param subscription_data [Stripe::SubscriptionDataCreateParams?]
     # @optional @param test_clock [String?] ID of the test clock to attach to the quote.
     # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
@@ -699,17 +706,17 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
+      footer : Stripe::PostQuotesRequestFooter? = nil,
       from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
+      header : Stripe::PostQuotesRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemCreateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
       test_clock : String? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil
@@ -725,17 +732,17 @@ module Stripe
     # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostQuotesRequestDescription?]
     # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param footer [String?]
+    # @optional @param footer [Stripe::PostQuotesRequestFooter?]
     # @optional @param from_quote [Stripe::FromQuoteParams?]
-    # @optional @param header [String?]
+    # @optional @param header [Stripe::PostQuotesRequestHeader?]
     # @optional @param invoice_settings [Stripe::QuoteParam?]
     # @optional @param line_items [Array(Stripe::LineItemCreateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
     # @optional @param metadata [Hash(String, String)?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
     # @optional @param subscription_data [Stripe::SubscriptionDataCreateParams?]
     # @optional @param test_clock [String?] ID of the test clock to attach to the quote.
     # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
@@ -748,17 +755,17 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
+      footer : Stripe::PostQuotesRequestFooter? = nil,
       from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
+      header : Stripe::PostQuotesRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemCreateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
       test_clock : String? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil
@@ -781,17 +788,17 @@ module Stripe
     # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostQuotesRequestDescription?]
     # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
-    # @optional @param footer [String?]
+    # @optional @param footer [Stripe::PostQuotesRequestFooter?]
     # @optional @param from_quote [Stripe::FromQuoteParams?]
-    # @optional @param header [String?]
+    # @optional @param header [Stripe::PostQuotesRequestHeader?]
     # @optional @param invoice_settings [Stripe::QuoteParam?]
     # @optional @param line_items [Array(Stripe::LineItemCreateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
     # @optional @param metadata [Hash(String, String)?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
     # @optional @param subscription_data [Stripe::SubscriptionDataCreateParams?]
     # @optional @param test_clock [String?] ID of the test clock to attach to the quote.
     # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
@@ -804,17 +811,17 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
+      footer : Stripe::PostQuotesRequestFooter? = nil,
       from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
+      header : Stripe::PostQuotesRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemCreateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
       test_clock : String? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil,
@@ -825,10 +832,6 @@ module Stripe
 
     POST_QUOTES_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
     POST_QUOTES_MAX_LENGTH_FOR_CUSTOMER            = 5000
-    POST_QUOTES_VALID_VALUES_FOR_DESCRIPTION       = String.static_array("")
-    POST_QUOTES_VALID_VALUES_FOR_FOOTER            = String.static_array("")
-    POST_QUOTES_VALID_VALUES_FOR_HEADER            = String.static_array("")
-    POST_QUOTES_VALID_VALUES_FOR_ON_BEHALF_OF      = String.static_array("")
     POST_QUOTES_MAX_LENGTH_FOR_TEST_CLOCK          = 5000
 
     # @return Crest::Request
@@ -840,17 +843,17 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
+      footer : Stripe::PostQuotesRequestFooter? = nil,
       from_quote : Stripe::FromQuoteParams? = nil,
-      header : String? = nil,
+      header : Stripe::PostQuotesRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemCreateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataCreateParams? = nil,
       test_clock : String? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil
@@ -879,20 +882,20 @@ module Stripe
           _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
         end
         unless (_description = description).nil?
-          OpenApi::EnumValidator.validate("description", _description, POST_QUOTES_VALID_VALUES_FOR_DESCRIPTION)
+          _description.validate if _description.is_a?(OpenApi::Validatable)
         end
         unless (_discounts = discounts).nil?
           _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
         end
 
         unless (_footer = footer).nil?
-          OpenApi::EnumValidator.validate("footer", _footer, POST_QUOTES_VALID_VALUES_FOR_FOOTER)
+          _footer.validate if _footer.is_a?(OpenApi::Validatable)
         end
         unless (_from_quote = from_quote).nil?
           _from_quote.validate if _from_quote.is_a?(OpenApi::Validatable)
         end
         unless (_header = header).nil?
-          OpenApi::EnumValidator.validate("header", _header, POST_QUOTES_VALID_VALUES_FOR_HEADER)
+          _header.validate if _header.is_a?(OpenApi::Validatable)
         end
         unless (_invoice_settings = invoice_settings).nil?
           _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
@@ -902,7 +905,7 @@ module Stripe
         end
 
         unless (_on_behalf_of = on_behalf_of).nil?
-          OpenApi::EnumValidator.validate("on_behalf_of", _on_behalf_of, POST_QUOTES_VALID_VALUES_FOR_ON_BEHALF_OF)
+          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
         end
         unless (_subscription_data = subscription_data).nil?
           _subscription_data.validate if _subscription_data.is_a?(OpenApi::Validatable)
@@ -939,17 +942,17 @@ module Stripe
       form_params << Tuple(String, Crest::ParamsValue).new("collection_method", collection_method.to_s) if !collection_method.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("customer", customer.to_s) if !customer.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(default_tax_rates.to_json), "default_tax_rates")) if !default_tax_rates.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("description", description.to_s) if !description.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(description.to_json), "description")) if !description.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(discounts.to_json), "discounts")) if !discounts.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("expires_at", expires_at.to_s) if !expires_at.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("footer", footer.to_s) if !footer.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(footer.to_json), "footer")) if !footer.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(from_quote.to_json), "from_quote")) if !from_quote.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("header", header.to_s) if !header.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(header.to_json), "header")) if !header.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(invoice_settings.to_json), "invoice_settings")) if !invoice_settings.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(line_items.to_json), "line_items")) if !line_items.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("on_behalf_of", on_behalf_of.to_s) if !on_behalf_of.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(on_behalf_of.to_json), "on_behalf_of")) if !on_behalf_of.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(subscription_data.to_json), "subscription_data")) if !subscription_data.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("test_clock", test_clock.to_s) if !test_clock.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(transfer_data.to_json), "transfer_data")) if !transfer_data.nil?
@@ -981,16 +984,16 @@ module Stripe
     # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostQuotesQuoteRequestDescription?]
     # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
-    # @optional @param footer [String?]
-    # @optional @param header [String?]
+    # @optional @param footer [Stripe::PostQuotesQuoteRequestFooter?]
+    # @optional @param header [Stripe::PostQuotesQuoteRequestHeader?]
     # @optional @param invoice_settings [Stripe::QuoteParam?]
     # @optional @param line_items [Array(Stripe::LineItemUpdateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
     # @optional @param metadata [Hash(String, String)?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
     # @optional @param subscription_data [Stripe::SubscriptionDataUpdateParams?]
     # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
     # @return [Stripe::Quote]
@@ -1003,16 +1006,16 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesQuoteRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
+      footer : Stripe::PostQuotesQuoteRequestFooter? = nil,
+      header : Stripe::PostQuotesQuoteRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil
     ) : Stripe::Quote
@@ -1028,16 +1031,16 @@ module Stripe
     # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostQuotesQuoteRequestDescription?]
     # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
-    # @optional @param footer [String?]
-    # @optional @param header [String?]
+    # @optional @param footer [Stripe::PostQuotesQuoteRequestFooter?]
+    # @optional @param header [Stripe::PostQuotesQuoteRequestHeader?]
     # @optional @param invoice_settings [Stripe::QuoteParam?]
     # @optional @param line_items [Array(Stripe::LineItemUpdateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
     # @optional @param metadata [Hash(String, String)?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
     # @optional @param subscription_data [Stripe::SubscriptionDataUpdateParams?]
     # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
     # @return [Tuple(Stripe::Quote, Integer, Hash)] Stripe::Quote, response status code and response headers
@@ -1050,16 +1053,16 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesQuoteRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
+      footer : Stripe::PostQuotesQuoteRequestFooter? = nil,
+      header : Stripe::PostQuotesQuoteRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil
     ) : Tuple(Stripe::Quote, Int32, Hash(String, Array(String) | String))
@@ -1082,16 +1085,16 @@ module Stripe
     # @optional @param collection_method [String?] Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically`.
     # @optional @param customer [String?] The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     # @optional @param default_tax_rates [Stripe::PostQuotesRequestDefaultTaxRates?]
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostQuotesQuoteRequestDescription?]
     # @optional @param discounts [Stripe::PostQuotesRequestDiscounts?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param expires_at [Int32?] A future timestamp on which the quote will be canceled if in `open` or `draft` status. Measured in seconds since the Unix epoch.
-    # @optional @param footer [String?]
-    # @optional @param header [String?]
+    # @optional @param footer [Stripe::PostQuotesQuoteRequestFooter?]
+    # @optional @param header [Stripe::PostQuotesQuoteRequestHeader?]
     # @optional @param invoice_settings [Stripe::QuoteParam?]
     # @optional @param line_items [Array(Stripe::LineItemUpdateParams)?] A list of line items the customer is being quoted for. Each line item includes information about the product, the quantity, and the resulting cost.
     # @optional @param metadata [Hash(String, String)?]
-    # @optional @param on_behalf_of [String?]
+    # @optional @param on_behalf_of [Stripe::PostQuotesRequestOnBehalfOf?]
     # @optional @param subscription_data [Stripe::SubscriptionDataUpdateParams?]
     # @optional @param transfer_data [Stripe::PostQuotesRequestTransferData?]
     # @return nil
@@ -1104,16 +1107,16 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesQuoteRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
+      footer : Stripe::PostQuotesQuoteRequestFooter? = nil,
+      header : Stripe::PostQuotesQuoteRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil,
       &block : Crest::Response ->
@@ -1124,10 +1127,6 @@ module Stripe
     POST_QUOTES_QUOTE_MAX_LENGTH_FOR_QUOTE               = 5000
     POST_QUOTES_QUOTE_VALID_VALUES_FOR_COLLECTION_METHOD = String.static_array("charge_automatically", "send_invoice")
     POST_QUOTES_QUOTE_MAX_LENGTH_FOR_CUSTOMER            = 5000
-    POST_QUOTES_QUOTE_VALID_VALUES_FOR_DESCRIPTION       = String.static_array("")
-    POST_QUOTES_QUOTE_VALID_VALUES_FOR_FOOTER            = String.static_array("")
-    POST_QUOTES_QUOTE_VALID_VALUES_FOR_HEADER            = String.static_array("")
-    POST_QUOTES_QUOTE_VALID_VALUES_FOR_ON_BEHALF_OF      = String.static_array("")
 
     # @return Crest::Request
     def build_api_request_for_post_quotes_quote(
@@ -1139,16 +1138,16 @@ module Stripe
       collection_method : String? = nil,
       customer : String? = nil,
       default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil,
-      description : String? = nil,
+      description : Stripe::PostQuotesQuoteRequestDescription? = nil,
       discounts : Stripe::PostQuotesRequestDiscounts? = nil,
       expand : Array(String)? = nil,
       expires_at : Int64? = nil,
-      footer : String? = nil,
-      header : String? = nil,
+      footer : Stripe::PostQuotesQuoteRequestFooter? = nil,
+      header : Stripe::PostQuotesQuoteRequestHeader? = nil,
       invoice_settings : Stripe::QuoteParam? = nil,
       line_items : Array(Stripe::LineItemUpdateParams)? = nil,
       metadata : Hash(String, String)? = nil,
-      on_behalf_of : String? = nil,
+      on_behalf_of : Stripe::PostQuotesRequestOnBehalfOf? = nil,
       subscription_data : Stripe::SubscriptionDataUpdateParams? = nil,
       transfer_data : Stripe::PostQuotesRequestTransferData? = nil
     ) : Crest::Request
@@ -1180,17 +1179,17 @@ module Stripe
           _default_tax_rates.validate if _default_tax_rates.is_a?(OpenApi::Validatable)
         end
         unless (_description = description).nil?
-          OpenApi::EnumValidator.validate("description", _description, POST_QUOTES_QUOTE_VALID_VALUES_FOR_DESCRIPTION)
+          _description.validate if _description.is_a?(OpenApi::Validatable)
         end
         unless (_discounts = discounts).nil?
           _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
         end
 
         unless (_footer = footer).nil?
-          OpenApi::EnumValidator.validate("footer", _footer, POST_QUOTES_QUOTE_VALID_VALUES_FOR_FOOTER)
+          _footer.validate if _footer.is_a?(OpenApi::Validatable)
         end
         unless (_header = header).nil?
-          OpenApi::EnumValidator.validate("header", _header, POST_QUOTES_QUOTE_VALID_VALUES_FOR_HEADER)
+          _header.validate if _header.is_a?(OpenApi::Validatable)
         end
         unless (_invoice_settings = invoice_settings).nil?
           _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
@@ -1200,7 +1199,7 @@ module Stripe
         end
 
         unless (_on_behalf_of = on_behalf_of).nil?
-          OpenApi::EnumValidator.validate("on_behalf_of", _on_behalf_of, POST_QUOTES_QUOTE_VALID_VALUES_FOR_ON_BEHALF_OF)
+          _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
         end
         unless (_subscription_data = subscription_data).nil?
           _subscription_data.validate if _subscription_data.is_a?(OpenApi::Validatable)
@@ -1234,16 +1233,16 @@ module Stripe
       form_params << Tuple(String, Crest::ParamsValue).new("collection_method", collection_method.to_s) if !collection_method.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("customer", customer.to_s) if !customer.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(default_tax_rates.to_json), "default_tax_rates")) if !default_tax_rates.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("description", description.to_s) if !description.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(description.to_json), "description")) if !description.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(discounts.to_json), "discounts")) if !discounts.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("expires_at", expires_at.to_s) if !expires_at.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("footer", footer.to_s) if !footer.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("header", header.to_s) if !header.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(footer.to_json), "footer")) if !footer.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(header.to_json), "header")) if !header.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(invoice_settings.to_json), "invoice_settings")) if !invoice_settings.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(line_items.to_json), "line_items")) if !line_items.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(metadata.to_json), "metadata")) if !metadata.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("on_behalf_of", on_behalf_of.to_s) if !on_behalf_of.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(on_behalf_of.to_json), "on_behalf_of")) if !on_behalf_of.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(subscription_data.to_json), "subscription_data")) if !subscription_data.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(transfer_data.to_json), "transfer_data")) if !transfer_data.nil?
 

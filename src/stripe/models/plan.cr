@@ -11,7 +11,7 @@ require "../../core"
 
 require "./plan_product"
 require "./plan_tier"
-require "./transform_usage"
+require "./plan_transform_usage"
 
 module Stripe
   # You can now model subscriptions more flexibly using the [Prices API](https://stripe.com/docs/api#prices). It replaces the Plans API and is backwards compatible to simplify your migration.  Plans define the base price, currency, and billing cycle for recurring purchases of products. [Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and plans help you track pricing. Different physical goods or levels of service should be represented by products, and pricing options should be represented by plans. This approach lets you change prices without having to change your provisioning scheme.  For example, you might have a single \"gold\" product that has plans for $10/month, $100/year, €9/month, and €90/year.  Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) and more about [products and prices](https://stripe.com/docs/products-prices/overview).
@@ -102,8 +102,8 @@ module Stripe
     ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
     VALID_VALUES_FOR_TIERS_MODE  = String.static_array("graduated", "volume")
 
-    @[JSON::Field(key: "transform_usage", type: Stripe::TransformUsage?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transform_usage : Stripe::TransformUsage? = nil
+    @[JSON::Field(key: "transform_usage", type: Stripe::PlanTransformUsage?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transform_usage : Stripe::PlanTransformUsage? = nil
 
     # Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
     @[JSON::Field(key: "trial_period_days", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -145,7 +145,7 @@ module Stripe
       @object : String? = nil,
       @product : Stripe::PlanProduct? = nil,
       @tiers_mode : String? = nil,
-      @transform_usage : Stripe::TransformUsage? = nil,
+      @transform_usage : Stripe::PlanTransformUsage? = nil,
       @trial_period_days : Int64? = nil,
       @usage_type : String? = nil,
       # Optional properties
@@ -448,7 +448,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transform_usage Object to be assigned
-    def transform_usage=(new_value : Stripe::TransformUsage?)
+    def transform_usage=(new_value : Stripe::PlanTransformUsage?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

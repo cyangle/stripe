@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/documents_param_files_inner"
 
 describe Stripe::DocumentsParamFilesInner do
-  describe "test an instance of DocumentsParamFilesInner" do
-    it "should create an instance of DocumentsParamFilesInner" do
-      # instance = Stripe::DocumentsParamFilesInner.new
-      # (instance).should be_a(Stripe::DocumentsParamFilesInner)
-    end
-  end
 end

@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./invoice_rendering_pdf"
+require "./invoices_resource_invoice_rendering_pdf"
 
 module Stripe
   #
@@ -26,8 +26,8 @@ module Stripe
     getter amount_tax_display : String? = nil
     MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY = 5000
 
-    @[JSON::Field(key: "pdf", type: Stripe::InvoiceRenderingPdf?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter pdf : Stripe::InvoiceRenderingPdf? = nil
+    @[JSON::Field(key: "pdf", type: Stripe::InvoicesResourceInvoiceRenderingPdf?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter pdf : Stripe::InvoicesResourceInvoiceRenderingPdf? = nil
 
     # End of Required Properties
 
@@ -37,7 +37,7 @@ module Stripe
       *,
       # Required properties
       @amount_tax_display : String? = nil,
-      @pdf : Stripe::InvoiceRenderingPdf? = nil
+      @pdf : Stripe::InvoicesResourceInvoiceRenderingPdf? = nil
     )
     end
 
@@ -83,7 +83,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pdf Object to be assigned
-    def pdf=(new_value : Stripe::InvoiceRenderingPdf?)
+    def pdf=(new_value : Stripe::InvoicesResourceInvoiceRenderingPdf?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

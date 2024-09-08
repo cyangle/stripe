@@ -10,6 +10,7 @@
 require "../../core"
 
 require "./payment_method_details_card_installments_plan"
+require "./payment_method_options_card_installments_plan"
 
 module Stripe
   #
@@ -29,8 +30,8 @@ module Stripe
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enabled : Bool? = nil
 
-    @[JSON::Field(key: "plan", type: Stripe::PaymentMethodDetailsCardInstallmentsPlan?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan? = nil
+    @[JSON::Field(key: "plan", type: Stripe::PaymentMethodOptionsCardInstallmentsPlan?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter plan : Stripe::PaymentMethodOptionsCardInstallmentsPlan? = nil
 
     # End of Required Properties
 
@@ -41,7 +42,7 @@ module Stripe
       # Required properties
       @available_plans : Array(Stripe::PaymentMethodDetailsCardInstallmentsPlan)? = nil,
       @enabled : Bool? = nil,
-      @plan : Stripe::PaymentMethodDetailsCardInstallmentsPlan? = nil
+      @plan : Stripe::PaymentMethodOptionsCardInstallmentsPlan? = nil
     )
     end
 
@@ -97,7 +98,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] plan Object to be assigned
-    def plan=(new_value : Stripe::PaymentMethodDetailsCardInstallmentsPlan?)
+    def plan=(new_value : Stripe::PaymentMethodOptionsCardInstallmentsPlan?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

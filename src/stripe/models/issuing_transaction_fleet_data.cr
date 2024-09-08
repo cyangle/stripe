@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./issuing_transaction_fleet_cardholder_prompt_data"
-require "./issuing_transaction_fleet_reported_breakdown"
+require "./issuing_transaction_fleet_data_cardholder_prompt_data"
+require "./issuing_transaction_fleet_data_reported_breakdown"
 
 module Stripe
   #
@@ -22,16 +22,16 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "cardholder_prompt_data", type: Stripe::IssuingTransactionFleetCardholderPromptData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter cardholder_prompt_data : Stripe::IssuingTransactionFleetCardholderPromptData? = nil
+    @[JSON::Field(key: "cardholder_prompt_data", type: Stripe::IssuingTransactionFleetDataCardholderPromptData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter cardholder_prompt_data : Stripe::IssuingTransactionFleetDataCardholderPromptData? = nil
 
     # The type of purchase. One of `fuel_purchase`, `non_fuel_purchase`, or `fuel_and_non_fuel_purchase`.
     @[JSON::Field(key: "purchase_type", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
     getter purchase_type : String? = nil
     MAX_LENGTH_FOR_PURCHASE_TYPE = 5000
 
-    @[JSON::Field(key: "reported_breakdown", type: Stripe::IssuingTransactionFleetReportedBreakdown?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter reported_breakdown : Stripe::IssuingTransactionFleetReportedBreakdown? = nil
+    @[JSON::Field(key: "reported_breakdown", type: Stripe::IssuingTransactionFleetDataReportedBreakdown?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter reported_breakdown : Stripe::IssuingTransactionFleetDataReportedBreakdown? = nil
 
     # The type of fuel service. One of `non_fuel_transaction`, `full_service`, or `self_service`.
     @[JSON::Field(key: "service_type", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -45,9 +45,9 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @cardholder_prompt_data : Stripe::IssuingTransactionFleetCardholderPromptData? = nil,
+      @cardholder_prompt_data : Stripe::IssuingTransactionFleetDataCardholderPromptData? = nil,
       @purchase_type : String? = nil,
-      @reported_breakdown : Stripe::IssuingTransactionFleetReportedBreakdown? = nil,
+      @reported_breakdown : Stripe::IssuingTransactionFleetDataReportedBreakdown? = nil,
       @service_type : String? = nil
     )
     end
@@ -100,7 +100,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cardholder_prompt_data Object to be assigned
-    def cardholder_prompt_data=(new_value : Stripe::IssuingTransactionFleetCardholderPromptData?)
+    def cardholder_prompt_data=(new_value : Stripe::IssuingTransactionFleetDataCardholderPromptData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -120,7 +120,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reported_breakdown Object to be assigned
-    def reported_breakdown=(new_value : Stripe::IssuingTransactionFleetReportedBreakdown?)
+    def reported_breakdown=(new_value : Stripe::IssuingTransactionFleetDataReportedBreakdown?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

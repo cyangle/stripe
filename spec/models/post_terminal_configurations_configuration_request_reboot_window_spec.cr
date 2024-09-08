@@ -14,24 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_terminal_configurations_configuration_request_reboot_window"
 
 describe Stripe::PostTerminalConfigurationsConfigurationRequestRebootWindow do
-  describe "test an instance of PostTerminalConfigurationsConfigurationRequestRebootWindow" do
-    it "should create an instance of PostTerminalConfigurationsConfigurationRequestRebootWindow" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestRebootWindow.new
-      # (instance).should be_a(Stripe::PostTerminalConfigurationsConfigurationRequestRebootWindow)
-    end
-  end
-
-  describe "test attribute 'end_hour'" do
-    it "should work" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestRebootWindow.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'start_hour'" do
-    it "should work" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestRebootWindow.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

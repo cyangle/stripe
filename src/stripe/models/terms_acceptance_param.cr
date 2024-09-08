@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./terms_acceptance_param_user_agent"
+
 module Stripe
   class TermsAcceptanceParam
     include JSON::Serializable
@@ -26,10 +28,8 @@ module Stripe
     @[JSON::Field(key: "ip", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ip : String? = nil
 
-    @[JSON::Field(key: "user_agent", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter user_agent : String? = nil
-    ERROR_MESSAGE_FOR_USER_AGENT = "invalid value for \"user_agent\", must be one of []."
-    VALID_VALUES_FOR_USER_AGENT  = String.static_array("")
+    @[JSON::Field(key: "user_agent", type: Stripe::TermsAcceptanceParamUserAgent?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter user_agent : Stripe::TermsAcceptanceParamUserAgent? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -38,7 +38,7 @@ module Stripe
       # Optional properties
       @date : Int64? = nil,
       @ip : String? = nil,
-      @user_agent : String? = nil
+      @user_agent : Stripe::TermsAcceptanceParamUserAgent? = nil
     )
     end
 
@@ -48,7 +48,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_user_agent = @user_agent).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_USER_AGENT) unless OpenApi::EnumValidator.valid?(_user_agent, VALID_VALUES_FOR_USER_AGENT)
+        invalid_properties.concat(_user_agent.list_invalid_properties_for("user_agent")) if _user_agent.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -57,7 +57,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_user_agent = @user_agent).nil?
-        return false unless OpenApi::EnumValidator.valid?(_user_agent, VALID_VALUES_FOR_USER_AGENT)
+        return false if _user_agent.is_a?(OpenApi::Validatable) && !_user_agent.valid?
       end
 
       true
@@ -77,9 +77,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_agent Object to be assigned
-    def user_agent=(new_value : String?)
+    def user_agent=(new_value : Stripe::TermsAcceptanceParamUserAgent?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("user_agent", new_value, VALID_VALUES_FOR_USER_AGENT)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @user_agent = new_value

@@ -9,29 +9,29 @@
 
 require "../../core"
 
-require "./cancellation_details"
-require "./discount"
 require "./invoiceitem_discounts_inner"
+require "./payment_links_resource_subscription_data_trial_settings"
 require "./subscription_application"
 require "./subscription_automatic_tax"
-require "./subscription_billing_thresholds"
+require "./subscription_billing_cycle_anchor_config"
+require "./subscription_billing_thresholds1"
+require "./subscription_cancellation_details"
 require "./subscription_customer"
 require "./subscription_default_payment_method"
 require "./subscription_default_source"
+require "./subscription_discount"
 require "./subscription_item_list"
 require "./subscription_latest_invoice"
 require "./subscription_on_behalf_of"
-require "./subscription_pending_invoice_item_interval"
+require "./subscription_pause_collection"
+require "./subscription_payment_settings"
+require "./subscription_pending_invoice_item_interval1"
 require "./subscription_pending_setup_intent"
+require "./subscription_pending_update"
 require "./subscription_schedule1"
 require "./subscription_test_clock"
-require "./subscription_transfer_data"
-require "./subscriptions_resource_billing_cycle_anchor_config"
-require "./subscriptions_resource_pause_collection"
-require "./subscriptions_resource_payment_settings"
-require "./subscriptions_resource_pending_update"
+require "./subscription_transfer_data1"
 require "./subscriptions_resource_subscription_invoice_settings"
-require "./subscriptions_trials_resource_trial_settings"
 require "./tax_rate"
 
 module Stripe
@@ -58,11 +58,11 @@ module Stripe
     @[JSON::Field(key: "billing_cycle_anchor", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : Int64? = nil
 
-    @[JSON::Field(key: "billing_cycle_anchor_config", type: Stripe::SubscriptionsResourceBillingCycleAnchorConfig?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter billing_cycle_anchor_config : Stripe::SubscriptionsResourceBillingCycleAnchorConfig? = nil
+    @[JSON::Field(key: "billing_cycle_anchor_config", type: Stripe::SubscriptionBillingCycleAnchorConfig?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter billing_cycle_anchor_config : Stripe::SubscriptionBillingCycleAnchorConfig? = nil
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionBillingThresholds?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter billing_thresholds : Stripe::SubscriptionBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionBillingThresholds1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter billing_thresholds : Stripe::SubscriptionBillingThresholds1? = nil
 
     # A date in the future at which the subscription will automatically get canceled
     @[JSON::Field(key: "cancel_at", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -76,8 +76,8 @@ module Stripe
     @[JSON::Field(key: "canceled_at", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
     getter canceled_at : Int64? = nil
 
-    @[JSON::Field(key: "cancellation_details", type: Stripe::CancellationDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter cancellation_details : Stripe::CancellationDetails? = nil
+    @[JSON::Field(key: "cancellation_details", type: Stripe::SubscriptionCancellationDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter cancellation_details : Stripe::SubscriptionCancellationDetails? = nil
 
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -119,8 +119,8 @@ module Stripe
     getter description : String? = nil
     MAX_LENGTH_FOR_DESCRIPTION = 500
 
-    @[JSON::Field(key: "discount", type: Stripe::Discount?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter discount : Stripe::Discount? = nil
+    @[JSON::Field(key: "discount", type: Stripe::SubscriptionDiscount?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter discount : Stripe::SubscriptionDiscount? = nil
 
     # The discounts applied to the subscription. Subscription item discounts are applied before subscription discounts. Use `expand[]=discounts` to expand each discount.
     @[JSON::Field(key: "discounts", type: Array(Stripe::InvoiceitemDiscountsInner)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -164,20 +164,20 @@ module Stripe
     @[JSON::Field(key: "on_behalf_of", type: Stripe::SubscriptionOnBehalfOf?, default: nil, required: true, nullable: true, emit_null: true)]
     getter on_behalf_of : Stripe::SubscriptionOnBehalfOf? = nil
 
-    @[JSON::Field(key: "pause_collection", type: Stripe::SubscriptionsResourcePauseCollection?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter pause_collection : Stripe::SubscriptionsResourcePauseCollection? = nil
+    @[JSON::Field(key: "pause_collection", type: Stripe::SubscriptionPauseCollection?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter pause_collection : Stripe::SubscriptionPauseCollection? = nil
 
-    @[JSON::Field(key: "payment_settings", type: Stripe::SubscriptionsResourcePaymentSettings?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil
+    @[JSON::Field(key: "payment_settings", type: Stripe::SubscriptionPaymentSettings?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_settings : Stripe::SubscriptionPaymentSettings? = nil
 
-    @[JSON::Field(key: "pending_invoice_item_interval", type: Stripe::SubscriptionPendingInvoiceItemInterval?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter pending_invoice_item_interval : Stripe::SubscriptionPendingInvoiceItemInterval? = nil
+    @[JSON::Field(key: "pending_invoice_item_interval", type: Stripe::SubscriptionPendingInvoiceItemInterval1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter pending_invoice_item_interval : Stripe::SubscriptionPendingInvoiceItemInterval1? = nil
 
     @[JSON::Field(key: "pending_setup_intent", type: Stripe::SubscriptionPendingSetupIntent?, default: nil, required: true, nullable: true, emit_null: true)]
     getter pending_setup_intent : Stripe::SubscriptionPendingSetupIntent? = nil
 
-    @[JSON::Field(key: "pending_update", type: Stripe::SubscriptionsResourcePendingUpdate?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter pending_update : Stripe::SubscriptionsResourcePendingUpdate? = nil
+    @[JSON::Field(key: "pending_update", type: Stripe::SubscriptionPendingUpdate?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter pending_update : Stripe::SubscriptionPendingUpdate? = nil
 
     @[JSON::Field(key: "schedule", type: Stripe::SubscriptionSchedule1?, default: nil, required: true, nullable: true, emit_null: true)]
     getter schedule : Stripe::SubscriptionSchedule1? = nil
@@ -195,15 +195,15 @@ module Stripe
     @[JSON::Field(key: "test_clock", type: Stripe::SubscriptionTestClock?, default: nil, required: true, nullable: true, emit_null: true)]
     getter test_clock : Stripe::SubscriptionTestClock? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::SubscriptionTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::SubscriptionTransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::SubscriptionTransferData1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::SubscriptionTransferData1? = nil
 
     # If the subscription has a trial, the end of that trial.
     @[JSON::Field(key: "trial_end", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
     getter trial_end : Int64? = nil
 
-    @[JSON::Field(key: "trial_settings", type: Stripe::SubscriptionsTrialsResourceTrialSettings?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter trial_settings : Stripe::SubscriptionsTrialsResourceTrialSettings? = nil
+    @[JSON::Field(key: "trial_settings", type: Stripe::PaymentLinksResourceSubscriptionDataTrialSettings?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter trial_settings : Stripe::PaymentLinksResourceSubscriptionDataTrialSettings? = nil
 
     # If the subscription has a trial, the beginning of that trial.
     @[JSON::Field(key: "trial_start", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -229,12 +229,12 @@ module Stripe
       @application_fee_percent : Float64? = nil,
       @automatic_tax : Stripe::SubscriptionAutomaticTax? = nil,
       @billing_cycle_anchor : Int64? = nil,
-      @billing_cycle_anchor_config : Stripe::SubscriptionsResourceBillingCycleAnchorConfig? = nil,
-      @billing_thresholds : Stripe::SubscriptionBillingThresholds? = nil,
+      @billing_cycle_anchor_config : Stripe::SubscriptionBillingCycleAnchorConfig? = nil,
+      @billing_thresholds : Stripe::SubscriptionBillingThresholds1? = nil,
       @cancel_at : Int64? = nil,
       @cancel_at_period_end : Bool? = nil,
       @canceled_at : Int64? = nil,
-      @cancellation_details : Stripe::CancellationDetails? = nil,
+      @cancellation_details : Stripe::SubscriptionCancellationDetails? = nil,
       @collection_method : String? = nil,
       @created : Int64? = nil,
       @currency : String? = nil,
@@ -245,7 +245,7 @@ module Stripe
       @default_payment_method : Stripe::SubscriptionDefaultPaymentMethod? = nil,
       @default_source : Stripe::SubscriptionDefaultSource? = nil,
       @description : String? = nil,
-      @discount : Stripe::Discount? = nil,
+      @discount : Stripe::SubscriptionDiscount? = nil,
       @discounts : Array(Stripe::InvoiceitemDiscountsInner)? = nil,
       @ended_at : Int64? = nil,
       @id : String? = nil,
@@ -257,18 +257,18 @@ module Stripe
       @next_pending_invoice_item_invoice : Int64? = nil,
       @object : String? = nil,
       @on_behalf_of : Stripe::SubscriptionOnBehalfOf? = nil,
-      @pause_collection : Stripe::SubscriptionsResourcePauseCollection? = nil,
-      @payment_settings : Stripe::SubscriptionsResourcePaymentSettings? = nil,
-      @pending_invoice_item_interval : Stripe::SubscriptionPendingInvoiceItemInterval? = nil,
+      @pause_collection : Stripe::SubscriptionPauseCollection? = nil,
+      @payment_settings : Stripe::SubscriptionPaymentSettings? = nil,
+      @pending_invoice_item_interval : Stripe::SubscriptionPendingInvoiceItemInterval1? = nil,
       @pending_setup_intent : Stripe::SubscriptionPendingSetupIntent? = nil,
-      @pending_update : Stripe::SubscriptionsResourcePendingUpdate? = nil,
+      @pending_update : Stripe::SubscriptionPendingUpdate? = nil,
       @schedule : Stripe::SubscriptionSchedule1? = nil,
       @start_date : Int64? = nil,
       @status : String? = nil,
       @test_clock : Stripe::SubscriptionTestClock? = nil,
-      @transfer_data : Stripe::SubscriptionTransferData? = nil,
+      @transfer_data : Stripe::SubscriptionTransferData1? = nil,
       @trial_end : Int64? = nil,
-      @trial_settings : Stripe::SubscriptionsTrialsResourceTrialSettings? = nil,
+      @trial_settings : Stripe::PaymentLinksResourceSubscriptionDataTrialSettings? = nil,
       @trial_start : Int64? = nil,
       # Optional properties
       @default_tax_rates : Array(Stripe::TaxRate)? = nil
@@ -602,7 +602,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor_config Object to be assigned
-    def billing_cycle_anchor_config=(new_value : Stripe::SubscriptionsResourceBillingCycleAnchorConfig?)
+    def billing_cycle_anchor_config=(new_value : Stripe::SubscriptionBillingCycleAnchorConfig?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -612,7 +612,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::SubscriptionBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::SubscriptionBillingThresholds1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -642,7 +642,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_details Object to be assigned
-    def cancellation_details=(new_value : Stripe::CancellationDetails?)
+    def cancellation_details=(new_value : Stripe::SubscriptionCancellationDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -742,7 +742,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discount Object to be assigned
-    def discount=(new_value : Stripe::Discount?)
+    def discount=(new_value : Stripe::SubscriptionDiscount?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -855,7 +855,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pause_collection Object to be assigned
-    def pause_collection=(new_value : Stripe::SubscriptionsResourcePauseCollection?)
+    def pause_collection=(new_value : Stripe::SubscriptionPauseCollection?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -865,7 +865,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_settings Object to be assigned
-    def payment_settings=(new_value : Stripe::SubscriptionsResourcePaymentSettings?)
+    def payment_settings=(new_value : Stripe::SubscriptionPaymentSettings?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -875,7 +875,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_invoice_item_interval Object to be assigned
-    def pending_invoice_item_interval=(new_value : Stripe::SubscriptionPendingInvoiceItemInterval?)
+    def pending_invoice_item_interval=(new_value : Stripe::SubscriptionPendingInvoiceItemInterval1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -895,7 +895,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_update Object to be assigned
-    def pending_update=(new_value : Stripe::SubscriptionsResourcePendingUpdate?)
+    def pending_update=(new_value : Stripe::SubscriptionPendingUpdate?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -944,7 +944,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::SubscriptionTransferData?)
+    def transfer_data=(new_value : Stripe::SubscriptionTransferData1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -960,7 +960,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] trial_settings Object to be assigned
-    def trial_settings=(new_value : Stripe::SubscriptionsTrialsResourceTrialSettings?)
+    def trial_settings=(new_value : Stripe::PaymentLinksResourceSubscriptionDataTrialSettings?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

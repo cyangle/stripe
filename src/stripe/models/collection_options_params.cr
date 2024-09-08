@@ -16,17 +16,13 @@ module Stripe
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required Properties
+    # Optional Properties
 
     # Specifies whether the platform collects only currently_due requirements (`currently_due`) or both currently_due and eventually_due requirements (`eventually_due`). If you don't specify `collection_options`, the default value is `currently_due`.
-    @[JSON::Field(key: "fields", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    @[JSON::Field(key: "fields", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter fields : String? = nil
     ERROR_MESSAGE_FOR_FIELDS = "invalid value for \"fields\", must be one of [currently_due, eventually_due]."
     VALID_VALUES_FOR_FIELDS  = String.static_array("currently_due", "eventually_due")
-
-    # End of Required Properties
-
-    # Optional Properties
 
     # Specifies whether the platform collects future_requirements in addition to requirements in Connect Onboarding. The default value is `omit`.
     @[JSON::Field(key: "future_requirements", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -38,9 +34,8 @@ module Stripe
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
-      # Required properties
-      @fields : String? = nil,
       # Optional properties
+      @fields : String? = nil,
       @future_requirements : String? = nil
     )
     end
@@ -49,8 +44,6 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-
-      invalid_properties.push("\"fields\" is required and cannot be null") if @fields.nil?
 
       unless (_fields = @fields).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_FIELDS) unless OpenApi::EnumValidator.valid?(_fields, VALID_VALUES_FOR_FIELDS)
@@ -64,7 +57,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false if @fields.nil?
       unless (_fields = @fields).nil?
         return false unless OpenApi::EnumValidator.valid?(_fields, VALID_VALUES_FOR_FIELDS)
       end
@@ -79,7 +71,6 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fields Object to be assigned
     def fields=(new_value : String?)
-      raise ArgumentError.new("\"fields\" is required and cannot be null") if new_value.nil?
       unless new_value.nil?
         OpenApi::EnumValidator.validate("fields", new_value, VALID_VALUES_FOR_FIELDS)
       end

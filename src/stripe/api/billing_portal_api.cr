@@ -22,6 +22,7 @@ require "../models/login_page_create_param"
 require "../models/login_page_update_param"
 require "../models/portal_public_resource_configuration_list"
 require "../models/post_accounts_request_metadata"
+require "../models/post_billing_portal_configurations_request_default_return_url"
 
 module Stripe
   class BillingPortalApi
@@ -276,7 +277,7 @@ module Stripe
     # <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
     # @required @param business_profile [Stripe::BusinessProfileCreateParam?]
     # @required @param features [Stripe::FeaturesCreationParam?]
-    # @optional @param default_return_url [String?]
+    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param login_page [Stripe::LoginPageCreateParam?]
     # @optional @param metadata [Hash(String, String)?]
@@ -285,7 +286,7 @@ module Stripe
       *,
       business_profile : Stripe::BusinessProfileCreateParam? = nil,
       features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       login_page : Stripe::LoginPageCreateParam? = nil,
       metadata : Hash(String, String)? = nil
@@ -297,7 +298,7 @@ module Stripe
     # &lt;p&gt;Creates a configuration that describes the functionality and behavior of a PortalSession&lt;/p&gt;
     # @required @param business_profile [Stripe::BusinessProfileCreateParam?]
     # @required @param features [Stripe::FeaturesCreationParam?]
-    # @optional @param default_return_url [String?]
+    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param login_page [Stripe::LoginPageCreateParam?]
     # @optional @param metadata [Hash(String, String)?]
@@ -306,7 +307,7 @@ module Stripe
       *,
       business_profile : Stripe::BusinessProfileCreateParam? = nil,
       features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       login_page : Stripe::LoginPageCreateParam? = nil,
       metadata : Hash(String, String)? = nil
@@ -325,7 +326,7 @@ module Stripe
     # &lt;p&gt;Creates a configuration that describes the functionality and behavior of a PortalSession&lt;/p&gt;
     # @required @param business_profile [Stripe::BusinessProfileCreateParam?]
     # @required @param features [Stripe::FeaturesCreationParam?]
-    # @optional @param default_return_url [String?]
+    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param login_page [Stripe::LoginPageCreateParam?]
     # @optional @param metadata [Hash(String, String)?]
@@ -334,7 +335,7 @@ module Stripe
       *,
       business_profile : Stripe::BusinessProfileCreateParam? = nil,
       features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       login_page : Stripe::LoginPageCreateParam? = nil,
       metadata : Hash(String, String)? = nil,
@@ -343,14 +344,12 @@ module Stripe
       build_api_request_for_post_billing_portal_configurations(business_profile: business_profile, features: features, default_return_url: default_return_url, expand: expand, login_page: login_page, metadata: metadata).execute(&block)
     end
 
-    POST_BILLING_PORTAL_CONFIGURATIONS_VALID_VALUES_FOR_DEFAULT_RETURN_URL = String.static_array("")
-
     # @return Crest::Request
     def build_api_request_for_post_billing_portal_configurations(
       *,
       business_profile : Stripe::BusinessProfileCreateParam? = nil,
       features : Stripe::FeaturesCreationParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       login_page : Stripe::LoginPageCreateParam? = nil,
       metadata : Hash(String, String)? = nil
@@ -369,7 +368,7 @@ module Stripe
           _features.validate if _features.is_a?(OpenApi::Validatable)
         end
         unless (_default_return_url = default_return_url).nil?
-          OpenApi::EnumValidator.validate("default_return_url", _default_return_url, POST_BILLING_PORTAL_CONFIGURATIONS_VALID_VALUES_FOR_DEFAULT_RETURN_URL)
+          _default_return_url.validate if _default_return_url.is_a?(OpenApi::Validatable)
         end
 
         unless (_login_page = login_page).nil?
@@ -396,7 +395,7 @@ module Stripe
       # form parameters
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(business_profile.to_json), "business_profile")) if !business_profile.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("default_return_url", default_return_url.to_s) if !default_return_url.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(default_return_url.to_json), "default_return_url")) if !default_return_url.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(features.to_json), "features")) if !features.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(login_page.to_json), "login_page")) if !login_page.nil?
@@ -425,7 +424,7 @@ module Stripe
     # @required @param configuration [String?]
     # @optional @param active [Bool?] Whether the configuration is active and can be used to create portal sessions.
     # @optional @param business_profile [Stripe::BusinessProfileUpdateParam?]
-    # @optional @param default_return_url [String?]
+    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param features [Stripe::FeaturesUpdatingParam?]
     # @optional @param login_page [Stripe::LoginPageUpdateParam?]
@@ -436,7 +435,7 @@ module Stripe
       configuration : String? = nil,
       active : Bool? = nil,
       business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       features : Stripe::FeaturesUpdatingParam? = nil,
       login_page : Stripe::LoginPageUpdateParam? = nil,
@@ -450,7 +449,7 @@ module Stripe
     # @required @param configuration [String?]
     # @optional @param active [Bool?] Whether the configuration is active and can be used to create portal sessions.
     # @optional @param business_profile [Stripe::BusinessProfileUpdateParam?]
-    # @optional @param default_return_url [String?]
+    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param features [Stripe::FeaturesUpdatingParam?]
     # @optional @param login_page [Stripe::LoginPageUpdateParam?]
@@ -461,7 +460,7 @@ module Stripe
       configuration : String? = nil,
       active : Bool? = nil,
       business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       features : Stripe::FeaturesUpdatingParam? = nil,
       login_page : Stripe::LoginPageUpdateParam? = nil,
@@ -482,7 +481,7 @@ module Stripe
     # @required @param configuration [String?]
     # @optional @param active [Bool?] Whether the configuration is active and can be used to create portal sessions.
     # @optional @param business_profile [Stripe::BusinessProfileUpdateParam?]
-    # @optional @param default_return_url [String?]
+    # @optional @param default_return_url [Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param features [Stripe::FeaturesUpdatingParam?]
     # @optional @param login_page [Stripe::LoginPageUpdateParam?]
@@ -493,7 +492,7 @@ module Stripe
       configuration : String? = nil,
       active : Bool? = nil,
       business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       features : Stripe::FeaturesUpdatingParam? = nil,
       login_page : Stripe::LoginPageUpdateParam? = nil,
@@ -503,8 +502,7 @@ module Stripe
       build_api_request_for_post_billing_portal_configurations_configuration(configuration: configuration, active: active, business_profile: business_profile, default_return_url: default_return_url, expand: expand, features: features, login_page: login_page, metadata: metadata).execute(&block)
     end
 
-    POST_BILLING_PORTAL_CONFIGURATIONS_CONFIGURATION_MAX_LENGTH_FOR_CONFIGURATION        = 5000
-    POST_BILLING_PORTAL_CONFIGURATIONS_CONFIGURATION_VALID_VALUES_FOR_DEFAULT_RETURN_URL = String.static_array("")
+    POST_BILLING_PORTAL_CONFIGURATIONS_CONFIGURATION_MAX_LENGTH_FOR_CONFIGURATION = 5000
 
     # @return Crest::Request
     def build_api_request_for_post_billing_portal_configurations_configuration(
@@ -512,7 +510,7 @@ module Stripe
       configuration : String? = nil,
       active : Bool? = nil,
       business_profile : Stripe::BusinessProfileUpdateParam? = nil,
-      default_return_url : String? = nil,
+      default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
       expand : Array(String)? = nil,
       features : Stripe::FeaturesUpdatingParam? = nil,
       login_page : Stripe::LoginPageUpdateParam? = nil,
@@ -532,7 +530,7 @@ module Stripe
           _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
         end
         unless (_default_return_url = default_return_url).nil?
-          OpenApi::EnumValidator.validate("default_return_url", _default_return_url, POST_BILLING_PORTAL_CONFIGURATIONS_CONFIGURATION_VALID_VALUES_FOR_DEFAULT_RETURN_URL)
+          _default_return_url.validate if _default_return_url.is_a?(OpenApi::Validatable)
         end
 
         unless (_features = features).nil?
@@ -566,7 +564,7 @@ module Stripe
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
       form_params << Tuple(String, Crest::ParamsValue).new("active", active.to_s) if !active.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(business_profile.to_json), "business_profile")) if !business_profile.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("default_return_url", default_return_url.to_s) if !default_return_url.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(default_return_url.to_json), "default_return_url")) if !default_return_url.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(features.to_json), "features")) if !features.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(login_page.to_json), "login_page")) if !login_page.nil?

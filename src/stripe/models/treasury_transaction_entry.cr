@@ -10,8 +10,8 @@
 require "../../core"
 
 require "./treasury_outbound_payment_transaction"
+require "./treasury_transaction_entry_flow_details"
 require "./treasury_transactions_resource_balance_impact"
-require "./treasury_transactions_resource_flow_details"
 
 module Stripe
   # TransactionEntries represent individual units of money movements within a single [Transaction](https://stripe.com/docs/api#transactions).
@@ -82,8 +82,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "flow_details", type: Stripe::TreasuryTransactionsResourceFlowDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_details.nil? && !flow_details_present?)]
-    getter flow_details : Stripe::TreasuryTransactionsResourceFlowDetails? = nil
+    @[JSON::Field(key: "flow_details", type: Stripe::TreasuryTransactionEntryFlowDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_details.nil? && !flow_details_present?)]
+    getter flow_details : Stripe::TreasuryTransactionEntryFlowDetails? = nil
 
     @[JSON::Field(ignore: true)]
     property? flow_details_present : Bool = false
@@ -106,7 +106,7 @@ module Stripe
       @transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil,
       @_type : String? = nil,
       # Optional properties
-      @flow_details : Stripe::TreasuryTransactionsResourceFlowDetails? = nil
+      @flow_details : Stripe::TreasuryTransactionEntryFlowDetails? = nil
     )
     end
 
@@ -351,7 +351,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flow_details Object to be assigned
-    def flow_details=(new_value : Stripe::TreasuryTransactionsResourceFlowDetails?)
+    def flow_details=(new_value : Stripe::TreasuryTransactionEntryFlowDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

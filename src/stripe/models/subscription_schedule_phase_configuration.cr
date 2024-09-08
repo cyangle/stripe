@@ -10,15 +10,15 @@
 require "../../core"
 
 require "./discounts_resource_stackable_discount"
-require "./invoice_setting_subscription_schedule_phase_setting"
 require "./schedules_phase_automatic_tax"
-require "./subscription_billing_thresholds"
+require "./subscription_billing_thresholds1"
 require "./subscription_schedule_add_invoice_item"
 require "./subscription_schedule_configuration_item"
 require "./subscription_schedule_phase_configuration_coupon"
 require "./subscription_schedule_phase_configuration_default_payment_method"
+require "./subscription_schedule_phase_configuration_invoice_settings"
 require "./subscription_schedule_phase_configuration_on_behalf_of"
-require "./subscription_transfer_data"
+require "./subscription_schedule_phase_configuration_transfer_data"
 require "./tax_rate"
 
 module Stripe
@@ -45,8 +45,8 @@ module Stripe
     ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
     VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("automatic", "phase_start")
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionBillingThresholds?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter billing_thresholds : Stripe::SubscriptionBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionBillingThresholds1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter billing_thresholds : Stripe::SubscriptionBillingThresholds1? = nil
 
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -77,8 +77,8 @@ module Stripe
     @[JSON::Field(key: "end_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter end_date : Int64? = nil
 
-    @[JSON::Field(key: "invoice_settings", type: Stripe::InvoiceSettingSubscriptionSchedulePhaseSetting?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter invoice_settings : Stripe::InvoiceSettingSubscriptionSchedulePhaseSetting? = nil
+    @[JSON::Field(key: "invoice_settings", type: Stripe::SubscriptionSchedulePhaseConfigurationInvoiceSettings?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter invoice_settings : Stripe::SubscriptionSchedulePhaseConfigurationInvoiceSettings? = nil
 
     # Subscription items to configure the subscription to during this phase of the subscription schedule.
     @[JSON::Field(key: "items", type: Array(Stripe::SubscriptionScheduleConfigurationItem)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -100,8 +100,8 @@ module Stripe
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter start_date : Int64? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::SubscriptionTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::SubscriptionTransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::SubscriptionSchedulePhaseConfigurationTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::SubscriptionSchedulePhaseConfigurationTransferData? = nil
 
     # When the trial ends within the phase.
     @[JSON::Field(key: "trial_end", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -129,7 +129,7 @@ module Stripe
       @add_invoice_items : Array(Stripe::SubscriptionScheduleAddInvoiceItem)? = nil,
       @application_fee_percent : Float64? = nil,
       @billing_cycle_anchor : String? = nil,
-      @billing_thresholds : Stripe::SubscriptionBillingThresholds? = nil,
+      @billing_thresholds : Stripe::SubscriptionBillingThresholds1? = nil,
       @collection_method : String? = nil,
       @coupon : Stripe::SubscriptionSchedulePhaseConfigurationCoupon? = nil,
       @currency : String? = nil,
@@ -137,13 +137,13 @@ module Stripe
       @description : String? = nil,
       @discounts : Array(Stripe::DiscountsResourceStackableDiscount)? = nil,
       @end_date : Int64? = nil,
-      @invoice_settings : Stripe::InvoiceSettingSubscriptionSchedulePhaseSetting? = nil,
+      @invoice_settings : Stripe::SubscriptionSchedulePhaseConfigurationInvoiceSettings? = nil,
       @items : Array(Stripe::SubscriptionScheduleConfigurationItem)? = nil,
       @metadata : Hash(String, String)? = nil,
       @on_behalf_of : Stripe::SubscriptionSchedulePhaseConfigurationOnBehalfOf? = nil,
       @proration_behavior : String? = nil,
       @start_date : Int64? = nil,
-      @transfer_data : Stripe::SubscriptionTransferData? = nil,
+      @transfer_data : Stripe::SubscriptionSchedulePhaseConfigurationTransferData? = nil,
       @trial_end : Int64? = nil,
       # Optional properties
       @automatic_tax : Stripe::SchedulesPhaseAutomaticTax? = nil,
@@ -328,7 +328,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::SubscriptionBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::SubscriptionBillingThresholds1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -405,7 +405,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_settings Object to be assigned
-    def invoice_settings=(new_value : Stripe::InvoiceSettingSubscriptionSchedulePhaseSetting?)
+    def invoice_settings=(new_value : Stripe::SubscriptionSchedulePhaseConfigurationInvoiceSettings?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -461,7 +461,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::SubscriptionTransferData?)
+    def transfer_data=(new_value : Stripe::SubscriptionSchedulePhaseConfigurationTransferData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

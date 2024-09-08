@@ -10,6 +10,7 @@
 require "../../core"
 
 require "./financial_reporting_finance_report_run_run_parameters"
+require "./reporting_report_run_result"
 
 module Stripe
   # The Report Run object represents an instance of a report type generated with specific run parameters. Once the object is created, Stripe begins processing the report. When the report has finished running, it will give you a reference to a file where you can retrieve your results. For an overview, see [API Access to Reports](https://stripe.com/docs/reporting/statements/api).  Note that certain report types can only be run based on your live-mode data (not test-mode data), and will error when queried without a [live-mode API key](https://stripe.com/docs/keys#test-live-modes).
@@ -53,8 +54,8 @@ module Stripe
     getter report_type : String? = nil
     MAX_LENGTH_FOR_REPORT_TYPE = 5000
 
-    @[JSON::Field(key: "result", type: Stripe::File?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter result : Stripe::File? = nil
+    @[JSON::Field(key: "result", type: Stripe::ReportingReportRunResult?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter result : Stripe::ReportingReportRunResult? = nil
 
     # Status of this report run. This will be `pending` when the run is initially created.  When the run finishes, this will be set to `succeeded` and the `result` field will be populated.  Rarely, we may encounter an error, at which point this will be set to `failed` and the `error` field will be populated.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -79,7 +80,7 @@ module Stripe
       @object : String? = nil,
       @parameters : Stripe::FinancialReportingFinanceReportRunRunParameters? = nil,
       @report_type : String? = nil,
-      @result : Stripe::File? = nil,
+      @result : Stripe::ReportingReportRunResult? = nil,
       @status : String? = nil,
       @succeeded_at : Int64? = nil
     )
@@ -252,7 +253,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] result Object to be assigned
-    def result=(new_value : Stripe::File?)
+    def result=(new_value : Stripe::ReportingReportRunResult?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

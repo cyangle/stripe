@@ -9,6 +9,8 @@
 
 require "../../core"
 
+require "./tax_param_ip_address"
+
 module Stripe
   class TaxParam
     include JSON::Serializable
@@ -18,10 +20,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter ip_address : String? = nil
-    ERROR_MESSAGE_FOR_IP_ADDRESS = "invalid value for \"ip_address\", must be one of []."
-    VALID_VALUES_FOR_IP_ADDRESS  = String.static_array("")
+    @[JSON::Field(key: "ip_address", type: Stripe::TaxParamIpAddress?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter ip_address : Stripe::TaxParamIpAddress? = nil
 
     # A flag that indicates when Stripe should validate the customer tax location. Defaults to `deferred`.
     @[JSON::Field(key: "validate_location", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -34,7 +34,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @ip_address : String? = nil,
+      @ip_address : Stripe::TaxParamIpAddress? = nil,
       @validate_location : String? = nil
     )
     end
@@ -45,7 +45,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_ip_address = @ip_address).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_IP_ADDRESS) unless OpenApi::EnumValidator.valid?(_ip_address, VALID_VALUES_FOR_IP_ADDRESS)
+        invalid_properties.concat(_ip_address.list_invalid_properties_for("ip_address")) if _ip_address.is_a?(OpenApi::Validatable)
       end
       unless (_validate_location = @validate_location).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_VALIDATE_LOCATION) unless OpenApi::EnumValidator.valid?(_validate_location, VALID_VALUES_FOR_VALIDATE_LOCATION)
@@ -57,7 +57,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_ip_address = @ip_address).nil?
-        return false unless OpenApi::EnumValidator.valid?(_ip_address, VALID_VALUES_FOR_IP_ADDRESS)
+        return false if _ip_address.is_a?(OpenApi::Validatable) && !_ip_address.valid?
       end
 
       unless (_validate_location = @validate_location).nil?
@@ -69,9 +69,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address Object to be assigned
-    def ip_address=(new_value : String?)
+    def ip_address=(new_value : Stripe::TaxParamIpAddress?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("ip_address", new_value, VALID_VALUES_FOR_IP_ADDRESS)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @ip_address = new_value

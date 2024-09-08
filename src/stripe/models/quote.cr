@@ -15,18 +15,18 @@ require "./payment_link_on_behalf_of"
 require "./quote_application"
 require "./quote_customer"
 require "./quote_default_tax_rates_inner"
+require "./quote_from_quote"
 require "./quote_invoice"
 require "./quote_subscription"
 require "./quote_subscription_schedule"
 require "./quote_test_clock"
+require "./quote_transfer_data"
 require "./quotes_resource_automatic_tax"
 require "./quotes_resource_computed"
-require "./quotes_resource_from_quote"
 require "./quotes_resource_list_line_items"
 require "./quotes_resource_status_transitions"
 require "./quotes_resource_subscription_data_subscription_data"
 require "./quotes_resource_total_details"
-require "./quotes_resource_transfer_data"
 
 module Stripe
   # A Quote is a way to model prices that you'd like to provide to a customer. Once accepted, it will automatically create an invoice, subscription or subscription schedule.
@@ -99,8 +99,8 @@ module Stripe
     getter footer : String? = nil
     MAX_LENGTH_FOR_FOOTER = 5000
 
-    @[JSON::Field(key: "from_quote", type: Stripe::QuotesResourceFromQuote?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter from_quote : Stripe::QuotesResourceFromQuote? = nil
+    @[JSON::Field(key: "from_quote", type: Stripe::QuoteFromQuote?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter from_quote : Stripe::QuoteFromQuote? = nil
 
     # A header that will be displayed on the quote PDF.
     @[JSON::Field(key: "header", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -163,8 +163,8 @@ module Stripe
     @[JSON::Field(key: "total_details", type: Stripe::QuotesResourceTotalDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total_details : Stripe::QuotesResourceTotalDetails? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::QuotesResourceTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::QuotesResourceTransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::QuoteTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::QuoteTransferData? = nil
 
     # End of Required Properties
 
@@ -197,7 +197,7 @@ module Stripe
       @discounts : Array(Stripe::InvoiceitemDiscountsInner)? = nil,
       @expires_at : Int64? = nil,
       @footer : String? = nil,
-      @from_quote : Stripe::QuotesResourceFromQuote? = nil,
+      @from_quote : Stripe::QuoteFromQuote? = nil,
       @header : String? = nil,
       @id : String? = nil,
       @invoice : Stripe::QuoteInvoice? = nil,
@@ -214,7 +214,7 @@ module Stripe
       @subscription_schedule : Stripe::QuoteSubscriptionSchedule? = nil,
       @test_clock : Stripe::QuoteTestClock? = nil,
       @total_details : Stripe::QuotesResourceTotalDetails? = nil,
-      @transfer_data : Stripe::QuotesResourceTransferData? = nil,
+      @transfer_data : Stripe::QuoteTransferData? = nil,
       # Optional properties
       @default_tax_rates : Array(Stripe::QuoteDefaultTaxRatesInner)? = nil,
       @line_items : Stripe::QuotesResourceListLineItems? = nil
@@ -634,7 +634,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] from_quote Object to be assigned
-    def from_quote=(new_value : Stripe::QuotesResourceFromQuote?)
+    def from_quote=(new_value : Stripe::QuoteFromQuote?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -807,7 +807,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::QuotesResourceTransferData?)
+    def transfer_data=(new_value : Stripe::QuoteTransferData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,17 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_data_update_params_trial_settings"
 
 describe Stripe::SubscriptionDataUpdateParamsTrialSettings do
-  describe "test an instance of SubscriptionDataUpdateParamsTrialSettings" do
-    it "should create an instance of SubscriptionDataUpdateParamsTrialSettings" do
-      # instance = Stripe::SubscriptionDataUpdateParamsTrialSettings.new
-      # (instance).should be_a(Stripe::SubscriptionDataUpdateParamsTrialSettings)
-    end
-  end
-
-  describe "test attribute 'end_behavior'" do
-    it "should work" do
-      # instance = Stripe::SubscriptionDataUpdateParamsTrialSettings.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

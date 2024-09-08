@@ -9,38 +9,39 @@
 
 require "../../core"
 
-require "./address"
-require "./api_errors"
 require "./automatic_tax"
 require "./connect_account_reference"
-require "./discount"
 require "./discounts_resource_discount_amount"
 require "./invoice_account_tax_ids_inner"
 require "./invoice_application"
 require "./invoice_charge"
 require "./invoice_customer"
+require "./invoice_customer_address"
+require "./invoice_customer_shipping"
 require "./invoice_default_payment_method"
 require "./invoice_default_source"
+require "./invoice_discount"
 require "./invoice_discounts_inner"
+require "./invoice_from_invoice"
+require "./invoice_last_finalization_error"
 require "./invoice_latest_revision"
 require "./invoice_lines_list"
 require "./invoice_on_behalf_of"
 require "./invoice_payment_intent"
 require "./invoice_quote"
+require "./invoice_rendering"
 require "./invoice_setting_custom_field"
+require "./invoice_shipping_cost"
+require "./invoice_shipping_details"
 require "./invoice_subscription"
+require "./invoice_subscription_details"
 require "./invoice_tax_amount"
 require "./invoice_test_clock"
 require "./invoice_threshold_reason"
-require "./invoice_transfer_data"
+require "./invoice_transfer_data1"
 require "./invoices_payment_settings"
-require "./invoices_resource_from_invoice"
-require "./invoices_resource_invoice_rendering"
 require "./invoices_resource_invoice_tax_id"
-require "./invoices_resource_shipping_cost"
 require "./invoices_resource_status_transitions"
-require "./shipping"
-require "./subscription_details_data"
 require "./tax_rate"
 
 module Stripe
@@ -131,8 +132,8 @@ module Stripe
     @[JSON::Field(key: "customer", type: Stripe::InvoiceCustomer?, default: nil, required: true, nullable: true, emit_null: true)]
     getter customer : Stripe::InvoiceCustomer? = nil
 
-    @[JSON::Field(key: "customer_address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter customer_address : Stripe::Address? = nil
+    @[JSON::Field(key: "customer_address", type: Stripe::InvoiceCustomerAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter customer_address : Stripe::InvoiceCustomerAddress? = nil
 
     # The customer's email. Until the invoice is finalized, this field will equal `customer.email`. Once the invoice is finalized, this field will no longer be updated.
     @[JSON::Field(key: "customer_email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -149,8 +150,8 @@ module Stripe
     getter customer_phone : String? = nil
     MAX_LENGTH_FOR_CUSTOMER_PHONE = 5000
 
-    @[JSON::Field(key: "customer_shipping", type: Stripe::Shipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter customer_shipping : Stripe::Shipping? = nil
+    @[JSON::Field(key: "customer_shipping", type: Stripe::InvoiceCustomerShipping?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter customer_shipping : Stripe::InvoiceCustomerShipping? = nil
 
     # The customer's tax exempt status. Until the invoice is finalized, this field will equal `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
     @[JSON::Field(key: "customer_tax_exempt", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -173,8 +174,8 @@ module Stripe
     getter description : String? = nil
     MAX_LENGTH_FOR_DESCRIPTION = 5000
 
-    @[JSON::Field(key: "discount", type: Stripe::Discount?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter discount : Stripe::Discount? = nil
+    @[JSON::Field(key: "discount", type: Stripe::InvoiceDiscount?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter discount : Stripe::InvoiceDiscount? = nil
 
     # The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
     @[JSON::Field(key: "discounts", type: Array(Stripe::InvoiceDiscountsInner)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -197,14 +198,14 @@ module Stripe
     getter footer : String? = nil
     MAX_LENGTH_FOR_FOOTER = 5000
 
-    @[JSON::Field(key: "from_invoice", type: Stripe::InvoicesResourceFromInvoice?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter from_invoice : Stripe::InvoicesResourceFromInvoice? = nil
+    @[JSON::Field(key: "from_invoice", type: Stripe::InvoiceFromInvoice?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter from_invoice : Stripe::InvoiceFromInvoice? = nil
 
     @[JSON::Field(key: "issuer", type: Stripe::ConnectAccountReference?, default: nil, required: true, nullable: false, emit_null: false)]
     getter issuer : Stripe::ConnectAccountReference? = nil
 
-    @[JSON::Field(key: "last_finalization_error", type: Stripe::ApiErrors?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter last_finalization_error : Stripe::ApiErrors? = nil
+    @[JSON::Field(key: "last_finalization_error", type: Stripe::InvoiceLastFinalizationError?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter last_finalization_error : Stripe::InvoiceLastFinalizationError? = nil
 
     @[JSON::Field(key: "latest_revision", type: Stripe::InvoiceLatestRevision?, default: nil, required: true, nullable: true, emit_null: true)]
     getter latest_revision : Stripe::InvoiceLatestRevision? = nil
@@ -275,14 +276,14 @@ module Stripe
     getter receipt_number : String? = nil
     MAX_LENGTH_FOR_RECEIPT_NUMBER = 5000
 
-    @[JSON::Field(key: "rendering", type: Stripe::InvoicesResourceInvoiceRendering?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter rendering : Stripe::InvoicesResourceInvoiceRendering? = nil
+    @[JSON::Field(key: "rendering", type: Stripe::InvoiceRendering?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter rendering : Stripe::InvoiceRendering? = nil
 
-    @[JSON::Field(key: "shipping_cost", type: Stripe::InvoicesResourceShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_cost : Stripe::InvoicesResourceShippingCost? = nil
+    @[JSON::Field(key: "shipping_cost", type: Stripe::InvoiceShippingCost?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_cost : Stripe::InvoiceShippingCost? = nil
 
-    @[JSON::Field(key: "shipping_details", type: Stripe::Shipping?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_details : Stripe::Shipping? = nil
+    @[JSON::Field(key: "shipping_details", type: Stripe::InvoiceShippingDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_details : Stripe::InvoiceShippingDetails? = nil
 
     # Starting customer balance before the invoice is finalized. If the invoice has not been finalized yet, this will be the current customer balance. For revision invoices, this also includes any customer balance that was applied to the original invoice.
     @[JSON::Field(key: "starting_balance", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -305,8 +306,8 @@ module Stripe
     @[JSON::Field(key: "subscription", type: Stripe::InvoiceSubscription?, default: nil, required: true, nullable: true, emit_null: true)]
     getter subscription : Stripe::InvoiceSubscription? = nil
 
-    @[JSON::Field(key: "subscription_details", type: Stripe::SubscriptionDetailsData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter subscription_details : Stripe::SubscriptionDetailsData? = nil
+    @[JSON::Field(key: "subscription_details", type: Stripe::InvoiceSubscriptionDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter subscription_details : Stripe::InvoiceSubscriptionDetails? = nil
 
     # Total of all subscriptions, invoice items, and prorations on the invoice before any invoice level discount or exclusive tax is applied. Item discounts are already incorporated
     @[JSON::Field(key: "subtotal", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -339,8 +340,8 @@ module Stripe
     @[JSON::Field(key: "total_tax_amounts", type: Array(Stripe::InvoiceTaxAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter total_tax_amounts : Array(Stripe::InvoiceTaxAmount)? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::InvoiceTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::InvoiceTransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::InvoiceTransferData1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::InvoiceTransferData1? = nil
 
     # Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all webhook delivery attempts have [been exhausted](https://stripe.com/docs/billing/webhooks#understand). This field tracks the time when webhooks for this invoice were successfully delivered. If the invoice had no webhooks to deliver, this will be set while the invoice is being created.
     @[JSON::Field(key: "webhooks_delivered_at", type: Int64?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -413,25 +414,25 @@ module Stripe
       @currency : String? = nil,
       @custom_fields : Array(Stripe::InvoiceSettingCustomField)? = nil,
       @customer : Stripe::InvoiceCustomer? = nil,
-      @customer_address : Stripe::Address? = nil,
+      @customer_address : Stripe::InvoiceCustomerAddress? = nil,
       @customer_email : String? = nil,
       @customer_name : String? = nil,
       @customer_phone : String? = nil,
-      @customer_shipping : Stripe::Shipping? = nil,
+      @customer_shipping : Stripe::InvoiceCustomerShipping? = nil,
       @customer_tax_exempt : String? = nil,
       @default_payment_method : Stripe::InvoiceDefaultPaymentMethod? = nil,
       @default_source : Stripe::InvoiceDefaultSource? = nil,
       @default_tax_rates : Array(Stripe::TaxRate)? = nil,
       @description : String? = nil,
-      @discount : Stripe::Discount? = nil,
+      @discount : Stripe::InvoiceDiscount? = nil,
       @discounts : Array(Stripe::InvoiceDiscountsInner)? = nil,
       @due_date : Int64? = nil,
       @effective_at : Int64? = nil,
       @ending_balance : Int64? = nil,
       @footer : String? = nil,
-      @from_invoice : Stripe::InvoicesResourceFromInvoice? = nil,
+      @from_invoice : Stripe::InvoiceFromInvoice? = nil,
       @issuer : Stripe::ConnectAccountReference? = nil,
-      @last_finalization_error : Stripe::ApiErrors? = nil,
+      @last_finalization_error : Stripe::InvoiceLastFinalizationError? = nil,
       @latest_revision : Stripe::InvoiceLatestRevision? = nil,
       @lines : Stripe::InvoiceLinesList? = nil,
       @livemode : Bool? = nil,
@@ -450,15 +451,15 @@ module Stripe
       @pre_payment_credit_notes_amount : Int64? = nil,
       @quote : Stripe::InvoiceQuote? = nil,
       @receipt_number : String? = nil,
-      @rendering : Stripe::InvoicesResourceInvoiceRendering? = nil,
-      @shipping_cost : Stripe::InvoicesResourceShippingCost? = nil,
-      @shipping_details : Stripe::Shipping? = nil,
+      @rendering : Stripe::InvoiceRendering? = nil,
+      @shipping_cost : Stripe::InvoiceShippingCost? = nil,
+      @shipping_details : Stripe::InvoiceShippingDetails? = nil,
       @starting_balance : Int64? = nil,
       @statement_descriptor : String? = nil,
       @status : String? = nil,
       @status_transitions : Stripe::InvoicesResourceStatusTransitions? = nil,
       @subscription : Stripe::InvoiceSubscription? = nil,
-      @subscription_details : Stripe::SubscriptionDetailsData? = nil,
+      @subscription_details : Stripe::InvoiceSubscriptionDetails? = nil,
       @subtotal : Int64? = nil,
       @subtotal_excluding_tax : Int64? = nil,
       @tax : Int64? = nil,
@@ -467,7 +468,7 @@ module Stripe
       @total_discount_amounts : Array(Stripe::DiscountsResourceDiscountAmount)? = nil,
       @total_excluding_tax : Int64? = nil,
       @total_tax_amounts : Array(Stripe::InvoiceTaxAmount)? = nil,
-      @transfer_data : Stripe::InvoiceTransferData? = nil,
+      @transfer_data : Stripe::InvoiceTransferData1? = nil,
       @webhooks_delivered_at : Int64? = nil,
       # Optional properties
       @auto_advance : Bool? = nil,
@@ -1165,7 +1166,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_address Object to be assigned
-    def customer_address=(new_value : Stripe::Address?)
+    def customer_address=(new_value : Stripe::InvoiceCustomerAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1205,7 +1206,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_shipping Object to be assigned
-    def customer_shipping=(new_value : Stripe::Shipping?)
+    def customer_shipping=(new_value : Stripe::InvoiceCustomerShipping?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1266,7 +1267,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] discount Object to be assigned
-    def discount=(new_value : Stripe::Discount?)
+    def discount=(new_value : Stripe::InvoiceDiscount?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1315,7 +1316,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] from_invoice Object to be assigned
-    def from_invoice=(new_value : Stripe::InvoicesResourceFromInvoice?)
+    def from_invoice=(new_value : Stripe::InvoiceFromInvoice?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1336,7 +1337,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_finalization_error Object to be assigned
-    def last_finalization_error=(new_value : Stripe::ApiErrors?)
+    def last_finalization_error=(new_value : Stripe::InvoiceLastFinalizationError?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1507,7 +1508,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] rendering Object to be assigned
-    def rendering=(new_value : Stripe::InvoicesResourceInvoiceRendering?)
+    def rendering=(new_value : Stripe::InvoiceRendering?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1517,7 +1518,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_cost Object to be assigned
-    def shipping_cost=(new_value : Stripe::InvoicesResourceShippingCost?)
+    def shipping_cost=(new_value : Stripe::InvoiceShippingCost?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1527,7 +1528,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_details Object to be assigned
-    def shipping_details=(new_value : Stripe::Shipping?)
+    def shipping_details=(new_value : Stripe::InvoiceShippingDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1586,7 +1587,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_details Object to be assigned
-    def subscription_details=(new_value : Stripe::SubscriptionDetailsData?)
+    def subscription_details=(new_value : Stripe::InvoiceSubscriptionDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -1661,7 +1662,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::InvoiceTransferData?)
+    def transfer_data=(new_value : Stripe::InvoiceTransferData1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,35 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/setup_intent_application"
 
 describe Stripe::SetupIntentApplication do
-  describe "test an instance of SetupIntentApplication" do
-    it "should create an instance of SetupIntentApplication" do
-      # instance = Stripe::SetupIntentApplication.new
-      # (instance).should be_a(Stripe::SetupIntentApplication)
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::SetupIntentApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::SetupIntentApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'object'" do
-    it "should work" do
-      # instance = Stripe::SetupIntentApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::SetupIntentApplication::ENUM_VALIDATOR_FOR_OBJECT
-      # validator.allowable_values.each do |value|
-      #   instance.object = value.as(String)
-      # end
-    end
-  end
 end

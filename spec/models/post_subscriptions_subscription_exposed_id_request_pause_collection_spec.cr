@@ -14,28 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscriptions_subscription_exposed_id_request_pause_collection"
 
 describe Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection do
-  describe "test an instance of PostSubscriptionsSubscriptionExposedIdRequestPauseCollection" do
-    it "should create an instance of PostSubscriptionsSubscriptionExposedIdRequestPauseCollection" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection.new
-      # (instance).should be_a(Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection)
-    end
-  end
-
-  describe "test attribute 'behavior'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection::ENUM_VALIDATOR_FOR_BEHAVIOR
-      # validator.allowable_values.each do |value|
-      #   instance.behavior = value.as(String)
-      # end
-    end
-  end
-
-  describe "test attribute 'resumes_at'" do
-    it "should work" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestPauseCollection.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

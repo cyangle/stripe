@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_quotes_request_transfer_data"
 
 describe Stripe::PostQuotesRequestTransferData do
-  describe "test an instance of PostQuotesRequestTransferData" do
-    it "should create an instance of PostQuotesRequestTransferData" do
-      # instance = Stripe::PostQuotesRequestTransferData.new
-      # (instance).should be_a(Stripe::PostQuotesRequestTransferData)
-    end
-  end
-
-  describe "test attribute 'amount'" do
-    it "should work" do
-      # instance = Stripe::PostQuotesRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'amount_percent'" do
-    it "should work" do
-      # instance = Stripe::PostQuotesRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'destination'" do
-    it "should work" do
-      # instance = Stripe::PostQuotesRequestTransferData.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

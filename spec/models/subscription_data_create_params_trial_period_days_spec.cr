@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_data_create_params_trial_period_days"
 
 describe Stripe::SubscriptionDataCreateParamsTrialPeriodDays do
-  describe "test an instance of SubscriptionDataCreateParamsTrialPeriodDays" do
-    it "should create an instance of SubscriptionDataCreateParamsTrialPeriodDays" do
-      # instance = Stripe::SubscriptionDataCreateParamsTrialPeriodDays.new
-      # (instance).should be_a(Stripe::SubscriptionDataCreateParamsTrialPeriodDays)
-    end
-  end
 end

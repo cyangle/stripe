@@ -14,35 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/charge_application"
 
 describe Stripe::ChargeApplication do
-  describe "test an instance of ChargeApplication" do
-    it "should create an instance of ChargeApplication" do
-      # instance = Stripe::ChargeApplication.new
-      # (instance).should be_a(Stripe::ChargeApplication)
-    end
-  end
-
-  describe "test attribute 'id'" do
-    it "should work" do
-      # instance = Stripe::ChargeApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::ChargeApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'object'" do
-    it "should work" do
-      # instance = Stripe::ChargeApplication.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::ChargeApplication::ENUM_VALIDATOR_FOR_OBJECT
-      # validator.allowable_values.each do |value|
-      #   instance.object = value.as(String)
-      # end
-    end
-  end
 end

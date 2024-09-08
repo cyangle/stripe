@@ -9,6 +9,7 @@
 
 require "../../core"
 
+require "./legal_entity_person_verification_additional_document"
 require "./legal_entity_person_verification_document"
 
 module Stripe
@@ -30,8 +31,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "additional_document", type: Stripe::LegalEntityPersonVerificationDocument?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: additional_document.nil? && !additional_document_present?)]
-    getter additional_document : Stripe::LegalEntityPersonVerificationDocument? = nil
+    @[JSON::Field(key: "additional_document", type: Stripe::LegalEntityPersonVerificationAdditionalDocument?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: additional_document.nil? && !additional_document_present?)]
+    getter additional_document : Stripe::LegalEntityPersonVerificationAdditionalDocument? = nil
 
     @[JSON::Field(ignore: true)]
     property? additional_document_present : Bool = false
@@ -62,7 +63,7 @@ module Stripe
       # Required properties
       @status : String? = nil,
       # Optional properties
-      @additional_document : Stripe::LegalEntityPersonVerificationDocument? = nil,
+      @additional_document : Stripe::LegalEntityPersonVerificationAdditionalDocument? = nil,
       @details : String? = nil,
       @details_code : String? = nil,
       @document : Stripe::LegalEntityPersonVerificationDocument? = nil
@@ -140,7 +141,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_document Object to be assigned
-    def additional_document=(new_value : Stripe::LegalEntityPersonVerificationDocument?)
+    def additional_document=(new_value : Stripe::LegalEntityPersonVerificationAdditionalDocument?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

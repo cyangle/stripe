@@ -13,11 +13,11 @@ require "./payment_flows_private_payment_methods_card_details_api_resource_enter
 require "./payment_flows_private_payment_methods_card_details_api_resource_enterprise_features_incremental_authorization_incremental_authorization"
 require "./payment_flows_private_payment_methods_card_details_api_resource_enterprise_features_overcapture_overcapture"
 require "./payment_flows_private_payment_methods_card_details_api_resource_multicapture"
-require "./payment_method_details_card_checks"
-require "./payment_method_details_card_installments"
-require "./payment_method_details_card_network_token"
-require "./payment_method_details_card_wallet"
-require "./three_d_secure_details_charge"
+require "./payment_method_details_card_checks1"
+require "./payment_method_details_card_installments1"
+require "./payment_method_details_card_network_token1"
+require "./payment_method_details_card_three_d_secure"
+require "./payment_method_details_card_wallet1"
 
 module Stripe
   #
@@ -43,8 +43,8 @@ module Stripe
     getter brand : String? = nil
     MAX_LENGTH_FOR_BRAND = 5000
 
-    @[JSON::Field(key: "checks", type: Stripe::PaymentMethodDetailsCardChecks?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter checks : Stripe::PaymentMethodDetailsCardChecks? = nil
+    @[JSON::Field(key: "checks", type: Stripe::PaymentMethodDetailsCardChecks1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter checks : Stripe::PaymentMethodDetailsCardChecks1? = nil
 
     # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -64,8 +64,8 @@ module Stripe
     getter funding : String? = nil
     MAX_LENGTH_FOR_FUNDING = 5000
 
-    @[JSON::Field(key: "installments", type: Stripe::PaymentMethodDetailsCardInstallments?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter installments : Stripe::PaymentMethodDetailsCardInstallments? = nil
+    @[JSON::Field(key: "installments", type: Stripe::PaymentMethodDetailsCardInstallments1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter installments : Stripe::PaymentMethodDetailsCardInstallments1? = nil
 
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -82,11 +82,11 @@ module Stripe
     getter network : String? = nil
     MAX_LENGTH_FOR_NETWORK = 5000
 
-    @[JSON::Field(key: "three_d_secure", type: Stripe::ThreeDSecureDetailsCharge?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter three_d_secure : Stripe::ThreeDSecureDetailsCharge? = nil
+    @[JSON::Field(key: "three_d_secure", type: Stripe::PaymentMethodDetailsCardThreeDSecure?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter three_d_secure : Stripe::PaymentMethodDetailsCardThreeDSecure? = nil
 
-    @[JSON::Field(key: "wallet", type: Stripe::PaymentMethodDetailsCardWallet?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter wallet : Stripe::PaymentMethodDetailsCardWallet? = nil
+    @[JSON::Field(key: "wallet", type: Stripe::PaymentMethodDetailsCardWallet1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter wallet : Stripe::PaymentMethodDetailsCardWallet1? = nil
 
     # End of Required Properties
 
@@ -144,8 +144,8 @@ module Stripe
     @[JSON::Field(key: "multicapture", type: Stripe::PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMulticapture?, default: nil, required: false, nullable: false, emit_null: false)]
     getter multicapture : Stripe::PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMulticapture? = nil
 
-    @[JSON::Field(key: "network_token", type: Stripe::PaymentMethodDetailsCardNetworkToken?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network_token.nil? && !network_token_present?)]
-    getter network_token : Stripe::PaymentMethodDetailsCardNetworkToken? = nil
+    @[JSON::Field(key: "network_token", type: Stripe::PaymentMethodDetailsCardNetworkToken1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network_token.nil? && !network_token_present?)]
+    getter network_token : Stripe::PaymentMethodDetailsCardNetworkToken1? = nil
 
     @[JSON::Field(ignore: true)]
     property? network_token_present : Bool = false
@@ -161,17 +161,17 @@ module Stripe
       @amount_authorized : Int64? = nil,
       @authorization_code : String? = nil,
       @brand : String? = nil,
-      @checks : Stripe::PaymentMethodDetailsCardChecks? = nil,
+      @checks : Stripe::PaymentMethodDetailsCardChecks1? = nil,
       @country : String? = nil,
       @exp_month : Int64? = nil,
       @exp_year : Int64? = nil,
       @funding : String? = nil,
-      @installments : Stripe::PaymentMethodDetailsCardInstallments? = nil,
+      @installments : Stripe::PaymentMethodDetailsCardInstallments1? = nil,
       @last4 : String? = nil,
       @mandate : String? = nil,
       @network : String? = nil,
-      @three_d_secure : Stripe::ThreeDSecureDetailsCharge? = nil,
-      @wallet : Stripe::PaymentMethodDetailsCardWallet? = nil,
+      @three_d_secure : Stripe::PaymentMethodDetailsCardThreeDSecure? = nil,
+      @wallet : Stripe::PaymentMethodDetailsCardWallet1? = nil,
       # Optional properties
       @capture_before : Int64? = nil,
       @description : String? = nil,
@@ -182,7 +182,7 @@ module Stripe
       @issuer : String? = nil,
       @moto : Bool? = nil,
       @multicapture : Stripe::PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMulticapture? = nil,
-      @network_token : Stripe::PaymentMethodDetailsCardNetworkToken? = nil,
+      @network_token : Stripe::PaymentMethodDetailsCardNetworkToken1? = nil,
       @overcapture : Stripe::PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesOvercaptureOvercapture? = nil
     )
     end
@@ -401,7 +401,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] checks Object to be assigned
-    def checks=(new_value : Stripe::PaymentMethodDetailsCardChecks?)
+    def checks=(new_value : Stripe::PaymentMethodDetailsCardChecks1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -447,7 +447,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(new_value : Stripe::PaymentMethodDetailsCardInstallments?)
+    def installments=(new_value : Stripe::PaymentMethodDetailsCardInstallments1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -487,7 +487,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] three_d_secure Object to be assigned
-    def three_d_secure=(new_value : Stripe::ThreeDSecureDetailsCharge?)
+    def three_d_secure=(new_value : Stripe::PaymentMethodDetailsCardThreeDSecure?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -497,7 +497,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] wallet Object to be assigned
-    def wallet=(new_value : Stripe::PaymentMethodDetailsCardWallet?)
+    def wallet=(new_value : Stripe::PaymentMethodDetailsCardWallet1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -589,7 +589,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_token Object to be assigned
-    def network_token=(new_value : Stripe::PaymentMethodDetailsCardNetworkToken?)
+    def network_token=(new_value : Stripe::PaymentMethodDetailsCardNetworkToken1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

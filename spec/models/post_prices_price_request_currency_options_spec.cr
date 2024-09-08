@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_prices_price_request_currency_options"
 
 describe Stripe::PostPricesPriceRequestCurrencyOptions do
-  describe "test an instance of PostPricesPriceRequestCurrencyOptions" do
-    it "should create an instance of PostPricesPriceRequestCurrencyOptions" do
-      # instance = Stripe::PostPricesPriceRequestCurrencyOptions.new
-      # (instance).should be_a(Stripe::PostPricesPriceRequestCurrencyOptions)
-    end
-  end
 end

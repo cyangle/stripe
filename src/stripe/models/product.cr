@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./package_dimensions"
 require "./product_default_price"
 require "./product_marketing_feature"
+require "./product_package_dimensions"
 require "./product_tax_code"
 
 module Stripe
@@ -68,8 +68,8 @@ module Stripe
     ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [product]."
     VALID_VALUES_FOR_OBJECT  = String.static_array("product")
 
-    @[JSON::Field(key: "package_dimensions", type: Stripe::PackageDimensions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter package_dimensions : Stripe::PackageDimensions? = nil
+    @[JSON::Field(key: "package_dimensions", type: Stripe::ProductPackageDimensions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter package_dimensions : Stripe::ProductPackageDimensions? = nil
 
     # Whether this product is shipped (i.e., physical goods).
     @[JSON::Field(key: "shippable", type: Bool?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -134,7 +134,7 @@ module Stripe
       @metadata : Hash(String, String)? = nil,
       @name : String? = nil,
       @object : String? = nil,
-      @package_dimensions : Stripe::PackageDimensions? = nil,
+      @package_dimensions : Stripe::ProductPackageDimensions? = nil,
       @shippable : Bool? = nil,
       @tax_code : Stripe::ProductTaxCode? = nil,
       @_type : String? = nil,
@@ -393,7 +393,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] package_dimensions Object to be assigned
-    def package_dimensions=(new_value : Stripe::PackageDimensions?)
+    def package_dimensions=(new_value : Stripe::ProductPackageDimensions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

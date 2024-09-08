@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./confirmation_tokens_resource_payment_method_options_resource_card"
+require "./confirmation_tokens_resource_payment_method_options_card"
 
 module Stripe
   # Payment-method-specific configuration
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "card", type: Stripe::ConfirmationTokensResourcePaymentMethodOptionsResourceCard?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter card : Stripe::ConfirmationTokensResourcePaymentMethodOptionsResourceCard? = nil
+    @[JSON::Field(key: "card", type: Stripe::ConfirmationTokensResourcePaymentMethodOptionsCard?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter card : Stripe::ConfirmationTokensResourcePaymentMethodOptionsCard? = nil
 
     # End of Required Properties
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @card : Stripe::ConfirmationTokensResourcePaymentMethodOptionsResourceCard? = nil
+      @card : Stripe::ConfirmationTokensResourcePaymentMethodOptionsCard? = nil
     )
     end
 
@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card Object to be assigned
-    def card=(new_value : Stripe::ConfirmationTokensResourcePaymentMethodOptionsResourceCard?)
+    def card=(new_value : Stripe::ConfirmationTokensResourcePaymentMethodOptionsCard?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

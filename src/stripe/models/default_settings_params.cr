@@ -10,8 +10,10 @@
 require "../../core"
 
 require "./automatic_tax_config"
-require "./default_settings_params_billing_thresholds"
+require "./default_settings_params_description"
+require "./default_settings_params_on_behalf_of"
 require "./default_settings_params_transfer_data"
+require "./post_subscriptions_request_billing_thresholds"
 require "./subscription_schedule_default_settings_param"
 
 module Stripe
@@ -36,8 +38,8 @@ module Stripe
     ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
     VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = String.static_array("automatic", "phase_start")
 
-    @[JSON::Field(key: "billing_thresholds", type: Stripe::DefaultSettingsParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil
+    @[JSON::Field(key: "billing_thresholds", type: Stripe::PostSubscriptionsRequestBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil
 
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions and mark the subscription as `active`. Defaults to `charge_automatically` on creation.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -50,18 +52,14 @@ module Stripe
     getter default_payment_method : String? = nil
     MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
 
-    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter description : String? = nil
-    ERROR_MESSAGE_FOR_DESCRIPTION = "invalid value for \"description\", must be one of []."
-    VALID_VALUES_FOR_DESCRIPTION  = String.static_array("")
+    @[JSON::Field(key: "description", type: Stripe::DefaultSettingsParamsDescription?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : Stripe::DefaultSettingsParamsDescription? = nil
 
     @[JSON::Field(key: "invoice_settings", type: Stripe::SubscriptionScheduleDefaultSettingsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_settings : Stripe::SubscriptionScheduleDefaultSettingsParam? = nil
 
-    @[JSON::Field(key: "on_behalf_of", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter on_behalf_of : String? = nil
-    ERROR_MESSAGE_FOR_ON_BEHALF_OF = "invalid value for \"on_behalf_of\", must be one of []."
-    VALID_VALUES_FOR_ON_BEHALF_OF  = String.static_array("")
+    @[JSON::Field(key: "on_behalf_of", type: Stripe::DefaultSettingsParamsOnBehalfOf?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter on_behalf_of : Stripe::DefaultSettingsParamsOnBehalfOf? = nil
 
     @[JSON::Field(key: "transfer_data", type: Stripe::DefaultSettingsParamsTransferData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfer_data : Stripe::DefaultSettingsParamsTransferData? = nil
@@ -74,12 +72,12 @@ module Stripe
       @application_fee_percent : Float64? = nil,
       @automatic_tax : Stripe::AutomaticTaxConfig? = nil,
       @billing_cycle_anchor : String? = nil,
-      @billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil,
+      @billing_thresholds : Stripe::PostSubscriptionsRequestBillingThresholds? = nil,
       @collection_method : String? = nil,
       @default_payment_method : String? = nil,
-      @description : String? = nil,
+      @description : Stripe::DefaultSettingsParamsDescription? = nil,
       @invoice_settings : Stripe::SubscriptionScheduleDefaultSettingsParam? = nil,
-      @on_behalf_of : String? = nil,
+      @on_behalf_of : Stripe::DefaultSettingsParamsOnBehalfOf? = nil,
       @transfer_data : Stripe::DefaultSettingsParamsTransferData? = nil
     )
     end
@@ -107,13 +105,13 @@ module Stripe
         end
       end
       unless (_description = @description).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DESCRIPTION) unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        invalid_properties.concat(_description.list_invalid_properties_for("description")) if _description.is_a?(OpenApi::Validatable)
       end
       unless (_invoice_settings = @invoice_settings).nil?
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
       unless (_on_behalf_of = @on_behalf_of).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_ON_BEHALF_OF) unless OpenApi::EnumValidator.valid?(_on_behalf_of, VALID_VALUES_FOR_ON_BEHALF_OF)
+        invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of")) if _on_behalf_of.is_a?(OpenApi::Validatable)
       end
       unless (_transfer_data = @transfer_data).nil?
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
@@ -145,7 +143,7 @@ module Stripe
       end
 
       unless (_description = @description).nil?
-        return false unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        return false if _description.is_a?(OpenApi::Validatable) && !_description.valid?
       end
 
       unless (_invoice_settings = @invoice_settings).nil?
@@ -153,7 +151,7 @@ module Stripe
       end
 
       unless (_on_behalf_of = @on_behalf_of).nil?
-        return false unless OpenApi::EnumValidator.valid?(_on_behalf_of, VALID_VALUES_FOR_ON_BEHALF_OF)
+        return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
 
       unless (_transfer_data = @transfer_data).nil?
@@ -191,7 +189,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_thresholds Object to be assigned
-    def billing_thresholds=(new_value : Stripe::DefaultSettingsParamsBillingThresholds?)
+    def billing_thresholds=(new_value : Stripe::PostSubscriptionsRequestBillingThresholds?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -221,9 +219,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(new_value : String?)
+    def description=(new_value : Stripe::DefaultSettingsParamsDescription?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("description", new_value, VALID_VALUES_FOR_DESCRIPTION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @description = new_value
@@ -241,9 +239,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] on_behalf_of Object to be assigned
-    def on_behalf_of=(new_value : String?)
+    def on_behalf_of=(new_value : Stripe::DefaultSettingsParamsOnBehalfOf?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("on_behalf_of", new_value, VALID_VALUES_FOR_ON_BEHALF_OF)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @on_behalf_of = new_value

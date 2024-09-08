@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./address"
+require "./payment_pages_checkout_session_customer_details_address"
 require "./payment_pages_checkout_session_tax_id"
 
 module Stripe
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address : Stripe::Address? = nil
+    @[JSON::Field(key: "address", type: Stripe::PaymentPagesCheckoutSessionCustomerDetailsAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address : Stripe::PaymentPagesCheckoutSessionCustomerDetailsAddress? = nil
 
     # The email associated with the Customer, if one exists, on the Checkout Session after a completed Checkout Session or at time of session expiry. Otherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.
     @[JSON::Field(key: "email", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -57,7 +57,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::Address? = nil,
+      @address : Stripe::PaymentPagesCheckoutSessionCustomerDetailsAddress? = nil,
       @email : String? = nil,
       @name : String? = nil,
       @phone : String? = nil,
@@ -130,7 +130,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::Address?)
+    def address=(new_value : Stripe::PaymentPagesCheckoutSessionCustomerDetailsAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

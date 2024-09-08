@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_invoiceitems_invoiceitem_request_tax_rates"
 
 describe Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates do
-  describe "test an instance of PostInvoiceitemsInvoiceitemRequestTaxRates" do
-    it "should create an instance of PostInvoiceitemsInvoiceitemRequestTaxRates" do
-      # instance = Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates.new
-      # (instance).should be_a(Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates)
-    end
-  end
 end

@@ -80,7 +80,7 @@ describe "InvoiceitemsApi" do
   # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the invoice item.
   # @option opts [String] :subscription The ID of a subscription to add this invoice item to. When left blank, the invoice item is added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
   # @option opts [String] :tax_behavior Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;. Once specified as either &#x60;inclusive&#x60; or &#x60;exclusive&#x60;, it cannot be changed.
-  # @option opts [String] :tax_code
+  # @option opts [PostInvoiceitemsRequestTaxCode] :tax_code
   # @option opts [Array(String)] :tax_rates The tax rates which apply to the invoice item. When set, the &#x60;default_tax_rates&#x60; on the invoice do not apply to this invoice item.
   # @option opts [Int32] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This &#x60;unit_amount&#x60; will be multiplied by the quantity to get the full amount. Passing in a negative &#x60;unit_amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
   # @option opts [BigDecimal] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
@@ -106,7 +106,7 @@ describe "InvoiceitemsApi" do
   # @option opts [OneTimePriceData] :price_data
   # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the invoice item.
   # @option opts [String] :tax_behavior Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;. Once specified as either &#x60;inclusive&#x60; or &#x60;exclusive&#x60;, it cannot be changed.
-  # @option opts [String] :tax_code
+  # @option opts [PostInvoiceitemsRequestTaxCode] :tax_code
   # @option opts [PostInvoiceitemsInvoiceitemRequestTaxRates] :tax_rates
   # @option opts [Int32] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer&#39;s account, pass a negative unit_amount.
   # @option opts [BigDecimal] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.

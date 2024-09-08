@@ -9,11 +9,11 @@
 
 require "../../core"
 
-require "./account_business_profile"
+require "./account_business_profile1"
 require "./account_capabilities"
 require "./account_future_requirements"
 require "./account_requirements"
-require "./account_settings"
+require "./account_settings1"
 require "./account_tos_acceptance"
 require "./account_unification_account_controller"
 require "./external_account_list"
@@ -45,8 +45,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "business_profile", type: Stripe::AccountBusinessProfile?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: business_profile.nil? && !business_profile_present?)]
-    getter business_profile : Stripe::AccountBusinessProfile? = nil
+    @[JSON::Field(key: "business_profile", type: Stripe::AccountBusinessProfile1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: business_profile.nil? && !business_profile_present?)]
+    getter business_profile : Stripe::AccountBusinessProfile1? = nil
 
     @[JSON::Field(ignore: true)]
     property? business_profile_present : Bool = false
@@ -118,8 +118,8 @@ module Stripe
     @[JSON::Field(key: "requirements", type: Stripe::AccountRequirements?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requirements : Stripe::AccountRequirements? = nil
 
-    @[JSON::Field(key: "settings", type: Stripe::AccountSettings?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: settings.nil? && !settings_present?)]
-    getter settings : Stripe::AccountSettings? = nil
+    @[JSON::Field(key: "settings", type: Stripe::AccountSettings1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: settings.nil? && !settings_present?)]
+    getter settings : Stripe::AccountSettings1? = nil
 
     @[JSON::Field(ignore: true)]
     property? settings_present : Bool = false
@@ -141,7 +141,7 @@ module Stripe
       @id : String? = nil,
       @object : String? = nil,
       # Optional properties
-      @business_profile : Stripe::AccountBusinessProfile? = nil,
+      @business_profile : Stripe::AccountBusinessProfile1? = nil,
       @business_type : String? = nil,
       @capabilities : Stripe::AccountCapabilities? = nil,
       @charges_enabled : Bool? = nil,
@@ -158,7 +158,7 @@ module Stripe
       @metadata : Hash(String, String)? = nil,
       @payouts_enabled : Bool? = nil,
       @requirements : Stripe::AccountRequirements? = nil,
-      @settings : Stripe::AccountSettings? = nil,
+      @settings : Stripe::AccountSettings1? = nil,
       @tos_acceptance : Stripe::AccountTosAcceptance? = nil,
       @_type : String? = nil
     )
@@ -339,7 +339,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_profile Object to be assigned
-    def business_profile=(new_value : Stripe::AccountBusinessProfile?)
+    def business_profile=(new_value : Stripe::AccountBusinessProfile1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -489,7 +489,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] settings Object to be assigned
-    def settings=(new_value : Stripe::AccountSettings?)
+    def settings=(new_value : Stripe::AccountSettings1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

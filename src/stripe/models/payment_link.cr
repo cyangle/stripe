@@ -10,22 +10,22 @@
 require "../../core"
 
 require "./payment_link_application"
+require "./payment_link_consent_collection"
+require "./payment_link_invoice_creation"
 require "./payment_link_on_behalf_of"
+require "./payment_link_payment_intent_data"
+require "./payment_link_restrictions"
+require "./payment_link_shipping_address_collection"
+require "./payment_link_subscription_data"
+require "./payment_link_transfer_data"
 require "./payment_links_resource_after_completion"
 require "./payment_links_resource_automatic_tax"
-require "./payment_links_resource_consent_collection"
 require "./payment_links_resource_custom_fields"
 require "./payment_links_resource_custom_text"
-require "./payment_links_resource_invoice_creation"
 require "./payment_links_resource_list_line_items"
-require "./payment_links_resource_payment_intent_data"
 require "./payment_links_resource_phone_number_collection"
-require "./payment_links_resource_restrictions"
-require "./payment_links_resource_shipping_address_collection"
 require "./payment_links_resource_shipping_option"
-require "./payment_links_resource_subscription_data"
 require "./payment_links_resource_tax_id_collection"
-require "./payment_links_resource_transfer_data"
 
 module Stripe
   # A payment link is a shareable URL that will take your customers to a hosted payment page. A payment link can be shared and used multiple times.  When a customer opens a payment link it will open a new [checkout session](https://stripe.com/docs/api/checkout/sessions) to render the payment page. You can use [checkout session events](https://stripe.com/docs/api/events/types#event_types-checkout.session.completed) to track payments through payment links.  Related guide: [Payment Links API](https://stripe.com/docs/payment-links)
@@ -68,8 +68,8 @@ module Stripe
     ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
     VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = String.static_array("auto", "required")
 
-    @[JSON::Field(key: "consent_collection", type: Stripe::PaymentLinksResourceConsentCollection?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter consent_collection : Stripe::PaymentLinksResourceConsentCollection? = nil
+    @[JSON::Field(key: "consent_collection", type: Stripe::PaymentLinkConsentCollection?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter consent_collection : Stripe::PaymentLinkConsentCollection? = nil
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -98,8 +98,8 @@ module Stripe
     getter inactive_message : String? = nil
     MAX_LENGTH_FOR_INACTIVE_MESSAGE = 5000
 
-    @[JSON::Field(key: "invoice_creation", type: Stripe::PaymentLinksResourceInvoiceCreation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter invoice_creation : Stripe::PaymentLinksResourceInvoiceCreation? = nil
+    @[JSON::Field(key: "invoice_creation", type: Stripe::PaymentLinkInvoiceCreation?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter invoice_creation : Stripe::PaymentLinkInvoiceCreation? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -117,8 +117,8 @@ module Stripe
     @[JSON::Field(key: "on_behalf_of", type: Stripe::PaymentLinkOnBehalfOf?, default: nil, required: true, nullable: true, emit_null: true)]
     getter on_behalf_of : Stripe::PaymentLinkOnBehalfOf? = nil
 
-    @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentLinksResourcePaymentIntentData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_intent_data : Stripe::PaymentLinksResourcePaymentIntentData? = nil
+    @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentLinkPaymentIntentData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_intent_data : Stripe::PaymentLinkPaymentIntentData? = nil
 
     # Configuration for collecting a payment method during checkout. Defaults to `always`.
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -135,11 +135,11 @@ module Stripe
     @[JSON::Field(key: "phone_number_collection", type: Stripe::PaymentLinksResourcePhoneNumberCollection?, default: nil, required: true, nullable: false, emit_null: false)]
     getter phone_number_collection : Stripe::PaymentLinksResourcePhoneNumberCollection? = nil
 
-    @[JSON::Field(key: "restrictions", type: Stripe::PaymentLinksResourceRestrictions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter restrictions : Stripe::PaymentLinksResourceRestrictions? = nil
+    @[JSON::Field(key: "restrictions", type: Stripe::PaymentLinkRestrictions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter restrictions : Stripe::PaymentLinkRestrictions? = nil
 
-    @[JSON::Field(key: "shipping_address_collection", type: Stripe::PaymentLinksResourceShippingAddressCollection?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter shipping_address_collection : Stripe::PaymentLinksResourceShippingAddressCollection? = nil
+    @[JSON::Field(key: "shipping_address_collection", type: Stripe::PaymentLinkShippingAddressCollection?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter shipping_address_collection : Stripe::PaymentLinkShippingAddressCollection? = nil
 
     # The shipping rate options applied to the session.
     @[JSON::Field(key: "shipping_options", type: Array(Stripe::PaymentLinksResourceShippingOption)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -151,14 +151,14 @@ module Stripe
     ERROR_MESSAGE_FOR_SUBMIT_TYPE = "invalid value for \"submit_type\", must be one of [auto, book, donate, pay]."
     VALID_VALUES_FOR_SUBMIT_TYPE  = String.static_array("auto", "book", "donate", "pay")
 
-    @[JSON::Field(key: "subscription_data", type: Stripe::PaymentLinksResourceSubscriptionData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter subscription_data : Stripe::PaymentLinksResourceSubscriptionData? = nil
+    @[JSON::Field(key: "subscription_data", type: Stripe::PaymentLinkSubscriptionData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter subscription_data : Stripe::PaymentLinkSubscriptionData? = nil
 
     @[JSON::Field(key: "tax_id_collection", type: Stripe::PaymentLinksResourceTaxIdCollection?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_id_collection : Stripe::PaymentLinksResourceTaxIdCollection? = nil
 
-    @[JSON::Field(key: "transfer_data", type: Stripe::PaymentLinksResourceTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter transfer_data : Stripe::PaymentLinksResourceTransferData? = nil
+    @[JSON::Field(key: "transfer_data", type: Stripe::PaymentLinkTransferData?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter transfer_data : Stripe::PaymentLinkTransferData? = nil
 
     # The public URL that can be shared with customers.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -185,29 +185,29 @@ module Stripe
       @application_fee_percent : Float64? = nil,
       @automatic_tax : Stripe::PaymentLinksResourceAutomaticTax? = nil,
       @billing_address_collection : String? = nil,
-      @consent_collection : Stripe::PaymentLinksResourceConsentCollection? = nil,
+      @consent_collection : Stripe::PaymentLinkConsentCollection? = nil,
       @currency : String? = nil,
       @custom_fields : Array(Stripe::PaymentLinksResourceCustomFields)? = nil,
       @custom_text : Stripe::PaymentLinksResourceCustomText? = nil,
       @customer_creation : String? = nil,
       @id : String? = nil,
       @inactive_message : String? = nil,
-      @invoice_creation : Stripe::PaymentLinksResourceInvoiceCreation? = nil,
+      @invoice_creation : Stripe::PaymentLinkInvoiceCreation? = nil,
       @livemode : Bool? = nil,
       @metadata : Hash(String, String)? = nil,
       @object : String? = nil,
       @on_behalf_of : Stripe::PaymentLinkOnBehalfOf? = nil,
-      @payment_intent_data : Stripe::PaymentLinksResourcePaymentIntentData? = nil,
+      @payment_intent_data : Stripe::PaymentLinkPaymentIntentData? = nil,
       @payment_method_collection : String? = nil,
       @payment_method_types : Array(String)? = nil,
       @phone_number_collection : Stripe::PaymentLinksResourcePhoneNumberCollection? = nil,
-      @restrictions : Stripe::PaymentLinksResourceRestrictions? = nil,
-      @shipping_address_collection : Stripe::PaymentLinksResourceShippingAddressCollection? = nil,
+      @restrictions : Stripe::PaymentLinkRestrictions? = nil,
+      @shipping_address_collection : Stripe::PaymentLinkShippingAddressCollection? = nil,
       @shipping_options : Array(Stripe::PaymentLinksResourceShippingOption)? = nil,
       @submit_type : String? = nil,
-      @subscription_data : Stripe::PaymentLinksResourceSubscriptionData? = nil,
+      @subscription_data : Stripe::PaymentLinkSubscriptionData? = nil,
       @tax_id_collection : Stripe::PaymentLinksResourceTaxIdCollection? = nil,
-      @transfer_data : Stripe::PaymentLinksResourceTransferData? = nil,
+      @transfer_data : Stripe::PaymentLinkTransferData? = nil,
       @url : String? = nil,
       # Optional properties
       @line_items : Stripe::PaymentLinksResourceListLineItems? = nil
@@ -552,7 +552,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] consent_collection Object to be assigned
-    def consent_collection=(new_value : Stripe::PaymentLinksResourceConsentCollection?)
+    def consent_collection=(new_value : Stripe::PaymentLinkConsentCollection?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -624,7 +624,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] invoice_creation Object to be assigned
-    def invoice_creation=(new_value : Stripe::PaymentLinksResourceInvoiceCreation?)
+    def invoice_creation=(new_value : Stripe::PaymentLinkInvoiceCreation?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -671,7 +671,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_intent_data Object to be assigned
-    def payment_intent_data=(new_value : Stripe::PaymentLinksResourcePaymentIntentData?)
+    def payment_intent_data=(new_value : Stripe::PaymentLinkPaymentIntentData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -713,7 +713,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restrictions Object to be assigned
-    def restrictions=(new_value : Stripe::PaymentLinksResourceRestrictions?)
+    def restrictions=(new_value : Stripe::PaymentLinkRestrictions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -723,7 +723,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping_address_collection Object to be assigned
-    def shipping_address_collection=(new_value : Stripe::PaymentLinksResourceShippingAddressCollection?)
+    def shipping_address_collection=(new_value : Stripe::PaymentLinkShippingAddressCollection?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -755,7 +755,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] subscription_data Object to be assigned
-    def subscription_data=(new_value : Stripe::PaymentLinksResourceSubscriptionData?)
+    def subscription_data=(new_value : Stripe::PaymentLinkSubscriptionData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -776,7 +776,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfer_data Object to be assigned
-    def transfer_data=(new_value : Stripe::PaymentLinksResourceTransferData?)
+    def transfer_data=(new_value : Stripe::PaymentLinkTransferData?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

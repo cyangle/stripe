@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_subscriptions_subscription_exposed_id_request_trial_end"
 
 describe Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd do
-  describe "test an instance of PostSubscriptionsSubscriptionExposedIdRequestTrialEnd" do
-    it "should create an instance of PostSubscriptionsSubscriptionExposedIdRequestTrialEnd" do
-      # instance = Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd.new
-      # (instance).should be_a(Stripe::PostSubscriptionsSubscriptionExposedIdRequestTrialEnd)
-    end
-  end
 end

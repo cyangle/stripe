@@ -12,7 +12,7 @@ require "../../core"
 require "./balance_transaction"
 require "./issuing_dispute_evidence"
 require "./issuing_dispute_transaction"
-require "./issuing_dispute_treasury"
+require "./issuing_dispute_treasury1"
 
 module Stripe
   # As a [card issuer](https://stripe.com/docs/issuing), you can dispute transactions that the cardholder does not recognize, suspects to be fraudulent, or has other issues with.  Related guide: [Issuing disputes](https://stripe.com/docs/issuing/purchases/disputes)
@@ -83,8 +83,8 @@ module Stripe
     ERROR_MESSAGE_FOR_LOSS_REASON = "invalid value for \"loss_reason\", must be one of [cardholder_authentication_issuer_liability, eci5_token_transaction_with_tavv, excess_disputes_in_timeframe, has_not_met_the_minimum_dispute_amount_requirements, invalid_duplicate_dispute, invalid_incorrect_amount_dispute, invalid_no_authorization, invalid_use_of_disputes, merchandise_delivered_or_shipped, merchandise_or_service_as_described, not_cancelled, other, refund_issued, submitted_beyond_allowable_time_limit, transaction_3ds_required, transaction_approved_after_prior_fraud_dispute, transaction_authorized, transaction_electronically_read, transaction_qualifies_for_visa_easy_payment_service, transaction_unattended]."
     VALID_VALUES_FOR_LOSS_REASON  = String.static_array("cardholder_authentication_issuer_liability", "eci5_token_transaction_with_tavv", "excess_disputes_in_timeframe", "has_not_met_the_minimum_dispute_amount_requirements", "invalid_duplicate_dispute", "invalid_incorrect_amount_dispute", "invalid_no_authorization", "invalid_use_of_disputes", "merchandise_delivered_or_shipped", "merchandise_or_service_as_described", "not_cancelled", "other", "refund_issued", "submitted_beyond_allowable_time_limit", "transaction_3ds_required", "transaction_approved_after_prior_fraud_dispute", "transaction_authorized", "transaction_electronically_read", "transaction_qualifies_for_visa_easy_payment_service", "transaction_unattended")
 
-    @[JSON::Field(key: "treasury", type: Stripe::IssuingDisputeTreasury?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
-    getter treasury : Stripe::IssuingDisputeTreasury? = nil
+    @[JSON::Field(key: "treasury", type: Stripe::IssuingDisputeTreasury1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
+    getter treasury : Stripe::IssuingDisputeTreasury1? = nil
 
     @[JSON::Field(ignore: true)]
     property? treasury_present : Bool = false
@@ -107,7 +107,7 @@ module Stripe
       # Optional properties
       @balance_transactions : Array(Stripe::BalanceTransaction)? = nil,
       @loss_reason : String? = nil,
-      @treasury : Stripe::IssuingDisputeTreasury? = nil
+      @treasury : Stripe::IssuingDisputeTreasury1? = nil
     )
     end
 
@@ -335,7 +335,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(new_value : Stripe::IssuingDisputeTreasury?)
+    def treasury=(new_value : Stripe::IssuingDisputeTreasury1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

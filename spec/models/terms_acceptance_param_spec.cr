@@ -39,10 +39,6 @@ describe Stripe::TermsAcceptanceParam do
     it "should work" do
       # instance = Stripe::TermsAcceptanceParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::TermsAcceptanceParam::ENUM_VALIDATOR_FOR_USER_AGENT
-      # validator.allowable_values.each do |value|
-      #   instance.user_agent = value.as(String)
-      # end
     end
   end
 end

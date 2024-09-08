@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/canceled_canceled_at"
 
 describe Stripe::CanceledCanceledAt do
-  describe "test an instance of CanceledCanceledAt" do
-    it "should create an instance of CanceledCanceledAt" do
-      # instance = Stripe::CanceledCanceledAt.new
-      # (instance).should be_a(Stripe::CanceledCanceledAt)
-    end
-  end
 end

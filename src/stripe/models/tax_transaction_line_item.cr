@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./tax_product_resource_tax_transaction_line_item_resource_reversal"
+require "./tax_transaction_line_item_reversal"
 
 module Stripe
   #
@@ -61,8 +61,8 @@ module Stripe
     getter reference : String? = nil
     MAX_LENGTH_FOR_REFERENCE = 5000
 
-    @[JSON::Field(key: "reversal", type: Stripe::TaxProductResourceTaxTransactionLineItemResourceReversal?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter reversal : Stripe::TaxProductResourceTaxTransactionLineItemResourceReversal? = nil
+    @[JSON::Field(key: "reversal", type: Stripe::TaxTransactionLineItemReversal?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter reversal : Stripe::TaxTransactionLineItemReversal? = nil
 
     # Specifies whether the `amount` includes taxes. If `tax_behavior=inclusive`, then the amount includes taxes.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -97,7 +97,7 @@ module Stripe
       @product : String? = nil,
       @quantity : Int64? = nil,
       @reference : String? = nil,
-      @reversal : Stripe::TaxProductResourceTaxTransactionLineItemResourceReversal? = nil,
+      @reversal : Stripe::TaxTransactionLineItemReversal? = nil,
       @tax_behavior : String? = nil,
       @tax_code : String? = nil,
       @_type : String? = nil
@@ -299,7 +299,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reversal Object to be assigned
-    def reversal=(new_value : Stripe::TaxProductResourceTaxTransactionLineItemResourceReversal?)
+    def reversal=(new_value : Stripe::TaxTransactionLineItemReversal?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

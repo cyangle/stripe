@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/mandate_params_amount"
 
 describe Stripe::MandateParamsAmount do
-  describe "test an instance of MandateParamsAmount" do
-    it "should create an instance of MandateParamsAmount" do
-      # instance = Stripe::MandateParamsAmount.new
-      # (instance).should be_a(Stripe::MandateParamsAmount)
-    end
-  end
 end

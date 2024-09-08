@@ -50,6 +50,13 @@ describe Stripe::PaymentMethodParam do
     end
   end
 
+  describe "test attribute 'display_preference'" do
+    it "should work" do
+      # instance = Stripe::PaymentMethodParam.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'financial_connections_account'" do
     it "should work" do
       # instance = Stripe::PaymentMethodParam.new

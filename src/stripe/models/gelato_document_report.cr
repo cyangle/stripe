@@ -9,11 +9,11 @@
 
 require "../../core"
 
-require "./address"
-require "./gelato_data_document_report_date_of_birth"
-require "./gelato_data_document_report_expiration_date"
-require "./gelato_data_document_report_issued_date"
-require "./gelato_document_report_error"
+require "./gelato_document_report_address"
+require "./gelato_document_report_dob"
+require "./gelato_document_report_error1"
+require "./gelato_document_report_expiration_date"
+require "./gelato_document_report_issued_date"
 
 module Stripe
   # Result from a document check
@@ -25,11 +25,11 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::Address?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address : Stripe::Address? = nil
+    @[JSON::Field(key: "address", type: Stripe::GelatoDocumentReportAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address : Stripe::GelatoDocumentReportAddress? = nil
 
-    @[JSON::Field(key: "error", type: Stripe::GelatoDocumentReportError?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter error : Stripe::GelatoDocumentReportError? = nil
+    @[JSON::Field(key: "error", type: Stripe::GelatoDocumentReportError1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter error : Stripe::GelatoDocumentReportError1? = nil
 
     # Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.
     @[JSON::Field(key: "files", type: Array(String)?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -40,8 +40,8 @@ module Stripe
     getter first_name : String? = nil
     MAX_LENGTH_FOR_FIRST_NAME = 5000
 
-    @[JSON::Field(key: "issued_date", type: Stripe::GelatoDataDocumentReportIssuedDate?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter issued_date : Stripe::GelatoDataDocumentReportIssuedDate? = nil
+    @[JSON::Field(key: "issued_date", type: Stripe::GelatoDocumentReportIssuedDate?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter issued_date : Stripe::GelatoDocumentReportIssuedDate? = nil
 
     # Issuing country of the document.
     @[JSON::Field(key: "issuing_country", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -69,14 +69,14 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "dob", type: Stripe::GelatoDataDocumentReportDateOfBirth?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
-    getter dob : Stripe::GelatoDataDocumentReportDateOfBirth? = nil
+    @[JSON::Field(key: "dob", type: Stripe::GelatoDocumentReportDob?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
+    getter dob : Stripe::GelatoDocumentReportDob? = nil
 
     @[JSON::Field(ignore: true)]
     property? dob_present : Bool = false
 
-    @[JSON::Field(key: "expiration_date", type: Stripe::GelatoDataDocumentReportExpirationDate?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expiration_date.nil? && !expiration_date_present?)]
-    getter expiration_date : Stripe::GelatoDataDocumentReportExpirationDate? = nil
+    @[JSON::Field(key: "expiration_date", type: Stripe::GelatoDocumentReportExpirationDate?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: expiration_date.nil? && !expiration_date_present?)]
+    getter expiration_date : Stripe::GelatoDocumentReportExpirationDate? = nil
 
     @[JSON::Field(ignore: true)]
     property? expiration_date_present : Bool = false
@@ -94,18 +94,18 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::Address? = nil,
-      @error : Stripe::GelatoDocumentReportError? = nil,
+      @address : Stripe::GelatoDocumentReportAddress? = nil,
+      @error : Stripe::GelatoDocumentReportError1? = nil,
       @files : Array(String)? = nil,
       @first_name : String? = nil,
-      @issued_date : Stripe::GelatoDataDocumentReportIssuedDate? = nil,
+      @issued_date : Stripe::GelatoDocumentReportIssuedDate? = nil,
       @issuing_country : String? = nil,
       @last_name : String? = nil,
       @status : String? = nil,
       @_type : String? = nil,
       # Optional properties
-      @dob : Stripe::GelatoDataDocumentReportDateOfBirth? = nil,
-      @expiration_date : Stripe::GelatoDataDocumentReportExpirationDate? = nil,
+      @dob : Stripe::GelatoDocumentReportDob? = nil,
+      @expiration_date : Stripe::GelatoDocumentReportExpirationDate? = nil,
       @number : String? = nil
     )
     end
@@ -215,7 +215,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::Address?)
+    def address=(new_value : Stripe::GelatoDocumentReportAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -225,7 +225,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(new_value : Stripe::GelatoDocumentReportError?)
+    def error=(new_value : Stripe::GelatoDocumentReportError1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -251,7 +251,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] issued_date Object to be assigned
-    def issued_date=(new_value : Stripe::GelatoDataDocumentReportIssuedDate?)
+    def issued_date=(new_value : Stripe::GelatoDocumentReportIssuedDate?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -302,7 +302,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dob Object to be assigned
-    def dob=(new_value : Stripe::GelatoDataDocumentReportDateOfBirth?)
+    def dob=(new_value : Stripe::GelatoDocumentReportDob?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -312,7 +312,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expiration_date Object to be assigned
-    def expiration_date=(new_value : Stripe::GelatoDataDocumentReportExpirationDate?)
+    def expiration_date=(new_value : Stripe::GelatoDocumentReportExpirationDate?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

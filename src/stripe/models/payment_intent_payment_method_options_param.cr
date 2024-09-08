@@ -13,6 +13,7 @@ require "./bank_transfer_param"
 require "./linked_account_options_param"
 require "./mandate_options_param"
 require "./networks_options_param"
+require "./payment_intent_payment_method_options_param_reference"
 
 module Stripe
   class PaymentIntentPaymentMethodOptionsParam
@@ -63,10 +64,8 @@ module Stripe
     ERROR_MESSAGE_FOR_PREFERRED_SETTLEMENT_SPEED = "invalid value for \"preferred_settlement_speed\", must be one of [, fastest, standard]."
     VALID_VALUES_FOR_PREFERRED_SETTLEMENT_SPEED  = String.static_array("", "fastest", "standard")
 
-    @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter reference : String? = nil
-    ERROR_MESSAGE_FOR_REFERENCE = "invalid value for \"reference\", must be one of []."
-    VALID_VALUES_FOR_REFERENCE  = String.static_array("")
+    @[JSON::Field(key: "reference", type: Stripe::PaymentIntentPaymentMethodOptionsParamReference?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter reference : Stripe::PaymentIntentPaymentMethodOptionsParamReference? = nil
 
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.  If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.  When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).  If you've already set `setup_future_usage` and you're performing a request using a publishable key, you can only update the value from `on_session` to `off_session`.
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -94,7 +93,7 @@ module Stripe
       @networks : Stripe::NetworksOptionsParam? = nil,
       @persistent_token : String? = nil,
       @preferred_settlement_speed : String? = nil,
-      @reference : String? = nil,
+      @reference : Stripe::PaymentIntentPaymentMethodOptionsParamReference? = nil,
       @setup_future_usage : String? = nil,
       @verification_method : String? = nil
     )
@@ -137,7 +136,7 @@ module Stripe
         invalid_properties.push(ERROR_MESSAGE_FOR_PREFERRED_SETTLEMENT_SPEED) unless OpenApi::EnumValidator.valid?(_preferred_settlement_speed, VALID_VALUES_FOR_PREFERRED_SETTLEMENT_SPEED)
       end
       unless (_reference = @reference).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_REFERENCE) unless OpenApi::EnumValidator.valid?(_reference, VALID_VALUES_FOR_REFERENCE)
+        invalid_properties.concat(_reference.list_invalid_properties_for("reference")) if _reference.is_a?(OpenApi::Validatable)
       end
       unless (_setup_future_usage = @setup_future_usage).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
@@ -188,7 +187,7 @@ module Stripe
       end
 
       unless (_reference = @reference).nil?
-        return false unless OpenApi::EnumValidator.valid?(_reference, VALID_VALUES_FOR_REFERENCE)
+        return false if _reference.is_a?(OpenApi::Validatable) && !_reference.valid?
       end
 
       unless (_setup_future_usage = @setup_future_usage).nil?
@@ -294,9 +293,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reference Object to be assigned
-    def reference=(new_value : String?)
+    def reference=(new_value : Stripe::PaymentIntentPaymentMethodOptionsParamReference?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("reference", new_value, VALID_VALUES_FOR_REFERENCE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @reference = new_value

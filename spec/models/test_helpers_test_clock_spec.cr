@@ -84,4 +84,11 @@ describe Stripe::TestHelpersTestClock do
       # end
     end
   end
+
+  describe "test attribute 'status_details'" do
+    it "should work" do
+      # instance = Stripe::TestHelpersTestClock.new
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 end

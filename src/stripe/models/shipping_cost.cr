@@ -20,7 +20,11 @@ module Stripe
 
     # Optional Properties
 
-    # The ID of the shipping rate to use for this order.
+    # A positive integer in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) representing the shipping charge. If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
+    @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter amount : Int64? = nil
+
+    # If provided, the [shipping rate](https://stripe.com/docs/api/shipping_rates/object)'s `amount`, `tax_code` and `tax_behavior` are used. If you provide a shipping rate, then you cannot pass the `amount`, `tax_code`, or `tax_behavior` parameters.
     @[JSON::Field(key: "shipping_rate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_rate : String? = nil
     MAX_LENGTH_FOR_SHIPPING_RATE = 5000
@@ -28,13 +32,26 @@ module Stripe
     @[JSON::Field(key: "shipping_rate_data", type: Stripe::MethodParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_rate_data : Stripe::MethodParams? = nil
 
+    # Specifies whether the `amount` includes taxes. If `tax_behavior=inclusive`, then the amount includes taxes. Defaults to `exclusive`.
+    @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_behavior : String? = nil
+    ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive]."
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = String.static_array("exclusive", "inclusive")
+
+    # The [tax code](https://stripe.com/docs/tax/tax-categories) used to calculate tax on shipping. If not provided, the default shipping tax code from your [Tax Settings](https://dashboard.stripe.com/settings/tax) is used.
+    @[JSON::Field(key: "tax_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_code : String? = nil
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
+      @amount : Int64? = nil,
       @shipping_rate : String? = nil,
-      @shipping_rate_data : Stripe::MethodParams? = nil
+      @shipping_rate_data : Stripe::MethodParams? = nil,
+      @tax_behavior : String? = nil,
+      @tax_code : String? = nil
     )
     end
 
@@ -51,6 +68,10 @@ module Stripe
       unless (_shipping_rate_data = @shipping_rate_data).nil?
         invalid_properties.concat(_shipping_rate_data.list_invalid_properties_for("shipping_rate_data")) if _shipping_rate_data.is_a?(OpenApi::Validatable)
       end
+      unless (_tax_behavior = @tax_behavior).nil?
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
+
       invalid_properties
     end
 
@@ -65,7 +86,17 @@ module Stripe
         return false if _shipping_rate_data.is_a?(OpenApi::Validatable) && !_shipping_rate_data.valid?
       end
 
+      unless (_tax_behavior = @tax_behavior).nil?
+        return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] amount Object to be assigned
+    def amount=(new_value : Int64?)
+      @amount = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,10 +119,26 @@ module Stripe
       @shipping_rate_data = new_value
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tax_behavior Object to be assigned
+    def tax_behavior=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("tax_behavior", new_value, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
+
+      @tax_behavior = new_value
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tax_code Object to be assigned
+    def tax_code=(new_value : String?)
+      @tax_code = new_value
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@shipping_rate, @shipping_rate_data)
+    def_equals_and_hash(@amount, @shipping_rate, @shipping_rate_data, @tax_behavior, @tax_code)
   end
 end

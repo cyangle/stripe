@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/payment_settings_payment_method_types"
 
 describe Stripe::PaymentSettingsPaymentMethodTypes do
-  describe "test an instance of PaymentSettingsPaymentMethodTypes" do
-    it "should create an instance of PaymentSettingsPaymentMethodTypes" do
-      # instance = Stripe::PaymentSettingsPaymentMethodTypes.new
-      # (instance).should be_a(Stripe::PaymentSettingsPaymentMethodTypes)
-    end
-  end
 end

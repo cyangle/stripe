@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/phase_configuration_params_default_tax_rates"
 
 describe Stripe::PhaseConfigurationParamsDefaultTaxRates do
-  describe "test an instance of PhaseConfigurationParamsDefaultTaxRates" do
-    it "should create an instance of PhaseConfigurationParamsDefaultTaxRates" do
-      # instance = Stripe::PhaseConfigurationParamsDefaultTaxRates.new
-      # (instance).should be_a(Stripe::PhaseConfigurationParamsDefaultTaxRates)
-    end
-  end
 end

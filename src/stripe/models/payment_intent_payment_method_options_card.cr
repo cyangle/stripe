@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./payment_method_options_card_installments"
-require "./payment_method_options_card_mandate_options"
+require "./payment_intent_payment_method_options_card_installments"
+require "./payment_intent_payment_method_options_card_mandate_options"
 
 module Stripe
   #
@@ -22,11 +22,11 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "installments", type: Stripe::PaymentMethodOptionsCardInstallments?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter installments : Stripe::PaymentMethodOptionsCardInstallments? = nil
+    @[JSON::Field(key: "installments", type: Stripe::PaymentIntentPaymentMethodOptionsCardInstallments?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter installments : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments? = nil
 
-    @[JSON::Field(key: "mandate_options", type: Stripe::PaymentMethodOptionsCardMandateOptions?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter mandate_options : Stripe::PaymentMethodOptionsCardMandateOptions? = nil
+    @[JSON::Field(key: "mandate_options", type: Stripe::PaymentIntentPaymentMethodOptionsCardMandateOptions?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter mandate_options : Stripe::PaymentIntentPaymentMethodOptionsCardMandateOptions? = nil
 
     # Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -99,8 +99,8 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @installments : Stripe::PaymentMethodOptionsCardInstallments? = nil,
-      @mandate_options : Stripe::PaymentMethodOptionsCardMandateOptions? = nil,
+      @installments : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments? = nil,
+      @mandate_options : Stripe::PaymentIntentPaymentMethodOptionsCardMandateOptions? = nil,
       @network : String? = nil,
       @request_three_d_secure : String? = nil,
       # Optional properties
@@ -221,7 +221,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] installments Object to be assigned
-    def installments=(new_value : Stripe::PaymentMethodOptionsCardInstallments?)
+    def installments=(new_value : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -231,7 +231,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mandate_options Object to be assigned
-    def mandate_options=(new_value : Stripe::PaymentMethodOptionsCardMandateOptions?)
+    def mandate_options=(new_value : Stripe::PaymentIntentPaymentMethodOptionsCardMandateOptions?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

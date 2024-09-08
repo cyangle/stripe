@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_intents_intent_request_application_fee_amount"
 
 describe Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount do
-  describe "test an instance of PostPaymentIntentsIntentRequestApplicationFeeAmount" do
-    it "should create an instance of PostPaymentIntentsIntentRequestApplicationFeeAmount" do
-      # instance = Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount.new
-      # (instance).should be_a(Stripe::PostPaymentIntentsIntentRequestApplicationFeeAmount)
-    end
-  end
 end

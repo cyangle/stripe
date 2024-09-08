@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./gelato_selfie_report_error"
+require "./gelato_selfie_report_error1"
 
 module Stripe
   # Result from a selfie check
@@ -26,8 +26,8 @@ module Stripe
     getter document : String? = nil
     MAX_LENGTH_FOR_DOCUMENT = 5000
 
-    @[JSON::Field(key: "error", type: Stripe::GelatoSelfieReportError?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter error : Stripe::GelatoSelfieReportError? = nil
+    @[JSON::Field(key: "error", type: Stripe::GelatoSelfieReportError1?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter error : Stripe::GelatoSelfieReportError1? = nil
 
     # ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.
     @[JSON::Field(key: "selfie", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -48,7 +48,7 @@ module Stripe
       *,
       # Required properties
       @document : String? = nil,
-      @error : Stripe::GelatoSelfieReportError? = nil,
+      @error : Stripe::GelatoSelfieReportError1? = nil,
       @selfie : String? = nil,
       @status : String? = nil
     )
@@ -115,7 +115,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error Object to be assigned
-    def error=(new_value : Stripe::GelatoSelfieReportError?)
+    def error=(new_value : Stripe::GelatoSelfieReportError1?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_details_params_default_tax_rates"
 
 describe Stripe::SubscriptionDetailsParamsDefaultTaxRates do
-  describe "test an instance of SubscriptionDetailsParamsDefaultTaxRates" do
-    it "should create an instance of SubscriptionDetailsParamsDefaultTaxRates" do
-      # instance = Stripe::SubscriptionDetailsParamsDefaultTaxRates.new
-      # (instance).should be_a(Stripe::SubscriptionDetailsParamsDefaultTaxRates)
-    end
-  end
 end

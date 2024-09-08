@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./terminal_reader_reader_resource_cart"
+require "./terminal_reader_reader_resource_set_reader_display_action_cart"
 
 module Stripe
   # Represents a reader action to set the reader display
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "cart", type: Stripe::TerminalReaderReaderResourceCart?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter cart : Stripe::TerminalReaderReaderResourceCart? = nil
+    @[JSON::Field(key: "cart", type: Stripe::TerminalReaderReaderResourceSetReaderDisplayActionCart?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter cart : Stripe::TerminalReaderReaderResourceSetReaderDisplayActionCart? = nil
 
     # Type of information to be displayed by the reader.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -37,7 +37,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @cart : Stripe::TerminalReaderReaderResourceCart? = nil,
+      @cart : Stripe::TerminalReaderReaderResourceSetReaderDisplayActionCart? = nil,
       @_type : String? = nil
     )
     end
@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cart Object to be assigned
-    def cart=(new_value : Stripe::TerminalReaderReaderResourceCart?)
+    def cart=(new_value : Stripe::TerminalReaderReaderResourceSetReaderDisplayActionCart?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

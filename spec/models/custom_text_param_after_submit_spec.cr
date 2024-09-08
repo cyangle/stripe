@@ -14,17 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/custom_text_param_after_submit"
 
 describe Stripe::CustomTextParamAfterSubmit do
-  describe "test an instance of CustomTextParamAfterSubmit" do
-    it "should create an instance of CustomTextParamAfterSubmit" do
-      # instance = Stripe::CustomTextParamAfterSubmit.new
-      # (instance).should be_a(Stripe::CustomTextParamAfterSubmit)
-    end
-  end
-
-  describe "test attribute 'message'" do
-    it "should work" do
-      # instance = Stripe::CustomTextParamAfterSubmit.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

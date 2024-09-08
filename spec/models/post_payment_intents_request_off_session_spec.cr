@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_intents_request_off_session"
 
 describe Stripe::PostPaymentIntentsRequestOffSession do
-  describe "test an instance of PostPaymentIntentsRequestOffSession" do
-    it "should create an instance of PostPaymentIntentsRequestOffSession" do
-      # instance = Stripe::PostPaymentIntentsRequestOffSession.new
-      # (instance).should be_a(Stripe::PostPaymentIntentsRequestOffSession)
-    end
-  end
 end

@@ -10,13 +10,13 @@
 require "../../core"
 
 require "./address_specs"
-require "./file_link_creation_params_metadata"
 require "./individual_relationship_specs"
 require "./individual_specs_dob"
 require "./individual_specs_full_name_aliases"
 require "./japan_address_kana_specs"
 require "./japan_address_kanji_specs"
 require "./person_verification_specs"
+require "./post_accounts_request_metadata"
 
 module Stripe
   class IndividualSpecs
@@ -95,8 +95,8 @@ module Stripe
     getter maiden_name : String? = nil
     MAX_LENGTH_FOR_MAIDEN_NAME = 5000
 
-    @[JSON::Field(key: "metadata", type: Stripe::FileLinkCreationParamsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter metadata : Stripe::FileLinkCreationParamsMetadata? = nil
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountsRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountsRequestMetadata? = nil
 
     # The individual's phone number.
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -143,7 +143,7 @@ module Stripe
       @last_name_kana : String? = nil,
       @last_name_kanji : String? = nil,
       @maiden_name : String? = nil,
-      @metadata : Stripe::FileLinkCreationParamsMetadata? = nil,
+      @metadata : Stripe::PostAccountsRequestMetadata? = nil,
       @phone : String? = nil,
       @political_exposure : String? = nil,
       @registered_address : Stripe::AddressSpecs? = nil,
@@ -484,7 +484,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] metadata Object to be assigned
-    def metadata=(new_value : Stripe::FileLinkCreationParamsMetadata?)
+    def metadata=(new_value : Stripe::PostAccountsRequestMetadata?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

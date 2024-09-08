@@ -9,6 +9,7 @@
 
 require "../../core"
 
+require "./scheduled_query_run_file"
 require "./sigma_scheduled_query_run_error"
 
 module Stripe
@@ -29,8 +30,8 @@ module Stripe
     @[JSON::Field(key: "data_load_time", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter data_load_time : Int64? = nil
 
-    @[JSON::Field(key: "file", type: Stripe::File?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter file : Stripe::File? = nil
+    @[JSON::Field(key: "file", type: Stripe::ScheduledQueryRunFile?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter file : Stripe::ScheduledQueryRunFile? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -80,7 +81,7 @@ module Stripe
       # Required properties
       @created : Int64? = nil,
       @data_load_time : Int64? = nil,
-      @file : Stripe::File? = nil,
+      @file : Stripe::ScheduledQueryRunFile? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
@@ -213,7 +214,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file Object to be assigned
-    def file=(new_value : Stripe::File?)
+    def file=(new_value : Stripe::ScheduledQueryRunFile?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

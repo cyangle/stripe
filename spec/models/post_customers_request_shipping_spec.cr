@@ -14,31 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_customers_request_shipping"
 
 describe Stripe::PostCustomersRequestShipping do
-  describe "test an instance of PostCustomersRequestShipping" do
-    it "should create an instance of PostCustomersRequestShipping" do
-      # instance = Stripe::PostCustomersRequestShipping.new
-      # (instance).should be_a(Stripe::PostCustomersRequestShipping)
-    end
-  end
-
-  describe "test attribute 'address'" do
-    it "should work" do
-      # instance = Stripe::PostCustomersRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'name'" do
-    it "should work" do
-      # instance = Stripe::PostCustomersRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'phone'" do
-    it "should work" do
-      # instance = Stripe::PostCustomersRequestShipping.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

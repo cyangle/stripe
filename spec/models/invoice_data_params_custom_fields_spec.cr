@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/invoice_data_params_custom_fields"
 
 describe Stripe::InvoiceDataParamsCustomFields do
-  describe "test an instance of InvoiceDataParamsCustomFields" do
-    it "should create an instance of InvoiceDataParamsCustomFields" do
-      # instance = Stripe::InvoiceDataParamsCustomFields.new
-      # (instance).should be_a(Stripe::InvoiceDataParamsCustomFields)
-    end
-  end
 end

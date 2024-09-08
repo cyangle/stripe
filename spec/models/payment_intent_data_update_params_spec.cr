@@ -25,10 +25,6 @@ describe Stripe::PaymentIntentDataUpdateParams do
     it "should work" do
       # instance = Stripe::PaymentIntentDataUpdateParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentDataUpdateParams::ENUM_VALIDATOR_FOR_DESCRIPTION
-      # validator.allowable_values.each do |value|
-      #   instance.description = value.as(String)
-      # end
     end
   end
 
@@ -43,10 +39,6 @@ describe Stripe::PaymentIntentDataUpdateParams do
     it "should work" do
       # instance = Stripe::PaymentIntentDataUpdateParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentDataUpdateParams::ENUM_VALIDATOR_FOR_STATEMENT_DESCRIPTOR
-      # validator.allowable_values.each do |value|
-      #   instance.statement_descriptor = value.as(String)
-      # end
     end
   end
 
@@ -54,10 +46,6 @@ describe Stripe::PaymentIntentDataUpdateParams do
     it "should work" do
       # instance = Stripe::PaymentIntentDataUpdateParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentDataUpdateParams::ENUM_VALIDATOR_FOR_STATEMENT_DESCRIPTOR_SUFFIX
-      # validator.allowable_values.each do |value|
-      #   instance.statement_descriptor_suffix = value.as(String)
-      # end
     end
   end
 
@@ -65,10 +53,6 @@ describe Stripe::PaymentIntentDataUpdateParams do
     it "should work" do
       # instance = Stripe::PaymentIntentDataUpdateParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PaymentIntentDataUpdateParams::ENUM_VALIDATOR_FOR_TRANSFER_GROUP
-      # validator.allowable_values.each do |value|
-      #   instance.transfer_group = value.as(String)
-      # end
     end
   end
 end

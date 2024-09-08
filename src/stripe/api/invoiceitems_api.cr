@@ -21,6 +21,7 @@ require "../models/post_accounts_request_metadata"
 require "../models/post_invoiceitems_invoiceitem_request_discounts"
 require "../models/post_invoiceitems_invoiceitem_request_tax_rates"
 require "../models/post_invoiceitems_request_discounts"
+require "../models/post_invoiceitems_request_tax_code"
 
 module Stripe
   class InvoiceitemsApi
@@ -411,7 +412,7 @@ module Stripe
     # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
     # @optional @param subscription [String?] The ID of a subscription to add this invoice item to. When left blank, the invoice item is added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
     # @optional @param tax_behavior [String?] Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tax_code [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
     # @optional @param tax_rates [Array(String)?] The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
     # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
     # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
@@ -433,7 +434,7 @@ module Stripe
       quantity : Int64? = nil,
       subscription : String? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Array(String)? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil
@@ -458,7 +459,7 @@ module Stripe
     # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
     # @optional @param subscription [String?] The ID of a subscription to add this invoice item to. When left blank, the invoice item is added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
     # @optional @param tax_behavior [String?] Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tax_code [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
     # @optional @param tax_rates [Array(String)?] The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
     # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
     # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
@@ -480,7 +481,7 @@ module Stripe
       quantity : Int64? = nil,
       subscription : String? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Array(String)? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil
@@ -512,7 +513,7 @@ module Stripe
     # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
     # @optional @param subscription [String?] The ID of a subscription to add this invoice item to. When left blank, the invoice item is added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
     # @optional @param tax_behavior [String?] Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tax_code [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
     # @optional @param tax_rates [Array(String)?] The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
     # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
     # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
@@ -534,7 +535,7 @@ module Stripe
       quantity : Int64? = nil,
       subscription : String? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Array(String)? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil,
@@ -549,7 +550,6 @@ module Stripe
     POST_INVOICEITEMS_MAX_LENGTH_FOR_PRICE          = 5000
     POST_INVOICEITEMS_MAX_LENGTH_FOR_SUBSCRIPTION   = 5000
     POST_INVOICEITEMS_VALID_VALUES_FOR_TAX_BEHAVIOR = String.static_array("exclusive", "inclusive", "unspecified")
-    POST_INVOICEITEMS_VALID_VALUES_FOR_TAX_CODE     = String.static_array("")
 
     # @return Crest::Request
     def build_api_request_for_post_invoiceitems(
@@ -569,7 +569,7 @@ module Stripe
       quantity : Int64? = nil,
       subscription : String? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Array(String)? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil
@@ -615,7 +615,7 @@ module Stripe
           OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, POST_INVOICEITEMS_VALID_VALUES_FOR_TAX_BEHAVIOR)
         end
         unless (_tax_code = tax_code).nil?
-          OpenApi::EnumValidator.validate("tax_code", _tax_code, POST_INVOICEITEMS_VALID_VALUES_FOR_TAX_CODE)
+          _tax_code.validate if _tax_code.is_a?(OpenApi::Validatable)
         end
       end
 
@@ -652,7 +652,7 @@ module Stripe
       form_params << Tuple(String, Crest::ParamsValue).new("quantity", quantity.to_s) if !quantity.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("subscription", subscription.to_s) if !subscription.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("tax_behavior", tax_behavior.to_s) if !tax_behavior.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("tax_code", tax_code.to_s) if !tax_code.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_code.to_json), "tax_code")) if !tax_code.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_rates.to_json), "tax_rates")) if !tax_rates.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("unit_amount", unit_amount.to_s) if !unit_amount.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("unit_amount_decimal", unit_amount_decimal.to_s) if !unit_amount_decimal.nil?
@@ -689,7 +689,7 @@ module Stripe
     # @optional @param price_data [Stripe::OneTimePriceData?]
     # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
     # @optional @param tax_behavior [String?] Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tax_code [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
     # @optional @param tax_rates [Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates?]
     # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
     # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
@@ -708,7 +708,7 @@ module Stripe
       price_data : Stripe::OneTimePriceData? = nil,
       quantity : Int64? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil
@@ -730,7 +730,7 @@ module Stripe
     # @optional @param price_data [Stripe::OneTimePriceData?]
     # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
     # @optional @param tax_behavior [String?] Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tax_code [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
     # @optional @param tax_rates [Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates?]
     # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
     # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
@@ -749,7 +749,7 @@ module Stripe
       price_data : Stripe::OneTimePriceData? = nil,
       quantity : Int64? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil
@@ -778,7 +778,7 @@ module Stripe
     # @optional @param price_data [Stripe::OneTimePriceData?]
     # @optional @param quantity [Int32?] Non-negative integer. The quantity of units for the invoice item.
     # @optional @param tax_behavior [String?] Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    # @optional @param tax_code [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
     # @optional @param tax_rates [Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates?]
     # @optional @param unit_amount [Int32?] The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
     # @optional @param unit_amount_decimal [BigDecimal?] Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
@@ -797,7 +797,7 @@ module Stripe
       price_data : Stripe::OneTimePriceData? = nil,
       quantity : Int64? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil,
@@ -810,7 +810,6 @@ module Stripe
     POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_DESCRIPTION    = 5000
     POST_INVOICEITEMS_INVOICEITEM_MAX_LENGTH_FOR_PRICE          = 5000
     POST_INVOICEITEMS_INVOICEITEM_VALID_VALUES_FOR_TAX_BEHAVIOR = String.static_array("exclusive", "inclusive", "unspecified")
-    POST_INVOICEITEMS_INVOICEITEM_VALID_VALUES_FOR_TAX_CODE     = String.static_array("")
 
     # @return Crest::Request
     def build_api_request_for_post_invoiceitems_invoiceitem(
@@ -827,7 +826,7 @@ module Stripe
       price_data : Stripe::OneTimePriceData? = nil,
       quantity : Int64? = nil,
       tax_behavior : String? = nil,
-      tax_code : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
       tax_rates : Stripe::PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
       unit_amount : Int64? = nil,
       unit_amount_decimal : BigDecimal? = nil
@@ -867,7 +866,7 @@ module Stripe
           OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, POST_INVOICEITEMS_INVOICEITEM_VALID_VALUES_FOR_TAX_BEHAVIOR)
         end
         unless (_tax_code = tax_code).nil?
-          OpenApi::EnumValidator.validate("tax_code", _tax_code, POST_INVOICEITEMS_INVOICEITEM_VALID_VALUES_FOR_TAX_CODE)
+          _tax_code.validate if _tax_code.is_a?(OpenApi::Validatable)
         end
         unless (_tax_rates = tax_rates).nil?
           _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
@@ -903,7 +902,7 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(price_data.to_json), "price_data")) if !price_data.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("quantity", quantity.to_s) if !quantity.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("tax_behavior", tax_behavior.to_s) if !tax_behavior.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("tax_code", tax_code.to_s) if !tax_code.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_code.to_json), "tax_code")) if !tax_code.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_rates.to_json), "tax_rates")) if !tax_rates.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("unit_amount", unit_amount.to_s) if !unit_amount.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("unit_amount_decimal", unit_amount_decimal.to_s) if !unit_amount_decimal.nil?

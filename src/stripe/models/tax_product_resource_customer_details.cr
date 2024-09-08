@@ -9,8 +9,8 @@
 
 require "../../core"
 
+require "./tax_product_resource_customer_details_address"
 require "./tax_product_resource_customer_details_resource_tax_id"
-require "./tax_product_resource_postal_address"
 
 module Stripe
   #
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "address", type: Stripe::TaxProductResourcePostalAddress?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter address : Stripe::TaxProductResourcePostalAddress? = nil
+    @[JSON::Field(key: "address", type: Stripe::TaxProductResourceCustomerDetailsAddress?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter address : Stripe::TaxProductResourceCustomerDetailsAddress? = nil
 
     # The type of customer address provided.
     @[JSON::Field(key: "address_source", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -53,7 +53,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @address : Stripe::TaxProductResourcePostalAddress? = nil,
+      @address : Stripe::TaxProductResourceCustomerDetailsAddress? = nil,
       @address_source : String? = nil,
       @ip_address : String? = nil,
       @tax_ids : Array(Stripe::TaxProductResourceCustomerDetailsResourceTaxId)? = nil,
@@ -120,7 +120,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(new_value : Stripe::TaxProductResourcePostalAddress?)
+    def address=(new_value : Stripe::TaxProductResourceCustomerDetailsAddress?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

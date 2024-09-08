@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./payment_links_resource_payment_method_reuse_agreement"
+require "./payment_links_resource_consent_collection_payment_method_reuse_agreement"
 
 module Stripe
   #
@@ -21,8 +21,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "payment_method_reuse_agreement", type: Stripe::PaymentLinksResourcePaymentMethodReuseAgreement?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter payment_method_reuse_agreement : Stripe::PaymentLinksResourcePaymentMethodReuseAgreement? = nil
+    @[JSON::Field(key: "payment_method_reuse_agreement", type: Stripe::PaymentLinksResourceConsentCollectionPaymentMethodReuseAgreement?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter payment_method_reuse_agreement : Stripe::PaymentLinksResourceConsentCollectionPaymentMethodReuseAgreement? = nil
 
     # If set to `auto`, enables the collection of customer consent for promotional communications.
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
@@ -43,7 +43,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @payment_method_reuse_agreement : Stripe::PaymentLinksResourcePaymentMethodReuseAgreement? = nil,
+      @payment_method_reuse_agreement : Stripe::PaymentLinksResourceConsentCollectionPaymentMethodReuseAgreement? = nil,
       @promotions : String? = nil,
       @terms_of_service : String? = nil
     )
@@ -86,7 +86,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_reuse_agreement Object to be assigned
-    def payment_method_reuse_agreement=(new_value : Stripe::PaymentLinksResourcePaymentMethodReuseAgreement?)
+    def payment_method_reuse_agreement=(new_value : Stripe::PaymentLinksResourceConsentCollectionPaymentMethodReuseAgreement?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

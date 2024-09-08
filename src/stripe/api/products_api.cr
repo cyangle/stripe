@@ -10,17 +10,24 @@
 require "../../core"
 
 require "../models/deleted_product"
+require "../models/deleted_product_feature"
+require "../models/entitlements_resource_product_feature_list"
 require "../models/error"
 require "../models/features"
 require "../models/get_accounts_created_parameter"
 
 require "../models/package_dimensions_specs"
 require "../models/post_accounts_request_metadata"
+require "../models/post_invoiceitems_request_tax_code"
+require "../models/post_products_id_request_description"
 require "../models/post_products_id_request_images"
 require "../models/post_products_id_request_marketing_features"
 require "../models/post_products_id_request_package_dimensions"
+require "../models/post_products_id_request_unit_label"
+require "../models/post_products_id_request_url"
 require "../models/price_data_without_product"
 require "../models/product"
+require "../models/product_feature"
 require "../models/product_list"
 require "../models/search_result"
 
@@ -119,6 +126,112 @@ module Stripe
         http_method: :"DELETE",
         path: local_var_path,
         operation: "ProductsApi.delete_products_id",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Deletes the feature attachment to a product</p>
+    # @required @param id [String?]
+    # @required @param product [String?]
+    # @return [Stripe::DeletedProductFeature]
+    def delete_products_product_features_id(
+      *,
+      id : String? = nil,
+      product : String? = nil
+    ) : Stripe::DeletedProductFeature
+      data, _status_code, _headers = delete_products_product_features_id_with_http_info(id: id, product: product)
+      data
+    end
+
+    # &lt;p&gt;Deletes the feature attachment to a product&lt;/p&gt;
+    # @required @param id [String?]
+    # @required @param product [String?]
+    # @return [Tuple(Stripe::DeletedProductFeature, Integer, Hash)] Stripe::DeletedProductFeature, response status code and response headers
+    def delete_products_product_features_id_with_http_info(
+      *,
+      id : String? = nil,
+      product : String? = nil
+    ) : Tuple(Stripe::DeletedProductFeature, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_delete_products_product_features_id(id: id, product: product)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: ProductsApi#delete_products_product_features_id\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::DeletedProductFeature.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Deletes the feature attachment to a product&lt;/p&gt;
+    # @required @param id [String?]
+    # @required @param product [String?]
+    # @return nil
+    def delete_products_product_features_id(
+      *,
+      id : String? = nil,
+      product : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_delete_products_product_features_id(id: id, product: product).execute(&block)
+    end
+
+    DELETE_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_ID      = 5000
+    DELETE_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_PRODUCT = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_delete_products_product_features_id(
+      *,
+      id : String? = nil,
+      product : String? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: ProductsApi.delete_products_product_features_id ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"id\" is required and cannot be null") if id.nil?
+        unless (_id = id).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, DELETE_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_ID)
+        end
+        raise ArgumentError.new("\"product\" is required and cannot be null") if product.nil?
+        unless (_product = product).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, DELETE_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_PRODUCT)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/products/{product}/features/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s)).sub("{" + "product" + "}", URI.encode_path(product.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"DELETE",
+        path: local_var_path,
+        operation: "ProductsApi.delete_products_product_features_id",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
@@ -405,6 +518,254 @@ module Stripe
         http_method: :"GET",
         path: local_var_path,
         operation: "ProductsApi.get_products_id",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieve a list of features for a product</p>
+    # @required @param product [String?]
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::EntitlementsResourceProductFeatureList]
+    def get_products_product_features(
+      *,
+      product : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::EntitlementsResourceProductFeatureList
+      data, _status_code, _headers = get_products_product_features_with_http_info(product: product, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieve a list of features for a product&lt;/p&gt;
+    # @required @param product [String?]
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::EntitlementsResourceProductFeatureList, Integer, Hash)] Stripe::EntitlementsResourceProductFeatureList, response status code and response headers
+    def get_products_product_features_with_http_info(
+      *,
+      product : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::EntitlementsResourceProductFeatureList, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_products_product_features(product: product, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: ProductsApi#get_products_product_features\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::EntitlementsResourceProductFeatureList.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieve a list of features for a product&lt;/p&gt;
+    # @required @param product [String?]
+    # @optional @param ending_before [String?] A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+    # @optional @param starting_after [String?] A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+    # @optional @param limit [Int32?] A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_products_product_features(
+      *,
+      product : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_products_product_features(product: product, ending_before: ending_before, starting_after: starting_after, limit: limit, expand: expand).execute(&block)
+    end
+
+    GET_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_PRODUCT        = 5000
+    GET_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_ENDING_BEFORE  = 5000
+    GET_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_STARTING_AFTER = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_products_product_features(
+      *,
+      product : String? = nil,
+      ending_before : String? = nil,
+      starting_after : String? = nil,
+      limit : Int64? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: ProductsApi.get_products_product_features ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"product\" is required and cannot be null") if product.nil?
+        unless (_product = product).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, GET_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_PRODUCT)
+        end
+        unless (_ending_before = ending_before).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("ending_before", ending_before.to_s.size, GET_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_ENDING_BEFORE)
+        end
+        unless (_starting_after = starting_after).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("starting_after", starting_after.to_s.size, GET_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_STARTING_AFTER)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/products/{product}/features".sub("{" + "product" + "}", URI.encode_path(product.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["ending_before"] = ending_before.to_s if !ending_before.nil?
+      query_params["starting_after"] = starting_after.to_s if !starting_after.nil?
+      query_params["limit"] = limit.to_s if !limit.nil?
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "ProductsApi.get_products_product_features",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Retrieves a product_feature, which represents a feature attachment to a product</p>
+    # @required @param product [String?] The ID of the product.
+    # @required @param id [String?] The ID of the product_feature.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::ProductFeature]
+    def get_products_product_features_id(
+      *,
+      product : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Stripe::ProductFeature
+      data, _status_code, _headers = get_products_product_features_id_with_http_info(product: product, id: id, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Retrieves a product_feature, which represents a feature attachment to a product&lt;/p&gt;
+    # @required @param product [String?] The ID of the product.
+    # @required @param id [String?] The ID of the product_feature.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::ProductFeature, Integer, Hash)] Stripe::ProductFeature, response status code and response headers
+    def get_products_product_features_id_with_http_info(
+      *,
+      product : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Tuple(Stripe::ProductFeature, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_get_products_product_features_id(product: product, id: id, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: ProductsApi#get_products_product_features_id\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::ProductFeature.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Retrieves a product_feature, which represents a feature attachment to a product&lt;/p&gt;
+    # @required @param product [String?] The ID of the product.
+    # @required @param id [String?] The ID of the product_feature.
+    # @optional @param expand [Array(Array(String))?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def get_products_product_features_id(
+      *,
+      product : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_get_products_product_features_id(product: product, id: id, expand: expand).execute(&block)
+    end
+
+    GET_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_PRODUCT = 5000
+    GET_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_ID      = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_get_products_product_features_id(
+      *,
+      product : String? = nil,
+      id : String? = nil,
+      expand : Array(Array(String))? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: ProductsApi.get_products_product_features_id ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"product\" is required and cannot be null") if product.nil?
+        unless (_product = product).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, GET_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_PRODUCT)
+        end
+        raise ArgumentError.new("\"id\" is required and cannot be null") if id.nil?
+        unless (_id = id).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("id", id.to_s.size, GET_PRODUCTS_PRODUCT_FEATURES_ID_MAX_LENGTH_FOR_ID)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/products/{product}/features/{id}".sub("{" + "product" + "}", URI.encode_path(product.to_s)).sub("{" + "id" + "}", URI.encode_path(id.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["expand"] = @api_client.build_collection_param(expand, "csv") if !expand.nil? && !expand.empty?
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "ProductsApi.get_products_product_features_id",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
@@ -797,7 +1158,7 @@ module Stripe
     # @required @param id [String?]
     # @optional @param active [Bool?] Whether the product is available for purchase.
     # @optional @param default_price [String?] The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostProductsIdRequestDescription?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param images [Stripe::PostProductsIdRequestImages?]
     # @optional @param marketing_features [Stripe::PostProductsIdRequestMarketingFeatures?]
@@ -806,16 +1167,16 @@ module Stripe
     # @optional @param package_dimensions [Stripe::PostProductsIdRequestPackageDimensions?]
     # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
     # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`. Only used for subscription payments.
-    # @optional @param tax_code [String?]
-    # @optional @param unit_label [String?]
-    # @optional @param url [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
+    # @optional @param unit_label [Stripe::PostProductsIdRequestUnitLabel?]
+    # @optional @param url [Stripe::PostProductsIdRequestUrl?]
     # @return [Stripe::Product]
     def post_products_id(
       *,
       id : String? = nil,
       active : Bool? = nil,
       default_price : String? = nil,
-      description : String? = nil,
+      description : Stripe::PostProductsIdRequestDescription? = nil,
       expand : Array(String)? = nil,
       images : Stripe::PostProductsIdRequestImages? = nil,
       marketing_features : Stripe::PostProductsIdRequestMarketingFeatures? = nil,
@@ -824,9 +1185,9 @@ module Stripe
       package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
       shippable : Bool? = nil,
       statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
+      unit_label : Stripe::PostProductsIdRequestUnitLabel? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil
     ) : Stripe::Product
       data, _status_code, _headers = post_products_id_with_http_info(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, marketing_features: marketing_features, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
       data
@@ -836,7 +1197,7 @@ module Stripe
     # @required @param id [String?]
     # @optional @param active [Bool?] Whether the product is available for purchase.
     # @optional @param default_price [String?] The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostProductsIdRequestDescription?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param images [Stripe::PostProductsIdRequestImages?]
     # @optional @param marketing_features [Stripe::PostProductsIdRequestMarketingFeatures?]
@@ -845,16 +1206,16 @@ module Stripe
     # @optional @param package_dimensions [Stripe::PostProductsIdRequestPackageDimensions?]
     # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
     # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`. Only used for subscription payments.
-    # @optional @param tax_code [String?]
-    # @optional @param unit_label [String?]
-    # @optional @param url [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
+    # @optional @param unit_label [Stripe::PostProductsIdRequestUnitLabel?]
+    # @optional @param url [Stripe::PostProductsIdRequestUrl?]
     # @return [Tuple(Stripe::Product, Integer, Hash)] Stripe::Product, response status code and response headers
     def post_products_id_with_http_info(
       *,
       id : String? = nil,
       active : Bool? = nil,
       default_price : String? = nil,
-      description : String? = nil,
+      description : Stripe::PostProductsIdRequestDescription? = nil,
       expand : Array(String)? = nil,
       images : Stripe::PostProductsIdRequestImages? = nil,
       marketing_features : Stripe::PostProductsIdRequestMarketingFeatures? = nil,
@@ -863,9 +1224,9 @@ module Stripe
       package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
       shippable : Bool? = nil,
       statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
+      unit_label : Stripe::PostProductsIdRequestUnitLabel? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil
     ) : Tuple(Stripe::Product, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_post_products_id(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, marketing_features: marketing_features, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url)
 
@@ -882,7 +1243,7 @@ module Stripe
     # @required @param id [String?]
     # @optional @param active [Bool?] Whether the product is available for purchase.
     # @optional @param default_price [String?] The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
-    # @optional @param description [String?]
+    # @optional @param description [Stripe::PostProductsIdRequestDescription?]
     # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
     # @optional @param images [Stripe::PostProductsIdRequestImages?]
     # @optional @param marketing_features [Stripe::PostProductsIdRequestMarketingFeatures?]
@@ -891,16 +1252,16 @@ module Stripe
     # @optional @param package_dimensions [Stripe::PostProductsIdRequestPackageDimensions?]
     # @optional @param shippable [Bool?] Whether this product is shipped (i.e., physical goods).
     # @optional @param statement_descriptor [String?] An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\\\`, `\\\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`. Only used for subscription payments.
-    # @optional @param tax_code [String?]
-    # @optional @param unit_label [String?]
-    # @optional @param url [String?]
+    # @optional @param tax_code [Stripe::PostInvoiceitemsRequestTaxCode?]
+    # @optional @param unit_label [Stripe::PostProductsIdRequestUnitLabel?]
+    # @optional @param url [Stripe::PostProductsIdRequestUrl?]
     # @return nil
     def post_products_id(
       *,
       id : String? = nil,
       active : Bool? = nil,
       default_price : String? = nil,
-      description : String? = nil,
+      description : Stripe::PostProductsIdRequestDescription? = nil,
       expand : Array(String)? = nil,
       images : Stripe::PostProductsIdRequestImages? = nil,
       marketing_features : Stripe::PostProductsIdRequestMarketingFeatures? = nil,
@@ -909,9 +1270,9 @@ module Stripe
       package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
       shippable : Bool? = nil,
       statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil,
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
+      unit_label : Stripe::PostProductsIdRequestUnitLabel? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil,
       &block : Crest::Response ->
     ) : Nil
       build_api_request_for_post_products_id(id: id, active: active, default_price: default_price, description: description, expand: expand, images: images, marketing_features: marketing_features, metadata: metadata, name: name, package_dimensions: package_dimensions, shippable: shippable, statement_descriptor: statement_descriptor, tax_code: tax_code, unit_label: unit_label, url: url).execute(&block)
@@ -919,12 +1280,8 @@ module Stripe
 
     POST_PRODUCTS_ID_MAX_LENGTH_FOR_ID                   = 5000
     POST_PRODUCTS_ID_MAX_LENGTH_FOR_DEFAULT_PRICE        = 5000
-    POST_PRODUCTS_ID_VALID_VALUES_FOR_DESCRIPTION        = String.static_array("")
     POST_PRODUCTS_ID_MAX_LENGTH_FOR_NAME                 = 5000
     POST_PRODUCTS_ID_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR =   22
-    POST_PRODUCTS_ID_VALID_VALUES_FOR_TAX_CODE           = String.static_array("")
-    POST_PRODUCTS_ID_VALID_VALUES_FOR_UNIT_LABEL         = String.static_array("")
-    POST_PRODUCTS_ID_VALID_VALUES_FOR_URL                = String.static_array("")
 
     # @return Crest::Request
     def build_api_request_for_post_products_id(
@@ -932,7 +1289,7 @@ module Stripe
       id : String? = nil,
       active : Bool? = nil,
       default_price : String? = nil,
-      description : String? = nil,
+      description : Stripe::PostProductsIdRequestDescription? = nil,
       expand : Array(String)? = nil,
       images : Stripe::PostProductsIdRequestImages? = nil,
       marketing_features : Stripe::PostProductsIdRequestMarketingFeatures? = nil,
@@ -941,9 +1298,9 @@ module Stripe
       package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil,
       shippable : Bool? = nil,
       statement_descriptor : String? = nil,
-      tax_code : String? = nil,
-      unit_label : String? = nil,
-      url : String? = nil
+      tax_code : Stripe::PostInvoiceitemsRequestTaxCode? = nil,
+      unit_label : Stripe::PostProductsIdRequestUnitLabel? = nil,
+      url : Stripe::PostProductsIdRequestUrl? = nil
     ) : Crest::Request
       if debugging?
         Log.debug { "Calling API: ProductsApi.post_products_id ..." }
@@ -959,7 +1316,7 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("default_price", default_price.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_DEFAULT_PRICE)
         end
         unless (_description = description).nil?
-          OpenApi::EnumValidator.validate("description", _description, POST_PRODUCTS_ID_VALID_VALUES_FOR_DESCRIPTION)
+          _description.validate if _description.is_a?(OpenApi::Validatable)
         end
 
         unless (_images = images).nil?
@@ -982,13 +1339,13 @@ module Stripe
           OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", statement_descriptor.to_s.size, POST_PRODUCTS_ID_MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
         end
         unless (_tax_code = tax_code).nil?
-          OpenApi::EnumValidator.validate("tax_code", _tax_code, POST_PRODUCTS_ID_VALID_VALUES_FOR_TAX_CODE)
+          _tax_code.validate if _tax_code.is_a?(OpenApi::Validatable)
         end
         unless (_unit_label = unit_label).nil?
-          OpenApi::EnumValidator.validate("unit_label", _unit_label, POST_PRODUCTS_ID_VALID_VALUES_FOR_UNIT_LABEL)
+          _unit_label.validate if _unit_label.is_a?(OpenApi::Validatable)
         end
         unless (_url = url).nil?
-          OpenApi::EnumValidator.validate("url", _url, POST_PRODUCTS_ID_VALID_VALUES_FOR_URL)
+          _url.validate if _url.is_a?(OpenApi::Validatable)
         end
       end
 
@@ -1012,7 +1369,7 @@ module Stripe
       form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
       form_params << Tuple(String, Crest::ParamsValue).new("active", active.to_s) if !active.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("default_price", default_price.to_s) if !default_price.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("description", description.to_s) if !description.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(description.to_json), "description")) if !description.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(images.to_json), "images")) if !images.nil?
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(marketing_features.to_json), "marketing_features")) if !marketing_features.nil?
@@ -1021,9 +1378,9 @@ module Stripe
       form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(package_dimensions.to_json), "package_dimensions")) if !package_dimensions.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("shippable", shippable.to_s) if !shippable.nil?
       form_params << Tuple(String, Crest::ParamsValue).new("statement_descriptor", statement_descriptor.to_s) if !statement_descriptor.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("tax_code", tax_code.to_s) if !tax_code.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("unit_label", unit_label.to_s) if !unit_label.nil?
-      form_params << Tuple(String, Crest::ParamsValue).new("url", url.to_s) if !url.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(tax_code.to_json), "tax_code")) if !tax_code.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(unit_label.to_json), "unit_label")) if !unit_label.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(url.to_json), "url")) if !url.nil?
 
       # http body (model)
       post_body : IO | String | Nil = nil
@@ -1035,6 +1392,123 @@ module Stripe
         http_method: :"POST",
         path: local_var_path,
         operation: "ProductsApi.post_products_id",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
+    # <p>Creates a product_feature, which represents a feature attachment to a product</p>
+    # @required @param product [String?]
+    # @required @param entitlement_feature [String?] The ID of the [Feature](https://stripe.com/docs/api/entitlements/feature) object attached to this product.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Stripe::ProductFeature]
+    def post_products_product_features(
+      *,
+      product : String? = nil,
+      entitlement_feature : String? = nil,
+      expand : Array(String)? = nil
+    ) : Stripe::ProductFeature
+      data, _status_code, _headers = post_products_product_features_with_http_info(product: product, entitlement_feature: entitlement_feature, expand: expand)
+      data
+    end
+
+    # &lt;p&gt;Creates a product_feature, which represents a feature attachment to a product&lt;/p&gt;
+    # @required @param product [String?]
+    # @required @param entitlement_feature [String?] The ID of the [Feature](https://stripe.com/docs/api/entitlements/feature) object attached to this product.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return [Tuple(Stripe::ProductFeature, Integer, Hash)] Stripe::ProductFeature, response status code and response headers
+    def post_products_product_features_with_http_info(
+      *,
+      product : String? = nil,
+      entitlement_feature : String? = nil,
+      expand : Array(String)? = nil
+    ) : Tuple(Stripe::ProductFeature, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_post_products_product_features(product: product, entitlement_feature: entitlement_feature, expand: expand)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging?
+        Log.debug { "API called: ProductsApi#post_products_product_features\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(Stripe::ProductFeature.from_json(body), status_code, headers)
+    end
+
+    # &lt;p&gt;Creates a product_feature, which represents a feature attachment to a product&lt;/p&gt;
+    # @required @param product [String?]
+    # @required @param entitlement_feature [String?] The ID of the [Feature](https://stripe.com/docs/api/entitlements/feature) object attached to this product.
+    # @optional @param expand [Array(String)?] Specifies which fields in the response should be expanded.
+    # @return nil
+    def post_products_product_features(
+      *,
+      product : String? = nil,
+      entitlement_feature : String? = nil,
+      expand : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_post_products_product_features(product: product, entitlement_feature: entitlement_feature, expand: expand).execute(&block)
+    end
+
+    POST_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_PRODUCT             = 5000
+    POST_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_ENTITLEMENT_FEATURE = 5000
+
+    # @return Crest::Request
+    def build_api_request_for_post_products_product_features(
+      *,
+      product : String? = nil,
+      entitlement_feature : String? = nil,
+      expand : Array(String)? = nil
+    ) : Crest::Request
+      if debugging?
+        Log.debug { "Calling API: ProductsApi.post_products_product_features ..." }
+      end
+
+      if client_side_validation?
+        raise ArgumentError.new("\"product\" is required and cannot be null") if product.nil?
+        unless (_product = product).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("product", product.to_s.size, POST_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_PRODUCT)
+        end
+        raise ArgumentError.new("\"entitlement_feature\" is required and cannot be null") if entitlement_feature.nil?
+        unless (_entitlement_feature = entitlement_feature).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("entitlement_feature", entitlement_feature.to_s.size, POST_PRODUCTS_PRODUCT_FEATURES_MAX_LENGTH_FOR_ENTITLEMENT_FEATURE)
+        end
+      end
+
+      # resource path
+      local_var_path = "/v1/products/{product}/features".sub("{" + "product" + "}", URI.encode_path(product.to_s))
+
+      # header parameters
+      header_params : Hash(String, String) = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+      # HTTP header "Content-Type"
+      header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
+
+      # cookie parameters
+      cookie_params : Hash(String, String) = Hash(String, String).new
+
+      # query parameters
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
+
+      # form parameters
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("entitlement_feature", entitlement_feature.to_s) if !entitlement_feature.nil?
+      form_params.concat(Crest::ZeroEnumeratedFlatParamsEncoder.flatten_params(JSON.parse(expand.to_json), "expand")) if !expand.nil?
+
+      # http body (model)
+      post_body : IO | String | Nil = nil
+
+      # auth_names
+      auth_names = ["basicAuth", "bearerAuth"]
+
+      @api_client.build_api_request(
+        http_method: :"POST",
+        path: local_var_path,
+        operation: "ProductsApi.post_products_product_features",
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,

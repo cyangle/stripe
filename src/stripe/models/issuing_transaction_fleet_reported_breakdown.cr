@@ -9,9 +9,9 @@
 
 require "../../core"
 
-require "./issuing_transaction_fleet_fuel_price_data"
-require "./issuing_transaction_fleet_non_fuel_price_data"
-require "./issuing_transaction_fleet_tax_data"
+require "./issuing_transaction_fleet_reported_breakdown_fuel"
+require "./issuing_transaction_fleet_reported_breakdown_non_fuel"
+require "./issuing_transaction_fleet_reported_breakdown_tax"
 
 module Stripe
   #
@@ -23,14 +23,14 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "fuel", type: Stripe::IssuingTransactionFleetFuelPriceData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter fuel : Stripe::IssuingTransactionFleetFuelPriceData? = nil
+    @[JSON::Field(key: "fuel", type: Stripe::IssuingTransactionFleetReportedBreakdownFuel?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter fuel : Stripe::IssuingTransactionFleetReportedBreakdownFuel? = nil
 
-    @[JSON::Field(key: "non_fuel", type: Stripe::IssuingTransactionFleetNonFuelPriceData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter non_fuel : Stripe::IssuingTransactionFleetNonFuelPriceData? = nil
+    @[JSON::Field(key: "non_fuel", type: Stripe::IssuingTransactionFleetReportedBreakdownNonFuel?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter non_fuel : Stripe::IssuingTransactionFleetReportedBreakdownNonFuel? = nil
 
-    @[JSON::Field(key: "tax", type: Stripe::IssuingTransactionFleetTaxData?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter tax : Stripe::IssuingTransactionFleetTaxData? = nil
+    @[JSON::Field(key: "tax", type: Stripe::IssuingTransactionFleetReportedBreakdownTax?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter tax : Stripe::IssuingTransactionFleetReportedBreakdownTax? = nil
 
     # End of Required Properties
 
@@ -39,9 +39,9 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @fuel : Stripe::IssuingTransactionFleetFuelPriceData? = nil,
-      @non_fuel : Stripe::IssuingTransactionFleetNonFuelPriceData? = nil,
-      @tax : Stripe::IssuingTransactionFleetTaxData? = nil
+      @fuel : Stripe::IssuingTransactionFleetReportedBreakdownFuel? = nil,
+      @non_fuel : Stripe::IssuingTransactionFleetReportedBreakdownNonFuel? = nil,
+      @tax : Stripe::IssuingTransactionFleetReportedBreakdownTax? = nil
     )
     end
 
@@ -82,7 +82,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fuel Object to be assigned
-    def fuel=(new_value : Stripe::IssuingTransactionFleetFuelPriceData?)
+    def fuel=(new_value : Stripe::IssuingTransactionFleetReportedBreakdownFuel?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -92,7 +92,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] non_fuel Object to be assigned
-    def non_fuel=(new_value : Stripe::IssuingTransactionFleetNonFuelPriceData?)
+    def non_fuel=(new_value : Stripe::IssuingTransactionFleetReportedBreakdownNonFuel?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -102,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax Object to be assigned
-    def tax=(new_value : Stripe::IssuingTransactionFleetTaxData?)
+    def tax=(new_value : Stripe::IssuingTransactionFleetReportedBreakdownTax?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

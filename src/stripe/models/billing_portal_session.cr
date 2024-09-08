@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./billing_portal_session_configuration"
-require "./portal_flows_flow"
+require "./billing_portal_session_flow"
 
 module Stripe
   # The Billing customer portal is a Stripe-hosted UI for subscription and billing management.  A portal configuration describes the functionality and features that you want to provide to your customers through the portal.  A portal session describes the instantiation of the customer portal for a particular customer. By visiting the session's URL, the customer can manage their subscriptions and billing details. For security reasons, sessions are short-lived and will expire if the customer does not visit the URL. Create sessions on-demand when customers intend to manage their subscriptions and billing details.  Related guide: [Customer management](/customer-management)
@@ -34,8 +34,8 @@ module Stripe
     getter customer : String? = nil
     MAX_LENGTH_FOR_CUSTOMER = 5000
 
-    @[JSON::Field(key: "flow", type: Stripe::PortalFlowsFlow?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter flow : Stripe::PortalFlowsFlow? = nil
+    @[JSON::Field(key: "flow", type: Stripe::BillingPortalSessionFlow?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter flow : Stripe::BillingPortalSessionFlow? = nil
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -83,7 +83,7 @@ module Stripe
       @configuration : Stripe::BillingPortalSessionConfiguration? = nil,
       @created : Int64? = nil,
       @customer : String? = nil,
-      @flow : Stripe::PortalFlowsFlow? = nil,
+      @flow : Stripe::BillingPortalSessionFlow? = nil,
       @id : String? = nil,
       @livemode : Bool? = nil,
       @locale : String? = nil,
@@ -236,7 +236,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flow Object to be assigned
-    def flow=(new_value : Stripe::PortalFlowsFlow?)
+    def flow=(new_value : Stripe::BillingPortalSessionFlow?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

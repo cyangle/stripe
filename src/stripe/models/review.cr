@@ -9,10 +9,10 @@
 
 require "../../core"
 
-require "./radar_review_resource_location"
-require "./radar_review_resource_session"
 require "./review_charge"
+require "./review_ip_address_location"
 require "./review_payment_intent"
+require "./review_session"
 
 module Stripe
   # Reviews can be used to supplement automated fraud detection with human expertise.  Learn more about [Radar](/radar) and reviewing payments [here](https://stripe.com/docs/radar/reviews).
@@ -52,8 +52,8 @@ module Stripe
     getter ip_address : String? = nil
     MAX_LENGTH_FOR_IP_ADDRESS = 5000
 
-    @[JSON::Field(key: "ip_address_location", type: Stripe::RadarReviewResourceLocation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter ip_address_location : Stripe::RadarReviewResourceLocation? = nil
+    @[JSON::Field(key: "ip_address_location", type: Stripe::ReviewIpAddressLocation?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter ip_address_location : Stripe::ReviewIpAddressLocation? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -80,8 +80,8 @@ module Stripe
     getter reason : String? = nil
     MAX_LENGTH_FOR_REASON = 5000
 
-    @[JSON::Field(key: "session", type: Stripe::RadarReviewResourceSession?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter session : Stripe::RadarReviewResourceSession? = nil
+    @[JSON::Field(key: "session", type: Stripe::ReviewSession?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter session : Stripe::ReviewSession? = nil
 
     # End of Required Properties
 
@@ -101,13 +101,13 @@ module Stripe
       @created : Int64? = nil,
       @id : String? = nil,
       @ip_address : String? = nil,
-      @ip_address_location : Stripe::RadarReviewResourceLocation? = nil,
+      @ip_address_location : Stripe::ReviewIpAddressLocation? = nil,
       @livemode : Bool? = nil,
       @object : String? = nil,
       @open : Bool? = nil,
       @opened_reason : String? = nil,
       @reason : String? = nil,
-      @session : Stripe::RadarReviewResourceSession? = nil,
+      @session : Stripe::ReviewSession? = nil,
       # Optional properties
       @payment_intent : Stripe::ReviewPaymentIntent? = nil
     )
@@ -297,7 +297,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ip_address_location Object to be assigned
-    def ip_address_location=(new_value : Stripe::RadarReviewResourceLocation?)
+    def ip_address_location=(new_value : Stripe::ReviewIpAddressLocation?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -356,7 +356,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] session Object to be assigned
-    def session=(new_value : Stripe::RadarReviewResourceSession?)
+    def session=(new_value : Stripe::ReviewSession?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

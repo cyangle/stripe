@@ -10,6 +10,9 @@
 require "../../core"
 
 require "./billing_details_inner_params_address"
+require "./billing_details_inner_params_email"
+require "./billing_details_inner_params_name"
+require "./billing_details_inner_params_phone"
 
 module Stripe
   class BillingDetailsInnerParams
@@ -23,20 +26,14 @@ module Stripe
     @[JSON::Field(key: "address", type: Stripe::BillingDetailsInnerParamsAddress?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : Stripe::BillingDetailsInnerParamsAddress? = nil
 
-    @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter email : String? = nil
-    ERROR_MESSAGE_FOR_EMAIL = "invalid value for \"email\", must be one of []."
-    VALID_VALUES_FOR_EMAIL  = String.static_array("")
+    @[JSON::Field(key: "email", type: Stripe::BillingDetailsInnerParamsEmail?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter email : Stripe::BillingDetailsInnerParamsEmail? = nil
 
-    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter name : String? = nil
-    ERROR_MESSAGE_FOR_NAME = "invalid value for \"name\", must be one of []."
-    VALID_VALUES_FOR_NAME  = String.static_array("")
+    @[JSON::Field(key: "name", type: Stripe::BillingDetailsInnerParamsName?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter name : Stripe::BillingDetailsInnerParamsName? = nil
 
-    @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter phone : String? = nil
-    ERROR_MESSAGE_FOR_PHONE = "invalid value for \"phone\", must be one of []."
-    VALID_VALUES_FOR_PHONE  = String.static_array("")
+    @[JSON::Field(key: "phone", type: Stripe::BillingDetailsInnerParamsPhone?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter phone : Stripe::BillingDetailsInnerParamsPhone? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -44,9 +41,9 @@ module Stripe
       *,
       # Optional properties
       @address : Stripe::BillingDetailsInnerParamsAddress? = nil,
-      @email : String? = nil,
-      @name : String? = nil,
-      @phone : String? = nil
+      @email : Stripe::BillingDetailsInnerParamsEmail? = nil,
+      @name : Stripe::BillingDetailsInnerParamsName? = nil,
+      @phone : Stripe::BillingDetailsInnerParamsPhone? = nil
     )
     end
 
@@ -59,13 +56,13 @@ module Stripe
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       unless (_email = @email).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_EMAIL) unless OpenApi::EnumValidator.valid?(_email, VALID_VALUES_FOR_EMAIL)
+        invalid_properties.concat(_email.list_invalid_properties_for("email")) if _email.is_a?(OpenApi::Validatable)
       end
       unless (_name = @name).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_NAME) unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
+        invalid_properties.concat(_name.list_invalid_properties_for("name")) if _name.is_a?(OpenApi::Validatable)
       end
       unless (_phone = @phone).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_PHONE) unless OpenApi::EnumValidator.valid?(_phone, VALID_VALUES_FOR_PHONE)
+        invalid_properties.concat(_phone.list_invalid_properties_for("phone")) if _phone.is_a?(OpenApi::Validatable)
       end
       invalid_properties
     end
@@ -78,15 +75,15 @@ module Stripe
       end
 
       unless (_email = @email).nil?
-        return false unless OpenApi::EnumValidator.valid?(_email, VALID_VALUES_FOR_EMAIL)
+        return false if _email.is_a?(OpenApi::Validatable) && !_email.valid?
       end
 
       unless (_name = @name).nil?
-        return false unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
+        return false if _name.is_a?(OpenApi::Validatable) && !_name.valid?
       end
 
       unless (_phone = @phone).nil?
-        return false unless OpenApi::EnumValidator.valid?(_phone, VALID_VALUES_FOR_PHONE)
+        return false if _phone.is_a?(OpenApi::Validatable) && !_phone.valid?
       end
 
       true
@@ -104,9 +101,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(new_value : String?)
+    def email=(new_value : Stripe::BillingDetailsInnerParamsEmail?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("email", new_value, VALID_VALUES_FOR_EMAIL)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @email = new_value
@@ -114,9 +111,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(new_value : String?)
+    def name=(new_value : Stripe::BillingDetailsInnerParamsName?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("name", new_value, VALID_VALUES_FOR_NAME)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @name = new_value
@@ -124,9 +121,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone Object to be assigned
-    def phone=(new_value : String?)
+    def phone=(new_value : Stripe::BillingDetailsInnerParamsPhone?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("phone", new_value, VALID_VALUES_FOR_PHONE)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @phone = new_value

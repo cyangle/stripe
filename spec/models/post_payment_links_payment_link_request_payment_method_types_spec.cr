@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_payment_links_payment_link_request_payment_method_types"
 
 describe Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes do
-  describe "test an instance of PostPaymentLinksPaymentLinkRequestPaymentMethodTypes" do
-    it "should create an instance of PostPaymentLinksPaymentLinkRequestPaymentMethodTypes" do
-      # instance = Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes.new
-      # (instance).should be_a(Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes)
-    end
-  end
 end

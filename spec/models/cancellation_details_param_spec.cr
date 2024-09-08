@@ -25,10 +25,6 @@ describe Stripe::CancellationDetailsParam do
     it "should work" do
       # instance = Stripe::CancellationDetailsParam.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::CancellationDetailsParam::ENUM_VALIDATOR_FOR_COMMENT
-      # validator.allowable_values.each do |value|
-      #   instance.comment = value.as(String)
-      # end
     end
   end
 

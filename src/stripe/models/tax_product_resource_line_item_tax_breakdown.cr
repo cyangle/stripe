@@ -10,7 +10,7 @@
 require "../../core"
 
 require "./tax_product_resource_jurisdiction"
-require "./tax_product_resource_line_item_tax_rate_details"
+require "./tax_product_resource_line_item_tax_breakdown_tax_rate_details"
 
 module Stripe
   #
@@ -35,8 +35,8 @@ module Stripe
     ERROR_MESSAGE_FOR_SOURCING = "invalid value for \"sourcing\", must be one of [destination, origin]."
     VALID_VALUES_FOR_SOURCING  = String.static_array("destination", "origin")
 
-    @[JSON::Field(key: "tax_rate_details", type: Stripe::TaxProductResourceLineItemTaxRateDetails?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter tax_rate_details : Stripe::TaxProductResourceLineItemTaxRateDetails? = nil
+    @[JSON::Field(key: "tax_rate_details", type: Stripe::TaxProductResourceLineItemTaxBreakdownTaxRateDetails?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter tax_rate_details : Stripe::TaxProductResourceLineItemTaxBreakdownTaxRateDetails? = nil
 
     # The reasoning behind this tax, for example, if the product is tax exempt. The possible values for this field may be extended as new tax rules are supported.
     @[JSON::Field(key: "taxability_reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -58,7 +58,7 @@ module Stripe
       @amount : Int64? = nil,
       @jurisdiction : Stripe::TaxProductResourceJurisdiction? = nil,
       @sourcing : String? = nil,
-      @tax_rate_details : Stripe::TaxProductResourceLineItemTaxRateDetails? = nil,
+      @tax_rate_details : Stripe::TaxProductResourceLineItemTaxBreakdownTaxRateDetails? = nil,
       @taxability_reason : String? = nil,
       @taxable_amount : Int64? = nil
     )
@@ -155,7 +155,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_rate_details Object to be assigned
-    def tax_rate_details=(new_value : Stripe::TaxProductResourceLineItemTaxRateDetails?)
+    def tax_rate_details=(new_value : Stripe::TaxProductResourceLineItemTaxBreakdownTaxRateDetails?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

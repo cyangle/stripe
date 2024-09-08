@@ -14,10 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/subscription_update_creation_param_products"
 
 describe Stripe::SubscriptionUpdateCreationParamProducts do
-  describe "test an instance of SubscriptionUpdateCreationParamProducts" do
-    it "should create an instance of SubscriptionUpdateCreationParamProducts" do
-      # instance = Stripe::SubscriptionUpdateCreationParamProducts.new
-      # (instance).should be_a(Stripe::SubscriptionUpdateCreationParamProducts)
-    end
-  end
 end

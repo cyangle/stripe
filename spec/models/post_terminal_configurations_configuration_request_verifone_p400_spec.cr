@@ -14,21 +14,4 @@ require "../spec_helper"
 require "../../src/stripe/models/post_terminal_configurations_configuration_request_verifone_p400"
 
 describe Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400 do
-  describe "test an instance of PostTerminalConfigurationsConfigurationRequestVerifoneP400" do
-    it "should create an instance of PostTerminalConfigurationsConfigurationRequestVerifoneP400" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400.new
-      # (instance).should be_a(Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400)
-    end
-  end
-
-  describe "test attribute 'splashscreen'" do
-    it "should work" do
-      # instance = Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400.new
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400::ENUM_VALIDATOR_FOR_SPLASHSCREEN
-      # validator.allowable_values.each do |value|
-      #   instance.splashscreen = value.as(String)
-      # end
-    end
-  end
 end

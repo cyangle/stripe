@@ -9,7 +9,7 @@
 
 require "../../core"
 
-require "./quotes_resource_recurring"
+require "./quotes_resource_computed_recurring"
 require "./quotes_resource_upfront"
 
 module Stripe
@@ -22,8 +22,8 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "recurring", type: Stripe::QuotesResourceRecurring?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter recurring : Stripe::QuotesResourceRecurring? = nil
+    @[JSON::Field(key: "recurring", type: Stripe::QuotesResourceComputedRecurring?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter recurring : Stripe::QuotesResourceComputedRecurring? = nil
 
     @[JSON::Field(key: "upfront", type: Stripe::QuotesResourceUpfront?, default: nil, required: true, nullable: false, emit_null: false)]
     getter upfront : Stripe::QuotesResourceUpfront? = nil
@@ -35,7 +35,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @recurring : Stripe::QuotesResourceRecurring? = nil,
+      @recurring : Stripe::QuotesResourceComputedRecurring? = nil,
       @upfront : Stripe::QuotesResourceUpfront? = nil
     )
     end
@@ -73,7 +73,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recurring Object to be assigned
-    def recurring=(new_value : Stripe::QuotesResourceRecurring?)
+    def recurring=(new_value : Stripe::QuotesResourceComputedRecurring?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end

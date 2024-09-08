@@ -9,6 +9,7 @@
 
 require "../../core"
 
+require "./post_subscriptions_subscription_exposed_id_request_description"
 require "./subscription_data_create_params_effective_date"
 require "./subscription_data_create_params_trial_period_days"
 require "./subscription_data_invoice_settings_params"
@@ -23,10 +24,8 @@ module Stripe
 
     # Optional Properties
 
-    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter description : String? = nil
-    ERROR_MESSAGE_FOR_DESCRIPTION = "invalid value for \"description\", must be one of []."
-    VALID_VALUES_FOR_DESCRIPTION  = String.static_array("")
+    @[JSON::Field(key: "description", type: Stripe::PostSubscriptionsSubscriptionExposedIdRequestDescription?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDescription? = nil
 
     @[JSON::Field(key: "effective_date", type: Stripe::SubscriptionDataCreateParamsEffectiveDate?, default: nil, required: false, nullable: false, emit_null: false)]
     getter effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate? = nil
@@ -48,7 +47,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @description : String? = nil,
+      @description : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDescription? = nil,
       @effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate? = nil,
       @invoice_settings : Stripe::SubscriptionDataInvoiceSettingsParams? = nil,
       @metadata : Hash(String, String)? = nil,
@@ -63,7 +62,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       unless (_description = @description).nil?
-        invalid_properties.push(ERROR_MESSAGE_FOR_DESCRIPTION) unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        invalid_properties.concat(_description.list_invalid_properties_for("description")) if _description.is_a?(OpenApi::Validatable)
       end
       unless (_effective_date = @effective_date).nil?
         invalid_properties.concat(_effective_date.list_invalid_properties_for("effective_date")) if _effective_date.is_a?(OpenApi::Validatable)
@@ -85,7 +84,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       unless (_description = @description).nil?
-        return false unless OpenApi::EnumValidator.valid?(_description, VALID_VALUES_FOR_DESCRIPTION)
+        return false if _description.is_a?(OpenApi::Validatable) && !_description.valid?
       end
 
       unless (_effective_date = @effective_date).nil?
@@ -109,9 +108,9 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] description Object to be assigned
-    def description=(new_value : String?)
+    def description=(new_value : Stripe::PostSubscriptionsSubscriptionExposedIdRequestDescription?)
       unless new_value.nil?
-        OpenApi::EnumValidator.validate("description", new_value, VALID_VALUES_FOR_DESCRIPTION)
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
 
       @description = new_value

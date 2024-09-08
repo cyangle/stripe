@@ -32,10 +32,6 @@ describe Stripe::BillingDetailsInnerParams do
     it "should work" do
       # instance = Stripe::BillingDetailsInnerParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BillingDetailsInnerParams::ENUM_VALIDATOR_FOR_EMAIL
-      # validator.allowable_values.each do |value|
-      #   instance.email = value.as(String)
-      # end
     end
   end
 
@@ -43,10 +39,6 @@ describe Stripe::BillingDetailsInnerParams do
     it "should work" do
       # instance = Stripe::BillingDetailsInnerParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BillingDetailsInnerParams::ENUM_VALIDATOR_FOR_NAME
-      # validator.allowable_values.each do |value|
-      #   instance.name = value.as(String)
-      # end
     end
   end
 
@@ -54,10 +46,6 @@ describe Stripe::BillingDetailsInnerParams do
     it "should work" do
       # instance = Stripe::BillingDetailsInnerParams.new
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Stripe::BillingDetailsInnerParams::ENUM_VALIDATOR_FOR_PHONE
-      # validator.allowable_values.each do |value|
-      #   instance.phone = value.as(String)
-      # end
     end
   end
 end

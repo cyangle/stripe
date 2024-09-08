@@ -9,8 +9,8 @@
 
 require "../../core"
 
-require "./portal_flows_after_completion_hosted_confirmation"
-require "./portal_flows_after_completion_redirect"
+require "./portal_flows_flow_after_completion_hosted_confirmation"
+require "./portal_flows_flow_after_completion_redirect"
 
 module Stripe
   #
@@ -22,11 +22,11 @@ module Stripe
 
     # Required Properties
 
-    @[JSON::Field(key: "hosted_confirmation", type: Stripe::PortalFlowsAfterCompletionHostedConfirmation?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter hosted_confirmation : Stripe::PortalFlowsAfterCompletionHostedConfirmation? = nil
+    @[JSON::Field(key: "hosted_confirmation", type: Stripe::PortalFlowsFlowAfterCompletionHostedConfirmation?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter hosted_confirmation : Stripe::PortalFlowsFlowAfterCompletionHostedConfirmation? = nil
 
-    @[JSON::Field(key: "redirect", type: Stripe::PortalFlowsAfterCompletionRedirect?, default: nil, required: true, nullable: true, emit_null: true)]
-    getter redirect : Stripe::PortalFlowsAfterCompletionRedirect? = nil
+    @[JSON::Field(key: "redirect", type: Stripe::PortalFlowsFlowAfterCompletionRedirect?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter redirect : Stripe::PortalFlowsFlowAfterCompletionRedirect? = nil
 
     # The specified type of behavior after the flow is completed.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -41,8 +41,8 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @hosted_confirmation : Stripe::PortalFlowsAfterCompletionHostedConfirmation? = nil,
-      @redirect : Stripe::PortalFlowsAfterCompletionRedirect? = nil,
+      @hosted_confirmation : Stripe::PortalFlowsFlowAfterCompletionHostedConfirmation? = nil,
+      @redirect : Stripe::PortalFlowsFlowAfterCompletionRedirect? = nil,
       @_type : String? = nil
     )
     end
@@ -87,7 +87,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] hosted_confirmation Object to be assigned
-    def hosted_confirmation=(new_value : Stripe::PortalFlowsAfterCompletionHostedConfirmation?)
+    def hosted_confirmation=(new_value : Stripe::PortalFlowsFlowAfterCompletionHostedConfirmation?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] redirect Object to be assigned
-    def redirect=(new_value : Stripe::PortalFlowsAfterCompletionRedirect?)
+    def redirect=(new_value : Stripe::PortalFlowsFlowAfterCompletionRedirect?)
       unless new_value.nil?
         new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
